@@ -11,7 +11,7 @@ module.exports = {
 	"SLS": 6,
 	"SteamCache": 7,
 	"OpenCache": 8,
-	"Max": 9,
+	"LANCache": 9,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -23,5 +23,5 @@ module.exports = {
 	"6": "SLS",
 	"7": "SteamCache",
 	"8": "OpenCache",
-	"9": "Max",
+	"9": "LANCache",
 };

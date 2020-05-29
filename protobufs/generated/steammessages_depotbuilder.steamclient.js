@@ -295,6 +295,10 @@
          * @property {Uint8Array|null} [aes_key] CContentBuilder_InitDepotBuild_Response aes_key
          * @property {Uint8Array|null} [rsa_key] CContentBuilder_InitDepotBuild_Response rsa_key
          * @property {string|null} [url_host] CContentBuilder_InitDepotBuild_Response url_host
+         * @property {boolean|null} [offset_detection_enabled] CContentBuilder_InitDepotBuild_Response offset_detection_enabled
+         * @property {number|null} [offset_detection_min_clean_chunk] CContentBuilder_InitDepotBuild_Response offset_detection_min_clean_chunk
+         * @property {number|null} [offset_detection_blast_radius_pre] CContentBuilder_InitDepotBuild_Response offset_detection_blast_radius_pre
+         * @property {number|null} [offset_detection_blast_radius_post] CContentBuilder_InitDepotBuild_Response offset_detection_blast_radius_post
          */
     
         /**
@@ -353,6 +357,38 @@
         CContentBuilder_InitDepotBuild_Response.prototype.url_host = "";
     
         /**
+         * CContentBuilder_InitDepotBuild_Response offset_detection_enabled.
+         * @member {boolean} offset_detection_enabled
+         * @memberof CContentBuilder_InitDepotBuild_Response
+         * @instance
+         */
+        CContentBuilder_InitDepotBuild_Response.prototype.offset_detection_enabled = false;
+    
+        /**
+         * CContentBuilder_InitDepotBuild_Response offset_detection_min_clean_chunk.
+         * @member {number} offset_detection_min_clean_chunk
+         * @memberof CContentBuilder_InitDepotBuild_Response
+         * @instance
+         */
+        CContentBuilder_InitDepotBuild_Response.prototype.offset_detection_min_clean_chunk = 0;
+    
+        /**
+         * CContentBuilder_InitDepotBuild_Response offset_detection_blast_radius_pre.
+         * @member {number} offset_detection_blast_radius_pre
+         * @memberof CContentBuilder_InitDepotBuild_Response
+         * @instance
+         */
+        CContentBuilder_InitDepotBuild_Response.prototype.offset_detection_blast_radius_pre = 0;
+    
+        /**
+         * CContentBuilder_InitDepotBuild_Response offset_detection_blast_radius_post.
+         * @member {number} offset_detection_blast_radius_post
+         * @memberof CContentBuilder_InitDepotBuild_Response
+         * @instance
+         */
+        CContentBuilder_InitDepotBuild_Response.prototype.offset_detection_blast_radius_post = 0;
+    
+        /**
          * Creates a new CContentBuilder_InitDepotBuild_Response instance using the specified properties.
          * @function create
          * @memberof CContentBuilder_InitDepotBuild_Response
@@ -386,6 +422,14 @@
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.rsa_key);
             if (message.url_host != null && message.hasOwnProperty("url_host"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.url_host);
+            if (message.offset_detection_enabled != null && message.hasOwnProperty("offset_detection_enabled"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.offset_detection_enabled);
+            if (message.offset_detection_min_clean_chunk != null && message.hasOwnProperty("offset_detection_min_clean_chunk"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.offset_detection_min_clean_chunk);
+            if (message.offset_detection_blast_radius_pre != null && message.hasOwnProperty("offset_detection_blast_radius_pre"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.offset_detection_blast_radius_pre);
+            if (message.offset_detection_blast_radius_post != null && message.hasOwnProperty("offset_detection_blast_radius_post"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.offset_detection_blast_radius_post);
             return writer;
         };
     
@@ -434,6 +478,18 @@
                     break;
                 case 5:
                     message.url_host = reader.string();
+                    break;
+                case 6:
+                    message.offset_detection_enabled = reader.bool();
+                    break;
+                case 7:
+                    message.offset_detection_min_clean_chunk = reader.uint32();
+                    break;
+                case 8:
+                    message.offset_detection_blast_radius_pre = reader.uint32();
+                    break;
+                case 9:
+                    message.offset_detection_blast_radius_post = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -485,6 +541,18 @@
             if (message.url_host != null && message.hasOwnProperty("url_host"))
                 if (!$util.isString(message.url_host))
                     return "url_host: string expected";
+            if (message.offset_detection_enabled != null && message.hasOwnProperty("offset_detection_enabled"))
+                if (typeof message.offset_detection_enabled !== "boolean")
+                    return "offset_detection_enabled: boolean expected";
+            if (message.offset_detection_min_clean_chunk != null && message.hasOwnProperty("offset_detection_min_clean_chunk"))
+                if (!$util.isInteger(message.offset_detection_min_clean_chunk))
+                    return "offset_detection_min_clean_chunk: integer expected";
+            if (message.offset_detection_blast_radius_pre != null && message.hasOwnProperty("offset_detection_blast_radius_pre"))
+                if (!$util.isInteger(message.offset_detection_blast_radius_pre))
+                    return "offset_detection_blast_radius_pre: integer expected";
+            if (message.offset_detection_blast_radius_post != null && message.hasOwnProperty("offset_detection_blast_radius_post"))
+                if (!$util.isInteger(message.offset_detection_blast_radius_post))
+                    return "offset_detection_blast_radius_post: integer expected";
             return null;
         };
     
@@ -523,6 +591,14 @@
                     message.rsa_key = object.rsa_key;
             if (object.url_host != null)
                 message.url_host = String(object.url_host);
+            if (object.offset_detection_enabled != null)
+                message.offset_detection_enabled = Boolean(object.offset_detection_enabled);
+            if (object.offset_detection_min_clean_chunk != null)
+                message.offset_detection_min_clean_chunk = object.offset_detection_min_clean_chunk >>> 0;
+            if (object.offset_detection_blast_radius_pre != null)
+                message.offset_detection_blast_radius_pre = object.offset_detection_blast_radius_pre >>> 0;
+            if (object.offset_detection_blast_radius_post != null)
+                message.offset_detection_blast_radius_post = object.offset_detection_blast_radius_post >>> 0;
             return message;
         };
     
@@ -561,6 +637,10 @@
                         object.rsa_key = $util.newBuffer(object.rsa_key);
                 }
                 object.url_host = "";
+                object.offset_detection_enabled = false;
+                object.offset_detection_min_clean_chunk = 0;
+                object.offset_detection_blast_radius_pre = 0;
+                object.offset_detection_blast_radius_post = 0;
             }
             if (message.baseline_manifestid != null && message.hasOwnProperty("baseline_manifestid"))
                 if (typeof message.baseline_manifestid === "number")
@@ -575,6 +655,14 @@
                 object.rsa_key = options.bytes === String ? $util.base64.encode(message.rsa_key, 0, message.rsa_key.length) : options.bytes === Array ? Array.prototype.slice.call(message.rsa_key) : message.rsa_key;
             if (message.url_host != null && message.hasOwnProperty("url_host"))
                 object.url_host = message.url_host;
+            if (message.offset_detection_enabled != null && message.hasOwnProperty("offset_detection_enabled"))
+                object.offset_detection_enabled = message.offset_detection_enabled;
+            if (message.offset_detection_min_clean_chunk != null && message.hasOwnProperty("offset_detection_min_clean_chunk"))
+                object.offset_detection_min_clean_chunk = message.offset_detection_min_clean_chunk;
+            if (message.offset_detection_blast_radius_pre != null && message.hasOwnProperty("offset_detection_blast_radius_pre"))
+                object.offset_detection_blast_radius_pre = message.offset_detection_blast_radius_pre;
+            if (message.offset_detection_blast_radius_post != null && message.hasOwnProperty("offset_detection_blast_radius_post"))
+                object.offset_detection_blast_radius_post = message.offset_detection_blast_radius_post;
             return object;
         };
     

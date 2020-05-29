@@ -796,6 +796,7 @@
          * @property {Uint8Array|null} [cert] CMsgSteamDatagramCertificateSigned cert
          * @property {number|Long|null} [ca_key_id] CMsgSteamDatagramCertificateSigned ca_key_id
          * @property {Uint8Array|null} [ca_signature] CMsgSteamDatagramCertificateSigned ca_signature
+         * @property {Uint8Array|null} [private_key_data] CMsgSteamDatagramCertificateSigned private_key_data
          */
     
         /**
@@ -838,6 +839,14 @@
         CMsgSteamDatagramCertificateSigned.prototype.ca_signature = $util.newBuffer([]);
     
         /**
+         * CMsgSteamDatagramCertificateSigned private_key_data.
+         * @member {Uint8Array} private_key_data
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @instance
+         */
+        CMsgSteamDatagramCertificateSigned.prototype.private_key_data = $util.newBuffer([]);
+    
+        /**
          * Creates a new CMsgSteamDatagramCertificateSigned instance using the specified properties.
          * @function create
          * @memberof CMsgSteamDatagramCertificateSigned
@@ -861,6 +870,8 @@
         CMsgSteamDatagramCertificateSigned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
+                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.private_key_data);
             if (message.cert != null && message.hasOwnProperty("cert"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.cert);
             if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
@@ -910,6 +921,9 @@
                 case 6:
                     message.ca_signature = reader.bytes();
                     break;
+                case 1:
+                    message.private_key_data = reader.bytes();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -954,6 +968,9 @@
             if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
                 if (!(message.ca_signature && typeof message.ca_signature.length === "number" || $util.isString(message.ca_signature)))
                     return "ca_signature: buffer expected";
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
+                if (!(message.private_key_data && typeof message.private_key_data.length === "number" || $util.isString(message.private_key_data)))
+                    return "private_key_data: buffer expected";
             return null;
         };
     
@@ -988,6 +1005,11 @@
                     $util.base64.decode(object.ca_signature, message.ca_signature = $util.newBuffer($util.base64.length(object.ca_signature)), 0);
                 else if (object.ca_signature.length)
                     message.ca_signature = object.ca_signature;
+            if (object.private_key_data != null)
+                if (typeof object.private_key_data === "string")
+                    $util.base64.decode(object.private_key_data, message.private_key_data = $util.newBuffer($util.base64.length(object.private_key_data)), 0);
+                else if (object.private_key_data.length)
+                    message.private_key_data = object.private_key_data;
             return message;
         };
     
@@ -1005,6 +1027,13 @@
                 options = {};
             var object = {};
             if (options.defaults) {
+                if (options.bytes === String)
+                    object.private_key_data = "";
+                else {
+                    object.private_key_data = [];
+                    if (options.bytes !== Array)
+                        object.private_key_data = $util.newBuffer(object.private_key_data);
+                }
                 if (options.bytes === String)
                     object.cert = "";
                 else {
@@ -1025,6 +1054,8 @@
                         object.ca_signature = $util.newBuffer(object.ca_signature);
                 }
             }
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
+                object.private_key_data = options.bytes === String ? $util.base64.encode(message.private_key_data, 0, message.private_key_data.length) : options.bytes === Array ? Array.prototype.slice.call(message.private_key_data) : message.private_key_data;
             if (message.cert != null && message.hasOwnProperty("cert"))
                 object.cert = options.bytes === String ? $util.base64.encode(message.cert, 0, message.cert.length) : options.bytes === Array ? Array.prototype.slice.call(message.cert) : message.cert;
             if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))

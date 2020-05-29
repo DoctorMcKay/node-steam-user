@@ -1,6 +1,6 @@
 /**
-  * @enum EChatRoomGroupRank
-  */
+ * @enum EChatRoomGroupRank
+ */
 module.exports = {
 	"Default": 0,
 	"Viewer": 10,
@@ -9,7 +9,6 @@ module.exports = {
 	"Moderator": 30,
 	"Officer": 40,
 	"Owner": 50,
-	"TestInvalid": 99,
 
 	// Value-to-name mapping for convenience
 	"0": "Default",
@@ -19,5 +18,4 @@ module.exports = {
 	"30": "Moderator",
 	"40": "Officer",
 	"50": "Owner",
-	"99": "TestInvalid",
 };

@@ -14,6 +14,9 @@ module.exports = {
 	"BroadcastingActive": 9,
 	"VRActive": 10,
 	"PINRequired": 11,
+	"TransportUnavailable": 12,
+	"Invisible": 13,
+	"GameLaunchFailed": 14,
 
 	// Value-to-name mapping for convenience
 	"0": "Success",
@@ -28,4 +31,7 @@ module.exports = {
 	"9": "BroadcastingActive",
 	"10": "VRActive",
 	"11": "PINRequired",
+	"12": "TransportUnavailable",
+	"13": "Invisible",
+	"14": "GameLaunchFailed",
 };

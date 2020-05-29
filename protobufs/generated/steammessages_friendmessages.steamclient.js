@@ -1600,6 +1600,7 @@
          * @property {boolean|null} [contains_bbcode] CFriendMessages_SendMessage_Request contains_bbcode
          * @property {boolean|null} [echo_to_sender] CFriendMessages_SendMessage_Request echo_to_sender
          * @property {boolean|null} [low_priority] CFriendMessages_SendMessage_Request low_priority
+         * @property {string|null} [client_message_id] CFriendMessages_SendMessage_Request client_message_id
          */
     
         /**
@@ -1666,6 +1667,14 @@
         CFriendMessages_SendMessage_Request.prototype.low_priority = false;
     
         /**
+         * CFriendMessages_SendMessage_Request client_message_id.
+         * @member {string} client_message_id
+         * @memberof CFriendMessages_SendMessage_Request
+         * @instance
+         */
+        CFriendMessages_SendMessage_Request.prototype.client_message_id = "";
+    
+        /**
          * Creates a new CFriendMessages_SendMessage_Request instance using the specified properties.
          * @function create
          * @memberof CFriendMessages_SendMessage_Request
@@ -1701,6 +1710,8 @@
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.echo_to_sender);
             if (message.low_priority != null && message.hasOwnProperty("low_priority"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.low_priority);
+            if (message.client_message_id != null && message.hasOwnProperty("client_message_id"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.client_message_id);
             return writer;
         };
     
@@ -1752,6 +1763,9 @@
                     break;
                 case 6:
                     message.low_priority = reader.bool();
+                    break;
+                case 8:
+                    message.client_message_id = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1806,6 +1820,9 @@
             if (message.low_priority != null && message.hasOwnProperty("low_priority"))
                 if (typeof message.low_priority !== "boolean")
                     return "low_priority: boolean expected";
+            if (message.client_message_id != null && message.hasOwnProperty("client_message_id"))
+                if (!$util.isString(message.client_message_id))
+                    return "client_message_id: string expected";
             return null;
         };
     
@@ -1840,6 +1857,8 @@
                 message.echo_to_sender = Boolean(object.echo_to_sender);
             if (object.low_priority != null)
                 message.low_priority = Boolean(object.low_priority);
+            if (object.client_message_id != null)
+                message.client_message_id = String(object.client_message_id);
             return message;
         };
     
@@ -1867,6 +1886,7 @@
                 object.contains_bbcode = false;
                 object.echo_to_sender = false;
                 object.low_priority = false;
+                object.client_message_id = "";
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -1883,6 +1903,8 @@
                 object.echo_to_sender = message.echo_to_sender;
             if (message.low_priority != null && message.hasOwnProperty("low_priority"))
                 object.low_priority = message.low_priority;
+            if (message.client_message_id != null && message.hasOwnProperty("client_message_id"))
+                object.client_message_id = message.client_message_id;
             return object;
         };
     
@@ -1909,6 +1931,7 @@
          * @property {string|null} [modified_message] CFriendMessages_SendMessage_Response modified_message
          * @property {number|null} [server_timestamp] CFriendMessages_SendMessage_Response server_timestamp
          * @property {number|null} [ordinal] CFriendMessages_SendMessage_Response ordinal
+         * @property {string|null} [message_without_bb_code] CFriendMessages_SendMessage_Response message_without_bb_code
          */
     
         /**
@@ -1951,6 +1974,14 @@
         CFriendMessages_SendMessage_Response.prototype.ordinal = 0;
     
         /**
+         * CFriendMessages_SendMessage_Response message_without_bb_code.
+         * @member {string} message_without_bb_code
+         * @memberof CFriendMessages_SendMessage_Response
+         * @instance
+         */
+        CFriendMessages_SendMessage_Response.prototype.message_without_bb_code = "";
+    
+        /**
          * Creates a new CFriendMessages_SendMessage_Response instance using the specified properties.
          * @function create
          * @memberof CFriendMessages_SendMessage_Response
@@ -1980,6 +2011,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.server_timestamp);
             if (message.ordinal != null && message.hasOwnProperty("ordinal"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ordinal);
+            if (message.message_without_bb_code != null && message.hasOwnProperty("message_without_bb_code"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.message_without_bb_code);
             return writer;
         };
     
@@ -2022,6 +2055,9 @@
                     break;
                 case 3:
                     message.ordinal = reader.uint32();
+                    break;
+                case 4:
+                    message.message_without_bb_code = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2067,6 +2103,9 @@
             if (message.ordinal != null && message.hasOwnProperty("ordinal"))
                 if (!$util.isInteger(message.ordinal))
                     return "ordinal: integer expected";
+            if (message.message_without_bb_code != null && message.hasOwnProperty("message_without_bb_code"))
+                if (!$util.isString(message.message_without_bb_code))
+                    return "message_without_bb_code: string expected";
             return null;
         };
     
@@ -2088,6 +2127,8 @@
                 message.server_timestamp = object.server_timestamp >>> 0;
             if (object.ordinal != null)
                 message.ordinal = object.ordinal >>> 0;
+            if (object.message_without_bb_code != null)
+                message.message_without_bb_code = String(object.message_without_bb_code);
             return message;
         };
     
@@ -2108,6 +2149,7 @@
                 object.modified_message = "";
                 object.server_timestamp = 0;
                 object.ordinal = 0;
+                object.message_without_bb_code = "";
             }
             if (message.modified_message != null && message.hasOwnProperty("modified_message"))
                 object.modified_message = message.modified_message;
@@ -2115,6 +2157,8 @@
                 object.server_timestamp = message.server_timestamp;
             if (message.ordinal != null && message.hasOwnProperty("ordinal"))
                 object.ordinal = message.ordinal;
+            if (message.message_without_bb_code != null && message.hasOwnProperty("message_without_bb_code"))
+                object.message_without_bb_code = message.message_without_bb_code;
             return object;
         };
     

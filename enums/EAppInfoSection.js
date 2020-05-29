@@ -24,7 +24,9 @@ module.exports = {
 	"Community": 15,
 	"Store": 16,
 	"Localization": 17,
-	"Max": 18,
+	"Broadcastgamedata": 18,
+	"Computed": 19,
+	"Albummetadata": 20,
 
 	// Value-to-name mapping for convenience
 	"0": "Unknown",
@@ -45,5 +47,7 @@ module.exports = {
 	"15": "Community",
 	"16": "Store",
 	"17": "Localization",
-	"18": "Max",
+	"18": "Broadcastgamedata",
+	"19": "Computed",
+	"20": "Albummetadata",
 };

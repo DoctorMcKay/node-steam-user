@@ -88,7 +88,13 @@
      * @property {number} k_EControllerElementTypeTrackpadLeft=26 k_EControllerElementTypeTrackpadLeft value
      * @property {number} k_EControllerElementTypeTrackpadRight=27 k_EControllerElementTypeTrackpadRight value
      * @property {number} k_EControllerElementTypeKeyboard=28 k_EControllerElementTypeKeyboard value
-     * @property {number} k_EControllerElementTypeMax=29 k_EControllerElementTypeMax value
+     * @property {number} k_EControllerElementTypeMagnifyingGlass=29 k_EControllerElementTypeMagnifyingGlass value
+     * @property {number} k_EControllerElementTypeButtonMacro1Finger=30 k_EControllerElementTypeButtonMacro1Finger value
+     * @property {number} k_EControllerElementTypeButtonMacro2Finger=31 k_EControllerElementTypeButtonMacro2Finger value
+     * @property {number} k_EControllerElementTypeRecordInput=32 k_EControllerElementTypeRecordInput value
+     * @property {number} k_EControllerElementTypePlaybackInput=33 k_EControllerElementTypePlaybackInput value
+     * @property {number} k_EControllerElementTypePaste=34 k_EControllerElementTypePaste value
+     * @property {number} k_EControllerElementTypeMax=35 k_EControllerElementTypeMax value
      */
     $root.EControllerElementType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -122,7 +128,13 @@
         values[valuesById[26] = "k_EControllerElementTypeTrackpadLeft"] = 26;
         values[valuesById[27] = "k_EControllerElementTypeTrackpadRight"] = 27;
         values[valuesById[28] = "k_EControllerElementTypeKeyboard"] = 28;
-        values[valuesById[29] = "k_EControllerElementTypeMax"] = 29;
+        values[valuesById[29] = "k_EControllerElementTypeMagnifyingGlass"] = 29;
+        values[valuesById[30] = "k_EControllerElementTypeButtonMacro1Finger"] = 30;
+        values[valuesById[31] = "k_EControllerElementTypeButtonMacro2Finger"] = 31;
+        values[valuesById[32] = "k_EControllerElementTypeRecordInput"] = 32;
+        values[valuesById[33] = "k_EControllerElementTypePlaybackInput"] = 33;
+        values[valuesById[34] = "k_EControllerElementTypePaste"] = 34;
+        values[valuesById[35] = "k_EControllerElementTypeMax"] = 35;
         return values;
     })();
     
@@ -361,6 +373,12 @@
                 case 27:
                 case 28:
                 case 29:
+                case 30:
+                case 31:
+                case 32:
+                case 33:
+                case 34:
+                case 35:
                     break;
                 }
             if (message.visible != null && message.hasOwnProperty("visible"))
@@ -514,9 +532,33 @@
             case 28:
                 message.type = 28;
                 break;
-            case "k_EControllerElementTypeMax":
+            case "k_EControllerElementTypeMagnifyingGlass":
             case 29:
                 message.type = 29;
+                break;
+            case "k_EControllerElementTypeButtonMacro1Finger":
+            case 30:
+                message.type = 30;
+                break;
+            case "k_EControllerElementTypeButtonMacro2Finger":
+            case 31:
+                message.type = 31;
+                break;
+            case "k_EControllerElementTypeRecordInput":
+            case 32:
+                message.type = 32;
+                break;
+            case "k_EControllerElementTypePlaybackInput":
+            case 33:
+                message.type = 33;
+                break;
+            case "k_EControllerElementTypePaste":
+            case 34:
+                message.type = 34;
+                break;
+            case "k_EControllerElementTypeMax":
+            case 35:
+                message.type = 35;
                 break;
             }
             if (object.visible != null)
@@ -582,6 +624,260 @@
         return CVirtualControllerElement;
     })();
     
+    $root.CVirtualControllerColor = (function() {
+    
+        /**
+         * Properties of a CVirtualControllerColor.
+         * @exports ICVirtualControllerColor
+         * @interface ICVirtualControllerColor
+         * @property {number|null} [r] CVirtualControllerColor r
+         * @property {number|null} [g] CVirtualControllerColor g
+         * @property {number|null} [b] CVirtualControllerColor b
+         * @property {number|null} [a] CVirtualControllerColor a
+         */
+    
+        /**
+         * Constructs a new CVirtualControllerColor.
+         * @exports CVirtualControllerColor
+         * @classdesc Represents a CVirtualControllerColor.
+         * @implements ICVirtualControllerColor
+         * @constructor
+         * @param {ICVirtualControllerColor=} [properties] Properties to set
+         */
+        function CVirtualControllerColor(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CVirtualControllerColor r.
+         * @member {number} r
+         * @memberof CVirtualControllerColor
+         * @instance
+         */
+        CVirtualControllerColor.prototype.r = 1;
+    
+        /**
+         * CVirtualControllerColor g.
+         * @member {number} g
+         * @memberof CVirtualControllerColor
+         * @instance
+         */
+        CVirtualControllerColor.prototype.g = 1;
+    
+        /**
+         * CVirtualControllerColor b.
+         * @member {number} b
+         * @memberof CVirtualControllerColor
+         * @instance
+         */
+        CVirtualControllerColor.prototype.b = 1;
+    
+        /**
+         * CVirtualControllerColor a.
+         * @member {number} a
+         * @memberof CVirtualControllerColor
+         * @instance
+         */
+        CVirtualControllerColor.prototype.a = 1;
+    
+        /**
+         * Creates a new CVirtualControllerColor instance using the specified properties.
+         * @function create
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {ICVirtualControllerColor=} [properties] Properties to set
+         * @returns {CVirtualControllerColor} CVirtualControllerColor instance
+         */
+        CVirtualControllerColor.create = function create(properties) {
+            return new CVirtualControllerColor(properties);
+        };
+    
+        /**
+         * Encodes the specified CVirtualControllerColor message. Does not implicitly {@link CVirtualControllerColor.verify|verify} messages.
+         * @function encode
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {ICVirtualControllerColor} message CVirtualControllerColor message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CVirtualControllerColor.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.r != null && message.hasOwnProperty("r"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.r);
+            if (message.g != null && message.hasOwnProperty("g"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.g);
+            if (message.b != null && message.hasOwnProperty("b"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.b);
+            if (message.a != null && message.hasOwnProperty("a"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.a);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CVirtualControllerColor message, length delimited. Does not implicitly {@link CVirtualControllerColor.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {ICVirtualControllerColor} message CVirtualControllerColor message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CVirtualControllerColor.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CVirtualControllerColor message from the specified reader or buffer.
+         * @function decode
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CVirtualControllerColor} CVirtualControllerColor
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CVirtualControllerColor.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerColor();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.r = reader.float();
+                    break;
+                case 2:
+                    message.g = reader.float();
+                    break;
+                case 3:
+                    message.b = reader.float();
+                    break;
+                case 4:
+                    message.a = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CVirtualControllerColor message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CVirtualControllerColor} CVirtualControllerColor
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CVirtualControllerColor.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CVirtualControllerColor message.
+         * @function verify
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CVirtualControllerColor.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.r != null && message.hasOwnProperty("r"))
+                if (typeof message.r !== "number")
+                    return "r: number expected";
+            if (message.g != null && message.hasOwnProperty("g"))
+                if (typeof message.g !== "number")
+                    return "g: number expected";
+            if (message.b != null && message.hasOwnProperty("b"))
+                if (typeof message.b !== "number")
+                    return "b: number expected";
+            if (message.a != null && message.hasOwnProperty("a"))
+                if (typeof message.a !== "number")
+                    return "a: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CVirtualControllerColor message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CVirtualControllerColor} CVirtualControllerColor
+         */
+        CVirtualControllerColor.fromObject = function fromObject(object) {
+            if (object instanceof $root.CVirtualControllerColor)
+                return object;
+            var message = new $root.CVirtualControllerColor();
+            if (object.r != null)
+                message.r = Number(object.r);
+            if (object.g != null)
+                message.g = Number(object.g);
+            if (object.b != null)
+                message.b = Number(object.b);
+            if (object.a != null)
+                message.a = Number(object.a);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CVirtualControllerColor message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CVirtualControllerColor
+         * @static
+         * @param {CVirtualControllerColor} message CVirtualControllerColor
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CVirtualControllerColor.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.r = 1;
+                object.g = 1;
+                object.b = 1;
+                object.a = 1;
+            }
+            if (message.r != null && message.hasOwnProperty("r"))
+                object.r = options.json && !isFinite(message.r) ? String(message.r) : message.r;
+            if (message.g != null && message.hasOwnProperty("g"))
+                object.g = options.json && !isFinite(message.g) ? String(message.g) : message.g;
+            if (message.b != null && message.hasOwnProperty("b"))
+                object.b = options.json && !isFinite(message.b) ? String(message.b) : message.b;
+            if (message.a != null && message.hasOwnProperty("a"))
+                object.a = options.json && !isFinite(message.a) ? String(message.a) : message.a;
+            return object;
+        };
+    
+        /**
+         * Converts this CVirtualControllerColor to JSON.
+         * @function toJSON
+         * @memberof CVirtualControllerColor
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CVirtualControllerColor.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CVirtualControllerColor;
+    })();
+    
     $root.CVirtualControllerLayout = (function() {
     
         /**
@@ -591,6 +887,7 @@
          * @property {number|null} [layout_version] CVirtualControllerLayout layout_version
          * @property {number|null} [actionset_id] CVirtualControllerLayout actionset_id
          * @property {Array.<ICVirtualControllerElement>|null} [elements] CVirtualControllerLayout elements
+         * @property {ICVirtualControllerColor|null} [color] CVirtualControllerLayout color
          */
     
         /**
@@ -634,6 +931,14 @@
         CVirtualControllerLayout.prototype.elements = $util.emptyArray;
     
         /**
+         * CVirtualControllerLayout color.
+         * @member {ICVirtualControllerColor|null|undefined} color
+         * @memberof CVirtualControllerLayout
+         * @instance
+         */
+        CVirtualControllerLayout.prototype.color = null;
+    
+        /**
          * Creates a new CVirtualControllerLayout instance using the specified properties.
          * @function create
          * @memberof CVirtualControllerLayout
@@ -664,6 +969,8 @@
             if (message.elements != null && message.elements.length)
                 for (var i = 0; i < message.elements.length; ++i)
                     $root.CVirtualControllerElement.encode(message.elements[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.color != null && message.hasOwnProperty("color"))
+                $root.CVirtualControllerColor.encode(message.color, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
     
@@ -708,6 +1015,9 @@
                     if (!(message.elements && message.elements.length))
                         message.elements = [];
                     message.elements.push($root.CVirtualControllerElement.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    message.color = $root.CVirtualControllerColor.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -759,6 +1069,11 @@
                         return "elements." + error;
                 }
             }
+            if (message.color != null && message.hasOwnProperty("color")) {
+                var error = $root.CVirtualControllerColor.verify(message.color);
+                if (error)
+                    return "color." + error;
+            }
             return null;
         };
     
@@ -788,6 +1103,11 @@
                     message.elements[i] = $root.CVirtualControllerElement.fromObject(object.elements[i]);
                 }
             }
+            if (object.color != null) {
+                if (typeof object.color !== "object")
+                    throw TypeError(".CVirtualControllerLayout.color: object expected");
+                message.color = $root.CVirtualControllerColor.fromObject(object.color);
+            }
             return message;
         };
     
@@ -809,6 +1129,7 @@
             if (options.defaults) {
                 object.layout_version = 0;
                 object.actionset_id = 0;
+                object.color = null;
             }
             if (message.layout_version != null && message.hasOwnProperty("layout_version"))
                 object.layout_version = message.layout_version;
@@ -819,6 +1140,8 @@
                 for (var j = 0; j < message.elements.length; ++j)
                     object.elements[j] = $root.CVirtualControllerElement.toObject(message.elements[j], options);
             }
+            if (message.color != null && message.hasOwnProperty("color"))
+                object.color = $root.CVirtualControllerColor.toObject(message.color, options);
             return object;
         };
     
@@ -845,6 +1168,13 @@
          * @property {Array.<ICVirtualControllerLayout>|null} [layouts] CVirtualControllerLayouts layouts
          * @property {EInputMode|null} [input_mode] CVirtualControllerLayouts input_mode
          * @property {EMouseMode|null} [mouse_mode] CVirtualControllerLayouts mouse_mode
+         * @property {number|null} [trackpad_sensitivity] CVirtualControllerLayouts trackpad_sensitivity
+         * @property {boolean|null} [pinch_zoom_enabled] CVirtualControllerLayouts pinch_zoom_enabled
+         * @property {number|null} [pinch_zoom_x] CVirtualControllerLayouts pinch_zoom_x
+         * @property {number|null} [pinch_zoom_y] CVirtualControllerLayouts pinch_zoom_y
+         * @property {number|null} [pinch_zoom_scale] CVirtualControllerLayouts pinch_zoom_scale
+         * @property {boolean|null} [shaken] CVirtualControllerLayouts shaken
+         * @property {boolean|null} [mouse_offscreen] CVirtualControllerLayouts mouse_offscreen
          */
     
         /**
@@ -888,6 +1218,62 @@
         CVirtualControllerLayouts.prototype.mouse_mode = 0;
     
         /**
+         * CVirtualControllerLayouts trackpad_sensitivity.
+         * @member {number} trackpad_sensitivity
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.trackpad_sensitivity = 1;
+    
+        /**
+         * CVirtualControllerLayouts pinch_zoom_enabled.
+         * @member {boolean} pinch_zoom_enabled
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.pinch_zoom_enabled = false;
+    
+        /**
+         * CVirtualControllerLayouts pinch_zoom_x.
+         * @member {number} pinch_zoom_x
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.pinch_zoom_x = 0;
+    
+        /**
+         * CVirtualControllerLayouts pinch_zoom_y.
+         * @member {number} pinch_zoom_y
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.pinch_zoom_y = 0;
+    
+        /**
+         * CVirtualControllerLayouts pinch_zoom_scale.
+         * @member {number} pinch_zoom_scale
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.pinch_zoom_scale = 1;
+    
+        /**
+         * CVirtualControllerLayouts shaken.
+         * @member {boolean} shaken
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.shaken = false;
+    
+        /**
+         * CVirtualControllerLayouts mouse_offscreen.
+         * @member {boolean} mouse_offscreen
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.mouse_offscreen = false;
+    
+        /**
          * Creates a new CVirtualControllerLayouts instance using the specified properties.
          * @function create
          * @memberof CVirtualControllerLayouts
@@ -918,6 +1304,20 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.input_mode);
             if (message.mouse_mode != null && message.hasOwnProperty("mouse_mode"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.mouse_mode);
+            if (message.trackpad_sensitivity != null && message.hasOwnProperty("trackpad_sensitivity"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.trackpad_sensitivity);
+            if (message.pinch_zoom_enabled != null && message.hasOwnProperty("pinch_zoom_enabled"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.pinch_zoom_enabled);
+            if (message.pinch_zoom_x != null && message.hasOwnProperty("pinch_zoom_x"))
+                writer.uint32(/* id 6, wireType 5 =*/53).float(message.pinch_zoom_x);
+            if (message.pinch_zoom_y != null && message.hasOwnProperty("pinch_zoom_y"))
+                writer.uint32(/* id 7, wireType 5 =*/61).float(message.pinch_zoom_y);
+            if (message.pinch_zoom_scale != null && message.hasOwnProperty("pinch_zoom_scale"))
+                writer.uint32(/* id 8, wireType 5 =*/69).float(message.pinch_zoom_scale);
+            if (message.shaken != null && message.hasOwnProperty("shaken"))
+                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.shaken);
+            if (message.mouse_offscreen != null && message.hasOwnProperty("mouse_offscreen"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.mouse_offscreen);
             return writer;
         };
     
@@ -962,6 +1362,27 @@
                     break;
                 case 3:
                     message.mouse_mode = reader.int32();
+                    break;
+                case 4:
+                    message.trackpad_sensitivity = reader.float();
+                    break;
+                case 5:
+                    message.pinch_zoom_enabled = reader.bool();
+                    break;
+                case 6:
+                    message.pinch_zoom_x = reader.float();
+                    break;
+                case 7:
+                    message.pinch_zoom_y = reader.float();
+                    break;
+                case 8:
+                    message.pinch_zoom_scale = reader.float();
+                    break;
+                case 9:
+                    message.shaken = reader.bool();
+                    break;
+                case 10:
+                    message.mouse_offscreen = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1028,6 +1449,27 @@
                 case 4:
                     break;
                 }
+            if (message.trackpad_sensitivity != null && message.hasOwnProperty("trackpad_sensitivity"))
+                if (typeof message.trackpad_sensitivity !== "number")
+                    return "trackpad_sensitivity: number expected";
+            if (message.pinch_zoom_enabled != null && message.hasOwnProperty("pinch_zoom_enabled"))
+                if (typeof message.pinch_zoom_enabled !== "boolean")
+                    return "pinch_zoom_enabled: boolean expected";
+            if (message.pinch_zoom_x != null && message.hasOwnProperty("pinch_zoom_x"))
+                if (typeof message.pinch_zoom_x !== "number")
+                    return "pinch_zoom_x: number expected";
+            if (message.pinch_zoom_y != null && message.hasOwnProperty("pinch_zoom_y"))
+                if (typeof message.pinch_zoom_y !== "number")
+                    return "pinch_zoom_y: number expected";
+            if (message.pinch_zoom_scale != null && message.hasOwnProperty("pinch_zoom_scale"))
+                if (typeof message.pinch_zoom_scale !== "number")
+                    return "pinch_zoom_scale: number expected";
+            if (message.shaken != null && message.hasOwnProperty("shaken"))
+                if (typeof message.shaken !== "boolean")
+                    return "shaken: boolean expected";
+            if (message.mouse_offscreen != null && message.hasOwnProperty("mouse_offscreen"))
+                if (typeof message.mouse_offscreen !== "boolean")
+                    return "mouse_offscreen: boolean expected";
             return null;
         };
     
@@ -1093,6 +1535,20 @@
                 message.mouse_mode = 4;
                 break;
             }
+            if (object.trackpad_sensitivity != null)
+                message.trackpad_sensitivity = Number(object.trackpad_sensitivity);
+            if (object.pinch_zoom_enabled != null)
+                message.pinch_zoom_enabled = Boolean(object.pinch_zoom_enabled);
+            if (object.pinch_zoom_x != null)
+                message.pinch_zoom_x = Number(object.pinch_zoom_x);
+            if (object.pinch_zoom_y != null)
+                message.pinch_zoom_y = Number(object.pinch_zoom_y);
+            if (object.pinch_zoom_scale != null)
+                message.pinch_zoom_scale = Number(object.pinch_zoom_scale);
+            if (object.shaken != null)
+                message.shaken = Boolean(object.shaken);
+            if (object.mouse_offscreen != null)
+                message.mouse_offscreen = Boolean(object.mouse_offscreen);
             return message;
         };
     
@@ -1114,6 +1570,13 @@
             if (options.defaults) {
                 object.input_mode = options.enums === String ? "k_EInputModeController" : 2;
                 object.mouse_mode = options.enums === String ? "k_EMouseModeUnknown" : 0;
+                object.trackpad_sensitivity = 1;
+                object.pinch_zoom_enabled = false;
+                object.pinch_zoom_x = 0;
+                object.pinch_zoom_y = 0;
+                object.pinch_zoom_scale = 1;
+                object.shaken = false;
+                object.mouse_offscreen = false;
             }
             if (message.layouts && message.layouts.length) {
                 object.layouts = [];
@@ -1124,6 +1587,20 @@
                 object.input_mode = options.enums === String ? $root.EInputMode[message.input_mode] : message.input_mode;
             if (message.mouse_mode != null && message.hasOwnProperty("mouse_mode"))
                 object.mouse_mode = options.enums === String ? $root.EMouseMode[message.mouse_mode] : message.mouse_mode;
+            if (message.trackpad_sensitivity != null && message.hasOwnProperty("trackpad_sensitivity"))
+                object.trackpad_sensitivity = options.json && !isFinite(message.trackpad_sensitivity) ? String(message.trackpad_sensitivity) : message.trackpad_sensitivity;
+            if (message.pinch_zoom_enabled != null && message.hasOwnProperty("pinch_zoom_enabled"))
+                object.pinch_zoom_enabled = message.pinch_zoom_enabled;
+            if (message.pinch_zoom_x != null && message.hasOwnProperty("pinch_zoom_x"))
+                object.pinch_zoom_x = options.json && !isFinite(message.pinch_zoom_x) ? String(message.pinch_zoom_x) : message.pinch_zoom_x;
+            if (message.pinch_zoom_y != null && message.hasOwnProperty("pinch_zoom_y"))
+                object.pinch_zoom_y = options.json && !isFinite(message.pinch_zoom_y) ? String(message.pinch_zoom_y) : message.pinch_zoom_y;
+            if (message.pinch_zoom_scale != null && message.hasOwnProperty("pinch_zoom_scale"))
+                object.pinch_zoom_scale = options.json && !isFinite(message.pinch_zoom_scale) ? String(message.pinch_zoom_scale) : message.pinch_zoom_scale;
+            if (message.shaken != null && message.hasOwnProperty("shaken"))
+                object.shaken = message.shaken;
+            if (message.mouse_offscreen != null && message.hasOwnProperty("mouse_offscreen"))
+                object.mouse_offscreen = message.mouse_offscreen;
             return object;
         };
     
@@ -1436,6 +1913,11 @@
              * @property {number|null} [output_mouse] Control output_mouse
              * @property {string|null} [icon_foreground] Control icon_foreground
              * @property {string|null} [icon_background] Control icon_background
+             * @property {boolean|null} [input_toggle] Control input_toggle
+             * @property {number|null} [input_activate_stick_or_trackpad] Control input_activate_stick_or_trackpad
+             * @property {number|null} [activation_type] Control activation_type
+             * @property {number|null} [long_press_ms] Control long_press_ms
+             * @property {number|null} [double_press_ms] Control double_press_ms
              */
     
             /**
@@ -1534,6 +2016,46 @@
             Control.prototype.icon_background = "";
     
             /**
+             * Control input_toggle.
+             * @member {boolean} input_toggle
+             * @memberof CVirtualControllerConfig.Control
+             * @instance
+             */
+            Control.prototype.input_toggle = false;
+    
+            /**
+             * Control input_activate_stick_or_trackpad.
+             * @member {number} input_activate_stick_or_trackpad
+             * @memberof CVirtualControllerConfig.Control
+             * @instance
+             */
+            Control.prototype.input_activate_stick_or_trackpad = 0;
+    
+            /**
+             * Control activation_type.
+             * @member {number} activation_type
+             * @memberof CVirtualControllerConfig.Control
+             * @instance
+             */
+            Control.prototype.activation_type = 0;
+    
+            /**
+             * Control long_press_ms.
+             * @member {number} long_press_ms
+             * @memberof CVirtualControllerConfig.Control
+             * @instance
+             */
+            Control.prototype.long_press_ms = 0;
+    
+            /**
+             * Control double_press_ms.
+             * @member {number} double_press_ms
+             * @memberof CVirtualControllerConfig.Control
+             * @instance
+             */
+            Control.prototype.double_press_ms = 0;
+    
+            /**
              * Creates a new Control instance using the specified properties.
              * @function create
              * @memberof CVirtualControllerConfig.Control
@@ -1577,6 +2099,16 @@
                     writer.uint32(/* id 9, wireType 2 =*/74).string(message.icon_foreground);
                 if (message.icon_background != null && message.hasOwnProperty("icon_background"))
                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.icon_background);
+                if (message.input_toggle != null && message.hasOwnProperty("input_toggle"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.input_toggle);
+                if (message.input_activate_stick_or_trackpad != null && message.hasOwnProperty("input_activate_stick_or_trackpad"))
+                    writer.uint32(/* id 12, wireType 0 =*/96).int32(message.input_activate_stick_or_trackpad);
+                if (message.activation_type != null && message.hasOwnProperty("activation_type"))
+                    writer.uint32(/* id 13, wireType 0 =*/104).int32(message.activation_type);
+                if (message.long_press_ms != null && message.hasOwnProperty("long_press_ms"))
+                    writer.uint32(/* id 14, wireType 0 =*/112).int32(message.long_press_ms);
+                if (message.double_press_ms != null && message.hasOwnProperty("double_press_ms"))
+                    writer.uint32(/* id 15, wireType 0 =*/120).int32(message.double_press_ms);
                 return writer;
             };
     
@@ -1640,6 +2172,21 @@
                         break;
                     case 10:
                         message.icon_background = reader.string();
+                        break;
+                    case 11:
+                        message.input_toggle = reader.bool();
+                        break;
+                    case 12:
+                        message.input_activate_stick_or_trackpad = reader.int32();
+                        break;
+                    case 13:
+                        message.activation_type = reader.int32();
+                        break;
+                    case 14:
+                        message.long_press_ms = reader.int32();
+                        break;
+                    case 15:
+                        message.double_press_ms = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1706,6 +2253,21 @@
                 if (message.icon_background != null && message.hasOwnProperty("icon_background"))
                     if (!$util.isString(message.icon_background))
                         return "icon_background: string expected";
+                if (message.input_toggle != null && message.hasOwnProperty("input_toggle"))
+                    if (typeof message.input_toggle !== "boolean")
+                        return "input_toggle: boolean expected";
+                if (message.input_activate_stick_or_trackpad != null && message.hasOwnProperty("input_activate_stick_or_trackpad"))
+                    if (!$util.isInteger(message.input_activate_stick_or_trackpad))
+                        return "input_activate_stick_or_trackpad: integer expected";
+                if (message.activation_type != null && message.hasOwnProperty("activation_type"))
+                    if (!$util.isInteger(message.activation_type))
+                        return "activation_type: integer expected";
+                if (message.long_press_ms != null && message.hasOwnProperty("long_press_ms"))
+                    if (!$util.isInteger(message.long_press_ms))
+                        return "long_press_ms: integer expected";
+                if (message.double_press_ms != null && message.hasOwnProperty("double_press_ms"))
+                    if (!$util.isInteger(message.double_press_ms))
+                        return "double_press_ms: integer expected";
                 return null;
             };
     
@@ -1741,6 +2303,16 @@
                     message.icon_foreground = String(object.icon_foreground);
                 if (object.icon_background != null)
                     message.icon_background = String(object.icon_background);
+                if (object.input_toggle != null)
+                    message.input_toggle = Boolean(object.input_toggle);
+                if (object.input_activate_stick_or_trackpad != null)
+                    message.input_activate_stick_or_trackpad = object.input_activate_stick_or_trackpad | 0;
+                if (object.activation_type != null)
+                    message.activation_type = object.activation_type | 0;
+                if (object.long_press_ms != null)
+                    message.long_press_ms = object.long_press_ms | 0;
+                if (object.double_press_ms != null)
+                    message.double_press_ms = object.double_press_ms | 0;
                 return message;
             };
     
@@ -1768,6 +2340,11 @@
                     object.output_mouse = 0;
                     object.icon_foreground = "";
                     object.icon_background = "";
+                    object.input_toggle = false;
+                    object.input_activate_stick_or_trackpad = 0;
+                    object.activation_type = 0;
+                    object.long_press_ms = 0;
+                    object.double_press_ms = 0;
                 }
                 if (message.name != null && message.hasOwnProperty("name"))
                     object.name = message.name;
@@ -1789,6 +2366,16 @@
                     object.icon_foreground = message.icon_foreground;
                 if (message.icon_background != null && message.hasOwnProperty("icon_background"))
                     object.icon_background = message.icon_background;
+                if (message.input_toggle != null && message.hasOwnProperty("input_toggle"))
+                    object.input_toggle = message.input_toggle;
+                if (message.input_activate_stick_or_trackpad != null && message.hasOwnProperty("input_activate_stick_or_trackpad"))
+                    object.input_activate_stick_or_trackpad = message.input_activate_stick_or_trackpad;
+                if (message.activation_type != null && message.hasOwnProperty("activation_type"))
+                    object.activation_type = message.activation_type;
+                if (message.long_press_ms != null && message.hasOwnProperty("long_press_ms"))
+                    object.long_press_ms = message.long_press_ms;
+                if (message.double_press_ms != null && message.hasOwnProperty("double_press_ms"))
+                    object.double_press_ms = message.double_press_ms;
                 return object;
             };
     
@@ -2092,7 +2679,9 @@
          * @exports ICVirtualControllerLayoutPackage
          * @interface ICVirtualControllerLayoutPackage
          * @property {number|null} [appid] CVirtualControllerLayoutPackage appid
-         * @property {number|null} [revision] CVirtualControllerLayoutPackage revision
+         * @property {number|Long|null} [creator] CVirtualControllerLayoutPackage creator
+         * @property {number|null} [initial_revision] CVirtualControllerLayoutPackage initial_revision
+         * @property {number|null} [saved_revision] CVirtualControllerLayoutPackage saved_revision
          * @property {ICVirtualControllerConfig|null} [config] CVirtualControllerLayoutPackage config
          * @property {ICVirtualControllerLayouts|null} [layouts] CVirtualControllerLayoutPackage layouts
          */
@@ -2121,12 +2710,28 @@
         CVirtualControllerLayoutPackage.prototype.appid = 0;
     
         /**
-         * CVirtualControllerLayoutPackage revision.
-         * @member {number} revision
+         * CVirtualControllerLayoutPackage creator.
+         * @member {number|Long} creator
          * @memberof CVirtualControllerLayoutPackage
          * @instance
          */
-        CVirtualControllerLayoutPackage.prototype.revision = 0;
+        CVirtualControllerLayoutPackage.prototype.creator = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CVirtualControllerLayoutPackage initial_revision.
+         * @member {number} initial_revision
+         * @memberof CVirtualControllerLayoutPackage
+         * @instance
+         */
+        CVirtualControllerLayoutPackage.prototype.initial_revision = 0;
+    
+        /**
+         * CVirtualControllerLayoutPackage saved_revision.
+         * @member {number} saved_revision
+         * @memberof CVirtualControllerLayoutPackage
+         * @instance
+         */
+        CVirtualControllerLayoutPackage.prototype.saved_revision = 0;
     
         /**
          * CVirtualControllerLayoutPackage config.
@@ -2170,12 +2775,16 @@
                 writer = $Writer.create();
             if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.revision != null && message.hasOwnProperty("revision"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.revision);
+            if (message.creator != null && message.hasOwnProperty("creator"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.creator);
+            if (message.initial_revision != null && message.hasOwnProperty("initial_revision"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.initial_revision);
+            if (message.saved_revision != null && message.hasOwnProperty("saved_revision"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.saved_revision);
             if (message.config != null && message.hasOwnProperty("config"))
-                $root.CVirtualControllerConfig.encode(message.config, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                $root.CVirtualControllerConfig.encode(message.config, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             if (message.layouts != null && message.hasOwnProperty("layouts"))
-                $root.CVirtualControllerLayouts.encode(message.layouts, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                $root.CVirtualControllerLayouts.encode(message.layouts, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             return writer;
         };
     
@@ -2214,12 +2823,18 @@
                     message.appid = reader.uint32();
                     break;
                 case 2:
-                    message.revision = reader.uint32();
+                    message.creator = reader.uint64();
                     break;
                 case 3:
-                    message.config = $root.CVirtualControllerConfig.decode(reader, reader.uint32());
+                    message.initial_revision = reader.uint32();
                     break;
                 case 4:
+                    message.saved_revision = reader.uint32();
+                    break;
+                case 5:
+                    message.config = $root.CVirtualControllerConfig.decode(reader, reader.uint32());
+                    break;
+                case 6:
                     message.layouts = $root.CVirtualControllerLayouts.decode(reader, reader.uint32());
                     break;
                 default:
@@ -2260,9 +2875,15 @@
             if (message.appid != null && message.hasOwnProperty("appid"))
                 if (!$util.isInteger(message.appid))
                     return "appid: integer expected";
-            if (message.revision != null && message.hasOwnProperty("revision"))
-                if (!$util.isInteger(message.revision))
-                    return "revision: integer expected";
+            if (message.creator != null && message.hasOwnProperty("creator"))
+                if (!$util.isInteger(message.creator) && !(message.creator && $util.isInteger(message.creator.low) && $util.isInteger(message.creator.high)))
+                    return "creator: integer|Long expected";
+            if (message.initial_revision != null && message.hasOwnProperty("initial_revision"))
+                if (!$util.isInteger(message.initial_revision))
+                    return "initial_revision: integer expected";
+            if (message.saved_revision != null && message.hasOwnProperty("saved_revision"))
+                if (!$util.isInteger(message.saved_revision))
+                    return "saved_revision: integer expected";
             if (message.config != null && message.hasOwnProperty("config")) {
                 var error = $root.CVirtualControllerConfig.verify(message.config);
                 if (error)
@@ -2290,8 +2911,19 @@
             var message = new $root.CVirtualControllerLayoutPackage();
             if (object.appid != null)
                 message.appid = object.appid >>> 0;
-            if (object.revision != null)
-                message.revision = object.revision >>> 0;
+            if (object.creator != null)
+                if ($util.Long)
+                    (message.creator = $util.Long.fromValue(object.creator)).unsigned = true;
+                else if (typeof object.creator === "string")
+                    message.creator = parseInt(object.creator, 10);
+                else if (typeof object.creator === "number")
+                    message.creator = object.creator;
+                else if (typeof object.creator === "object")
+                    message.creator = new $util.LongBits(object.creator.low >>> 0, object.creator.high >>> 0).toNumber(true);
+            if (object.initial_revision != null)
+                message.initial_revision = object.initial_revision >>> 0;
+            if (object.saved_revision != null)
+                message.saved_revision = object.saved_revision >>> 0;
             if (object.config != null) {
                 if (typeof object.config !== "object")
                     throw TypeError(".CVirtualControllerLayoutPackage.config: object expected");
@@ -2320,14 +2952,27 @@
             var object = {};
             if (options.defaults) {
                 object.appid = 0;
-                object.revision = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.creator = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.creator = options.longs === String ? "0" : 0;
+                object.initial_revision = 0;
+                object.saved_revision = 0;
                 object.config = null;
                 object.layouts = null;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
-            if (message.revision != null && message.hasOwnProperty("revision"))
-                object.revision = message.revision;
+            if (message.creator != null && message.hasOwnProperty("creator"))
+                if (typeof message.creator === "number")
+                    object.creator = options.longs === String ? String(message.creator) : message.creator;
+                else
+                    object.creator = options.longs === String ? $util.Long.prototype.toString.call(message.creator) : options.longs === Number ? new $util.LongBits(message.creator.low >>> 0, message.creator.high >>> 0).toNumber(true) : message.creator;
+            if (message.initial_revision != null && message.hasOwnProperty("initial_revision"))
+                object.initial_revision = message.initial_revision;
+            if (message.saved_revision != null && message.hasOwnProperty("saved_revision"))
+                object.saved_revision = message.saved_revision;
             if (message.config != null && message.hasOwnProperty("config"))
                 object.config = $root.CVirtualControllerConfig.toObject(message.config, options);
             if (message.layouts != null && message.hasOwnProperty("layouts"))
@@ -2356,6 +3001,10 @@
          * @exports ICVirtualControllerGlobalConfig
          * @interface ICVirtualControllerGlobalConfig
          * @property {boolean|null} [feedback_enabled] CVirtualControllerGlobalConfig feedback_enabled
+         * @property {boolean|null} [gyroscope_enabled] CVirtualControllerGlobalConfig gyroscope_enabled
+         * @property {boolean|null} [auto_fade_enabled] CVirtualControllerGlobalConfig auto_fade_enabled
+         * @property {boolean|null} [rumble_enabled] CVirtualControllerGlobalConfig rumble_enabled
+         * @property {boolean|null} [shake_fade_enabled] CVirtualControllerGlobalConfig shake_fade_enabled
          */
     
         /**
@@ -2380,6 +3029,38 @@
          * @instance
          */
         CVirtualControllerGlobalConfig.prototype.feedback_enabled = false;
+    
+        /**
+         * CVirtualControllerGlobalConfig gyroscope_enabled.
+         * @member {boolean} gyroscope_enabled
+         * @memberof CVirtualControllerGlobalConfig
+         * @instance
+         */
+        CVirtualControllerGlobalConfig.prototype.gyroscope_enabled = true;
+    
+        /**
+         * CVirtualControllerGlobalConfig auto_fade_enabled.
+         * @member {boolean} auto_fade_enabled
+         * @memberof CVirtualControllerGlobalConfig
+         * @instance
+         */
+        CVirtualControllerGlobalConfig.prototype.auto_fade_enabled = true;
+    
+        /**
+         * CVirtualControllerGlobalConfig rumble_enabled.
+         * @member {boolean} rumble_enabled
+         * @memberof CVirtualControllerGlobalConfig
+         * @instance
+         */
+        CVirtualControllerGlobalConfig.prototype.rumble_enabled = true;
+    
+        /**
+         * CVirtualControllerGlobalConfig shake_fade_enabled.
+         * @member {boolean} shake_fade_enabled
+         * @memberof CVirtualControllerGlobalConfig
+         * @instance
+         */
+        CVirtualControllerGlobalConfig.prototype.shake_fade_enabled = false;
     
         /**
          * Creates a new CVirtualControllerGlobalConfig instance using the specified properties.
@@ -2407,6 +3088,14 @@
                 writer = $Writer.create();
             if (message.feedback_enabled != null && message.hasOwnProperty("feedback_enabled"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.feedback_enabled);
+            if (message.gyroscope_enabled != null && message.hasOwnProperty("gyroscope_enabled"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.gyroscope_enabled);
+            if (message.auto_fade_enabled != null && message.hasOwnProperty("auto_fade_enabled"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.auto_fade_enabled);
+            if (message.rumble_enabled != null && message.hasOwnProperty("rumble_enabled"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.rumble_enabled);
+            if (message.shake_fade_enabled != null && message.hasOwnProperty("shake_fade_enabled"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.shake_fade_enabled);
             return writer;
         };
     
@@ -2443,6 +3132,18 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.feedback_enabled = reader.bool();
+                    break;
+                case 2:
+                    message.gyroscope_enabled = reader.bool();
+                    break;
+                case 3:
+                    message.auto_fade_enabled = reader.bool();
+                    break;
+                case 4:
+                    message.rumble_enabled = reader.bool();
+                    break;
+                case 5:
+                    message.shake_fade_enabled = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2482,6 +3183,18 @@
             if (message.feedback_enabled != null && message.hasOwnProperty("feedback_enabled"))
                 if (typeof message.feedback_enabled !== "boolean")
                     return "feedback_enabled: boolean expected";
+            if (message.gyroscope_enabled != null && message.hasOwnProperty("gyroscope_enabled"))
+                if (typeof message.gyroscope_enabled !== "boolean")
+                    return "gyroscope_enabled: boolean expected";
+            if (message.auto_fade_enabled != null && message.hasOwnProperty("auto_fade_enabled"))
+                if (typeof message.auto_fade_enabled !== "boolean")
+                    return "auto_fade_enabled: boolean expected";
+            if (message.rumble_enabled != null && message.hasOwnProperty("rumble_enabled"))
+                if (typeof message.rumble_enabled !== "boolean")
+                    return "rumble_enabled: boolean expected";
+            if (message.shake_fade_enabled != null && message.hasOwnProperty("shake_fade_enabled"))
+                if (typeof message.shake_fade_enabled !== "boolean")
+                    return "shake_fade_enabled: boolean expected";
             return null;
         };
     
@@ -2499,6 +3212,14 @@
             var message = new $root.CVirtualControllerGlobalConfig();
             if (object.feedback_enabled != null)
                 message.feedback_enabled = Boolean(object.feedback_enabled);
+            if (object.gyroscope_enabled != null)
+                message.gyroscope_enabled = Boolean(object.gyroscope_enabled);
+            if (object.auto_fade_enabled != null)
+                message.auto_fade_enabled = Boolean(object.auto_fade_enabled);
+            if (object.rumble_enabled != null)
+                message.rumble_enabled = Boolean(object.rumble_enabled);
+            if (object.shake_fade_enabled != null)
+                message.shake_fade_enabled = Boolean(object.shake_fade_enabled);
             return message;
         };
     
@@ -2515,10 +3236,23 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.feedback_enabled = false;
+                object.gyroscope_enabled = true;
+                object.auto_fade_enabled = true;
+                object.rumble_enabled = true;
+                object.shake_fade_enabled = false;
+            }
             if (message.feedback_enabled != null && message.hasOwnProperty("feedback_enabled"))
                 object.feedback_enabled = message.feedback_enabled;
+            if (message.gyroscope_enabled != null && message.hasOwnProperty("gyroscope_enabled"))
+                object.gyroscope_enabled = message.gyroscope_enabled;
+            if (message.auto_fade_enabled != null && message.hasOwnProperty("auto_fade_enabled"))
+                object.auto_fade_enabled = message.auto_fade_enabled;
+            if (message.rumble_enabled != null && message.hasOwnProperty("rumble_enabled"))
+                object.rumble_enabled = message.rumble_enabled;
+            if (message.shake_fade_enabled != null && message.hasOwnProperty("shake_fade_enabled"))
+                object.shake_fade_enabled = message.shake_fade_enabled;
             return object;
         };
     

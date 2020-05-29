@@ -16,6 +16,20 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    /**
+     * EContentDeltaChunkDataLocation enum.
+     * @exports EContentDeltaChunkDataLocation
+     * @enum {string}
+     * @property {number} k_EContentDeltaChunkDataLocationInProtobuf=0 k_EContentDeltaChunkDataLocationInProtobuf value
+     * @property {number} k_EContentDeltaChunkDataLocationAfterProtobuf=1 k_EContentDeltaChunkDataLocationAfterProtobuf value
+     */
+    $root.EContentDeltaChunkDataLocation = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EContentDeltaChunkDataLocationInProtobuf"] = 0;
+        values[valuesById[1] = "k_EContentDeltaChunkDataLocationAfterProtobuf"] = 1;
+        return values;
+    })();
+    
     $root.ContentManifestPayload = (function() {
     
         /**
@@ -1509,6 +1523,7 @@
          * @property {number|Long|null} [manifest_id_source] ContentDeltaChunks manifest_id_source
          * @property {number|Long|null} [manifest_id_target] ContentDeltaChunks manifest_id_target
          * @property {Array.<ContentDeltaChunks.IDeltaChunk>|null} [deltaChunks] ContentDeltaChunks deltaChunks
+         * @property {EContentDeltaChunkDataLocation|null} [chunk_data_location] ContentDeltaChunks chunk_data_location
          */
     
         /**
@@ -1560,6 +1575,14 @@
         ContentDeltaChunks.prototype.deltaChunks = $util.emptyArray;
     
         /**
+         * ContentDeltaChunks chunk_data_location.
+         * @member {EContentDeltaChunkDataLocation} chunk_data_location
+         * @memberof ContentDeltaChunks
+         * @instance
+         */
+        ContentDeltaChunks.prototype.chunk_data_location = 0;
+    
+        /**
          * Creates a new ContentDeltaChunks instance using the specified properties.
          * @function create
          * @memberof ContentDeltaChunks
@@ -1592,6 +1615,8 @@
             if (message.deltaChunks != null && message.deltaChunks.length)
                 for (var i = 0; i < message.deltaChunks.length; ++i)
                     $root.ContentDeltaChunks.DeltaChunk.encode(message.deltaChunks[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.chunk_data_location != null && message.hasOwnProperty("chunk_data_location"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.chunk_data_location);
             return writer;
         };
     
@@ -1639,6 +1664,9 @@
                     if (!(message.deltaChunks && message.deltaChunks.length))
                         message.deltaChunks = [];
                     message.deltaChunks.push($root.ContentDeltaChunks.DeltaChunk.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    message.chunk_data_location = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1693,6 +1721,14 @@
                         return "deltaChunks." + error;
                 }
             }
+            if (message.chunk_data_location != null && message.hasOwnProperty("chunk_data_location"))
+                switch (message.chunk_data_location) {
+                default:
+                    return "chunk_data_location: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
             return null;
         };
     
@@ -1738,6 +1774,16 @@
                     message.deltaChunks[i] = $root.ContentDeltaChunks.DeltaChunk.fromObject(object.deltaChunks[i]);
                 }
             }
+            switch (object.chunk_data_location) {
+            case "k_EContentDeltaChunkDataLocationInProtobuf":
+            case 0:
+                message.chunk_data_location = 0;
+                break;
+            case "k_EContentDeltaChunkDataLocationAfterProtobuf":
+            case 1:
+                message.chunk_data_location = 1;
+                break;
+            }
             return message;
         };
     
@@ -1768,6 +1814,7 @@
                     object.manifest_id_target = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.manifest_id_target = options.longs === String ? "0" : 0;
+                object.chunk_data_location = options.enums === String ? "k_EContentDeltaChunkDataLocationInProtobuf" : 0;
             }
             if (message.depot_id != null && message.hasOwnProperty("depot_id"))
                 object.depot_id = message.depot_id;
@@ -1786,6 +1833,8 @@
                 for (var j = 0; j < message.deltaChunks.length; ++j)
                     object.deltaChunks[j] = $root.ContentDeltaChunks.DeltaChunk.toObject(message.deltaChunks[j], options);
             }
+            if (message.chunk_data_location != null && message.hasOwnProperty("chunk_data_location"))
+                object.chunk_data_location = options.enums === String ? $root.EContentDeltaChunkDataLocation[message.chunk_data_location] : message.chunk_data_location;
             return object;
         };
     
@@ -1811,6 +1860,7 @@
              * @property {number|null} [size_original] DeltaChunk size_original
              * @property {number|null} [patch_method] DeltaChunk patch_method
              * @property {Uint8Array|null} [chunk] DeltaChunk chunk
+             * @property {number|null} [size_delta] DeltaChunk size_delta
              */
     
             /**
@@ -1869,6 +1919,14 @@
             DeltaChunk.prototype.chunk = $util.newBuffer([]);
     
             /**
+             * DeltaChunk size_delta.
+             * @member {number} size_delta
+             * @memberof ContentDeltaChunks.DeltaChunk
+             * @instance
+             */
+            DeltaChunk.prototype.size_delta = 0;
+    
+            /**
              * Creates a new DeltaChunk instance using the specified properties.
              * @function create
              * @memberof ContentDeltaChunks.DeltaChunk
@@ -1902,6 +1960,8 @@
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.patch_method);
                 if (message.chunk != null && message.hasOwnProperty("chunk"))
                     writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.chunk);
+                if (message.size_delta != null && message.hasOwnProperty("size_delta"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.size_delta);
                 return writer;
             };
     
@@ -1950,6 +2010,9 @@
                         break;
                     case 5:
                         message.chunk = reader.bytes();
+                        break;
+                    case 6:
+                        message.size_delta = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -2001,6 +2064,9 @@
                 if (message.chunk != null && message.hasOwnProperty("chunk"))
                     if (!(message.chunk && typeof message.chunk.length === "number" || $util.isString(message.chunk)))
                         return "chunk: buffer expected";
+                if (message.size_delta != null && message.hasOwnProperty("size_delta"))
+                    if (!$util.isInteger(message.size_delta))
+                        return "size_delta: integer expected";
                 return null;
             };
     
@@ -2035,6 +2101,8 @@
                         $util.base64.decode(object.chunk, message.chunk = $util.newBuffer($util.base64.length(object.chunk)), 0);
                     else if (object.chunk.length)
                         message.chunk = object.chunk;
+                if (object.size_delta != null)
+                    message.size_delta = object.size_delta >>> 0;
                 return message;
             };
     
@@ -2075,6 +2143,7 @@
                         if (options.bytes !== Array)
                             object.chunk = $util.newBuffer(object.chunk);
                     }
+                    object.size_delta = 0;
                 }
                 if (message.sha_source != null && message.hasOwnProperty("sha_source"))
                     object.sha_source = options.bytes === String ? $util.base64.encode(message.sha_source, 0, message.sha_source.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha_source) : message.sha_source;
@@ -2086,6 +2155,8 @@
                     object.patch_method = message.patch_method;
                 if (message.chunk != null && message.hasOwnProperty("chunk"))
                     object.chunk = options.bytes === String ? $util.base64.encode(message.chunk, 0, message.chunk.length) : options.bytes === Array ? Array.prototype.slice.call(message.chunk) : message.chunk;
+                if (message.size_delta != null && message.hasOwnProperty("size_delta"))
+                    object.size_delta = message.size_delta;
                 return object;
             };
     

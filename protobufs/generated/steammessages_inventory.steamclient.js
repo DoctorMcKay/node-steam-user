@@ -3255,6 +3255,7 @@
          * @property {number|null} [appid] CInventory_SplitItemStack_Request appid
          * @property {number|Long|null} [itemid] CInventory_SplitItemStack_Request itemid
          * @property {number|null} [quantity] CInventory_SplitItemStack_Request quantity
+         * @property {number|Long|null} [steamid] CInventory_SplitItemStack_Request steamid
          */
     
         /**
@@ -3297,6 +3298,14 @@
         CInventory_SplitItemStack_Request.prototype.quantity = 0;
     
         /**
+         * CInventory_SplitItemStack_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CInventory_SplitItemStack_Request
+         * @instance
+         */
+        CInventory_SplitItemStack_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CInventory_SplitItemStack_Request instance using the specified properties.
          * @function create
          * @memberof CInventory_SplitItemStack_Request
@@ -3326,6 +3335,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.itemid);
             if (message.quantity != null && message.hasOwnProperty("quantity"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.quantity);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.steamid);
             return writer;
         };
     
@@ -3368,6 +3379,9 @@
                     break;
                 case 3:
                     message.quantity = reader.uint32();
+                    break;
+                case 5:
+                    message.steamid = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3413,6 +3427,9 @@
             if (message.quantity != null && message.hasOwnProperty("quantity"))
                 if (!$util.isInteger(message.quantity))
                     return "quantity: integer expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
             return null;
         };
     
@@ -3441,6 +3458,15 @@
                     message.itemid = new $util.LongBits(object.itemid.low >>> 0, object.itemid.high >>> 0).toNumber(true);
             if (object.quantity != null)
                 message.quantity = object.quantity >>> 0;
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -3465,6 +3491,11 @@
                 } else
                     object.itemid = options.longs === String ? "0" : 0;
                 object.quantity = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -3475,6 +3506,11 @@
                     object.itemid = options.longs === String ? $util.Long.prototype.toString.call(message.itemid) : options.longs === Number ? new $util.LongBits(message.itemid.low >>> 0, message.itemid.high >>> 0).toNumber(true) : message.itemid;
             if (message.quantity != null && message.hasOwnProperty("quantity"))
                 object.quantity = message.quantity;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
             return object;
         };
     
@@ -3502,6 +3538,7 @@
          * @property {number|Long|null} [fromitemid] CInventory_CombineItemStacks_Request fromitemid
          * @property {number|Long|null} [destitemid] CInventory_CombineItemStacks_Request destitemid
          * @property {number|null} [quantity] CInventory_CombineItemStacks_Request quantity
+         * @property {number|Long|null} [steamid] CInventory_CombineItemStacks_Request steamid
          */
     
         /**
@@ -3552,6 +3589,14 @@
         CInventory_CombineItemStacks_Request.prototype.quantity = 0;
     
         /**
+         * CInventory_CombineItemStacks_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CInventory_CombineItemStacks_Request
+         * @instance
+         */
+        CInventory_CombineItemStacks_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
          * Creates a new CInventory_CombineItemStacks_Request instance using the specified properties.
          * @function create
          * @memberof CInventory_CombineItemStacks_Request
@@ -3583,6 +3628,8 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.destitemid);
             if (message.quantity != null && message.hasOwnProperty("quantity"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.quantity);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 7, wireType 1 =*/57).fixed64(message.steamid);
             return writer;
         };
     
@@ -3628,6 +3675,9 @@
                     break;
                 case 4:
                     message.quantity = reader.uint32();
+                    break;
+                case 7:
+                    message.steamid = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3676,6 +3726,9 @@
             if (message.quantity != null && message.hasOwnProperty("quantity"))
                 if (!$util.isInteger(message.quantity))
                     return "quantity: integer expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
             return null;
         };
     
@@ -3713,6 +3766,15 @@
                     message.destitemid = new $util.LongBits(object.destitemid.low >>> 0, object.destitemid.high >>> 0).toNumber(true);
             if (object.quantity != null)
                 message.quantity = object.quantity >>> 0;
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
             return message;
         };
     
@@ -3742,6 +3804,11 @@
                 } else
                     object.destitemid = options.longs === String ? "0" : 0;
                 object.quantity = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -3757,6 +3824,11 @@
                     object.destitemid = options.longs === String ? $util.Long.prototype.toString.call(message.destitemid) : options.longs === Number ? new $util.LongBits(message.destitemid.low >>> 0, message.destitemid.high >>> 0).toNumber(true) : message.destitemid;
             if (message.quantity != null && message.hasOwnProperty("quantity"))
                 object.quantity = message.quantity;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
             return object;
         };
     
@@ -5480,6 +5552,266 @@
         return CInventory_PurchaseFinalize_Request;
     })();
     
+    $root.CInventory_InspectItem_Request = (function() {
+    
+        /**
+         * Properties of a CInventory_InspectItem_Request.
+         * @exports ICInventory_InspectItem_Request
+         * @interface ICInventory_InspectItem_Request
+         * @property {number|Long|null} [itemdefid] CInventory_InspectItem_Request itemdefid
+         * @property {number|Long|null} [itemid] CInventory_InspectItem_Request itemid
+         * @property {string|null} [tags] CInventory_InspectItem_Request tags
+         */
+    
+        /**
+         * Constructs a new CInventory_InspectItem_Request.
+         * @exports CInventory_InspectItem_Request
+         * @classdesc Represents a CInventory_InspectItem_Request.
+         * @implements ICInventory_InspectItem_Request
+         * @constructor
+         * @param {ICInventory_InspectItem_Request=} [properties] Properties to set
+         */
+        function CInventory_InspectItem_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CInventory_InspectItem_Request itemdefid.
+         * @member {number|Long} itemdefid
+         * @memberof CInventory_InspectItem_Request
+         * @instance
+         */
+        CInventory_InspectItem_Request.prototype.itemdefid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CInventory_InspectItem_Request itemid.
+         * @member {number|Long} itemid
+         * @memberof CInventory_InspectItem_Request
+         * @instance
+         */
+        CInventory_InspectItem_Request.prototype.itemid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CInventory_InspectItem_Request tags.
+         * @member {string} tags
+         * @memberof CInventory_InspectItem_Request
+         * @instance
+         */
+        CInventory_InspectItem_Request.prototype.tags = "";
+    
+        /**
+         * Creates a new CInventory_InspectItem_Request instance using the specified properties.
+         * @function create
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {ICInventory_InspectItem_Request=} [properties] Properties to set
+         * @returns {CInventory_InspectItem_Request} CInventory_InspectItem_Request instance
+         */
+        CInventory_InspectItem_Request.create = function create(properties) {
+            return new CInventory_InspectItem_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CInventory_InspectItem_Request message. Does not implicitly {@link CInventory_InspectItem_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {ICInventory_InspectItem_Request} message CInventory_InspectItem_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInventory_InspectItem_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.itemdefid);
+            if (message.itemid != null && message.hasOwnProperty("itemid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.itemid);
+            if (message.tags != null && message.hasOwnProperty("tags"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.tags);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CInventory_InspectItem_Request message, length delimited. Does not implicitly {@link CInventory_InspectItem_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {ICInventory_InspectItem_Request} message CInventory_InspectItem_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInventory_InspectItem_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CInventory_InspectItem_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CInventory_InspectItem_Request} CInventory_InspectItem_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInventory_InspectItem_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_InspectItem_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.itemdefid = reader.uint64();
+                    break;
+                case 2:
+                    message.itemid = reader.fixed64();
+                    break;
+                case 3:
+                    message.tags = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CInventory_InspectItem_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CInventory_InspectItem_Request} CInventory_InspectItem_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInventory_InspectItem_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CInventory_InspectItem_Request message.
+         * @function verify
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CInventory_InspectItem_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
+                if (!$util.isInteger(message.itemdefid) && !(message.itemdefid && $util.isInteger(message.itemdefid.low) && $util.isInteger(message.itemdefid.high)))
+                    return "itemdefid: integer|Long expected";
+            if (message.itemid != null && message.hasOwnProperty("itemid"))
+                if (!$util.isInteger(message.itemid) && !(message.itemid && $util.isInteger(message.itemid.low) && $util.isInteger(message.itemid.high)))
+                    return "itemid: integer|Long expected";
+            if (message.tags != null && message.hasOwnProperty("tags"))
+                if (!$util.isString(message.tags))
+                    return "tags: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CInventory_InspectItem_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CInventory_InspectItem_Request} CInventory_InspectItem_Request
+         */
+        CInventory_InspectItem_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CInventory_InspectItem_Request)
+                return object;
+            var message = new $root.CInventory_InspectItem_Request();
+            if (object.itemdefid != null)
+                if ($util.Long)
+                    (message.itemdefid = $util.Long.fromValue(object.itemdefid)).unsigned = true;
+                else if (typeof object.itemdefid === "string")
+                    message.itemdefid = parseInt(object.itemdefid, 10);
+                else if (typeof object.itemdefid === "number")
+                    message.itemdefid = object.itemdefid;
+                else if (typeof object.itemdefid === "object")
+                    message.itemdefid = new $util.LongBits(object.itemdefid.low >>> 0, object.itemdefid.high >>> 0).toNumber(true);
+            if (object.itemid != null)
+                if ($util.Long)
+                    (message.itemid = $util.Long.fromValue(object.itemid)).unsigned = false;
+                else if (typeof object.itemid === "string")
+                    message.itemid = parseInt(object.itemid, 10);
+                else if (typeof object.itemid === "number")
+                    message.itemid = object.itemid;
+                else if (typeof object.itemid === "object")
+                    message.itemid = new $util.LongBits(object.itemid.low >>> 0, object.itemid.high >>> 0).toNumber();
+            if (object.tags != null)
+                message.tags = String(object.tags);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CInventory_InspectItem_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CInventory_InspectItem_Request
+         * @static
+         * @param {CInventory_InspectItem_Request} message CInventory_InspectItem_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CInventory_InspectItem_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.itemdefid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.itemdefid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.itemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.itemid = options.longs === String ? "0" : 0;
+                object.tags = "";
+            }
+            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
+                if (typeof message.itemdefid === "number")
+                    object.itemdefid = options.longs === String ? String(message.itemdefid) : message.itemdefid;
+                else
+                    object.itemdefid = options.longs === String ? $util.Long.prototype.toString.call(message.itemdefid) : options.longs === Number ? new $util.LongBits(message.itemdefid.low >>> 0, message.itemdefid.high >>> 0).toNumber(true) : message.itemdefid;
+            if (message.itemid != null && message.hasOwnProperty("itemid"))
+                if (typeof message.itemid === "number")
+                    object.itemid = options.longs === String ? String(message.itemid) : message.itemid;
+                else
+                    object.itemid = options.longs === String ? $util.Long.prototype.toString.call(message.itemid) : options.longs === Number ? new $util.LongBits(message.itemid.low >>> 0, message.itemid.high >>> 0).toNumber() : message.itemid;
+            if (message.tags != null && message.hasOwnProperty("tags"))
+                object.tags = message.tags;
+            return object;
+        };
+    
+        /**
+         * Converts this CInventory_InspectItem_Request to JSON.
+         * @function toJSON
+         * @memberof CInventory_InspectItem_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CInventory_InspectItem_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CInventory_InspectItem_Request;
+    })();
+    
     $root.CInventoryClient_NewItems_Notification = (function() {
     
         /**
@@ -6218,6 +6550,39 @@
          * @memberof Inventory
          * @instance
          * @param {ICInventory_PurchaseFinalize_Request} request CInventory_PurchaseFinalize_Request message or plain object
+         * @returns {Promise<CInventory_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Inventory#inspectItem}.
+         * @memberof Inventory
+         * @typedef InspectItemCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CInventory_Response} [response] CInventory_Response
+         */
+    
+        /**
+         * Calls InspectItem.
+         * @function inspectItem
+         * @memberof Inventory
+         * @instance
+         * @param {ICInventory_InspectItem_Request} request CInventory_InspectItem_Request message or plain object
+         * @param {Inventory.InspectItemCallback} callback Node-style callback called with the error, if any, and CInventory_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Inventory.prototype.inspectItem = function inspectItem(request, callback) {
+            return this.rpcCall(inspectItem, $root.CInventory_InspectItem_Request, $root.CInventory_Response, request, callback);
+        }, "name", { value: "InspectItem" });
+    
+        /**
+         * Calls InspectItem.
+         * @function inspectItem
+         * @memberof Inventory
+         * @instance
+         * @param {ICInventory_InspectItem_Request} request CInventory_InspectItem_Request message or plain object
          * @returns {Promise<CInventory_Response>} Promise
          * @variation 2
          */

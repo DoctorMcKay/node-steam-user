@@ -43,7 +43,6 @@ module.exports = {
 	"QAR": 39,
 	"CRC": 40,
 	"UYU": 41,
-	"Max": 42,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -87,5 +86,4 @@ module.exports = {
 	"39": "QAR",
 	"40": "CRC",
 	"41": "UYU",
-	"42": "Max",
 };

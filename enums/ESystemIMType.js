@@ -12,7 +12,6 @@ module.exports = {
 	"GiftRevoked": 7,
 	"SupportMessage": 8,
 	"SupportMessageClearAlert": 9,
-	"Max": 10,
 
 	// Value-to-name mapping for convenience
 	"0": "RawText",
@@ -25,5 +24,4 @@ module.exports = {
 	"7": "GiftRevoked",
 	"8": "SupportMessage",
 	"9": "SupportMessageClearAlert",
-	"10": "Max",
 };

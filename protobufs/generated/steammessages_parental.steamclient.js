@@ -243,6 +243,7 @@
          * @property {boolean|null} [is_enabled] ParentalSettings is_enabled
          * @property {number|null} [enabled_features] ParentalSettings enabled_features
          * @property {string|null} [recovery_email] ParentalSettings recovery_email
+         * @property {boolean|null} [is_site_license_lock] ParentalSettings is_site_license_lock
          */
     
         /**
@@ -351,6 +352,14 @@
         ParentalSettings.prototype.recovery_email = "";
     
         /**
+         * ParentalSettings is_site_license_lock.
+         * @member {boolean} is_site_license_lock
+         * @memberof ParentalSettings
+         * @instance
+         */
+        ParentalSettings.prototype.is_site_license_lock = false;
+    
+        /**
          * Creates a new ParentalSettings instance using the specified properties.
          * @function create
          * @memberof ParentalSettings
@@ -398,6 +407,8 @@
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.enabled_features);
             if (message.recovery_email != null && message.hasOwnProperty("recovery_email"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.recovery_email);
+            if (message.is_site_license_lock != null && message.hasOwnProperty("is_site_license_lock"))
+                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.is_site_license_lock);
             return writer;
         };
     
@@ -468,6 +479,9 @@
                     break;
                 case 11:
                     message.recovery_email = reader.string();
+                    break;
+                case 12:
+                    message.is_site_license_lock = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -549,6 +563,9 @@
             if (message.recovery_email != null && message.hasOwnProperty("recovery_email"))
                 if (!$util.isString(message.recovery_email))
                     return "recovery_email: string expected";
+            if (message.is_site_license_lock != null && message.hasOwnProperty("is_site_license_lock"))
+                if (typeof message.is_site_license_lock !== "boolean")
+                    return "is_site_license_lock: boolean expected";
             return null;
         };
     
@@ -615,6 +632,8 @@
                 message.enabled_features = object.enabled_features >>> 0;
             if (object.recovery_email != null)
                 message.recovery_email = String(object.recovery_email);
+            if (object.is_site_license_lock != null)
+                message.is_site_license_lock = Boolean(object.is_site_license_lock);
             return message;
         };
     
@@ -661,6 +680,7 @@
                 object.is_enabled = false;
                 object.enabled_features = 0;
                 object.recovery_email = "";
+                object.is_site_license_lock = false;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -693,6 +713,8 @@
                 object.enabled_features = message.enabled_features;
             if (message.recovery_email != null && message.hasOwnProperty("recovery_email"))
                 object.recovery_email = message.recovery_email;
+            if (message.is_site_license_lock != null && message.hasOwnProperty("is_site_license_lock"))
+                object.is_site_license_lock = message.is_site_license_lock;
             return object;
         };
     

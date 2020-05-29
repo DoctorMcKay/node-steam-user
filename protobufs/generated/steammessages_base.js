@@ -53,6 +53,8 @@
      * @property {number} k_EClanFreeTrial=31 k_EClanFreeTrial value
      * @property {number} k_EClanSeasonRelease=32 k_EClanSeasonRelease value
      * @property {number} k_EClanSeasonUpdate=33 k_EClanSeasonUpdate value
+     * @property {number} k_EClanCrosspostEvent=34 k_EClanCrosspostEvent value
+     * @property {number} k_EClanInGameEventGeneral=35 k_EClanInGameEventGeneral value
      */
     $root.EProtoClanEventType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -89,6 +91,26 @@
         values[valuesById[31] = "k_EClanFreeTrial"] = 31;
         values[valuesById[32] = "k_EClanSeasonRelease"] = 32;
         values[valuesById[33] = "k_EClanSeasonUpdate"] = 33;
+        values[valuesById[34] = "k_EClanCrosspostEvent"] = 34;
+        values[valuesById[35] = "k_EClanInGameEventGeneral"] = 35;
+        return values;
+    })();
+    
+    /**
+     * PartnerEventNotificationType enum.
+     * @exports PartnerEventNotificationType
+     * @enum {string}
+     * @property {number} k_EEventStart=0 k_EEventStart value
+     * @property {number} k_EEventBroadcastStart=1 k_EEventBroadcastStart value
+     * @property {number} k_EEventMatchStart=2 k_EEventMatchStart value
+     * @property {number} k_EEventPartnerMaxType=3 k_EEventPartnerMaxType value
+     */
+    $root.PartnerEventNotificationType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EEventStart"] = 0;
+        values[valuesById[1] = "k_EEventBroadcastStart"] = 1;
+        values[valuesById[2] = "k_EEventMatchStart"] = 2;
+        values[valuesById[3] = "k_EEventPartnerMaxType"] = 3;
         return values;
     })();
     
@@ -328,6 +350,235 @@
         return CMsgIPAddress;
     })();
     
+    $root.CMsgIPAddressBucket = (function() {
+    
+        /**
+         * Properties of a CMsgIPAddressBucket.
+         * @exports ICMsgIPAddressBucket
+         * @interface ICMsgIPAddressBucket
+         * @property {ICMsgIPAddress|null} [original_ip_address] CMsgIPAddressBucket original_ip_address
+         * @property {number|Long|null} [bucket] CMsgIPAddressBucket bucket
+         */
+    
+        /**
+         * Constructs a new CMsgIPAddressBucket.
+         * @exports CMsgIPAddressBucket
+         * @classdesc Represents a CMsgIPAddressBucket.
+         * @implements ICMsgIPAddressBucket
+         * @constructor
+         * @param {ICMsgIPAddressBucket=} [properties] Properties to set
+         */
+        function CMsgIPAddressBucket(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgIPAddressBucket original_ip_address.
+         * @member {ICMsgIPAddress|null|undefined} original_ip_address
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         */
+        CMsgIPAddressBucket.prototype.original_ip_address = null;
+    
+        /**
+         * CMsgIPAddressBucket bucket.
+         * @member {number|Long} bucket
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         */
+        CMsgIPAddressBucket.prototype.bucket = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CMsgIPAddressBucket instance using the specified properties.
+         * @function create
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket=} [properties] Properties to set
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket instance
+         */
+        CMsgIPAddressBucket.create = function create(properties) {
+            return new CMsgIPAddressBucket(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddressBucket message. Does not implicitly {@link CMsgIPAddressBucket.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket} message CMsgIPAddressBucket message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddressBucket.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address"))
+                $root.CMsgIPAddress.encode(message.original_ip_address, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.bucket);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddressBucket message, length delimited. Does not implicitly {@link CMsgIPAddressBucket.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket} message CMsgIPAddressBucket message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddressBucket.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgIPAddressBucket message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddressBucket.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgIPAddressBucket();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.original_ip_address = $root.CMsgIPAddress.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.bucket = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgIPAddressBucket message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddressBucket.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgIPAddressBucket message.
+         * @function verify
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgIPAddressBucket.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address")) {
+                var error = $root.CMsgIPAddress.verify(message.original_ip_address);
+                if (error)
+                    return "original_ip_address." + error;
+            }
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                if (!$util.isInteger(message.bucket) && !(message.bucket && $util.isInteger(message.bucket.low) && $util.isInteger(message.bucket.high)))
+                    return "bucket: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgIPAddressBucket message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         */
+        CMsgIPAddressBucket.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgIPAddressBucket)
+                return object;
+            var message = new $root.CMsgIPAddressBucket();
+            if (object.original_ip_address != null) {
+                if (typeof object.original_ip_address !== "object")
+                    throw TypeError(".CMsgIPAddressBucket.original_ip_address: object expected");
+                message.original_ip_address = $root.CMsgIPAddress.fromObject(object.original_ip_address);
+            }
+            if (object.bucket != null)
+                if ($util.Long)
+                    (message.bucket = $util.Long.fromValue(object.bucket)).unsigned = false;
+                else if (typeof object.bucket === "string")
+                    message.bucket = parseInt(object.bucket, 10);
+                else if (typeof object.bucket === "number")
+                    message.bucket = object.bucket;
+                else if (typeof object.bucket === "object")
+                    message.bucket = new $util.LongBits(object.bucket.low >>> 0, object.bucket.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgIPAddressBucket message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {CMsgIPAddressBucket} message CMsgIPAddressBucket
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgIPAddressBucket.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.original_ip_address = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.bucket = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bucket = options.longs === String ? "0" : 0;
+            }
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address"))
+                object.original_ip_address = $root.CMsgIPAddress.toObject(message.original_ip_address, options);
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                if (typeof message.bucket === "number")
+                    object.bucket = options.longs === String ? String(message.bucket) : message.bucket;
+                else
+                    object.bucket = options.longs === String ? $util.Long.prototype.toString.call(message.bucket) : options.longs === Number ? new $util.LongBits(message.bucket.low >>> 0, message.bucket.high >>> 0).toNumber() : message.bucket;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgIPAddressBucket to JSON.
+         * @function toJSON
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgIPAddressBucket.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgIPAddressBucket;
+    })();
+    
     $root.CMsgProtoBufHeader = (function() {
     
         /**
@@ -356,6 +607,8 @@
          * @property {Array.<number>|null} [forward_to_sysid] CMsgProtoBufHeader forward_to_sysid
          * @property {number|null} [cm_sysid] CMsgProtoBufHeader cm_sysid
          * @property {string|null} [wg_token] CMsgProtoBufHeader wg_token
+         * @property {number|null} [launcher_type] CMsgProtoBufHeader launcher_type
+         * @property {number|null} [realm] CMsgProtoBufHeader realm
          * @property {number|null} [ip] CMsgProtoBufHeader ip
          * @property {Uint8Array|null} [ip_v6] CMsgProtoBufHeader ip_v6
          */
@@ -553,6 +806,22 @@
         CMsgProtoBufHeader.prototype.wg_token = "";
     
         /**
+         * CMsgProtoBufHeader launcher_type.
+         * @member {number} launcher_type
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.launcher_type = 0;
+    
+        /**
+         * CMsgProtoBufHeader realm.
+         * @member {number} realm
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.realm = 0;
+    
+        /**
          * CMsgProtoBufHeader ip.
          * @member {number} ip
          * @memberof CMsgProtoBufHeader
@@ -655,6 +924,10 @@
                 writer.uint32(/* id 29, wireType 2 =*/234).bytes(message.ip_v6);
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.wg_token);
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.launcher_type);
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                writer.uint32(/* id 32, wireType 0 =*/256).uint32(message.realm);
             return writer;
         };
     
@@ -761,6 +1034,12 @@
                     break;
                 case 30:
                     message.wg_token = reader.string();
+                    break;
+                case 31:
+                    message.launcher_type = reader.uint32();
+                    break;
+                case 32:
+                    message.realm = reader.uint32();
                     break;
                 case 15:
                     message.ip = reader.uint32();
@@ -874,6 +1153,12 @@
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 if (!$util.isString(message.wg_token))
                     return "wg_token: string expected";
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                if (!$util.isInteger(message.launcher_type))
+                    return "launcher_type: integer expected";
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                if (!$util.isInteger(message.realm))
+                    return "realm: integer expected";
             if (message.ip != null && message.hasOwnProperty("ip")) {
                 properties.ip_addr = 1;
                 if (!$util.isInteger(message.ip))
@@ -985,6 +1270,10 @@
                 message.cm_sysid = object.cm_sysid >>> 0;
             if (object.wg_token != null)
                 message.wg_token = String(object.wg_token);
+            if (object.launcher_type != null)
+                message.launcher_type = object.launcher_type >>> 0;
+            if (object.realm != null)
+                message.realm = object.realm >>> 0;
             if (object.ip != null)
                 message.ip = object.ip >>> 0;
             if (object.ip_v6 != null)
@@ -1052,6 +1341,8 @@
                 object.is_from_external_source = false;
                 object.cm_sysid = 0;
                 object.wg_token = "";
+                object.launcher_type = 0;
+                object.realm = 0;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -1125,6 +1416,10 @@
             }
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 object.wg_token = message.wg_token;
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                object.launcher_type = message.launcher_type;
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                object.realm = message.realm;
             return object;
         };
     
@@ -2365,6 +2660,7 @@
          * @property {boolean|null} [economy_support_supervisor] CMsgAppRights economy_support_supervisor
          * @property {boolean|null} [manage_pricing] CMsgAppRights manage_pricing
          * @property {boolean|null} [broadcast_live] CMsgAppRights broadcast_live
+         * @property {boolean|null} [view_marketing_traffic] CMsgAppRights view_marketing_traffic
          */
     
         /**
@@ -2503,6 +2799,14 @@
         CMsgAppRights.prototype.broadcast_live = false;
     
         /**
+         * CMsgAppRights view_marketing_traffic.
+         * @member {boolean} view_marketing_traffic
+         * @memberof CMsgAppRights
+         * @instance
+         */
+        CMsgAppRights.prototype.view_marketing_traffic = false;
+    
+        /**
          * Creates a new CMsgAppRights instance using the specified properties.
          * @function create
          * @memberof CMsgAppRights
@@ -2556,6 +2860,8 @@
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.manage_pricing);
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.broadcast_live);
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.view_marketing_traffic);
             return writer;
         };
     
@@ -2634,6 +2940,9 @@
                     break;
                 case 15:
                     message.broadcast_live = reader.bool();
+                    break;
+                case 16:
+                    message.view_marketing_traffic = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2715,6 +3024,9 @@
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 if (typeof message.broadcast_live !== "boolean")
                     return "broadcast_live: boolean expected";
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                if (typeof message.view_marketing_traffic !== "boolean")
+                    return "view_marketing_traffic: boolean expected";
             return null;
         };
     
@@ -2760,6 +3072,8 @@
                 message.manage_pricing = Boolean(object.manage_pricing);
             if (object.broadcast_live != null)
                 message.broadcast_live = Boolean(object.broadcast_live);
+            if (object.view_marketing_traffic != null)
+                message.view_marketing_traffic = Boolean(object.view_marketing_traffic);
             return message;
         };
     
@@ -2792,6 +3106,7 @@
                 object.economy_support_supervisor = false;
                 object.manage_pricing = false;
                 object.broadcast_live = false;
+                object.view_marketing_traffic = false;
             }
             if (message.edit_info != null && message.hasOwnProperty("edit_info"))
                 object.edit_info = message.edit_info;
@@ -2823,6 +3138,8 @@
                 object.manage_pricing = message.manage_pricing;
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 object.broadcast_live = message.broadcast_live;
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                object.view_marketing_traffic = message.view_marketing_traffic;
             return object;
         };
     
@@ -4276,6 +4593,9 @@
          * @property {number|null} [language] CCommunity_ClanAnnouncementInfo language
          * @property {boolean|null} [hidden] CCommunity_ClanAnnouncementInfo hidden
          * @property {number|Long|null} [forum_topic_id] CCommunity_ClanAnnouncementInfo forum_topic_id
+         * @property {number|Long|null} [event_gid] CCommunity_ClanAnnouncementInfo event_gid
+         * @property {number|null} [voteupcount] CCommunity_ClanAnnouncementInfo voteupcount
+         * @property {number|null} [votedowncount] CCommunity_ClanAnnouncementInfo votedowncount
          */
     
         /**
@@ -4391,6 +4711,30 @@
         CCommunity_ClanAnnouncementInfo.prototype.forum_topic_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
+         * CCommunity_ClanAnnouncementInfo event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_ClanAnnouncementInfo voteupcount.
+         * @member {number} voteupcount
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.voteupcount = 0;
+    
+        /**
+         * CCommunity_ClanAnnouncementInfo votedowncount.
+         * @member {number} votedowncount
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.votedowncount = 0;
+    
+        /**
          * Creates a new CCommunity_ClanAnnouncementInfo instance using the specified properties.
          * @function create
          * @memberof CCommunity_ClanAnnouncementInfo
@@ -4439,6 +4783,12 @@
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.hidden);
             if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
                 writer.uint32(/* id 12, wireType 1 =*/97).fixed64(message.forum_topic_id);
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 13, wireType 1 =*/105).fixed64(message.event_gid);
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.voteupcount);
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.votedowncount);
             return writer;
         };
     
@@ -4510,6 +4860,15 @@
                     break;
                 case 12:
                     message.forum_topic_id = reader.fixed64();
+                    break;
+                case 13:
+                    message.event_gid = reader.fixed64();
+                    break;
+                case 14:
+                    message.voteupcount = reader.int32();
+                    break;
+                case 15:
+                    message.votedowncount = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4586,6 +4945,15 @@
             if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
                 if (!$util.isInteger(message.forum_topic_id) && !(message.forum_topic_id && $util.isInteger(message.forum_topic_id.low) && $util.isInteger(message.forum_topic_id.high)))
                     return "forum_topic_id: integer|Long expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                if (!$util.isInteger(message.voteupcount))
+                    return "voteupcount: integer expected";
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                if (!$util.isInteger(message.votedowncount))
+                    return "votedowncount: integer expected";
             return null;
         };
     
@@ -4658,6 +5026,19 @@
                     message.forum_topic_id = object.forum_topic_id;
                 else if (typeof object.forum_topic_id === "object")
                     message.forum_topic_id = new $util.LongBits(object.forum_topic_id.low >>> 0, object.forum_topic_id.high >>> 0).toNumber();
+            if (object.event_gid != null)
+                if ($util.Long)
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.voteupcount != null)
+                message.voteupcount = object.voteupcount | 0;
+            if (object.votedowncount != null)
+                message.votedowncount = object.votedowncount | 0;
             return message;
         };
     
@@ -4704,6 +5085,13 @@
                     object.forum_topic_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.forum_topic_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.event_gid = options.longs === String ? "0" : 0;
+                object.voteupcount = 0;
+                object.votedowncount = 0;
             }
             if (message.gid != null && message.hasOwnProperty("gid"))
                 if (typeof message.gid === "number")
@@ -4744,6 +5132,15 @@
                     object.forum_topic_id = options.longs === String ? String(message.forum_topic_id) : message.forum_topic_id;
                 else
                     object.forum_topic_id = options.longs === String ? $util.Long.prototype.toString.call(message.forum_topic_id) : options.longs === Number ? new $util.LongBits(message.forum_topic_id.low >>> 0, message.forum_topic_id.high >>> 0).toNumber() : message.forum_topic_id;
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
+                else
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                object.voteupcount = message.voteupcount;
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                object.votedowncount = message.votedowncount;
             return object;
         };
     
@@ -4791,6 +5188,8 @@
          * @property {number|null} [ignore_count] CClanEventData ignore_count
          * @property {number|Long|null} [forum_topic_id] CClanEventData forum_topic_id
          * @property {number|null} [rtime32_last_modified] CClanEventData rtime32_last_modified
+         * @property {number|Long|null} [news_post_gid] CClanEventData news_post_gid
+         * @property {number|null} [rtime_mod_reviewed] CClanEventData rtime_mod_reviewed
          */
     
         /**
@@ -5001,6 +5400,22 @@
         CClanEventData.prototype.rtime32_last_modified = 0;
     
         /**
+         * CClanEventData news_post_gid.
+         * @member {number|Long} news_post_gid
+         * @memberof CClanEventData
+         * @instance
+         */
+        CClanEventData.prototype.news_post_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CClanEventData rtime_mod_reviewed.
+         * @member {number} rtime_mod_reviewed
+         * @memberof CClanEventData
+         * @instance
+         */
+        CClanEventData.prototype.rtime_mod_reviewed = 0;
+    
+        /**
          * Creates a new CClanEventData instance using the specified properties.
          * @function create
          * @memberof CClanEventData
@@ -5072,6 +5487,10 @@
                 writer.uint32(/* id 23, wireType 1 =*/185).fixed64(message.forum_topic_id);
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 writer.uint32(/* id 24, wireType 0 =*/192).uint32(message.rtime32_last_modified);
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                writer.uint32(/* id 25, wireType 1 =*/201).fixed64(message.news_post_gid);
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.rtime_mod_reviewed);
             return writer;
         };
     
@@ -5178,6 +5597,12 @@
                 case 24:
                     message.rtime32_last_modified = reader.uint32();
                     break;
+                case 25:
+                    message.news_post_gid = reader.fixed64();
+                    break;
+                case 26:
+                    message.rtime_mod_reviewed = reader.uint32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -5259,6 +5684,8 @@
                 case 31:
                 case 32:
                 case 33:
+                case 34:
+                case 35:
                     break;
                 }
             if (message.appid != null && message.hasOwnProperty("appid"))
@@ -5323,6 +5750,12 @@
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 if (!$util.isInteger(message.rtime32_last_modified))
                     return "rtime32_last_modified: integer expected";
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                if (!$util.isInteger(message.news_post_gid) && !(message.news_post_gid && $util.isInteger(message.news_post_gid.low) && $util.isInteger(message.news_post_gid.high)))
+                    return "news_post_gid: integer|Long expected";
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                if (!$util.isInteger(message.rtime_mod_reviewed))
+                    return "rtime_mod_reviewed: integer expected";
             return null;
         };
     
@@ -5491,6 +5924,14 @@
             case 33:
                 message.event_type = 33;
                 break;
+            case "k_EClanCrosspostEvent":
+            case 34:
+                message.event_type = 34;
+                break;
+            case "k_EClanInGameEventGeneral":
+            case 35:
+                message.event_type = 35;
+                break;
             }
             if (object.appid != null)
                 message.appid = object.appid >>> 0;
@@ -5556,6 +5997,17 @@
                     message.forum_topic_id = new $util.LongBits(object.forum_topic_id.low >>> 0, object.forum_topic_id.high >>> 0).toNumber();
             if (object.rtime32_last_modified != null)
                 message.rtime32_last_modified = object.rtime32_last_modified >>> 0;
+            if (object.news_post_gid != null)
+                if ($util.Long)
+                    (message.news_post_gid = $util.Long.fromValue(object.news_post_gid)).unsigned = false;
+                else if (typeof object.news_post_gid === "string")
+                    message.news_post_gid = parseInt(object.news_post_gid, 10);
+                else if (typeof object.news_post_gid === "number")
+                    message.news_post_gid = object.news_post_gid;
+                else if (typeof object.news_post_gid === "object")
+                    message.news_post_gid = new $util.LongBits(object.news_post_gid.low >>> 0, object.news_post_gid.high >>> 0).toNumber();
+            if (object.rtime_mod_reviewed != null)
+                message.rtime_mod_reviewed = object.rtime_mod_reviewed >>> 0;
             return message;
         };
     
@@ -5617,6 +6069,12 @@
                 } else
                     object.forum_topic_id = options.longs === String ? "0" : 0;
                 object.rtime32_last_modified = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.news_post_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.news_post_gid = options.longs === String ? "0" : 0;
+                object.rtime_mod_reviewed = 0;
             }
             if (message.gid != null && message.hasOwnProperty("gid"))
                 if (typeof message.gid === "number")
@@ -5681,6 +6139,13 @@
                     object.forum_topic_id = options.longs === String ? $util.Long.prototype.toString.call(message.forum_topic_id) : options.longs === Number ? new $util.LongBits(message.forum_topic_id.low >>> 0, message.forum_topic_id.high >>> 0).toNumber() : message.forum_topic_id;
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 object.rtime32_last_modified = message.rtime32_last_modified;
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                if (typeof message.news_post_gid === "number")
+                    object.news_post_gid = options.longs === String ? String(message.news_post_gid) : message.news_post_gid;
+                else
+                    object.news_post_gid = options.longs === String ? $util.Long.prototype.toString.call(message.news_post_gid) : options.longs === Number ? new $util.LongBits(message.news_post_gid.low >>> 0, message.news_post_gid.high >>> 0).toNumber() : message.news_post_gid;
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                object.rtime_mod_reviewed = message.rtime_mod_reviewed;
             return object;
         };
     
@@ -5696,6 +6161,392 @@
         };
     
         return CClanEventData;
+    })();
+    
+    $root.CBilling_Address = (function() {
+    
+        /**
+         * Properties of a CBilling_Address.
+         * @exports ICBilling_Address
+         * @interface ICBilling_Address
+         * @property {string|null} [first_name] CBilling_Address first_name
+         * @property {string|null} [last_name] CBilling_Address last_name
+         * @property {string|null} [address1] CBilling_Address address1
+         * @property {string|null} [address2] CBilling_Address address2
+         * @property {string|null} [city] CBilling_Address city
+         * @property {string|null} [us_state] CBilling_Address us_state
+         * @property {string|null} [country_code] CBilling_Address country_code
+         * @property {string|null} [postcode] CBilling_Address postcode
+         * @property {number|null} [zip_plus4] CBilling_Address zip_plus4
+         * @property {string|null} [phone] CBilling_Address phone
+         */
+    
+        /**
+         * Constructs a new CBilling_Address.
+         * @exports CBilling_Address
+         * @classdesc Represents a CBilling_Address.
+         * @implements ICBilling_Address
+         * @constructor
+         * @param {ICBilling_Address=} [properties] Properties to set
+         */
+        function CBilling_Address(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBilling_Address first_name.
+         * @member {string} first_name
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.first_name = "";
+    
+        /**
+         * CBilling_Address last_name.
+         * @member {string} last_name
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.last_name = "";
+    
+        /**
+         * CBilling_Address address1.
+         * @member {string} address1
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.address1 = "";
+    
+        /**
+         * CBilling_Address address2.
+         * @member {string} address2
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.address2 = "";
+    
+        /**
+         * CBilling_Address city.
+         * @member {string} city
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.city = "";
+    
+        /**
+         * CBilling_Address us_state.
+         * @member {string} us_state
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.us_state = "";
+    
+        /**
+         * CBilling_Address country_code.
+         * @member {string} country_code
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.country_code = "";
+    
+        /**
+         * CBilling_Address postcode.
+         * @member {string} postcode
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.postcode = "";
+    
+        /**
+         * CBilling_Address zip_plus4.
+         * @member {number} zip_plus4
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.zip_plus4 = 0;
+    
+        /**
+         * CBilling_Address phone.
+         * @member {string} phone
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.phone = "";
+    
+        /**
+         * Creates a new CBilling_Address instance using the specified properties.
+         * @function create
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address=} [properties] Properties to set
+         * @returns {CBilling_Address} CBilling_Address instance
+         */
+        CBilling_Address.create = function create(properties) {
+            return new CBilling_Address(properties);
+        };
+    
+        /**
+         * Encodes the specified CBilling_Address message. Does not implicitly {@link CBilling_Address.verify|verify} messages.
+         * @function encode
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address} message CBilling_Address message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBilling_Address.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.first_name);
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.last_name);
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.address1);
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.address2);
+            if (message.city != null && message.hasOwnProperty("city"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.city);
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.us_state);
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.country_code);
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.postcode);
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.zip_plus4);
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.phone);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBilling_Address message, length delimited. Does not implicitly {@link CBilling_Address.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address} message CBilling_Address message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBilling_Address.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBilling_Address message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBilling_Address
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBilling_Address} CBilling_Address
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBilling_Address.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBilling_Address();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.first_name = reader.string();
+                    break;
+                case 2:
+                    message.last_name = reader.string();
+                    break;
+                case 3:
+                    message.address1 = reader.string();
+                    break;
+                case 4:
+                    message.address2 = reader.string();
+                    break;
+                case 5:
+                    message.city = reader.string();
+                    break;
+                case 6:
+                    message.us_state = reader.string();
+                    break;
+                case 7:
+                    message.country_code = reader.string();
+                    break;
+                case 8:
+                    message.postcode = reader.string();
+                    break;
+                case 9:
+                    message.zip_plus4 = reader.int32();
+                    break;
+                case 10:
+                    message.phone = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBilling_Address message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBilling_Address
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBilling_Address} CBilling_Address
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBilling_Address.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBilling_Address message.
+         * @function verify
+         * @memberof CBilling_Address
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBilling_Address.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                if (!$util.isString(message.first_name))
+                    return "first_name: string expected";
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                if (!$util.isString(message.last_name))
+                    return "last_name: string expected";
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                if (!$util.isString(message.address1))
+                    return "address1: string expected";
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                if (!$util.isString(message.address2))
+                    return "address2: string expected";
+            if (message.city != null && message.hasOwnProperty("city"))
+                if (!$util.isString(message.city))
+                    return "city: string expected";
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                if (!$util.isString(message.us_state))
+                    return "us_state: string expected";
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                if (!$util.isString(message.country_code))
+                    return "country_code: string expected";
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                if (!$util.isString(message.postcode))
+                    return "postcode: string expected";
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                if (!$util.isInteger(message.zip_plus4))
+                    return "zip_plus4: integer expected";
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                if (!$util.isString(message.phone))
+                    return "phone: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBilling_Address message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBilling_Address
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBilling_Address} CBilling_Address
+         */
+        CBilling_Address.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBilling_Address)
+                return object;
+            var message = new $root.CBilling_Address();
+            if (object.first_name != null)
+                message.first_name = String(object.first_name);
+            if (object.last_name != null)
+                message.last_name = String(object.last_name);
+            if (object.address1 != null)
+                message.address1 = String(object.address1);
+            if (object.address2 != null)
+                message.address2 = String(object.address2);
+            if (object.city != null)
+                message.city = String(object.city);
+            if (object.us_state != null)
+                message.us_state = String(object.us_state);
+            if (object.country_code != null)
+                message.country_code = String(object.country_code);
+            if (object.postcode != null)
+                message.postcode = String(object.postcode);
+            if (object.zip_plus4 != null)
+                message.zip_plus4 = object.zip_plus4 | 0;
+            if (object.phone != null)
+                message.phone = String(object.phone);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBilling_Address message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBilling_Address
+         * @static
+         * @param {CBilling_Address} message CBilling_Address
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBilling_Address.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.first_name = "";
+                object.last_name = "";
+                object.address1 = "";
+                object.address2 = "";
+                object.city = "";
+                object.us_state = "";
+                object.country_code = "";
+                object.postcode = "";
+                object.zip_plus4 = 0;
+                object.phone = "";
+            }
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                object.first_name = message.first_name;
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                object.last_name = message.last_name;
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                object.address1 = message.address1;
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                object.address2 = message.address2;
+            if (message.city != null && message.hasOwnProperty("city"))
+                object.city = message.city;
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                object.us_state = message.us_state;
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                object.country_code = message.country_code;
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                object.postcode = message.postcode;
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                object.zip_plus4 = message.zip_plus4;
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                object.phone = message.phone;
+            return object;
+        };
+    
+        /**
+         * Converts this CBilling_Address to JSON.
+         * @function toJSON
+         * @memberof CBilling_Address
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBilling_Address.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBilling_Address;
     })();
     
     $root.google = (function() {

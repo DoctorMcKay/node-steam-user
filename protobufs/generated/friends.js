@@ -1337,6 +1337,2932 @@
         return CCommunity_GetAppRichPresenceLocalization_Response_TokenList;
     })();
     
+    $root.CCommunity_Comment = (function() {
+    
+        /**
+         * Properties of a CCommunity_Comment.
+         * @exports ICCommunity_Comment
+         * @interface ICCommunity_Comment
+         * @property {number|Long|null} [gidcomment] CCommunity_Comment gidcomment
+         * @property {number|Long|null} [steamid] CCommunity_Comment steamid
+         * @property {number|null} [timestamp] CCommunity_Comment timestamp
+         * @property {string|null} [text] CCommunity_Comment text
+         * @property {number|null} [upvotes] CCommunity_Comment upvotes
+         * @property {boolean|null} [hidden] CCommunity_Comment hidden
+         * @property {boolean|null} [hidden_by_user] CCommunity_Comment hidden_by_user
+         * @property {boolean|null} [deleted] CCommunity_Comment deleted
+         * @property {ICMsgIPAddress|null} [ipaddress] CCommunity_Comment ipaddress
+         * @property {number|null} [total_hidden] CCommunity_Comment total_hidden
+         * @property {boolean|null} [upvoted_by_user] CCommunity_Comment upvoted_by_user
+         */
+    
+        /**
+         * Constructs a new CCommunity_Comment.
+         * @exports CCommunity_Comment
+         * @classdesc Represents a CCommunity_Comment.
+         * @implements ICCommunity_Comment
+         * @constructor
+         * @param {ICCommunity_Comment=} [properties] Properties to set
+         */
+        function CCommunity_Comment(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_Comment gidcomment.
+         * @member {number|Long} gidcomment
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.gidcomment = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_Comment steamid.
+         * @member {number|Long} steamid
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_Comment timestamp.
+         * @member {number} timestamp
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.timestamp = 0;
+    
+        /**
+         * CCommunity_Comment text.
+         * @member {string} text
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.text = "";
+    
+        /**
+         * CCommunity_Comment upvotes.
+         * @member {number} upvotes
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.upvotes = 0;
+    
+        /**
+         * CCommunity_Comment hidden.
+         * @member {boolean} hidden
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.hidden = false;
+    
+        /**
+         * CCommunity_Comment hidden_by_user.
+         * @member {boolean} hidden_by_user
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.hidden_by_user = false;
+    
+        /**
+         * CCommunity_Comment deleted.
+         * @member {boolean} deleted
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.deleted = false;
+    
+        /**
+         * CCommunity_Comment ipaddress.
+         * @member {ICMsgIPAddress|null|undefined} ipaddress
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.ipaddress = null;
+    
+        /**
+         * CCommunity_Comment total_hidden.
+         * @member {number} total_hidden
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.total_hidden = 0;
+    
+        /**
+         * CCommunity_Comment upvoted_by_user.
+         * @member {boolean} upvoted_by_user
+         * @memberof CCommunity_Comment
+         * @instance
+         */
+        CCommunity_Comment.prototype.upvoted_by_user = false;
+    
+        /**
+         * Creates a new CCommunity_Comment instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {ICCommunity_Comment=} [properties] Properties to set
+         * @returns {CCommunity_Comment} CCommunity_Comment instance
+         */
+        CCommunity_Comment.create = function create(properties) {
+            return new CCommunity_Comment(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_Comment message. Does not implicitly {@link CCommunity_Comment.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {ICCommunity_Comment} message CCommunity_Comment message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_Comment.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.gidcomment);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.timestamp);
+            if (message.text != null && message.hasOwnProperty("text"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.text);
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.upvotes);
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.hidden);
+            if (message.hidden_by_user != null && message.hasOwnProperty("hidden_by_user"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hidden_by_user);
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.deleted);
+            if (message.ipaddress != null && message.hasOwnProperty("ipaddress"))
+                $root.CMsgIPAddress.encode(message.ipaddress, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            if (message.total_hidden != null && message.hasOwnProperty("total_hidden"))
+                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.total_hidden);
+            if (message.upvoted_by_user != null && message.hasOwnProperty("upvoted_by_user"))
+                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.upvoted_by_user);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_Comment message, length delimited. Does not implicitly {@link CCommunity_Comment.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {ICCommunity_Comment} message CCommunity_Comment message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_Comment.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_Comment message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_Comment} CCommunity_Comment
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_Comment.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_Comment();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.gidcomment = reader.fixed64();
+                    break;
+                case 2:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 3:
+                    message.timestamp = reader.uint32();
+                    break;
+                case 4:
+                    message.text = reader.string();
+                    break;
+                case 5:
+                    message.upvotes = reader.int32();
+                    break;
+                case 6:
+                    message.hidden = reader.bool();
+                    break;
+                case 7:
+                    message.hidden_by_user = reader.bool();
+                    break;
+                case 8:
+                    message.deleted = reader.bool();
+                    break;
+                case 9:
+                    message.ipaddress = $root.CMsgIPAddress.decode(reader, reader.uint32());
+                    break;
+                case 10:
+                    message.total_hidden = reader.int32();
+                    break;
+                case 11:
+                    message.upvoted_by_user = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_Comment message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_Comment} CCommunity_Comment
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_Comment.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_Comment message.
+         * @function verify
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_Comment.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (!$util.isInteger(message.gidcomment) && !(message.gidcomment && $util.isInteger(message.gidcomment.low) && $util.isInteger(message.gidcomment.high)))
+                    return "gidcomment: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp))
+                    return "timestamp: integer expected";
+            if (message.text != null && message.hasOwnProperty("text"))
+                if (!$util.isString(message.text))
+                    return "text: string expected";
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                if (!$util.isInteger(message.upvotes))
+                    return "upvotes: integer expected";
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
+                if (typeof message.hidden !== "boolean")
+                    return "hidden: boolean expected";
+            if (message.hidden_by_user != null && message.hasOwnProperty("hidden_by_user"))
+                if (typeof message.hidden_by_user !== "boolean")
+                    return "hidden_by_user: boolean expected";
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                if (typeof message.deleted !== "boolean")
+                    return "deleted: boolean expected";
+            if (message.ipaddress != null && message.hasOwnProperty("ipaddress")) {
+                var error = $root.CMsgIPAddress.verify(message.ipaddress);
+                if (error)
+                    return "ipaddress." + error;
+            }
+            if (message.total_hidden != null && message.hasOwnProperty("total_hidden"))
+                if (!$util.isInteger(message.total_hidden))
+                    return "total_hidden: integer expected";
+            if (message.upvoted_by_user != null && message.hasOwnProperty("upvoted_by_user"))
+                if (typeof message.upvoted_by_user !== "boolean")
+                    return "upvoted_by_user: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_Comment message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_Comment} CCommunity_Comment
+         */
+        CCommunity_Comment.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_Comment)
+                return object;
+            var message = new $root.CCommunity_Comment();
+            if (object.gidcomment != null)
+                if ($util.Long)
+                    (message.gidcomment = $util.Long.fromValue(object.gidcomment)).unsigned = false;
+                else if (typeof object.gidcomment === "string")
+                    message.gidcomment = parseInt(object.gidcomment, 10);
+                else if (typeof object.gidcomment === "number")
+                    message.gidcomment = object.gidcomment;
+                else if (typeof object.gidcomment === "object")
+                    message.gidcomment = new $util.LongBits(object.gidcomment.low >>> 0, object.gidcomment.high >>> 0).toNumber();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.timestamp != null)
+                message.timestamp = object.timestamp >>> 0;
+            if (object.text != null)
+                message.text = String(object.text);
+            if (object.upvotes != null)
+                message.upvotes = object.upvotes | 0;
+            if (object.hidden != null)
+                message.hidden = Boolean(object.hidden);
+            if (object.hidden_by_user != null)
+                message.hidden_by_user = Boolean(object.hidden_by_user);
+            if (object.deleted != null)
+                message.deleted = Boolean(object.deleted);
+            if (object.ipaddress != null) {
+                if (typeof object.ipaddress !== "object")
+                    throw TypeError(".CCommunity_Comment.ipaddress: object expected");
+                message.ipaddress = $root.CMsgIPAddress.fromObject(object.ipaddress);
+            }
+            if (object.total_hidden != null)
+                message.total_hidden = object.total_hidden | 0;
+            if (object.upvoted_by_user != null)
+                message.upvoted_by_user = Boolean(object.upvoted_by_user);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_Comment message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_Comment
+         * @static
+         * @param {CCommunity_Comment} message CCommunity_Comment
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_Comment.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.gidcomment = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gidcomment = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.timestamp = 0;
+                object.text = "";
+                object.upvotes = 0;
+                object.hidden = false;
+                object.hidden_by_user = false;
+                object.deleted = false;
+                object.ipaddress = null;
+                object.total_hidden = 0;
+                object.upvoted_by_user = false;
+            }
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (typeof message.gidcomment === "number")
+                    object.gidcomment = options.longs === String ? String(message.gidcomment) : message.gidcomment;
+                else
+                    object.gidcomment = options.longs === String ? $util.Long.prototype.toString.call(message.gidcomment) : options.longs === Number ? new $util.LongBits(message.gidcomment.low >>> 0, message.gidcomment.high >>> 0).toNumber() : message.gidcomment;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                object.timestamp = message.timestamp;
+            if (message.text != null && message.hasOwnProperty("text"))
+                object.text = message.text;
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                object.upvotes = message.upvotes;
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
+                object.hidden = message.hidden;
+            if (message.hidden_by_user != null && message.hasOwnProperty("hidden_by_user"))
+                object.hidden_by_user = message.hidden_by_user;
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                object.deleted = message.deleted;
+            if (message.ipaddress != null && message.hasOwnProperty("ipaddress"))
+                object.ipaddress = $root.CMsgIPAddress.toObject(message.ipaddress, options);
+            if (message.total_hidden != null && message.hasOwnProperty("total_hidden"))
+                object.total_hidden = message.total_hidden;
+            if (message.upvoted_by_user != null && message.hasOwnProperty("upvoted_by_user"))
+                object.upvoted_by_user = message.upvoted_by_user;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_Comment to JSON.
+         * @function toJSON
+         * @memberof CCommunity_Comment
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_Comment.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_Comment;
+    })();
+    
+    $root.CCommunity_GetCommentThread_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetCommentThread_Response.
+         * @exports ICCommunity_GetCommentThread_Response
+         * @interface ICCommunity_GetCommentThread_Response
+         * @property {Array.<ICCommunity_Comment>|null} [comments] CCommunity_GetCommentThread_Response comments
+         * @property {Array.<ICCommunity_Comment>|null} [deleted_comments] CCommunity_GetCommentThread_Response deleted_comments
+         * @property {number|Long|null} [steamid] CCommunity_GetCommentThread_Response steamid
+         * @property {number|Long|null} [commentthreadid] CCommunity_GetCommentThread_Response commentthreadid
+         * @property {number|null} [start] CCommunity_GetCommentThread_Response start
+         * @property {number|null} [count] CCommunity_GetCommentThread_Response count
+         * @property {number|null} [total_count] CCommunity_GetCommentThread_Response total_count
+         * @property {number|null} [upvotes] CCommunity_GetCommentThread_Response upvotes
+         * @property {Array.<number>|null} [upvoters] CCommunity_GetCommentThread_Response upvoters
+         * @property {boolean|null} [user_subscribed] CCommunity_GetCommentThread_Response user_subscribed
+         * @property {boolean|null} [user_upvoted] CCommunity_GetCommentThread_Response user_upvoted
+         * @property {number|Long|null} [answer_commentid] CCommunity_GetCommentThread_Response answer_commentid
+         * @property {number|null} [answer_actor] CCommunity_GetCommentThread_Response answer_actor
+         * @property {number|null} [answer_actor_rank] CCommunity_GetCommentThread_Response answer_actor_rank
+         * @property {boolean|null} [can_post] CCommunity_GetCommentThread_Response can_post
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetCommentThread_Response.
+         * @exports CCommunity_GetCommentThread_Response
+         * @classdesc Represents a CCommunity_GetCommentThread_Response.
+         * @implements ICCommunity_GetCommentThread_Response
+         * @constructor
+         * @param {ICCommunity_GetCommentThread_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetCommentThread_Response(properties) {
+            this.comments = [];
+            this.deleted_comments = [];
+            this.upvoters = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetCommentThread_Response comments.
+         * @member {Array.<ICCommunity_Comment>} comments
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.comments = $util.emptyArray;
+    
+        /**
+         * CCommunity_GetCommentThread_Response deleted_comments.
+         * @member {Array.<ICCommunity_Comment>} deleted_comments
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.deleted_comments = $util.emptyArray;
+    
+        /**
+         * CCommunity_GetCommentThread_Response steamid.
+         * @member {number|Long} steamid
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response commentthreadid.
+         * @member {number|Long} commentthreadid
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.commentthreadid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response start.
+         * @member {number} start
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.start = 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response count.
+         * @member {number} count
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.count = 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response total_count.
+         * @member {number} total_count
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.total_count = 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response upvotes.
+         * @member {number} upvotes
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.upvotes = 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response upvoters.
+         * @member {Array.<number>} upvoters
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.upvoters = $util.emptyArray;
+    
+        /**
+         * CCommunity_GetCommentThread_Response user_subscribed.
+         * @member {boolean} user_subscribed
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.user_subscribed = false;
+    
+        /**
+         * CCommunity_GetCommentThread_Response user_upvoted.
+         * @member {boolean} user_upvoted
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.user_upvoted = false;
+    
+        /**
+         * CCommunity_GetCommentThread_Response answer_commentid.
+         * @member {number|Long} answer_commentid
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.answer_commentid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response answer_actor.
+         * @member {number} answer_actor
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.answer_actor = 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response answer_actor_rank.
+         * @member {number} answer_actor_rank
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.answer_actor_rank = 0;
+    
+        /**
+         * CCommunity_GetCommentThread_Response can_post.
+         * @member {boolean} can_post
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         */
+        CCommunity_GetCommentThread_Response.prototype.can_post = false;
+    
+        /**
+         * Creates a new CCommunity_GetCommentThread_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {ICCommunity_GetCommentThread_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetCommentThread_Response} CCommunity_GetCommentThread_Response instance
+         */
+        CCommunity_GetCommentThread_Response.create = function create(properties) {
+            return new CCommunity_GetCommentThread_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetCommentThread_Response message. Does not implicitly {@link CCommunity_GetCommentThread_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {ICCommunity_GetCommentThread_Response} message CCommunity_GetCommentThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetCommentThread_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.comments != null && message.comments.length)
+                for (var i = 0; i < message.comments.length; ++i)
+                    $root.CCommunity_Comment.encode(message.comments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.deleted_comments != null && message.deleted_comments.length)
+                for (var i = 0; i < message.deleted_comments.length; ++i)
+                    $root.CCommunity_Comment.encode(message.deleted_comments[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.steamid);
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.commentthreadid);
+            if (message.start != null && message.hasOwnProperty("start"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.start);
+            if (message.count != null && message.hasOwnProperty("count"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.count);
+            if (message.total_count != null && message.hasOwnProperty("total_count"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.total_count);
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.upvotes);
+            if (message.upvoters != null && message.upvoters.length)
+                for (var i = 0; i < message.upvoters.length; ++i)
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.upvoters[i]);
+            if (message.user_subscribed != null && message.hasOwnProperty("user_subscribed"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.user_subscribed);
+            if (message.user_upvoted != null && message.hasOwnProperty("user_upvoted"))
+                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.user_upvoted);
+            if (message.answer_commentid != null && message.hasOwnProperty("answer_commentid"))
+                writer.uint32(/* id 12, wireType 1 =*/97).fixed64(message.answer_commentid);
+            if (message.answer_actor != null && message.hasOwnProperty("answer_actor"))
+                writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.answer_actor);
+            if (message.answer_actor_rank != null && message.hasOwnProperty("answer_actor_rank"))
+                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.answer_actor_rank);
+            if (message.can_post != null && message.hasOwnProperty("can_post"))
+                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.can_post);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetCommentThread_Response message, length delimited. Does not implicitly {@link CCommunity_GetCommentThread_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {ICCommunity_GetCommentThread_Response} message CCommunity_GetCommentThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetCommentThread_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetCommentThread_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetCommentThread_Response} CCommunity_GetCommentThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetCommentThread_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetCommentThread_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.comments && message.comments.length))
+                        message.comments = [];
+                    message.comments.push($root.CCommunity_Comment.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.deleted_comments && message.deleted_comments.length))
+                        message.deleted_comments = [];
+                    message.deleted_comments.push($root.CCommunity_Comment.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 4:
+                    message.commentthreadid = reader.fixed64();
+                    break;
+                case 5:
+                    message.start = reader.int32();
+                    break;
+                case 6:
+                    message.count = reader.int32();
+                    break;
+                case 7:
+                    message.total_count = reader.int32();
+                    break;
+                case 8:
+                    message.upvotes = reader.int32();
+                    break;
+                case 9:
+                    if (!(message.upvoters && message.upvoters.length))
+                        message.upvoters = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.upvoters.push(reader.uint32());
+                    } else
+                        message.upvoters.push(reader.uint32());
+                    break;
+                case 10:
+                    message.user_subscribed = reader.bool();
+                    break;
+                case 11:
+                    message.user_upvoted = reader.bool();
+                    break;
+                case 12:
+                    message.answer_commentid = reader.fixed64();
+                    break;
+                case 13:
+                    message.answer_actor = reader.uint32();
+                    break;
+                case 14:
+                    message.answer_actor_rank = reader.int32();
+                    break;
+                case 15:
+                    message.can_post = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetCommentThread_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetCommentThread_Response} CCommunity_GetCommentThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetCommentThread_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetCommentThread_Response message.
+         * @function verify
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetCommentThread_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.comments != null && message.hasOwnProperty("comments")) {
+                if (!Array.isArray(message.comments))
+                    return "comments: array expected";
+                for (var i = 0; i < message.comments.length; ++i) {
+                    var error = $root.CCommunity_Comment.verify(message.comments[i]);
+                    if (error)
+                        return "comments." + error;
+                }
+            }
+            if (message.deleted_comments != null && message.hasOwnProperty("deleted_comments")) {
+                if (!Array.isArray(message.deleted_comments))
+                    return "deleted_comments: array expected";
+                for (var i = 0; i < message.deleted_comments.length; ++i) {
+                    var error = $root.CCommunity_Comment.verify(message.deleted_comments[i]);
+                    if (error)
+                        return "deleted_comments." + error;
+                }
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (!$util.isInteger(message.commentthreadid) && !(message.commentthreadid && $util.isInteger(message.commentthreadid.low) && $util.isInteger(message.commentthreadid.high)))
+                    return "commentthreadid: integer|Long expected";
+            if (message.start != null && message.hasOwnProperty("start"))
+                if (!$util.isInteger(message.start))
+                    return "start: integer expected";
+            if (message.count != null && message.hasOwnProperty("count"))
+                if (!$util.isInteger(message.count))
+                    return "count: integer expected";
+            if (message.total_count != null && message.hasOwnProperty("total_count"))
+                if (!$util.isInteger(message.total_count))
+                    return "total_count: integer expected";
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                if (!$util.isInteger(message.upvotes))
+                    return "upvotes: integer expected";
+            if (message.upvoters != null && message.hasOwnProperty("upvoters")) {
+                if (!Array.isArray(message.upvoters))
+                    return "upvoters: array expected";
+                for (var i = 0; i < message.upvoters.length; ++i)
+                    if (!$util.isInteger(message.upvoters[i]))
+                        return "upvoters: integer[] expected";
+            }
+            if (message.user_subscribed != null && message.hasOwnProperty("user_subscribed"))
+                if (typeof message.user_subscribed !== "boolean")
+                    return "user_subscribed: boolean expected";
+            if (message.user_upvoted != null && message.hasOwnProperty("user_upvoted"))
+                if (typeof message.user_upvoted !== "boolean")
+                    return "user_upvoted: boolean expected";
+            if (message.answer_commentid != null && message.hasOwnProperty("answer_commentid"))
+                if (!$util.isInteger(message.answer_commentid) && !(message.answer_commentid && $util.isInteger(message.answer_commentid.low) && $util.isInteger(message.answer_commentid.high)))
+                    return "answer_commentid: integer|Long expected";
+            if (message.answer_actor != null && message.hasOwnProperty("answer_actor"))
+                if (!$util.isInteger(message.answer_actor))
+                    return "answer_actor: integer expected";
+            if (message.answer_actor_rank != null && message.hasOwnProperty("answer_actor_rank"))
+                if (!$util.isInteger(message.answer_actor_rank))
+                    return "answer_actor_rank: integer expected";
+            if (message.can_post != null && message.hasOwnProperty("can_post"))
+                if (typeof message.can_post !== "boolean")
+                    return "can_post: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetCommentThread_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetCommentThread_Response} CCommunity_GetCommentThread_Response
+         */
+        CCommunity_GetCommentThread_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetCommentThread_Response)
+                return object;
+            var message = new $root.CCommunity_GetCommentThread_Response();
+            if (object.comments) {
+                if (!Array.isArray(object.comments))
+                    throw TypeError(".CCommunity_GetCommentThread_Response.comments: array expected");
+                message.comments = [];
+                for (var i = 0; i < object.comments.length; ++i) {
+                    if (typeof object.comments[i] !== "object")
+                        throw TypeError(".CCommunity_GetCommentThread_Response.comments: object expected");
+                    message.comments[i] = $root.CCommunity_Comment.fromObject(object.comments[i]);
+                }
+            }
+            if (object.deleted_comments) {
+                if (!Array.isArray(object.deleted_comments))
+                    throw TypeError(".CCommunity_GetCommentThread_Response.deleted_comments: array expected");
+                message.deleted_comments = [];
+                for (var i = 0; i < object.deleted_comments.length; ++i) {
+                    if (typeof object.deleted_comments[i] !== "object")
+                        throw TypeError(".CCommunity_GetCommentThread_Response.deleted_comments: object expected");
+                    message.deleted_comments[i] = $root.CCommunity_Comment.fromObject(object.deleted_comments[i]);
+                }
+            }
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.commentthreadid != null)
+                if ($util.Long)
+                    (message.commentthreadid = $util.Long.fromValue(object.commentthreadid)).unsigned = false;
+                else if (typeof object.commentthreadid === "string")
+                    message.commentthreadid = parseInt(object.commentthreadid, 10);
+                else if (typeof object.commentthreadid === "number")
+                    message.commentthreadid = object.commentthreadid;
+                else if (typeof object.commentthreadid === "object")
+                    message.commentthreadid = new $util.LongBits(object.commentthreadid.low >>> 0, object.commentthreadid.high >>> 0).toNumber();
+            if (object.start != null)
+                message.start = object.start | 0;
+            if (object.count != null)
+                message.count = object.count | 0;
+            if (object.total_count != null)
+                message.total_count = object.total_count | 0;
+            if (object.upvotes != null)
+                message.upvotes = object.upvotes | 0;
+            if (object.upvoters) {
+                if (!Array.isArray(object.upvoters))
+                    throw TypeError(".CCommunity_GetCommentThread_Response.upvoters: array expected");
+                message.upvoters = [];
+                for (var i = 0; i < object.upvoters.length; ++i)
+                    message.upvoters[i] = object.upvoters[i] >>> 0;
+            }
+            if (object.user_subscribed != null)
+                message.user_subscribed = Boolean(object.user_subscribed);
+            if (object.user_upvoted != null)
+                message.user_upvoted = Boolean(object.user_upvoted);
+            if (object.answer_commentid != null)
+                if ($util.Long)
+                    (message.answer_commentid = $util.Long.fromValue(object.answer_commentid)).unsigned = false;
+                else if (typeof object.answer_commentid === "string")
+                    message.answer_commentid = parseInt(object.answer_commentid, 10);
+                else if (typeof object.answer_commentid === "number")
+                    message.answer_commentid = object.answer_commentid;
+                else if (typeof object.answer_commentid === "object")
+                    message.answer_commentid = new $util.LongBits(object.answer_commentid.low >>> 0, object.answer_commentid.high >>> 0).toNumber();
+            if (object.answer_actor != null)
+                message.answer_actor = object.answer_actor >>> 0;
+            if (object.answer_actor_rank != null)
+                message.answer_actor_rank = object.answer_actor_rank | 0;
+            if (object.can_post != null)
+                message.can_post = Boolean(object.can_post);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetCommentThread_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetCommentThread_Response
+         * @static
+         * @param {CCommunity_GetCommentThread_Response} message CCommunity_GetCommentThread_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetCommentThread_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.comments = [];
+                object.deleted_comments = [];
+                object.upvoters = [];
+            }
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.commentthreadid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.commentthreadid = options.longs === String ? "0" : 0;
+                object.start = 0;
+                object.count = 0;
+                object.total_count = 0;
+                object.upvotes = 0;
+                object.user_subscribed = false;
+                object.user_upvoted = false;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.answer_commentid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.answer_commentid = options.longs === String ? "0" : 0;
+                object.answer_actor = 0;
+                object.answer_actor_rank = 0;
+                object.can_post = false;
+            }
+            if (message.comments && message.comments.length) {
+                object.comments = [];
+                for (var j = 0; j < message.comments.length; ++j)
+                    object.comments[j] = $root.CCommunity_Comment.toObject(message.comments[j], options);
+            }
+            if (message.deleted_comments && message.deleted_comments.length) {
+                object.deleted_comments = [];
+                for (var j = 0; j < message.deleted_comments.length; ++j)
+                    object.deleted_comments[j] = $root.CCommunity_Comment.toObject(message.deleted_comments[j], options);
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (typeof message.commentthreadid === "number")
+                    object.commentthreadid = options.longs === String ? String(message.commentthreadid) : message.commentthreadid;
+                else
+                    object.commentthreadid = options.longs === String ? $util.Long.prototype.toString.call(message.commentthreadid) : options.longs === Number ? new $util.LongBits(message.commentthreadid.low >>> 0, message.commentthreadid.high >>> 0).toNumber() : message.commentthreadid;
+            if (message.start != null && message.hasOwnProperty("start"))
+                object.start = message.start;
+            if (message.count != null && message.hasOwnProperty("count"))
+                object.count = message.count;
+            if (message.total_count != null && message.hasOwnProperty("total_count"))
+                object.total_count = message.total_count;
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                object.upvotes = message.upvotes;
+            if (message.upvoters && message.upvoters.length) {
+                object.upvoters = [];
+                for (var j = 0; j < message.upvoters.length; ++j)
+                    object.upvoters[j] = message.upvoters[j];
+            }
+            if (message.user_subscribed != null && message.hasOwnProperty("user_subscribed"))
+                object.user_subscribed = message.user_subscribed;
+            if (message.user_upvoted != null && message.hasOwnProperty("user_upvoted"))
+                object.user_upvoted = message.user_upvoted;
+            if (message.answer_commentid != null && message.hasOwnProperty("answer_commentid"))
+                if (typeof message.answer_commentid === "number")
+                    object.answer_commentid = options.longs === String ? String(message.answer_commentid) : message.answer_commentid;
+                else
+                    object.answer_commentid = options.longs === String ? $util.Long.prototype.toString.call(message.answer_commentid) : options.longs === Number ? new $util.LongBits(message.answer_commentid.low >>> 0, message.answer_commentid.high >>> 0).toNumber() : message.answer_commentid;
+            if (message.answer_actor != null && message.hasOwnProperty("answer_actor"))
+                object.answer_actor = message.answer_actor;
+            if (message.answer_actor_rank != null && message.hasOwnProperty("answer_actor_rank"))
+                object.answer_actor_rank = message.answer_actor_rank;
+            if (message.can_post != null && message.hasOwnProperty("can_post"))
+                object.can_post = message.can_post;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetCommentThread_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetCommentThread_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetCommentThread_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetCommentThread_Response;
+    })();
+    
+    $root.CCommunity_PostCommentToThread_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_PostCommentToThread_Response.
+         * @exports ICCommunity_PostCommentToThread_Response
+         * @interface ICCommunity_PostCommentToThread_Response
+         * @property {number|Long|null} [gidcomment] CCommunity_PostCommentToThread_Response gidcomment
+         * @property {number|Long|null} [commentthreadid] CCommunity_PostCommentToThread_Response commentthreadid
+         * @property {number|null} [count] CCommunity_PostCommentToThread_Response count
+         * @property {number|null} [upvotes] CCommunity_PostCommentToThread_Response upvotes
+         */
+    
+        /**
+         * Constructs a new CCommunity_PostCommentToThread_Response.
+         * @exports CCommunity_PostCommentToThread_Response
+         * @classdesc Represents a CCommunity_PostCommentToThread_Response.
+         * @implements ICCommunity_PostCommentToThread_Response
+         * @constructor
+         * @param {ICCommunity_PostCommentToThread_Response=} [properties] Properties to set
+         */
+        function CCommunity_PostCommentToThread_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_PostCommentToThread_Response gidcomment.
+         * @member {number|Long} gidcomment
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @instance
+         */
+        CCommunity_PostCommentToThread_Response.prototype.gidcomment = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_PostCommentToThread_Response commentthreadid.
+         * @member {number|Long} commentthreadid
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @instance
+         */
+        CCommunity_PostCommentToThread_Response.prototype.commentthreadid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_PostCommentToThread_Response count.
+         * @member {number} count
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @instance
+         */
+        CCommunity_PostCommentToThread_Response.prototype.count = 0;
+    
+        /**
+         * CCommunity_PostCommentToThread_Response upvotes.
+         * @member {number} upvotes
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @instance
+         */
+        CCommunity_PostCommentToThread_Response.prototype.upvotes = 0;
+    
+        /**
+         * Creates a new CCommunity_PostCommentToThread_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {ICCommunity_PostCommentToThread_Response=} [properties] Properties to set
+         * @returns {CCommunity_PostCommentToThread_Response} CCommunity_PostCommentToThread_Response instance
+         */
+        CCommunity_PostCommentToThread_Response.create = function create(properties) {
+            return new CCommunity_PostCommentToThread_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PostCommentToThread_Response message. Does not implicitly {@link CCommunity_PostCommentToThread_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {ICCommunity_PostCommentToThread_Response} message CCommunity_PostCommentToThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PostCommentToThread_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.gidcomment);
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.commentthreadid);
+            if (message.count != null && message.hasOwnProperty("count"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.count);
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.upvotes);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PostCommentToThread_Response message, length delimited. Does not implicitly {@link CCommunity_PostCommentToThread_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {ICCommunity_PostCommentToThread_Response} message CCommunity_PostCommentToThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PostCommentToThread_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_PostCommentToThread_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_PostCommentToThread_Response} CCommunity_PostCommentToThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PostCommentToThread_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_PostCommentToThread_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.gidcomment = reader.fixed64();
+                    break;
+                case 2:
+                    message.commentthreadid = reader.fixed64();
+                    break;
+                case 3:
+                    message.count = reader.int32();
+                    break;
+                case 4:
+                    message.upvotes = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_PostCommentToThread_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_PostCommentToThread_Response} CCommunity_PostCommentToThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PostCommentToThread_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_PostCommentToThread_Response message.
+         * @function verify
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_PostCommentToThread_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (!$util.isInteger(message.gidcomment) && !(message.gidcomment && $util.isInteger(message.gidcomment.low) && $util.isInteger(message.gidcomment.high)))
+                    return "gidcomment: integer|Long expected";
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (!$util.isInteger(message.commentthreadid) && !(message.commentthreadid && $util.isInteger(message.commentthreadid.low) && $util.isInteger(message.commentthreadid.high)))
+                    return "commentthreadid: integer|Long expected";
+            if (message.count != null && message.hasOwnProperty("count"))
+                if (!$util.isInteger(message.count))
+                    return "count: integer expected";
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                if (!$util.isInteger(message.upvotes))
+                    return "upvotes: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_PostCommentToThread_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_PostCommentToThread_Response} CCommunity_PostCommentToThread_Response
+         */
+        CCommunity_PostCommentToThread_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_PostCommentToThread_Response)
+                return object;
+            var message = new $root.CCommunity_PostCommentToThread_Response();
+            if (object.gidcomment != null)
+                if ($util.Long)
+                    (message.gidcomment = $util.Long.fromValue(object.gidcomment)).unsigned = false;
+                else if (typeof object.gidcomment === "string")
+                    message.gidcomment = parseInt(object.gidcomment, 10);
+                else if (typeof object.gidcomment === "number")
+                    message.gidcomment = object.gidcomment;
+                else if (typeof object.gidcomment === "object")
+                    message.gidcomment = new $util.LongBits(object.gidcomment.low >>> 0, object.gidcomment.high >>> 0).toNumber();
+            if (object.commentthreadid != null)
+                if ($util.Long)
+                    (message.commentthreadid = $util.Long.fromValue(object.commentthreadid)).unsigned = false;
+                else if (typeof object.commentthreadid === "string")
+                    message.commentthreadid = parseInt(object.commentthreadid, 10);
+                else if (typeof object.commentthreadid === "number")
+                    message.commentthreadid = object.commentthreadid;
+                else if (typeof object.commentthreadid === "object")
+                    message.commentthreadid = new $util.LongBits(object.commentthreadid.low >>> 0, object.commentthreadid.high >>> 0).toNumber();
+            if (object.count != null)
+                message.count = object.count | 0;
+            if (object.upvotes != null)
+                message.upvotes = object.upvotes | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_PostCommentToThread_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @static
+         * @param {CCommunity_PostCommentToThread_Response} message CCommunity_PostCommentToThread_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_PostCommentToThread_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.gidcomment = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gidcomment = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.commentthreadid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.commentthreadid = options.longs === String ? "0" : 0;
+                object.count = 0;
+                object.upvotes = 0;
+            }
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (typeof message.gidcomment === "number")
+                    object.gidcomment = options.longs === String ? String(message.gidcomment) : message.gidcomment;
+                else
+                    object.gidcomment = options.longs === String ? $util.Long.prototype.toString.call(message.gidcomment) : options.longs === Number ? new $util.LongBits(message.gidcomment.low >>> 0, message.gidcomment.high >>> 0).toNumber() : message.gidcomment;
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (typeof message.commentthreadid === "number")
+                    object.commentthreadid = options.longs === String ? String(message.commentthreadid) : message.commentthreadid;
+                else
+                    object.commentthreadid = options.longs === String ? $util.Long.prototype.toString.call(message.commentthreadid) : options.longs === Number ? new $util.LongBits(message.commentthreadid.low >>> 0, message.commentthreadid.high >>> 0).toNumber() : message.commentthreadid;
+            if (message.count != null && message.hasOwnProperty("count"))
+                object.count = message.count;
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                object.upvotes = message.upvotes;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_PostCommentToThread_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_PostCommentToThread_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_PostCommentToThread_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_PostCommentToThread_Response;
+    })();
+    
+    $root.CCommunity_DeleteCommentFromThread_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_DeleteCommentFromThread_Response.
+         * @exports ICCommunity_DeleteCommentFromThread_Response
+         * @interface ICCommunity_DeleteCommentFromThread_Response
+         */
+    
+        /**
+         * Constructs a new CCommunity_DeleteCommentFromThread_Response.
+         * @exports CCommunity_DeleteCommentFromThread_Response
+         * @classdesc Represents a CCommunity_DeleteCommentFromThread_Response.
+         * @implements ICCommunity_DeleteCommentFromThread_Response
+         * @constructor
+         * @param {ICCommunity_DeleteCommentFromThread_Response=} [properties] Properties to set
+         */
+        function CCommunity_DeleteCommentFromThread_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CCommunity_DeleteCommentFromThread_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {ICCommunity_DeleteCommentFromThread_Response=} [properties] Properties to set
+         * @returns {CCommunity_DeleteCommentFromThread_Response} CCommunity_DeleteCommentFromThread_Response instance
+         */
+        CCommunity_DeleteCommentFromThread_Response.create = function create(properties) {
+            return new CCommunity_DeleteCommentFromThread_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_DeleteCommentFromThread_Response message. Does not implicitly {@link CCommunity_DeleteCommentFromThread_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {ICCommunity_DeleteCommentFromThread_Response} message CCommunity_DeleteCommentFromThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_DeleteCommentFromThread_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_DeleteCommentFromThread_Response message, length delimited. Does not implicitly {@link CCommunity_DeleteCommentFromThread_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {ICCommunity_DeleteCommentFromThread_Response} message CCommunity_DeleteCommentFromThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_DeleteCommentFromThread_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_DeleteCommentFromThread_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_DeleteCommentFromThread_Response} CCommunity_DeleteCommentFromThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_DeleteCommentFromThread_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_DeleteCommentFromThread_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_DeleteCommentFromThread_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_DeleteCommentFromThread_Response} CCommunity_DeleteCommentFromThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_DeleteCommentFromThread_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_DeleteCommentFromThread_Response message.
+         * @function verify
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_DeleteCommentFromThread_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_DeleteCommentFromThread_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_DeleteCommentFromThread_Response} CCommunity_DeleteCommentFromThread_Response
+         */
+        CCommunity_DeleteCommentFromThread_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_DeleteCommentFromThread_Response)
+                return object;
+            return new $root.CCommunity_DeleteCommentFromThread_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_DeleteCommentFromThread_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @static
+         * @param {CCommunity_DeleteCommentFromThread_Response} message CCommunity_DeleteCommentFromThread_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_DeleteCommentFromThread_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CCommunity_DeleteCommentFromThread_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_DeleteCommentFromThread_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_DeleteCommentFromThread_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_DeleteCommentFromThread_Response;
+    })();
+    
+    $root.CCommunity_RateCommentThread_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_RateCommentThread_Response.
+         * @exports ICCommunity_RateCommentThread_Response
+         * @interface ICCommunity_RateCommentThread_Response
+         * @property {number|Long|null} [gidcomment] CCommunity_RateCommentThread_Response gidcomment
+         * @property {number|Long|null} [commentthreadid] CCommunity_RateCommentThread_Response commentthreadid
+         * @property {number|null} [count] CCommunity_RateCommentThread_Response count
+         * @property {number|null} [upvotes] CCommunity_RateCommentThread_Response upvotes
+         * @property {boolean|null} [has_upvoted] CCommunity_RateCommentThread_Response has_upvoted
+         */
+    
+        /**
+         * Constructs a new CCommunity_RateCommentThread_Response.
+         * @exports CCommunity_RateCommentThread_Response
+         * @classdesc Represents a CCommunity_RateCommentThread_Response.
+         * @implements ICCommunity_RateCommentThread_Response
+         * @constructor
+         * @param {ICCommunity_RateCommentThread_Response=} [properties] Properties to set
+         */
+        function CCommunity_RateCommentThread_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_RateCommentThread_Response gidcomment.
+         * @member {number|Long} gidcomment
+         * @memberof CCommunity_RateCommentThread_Response
+         * @instance
+         */
+        CCommunity_RateCommentThread_Response.prototype.gidcomment = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CCommunity_RateCommentThread_Response commentthreadid.
+         * @member {number|Long} commentthreadid
+         * @memberof CCommunity_RateCommentThread_Response
+         * @instance
+         */
+        CCommunity_RateCommentThread_Response.prototype.commentthreadid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CCommunity_RateCommentThread_Response count.
+         * @member {number} count
+         * @memberof CCommunity_RateCommentThread_Response
+         * @instance
+         */
+        CCommunity_RateCommentThread_Response.prototype.count = 0;
+    
+        /**
+         * CCommunity_RateCommentThread_Response upvotes.
+         * @member {number} upvotes
+         * @memberof CCommunity_RateCommentThread_Response
+         * @instance
+         */
+        CCommunity_RateCommentThread_Response.prototype.upvotes = 0;
+    
+        /**
+         * CCommunity_RateCommentThread_Response has_upvoted.
+         * @member {boolean} has_upvoted
+         * @memberof CCommunity_RateCommentThread_Response
+         * @instance
+         */
+        CCommunity_RateCommentThread_Response.prototype.has_upvoted = false;
+    
+        /**
+         * Creates a new CCommunity_RateCommentThread_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {ICCommunity_RateCommentThread_Response=} [properties] Properties to set
+         * @returns {CCommunity_RateCommentThread_Response} CCommunity_RateCommentThread_Response instance
+         */
+        CCommunity_RateCommentThread_Response.create = function create(properties) {
+            return new CCommunity_RateCommentThread_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_RateCommentThread_Response message. Does not implicitly {@link CCommunity_RateCommentThread_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {ICCommunity_RateCommentThread_Response} message CCommunity_RateCommentThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_RateCommentThread_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.gidcomment);
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.commentthreadid);
+            if (message.count != null && message.hasOwnProperty("count"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.count);
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.upvotes);
+            if (message.has_upvoted != null && message.hasOwnProperty("has_upvoted"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.has_upvoted);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_RateCommentThread_Response message, length delimited. Does not implicitly {@link CCommunity_RateCommentThread_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {ICCommunity_RateCommentThread_Response} message CCommunity_RateCommentThread_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_RateCommentThread_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_RateCommentThread_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_RateCommentThread_Response} CCommunity_RateCommentThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_RateCommentThread_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_RateCommentThread_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.gidcomment = reader.uint64();
+                    break;
+                case 2:
+                    message.commentthreadid = reader.uint64();
+                    break;
+                case 3:
+                    message.count = reader.uint32();
+                    break;
+                case 4:
+                    message.upvotes = reader.uint32();
+                    break;
+                case 5:
+                    message.has_upvoted = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_RateCommentThread_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_RateCommentThread_Response} CCommunity_RateCommentThread_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_RateCommentThread_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_RateCommentThread_Response message.
+         * @function verify
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_RateCommentThread_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (!$util.isInteger(message.gidcomment) && !(message.gidcomment && $util.isInteger(message.gidcomment.low) && $util.isInteger(message.gidcomment.high)))
+                    return "gidcomment: integer|Long expected";
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (!$util.isInteger(message.commentthreadid) && !(message.commentthreadid && $util.isInteger(message.commentthreadid.low) && $util.isInteger(message.commentthreadid.high)))
+                    return "commentthreadid: integer|Long expected";
+            if (message.count != null && message.hasOwnProperty("count"))
+                if (!$util.isInteger(message.count))
+                    return "count: integer expected";
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                if (!$util.isInteger(message.upvotes))
+                    return "upvotes: integer expected";
+            if (message.has_upvoted != null && message.hasOwnProperty("has_upvoted"))
+                if (typeof message.has_upvoted !== "boolean")
+                    return "has_upvoted: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_RateCommentThread_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_RateCommentThread_Response} CCommunity_RateCommentThread_Response
+         */
+        CCommunity_RateCommentThread_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_RateCommentThread_Response)
+                return object;
+            var message = new $root.CCommunity_RateCommentThread_Response();
+            if (object.gidcomment != null)
+                if ($util.Long)
+                    (message.gidcomment = $util.Long.fromValue(object.gidcomment)).unsigned = true;
+                else if (typeof object.gidcomment === "string")
+                    message.gidcomment = parseInt(object.gidcomment, 10);
+                else if (typeof object.gidcomment === "number")
+                    message.gidcomment = object.gidcomment;
+                else if (typeof object.gidcomment === "object")
+                    message.gidcomment = new $util.LongBits(object.gidcomment.low >>> 0, object.gidcomment.high >>> 0).toNumber(true);
+            if (object.commentthreadid != null)
+                if ($util.Long)
+                    (message.commentthreadid = $util.Long.fromValue(object.commentthreadid)).unsigned = true;
+                else if (typeof object.commentthreadid === "string")
+                    message.commentthreadid = parseInt(object.commentthreadid, 10);
+                else if (typeof object.commentthreadid === "number")
+                    message.commentthreadid = object.commentthreadid;
+                else if (typeof object.commentthreadid === "object")
+                    message.commentthreadid = new $util.LongBits(object.commentthreadid.low >>> 0, object.commentthreadid.high >>> 0).toNumber(true);
+            if (object.count != null)
+                message.count = object.count >>> 0;
+            if (object.upvotes != null)
+                message.upvotes = object.upvotes >>> 0;
+            if (object.has_upvoted != null)
+                message.has_upvoted = Boolean(object.has_upvoted);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_RateCommentThread_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_RateCommentThread_Response
+         * @static
+         * @param {CCommunity_RateCommentThread_Response} message CCommunity_RateCommentThread_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_RateCommentThread_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.gidcomment = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gidcomment = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.commentthreadid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.commentthreadid = options.longs === String ? "0" : 0;
+                object.count = 0;
+                object.upvotes = 0;
+                object.has_upvoted = false;
+            }
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (typeof message.gidcomment === "number")
+                    object.gidcomment = options.longs === String ? String(message.gidcomment) : message.gidcomment;
+                else
+                    object.gidcomment = options.longs === String ? $util.Long.prototype.toString.call(message.gidcomment) : options.longs === Number ? new $util.LongBits(message.gidcomment.low >>> 0, message.gidcomment.high >>> 0).toNumber(true) : message.gidcomment;
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (typeof message.commentthreadid === "number")
+                    object.commentthreadid = options.longs === String ? String(message.commentthreadid) : message.commentthreadid;
+                else
+                    object.commentthreadid = options.longs === String ? $util.Long.prototype.toString.call(message.commentthreadid) : options.longs === Number ? new $util.LongBits(message.commentthreadid.low >>> 0, message.commentthreadid.high >>> 0).toNumber(true) : message.commentthreadid;
+            if (message.count != null && message.hasOwnProperty("count"))
+                object.count = message.count;
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                object.upvotes = message.upvotes;
+            if (message.has_upvoted != null && message.hasOwnProperty("has_upvoted"))
+                object.has_upvoted = message.has_upvoted;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_RateCommentThread_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_RateCommentThread_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_RateCommentThread_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_RateCommentThread_Response;
+    })();
+    
+    $root.CCommunity_GetCommentThreadRatings_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetCommentThreadRatings_Response.
+         * @exports ICCommunity_GetCommentThreadRatings_Response
+         * @interface ICCommunity_GetCommentThreadRatings_Response
+         * @property {number|Long|null} [commentthreadid] CCommunity_GetCommentThreadRatings_Response commentthreadid
+         * @property {number|Long|null} [gidcomment] CCommunity_GetCommentThreadRatings_Response gidcomment
+         * @property {number|null} [upvotes] CCommunity_GetCommentThreadRatings_Response upvotes
+         * @property {boolean|null} [has_upvoted] CCommunity_GetCommentThreadRatings_Response has_upvoted
+         * @property {Array.<number>|null} [upvoter_accountids] CCommunity_GetCommentThreadRatings_Response upvoter_accountids
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetCommentThreadRatings_Response.
+         * @exports CCommunity_GetCommentThreadRatings_Response
+         * @classdesc Represents a CCommunity_GetCommentThreadRatings_Response.
+         * @implements ICCommunity_GetCommentThreadRatings_Response
+         * @constructor
+         * @param {ICCommunity_GetCommentThreadRatings_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetCommentThreadRatings_Response(properties) {
+            this.upvoter_accountids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetCommentThreadRatings_Response commentthreadid.
+         * @member {number|Long} commentthreadid
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @instance
+         */
+        CCommunity_GetCommentThreadRatings_Response.prototype.commentthreadid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CCommunity_GetCommentThreadRatings_Response gidcomment.
+         * @member {number|Long} gidcomment
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @instance
+         */
+        CCommunity_GetCommentThreadRatings_Response.prototype.gidcomment = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CCommunity_GetCommentThreadRatings_Response upvotes.
+         * @member {number} upvotes
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @instance
+         */
+        CCommunity_GetCommentThreadRatings_Response.prototype.upvotes = 0;
+    
+        /**
+         * CCommunity_GetCommentThreadRatings_Response has_upvoted.
+         * @member {boolean} has_upvoted
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @instance
+         */
+        CCommunity_GetCommentThreadRatings_Response.prototype.has_upvoted = false;
+    
+        /**
+         * CCommunity_GetCommentThreadRatings_Response upvoter_accountids.
+         * @member {Array.<number>} upvoter_accountids
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @instance
+         */
+        CCommunity_GetCommentThreadRatings_Response.prototype.upvoter_accountids = $util.emptyArray;
+    
+        /**
+         * Creates a new CCommunity_GetCommentThreadRatings_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {ICCommunity_GetCommentThreadRatings_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetCommentThreadRatings_Response} CCommunity_GetCommentThreadRatings_Response instance
+         */
+        CCommunity_GetCommentThreadRatings_Response.create = function create(properties) {
+            return new CCommunity_GetCommentThreadRatings_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetCommentThreadRatings_Response message. Does not implicitly {@link CCommunity_GetCommentThreadRatings_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {ICCommunity_GetCommentThreadRatings_Response} message CCommunity_GetCommentThreadRatings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetCommentThreadRatings_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.commentthreadid);
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.gidcomment);
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.upvotes);
+            if (message.has_upvoted != null && message.hasOwnProperty("has_upvoted"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.has_upvoted);
+            if (message.upvoter_accountids != null && message.upvoter_accountids.length)
+                for (var i = 0; i < message.upvoter_accountids.length; ++i)
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.upvoter_accountids[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetCommentThreadRatings_Response message, length delimited. Does not implicitly {@link CCommunity_GetCommentThreadRatings_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {ICCommunity_GetCommentThreadRatings_Response} message CCommunity_GetCommentThreadRatings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetCommentThreadRatings_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetCommentThreadRatings_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetCommentThreadRatings_Response} CCommunity_GetCommentThreadRatings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetCommentThreadRatings_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetCommentThreadRatings_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.commentthreadid = reader.uint64();
+                    break;
+                case 2:
+                    message.gidcomment = reader.uint64();
+                    break;
+                case 3:
+                    message.upvotes = reader.uint32();
+                    break;
+                case 4:
+                    message.has_upvoted = reader.bool();
+                    break;
+                case 5:
+                    if (!(message.upvoter_accountids && message.upvoter_accountids.length))
+                        message.upvoter_accountids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.upvoter_accountids.push(reader.uint32());
+                    } else
+                        message.upvoter_accountids.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetCommentThreadRatings_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetCommentThreadRatings_Response} CCommunity_GetCommentThreadRatings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetCommentThreadRatings_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetCommentThreadRatings_Response message.
+         * @function verify
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetCommentThreadRatings_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (!$util.isInteger(message.commentthreadid) && !(message.commentthreadid && $util.isInteger(message.commentthreadid.low) && $util.isInteger(message.commentthreadid.high)))
+                    return "commentthreadid: integer|Long expected";
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (!$util.isInteger(message.gidcomment) && !(message.gidcomment && $util.isInteger(message.gidcomment.low) && $util.isInteger(message.gidcomment.high)))
+                    return "gidcomment: integer|Long expected";
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                if (!$util.isInteger(message.upvotes))
+                    return "upvotes: integer expected";
+            if (message.has_upvoted != null && message.hasOwnProperty("has_upvoted"))
+                if (typeof message.has_upvoted !== "boolean")
+                    return "has_upvoted: boolean expected";
+            if (message.upvoter_accountids != null && message.hasOwnProperty("upvoter_accountids")) {
+                if (!Array.isArray(message.upvoter_accountids))
+                    return "upvoter_accountids: array expected";
+                for (var i = 0; i < message.upvoter_accountids.length; ++i)
+                    if (!$util.isInteger(message.upvoter_accountids[i]))
+                        return "upvoter_accountids: integer[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetCommentThreadRatings_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetCommentThreadRatings_Response} CCommunity_GetCommentThreadRatings_Response
+         */
+        CCommunity_GetCommentThreadRatings_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetCommentThreadRatings_Response)
+                return object;
+            var message = new $root.CCommunity_GetCommentThreadRatings_Response();
+            if (object.commentthreadid != null)
+                if ($util.Long)
+                    (message.commentthreadid = $util.Long.fromValue(object.commentthreadid)).unsigned = true;
+                else if (typeof object.commentthreadid === "string")
+                    message.commentthreadid = parseInt(object.commentthreadid, 10);
+                else if (typeof object.commentthreadid === "number")
+                    message.commentthreadid = object.commentthreadid;
+                else if (typeof object.commentthreadid === "object")
+                    message.commentthreadid = new $util.LongBits(object.commentthreadid.low >>> 0, object.commentthreadid.high >>> 0).toNumber(true);
+            if (object.gidcomment != null)
+                if ($util.Long)
+                    (message.gidcomment = $util.Long.fromValue(object.gidcomment)).unsigned = true;
+                else if (typeof object.gidcomment === "string")
+                    message.gidcomment = parseInt(object.gidcomment, 10);
+                else if (typeof object.gidcomment === "number")
+                    message.gidcomment = object.gidcomment;
+                else if (typeof object.gidcomment === "object")
+                    message.gidcomment = new $util.LongBits(object.gidcomment.low >>> 0, object.gidcomment.high >>> 0).toNumber(true);
+            if (object.upvotes != null)
+                message.upvotes = object.upvotes >>> 0;
+            if (object.has_upvoted != null)
+                message.has_upvoted = Boolean(object.has_upvoted);
+            if (object.upvoter_accountids) {
+                if (!Array.isArray(object.upvoter_accountids))
+                    throw TypeError(".CCommunity_GetCommentThreadRatings_Response.upvoter_accountids: array expected");
+                message.upvoter_accountids = [];
+                for (var i = 0; i < object.upvoter_accountids.length; ++i)
+                    message.upvoter_accountids[i] = object.upvoter_accountids[i] >>> 0;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetCommentThreadRatings_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @static
+         * @param {CCommunity_GetCommentThreadRatings_Response} message CCommunity_GetCommentThreadRatings_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetCommentThreadRatings_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.upvoter_accountids = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.commentthreadid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.commentthreadid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.gidcomment = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gidcomment = options.longs === String ? "0" : 0;
+                object.upvotes = 0;
+                object.has_upvoted = false;
+            }
+            if (message.commentthreadid != null && message.hasOwnProperty("commentthreadid"))
+                if (typeof message.commentthreadid === "number")
+                    object.commentthreadid = options.longs === String ? String(message.commentthreadid) : message.commentthreadid;
+                else
+                    object.commentthreadid = options.longs === String ? $util.Long.prototype.toString.call(message.commentthreadid) : options.longs === Number ? new $util.LongBits(message.commentthreadid.low >>> 0, message.commentthreadid.high >>> 0).toNumber(true) : message.commentthreadid;
+            if (message.gidcomment != null && message.hasOwnProperty("gidcomment"))
+                if (typeof message.gidcomment === "number")
+                    object.gidcomment = options.longs === String ? String(message.gidcomment) : message.gidcomment;
+                else
+                    object.gidcomment = options.longs === String ? $util.Long.prototype.toString.call(message.gidcomment) : options.longs === Number ? new $util.LongBits(message.gidcomment.low >>> 0, message.gidcomment.high >>> 0).toNumber(true) : message.gidcomment;
+            if (message.upvotes != null && message.hasOwnProperty("upvotes"))
+                object.upvotes = message.upvotes;
+            if (message.has_upvoted != null && message.hasOwnProperty("has_upvoted"))
+                object.has_upvoted = message.has_upvoted;
+            if (message.upvoter_accountids && message.upvoter_accountids.length) {
+                object.upvoter_accountids = [];
+                for (var j = 0; j < message.upvoter_accountids.length; ++j)
+                    object.upvoter_accountids[j] = message.upvoter_accountids[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetCommentThreadRatings_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetCommentThreadRatings_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetCommentThreadRatings_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetCommentThreadRatings_Response;
+    })();
+    
+    $root.CCommunity_RateClanAnnouncement_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_RateClanAnnouncement_Response.
+         * @exports ICCommunity_RateClanAnnouncement_Response
+         * @interface ICCommunity_RateClanAnnouncement_Response
+         */
+    
+        /**
+         * Constructs a new CCommunity_RateClanAnnouncement_Response.
+         * @exports CCommunity_RateClanAnnouncement_Response
+         * @classdesc Represents a CCommunity_RateClanAnnouncement_Response.
+         * @implements ICCommunity_RateClanAnnouncement_Response
+         * @constructor
+         * @param {ICCommunity_RateClanAnnouncement_Response=} [properties] Properties to set
+         */
+        function CCommunity_RateClanAnnouncement_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CCommunity_RateClanAnnouncement_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {ICCommunity_RateClanAnnouncement_Response=} [properties] Properties to set
+         * @returns {CCommunity_RateClanAnnouncement_Response} CCommunity_RateClanAnnouncement_Response instance
+         */
+        CCommunity_RateClanAnnouncement_Response.create = function create(properties) {
+            return new CCommunity_RateClanAnnouncement_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_RateClanAnnouncement_Response message. Does not implicitly {@link CCommunity_RateClanAnnouncement_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {ICCommunity_RateClanAnnouncement_Response} message CCommunity_RateClanAnnouncement_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_RateClanAnnouncement_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_RateClanAnnouncement_Response message, length delimited. Does not implicitly {@link CCommunity_RateClanAnnouncement_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {ICCommunity_RateClanAnnouncement_Response} message CCommunity_RateClanAnnouncement_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_RateClanAnnouncement_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_RateClanAnnouncement_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_RateClanAnnouncement_Response} CCommunity_RateClanAnnouncement_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_RateClanAnnouncement_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_RateClanAnnouncement_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_RateClanAnnouncement_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_RateClanAnnouncement_Response} CCommunity_RateClanAnnouncement_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_RateClanAnnouncement_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_RateClanAnnouncement_Response message.
+         * @function verify
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_RateClanAnnouncement_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_RateClanAnnouncement_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_RateClanAnnouncement_Response} CCommunity_RateClanAnnouncement_Response
+         */
+        CCommunity_RateClanAnnouncement_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_RateClanAnnouncement_Response)
+                return object;
+            return new $root.CCommunity_RateClanAnnouncement_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_RateClanAnnouncement_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @static
+         * @param {CCommunity_RateClanAnnouncement_Response} message CCommunity_RateClanAnnouncement_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_RateClanAnnouncement_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CCommunity_RateClanAnnouncement_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_RateClanAnnouncement_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_RateClanAnnouncement_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_RateClanAnnouncement_Response;
+    })();
+    
+    $root.CCommunity_GetClanAnnouncementVoteForUser_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetClanAnnouncementVoteForUser_Response.
+         * @exports ICCommunity_GetClanAnnouncementVoteForUser_Response
+         * @interface ICCommunity_GetClanAnnouncementVoteForUser_Response
+         * @property {boolean|null} [voted_up] CCommunity_GetClanAnnouncementVoteForUser_Response voted_up
+         * @property {boolean|null} [voted_down] CCommunity_GetClanAnnouncementVoteForUser_Response voted_down
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetClanAnnouncementVoteForUser_Response.
+         * @exports CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @classdesc Represents a CCommunity_GetClanAnnouncementVoteForUser_Response.
+         * @implements ICCommunity_GetClanAnnouncementVoteForUser_Response
+         * @constructor
+         * @param {ICCommunity_GetClanAnnouncementVoteForUser_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetClanAnnouncementVoteForUser_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetClanAnnouncementVoteForUser_Response voted_up.
+         * @member {boolean} voted_up
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @instance
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.prototype.voted_up = false;
+    
+        /**
+         * CCommunity_GetClanAnnouncementVoteForUser_Response voted_down.
+         * @member {boolean} voted_down
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @instance
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.prototype.voted_down = false;
+    
+        /**
+         * Creates a new CCommunity_GetClanAnnouncementVoteForUser_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {ICCommunity_GetClanAnnouncementVoteForUser_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetClanAnnouncementVoteForUser_Response} CCommunity_GetClanAnnouncementVoteForUser_Response instance
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.create = function create(properties) {
+            return new CCommunity_GetClanAnnouncementVoteForUser_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetClanAnnouncementVoteForUser_Response message. Does not implicitly {@link CCommunity_GetClanAnnouncementVoteForUser_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {ICCommunity_GetClanAnnouncementVoteForUser_Response} message CCommunity_GetClanAnnouncementVoteForUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.voted_up != null && message.hasOwnProperty("voted_up"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.voted_up);
+            if (message.voted_down != null && message.hasOwnProperty("voted_down"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.voted_down);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetClanAnnouncementVoteForUser_Response message, length delimited. Does not implicitly {@link CCommunity_GetClanAnnouncementVoteForUser_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {ICCommunity_GetClanAnnouncementVoteForUser_Response} message CCommunity_GetClanAnnouncementVoteForUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetClanAnnouncementVoteForUser_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetClanAnnouncementVoteForUser_Response} CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetClanAnnouncementVoteForUser_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.voted_up = reader.bool();
+                    break;
+                case 2:
+                    message.voted_down = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetClanAnnouncementVoteForUser_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetClanAnnouncementVoteForUser_Response} CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetClanAnnouncementVoteForUser_Response message.
+         * @function verify
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.voted_up != null && message.hasOwnProperty("voted_up"))
+                if (typeof message.voted_up !== "boolean")
+                    return "voted_up: boolean expected";
+            if (message.voted_down != null && message.hasOwnProperty("voted_down"))
+                if (typeof message.voted_down !== "boolean")
+                    return "voted_down: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetClanAnnouncementVoteForUser_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetClanAnnouncementVoteForUser_Response} CCommunity_GetClanAnnouncementVoteForUser_Response
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetClanAnnouncementVoteForUser_Response)
+                return object;
+            var message = new $root.CCommunity_GetClanAnnouncementVoteForUser_Response();
+            if (object.voted_up != null)
+                message.voted_up = Boolean(object.voted_up);
+            if (object.voted_down != null)
+                message.voted_down = Boolean(object.voted_down);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetClanAnnouncementVoteForUser_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @static
+         * @param {CCommunity_GetClanAnnouncementVoteForUser_Response} message CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.voted_up = false;
+                object.voted_down = false;
+            }
+            if (message.voted_up != null && message.hasOwnProperty("voted_up"))
+                object.voted_up = message.voted_up;
+            if (message.voted_down != null && message.hasOwnProperty("voted_down"))
+                object.voted_down = message.voted_down;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetClanAnnouncementVoteForUser_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetClanAnnouncementVoteForUser_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetClanAnnouncementVoteForUser_Response;
+    })();
+    
+    $root.CCommunity_GetAvatarHistory_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetAvatarHistory_Response.
+         * @exports ICCommunity_GetAvatarHistory_Response
+         * @interface ICCommunity_GetAvatarHistory_Response
+         * @property {Array.<ICCommunity_GetAvatarHistory_Response_AvatarData>|null} [avatars] CCommunity_GetAvatarHistory_Response avatars
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetAvatarHistory_Response.
+         * @exports CCommunity_GetAvatarHistory_Response
+         * @classdesc Represents a CCommunity_GetAvatarHistory_Response.
+         * @implements ICCommunity_GetAvatarHistory_Response
+         * @constructor
+         * @param {ICCommunity_GetAvatarHistory_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetAvatarHistory_Response(properties) {
+            this.avatars = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetAvatarHistory_Response avatars.
+         * @member {Array.<ICCommunity_GetAvatarHistory_Response_AvatarData>} avatars
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @instance
+         */
+        CCommunity_GetAvatarHistory_Response.prototype.avatars = $util.emptyArray;
+    
+        /**
+         * Creates a new CCommunity_GetAvatarHistory_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {ICCommunity_GetAvatarHistory_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetAvatarHistory_Response} CCommunity_GetAvatarHistory_Response instance
+         */
+        CCommunity_GetAvatarHistory_Response.create = function create(properties) {
+            return new CCommunity_GetAvatarHistory_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetAvatarHistory_Response message. Does not implicitly {@link CCommunity_GetAvatarHistory_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {ICCommunity_GetAvatarHistory_Response} message CCommunity_GetAvatarHistory_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetAvatarHistory_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.avatars != null && message.avatars.length)
+                for (var i = 0; i < message.avatars.length; ++i)
+                    $root.CCommunity_GetAvatarHistory_Response_AvatarData.encode(message.avatars[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetAvatarHistory_Response message, length delimited. Does not implicitly {@link CCommunity_GetAvatarHistory_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {ICCommunity_GetAvatarHistory_Response} message CCommunity_GetAvatarHistory_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetAvatarHistory_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetAvatarHistory_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetAvatarHistory_Response} CCommunity_GetAvatarHistory_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetAvatarHistory_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetAvatarHistory_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.avatars && message.avatars.length))
+                        message.avatars = [];
+                    message.avatars.push($root.CCommunity_GetAvatarHistory_Response_AvatarData.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetAvatarHistory_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetAvatarHistory_Response} CCommunity_GetAvatarHistory_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetAvatarHistory_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetAvatarHistory_Response message.
+         * @function verify
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetAvatarHistory_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.avatars != null && message.hasOwnProperty("avatars")) {
+                if (!Array.isArray(message.avatars))
+                    return "avatars: array expected";
+                for (var i = 0; i < message.avatars.length; ++i) {
+                    var error = $root.CCommunity_GetAvatarHistory_Response_AvatarData.verify(message.avatars[i]);
+                    if (error)
+                        return "avatars." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetAvatarHistory_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetAvatarHistory_Response} CCommunity_GetAvatarHistory_Response
+         */
+        CCommunity_GetAvatarHistory_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetAvatarHistory_Response)
+                return object;
+            var message = new $root.CCommunity_GetAvatarHistory_Response();
+            if (object.avatars) {
+                if (!Array.isArray(object.avatars))
+                    throw TypeError(".CCommunity_GetAvatarHistory_Response.avatars: array expected");
+                message.avatars = [];
+                for (var i = 0; i < object.avatars.length; ++i) {
+                    if (typeof object.avatars[i] !== "object")
+                        throw TypeError(".CCommunity_GetAvatarHistory_Response.avatars: object expected");
+                    message.avatars[i] = $root.CCommunity_GetAvatarHistory_Response_AvatarData.fromObject(object.avatars[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetAvatarHistory_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @static
+         * @param {CCommunity_GetAvatarHistory_Response} message CCommunity_GetAvatarHistory_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetAvatarHistory_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.avatars = [];
+            if (message.avatars && message.avatars.length) {
+                object.avatars = [];
+                for (var j = 0; j < message.avatars.length; ++j)
+                    object.avatars[j] = $root.CCommunity_GetAvatarHistory_Response_AvatarData.toObject(message.avatars[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetAvatarHistory_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetAvatarHistory_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetAvatarHistory_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetAvatarHistory_Response;
+    })();
+    
+    $root.CCommunity_GetAvatarHistory_Response_AvatarData = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetAvatarHistory_Response_AvatarData.
+         * @exports ICCommunity_GetAvatarHistory_Response_AvatarData
+         * @interface ICCommunity_GetAvatarHistory_Response_AvatarData
+         * @property {string|null} [avatar_sha1] CCommunity_GetAvatarHistory_Response_AvatarData avatar_sha1
+         * @property {boolean|null} [user_uploaded] CCommunity_GetAvatarHistory_Response_AvatarData user_uploaded
+         * @property {number|null} [timestamp] CCommunity_GetAvatarHistory_Response_AvatarData timestamp
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetAvatarHistory_Response_AvatarData.
+         * @exports CCommunity_GetAvatarHistory_Response_AvatarData
+         * @classdesc Represents a CCommunity_GetAvatarHistory_Response_AvatarData.
+         * @implements ICCommunity_GetAvatarHistory_Response_AvatarData
+         * @constructor
+         * @param {ICCommunity_GetAvatarHistory_Response_AvatarData=} [properties] Properties to set
+         */
+        function CCommunity_GetAvatarHistory_Response_AvatarData(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetAvatarHistory_Response_AvatarData avatar_sha1.
+         * @member {string} avatar_sha1
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @instance
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.prototype.avatar_sha1 = "";
+    
+        /**
+         * CCommunity_GetAvatarHistory_Response_AvatarData user_uploaded.
+         * @member {boolean} user_uploaded
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @instance
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.prototype.user_uploaded = false;
+    
+        /**
+         * CCommunity_GetAvatarHistory_Response_AvatarData timestamp.
+         * @member {number} timestamp
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @instance
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.prototype.timestamp = 0;
+    
+        /**
+         * Creates a new CCommunity_GetAvatarHistory_Response_AvatarData instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {ICCommunity_GetAvatarHistory_Response_AvatarData=} [properties] Properties to set
+         * @returns {CCommunity_GetAvatarHistory_Response_AvatarData} CCommunity_GetAvatarHistory_Response_AvatarData instance
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.create = function create(properties) {
+            return new CCommunity_GetAvatarHistory_Response_AvatarData(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetAvatarHistory_Response_AvatarData message. Does not implicitly {@link CCommunity_GetAvatarHistory_Response_AvatarData.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {ICCommunity_GetAvatarHistory_Response_AvatarData} message CCommunity_GetAvatarHistory_Response_AvatarData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.avatar_sha1 != null && message.hasOwnProperty("avatar_sha1"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.avatar_sha1);
+            if (message.user_uploaded != null && message.hasOwnProperty("user_uploaded"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.user_uploaded);
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.timestamp);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetAvatarHistory_Response_AvatarData message, length delimited. Does not implicitly {@link CCommunity_GetAvatarHistory_Response_AvatarData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {ICCommunity_GetAvatarHistory_Response_AvatarData} message CCommunity_GetAvatarHistory_Response_AvatarData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetAvatarHistory_Response_AvatarData message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetAvatarHistory_Response_AvatarData} CCommunity_GetAvatarHistory_Response_AvatarData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetAvatarHistory_Response_AvatarData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.avatar_sha1 = reader.string();
+                    break;
+                case 2:
+                    message.user_uploaded = reader.bool();
+                    break;
+                case 3:
+                    message.timestamp = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetAvatarHistory_Response_AvatarData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetAvatarHistory_Response_AvatarData} CCommunity_GetAvatarHistory_Response_AvatarData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetAvatarHistory_Response_AvatarData message.
+         * @function verify
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.avatar_sha1 != null && message.hasOwnProperty("avatar_sha1"))
+                if (!$util.isString(message.avatar_sha1))
+                    return "avatar_sha1: string expected";
+            if (message.user_uploaded != null && message.hasOwnProperty("user_uploaded"))
+                if (typeof message.user_uploaded !== "boolean")
+                    return "user_uploaded: boolean expected";
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp))
+                    return "timestamp: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetAvatarHistory_Response_AvatarData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetAvatarHistory_Response_AvatarData} CCommunity_GetAvatarHistory_Response_AvatarData
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetAvatarHistory_Response_AvatarData)
+                return object;
+            var message = new $root.CCommunity_GetAvatarHistory_Response_AvatarData();
+            if (object.avatar_sha1 != null)
+                message.avatar_sha1 = String(object.avatar_sha1);
+            if (object.user_uploaded != null)
+                message.user_uploaded = Boolean(object.user_uploaded);
+            if (object.timestamp != null)
+                message.timestamp = object.timestamp >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetAvatarHistory_Response_AvatarData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @static
+         * @param {CCommunity_GetAvatarHistory_Response_AvatarData} message CCommunity_GetAvatarHistory_Response_AvatarData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.avatar_sha1 = "";
+                object.user_uploaded = false;
+                object.timestamp = 0;
+            }
+            if (message.avatar_sha1 != null && message.hasOwnProperty("avatar_sha1"))
+                object.avatar_sha1 = message.avatar_sha1;
+            if (message.user_uploaded != null && message.hasOwnProperty("user_uploaded"))
+                object.user_uploaded = message.user_uploaded;
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                object.timestamp = message.timestamp;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetAvatarHistory_Response_AvatarData to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetAvatarHistory_Response_AvatarData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetAvatarHistory_Response_AvatarData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetAvatarHistory_Response_AvatarData;
+    })();
+    
     $root.CAppPriority = (function() {
     
         /**
@@ -1776,23 +4702,30 @@
         return CCommunity_GetUserPartnerEventNews_Response;
     })();
     
-    $root.CPlayer_PostStatusToFriends_Response = (function() {
+    $root.CCommunity_PartnerEventResult = (function() {
     
         /**
-         * Properties of a CPlayer_PostStatusToFriends_Response.
-         * @exports ICPlayer_PostStatusToFriends_Response
-         * @interface ICPlayer_PostStatusToFriends_Response
+         * Properties of a CCommunity_PartnerEventResult.
+         * @exports ICCommunity_PartnerEventResult
+         * @interface ICCommunity_PartnerEventResult
+         * @property {number|null} [clanid] CCommunity_PartnerEventResult clanid
+         * @property {number|Long|null} [event_gid] CCommunity_PartnerEventResult event_gid
+         * @property {number|Long|null} [announcement_gid] CCommunity_PartnerEventResult announcement_gid
+         * @property {number|null} [appid] CCommunity_PartnerEventResult appid
+         * @property {boolean|null} [possible_takeover] CCommunity_PartnerEventResult possible_takeover
+         * @property {number|null} [rtime32_last_modified] CCommunity_PartnerEventResult rtime32_last_modified
+         * @property {number|null} [user_app_priority] CCommunity_PartnerEventResult user_app_priority
          */
     
         /**
-         * Constructs a new CPlayer_PostStatusToFriends_Response.
-         * @exports CPlayer_PostStatusToFriends_Response
-         * @classdesc Represents a CPlayer_PostStatusToFriends_Response.
-         * @implements ICPlayer_PostStatusToFriends_Response
+         * Constructs a new CCommunity_PartnerEventResult.
+         * @exports CCommunity_PartnerEventResult
+         * @classdesc Represents a CCommunity_PartnerEventResult.
+         * @implements ICCommunity_PartnerEventResult
          * @constructor
-         * @param {ICPlayer_PostStatusToFriends_Response=} [properties] Properties to set
+         * @param {ICCommunity_PartnerEventResult=} [properties] Properties to set
          */
-        function CPlayer_PostStatusToFriends_Response(properties) {
+        function CCommunity_PartnerEventResult(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1800,292 +4733,153 @@
         }
     
         /**
-         * Creates a new CPlayer_PostStatusToFriends_Response instance using the specified properties.
-         * @function create
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {ICPlayer_PostStatusToFriends_Response=} [properties] Properties to set
-         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response instance
-         */
-        CPlayer_PostStatusToFriends_Response.create = function create(properties) {
-            return new CPlayer_PostStatusToFriends_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CPlayer_PostStatusToFriends_Response message. Does not implicitly {@link CPlayer_PostStatusToFriends_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {ICPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CPlayer_PostStatusToFriends_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CPlayer_PostStatusToFriends_Response message, length delimited. Does not implicitly {@link CPlayer_PostStatusToFriends_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {ICPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CPlayer_PostStatusToFriends_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CPlayer_PostStatusToFriends_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CPlayer_PostStatusToFriends_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_PostStatusToFriends_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CPlayer_PostStatusToFriends_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CPlayer_PostStatusToFriends_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CPlayer_PostStatusToFriends_Response message.
-         * @function verify
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CPlayer_PostStatusToFriends_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CPlayer_PostStatusToFriends_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
-         */
-        CPlayer_PostStatusToFriends_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CPlayer_PostStatusToFriends_Response)
-                return object;
-            return new $root.CPlayer_PostStatusToFriends_Response();
-        };
-    
-        /**
-         * Creates a plain object from a CPlayer_PostStatusToFriends_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @static
-         * @param {CPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CPlayer_PostStatusToFriends_Response.toObject = function toObject() {
-            return {};
-        };
-    
-        /**
-         * Converts this CPlayer_PostStatusToFriends_Response to JSON.
-         * @function toJSON
-         * @memberof CPlayer_PostStatusToFriends_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CPlayer_PostStatusToFriends_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CPlayer_PostStatusToFriends_Response;
-    })();
-    
-    $root.CPlayer_GetPostedStatus_Response = (function() {
-    
-        /**
-         * Properties of a CPlayer_GetPostedStatus_Response.
-         * @exports ICPlayer_GetPostedStatus_Response
-         * @interface ICPlayer_GetPostedStatus_Response
-         * @property {number|null} [accountid] CPlayer_GetPostedStatus_Response accountid
-         * @property {number|Long|null} [postid] CPlayer_GetPostedStatus_Response postid
-         * @property {string|null} [status_text] CPlayer_GetPostedStatus_Response status_text
-         * @property {boolean|null} [deleted] CPlayer_GetPostedStatus_Response deleted
-         * @property {number|null} [appid] CPlayer_GetPostedStatus_Response appid
-         */
-    
-        /**
-         * Constructs a new CPlayer_GetPostedStatus_Response.
-         * @exports CPlayer_GetPostedStatus_Response
-         * @classdesc Represents a CPlayer_GetPostedStatus_Response.
-         * @implements ICPlayer_GetPostedStatus_Response
-         * @constructor
-         * @param {ICPlayer_GetPostedStatus_Response=} [properties] Properties to set
-         */
-        function CPlayer_GetPostedStatus_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CPlayer_GetPostedStatus_Response accountid.
-         * @member {number} accountid
-         * @memberof CPlayer_GetPostedStatus_Response
+         * CCommunity_PartnerEventResult clanid.
+         * @member {number} clanid
+         * @memberof CCommunity_PartnerEventResult
          * @instance
          */
-        CPlayer_GetPostedStatus_Response.prototype.accountid = 0;
+        CCommunity_PartnerEventResult.prototype.clanid = 0;
     
         /**
-         * CPlayer_GetPostedStatus_Response postid.
-         * @member {number|Long} postid
-         * @memberof CPlayer_GetPostedStatus_Response
+         * CCommunity_PartnerEventResult event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CCommunity_PartnerEventResult
          * @instance
          */
-        CPlayer_GetPostedStatus_Response.prototype.postid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        CCommunity_PartnerEventResult.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CPlayer_GetPostedStatus_Response status_text.
-         * @member {string} status_text
-         * @memberof CPlayer_GetPostedStatus_Response
+         * CCommunity_PartnerEventResult announcement_gid.
+         * @member {number|Long} announcement_gid
+         * @memberof CCommunity_PartnerEventResult
          * @instance
          */
-        CPlayer_GetPostedStatus_Response.prototype.status_text = "";
+        CCommunity_PartnerEventResult.prototype.announcement_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CPlayer_GetPostedStatus_Response deleted.
-         * @member {boolean} deleted
-         * @memberof CPlayer_GetPostedStatus_Response
-         * @instance
-         */
-        CPlayer_GetPostedStatus_Response.prototype.deleted = false;
-    
-        /**
-         * CPlayer_GetPostedStatus_Response appid.
+         * CCommunity_PartnerEventResult appid.
          * @member {number} appid
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @instance
          */
-        CPlayer_GetPostedStatus_Response.prototype.appid = 0;
+        CCommunity_PartnerEventResult.prototype.appid = 0;
     
         /**
-         * Creates a new CPlayer_GetPostedStatus_Response instance using the specified properties.
-         * @function create
-         * @memberof CPlayer_GetPostedStatus_Response
-         * @static
-         * @param {ICPlayer_GetPostedStatus_Response=} [properties] Properties to set
-         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response instance
+         * CCommunity_PartnerEventResult possible_takeover.
+         * @member {boolean} possible_takeover
+         * @memberof CCommunity_PartnerEventResult
+         * @instance
          */
-        CPlayer_GetPostedStatus_Response.create = function create(properties) {
-            return new CPlayer_GetPostedStatus_Response(properties);
+        CCommunity_PartnerEventResult.prototype.possible_takeover = false;
+    
+        /**
+         * CCommunity_PartnerEventResult rtime32_last_modified.
+         * @member {number} rtime32_last_modified
+         * @memberof CCommunity_PartnerEventResult
+         * @instance
+         */
+        CCommunity_PartnerEventResult.prototype.rtime32_last_modified = 0;
+    
+        /**
+         * CCommunity_PartnerEventResult user_app_priority.
+         * @member {number} user_app_priority
+         * @memberof CCommunity_PartnerEventResult
+         * @instance
+         */
+        CCommunity_PartnerEventResult.prototype.user_app_priority = 0;
+    
+        /**
+         * Creates a new CCommunity_PartnerEventResult instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_PartnerEventResult
+         * @static
+         * @param {ICCommunity_PartnerEventResult=} [properties] Properties to set
+         * @returns {CCommunity_PartnerEventResult} CCommunity_PartnerEventResult instance
+         */
+        CCommunity_PartnerEventResult.create = function create(properties) {
+            return new CCommunity_PartnerEventResult(properties);
         };
     
         /**
-         * Encodes the specified CPlayer_GetPostedStatus_Response message. Does not implicitly {@link CPlayer_GetPostedStatus_Response.verify|verify} messages.
+         * Encodes the specified CCommunity_PartnerEventResult message. Does not implicitly {@link CCommunity_PartnerEventResult.verify|verify} messages.
          * @function encode
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @static
-         * @param {ICPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response message or plain object to encode
+         * @param {ICCommunity_PartnerEventResult} message CCommunity_PartnerEventResult message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CPlayer_GetPostedStatus_Response.encode = function encode(message, writer) {
+        CCommunity_PartnerEventResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.accountid != null && message.hasOwnProperty("accountid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.accountid);
-            if (message.postid != null && message.hasOwnProperty("postid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.postid);
-            if (message.status_text != null && message.hasOwnProperty("status_text"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.status_text);
-            if (message.deleted != null && message.hasOwnProperty("deleted"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.deleted);
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.clanid);
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.event_gid);
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.announcement_gid);
             if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.appid);
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.appid);
+            if (message.possible_takeover != null && message.hasOwnProperty("possible_takeover"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.possible_takeover);
+            if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.rtime32_last_modified);
+            if (message.user_app_priority != null && message.hasOwnProperty("user_app_priority"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.user_app_priority);
             return writer;
         };
     
         /**
-         * Encodes the specified CPlayer_GetPostedStatus_Response message, length delimited. Does not implicitly {@link CPlayer_GetPostedStatus_Response.verify|verify} messages.
+         * Encodes the specified CCommunity_PartnerEventResult message, length delimited. Does not implicitly {@link CCommunity_PartnerEventResult.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @static
-         * @param {ICPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response message or plain object to encode
+         * @param {ICCommunity_PartnerEventResult} message CCommunity_PartnerEventResult message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CPlayer_GetPostedStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+        CCommunity_PartnerEventResult.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CPlayer_GetPostedStatus_Response message from the specified reader or buffer.
+         * Decodes a CCommunity_PartnerEventResult message from the specified reader or buffer.
          * @function decode
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         * @returns {CCommunity_PartnerEventResult} CCommunity_PartnerEventResult
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CPlayer_GetPostedStatus_Response.decode = function decode(reader, length) {
+        CCommunity_PartnerEventResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPostedStatus_Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_PartnerEventResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.accountid = reader.uint32();
+                    message.clanid = reader.uint32();
                     break;
                 case 2:
-                    message.postid = reader.uint64();
+                    message.event_gid = reader.fixed64();
                     break;
                 case 3:
-                    message.status_text = reader.string();
+                    message.announcement_gid = reader.fixed64();
                     break;
                 case 4:
-                    message.deleted = reader.bool();
+                    message.appid = reader.uint32();
                     break;
                 case 5:
-                    message.appid = reader.uint32();
+                    message.possible_takeover = reader.bool();
+                    break;
+                case 6:
+                    message.rtime32_last_modified = reader.uint32();
+                    break;
+                case 7:
+                    message.user_app_priority = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2096,134 +4890,2356 @@
         };
     
         /**
-         * Decodes a CPlayer_GetPostedStatus_Response message from the specified reader or buffer, length delimited.
+         * Decodes a CCommunity_PartnerEventResult message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         * @returns {CCommunity_PartnerEventResult} CCommunity_PartnerEventResult
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CPlayer_GetPostedStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+        CCommunity_PartnerEventResult.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CPlayer_GetPostedStatus_Response message.
+         * Verifies a CCommunity_PartnerEventResult message.
          * @function verify
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CPlayer_GetPostedStatus_Response.verify = function verify(message) {
+        CCommunity_PartnerEventResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.accountid != null && message.hasOwnProperty("accountid"))
-                if (!$util.isInteger(message.accountid))
-                    return "accountid: integer expected";
-            if (message.postid != null && message.hasOwnProperty("postid"))
-                if (!$util.isInteger(message.postid) && !(message.postid && $util.isInteger(message.postid.low) && $util.isInteger(message.postid.high)))
-                    return "postid: integer|Long expected";
-            if (message.status_text != null && message.hasOwnProperty("status_text"))
-                if (!$util.isString(message.status_text))
-                    return "status_text: string expected";
-            if (message.deleted != null && message.hasOwnProperty("deleted"))
-                if (typeof message.deleted !== "boolean")
-                    return "deleted: boolean expected";
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                if (!$util.isInteger(message.clanid))
+                    return "clanid: integer expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                if (!$util.isInteger(message.announcement_gid) && !(message.announcement_gid && $util.isInteger(message.announcement_gid.low) && $util.isInteger(message.announcement_gid.high)))
+                    return "announcement_gid: integer|Long expected";
             if (message.appid != null && message.hasOwnProperty("appid"))
                 if (!$util.isInteger(message.appid))
                     return "appid: integer expected";
+            if (message.possible_takeover != null && message.hasOwnProperty("possible_takeover"))
+                if (typeof message.possible_takeover !== "boolean")
+                    return "possible_takeover: boolean expected";
+            if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
+                if (!$util.isInteger(message.rtime32_last_modified))
+                    return "rtime32_last_modified: integer expected";
+            if (message.user_app_priority != null && message.hasOwnProperty("user_app_priority"))
+                if (!$util.isInteger(message.user_app_priority))
+                    return "user_app_priority: integer expected";
             return null;
         };
     
         /**
-         * Creates a CPlayer_GetPostedStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * Creates a CCommunity_PartnerEventResult message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         * @returns {CCommunity_PartnerEventResult} CCommunity_PartnerEventResult
          */
-        CPlayer_GetPostedStatus_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CPlayer_GetPostedStatus_Response)
+        CCommunity_PartnerEventResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_PartnerEventResult)
                 return object;
-            var message = new $root.CPlayer_GetPostedStatus_Response();
-            if (object.accountid != null)
-                message.accountid = object.accountid >>> 0;
-            if (object.postid != null)
+            var message = new $root.CCommunity_PartnerEventResult();
+            if (object.clanid != null)
+                message.clanid = object.clanid >>> 0;
+            if (object.event_gid != null)
                 if ($util.Long)
-                    (message.postid = $util.Long.fromValue(object.postid)).unsigned = true;
-                else if (typeof object.postid === "string")
-                    message.postid = parseInt(object.postid, 10);
-                else if (typeof object.postid === "number")
-                    message.postid = object.postid;
-                else if (typeof object.postid === "object")
-                    message.postid = new $util.LongBits(object.postid.low >>> 0, object.postid.high >>> 0).toNumber(true);
-            if (object.status_text != null)
-                message.status_text = String(object.status_text);
-            if (object.deleted != null)
-                message.deleted = Boolean(object.deleted);
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.announcement_gid != null)
+                if ($util.Long)
+                    (message.announcement_gid = $util.Long.fromValue(object.announcement_gid)).unsigned = false;
+                else if (typeof object.announcement_gid === "string")
+                    message.announcement_gid = parseInt(object.announcement_gid, 10);
+                else if (typeof object.announcement_gid === "number")
+                    message.announcement_gid = object.announcement_gid;
+                else if (typeof object.announcement_gid === "object")
+                    message.announcement_gid = new $util.LongBits(object.announcement_gid.low >>> 0, object.announcement_gid.high >>> 0).toNumber();
             if (object.appid != null)
                 message.appid = object.appid >>> 0;
+            if (object.possible_takeover != null)
+                message.possible_takeover = Boolean(object.possible_takeover);
+            if (object.rtime32_last_modified != null)
+                message.rtime32_last_modified = object.rtime32_last_modified >>> 0;
+            if (object.user_app_priority != null)
+                message.user_app_priority = object.user_app_priority | 0;
             return message;
         };
     
         /**
-         * Creates a plain object from a CPlayer_GetPostedStatus_Response message. Also converts values to other types if specified.
+         * Creates a plain object from a CCommunity_PartnerEventResult message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @static
-         * @param {CPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response
+         * @param {CCommunity_PartnerEventResult} message CCommunity_PartnerEventResult
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CPlayer_GetPostedStatus_Response.toObject = function toObject(message, options) {
+        CCommunity_PartnerEventResult.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.accountid = 0;
+                object.clanid = 0;
                 if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.postid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.postid = options.longs === String ? "0" : 0;
-                object.status_text = "";
-                object.deleted = false;
+                    object.event_gid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.announcement_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.announcement_gid = options.longs === String ? "0" : 0;
                 object.appid = 0;
+                object.possible_takeover = false;
+                object.rtime32_last_modified = 0;
+                object.user_app_priority = 0;
             }
-            if (message.accountid != null && message.hasOwnProperty("accountid"))
-                object.accountid = message.accountid;
-            if (message.postid != null && message.hasOwnProperty("postid"))
-                if (typeof message.postid === "number")
-                    object.postid = options.longs === String ? String(message.postid) : message.postid;
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                object.clanid = message.clanid;
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
                 else
-                    object.postid = options.longs === String ? $util.Long.prototype.toString.call(message.postid) : options.longs === Number ? new $util.LongBits(message.postid.low >>> 0, message.postid.high >>> 0).toNumber(true) : message.postid;
-            if (message.status_text != null && message.hasOwnProperty("status_text"))
-                object.status_text = message.status_text;
-            if (message.deleted != null && message.hasOwnProperty("deleted"))
-                object.deleted = message.deleted;
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                if (typeof message.announcement_gid === "number")
+                    object.announcement_gid = options.longs === String ? String(message.announcement_gid) : message.announcement_gid;
+                else
+                    object.announcement_gid = options.longs === String ? $util.Long.prototype.toString.call(message.announcement_gid) : options.longs === Number ? new $util.LongBits(message.announcement_gid.low >>> 0, message.announcement_gid.high >>> 0).toNumber() : message.announcement_gid;
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
+            if (message.possible_takeover != null && message.hasOwnProperty("possible_takeover"))
+                object.possible_takeover = message.possible_takeover;
+            if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
+                object.rtime32_last_modified = message.rtime32_last_modified;
+            if (message.user_app_priority != null && message.hasOwnProperty("user_app_priority"))
+                object.user_app_priority = message.user_app_priority;
             return object;
         };
     
         /**
-         * Converts this CPlayer_GetPostedStatus_Response to JSON.
+         * Converts this CCommunity_PartnerEventResult to JSON.
          * @function toJSON
-         * @memberof CPlayer_GetPostedStatus_Response
+         * @memberof CCommunity_PartnerEventResult
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CPlayer_GetPostedStatus_Response.prototype.toJSON = function toJSON() {
+        CCommunity_PartnerEventResult.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CPlayer_GetPostedStatus_Response;
+        return CCommunity_PartnerEventResult;
+    })();
+    
+    $root.CCommunity_GetBestEventsForUser_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetBestEventsForUser_Response.
+         * @exports ICCommunity_GetBestEventsForUser_Response
+         * @interface ICCommunity_GetBestEventsForUser_Response
+         * @property {Array.<ICCommunity_PartnerEventResult>|null} [results] CCommunity_GetBestEventsForUser_Response results
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetBestEventsForUser_Response.
+         * @exports CCommunity_GetBestEventsForUser_Response
+         * @classdesc Represents a CCommunity_GetBestEventsForUser_Response.
+         * @implements ICCommunity_GetBestEventsForUser_Response
+         * @constructor
+         * @param {ICCommunity_GetBestEventsForUser_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetBestEventsForUser_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetBestEventsForUser_Response results.
+         * @member {Array.<ICCommunity_PartnerEventResult>} results
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @instance
+         */
+        CCommunity_GetBestEventsForUser_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CCommunity_GetBestEventsForUser_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {ICCommunity_GetBestEventsForUser_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetBestEventsForUser_Response} CCommunity_GetBestEventsForUser_Response instance
+         */
+        CCommunity_GetBestEventsForUser_Response.create = function create(properties) {
+            return new CCommunity_GetBestEventsForUser_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetBestEventsForUser_Response message. Does not implicitly {@link CCommunity_GetBestEventsForUser_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {ICCommunity_GetBestEventsForUser_Response} message CCommunity_GetBestEventsForUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetBestEventsForUser_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.CCommunity_PartnerEventResult.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetBestEventsForUser_Response message, length delimited. Does not implicitly {@link CCommunity_GetBestEventsForUser_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {ICCommunity_GetBestEventsForUser_Response} message CCommunity_GetBestEventsForUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetBestEventsForUser_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetBestEventsForUser_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetBestEventsForUser_Response} CCommunity_GetBestEventsForUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetBestEventsForUser_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetBestEventsForUser_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.CCommunity_PartnerEventResult.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetBestEventsForUser_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetBestEventsForUser_Response} CCommunity_GetBestEventsForUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetBestEventsForUser_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetBestEventsForUser_Response message.
+         * @function verify
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetBestEventsForUser_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.CCommunity_PartnerEventResult.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetBestEventsForUser_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetBestEventsForUser_Response} CCommunity_GetBestEventsForUser_Response
+         */
+        CCommunity_GetBestEventsForUser_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetBestEventsForUser_Response)
+                return object;
+            var message = new $root.CCommunity_GetBestEventsForUser_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CCommunity_GetBestEventsForUser_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CCommunity_GetBestEventsForUser_Response.results: object expected");
+                    message.results[i] = $root.CCommunity_PartnerEventResult.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetBestEventsForUser_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @static
+         * @param {CCommunity_GetBestEventsForUser_Response} message CCommunity_GetBestEventsForUser_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetBestEventsForUser_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.CCommunity_PartnerEventResult.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetBestEventsForUser_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetBestEventsForUser_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetBestEventsForUser_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetBestEventsForUser_Response;
+    })();
+    
+    $root.CCommunity_ClearUserPartnerEventsAppPriorities_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_ClearUserPartnerEventsAppPriorities_Response.
+         * @exports ICCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @interface ICCommunity_ClearUserPartnerEventsAppPriorities_Response
+         */
+    
+        /**
+         * Constructs a new CCommunity_ClearUserPartnerEventsAppPriorities_Response.
+         * @exports CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @classdesc Represents a CCommunity_ClearUserPartnerEventsAppPriorities_Response.
+         * @implements ICCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @constructor
+         * @param {ICCommunity_ClearUserPartnerEventsAppPriorities_Response=} [properties] Properties to set
+         */
+        function CCommunity_ClearUserPartnerEventsAppPriorities_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CCommunity_ClearUserPartnerEventsAppPriorities_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {ICCommunity_ClearUserPartnerEventsAppPriorities_Response=} [properties] Properties to set
+         * @returns {CCommunity_ClearUserPartnerEventsAppPriorities_Response} CCommunity_ClearUserPartnerEventsAppPriorities_Response instance
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.create = function create(properties) {
+            return new CCommunity_ClearUserPartnerEventsAppPriorities_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_ClearUserPartnerEventsAppPriorities_Response message. Does not implicitly {@link CCommunity_ClearUserPartnerEventsAppPriorities_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {ICCommunity_ClearUserPartnerEventsAppPriorities_Response} message CCommunity_ClearUserPartnerEventsAppPriorities_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_ClearUserPartnerEventsAppPriorities_Response message, length delimited. Does not implicitly {@link CCommunity_ClearUserPartnerEventsAppPriorities_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {ICCommunity_ClearUserPartnerEventsAppPriorities_Response} message CCommunity_ClearUserPartnerEventsAppPriorities_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_ClearUserPartnerEventsAppPriorities_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_ClearUserPartnerEventsAppPriorities_Response} CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_ClearUserPartnerEventsAppPriorities_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_ClearUserPartnerEventsAppPriorities_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_ClearUserPartnerEventsAppPriorities_Response} CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_ClearUserPartnerEventsAppPriorities_Response message.
+         * @function verify
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_ClearUserPartnerEventsAppPriorities_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_ClearUserPartnerEventsAppPriorities_Response} CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_ClearUserPartnerEventsAppPriorities_Response)
+                return object;
+            return new $root.CCommunity_ClearUserPartnerEventsAppPriorities_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_ClearUserPartnerEventsAppPriorities_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {CCommunity_ClearUserPartnerEventsAppPriorities_Response} message CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CCommunity_ClearUserPartnerEventsAppPriorities_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_ClearUserPartnerEventsAppPriorities_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_ClearUserPartnerEventsAppPriorities_Response;
+    })();
+    
+    $root.CCommunity_PartnerEventsAppPriority = (function() {
+    
+        /**
+         * Properties of a CCommunity_PartnerEventsAppPriority.
+         * @exports ICCommunity_PartnerEventsAppPriority
+         * @interface ICCommunity_PartnerEventsAppPriority
+         * @property {number|null} [appid] CCommunity_PartnerEventsAppPriority appid
+         * @property {number|null} [user_app_priority] CCommunity_PartnerEventsAppPriority user_app_priority
+         */
+    
+        /**
+         * Constructs a new CCommunity_PartnerEventsAppPriority.
+         * @exports CCommunity_PartnerEventsAppPriority
+         * @classdesc Represents a CCommunity_PartnerEventsAppPriority.
+         * @implements ICCommunity_PartnerEventsAppPriority
+         * @constructor
+         * @param {ICCommunity_PartnerEventsAppPriority=} [properties] Properties to set
+         */
+        function CCommunity_PartnerEventsAppPriority(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_PartnerEventsAppPriority appid.
+         * @member {number} appid
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @instance
+         */
+        CCommunity_PartnerEventsAppPriority.prototype.appid = 0;
+    
+        /**
+         * CCommunity_PartnerEventsAppPriority user_app_priority.
+         * @member {number} user_app_priority
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @instance
+         */
+        CCommunity_PartnerEventsAppPriority.prototype.user_app_priority = 0;
+    
+        /**
+         * Creates a new CCommunity_PartnerEventsAppPriority instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {ICCommunity_PartnerEventsAppPriority=} [properties] Properties to set
+         * @returns {CCommunity_PartnerEventsAppPriority} CCommunity_PartnerEventsAppPriority instance
+         */
+        CCommunity_PartnerEventsAppPriority.create = function create(properties) {
+            return new CCommunity_PartnerEventsAppPriority(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PartnerEventsAppPriority message. Does not implicitly {@link CCommunity_PartnerEventsAppPriority.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {ICCommunity_PartnerEventsAppPriority} message CCommunity_PartnerEventsAppPriority message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PartnerEventsAppPriority.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.user_app_priority != null && message.hasOwnProperty("user_app_priority"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.user_app_priority);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PartnerEventsAppPriority message, length delimited. Does not implicitly {@link CCommunity_PartnerEventsAppPriority.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {ICCommunity_PartnerEventsAppPriority} message CCommunity_PartnerEventsAppPriority message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PartnerEventsAppPriority.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_PartnerEventsAppPriority message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_PartnerEventsAppPriority} CCommunity_PartnerEventsAppPriority
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PartnerEventsAppPriority.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_PartnerEventsAppPriority();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.user_app_priority = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_PartnerEventsAppPriority message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_PartnerEventsAppPriority} CCommunity_PartnerEventsAppPriority
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PartnerEventsAppPriority.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_PartnerEventsAppPriority message.
+         * @function verify
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_PartnerEventsAppPriority.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.user_app_priority != null && message.hasOwnProperty("user_app_priority"))
+                if (!$util.isInteger(message.user_app_priority))
+                    return "user_app_priority: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_PartnerEventsAppPriority message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_PartnerEventsAppPriority} CCommunity_PartnerEventsAppPriority
+         */
+        CCommunity_PartnerEventsAppPriority.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_PartnerEventsAppPriority)
+                return object;
+            var message = new $root.CCommunity_PartnerEventsAppPriority();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.user_app_priority != null)
+                message.user_app_priority = object.user_app_priority | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_PartnerEventsAppPriority message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @static
+         * @param {CCommunity_PartnerEventsAppPriority} message CCommunity_PartnerEventsAppPriority
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_PartnerEventsAppPriority.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.user_app_priority = 0;
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.user_app_priority != null && message.hasOwnProperty("user_app_priority"))
+                object.user_app_priority = message.user_app_priority;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_PartnerEventsAppPriority to JSON.
+         * @function toJSON
+         * @memberof CCommunity_PartnerEventsAppPriority
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_PartnerEventsAppPriority.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_PartnerEventsAppPriority;
+    })();
+    
+    $root.CCommunity_GetUserPartnerEventsAppPriorities_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetUserPartnerEventsAppPriorities_Response.
+         * @exports ICCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @interface ICCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @property {Array.<ICCommunity_PartnerEventsAppPriority>|null} [priorities] CCommunity_GetUserPartnerEventsAppPriorities_Response priorities
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetUserPartnerEventsAppPriorities_Response.
+         * @exports CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @classdesc Represents a CCommunity_GetUserPartnerEventsAppPriorities_Response.
+         * @implements ICCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @constructor
+         * @param {ICCommunity_GetUserPartnerEventsAppPriorities_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetUserPartnerEventsAppPriorities_Response(properties) {
+            this.priorities = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetUserPartnerEventsAppPriorities_Response priorities.
+         * @member {Array.<ICCommunity_PartnerEventsAppPriority>} priorities
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @instance
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.prototype.priorities = $util.emptyArray;
+    
+        /**
+         * Creates a new CCommunity_GetUserPartnerEventsAppPriorities_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventsAppPriorities_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetUserPartnerEventsAppPriorities_Response} CCommunity_GetUserPartnerEventsAppPriorities_Response instance
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.create = function create(properties) {
+            return new CCommunity_GetUserPartnerEventsAppPriorities_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventsAppPriorities_Response message. Does not implicitly {@link CCommunity_GetUserPartnerEventsAppPriorities_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventsAppPriorities_Response} message CCommunity_GetUserPartnerEventsAppPriorities_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.priorities != null && message.priorities.length)
+                for (var i = 0; i < message.priorities.length; ++i)
+                    $root.CCommunity_PartnerEventsAppPriority.encode(message.priorities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventsAppPriorities_Response message, length delimited. Does not implicitly {@link CCommunity_GetUserPartnerEventsAppPriorities_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventsAppPriorities_Response} message CCommunity_GetUserPartnerEventsAppPriorities_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventsAppPriorities_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetUserPartnerEventsAppPriorities_Response} CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetUserPartnerEventsAppPriorities_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.priorities && message.priorities.length))
+                        message.priorities = [];
+                    message.priorities.push($root.CCommunity_PartnerEventsAppPriority.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventsAppPriorities_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetUserPartnerEventsAppPriorities_Response} CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetUserPartnerEventsAppPriorities_Response message.
+         * @function verify
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.priorities != null && message.hasOwnProperty("priorities")) {
+                if (!Array.isArray(message.priorities))
+                    return "priorities: array expected";
+                for (var i = 0; i < message.priorities.length; ++i) {
+                    var error = $root.CCommunity_PartnerEventsAppPriority.verify(message.priorities[i]);
+                    if (error)
+                        return "priorities." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetUserPartnerEventsAppPriorities_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetUserPartnerEventsAppPriorities_Response} CCommunity_GetUserPartnerEventsAppPriorities_Response
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetUserPartnerEventsAppPriorities_Response)
+                return object;
+            var message = new $root.CCommunity_GetUserPartnerEventsAppPriorities_Response();
+            if (object.priorities) {
+                if (!Array.isArray(object.priorities))
+                    throw TypeError(".CCommunity_GetUserPartnerEventsAppPriorities_Response.priorities: array expected");
+                message.priorities = [];
+                for (var i = 0; i < object.priorities.length; ++i) {
+                    if (typeof object.priorities[i] !== "object")
+                        throw TypeError(".CCommunity_GetUserPartnerEventsAppPriorities_Response.priorities: object expected");
+                    message.priorities[i] = $root.CCommunity_PartnerEventsAppPriority.fromObject(object.priorities[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetUserPartnerEventsAppPriorities_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @static
+         * @param {CCommunity_GetUserPartnerEventsAppPriorities_Response} message CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.priorities = [];
+            if (message.priorities && message.priorities.length) {
+                object.priorities = [];
+                for (var j = 0; j < message.priorities.length; ++j)
+                    object.priorities[j] = $root.CCommunity_PartnerEventsAppPriority.toObject(message.priorities[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetUserPartnerEventsAppPriorities_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetUserPartnerEventsAppPriorities_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetUserPartnerEventsAppPriorities_Response;
+    })();
+    
+    $root.CCommunity_ClearSinglePartnerEventsAppPriority_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_ClearSinglePartnerEventsAppPriority_Response.
+         * @exports ICCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @interface ICCommunity_ClearSinglePartnerEventsAppPriority_Response
+         */
+    
+        /**
+         * Constructs a new CCommunity_ClearSinglePartnerEventsAppPriority_Response.
+         * @exports CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @classdesc Represents a CCommunity_ClearSinglePartnerEventsAppPriority_Response.
+         * @implements ICCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @constructor
+         * @param {ICCommunity_ClearSinglePartnerEventsAppPriority_Response=} [properties] Properties to set
+         */
+        function CCommunity_ClearSinglePartnerEventsAppPriority_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CCommunity_ClearSinglePartnerEventsAppPriority_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {ICCommunity_ClearSinglePartnerEventsAppPriority_Response=} [properties] Properties to set
+         * @returns {CCommunity_ClearSinglePartnerEventsAppPriority_Response} CCommunity_ClearSinglePartnerEventsAppPriority_Response instance
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.create = function create(properties) {
+            return new CCommunity_ClearSinglePartnerEventsAppPriority_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_ClearSinglePartnerEventsAppPriority_Response message. Does not implicitly {@link CCommunity_ClearSinglePartnerEventsAppPriority_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {ICCommunity_ClearSinglePartnerEventsAppPriority_Response} message CCommunity_ClearSinglePartnerEventsAppPriority_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_ClearSinglePartnerEventsAppPriority_Response message, length delimited. Does not implicitly {@link CCommunity_ClearSinglePartnerEventsAppPriority_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {ICCommunity_ClearSinglePartnerEventsAppPriority_Response} message CCommunity_ClearSinglePartnerEventsAppPriority_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_ClearSinglePartnerEventsAppPriority_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_ClearSinglePartnerEventsAppPriority_Response} CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_ClearSinglePartnerEventsAppPriority_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_ClearSinglePartnerEventsAppPriority_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_ClearSinglePartnerEventsAppPriority_Response} CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_ClearSinglePartnerEventsAppPriority_Response message.
+         * @function verify
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_ClearSinglePartnerEventsAppPriority_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_ClearSinglePartnerEventsAppPriority_Response} CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_ClearSinglePartnerEventsAppPriority_Response)
+                return object;
+            return new $root.CCommunity_ClearSinglePartnerEventsAppPriority_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_ClearSinglePartnerEventsAppPriority_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @static
+         * @param {CCommunity_ClearSinglePartnerEventsAppPriority_Response} message CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CCommunity_ClearSinglePartnerEventsAppPriority_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_ClearSinglePartnerEventsAppPriority_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_ClearSinglePartnerEventsAppPriority_Response;
+    })();
+    
+    $root.CCommunity_PartnerEventsShowMoreForApp_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_PartnerEventsShowMoreForApp_Response.
+         * @exports ICCommunity_PartnerEventsShowMoreForApp_Response
+         * @interface ICCommunity_PartnerEventsShowMoreForApp_Response
+         */
+    
+        /**
+         * Constructs a new CCommunity_PartnerEventsShowMoreForApp_Response.
+         * @exports CCommunity_PartnerEventsShowMoreForApp_Response
+         * @classdesc Represents a CCommunity_PartnerEventsShowMoreForApp_Response.
+         * @implements ICCommunity_PartnerEventsShowMoreForApp_Response
+         * @constructor
+         * @param {ICCommunity_PartnerEventsShowMoreForApp_Response=} [properties] Properties to set
+         */
+        function CCommunity_PartnerEventsShowMoreForApp_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CCommunity_PartnerEventsShowMoreForApp_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {ICCommunity_PartnerEventsShowMoreForApp_Response=} [properties] Properties to set
+         * @returns {CCommunity_PartnerEventsShowMoreForApp_Response} CCommunity_PartnerEventsShowMoreForApp_Response instance
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.create = function create(properties) {
+            return new CCommunity_PartnerEventsShowMoreForApp_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PartnerEventsShowMoreForApp_Response message. Does not implicitly {@link CCommunity_PartnerEventsShowMoreForApp_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {ICCommunity_PartnerEventsShowMoreForApp_Response} message CCommunity_PartnerEventsShowMoreForApp_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PartnerEventsShowMoreForApp_Response message, length delimited. Does not implicitly {@link CCommunity_PartnerEventsShowMoreForApp_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {ICCommunity_PartnerEventsShowMoreForApp_Response} message CCommunity_PartnerEventsShowMoreForApp_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_PartnerEventsShowMoreForApp_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_PartnerEventsShowMoreForApp_Response} CCommunity_PartnerEventsShowMoreForApp_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_PartnerEventsShowMoreForApp_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_PartnerEventsShowMoreForApp_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_PartnerEventsShowMoreForApp_Response} CCommunity_PartnerEventsShowMoreForApp_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_PartnerEventsShowMoreForApp_Response message.
+         * @function verify
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_PartnerEventsShowMoreForApp_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_PartnerEventsShowMoreForApp_Response} CCommunity_PartnerEventsShowMoreForApp_Response
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_PartnerEventsShowMoreForApp_Response)
+                return object;
+            return new $root.CCommunity_PartnerEventsShowMoreForApp_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_PartnerEventsShowMoreForApp_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @static
+         * @param {CCommunity_PartnerEventsShowMoreForApp_Response} message CCommunity_PartnerEventsShowMoreForApp_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CCommunity_PartnerEventsShowMoreForApp_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_PartnerEventsShowMoreForApp_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_PartnerEventsShowMoreForApp_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_PartnerEventsShowMoreForApp_Response;
+    })();
+    
+    $root.CCommunity_PartnerEventsShowLessForApp_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_PartnerEventsShowLessForApp_Response.
+         * @exports ICCommunity_PartnerEventsShowLessForApp_Response
+         * @interface ICCommunity_PartnerEventsShowLessForApp_Response
+         */
+    
+        /**
+         * Constructs a new CCommunity_PartnerEventsShowLessForApp_Response.
+         * @exports CCommunity_PartnerEventsShowLessForApp_Response
+         * @classdesc Represents a CCommunity_PartnerEventsShowLessForApp_Response.
+         * @implements ICCommunity_PartnerEventsShowLessForApp_Response
+         * @constructor
+         * @param {ICCommunity_PartnerEventsShowLessForApp_Response=} [properties] Properties to set
+         */
+        function CCommunity_PartnerEventsShowLessForApp_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CCommunity_PartnerEventsShowLessForApp_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {ICCommunity_PartnerEventsShowLessForApp_Response=} [properties] Properties to set
+         * @returns {CCommunity_PartnerEventsShowLessForApp_Response} CCommunity_PartnerEventsShowLessForApp_Response instance
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.create = function create(properties) {
+            return new CCommunity_PartnerEventsShowLessForApp_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PartnerEventsShowLessForApp_Response message. Does not implicitly {@link CCommunity_PartnerEventsShowLessForApp_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {ICCommunity_PartnerEventsShowLessForApp_Response} message CCommunity_PartnerEventsShowLessForApp_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_PartnerEventsShowLessForApp_Response message, length delimited. Does not implicitly {@link CCommunity_PartnerEventsShowLessForApp_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {ICCommunity_PartnerEventsShowLessForApp_Response} message CCommunity_PartnerEventsShowLessForApp_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_PartnerEventsShowLessForApp_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_PartnerEventsShowLessForApp_Response} CCommunity_PartnerEventsShowLessForApp_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_PartnerEventsShowLessForApp_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_PartnerEventsShowLessForApp_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_PartnerEventsShowLessForApp_Response} CCommunity_PartnerEventsShowLessForApp_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_PartnerEventsShowLessForApp_Response message.
+         * @function verify
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_PartnerEventsShowLessForApp_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_PartnerEventsShowLessForApp_Response} CCommunity_PartnerEventsShowLessForApp_Response
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_PartnerEventsShowLessForApp_Response)
+                return object;
+            return new $root.CCommunity_PartnerEventsShowLessForApp_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_PartnerEventsShowLessForApp_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @static
+         * @param {CCommunity_PartnerEventsShowLessForApp_Response} message CCommunity_PartnerEventsShowLessForApp_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CCommunity_PartnerEventsShowLessForApp_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_PartnerEventsShowLessForApp_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_PartnerEventsShowLessForApp_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_PartnerEventsShowLessForApp_Response;
+    })();
+    
+    $root.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking = (function() {
+    
+        /**
+         * Properties of a CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.
+         * @exports ICCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @interface ICCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @property {number|null} [clanid] CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking clanid
+         * @property {number|Long|null} [event_gid] CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking event_gid
+         * @property {number|null} [display_location] CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking display_location
+         * @property {boolean|null} [mark_shown] CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking mark_shown
+         * @property {boolean|null} [mark_read] CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking mark_read
+         */
+    
+        /**
+         * Constructs a new CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.
+         * @exports CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @classdesc Represents a CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.
+         * @implements ICCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @constructor
+         * @param {ICCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking=} [properties] Properties to set
+         */
+        function CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking clanid.
+         * @member {number} clanid
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @instance
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.prototype.clanid = 0;
+    
+        /**
+         * CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @instance
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking display_location.
+         * @member {number} display_location
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @instance
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.prototype.display_location = 0;
+    
+        /**
+         * CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking mark_shown.
+         * @member {boolean} mark_shown
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @instance
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.prototype.mark_shown = false;
+    
+        /**
+         * CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking mark_read.
+         * @member {boolean} mark_read
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @instance
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.prototype.mark_read = false;
+    
+        /**
+         * Creates a new CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {ICCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking=} [properties] Properties to set
+         * @returns {CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking} CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking instance
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.create = function create(properties) {
+            return new CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message. Does not implicitly {@link CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {ICCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking} message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.clanid);
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.event_gid);
+            if (message.display_location != null && message.hasOwnProperty("display_location"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.display_location);
+            if (message.mark_shown != null && message.hasOwnProperty("mark_shown"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.mark_shown);
+            if (message.mark_read != null && message.hasOwnProperty("mark_read"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.mark_read);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message, length delimited. Does not implicitly {@link CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {ICCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking} message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking} CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.clanid = reader.uint32();
+                    break;
+                case 2:
+                    message.event_gid = reader.fixed64();
+                    break;
+                case 3:
+                    message.display_location = reader.int32();
+                    break;
+                case 4:
+                    message.mark_shown = reader.bool();
+                    break;
+                case 5:
+                    message.mark_read = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking} CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message.
+         * @function verify
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                if (!$util.isInteger(message.clanid))
+                    return "clanid: integer expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.display_location != null && message.hasOwnProperty("display_location"))
+                if (!$util.isInteger(message.display_location))
+                    return "display_location: integer expected";
+            if (message.mark_shown != null && message.hasOwnProperty("mark_shown"))
+                if (typeof message.mark_shown !== "boolean")
+                    return "mark_shown: boolean expected";
+            if (message.mark_read != null && message.hasOwnProperty("mark_read"))
+                if (typeof message.mark_read !== "boolean")
+                    return "mark_read: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking} CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking)
+                return object;
+            var message = new $root.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking();
+            if (object.clanid != null)
+                message.clanid = object.clanid >>> 0;
+            if (object.event_gid != null)
+                if ($util.Long)
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.display_location != null)
+                message.display_location = object.display_location | 0;
+            if (object.mark_shown != null)
+                message.mark_shown = Boolean(object.mark_shown);
+            if (object.mark_read != null)
+                message.mark_read = Boolean(object.mark_read);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @static
+         * @param {CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking} message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.clanid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.event_gid = options.longs === String ? "0" : 0;
+                object.display_location = 0;
+                object.mark_shown = false;
+                object.mark_read = false;
+            }
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                object.clanid = message.clanid;
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
+                else
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.display_location != null && message.hasOwnProperty("display_location"))
+                object.display_location = message.display_location;
+            if (message.mark_shown != null && message.hasOwnProperty("mark_shown"))
+                object.mark_shown = message.mark_shown;
+            if (message.mark_read != null && message.hasOwnProperty("mark_read"))
+                object.mark_read = message.mark_read;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking to JSON.
+         * @function toJSON
+         * @memberof CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking;
+    })();
+    
+    $root.CCommunity_MarkPartnerEventsForUser_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_MarkPartnerEventsForUser_Response.
+         * @exports ICCommunity_MarkPartnerEventsForUser_Response
+         * @interface ICCommunity_MarkPartnerEventsForUser_Response
+         */
+    
+        /**
+         * Constructs a new CCommunity_MarkPartnerEventsForUser_Response.
+         * @exports CCommunity_MarkPartnerEventsForUser_Response
+         * @classdesc Represents a CCommunity_MarkPartnerEventsForUser_Response.
+         * @implements ICCommunity_MarkPartnerEventsForUser_Response
+         * @constructor
+         * @param {ICCommunity_MarkPartnerEventsForUser_Response=} [properties] Properties to set
+         */
+        function CCommunity_MarkPartnerEventsForUser_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CCommunity_MarkPartnerEventsForUser_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {ICCommunity_MarkPartnerEventsForUser_Response=} [properties] Properties to set
+         * @returns {CCommunity_MarkPartnerEventsForUser_Response} CCommunity_MarkPartnerEventsForUser_Response instance
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.create = function create(properties) {
+            return new CCommunity_MarkPartnerEventsForUser_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_MarkPartnerEventsForUser_Response message. Does not implicitly {@link CCommunity_MarkPartnerEventsForUser_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {ICCommunity_MarkPartnerEventsForUser_Response} message CCommunity_MarkPartnerEventsForUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_MarkPartnerEventsForUser_Response message, length delimited. Does not implicitly {@link CCommunity_MarkPartnerEventsForUser_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {ICCommunity_MarkPartnerEventsForUser_Response} message CCommunity_MarkPartnerEventsForUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_MarkPartnerEventsForUser_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_MarkPartnerEventsForUser_Response} CCommunity_MarkPartnerEventsForUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_MarkPartnerEventsForUser_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_MarkPartnerEventsForUser_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_MarkPartnerEventsForUser_Response} CCommunity_MarkPartnerEventsForUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_MarkPartnerEventsForUser_Response message.
+         * @function verify
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_MarkPartnerEventsForUser_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_MarkPartnerEventsForUser_Response} CCommunity_MarkPartnerEventsForUser_Response
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_MarkPartnerEventsForUser_Response)
+                return object;
+            return new $root.CCommunity_MarkPartnerEventsForUser_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_MarkPartnerEventsForUser_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @static
+         * @param {CCommunity_MarkPartnerEventsForUser_Response} message CCommunity_MarkPartnerEventsForUser_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CCommunity_MarkPartnerEventsForUser_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_MarkPartnerEventsForUser_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_MarkPartnerEventsForUser_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_MarkPartnerEventsForUser_Response;
+    })();
+    
+    $root.CCommunity_GetUserPartnerEventViewStatus_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetUserPartnerEventViewStatus_Response.
+         * @exports ICCommunity_GetUserPartnerEventViewStatus_Response
+         * @interface ICCommunity_GetUserPartnerEventViewStatus_Response
+         * @property {Array.<ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent>|null} [events] CCommunity_GetUserPartnerEventViewStatus_Response events
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetUserPartnerEventViewStatus_Response.
+         * @exports CCommunity_GetUserPartnerEventViewStatus_Response
+         * @classdesc Represents a CCommunity_GetUserPartnerEventViewStatus_Response.
+         * @implements ICCommunity_GetUserPartnerEventViewStatus_Response
+         * @constructor
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetUserPartnerEventViewStatus_Response(properties) {
+            this.events = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetUserPartnerEventViewStatus_Response events.
+         * @member {Array.<ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent>} events
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @instance
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.prototype.events = $util.emptyArray;
+    
+        /**
+         * Creates a new CCommunity_GetUserPartnerEventViewStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response} CCommunity_GetUserPartnerEventViewStatus_Response instance
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.create = function create(properties) {
+            return new CCommunity_GetUserPartnerEventViewStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventViewStatus_Response message. Does not implicitly {@link CCommunity_GetUserPartnerEventViewStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response} message CCommunity_GetUserPartnerEventViewStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.events != null && message.events.length)
+                for (var i = 0; i < message.events.length; ++i)
+                    $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.encode(message.events[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventViewStatus_Response message, length delimited. Does not implicitly {@link CCommunity_GetUserPartnerEventViewStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response} message CCommunity_GetUserPartnerEventViewStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventViewStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response} CCommunity_GetUserPartnerEventViewStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetUserPartnerEventViewStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.events && message.events.length))
+                        message.events = [];
+                    message.events.push($root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventViewStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response} CCommunity_GetUserPartnerEventViewStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetUserPartnerEventViewStatus_Response message.
+         * @function verify
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.events != null && message.hasOwnProperty("events")) {
+                if (!Array.isArray(message.events))
+                    return "events: array expected";
+                for (var i = 0; i < message.events.length; ++i) {
+                    var error = $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.verify(message.events[i]);
+                    if (error)
+                        return "events." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetUserPartnerEventViewStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response} CCommunity_GetUserPartnerEventViewStatus_Response
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetUserPartnerEventViewStatus_Response)
+                return object;
+            var message = new $root.CCommunity_GetUserPartnerEventViewStatus_Response();
+            if (object.events) {
+                if (!Array.isArray(object.events))
+                    throw TypeError(".CCommunity_GetUserPartnerEventViewStatus_Response.events: array expected");
+                message.events = [];
+                for (var i = 0; i < object.events.length; ++i) {
+                    if (typeof object.events[i] !== "object")
+                        throw TypeError(".CCommunity_GetUserPartnerEventViewStatus_Response.events: object expected");
+                    message.events[i] = $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.fromObject(object.events[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetUserPartnerEventViewStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @static
+         * @param {CCommunity_GetUserPartnerEventViewStatus_Response} message CCommunity_GetUserPartnerEventViewStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.events = [];
+            if (message.events && message.events.length) {
+                object.events = [];
+                for (var j = 0; j < message.events.length; ++j)
+                    object.events[j] = $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.toObject(message.events[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetUserPartnerEventViewStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetUserPartnerEventViewStatus_Response;
+    })();
+    
+    $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.
+         * @exports ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @interface ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @property {number|Long|null} [event_gid] CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent event_gid
+         * @property {number|null} [last_shown_time] CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent last_shown_time
+         * @property {number|null} [last_read_time] CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent last_read_time
+         * @property {number|null} [clan_account_id] CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent clan_account_id
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.
+         * @exports CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @classdesc Represents a CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.
+         * @implements ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @constructor
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent=} [properties] Properties to set
+         */
+        function CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @instance
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent last_shown_time.
+         * @member {number} last_shown_time
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @instance
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.prototype.last_shown_time = 0;
+    
+        /**
+         * CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent last_read_time.
+         * @member {number} last_read_time
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @instance
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.prototype.last_read_time = 0;
+    
+        /**
+         * CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent clan_account_id.
+         * @member {number} clan_account_id
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @instance
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.prototype.clan_account_id = 0;
+    
+        /**
+         * Creates a new CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent=} [properties] Properties to set
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent} CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent instance
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.create = function create(properties) {
+            return new CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message. Does not implicitly {@link CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent} message CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.event_gid);
+            if (message.last_shown_time != null && message.hasOwnProperty("last_shown_time"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.last_shown_time);
+            if (message.last_read_time != null && message.hasOwnProperty("last_read_time"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.last_read_time);
+            if (message.clan_account_id != null && message.hasOwnProperty("clan_account_id"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.clan_account_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message, length delimited. Does not implicitly {@link CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent} message CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent} CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.event_gid = reader.fixed64();
+                    break;
+                case 2:
+                    message.last_shown_time = reader.uint32();
+                    break;
+                case 3:
+                    message.last_read_time = reader.uint32();
+                    break;
+                case 4:
+                    message.clan_account_id = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent} CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message.
+         * @function verify
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.last_shown_time != null && message.hasOwnProperty("last_shown_time"))
+                if (!$util.isInteger(message.last_shown_time))
+                    return "last_shown_time: integer expected";
+            if (message.last_read_time != null && message.hasOwnProperty("last_read_time"))
+                if (!$util.isInteger(message.last_read_time))
+                    return "last_read_time: integer expected";
+            if (message.clan_account_id != null && message.hasOwnProperty("clan_account_id"))
+                if (!$util.isInteger(message.clan_account_id))
+                    return "clan_account_id: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent} CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent)
+                return object;
+            var message = new $root.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent();
+            if (object.event_gid != null)
+                if ($util.Long)
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.last_shown_time != null)
+                message.last_shown_time = object.last_shown_time >>> 0;
+            if (object.last_read_time != null)
+                message.last_read_time = object.last_read_time >>> 0;
+            if (object.clan_account_id != null)
+                message.clan_account_id = object.clan_account_id >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @static
+         * @param {CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent} message CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.event_gid = options.longs === String ? "0" : 0;
+                object.last_shown_time = 0;
+                object.last_read_time = 0;
+                object.clan_account_id = 0;
+            }
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
+                else
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.last_shown_time != null && message.hasOwnProperty("last_shown_time"))
+                object.last_shown_time = message.last_shown_time;
+            if (message.last_read_time != null && message.hasOwnProperty("last_read_time"))
+                object.last_read_time = message.last_read_time;
+            if (message.clan_account_id != null && message.hasOwnProperty("clan_account_id"))
+                object.clan_account_id = message.clan_account_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent;
     })();
     
     $root.CWebRTCClient_InitiateWebRTCConnection_Request = (function() {
@@ -20434,6 +25450,193 @@
         return CSteamTV_HomePageTemplate_Developer;
     })();
     
+    $root.CSteamTV_HomePageTemplate_Event = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_Event.
+         * @exports ICSteamTV_HomePageTemplate_Event
+         * @interface ICSteamTV_HomePageTemplate_Event
+         * @property {string|null} [title] CSteamTV_HomePageTemplate_Event title
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_Event.
+         * @exports CSteamTV_HomePageTemplate_Event
+         * @classdesc Represents a CSteamTV_HomePageTemplate_Event.
+         * @implements ICSteamTV_HomePageTemplate_Event
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_Event=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_Event(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_Event title.
+         * @member {string} title
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_Event.prototype.title = "";
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_Event instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Event=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_Event} CSteamTV_HomePageTemplate_Event instance
+         */
+        CSteamTV_HomePageTemplate_Event.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_Event(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_Event message. Does not implicitly {@link CSteamTV_HomePageTemplate_Event.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Event} message CSteamTV_HomePageTemplate_Event message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_Event.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_Event message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_Event.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Event} message CSteamTV_HomePageTemplate_Event message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_Event.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_Event message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_Event} CSteamTV_HomePageTemplate_Event
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_Event.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_Event();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.title = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_Event message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_Event} CSteamTV_HomePageTemplate_Event
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_Event.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_Event message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_Event.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_Event message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_Event} CSteamTV_HomePageTemplate_Event
+         */
+        CSteamTV_HomePageTemplate_Event.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_Event)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_Event();
+            if (object.title != null)
+                message.title = String(object.title);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_Event message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @static
+         * @param {CSteamTV_HomePageTemplate_Event} message CSteamTV_HomePageTemplate_Event
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_Event.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.title = "";
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_Event to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_Event
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_Event.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_Event;
+    })();
+    
     $root.CSteamTV_HomePageContentRow = (function() {
     
         /**
@@ -20448,6 +25651,7 @@
          * @property {ICSteamTV_HomePageTemplate_ConveyorBelt|null} [conveyor_belt] CSteamTV_HomePageContentRow conveyor_belt
          * @property {ICSteamTV_HomePageTemplate_WatchParty|null} [watch_party] CSteamTV_HomePageContentRow watch_party
          * @property {ICSteamTV_HomePageTemplate_Developer|null} [developer] CSteamTV_HomePageContentRow developer
+         * @property {ICSteamTV_HomePageTemplate_Event|null} [event] CSteamTV_HomePageContentRow event
          */
     
         /**
@@ -20530,6 +25734,14 @@
         CSteamTV_HomePageContentRow.prototype.developer = null;
     
         /**
+         * CSteamTV_HomePageContentRow event.
+         * @member {ICSteamTV_HomePageTemplate_Event|null|undefined} event
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.event = null;
+    
+        /**
          * Creates a new CSteamTV_HomePageContentRow instance using the specified properties.
          * @function create
          * @memberof CSteamTV_HomePageContentRow
@@ -20569,6 +25781,8 @@
                 $root.CSteamTV_HomePageTemplate_WatchParty.encode(message.watch_party, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             if (message.developer != null && message.hasOwnProperty("developer"))
                 $root.CSteamTV_HomePageTemplate_Developer.encode(message.developer, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.event != null && message.hasOwnProperty("event"))
+                $root.CSteamTV_HomePageTemplate_Event.encode(message.event, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             return writer;
         };
     
@@ -20626,6 +25840,9 @@
                     break;
                 case 8:
                     message.developer = $root.CSteamTV_HomePageTemplate_Developer.decode(reader, reader.uint32());
+                    break;
+                case 9:
+                    message.event = $root.CSteamTV_HomePageTemplate_Event.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -20700,6 +25917,11 @@
                 if (error)
                     return "developer." + error;
             }
+            if (message.event != null && message.hasOwnProperty("event")) {
+                var error = $root.CSteamTV_HomePageTemplate_Event.verify(message.event);
+                if (error)
+                    return "event." + error;
+            }
             return null;
         };
     
@@ -20752,6 +25974,11 @@
                     throw TypeError(".CSteamTV_HomePageContentRow.developer: object expected");
                 message.developer = $root.CSteamTV_HomePageTemplate_Developer.fromObject(object.developer);
             }
+            if (object.event != null) {
+                if (typeof object.event !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.event: object expected");
+                message.event = $root.CSteamTV_HomePageTemplate_Event.fromObject(object.event);
+            }
             return message;
         };
     
@@ -20777,6 +26004,7 @@
                 object.conveyor_belt = null;
                 object.watch_party = null;
                 object.developer = null;
+                object.event = null;
             }
             if (message.template_type != null && message.hasOwnProperty("template_type"))
                 object.template_type = message.template_type;
@@ -20794,6 +26022,8 @@
                 object.watch_party = $root.CSteamTV_HomePageTemplate_WatchParty.toObject(message.watch_party, options);
             if (message.developer != null && message.hasOwnProperty("developer"))
                 object.developer = $root.CSteamTV_HomePageTemplate_Developer.toObject(message.developer, options);
+            if (message.event != null && message.hasOwnProperty("event"))
+                object.event = $root.CSteamTV_HomePageTemplate_Event.toObject(message.event, options);
             return object;
         };
     
@@ -23834,305 +29064,6 @@
         return CFriendsList_GetFriendsList_Response;
     })();
     
-    $root.CMsgClientSecret = (function() {
-    
-        /**
-         * Properties of a CMsgClientSecret.
-         * @exports ICMsgClientSecret
-         * @interface ICMsgClientSecret
-         * @property {number|null} [version] CMsgClientSecret version
-         * @property {number|null} [appid] CMsgClientSecret appid
-         * @property {number|null} [deviceid] CMsgClientSecret deviceid
-         * @property {number|Long|null} [nonce] CMsgClientSecret nonce
-         * @property {Uint8Array|null} [hmac] CMsgClientSecret hmac
-         */
-    
-        /**
-         * Constructs a new CMsgClientSecret.
-         * @exports CMsgClientSecret
-         * @classdesc Represents a CMsgClientSecret.
-         * @implements ICMsgClientSecret
-         * @constructor
-         * @param {ICMsgClientSecret=} [properties] Properties to set
-         */
-        function CMsgClientSecret(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgClientSecret version.
-         * @member {number} version
-         * @memberof CMsgClientSecret
-         * @instance
-         */
-        CMsgClientSecret.prototype.version = 0;
-    
-        /**
-         * CMsgClientSecret appid.
-         * @member {number} appid
-         * @memberof CMsgClientSecret
-         * @instance
-         */
-        CMsgClientSecret.prototype.appid = 0;
-    
-        /**
-         * CMsgClientSecret deviceid.
-         * @member {number} deviceid
-         * @memberof CMsgClientSecret
-         * @instance
-         */
-        CMsgClientSecret.prototype.deviceid = 0;
-    
-        /**
-         * CMsgClientSecret nonce.
-         * @member {number|Long} nonce
-         * @memberof CMsgClientSecret
-         * @instance
-         */
-        CMsgClientSecret.prototype.nonce = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * CMsgClientSecret hmac.
-         * @member {Uint8Array} hmac
-         * @memberof CMsgClientSecret
-         * @instance
-         */
-        CMsgClientSecret.prototype.hmac = $util.newBuffer([]);
-    
-        /**
-         * Creates a new CMsgClientSecret instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {ICMsgClientSecret=} [properties] Properties to set
-         * @returns {CMsgClientSecret} CMsgClientSecret instance
-         */
-        CMsgClientSecret.create = function create(properties) {
-            return new CMsgClientSecret(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgClientSecret message. Does not implicitly {@link CMsgClientSecret.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {ICMsgClientSecret} message CMsgClientSecret message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientSecret.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.version != null && message.hasOwnProperty("version"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.version);
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
-            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.deviceid);
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.nonce);
-            if (message.hmac != null && message.hasOwnProperty("hmac"))
-                writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.hmac);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgClientSecret message, length delimited. Does not implicitly {@link CMsgClientSecret.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {ICMsgClientSecret} message CMsgClientSecret message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientSecret.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgClientSecret message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientSecret} CMsgClientSecret
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientSecret.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientSecret();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.version = reader.uint32();
-                    break;
-                case 2:
-                    message.appid = reader.uint32();
-                    break;
-                case 3:
-                    message.deviceid = reader.uint32();
-                    break;
-                case 4:
-                    message.nonce = reader.fixed64();
-                    break;
-                case 5:
-                    message.hmac = reader.bytes();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgClientSecret message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientSecret} CMsgClientSecret
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientSecret.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgClientSecret message.
-         * @function verify
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgClientSecret.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.version != null && message.hasOwnProperty("version"))
-                if (!$util.isInteger(message.version))
-                    return "version: integer expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
-                if (!$util.isInteger(message.deviceid))
-                    return "deviceid: integer expected";
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (!$util.isInteger(message.nonce) && !(message.nonce && $util.isInteger(message.nonce.low) && $util.isInteger(message.nonce.high)))
-                    return "nonce: integer|Long expected";
-            if (message.hmac != null && message.hasOwnProperty("hmac"))
-                if (!(message.hmac && typeof message.hmac.length === "number" || $util.isString(message.hmac)))
-                    return "hmac: buffer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgClientSecret message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientSecret} CMsgClientSecret
-         */
-        CMsgClientSecret.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientSecret)
-                return object;
-            var message = new $root.CMsgClientSecret();
-            if (object.version != null)
-                message.version = object.version >>> 0;
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.deviceid != null)
-                message.deviceid = object.deviceid >>> 0;
-            if (object.nonce != null)
-                if ($util.Long)
-                    (message.nonce = $util.Long.fromValue(object.nonce)).unsigned = false;
-                else if (typeof object.nonce === "string")
-                    message.nonce = parseInt(object.nonce, 10);
-                else if (typeof object.nonce === "number")
-                    message.nonce = object.nonce;
-                else if (typeof object.nonce === "object")
-                    message.nonce = new $util.LongBits(object.nonce.low >>> 0, object.nonce.high >>> 0).toNumber();
-            if (object.hmac != null)
-                if (typeof object.hmac === "string")
-                    $util.base64.decode(object.hmac, message.hmac = $util.newBuffer($util.base64.length(object.hmac)), 0);
-                else if (object.hmac.length)
-                    message.hmac = object.hmac;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgClientSecret message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgClientSecret
-         * @static
-         * @param {CMsgClientSecret} message CMsgClientSecret
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgClientSecret.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.version = 0;
-                object.appid = 0;
-                object.deviceid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.nonce = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.nonce = options.longs === String ? "0" : 0;
-                if (options.bytes === String)
-                    object.hmac = "";
-                else {
-                    object.hmac = [];
-                    if (options.bytes !== Array)
-                        object.hmac = $util.newBuffer(object.hmac);
-                }
-            }
-            if (message.version != null && message.hasOwnProperty("version"))
-                object.version = message.version;
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
-                object.deviceid = message.deviceid;
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (typeof message.nonce === "number")
-                    object.nonce = options.longs === String ? String(message.nonce) : message.nonce;
-                else
-                    object.nonce = options.longs === String ? $util.Long.prototype.toString.call(message.nonce) : options.longs === Number ? new $util.LongBits(message.nonce.low >>> 0, message.nonce.high >>> 0).toNumber() : message.nonce;
-            if (message.hmac != null && message.hasOwnProperty("hmac"))
-                object.hmac = options.bytes === String ? $util.base64.encode(message.hmac, 0, message.hmac.length) : options.bytes === Array ? Array.prototype.slice.call(message.hmac) : message.hmac;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgClientSecret to JSON.
-         * @function toJSON
-         * @memberof CMsgClientSecret
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgClientSecret.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgClientSecret;
-    })();
-    
     $root.CClan_RespondToClanInvite_Request = (function() {
     
         /**
@@ -24515,166 +29446,6 @@
         };
     
         return CClan_RespondToClanInvite_Response;
-    })();
-    
-    $root.CBroadcast_SetClipDetails_Response = (function() {
-    
-        /**
-         * Properties of a CBroadcast_SetClipDetails_Response.
-         * @exports ICBroadcast_SetClipDetails_Response
-         * @interface ICBroadcast_SetClipDetails_Response
-         */
-    
-        /**
-         * Constructs a new CBroadcast_SetClipDetails_Response.
-         * @exports CBroadcast_SetClipDetails_Response
-         * @classdesc Represents a CBroadcast_SetClipDetails_Response.
-         * @implements ICBroadcast_SetClipDetails_Response
-         * @constructor
-         * @param {ICBroadcast_SetClipDetails_Response=} [properties] Properties to set
-         */
-        function CBroadcast_SetClipDetails_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Creates a new CBroadcast_SetClipDetails_Response instance using the specified properties.
-         * @function create
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {ICBroadcast_SetClipDetails_Response=} [properties] Properties to set
-         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response instance
-         */
-        CBroadcast_SetClipDetails_Response.create = function create(properties) {
-            return new CBroadcast_SetClipDetails_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CBroadcast_SetClipDetails_Response message. Does not implicitly {@link CBroadcast_SetClipDetails_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {ICBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CBroadcast_SetClipDetails_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CBroadcast_SetClipDetails_Response message, length delimited. Does not implicitly {@link CBroadcast_SetClipDetails_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {ICBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CBroadcast_SetClipDetails_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CBroadcast_SetClipDetails_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CBroadcast_SetClipDetails_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SetClipDetails_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CBroadcast_SetClipDetails_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CBroadcast_SetClipDetails_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CBroadcast_SetClipDetails_Response message.
-         * @function verify
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CBroadcast_SetClipDetails_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CBroadcast_SetClipDetails_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
-         */
-        CBroadcast_SetClipDetails_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CBroadcast_SetClipDetails_Response)
-                return object;
-            return new $root.CBroadcast_SetClipDetails_Response();
-        };
-    
-        /**
-         * Creates a plain object from a CBroadcast_SetClipDetails_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @static
-         * @param {CBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CBroadcast_SetClipDetails_Response.toObject = function toObject() {
-            return {};
-        };
-    
-        /**
-         * Converts this CBroadcast_SetClipDetails_Response to JSON.
-         * @function toJSON
-         * @memberof CBroadcast_SetClipDetails_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CBroadcast_SetClipDetails_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CBroadcast_SetClipDetails_Response;
     })();
     
     $root.CProductImpressionsFromClient_Notification = (function() {
@@ -25376,6 +30147,270 @@
          */
     
         /**
+         * Callback as used by {@link Community#getCommentThread}.
+         * @memberof Community
+         * @typedef GetCommentThreadCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetCommentThread_Response} [response] CCommunity_GetCommentThread_Response
+         */
+    
+        /**
+         * Calls GetCommentThread.
+         * @function getCommentThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetCommentThreadCallback} callback Node-style callback called with the error, if any, and CCommunity_GetCommentThread_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getCommentThread = function getCommentThread(request, callback) {
+            return this.rpcCall(getCommentThread, $root.NotImplemented, $root.CCommunity_GetCommentThread_Response, request, callback);
+        }, "name", { value: "GetCommentThread" });
+    
+        /**
+         * Calls GetCommentThread.
+         * @function getCommentThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetCommentThread_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#postCommentToThread}.
+         * @memberof Community
+         * @typedef PostCommentToThreadCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_PostCommentToThread_Response} [response] CCommunity_PostCommentToThread_Response
+         */
+    
+        /**
+         * Calls PostCommentToThread.
+         * @function postCommentToThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.PostCommentToThreadCallback} callback Node-style callback called with the error, if any, and CCommunity_PostCommentToThread_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.postCommentToThread = function postCommentToThread(request, callback) {
+            return this.rpcCall(postCommentToThread, $root.NotImplemented, $root.CCommunity_PostCommentToThread_Response, request, callback);
+        }, "name", { value: "PostCommentToThread" });
+    
+        /**
+         * Calls PostCommentToThread.
+         * @function postCommentToThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_PostCommentToThread_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#deleteCommentFromThread}.
+         * @memberof Community
+         * @typedef DeleteCommentFromThreadCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_DeleteCommentFromThread_Response} [response] CCommunity_DeleteCommentFromThread_Response
+         */
+    
+        /**
+         * Calls DeleteCommentFromThread.
+         * @function deleteCommentFromThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.DeleteCommentFromThreadCallback} callback Node-style callback called with the error, if any, and CCommunity_DeleteCommentFromThread_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.deleteCommentFromThread = function deleteCommentFromThread(request, callback) {
+            return this.rpcCall(deleteCommentFromThread, $root.NotImplemented, $root.CCommunity_DeleteCommentFromThread_Response, request, callback);
+        }, "name", { value: "DeleteCommentFromThread" });
+    
+        /**
+         * Calls DeleteCommentFromThread.
+         * @function deleteCommentFromThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_DeleteCommentFromThread_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#rateCommentThread}.
+         * @memberof Community
+         * @typedef RateCommentThreadCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_RateCommentThread_Response} [response] CCommunity_RateCommentThread_Response
+         */
+    
+        /**
+         * Calls RateCommentThread.
+         * @function rateCommentThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.RateCommentThreadCallback} callback Node-style callback called with the error, if any, and CCommunity_RateCommentThread_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.rateCommentThread = function rateCommentThread(request, callback) {
+            return this.rpcCall(rateCommentThread, $root.NotImplemented, $root.CCommunity_RateCommentThread_Response, request, callback);
+        }, "name", { value: "RateCommentThread" });
+    
+        /**
+         * Calls RateCommentThread.
+         * @function rateCommentThread
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_RateCommentThread_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#getCommentThreadRatings}.
+         * @memberof Community
+         * @typedef GetCommentThreadRatingsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetCommentThreadRatings_Response} [response] CCommunity_GetCommentThreadRatings_Response
+         */
+    
+        /**
+         * Calls GetCommentThreadRatings.
+         * @function getCommentThreadRatings
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetCommentThreadRatingsCallback} callback Node-style callback called with the error, if any, and CCommunity_GetCommentThreadRatings_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getCommentThreadRatings = function getCommentThreadRatings(request, callback) {
+            return this.rpcCall(getCommentThreadRatings, $root.NotImplemented, $root.CCommunity_GetCommentThreadRatings_Response, request, callback);
+        }, "name", { value: "GetCommentThreadRatings" });
+    
+        /**
+         * Calls GetCommentThreadRatings.
+         * @function getCommentThreadRatings
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetCommentThreadRatings_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#rateClanAnnouncement}.
+         * @memberof Community
+         * @typedef RateClanAnnouncementCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_RateClanAnnouncement_Response} [response] CCommunity_RateClanAnnouncement_Response
+         */
+    
+        /**
+         * Calls RateClanAnnouncement.
+         * @function rateClanAnnouncement
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.RateClanAnnouncementCallback} callback Node-style callback called with the error, if any, and CCommunity_RateClanAnnouncement_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.rateClanAnnouncement = function rateClanAnnouncement(request, callback) {
+            return this.rpcCall(rateClanAnnouncement, $root.NotImplemented, $root.CCommunity_RateClanAnnouncement_Response, request, callback);
+        }, "name", { value: "RateClanAnnouncement" });
+    
+        /**
+         * Calls RateClanAnnouncement.
+         * @function rateClanAnnouncement
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_RateClanAnnouncement_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#getClanAnnouncementVoteForUser}.
+         * @memberof Community
+         * @typedef GetClanAnnouncementVoteForUserCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetClanAnnouncementVoteForUser_Response} [response] CCommunity_GetClanAnnouncementVoteForUser_Response
+         */
+    
+        /**
+         * Calls GetClanAnnouncementVoteForUser.
+         * @function getClanAnnouncementVoteForUser
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetClanAnnouncementVoteForUserCallback} callback Node-style callback called with the error, if any, and CCommunity_GetClanAnnouncementVoteForUser_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getClanAnnouncementVoteForUser = function getClanAnnouncementVoteForUser(request, callback) {
+            return this.rpcCall(getClanAnnouncementVoteForUser, $root.NotImplemented, $root.CCommunity_GetClanAnnouncementVoteForUser_Response, request, callback);
+        }, "name", { value: "GetClanAnnouncementVoteForUser" });
+    
+        /**
+         * Calls GetClanAnnouncementVoteForUser.
+         * @function getClanAnnouncementVoteForUser
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetClanAnnouncementVoteForUser_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#getAvatarHistory}.
+         * @memberof Community
+         * @typedef GetAvatarHistoryCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetAvatarHistory_Response} [response] CCommunity_GetAvatarHistory_Response
+         */
+    
+        /**
+         * Calls GetAvatarHistory.
+         * @function getAvatarHistory
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetAvatarHistoryCallback} callback Node-style callback called with the error, if any, and CCommunity_GetAvatarHistory_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getAvatarHistory = function getAvatarHistory(request, callback) {
+            return this.rpcCall(getAvatarHistory, $root.NotImplemented, $root.CCommunity_GetAvatarHistory_Response, request, callback);
+        }, "name", { value: "GetAvatarHistory" });
+    
+        /**
+         * Calls GetAvatarHistory.
+         * @function getAvatarHistory
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetAvatarHistory_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link Community#getUserPartnerEventNews}.
          * @memberof Community
          * @typedef GetUserPartnerEventNewsCallback
@@ -25405,6 +30440,270 @@
          * @instance
          * @param {INotImplemented} request NotImplemented message or plain object
          * @returns {Promise<CCommunity_GetUserPartnerEventNews_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#getBestEventsForUser}.
+         * @memberof Community
+         * @typedef GetBestEventsForUserCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetBestEventsForUser_Response} [response] CCommunity_GetBestEventsForUser_Response
+         */
+    
+        /**
+         * Calls GetBestEventsForUser.
+         * @function getBestEventsForUser
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetBestEventsForUserCallback} callback Node-style callback called with the error, if any, and CCommunity_GetBestEventsForUser_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getBestEventsForUser = function getBestEventsForUser(request, callback) {
+            return this.rpcCall(getBestEventsForUser, $root.NotImplemented, $root.CCommunity_GetBestEventsForUser_Response, request, callback);
+        }, "name", { value: "GetBestEventsForUser" });
+    
+        /**
+         * Calls GetBestEventsForUser.
+         * @function getBestEventsForUser
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetBestEventsForUser_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#markPartnerEventsForUser}.
+         * @memberof Community
+         * @typedef MarkPartnerEventsForUserCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_MarkPartnerEventsForUser_Response} [response] CCommunity_MarkPartnerEventsForUser_Response
+         */
+    
+        /**
+         * Calls MarkPartnerEventsForUser.
+         * @function markPartnerEventsForUser
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.MarkPartnerEventsForUserCallback} callback Node-style callback called with the error, if any, and CCommunity_MarkPartnerEventsForUser_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.markPartnerEventsForUser = function markPartnerEventsForUser(request, callback) {
+            return this.rpcCall(markPartnerEventsForUser, $root.NotImplemented, $root.CCommunity_MarkPartnerEventsForUser_Response, request, callback);
+        }, "name", { value: "MarkPartnerEventsForUser" });
+    
+        /**
+         * Calls MarkPartnerEventsForUser.
+         * @function markPartnerEventsForUser
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_MarkPartnerEventsForUser_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#getUserPartnerEventViewStatus}.
+         * @memberof Community
+         * @typedef GetUserPartnerEventViewStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetUserPartnerEventViewStatus_Response} [response] CCommunity_GetUserPartnerEventViewStatus_Response
+         */
+    
+        /**
+         * Calls GetUserPartnerEventViewStatus.
+         * @function getUserPartnerEventViewStatus
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetUserPartnerEventViewStatusCallback} callback Node-style callback called with the error, if any, and CCommunity_GetUserPartnerEventViewStatus_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getUserPartnerEventViewStatus = function getUserPartnerEventViewStatus(request, callback) {
+            return this.rpcCall(getUserPartnerEventViewStatus, $root.NotImplemented, $root.CCommunity_GetUserPartnerEventViewStatus_Response, request, callback);
+        }, "name", { value: "GetUserPartnerEventViewStatus" });
+    
+        /**
+         * Calls GetUserPartnerEventViewStatus.
+         * @function getUserPartnerEventViewStatus
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetUserPartnerEventViewStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#partnerEventsShowMoreForApp}.
+         * @memberof Community
+         * @typedef PartnerEventsShowMoreForAppCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_PartnerEventsShowMoreForApp_Response} [response] CCommunity_PartnerEventsShowMoreForApp_Response
+         */
+    
+        /**
+         * Calls PartnerEventsShowMoreForApp.
+         * @function partnerEventsShowMoreForApp
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.PartnerEventsShowMoreForAppCallback} callback Node-style callback called with the error, if any, and CCommunity_PartnerEventsShowMoreForApp_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.partnerEventsShowMoreForApp = function partnerEventsShowMoreForApp(request, callback) {
+            return this.rpcCall(partnerEventsShowMoreForApp, $root.NotImplemented, $root.CCommunity_PartnerEventsShowMoreForApp_Response, request, callback);
+        }, "name", { value: "PartnerEventsShowMoreForApp" });
+    
+        /**
+         * Calls PartnerEventsShowMoreForApp.
+         * @function partnerEventsShowMoreForApp
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_PartnerEventsShowMoreForApp_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#partnerEventsShowLessForApp}.
+         * @memberof Community
+         * @typedef PartnerEventsShowLessForAppCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_PartnerEventsShowLessForApp_Response} [response] CCommunity_PartnerEventsShowLessForApp_Response
+         */
+    
+        /**
+         * Calls PartnerEventsShowLessForApp.
+         * @function partnerEventsShowLessForApp
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.PartnerEventsShowLessForAppCallback} callback Node-style callback called with the error, if any, and CCommunity_PartnerEventsShowLessForApp_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.partnerEventsShowLessForApp = function partnerEventsShowLessForApp(request, callback) {
+            return this.rpcCall(partnerEventsShowLessForApp, $root.NotImplemented, $root.CCommunity_PartnerEventsShowLessForApp_Response, request, callback);
+        }, "name", { value: "PartnerEventsShowLessForApp" });
+    
+        /**
+         * Calls PartnerEventsShowLessForApp.
+         * @function partnerEventsShowLessForApp
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_PartnerEventsShowLessForApp_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#clearUserPartnerEventsAppPriorities}.
+         * @memberof Community
+         * @typedef ClearUserPartnerEventsAppPrioritiesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_ClearUserPartnerEventsAppPriorities_Response} [response] CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         */
+    
+        /**
+         * Calls ClearUserPartnerEventsAppPriorities.
+         * @function clearUserPartnerEventsAppPriorities
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.ClearUserPartnerEventsAppPrioritiesCallback} callback Node-style callback called with the error, if any, and CCommunity_ClearUserPartnerEventsAppPriorities_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.clearUserPartnerEventsAppPriorities = function clearUserPartnerEventsAppPriorities(request, callback) {
+            return this.rpcCall(clearUserPartnerEventsAppPriorities, $root.NotImplemented, $root.CCommunity_ClearUserPartnerEventsAppPriorities_Response, request, callback);
+        }, "name", { value: "ClearUserPartnerEventsAppPriorities" });
+    
+        /**
+         * Calls ClearUserPartnerEventsAppPriorities.
+         * @function clearUserPartnerEventsAppPriorities
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_ClearUserPartnerEventsAppPriorities_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#getUserPartnerEventsAppPriorities}.
+         * @memberof Community
+         * @typedef GetUserPartnerEventsAppPrioritiesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetUserPartnerEventsAppPriorities_Response} [response] CCommunity_GetUserPartnerEventsAppPriorities_Response
+         */
+    
+        /**
+         * Calls GetUserPartnerEventsAppPriorities.
+         * @function getUserPartnerEventsAppPriorities
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetUserPartnerEventsAppPrioritiesCallback} callback Node-style callback called with the error, if any, and CCommunity_GetUserPartnerEventsAppPriorities_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getUserPartnerEventsAppPriorities = function getUserPartnerEventsAppPriorities(request, callback) {
+            return this.rpcCall(getUserPartnerEventsAppPriorities, $root.NotImplemented, $root.CCommunity_GetUserPartnerEventsAppPriorities_Response, request, callback);
+        }, "name", { value: "GetUserPartnerEventsAppPriorities" });
+    
+        /**
+         * Calls GetUserPartnerEventsAppPriorities.
+         * @function getUserPartnerEventsAppPriorities
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetUserPartnerEventsAppPriorities_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#clearSinglePartnerEventsAppPriority}.
+         * @memberof Community
+         * @typedef ClearSinglePartnerEventsAppPriorityCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_ClearSinglePartnerEventsAppPriority_Response} [response] CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         */
+    
+        /**
+         * Calls ClearSinglePartnerEventsAppPriority.
+         * @function clearSinglePartnerEventsAppPriority
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.ClearSinglePartnerEventsAppPriorityCallback} callback Node-style callback called with the error, if any, and CCommunity_ClearSinglePartnerEventsAppPriority_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.clearSinglePartnerEventsAppPriority = function clearSinglePartnerEventsAppPriority(request, callback) {
+            return this.rpcCall(clearSinglePartnerEventsAppPriority, $root.NotImplemented, $root.CCommunity_ClearSinglePartnerEventsAppPriority_Response, request, callback);
+        }, "name", { value: "ClearSinglePartnerEventsAppPriority" });
+    
+        /**
+         * Calls ClearSinglePartnerEventsAppPriority.
+         * @function clearSinglePartnerEventsAppPriority
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_ClearSinglePartnerEventsAppPriority_Response>} Promise
          * @variation 2
          */
     
@@ -34462,6 +39761,8 @@
      * @property {number} k_EClanFreeTrial=31 k_EClanFreeTrial value
      * @property {number} k_EClanSeasonRelease=32 k_EClanSeasonRelease value
      * @property {number} k_EClanSeasonUpdate=33 k_EClanSeasonUpdate value
+     * @property {number} k_EClanCrosspostEvent=34 k_EClanCrosspostEvent value
+     * @property {number} k_EClanInGameEventGeneral=35 k_EClanInGameEventGeneral value
      */
     $root.EProtoClanEventType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -34498,6 +39799,26 @@
         values[valuesById[31] = "k_EClanFreeTrial"] = 31;
         values[valuesById[32] = "k_EClanSeasonRelease"] = 32;
         values[valuesById[33] = "k_EClanSeasonUpdate"] = 33;
+        values[valuesById[34] = "k_EClanCrosspostEvent"] = 34;
+        values[valuesById[35] = "k_EClanInGameEventGeneral"] = 35;
+        return values;
+    })();
+    
+    /**
+     * PartnerEventNotificationType enum.
+     * @exports PartnerEventNotificationType
+     * @enum {string}
+     * @property {number} k_EEventStart=0 k_EEventStart value
+     * @property {number} k_EEventBroadcastStart=1 k_EEventBroadcastStart value
+     * @property {number} k_EEventMatchStart=2 k_EEventMatchStart value
+     * @property {number} k_EEventPartnerMaxType=3 k_EEventPartnerMaxType value
+     */
+    $root.PartnerEventNotificationType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EEventStart"] = 0;
+        values[valuesById[1] = "k_EEventBroadcastStart"] = 1;
+        values[valuesById[2] = "k_EEventMatchStart"] = 2;
+        values[valuesById[3] = "k_EEventPartnerMaxType"] = 3;
         return values;
     })();
     
@@ -34737,6 +40058,235 @@
         return CMsgIPAddress;
     })();
     
+    $root.CMsgIPAddressBucket = (function() {
+    
+        /**
+         * Properties of a CMsgIPAddressBucket.
+         * @exports ICMsgIPAddressBucket
+         * @interface ICMsgIPAddressBucket
+         * @property {ICMsgIPAddress|null} [original_ip_address] CMsgIPAddressBucket original_ip_address
+         * @property {number|Long|null} [bucket] CMsgIPAddressBucket bucket
+         */
+    
+        /**
+         * Constructs a new CMsgIPAddressBucket.
+         * @exports CMsgIPAddressBucket
+         * @classdesc Represents a CMsgIPAddressBucket.
+         * @implements ICMsgIPAddressBucket
+         * @constructor
+         * @param {ICMsgIPAddressBucket=} [properties] Properties to set
+         */
+        function CMsgIPAddressBucket(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgIPAddressBucket original_ip_address.
+         * @member {ICMsgIPAddress|null|undefined} original_ip_address
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         */
+        CMsgIPAddressBucket.prototype.original_ip_address = null;
+    
+        /**
+         * CMsgIPAddressBucket bucket.
+         * @member {number|Long} bucket
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         */
+        CMsgIPAddressBucket.prototype.bucket = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CMsgIPAddressBucket instance using the specified properties.
+         * @function create
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket=} [properties] Properties to set
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket instance
+         */
+        CMsgIPAddressBucket.create = function create(properties) {
+            return new CMsgIPAddressBucket(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddressBucket message. Does not implicitly {@link CMsgIPAddressBucket.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket} message CMsgIPAddressBucket message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddressBucket.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address"))
+                $root.CMsgIPAddress.encode(message.original_ip_address, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.bucket);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddressBucket message, length delimited. Does not implicitly {@link CMsgIPAddressBucket.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket} message CMsgIPAddressBucket message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddressBucket.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgIPAddressBucket message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddressBucket.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgIPAddressBucket();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.original_ip_address = $root.CMsgIPAddress.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.bucket = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgIPAddressBucket message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddressBucket.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgIPAddressBucket message.
+         * @function verify
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgIPAddressBucket.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address")) {
+                var error = $root.CMsgIPAddress.verify(message.original_ip_address);
+                if (error)
+                    return "original_ip_address." + error;
+            }
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                if (!$util.isInteger(message.bucket) && !(message.bucket && $util.isInteger(message.bucket.low) && $util.isInteger(message.bucket.high)))
+                    return "bucket: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgIPAddressBucket message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         */
+        CMsgIPAddressBucket.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgIPAddressBucket)
+                return object;
+            var message = new $root.CMsgIPAddressBucket();
+            if (object.original_ip_address != null) {
+                if (typeof object.original_ip_address !== "object")
+                    throw TypeError(".CMsgIPAddressBucket.original_ip_address: object expected");
+                message.original_ip_address = $root.CMsgIPAddress.fromObject(object.original_ip_address);
+            }
+            if (object.bucket != null)
+                if ($util.Long)
+                    (message.bucket = $util.Long.fromValue(object.bucket)).unsigned = false;
+                else if (typeof object.bucket === "string")
+                    message.bucket = parseInt(object.bucket, 10);
+                else if (typeof object.bucket === "number")
+                    message.bucket = object.bucket;
+                else if (typeof object.bucket === "object")
+                    message.bucket = new $util.LongBits(object.bucket.low >>> 0, object.bucket.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgIPAddressBucket message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {CMsgIPAddressBucket} message CMsgIPAddressBucket
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgIPAddressBucket.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.original_ip_address = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.bucket = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bucket = options.longs === String ? "0" : 0;
+            }
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address"))
+                object.original_ip_address = $root.CMsgIPAddress.toObject(message.original_ip_address, options);
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                if (typeof message.bucket === "number")
+                    object.bucket = options.longs === String ? String(message.bucket) : message.bucket;
+                else
+                    object.bucket = options.longs === String ? $util.Long.prototype.toString.call(message.bucket) : options.longs === Number ? new $util.LongBits(message.bucket.low >>> 0, message.bucket.high >>> 0).toNumber() : message.bucket;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgIPAddressBucket to JSON.
+         * @function toJSON
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgIPAddressBucket.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgIPAddressBucket;
+    })();
+    
     $root.CMsgProtoBufHeader = (function() {
     
         /**
@@ -34765,6 +40315,8 @@
          * @property {Array.<number>|null} [forward_to_sysid] CMsgProtoBufHeader forward_to_sysid
          * @property {number|null} [cm_sysid] CMsgProtoBufHeader cm_sysid
          * @property {string|null} [wg_token] CMsgProtoBufHeader wg_token
+         * @property {number|null} [launcher_type] CMsgProtoBufHeader launcher_type
+         * @property {number|null} [realm] CMsgProtoBufHeader realm
          * @property {number|null} [ip] CMsgProtoBufHeader ip
          * @property {Uint8Array|null} [ip_v6] CMsgProtoBufHeader ip_v6
          */
@@ -34962,6 +40514,22 @@
         CMsgProtoBufHeader.prototype.wg_token = "";
     
         /**
+         * CMsgProtoBufHeader launcher_type.
+         * @member {number} launcher_type
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.launcher_type = 0;
+    
+        /**
+         * CMsgProtoBufHeader realm.
+         * @member {number} realm
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.realm = 0;
+    
+        /**
          * CMsgProtoBufHeader ip.
          * @member {number} ip
          * @memberof CMsgProtoBufHeader
@@ -35064,6 +40632,10 @@
                 writer.uint32(/* id 29, wireType 2 =*/234).bytes(message.ip_v6);
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.wg_token);
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.launcher_type);
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                writer.uint32(/* id 32, wireType 0 =*/256).uint32(message.realm);
             return writer;
         };
     
@@ -35170,6 +40742,12 @@
                     break;
                 case 30:
                     message.wg_token = reader.string();
+                    break;
+                case 31:
+                    message.launcher_type = reader.uint32();
+                    break;
+                case 32:
+                    message.realm = reader.uint32();
                     break;
                 case 15:
                     message.ip = reader.uint32();
@@ -35283,6 +40861,12 @@
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 if (!$util.isString(message.wg_token))
                     return "wg_token: string expected";
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                if (!$util.isInteger(message.launcher_type))
+                    return "launcher_type: integer expected";
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                if (!$util.isInteger(message.realm))
+                    return "realm: integer expected";
             if (message.ip != null && message.hasOwnProperty("ip")) {
                 properties.ip_addr = 1;
                 if (!$util.isInteger(message.ip))
@@ -35394,6 +40978,10 @@
                 message.cm_sysid = object.cm_sysid >>> 0;
             if (object.wg_token != null)
                 message.wg_token = String(object.wg_token);
+            if (object.launcher_type != null)
+                message.launcher_type = object.launcher_type >>> 0;
+            if (object.realm != null)
+                message.realm = object.realm >>> 0;
             if (object.ip != null)
                 message.ip = object.ip >>> 0;
             if (object.ip_v6 != null)
@@ -35461,6 +41049,8 @@
                 object.is_from_external_source = false;
                 object.cm_sysid = 0;
                 object.wg_token = "";
+                object.launcher_type = 0;
+                object.realm = 0;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -35534,6 +41124,10 @@
             }
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 object.wg_token = message.wg_token;
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                object.launcher_type = message.launcher_type;
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                object.realm = message.realm;
             return object;
         };
     
@@ -36774,6 +42368,7 @@
          * @property {boolean|null} [economy_support_supervisor] CMsgAppRights economy_support_supervisor
          * @property {boolean|null} [manage_pricing] CMsgAppRights manage_pricing
          * @property {boolean|null} [broadcast_live] CMsgAppRights broadcast_live
+         * @property {boolean|null} [view_marketing_traffic] CMsgAppRights view_marketing_traffic
          */
     
         /**
@@ -36912,6 +42507,14 @@
         CMsgAppRights.prototype.broadcast_live = false;
     
         /**
+         * CMsgAppRights view_marketing_traffic.
+         * @member {boolean} view_marketing_traffic
+         * @memberof CMsgAppRights
+         * @instance
+         */
+        CMsgAppRights.prototype.view_marketing_traffic = false;
+    
+        /**
          * Creates a new CMsgAppRights instance using the specified properties.
          * @function create
          * @memberof CMsgAppRights
@@ -36965,6 +42568,8 @@
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.manage_pricing);
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.broadcast_live);
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.view_marketing_traffic);
             return writer;
         };
     
@@ -37043,6 +42648,9 @@
                     break;
                 case 15:
                     message.broadcast_live = reader.bool();
+                    break;
+                case 16:
+                    message.view_marketing_traffic = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -37124,6 +42732,9 @@
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 if (typeof message.broadcast_live !== "boolean")
                     return "broadcast_live: boolean expected";
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                if (typeof message.view_marketing_traffic !== "boolean")
+                    return "view_marketing_traffic: boolean expected";
             return null;
         };
     
@@ -37169,6 +42780,8 @@
                 message.manage_pricing = Boolean(object.manage_pricing);
             if (object.broadcast_live != null)
                 message.broadcast_live = Boolean(object.broadcast_live);
+            if (object.view_marketing_traffic != null)
+                message.view_marketing_traffic = Boolean(object.view_marketing_traffic);
             return message;
         };
     
@@ -37201,6 +42814,7 @@
                 object.economy_support_supervisor = false;
                 object.manage_pricing = false;
                 object.broadcast_live = false;
+                object.view_marketing_traffic = false;
             }
             if (message.edit_info != null && message.hasOwnProperty("edit_info"))
                 object.edit_info = message.edit_info;
@@ -37232,6 +42846,8 @@
                 object.manage_pricing = message.manage_pricing;
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 object.broadcast_live = message.broadcast_live;
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                object.view_marketing_traffic = message.view_marketing_traffic;
             return object;
         };
     
@@ -38685,6 +44301,9 @@
          * @property {number|null} [language] CCommunity_ClanAnnouncementInfo language
          * @property {boolean|null} [hidden] CCommunity_ClanAnnouncementInfo hidden
          * @property {number|Long|null} [forum_topic_id] CCommunity_ClanAnnouncementInfo forum_topic_id
+         * @property {number|Long|null} [event_gid] CCommunity_ClanAnnouncementInfo event_gid
+         * @property {number|null} [voteupcount] CCommunity_ClanAnnouncementInfo voteupcount
+         * @property {number|null} [votedowncount] CCommunity_ClanAnnouncementInfo votedowncount
          */
     
         /**
@@ -38800,6 +44419,30 @@
         CCommunity_ClanAnnouncementInfo.prototype.forum_topic_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
+         * CCommunity_ClanAnnouncementInfo event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_ClanAnnouncementInfo voteupcount.
+         * @member {number} voteupcount
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.voteupcount = 0;
+    
+        /**
+         * CCommunity_ClanAnnouncementInfo votedowncount.
+         * @member {number} votedowncount
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.votedowncount = 0;
+    
+        /**
          * Creates a new CCommunity_ClanAnnouncementInfo instance using the specified properties.
          * @function create
          * @memberof CCommunity_ClanAnnouncementInfo
@@ -38848,6 +44491,12 @@
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.hidden);
             if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
                 writer.uint32(/* id 12, wireType 1 =*/97).fixed64(message.forum_topic_id);
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 13, wireType 1 =*/105).fixed64(message.event_gid);
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.voteupcount);
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.votedowncount);
             return writer;
         };
     
@@ -38919,6 +44568,15 @@
                     break;
                 case 12:
                     message.forum_topic_id = reader.fixed64();
+                    break;
+                case 13:
+                    message.event_gid = reader.fixed64();
+                    break;
+                case 14:
+                    message.voteupcount = reader.int32();
+                    break;
+                case 15:
+                    message.votedowncount = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -38995,6 +44653,15 @@
             if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
                 if (!$util.isInteger(message.forum_topic_id) && !(message.forum_topic_id && $util.isInteger(message.forum_topic_id.low) && $util.isInteger(message.forum_topic_id.high)))
                     return "forum_topic_id: integer|Long expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                if (!$util.isInteger(message.voteupcount))
+                    return "voteupcount: integer expected";
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                if (!$util.isInteger(message.votedowncount))
+                    return "votedowncount: integer expected";
             return null;
         };
     
@@ -39067,6 +44734,19 @@
                     message.forum_topic_id = object.forum_topic_id;
                 else if (typeof object.forum_topic_id === "object")
                     message.forum_topic_id = new $util.LongBits(object.forum_topic_id.low >>> 0, object.forum_topic_id.high >>> 0).toNumber();
+            if (object.event_gid != null)
+                if ($util.Long)
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.voteupcount != null)
+                message.voteupcount = object.voteupcount | 0;
+            if (object.votedowncount != null)
+                message.votedowncount = object.votedowncount | 0;
             return message;
         };
     
@@ -39113,6 +44793,13 @@
                     object.forum_topic_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.forum_topic_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.event_gid = options.longs === String ? "0" : 0;
+                object.voteupcount = 0;
+                object.votedowncount = 0;
             }
             if (message.gid != null && message.hasOwnProperty("gid"))
                 if (typeof message.gid === "number")
@@ -39153,6 +44840,15 @@
                     object.forum_topic_id = options.longs === String ? String(message.forum_topic_id) : message.forum_topic_id;
                 else
                     object.forum_topic_id = options.longs === String ? $util.Long.prototype.toString.call(message.forum_topic_id) : options.longs === Number ? new $util.LongBits(message.forum_topic_id.low >>> 0, message.forum_topic_id.high >>> 0).toNumber() : message.forum_topic_id;
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
+                else
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                object.voteupcount = message.voteupcount;
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                object.votedowncount = message.votedowncount;
             return object;
         };
     
@@ -39200,6 +44896,8 @@
          * @property {number|null} [ignore_count] CClanEventData ignore_count
          * @property {number|Long|null} [forum_topic_id] CClanEventData forum_topic_id
          * @property {number|null} [rtime32_last_modified] CClanEventData rtime32_last_modified
+         * @property {number|Long|null} [news_post_gid] CClanEventData news_post_gid
+         * @property {number|null} [rtime_mod_reviewed] CClanEventData rtime_mod_reviewed
          */
     
         /**
@@ -39410,6 +45108,22 @@
         CClanEventData.prototype.rtime32_last_modified = 0;
     
         /**
+         * CClanEventData news_post_gid.
+         * @member {number|Long} news_post_gid
+         * @memberof CClanEventData
+         * @instance
+         */
+        CClanEventData.prototype.news_post_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CClanEventData rtime_mod_reviewed.
+         * @member {number} rtime_mod_reviewed
+         * @memberof CClanEventData
+         * @instance
+         */
+        CClanEventData.prototype.rtime_mod_reviewed = 0;
+    
+        /**
          * Creates a new CClanEventData instance using the specified properties.
          * @function create
          * @memberof CClanEventData
@@ -39481,6 +45195,10 @@
                 writer.uint32(/* id 23, wireType 1 =*/185).fixed64(message.forum_topic_id);
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 writer.uint32(/* id 24, wireType 0 =*/192).uint32(message.rtime32_last_modified);
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                writer.uint32(/* id 25, wireType 1 =*/201).fixed64(message.news_post_gid);
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.rtime_mod_reviewed);
             return writer;
         };
     
@@ -39587,6 +45305,12 @@
                 case 24:
                     message.rtime32_last_modified = reader.uint32();
                     break;
+                case 25:
+                    message.news_post_gid = reader.fixed64();
+                    break;
+                case 26:
+                    message.rtime_mod_reviewed = reader.uint32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -39668,6 +45392,8 @@
                 case 31:
                 case 32:
                 case 33:
+                case 34:
+                case 35:
                     break;
                 }
             if (message.appid != null && message.hasOwnProperty("appid"))
@@ -39732,6 +45458,12 @@
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 if (!$util.isInteger(message.rtime32_last_modified))
                     return "rtime32_last_modified: integer expected";
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                if (!$util.isInteger(message.news_post_gid) && !(message.news_post_gid && $util.isInteger(message.news_post_gid.low) && $util.isInteger(message.news_post_gid.high)))
+                    return "news_post_gid: integer|Long expected";
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                if (!$util.isInteger(message.rtime_mod_reviewed))
+                    return "rtime_mod_reviewed: integer expected";
             return null;
         };
     
@@ -39900,6 +45632,14 @@
             case 33:
                 message.event_type = 33;
                 break;
+            case "k_EClanCrosspostEvent":
+            case 34:
+                message.event_type = 34;
+                break;
+            case "k_EClanInGameEventGeneral":
+            case 35:
+                message.event_type = 35;
+                break;
             }
             if (object.appid != null)
                 message.appid = object.appid >>> 0;
@@ -39965,6 +45705,17 @@
                     message.forum_topic_id = new $util.LongBits(object.forum_topic_id.low >>> 0, object.forum_topic_id.high >>> 0).toNumber();
             if (object.rtime32_last_modified != null)
                 message.rtime32_last_modified = object.rtime32_last_modified >>> 0;
+            if (object.news_post_gid != null)
+                if ($util.Long)
+                    (message.news_post_gid = $util.Long.fromValue(object.news_post_gid)).unsigned = false;
+                else if (typeof object.news_post_gid === "string")
+                    message.news_post_gid = parseInt(object.news_post_gid, 10);
+                else if (typeof object.news_post_gid === "number")
+                    message.news_post_gid = object.news_post_gid;
+                else if (typeof object.news_post_gid === "object")
+                    message.news_post_gid = new $util.LongBits(object.news_post_gid.low >>> 0, object.news_post_gid.high >>> 0).toNumber();
+            if (object.rtime_mod_reviewed != null)
+                message.rtime_mod_reviewed = object.rtime_mod_reviewed >>> 0;
             return message;
         };
     
@@ -40026,6 +45777,12 @@
                 } else
                     object.forum_topic_id = options.longs === String ? "0" : 0;
                 object.rtime32_last_modified = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.news_post_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.news_post_gid = options.longs === String ? "0" : 0;
+                object.rtime_mod_reviewed = 0;
             }
             if (message.gid != null && message.hasOwnProperty("gid"))
                 if (typeof message.gid === "number")
@@ -40090,6 +45847,13 @@
                     object.forum_topic_id = options.longs === String ? $util.Long.prototype.toString.call(message.forum_topic_id) : options.longs === Number ? new $util.LongBits(message.forum_topic_id.low >>> 0, message.forum_topic_id.high >>> 0).toNumber() : message.forum_topic_id;
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 object.rtime32_last_modified = message.rtime32_last_modified;
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                if (typeof message.news_post_gid === "number")
+                    object.news_post_gid = options.longs === String ? String(message.news_post_gid) : message.news_post_gid;
+                else
+                    object.news_post_gid = options.longs === String ? $util.Long.prototype.toString.call(message.news_post_gid) : options.longs === Number ? new $util.LongBits(message.news_post_gid.low >>> 0, message.news_post_gid.high >>> 0).toNumber() : message.news_post_gid;
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                object.rtime_mod_reviewed = message.rtime_mod_reviewed;
             return object;
         };
     
@@ -40105,6 +45869,392 @@
         };
     
         return CClanEventData;
+    })();
+    
+    $root.CBilling_Address = (function() {
+    
+        /**
+         * Properties of a CBilling_Address.
+         * @exports ICBilling_Address
+         * @interface ICBilling_Address
+         * @property {string|null} [first_name] CBilling_Address first_name
+         * @property {string|null} [last_name] CBilling_Address last_name
+         * @property {string|null} [address1] CBilling_Address address1
+         * @property {string|null} [address2] CBilling_Address address2
+         * @property {string|null} [city] CBilling_Address city
+         * @property {string|null} [us_state] CBilling_Address us_state
+         * @property {string|null} [country_code] CBilling_Address country_code
+         * @property {string|null} [postcode] CBilling_Address postcode
+         * @property {number|null} [zip_plus4] CBilling_Address zip_plus4
+         * @property {string|null} [phone] CBilling_Address phone
+         */
+    
+        /**
+         * Constructs a new CBilling_Address.
+         * @exports CBilling_Address
+         * @classdesc Represents a CBilling_Address.
+         * @implements ICBilling_Address
+         * @constructor
+         * @param {ICBilling_Address=} [properties] Properties to set
+         */
+        function CBilling_Address(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBilling_Address first_name.
+         * @member {string} first_name
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.first_name = "";
+    
+        /**
+         * CBilling_Address last_name.
+         * @member {string} last_name
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.last_name = "";
+    
+        /**
+         * CBilling_Address address1.
+         * @member {string} address1
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.address1 = "";
+    
+        /**
+         * CBilling_Address address2.
+         * @member {string} address2
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.address2 = "";
+    
+        /**
+         * CBilling_Address city.
+         * @member {string} city
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.city = "";
+    
+        /**
+         * CBilling_Address us_state.
+         * @member {string} us_state
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.us_state = "";
+    
+        /**
+         * CBilling_Address country_code.
+         * @member {string} country_code
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.country_code = "";
+    
+        /**
+         * CBilling_Address postcode.
+         * @member {string} postcode
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.postcode = "";
+    
+        /**
+         * CBilling_Address zip_plus4.
+         * @member {number} zip_plus4
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.zip_plus4 = 0;
+    
+        /**
+         * CBilling_Address phone.
+         * @member {string} phone
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.phone = "";
+    
+        /**
+         * Creates a new CBilling_Address instance using the specified properties.
+         * @function create
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address=} [properties] Properties to set
+         * @returns {CBilling_Address} CBilling_Address instance
+         */
+        CBilling_Address.create = function create(properties) {
+            return new CBilling_Address(properties);
+        };
+    
+        /**
+         * Encodes the specified CBilling_Address message. Does not implicitly {@link CBilling_Address.verify|verify} messages.
+         * @function encode
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address} message CBilling_Address message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBilling_Address.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.first_name);
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.last_name);
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.address1);
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.address2);
+            if (message.city != null && message.hasOwnProperty("city"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.city);
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.us_state);
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.country_code);
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.postcode);
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.zip_plus4);
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.phone);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBilling_Address message, length delimited. Does not implicitly {@link CBilling_Address.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address} message CBilling_Address message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBilling_Address.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBilling_Address message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBilling_Address
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBilling_Address} CBilling_Address
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBilling_Address.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBilling_Address();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.first_name = reader.string();
+                    break;
+                case 2:
+                    message.last_name = reader.string();
+                    break;
+                case 3:
+                    message.address1 = reader.string();
+                    break;
+                case 4:
+                    message.address2 = reader.string();
+                    break;
+                case 5:
+                    message.city = reader.string();
+                    break;
+                case 6:
+                    message.us_state = reader.string();
+                    break;
+                case 7:
+                    message.country_code = reader.string();
+                    break;
+                case 8:
+                    message.postcode = reader.string();
+                    break;
+                case 9:
+                    message.zip_plus4 = reader.int32();
+                    break;
+                case 10:
+                    message.phone = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBilling_Address message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBilling_Address
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBilling_Address} CBilling_Address
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBilling_Address.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBilling_Address message.
+         * @function verify
+         * @memberof CBilling_Address
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBilling_Address.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                if (!$util.isString(message.first_name))
+                    return "first_name: string expected";
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                if (!$util.isString(message.last_name))
+                    return "last_name: string expected";
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                if (!$util.isString(message.address1))
+                    return "address1: string expected";
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                if (!$util.isString(message.address2))
+                    return "address2: string expected";
+            if (message.city != null && message.hasOwnProperty("city"))
+                if (!$util.isString(message.city))
+                    return "city: string expected";
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                if (!$util.isString(message.us_state))
+                    return "us_state: string expected";
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                if (!$util.isString(message.country_code))
+                    return "country_code: string expected";
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                if (!$util.isString(message.postcode))
+                    return "postcode: string expected";
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                if (!$util.isInteger(message.zip_plus4))
+                    return "zip_plus4: integer expected";
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                if (!$util.isString(message.phone))
+                    return "phone: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBilling_Address message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBilling_Address
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBilling_Address} CBilling_Address
+         */
+        CBilling_Address.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBilling_Address)
+                return object;
+            var message = new $root.CBilling_Address();
+            if (object.first_name != null)
+                message.first_name = String(object.first_name);
+            if (object.last_name != null)
+                message.last_name = String(object.last_name);
+            if (object.address1 != null)
+                message.address1 = String(object.address1);
+            if (object.address2 != null)
+                message.address2 = String(object.address2);
+            if (object.city != null)
+                message.city = String(object.city);
+            if (object.us_state != null)
+                message.us_state = String(object.us_state);
+            if (object.country_code != null)
+                message.country_code = String(object.country_code);
+            if (object.postcode != null)
+                message.postcode = String(object.postcode);
+            if (object.zip_plus4 != null)
+                message.zip_plus4 = object.zip_plus4 | 0;
+            if (object.phone != null)
+                message.phone = String(object.phone);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBilling_Address message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBilling_Address
+         * @static
+         * @param {CBilling_Address} message CBilling_Address
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBilling_Address.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.first_name = "";
+                object.last_name = "";
+                object.address1 = "";
+                object.address2 = "";
+                object.city = "";
+                object.us_state = "";
+                object.country_code = "";
+                object.postcode = "";
+                object.zip_plus4 = 0;
+                object.phone = "";
+            }
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                object.first_name = message.first_name;
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                object.last_name = message.last_name;
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                object.address1 = message.address1;
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                object.address2 = message.address2;
+            if (message.city != null && message.hasOwnProperty("city"))
+                object.city = message.city;
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                object.us_state = message.us_state;
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                object.country_code = message.country_code;
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                object.postcode = message.postcode;
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                object.zip_plus4 = message.zip_plus4;
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                object.phone = message.phone;
+            return object;
+        };
+    
+        /**
+         * Converts this CBilling_Address to JSON.
+         * @function toJSON
+         * @memberof CBilling_Address
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBilling_Address.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBilling_Address;
     })();
     
     $root.CMsgClientFriendMsg = (function() {
@@ -44777,7 +50927,6 @@
              * @property {number|null} [game_server_port] Friend game_server_port
              * @property {number|null} [persona_state_flags] Friend persona_state_flags
              * @property {number|null} [online_session_instances] Friend online_session_instances
-             * @property {number|null} [published_instance_id] Friend published_instance_id
              * @property {boolean|null} [persona_set_by_user] Friend persona_set_by_user
              * @property {string|null} [player_name] Friend player_name
              * @property {number|null} [query_port] Friend query_port
@@ -44872,14 +51021,6 @@
              * @instance
              */
             Friend.prototype.online_session_instances = 0;
-    
-            /**
-             * Friend published_instance_id.
-             * @member {number} published_instance_id
-             * @memberof CMsgClientPersonaState.Friend
-             * @instance
-             */
-            Friend.prototype.published_instance_id = 0;
     
             /**
              * Friend persona_set_by_user.
@@ -45087,8 +51228,6 @@
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.persona_state_flags);
                 if (message.online_session_instances != null && message.hasOwnProperty("online_session_instances"))
                     writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.online_session_instances);
-                if (message.published_instance_id != null && message.hasOwnProperty("published_instance_id"))
-                    writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.published_instance_id);
                 if (message.persona_set_by_user != null && message.hasOwnProperty("persona_set_by_user"))
                     writer.uint32(/* id 10, wireType 0 =*/80).bool(message.persona_set_by_user);
                 if (message.player_name != null && message.hasOwnProperty("player_name"))
@@ -45186,9 +51325,6 @@
                         break;
                     case 7:
                         message.online_session_instances = reader.uint32();
-                        break;
-                    case 8:
-                        message.published_instance_id = reader.uint32();
                         break;
                     case 10:
                         message.persona_set_by_user = reader.bool();
@@ -45311,9 +51447,6 @@
                 if (message.online_session_instances != null && message.hasOwnProperty("online_session_instances"))
                     if (!$util.isInteger(message.online_session_instances))
                         return "online_session_instances: integer expected";
-                if (message.published_instance_id != null && message.hasOwnProperty("published_instance_id"))
-                    if (!$util.isInteger(message.published_instance_id))
-                        return "published_instance_id: integer expected";
                 if (message.persona_set_by_user != null && message.hasOwnProperty("persona_set_by_user"))
                     if (typeof message.persona_set_by_user !== "boolean")
                         return "persona_set_by_user: boolean expected";
@@ -45421,8 +51554,6 @@
                     message.persona_state_flags = object.persona_state_flags >>> 0;
                 if (object.online_session_instances != null)
                     message.online_session_instances = object.online_session_instances >>> 0;
-                if (object.published_instance_id != null)
-                    message.published_instance_id = object.published_instance_id >>> 0;
                 if (object.persona_set_by_user != null)
                     message.persona_set_by_user = Boolean(object.persona_set_by_user);
                 if (object.player_name != null)
@@ -45540,7 +51671,6 @@
                     object.game_server_port = 0;
                     object.persona_state_flags = 0;
                     object.online_session_instances = 0;
-                    object.published_instance_id = 0;
                     object.persona_set_by_user = false;
                     object.player_name = "";
                     object.query_port = 0;
@@ -45607,8 +51737,6 @@
                     object.persona_state_flags = message.persona_state_flags;
                 if (message.online_session_instances != null && message.hasOwnProperty("online_session_instances"))
                     object.online_session_instances = message.online_session_instances;
-                if (message.published_instance_id != null && message.hasOwnProperty("published_instance_id"))
-                    object.published_instance_id = message.published_instance_id;
                 if (message.persona_set_by_user != null && message.hasOwnProperty("persona_set_by_user"))
                     object.persona_set_by_user = message.persona_set_by_user;
                 if (message.player_name != null && message.hasOwnProperty("player_name"))
@@ -49092,6 +55220,8 @@
          * @exports ICMsgClientEmoticonList
          * @interface ICMsgClientEmoticonList
          * @property {Array.<CMsgClientEmoticonList.IEmoticon>|null} [emoticons] CMsgClientEmoticonList emoticons
+         * @property {Array.<CMsgClientEmoticonList.ISticker>|null} [stickers] CMsgClientEmoticonList stickers
+         * @property {Array.<CMsgClientEmoticonList.IEffect>|null} [effects] CMsgClientEmoticonList effects
          */
     
         /**
@@ -49104,6 +55234,8 @@
          */
         function CMsgClientEmoticonList(properties) {
             this.emoticons = [];
+            this.stickers = [];
+            this.effects = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -49117,6 +55249,22 @@
          * @instance
          */
         CMsgClientEmoticonList.prototype.emoticons = $util.emptyArray;
+    
+        /**
+         * CMsgClientEmoticonList stickers.
+         * @member {Array.<CMsgClientEmoticonList.ISticker>} stickers
+         * @memberof CMsgClientEmoticonList
+         * @instance
+         */
+        CMsgClientEmoticonList.prototype.stickers = $util.emptyArray;
+    
+        /**
+         * CMsgClientEmoticonList effects.
+         * @member {Array.<CMsgClientEmoticonList.IEffect>} effects
+         * @memberof CMsgClientEmoticonList
+         * @instance
+         */
+        CMsgClientEmoticonList.prototype.effects = $util.emptyArray;
     
         /**
          * Creates a new CMsgClientEmoticonList instance using the specified properties.
@@ -49145,6 +55293,12 @@
             if (message.emoticons != null && message.emoticons.length)
                 for (var i = 0; i < message.emoticons.length; ++i)
                     $root.CMsgClientEmoticonList.Emoticon.encode(message.emoticons[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.stickers != null && message.stickers.length)
+                for (var i = 0; i < message.stickers.length; ++i)
+                    $root.CMsgClientEmoticonList.Sticker.encode(message.stickers[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.effects != null && message.effects.length)
+                for (var i = 0; i < message.effects.length; ++i)
+                    $root.CMsgClientEmoticonList.Effect.encode(message.effects[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
     
@@ -49183,6 +55337,16 @@
                     if (!(message.emoticons && message.emoticons.length))
                         message.emoticons = [];
                     message.emoticons.push($root.CMsgClientEmoticonList.Emoticon.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.stickers && message.stickers.length))
+                        message.stickers = [];
+                    message.stickers.push($root.CMsgClientEmoticonList.Sticker.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    if (!(message.effects && message.effects.length))
+                        message.effects = [];
+                    message.effects.push($root.CMsgClientEmoticonList.Effect.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -49228,6 +55392,24 @@
                         return "emoticons." + error;
                 }
             }
+            if (message.stickers != null && message.hasOwnProperty("stickers")) {
+                if (!Array.isArray(message.stickers))
+                    return "stickers: array expected";
+                for (var i = 0; i < message.stickers.length; ++i) {
+                    var error = $root.CMsgClientEmoticonList.Sticker.verify(message.stickers[i]);
+                    if (error)
+                        return "stickers." + error;
+                }
+            }
+            if (message.effects != null && message.hasOwnProperty("effects")) {
+                if (!Array.isArray(message.effects))
+                    return "effects: array expected";
+                for (var i = 0; i < message.effects.length; ++i) {
+                    var error = $root.CMsgClientEmoticonList.Effect.verify(message.effects[i]);
+                    if (error)
+                        return "effects." + error;
+                }
+            }
             return null;
         };
     
@@ -49253,6 +55435,26 @@
                     message.emoticons[i] = $root.CMsgClientEmoticonList.Emoticon.fromObject(object.emoticons[i]);
                 }
             }
+            if (object.stickers) {
+                if (!Array.isArray(object.stickers))
+                    throw TypeError(".CMsgClientEmoticonList.stickers: array expected");
+                message.stickers = [];
+                for (var i = 0; i < object.stickers.length; ++i) {
+                    if (typeof object.stickers[i] !== "object")
+                        throw TypeError(".CMsgClientEmoticonList.stickers: object expected");
+                    message.stickers[i] = $root.CMsgClientEmoticonList.Sticker.fromObject(object.stickers[i]);
+                }
+            }
+            if (object.effects) {
+                if (!Array.isArray(object.effects))
+                    throw TypeError(".CMsgClientEmoticonList.effects: array expected");
+                message.effects = [];
+                for (var i = 0; i < object.effects.length; ++i) {
+                    if (typeof object.effects[i] !== "object")
+                        throw TypeError(".CMsgClientEmoticonList.effects: object expected");
+                    message.effects[i] = $root.CMsgClientEmoticonList.Effect.fromObject(object.effects[i]);
+                }
+            }
             return message;
         };
     
@@ -49269,12 +55471,25 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.emoticons = [];
+                object.stickers = [];
+                object.effects = [];
+            }
             if (message.emoticons && message.emoticons.length) {
                 object.emoticons = [];
                 for (var j = 0; j < message.emoticons.length; ++j)
                     object.emoticons[j] = $root.CMsgClientEmoticonList.Emoticon.toObject(message.emoticons[j], options);
+            }
+            if (message.stickers && message.stickers.length) {
+                object.stickers = [];
+                for (var j = 0; j < message.stickers.length; ++j)
+                    object.stickers[j] = $root.CMsgClientEmoticonList.Sticker.toObject(message.stickers[j], options);
+            }
+            if (message.effects && message.effects.length) {
+                object.effects = [];
+                for (var j = 0; j < message.effects.length; ++j)
+                    object.effects[j] = $root.CMsgClientEmoticonList.Effect.toObject(message.effects[j], options);
             }
             return object;
         };
@@ -49564,6 +55779,536 @@
             };
     
             return Emoticon;
+        })();
+    
+        CMsgClientEmoticonList.Sticker = (function() {
+    
+            /**
+             * Properties of a Sticker.
+             * @memberof CMsgClientEmoticonList
+             * @interface ISticker
+             * @property {string|null} [name] Sticker name
+             * @property {number|null} [count] Sticker count
+             * @property {number|null} [time_received] Sticker time_received
+             * @property {number|null} [appid] Sticker appid
+             */
+    
+            /**
+             * Constructs a new Sticker.
+             * @memberof CMsgClientEmoticonList
+             * @classdesc Represents a Sticker.
+             * @implements ISticker
+             * @constructor
+             * @param {CMsgClientEmoticonList.ISticker=} [properties] Properties to set
+             */
+            function Sticker(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Sticker name.
+             * @member {string} name
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @instance
+             */
+            Sticker.prototype.name = "";
+    
+            /**
+             * Sticker count.
+             * @member {number} count
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @instance
+             */
+            Sticker.prototype.count = 0;
+    
+            /**
+             * Sticker time_received.
+             * @member {number} time_received
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @instance
+             */
+            Sticker.prototype.time_received = 0;
+    
+            /**
+             * Sticker appid.
+             * @member {number} appid
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @instance
+             */
+            Sticker.prototype.appid = 0;
+    
+            /**
+             * Creates a new Sticker instance using the specified properties.
+             * @function create
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {CMsgClientEmoticonList.ISticker=} [properties] Properties to set
+             * @returns {CMsgClientEmoticonList.Sticker} Sticker instance
+             */
+            Sticker.create = function create(properties) {
+                return new Sticker(properties);
+            };
+    
+            /**
+             * Encodes the specified Sticker message. Does not implicitly {@link CMsgClientEmoticonList.Sticker.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {CMsgClientEmoticonList.ISticker} message Sticker message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Sticker.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.name != null && message.hasOwnProperty("name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.count != null && message.hasOwnProperty("count"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.count);
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.time_received);
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.appid);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Sticker message, length delimited. Does not implicitly {@link CMsgClientEmoticonList.Sticker.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {CMsgClientEmoticonList.ISticker} message Sticker message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Sticker.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Sticker message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgClientEmoticonList.Sticker} Sticker
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Sticker.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientEmoticonList.Sticker();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.name = reader.string();
+                        break;
+                    case 2:
+                        message.count = reader.int32();
+                        break;
+                    case 3:
+                        message.time_received = reader.uint32();
+                        break;
+                    case 4:
+                        message.appid = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Sticker message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgClientEmoticonList.Sticker} Sticker
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Sticker.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Sticker message.
+             * @function verify
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Sticker.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.count != null && message.hasOwnProperty("count"))
+                    if (!$util.isInteger(message.count))
+                        return "count: integer expected";
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    if (!$util.isInteger(message.time_received))
+                        return "time_received: integer expected";
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    if (!$util.isInteger(message.appid))
+                        return "appid: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Sticker message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgClientEmoticonList.Sticker} Sticker
+             */
+            Sticker.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgClientEmoticonList.Sticker)
+                    return object;
+                var message = new $root.CMsgClientEmoticonList.Sticker();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.count != null)
+                    message.count = object.count | 0;
+                if (object.time_received != null)
+                    message.time_received = object.time_received >>> 0;
+                if (object.appid != null)
+                    message.appid = object.appid >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Sticker message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @static
+             * @param {CMsgClientEmoticonList.Sticker} message Sticker
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Sticker.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.count = 0;
+                    object.time_received = 0;
+                    object.appid = 0;
+                }
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.count != null && message.hasOwnProperty("count"))
+                    object.count = message.count;
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    object.time_received = message.time_received;
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    object.appid = message.appid;
+                return object;
+            };
+    
+            /**
+             * Converts this Sticker to JSON.
+             * @function toJSON
+             * @memberof CMsgClientEmoticonList.Sticker
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Sticker.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Sticker;
+        })();
+    
+        CMsgClientEmoticonList.Effect = (function() {
+    
+            /**
+             * Properties of an Effect.
+             * @memberof CMsgClientEmoticonList
+             * @interface IEffect
+             * @property {string|null} [name] Effect name
+             * @property {number|null} [count] Effect count
+             * @property {number|null} [time_received] Effect time_received
+             * @property {boolean|null} [infinite_use] Effect infinite_use
+             * @property {number|null} [appid] Effect appid
+             */
+    
+            /**
+             * Constructs a new Effect.
+             * @memberof CMsgClientEmoticonList
+             * @classdesc Represents an Effect.
+             * @implements IEffect
+             * @constructor
+             * @param {CMsgClientEmoticonList.IEffect=} [properties] Properties to set
+             */
+            function Effect(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Effect name.
+             * @member {string} name
+             * @memberof CMsgClientEmoticonList.Effect
+             * @instance
+             */
+            Effect.prototype.name = "";
+    
+            /**
+             * Effect count.
+             * @member {number} count
+             * @memberof CMsgClientEmoticonList.Effect
+             * @instance
+             */
+            Effect.prototype.count = 0;
+    
+            /**
+             * Effect time_received.
+             * @member {number} time_received
+             * @memberof CMsgClientEmoticonList.Effect
+             * @instance
+             */
+            Effect.prototype.time_received = 0;
+    
+            /**
+             * Effect infinite_use.
+             * @member {boolean} infinite_use
+             * @memberof CMsgClientEmoticonList.Effect
+             * @instance
+             */
+            Effect.prototype.infinite_use = false;
+    
+            /**
+             * Effect appid.
+             * @member {number} appid
+             * @memberof CMsgClientEmoticonList.Effect
+             * @instance
+             */
+            Effect.prototype.appid = 0;
+    
+            /**
+             * Creates a new Effect instance using the specified properties.
+             * @function create
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {CMsgClientEmoticonList.IEffect=} [properties] Properties to set
+             * @returns {CMsgClientEmoticonList.Effect} Effect instance
+             */
+            Effect.create = function create(properties) {
+                return new Effect(properties);
+            };
+    
+            /**
+             * Encodes the specified Effect message. Does not implicitly {@link CMsgClientEmoticonList.Effect.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {CMsgClientEmoticonList.IEffect} message Effect message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Effect.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.name != null && message.hasOwnProperty("name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.count != null && message.hasOwnProperty("count"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.count);
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.time_received);
+                if (message.infinite_use != null && message.hasOwnProperty("infinite_use"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.infinite_use);
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.appid);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Effect message, length delimited. Does not implicitly {@link CMsgClientEmoticonList.Effect.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {CMsgClientEmoticonList.IEffect} message Effect message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Effect.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an Effect message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgClientEmoticonList.Effect} Effect
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Effect.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientEmoticonList.Effect();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.name = reader.string();
+                        break;
+                    case 2:
+                        message.count = reader.int32();
+                        break;
+                    case 3:
+                        message.time_received = reader.uint32();
+                        break;
+                    case 4:
+                        message.infinite_use = reader.bool();
+                        break;
+                    case 5:
+                        message.appid = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an Effect message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgClientEmoticonList.Effect} Effect
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Effect.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an Effect message.
+             * @function verify
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Effect.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.count != null && message.hasOwnProperty("count"))
+                    if (!$util.isInteger(message.count))
+                        return "count: integer expected";
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    if (!$util.isInteger(message.time_received))
+                        return "time_received: integer expected";
+                if (message.infinite_use != null && message.hasOwnProperty("infinite_use"))
+                    if (typeof message.infinite_use !== "boolean")
+                        return "infinite_use: boolean expected";
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    if (!$util.isInteger(message.appid))
+                        return "appid: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates an Effect message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgClientEmoticonList.Effect} Effect
+             */
+            Effect.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgClientEmoticonList.Effect)
+                    return object;
+                var message = new $root.CMsgClientEmoticonList.Effect();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.count != null)
+                    message.count = object.count | 0;
+                if (object.time_received != null)
+                    message.time_received = object.time_received >>> 0;
+                if (object.infinite_use != null)
+                    message.infinite_use = Boolean(object.infinite_use);
+                if (object.appid != null)
+                    message.appid = object.appid >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an Effect message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgClientEmoticonList.Effect
+             * @static
+             * @param {CMsgClientEmoticonList.Effect} message Effect
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Effect.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.count = 0;
+                    object.time_received = 0;
+                    object.infinite_use = false;
+                    object.appid = 0;
+                }
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.count != null && message.hasOwnProperty("count"))
+                    object.count = message.count;
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    object.time_received = message.time_received;
+                if (message.infinite_use != null && message.hasOwnProperty("infinite_use"))
+                    object.infinite_use = message.infinite_use;
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    object.appid = message.appid;
+                return object;
+            };
+    
+            /**
+             * Converts this Effect to JSON.
+             * @function toJSON
+             * @memberof CMsgClientEmoticonList.Effect
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Effect.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Effect;
         })();
     
         return CMsgClientEmoticonList;

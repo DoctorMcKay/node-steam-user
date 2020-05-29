@@ -16,6 +16,24 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    /**
+     * EValveIndexComponent enum.
+     * @exports EValveIndexComponent
+     * @enum {string}
+     * @property {number} k_EValveIndexComponentUnknown=0 k_EValveIndexComponentUnknown value
+     * @property {number} k_EValveIndexComponentHMD=1 k_EValveIndexComponentHMD value
+     * @property {number} k_EValveIndexComponentLeftKnuckle=2 k_EValveIndexComponentLeftKnuckle value
+     * @property {number} k_EValveIndexComponentRightKnuckle=3 k_EValveIndexComponentRightKnuckle value
+     */
+    $root.EValveIndexComponent = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EValveIndexComponentUnknown"] = 0;
+        values[valuesById[1] = "k_EValveIndexComponentHMD"] = 1;
+        values[valuesById[2] = "k_EValveIndexComponentLeftKnuckle"] = 2;
+        values[valuesById[3] = "k_EValveIndexComponentRightKnuckle"] = 3;
+        return values;
+    })();
+    
     $root.CAccountHardware_RegisterSteamController_Request = (function() {
     
         /**
@@ -5228,6 +5246,465 @@
         return CAccountHardware_VRCompatibilityCheck_Response;
     })();
     
+    $root.CAccountHardware_RegisterValveIndexComponent_Request = (function() {
+    
+        /**
+         * Properties of a CAccountHardware_RegisterValveIndexComponent_Request.
+         * @exports ICAccountHardware_RegisterValveIndexComponent_Request
+         * @interface ICAccountHardware_RegisterValveIndexComponent_Request
+         * @property {string|null} [serial_number] CAccountHardware_RegisterValveIndexComponent_Request serial_number
+         * @property {string|null} [manufacturer_serial_number] CAccountHardware_RegisterValveIndexComponent_Request manufacturer_serial_number
+         * @property {string|null} [component_code] CAccountHardware_RegisterValveIndexComponent_Request component_code
+         * @property {EValveIndexComponent|null} [component_type] CAccountHardware_RegisterValveIndexComponent_Request component_type
+         * @property {number|null} [estimated_time_registered] CAccountHardware_RegisterValveIndexComponent_Request estimated_time_registered
+         */
+    
+        /**
+         * Constructs a new CAccountHardware_RegisterValveIndexComponent_Request.
+         * @exports CAccountHardware_RegisterValveIndexComponent_Request
+         * @classdesc Represents a CAccountHardware_RegisterValveIndexComponent_Request.
+         * @implements ICAccountHardware_RegisterValveIndexComponent_Request
+         * @constructor
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Request=} [properties] Properties to set
+         */
+        function CAccountHardware_RegisterValveIndexComponent_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAccountHardware_RegisterValveIndexComponent_Request serial_number.
+         * @member {string} serial_number
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @instance
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.prototype.serial_number = "";
+    
+        /**
+         * CAccountHardware_RegisterValveIndexComponent_Request manufacturer_serial_number.
+         * @member {string} manufacturer_serial_number
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @instance
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.prototype.manufacturer_serial_number = "";
+    
+        /**
+         * CAccountHardware_RegisterValveIndexComponent_Request component_code.
+         * @member {string} component_code
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @instance
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.prototype.component_code = "";
+    
+        /**
+         * CAccountHardware_RegisterValveIndexComponent_Request component_type.
+         * @member {EValveIndexComponent} component_type
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @instance
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.prototype.component_type = 0;
+    
+        /**
+         * CAccountHardware_RegisterValveIndexComponent_Request estimated_time_registered.
+         * @member {number} estimated_time_registered
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @instance
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.prototype.estimated_time_registered = 0;
+    
+        /**
+         * Creates a new CAccountHardware_RegisterValveIndexComponent_Request instance using the specified properties.
+         * @function create
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Request=} [properties] Properties to set
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Request} CAccountHardware_RegisterValveIndexComponent_Request instance
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.create = function create(properties) {
+            return new CAccountHardware_RegisterValveIndexComponent_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_RegisterValveIndexComponent_Request message. Does not implicitly {@link CAccountHardware_RegisterValveIndexComponent_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Request} message CAccountHardware_RegisterValveIndexComponent_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.serial_number != null && message.hasOwnProperty("serial_number"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serial_number);
+            if (message.manufacturer_serial_number != null && message.hasOwnProperty("manufacturer_serial_number"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.manufacturer_serial_number);
+            if (message.component_code != null && message.hasOwnProperty("component_code"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.component_code);
+            if (message.component_type != null && message.hasOwnProperty("component_type"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.component_type);
+            if (message.estimated_time_registered != null && message.hasOwnProperty("estimated_time_registered"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.estimated_time_registered);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_RegisterValveIndexComponent_Request message, length delimited. Does not implicitly {@link CAccountHardware_RegisterValveIndexComponent_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Request} message CAccountHardware_RegisterValveIndexComponent_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAccountHardware_RegisterValveIndexComponent_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Request} CAccountHardware_RegisterValveIndexComponent_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountHardware_RegisterValveIndexComponent_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.serial_number = reader.string();
+                    break;
+                case 2:
+                    message.manufacturer_serial_number = reader.string();
+                    break;
+                case 3:
+                    message.component_code = reader.string();
+                    break;
+                case 4:
+                    message.component_type = reader.int32();
+                    break;
+                case 5:
+                    message.estimated_time_registered = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAccountHardware_RegisterValveIndexComponent_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Request} CAccountHardware_RegisterValveIndexComponent_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAccountHardware_RegisterValveIndexComponent_Request message.
+         * @function verify
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.serial_number != null && message.hasOwnProperty("serial_number"))
+                if (!$util.isString(message.serial_number))
+                    return "serial_number: string expected";
+            if (message.manufacturer_serial_number != null && message.hasOwnProperty("manufacturer_serial_number"))
+                if (!$util.isString(message.manufacturer_serial_number))
+                    return "manufacturer_serial_number: string expected";
+            if (message.component_code != null && message.hasOwnProperty("component_code"))
+                if (!$util.isString(message.component_code))
+                    return "component_code: string expected";
+            if (message.component_type != null && message.hasOwnProperty("component_type"))
+                switch (message.component_type) {
+                default:
+                    return "component_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            if (message.estimated_time_registered != null && message.hasOwnProperty("estimated_time_registered"))
+                if (!$util.isInteger(message.estimated_time_registered))
+                    return "estimated_time_registered: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAccountHardware_RegisterValveIndexComponent_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Request} CAccountHardware_RegisterValveIndexComponent_Request
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAccountHardware_RegisterValveIndexComponent_Request)
+                return object;
+            var message = new $root.CAccountHardware_RegisterValveIndexComponent_Request();
+            if (object.serial_number != null)
+                message.serial_number = String(object.serial_number);
+            if (object.manufacturer_serial_number != null)
+                message.manufacturer_serial_number = String(object.manufacturer_serial_number);
+            if (object.component_code != null)
+                message.component_code = String(object.component_code);
+            switch (object.component_type) {
+            case "k_EValveIndexComponentUnknown":
+            case 0:
+                message.component_type = 0;
+                break;
+            case "k_EValveIndexComponentHMD":
+            case 1:
+                message.component_type = 1;
+                break;
+            case "k_EValveIndexComponentLeftKnuckle":
+            case 2:
+                message.component_type = 2;
+                break;
+            case "k_EValveIndexComponentRightKnuckle":
+            case 3:
+                message.component_type = 3;
+                break;
+            }
+            if (object.estimated_time_registered != null)
+                message.estimated_time_registered = object.estimated_time_registered | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAccountHardware_RegisterValveIndexComponent_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @static
+         * @param {CAccountHardware_RegisterValveIndexComponent_Request} message CAccountHardware_RegisterValveIndexComponent_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.serial_number = "";
+                object.manufacturer_serial_number = "";
+                object.component_code = "";
+                object.component_type = options.enums === String ? "k_EValveIndexComponentUnknown" : 0;
+                object.estimated_time_registered = 0;
+            }
+            if (message.serial_number != null && message.hasOwnProperty("serial_number"))
+                object.serial_number = message.serial_number;
+            if (message.manufacturer_serial_number != null && message.hasOwnProperty("manufacturer_serial_number"))
+                object.manufacturer_serial_number = message.manufacturer_serial_number;
+            if (message.component_code != null && message.hasOwnProperty("component_code"))
+                object.component_code = message.component_code;
+            if (message.component_type != null && message.hasOwnProperty("component_type"))
+                object.component_type = options.enums === String ? $root.EValveIndexComponent[message.component_type] : message.component_type;
+            if (message.estimated_time_registered != null && message.hasOwnProperty("estimated_time_registered"))
+                object.estimated_time_registered = message.estimated_time_registered;
+            return object;
+        };
+    
+        /**
+         * Converts this CAccountHardware_RegisterValveIndexComponent_Request to JSON.
+         * @function toJSON
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAccountHardware_RegisterValveIndexComponent_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAccountHardware_RegisterValveIndexComponent_Request;
+    })();
+    
+    $root.CAccountHardware_RegisterValveIndexComponent_Response = (function() {
+    
+        /**
+         * Properties of a CAccountHardware_RegisterValveIndexComponent_Response.
+         * @exports ICAccountHardware_RegisterValveIndexComponent_Response
+         * @interface ICAccountHardware_RegisterValveIndexComponent_Response
+         */
+    
+        /**
+         * Constructs a new CAccountHardware_RegisterValveIndexComponent_Response.
+         * @exports CAccountHardware_RegisterValveIndexComponent_Response
+         * @classdesc Represents a CAccountHardware_RegisterValveIndexComponent_Response.
+         * @implements ICAccountHardware_RegisterValveIndexComponent_Response
+         * @constructor
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Response=} [properties] Properties to set
+         */
+        function CAccountHardware_RegisterValveIndexComponent_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CAccountHardware_RegisterValveIndexComponent_Response instance using the specified properties.
+         * @function create
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Response=} [properties] Properties to set
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Response} CAccountHardware_RegisterValveIndexComponent_Response instance
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.create = function create(properties) {
+            return new CAccountHardware_RegisterValveIndexComponent_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_RegisterValveIndexComponent_Response message. Does not implicitly {@link CAccountHardware_RegisterValveIndexComponent_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Response} message CAccountHardware_RegisterValveIndexComponent_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_RegisterValveIndexComponent_Response message, length delimited. Does not implicitly {@link CAccountHardware_RegisterValveIndexComponent_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Response} message CAccountHardware_RegisterValveIndexComponent_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAccountHardware_RegisterValveIndexComponent_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Response} CAccountHardware_RegisterValveIndexComponent_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountHardware_RegisterValveIndexComponent_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAccountHardware_RegisterValveIndexComponent_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Response} CAccountHardware_RegisterValveIndexComponent_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAccountHardware_RegisterValveIndexComponent_Response message.
+         * @function verify
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAccountHardware_RegisterValveIndexComponent_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAccountHardware_RegisterValveIndexComponent_Response} CAccountHardware_RegisterValveIndexComponent_Response
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAccountHardware_RegisterValveIndexComponent_Response)
+                return object;
+            return new $root.CAccountHardware_RegisterValveIndexComponent_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CAccountHardware_RegisterValveIndexComponent_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @static
+         * @param {CAccountHardware_RegisterValveIndexComponent_Response} message CAccountHardware_RegisterValveIndexComponent_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CAccountHardware_RegisterValveIndexComponent_Response to JSON.
+         * @function toJSON
+         * @memberof CAccountHardware_RegisterValveIndexComponent_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAccountHardware_RegisterValveIndexComponent_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAccountHardware_RegisterValveIndexComponent_Response;
+    })();
+    
     $root.AccountHardware = (function() {
     
         /**
@@ -5554,6 +6031,39 @@
          * @instance
          * @param {ICAccountHardware_VRCompatibilityCheck_Request} request CAccountHardware_VRCompatibilityCheck_Request message or plain object
          * @returns {Promise<CAccountHardware_VRCompatibilityCheck_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link AccountHardware#registerValveIndexComponent}.
+         * @memberof AccountHardware
+         * @typedef RegisterValveIndexComponentCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAccountHardware_RegisterValveIndexComponent_Response} [response] CAccountHardware_RegisterValveIndexComponent_Response
+         */
+    
+        /**
+         * Calls RegisterValveIndexComponent.
+         * @function registerValveIndexComponent
+         * @memberof AccountHardware
+         * @instance
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Request} request CAccountHardware_RegisterValveIndexComponent_Request message or plain object
+         * @param {AccountHardware.RegisterValveIndexComponentCallback} callback Node-style callback called with the error, if any, and CAccountHardware_RegisterValveIndexComponent_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(AccountHardware.prototype.registerValveIndexComponent = function registerValveIndexComponent(request, callback) {
+            return this.rpcCall(registerValveIndexComponent, $root.CAccountHardware_RegisterValveIndexComponent_Request, $root.CAccountHardware_RegisterValveIndexComponent_Response, request, callback);
+        }, "name", { value: "RegisterValveIndexComponent" });
+    
+        /**
+         * Calls RegisterValveIndexComponent.
+         * @function registerValveIndexComponent
+         * @memberof AccountHardware
+         * @instance
+         * @param {ICAccountHardware_RegisterValveIndexComponent_Request} request CAccountHardware_RegisterValveIndexComponent_Request message or plain object
+         * @returns {Promise<CAccountHardware_RegisterValveIndexComponent_Response>} Promise
          * @variation 2
          */
     

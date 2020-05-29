@@ -33,6 +33,7 @@
      * @property {number} k_ERemoteDeviceStreamingCancelRequest=10 k_ERemoteDeviceStreamingCancelRequest value
      * @property {number} k_ERemoteClientBroadcastMsgClientIDDeconflict=11 k_ERemoteClientBroadcastMsgClientIDDeconflict value
      * @property {number} k_ERemoteDeviceStreamTransportSignal=12 k_ERemoteDeviceStreamTransportSignal value
+     * @property {number} k_ERemoteDeviceStreamingProgress=13 k_ERemoteDeviceStreamingProgress value
      */
     $root.ERemoteClientBroadcastMsg = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -49,6 +50,7 @@
         values[valuesById[10] = "k_ERemoteDeviceStreamingCancelRequest"] = 10;
         values[valuesById[11] = "k_ERemoteClientBroadcastMsgClientIDDeconflict"] = 11;
         values[valuesById[12] = "k_ERemoteDeviceStreamTransportSignal"] = 12;
+        values[valuesById[13] = "k_ERemoteDeviceStreamingProgress"] = 13;
         return values;
     })();
     
@@ -101,6 +103,26 @@
     })();
     
     /**
+     * EStreamDeviceFormFactor enum.
+     * @exports EStreamDeviceFormFactor
+     * @enum {string}
+     * @property {number} k_EStreamDeviceFormFactorUnknown=0 k_EStreamDeviceFormFactorUnknown value
+     * @property {number} k_EStreamDeviceFormFactorPhone=1 k_EStreamDeviceFormFactorPhone value
+     * @property {number} k_EStreamDeviceFormFactorTablet=2 k_EStreamDeviceFormFactorTablet value
+     * @property {number} k_EStreamDeviceFormFactorComputer=3 k_EStreamDeviceFormFactorComputer value
+     * @property {number} k_EStreamDeviceFormFactorTV=4 k_EStreamDeviceFormFactorTV value
+     */
+    $root.EStreamDeviceFormFactor = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EStreamDeviceFormFactorUnknown"] = 0;
+        values[valuesById[1] = "k_EStreamDeviceFormFactorPhone"] = 1;
+        values[valuesById[2] = "k_EStreamDeviceFormFactorTablet"] = 2;
+        values[valuesById[3] = "k_EStreamDeviceFormFactorComputer"] = 3;
+        values[valuesById[4] = "k_EStreamDeviceFormFactorTV"] = 4;
+        return values;
+    })();
+    
+    /**
      * EStreamTransport enum.
      * @exports EStreamTransport
      * @enum {string}
@@ -108,6 +130,9 @@
      * @property {number} k_EStreamTransportUDP=1 k_EStreamTransportUDP value
      * @property {number} k_EStreamTransportUDPRelay=2 k_EStreamTransportUDPRelay value
      * @property {number} k_EStreamTransportWebRTC=3 k_EStreamTransportWebRTC value
+     * @property {number} k_EStreamTransportSDR=4 k_EStreamTransportSDR value
+     * @property {number} k_EStreamTransportUDP_SNS=5 k_EStreamTransportUDP_SNS value
+     * @property {number} k_EStreamTransportUDPRelay_SNS=6 k_EStreamTransportUDPRelay_SNS value
      */
     $root.EStreamTransport = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -115,6 +140,27 @@
         values[valuesById[1] = "k_EStreamTransportUDP"] = 1;
         values[valuesById[2] = "k_EStreamTransportUDPRelay"] = 2;
         values[valuesById[3] = "k_EStreamTransportWebRTC"] = 3;
+        values[valuesById[4] = "k_EStreamTransportSDR"] = 4;
+        values[valuesById[5] = "k_EStreamTransportUDP_SNS"] = 5;
+        values[valuesById[6] = "k_EStreamTransportUDPRelay_SNS"] = 6;
+        return values;
+    })();
+    
+    /**
+     * EStreamInterface enum.
+     * @exports EStreamInterface
+     * @enum {string}
+     * @property {number} k_EStreamInterfaceDefault=0 k_EStreamInterfaceDefault value
+     * @property {number} k_EStreamInterfaceRecentGames=1 k_EStreamInterfaceRecentGames value
+     * @property {number} k_EStreamInterfaceBigPicture=2 k_EStreamInterfaceBigPicture value
+     * @property {number} k_EStreamInterfaceDesktop=3 k_EStreamInterfaceDesktop value
+     */
+    $root.EStreamInterface = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EStreamInterfaceDefault"] = 0;
+        values[valuesById[1] = "k_EStreamInterfaceRecentGames"] = 1;
+        values[valuesById[2] = "k_EStreamInterfaceBigPicture"] = 2;
+        values[valuesById[3] = "k_EStreamInterfaceDesktop"] = 3;
         return values;
     })();
     
@@ -135,6 +181,8 @@
      * @property {number} k_ERemoteDeviceStreamingVRActive=10 k_ERemoteDeviceStreamingVRActive value
      * @property {number} k_ERemoteDeviceStreamingPINRequired=11 k_ERemoteDeviceStreamingPINRequired value
      * @property {number} k_ERemoteDeviceStreamingTransportUnavailable=12 k_ERemoteDeviceStreamingTransportUnavailable value
+     * @property {number} k_ERemoteDeviceStreamingInvisible=13 k_ERemoteDeviceStreamingInvisible value
+     * @property {number} k_ERemoteDeviceStreamingGameLaunchFailed=14 k_ERemoteDeviceStreamingGameLaunchFailed value
      */
     $root.ERemoteDeviceStreamingResult = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -151,6 +199,8 @@
         values[valuesById[10] = "k_ERemoteDeviceStreamingVRActive"] = 10;
         values[valuesById[11] = "k_ERemoteDeviceStreamingPINRequired"] = 11;
         values[valuesById[12] = "k_ERemoteDeviceStreamingTransportUnavailable"] = 12;
+        values[valuesById[13] = "k_ERemoteDeviceStreamingInvisible"] = 13;
+        values[valuesById[14] = "k_ERemoteDeviceStreamingGameLaunchFailed"] = 14;
         return values;
     })();
     
@@ -360,6 +410,7 @@
                 case 10:
                 case 11:
                 case 12:
+                case 13:
                     break;
                 }
             if (message.instance_id != null && message.hasOwnProperty("instance_id"))
@@ -447,6 +498,10 @@
             case "k_ERemoteDeviceStreamTransportSignal":
             case 12:
                 message.msg_type = 12;
+                break;
+            case "k_ERemoteDeviceStreamingProgress":
+            case 13:
+                message.msg_type = 13;
                 break;
             }
             if (object.instance_id != null)
@@ -574,6 +629,7 @@
          * @property {number|null} [content_cache_port] CMsgRemoteClientBroadcastStatus content_cache_port
          * @property {Array.<string>|null} [ip_addresses] CMsgRemoteClientBroadcastStatus ip_addresses
          * @property {string|null} [public_ip_address] CMsgRemoteClientBroadcastStatus public_ip_address
+         * @property {boolean|null} [remoteplay_active] CMsgRemoteClientBroadcastStatus remoteplay_active
          */
     
         /**
@@ -747,6 +803,14 @@
         CMsgRemoteClientBroadcastStatus.prototype.public_ip_address = "";
     
         /**
+         * CMsgRemoteClientBroadcastStatus remoteplay_active.
+         * @member {boolean} remoteplay_active
+         * @memberof CMsgRemoteClientBroadcastStatus
+         * @instance
+         */
+        CMsgRemoteClientBroadcastStatus.prototype.remoteplay_active = false;
+    
+        /**
          * Creates a new CMsgRemoteClientBroadcastStatus instance using the specified properties.
          * @function create
          * @memberof CMsgRemoteClientBroadcastStatus
@@ -811,6 +875,8 @@
                     writer.uint32(/* id 20, wireType 2 =*/162).string(message.ip_addresses[i]);
             if (message.public_ip_address != null && message.hasOwnProperty("public_ip_address"))
                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.public_ip_address);
+            if (message.remoteplay_active != null && message.hasOwnProperty("remoteplay_active"))
+                writer.uint32(/* id 22, wireType 0 =*/176).bool(message.remoteplay_active);
             return writer;
         };
     
@@ -907,6 +973,9 @@
                     break;
                 case 21:
                     message.public_ip_address = reader.string();
+                    break;
+                case 22:
+                    message.remoteplay_active = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1014,6 +1083,9 @@
             if (message.public_ip_address != null && message.hasOwnProperty("public_ip_address"))
                 if (!$util.isString(message.public_ip_address))
                     return "public_ip_address: string expected";
+            if (message.remoteplay_active != null && message.hasOwnProperty("remoteplay_active"))
+                if (typeof message.remoteplay_active !== "boolean")
+                    return "remoteplay_active: boolean expected";
             return null;
         };
     
@@ -1085,6 +1157,8 @@
             }
             if (object.public_ip_address != null)
                 message.public_ip_address = String(object.public_ip_address);
+            if (object.remoteplay_active != null)
+                message.remoteplay_active = Boolean(object.remoteplay_active);
             return message;
         };
     
@@ -1123,6 +1197,7 @@
                 object.vr_active = false;
                 object.content_cache_port = 0;
                 object.public_ip_address = "";
+                object.remoteplay_active = false;
             }
             if (message.version != null && message.hasOwnProperty("version"))
                 object.version = message.version;
@@ -1171,6 +1246,8 @@
             }
             if (message.public_ip_address != null && message.hasOwnProperty("public_ip_address"))
                 object.public_ip_address = message.public_ip_address;
+            if (message.remoteplay_active != null && message.hasOwnProperty("remoteplay_active"))
+                object.remoteplay_active = message.remoteplay_active;
             return object;
         };
     
@@ -2990,6 +3067,11 @@
          * @property {number|Long|null} [client_id] CMsgRemoteDeviceStreamingRequest client_id
          * @property {Array.<EStreamTransport>|null} [supported_transport] CMsgRemoteDeviceStreamingRequest supported_transport
          * @property {boolean|null} [restricted] CMsgRemoteDeviceStreamingRequest restricted
+         * @property {EStreamDeviceFormFactor|null} [form_factor] CMsgRemoteDeviceStreamingRequest form_factor
+         * @property {number|null} [gamepad_count] CMsgRemoteDeviceStreamingRequest gamepad_count
+         * @property {Array.<CMsgRemoteDeviceStreamingRequest.IReservedGamepad>|null} [gamepads] CMsgRemoteDeviceStreamingRequest gamepads
+         * @property {number|Long|null} [gameid] CMsgRemoteDeviceStreamingRequest gameid
+         * @property {EStreamInterface|null} [stream_interface] CMsgRemoteDeviceStreamingRequest stream_interface
          */
     
         /**
@@ -3002,6 +3084,7 @@
          */
         function CMsgRemoteDeviceStreamingRequest(properties) {
             this.supported_transport = [];
+            this.gamepads = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3129,6 +3212,46 @@
         CMsgRemoteDeviceStreamingRequest.prototype.restricted = false;
     
         /**
+         * CMsgRemoteDeviceStreamingRequest form_factor.
+         * @member {EStreamDeviceFormFactor} form_factor
+         * @memberof CMsgRemoteDeviceStreamingRequest
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingRequest.prototype.form_factor = 0;
+    
+        /**
+         * CMsgRemoteDeviceStreamingRequest gamepad_count.
+         * @member {number} gamepad_count
+         * @memberof CMsgRemoteDeviceStreamingRequest
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingRequest.prototype.gamepad_count = 0;
+    
+        /**
+         * CMsgRemoteDeviceStreamingRequest gamepads.
+         * @member {Array.<CMsgRemoteDeviceStreamingRequest.IReservedGamepad>} gamepads
+         * @memberof CMsgRemoteDeviceStreamingRequest
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingRequest.prototype.gamepads = $util.emptyArray;
+    
+        /**
+         * CMsgRemoteDeviceStreamingRequest gameid.
+         * @member {number|Long} gameid
+         * @memberof CMsgRemoteDeviceStreamingRequest
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingRequest.prototype.gameid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CMsgRemoteDeviceStreamingRequest stream_interface.
+         * @member {EStreamInterface} stream_interface
+         * @memberof CMsgRemoteDeviceStreamingRequest
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingRequest.prototype.stream_interface = 0;
+    
+        /**
          * Creates a new CMsgRemoteDeviceStreamingRequest instance using the specified properties.
          * @function create
          * @memberof CMsgRemoteDeviceStreamingRequest
@@ -3182,6 +3305,17 @@
                     writer.uint32(/* id 14, wireType 0 =*/112).int32(message.supported_transport[i]);
             if (message.restricted != null && message.hasOwnProperty("restricted"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.restricted);
+            if (message.form_factor != null && message.hasOwnProperty("form_factor"))
+                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.form_factor);
+            if (message.gamepad_count != null && message.hasOwnProperty("gamepad_count"))
+                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.gamepad_count);
+            if (message.gamepads != null && message.gamepads.length)
+                for (var i = 0; i < message.gamepads.length; ++i)
+                    $root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad.encode(message.gamepads[i], writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                writer.uint32(/* id 19, wireType 0 =*/152).uint64(message.gameid);
+            if (message.stream_interface != null && message.hasOwnProperty("stream_interface"))
+                writer.uint32(/* id 20, wireType 0 =*/160).int32(message.stream_interface);
             return writer;
         };
     
@@ -3267,6 +3401,23 @@
                     break;
                 case 15:
                     message.restricted = reader.bool();
+                    break;
+                case 16:
+                    message.form_factor = reader.int32();
+                    break;
+                case 17:
+                    message.gamepad_count = reader.int32();
+                    break;
+                case 18:
+                    if (!(message.gamepads && message.gamepads.length))
+                        message.gamepads = [];
+                    message.gamepads.push($root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad.decode(reader, reader.uint32()));
+                    break;
+                case 19:
+                    message.gameid = reader.uint64();
+                    break;
+                case 20:
+                    message.stream_interface = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3354,12 +3505,51 @@
                     case 1:
                     case 2:
                     case 3:
+                    case 4:
+                    case 5:
+                    case 6:
                         break;
                     }
             }
             if (message.restricted != null && message.hasOwnProperty("restricted"))
                 if (typeof message.restricted !== "boolean")
                     return "restricted: boolean expected";
+            if (message.form_factor != null && message.hasOwnProperty("form_factor"))
+                switch (message.form_factor) {
+                default:
+                    return "form_factor: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
+                }
+            if (message.gamepad_count != null && message.hasOwnProperty("gamepad_count"))
+                if (!$util.isInteger(message.gamepad_count))
+                    return "gamepad_count: integer expected";
+            if (message.gamepads != null && message.hasOwnProperty("gamepads")) {
+                if (!Array.isArray(message.gamepads))
+                    return "gamepads: array expected";
+                for (var i = 0; i < message.gamepads.length; ++i) {
+                    var error = $root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad.verify(message.gamepads[i]);
+                    if (error)
+                        return "gamepads." + error;
+                }
+            }
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (!$util.isInteger(message.gameid) && !(message.gameid && $util.isInteger(message.gameid.low) && $util.isInteger(message.gameid.high)))
+                    return "gameid: integer|Long expected";
+            if (message.stream_interface != null && message.hasOwnProperty("stream_interface"))
+                switch (message.stream_interface) {
+                default:
+                    return "stream_interface: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
             return null;
         };
     
@@ -3437,10 +3627,83 @@
                     case 3:
                         message.supported_transport[i] = 3;
                         break;
+                    case "k_EStreamTransportSDR":
+                    case 4:
+                        message.supported_transport[i] = 4;
+                        break;
+                    case "k_EStreamTransportUDP_SNS":
+                    case 5:
+                        message.supported_transport[i] = 5;
+                        break;
+                    case "k_EStreamTransportUDPRelay_SNS":
+                    case 6:
+                        message.supported_transport[i] = 6;
+                        break;
                     }
             }
             if (object.restricted != null)
                 message.restricted = Boolean(object.restricted);
+            switch (object.form_factor) {
+            case "k_EStreamDeviceFormFactorUnknown":
+            case 0:
+                message.form_factor = 0;
+                break;
+            case "k_EStreamDeviceFormFactorPhone":
+            case 1:
+                message.form_factor = 1;
+                break;
+            case "k_EStreamDeviceFormFactorTablet":
+            case 2:
+                message.form_factor = 2;
+                break;
+            case "k_EStreamDeviceFormFactorComputer":
+            case 3:
+                message.form_factor = 3;
+                break;
+            case "k_EStreamDeviceFormFactorTV":
+            case 4:
+                message.form_factor = 4;
+                break;
+            }
+            if (object.gamepad_count != null)
+                message.gamepad_count = object.gamepad_count | 0;
+            if (object.gamepads) {
+                if (!Array.isArray(object.gamepads))
+                    throw TypeError(".CMsgRemoteDeviceStreamingRequest.gamepads: array expected");
+                message.gamepads = [];
+                for (var i = 0; i < object.gamepads.length; ++i) {
+                    if (typeof object.gamepads[i] !== "object")
+                        throw TypeError(".CMsgRemoteDeviceStreamingRequest.gamepads: object expected");
+                    message.gamepads[i] = $root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad.fromObject(object.gamepads[i]);
+                }
+            }
+            if (object.gameid != null)
+                if ($util.Long)
+                    (message.gameid = $util.Long.fromValue(object.gameid)).unsigned = true;
+                else if (typeof object.gameid === "string")
+                    message.gameid = parseInt(object.gameid, 10);
+                else if (typeof object.gameid === "number")
+                    message.gameid = object.gameid;
+                else if (typeof object.gameid === "object")
+                    message.gameid = new $util.LongBits(object.gameid.low >>> 0, object.gameid.high >>> 0).toNumber(true);
+            switch (object.stream_interface) {
+            case "k_EStreamInterfaceDefault":
+            case 0:
+                message.stream_interface = 0;
+                break;
+            case "k_EStreamInterfaceRecentGames":
+            case 1:
+                message.stream_interface = 1;
+                break;
+            case "k_EStreamInterfaceBigPicture":
+            case 2:
+                message.stream_interface = 2;
+                break;
+            case "k_EStreamInterfaceDesktop":
+            case 3:
+                message.stream_interface = 3;
+                break;
+            }
             return message;
         };
     
@@ -3457,8 +3720,10 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.supported_transport = [];
+                object.gamepads = [];
+            }
             if (options.defaults) {
                 object.request_id = 0;
                 object.maximum_resolution_x = 0;
@@ -3490,6 +3755,14 @@
                 } else
                     object.client_id = options.longs === String ? "0" : 0;
                 object.restricted = false;
+                object.form_factor = options.enums === String ? "k_EStreamDeviceFormFactorUnknown" : 0;
+                object.gamepad_count = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.gameid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gameid = options.longs === String ? "0" : 0;
+                object.stream_interface = options.enums === String ? "k_EStreamInterfaceDefault" : 0;
             }
             if (message.request_id != null && message.hasOwnProperty("request_id"))
                 object.request_id = message.request_id;
@@ -3527,6 +3800,22 @@
             }
             if (message.restricted != null && message.hasOwnProperty("restricted"))
                 object.restricted = message.restricted;
+            if (message.form_factor != null && message.hasOwnProperty("form_factor"))
+                object.form_factor = options.enums === String ? $root.EStreamDeviceFormFactor[message.form_factor] : message.form_factor;
+            if (message.gamepad_count != null && message.hasOwnProperty("gamepad_count"))
+                object.gamepad_count = message.gamepad_count;
+            if (message.gamepads && message.gamepads.length) {
+                object.gamepads = [];
+                for (var j = 0; j < message.gamepads.length; ++j)
+                    object.gamepads[j] = $root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad.toObject(message.gamepads[j], options);
+            }
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (typeof message.gameid === "number")
+                    object.gameid = options.longs === String ? String(message.gameid) : message.gameid;
+                else
+                    object.gameid = options.longs === String ? $util.Long.prototype.toString.call(message.gameid) : options.longs === Number ? new $util.LongBits(message.gameid.low >>> 0, message.gameid.high >>> 0).toNumber(true) : message.gameid;
+            if (message.stream_interface != null && message.hasOwnProperty("stream_interface"))
+                object.stream_interface = options.enums === String ? $root.EStreamInterface[message.stream_interface] : message.stream_interface;
             return object;
         };
     
@@ -3540,6 +3829,216 @@
         CMsgRemoteDeviceStreamingRequest.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
+    
+        CMsgRemoteDeviceStreamingRequest.ReservedGamepad = (function() {
+    
+            /**
+             * Properties of a ReservedGamepad.
+             * @memberof CMsgRemoteDeviceStreamingRequest
+             * @interface IReservedGamepad
+             * @property {number|null} [controller_type] ReservedGamepad controller_type
+             * @property {number|null} [controller_subtype] ReservedGamepad controller_subtype
+             */
+    
+            /**
+             * Constructs a new ReservedGamepad.
+             * @memberof CMsgRemoteDeviceStreamingRequest
+             * @classdesc Represents a ReservedGamepad.
+             * @implements IReservedGamepad
+             * @constructor
+             * @param {CMsgRemoteDeviceStreamingRequest.IReservedGamepad=} [properties] Properties to set
+             */
+            function ReservedGamepad(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ReservedGamepad controller_type.
+             * @member {number} controller_type
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @instance
+             */
+            ReservedGamepad.prototype.controller_type = 0;
+    
+            /**
+             * ReservedGamepad controller_subtype.
+             * @member {number} controller_subtype
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @instance
+             */
+            ReservedGamepad.prototype.controller_subtype = 0;
+    
+            /**
+             * Creates a new ReservedGamepad instance using the specified properties.
+             * @function create
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {CMsgRemoteDeviceStreamingRequest.IReservedGamepad=} [properties] Properties to set
+             * @returns {CMsgRemoteDeviceStreamingRequest.ReservedGamepad} ReservedGamepad instance
+             */
+            ReservedGamepad.create = function create(properties) {
+                return new ReservedGamepad(properties);
+            };
+    
+            /**
+             * Encodes the specified ReservedGamepad message. Does not implicitly {@link CMsgRemoteDeviceStreamingRequest.ReservedGamepad.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {CMsgRemoteDeviceStreamingRequest.IReservedGamepad} message ReservedGamepad message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ReservedGamepad.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.controller_type != null && message.hasOwnProperty("controller_type"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.controller_type);
+                if (message.controller_subtype != null && message.hasOwnProperty("controller_subtype"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.controller_subtype);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ReservedGamepad message, length delimited. Does not implicitly {@link CMsgRemoteDeviceStreamingRequest.ReservedGamepad.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {CMsgRemoteDeviceStreamingRequest.IReservedGamepad} message ReservedGamepad message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ReservedGamepad.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ReservedGamepad message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgRemoteDeviceStreamingRequest.ReservedGamepad} ReservedGamepad
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ReservedGamepad.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.controller_type = reader.uint32();
+                        break;
+                    case 2:
+                        message.controller_subtype = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ReservedGamepad message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgRemoteDeviceStreamingRequest.ReservedGamepad} ReservedGamepad
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ReservedGamepad.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ReservedGamepad message.
+             * @function verify
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ReservedGamepad.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.controller_type != null && message.hasOwnProperty("controller_type"))
+                    if (!$util.isInteger(message.controller_type))
+                        return "controller_type: integer expected";
+                if (message.controller_subtype != null && message.hasOwnProperty("controller_subtype"))
+                    if (!$util.isInteger(message.controller_subtype))
+                        return "controller_subtype: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ReservedGamepad message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgRemoteDeviceStreamingRequest.ReservedGamepad} ReservedGamepad
+             */
+            ReservedGamepad.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad)
+                    return object;
+                var message = new $root.CMsgRemoteDeviceStreamingRequest.ReservedGamepad();
+                if (object.controller_type != null)
+                    message.controller_type = object.controller_type >>> 0;
+                if (object.controller_subtype != null)
+                    message.controller_subtype = object.controller_subtype >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ReservedGamepad message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @static
+             * @param {CMsgRemoteDeviceStreamingRequest.ReservedGamepad} message ReservedGamepad
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ReservedGamepad.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.controller_type = 0;
+                    object.controller_subtype = 0;
+                }
+                if (message.controller_type != null && message.hasOwnProperty("controller_type"))
+                    object.controller_type = message.controller_type;
+                if (message.controller_subtype != null && message.hasOwnProperty("controller_subtype"))
+                    object.controller_subtype = message.controller_subtype;
+                return object;
+            };
+    
+            /**
+             * Converts this ReservedGamepad to JSON.
+             * @function toJSON
+             * @memberof CMsgRemoteDeviceStreamingRequest.ReservedGamepad
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ReservedGamepad.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ReservedGamepad;
+        })();
     
         return CMsgRemoteDeviceStreamingRequest;
     })();
@@ -3731,6 +4230,216 @@
         return CMsgRemoteDeviceStreamingCancelRequest;
     })();
     
+    $root.CMsgRemoteDeviceStreamingProgress = (function() {
+    
+        /**
+         * Properties of a CMsgRemoteDeviceStreamingProgress.
+         * @exports ICMsgRemoteDeviceStreamingProgress
+         * @interface ICMsgRemoteDeviceStreamingProgress
+         * @property {number} request_id CMsgRemoteDeviceStreamingProgress request_id
+         * @property {number|null} [progress] CMsgRemoteDeviceStreamingProgress progress
+         */
+    
+        /**
+         * Constructs a new CMsgRemoteDeviceStreamingProgress.
+         * @exports CMsgRemoteDeviceStreamingProgress
+         * @classdesc Represents a CMsgRemoteDeviceStreamingProgress.
+         * @implements ICMsgRemoteDeviceStreamingProgress
+         * @constructor
+         * @param {ICMsgRemoteDeviceStreamingProgress=} [properties] Properties to set
+         */
+        function CMsgRemoteDeviceStreamingProgress(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgRemoteDeviceStreamingProgress request_id.
+         * @member {number} request_id
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingProgress.prototype.request_id = 0;
+    
+        /**
+         * CMsgRemoteDeviceStreamingProgress progress.
+         * @member {number} progress
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingProgress.prototype.progress = 0;
+    
+        /**
+         * Creates a new CMsgRemoteDeviceStreamingProgress instance using the specified properties.
+         * @function create
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {ICMsgRemoteDeviceStreamingProgress=} [properties] Properties to set
+         * @returns {CMsgRemoteDeviceStreamingProgress} CMsgRemoteDeviceStreamingProgress instance
+         */
+        CMsgRemoteDeviceStreamingProgress.create = function create(properties) {
+            return new CMsgRemoteDeviceStreamingProgress(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgRemoteDeviceStreamingProgress message. Does not implicitly {@link CMsgRemoteDeviceStreamingProgress.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {ICMsgRemoteDeviceStreamingProgress} message CMsgRemoteDeviceStreamingProgress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgRemoteDeviceStreamingProgress.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.request_id);
+            if (message.progress != null && message.hasOwnProperty("progress"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.progress);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgRemoteDeviceStreamingProgress message, length delimited. Does not implicitly {@link CMsgRemoteDeviceStreamingProgress.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {ICMsgRemoteDeviceStreamingProgress} message CMsgRemoteDeviceStreamingProgress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgRemoteDeviceStreamingProgress.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgRemoteDeviceStreamingProgress message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgRemoteDeviceStreamingProgress} CMsgRemoteDeviceStreamingProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgRemoteDeviceStreamingProgress.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgRemoteDeviceStreamingProgress();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.request_id = reader.uint32();
+                    break;
+                case 2:
+                    message.progress = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("request_id"))
+                throw $util.ProtocolError("missing required 'request_id'", { instance: message });
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgRemoteDeviceStreamingProgress message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgRemoteDeviceStreamingProgress} CMsgRemoteDeviceStreamingProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgRemoteDeviceStreamingProgress.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgRemoteDeviceStreamingProgress message.
+         * @function verify
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgRemoteDeviceStreamingProgress.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.request_id))
+                return "request_id: integer expected";
+            if (message.progress != null && message.hasOwnProperty("progress"))
+                if (typeof message.progress !== "number")
+                    return "progress: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgRemoteDeviceStreamingProgress message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgRemoteDeviceStreamingProgress} CMsgRemoteDeviceStreamingProgress
+         */
+        CMsgRemoteDeviceStreamingProgress.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgRemoteDeviceStreamingProgress)
+                return object;
+            var message = new $root.CMsgRemoteDeviceStreamingProgress();
+            if (object.request_id != null)
+                message.request_id = object.request_id >>> 0;
+            if (object.progress != null)
+                message.progress = Number(object.progress);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgRemoteDeviceStreamingProgress message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @static
+         * @param {CMsgRemoteDeviceStreamingProgress} message CMsgRemoteDeviceStreamingProgress
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgRemoteDeviceStreamingProgress.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.request_id = 0;
+                object.progress = 0;
+            }
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                object.request_id = message.request_id;
+            if (message.progress != null && message.hasOwnProperty("progress"))
+                object.progress = options.json && !isFinite(message.progress) ? String(message.progress) : message.progress;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgRemoteDeviceStreamingProgress to JSON.
+         * @function toJSON
+         * @memberof CMsgRemoteDeviceStreamingProgress
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgRemoteDeviceStreamingProgress.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgRemoteDeviceStreamingProgress;
+    })();
+    
     $root.CMsgRemoteDeviceStreamingResponse = (function() {
     
         /**
@@ -3743,6 +4452,7 @@
          * @property {Uint8Array|null} [encrypted_session_key] CMsgRemoteDeviceStreamingResponse encrypted_session_key
          * @property {EStreamTransport|null} [transport] CMsgRemoteDeviceStreamingResponse transport
          * @property {string|null} [relay_server] CMsgRemoteDeviceStreamingResponse relay_server
+         * @property {string|null} [cert] CMsgRemoteDeviceStreamingResponse cert
          */
     
         /**
@@ -3809,6 +4519,14 @@
         CMsgRemoteDeviceStreamingResponse.prototype.relay_server = "";
     
         /**
+         * CMsgRemoteDeviceStreamingResponse cert.
+         * @member {string} cert
+         * @memberof CMsgRemoteDeviceStreamingResponse
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingResponse.prototype.cert = "";
+    
+        /**
          * Creates a new CMsgRemoteDeviceStreamingResponse instance using the specified properties.
          * @function create
          * @memberof CMsgRemoteDeviceStreamingResponse
@@ -3842,6 +4560,8 @@
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.transport);
             if (message.relay_server != null && message.hasOwnProperty("relay_server"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.relay_server);
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.cert);
             return writer;
         };
     
@@ -3893,6 +4613,9 @@
                     break;
                 case 7:
                     message.relay_server = reader.string();
+                    break;
+                case 8:
+                    message.cert = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3951,6 +4674,8 @@
             case 10:
             case 11:
             case 12:
+            case 13:
+            case 14:
                 break;
             }
             if (message.port != null && message.hasOwnProperty("port"))
@@ -3967,11 +4692,17 @@
                 case 1:
                 case 2:
                 case 3:
+                case 4:
+                case 5:
+                case 6:
                     break;
                 }
             if (message.relay_server != null && message.hasOwnProperty("relay_server"))
                 if (!$util.isString(message.relay_server))
                     return "relay_server: string expected";
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                if (!$util.isString(message.cert))
+                    return "cert: string expected";
             return null;
         };
     
@@ -4042,6 +4773,14 @@
             case 12:
                 message.result = 12;
                 break;
+            case "k_ERemoteDeviceStreamingInvisible":
+            case 13:
+                message.result = 13;
+                break;
+            case "k_ERemoteDeviceStreamingGameLaunchFailed":
+            case 14:
+                message.result = 14;
+                break;
             }
             if (object.port != null)
                 message.port = object.port >>> 0;
@@ -4067,9 +4806,23 @@
             case 3:
                 message.transport = 3;
                 break;
+            case "k_EStreamTransportSDR":
+            case 4:
+                message.transport = 4;
+                break;
+            case "k_EStreamTransportUDP_SNS":
+            case 5:
+                message.transport = 5;
+                break;
+            case "k_EStreamTransportUDPRelay_SNS":
+            case 6:
+                message.transport = 6;
+                break;
             }
             if (object.relay_server != null)
                 message.relay_server = String(object.relay_server);
+            if (object.cert != null)
+                message.cert = String(object.cert);
             return message;
         };
     
@@ -4099,6 +4852,7 @@
                 }
                 object.transport = options.enums === String ? "k_EStreamTransportUDP" : 1;
                 object.relay_server = "";
+                object.cert = "";
             }
             if (message.request_id != null && message.hasOwnProperty("request_id"))
                 object.request_id = message.request_id;
@@ -4112,6 +4866,8 @@
                 object.transport = options.enums === String ? $root.EStreamTransport[message.transport] : message.transport;
             if (message.relay_server != null && message.hasOwnProperty("relay_server"))
                 object.relay_server = message.relay_server;
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                object.cert = message.cert;
             return object;
         };
     
@@ -4136,6 +4892,7 @@
          * @exports ICMsgRemoteDeviceProofRequest
          * @interface ICMsgRemoteDeviceProofRequest
          * @property {Uint8Array} challenge CMsgRemoteDeviceProofRequest challenge
+         * @property {number|null} [request_id] CMsgRemoteDeviceProofRequest request_id
          */
     
         /**
@@ -4162,6 +4919,14 @@
         CMsgRemoteDeviceProofRequest.prototype.challenge = $util.newBuffer([]);
     
         /**
+         * CMsgRemoteDeviceProofRequest request_id.
+         * @member {number} request_id
+         * @memberof CMsgRemoteDeviceProofRequest
+         * @instance
+         */
+        CMsgRemoteDeviceProofRequest.prototype.request_id = 0;
+    
+        /**
          * Creates a new CMsgRemoteDeviceProofRequest instance using the specified properties.
          * @function create
          * @memberof CMsgRemoteDeviceProofRequest
@@ -4186,6 +4951,8 @@
             if (!writer)
                 writer = $Writer.create();
             writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.challenge);
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.request_id);
             return writer;
         };
     
@@ -4222,6 +4989,9 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.challenge = reader.bytes();
+                    break;
+                case 2:
+                    message.request_id = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4262,6 +5032,9 @@
                 return "object expected";
             if (!(message.challenge && typeof message.challenge.length === "number" || $util.isString(message.challenge)))
                 return "challenge: buffer expected";
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                if (!$util.isInteger(message.request_id))
+                    return "request_id: integer expected";
             return null;
         };
     
@@ -4282,6 +5055,8 @@
                     $util.base64.decode(object.challenge, message.challenge = $util.newBuffer($util.base64.length(object.challenge)), 0);
                 else if (object.challenge.length)
                     message.challenge = object.challenge;
+            if (object.request_id != null)
+                message.request_id = object.request_id >>> 0;
             return message;
         };
     
@@ -4298,7 +5073,7 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 if (options.bytes === String)
                     object.challenge = "";
                 else {
@@ -4306,8 +5081,12 @@
                     if (options.bytes !== Array)
                         object.challenge = $util.newBuffer(object.challenge);
                 }
+                object.request_id = 0;
+            }
             if (message.challenge != null && message.hasOwnProperty("challenge"))
                 object.challenge = options.bytes === String ? $util.base64.encode(message.challenge, 0, message.challenge.length) : options.bytes === Array ? Array.prototype.slice.call(message.challenge) : message.challenge;
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                object.request_id = message.request_id;
             return object;
         };
     
@@ -4332,6 +5111,7 @@
          * @exports ICMsgRemoteDeviceProofResponse
          * @interface ICMsgRemoteDeviceProofResponse
          * @property {Uint8Array} response CMsgRemoteDeviceProofResponse response
+         * @property {number|null} [request_id] CMsgRemoteDeviceProofResponse request_id
          */
     
         /**
@@ -4358,6 +5138,14 @@
         CMsgRemoteDeviceProofResponse.prototype.response = $util.newBuffer([]);
     
         /**
+         * CMsgRemoteDeviceProofResponse request_id.
+         * @member {number} request_id
+         * @memberof CMsgRemoteDeviceProofResponse
+         * @instance
+         */
+        CMsgRemoteDeviceProofResponse.prototype.request_id = 0;
+    
+        /**
          * Creates a new CMsgRemoteDeviceProofResponse instance using the specified properties.
          * @function create
          * @memberof CMsgRemoteDeviceProofResponse
@@ -4382,6 +5170,8 @@
             if (!writer)
                 writer = $Writer.create();
             writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.response);
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.request_id);
             return writer;
         };
     
@@ -4418,6 +5208,9 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.response = reader.bytes();
+                    break;
+                case 2:
+                    message.request_id = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4458,6 +5251,9 @@
                 return "object expected";
             if (!(message.response && typeof message.response.length === "number" || $util.isString(message.response)))
                 return "response: buffer expected";
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                if (!$util.isInteger(message.request_id))
+                    return "request_id: integer expected";
             return null;
         };
     
@@ -4478,6 +5274,8 @@
                     $util.base64.decode(object.response, message.response = $util.newBuffer($util.base64.length(object.response)), 0);
                 else if (object.response.length)
                     message.response = object.response;
+            if (object.request_id != null)
+                message.request_id = object.request_id >>> 0;
             return message;
         };
     
@@ -4494,7 +5292,7 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 if (options.bytes === String)
                     object.response = "";
                 else {
@@ -4502,8 +5300,12 @@
                     if (options.bytes !== Array)
                         object.response = $util.newBuffer(object.response);
                 }
+                object.request_id = 0;
+            }
             if (message.response != null && message.hasOwnProperty("response"))
                 object.response = options.bytes === String ? $util.base64.encode(message.response, 0, message.response.length) : options.bytes === Array ? Array.prototype.slice.call(message.response) : message.response;
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                object.request_id = message.request_id;
             return object;
         };
     

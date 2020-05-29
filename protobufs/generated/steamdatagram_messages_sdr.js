@@ -4776,6 +4776,568 @@
         return CMsgSteamDatagramConnectOK;
     })();
     
+    $root.CMsgSteamNetworkingP2PSDRRoutingSummary = (function() {
+    
+        /**
+         * Properties of a CMsgSteamNetworkingP2PSDRRoutingSummary.
+         * @exports ICMsgSteamNetworkingP2PSDRRoutingSummary
+         * @interface ICMsgSteamNetworkingP2PSDRRoutingSummary
+         * @property {number|null} [initial_ping] CMsgSteamNetworkingP2PSDRRoutingSummary initial_ping
+         * @property {number|null} [initial_ping_front_local] CMsgSteamNetworkingP2PSDRRoutingSummary initial_ping_front_local
+         * @property {number|null} [initial_ping_front_remote] CMsgSteamNetworkingP2PSDRRoutingSummary initial_ping_front_remote
+         * @property {number|null} [initial_score] CMsgSteamNetworkingP2PSDRRoutingSummary initial_score
+         * @property {number|null} [initial_pop_local] CMsgSteamNetworkingP2PSDRRoutingSummary initial_pop_local
+         * @property {number|null} [initial_pop_remote] CMsgSteamNetworkingP2PSDRRoutingSummary initial_pop_remote
+         * @property {number|null} [negotiation_ms] CMsgSteamNetworkingP2PSDRRoutingSummary negotiation_ms
+         * @property {number|null} [selected_seconds] CMsgSteamNetworkingP2PSDRRoutingSummary selected_seconds
+         */
+    
+        /**
+         * Constructs a new CMsgSteamNetworkingP2PSDRRoutingSummary.
+         * @exports CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @classdesc Represents a CMsgSteamNetworkingP2PSDRRoutingSummary.
+         * @implements ICMsgSteamNetworkingP2PSDRRoutingSummary
+         * @constructor
+         * @param {ICMsgSteamNetworkingP2PSDRRoutingSummary=} [properties] Properties to set
+         */
+        function CMsgSteamNetworkingP2PSDRRoutingSummary(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary initial_ping.
+         * @member {number} initial_ping
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.initial_ping = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary initial_ping_front_local.
+         * @member {number} initial_ping_front_local
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.initial_ping_front_local = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary initial_ping_front_remote.
+         * @member {number} initial_ping_front_remote
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.initial_ping_front_remote = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary initial_score.
+         * @member {number} initial_score
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.initial_score = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary initial_pop_local.
+         * @member {number} initial_pop_local
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.initial_pop_local = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary initial_pop_remote.
+         * @member {number} initial_pop_remote
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.initial_pop_remote = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary negotiation_ms.
+         * @member {number} negotiation_ms
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.negotiation_ms = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary selected_seconds.
+         * @member {number} selected_seconds
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.selected_seconds = 0;
+    
+        /**
+         * Creates a new CMsgSteamNetworkingP2PSDRRoutingSummary instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {ICMsgSteamNetworkingP2PSDRRoutingSummary=} [properties] Properties to set
+         * @returns {CMsgSteamNetworkingP2PSDRRoutingSummary} CMsgSteamNetworkingP2PSDRRoutingSummary instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.create = function create(properties) {
+            return new CMsgSteamNetworkingP2PSDRRoutingSummary(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingP2PSDRRoutingSummary message. Does not implicitly {@link CMsgSteamNetworkingP2PSDRRoutingSummary.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {ICMsgSteamNetworkingP2PSDRRoutingSummary} message CMsgSteamNetworkingP2PSDRRoutingSummary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.initial_ping);
+            if (message.initial_ping_front_local != null && message.hasOwnProperty("initial_ping_front_local"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.initial_ping_front_local);
+            if (message.initial_ping_front_remote != null && message.hasOwnProperty("initial_ping_front_remote"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.initial_ping_front_remote);
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.initial_score);
+            if (message.initial_pop_local != null && message.hasOwnProperty("initial_pop_local"))
+                writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.initial_pop_local);
+            if (message.initial_pop_remote != null && message.hasOwnProperty("initial_pop_remote"))
+                writer.uint32(/* id 6, wireType 5 =*/53).fixed32(message.initial_pop_remote);
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.negotiation_ms);
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.selected_seconds);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingP2PSDRRoutingSummary message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PSDRRoutingSummary.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {ICMsgSteamNetworkingP2PSDRRoutingSummary} message CMsgSteamNetworkingP2PSDRRoutingSummary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingP2PSDRRoutingSummary message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamNetworkingP2PSDRRoutingSummary} CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PSDRRoutingSummary();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.initial_ping = reader.uint32();
+                    break;
+                case 2:
+                    message.initial_ping_front_local = reader.uint32();
+                    break;
+                case 3:
+                    message.initial_ping_front_remote = reader.uint32();
+                    break;
+                case 4:
+                    message.initial_score = reader.uint32();
+                    break;
+                case 5:
+                    message.initial_pop_local = reader.fixed32();
+                    break;
+                case 6:
+                    message.initial_pop_remote = reader.fixed32();
+                    break;
+                case 7:
+                    message.negotiation_ms = reader.uint32();
+                    break;
+                case 8:
+                    message.selected_seconds = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingP2PSDRRoutingSummary message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamNetworkingP2PSDRRoutingSummary} CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamNetworkingP2PSDRRoutingSummary message.
+         * @function verify
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
+                if (!$util.isInteger(message.initial_ping))
+                    return "initial_ping: integer expected";
+            if (message.initial_ping_front_local != null && message.hasOwnProperty("initial_ping_front_local"))
+                if (!$util.isInteger(message.initial_ping_front_local))
+                    return "initial_ping_front_local: integer expected";
+            if (message.initial_ping_front_remote != null && message.hasOwnProperty("initial_ping_front_remote"))
+                if (!$util.isInteger(message.initial_ping_front_remote))
+                    return "initial_ping_front_remote: integer expected";
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
+                if (!$util.isInteger(message.initial_score))
+                    return "initial_score: integer expected";
+            if (message.initial_pop_local != null && message.hasOwnProperty("initial_pop_local"))
+                if (!$util.isInteger(message.initial_pop_local))
+                    return "initial_pop_local: integer expected";
+            if (message.initial_pop_remote != null && message.hasOwnProperty("initial_pop_remote"))
+                if (!$util.isInteger(message.initial_pop_remote))
+                    return "initial_pop_remote: integer expected";
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
+                if (!$util.isInteger(message.negotiation_ms))
+                    return "negotiation_ms: integer expected";
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
+                if (!$util.isInteger(message.selected_seconds))
+                    return "selected_seconds: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamNetworkingP2PSDRRoutingSummary message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamNetworkingP2PSDRRoutingSummary} CMsgSteamNetworkingP2PSDRRoutingSummary
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamNetworkingP2PSDRRoutingSummary)
+                return object;
+            var message = new $root.CMsgSteamNetworkingP2PSDRRoutingSummary();
+            if (object.initial_ping != null)
+                message.initial_ping = object.initial_ping >>> 0;
+            if (object.initial_ping_front_local != null)
+                message.initial_ping_front_local = object.initial_ping_front_local >>> 0;
+            if (object.initial_ping_front_remote != null)
+                message.initial_ping_front_remote = object.initial_ping_front_remote >>> 0;
+            if (object.initial_score != null)
+                message.initial_score = object.initial_score >>> 0;
+            if (object.initial_pop_local != null)
+                message.initial_pop_local = object.initial_pop_local >>> 0;
+            if (object.initial_pop_remote != null)
+                message.initial_pop_remote = object.initial_pop_remote >>> 0;
+            if (object.negotiation_ms != null)
+                message.negotiation_ms = object.negotiation_ms >>> 0;
+            if (object.selected_seconds != null)
+                message.selected_seconds = object.selected_seconds >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamNetworkingP2PSDRRoutingSummary message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @static
+         * @param {CMsgSteamNetworkingP2PSDRRoutingSummary} message CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.initial_ping = 0;
+                object.initial_ping_front_local = 0;
+                object.initial_ping_front_remote = 0;
+                object.initial_score = 0;
+                object.initial_pop_local = 0;
+                object.initial_pop_remote = 0;
+                object.negotiation_ms = 0;
+                object.selected_seconds = 0;
+            }
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
+                object.initial_ping = message.initial_ping;
+            if (message.initial_ping_front_local != null && message.hasOwnProperty("initial_ping_front_local"))
+                object.initial_ping_front_local = message.initial_ping_front_local;
+            if (message.initial_ping_front_remote != null && message.hasOwnProperty("initial_ping_front_remote"))
+                object.initial_ping_front_remote = message.initial_ping_front_remote;
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
+                object.initial_score = message.initial_score;
+            if (message.initial_pop_local != null && message.hasOwnProperty("initial_pop_local"))
+                object.initial_pop_local = message.initial_pop_local;
+            if (message.initial_pop_remote != null && message.hasOwnProperty("initial_pop_remote"))
+                object.initial_pop_remote = message.initial_pop_remote;
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
+                object.negotiation_ms = message.negotiation_ms;
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
+                object.selected_seconds = message.selected_seconds;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamNetworkingP2PSDRRoutingSummary to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamNetworkingP2PSDRRoutingSummary;
+    })();
+    
+    $root.CMsgSteamDatagramP2PRoutingSummary = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramP2PRoutingSummary.
+         * @exports ICMsgSteamDatagramP2PRoutingSummary
+         * @interface ICMsgSteamDatagramP2PRoutingSummary
+         * @property {ICMsgSteamNetworkingICESessionSummary|null} [ice] CMsgSteamDatagramP2PRoutingSummary ice
+         * @property {ICMsgSteamNetworkingP2PSDRRoutingSummary|null} [sdr] CMsgSteamDatagramP2PRoutingSummary sdr
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramP2PRoutingSummary.
+         * @exports CMsgSteamDatagramP2PRoutingSummary
+         * @classdesc Represents a CMsgSteamDatagramP2PRoutingSummary.
+         * @implements ICMsgSteamDatagramP2PRoutingSummary
+         * @constructor
+         * @param {ICMsgSteamDatagramP2PRoutingSummary=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramP2PRoutingSummary(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramP2PRoutingSummary ice.
+         * @member {ICMsgSteamNetworkingICESessionSummary|null|undefined} ice
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @instance
+         */
+        CMsgSteamDatagramP2PRoutingSummary.prototype.ice = null;
+    
+        /**
+         * CMsgSteamDatagramP2PRoutingSummary sdr.
+         * @member {ICMsgSteamNetworkingP2PSDRRoutingSummary|null|undefined} sdr
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @instance
+         */
+        CMsgSteamDatagramP2PRoutingSummary.prototype.sdr = null;
+    
+        /**
+         * Creates a new CMsgSteamDatagramP2PRoutingSummary instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {ICMsgSteamDatagramP2PRoutingSummary=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramP2PRoutingSummary} CMsgSteamDatagramP2PRoutingSummary instance
+         */
+        CMsgSteamDatagramP2PRoutingSummary.create = function create(properties) {
+            return new CMsgSteamDatagramP2PRoutingSummary(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramP2PRoutingSummary message. Does not implicitly {@link CMsgSteamDatagramP2PRoutingSummary.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {ICMsgSteamDatagramP2PRoutingSummary} message CMsgSteamDatagramP2PRoutingSummary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramP2PRoutingSummary.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ice != null && message.hasOwnProperty("ice"))
+                $root.CMsgSteamNetworkingICESessionSummary.encode(message.ice, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.sdr != null && message.hasOwnProperty("sdr"))
+                $root.CMsgSteamNetworkingP2PSDRRoutingSummary.encode(message.sdr, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramP2PRoutingSummary message, length delimited. Does not implicitly {@link CMsgSteamDatagramP2PRoutingSummary.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {ICMsgSteamDatagramP2PRoutingSummary} message CMsgSteamDatagramP2PRoutingSummary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramP2PRoutingSummary.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramP2PRoutingSummary message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramP2PRoutingSummary} CMsgSteamDatagramP2PRoutingSummary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramP2PRoutingSummary.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramP2PRoutingSummary();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 2:
+                    message.ice = $root.CMsgSteamNetworkingICESessionSummary.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.sdr = $root.CMsgSteamNetworkingP2PSDRRoutingSummary.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramP2PRoutingSummary message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramP2PRoutingSummary} CMsgSteamDatagramP2PRoutingSummary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramP2PRoutingSummary.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramP2PRoutingSummary message.
+         * @function verify
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramP2PRoutingSummary.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ice != null && message.hasOwnProperty("ice")) {
+                var error = $root.CMsgSteamNetworkingICESessionSummary.verify(message.ice);
+                if (error)
+                    return "ice." + error;
+            }
+            if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                var error = $root.CMsgSteamNetworkingP2PSDRRoutingSummary.verify(message.sdr);
+                if (error)
+                    return "sdr." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramP2PRoutingSummary message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramP2PRoutingSummary} CMsgSteamDatagramP2PRoutingSummary
+         */
+        CMsgSteamDatagramP2PRoutingSummary.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramP2PRoutingSummary)
+                return object;
+            var message = new $root.CMsgSteamDatagramP2PRoutingSummary();
+            if (object.ice != null) {
+                if (typeof object.ice !== "object")
+                    throw TypeError(".CMsgSteamDatagramP2PRoutingSummary.ice: object expected");
+                message.ice = $root.CMsgSteamNetworkingICESessionSummary.fromObject(object.ice);
+            }
+            if (object.sdr != null) {
+                if (typeof object.sdr !== "object")
+                    throw TypeError(".CMsgSteamDatagramP2PRoutingSummary.sdr: object expected");
+                message.sdr = $root.CMsgSteamNetworkingP2PSDRRoutingSummary.fromObject(object.sdr);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramP2PRoutingSummary message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @static
+         * @param {CMsgSteamDatagramP2PRoutingSummary} message CMsgSteamDatagramP2PRoutingSummary
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramP2PRoutingSummary.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.ice = null;
+                object.sdr = null;
+            }
+            if (message.ice != null && message.hasOwnProperty("ice"))
+                object.ice = $root.CMsgSteamNetworkingICESessionSummary.toObject(message.ice, options);
+            if (message.sdr != null && message.hasOwnProperty("sdr"))
+                object.sdr = $root.CMsgSteamNetworkingP2PSDRRoutingSummary.toObject(message.sdr, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramP2PRoutingSummary to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramP2PRoutingSummary
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramP2PRoutingSummary.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamDatagramP2PRoutingSummary;
+    })();
+    
     $root.CMsgSteamDatagramConnectionClosed = (function() {
     
         /**
@@ -4796,6 +5358,11 @@
          * @property {string|null} [debug] CMsgSteamDatagramConnectionClosed debug
          * @property {number|null} [reason_code] CMsgSteamDatagramConnectionClosed reason_code
          * @property {number|Long|null} [routing_secret] CMsgSteamDatagramConnectionClosed routing_secret
+         * @property {boolean|null} [not_primary_session] CMsgSteamDatagramConnectionClosed not_primary_session
+         * @property {boolean|null} [not_primary_transport] CMsgSteamDatagramConnectionClosed not_primary_transport
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_relay] CMsgSteamDatagramConnectionClosed quality_relay
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_e2e] CMsgSteamDatagramConnectionClosed quality_e2e
+         * @property {ICMsgSteamDatagramP2PRoutingSummary|null} [p2p_routing_summary] CMsgSteamDatagramConnectionClosed p2p_routing_summary
          */
     
         /**
@@ -4926,6 +5493,46 @@
         CMsgSteamDatagramConnectionClosed.prototype.routing_secret = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
+         * CMsgSteamDatagramConnectionClosed not_primary_session.
+         * @member {boolean} not_primary_session
+         * @memberof CMsgSteamDatagramConnectionClosed
+         * @instance
+         */
+        CMsgSteamDatagramConnectionClosed.prototype.not_primary_session = false;
+    
+        /**
+         * CMsgSteamDatagramConnectionClosed not_primary_transport.
+         * @member {boolean} not_primary_transport
+         * @memberof CMsgSteamDatagramConnectionClosed
+         * @instance
+         */
+        CMsgSteamDatagramConnectionClosed.prototype.not_primary_transport = false;
+    
+        /**
+         * CMsgSteamDatagramConnectionClosed quality_relay.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_relay
+         * @memberof CMsgSteamDatagramConnectionClosed
+         * @instance
+         */
+        CMsgSteamDatagramConnectionClosed.prototype.quality_relay = null;
+    
+        /**
+         * CMsgSteamDatagramConnectionClosed quality_e2e.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_e2e
+         * @memberof CMsgSteamDatagramConnectionClosed
+         * @instance
+         */
+        CMsgSteamDatagramConnectionClosed.prototype.quality_e2e = null;
+    
+        /**
+         * CMsgSteamDatagramConnectionClosed p2p_routing_summary.
+         * @member {ICMsgSteamDatagramP2PRoutingSummary|null|undefined} p2p_routing_summary
+         * @memberof CMsgSteamDatagramConnectionClosed
+         * @instance
+         */
+        CMsgSteamDatagramConnectionClosed.prototype.p2p_routing_summary = null;
+    
+        /**
          * Creates a new CMsgSteamDatagramConnectionClosed instance using the specified properties.
          * @function create
          * @memberof CMsgSteamDatagramConnectionClosed
@@ -4977,6 +5584,16 @@
                 writer.uint32(/* id 14, wireType 1 =*/113).fixed64(message.routing_secret);
             if (message.from_identity_string != null && message.hasOwnProperty("from_identity_string"))
                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.from_identity_string);
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
+                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.not_primary_session);
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
+                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.not_primary_transport);
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
+                $root.CMsgSteamDatagramP2PRoutingSummary.encode(message.p2p_routing_summary, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
             return writer;
         };
     
@@ -5052,6 +5669,21 @@
                     break;
                 case 14:
                     message.routing_secret = reader.fixed64();
+                    break;
+                case 16:
+                    message.not_primary_session = reader.bool();
+                    break;
+                case 19:
+                    message.not_primary_transport = reader.bool();
+                    break;
+                case 17:
+                    message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 18:
+                    message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 21:
+                    message.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5138,6 +5770,27 @@
             if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 if (!$util.isInteger(message.routing_secret) && !(message.routing_secret && $util.isInteger(message.routing_secret.low) && $util.isInteger(message.routing_secret.high)))
                     return "routing_secret: integer|Long expected";
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
+                if (typeof message.not_primary_session !== "boolean")
+                    return "not_primary_session: boolean expected";
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
+                if (typeof message.not_primary_transport !== "boolean")
+                    return "not_primary_transport: boolean expected";
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_relay);
+                if (error)
+                    return "quality_relay." + error;
+            }
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_e2e);
+                if (error)
+                    return "quality_e2e." + error;
+            }
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary")) {
+                var error = $root.CMsgSteamDatagramP2PRoutingSummary.verify(message.p2p_routing_summary);
+                if (error)
+                    return "p2p_routing_summary." + error;
+            }
             return null;
         };
     
@@ -5213,6 +5866,25 @@
                     message.routing_secret = object.routing_secret;
                 else if (typeof object.routing_secret === "object")
                     message.routing_secret = new $util.LongBits(object.routing_secret.low >>> 0, object.routing_secret.high >>> 0).toNumber();
+            if (object.not_primary_session != null)
+                message.not_primary_session = Boolean(object.not_primary_session);
+            if (object.not_primary_transport != null)
+                message.not_primary_transport = Boolean(object.not_primary_transport);
+            if (object.quality_relay != null) {
+                if (typeof object.quality_relay !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionClosed.quality_relay: object expected");
+                message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_relay);
+            }
+            if (object.quality_e2e != null) {
+                if (typeof object.quality_e2e !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionClosed.quality_e2e: object expected");
+                message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_e2e);
+            }
+            if (object.p2p_routing_summary != null) {
+                if (typeof object.p2p_routing_summary !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionClosed.p2p_routing_summary: object expected");
+                message.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.fromObject(object.p2p_routing_summary);
+            }
             return message;
         };
     
@@ -5258,6 +5930,11 @@
                 } else
                     object.routing_secret = options.longs === String ? "0" : 0;
                 object.from_identity_string = "";
+                object.not_primary_session = false;
+                object.quality_relay = null;
+                object.quality_e2e = null;
+                object.not_primary_transport = false;
+                object.p2p_routing_summary = null;
             }
             if (message.legacy_gameserver_relay_session_id != null && message.hasOwnProperty("legacy_gameserver_relay_session_id"))
                 object.legacy_gameserver_relay_session_id = message.legacy_gameserver_relay_session_id;
@@ -5293,6 +5970,16 @@
                     object.routing_secret = options.longs === String ? $util.Long.prototype.toString.call(message.routing_secret) : options.longs === Number ? new $util.LongBits(message.routing_secret.low >>> 0, message.routing_secret.high >>> 0).toNumber() : message.routing_secret;
             if (message.from_identity_string != null && message.hasOwnProperty("from_identity_string"))
                 object.from_identity_string = message.from_identity_string;
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
+                object.not_primary_session = message.not_primary_session;
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                object.quality_relay = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_relay, options);
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                object.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_e2e, options);
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
+                object.not_primary_transport = message.not_primary_transport;
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
+                object.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.toObject(message.p2p_routing_summary, options);
             return object;
         };
     
@@ -5340,8 +6027,13 @@
          * @property {string|null} [from_identity_string] CMsgSteamDatagramNoConnection from_identity_string
          * @property {number|Long|null} [legacy_from_steam_id] CMsgSteamDatagramNoConnection legacy_from_steam_id
          * @property {boolean|null} [end_to_end] CMsgSteamDatagramNoConnection end_to_end
-         * @property {number|null} [dummy_pad] CMsgSteamDatagramNoConnection dummy_pad
+         * @property {boolean|null} [not_primary_session] CMsgSteamDatagramNoConnection not_primary_session
+         * @property {boolean|null} [not_primary_transport] CMsgSteamDatagramNoConnection not_primary_transport
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_relay] CMsgSteamDatagramNoConnection quality_relay
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_e2e] CMsgSteamDatagramNoConnection quality_e2e
+         * @property {ICMsgSteamDatagramP2PRoutingSummary|null} [p2p_routing_summary] CMsgSteamDatagramNoConnection p2p_routing_summary
          * @property {number|Long|null} [routing_secret] CMsgSteamDatagramNoConnection routing_secret
+         * @property {number|null} [dummy_pad] CMsgSteamDatagramNoConnection dummy_pad
          */
     
         /**
@@ -5424,12 +6116,44 @@
         CMsgSteamDatagramNoConnection.prototype.end_to_end = false;
     
         /**
-         * CMsgSteamDatagramNoConnection dummy_pad.
-         * @member {number} dummy_pad
+         * CMsgSteamDatagramNoConnection not_primary_session.
+         * @member {boolean} not_primary_session
          * @memberof CMsgSteamDatagramNoConnection
          * @instance
          */
-        CMsgSteamDatagramNoConnection.prototype.dummy_pad = 0;
+        CMsgSteamDatagramNoConnection.prototype.not_primary_session = false;
+    
+        /**
+         * CMsgSteamDatagramNoConnection not_primary_transport.
+         * @member {boolean} not_primary_transport
+         * @memberof CMsgSteamDatagramNoConnection
+         * @instance
+         */
+        CMsgSteamDatagramNoConnection.prototype.not_primary_transport = false;
+    
+        /**
+         * CMsgSteamDatagramNoConnection quality_relay.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_relay
+         * @memberof CMsgSteamDatagramNoConnection
+         * @instance
+         */
+        CMsgSteamDatagramNoConnection.prototype.quality_relay = null;
+    
+        /**
+         * CMsgSteamDatagramNoConnection quality_e2e.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_e2e
+         * @memberof CMsgSteamDatagramNoConnection
+         * @instance
+         */
+        CMsgSteamDatagramNoConnection.prototype.quality_e2e = null;
+    
+        /**
+         * CMsgSteamDatagramNoConnection p2p_routing_summary.
+         * @member {ICMsgSteamDatagramP2PRoutingSummary|null|undefined} p2p_routing_summary
+         * @memberof CMsgSteamDatagramNoConnection
+         * @instance
+         */
+        CMsgSteamDatagramNoConnection.prototype.p2p_routing_summary = null;
     
         /**
          * CMsgSteamDatagramNoConnection routing_secret.
@@ -5438,6 +6162,14 @@
          * @instance
          */
         CMsgSteamDatagramNoConnection.prototype.routing_secret = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamDatagramNoConnection dummy_pad.
+         * @member {number} dummy_pad
+         * @memberof CMsgSteamDatagramNoConnection
+         * @instance
+         */
+        CMsgSteamDatagramNoConnection.prototype.dummy_pad = 0;
     
         /**
          * Creates a new CMsgSteamDatagramNoConnection instance using the specified properties.
@@ -5481,6 +6213,16 @@
                 writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.from_relay_session_id);
             if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 writer.uint32(/* id 11, wireType 1 =*/89).fixed64(message.routing_secret);
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
+                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.not_primary_session);
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
+                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.not_primary_transport);
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
+                $root.CMsgSteamDatagramP2PRoutingSummary.encode(message.p2p_routing_summary, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.dummy_pad != null && message.hasOwnProperty("dummy_pad"))
                 writer.uint32(/* id 1023, wireType 5 =*/8189).fixed32(message.dummy_pad);
             return writer;
@@ -5541,11 +6283,26 @@
                 case 4:
                     message.end_to_end = reader.bool();
                     break;
-                case 1023:
-                    message.dummy_pad = reader.fixed32();
+                case 12:
+                    message.not_primary_session = reader.bool();
+                    break;
+                case 15:
+                    message.not_primary_transport = reader.bool();
+                    break;
+                case 13:
+                    message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 14:
+                    message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 16:
+                    message.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.decode(reader, reader.uint32());
                     break;
                 case 11:
                     message.routing_secret = reader.fixed64();
+                    break;
+                case 1023:
+                    message.dummy_pad = reader.fixed32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5606,12 +6363,33 @@
             if (message.end_to_end != null && message.hasOwnProperty("end_to_end"))
                 if (typeof message.end_to_end !== "boolean")
                     return "end_to_end: boolean expected";
-            if (message.dummy_pad != null && message.hasOwnProperty("dummy_pad"))
-                if (!$util.isInteger(message.dummy_pad))
-                    return "dummy_pad: integer expected";
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
+                if (typeof message.not_primary_session !== "boolean")
+                    return "not_primary_session: boolean expected";
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
+                if (typeof message.not_primary_transport !== "boolean")
+                    return "not_primary_transport: boolean expected";
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_relay);
+                if (error)
+                    return "quality_relay." + error;
+            }
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_e2e);
+                if (error)
+                    return "quality_e2e." + error;
+            }
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary")) {
+                var error = $root.CMsgSteamDatagramP2PRoutingSummary.verify(message.p2p_routing_summary);
+                if (error)
+                    return "p2p_routing_summary." + error;
+            }
             if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 if (!$util.isInteger(message.routing_secret) && !(message.routing_secret && $util.isInteger(message.routing_secret.low) && $util.isInteger(message.routing_secret.high)))
                     return "routing_secret: integer|Long expected";
+            if (message.dummy_pad != null && message.hasOwnProperty("dummy_pad"))
+                if (!$util.isInteger(message.dummy_pad))
+                    return "dummy_pad: integer expected";
             return null;
         };
     
@@ -5650,8 +6428,25 @@
                     message.legacy_from_steam_id = new $util.LongBits(object.legacy_from_steam_id.low >>> 0, object.legacy_from_steam_id.high >>> 0).toNumber();
             if (object.end_to_end != null)
                 message.end_to_end = Boolean(object.end_to_end);
-            if (object.dummy_pad != null)
-                message.dummy_pad = object.dummy_pad >>> 0;
+            if (object.not_primary_session != null)
+                message.not_primary_session = Boolean(object.not_primary_session);
+            if (object.not_primary_transport != null)
+                message.not_primary_transport = Boolean(object.not_primary_transport);
+            if (object.quality_relay != null) {
+                if (typeof object.quality_relay !== "object")
+                    throw TypeError(".CMsgSteamDatagramNoConnection.quality_relay: object expected");
+                message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_relay);
+            }
+            if (object.quality_e2e != null) {
+                if (typeof object.quality_e2e !== "object")
+                    throw TypeError(".CMsgSteamDatagramNoConnection.quality_e2e: object expected");
+                message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_e2e);
+            }
+            if (object.p2p_routing_summary != null) {
+                if (typeof object.p2p_routing_summary !== "object")
+                    throw TypeError(".CMsgSteamDatagramNoConnection.p2p_routing_summary: object expected");
+                message.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.fromObject(object.p2p_routing_summary);
+            }
             if (object.routing_secret != null)
                 if ($util.Long)
                     (message.routing_secret = $util.Long.fromValue(object.routing_secret)).unsigned = false;
@@ -5661,6 +6456,8 @@
                     message.routing_secret = object.routing_secret;
                 else if (typeof object.routing_secret === "object")
                     message.routing_secret = new $util.LongBits(object.routing_secret.low >>> 0, object.routing_secret.high >>> 0).toNumber();
+            if (object.dummy_pad != null)
+                message.dummy_pad = object.dummy_pad >>> 0;
             return message;
         };
     
@@ -5695,6 +6492,11 @@
                     object.routing_secret = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.routing_secret = options.longs === String ? "0" : 0;
+                object.not_primary_session = false;
+                object.quality_relay = null;
+                object.quality_e2e = null;
+                object.not_primary_transport = false;
+                object.p2p_routing_summary = null;
                 object.dummy_pad = 0;
             }
             if (message.legacy_gameserver_relay_session_id != null && message.hasOwnProperty("legacy_gameserver_relay_session_id"))
@@ -5721,6 +6523,16 @@
                     object.routing_secret = options.longs === String ? String(message.routing_secret) : message.routing_secret;
                 else
                     object.routing_secret = options.longs === String ? $util.Long.prototype.toString.call(message.routing_secret) : options.longs === Number ? new $util.LongBits(message.routing_secret.low >>> 0, message.routing_secret.high >>> 0).toNumber() : message.routing_secret;
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
+                object.not_primary_session = message.not_primary_session;
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                object.quality_relay = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_relay, options);
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                object.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_e2e, options);
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
+                object.not_primary_transport = message.not_primary_transport;
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
+                object.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.toObject(message.p2p_routing_summary, options);
             if (message.dummy_pad != null && message.hasOwnProperty("dummy_pad"))
                 object.dummy_pad = message.dummy_pad;
             return object;
@@ -6804,12 +7616,14 @@
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
+         * @property {number} NOT_PRIMARY_SESSION=8 NOT_PRIMARY_SESSION value
          */
         CMsgSteamDatagramConnectionStatsClientToRouter.Flags = (function() {
             var valuesById = {}, values = Object.create(valuesById);
             values[valuesById[1] = "ACK_REQUEST_RELAY"] = 1;
             values[valuesById[2] = "ACK_REQUEST_E2E"] = 2;
             values[valuesById[4] = "ACK_REQUEST_IMMEDIATE"] = 4;
+            values[valuesById[8] = "NOT_PRIMARY_SESSION"] = 8;
             return values;
         })();
     
@@ -8331,7 +9145,8 @@
          * @property {number|null} [challenge_time] CMsgSteamDatagramP2PSessionRequestBody challenge_time
          * @property {number|Long|null} [challenge] CMsgSteamDatagramP2PSessionRequestBody challenge
          * @property {number|null} [client_connection_id] CMsgSteamDatagramP2PSessionRequestBody client_connection_id
-         * @property {number|Long|null} [peer_steam_id] CMsgSteamDatagramP2PSessionRequestBody peer_steam_id
+         * @property {number|Long|null} [legacy_peer_steam_id] CMsgSteamDatagramP2PSessionRequestBody legacy_peer_steam_id
+         * @property {string|null} [peer_identity_string] CMsgSteamDatagramP2PSessionRequestBody peer_identity_string
          * @property {number|null} [peer_connection_id] CMsgSteamDatagramP2PSessionRequestBody peer_connection_id
          * @property {number|null} [protocol_version] CMsgSteamDatagramP2PSessionRequestBody protocol_version
          * @property {number|null} [network_config_version] CMsgSteamDatagramP2PSessionRequestBody network_config_version
@@ -8378,12 +9193,20 @@
         CMsgSteamDatagramP2PSessionRequestBody.prototype.client_connection_id = 0;
     
         /**
-         * CMsgSteamDatagramP2PSessionRequestBody peer_steam_id.
-         * @member {number|Long} peer_steam_id
+         * CMsgSteamDatagramP2PSessionRequestBody legacy_peer_steam_id.
+         * @member {number|Long} legacy_peer_steam_id
          * @memberof CMsgSteamDatagramP2PSessionRequestBody
          * @instance
          */
-        CMsgSteamDatagramP2PSessionRequestBody.prototype.peer_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        CMsgSteamDatagramP2PSessionRequestBody.prototype.legacy_peer_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamDatagramP2PSessionRequestBody peer_identity_string.
+         * @member {string} peer_identity_string
+         * @memberof CMsgSteamDatagramP2PSessionRequestBody
+         * @instance
+         */
+        CMsgSteamDatagramP2PSessionRequestBody.prototype.peer_identity_string = "";
     
         /**
          * CMsgSteamDatagramP2PSessionRequestBody peer_connection_id.
@@ -8447,8 +9270,8 @@
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.challenge);
             if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.client_connection_id);
-            if (message.peer_steam_id != null && message.hasOwnProperty("peer_steam_id"))
-                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.peer_steam_id);
+            if (message.legacy_peer_steam_id != null && message.hasOwnProperty("legacy_peer_steam_id"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_peer_steam_id);
             if (message.peer_connection_id != null && message.hasOwnProperty("peer_connection_id"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.peer_connection_id);
             if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
@@ -8457,6 +9280,8 @@
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.network_config_version);
             if (message.public_ip != null && message.hasOwnProperty("public_ip"))
                 writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.public_ip);
+            if (message.peer_identity_string != null && message.hasOwnProperty("peer_identity_string"))
+                writer.uint32(/* id 11, wireType 2 =*/90).string(message.peer_identity_string);
             return writer;
         };
     
@@ -8501,7 +9326,10 @@
                     message.client_connection_id = reader.fixed32();
                     break;
                 case 4:
-                    message.peer_steam_id = reader.fixed64();
+                    message.legacy_peer_steam_id = reader.fixed64();
+                    break;
+                case 11:
+                    message.peer_identity_string = reader.string();
                     break;
                 case 5:
                     message.peer_connection_id = reader.fixed32();
@@ -8559,9 +9387,12 @@
             if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 if (!$util.isInteger(message.client_connection_id))
                     return "client_connection_id: integer expected";
-            if (message.peer_steam_id != null && message.hasOwnProperty("peer_steam_id"))
-                if (!$util.isInteger(message.peer_steam_id) && !(message.peer_steam_id && $util.isInteger(message.peer_steam_id.low) && $util.isInteger(message.peer_steam_id.high)))
-                    return "peer_steam_id: integer|Long expected";
+            if (message.legacy_peer_steam_id != null && message.hasOwnProperty("legacy_peer_steam_id"))
+                if (!$util.isInteger(message.legacy_peer_steam_id) && !(message.legacy_peer_steam_id && $util.isInteger(message.legacy_peer_steam_id.low) && $util.isInteger(message.legacy_peer_steam_id.high)))
+                    return "legacy_peer_steam_id: integer|Long expected";
+            if (message.peer_identity_string != null && message.hasOwnProperty("peer_identity_string"))
+                if (!$util.isString(message.peer_identity_string))
+                    return "peer_identity_string: string expected";
             if (message.peer_connection_id != null && message.hasOwnProperty("peer_connection_id"))
                 if (!$util.isInteger(message.peer_connection_id))
                     return "peer_connection_id: integer expected";
@@ -8602,15 +9433,17 @@
                     message.challenge = new $util.LongBits(object.challenge.low >>> 0, object.challenge.high >>> 0).toNumber();
             if (object.client_connection_id != null)
                 message.client_connection_id = object.client_connection_id >>> 0;
-            if (object.peer_steam_id != null)
+            if (object.legacy_peer_steam_id != null)
                 if ($util.Long)
-                    (message.peer_steam_id = $util.Long.fromValue(object.peer_steam_id)).unsigned = false;
-                else if (typeof object.peer_steam_id === "string")
-                    message.peer_steam_id = parseInt(object.peer_steam_id, 10);
-                else if (typeof object.peer_steam_id === "number")
-                    message.peer_steam_id = object.peer_steam_id;
-                else if (typeof object.peer_steam_id === "object")
-                    message.peer_steam_id = new $util.LongBits(object.peer_steam_id.low >>> 0, object.peer_steam_id.high >>> 0).toNumber();
+                    (message.legacy_peer_steam_id = $util.Long.fromValue(object.legacy_peer_steam_id)).unsigned = false;
+                else if (typeof object.legacy_peer_steam_id === "string")
+                    message.legacy_peer_steam_id = parseInt(object.legacy_peer_steam_id, 10);
+                else if (typeof object.legacy_peer_steam_id === "number")
+                    message.legacy_peer_steam_id = object.legacy_peer_steam_id;
+                else if (typeof object.legacy_peer_steam_id === "object")
+                    message.legacy_peer_steam_id = new $util.LongBits(object.legacy_peer_steam_id.low >>> 0, object.legacy_peer_steam_id.high >>> 0).toNumber();
+            if (object.peer_identity_string != null)
+                message.peer_identity_string = String(object.peer_identity_string);
             if (object.peer_connection_id != null)
                 message.peer_connection_id = object.peer_connection_id >>> 0;
             if (object.protocol_version != null)
@@ -8645,13 +9478,14 @@
                 object.client_connection_id = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.peer_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.legacy_peer_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.peer_steam_id = options.longs === String ? "0" : 0;
+                    object.legacy_peer_steam_id = options.longs === String ? "0" : 0;
                 object.peer_connection_id = 0;
                 object.protocol_version = 0;
                 object.network_config_version = 0;
                 object.public_ip = 0;
+                object.peer_identity_string = "";
             }
             if (message.challenge_time != null && message.hasOwnProperty("challenge_time"))
                 object.challenge_time = message.challenge_time;
@@ -8662,11 +9496,11 @@
                     object.challenge = options.longs === String ? $util.Long.prototype.toString.call(message.challenge) : options.longs === Number ? new $util.LongBits(message.challenge.low >>> 0, message.challenge.high >>> 0).toNumber() : message.challenge;
             if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 object.client_connection_id = message.client_connection_id;
-            if (message.peer_steam_id != null && message.hasOwnProperty("peer_steam_id"))
-                if (typeof message.peer_steam_id === "number")
-                    object.peer_steam_id = options.longs === String ? String(message.peer_steam_id) : message.peer_steam_id;
+            if (message.legacy_peer_steam_id != null && message.hasOwnProperty("legacy_peer_steam_id"))
+                if (typeof message.legacy_peer_steam_id === "number")
+                    object.legacy_peer_steam_id = options.longs === String ? String(message.legacy_peer_steam_id) : message.legacy_peer_steam_id;
                 else
-                    object.peer_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.peer_steam_id) : options.longs === Number ? new $util.LongBits(message.peer_steam_id.low >>> 0, message.peer_steam_id.high >>> 0).toNumber() : message.peer_steam_id;
+                    object.legacy_peer_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.legacy_peer_steam_id) : options.longs === Number ? new $util.LongBits(message.legacy_peer_steam_id.low >>> 0, message.legacy_peer_steam_id.high >>> 0).toNumber() : message.legacy_peer_steam_id;
             if (message.peer_connection_id != null && message.hasOwnProperty("peer_connection_id"))
                 object.peer_connection_id = message.peer_connection_id;
             if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
@@ -8675,6 +9509,8 @@
                 object.network_config_version = message.network_config_version;
             if (message.public_ip != null && message.hasOwnProperty("public_ip"))
                 object.public_ip = message.public_ip;
+            if (message.peer_identity_string != null && message.hasOwnProperty("peer_identity_string"))
+                object.peer_identity_string = message.peer_identity_string;
             return object;
         };
     
@@ -9208,6 +10044,1409 @@
         };
     
         return CMsgSteamDatagramP2PSessionEstablished;
+    })();
+    
+    $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramConnectionStatsP2PClientToRouter.
+         * @exports ICMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @interface ICMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_relay] CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_relay
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_e2e] CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_e2e
+         * @property {ICMsgSteamDatagramP2PRoutingSummary|null} [p2p_routing_summary] CMsgSteamDatagramConnectionStatsP2PClientToRouter p2p_routing_summary
+         * @property {Array.<number>|null} [ack_relay] CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_relay
+         * @property {Array.<number>|null} [legacy_ack_e2e] CMsgSteamDatagramConnectionStatsP2PClientToRouter legacy_ack_e2e
+         * @property {number|null} [flags] CMsgSteamDatagramConnectionStatsP2PClientToRouter flags
+         * @property {Uint8Array|null} [forward_target_relay_routing_token] CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_relay_routing_token
+         * @property {number|null} [forward_target_revision] CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_revision
+         * @property {Uint8Array|null} [routes] CMsgSteamDatagramConnectionStatsP2PClientToRouter routes
+         * @property {number|null} [ack_peer_routes_revision] CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_peer_routes_revision
+         * @property {number|null} [connection_id] CMsgSteamDatagramConnectionStatsP2PClientToRouter connection_id
+         * @property {number|null} [seq_num_c2r] CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_c2r
+         * @property {number|null} [seq_num_e2e] CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_e2e
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramConnectionStatsP2PClientToRouter.
+         * @exports CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @classdesc Represents a CMsgSteamDatagramConnectionStatsP2PClientToRouter.
+         * @implements ICMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @constructor
+         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramConnectionStatsP2PClientToRouter(properties) {
+            this.ack_relay = [];
+            this.legacy_ack_e2e = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_relay.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_relay
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.quality_relay = null;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_e2e.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_e2e
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.quality_e2e = null;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter p2p_routing_summary.
+         * @member {ICMsgSteamDatagramP2PRoutingSummary|null|undefined} p2p_routing_summary
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.p2p_routing_summary = null;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_relay.
+         * @member {Array.<number>} ack_relay
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.ack_relay = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter legacy_ack_e2e.
+         * @member {Array.<number>} legacy_ack_e2e
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.legacy_ack_e2e = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter flags.
+         * @member {number} flags
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.flags = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_relay_routing_token.
+         * @member {Uint8Array} forward_target_relay_routing_token
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.forward_target_relay_routing_token = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_revision.
+         * @member {number} forward_target_revision
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.forward_target_revision = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter routes.
+         * @member {Uint8Array} routes
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.routes = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_peer_routes_revision.
+         * @member {number} ack_peer_routes_revision
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.ack_peer_routes_revision = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter connection_id.
+         * @member {number} connection_id
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.connection_id = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_c2r.
+         * @member {number} seq_num_c2r
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.seq_num_c2r = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_e2e.
+         * @member {number} seq_num_e2e
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.seq_num_e2e = 0;
+    
+        /**
+         * Creates a new CMsgSteamDatagramConnectionStatsP2PClientToRouter instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.create = function create(properties) {
+            return new CMsgSteamDatagramConnectionStatsP2PClientToRouter(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PClientToRouter message. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PClientToRouter.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter} message CMsgSteamDatagramConnectionStatsP2PClientToRouter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.ack_relay != null && message.ack_relay.length)
+                for (var i = 0; i < message.ack_relay.length; ++i)
+                    writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.ack_relay[i]);
+            if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
+                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
+                    writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.legacy_ack_e2e[i]);
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.flags);
+            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
+                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.forward_target_relay_routing_token);
+            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.forward_target_revision);
+            if (message.routes != null && message.hasOwnProperty("routes"))
+                writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.routes);
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.ack_peer_routes_revision);
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.connection_id);
+            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.seq_num_c2r);
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.seq_num_e2e);
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
+                $root.CMsgSteamDatagramP2PRoutingSummary.encode(message.p2p_routing_summary, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PClientToRouter message, length delimited. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PClientToRouter.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter} message CMsgSteamDatagramConnectionStatsP2PClientToRouter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramConnectionStatsP2PClientToRouter message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 14:
+                    message.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    if (!(message.ack_relay && message.ack_relay.length))
+                        message.ack_relay = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.ack_relay.push(reader.fixed32());
+                    } else
+                        message.ack_relay.push(reader.fixed32());
+                    break;
+                case 4:
+                    if (!(message.legacy_ack_e2e && message.legacy_ack_e2e.length))
+                        message.legacy_ack_e2e = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.legacy_ack_e2e.push(reader.fixed32());
+                    } else
+                        message.legacy_ack_e2e.push(reader.fixed32());
+                    break;
+                case 5:
+                    message.flags = reader.uint32();
+                    break;
+                case 6:
+                    message.forward_target_relay_routing_token = reader.bytes();
+                    break;
+                case 7:
+                    message.forward_target_revision = reader.uint32();
+                    break;
+                case 8:
+                    message.routes = reader.bytes();
+                    break;
+                case 9:
+                    message.ack_peer_routes_revision = reader.uint32();
+                    break;
+                case 10:
+                    message.connection_id = reader.fixed32();
+                    break;
+                case 11:
+                    message.seq_num_c2r = reader.uint32();
+                    break;
+                case 12:
+                    message.seq_num_e2e = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramConnectionStatsP2PClientToRouter message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramConnectionStatsP2PClientToRouter message.
+         * @function verify
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_relay);
+                if (error)
+                    return "quality_relay." + error;
+            }
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_e2e);
+                if (error)
+                    return "quality_e2e." + error;
+            }
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary")) {
+                var error = $root.CMsgSteamDatagramP2PRoutingSummary.verify(message.p2p_routing_summary);
+                if (error)
+                    return "p2p_routing_summary." + error;
+            }
+            if (message.ack_relay != null && message.hasOwnProperty("ack_relay")) {
+                if (!Array.isArray(message.ack_relay))
+                    return "ack_relay: array expected";
+                for (var i = 0; i < message.ack_relay.length; ++i)
+                    if (!$util.isInteger(message.ack_relay[i]))
+                        return "ack_relay: integer[] expected";
+            }
+            if (message.legacy_ack_e2e != null && message.hasOwnProperty("legacy_ack_e2e")) {
+                if (!Array.isArray(message.legacy_ack_e2e))
+                    return "legacy_ack_e2e: array expected";
+                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
+                    if (!$util.isInteger(message.legacy_ack_e2e[i]))
+                        return "legacy_ack_e2e: integer[] expected";
+            }
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                if (!$util.isInteger(message.flags))
+                    return "flags: integer expected";
+            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
+                if (!(message.forward_target_relay_routing_token && typeof message.forward_target_relay_routing_token.length === "number" || $util.isString(message.forward_target_relay_routing_token)))
+                    return "forward_target_relay_routing_token: buffer expected";
+            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
+                if (!$util.isInteger(message.forward_target_revision))
+                    return "forward_target_revision: integer expected";
+            if (message.routes != null && message.hasOwnProperty("routes"))
+                if (!(message.routes && typeof message.routes.length === "number" || $util.isString(message.routes)))
+                    return "routes: buffer expected";
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                if (!$util.isInteger(message.ack_peer_routes_revision))
+                    return "ack_peer_routes_revision: integer expected";
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                if (!$util.isInteger(message.connection_id))
+                    return "connection_id: integer expected";
+            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
+                if (!$util.isInteger(message.seq_num_c2r))
+                    return "seq_num_c2r: integer expected";
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
+                if (!$util.isInteger(message.seq_num_e2e))
+                    return "seq_num_e2e: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramConnectionStatsP2PClientToRouter message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter)
+                return object;
+            var message = new $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter();
+            if (object.quality_relay != null) {
+                if (typeof object.quality_relay !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.quality_relay: object expected");
+                message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_relay);
+            }
+            if (object.quality_e2e != null) {
+                if (typeof object.quality_e2e !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.quality_e2e: object expected");
+                message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_e2e);
+            }
+            if (object.p2p_routing_summary != null) {
+                if (typeof object.p2p_routing_summary !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.p2p_routing_summary: object expected");
+                message.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.fromObject(object.p2p_routing_summary);
+            }
+            if (object.ack_relay) {
+                if (!Array.isArray(object.ack_relay))
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.ack_relay: array expected");
+                message.ack_relay = [];
+                for (var i = 0; i < object.ack_relay.length; ++i)
+                    message.ack_relay[i] = object.ack_relay[i] >>> 0;
+            }
+            if (object.legacy_ack_e2e) {
+                if (!Array.isArray(object.legacy_ack_e2e))
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.legacy_ack_e2e: array expected");
+                message.legacy_ack_e2e = [];
+                for (var i = 0; i < object.legacy_ack_e2e.length; ++i)
+                    message.legacy_ack_e2e[i] = object.legacy_ack_e2e[i] >>> 0;
+            }
+            if (object.flags != null)
+                message.flags = object.flags >>> 0;
+            if (object.forward_target_relay_routing_token != null)
+                if (typeof object.forward_target_relay_routing_token === "string")
+                    $util.base64.decode(object.forward_target_relay_routing_token, message.forward_target_relay_routing_token = $util.newBuffer($util.base64.length(object.forward_target_relay_routing_token)), 0);
+                else if (object.forward_target_relay_routing_token.length)
+                    message.forward_target_relay_routing_token = object.forward_target_relay_routing_token;
+            if (object.forward_target_revision != null)
+                message.forward_target_revision = object.forward_target_revision >>> 0;
+            if (object.routes != null)
+                if (typeof object.routes === "string")
+                    $util.base64.decode(object.routes, message.routes = $util.newBuffer($util.base64.length(object.routes)), 0);
+                else if (object.routes.length)
+                    message.routes = object.routes;
+            if (object.ack_peer_routes_revision != null)
+                message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
+            if (object.connection_id != null)
+                message.connection_id = object.connection_id >>> 0;
+            if (object.seq_num_c2r != null)
+                message.seq_num_c2r = object.seq_num_c2r >>> 0;
+            if (object.seq_num_e2e != null)
+                message.seq_num_e2e = object.seq_num_e2e >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramConnectionStatsP2PClientToRouter message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @static
+         * @param {CMsgSteamDatagramConnectionStatsP2PClientToRouter} message CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.ack_relay = [];
+                object.legacy_ack_e2e = [];
+            }
+            if (options.defaults) {
+                object.quality_relay = null;
+                object.quality_e2e = null;
+                object.flags = 0;
+                if (options.bytes === String)
+                    object.forward_target_relay_routing_token = "";
+                else {
+                    object.forward_target_relay_routing_token = [];
+                    if (options.bytes !== Array)
+                        object.forward_target_relay_routing_token = $util.newBuffer(object.forward_target_relay_routing_token);
+                }
+                object.forward_target_revision = 0;
+                if (options.bytes === String)
+                    object.routes = "";
+                else {
+                    object.routes = [];
+                    if (options.bytes !== Array)
+                        object.routes = $util.newBuffer(object.routes);
+                }
+                object.ack_peer_routes_revision = 0;
+                object.connection_id = 0;
+                object.seq_num_c2r = 0;
+                object.seq_num_e2e = 0;
+                object.p2p_routing_summary = null;
+            }
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                object.quality_relay = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_relay, options);
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                object.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_e2e, options);
+            if (message.ack_relay && message.ack_relay.length) {
+                object.ack_relay = [];
+                for (var j = 0; j < message.ack_relay.length; ++j)
+                    object.ack_relay[j] = message.ack_relay[j];
+            }
+            if (message.legacy_ack_e2e && message.legacy_ack_e2e.length) {
+                object.legacy_ack_e2e = [];
+                for (var j = 0; j < message.legacy_ack_e2e.length; ++j)
+                    object.legacy_ack_e2e[j] = message.legacy_ack_e2e[j];
+            }
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                object.flags = message.flags;
+            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
+                object.forward_target_relay_routing_token = options.bytes === String ? $util.base64.encode(message.forward_target_relay_routing_token, 0, message.forward_target_relay_routing_token.length) : options.bytes === Array ? Array.prototype.slice.call(message.forward_target_relay_routing_token) : message.forward_target_relay_routing_token;
+            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
+                object.forward_target_revision = message.forward_target_revision;
+            if (message.routes != null && message.hasOwnProperty("routes"))
+                object.routes = options.bytes === String ? $util.base64.encode(message.routes, 0, message.routes.length) : options.bytes === Array ? Array.prototype.slice.call(message.routes) : message.routes;
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                object.ack_peer_routes_revision = message.ack_peer_routes_revision;
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                object.connection_id = message.connection_id;
+            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
+                object.seq_num_c2r = message.seq_num_c2r;
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
+                object.seq_num_e2e = message.seq_num_e2e;
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
+                object.p2p_routing_summary = $root.CMsgSteamDatagramP2PRoutingSummary.toObject(message.p2p_routing_summary, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramConnectionStatsP2PClientToRouter to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Flags enum.
+         * @name CMsgSteamDatagramConnectionStatsP2PClientToRouter.Flags
+         * @enum {string}
+         * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
+         * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
+         * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
+         * @property {number} NOT_PRIMARY_SESSION=8 NOT_PRIMARY_SESSION value
+         * @property {number} NOT_PRIMARY_TRANSPORT_E2E=16 NOT_PRIMARY_TRANSPORT_E2E value
+         */
+        CMsgSteamDatagramConnectionStatsP2PClientToRouter.Flags = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[1] = "ACK_REQUEST_RELAY"] = 1;
+            values[valuesById[2] = "ACK_REQUEST_E2E"] = 2;
+            values[valuesById[4] = "ACK_REQUEST_IMMEDIATE"] = 4;
+            values[valuesById[8] = "NOT_PRIMARY_SESSION"] = 8;
+            values[valuesById[16] = "NOT_PRIMARY_TRANSPORT_E2E"] = 16;
+            return values;
+        })();
+    
+        return CMsgSteamDatagramConnectionStatsP2PClientToRouter;
+    })();
+    
+    $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramConnectionStatsP2PRouterToClient.
+         * @exports ICMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @interface ICMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_relay] CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_relay
+         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_e2e
+         * @property {number|null} [seconds_until_shutdown] CMsgSteamDatagramConnectionStatsP2PRouterToClient seconds_until_shutdown
+         * @property {number|null} [migrate_request_ip] CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_ip
+         * @property {number|null} [migrate_request_port] CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_port
+         * @property {number|null} [scoring_penalty_relay_cluster] CMsgSteamDatagramConnectionStatsP2PRouterToClient scoring_penalty_relay_cluster
+         * @property {Array.<number>|null} [ack_relay] CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_relay
+         * @property {Array.<number>|null} [legacy_ack_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToClient legacy_ack_e2e
+         * @property {number|null} [flags] CMsgSteamDatagramConnectionStatsP2PRouterToClient flags
+         * @property {number|null} [ack_forward_target_revision] CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_forward_target_revision
+         * @property {Uint8Array|null} [routes] CMsgSteamDatagramConnectionStatsP2PRouterToClient routes
+         * @property {number|null} [ack_peer_routes_revision] CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_peer_routes_revision
+         * @property {number|null} [connection_id] CMsgSteamDatagramConnectionStatsP2PRouterToClient connection_id
+         * @property {number|null} [seq_num_r2c] CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_r2c
+         * @property {number|null} [seq_num_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_e2e
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramConnectionStatsP2PRouterToClient.
+         * @exports CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @classdesc Represents a CMsgSteamDatagramConnectionStatsP2PRouterToClient.
+         * @implements ICMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @constructor
+         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramConnectionStatsP2PRouterToClient(properties) {
+            this.ack_relay = [];
+            this.legacy_ack_e2e = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_relay.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_relay
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.quality_relay = null;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_e2e.
+         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_e2e
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.quality_e2e = null;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient seconds_until_shutdown.
+         * @member {number} seconds_until_shutdown
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.seconds_until_shutdown = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_ip.
+         * @member {number} migrate_request_ip
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.migrate_request_ip = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_port.
+         * @member {number} migrate_request_port
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.migrate_request_port = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient scoring_penalty_relay_cluster.
+         * @member {number} scoring_penalty_relay_cluster
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.scoring_penalty_relay_cluster = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_relay.
+         * @member {Array.<number>} ack_relay
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.ack_relay = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient legacy_ack_e2e.
+         * @member {Array.<number>} legacy_ack_e2e
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.legacy_ack_e2e = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient flags.
+         * @member {number} flags
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.flags = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_forward_target_revision.
+         * @member {number} ack_forward_target_revision
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.ack_forward_target_revision = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient routes.
+         * @member {Uint8Array} routes
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.routes = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_peer_routes_revision.
+         * @member {number} ack_peer_routes_revision
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.ack_peer_routes_revision = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient connection_id.
+         * @member {number} connection_id
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.connection_id = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_r2c.
+         * @member {number} seq_num_r2c
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.seq_num_r2c = 0;
+    
+        /**
+         * CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_e2e.
+         * @member {number} seq_num_e2e
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.seq_num_e2e = 0;
+    
+        /**
+         * Creates a new CMsgSteamDatagramConnectionStatsP2PRouterToClient instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient instance
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.create = function create(properties) {
+            return new CMsgSteamDatagramConnectionStatsP2PRouterToClient(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PRouterToClient message. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PRouterToClient.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient} message CMsgSteamDatagramConnectionStatsP2PRouterToClient message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seconds_until_shutdown);
+            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
+                writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.migrate_request_ip);
+            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.migrate_request_port);
+            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.scoring_penalty_relay_cluster);
+            if (message.ack_relay != null && message.ack_relay.length)
+                for (var i = 0; i < message.ack_relay.length; ++i)
+                    writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.ack_relay[i]);
+            if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
+                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
+                    writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.legacy_ack_e2e[i]);
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.flags);
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.ack_forward_target_revision);
+            if (message.routes != null && message.hasOwnProperty("routes"))
+                writer.uint32(/* id 11, wireType 2 =*/90).bytes(message.routes);
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.ack_peer_routes_revision);
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                writer.uint32(/* id 13, wireType 5 =*/109).fixed32(message.connection_id);
+            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.seq_num_r2c);
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
+                writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.seq_num_e2e);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PRouterToClient message, length delimited. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PRouterToClient.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient} message CMsgSteamDatagramConnectionStatsP2PRouterToClient message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramConnectionStatsP2PRouterToClient message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.seconds_until_shutdown = reader.uint32();
+                    break;
+                case 4:
+                    message.migrate_request_ip = reader.fixed32();
+                    break;
+                case 5:
+                    message.migrate_request_port = reader.uint32();
+                    break;
+                case 6:
+                    message.scoring_penalty_relay_cluster = reader.uint32();
+                    break;
+                case 7:
+                    if (!(message.ack_relay && message.ack_relay.length))
+                        message.ack_relay = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.ack_relay.push(reader.fixed32());
+                    } else
+                        message.ack_relay.push(reader.fixed32());
+                    break;
+                case 8:
+                    if (!(message.legacy_ack_e2e && message.legacy_ack_e2e.length))
+                        message.legacy_ack_e2e = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.legacy_ack_e2e.push(reader.fixed32());
+                    } else
+                        message.legacy_ack_e2e.push(reader.fixed32());
+                    break;
+                case 9:
+                    message.flags = reader.uint32();
+                    break;
+                case 10:
+                    message.ack_forward_target_revision = reader.uint32();
+                    break;
+                case 11:
+                    message.routes = reader.bytes();
+                    break;
+                case 12:
+                    message.ack_peer_routes_revision = reader.uint32();
+                    break;
+                case 13:
+                    message.connection_id = reader.fixed32();
+                    break;
+                case 14:
+                    message.seq_num_r2c = reader.uint32();
+                    break;
+                case 15:
+                    message.seq_num_e2e = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramConnectionStatsP2PRouterToClient message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramConnectionStatsP2PRouterToClient message.
+         * @function verify
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_relay);
+                if (error)
+                    return "quality_relay." + error;
+            }
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e")) {
+                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_e2e);
+                if (error)
+                    return "quality_e2e." + error;
+            }
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
+                if (!$util.isInteger(message.seconds_until_shutdown))
+                    return "seconds_until_shutdown: integer expected";
+            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
+                if (!$util.isInteger(message.migrate_request_ip))
+                    return "migrate_request_ip: integer expected";
+            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
+                if (!$util.isInteger(message.migrate_request_port))
+                    return "migrate_request_port: integer expected";
+            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
+                if (!$util.isInteger(message.scoring_penalty_relay_cluster))
+                    return "scoring_penalty_relay_cluster: integer expected";
+            if (message.ack_relay != null && message.hasOwnProperty("ack_relay")) {
+                if (!Array.isArray(message.ack_relay))
+                    return "ack_relay: array expected";
+                for (var i = 0; i < message.ack_relay.length; ++i)
+                    if (!$util.isInteger(message.ack_relay[i]))
+                        return "ack_relay: integer[] expected";
+            }
+            if (message.legacy_ack_e2e != null && message.hasOwnProperty("legacy_ack_e2e")) {
+                if (!Array.isArray(message.legacy_ack_e2e))
+                    return "legacy_ack_e2e: array expected";
+                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
+                    if (!$util.isInteger(message.legacy_ack_e2e[i]))
+                        return "legacy_ack_e2e: integer[] expected";
+            }
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                if (!$util.isInteger(message.flags))
+                    return "flags: integer expected";
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
+                if (!$util.isInteger(message.ack_forward_target_revision))
+                    return "ack_forward_target_revision: integer expected";
+            if (message.routes != null && message.hasOwnProperty("routes"))
+                if (!(message.routes && typeof message.routes.length === "number" || $util.isString(message.routes)))
+                    return "routes: buffer expected";
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                if (!$util.isInteger(message.ack_peer_routes_revision))
+                    return "ack_peer_routes_revision: integer expected";
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                if (!$util.isInteger(message.connection_id))
+                    return "connection_id: integer expected";
+            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
+                if (!$util.isInteger(message.seq_num_r2c))
+                    return "seq_num_r2c: integer expected";
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
+                if (!$util.isInteger(message.seq_num_e2e))
+                    return "seq_num_e2e: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramConnectionStatsP2PRouterToClient message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient)
+                return object;
+            var message = new $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient();
+            if (object.quality_relay != null) {
+                if (typeof object.quality_relay !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.quality_relay: object expected");
+                message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_relay);
+            }
+            if (object.quality_e2e != null) {
+                if (typeof object.quality_e2e !== "object")
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.quality_e2e: object expected");
+                message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_e2e);
+            }
+            if (object.seconds_until_shutdown != null)
+                message.seconds_until_shutdown = object.seconds_until_shutdown >>> 0;
+            if (object.migrate_request_ip != null)
+                message.migrate_request_ip = object.migrate_request_ip >>> 0;
+            if (object.migrate_request_port != null)
+                message.migrate_request_port = object.migrate_request_port >>> 0;
+            if (object.scoring_penalty_relay_cluster != null)
+                message.scoring_penalty_relay_cluster = object.scoring_penalty_relay_cluster >>> 0;
+            if (object.ack_relay) {
+                if (!Array.isArray(object.ack_relay))
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.ack_relay: array expected");
+                message.ack_relay = [];
+                for (var i = 0; i < object.ack_relay.length; ++i)
+                    message.ack_relay[i] = object.ack_relay[i] >>> 0;
+            }
+            if (object.legacy_ack_e2e) {
+                if (!Array.isArray(object.legacy_ack_e2e))
+                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.legacy_ack_e2e: array expected");
+                message.legacy_ack_e2e = [];
+                for (var i = 0; i < object.legacy_ack_e2e.length; ++i)
+                    message.legacy_ack_e2e[i] = object.legacy_ack_e2e[i] >>> 0;
+            }
+            if (object.flags != null)
+                message.flags = object.flags >>> 0;
+            if (object.ack_forward_target_revision != null)
+                message.ack_forward_target_revision = object.ack_forward_target_revision >>> 0;
+            if (object.routes != null)
+                if (typeof object.routes === "string")
+                    $util.base64.decode(object.routes, message.routes = $util.newBuffer($util.base64.length(object.routes)), 0);
+                else if (object.routes.length)
+                    message.routes = object.routes;
+            if (object.ack_peer_routes_revision != null)
+                message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
+            if (object.connection_id != null)
+                message.connection_id = object.connection_id >>> 0;
+            if (object.seq_num_r2c != null)
+                message.seq_num_r2c = object.seq_num_r2c >>> 0;
+            if (object.seq_num_e2e != null)
+                message.seq_num_e2e = object.seq_num_e2e >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramConnectionStatsP2PRouterToClient message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @static
+         * @param {CMsgSteamDatagramConnectionStatsP2PRouterToClient} message CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.ack_relay = [];
+                object.legacy_ack_e2e = [];
+            }
+            if (options.defaults) {
+                object.quality_relay = null;
+                object.quality_e2e = null;
+                object.seconds_until_shutdown = 0;
+                object.migrate_request_ip = 0;
+                object.migrate_request_port = 0;
+                object.scoring_penalty_relay_cluster = 0;
+                object.flags = 0;
+                object.ack_forward_target_revision = 0;
+                if (options.bytes === String)
+                    object.routes = "";
+                else {
+                    object.routes = [];
+                    if (options.bytes !== Array)
+                        object.routes = $util.newBuffer(object.routes);
+                }
+                object.ack_peer_routes_revision = 0;
+                object.connection_id = 0;
+                object.seq_num_r2c = 0;
+                object.seq_num_e2e = 0;
+            }
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
+                object.quality_relay = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_relay, options);
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
+                object.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_e2e, options);
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
+                object.seconds_until_shutdown = message.seconds_until_shutdown;
+            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
+                object.migrate_request_ip = message.migrate_request_ip;
+            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
+                object.migrate_request_port = message.migrate_request_port;
+            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
+                object.scoring_penalty_relay_cluster = message.scoring_penalty_relay_cluster;
+            if (message.ack_relay && message.ack_relay.length) {
+                object.ack_relay = [];
+                for (var j = 0; j < message.ack_relay.length; ++j)
+                    object.ack_relay[j] = message.ack_relay[j];
+            }
+            if (message.legacy_ack_e2e && message.legacy_ack_e2e.length) {
+                object.legacy_ack_e2e = [];
+                for (var j = 0; j < message.legacy_ack_e2e.length; ++j)
+                    object.legacy_ack_e2e[j] = message.legacy_ack_e2e[j];
+            }
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                object.flags = message.flags;
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
+                object.ack_forward_target_revision = message.ack_forward_target_revision;
+            if (message.routes != null && message.hasOwnProperty("routes"))
+                object.routes = options.bytes === String ? $util.base64.encode(message.routes, 0, message.routes.length) : options.bytes === Array ? Array.prototype.slice.call(message.routes) : message.routes;
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                object.ack_peer_routes_revision = message.ack_peer_routes_revision;
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                object.connection_id = message.connection_id;
+            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
+                object.seq_num_r2c = message.seq_num_r2c;
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
+                object.seq_num_e2e = message.seq_num_e2e;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramConnectionStatsP2PRouterToClient to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Flags enum.
+         * @name CMsgSteamDatagramConnectionStatsP2PRouterToClient.Flags
+         * @enum {string}
+         * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
+         * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
+         * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
+         * @property {number} NOT_PRIMARY_TRANSPORT_E2E=16 NOT_PRIMARY_TRANSPORT_E2E value
+         */
+        CMsgSteamDatagramConnectionStatsP2PRouterToClient.Flags = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[1] = "ACK_REQUEST_RELAY"] = 1;
+            values[valuesById[2] = "ACK_REQUEST_E2E"] = 2;
+            values[valuesById[4] = "ACK_REQUEST_IMMEDIATE"] = 4;
+            values[valuesById[16] = "NOT_PRIMARY_TRANSPORT_E2E"] = 16;
+            return values;
+        })();
+    
+        return CMsgSteamDatagramConnectionStatsP2PRouterToClient;
+    })();
+    
+    $root.CMsgSteamDatagramP2PBadRouteRouterToClient = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramP2PBadRouteRouterToClient.
+         * @exports ICMsgSteamDatagramP2PBadRouteRouterToClient
+         * @interface ICMsgSteamDatagramP2PBadRouteRouterToClient
+         * @property {number|null} [connection_id] CMsgSteamDatagramP2PBadRouteRouterToClient connection_id
+         * @property {Uint8Array|null} [failed_relay_routing_token] CMsgSteamDatagramP2PBadRouteRouterToClient failed_relay_routing_token
+         * @property {number|null} [ack_forward_target_revision] CMsgSteamDatagramP2PBadRouteRouterToClient ack_forward_target_revision
+         * @property {number|Long|null} [kludge_pad] CMsgSteamDatagramP2PBadRouteRouterToClient kludge_pad
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramP2PBadRouteRouterToClient.
+         * @exports CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @classdesc Represents a CMsgSteamDatagramP2PBadRouteRouterToClient.
+         * @implements ICMsgSteamDatagramP2PBadRouteRouterToClient
+         * @constructor
+         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramP2PBadRouteRouterToClient(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramP2PBadRouteRouterToClient connection_id.
+         * @member {number} connection_id
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.connection_id = 0;
+    
+        /**
+         * CMsgSteamDatagramP2PBadRouteRouterToClient failed_relay_routing_token.
+         * @member {Uint8Array} failed_relay_routing_token
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.failed_relay_routing_token = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramP2PBadRouteRouterToClient ack_forward_target_revision.
+         * @member {number} ack_forward_target_revision
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.ack_forward_target_revision = 0;
+    
+        /**
+         * CMsgSteamDatagramP2PBadRouteRouterToClient kludge_pad.
+         * @member {number|Long} kludge_pad
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @instance
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.kludge_pad = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CMsgSteamDatagramP2PBadRouteRouterToClient instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient instance
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.create = function create(properties) {
+            return new CMsgSteamDatagramP2PBadRouteRouterToClient(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramP2PBadRouteRouterToClient message. Does not implicitly {@link CMsgSteamDatagramP2PBadRouteRouterToClient.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient} message CMsgSteamDatagramP2PBadRouteRouterToClient message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
+            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.failed_relay_routing_token);
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ack_forward_target_revision);
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
+                writer.uint32(/* id 99, wireType 1 =*/793).fixed64(message.kludge_pad);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramP2PBadRouteRouterToClient message, length delimited. Does not implicitly {@link CMsgSteamDatagramP2PBadRouteRouterToClient.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient} message CMsgSteamDatagramP2PBadRouteRouterToClient message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramP2PBadRouteRouterToClient message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramP2PBadRouteRouterToClient();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.connection_id = reader.fixed32();
+                    break;
+                case 2:
+                    message.failed_relay_routing_token = reader.bytes();
+                    break;
+                case 3:
+                    message.ack_forward_target_revision = reader.uint32();
+                    break;
+                case 99:
+                    message.kludge_pad = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramP2PBadRouteRouterToClient message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramP2PBadRouteRouterToClient message.
+         * @function verify
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                if (!$util.isInteger(message.connection_id))
+                    return "connection_id: integer expected";
+            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
+                if (!(message.failed_relay_routing_token && typeof message.failed_relay_routing_token.length === "number" || $util.isString(message.failed_relay_routing_token)))
+                    return "failed_relay_routing_token: buffer expected";
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
+                if (!$util.isInteger(message.ack_forward_target_revision))
+                    return "ack_forward_target_revision: integer expected";
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
+                if (!$util.isInteger(message.kludge_pad) && !(message.kludge_pad && $util.isInteger(message.kludge_pad.low) && $util.isInteger(message.kludge_pad.high)))
+                    return "kludge_pad: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramP2PBadRouteRouterToClient message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramP2PBadRouteRouterToClient)
+                return object;
+            var message = new $root.CMsgSteamDatagramP2PBadRouteRouterToClient();
+            if (object.connection_id != null)
+                message.connection_id = object.connection_id >>> 0;
+            if (object.failed_relay_routing_token != null)
+                if (typeof object.failed_relay_routing_token === "string")
+                    $util.base64.decode(object.failed_relay_routing_token, message.failed_relay_routing_token = $util.newBuffer($util.base64.length(object.failed_relay_routing_token)), 0);
+                else if (object.failed_relay_routing_token.length)
+                    message.failed_relay_routing_token = object.failed_relay_routing_token;
+            if (object.ack_forward_target_revision != null)
+                message.ack_forward_target_revision = object.ack_forward_target_revision >>> 0;
+            if (object.kludge_pad != null)
+                if ($util.Long)
+                    (message.kludge_pad = $util.Long.fromValue(object.kludge_pad)).unsigned = false;
+                else if (typeof object.kludge_pad === "string")
+                    message.kludge_pad = parseInt(object.kludge_pad, 10);
+                else if (typeof object.kludge_pad === "number")
+                    message.kludge_pad = object.kludge_pad;
+                else if (typeof object.kludge_pad === "object")
+                    message.kludge_pad = new $util.LongBits(object.kludge_pad.low >>> 0, object.kludge_pad.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramP2PBadRouteRouterToClient message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @static
+         * @param {CMsgSteamDatagramP2PBadRouteRouterToClient} message CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.connection_id = 0;
+                if (options.bytes === String)
+                    object.failed_relay_routing_token = "";
+                else {
+                    object.failed_relay_routing_token = [];
+                    if (options.bytes !== Array)
+                        object.failed_relay_routing_token = $util.newBuffer(object.failed_relay_routing_token);
+                }
+                object.ack_forward_target_revision = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.kludge_pad = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.kludge_pad = options.longs === String ? "0" : 0;
+            }
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
+                object.connection_id = message.connection_id;
+            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
+                object.failed_relay_routing_token = options.bytes === String ? $util.base64.encode(message.failed_relay_routing_token, 0, message.failed_relay_routing_token.length) : options.bytes === Array ? Array.prototype.slice.call(message.failed_relay_routing_token) : message.failed_relay_routing_token;
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
+                object.ack_forward_target_revision = message.ack_forward_target_revision;
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
+                if (typeof message.kludge_pad === "number")
+                    object.kludge_pad = options.longs === String ? String(message.kludge_pad) : message.kludge_pad;
+                else
+                    object.kludge_pad = options.longs === String ? $util.Long.prototype.toString.call(message.kludge_pad) : options.longs === Number ? new $util.LongBits(message.kludge_pad.low >>> 0, message.kludge_pad.high >>> 0).toNumber() : message.kludge_pad;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramP2PBadRouteRouterToClient to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamDatagramP2PBadRouteRouterToClient;
     })();
     
     $root.CMsgSteamDatagramP2PRoutes = (function() {
@@ -9978,1725 +12217,6 @@
         })();
     
         return CMsgSteamDatagramP2PRoutes;
-    })();
-    
-    $root.CMsgSteamDatagramP2PRendezvous = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramP2PRendezvous.
-         * @exports ICMsgSteamDatagramP2PRendezvous
-         * @interface ICMsgSteamDatagramP2PRendezvous
-         * @property {number|null} [to_connection_id] CMsgSteamDatagramP2PRendezvous to_connection_id
-         * @property {ICMsgSteamDatagramP2PRoutes|null} [routes] CMsgSteamDatagramP2PRendezvous routes
-         * @property {number|null} [ack_peer_routes_revision] CMsgSteamDatagramP2PRendezvous ack_peer_routes_revision
-         * @property {ICMsgSteamDatagramConnectRequest|null} [connect_request] CMsgSteamDatagramP2PRendezvous connect_request
-         * @property {ICMsgSteamDatagramConnectOK|null} [connect_ok] CMsgSteamDatagramP2PRendezvous connect_ok
-         * @property {ICMsgSteamDatagramConnectionClosed|null} [connection_closed] CMsgSteamDatagramP2PRendezvous connection_closed
-         * @property {Uint8Array|null} [failed_relay_routing_token] CMsgSteamDatagramP2PRendezvous failed_relay_routing_token
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramP2PRendezvous.
-         * @exports CMsgSteamDatagramP2PRendezvous
-         * @classdesc Represents a CMsgSteamDatagramP2PRendezvous.
-         * @implements ICMsgSteamDatagramP2PRendezvous
-         * @constructor
-         * @param {ICMsgSteamDatagramP2PRendezvous=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramP2PRendezvous(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramP2PRendezvous to_connection_id.
-         * @member {number} to_connection_id
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.to_connection_id = 0;
-    
-        /**
-         * CMsgSteamDatagramP2PRendezvous routes.
-         * @member {ICMsgSteamDatagramP2PRoutes|null|undefined} routes
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.routes = null;
-    
-        /**
-         * CMsgSteamDatagramP2PRendezvous ack_peer_routes_revision.
-         * @member {number} ack_peer_routes_revision
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.ack_peer_routes_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramP2PRendezvous connect_request.
-         * @member {ICMsgSteamDatagramConnectRequest|null|undefined} connect_request
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.connect_request = null;
-    
-        /**
-         * CMsgSteamDatagramP2PRendezvous connect_ok.
-         * @member {ICMsgSteamDatagramConnectOK|null|undefined} connect_ok
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.connect_ok = null;
-    
-        /**
-         * CMsgSteamDatagramP2PRendezvous connection_closed.
-         * @member {ICMsgSteamDatagramConnectionClosed|null|undefined} connection_closed
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.connection_closed = null;
-    
-        /**
-         * CMsgSteamDatagramP2PRendezvous failed_relay_routing_token.
-         * @member {Uint8Array} failed_relay_routing_token
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.failed_relay_routing_token = $util.newBuffer([]);
-    
-        /**
-         * Creates a new CMsgSteamDatagramP2PRendezvous instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {ICMsgSteamDatagramP2PRendezvous=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramP2PRendezvous} CMsgSteamDatagramP2PRendezvous instance
-         */
-        CMsgSteamDatagramP2PRendezvous.create = function create(properties) {
-            return new CMsgSteamDatagramP2PRendezvous(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramP2PRendezvous message. Does not implicitly {@link CMsgSteamDatagramP2PRendezvous.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {ICMsgSteamDatagramP2PRendezvous} message CMsgSteamDatagramP2PRendezvous message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramP2PRendezvous.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
-                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.to_connection_id);
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                $root.CMsgSteamDatagramP2PRoutes.encode(message.routes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ack_peer_routes_revision);
-            if (message.connect_request != null && message.hasOwnProperty("connect_request"))
-                $root.CMsgSteamDatagramConnectRequest.encode(message.connect_request, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.connect_ok != null && message.hasOwnProperty("connect_ok"))
-                $root.CMsgSteamDatagramConnectOK.encode(message.connect_ok, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.connection_closed != null && message.hasOwnProperty("connection_closed"))
-                $root.CMsgSteamDatagramConnectionClosed.encode(message.connection_closed, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
-                writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.failed_relay_routing_token);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramP2PRendezvous message, length delimited. Does not implicitly {@link CMsgSteamDatagramP2PRendezvous.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {ICMsgSteamDatagramP2PRendezvous} message CMsgSteamDatagramP2PRendezvous message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramP2PRendezvous.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramP2PRendezvous message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramP2PRendezvous} CMsgSteamDatagramP2PRendezvous
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramP2PRendezvous.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramP2PRendezvous();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.to_connection_id = reader.fixed32();
-                    break;
-                case 2:
-                    message.routes = $root.CMsgSteamDatagramP2PRoutes.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    message.ack_peer_routes_revision = reader.uint32();
-                    break;
-                case 4:
-                    message.connect_request = $root.CMsgSteamDatagramConnectRequest.decode(reader, reader.uint32());
-                    break;
-                case 5:
-                    message.connect_ok = $root.CMsgSteamDatagramConnectOK.decode(reader, reader.uint32());
-                    break;
-                case 6:
-                    message.connection_closed = $root.CMsgSteamDatagramConnectionClosed.decode(reader, reader.uint32());
-                    break;
-                case 7:
-                    message.failed_relay_routing_token = reader.bytes();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramP2PRendezvous message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramP2PRendezvous} CMsgSteamDatagramP2PRendezvous
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramP2PRendezvous.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramP2PRendezvous message.
-         * @function verify
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramP2PRendezvous.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
-                if (!$util.isInteger(message.to_connection_id))
-                    return "to_connection_id: integer expected";
-            if (message.routes != null && message.hasOwnProperty("routes")) {
-                var error = $root.CMsgSteamDatagramP2PRoutes.verify(message.routes);
-                if (error)
-                    return "routes." + error;
-            }
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                if (!$util.isInteger(message.ack_peer_routes_revision))
-                    return "ack_peer_routes_revision: integer expected";
-            if (message.connect_request != null && message.hasOwnProperty("connect_request")) {
-                var error = $root.CMsgSteamDatagramConnectRequest.verify(message.connect_request);
-                if (error)
-                    return "connect_request." + error;
-            }
-            if (message.connect_ok != null && message.hasOwnProperty("connect_ok")) {
-                var error = $root.CMsgSteamDatagramConnectOK.verify(message.connect_ok);
-                if (error)
-                    return "connect_ok." + error;
-            }
-            if (message.connection_closed != null && message.hasOwnProperty("connection_closed")) {
-                var error = $root.CMsgSteamDatagramConnectionClosed.verify(message.connection_closed);
-                if (error)
-                    return "connection_closed." + error;
-            }
-            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
-                if (!(message.failed_relay_routing_token && typeof message.failed_relay_routing_token.length === "number" || $util.isString(message.failed_relay_routing_token)))
-                    return "failed_relay_routing_token: buffer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramP2PRendezvous message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramP2PRendezvous} CMsgSteamDatagramP2PRendezvous
-         */
-        CMsgSteamDatagramP2PRendezvous.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramP2PRendezvous)
-                return object;
-            var message = new $root.CMsgSteamDatagramP2PRendezvous();
-            if (object.to_connection_id != null)
-                message.to_connection_id = object.to_connection_id >>> 0;
-            if (object.routes != null) {
-                if (typeof object.routes !== "object")
-                    throw TypeError(".CMsgSteamDatagramP2PRendezvous.routes: object expected");
-                message.routes = $root.CMsgSteamDatagramP2PRoutes.fromObject(object.routes);
-            }
-            if (object.ack_peer_routes_revision != null)
-                message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
-            if (object.connect_request != null) {
-                if (typeof object.connect_request !== "object")
-                    throw TypeError(".CMsgSteamDatagramP2PRendezvous.connect_request: object expected");
-                message.connect_request = $root.CMsgSteamDatagramConnectRequest.fromObject(object.connect_request);
-            }
-            if (object.connect_ok != null) {
-                if (typeof object.connect_ok !== "object")
-                    throw TypeError(".CMsgSteamDatagramP2PRendezvous.connect_ok: object expected");
-                message.connect_ok = $root.CMsgSteamDatagramConnectOK.fromObject(object.connect_ok);
-            }
-            if (object.connection_closed != null) {
-                if (typeof object.connection_closed !== "object")
-                    throw TypeError(".CMsgSteamDatagramP2PRendezvous.connection_closed: object expected");
-                message.connection_closed = $root.CMsgSteamDatagramConnectionClosed.fromObject(object.connection_closed);
-            }
-            if (object.failed_relay_routing_token != null)
-                if (typeof object.failed_relay_routing_token === "string")
-                    $util.base64.decode(object.failed_relay_routing_token, message.failed_relay_routing_token = $util.newBuffer($util.base64.length(object.failed_relay_routing_token)), 0);
-                else if (object.failed_relay_routing_token.length)
-                    message.failed_relay_routing_token = object.failed_relay_routing_token;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramP2PRendezvous message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @static
-         * @param {CMsgSteamDatagramP2PRendezvous} message CMsgSteamDatagramP2PRendezvous
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramP2PRendezvous.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.to_connection_id = 0;
-                object.routes = null;
-                object.ack_peer_routes_revision = 0;
-                object.connect_request = null;
-                object.connect_ok = null;
-                object.connection_closed = null;
-                if (options.bytes === String)
-                    object.failed_relay_routing_token = "";
-                else {
-                    object.failed_relay_routing_token = [];
-                    if (options.bytes !== Array)
-                        object.failed_relay_routing_token = $util.newBuffer(object.failed_relay_routing_token);
-                }
-            }
-            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
-                object.to_connection_id = message.to_connection_id;
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                object.routes = $root.CMsgSteamDatagramP2PRoutes.toObject(message.routes, options);
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                object.ack_peer_routes_revision = message.ack_peer_routes_revision;
-            if (message.connect_request != null && message.hasOwnProperty("connect_request"))
-                object.connect_request = $root.CMsgSteamDatagramConnectRequest.toObject(message.connect_request, options);
-            if (message.connect_ok != null && message.hasOwnProperty("connect_ok"))
-                object.connect_ok = $root.CMsgSteamDatagramConnectOK.toObject(message.connect_ok, options);
-            if (message.connection_closed != null && message.hasOwnProperty("connection_closed"))
-                object.connection_closed = $root.CMsgSteamDatagramConnectionClosed.toObject(message.connection_closed, options);
-            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
-                object.failed_relay_routing_token = options.bytes === String ? $util.base64.encode(message.failed_relay_routing_token, 0, message.failed_relay_routing_token.length) : options.bytes === Array ? Array.prototype.slice.call(message.failed_relay_routing_token) : message.failed_relay_routing_token;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramP2PRendezvous to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramP2PRendezvous
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramP2PRendezvous.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgSteamDatagramP2PRendezvous;
-    })();
-    
-    $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramConnectionStatsP2PClientToRouter.
-         * @exports ICMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @interface ICMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_relay] CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_relay
-         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_e2e] CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_e2e
-         * @property {Array.<number>|null} [ack_relay] CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_relay
-         * @property {Array.<number>|null} [legacy_ack_e2e] CMsgSteamDatagramConnectionStatsP2PClientToRouter legacy_ack_e2e
-         * @property {number|null} [flags] CMsgSteamDatagramConnectionStatsP2PClientToRouter flags
-         * @property {Uint8Array|null} [forward_target_relay_routing_token] CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_relay_routing_token
-         * @property {number|null} [forward_target_revision] CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_revision
-         * @property {Uint8Array|null} [routes] CMsgSteamDatagramConnectionStatsP2PClientToRouter routes
-         * @property {number|null} [ack_peer_routes_revision] CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_peer_routes_revision
-         * @property {number|null} [connection_id] CMsgSteamDatagramConnectionStatsP2PClientToRouter connection_id
-         * @property {number|null} [seq_num_c2r] CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_c2r
-         * @property {number|null} [seq_num_e2e] CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_e2e
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramConnectionStatsP2PClientToRouter.
-         * @exports CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @classdesc Represents a CMsgSteamDatagramConnectionStatsP2PClientToRouter.
-         * @implements ICMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @constructor
-         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramConnectionStatsP2PClientToRouter(properties) {
-            this.ack_relay = [];
-            this.legacy_ack_e2e = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_relay.
-         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_relay
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.quality_relay = null;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter quality_e2e.
-         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.quality_e2e = null;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_relay.
-         * @member {Array.<number>} ack_relay
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.ack_relay = $util.emptyArray;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter legacy_ack_e2e.
-         * @member {Array.<number>} legacy_ack_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.legacy_ack_e2e = $util.emptyArray;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter flags.
-         * @member {number} flags
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.flags = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_relay_routing_token.
-         * @member {Uint8Array} forward_target_relay_routing_token
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.forward_target_relay_routing_token = $util.newBuffer([]);
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter forward_target_revision.
-         * @member {number} forward_target_revision
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.forward_target_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter routes.
-         * @member {Uint8Array} routes
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.routes = $util.newBuffer([]);
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter ack_peer_routes_revision.
-         * @member {number} ack_peer_routes_revision
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.ack_peer_routes_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter connection_id.
-         * @member {number} connection_id
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.connection_id = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_c2r.
-         * @member {number} seq_num_c2r
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.seq_num_c2r = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PClientToRouter seq_num_e2e.
-         * @member {number} seq_num_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.seq_num_e2e = 0;
-    
-        /**
-         * Creates a new CMsgSteamDatagramConnectionStatsP2PClientToRouter instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.create = function create(properties) {
-            return new CMsgSteamDatagramConnectionStatsP2PClientToRouter(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PClientToRouter message. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PClientToRouter.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter} message CMsgSteamDatagramConnectionStatsP2PClientToRouter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
-                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
-                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.ack_relay != null && message.ack_relay.length)
-                for (var i = 0; i < message.ack_relay.length; ++i)
-                    writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.ack_relay[i]);
-            if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
-                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
-                    writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.flags);
-            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
-                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.forward_target_relay_routing_token);
-            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
-                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.forward_target_revision);
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.routes);
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.ack_peer_routes_revision);
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.connection_id);
-            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
-                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.seq_num_c2r);
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.seq_num_e2e);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PClientToRouter message, length delimited. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PClientToRouter.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PClientToRouter} message CMsgSteamDatagramConnectionStatsP2PClientToRouter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramConnectionStatsP2PClientToRouter message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    if (!(message.ack_relay && message.ack_relay.length))
-                        message.ack_relay = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.ack_relay.push(reader.fixed32());
-                    } else
-                        message.ack_relay.push(reader.fixed32());
-                    break;
-                case 4:
-                    if (!(message.legacy_ack_e2e && message.legacy_ack_e2e.length))
-                        message.legacy_ack_e2e = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.legacy_ack_e2e.push(reader.fixed32());
-                    } else
-                        message.legacy_ack_e2e.push(reader.fixed32());
-                    break;
-                case 5:
-                    message.flags = reader.uint32();
-                    break;
-                case 6:
-                    message.forward_target_relay_routing_token = reader.bytes();
-                    break;
-                case 7:
-                    message.forward_target_revision = reader.uint32();
-                    break;
-                case 8:
-                    message.routes = reader.bytes();
-                    break;
-                case 9:
-                    message.ack_peer_routes_revision = reader.uint32();
-                    break;
-                case 10:
-                    message.connection_id = reader.fixed32();
-                    break;
-                case 11:
-                    message.seq_num_c2r = reader.uint32();
-                    break;
-                case 12:
-                    message.seq_num_e2e = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramConnectionStatsP2PClientToRouter message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramConnectionStatsP2PClientToRouter message.
-         * @function verify
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay")) {
-                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_relay);
-                if (error)
-                    return "quality_relay." + error;
-            }
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e")) {
-                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_e2e);
-                if (error)
-                    return "quality_e2e." + error;
-            }
-            if (message.ack_relay != null && message.hasOwnProperty("ack_relay")) {
-                if (!Array.isArray(message.ack_relay))
-                    return "ack_relay: array expected";
-                for (var i = 0; i < message.ack_relay.length; ++i)
-                    if (!$util.isInteger(message.ack_relay[i]))
-                        return "ack_relay: integer[] expected";
-            }
-            if (message.legacy_ack_e2e != null && message.hasOwnProperty("legacy_ack_e2e")) {
-                if (!Array.isArray(message.legacy_ack_e2e))
-                    return "legacy_ack_e2e: array expected";
-                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
-                    if (!$util.isInteger(message.legacy_ack_e2e[i]))
-                        return "legacy_ack_e2e: integer[] expected";
-            }
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                if (!$util.isInteger(message.flags))
-                    return "flags: integer expected";
-            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
-                if (!(message.forward_target_relay_routing_token && typeof message.forward_target_relay_routing_token.length === "number" || $util.isString(message.forward_target_relay_routing_token)))
-                    return "forward_target_relay_routing_token: buffer expected";
-            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
-                if (!$util.isInteger(message.forward_target_revision))
-                    return "forward_target_revision: integer expected";
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                if (!(message.routes && typeof message.routes.length === "number" || $util.isString(message.routes)))
-                    return "routes: buffer expected";
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                if (!$util.isInteger(message.ack_peer_routes_revision))
-                    return "ack_peer_routes_revision: integer expected";
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                if (!$util.isInteger(message.connection_id))
-                    return "connection_id: integer expected";
-            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
-                if (!$util.isInteger(message.seq_num_c2r))
-                    return "seq_num_c2r: integer expected";
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                if (!$util.isInteger(message.seq_num_e2e))
-                    return "seq_num_e2e: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramConnectionStatsP2PClientToRouter message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramConnectionStatsP2PClientToRouter} CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter)
-                return object;
-            var message = new $root.CMsgSteamDatagramConnectionStatsP2PClientToRouter();
-            if (object.quality_relay != null) {
-                if (typeof object.quality_relay !== "object")
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.quality_relay: object expected");
-                message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_relay);
-            }
-            if (object.quality_e2e != null) {
-                if (typeof object.quality_e2e !== "object")
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.quality_e2e: object expected");
-                message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_e2e);
-            }
-            if (object.ack_relay) {
-                if (!Array.isArray(object.ack_relay))
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.ack_relay: array expected");
-                message.ack_relay = [];
-                for (var i = 0; i < object.ack_relay.length; ++i)
-                    message.ack_relay[i] = object.ack_relay[i] >>> 0;
-            }
-            if (object.legacy_ack_e2e) {
-                if (!Array.isArray(object.legacy_ack_e2e))
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PClientToRouter.legacy_ack_e2e: array expected");
-                message.legacy_ack_e2e = [];
-                for (var i = 0; i < object.legacy_ack_e2e.length; ++i)
-                    message.legacy_ack_e2e[i] = object.legacy_ack_e2e[i] >>> 0;
-            }
-            if (object.flags != null)
-                message.flags = object.flags >>> 0;
-            if (object.forward_target_relay_routing_token != null)
-                if (typeof object.forward_target_relay_routing_token === "string")
-                    $util.base64.decode(object.forward_target_relay_routing_token, message.forward_target_relay_routing_token = $util.newBuffer($util.base64.length(object.forward_target_relay_routing_token)), 0);
-                else if (object.forward_target_relay_routing_token.length)
-                    message.forward_target_relay_routing_token = object.forward_target_relay_routing_token;
-            if (object.forward_target_revision != null)
-                message.forward_target_revision = object.forward_target_revision >>> 0;
-            if (object.routes != null)
-                if (typeof object.routes === "string")
-                    $util.base64.decode(object.routes, message.routes = $util.newBuffer($util.base64.length(object.routes)), 0);
-                else if (object.routes.length)
-                    message.routes = object.routes;
-            if (object.ack_peer_routes_revision != null)
-                message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
-            if (object.connection_id != null)
-                message.connection_id = object.connection_id >>> 0;
-            if (object.seq_num_c2r != null)
-                message.seq_num_c2r = object.seq_num_c2r >>> 0;
-            if (object.seq_num_e2e != null)
-                message.seq_num_e2e = object.seq_num_e2e >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramConnectionStatsP2PClientToRouter message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @static
-         * @param {CMsgSteamDatagramConnectionStatsP2PClientToRouter} message CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults) {
-                object.ack_relay = [];
-                object.legacy_ack_e2e = [];
-            }
-            if (options.defaults) {
-                object.quality_relay = null;
-                object.quality_e2e = null;
-                object.flags = 0;
-                if (options.bytes === String)
-                    object.forward_target_relay_routing_token = "";
-                else {
-                    object.forward_target_relay_routing_token = [];
-                    if (options.bytes !== Array)
-                        object.forward_target_relay_routing_token = $util.newBuffer(object.forward_target_relay_routing_token);
-                }
-                object.forward_target_revision = 0;
-                if (options.bytes === String)
-                    object.routes = "";
-                else {
-                    object.routes = [];
-                    if (options.bytes !== Array)
-                        object.routes = $util.newBuffer(object.routes);
-                }
-                object.ack_peer_routes_revision = 0;
-                object.connection_id = 0;
-                object.seq_num_c2r = 0;
-                object.seq_num_e2e = 0;
-            }
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
-                object.quality_relay = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_relay, options);
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
-                object.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_e2e, options);
-            if (message.ack_relay && message.ack_relay.length) {
-                object.ack_relay = [];
-                for (var j = 0; j < message.ack_relay.length; ++j)
-                    object.ack_relay[j] = message.ack_relay[j];
-            }
-            if (message.legacy_ack_e2e && message.legacy_ack_e2e.length) {
-                object.legacy_ack_e2e = [];
-                for (var j = 0; j < message.legacy_ack_e2e.length; ++j)
-                    object.legacy_ack_e2e[j] = message.legacy_ack_e2e[j];
-            }
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                object.flags = message.flags;
-            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
-                object.forward_target_relay_routing_token = options.bytes === String ? $util.base64.encode(message.forward_target_relay_routing_token, 0, message.forward_target_relay_routing_token.length) : options.bytes === Array ? Array.prototype.slice.call(message.forward_target_relay_routing_token) : message.forward_target_relay_routing_token;
-            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
-                object.forward_target_revision = message.forward_target_revision;
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                object.routes = options.bytes === String ? $util.base64.encode(message.routes, 0, message.routes.length) : options.bytes === Array ? Array.prototype.slice.call(message.routes) : message.routes;
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                object.ack_peer_routes_revision = message.ack_peer_routes_revision;
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                object.connection_id = message.connection_id;
-            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
-                object.seq_num_c2r = message.seq_num_c2r;
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                object.seq_num_e2e = message.seq_num_e2e;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramConnectionStatsP2PClientToRouter to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramConnectionStatsP2PClientToRouter
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Flags enum.
-         * @name CMsgSteamDatagramConnectionStatsP2PClientToRouter.Flags
-         * @enum {string}
-         * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
-         * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
-         * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
-         */
-        CMsgSteamDatagramConnectionStatsP2PClientToRouter.Flags = (function() {
-            var valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[1] = "ACK_REQUEST_RELAY"] = 1;
-            values[valuesById[2] = "ACK_REQUEST_E2E"] = 2;
-            values[valuesById[4] = "ACK_REQUEST_IMMEDIATE"] = 4;
-            return values;
-        })();
-    
-        return CMsgSteamDatagramConnectionStatsP2PClientToRouter;
-    })();
-    
-    $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramConnectionStatsP2PRouterToClient.
-         * @exports ICMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @interface ICMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_relay] CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_relay
-         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_e2e
-         * @property {number|null} [seconds_until_shutdown] CMsgSteamDatagramConnectionStatsP2PRouterToClient seconds_until_shutdown
-         * @property {number|null} [migrate_request_ip] CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_ip
-         * @property {number|null} [migrate_request_port] CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_port
-         * @property {number|null} [scoring_penalty_relay_cluster] CMsgSteamDatagramConnectionStatsP2PRouterToClient scoring_penalty_relay_cluster
-         * @property {Array.<number>|null} [ack_relay] CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_relay
-         * @property {Array.<number>|null} [legacy_ack_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToClient legacy_ack_e2e
-         * @property {number|null} [flags] CMsgSteamDatagramConnectionStatsP2PRouterToClient flags
-         * @property {number|null} [ack_forward_target_revision] CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_forward_target_revision
-         * @property {Uint8Array|null} [routes] CMsgSteamDatagramConnectionStatsP2PRouterToClient routes
-         * @property {number|null} [ack_peer_routes_revision] CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_peer_routes_revision
-         * @property {number|null} [connection_id] CMsgSteamDatagramConnectionStatsP2PRouterToClient connection_id
-         * @property {number|null} [seq_num_r2c] CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_r2c
-         * @property {number|null} [seq_num_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_e2e
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramConnectionStatsP2PRouterToClient.
-         * @exports CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @classdesc Represents a CMsgSteamDatagramConnectionStatsP2PRouterToClient.
-         * @implements ICMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @constructor
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramConnectionStatsP2PRouterToClient(properties) {
-            this.ack_relay = [];
-            this.legacy_ack_e2e = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_relay.
-         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_relay
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.quality_relay = null;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient quality_e2e.
-         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.quality_e2e = null;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient seconds_until_shutdown.
-         * @member {number} seconds_until_shutdown
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.seconds_until_shutdown = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_ip.
-         * @member {number} migrate_request_ip
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.migrate_request_ip = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient migrate_request_port.
-         * @member {number} migrate_request_port
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.migrate_request_port = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient scoring_penalty_relay_cluster.
-         * @member {number} scoring_penalty_relay_cluster
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.scoring_penalty_relay_cluster = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_relay.
-         * @member {Array.<number>} ack_relay
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.ack_relay = $util.emptyArray;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient legacy_ack_e2e.
-         * @member {Array.<number>} legacy_ack_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.legacy_ack_e2e = $util.emptyArray;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient flags.
-         * @member {number} flags
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.flags = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_forward_target_revision.
-         * @member {number} ack_forward_target_revision
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.ack_forward_target_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient routes.
-         * @member {Uint8Array} routes
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.routes = $util.newBuffer([]);
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient ack_peer_routes_revision.
-         * @member {number} ack_peer_routes_revision
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.ack_peer_routes_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient connection_id.
-         * @member {number} connection_id
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.connection_id = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_r2c.
-         * @member {number} seq_num_r2c
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.seq_num_r2c = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToClient seq_num_e2e.
-         * @member {number} seq_num_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.seq_num_e2e = 0;
-    
-        /**
-         * Creates a new CMsgSteamDatagramConnectionStatsP2PRouterToClient instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.create = function create(properties) {
-            return new CMsgSteamDatagramConnectionStatsP2PRouterToClient(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PRouterToClient message. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PRouterToClient.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient} message CMsgSteamDatagramConnectionStatsP2PRouterToClient message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
-                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
-                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seconds_until_shutdown);
-            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
-                writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.migrate_request_ip);
-            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.migrate_request_port);
-            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.scoring_penalty_relay_cluster);
-            if (message.ack_relay != null && message.ack_relay.length)
-                for (var i = 0; i < message.ack_relay.length; ++i)
-                    writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.ack_relay[i]);
-            if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
-                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
-                    writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.flags);
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.ack_forward_target_revision);
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                writer.uint32(/* id 11, wireType 2 =*/90).bytes(message.routes);
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.ack_peer_routes_revision);
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                writer.uint32(/* id 13, wireType 5 =*/109).fixed32(message.connection_id);
-            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
-                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.seq_num_r2c);
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.seq_num_e2e);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PRouterToClient message, length delimited. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PRouterToClient.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToClient} message CMsgSteamDatagramConnectionStatsP2PRouterToClient message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramConnectionStatsP2PRouterToClient message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    message.seconds_until_shutdown = reader.uint32();
-                    break;
-                case 4:
-                    message.migrate_request_ip = reader.fixed32();
-                    break;
-                case 5:
-                    message.migrate_request_port = reader.uint32();
-                    break;
-                case 6:
-                    message.scoring_penalty_relay_cluster = reader.uint32();
-                    break;
-                case 7:
-                    if (!(message.ack_relay && message.ack_relay.length))
-                        message.ack_relay = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.ack_relay.push(reader.fixed32());
-                    } else
-                        message.ack_relay.push(reader.fixed32());
-                    break;
-                case 8:
-                    if (!(message.legacy_ack_e2e && message.legacy_ack_e2e.length))
-                        message.legacy_ack_e2e = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.legacy_ack_e2e.push(reader.fixed32());
-                    } else
-                        message.legacy_ack_e2e.push(reader.fixed32());
-                    break;
-                case 9:
-                    message.flags = reader.uint32();
-                    break;
-                case 10:
-                    message.ack_forward_target_revision = reader.uint32();
-                    break;
-                case 11:
-                    message.routes = reader.bytes();
-                    break;
-                case 12:
-                    message.ack_peer_routes_revision = reader.uint32();
-                    break;
-                case 13:
-                    message.connection_id = reader.fixed32();
-                    break;
-                case 14:
-                    message.seq_num_r2c = reader.uint32();
-                    break;
-                case 15:
-                    message.seq_num_e2e = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramConnectionStatsP2PRouterToClient message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramConnectionStatsP2PRouterToClient message.
-         * @function verify
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay")) {
-                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_relay);
-                if (error)
-                    return "quality_relay." + error;
-            }
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e")) {
-                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_e2e);
-                if (error)
-                    return "quality_e2e." + error;
-            }
-            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
-                if (!$util.isInteger(message.seconds_until_shutdown))
-                    return "seconds_until_shutdown: integer expected";
-            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
-                if (!$util.isInteger(message.migrate_request_ip))
-                    return "migrate_request_ip: integer expected";
-            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
-                if (!$util.isInteger(message.migrate_request_port))
-                    return "migrate_request_port: integer expected";
-            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
-                if (!$util.isInteger(message.scoring_penalty_relay_cluster))
-                    return "scoring_penalty_relay_cluster: integer expected";
-            if (message.ack_relay != null && message.hasOwnProperty("ack_relay")) {
-                if (!Array.isArray(message.ack_relay))
-                    return "ack_relay: array expected";
-                for (var i = 0; i < message.ack_relay.length; ++i)
-                    if (!$util.isInteger(message.ack_relay[i]))
-                        return "ack_relay: integer[] expected";
-            }
-            if (message.legacy_ack_e2e != null && message.hasOwnProperty("legacy_ack_e2e")) {
-                if (!Array.isArray(message.legacy_ack_e2e))
-                    return "legacy_ack_e2e: array expected";
-                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
-                    if (!$util.isInteger(message.legacy_ack_e2e[i]))
-                        return "legacy_ack_e2e: integer[] expected";
-            }
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                if (!$util.isInteger(message.flags))
-                    return "flags: integer expected";
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                if (!$util.isInteger(message.ack_forward_target_revision))
-                    return "ack_forward_target_revision: integer expected";
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                if (!(message.routes && typeof message.routes.length === "number" || $util.isString(message.routes)))
-                    return "routes: buffer expected";
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                if (!$util.isInteger(message.ack_peer_routes_revision))
-                    return "ack_peer_routes_revision: integer expected";
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                if (!$util.isInteger(message.connection_id))
-                    return "connection_id: integer expected";
-            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
-                if (!$util.isInteger(message.seq_num_r2c))
-                    return "seq_num_r2c: integer expected";
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                if (!$util.isInteger(message.seq_num_e2e))
-                    return "seq_num_e2e: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramConnectionStatsP2PRouterToClient message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToClient} CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient)
-                return object;
-            var message = new $root.CMsgSteamDatagramConnectionStatsP2PRouterToClient();
-            if (object.quality_relay != null) {
-                if (typeof object.quality_relay !== "object")
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.quality_relay: object expected");
-                message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_relay);
-            }
-            if (object.quality_e2e != null) {
-                if (typeof object.quality_e2e !== "object")
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.quality_e2e: object expected");
-                message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_e2e);
-            }
-            if (object.seconds_until_shutdown != null)
-                message.seconds_until_shutdown = object.seconds_until_shutdown >>> 0;
-            if (object.migrate_request_ip != null)
-                message.migrate_request_ip = object.migrate_request_ip >>> 0;
-            if (object.migrate_request_port != null)
-                message.migrate_request_port = object.migrate_request_port >>> 0;
-            if (object.scoring_penalty_relay_cluster != null)
-                message.scoring_penalty_relay_cluster = object.scoring_penalty_relay_cluster >>> 0;
-            if (object.ack_relay) {
-                if (!Array.isArray(object.ack_relay))
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.ack_relay: array expected");
-                message.ack_relay = [];
-                for (var i = 0; i < object.ack_relay.length; ++i)
-                    message.ack_relay[i] = object.ack_relay[i] >>> 0;
-            }
-            if (object.legacy_ack_e2e) {
-                if (!Array.isArray(object.legacy_ack_e2e))
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToClient.legacy_ack_e2e: array expected");
-                message.legacy_ack_e2e = [];
-                for (var i = 0; i < object.legacy_ack_e2e.length; ++i)
-                    message.legacy_ack_e2e[i] = object.legacy_ack_e2e[i] >>> 0;
-            }
-            if (object.flags != null)
-                message.flags = object.flags >>> 0;
-            if (object.ack_forward_target_revision != null)
-                message.ack_forward_target_revision = object.ack_forward_target_revision >>> 0;
-            if (object.routes != null)
-                if (typeof object.routes === "string")
-                    $util.base64.decode(object.routes, message.routes = $util.newBuffer($util.base64.length(object.routes)), 0);
-                else if (object.routes.length)
-                    message.routes = object.routes;
-            if (object.ack_peer_routes_revision != null)
-                message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
-            if (object.connection_id != null)
-                message.connection_id = object.connection_id >>> 0;
-            if (object.seq_num_r2c != null)
-                message.seq_num_r2c = object.seq_num_r2c >>> 0;
-            if (object.seq_num_e2e != null)
-                message.seq_num_e2e = object.seq_num_e2e >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramConnectionStatsP2PRouterToClient message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @static
-         * @param {CMsgSteamDatagramConnectionStatsP2PRouterToClient} message CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults) {
-                object.ack_relay = [];
-                object.legacy_ack_e2e = [];
-            }
-            if (options.defaults) {
-                object.quality_relay = null;
-                object.quality_e2e = null;
-                object.seconds_until_shutdown = 0;
-                object.migrate_request_ip = 0;
-                object.migrate_request_port = 0;
-                object.scoring_penalty_relay_cluster = 0;
-                object.flags = 0;
-                object.ack_forward_target_revision = 0;
-                if (options.bytes === String)
-                    object.routes = "";
-                else {
-                    object.routes = [];
-                    if (options.bytes !== Array)
-                        object.routes = $util.newBuffer(object.routes);
-                }
-                object.ack_peer_routes_revision = 0;
-                object.connection_id = 0;
-                object.seq_num_r2c = 0;
-                object.seq_num_e2e = 0;
-            }
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
-                object.quality_relay = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_relay, options);
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
-                object.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_e2e, options);
-            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
-                object.seconds_until_shutdown = message.seconds_until_shutdown;
-            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
-                object.migrate_request_ip = message.migrate_request_ip;
-            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
-                object.migrate_request_port = message.migrate_request_port;
-            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
-                object.scoring_penalty_relay_cluster = message.scoring_penalty_relay_cluster;
-            if (message.ack_relay && message.ack_relay.length) {
-                object.ack_relay = [];
-                for (var j = 0; j < message.ack_relay.length; ++j)
-                    object.ack_relay[j] = message.ack_relay[j];
-            }
-            if (message.legacy_ack_e2e && message.legacy_ack_e2e.length) {
-                object.legacy_ack_e2e = [];
-                for (var j = 0; j < message.legacy_ack_e2e.length; ++j)
-                    object.legacy_ack_e2e[j] = message.legacy_ack_e2e[j];
-            }
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                object.flags = message.flags;
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                object.ack_forward_target_revision = message.ack_forward_target_revision;
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                object.routes = options.bytes === String ? $util.base64.encode(message.routes, 0, message.routes.length) : options.bytes === Array ? Array.prototype.slice.call(message.routes) : message.routes;
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                object.ack_peer_routes_revision = message.ack_peer_routes_revision;
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                object.connection_id = message.connection_id;
-            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
-                object.seq_num_r2c = message.seq_num_r2c;
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                object.seq_num_e2e = message.seq_num_e2e;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramConnectionStatsP2PRouterToClient to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToClient
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Flags enum.
-         * @name CMsgSteamDatagramConnectionStatsP2PRouterToClient.Flags
-         * @enum {string}
-         * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
-         * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
-         * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToClient.Flags = (function() {
-            var valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[1] = "ACK_REQUEST_RELAY"] = 1;
-            values[valuesById[2] = "ACK_REQUEST_E2E"] = 2;
-            values[valuesById[4] = "ACK_REQUEST_IMMEDIATE"] = 4;
-            return values;
-        })();
-    
-        return CMsgSteamDatagramConnectionStatsP2PRouterToClient;
-    })();
-    
-    $root.CMsgSteamDatagramP2PBadRouteRouterToClient = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramP2PBadRouteRouterToClient.
-         * @exports ICMsgSteamDatagramP2PBadRouteRouterToClient
-         * @interface ICMsgSteamDatagramP2PBadRouteRouterToClient
-         * @property {number|null} [connection_id] CMsgSteamDatagramP2PBadRouteRouterToClient connection_id
-         * @property {Uint8Array|null} [failed_relay_routing_token] CMsgSteamDatagramP2PBadRouteRouterToClient failed_relay_routing_token
-         * @property {number|null} [ack_forward_target_revision] CMsgSteamDatagramP2PBadRouteRouterToClient ack_forward_target_revision
-         * @property {number|Long|null} [kludge_pad] CMsgSteamDatagramP2PBadRouteRouterToClient kludge_pad
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramP2PBadRouteRouterToClient.
-         * @exports CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @classdesc Represents a CMsgSteamDatagramP2PBadRouteRouterToClient.
-         * @implements ICMsgSteamDatagramP2PBadRouteRouterToClient
-         * @constructor
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramP2PBadRouteRouterToClient(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramP2PBadRouteRouterToClient connection_id.
-         * @member {number} connection_id
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.connection_id = 0;
-    
-        /**
-         * CMsgSteamDatagramP2PBadRouteRouterToClient failed_relay_routing_token.
-         * @member {Uint8Array} failed_relay_routing_token
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.failed_relay_routing_token = $util.newBuffer([]);
-    
-        /**
-         * CMsgSteamDatagramP2PBadRouteRouterToClient ack_forward_target_revision.
-         * @member {number} ack_forward_target_revision
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.ack_forward_target_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramP2PBadRouteRouterToClient kludge_pad.
-         * @member {number|Long} kludge_pad
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.kludge_pad = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * Creates a new CMsgSteamDatagramP2PBadRouteRouterToClient instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.create = function create(properties) {
-            return new CMsgSteamDatagramP2PBadRouteRouterToClient(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramP2PBadRouteRouterToClient message. Does not implicitly {@link CMsgSteamDatagramP2PBadRouteRouterToClient.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient} message CMsgSteamDatagramP2PBadRouteRouterToClient message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
-                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.failed_relay_routing_token);
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ack_forward_target_revision);
-            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
-                writer.uint32(/* id 99, wireType 1 =*/793).fixed64(message.kludge_pad);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramP2PBadRouteRouterToClient message, length delimited. Does not implicitly {@link CMsgSteamDatagramP2PBadRouteRouterToClient.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToClient} message CMsgSteamDatagramP2PBadRouteRouterToClient message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramP2PBadRouteRouterToClient message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramP2PBadRouteRouterToClient();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.connection_id = reader.fixed32();
-                    break;
-                case 2:
-                    message.failed_relay_routing_token = reader.bytes();
-                    break;
-                case 3:
-                    message.ack_forward_target_revision = reader.uint32();
-                    break;
-                case 99:
-                    message.kludge_pad = reader.fixed64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramP2PBadRouteRouterToClient message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramP2PBadRouteRouterToClient message.
-         * @function verify
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                if (!$util.isInteger(message.connection_id))
-                    return "connection_id: integer expected";
-            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
-                if (!(message.failed_relay_routing_token && typeof message.failed_relay_routing_token.length === "number" || $util.isString(message.failed_relay_routing_token)))
-                    return "failed_relay_routing_token: buffer expected";
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                if (!$util.isInteger(message.ack_forward_target_revision))
-                    return "ack_forward_target_revision: integer expected";
-            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
-                if (!$util.isInteger(message.kludge_pad) && !(message.kludge_pad && $util.isInteger(message.kludge_pad.low) && $util.isInteger(message.kludge_pad.high)))
-                    return "kludge_pad: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramP2PBadRouteRouterToClient message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToClient} CMsgSteamDatagramP2PBadRouteRouterToClient
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramP2PBadRouteRouterToClient)
-                return object;
-            var message = new $root.CMsgSteamDatagramP2PBadRouteRouterToClient();
-            if (object.connection_id != null)
-                message.connection_id = object.connection_id >>> 0;
-            if (object.failed_relay_routing_token != null)
-                if (typeof object.failed_relay_routing_token === "string")
-                    $util.base64.decode(object.failed_relay_routing_token, message.failed_relay_routing_token = $util.newBuffer($util.base64.length(object.failed_relay_routing_token)), 0);
-                else if (object.failed_relay_routing_token.length)
-                    message.failed_relay_routing_token = object.failed_relay_routing_token;
-            if (object.ack_forward_target_revision != null)
-                message.ack_forward_target_revision = object.ack_forward_target_revision >>> 0;
-            if (object.kludge_pad != null)
-                if ($util.Long)
-                    (message.kludge_pad = $util.Long.fromValue(object.kludge_pad)).unsigned = false;
-                else if (typeof object.kludge_pad === "string")
-                    message.kludge_pad = parseInt(object.kludge_pad, 10);
-                else if (typeof object.kludge_pad === "number")
-                    message.kludge_pad = object.kludge_pad;
-                else if (typeof object.kludge_pad === "object")
-                    message.kludge_pad = new $util.LongBits(object.kludge_pad.low >>> 0, object.kludge_pad.high >>> 0).toNumber();
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramP2PBadRouteRouterToClient message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @static
-         * @param {CMsgSteamDatagramP2PBadRouteRouterToClient} message CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.connection_id = 0;
-                if (options.bytes === String)
-                    object.failed_relay_routing_token = "";
-                else {
-                    object.failed_relay_routing_token = [];
-                    if (options.bytes !== Array)
-                        object.failed_relay_routing_token = $util.newBuffer(object.failed_relay_routing_token);
-                }
-                object.ack_forward_target_revision = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.kludge_pad = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.kludge_pad = options.longs === String ? "0" : 0;
-            }
-            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
-                object.connection_id = message.connection_id;
-            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
-                object.failed_relay_routing_token = options.bytes === String ? $util.base64.encode(message.failed_relay_routing_token, 0, message.failed_relay_routing_token.length) : options.bytes === Array ? Array.prototype.slice.call(message.failed_relay_routing_token) : message.failed_relay_routing_token;
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                object.ack_forward_target_revision = message.ack_forward_target_revision;
-            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
-                if (typeof message.kludge_pad === "number")
-                    object.kludge_pad = options.longs === String ? String(message.kludge_pad) : message.kludge_pad;
-                else
-                    object.kludge_pad = options.longs === String ? $util.Long.prototype.toString.call(message.kludge_pad) : options.longs === Number ? new $util.LongBits(message.kludge_pad.low >>> 0, message.kludge_pad.high >>> 0).toNumber() : message.kludge_pad;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramP2PBadRouteRouterToClient to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToClient
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToClient.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgSteamDatagramP2PBadRouteRouterToClient;
     })();
     
     $root.CMsgSteamDatagramGameServerSample = (function() {
@@ -13160,6 +13680,7 @@
          * @exports ICMsgSteamDatagramRouterHealth
          * @interface ICMsgSteamDatagramRouterHealth
          * @property {number|null} [cpu_load] CMsgSteamDatagramRouterHealth cpu_load
+         * @property {number|null} [cpu_load_raw] CMsgSteamDatagramRouterHealth cpu_load_raw
          * @property {number|null} [active_sessions] CMsgSteamDatagramRouterHealth active_sessions
          * @property {number|null} [data_pkts_sec] CMsgSteamDatagramRouterHealth data_pkts_sec
          * @property {number|null} [other_pkts_sec] CMsgSteamDatagramRouterHealth other_pkts_sec
@@ -13193,6 +13714,14 @@
          * @instance
          */
         CMsgSteamDatagramRouterHealth.prototype.cpu_load = 0;
+    
+        /**
+         * CMsgSteamDatagramRouterHealth cpu_load_raw.
+         * @member {number} cpu_load_raw
+         * @memberof CMsgSteamDatagramRouterHealth
+         * @instance
+         */
+        CMsgSteamDatagramRouterHealth.prototype.cpu_load_raw = 0;
     
         /**
          * CMsgSteamDatagramRouterHealth active_sessions.
@@ -13301,6 +13830,8 @@
                 writer.uint32(/* id 8, wireType 5 =*/69).float(message.cpu_cost_per_user);
             if (message.cpu_cost_per_packet != null && message.hasOwnProperty("cpu_cost_per_packet"))
                 writer.uint32(/* id 9, wireType 5 =*/77).float(message.cpu_cost_per_packet);
+            if (message.cpu_load_raw != null && message.hasOwnProperty("cpu_load_raw"))
+                writer.uint32(/* id 10, wireType 5 =*/85).float(message.cpu_load_raw);
             return writer;
         };
     
@@ -13337,6 +13868,9 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.cpu_load = reader.float();
+                    break;
+                case 10:
+                    message.cpu_load_raw = reader.float();
                     break;
                 case 2:
                     message.active_sessions = reader.uint32();
@@ -13402,6 +13936,9 @@
             if (message.cpu_load != null && message.hasOwnProperty("cpu_load"))
                 if (typeof message.cpu_load !== "number")
                     return "cpu_load: number expected";
+            if (message.cpu_load_raw != null && message.hasOwnProperty("cpu_load_raw"))
+                if (typeof message.cpu_load_raw !== "number")
+                    return "cpu_load_raw: number expected";
             if (message.active_sessions != null && message.hasOwnProperty("active_sessions"))
                 if (!$util.isInteger(message.active_sessions))
                     return "active_sessions: integer expected";
@@ -13449,6 +13986,8 @@
             var message = new $root.CMsgSteamDatagramRouterHealth();
             if (object.cpu_load != null)
                 message.cpu_load = Number(object.cpu_load);
+            if (object.cpu_load_raw != null)
+                message.cpu_load_raw = Number(object.cpu_load_raw);
             if (object.active_sessions != null)
                 message.active_sessions = object.active_sessions >>> 0;
             if (object.data_pkts_sec != null)
@@ -13511,6 +14050,7 @@
                     object.magic = options.longs === String ? "0" : 0;
                 object.cpu_cost_per_user = 0;
                 object.cpu_cost_per_packet = 0;
+                object.cpu_load_raw = 0;
             }
             if (message.cpu_load != null && message.hasOwnProperty("cpu_load"))
                 object.cpu_load = options.json && !isFinite(message.cpu_load) ? String(message.cpu_load) : message.cpu_load;
@@ -13536,6 +14076,8 @@
                 object.cpu_cost_per_user = options.json && !isFinite(message.cpu_cost_per_user) ? String(message.cpu_cost_per_user) : message.cpu_cost_per_user;
             if (message.cpu_cost_per_packet != null && message.hasOwnProperty("cpu_cost_per_packet"))
                 object.cpu_cost_per_packet = options.json && !isFinite(message.cpu_cost_per_packet) ? String(message.cpu_cost_per_packet) : message.cpu_cost_per_packet;
+            if (message.cpu_load_raw != null && message.hasOwnProperty("cpu_load_raw"))
+                object.cpu_load_raw = options.json && !isFinite(message.cpu_load_raw) ? String(message.cpu_load_raw) : message.cpu_load_raw;
             return object;
         };
     
@@ -14304,240 +14846,18 @@
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
+         * @property {number} NOT_PRIMARY_TRANSPORT_E2E=16 NOT_PRIMARY_TRANSPORT_E2E value
          */
         CMsgSteamDatagramConnectionStatsP2PRouterToRouter.Flags = (function() {
             var valuesById = {}, values = Object.create(valuesById);
             values[valuesById[1] = "ACK_REQUEST_RELAY"] = 1;
             values[valuesById[2] = "ACK_REQUEST_E2E"] = 2;
             values[valuesById[4] = "ACK_REQUEST_IMMEDIATE"] = 4;
+            values[valuesById[16] = "NOT_PRIMARY_TRANSPORT_E2E"] = 16;
             return values;
         })();
     
         return CMsgSteamDatagramConnectionStatsP2PRouterToRouter;
-    })();
-    
-    $root.CMsgSteamDatagramP2PBadRouteRouterToRouter = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramP2PBadRouteRouterToRouter.
-         * @exports ICMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @interface ICMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @property {number|null} [from_relay_session_id] CMsgSteamDatagramP2PBadRouteRouterToRouter from_relay_session_id
-         * @property {number|Long|null} [kludge_pad] CMsgSteamDatagramP2PBadRouteRouterToRouter kludge_pad
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramP2PBadRouteRouterToRouter.
-         * @exports CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @classdesc Represents a CMsgSteamDatagramP2PBadRouteRouterToRouter.
-         * @implements ICMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @constructor
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToRouter=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramP2PBadRouteRouterToRouter(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramP2PBadRouteRouterToRouter from_relay_session_id.
-         * @member {number} from_relay_session_id
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.prototype.from_relay_session_id = 0;
-    
-        /**
-         * CMsgSteamDatagramP2PBadRouteRouterToRouter kludge_pad.
-         * @member {number|Long} kludge_pad
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.prototype.kludge_pad = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * Creates a new CMsgSteamDatagramP2PBadRouteRouterToRouter instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToRouter=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToRouter} CMsgSteamDatagramP2PBadRouteRouterToRouter instance
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.create = function create(properties) {
-            return new CMsgSteamDatagramP2PBadRouteRouterToRouter(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramP2PBadRouteRouterToRouter message. Does not implicitly {@link CMsgSteamDatagramP2PBadRouteRouterToRouter.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToRouter} message CMsgSteamDatagramP2PBadRouteRouterToRouter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
-                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.from_relay_session_id);
-            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
-                writer.uint32(/* id 99, wireType 1 =*/793).fixed64(message.kludge_pad);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramP2PBadRouteRouterToRouter message, length delimited. Does not implicitly {@link CMsgSteamDatagramP2PBadRouteRouterToRouter.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {ICMsgSteamDatagramP2PBadRouteRouterToRouter} message CMsgSteamDatagramP2PBadRouteRouterToRouter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramP2PBadRouteRouterToRouter message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToRouter} CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramP2PBadRouteRouterToRouter();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.from_relay_session_id = reader.fixed32();
-                    break;
-                case 99:
-                    message.kludge_pad = reader.fixed64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramP2PBadRouteRouterToRouter message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToRouter} CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramP2PBadRouteRouterToRouter message.
-         * @function verify
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
-                if (!$util.isInteger(message.from_relay_session_id))
-                    return "from_relay_session_id: integer expected";
-            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
-                if (!$util.isInteger(message.kludge_pad) && !(message.kludge_pad && $util.isInteger(message.kludge_pad.low) && $util.isInteger(message.kludge_pad.high)))
-                    return "kludge_pad: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramP2PBadRouteRouterToRouter message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramP2PBadRouteRouterToRouter} CMsgSteamDatagramP2PBadRouteRouterToRouter
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramP2PBadRouteRouterToRouter)
-                return object;
-            var message = new $root.CMsgSteamDatagramP2PBadRouteRouterToRouter();
-            if (object.from_relay_session_id != null)
-                message.from_relay_session_id = object.from_relay_session_id >>> 0;
-            if (object.kludge_pad != null)
-                if ($util.Long)
-                    (message.kludge_pad = $util.Long.fromValue(object.kludge_pad)).unsigned = false;
-                else if (typeof object.kludge_pad === "string")
-                    message.kludge_pad = parseInt(object.kludge_pad, 10);
-                else if (typeof object.kludge_pad === "number")
-                    message.kludge_pad = object.kludge_pad;
-                else if (typeof object.kludge_pad === "object")
-                    message.kludge_pad = new $util.LongBits(object.kludge_pad.low >>> 0, object.kludge_pad.high >>> 0).toNumber();
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramP2PBadRouteRouterToRouter message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @static
-         * @param {CMsgSteamDatagramP2PBadRouteRouterToRouter} message CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.from_relay_session_id = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.kludge_pad = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.kludge_pad = options.longs === String ? "0" : 0;
-            }
-            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
-                object.from_relay_session_id = message.from_relay_session_id;
-            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
-                if (typeof message.kludge_pad === "number")
-                    object.kludge_pad = options.longs === String ? String(message.kludge_pad) : message.kludge_pad;
-                else
-                    object.kludge_pad = options.longs === String ? $util.Long.prototype.toString.call(message.kludge_pad) : options.longs === Number ? new $util.LongBits(message.kludge_pad.low >>> 0, message.kludge_pad.high >>> 0).toNumber() : message.kludge_pad;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramP2PBadRouteRouterToRouter to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramP2PBadRouteRouterToRouter
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramP2PBadRouteRouterToRouter.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgSteamDatagramP2PBadRouteRouterToRouter;
     })();
     
     $root.CMsgSteamNetworkingIdentityLegacyBinary = (function() {
@@ -15320,6 +15640,7 @@
          * @property {Uint8Array|null} [cert] CMsgSteamDatagramCertificateSigned cert
          * @property {number|Long|null} [ca_key_id] CMsgSteamDatagramCertificateSigned ca_key_id
          * @property {Uint8Array|null} [ca_signature] CMsgSteamDatagramCertificateSigned ca_signature
+         * @property {Uint8Array|null} [private_key_data] CMsgSteamDatagramCertificateSigned private_key_data
          */
     
         /**
@@ -15362,6 +15683,14 @@
         CMsgSteamDatagramCertificateSigned.prototype.ca_signature = $util.newBuffer([]);
     
         /**
+         * CMsgSteamDatagramCertificateSigned private_key_data.
+         * @member {Uint8Array} private_key_data
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @instance
+         */
+        CMsgSteamDatagramCertificateSigned.prototype.private_key_data = $util.newBuffer([]);
+    
+        /**
          * Creates a new CMsgSteamDatagramCertificateSigned instance using the specified properties.
          * @function create
          * @memberof CMsgSteamDatagramCertificateSigned
@@ -15385,6 +15714,8 @@
         CMsgSteamDatagramCertificateSigned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
+                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.private_key_data);
             if (message.cert != null && message.hasOwnProperty("cert"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.cert);
             if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
@@ -15434,6 +15765,9 @@
                 case 6:
                     message.ca_signature = reader.bytes();
                     break;
+                case 1:
+                    message.private_key_data = reader.bytes();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -15478,6 +15812,9 @@
             if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
                 if (!(message.ca_signature && typeof message.ca_signature.length === "number" || $util.isString(message.ca_signature)))
                     return "ca_signature: buffer expected";
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
+                if (!(message.private_key_data && typeof message.private_key_data.length === "number" || $util.isString(message.private_key_data)))
+                    return "private_key_data: buffer expected";
             return null;
         };
     
@@ -15512,6 +15849,11 @@
                     $util.base64.decode(object.ca_signature, message.ca_signature = $util.newBuffer($util.base64.length(object.ca_signature)), 0);
                 else if (object.ca_signature.length)
                     message.ca_signature = object.ca_signature;
+            if (object.private_key_data != null)
+                if (typeof object.private_key_data === "string")
+                    $util.base64.decode(object.private_key_data, message.private_key_data = $util.newBuffer($util.base64.length(object.private_key_data)), 0);
+                else if (object.private_key_data.length)
+                    message.private_key_data = object.private_key_data;
             return message;
         };
     
@@ -15529,6 +15871,13 @@
                 options = {};
             var object = {};
             if (options.defaults) {
+                if (options.bytes === String)
+                    object.private_key_data = "";
+                else {
+                    object.private_key_data = [];
+                    if (options.bytes !== Array)
+                        object.private_key_data = $util.newBuffer(object.private_key_data);
+                }
                 if (options.bytes === String)
                     object.cert = "";
                 else {
@@ -15549,6 +15898,8 @@
                         object.ca_signature = $util.newBuffer(object.ca_signature);
                 }
             }
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
+                object.private_key_data = options.bytes === String ? $util.base64.encode(message.private_key_data, 0, message.private_key_data.length) : options.bytes === Array ? Array.prototype.slice.call(message.private_key_data) : message.private_key_data;
             if (message.cert != null && message.hasOwnProperty("cert"))
                 object.cert = options.bytes === String ? $util.base64.encode(message.cert, 0, message.cert.length) : options.bytes === Array ? Array.prototype.slice.call(message.cert) : message.cert;
             if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
@@ -15767,6 +16118,22 @@
         return CMsgSteamDatagramCertificateRequest;
     })();
     
+    /**
+     * ESteamNetworkingSocketsCipher enum.
+     * @exports ESteamNetworkingSocketsCipher
+     * @enum {string}
+     * @property {number} k_ESteamNetworkingSocketsCipher_INVALID=0 k_ESteamNetworkingSocketsCipher_INVALID value
+     * @property {number} k_ESteamNetworkingSocketsCipher_NULL=1 k_ESteamNetworkingSocketsCipher_NULL value
+     * @property {number} k_ESteamNetworkingSocketsCipher_AES_256_GCM=2 k_ESteamNetworkingSocketsCipher_AES_256_GCM value
+     */
+    $root.ESteamNetworkingSocketsCipher = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_ESteamNetworkingSocketsCipher_INVALID"] = 0;
+        values[valuesById[1] = "k_ESteamNetworkingSocketsCipher_NULL"] = 1;
+        values[valuesById[2] = "k_ESteamNetworkingSocketsCipher_AES_256_GCM"] = 2;
+        return values;
+    })();
+    
     $root.CMsgSteamDatagramSessionCryptInfo = (function() {
     
         /**
@@ -15777,6 +16144,7 @@
          * @property {Uint8Array|null} [key_data] CMsgSteamDatagramSessionCryptInfo key_data
          * @property {number|Long|null} [nonce] CMsgSteamDatagramSessionCryptInfo nonce
          * @property {number|null} [protocol_version] CMsgSteamDatagramSessionCryptInfo protocol_version
+         * @property {Array.<ESteamNetworkingSocketsCipher>|null} [ciphers] CMsgSteamDatagramSessionCryptInfo ciphers
          */
     
         /**
@@ -15788,6 +16156,7 @@
          * @param {ICMsgSteamDatagramSessionCryptInfo=} [properties] Properties to set
          */
         function CMsgSteamDatagramSessionCryptInfo(properties) {
+            this.ciphers = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -15827,6 +16196,14 @@
         CMsgSteamDatagramSessionCryptInfo.prototype.protocol_version = 0;
     
         /**
+         * CMsgSteamDatagramSessionCryptInfo ciphers.
+         * @member {Array.<ESteamNetworkingSocketsCipher>} ciphers
+         * @memberof CMsgSteamDatagramSessionCryptInfo
+         * @instance
+         */
+        CMsgSteamDatagramSessionCryptInfo.prototype.ciphers = $util.emptyArray;
+    
+        /**
          * Creates a new CMsgSteamDatagramSessionCryptInfo instance using the specified properties.
          * @function create
          * @memberof CMsgSteamDatagramSessionCryptInfo
@@ -15858,6 +16235,9 @@
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.nonce);
             if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.protocol_version);
+            if (message.ciphers != null && message.ciphers.length)
+                for (var i = 0; i < message.ciphers.length; ++i)
+                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.ciphers[i]);
             return writer;
         };
     
@@ -15903,6 +16283,16 @@
                     break;
                 case 4:
                     message.protocol_version = reader.uint32();
+                    break;
+                case 5:
+                    if (!(message.ciphers && message.ciphers.length))
+                        message.ciphers = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.ciphers.push(reader.int32());
+                    } else
+                        message.ciphers.push(reader.int32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -15956,6 +16346,19 @@
             if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 if (!$util.isInteger(message.protocol_version))
                     return "protocol_version: integer expected";
+            if (message.ciphers != null && message.hasOwnProperty("ciphers")) {
+                if (!Array.isArray(message.ciphers))
+                    return "ciphers: array expected";
+                for (var i = 0; i < message.ciphers.length; ++i)
+                    switch (message.ciphers[i]) {
+                    default:
+                        return "ciphers: enum value[] expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+            }
             return null;
         };
     
@@ -15997,6 +16400,27 @@
                     message.nonce = new $util.LongBits(object.nonce.low >>> 0, object.nonce.high >>> 0).toNumber();
             if (object.protocol_version != null)
                 message.protocol_version = object.protocol_version >>> 0;
+            if (object.ciphers) {
+                if (!Array.isArray(object.ciphers))
+                    throw TypeError(".CMsgSteamDatagramSessionCryptInfo.ciphers: array expected");
+                message.ciphers = [];
+                for (var i = 0; i < object.ciphers.length; ++i)
+                    switch (object.ciphers[i]) {
+                    default:
+                    case "k_ESteamNetworkingSocketsCipher_INVALID":
+                    case 0:
+                        message.ciphers[i] = 0;
+                        break;
+                    case "k_ESteamNetworkingSocketsCipher_NULL":
+                    case 1:
+                        message.ciphers[i] = 1;
+                        break;
+                    case "k_ESteamNetworkingSocketsCipher_AES_256_GCM":
+                    case 2:
+                        message.ciphers[i] = 2;
+                        break;
+                    }
+            }
             return message;
         };
     
@@ -16013,6 +16437,8 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.ciphers = [];
             if (options.defaults) {
                 object.key_type = options.enums === String ? "INVALID" : 0;
                 if (options.bytes === String)
@@ -16040,6 +16466,11 @@
                     object.nonce = options.longs === String ? $util.Long.prototype.toString.call(message.nonce) : options.longs === Number ? new $util.LongBits(message.nonce.low >>> 0, message.nonce.high >>> 0).toNumber() : message.nonce;
             if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 object.protocol_version = message.protocol_version;
+            if (message.ciphers && message.ciphers.length) {
+                object.ciphers = [];
+                for (var j = 0; j < message.ciphers.length; ++j)
+                    object.ciphers[j] = options.enums === String ? $root.ESteamNetworkingSocketsCipher[message.ciphers[j]] : message.ciphers[j];
+            }
             return object;
         };
     
@@ -16857,6 +17288,7 @@
          * Properties of a CMsgSteamDatagramLinkLifetimeStats.
          * @exports ICMsgSteamDatagramLinkLifetimeStats
          * @interface ICMsgSteamDatagramLinkLifetimeStats
+         * @property {number|null} [connected_seconds] CMsgSteamDatagramLinkLifetimeStats connected_seconds
          * @property {number|Long|null} [packets_sent] CMsgSteamDatagramLinkLifetimeStats packets_sent
          * @property {number|Long|null} [kb_sent] CMsgSteamDatagramLinkLifetimeStats kb_sent
          * @property {number|Long|null} [packets_recv] CMsgSteamDatagramLinkLifetimeStats packets_recv
@@ -16943,6 +17375,14 @@
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+    
+        /**
+         * CMsgSteamDatagramLinkLifetimeStats connected_seconds.
+         * @member {number} connected_seconds
+         * @memberof CMsgSteamDatagramLinkLifetimeStats
+         * @instance
+         */
+        CMsgSteamDatagramLinkLifetimeStats.prototype.connected_seconds = 0;
     
         /**
          * CMsgSteamDatagramLinkLifetimeStats packets_sent.
@@ -17528,6 +17968,8 @@
         CMsgSteamDatagramLinkLifetimeStats.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.connected_seconds != null && message.hasOwnProperty("connected_seconds"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.connected_seconds);
             if (message.packets_sent != null && message.hasOwnProperty("packets_sent"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.packets_sent);
             if (message.kb_sent != null && message.hasOwnProperty("kb_sent"))
@@ -17702,6 +18144,9 @@
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 2:
+                    message.connected_seconds = reader.uint32();
+                    break;
                 case 3:
                     message.packets_sent = reader.uint64();
                     break;
@@ -17947,6 +18392,9 @@
         CMsgSteamDatagramLinkLifetimeStats.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.connected_seconds != null && message.hasOwnProperty("connected_seconds"))
+                if (!$util.isInteger(message.connected_seconds))
+                    return "connected_seconds: integer expected";
             if (message.packets_sent != null && message.hasOwnProperty("packets_sent"))
                 if (!$util.isInteger(message.packets_sent) && !(message.packets_sent && $util.isInteger(message.packets_sent.low) && $util.isInteger(message.packets_sent.high)))
                     return "packets_sent: integer|Long expected";
@@ -18172,6 +18620,8 @@
             if (object instanceof $root.CMsgSteamDatagramLinkLifetimeStats)
                 return object;
             var message = new $root.CMsgSteamDatagramLinkLifetimeStats();
+            if (object.connected_seconds != null)
+                message.connected_seconds = object.connected_seconds >>> 0;
             if (object.packets_sent != null)
                 if ($util.Long)
                     (message.packets_sent = $util.Long.fromValue(object.packets_sent)).unsigned = true;
@@ -18392,6 +18842,7 @@
                 options = {};
             var object = {};
             if (options.defaults) {
+                object.connected_seconds = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
                     object.packets_sent = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -18499,6 +18950,8 @@
                 object.rxspeed_ntile_95th = 0;
                 object.rxspeed_ntile_98th = 0;
             }
+            if (message.connected_seconds != null && message.hasOwnProperty("connected_seconds"))
+                object.connected_seconds = message.connected_seconds;
             if (message.packets_sent != null && message.hasOwnProperty("packets_sent"))
                 if (typeof message.packets_sent === "number")
                     object.packets_sent = options.longs === String ? String(message.packets_sent) : message.packets_sent;
@@ -18901,6 +19354,2304 @@
         };
     
         return CMsgSteamDatagramConnectionQuality;
+    })();
+    
+    $root.CMsgICERendezvous = (function() {
+    
+        /**
+         * Properties of a CMsgICERendezvous.
+         * @exports ICMsgICERendezvous
+         * @interface ICMsgICERendezvous
+         * @property {CMsgICERendezvous.IAuth|null} [auth] CMsgICERendezvous auth
+         * @property {CMsgICERendezvous.ICandidate|null} [add_candidate] CMsgICERendezvous add_candidate
+         */
+    
+        /**
+         * Constructs a new CMsgICERendezvous.
+         * @exports CMsgICERendezvous
+         * @classdesc Represents a CMsgICERendezvous.
+         * @implements ICMsgICERendezvous
+         * @constructor
+         * @param {ICMsgICERendezvous=} [properties] Properties to set
+         */
+        function CMsgICERendezvous(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgICERendezvous auth.
+         * @member {CMsgICERendezvous.IAuth|null|undefined} auth
+         * @memberof CMsgICERendezvous
+         * @instance
+         */
+        CMsgICERendezvous.prototype.auth = null;
+    
+        /**
+         * CMsgICERendezvous add_candidate.
+         * @member {CMsgICERendezvous.ICandidate|null|undefined} add_candidate
+         * @memberof CMsgICERendezvous
+         * @instance
+         */
+        CMsgICERendezvous.prototype.add_candidate = null;
+    
+        /**
+         * Creates a new CMsgICERendezvous instance using the specified properties.
+         * @function create
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {ICMsgICERendezvous=} [properties] Properties to set
+         * @returns {CMsgICERendezvous} CMsgICERendezvous instance
+         */
+        CMsgICERendezvous.create = function create(properties) {
+            return new CMsgICERendezvous(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgICERendezvous message. Does not implicitly {@link CMsgICERendezvous.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {ICMsgICERendezvous} message CMsgICERendezvous message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgICERendezvous.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.add_candidate != null && message.hasOwnProperty("add_candidate"))
+                $root.CMsgICERendezvous.Candidate.encode(message.add_candidate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.auth != null && message.hasOwnProperty("auth"))
+                $root.CMsgICERendezvous.Auth.encode(message.auth, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgICERendezvous message, length delimited. Does not implicitly {@link CMsgICERendezvous.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {ICMsgICERendezvous} message CMsgICERendezvous message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgICERendezvous.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgICERendezvous message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgICERendezvous} CMsgICERendezvous
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgICERendezvous.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgICERendezvous();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 2:
+                    message.auth = $root.CMsgICERendezvous.Auth.decode(reader, reader.uint32());
+                    break;
+                case 1:
+                    message.add_candidate = $root.CMsgICERendezvous.Candidate.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgICERendezvous message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgICERendezvous} CMsgICERendezvous
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgICERendezvous.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgICERendezvous message.
+         * @function verify
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgICERendezvous.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.auth != null && message.hasOwnProperty("auth")) {
+                var error = $root.CMsgICERendezvous.Auth.verify(message.auth);
+                if (error)
+                    return "auth." + error;
+            }
+            if (message.add_candidate != null && message.hasOwnProperty("add_candidate")) {
+                var error = $root.CMsgICERendezvous.Candidate.verify(message.add_candidate);
+                if (error)
+                    return "add_candidate." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgICERendezvous message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgICERendezvous} CMsgICERendezvous
+         */
+        CMsgICERendezvous.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgICERendezvous)
+                return object;
+            var message = new $root.CMsgICERendezvous();
+            if (object.auth != null) {
+                if (typeof object.auth !== "object")
+                    throw TypeError(".CMsgICERendezvous.auth: object expected");
+                message.auth = $root.CMsgICERendezvous.Auth.fromObject(object.auth);
+            }
+            if (object.add_candidate != null) {
+                if (typeof object.add_candidate !== "object")
+                    throw TypeError(".CMsgICERendezvous.add_candidate: object expected");
+                message.add_candidate = $root.CMsgICERendezvous.Candidate.fromObject(object.add_candidate);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgICERendezvous message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgICERendezvous
+         * @static
+         * @param {CMsgICERendezvous} message CMsgICERendezvous
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgICERendezvous.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.add_candidate = null;
+                object.auth = null;
+            }
+            if (message.add_candidate != null && message.hasOwnProperty("add_candidate"))
+                object.add_candidate = $root.CMsgICERendezvous.Candidate.toObject(message.add_candidate, options);
+            if (message.auth != null && message.hasOwnProperty("auth"))
+                object.auth = $root.CMsgICERendezvous.Auth.toObject(message.auth, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgICERendezvous to JSON.
+         * @function toJSON
+         * @memberof CMsgICERendezvous
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgICERendezvous.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CMsgICERendezvous.Auth = (function() {
+    
+            /**
+             * Properties of an Auth.
+             * @memberof CMsgICERendezvous
+             * @interface IAuth
+             * @property {string|null} [pwd_frag] Auth pwd_frag
+             */
+    
+            /**
+             * Constructs a new Auth.
+             * @memberof CMsgICERendezvous
+             * @classdesc Represents an Auth.
+             * @implements IAuth
+             * @constructor
+             * @param {CMsgICERendezvous.IAuth=} [properties] Properties to set
+             */
+            function Auth(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Auth pwd_frag.
+             * @member {string} pwd_frag
+             * @memberof CMsgICERendezvous.Auth
+             * @instance
+             */
+            Auth.prototype.pwd_frag = "";
+    
+            /**
+             * Creates a new Auth instance using the specified properties.
+             * @function create
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {CMsgICERendezvous.IAuth=} [properties] Properties to set
+             * @returns {CMsgICERendezvous.Auth} Auth instance
+             */
+            Auth.create = function create(properties) {
+                return new Auth(properties);
+            };
+    
+            /**
+             * Encodes the specified Auth message. Does not implicitly {@link CMsgICERendezvous.Auth.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {CMsgICERendezvous.IAuth} message Auth message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Auth.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.pwd_frag != null && message.hasOwnProperty("pwd_frag"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.pwd_frag);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Auth message, length delimited. Does not implicitly {@link CMsgICERendezvous.Auth.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {CMsgICERendezvous.IAuth} message Auth message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Auth.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an Auth message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgICERendezvous.Auth} Auth
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Auth.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgICERendezvous.Auth();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.pwd_frag = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an Auth message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgICERendezvous.Auth} Auth
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Auth.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an Auth message.
+             * @function verify
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Auth.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.pwd_frag != null && message.hasOwnProperty("pwd_frag"))
+                    if (!$util.isString(message.pwd_frag))
+                        return "pwd_frag: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates an Auth message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgICERendezvous.Auth} Auth
+             */
+            Auth.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgICERendezvous.Auth)
+                    return object;
+                var message = new $root.CMsgICERendezvous.Auth();
+                if (object.pwd_frag != null)
+                    message.pwd_frag = String(object.pwd_frag);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an Auth message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgICERendezvous.Auth
+             * @static
+             * @param {CMsgICERendezvous.Auth} message Auth
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Auth.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.pwd_frag = "";
+                if (message.pwd_frag != null && message.hasOwnProperty("pwd_frag"))
+                    object.pwd_frag = message.pwd_frag;
+                return object;
+            };
+    
+            /**
+             * Converts this Auth to JSON.
+             * @function toJSON
+             * @memberof CMsgICERendezvous.Auth
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Auth.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Auth;
+        })();
+    
+        CMsgICERendezvous.Candidate = (function() {
+    
+            /**
+             * Properties of a Candidate.
+             * @memberof CMsgICERendezvous
+             * @interface ICandidate
+             * @property {string|null} [candidate] Candidate candidate
+             */
+    
+            /**
+             * Constructs a new Candidate.
+             * @memberof CMsgICERendezvous
+             * @classdesc Represents a Candidate.
+             * @implements ICandidate
+             * @constructor
+             * @param {CMsgICERendezvous.ICandidate=} [properties] Properties to set
+             */
+            function Candidate(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Candidate candidate.
+             * @member {string} candidate
+             * @memberof CMsgICERendezvous.Candidate
+             * @instance
+             */
+            Candidate.prototype.candidate = "";
+    
+            /**
+             * Creates a new Candidate instance using the specified properties.
+             * @function create
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {CMsgICERendezvous.ICandidate=} [properties] Properties to set
+             * @returns {CMsgICERendezvous.Candidate} Candidate instance
+             */
+            Candidate.create = function create(properties) {
+                return new Candidate(properties);
+            };
+    
+            /**
+             * Encodes the specified Candidate message. Does not implicitly {@link CMsgICERendezvous.Candidate.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {CMsgICERendezvous.ICandidate} message Candidate message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Candidate.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.candidate != null && message.hasOwnProperty("candidate"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.candidate);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Candidate message, length delimited. Does not implicitly {@link CMsgICERendezvous.Candidate.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {CMsgICERendezvous.ICandidate} message Candidate message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Candidate.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Candidate message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgICERendezvous.Candidate} Candidate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Candidate.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgICERendezvous.Candidate();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 3:
+                        message.candidate = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Candidate message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgICERendezvous.Candidate} Candidate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Candidate.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Candidate message.
+             * @function verify
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Candidate.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.candidate != null && message.hasOwnProperty("candidate"))
+                    if (!$util.isString(message.candidate))
+                        return "candidate: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Candidate message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgICERendezvous.Candidate} Candidate
+             */
+            Candidate.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgICERendezvous.Candidate)
+                    return object;
+                var message = new $root.CMsgICERendezvous.Candidate();
+                if (object.candidate != null)
+                    message.candidate = String(object.candidate);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Candidate message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgICERendezvous.Candidate
+             * @static
+             * @param {CMsgICERendezvous.Candidate} message Candidate
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Candidate.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.candidate = "";
+                if (message.candidate != null && message.hasOwnProperty("candidate"))
+                    object.candidate = message.candidate;
+                return object;
+            };
+    
+            /**
+             * Converts this Candidate to JSON.
+             * @function toJSON
+             * @memberof CMsgICERendezvous.Candidate
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Candidate.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Candidate;
+        })();
+    
+        return CMsgICERendezvous;
+    })();
+    
+    $root.CMsgSteamNetworkingP2PRendezvous = (function() {
+    
+        /**
+         * Properties of a CMsgSteamNetworkingP2PRendezvous.
+         * @exports ICMsgSteamNetworkingP2PRendezvous
+         * @interface ICMsgSteamNetworkingP2PRendezvous
+         * @property {string|null} [from_identity] CMsgSteamNetworkingP2PRendezvous from_identity
+         * @property {number|null} [from_connection_id] CMsgSteamNetworkingP2PRendezvous from_connection_id
+         * @property {string|null} [to_identity] CMsgSteamNetworkingP2PRendezvous to_identity
+         * @property {number|null} [to_connection_id] CMsgSteamNetworkingP2PRendezvous to_connection_id
+         * @property {Uint8Array|null} [sdr_routes] CMsgSteamNetworkingP2PRendezvous sdr_routes
+         * @property {number|null} [ack_peer_routes_revision] CMsgSteamNetworkingP2PRendezvous ack_peer_routes_revision
+         * @property {boolean|null} [ice_enabled] CMsgSteamNetworkingP2PRendezvous ice_enabled
+         * @property {CMsgSteamNetworkingP2PRendezvous.IConnectRequest|null} [connect_request] CMsgSteamNetworkingP2PRendezvous connect_request
+         * @property {CMsgSteamNetworkingP2PRendezvous.IConnectOK|null} [connect_ok] CMsgSteamNetworkingP2PRendezvous connect_ok
+         * @property {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed|null} [connection_closed] CMsgSteamNetworkingP2PRendezvous connection_closed
+         * @property {number|null} [ack_reliable_msg] CMsgSteamNetworkingP2PRendezvous ack_reliable_msg
+         * @property {number|null} [first_reliable_msg] CMsgSteamNetworkingP2PRendezvous first_reliable_msg
+         * @property {Array.<CMsgSteamNetworkingP2PRendezvous.IReliableMessage>|null} [reliable_messages] CMsgSteamNetworkingP2PRendezvous reliable_messages
+         */
+    
+        /**
+         * Constructs a new CMsgSteamNetworkingP2PRendezvous.
+         * @exports CMsgSteamNetworkingP2PRendezvous
+         * @classdesc Represents a CMsgSteamNetworkingP2PRendezvous.
+         * @implements ICMsgSteamNetworkingP2PRendezvous
+         * @constructor
+         * @param {ICMsgSteamNetworkingP2PRendezvous=} [properties] Properties to set
+         */
+        function CMsgSteamNetworkingP2PRendezvous(properties) {
+            this.reliable_messages = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous from_identity.
+         * @member {string} from_identity
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.from_identity = "";
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous from_connection_id.
+         * @member {number} from_connection_id
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.from_connection_id = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous to_identity.
+         * @member {string} to_identity
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.to_identity = "";
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous to_connection_id.
+         * @member {number} to_connection_id
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.to_connection_id = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous sdr_routes.
+         * @member {Uint8Array} sdr_routes
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.sdr_routes = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous ack_peer_routes_revision.
+         * @member {number} ack_peer_routes_revision
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.ack_peer_routes_revision = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous ice_enabled.
+         * @member {boolean} ice_enabled
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.ice_enabled = false;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous connect_request.
+         * @member {CMsgSteamNetworkingP2PRendezvous.IConnectRequest|null|undefined} connect_request
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.connect_request = null;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous connect_ok.
+         * @member {CMsgSteamNetworkingP2PRendezvous.IConnectOK|null|undefined} connect_ok
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.connect_ok = null;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous connection_closed.
+         * @member {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed|null|undefined} connection_closed
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.connection_closed = null;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous ack_reliable_msg.
+         * @member {number} ack_reliable_msg
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.ack_reliable_msg = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous first_reliable_msg.
+         * @member {number} first_reliable_msg
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.first_reliable_msg = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PRendezvous reliable_messages.
+         * @member {Array.<CMsgSteamNetworkingP2PRendezvous.IReliableMessage>} reliable_messages
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.reliable_messages = $util.emptyArray;
+    
+        /**
+         * Creates a new CMsgSteamNetworkingP2PRendezvous instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {ICMsgSteamNetworkingP2PRendezvous=} [properties] Properties to set
+         * @returns {CMsgSteamNetworkingP2PRendezvous} CMsgSteamNetworkingP2PRendezvous instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.create = function create(properties) {
+            return new CMsgSteamNetworkingP2PRendezvous(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingP2PRendezvous message. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {ICMsgSteamNetworkingP2PRendezvous} message CMsgSteamNetworkingP2PRendezvous message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingP2PRendezvous.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.to_connection_id);
+            if (message.sdr_routes != null && message.hasOwnProperty("sdr_routes"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.sdr_routes);
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ack_peer_routes_revision);
+            if (message.connect_request != null && message.hasOwnProperty("connect_request"))
+                $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.encode(message.connect_request, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.connect_ok != null && message.hasOwnProperty("connect_ok"))
+                $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK.encode(message.connect_ok, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.connection_closed != null && message.hasOwnProperty("connection_closed"))
+                $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.encode(message.connection_closed, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.ice_enabled != null && message.hasOwnProperty("ice_enabled"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.ice_enabled);
+            if (message.from_identity != null && message.hasOwnProperty("from_identity"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.from_identity);
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
+                writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.from_connection_id);
+            if (message.to_identity != null && message.hasOwnProperty("to_identity"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.to_identity);
+            if (message.ack_reliable_msg != null && message.hasOwnProperty("ack_reliable_msg"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.ack_reliable_msg);
+            if (message.first_reliable_msg != null && message.hasOwnProperty("first_reliable_msg"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.first_reliable_msg);
+            if (message.reliable_messages != null && message.reliable_messages.length)
+                for (var i = 0; i < message.reliable_messages.length; ++i)
+                    $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.encode(message.reliable_messages[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingP2PRendezvous message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {ICMsgSteamNetworkingP2PRendezvous} message CMsgSteamNetworkingP2PRendezvous message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingP2PRendezvous.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingP2PRendezvous message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamNetworkingP2PRendezvous} CMsgSteamNetworkingP2PRendezvous
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingP2PRendezvous.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PRendezvous();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 8:
+                    message.from_identity = reader.string();
+                    break;
+                case 9:
+                    message.from_connection_id = reader.fixed32();
+                    break;
+                case 10:
+                    message.to_identity = reader.string();
+                    break;
+                case 1:
+                    message.to_connection_id = reader.fixed32();
+                    break;
+                case 2:
+                    message.sdr_routes = reader.bytes();
+                    break;
+                case 3:
+                    message.ack_peer_routes_revision = reader.uint32();
+                    break;
+                case 7:
+                    message.ice_enabled = reader.bool();
+                    break;
+                case 4:
+                    message.connect_request = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    message.connect_ok = $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.connection_closed = $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.decode(reader, reader.uint32());
+                    break;
+                case 11:
+                    message.ack_reliable_msg = reader.uint32();
+                    break;
+                case 12:
+                    message.first_reliable_msg = reader.uint32();
+                    break;
+                case 13:
+                    if (!(message.reliable_messages && message.reliable_messages.length))
+                        message.reliable_messages = [];
+                    message.reliable_messages.push($root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingP2PRendezvous message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamNetworkingP2PRendezvous} CMsgSteamNetworkingP2PRendezvous
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingP2PRendezvous.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamNetworkingP2PRendezvous message.
+         * @function verify
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamNetworkingP2PRendezvous.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.from_identity != null && message.hasOwnProperty("from_identity"))
+                if (!$util.isString(message.from_identity))
+                    return "from_identity: string expected";
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
+                if (!$util.isInteger(message.from_connection_id))
+                    return "from_connection_id: integer expected";
+            if (message.to_identity != null && message.hasOwnProperty("to_identity"))
+                if (!$util.isString(message.to_identity))
+                    return "to_identity: string expected";
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
+                if (!$util.isInteger(message.to_connection_id))
+                    return "to_connection_id: integer expected";
+            if (message.sdr_routes != null && message.hasOwnProperty("sdr_routes"))
+                if (!(message.sdr_routes && typeof message.sdr_routes.length === "number" || $util.isString(message.sdr_routes)))
+                    return "sdr_routes: buffer expected";
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                if (!$util.isInteger(message.ack_peer_routes_revision))
+                    return "ack_peer_routes_revision: integer expected";
+            if (message.ice_enabled != null && message.hasOwnProperty("ice_enabled"))
+                if (typeof message.ice_enabled !== "boolean")
+                    return "ice_enabled: boolean expected";
+            if (message.connect_request != null && message.hasOwnProperty("connect_request")) {
+                var error = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.verify(message.connect_request);
+                if (error)
+                    return "connect_request." + error;
+            }
+            if (message.connect_ok != null && message.hasOwnProperty("connect_ok")) {
+                var error = $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK.verify(message.connect_ok);
+                if (error)
+                    return "connect_ok." + error;
+            }
+            if (message.connection_closed != null && message.hasOwnProperty("connection_closed")) {
+                var error = $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.verify(message.connection_closed);
+                if (error)
+                    return "connection_closed." + error;
+            }
+            if (message.ack_reliable_msg != null && message.hasOwnProperty("ack_reliable_msg"))
+                if (!$util.isInteger(message.ack_reliable_msg))
+                    return "ack_reliable_msg: integer expected";
+            if (message.first_reliable_msg != null && message.hasOwnProperty("first_reliable_msg"))
+                if (!$util.isInteger(message.first_reliable_msg))
+                    return "first_reliable_msg: integer expected";
+            if (message.reliable_messages != null && message.hasOwnProperty("reliable_messages")) {
+                if (!Array.isArray(message.reliable_messages))
+                    return "reliable_messages: array expected";
+                for (var i = 0; i < message.reliable_messages.length; ++i) {
+                    var error = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.verify(message.reliable_messages[i]);
+                    if (error)
+                        return "reliable_messages." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamNetworkingP2PRendezvous message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamNetworkingP2PRendezvous} CMsgSteamNetworkingP2PRendezvous
+         */
+        CMsgSteamNetworkingP2PRendezvous.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamNetworkingP2PRendezvous)
+                return object;
+            var message = new $root.CMsgSteamNetworkingP2PRendezvous();
+            if (object.from_identity != null)
+                message.from_identity = String(object.from_identity);
+            if (object.from_connection_id != null)
+                message.from_connection_id = object.from_connection_id >>> 0;
+            if (object.to_identity != null)
+                message.to_identity = String(object.to_identity);
+            if (object.to_connection_id != null)
+                message.to_connection_id = object.to_connection_id >>> 0;
+            if (object.sdr_routes != null)
+                if (typeof object.sdr_routes === "string")
+                    $util.base64.decode(object.sdr_routes, message.sdr_routes = $util.newBuffer($util.base64.length(object.sdr_routes)), 0);
+                else if (object.sdr_routes.length)
+                    message.sdr_routes = object.sdr_routes;
+            if (object.ack_peer_routes_revision != null)
+                message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
+            if (object.ice_enabled != null)
+                message.ice_enabled = Boolean(object.ice_enabled);
+            if (object.connect_request != null) {
+                if (typeof object.connect_request !== "object")
+                    throw TypeError(".CMsgSteamNetworkingP2PRendezvous.connect_request: object expected");
+                message.connect_request = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.fromObject(object.connect_request);
+            }
+            if (object.connect_ok != null) {
+                if (typeof object.connect_ok !== "object")
+                    throw TypeError(".CMsgSteamNetworkingP2PRendezvous.connect_ok: object expected");
+                message.connect_ok = $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK.fromObject(object.connect_ok);
+            }
+            if (object.connection_closed != null) {
+                if (typeof object.connection_closed !== "object")
+                    throw TypeError(".CMsgSteamNetworkingP2PRendezvous.connection_closed: object expected");
+                message.connection_closed = $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.fromObject(object.connection_closed);
+            }
+            if (object.ack_reliable_msg != null)
+                message.ack_reliable_msg = object.ack_reliable_msg >>> 0;
+            if (object.first_reliable_msg != null)
+                message.first_reliable_msg = object.first_reliable_msg >>> 0;
+            if (object.reliable_messages) {
+                if (!Array.isArray(object.reliable_messages))
+                    throw TypeError(".CMsgSteamNetworkingP2PRendezvous.reliable_messages: array expected");
+                message.reliable_messages = [];
+                for (var i = 0; i < object.reliable_messages.length; ++i) {
+                    if (typeof object.reliable_messages[i] !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.reliable_messages: object expected");
+                    message.reliable_messages[i] = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.fromObject(object.reliable_messages[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamNetworkingP2PRendezvous message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @static
+         * @param {CMsgSteamNetworkingP2PRendezvous} message CMsgSteamNetworkingP2PRendezvous
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamNetworkingP2PRendezvous.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.reliable_messages = [];
+            if (options.defaults) {
+                object.to_connection_id = 0;
+                if (options.bytes === String)
+                    object.sdr_routes = "";
+                else {
+                    object.sdr_routes = [];
+                    if (options.bytes !== Array)
+                        object.sdr_routes = $util.newBuffer(object.sdr_routes);
+                }
+                object.ack_peer_routes_revision = 0;
+                object.connect_request = null;
+                object.connect_ok = null;
+                object.connection_closed = null;
+                object.ice_enabled = false;
+                object.from_identity = "";
+                object.from_connection_id = 0;
+                object.to_identity = "";
+                object.ack_reliable_msg = 0;
+                object.first_reliable_msg = 0;
+            }
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
+                object.to_connection_id = message.to_connection_id;
+            if (message.sdr_routes != null && message.hasOwnProperty("sdr_routes"))
+                object.sdr_routes = options.bytes === String ? $util.base64.encode(message.sdr_routes, 0, message.sdr_routes.length) : options.bytes === Array ? Array.prototype.slice.call(message.sdr_routes) : message.sdr_routes;
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
+                object.ack_peer_routes_revision = message.ack_peer_routes_revision;
+            if (message.connect_request != null && message.hasOwnProperty("connect_request"))
+                object.connect_request = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.toObject(message.connect_request, options);
+            if (message.connect_ok != null && message.hasOwnProperty("connect_ok"))
+                object.connect_ok = $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK.toObject(message.connect_ok, options);
+            if (message.connection_closed != null && message.hasOwnProperty("connection_closed"))
+                object.connection_closed = $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.toObject(message.connection_closed, options);
+            if (message.ice_enabled != null && message.hasOwnProperty("ice_enabled"))
+                object.ice_enabled = message.ice_enabled;
+            if (message.from_identity != null && message.hasOwnProperty("from_identity"))
+                object.from_identity = message.from_identity;
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
+                object.from_connection_id = message.from_connection_id;
+            if (message.to_identity != null && message.hasOwnProperty("to_identity"))
+                object.to_identity = message.to_identity;
+            if (message.ack_reliable_msg != null && message.hasOwnProperty("ack_reliable_msg"))
+                object.ack_reliable_msg = message.ack_reliable_msg;
+            if (message.first_reliable_msg != null && message.hasOwnProperty("first_reliable_msg"))
+                object.first_reliable_msg = message.first_reliable_msg;
+            if (message.reliable_messages && message.reliable_messages.length) {
+                object.reliable_messages = [];
+                for (var j = 0; j < message.reliable_messages.length; ++j)
+                    object.reliable_messages[j] = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.toObject(message.reliable_messages[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamNetworkingP2PRendezvous to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CMsgSteamNetworkingP2PRendezvous.ConnectRequest = (function() {
+    
+            /**
+             * Properties of a ConnectRequest.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @interface IConnectRequest
+             * @property {ICMsgSteamDatagramSessionCryptInfoSigned|null} [crypt] ConnectRequest crypt
+             * @property {ICMsgSteamDatagramCertificateSigned|null} [cert] ConnectRequest cert
+             * @property {number|null} [virtual_port] ConnectRequest virtual_port
+             */
+    
+            /**
+             * Constructs a new ConnectRequest.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @classdesc Represents a ConnectRequest.
+             * @implements IConnectRequest
+             * @constructor
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectRequest=} [properties] Properties to set
+             */
+            function ConnectRequest(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ConnectRequest crypt.
+             * @member {ICMsgSteamDatagramSessionCryptInfoSigned|null|undefined} crypt
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             */
+            ConnectRequest.prototype.crypt = null;
+    
+            /**
+             * ConnectRequest cert.
+             * @member {ICMsgSteamDatagramCertificateSigned|null|undefined} cert
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             */
+            ConnectRequest.prototype.cert = null;
+    
+            /**
+             * ConnectRequest virtual_port.
+             * @member {number} virtual_port
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             */
+            ConnectRequest.prototype.virtual_port = 0;
+    
+            /**
+             * Creates a new ConnectRequest instance using the specified properties.
+             * @function create
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectRequest=} [properties] Properties to set
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectRequest} ConnectRequest instance
+             */
+            ConnectRequest.create = function create(properties) {
+                return new ConnectRequest(properties);
+            };
+    
+            /**
+             * Encodes the specified ConnectRequest message. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ConnectRequest.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectRequest} message ConnectRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ConnectRequest.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
+                    $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                if (message.cert != null && message.hasOwnProperty("cert"))
+                    $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.virtual_port);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ConnectRequest message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ConnectRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectRequest} message ConnectRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ConnectRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ConnectRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectRequest} ConnectRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ConnectRequest.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 6:
+                        message.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.decode(reader, reader.uint32());
+                        break;
+                    case 7:
+                        message.cert = $root.CMsgSteamDatagramCertificateSigned.decode(reader, reader.uint32());
+                        break;
+                    case 9:
+                        message.virtual_port = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ConnectRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectRequest} ConnectRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ConnectRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ConnectRequest message.
+             * @function verify
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ConnectRequest.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.crypt != null && message.hasOwnProperty("crypt")) {
+                    var error = $root.CMsgSteamDatagramSessionCryptInfoSigned.verify(message.crypt);
+                    if (error)
+                        return "crypt." + error;
+                }
+                if (message.cert != null && message.hasOwnProperty("cert")) {
+                    var error = $root.CMsgSteamDatagramCertificateSigned.verify(message.cert);
+                    if (error)
+                        return "cert." + error;
+                }
+                if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
+                    if (!$util.isInteger(message.virtual_port))
+                        return "virtual_port: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ConnectRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectRequest} ConnectRequest
+             */
+            ConnectRequest.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest)
+                    return object;
+                var message = new $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest();
+                if (object.crypt != null) {
+                    if (typeof object.crypt !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.ConnectRequest.crypt: object expected");
+                    message.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.fromObject(object.crypt);
+                }
+                if (object.cert != null) {
+                    if (typeof object.cert !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.ConnectRequest.cert: object expected");
+                    message.cert = $root.CMsgSteamDatagramCertificateSigned.fromObject(object.cert);
+                }
+                if (object.virtual_port != null)
+                    message.virtual_port = object.virtual_port >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ConnectRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.ConnectRequest} message ConnectRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ConnectRequest.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.crypt = null;
+                    object.cert = null;
+                    object.virtual_port = 0;
+                }
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
+                    object.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.toObject(message.crypt, options);
+                if (message.cert != null && message.hasOwnProperty("cert"))
+                    object.cert = $root.CMsgSteamDatagramCertificateSigned.toObject(message.cert, options);
+                if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
+                    object.virtual_port = message.virtual_port;
+                return object;
+            };
+    
+            /**
+             * Converts this ConnectRequest to JSON.
+             * @function toJSON
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ConnectRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ConnectRequest;
+        })();
+    
+        CMsgSteamNetworkingP2PRendezvous.ConnectOK = (function() {
+    
+            /**
+             * Properties of a ConnectOK.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @interface IConnectOK
+             * @property {ICMsgSteamDatagramSessionCryptInfoSigned|null} [crypt] ConnectOK crypt
+             * @property {ICMsgSteamDatagramCertificateSigned|null} [cert] ConnectOK cert
+             */
+    
+            /**
+             * Constructs a new ConnectOK.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @classdesc Represents a ConnectOK.
+             * @implements IConnectOK
+             * @constructor
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectOK=} [properties] Properties to set
+             */
+            function ConnectOK(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ConnectOK crypt.
+             * @member {ICMsgSteamDatagramSessionCryptInfoSigned|null|undefined} crypt
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @instance
+             */
+            ConnectOK.prototype.crypt = null;
+    
+            /**
+             * ConnectOK cert.
+             * @member {ICMsgSteamDatagramCertificateSigned|null|undefined} cert
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @instance
+             */
+            ConnectOK.prototype.cert = null;
+    
+            /**
+             * Creates a new ConnectOK instance using the specified properties.
+             * @function create
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectOK=} [properties] Properties to set
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectOK} ConnectOK instance
+             */
+            ConnectOK.create = function create(properties) {
+                return new ConnectOK(properties);
+            };
+    
+            /**
+             * Encodes the specified ConnectOK message. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ConnectOK.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectOK} message ConnectOK message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ConnectOK.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
+                    $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                if (message.cert != null && message.hasOwnProperty("cert"))
+                    $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ConnectOK message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ConnectOK.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectOK} message ConnectOK message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ConnectOK.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ConnectOK message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectOK} ConnectOK
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ConnectOK.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 5:
+                        message.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.decode(reader, reader.uint32());
+                        break;
+                    case 6:
+                        message.cert = $root.CMsgSteamDatagramCertificateSigned.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ConnectOK message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectOK} ConnectOK
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ConnectOK.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ConnectOK message.
+             * @function verify
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ConnectOK.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.crypt != null && message.hasOwnProperty("crypt")) {
+                    var error = $root.CMsgSteamDatagramSessionCryptInfoSigned.verify(message.crypt);
+                    if (error)
+                        return "crypt." + error;
+                }
+                if (message.cert != null && message.hasOwnProperty("cert")) {
+                    var error = $root.CMsgSteamDatagramCertificateSigned.verify(message.cert);
+                    if (error)
+                        return "cert." + error;
+                }
+                return null;
+            };
+    
+            /**
+             * Creates a ConnectOK message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectOK} ConnectOK
+             */
+            ConnectOK.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK)
+                    return object;
+                var message = new $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK();
+                if (object.crypt != null) {
+                    if (typeof object.crypt !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.ConnectOK.crypt: object expected");
+                    message.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.fromObject(object.crypt);
+                }
+                if (object.cert != null) {
+                    if (typeof object.cert !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.ConnectOK.cert: object expected");
+                    message.cert = $root.CMsgSteamDatagramCertificateSigned.fromObject(object.cert);
+                }
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ConnectOK message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.ConnectOK} message ConnectOK
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ConnectOK.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.crypt = null;
+                    object.cert = null;
+                }
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
+                    object.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.toObject(message.crypt, options);
+                if (message.cert != null && message.hasOwnProperty("cert"))
+                    object.cert = $root.CMsgSteamDatagramCertificateSigned.toObject(message.cert, options);
+                return object;
+            };
+    
+            /**
+             * Converts this ConnectOK to JSON.
+             * @function toJSON
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectOK
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ConnectOK.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ConnectOK;
+        })();
+    
+        CMsgSteamNetworkingP2PRendezvous.ConnectionClosed = (function() {
+    
+            /**
+             * Properties of a ConnectionClosed.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @interface IConnectionClosed
+             * @property {string|null} [debug] ConnectionClosed debug
+             * @property {number|null} [reason_code] ConnectionClosed reason_code
+             */
+    
+            /**
+             * Constructs a new ConnectionClosed.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @classdesc Represents a ConnectionClosed.
+             * @implements IConnectionClosed
+             * @constructor
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed=} [properties] Properties to set
+             */
+            function ConnectionClosed(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ConnectionClosed debug.
+             * @member {string} debug
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @instance
+             */
+            ConnectionClosed.prototype.debug = "";
+    
+            /**
+             * ConnectionClosed reason_code.
+             * @member {number} reason_code
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @instance
+             */
+            ConnectionClosed.prototype.reason_code = 0;
+    
+            /**
+             * Creates a new ConnectionClosed instance using the specified properties.
+             * @function create
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed=} [properties] Properties to set
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectionClosed} ConnectionClosed instance
+             */
+            ConnectionClosed.create = function create(properties) {
+                return new ConnectionClosed(properties);
+            };
+    
+            /**
+             * Encodes the specified ConnectionClosed message. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed} message ConnectionClosed message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ConnectionClosed.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.debug != null && message.hasOwnProperty("debug"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.debug);
+                if (message.reason_code != null && message.hasOwnProperty("reason_code"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.reason_code);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ConnectionClosed message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed} message ConnectionClosed message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ConnectionClosed.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ConnectionClosed message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectionClosed} ConnectionClosed
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ConnectionClosed.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 5:
+                        message.debug = reader.string();
+                        break;
+                    case 6:
+                        message.reason_code = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ConnectionClosed message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectionClosed} ConnectionClosed
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ConnectionClosed.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ConnectionClosed message.
+             * @function verify
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ConnectionClosed.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.debug != null && message.hasOwnProperty("debug"))
+                    if (!$util.isString(message.debug))
+                        return "debug: string expected";
+                if (message.reason_code != null && message.hasOwnProperty("reason_code"))
+                    if (!$util.isInteger(message.reason_code))
+                        return "reason_code: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ConnectionClosed message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ConnectionClosed} ConnectionClosed
+             */
+            ConnectionClosed.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed)
+                    return object;
+                var message = new $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed();
+                if (object.debug != null)
+                    message.debug = String(object.debug);
+                if (object.reason_code != null)
+                    message.reason_code = object.reason_code >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ConnectionClosed message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.ConnectionClosed} message ConnectionClosed
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ConnectionClosed.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.debug = "";
+                    object.reason_code = 0;
+                }
+                if (message.debug != null && message.hasOwnProperty("debug"))
+                    object.debug = message.debug;
+                if (message.reason_code != null && message.hasOwnProperty("reason_code"))
+                    object.reason_code = message.reason_code;
+                return object;
+            };
+    
+            /**
+             * Converts this ConnectionClosed to JSON.
+             * @function toJSON
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectionClosed
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ConnectionClosed.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ConnectionClosed;
+        })();
+    
+        CMsgSteamNetworkingP2PRendezvous.ReliableMessage = (function() {
+    
+            /**
+             * Properties of a ReliableMessage.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @interface IReliableMessage
+             * @property {ICMsgICERendezvous|null} [ice] ReliableMessage ice
+             */
+    
+            /**
+             * Constructs a new ReliableMessage.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @classdesc Represents a ReliableMessage.
+             * @implements IReliableMessage
+             * @constructor
+             * @param {CMsgSteamNetworkingP2PRendezvous.IReliableMessage=} [properties] Properties to set
+             */
+            function ReliableMessage(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ReliableMessage ice.
+             * @member {ICMsgICERendezvous|null|undefined} ice
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @instance
+             */
+            ReliableMessage.prototype.ice = null;
+    
+            /**
+             * Creates a new ReliableMessage instance using the specified properties.
+             * @function create
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IReliableMessage=} [properties] Properties to set
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ReliableMessage} ReliableMessage instance
+             */
+            ReliableMessage.create = function create(properties) {
+                return new ReliableMessage(properties);
+            };
+    
+            /**
+             * Encodes the specified ReliableMessage message. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ReliableMessage.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IReliableMessage} message ReliableMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ReliableMessage.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.ice != null && message.hasOwnProperty("ice"))
+                    $root.CMsgICERendezvous.encode(message.ice, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ReliableMessage message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ReliableMessage.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IReliableMessage} message ReliableMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ReliableMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ReliableMessage message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ReliableMessage} ReliableMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ReliableMessage.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.ice = $root.CMsgICERendezvous.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ReliableMessage message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ReliableMessage} ReliableMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ReliableMessage.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ReliableMessage message.
+             * @function verify
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ReliableMessage.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.ice != null && message.hasOwnProperty("ice")) {
+                    var error = $root.CMsgICERendezvous.verify(message.ice);
+                    if (error)
+                        return "ice." + error;
+                }
+                return null;
+            };
+    
+            /**
+             * Creates a ReliableMessage message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ReliableMessage} ReliableMessage
+             */
+            ReliableMessage.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage)
+                    return object;
+                var message = new $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage();
+                if (object.ice != null) {
+                    if (typeof object.ice !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.ReliableMessage.ice: object expected");
+                    message.ice = $root.CMsgICERendezvous.fromObject(object.ice);
+                }
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ReliableMessage message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.ReliableMessage} message ReliableMessage
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ReliableMessage.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.ice = null;
+                if (message.ice != null && message.hasOwnProperty("ice"))
+                    object.ice = $root.CMsgICERendezvous.toObject(message.ice, options);
+                return object;
+            };
+    
+            /**
+             * Converts this ReliableMessage to JSON.
+             * @function toJSON
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ReliableMessage
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ReliableMessage.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ReliableMessage;
+        })();
+    
+        return CMsgSteamNetworkingP2PRendezvous;
+    })();
+    
+    $root.CMsgSteamNetworkingICESessionSummary = (function() {
+    
+        /**
+         * Properties of a CMsgSteamNetworkingICESessionSummary.
+         * @exports ICMsgSteamNetworkingICESessionSummary
+         * @interface ICMsgSteamNetworkingICESessionSummary
+         * @property {number|null} [failure_reason_code] CMsgSteamNetworkingICESessionSummary failure_reason_code
+         * @property {number|null} [local_candidate_types] CMsgSteamNetworkingICESessionSummary local_candidate_types
+         * @property {number|null} [remote_candidate_types] CMsgSteamNetworkingICESessionSummary remote_candidate_types
+         * @property {number|null} [initial_route_kind] CMsgSteamNetworkingICESessionSummary initial_route_kind
+         * @property {number|null} [initial_ping] CMsgSteamNetworkingICESessionSummary initial_ping
+         * @property {number|null} [initial_score] CMsgSteamNetworkingICESessionSummary initial_score
+         * @property {number|null} [negotiation_ms] CMsgSteamNetworkingICESessionSummary negotiation_ms
+         * @property {number|null} [selected_seconds] CMsgSteamNetworkingICESessionSummary selected_seconds
+         */
+    
+        /**
+         * Constructs a new CMsgSteamNetworkingICESessionSummary.
+         * @exports CMsgSteamNetworkingICESessionSummary
+         * @classdesc Represents a CMsgSteamNetworkingICESessionSummary.
+         * @implements ICMsgSteamNetworkingICESessionSummary
+         * @constructor
+         * @param {ICMsgSteamNetworkingICESessionSummary=} [properties] Properties to set
+         */
+        function CMsgSteamNetworkingICESessionSummary(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary failure_reason_code.
+         * @member {number} failure_reason_code
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.failure_reason_code = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary local_candidate_types.
+         * @member {number} local_candidate_types
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.local_candidate_types = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary remote_candidate_types.
+         * @member {number} remote_candidate_types
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.remote_candidate_types = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary initial_route_kind.
+         * @member {number} initial_route_kind
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.initial_route_kind = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary initial_ping.
+         * @member {number} initial_ping
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.initial_ping = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary initial_score.
+         * @member {number} initial_score
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.initial_score = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary negotiation_ms.
+         * @member {number} negotiation_ms
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.negotiation_ms = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary selected_seconds.
+         * @member {number} selected_seconds
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.selected_seconds = 0;
+    
+        /**
+         * Creates a new CMsgSteamNetworkingICESessionSummary instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {ICMsgSteamNetworkingICESessionSummary=} [properties] Properties to set
+         * @returns {CMsgSteamNetworkingICESessionSummary} CMsgSteamNetworkingICESessionSummary instance
+         */
+        CMsgSteamNetworkingICESessionSummary.create = function create(properties) {
+            return new CMsgSteamNetworkingICESessionSummary(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingICESessionSummary message. Does not implicitly {@link CMsgSteamNetworkingICESessionSummary.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {ICMsgSteamNetworkingICESessionSummary} message CMsgSteamNetworkingICESessionSummary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingICESessionSummary.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.local_candidate_types != null && message.hasOwnProperty("local_candidate_types"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.local_candidate_types);
+            if (message.remote_candidate_types != null && message.hasOwnProperty("remote_candidate_types"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.remote_candidate_types);
+            if (message.initial_route_kind != null && message.hasOwnProperty("initial_route_kind"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.initial_route_kind);
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.initial_ping);
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.negotiation_ms);
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.initial_score);
+            if (message.failure_reason_code != null && message.hasOwnProperty("failure_reason_code"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.failure_reason_code);
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.selected_seconds);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingICESessionSummary message, length delimited. Does not implicitly {@link CMsgSteamNetworkingICESessionSummary.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {ICMsgSteamNetworkingICESessionSummary} message CMsgSteamNetworkingICESessionSummary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingICESessionSummary.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingICESessionSummary message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamNetworkingICESessionSummary} CMsgSteamNetworkingICESessionSummary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingICESessionSummary.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingICESessionSummary();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 7:
+                    message.failure_reason_code = reader.uint32();
+                    break;
+                case 1:
+                    message.local_candidate_types = reader.uint32();
+                    break;
+                case 2:
+                    message.remote_candidate_types = reader.uint32();
+                    break;
+                case 3:
+                    message.initial_route_kind = reader.uint32();
+                    break;
+                case 4:
+                    message.initial_ping = reader.uint32();
+                    break;
+                case 6:
+                    message.initial_score = reader.uint32();
+                    break;
+                case 5:
+                    message.negotiation_ms = reader.uint32();
+                    break;
+                case 12:
+                    message.selected_seconds = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingICESessionSummary message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamNetworkingICESessionSummary} CMsgSteamNetworkingICESessionSummary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingICESessionSummary.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamNetworkingICESessionSummary message.
+         * @function verify
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamNetworkingICESessionSummary.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.failure_reason_code != null && message.hasOwnProperty("failure_reason_code"))
+                if (!$util.isInteger(message.failure_reason_code))
+                    return "failure_reason_code: integer expected";
+            if (message.local_candidate_types != null && message.hasOwnProperty("local_candidate_types"))
+                if (!$util.isInteger(message.local_candidate_types))
+                    return "local_candidate_types: integer expected";
+            if (message.remote_candidate_types != null && message.hasOwnProperty("remote_candidate_types"))
+                if (!$util.isInteger(message.remote_candidate_types))
+                    return "remote_candidate_types: integer expected";
+            if (message.initial_route_kind != null && message.hasOwnProperty("initial_route_kind"))
+                if (!$util.isInteger(message.initial_route_kind))
+                    return "initial_route_kind: integer expected";
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
+                if (!$util.isInteger(message.initial_ping))
+                    return "initial_ping: integer expected";
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
+                if (!$util.isInteger(message.initial_score))
+                    return "initial_score: integer expected";
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
+                if (!$util.isInteger(message.negotiation_ms))
+                    return "negotiation_ms: integer expected";
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
+                if (!$util.isInteger(message.selected_seconds))
+                    return "selected_seconds: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamNetworkingICESessionSummary message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamNetworkingICESessionSummary} CMsgSteamNetworkingICESessionSummary
+         */
+        CMsgSteamNetworkingICESessionSummary.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamNetworkingICESessionSummary)
+                return object;
+            var message = new $root.CMsgSteamNetworkingICESessionSummary();
+            if (object.failure_reason_code != null)
+                message.failure_reason_code = object.failure_reason_code >>> 0;
+            if (object.local_candidate_types != null)
+                message.local_candidate_types = object.local_candidate_types >>> 0;
+            if (object.remote_candidate_types != null)
+                message.remote_candidate_types = object.remote_candidate_types >>> 0;
+            if (object.initial_route_kind != null)
+                message.initial_route_kind = object.initial_route_kind >>> 0;
+            if (object.initial_ping != null)
+                message.initial_ping = object.initial_ping >>> 0;
+            if (object.initial_score != null)
+                message.initial_score = object.initial_score >>> 0;
+            if (object.negotiation_ms != null)
+                message.negotiation_ms = object.negotiation_ms >>> 0;
+            if (object.selected_seconds != null)
+                message.selected_seconds = object.selected_seconds >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamNetworkingICESessionSummary message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @static
+         * @param {CMsgSteamNetworkingICESessionSummary} message CMsgSteamNetworkingICESessionSummary
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamNetworkingICESessionSummary.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.local_candidate_types = 0;
+                object.remote_candidate_types = 0;
+                object.initial_route_kind = 0;
+                object.initial_ping = 0;
+                object.negotiation_ms = 0;
+                object.initial_score = 0;
+                object.failure_reason_code = 0;
+                object.selected_seconds = 0;
+            }
+            if (message.local_candidate_types != null && message.hasOwnProperty("local_candidate_types"))
+                object.local_candidate_types = message.local_candidate_types;
+            if (message.remote_candidate_types != null && message.hasOwnProperty("remote_candidate_types"))
+                object.remote_candidate_types = message.remote_candidate_types;
+            if (message.initial_route_kind != null && message.hasOwnProperty("initial_route_kind"))
+                object.initial_route_kind = message.initial_route_kind;
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
+                object.initial_ping = message.initial_ping;
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
+                object.negotiation_ms = message.negotiation_ms;
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
+                object.initial_score = message.initial_score;
+            if (message.failure_reason_code != null && message.hasOwnProperty("failure_reason_code"))
+                object.failure_reason_code = message.failure_reason_code;
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
+                object.selected_seconds = message.selected_seconds;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamNetworkingICESessionSummary to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamNetworkingICESessionSummary;
     })();
 
     return $root;

@@ -14661,6 +14661,8 @@
          * @property {number|null} [browser_handle] CMsgFileLoadDialog browser_handle
          * @property {string|null} [title] CMsgFileLoadDialog title
          * @property {string|null} [initialFile] CMsgFileLoadDialog initialFile
+         * @property {Array.<string>|null} [accept_types] CMsgFileLoadDialog accept_types
+         * @property {boolean|null} [is_save] CMsgFileLoadDialog is_save
          */
     
         /**
@@ -14672,6 +14674,7 @@
          * @param {ICMsgFileLoadDialog=} [properties] Properties to set
          */
         function CMsgFileLoadDialog(properties) {
+            this.accept_types = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -14703,6 +14706,22 @@
         CMsgFileLoadDialog.prototype.initialFile = "";
     
         /**
+         * CMsgFileLoadDialog accept_types.
+         * @member {Array.<string>} accept_types
+         * @memberof CMsgFileLoadDialog
+         * @instance
+         */
+        CMsgFileLoadDialog.prototype.accept_types = $util.emptyArray;
+    
+        /**
+         * CMsgFileLoadDialog is_save.
+         * @member {boolean} is_save
+         * @memberof CMsgFileLoadDialog
+         * @instance
+         */
+        CMsgFileLoadDialog.prototype.is_save = false;
+    
+        /**
          * Creates a new CMsgFileLoadDialog instance using the specified properties.
          * @function create
          * @memberof CMsgFileLoadDialog
@@ -14732,6 +14751,11 @@
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
             if (message.initialFile != null && message.hasOwnProperty("initialFile"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.initialFile);
+            if (message.accept_types != null && message.accept_types.length)
+                for (var i = 0; i < message.accept_types.length; ++i)
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.accept_types[i]);
+            if (message.is_save != null && message.hasOwnProperty("is_save"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.is_save);
             return writer;
         };
     
@@ -14774,6 +14798,14 @@
                     break;
                 case 3:
                     message.initialFile = reader.string();
+                    break;
+                case 4:
+                    if (!(message.accept_types && message.accept_types.length))
+                        message.accept_types = [];
+                    message.accept_types.push(reader.string());
+                    break;
+                case 5:
+                    message.is_save = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -14819,6 +14851,16 @@
             if (message.initialFile != null && message.hasOwnProperty("initialFile"))
                 if (!$util.isString(message.initialFile))
                     return "initialFile: string expected";
+            if (message.accept_types != null && message.hasOwnProperty("accept_types")) {
+                if (!Array.isArray(message.accept_types))
+                    return "accept_types: array expected";
+                for (var i = 0; i < message.accept_types.length; ++i)
+                    if (!$util.isString(message.accept_types[i]))
+                        return "accept_types: string[] expected";
+            }
+            if (message.is_save != null && message.hasOwnProperty("is_save"))
+                if (typeof message.is_save !== "boolean")
+                    return "is_save: boolean expected";
             return null;
         };
     
@@ -14840,6 +14882,15 @@
                 message.title = String(object.title);
             if (object.initialFile != null)
                 message.initialFile = String(object.initialFile);
+            if (object.accept_types) {
+                if (!Array.isArray(object.accept_types))
+                    throw TypeError(".CMsgFileLoadDialog.accept_types: array expected");
+                message.accept_types = [];
+                for (var i = 0; i < object.accept_types.length; ++i)
+                    message.accept_types[i] = String(object.accept_types[i]);
+            }
+            if (object.is_save != null)
+                message.is_save = Boolean(object.is_save);
             return message;
         };
     
@@ -14856,10 +14907,13 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.accept_types = [];
             if (options.defaults) {
                 object.browser_handle = 0;
                 object.title = "";
                 object.initialFile = "";
+                object.is_save = false;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -14867,6 +14921,13 @@
                 object.title = message.title;
             if (message.initialFile != null && message.hasOwnProperty("initialFile"))
                 object.initialFile = message.initialFile;
+            if (message.accept_types && message.accept_types.length) {
+                object.accept_types = [];
+                for (var j = 0; j < message.accept_types.length; ++j)
+                    object.accept_types[j] = message.accept_types[j];
+            }
+            if (message.is_save != null && message.hasOwnProperty("is_save"))
+                object.is_save = message.is_save;
             return object;
         };
     
@@ -32120,6 +32181,8 @@
          * @property {number|null} [y] CMsgSetWindowPosition y
          * @property {number|null} [width] CMsgSetWindowPosition width
          * @property {number|null} [height] CMsgSetWindowPosition height
+         * @property {number|null} [min_width] CMsgSetWindowPosition min_width
+         * @property {number|null} [min_height] CMsgSetWindowPosition min_height
          */
     
         /**
@@ -32178,6 +32241,22 @@
         CMsgSetWindowPosition.prototype.height = 0;
     
         /**
+         * CMsgSetWindowPosition min_width.
+         * @member {number} min_width
+         * @memberof CMsgSetWindowPosition
+         * @instance
+         */
+        CMsgSetWindowPosition.prototype.min_width = 0;
+    
+        /**
+         * CMsgSetWindowPosition min_height.
+         * @member {number} min_height
+         * @memberof CMsgSetWindowPosition
+         * @instance
+         */
+        CMsgSetWindowPosition.prototype.min_height = 0;
+    
+        /**
          * Creates a new CMsgSetWindowPosition instance using the specified properties.
          * @function create
          * @memberof CMsgSetWindowPosition
@@ -32211,6 +32290,10 @@
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.width);
             if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.height);
+            if (message.min_width != null && message.hasOwnProperty("min_width"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.min_width);
+            if (message.min_height != null && message.hasOwnProperty("min_height"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.min_height);
             return writer;
         };
     
@@ -32259,6 +32342,12 @@
                     break;
                 case 5:
                     message.height = reader.int32();
+                    break;
+                case 6:
+                    message.min_width = reader.int32();
+                    break;
+                case 7:
+                    message.min_height = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -32310,6 +32399,12 @@
             if (message.height != null && message.hasOwnProperty("height"))
                 if (!$util.isInteger(message.height))
                     return "height: integer expected";
+            if (message.min_width != null && message.hasOwnProperty("min_width"))
+                if (!$util.isInteger(message.min_width))
+                    return "min_width: integer expected";
+            if (message.min_height != null && message.hasOwnProperty("min_height"))
+                if (!$util.isInteger(message.min_height))
+                    return "min_height: integer expected";
             return null;
         };
     
@@ -32335,6 +32430,10 @@
                 message.width = object.width | 0;
             if (object.height != null)
                 message.height = object.height | 0;
+            if (object.min_width != null)
+                message.min_width = object.min_width | 0;
+            if (object.min_height != null)
+                message.min_height = object.min_height | 0;
             return message;
         };
     
@@ -32357,6 +32456,8 @@
                 object.y = 0;
                 object.width = 0;
                 object.height = 0;
+                object.min_width = 0;
+                object.min_height = 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -32368,6 +32469,10 @@
                 object.width = message.width;
             if (message.height != null && message.hasOwnProperty("height"))
                 object.height = message.height;
+            if (message.min_width != null && message.hasOwnProperty("min_width"))
+                object.min_width = message.min_width;
+            if (message.min_height != null && message.hasOwnProperty("min_height"))
+                object.min_height = message.min_height;
             return object;
         };
     
@@ -34763,6 +34868,426 @@
         };
     
         return CMsgInspectElement;
+    })();
+    
+    $root.CMsgDisableF5 = (function() {
+    
+        /**
+         * Properties of a CMsgDisableF5.
+         * @exports ICMsgDisableF5
+         * @interface ICMsgDisableF5
+         * @property {number|null} [browser_handle] CMsgDisableF5 browser_handle
+         * @property {boolean|null} [disable] CMsgDisableF5 disable
+         */
+    
+        /**
+         * Constructs a new CMsgDisableF5.
+         * @exports CMsgDisableF5
+         * @classdesc Represents a CMsgDisableF5.
+         * @implements ICMsgDisableF5
+         * @constructor
+         * @param {ICMsgDisableF5=} [properties] Properties to set
+         */
+        function CMsgDisableF5(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgDisableF5 browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgDisableF5
+         * @instance
+         */
+        CMsgDisableF5.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgDisableF5 disable.
+         * @member {boolean} disable
+         * @memberof CMsgDisableF5
+         * @instance
+         */
+        CMsgDisableF5.prototype.disable = false;
+    
+        /**
+         * Creates a new CMsgDisableF5 instance using the specified properties.
+         * @function create
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {ICMsgDisableF5=} [properties] Properties to set
+         * @returns {CMsgDisableF5} CMsgDisableF5 instance
+         */
+        CMsgDisableF5.create = function create(properties) {
+            return new CMsgDisableF5(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgDisableF5 message. Does not implicitly {@link CMsgDisableF5.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {ICMsgDisableF5} message CMsgDisableF5 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgDisableF5.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.disable != null && message.hasOwnProperty("disable"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.disable);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgDisableF5 message, length delimited. Does not implicitly {@link CMsgDisableF5.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {ICMsgDisableF5} message CMsgDisableF5 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgDisableF5.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgDisableF5 message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgDisableF5} CMsgDisableF5
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgDisableF5.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgDisableF5();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.disable = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgDisableF5 message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgDisableF5} CMsgDisableF5
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgDisableF5.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgDisableF5 message.
+         * @function verify
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgDisableF5.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.disable != null && message.hasOwnProperty("disable"))
+                if (typeof message.disable !== "boolean")
+                    return "disable: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgDisableF5 message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgDisableF5} CMsgDisableF5
+         */
+        CMsgDisableF5.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgDisableF5)
+                return object;
+            var message = new $root.CMsgDisableF5();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.disable != null)
+                message.disable = Boolean(object.disable);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgDisableF5 message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgDisableF5
+         * @static
+         * @param {CMsgDisableF5} message CMsgDisableF5
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgDisableF5.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.disable = false;
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.disable != null && message.hasOwnProperty("disable"))
+                object.disable = message.disable;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgDisableF5 to JSON.
+         * @function toJSON
+         * @memberof CMsgDisableF5
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgDisableF5.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgDisableF5;
+    })();
+    
+    $root.CMsgStartDownload = (function() {
+    
+        /**
+         * Properties of a CMsgStartDownload.
+         * @exports ICMsgStartDownload
+         * @interface ICMsgStartDownload
+         * @property {number|null} [browser_handle] CMsgStartDownload browser_handle
+         * @property {string|null} [url] CMsgStartDownload url
+         */
+    
+        /**
+         * Constructs a new CMsgStartDownload.
+         * @exports CMsgStartDownload
+         * @classdesc Represents a CMsgStartDownload.
+         * @implements ICMsgStartDownload
+         * @constructor
+         * @param {ICMsgStartDownload=} [properties] Properties to set
+         */
+        function CMsgStartDownload(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgStartDownload browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgStartDownload
+         * @instance
+         */
+        CMsgStartDownload.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgStartDownload url.
+         * @member {string} url
+         * @memberof CMsgStartDownload
+         * @instance
+         */
+        CMsgStartDownload.prototype.url = "";
+    
+        /**
+         * Creates a new CMsgStartDownload instance using the specified properties.
+         * @function create
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {ICMsgStartDownload=} [properties] Properties to set
+         * @returns {CMsgStartDownload} CMsgStartDownload instance
+         */
+        CMsgStartDownload.create = function create(properties) {
+            return new CMsgStartDownload(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgStartDownload message. Does not implicitly {@link CMsgStartDownload.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {ICMsgStartDownload} message CMsgStartDownload message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgStartDownload.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.url != null && message.hasOwnProperty("url"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgStartDownload message, length delimited. Does not implicitly {@link CMsgStartDownload.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {ICMsgStartDownload} message CMsgStartDownload message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgStartDownload.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgStartDownload message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgStartDownload} CMsgStartDownload
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgStartDownload.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgStartDownload();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.url = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgStartDownload message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgStartDownload} CMsgStartDownload
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgStartDownload.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgStartDownload message.
+         * @function verify
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgStartDownload.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.url != null && message.hasOwnProperty("url"))
+                if (!$util.isString(message.url))
+                    return "url: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgStartDownload message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgStartDownload} CMsgStartDownload
+         */
+        CMsgStartDownload.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgStartDownload)
+                return object;
+            var message = new $root.CMsgStartDownload();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.url != null)
+                message.url = String(object.url);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgStartDownload message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgStartDownload
+         * @static
+         * @param {CMsgStartDownload} message CMsgStartDownload
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgStartDownload.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.url = "";
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.url != null && message.hasOwnProperty("url"))
+                object.url = message.url;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgStartDownload to JSON.
+         * @function toJSON
+         * @memberof CMsgStartDownload
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgStartDownload.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgStartDownload;
     })();
 
     return $root;

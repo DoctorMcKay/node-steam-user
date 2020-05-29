@@ -89,6 +89,7 @@ module.exports = {
 	"MasterComp": 130,
 	"StorePromotion": 131, // removed "renamed to Promotional"
 	"Promotional": 131,
+	"MasterSubscription": 134,
 	"OEMTicket": 256,
 	"Split": 512,
 	"Complimentary": 1024,
@@ -177,6 +178,7 @@ module.exports = {
 	"129": "Valve",
 	"130": "MasterComp",
 	"131": "Promotional",
+	"134": "MasterSubscription",
 	"256": "OEMTicket",
 	"512": "Split",
 	"1024": "Complimentary",

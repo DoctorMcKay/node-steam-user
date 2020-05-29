@@ -7,8 +7,9 @@ module.exports = {
 	"OSX": 2,
 	"PS3": 4,
 	"Linux": 8,
-	"Reserved1": 8, // removed
-	"Reserved2": 16,
+	"Switch": 16,
+	"Android": 32,
+	"IPhoneOS": 64,
 	"All": -1,
 
 	// Value-to-name mapping for convenience
@@ -16,7 +17,9 @@ module.exports = {
 	"1": "Windows",
 	"2": "OSX",
 	"4": "PS3",
-	"8": "Reserved1",
-	"16": "Reserved2",
+	"8": "Linux",
+	"16": "Switch",
+	"32": "Android",
+	"64": "IPhoneOS",
 	"-1": "All",
 };

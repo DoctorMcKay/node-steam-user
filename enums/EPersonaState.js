@@ -10,7 +10,6 @@ module.exports = {
 	"LookingToTrade": 5,
 	"LookingToPlay": 6,
 	"Invisible": 7,
-	"Max": 8,
 
 	// Value-to-name mapping for convenience
 	"0": "Offline",
@@ -21,5 +20,4 @@ module.exports = {
 	"5": "LookingToTrade",
 	"6": "LookingToPlay",
 	"7": "Invisible",
-	"8": "Max",
 };

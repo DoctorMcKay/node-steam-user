@@ -123,6 +123,10 @@ module.exports = {
 	"WGNetworkSendExceeded": 110,
 	"AccountNotFriends": 111,
 	"LimitedUserAccount": 112,
+	"CantRemoveItem": 113,
+	"AccountHasBeenDeleted": 114,
+	"AccountHasAnExistingUserCancelledLicense": 115,
+	"DeniedDueToCommunityCooldown": 116,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -237,4 +241,8 @@ module.exports = {
 	"110": "WGNetworkSendExceeded",
 	"111": "AccountNotFriends",
 	"112": "LimitedUserAccount",
+	"113": "CantRemoveItem",
+	"114": "AccountHasBeenDeleted",
+	"115": "AccountHasAnExistingUserCancelledLicense",
+	"116": "DeniedDueToCommunityCooldown",
 };

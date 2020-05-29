@@ -1494,6 +1494,7 @@
              * @property {Array.<CCredentials_GetSteamGuardDetails_Response.INewAuthentication>|null} [newauthentication] SessionData newauthentication
              * @property {boolean|null} [authentication_exists_from_same_ip_before_mintime] SessionData authentication_exists_from_same_ip_before_mintime
              * @property {number|null} [public_ipv4] SessionData public_ipv4
+             * @property {string|null} [public_ip_address] SessionData public_ip_address
              */
     
             /**
@@ -1569,6 +1570,14 @@
             SessionData.prototype.public_ipv4 = 0;
     
             /**
+             * SessionData public_ip_address.
+             * @member {string} public_ip_address
+             * @memberof CCredentials_GetSteamGuardDetails_Response.SessionData
+             * @instance
+             */
+            SessionData.prototype.public_ip_address = "";
+    
+            /**
              * Creates a new SessionData instance using the specified properties.
              * @function create
              * @memberof CCredentials_GetSteamGuardDetails_Response.SessionData
@@ -1607,6 +1616,8 @@
                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.authentication_exists_from_same_ip_before_mintime);
                 if (message.public_ipv4 != null && message.hasOwnProperty("public_ipv4"))
                     writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.public_ipv4);
+                if (message.public_ip_address != null && message.hasOwnProperty("public_ip_address"))
+                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.public_ip_address);
                 return writer;
             };
     
@@ -1663,6 +1674,9 @@
                         break;
                     case 7:
                         message.public_ipv4 = reader.uint32();
+                        break;
+                    case 8:
+                        message.public_ip_address = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1726,6 +1740,9 @@
                 if (message.public_ipv4 != null && message.hasOwnProperty("public_ipv4"))
                     if (!$util.isInteger(message.public_ipv4))
                         return "public_ipv4: integer expected";
+                if (message.public_ip_address != null && message.hasOwnProperty("public_ip_address"))
+                    if (!$util.isString(message.public_ip_address))
+                        return "public_ip_address: string expected";
                 return null;
             };
     
@@ -1770,6 +1787,8 @@
                     message.authentication_exists_from_same_ip_before_mintime = Boolean(object.authentication_exists_from_same_ip_before_mintime);
                 if (object.public_ipv4 != null)
                     message.public_ipv4 = object.public_ipv4 >>> 0;
+                if (object.public_ip_address != null)
+                    message.public_ip_address = String(object.public_ip_address);
                 return message;
             };
     
@@ -1799,6 +1818,7 @@
                     object.authentication_exists_from_geoloc_before_mintime = false;
                     object.authentication_exists_from_same_ip_before_mintime = false;
                     object.public_ipv4 = 0;
+                    object.public_ip_address = "";
                 }
                 if (message.machine_id != null && message.hasOwnProperty("machine_id"))
                     if (typeof message.machine_id === "number")
@@ -1820,6 +1840,8 @@
                     object.authentication_exists_from_same_ip_before_mintime = message.authentication_exists_from_same_ip_before_mintime;
                 if (message.public_ipv4 != null && message.hasOwnProperty("public_ipv4"))
                     object.public_ipv4 = message.public_ipv4;
+                if (message.public_ip_address != null && message.hasOwnProperty("public_ip_address"))
+                    object.public_ip_address = message.public_ip_address;
                 return object;
             };
     
@@ -3164,6 +3186,7 @@
          * Properties of a CCredentials_LastCredentialChangeTime_Request.
          * @exports ICCredentials_LastCredentialChangeTime_Request
          * @interface ICCredentials_LastCredentialChangeTime_Request
+         * @property {boolean|null} [user_changes_only] CCredentials_LastCredentialChangeTime_Request user_changes_only
          */
     
         /**
@@ -3180,6 +3203,14 @@
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+    
+        /**
+         * CCredentials_LastCredentialChangeTime_Request user_changes_only.
+         * @member {boolean} user_changes_only
+         * @memberof CCredentials_LastCredentialChangeTime_Request
+         * @instance
+         */
+        CCredentials_LastCredentialChangeTime_Request.prototype.user_changes_only = false;
     
         /**
          * Creates a new CCredentials_LastCredentialChangeTime_Request instance using the specified properties.
@@ -3205,6 +3236,8 @@
         CCredentials_LastCredentialChangeTime_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.user_changes_only != null && message.hasOwnProperty("user_changes_only"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.user_changes_only);
             return writer;
         };
     
@@ -3239,6 +3272,9 @@
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.user_changes_only = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -3274,6 +3310,9 @@
         CCredentials_LastCredentialChangeTime_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.user_changes_only != null && message.hasOwnProperty("user_changes_only"))
+                if (typeof message.user_changes_only !== "boolean")
+                    return "user_changes_only: boolean expected";
             return null;
         };
     
@@ -3288,7 +3327,10 @@
         CCredentials_LastCredentialChangeTime_Request.fromObject = function fromObject(object) {
             if (object instanceof $root.CCredentials_LastCredentialChangeTime_Request)
                 return object;
-            return new $root.CCredentials_LastCredentialChangeTime_Request();
+            var message = new $root.CCredentials_LastCredentialChangeTime_Request();
+            if (object.user_changes_only != null)
+                message.user_changes_only = Boolean(object.user_changes_only);
+            return message;
         };
     
         /**
@@ -3300,8 +3342,15 @@
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CCredentials_LastCredentialChangeTime_Request.toObject = function toObject() {
-            return {};
+        CCredentials_LastCredentialChangeTime_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.user_changes_only = false;
+            if (message.user_changes_only != null && message.hasOwnProperty("user_changes_only"))
+                object.user_changes_only = message.user_changes_only;
+            return object;
         };
     
         /**

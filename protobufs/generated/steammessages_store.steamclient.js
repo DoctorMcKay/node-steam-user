@@ -2394,6 +2394,253 @@
         return CStore_GetStorePreferences_Response;
     })();
     
+    $root.CStore_StorePreferencesChanged_Notification = (function() {
+    
+        /**
+         * Properties of a CStore_StorePreferencesChanged_Notification.
+         * @exports ICStore_StorePreferencesChanged_Notification
+         * @interface ICStore_StorePreferencesChanged_Notification
+         * @property {ICStore_UserPreferences|null} [preferences] CStore_StorePreferencesChanged_Notification preferences
+         * @property {ICStore_UserTagPreferences|null} [tag_preferences] CStore_StorePreferencesChanged_Notification tag_preferences
+         * @property {ICStore_UserContentDescriptorPreferences|null} [content_descriptor_preferences] CStore_StorePreferencesChanged_Notification content_descriptor_preferences
+         */
+    
+        /**
+         * Constructs a new CStore_StorePreferencesChanged_Notification.
+         * @exports CStore_StorePreferencesChanged_Notification
+         * @classdesc Represents a CStore_StorePreferencesChanged_Notification.
+         * @implements ICStore_StorePreferencesChanged_Notification
+         * @constructor
+         * @param {ICStore_StorePreferencesChanged_Notification=} [properties] Properties to set
+         */
+        function CStore_StorePreferencesChanged_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CStore_StorePreferencesChanged_Notification preferences.
+         * @member {ICStore_UserPreferences|null|undefined} preferences
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @instance
+         */
+        CStore_StorePreferencesChanged_Notification.prototype.preferences = null;
+    
+        /**
+         * CStore_StorePreferencesChanged_Notification tag_preferences.
+         * @member {ICStore_UserTagPreferences|null|undefined} tag_preferences
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @instance
+         */
+        CStore_StorePreferencesChanged_Notification.prototype.tag_preferences = null;
+    
+        /**
+         * CStore_StorePreferencesChanged_Notification content_descriptor_preferences.
+         * @member {ICStore_UserContentDescriptorPreferences|null|undefined} content_descriptor_preferences
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @instance
+         */
+        CStore_StorePreferencesChanged_Notification.prototype.content_descriptor_preferences = null;
+    
+        /**
+         * Creates a new CStore_StorePreferencesChanged_Notification instance using the specified properties.
+         * @function create
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {ICStore_StorePreferencesChanged_Notification=} [properties] Properties to set
+         * @returns {CStore_StorePreferencesChanged_Notification} CStore_StorePreferencesChanged_Notification instance
+         */
+        CStore_StorePreferencesChanged_Notification.create = function create(properties) {
+            return new CStore_StorePreferencesChanged_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CStore_StorePreferencesChanged_Notification message. Does not implicitly {@link CStore_StorePreferencesChanged_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {ICStore_StorePreferencesChanged_Notification} message CStore_StorePreferencesChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CStore_StorePreferencesChanged_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.preferences != null && message.hasOwnProperty("preferences"))
+                $root.CStore_UserPreferences.encode(message.preferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
+                $root.CStore_UserTagPreferences.encode(message.tag_preferences, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
+                $root.CStore_UserContentDescriptorPreferences.encode(message.content_descriptor_preferences, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CStore_StorePreferencesChanged_Notification message, length delimited. Does not implicitly {@link CStore_StorePreferencesChanged_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {ICStore_StorePreferencesChanged_Notification} message CStore_StorePreferencesChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CStore_StorePreferencesChanged_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CStore_StorePreferencesChanged_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CStore_StorePreferencesChanged_Notification} CStore_StorePreferencesChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CStore_StorePreferencesChanged_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_StorePreferencesChanged_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.preferences = $root.CStore_UserPreferences.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.tag_preferences = $root.CStore_UserTagPreferences.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CStore_StorePreferencesChanged_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CStore_StorePreferencesChanged_Notification} CStore_StorePreferencesChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CStore_StorePreferencesChanged_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CStore_StorePreferencesChanged_Notification message.
+         * @function verify
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CStore_StorePreferencesChanged_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.preferences != null && message.hasOwnProperty("preferences")) {
+                var error = $root.CStore_UserPreferences.verify(message.preferences);
+                if (error)
+                    return "preferences." + error;
+            }
+            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences")) {
+                var error = $root.CStore_UserTagPreferences.verify(message.tag_preferences);
+                if (error)
+                    return "tag_preferences." + error;
+            }
+            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences")) {
+                var error = $root.CStore_UserContentDescriptorPreferences.verify(message.content_descriptor_preferences);
+                if (error)
+                    return "content_descriptor_preferences." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CStore_StorePreferencesChanged_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CStore_StorePreferencesChanged_Notification} CStore_StorePreferencesChanged_Notification
+         */
+        CStore_StorePreferencesChanged_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CStore_StorePreferencesChanged_Notification)
+                return object;
+            var message = new $root.CStore_StorePreferencesChanged_Notification();
+            if (object.preferences != null) {
+                if (typeof object.preferences !== "object")
+                    throw TypeError(".CStore_StorePreferencesChanged_Notification.preferences: object expected");
+                message.preferences = $root.CStore_UserPreferences.fromObject(object.preferences);
+            }
+            if (object.tag_preferences != null) {
+                if (typeof object.tag_preferences !== "object")
+                    throw TypeError(".CStore_StorePreferencesChanged_Notification.tag_preferences: object expected");
+                message.tag_preferences = $root.CStore_UserTagPreferences.fromObject(object.tag_preferences);
+            }
+            if (object.content_descriptor_preferences != null) {
+                if (typeof object.content_descriptor_preferences !== "object")
+                    throw TypeError(".CStore_StorePreferencesChanged_Notification.content_descriptor_preferences: object expected");
+                message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.fromObject(object.content_descriptor_preferences);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CStore_StorePreferencesChanged_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @static
+         * @param {CStore_StorePreferencesChanged_Notification} message CStore_StorePreferencesChanged_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CStore_StorePreferencesChanged_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.preferences = null;
+                object.tag_preferences = null;
+                object.content_descriptor_preferences = null;
+            }
+            if (message.preferences != null && message.hasOwnProperty("preferences"))
+                object.preferences = $root.CStore_UserPreferences.toObject(message.preferences, options);
+            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
+                object.tag_preferences = $root.CStore_UserTagPreferences.toObject(message.tag_preferences, options);
+            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
+                object.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.toObject(message.content_descriptor_preferences, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CStore_StorePreferencesChanged_Notification to JSON.
+         * @function toJSON
+         * @memberof CStore_StorePreferencesChanged_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CStore_StorePreferencesChanged_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CStore_StorePreferencesChanged_Notification;
+    })();
+    
     $root.Store = (function() {
     
         /**
@@ -2493,6 +2740,74 @@
          */
     
         return Store;
+    })();
+    
+    $root.StoreClient = (function() {
+    
+        /**
+         * Constructs a new StoreClient service.
+         * @exports StoreClient
+         * @classdesc Represents a StoreClient
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function StoreClient(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (StoreClient.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = StoreClient;
+    
+        /**
+         * Creates new StoreClient service using the specified rpc implementation.
+         * @function create
+         * @memberof StoreClient
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {StoreClient} RPC service. Useful where requests and/or responses are streamed.
+         */
+        StoreClient.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link StoreClient#notifyStorePreferencesChanged}.
+         * @memberof StoreClient
+         * @typedef NotifyStorePreferencesChangedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyStorePreferencesChanged.
+         * @function notifyStorePreferencesChanged
+         * @memberof StoreClient
+         * @instance
+         * @param {ICStore_StorePreferencesChanged_Notification} request CStore_StorePreferencesChanged_Notification message or plain object
+         * @param {StoreClient.NotifyStorePreferencesChangedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(StoreClient.prototype.notifyStorePreferencesChanged = function notifyStorePreferencesChanged(request, callback) {
+            return this.rpcCall(notifyStorePreferencesChanged, $root.CStore_StorePreferencesChanged_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyStorePreferencesChanged" });
+    
+        /**
+         * Calls NotifyStorePreferencesChanged.
+         * @function notifyStorePreferencesChanged
+         * @memberof StoreClient
+         * @instance
+         * @param {ICStore_StorePreferencesChanged_Notification} request CStore_StorePreferencesChanged_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        return StoreClient;
     })();
     
     /**

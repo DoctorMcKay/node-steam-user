@@ -2005,6 +2005,8 @@
          * @property {string|null} [url] CCloud_UserFile url
          * @property {number|Long|null} [steamid_creator] CCloud_UserFile steamid_creator
          * @property {number|null} [flags] CCloud_UserFile flags
+         * @property {Array.<string>|null} [platforms_to_sync] CCloud_UserFile platforms_to_sync
+         * @property {string|null} [file_sha] CCloud_UserFile file_sha
          */
     
         /**
@@ -2016,6 +2018,7 @@
          * @param {ICCloud_UserFile=} [properties] Properties to set
          */
         function CCloud_UserFile(properties) {
+            this.platforms_to_sync = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -2087,6 +2090,22 @@
         CCloud_UserFile.prototype.flags = 0;
     
         /**
+         * CCloud_UserFile platforms_to_sync.
+         * @member {Array.<string>} platforms_to_sync
+         * @memberof CCloud_UserFile
+         * @instance
+         */
+        CCloud_UserFile.prototype.platforms_to_sync = $util.emptyArray;
+    
+        /**
+         * CCloud_UserFile file_sha.
+         * @member {string} file_sha
+         * @memberof CCloud_UserFile
+         * @instance
+         */
+        CCloud_UserFile.prototype.file_sha = "";
+    
+        /**
          * Creates a new CCloud_UserFile instance using the specified properties.
          * @function create
          * @memberof CCloud_UserFile
@@ -2126,6 +2145,11 @@
                 writer.uint32(/* id 7, wireType 1 =*/57).fixed64(message.steamid_creator);
             if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.flags);
+            if (message.platforms_to_sync != null && message.platforms_to_sync.length)
+                for (var i = 0; i < message.platforms_to_sync.length; ++i)
+                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.platforms_to_sync[i]);
+            if (message.file_sha != null && message.hasOwnProperty("file_sha"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.file_sha);
             return writer;
         };
     
@@ -2183,6 +2207,14 @@
                     break;
                 case 8:
                     message.flags = reader.uint32();
+                    break;
+                case 9:
+                    if (!(message.platforms_to_sync && message.platforms_to_sync.length))
+                        message.platforms_to_sync = [];
+                    message.platforms_to_sync.push(reader.string());
+                    break;
+                case 10:
+                    message.file_sha = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2243,6 +2275,16 @@
             if (message.flags != null && message.hasOwnProperty("flags"))
                 if (!$util.isInteger(message.flags))
                     return "flags: integer expected";
+            if (message.platforms_to_sync != null && message.hasOwnProperty("platforms_to_sync")) {
+                if (!Array.isArray(message.platforms_to_sync))
+                    return "platforms_to_sync: array expected";
+                for (var i = 0; i < message.platforms_to_sync.length; ++i)
+                    if (!$util.isString(message.platforms_to_sync[i]))
+                        return "platforms_to_sync: string[] expected";
+            }
+            if (message.file_sha != null && message.hasOwnProperty("file_sha"))
+                if (!$util.isString(message.file_sha))
+                    return "file_sha: string expected";
             return null;
         };
     
@@ -2295,6 +2337,15 @@
                     message.steamid_creator = new $util.LongBits(object.steamid_creator.low >>> 0, object.steamid_creator.high >>> 0).toNumber();
             if (object.flags != null)
                 message.flags = object.flags >>> 0;
+            if (object.platforms_to_sync) {
+                if (!Array.isArray(object.platforms_to_sync))
+                    throw TypeError(".CCloud_UserFile.platforms_to_sync: array expected");
+                message.platforms_to_sync = [];
+                for (var i = 0; i < object.platforms_to_sync.length; ++i)
+                    message.platforms_to_sync[i] = String(object.platforms_to_sync[i]);
+            }
+            if (object.file_sha != null)
+                message.file_sha = String(object.file_sha);
             return message;
         };
     
@@ -2311,6 +2362,8 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.platforms_to_sync = [];
             if (options.defaults) {
                 object.appid = 0;
                 if ($util.Long) {
@@ -2332,6 +2385,7 @@
                 } else
                     object.steamid_creator = options.longs === String ? "0" : 0;
                 object.flags = 0;
+                object.file_sha = "";
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -2358,6 +2412,13 @@
                     object.steamid_creator = options.longs === String ? $util.Long.prototype.toString.call(message.steamid_creator) : options.longs === Number ? new $util.LongBits(message.steamid_creator.low >>> 0, message.steamid_creator.high >>> 0).toNumber() : message.steamid_creator;
             if (message.flags != null && message.hasOwnProperty("flags"))
                 object.flags = message.flags;
+            if (message.platforms_to_sync && message.platforms_to_sync.length) {
+                object.platforms_to_sync = [];
+                for (var j = 0; j < message.platforms_to_sync.length; ++j)
+                    object.platforms_to_sync[j] = message.platforms_to_sync[j];
+            }
+            if (message.file_sha != null && message.hasOwnProperty("file_sha"))
+                object.file_sha = message.file_sha;
             return object;
         };
     
@@ -4178,6 +4239,9 @@
          * @property {number|Long|null} [bytes_actual] CCloud_ExternalStorageTransferReport_Notification bytes_actual
          * @property {number|null} [duration_ms] CCloud_ExternalStorageTransferReport_Notification duration_ms
          * @property {number|null} [cellid] CCloud_ExternalStorageTransferReport_Notification cellid
+         * @property {boolean|null} [proxied] CCloud_ExternalStorageTransferReport_Notification proxied
+         * @property {boolean|null} [ipv6_local] CCloud_ExternalStorageTransferReport_Notification ipv6_local
+         * @property {boolean|null} [ipv6_remote] CCloud_ExternalStorageTransferReport_Notification ipv6_remote
          */
     
         /**
@@ -4268,6 +4332,30 @@
         CCloud_ExternalStorageTransferReport_Notification.prototype.cellid = 0;
     
         /**
+         * CCloud_ExternalStorageTransferReport_Notification proxied.
+         * @member {boolean} proxied
+         * @memberof CCloud_ExternalStorageTransferReport_Notification
+         * @instance
+         */
+        CCloud_ExternalStorageTransferReport_Notification.prototype.proxied = false;
+    
+        /**
+         * CCloud_ExternalStorageTransferReport_Notification ipv6_local.
+         * @member {boolean} ipv6_local
+         * @memberof CCloud_ExternalStorageTransferReport_Notification
+         * @instance
+         */
+        CCloud_ExternalStorageTransferReport_Notification.prototype.ipv6_local = false;
+    
+        /**
+         * CCloud_ExternalStorageTransferReport_Notification ipv6_remote.
+         * @member {boolean} ipv6_remote
+         * @memberof CCloud_ExternalStorageTransferReport_Notification
+         * @instance
+         */
+        CCloud_ExternalStorageTransferReport_Notification.prototype.ipv6_remote = false;
+    
+        /**
          * Creates a new CCloud_ExternalStorageTransferReport_Notification instance using the specified properties.
          * @function create
          * @memberof CCloud_ExternalStorageTransferReport_Notification
@@ -4309,6 +4397,12 @@
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.duration_ms);
             if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.cellid);
+            if (message.proxied != null && message.hasOwnProperty("proxied"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.proxied);
+            if (message.ipv6_local != null && message.hasOwnProperty("ipv6_local"))
+                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.ipv6_local);
+            if (message.ipv6_remote != null && message.hasOwnProperty("ipv6_remote"))
+                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.ipv6_remote);
             return writer;
         };
     
@@ -4369,6 +4463,15 @@
                     break;
                 case 9:
                     message.cellid = reader.uint32();
+                    break;
+                case 10:
+                    message.proxied = reader.bool();
+                    break;
+                case 11:
+                    message.ipv6_local = reader.bool();
+                    break;
+                case 12:
+                    message.ipv6_remote = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4432,6 +4535,15 @@
             if (message.cellid != null && message.hasOwnProperty("cellid"))
                 if (!$util.isInteger(message.cellid))
                     return "cellid: integer expected";
+            if (message.proxied != null && message.hasOwnProperty("proxied"))
+                if (typeof message.proxied !== "boolean")
+                    return "proxied: boolean expected";
+            if (message.ipv6_local != null && message.hasOwnProperty("ipv6_local"))
+                if (typeof message.ipv6_local !== "boolean")
+                    return "ipv6_local: boolean expected";
+            if (message.ipv6_remote != null && message.hasOwnProperty("ipv6_remote"))
+                if (typeof message.ipv6_remote !== "boolean")
+                    return "ipv6_remote: boolean expected";
             return null;
         };
     
@@ -4479,6 +4591,12 @@
                 message.duration_ms = object.duration_ms >>> 0;
             if (object.cellid != null)
                 message.cellid = object.cellid >>> 0;
+            if (object.proxied != null)
+                message.proxied = Boolean(object.proxied);
+            if (object.ipv6_local != null)
+                message.ipv6_local = Boolean(object.ipv6_local);
+            if (object.ipv6_remote != null)
+                message.ipv6_remote = Boolean(object.ipv6_remote);
             return message;
         };
     
@@ -4513,6 +4631,9 @@
                     object.bytes_actual = options.longs === String ? "0" : 0;
                 object.duration_ms = 0;
                 object.cellid = 0;
+                object.proxied = false;
+                object.ipv6_local = false;
+                object.ipv6_remote = false;
             }
             if (message.host != null && message.hasOwnProperty("host"))
                 object.host = message.host;
@@ -4538,6 +4659,12 @@
                 object.duration_ms = message.duration_ms;
             if (message.cellid != null && message.hasOwnProperty("cellid"))
                 object.cellid = message.cellid;
+            if (message.proxied != null && message.hasOwnProperty("proxied"))
+                object.proxied = message.proxied;
+            if (message.ipv6_local != null && message.hasOwnProperty("ipv6_local"))
+                object.ipv6_local = message.ipv6_local;
+            if (message.ipv6_remote != null && message.hasOwnProperty("ipv6_remote"))
+                object.ipv6_remote = message.ipv6_remote;
             return object;
         };
     
@@ -4571,6 +4698,7 @@
          * @property {number|null} [cell_id] CCloud_ClientBeginFileUpload_Request cell_id
          * @property {boolean|null} [can_encrypt] CCloud_ClientBeginFileUpload_Request can_encrypt
          * @property {boolean|null} [is_shared_file] CCloud_ClientBeginFileUpload_Request is_shared_file
+         * @property {number|null} [realm] CCloud_ClientBeginFileUpload_Request realm
          */
     
         /**
@@ -4669,6 +4797,14 @@
         CCloud_ClientBeginFileUpload_Request.prototype.is_shared_file = false;
     
         /**
+         * CCloud_ClientBeginFileUpload_Request realm.
+         * @member {number} realm
+         * @memberof CCloud_ClientBeginFileUpload_Request
+         * @instance
+         */
+        CCloud_ClientBeginFileUpload_Request.prototype.realm = 0;
+    
+        /**
          * Creates a new CCloud_ClientBeginFileUpload_Request instance using the specified properties.
          * @function create
          * @memberof CCloud_ClientBeginFileUpload_Request
@@ -4712,6 +4848,8 @@
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.can_encrypt);
             if (message.is_shared_file != null && message.hasOwnProperty("is_shared_file"))
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.is_shared_file);
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.realm);
             return writer;
         };
     
@@ -4775,6 +4913,9 @@
                     break;
                 case 11:
                     message.is_shared_file = reader.bool();
+                    break;
+                case 12:
+                    message.realm = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4841,6 +4982,9 @@
             if (message.is_shared_file != null && message.hasOwnProperty("is_shared_file"))
                 if (typeof message.is_shared_file !== "boolean")
                     return "is_shared_file: boolean expected";
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                if (!$util.isInteger(message.realm))
+                    return "realm: integer expected";
             return null;
         };
     
@@ -4886,6 +5030,8 @@
                 message.can_encrypt = Boolean(object.can_encrypt);
             if (object.is_shared_file != null)
                 message.is_shared_file = Boolean(object.is_shared_file);
+            if (object.realm != null)
+                message.realm = object.realm >>> 0;
             return message;
         };
     
@@ -4923,6 +5069,7 @@
                 object.cell_id = 0;
                 object.can_encrypt = false;
                 object.is_shared_file = false;
+                object.realm = 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -4947,6 +5094,8 @@
                 object.can_encrypt = message.can_encrypt;
             if (message.is_shared_file != null && message.hasOwnProperty("is_shared_file"))
                 object.is_shared_file = message.is_shared_file;
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                object.realm = message.realm;
             return object;
         };
     
@@ -6272,6 +6421,7 @@
          * @interface ICCloud_ClientFileDownload_Request
          * @property {number|null} [appid] CCloud_ClientFileDownload_Request appid
          * @property {string|null} [filename] CCloud_ClientFileDownload_Request filename
+         * @property {number|null} [realm] CCloud_ClientFileDownload_Request realm
          */
     
         /**
@@ -6306,6 +6456,14 @@
         CCloud_ClientFileDownload_Request.prototype.filename = "";
     
         /**
+         * CCloud_ClientFileDownload_Request realm.
+         * @member {number} realm
+         * @memberof CCloud_ClientFileDownload_Request
+         * @instance
+         */
+        CCloud_ClientFileDownload_Request.prototype.realm = 0;
+    
+        /**
          * Creates a new CCloud_ClientFileDownload_Request instance using the specified properties.
          * @function create
          * @memberof CCloud_ClientFileDownload_Request
@@ -6333,6 +6491,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
             if (message.filename != null && message.hasOwnProperty("filename"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.filename);
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.realm);
             return writer;
         };
     
@@ -6372,6 +6532,9 @@
                     break;
                 case 2:
                     message.filename = reader.string();
+                    break;
+                case 3:
+                    message.realm = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6414,6 +6577,9 @@
             if (message.filename != null && message.hasOwnProperty("filename"))
                 if (!$util.isString(message.filename))
                     return "filename: string expected";
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                if (!$util.isInteger(message.realm))
+                    return "realm: integer expected";
             return null;
         };
     
@@ -6433,6 +6599,8 @@
                 message.appid = object.appid >>> 0;
             if (object.filename != null)
                 message.filename = String(object.filename);
+            if (object.realm != null)
+                message.realm = object.realm >>> 0;
             return message;
         };
     
@@ -6452,11 +6620,14 @@
             if (options.defaults) {
                 object.appid = 0;
                 object.filename = "";
+                object.realm = 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
             if (message.filename != null && message.hasOwnProperty("filename"))
                 object.filename = message.filename;
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                object.realm = message.realm;
             return object;
         };
     

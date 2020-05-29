@@ -645,6 +645,1397 @@
         return CPlayer_GetMutualFriendsForIncomingInvites_Response;
     })();
     
+    $root.CPlayer_GetOwnedGames_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetOwnedGames_Request.
+         * @exports ICPlayer_GetOwnedGames_Request
+         * @interface ICPlayer_GetOwnedGames_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetOwnedGames_Request steamid
+         * @property {boolean|null} [include_appinfo] CPlayer_GetOwnedGames_Request include_appinfo
+         * @property {boolean|null} [include_played_free_games] CPlayer_GetOwnedGames_Request include_played_free_games
+         * @property {Array.<number>|null} [appids_filter] CPlayer_GetOwnedGames_Request appids_filter
+         * @property {boolean|null} [include_free_sub] CPlayer_GetOwnedGames_Request include_free_sub
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetOwnedGames_Request.
+         * @exports CPlayer_GetOwnedGames_Request
+         * @classdesc Represents a CPlayer_GetOwnedGames_Request.
+         * @implements ICPlayer_GetOwnedGames_Request
+         * @constructor
+         * @param {ICPlayer_GetOwnedGames_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetOwnedGames_Request(properties) {
+            this.appids_filter = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetOwnedGames_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @instance
+         */
+        CPlayer_GetOwnedGames_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CPlayer_GetOwnedGames_Request include_appinfo.
+         * @member {boolean} include_appinfo
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @instance
+         */
+        CPlayer_GetOwnedGames_Request.prototype.include_appinfo = false;
+    
+        /**
+         * CPlayer_GetOwnedGames_Request include_played_free_games.
+         * @member {boolean} include_played_free_games
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @instance
+         */
+        CPlayer_GetOwnedGames_Request.prototype.include_played_free_games = false;
+    
+        /**
+         * CPlayer_GetOwnedGames_Request appids_filter.
+         * @member {Array.<number>} appids_filter
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @instance
+         */
+        CPlayer_GetOwnedGames_Request.prototype.appids_filter = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetOwnedGames_Request include_free_sub.
+         * @member {boolean} include_free_sub
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @instance
+         */
+        CPlayer_GetOwnedGames_Request.prototype.include_free_sub = false;
+    
+        /**
+         * Creates a new CPlayer_GetOwnedGames_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {ICPlayer_GetOwnedGames_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetOwnedGames_Request} CPlayer_GetOwnedGames_Request instance
+         */
+        CPlayer_GetOwnedGames_Request.create = function create(properties) {
+            return new CPlayer_GetOwnedGames_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetOwnedGames_Request message. Does not implicitly {@link CPlayer_GetOwnedGames_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {ICPlayer_GetOwnedGames_Request} message CPlayer_GetOwnedGames_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetOwnedGames_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.steamid);
+            if (message.include_appinfo != null && message.hasOwnProperty("include_appinfo"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.include_appinfo);
+            if (message.include_played_free_games != null && message.hasOwnProperty("include_played_free_games"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.include_played_free_games);
+            if (message.appids_filter != null && message.appids_filter.length)
+                for (var i = 0; i < message.appids_filter.length; ++i)
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.appids_filter[i]);
+            if (message.include_free_sub != null && message.hasOwnProperty("include_free_sub"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.include_free_sub);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetOwnedGames_Request message, length delimited. Does not implicitly {@link CPlayer_GetOwnedGames_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {ICPlayer_GetOwnedGames_Request} message CPlayer_GetOwnedGames_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetOwnedGames_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetOwnedGames_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetOwnedGames_Request} CPlayer_GetOwnedGames_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetOwnedGames_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetOwnedGames_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.uint64();
+                    break;
+                case 2:
+                    message.include_appinfo = reader.bool();
+                    break;
+                case 3:
+                    message.include_played_free_games = reader.bool();
+                    break;
+                case 4:
+                    if (!(message.appids_filter && message.appids_filter.length))
+                        message.appids_filter = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.appids_filter.push(reader.uint32());
+                    } else
+                        message.appids_filter.push(reader.uint32());
+                    break;
+                case 5:
+                    message.include_free_sub = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetOwnedGames_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetOwnedGames_Request} CPlayer_GetOwnedGames_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetOwnedGames_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetOwnedGames_Request message.
+         * @function verify
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetOwnedGames_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.include_appinfo != null && message.hasOwnProperty("include_appinfo"))
+                if (typeof message.include_appinfo !== "boolean")
+                    return "include_appinfo: boolean expected";
+            if (message.include_played_free_games != null && message.hasOwnProperty("include_played_free_games"))
+                if (typeof message.include_played_free_games !== "boolean")
+                    return "include_played_free_games: boolean expected";
+            if (message.appids_filter != null && message.hasOwnProperty("appids_filter")) {
+                if (!Array.isArray(message.appids_filter))
+                    return "appids_filter: array expected";
+                for (var i = 0; i < message.appids_filter.length; ++i)
+                    if (!$util.isInteger(message.appids_filter[i]))
+                        return "appids_filter: integer[] expected";
+            }
+            if (message.include_free_sub != null && message.hasOwnProperty("include_free_sub"))
+                if (typeof message.include_free_sub !== "boolean")
+                    return "include_free_sub: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetOwnedGames_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetOwnedGames_Request} CPlayer_GetOwnedGames_Request
+         */
+        CPlayer_GetOwnedGames_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetOwnedGames_Request)
+                return object;
+            var message = new $root.CPlayer_GetOwnedGames_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+            if (object.include_appinfo != null)
+                message.include_appinfo = Boolean(object.include_appinfo);
+            if (object.include_played_free_games != null)
+                message.include_played_free_games = Boolean(object.include_played_free_games);
+            if (object.appids_filter) {
+                if (!Array.isArray(object.appids_filter))
+                    throw TypeError(".CPlayer_GetOwnedGames_Request.appids_filter: array expected");
+                message.appids_filter = [];
+                for (var i = 0; i < object.appids_filter.length; ++i)
+                    message.appids_filter[i] = object.appids_filter[i] >>> 0;
+            }
+            if (object.include_free_sub != null)
+                message.include_free_sub = Boolean(object.include_free_sub);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetOwnedGames_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @static
+         * @param {CPlayer_GetOwnedGames_Request} message CPlayer_GetOwnedGames_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetOwnedGames_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.appids_filter = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.include_appinfo = false;
+                object.include_played_free_games = false;
+                object.include_free_sub = false;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+            if (message.include_appinfo != null && message.hasOwnProperty("include_appinfo"))
+                object.include_appinfo = message.include_appinfo;
+            if (message.include_played_free_games != null && message.hasOwnProperty("include_played_free_games"))
+                object.include_played_free_games = message.include_played_free_games;
+            if (message.appids_filter && message.appids_filter.length) {
+                object.appids_filter = [];
+                for (var j = 0; j < message.appids_filter.length; ++j)
+                    object.appids_filter[j] = message.appids_filter[j];
+            }
+            if (message.include_free_sub != null && message.hasOwnProperty("include_free_sub"))
+                object.include_free_sub = message.include_free_sub;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetOwnedGames_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetOwnedGames_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetOwnedGames_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetOwnedGames_Request;
+    })();
+    
+    $root.CPlayer_GetOwnedGames_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetOwnedGames_Response.
+         * @exports ICPlayer_GetOwnedGames_Response
+         * @interface ICPlayer_GetOwnedGames_Response
+         * @property {number|null} [game_count] CPlayer_GetOwnedGames_Response game_count
+         * @property {Array.<CPlayer_GetOwnedGames_Response.IGame>|null} [games] CPlayer_GetOwnedGames_Response games
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetOwnedGames_Response.
+         * @exports CPlayer_GetOwnedGames_Response
+         * @classdesc Represents a CPlayer_GetOwnedGames_Response.
+         * @implements ICPlayer_GetOwnedGames_Response
+         * @constructor
+         * @param {ICPlayer_GetOwnedGames_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetOwnedGames_Response(properties) {
+            this.games = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetOwnedGames_Response game_count.
+         * @member {number} game_count
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @instance
+         */
+        CPlayer_GetOwnedGames_Response.prototype.game_count = 0;
+    
+        /**
+         * CPlayer_GetOwnedGames_Response games.
+         * @member {Array.<CPlayer_GetOwnedGames_Response.IGame>} games
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @instance
+         */
+        CPlayer_GetOwnedGames_Response.prototype.games = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetOwnedGames_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {ICPlayer_GetOwnedGames_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetOwnedGames_Response} CPlayer_GetOwnedGames_Response instance
+         */
+        CPlayer_GetOwnedGames_Response.create = function create(properties) {
+            return new CPlayer_GetOwnedGames_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetOwnedGames_Response message. Does not implicitly {@link CPlayer_GetOwnedGames_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {ICPlayer_GetOwnedGames_Response} message CPlayer_GetOwnedGames_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetOwnedGames_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.game_count != null && message.hasOwnProperty("game_count"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.game_count);
+            if (message.games != null && message.games.length)
+                for (var i = 0; i < message.games.length; ++i)
+                    $root.CPlayer_GetOwnedGames_Response.Game.encode(message.games[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetOwnedGames_Response message, length delimited. Does not implicitly {@link CPlayer_GetOwnedGames_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {ICPlayer_GetOwnedGames_Response} message CPlayer_GetOwnedGames_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetOwnedGames_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetOwnedGames_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetOwnedGames_Response} CPlayer_GetOwnedGames_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetOwnedGames_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetOwnedGames_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.game_count = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.games && message.games.length))
+                        message.games = [];
+                    message.games.push($root.CPlayer_GetOwnedGames_Response.Game.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetOwnedGames_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetOwnedGames_Response} CPlayer_GetOwnedGames_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetOwnedGames_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetOwnedGames_Response message.
+         * @function verify
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetOwnedGames_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.game_count != null && message.hasOwnProperty("game_count"))
+                if (!$util.isInteger(message.game_count))
+                    return "game_count: integer expected";
+            if (message.games != null && message.hasOwnProperty("games")) {
+                if (!Array.isArray(message.games))
+                    return "games: array expected";
+                for (var i = 0; i < message.games.length; ++i) {
+                    var error = $root.CPlayer_GetOwnedGames_Response.Game.verify(message.games[i]);
+                    if (error)
+                        return "games." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetOwnedGames_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetOwnedGames_Response} CPlayer_GetOwnedGames_Response
+         */
+        CPlayer_GetOwnedGames_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetOwnedGames_Response)
+                return object;
+            var message = new $root.CPlayer_GetOwnedGames_Response();
+            if (object.game_count != null)
+                message.game_count = object.game_count >>> 0;
+            if (object.games) {
+                if (!Array.isArray(object.games))
+                    throw TypeError(".CPlayer_GetOwnedGames_Response.games: array expected");
+                message.games = [];
+                for (var i = 0; i < object.games.length; ++i) {
+                    if (typeof object.games[i] !== "object")
+                        throw TypeError(".CPlayer_GetOwnedGames_Response.games: object expected");
+                    message.games[i] = $root.CPlayer_GetOwnedGames_Response.Game.fromObject(object.games[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetOwnedGames_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @static
+         * @param {CPlayer_GetOwnedGames_Response} message CPlayer_GetOwnedGames_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetOwnedGames_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.games = [];
+            if (options.defaults)
+                object.game_count = 0;
+            if (message.game_count != null && message.hasOwnProperty("game_count"))
+                object.game_count = message.game_count;
+            if (message.games && message.games.length) {
+                object.games = [];
+                for (var j = 0; j < message.games.length; ++j)
+                    object.games[j] = $root.CPlayer_GetOwnedGames_Response.Game.toObject(message.games[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetOwnedGames_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetOwnedGames_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetOwnedGames_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CPlayer_GetOwnedGames_Response.Game = (function() {
+    
+            /**
+             * Properties of a Game.
+             * @memberof CPlayer_GetOwnedGames_Response
+             * @interface IGame
+             * @property {number|null} [appid] Game appid
+             * @property {string|null} [name] Game name
+             * @property {number|null} [playtime_2weeks] Game playtime_2weeks
+             * @property {number|null} [playtime_forever] Game playtime_forever
+             * @property {string|null} [img_icon_url] Game img_icon_url
+             * @property {string|null} [img_logo_url] Game img_logo_url
+             * @property {boolean|null} [has_community_visible_stats] Game has_community_visible_stats
+             * @property {number|null} [playtime_windows_forever] Game playtime_windows_forever
+             * @property {number|null} [playtime_mac_forever] Game playtime_mac_forever
+             * @property {number|null} [playtime_linux_forever] Game playtime_linux_forever
+             */
+    
+            /**
+             * Constructs a new Game.
+             * @memberof CPlayer_GetOwnedGames_Response
+             * @classdesc Represents a Game.
+             * @implements IGame
+             * @constructor
+             * @param {CPlayer_GetOwnedGames_Response.IGame=} [properties] Properties to set
+             */
+            function Game(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Game appid.
+             * @member {number} appid
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.appid = 0;
+    
+            /**
+             * Game name.
+             * @member {string} name
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.name = "";
+    
+            /**
+             * Game playtime_2weeks.
+             * @member {number} playtime_2weeks
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_2weeks = 0;
+    
+            /**
+             * Game playtime_forever.
+             * @member {number} playtime_forever
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_forever = 0;
+    
+            /**
+             * Game img_icon_url.
+             * @member {string} img_icon_url
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.img_icon_url = "";
+    
+            /**
+             * Game img_logo_url.
+             * @member {string} img_logo_url
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.img_logo_url = "";
+    
+            /**
+             * Game has_community_visible_stats.
+             * @member {boolean} has_community_visible_stats
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.has_community_visible_stats = false;
+    
+            /**
+             * Game playtime_windows_forever.
+             * @member {number} playtime_windows_forever
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_windows_forever = 0;
+    
+            /**
+             * Game playtime_mac_forever.
+             * @member {number} playtime_mac_forever
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_mac_forever = 0;
+    
+            /**
+             * Game playtime_linux_forever.
+             * @member {number} playtime_linux_forever
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_linux_forever = 0;
+    
+            /**
+             * Creates a new Game instance using the specified properties.
+             * @function create
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {CPlayer_GetOwnedGames_Response.IGame=} [properties] Properties to set
+             * @returns {CPlayer_GetOwnedGames_Response.Game} Game instance
+             */
+            Game.create = function create(properties) {
+                return new Game(properties);
+            };
+    
+            /**
+             * Encodes the specified Game message. Does not implicitly {@link CPlayer_GetOwnedGames_Response.Game.verify|verify} messages.
+             * @function encode
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {CPlayer_GetOwnedGames_Response.IGame} message Game message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Game.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.appid);
+                if (message.name != null && message.hasOwnProperty("name"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                if (message.playtime_2weeks != null && message.hasOwnProperty("playtime_2weeks"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.playtime_2weeks);
+                if (message.playtime_forever != null && message.hasOwnProperty("playtime_forever"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.playtime_forever);
+                if (message.img_icon_url != null && message.hasOwnProperty("img_icon_url"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.img_icon_url);
+                if (message.img_logo_url != null && message.hasOwnProperty("img_logo_url"))
+                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.img_logo_url);
+                if (message.has_community_visible_stats != null && message.hasOwnProperty("has_community_visible_stats"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.has_community_visible_stats);
+                if (message.playtime_windows_forever != null && message.hasOwnProperty("playtime_windows_forever"))
+                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.playtime_windows_forever);
+                if (message.playtime_mac_forever != null && message.hasOwnProperty("playtime_mac_forever"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.playtime_mac_forever);
+                if (message.playtime_linux_forever != null && message.hasOwnProperty("playtime_linux_forever"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.playtime_linux_forever);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Game message, length delimited. Does not implicitly {@link CPlayer_GetOwnedGames_Response.Game.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {CPlayer_GetOwnedGames_Response.IGame} message Game message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Game.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Game message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPlayer_GetOwnedGames_Response.Game} Game
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Game.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetOwnedGames_Response.Game();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.appid = reader.int32();
+                        break;
+                    case 2:
+                        message.name = reader.string();
+                        break;
+                    case 3:
+                        message.playtime_2weeks = reader.int32();
+                        break;
+                    case 4:
+                        message.playtime_forever = reader.int32();
+                        break;
+                    case 5:
+                        message.img_icon_url = reader.string();
+                        break;
+                    case 6:
+                        message.img_logo_url = reader.string();
+                        break;
+                    case 7:
+                        message.has_community_visible_stats = reader.bool();
+                        break;
+                    case 8:
+                        message.playtime_windows_forever = reader.int32();
+                        break;
+                    case 9:
+                        message.playtime_mac_forever = reader.int32();
+                        break;
+                    case 10:
+                        message.playtime_linux_forever = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Game message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPlayer_GetOwnedGames_Response.Game} Game
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Game.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Game message.
+             * @function verify
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Game.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    if (!$util.isInteger(message.appid))
+                        return "appid: integer expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.playtime_2weeks != null && message.hasOwnProperty("playtime_2weeks"))
+                    if (!$util.isInteger(message.playtime_2weeks))
+                        return "playtime_2weeks: integer expected";
+                if (message.playtime_forever != null && message.hasOwnProperty("playtime_forever"))
+                    if (!$util.isInteger(message.playtime_forever))
+                        return "playtime_forever: integer expected";
+                if (message.img_icon_url != null && message.hasOwnProperty("img_icon_url"))
+                    if (!$util.isString(message.img_icon_url))
+                        return "img_icon_url: string expected";
+                if (message.img_logo_url != null && message.hasOwnProperty("img_logo_url"))
+                    if (!$util.isString(message.img_logo_url))
+                        return "img_logo_url: string expected";
+                if (message.has_community_visible_stats != null && message.hasOwnProperty("has_community_visible_stats"))
+                    if (typeof message.has_community_visible_stats !== "boolean")
+                        return "has_community_visible_stats: boolean expected";
+                if (message.playtime_windows_forever != null && message.hasOwnProperty("playtime_windows_forever"))
+                    if (!$util.isInteger(message.playtime_windows_forever))
+                        return "playtime_windows_forever: integer expected";
+                if (message.playtime_mac_forever != null && message.hasOwnProperty("playtime_mac_forever"))
+                    if (!$util.isInteger(message.playtime_mac_forever))
+                        return "playtime_mac_forever: integer expected";
+                if (message.playtime_linux_forever != null && message.hasOwnProperty("playtime_linux_forever"))
+                    if (!$util.isInteger(message.playtime_linux_forever))
+                        return "playtime_linux_forever: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Game message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPlayer_GetOwnedGames_Response.Game} Game
+             */
+            Game.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPlayer_GetOwnedGames_Response.Game)
+                    return object;
+                var message = new $root.CPlayer_GetOwnedGames_Response.Game();
+                if (object.appid != null)
+                    message.appid = object.appid | 0;
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.playtime_2weeks != null)
+                    message.playtime_2weeks = object.playtime_2weeks | 0;
+                if (object.playtime_forever != null)
+                    message.playtime_forever = object.playtime_forever | 0;
+                if (object.img_icon_url != null)
+                    message.img_icon_url = String(object.img_icon_url);
+                if (object.img_logo_url != null)
+                    message.img_logo_url = String(object.img_logo_url);
+                if (object.has_community_visible_stats != null)
+                    message.has_community_visible_stats = Boolean(object.has_community_visible_stats);
+                if (object.playtime_windows_forever != null)
+                    message.playtime_windows_forever = object.playtime_windows_forever | 0;
+                if (object.playtime_mac_forever != null)
+                    message.playtime_mac_forever = object.playtime_mac_forever | 0;
+                if (object.playtime_linux_forever != null)
+                    message.playtime_linux_forever = object.playtime_linux_forever | 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Game message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @static
+             * @param {CPlayer_GetOwnedGames_Response.Game} message Game
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Game.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.appid = 0;
+                    object.name = "";
+                    object.playtime_2weeks = 0;
+                    object.playtime_forever = 0;
+                    object.img_icon_url = "";
+                    object.img_logo_url = "";
+                    object.has_community_visible_stats = false;
+                    object.playtime_windows_forever = 0;
+                    object.playtime_mac_forever = 0;
+                    object.playtime_linux_forever = 0;
+                }
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    object.appid = message.appid;
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.playtime_2weeks != null && message.hasOwnProperty("playtime_2weeks"))
+                    object.playtime_2weeks = message.playtime_2weeks;
+                if (message.playtime_forever != null && message.hasOwnProperty("playtime_forever"))
+                    object.playtime_forever = message.playtime_forever;
+                if (message.img_icon_url != null && message.hasOwnProperty("img_icon_url"))
+                    object.img_icon_url = message.img_icon_url;
+                if (message.img_logo_url != null && message.hasOwnProperty("img_logo_url"))
+                    object.img_logo_url = message.img_logo_url;
+                if (message.has_community_visible_stats != null && message.hasOwnProperty("has_community_visible_stats"))
+                    object.has_community_visible_stats = message.has_community_visible_stats;
+                if (message.playtime_windows_forever != null && message.hasOwnProperty("playtime_windows_forever"))
+                    object.playtime_windows_forever = message.playtime_windows_forever;
+                if (message.playtime_mac_forever != null && message.hasOwnProperty("playtime_mac_forever"))
+                    object.playtime_mac_forever = message.playtime_mac_forever;
+                if (message.playtime_linux_forever != null && message.hasOwnProperty("playtime_linux_forever"))
+                    object.playtime_linux_forever = message.playtime_linux_forever;
+                return object;
+            };
+    
+            /**
+             * Converts this Game to JSON.
+             * @function toJSON
+             * @memberof CPlayer_GetOwnedGames_Response.Game
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Game.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Game;
+        })();
+    
+        return CPlayer_GetOwnedGames_Response;
+    })();
+    
+    $root.CPlayer_GetPlayNext_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPlayNext_Request.
+         * @exports ICPlayer_GetPlayNext_Request
+         * @interface ICPlayer_GetPlayNext_Request
+         * @property {number|null} [max_age_seconds] CPlayer_GetPlayNext_Request max_age_seconds
+         * @property {Array.<number>|null} [ignore_appids] CPlayer_GetPlayNext_Request ignore_appids
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPlayNext_Request.
+         * @exports CPlayer_GetPlayNext_Request
+         * @classdesc Represents a CPlayer_GetPlayNext_Request.
+         * @implements ICPlayer_GetPlayNext_Request
+         * @constructor
+         * @param {ICPlayer_GetPlayNext_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetPlayNext_Request(properties) {
+            this.ignore_appids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetPlayNext_Request max_age_seconds.
+         * @member {number} max_age_seconds
+         * @memberof CPlayer_GetPlayNext_Request
+         * @instance
+         */
+        CPlayer_GetPlayNext_Request.prototype.max_age_seconds = 0;
+    
+        /**
+         * CPlayer_GetPlayNext_Request ignore_appids.
+         * @member {Array.<number>} ignore_appids
+         * @memberof CPlayer_GetPlayNext_Request
+         * @instance
+         */
+        CPlayer_GetPlayNext_Request.prototype.ignore_appids = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetPlayNext_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {ICPlayer_GetPlayNext_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetPlayNext_Request} CPlayer_GetPlayNext_Request instance
+         */
+        CPlayer_GetPlayNext_Request.create = function create(properties) {
+            return new CPlayer_GetPlayNext_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPlayNext_Request message. Does not implicitly {@link CPlayer_GetPlayNext_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {ICPlayer_GetPlayNext_Request} message CPlayer_GetPlayNext_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPlayNext_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.max_age_seconds != null && message.hasOwnProperty("max_age_seconds"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.max_age_seconds);
+            if (message.ignore_appids != null && message.ignore_appids.length)
+                for (var i = 0; i < message.ignore_appids.length; ++i)
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.ignore_appids[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPlayNext_Request message, length delimited. Does not implicitly {@link CPlayer_GetPlayNext_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {ICPlayer_GetPlayNext_Request} message CPlayer_GetPlayNext_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPlayNext_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPlayNext_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPlayNext_Request} CPlayer_GetPlayNext_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPlayNext_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPlayNext_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.max_age_seconds = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.ignore_appids && message.ignore_appids.length))
+                        message.ignore_appids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.ignore_appids.push(reader.uint32());
+                    } else
+                        message.ignore_appids.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPlayNext_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPlayNext_Request} CPlayer_GetPlayNext_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPlayNext_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPlayNext_Request message.
+         * @function verify
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPlayNext_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.max_age_seconds != null && message.hasOwnProperty("max_age_seconds"))
+                if (!$util.isInteger(message.max_age_seconds))
+                    return "max_age_seconds: integer expected";
+            if (message.ignore_appids != null && message.hasOwnProperty("ignore_appids")) {
+                if (!Array.isArray(message.ignore_appids))
+                    return "ignore_appids: array expected";
+                for (var i = 0; i < message.ignore_appids.length; ++i)
+                    if (!$util.isInteger(message.ignore_appids[i]))
+                        return "ignore_appids: integer[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPlayNext_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPlayNext_Request} CPlayer_GetPlayNext_Request
+         */
+        CPlayer_GetPlayNext_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPlayNext_Request)
+                return object;
+            var message = new $root.CPlayer_GetPlayNext_Request();
+            if (object.max_age_seconds != null)
+                message.max_age_seconds = object.max_age_seconds >>> 0;
+            if (object.ignore_appids) {
+                if (!Array.isArray(object.ignore_appids))
+                    throw TypeError(".CPlayer_GetPlayNext_Request.ignore_appids: array expected");
+                message.ignore_appids = [];
+                for (var i = 0; i < object.ignore_appids.length; ++i)
+                    message.ignore_appids[i] = object.ignore_appids[i] >>> 0;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPlayNext_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPlayNext_Request
+         * @static
+         * @param {CPlayer_GetPlayNext_Request} message CPlayer_GetPlayNext_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPlayNext_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.ignore_appids = [];
+            if (options.defaults)
+                object.max_age_seconds = 0;
+            if (message.max_age_seconds != null && message.hasOwnProperty("max_age_seconds"))
+                object.max_age_seconds = message.max_age_seconds;
+            if (message.ignore_appids && message.ignore_appids.length) {
+                object.ignore_appids = [];
+                for (var j = 0; j < message.ignore_appids.length; ++j)
+                    object.ignore_appids[j] = message.ignore_appids[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetPlayNext_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPlayNext_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPlayNext_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPlayNext_Request;
+    })();
+    
+    $root.CPlayer_GetPlayNext_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPlayNext_Response.
+         * @exports ICPlayer_GetPlayNext_Response
+         * @interface ICPlayer_GetPlayNext_Response
+         * @property {number|null} [last_update_time] CPlayer_GetPlayNext_Response last_update_time
+         * @property {Array.<number>|null} [appids] CPlayer_GetPlayNext_Response appids
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPlayNext_Response.
+         * @exports CPlayer_GetPlayNext_Response
+         * @classdesc Represents a CPlayer_GetPlayNext_Response.
+         * @implements ICPlayer_GetPlayNext_Response
+         * @constructor
+         * @param {ICPlayer_GetPlayNext_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetPlayNext_Response(properties) {
+            this.appids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetPlayNext_Response last_update_time.
+         * @member {number} last_update_time
+         * @memberof CPlayer_GetPlayNext_Response
+         * @instance
+         */
+        CPlayer_GetPlayNext_Response.prototype.last_update_time = 0;
+    
+        /**
+         * CPlayer_GetPlayNext_Response appids.
+         * @member {Array.<number>} appids
+         * @memberof CPlayer_GetPlayNext_Response
+         * @instance
+         */
+        CPlayer_GetPlayNext_Response.prototype.appids = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetPlayNext_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {ICPlayer_GetPlayNext_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetPlayNext_Response} CPlayer_GetPlayNext_Response instance
+         */
+        CPlayer_GetPlayNext_Response.create = function create(properties) {
+            return new CPlayer_GetPlayNext_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPlayNext_Response message. Does not implicitly {@link CPlayer_GetPlayNext_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {ICPlayer_GetPlayNext_Response} message CPlayer_GetPlayNext_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPlayNext_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.last_update_time != null && message.hasOwnProperty("last_update_time"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.last_update_time);
+            if (message.appids != null && message.appids.length)
+                for (var i = 0; i < message.appids.length; ++i)
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appids[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPlayNext_Response message, length delimited. Does not implicitly {@link CPlayer_GetPlayNext_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {ICPlayer_GetPlayNext_Response} message CPlayer_GetPlayNext_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPlayNext_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPlayNext_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPlayNext_Response} CPlayer_GetPlayNext_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPlayNext_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPlayNext_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.last_update_time = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.appids && message.appids.length))
+                        message.appids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.appids.push(reader.uint32());
+                    } else
+                        message.appids.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPlayNext_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPlayNext_Response} CPlayer_GetPlayNext_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPlayNext_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPlayNext_Response message.
+         * @function verify
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPlayNext_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.last_update_time != null && message.hasOwnProperty("last_update_time"))
+                if (!$util.isInteger(message.last_update_time))
+                    return "last_update_time: integer expected";
+            if (message.appids != null && message.hasOwnProperty("appids")) {
+                if (!Array.isArray(message.appids))
+                    return "appids: array expected";
+                for (var i = 0; i < message.appids.length; ++i)
+                    if (!$util.isInteger(message.appids[i]))
+                        return "appids: integer[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPlayNext_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPlayNext_Response} CPlayer_GetPlayNext_Response
+         */
+        CPlayer_GetPlayNext_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPlayNext_Response)
+                return object;
+            var message = new $root.CPlayer_GetPlayNext_Response();
+            if (object.last_update_time != null)
+                message.last_update_time = object.last_update_time >>> 0;
+            if (object.appids) {
+                if (!Array.isArray(object.appids))
+                    throw TypeError(".CPlayer_GetPlayNext_Response.appids: array expected");
+                message.appids = [];
+                for (var i = 0; i < object.appids.length; ++i)
+                    message.appids[i] = object.appids[i] >>> 0;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPlayNext_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPlayNext_Response
+         * @static
+         * @param {CPlayer_GetPlayNext_Response} message CPlayer_GetPlayNext_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPlayNext_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.appids = [];
+            if (options.defaults)
+                object.last_update_time = 0;
+            if (message.last_update_time != null && message.hasOwnProperty("last_update_time"))
+                object.last_update_time = message.last_update_time;
+            if (message.appids && message.appids.length) {
+                object.appids = [];
+                for (var j = 0; j < message.appids.length; ++j)
+                    object.appids[j] = message.appids[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetPlayNext_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPlayNext_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPlayNext_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPlayNext_Response;
+    })();
+    
     $root.CPlayer_GetFriendsGameplayInfo_Request = (function() {
     
         /**
@@ -1777,6 +3168,1293 @@
         return CPlayer_GetFriendsGameplayInfo_Response;
     })();
     
+    $root.CPlayer_GetFriendsAppsActivity_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetFriendsAppsActivity_Request.
+         * @exports ICPlayer_GetFriendsAppsActivity_Request
+         * @interface ICPlayer_GetFriendsAppsActivity_Request
+         * @property {string|null} [news_language] CPlayer_GetFriendsAppsActivity_Request news_language
+         * @property {number|null} [request_flags] CPlayer_GetFriendsAppsActivity_Request request_flags
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetFriendsAppsActivity_Request.
+         * @exports CPlayer_GetFriendsAppsActivity_Request
+         * @classdesc Represents a CPlayer_GetFriendsAppsActivity_Request.
+         * @implements ICPlayer_GetFriendsAppsActivity_Request
+         * @constructor
+         * @param {ICPlayer_GetFriendsAppsActivity_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetFriendsAppsActivity_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Request news_language.
+         * @member {string} news_language
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Request.prototype.news_language = "";
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Request request_flags.
+         * @member {number} request_flags
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Request.prototype.request_flags = 0;
+    
+        /**
+         * Creates a new CPlayer_GetFriendsAppsActivity_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {ICPlayer_GetFriendsAppsActivity_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetFriendsAppsActivity_Request} CPlayer_GetFriendsAppsActivity_Request instance
+         */
+        CPlayer_GetFriendsAppsActivity_Request.create = function create(properties) {
+            return new CPlayer_GetFriendsAppsActivity_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsAppsActivity_Request message. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {ICPlayer_GetFriendsAppsActivity_Request} message CPlayer_GetFriendsAppsActivity_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsAppsActivity_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.news_language != null && message.hasOwnProperty("news_language"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.news_language);
+            if (message.request_flags != null && message.hasOwnProperty("request_flags"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.request_flags);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsAppsActivity_Request message, length delimited. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {ICPlayer_GetFriendsAppsActivity_Request} message CPlayer_GetFriendsAppsActivity_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsAppsActivity_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsAppsActivity_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetFriendsAppsActivity_Request} CPlayer_GetFriendsAppsActivity_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsAppsActivity_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsAppsActivity_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.news_language = reader.string();
+                    break;
+                case 2:
+                    message.request_flags = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsAppsActivity_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetFriendsAppsActivity_Request} CPlayer_GetFriendsAppsActivity_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsAppsActivity_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetFriendsAppsActivity_Request message.
+         * @function verify
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetFriendsAppsActivity_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.news_language != null && message.hasOwnProperty("news_language"))
+                if (!$util.isString(message.news_language))
+                    return "news_language: string expected";
+            if (message.request_flags != null && message.hasOwnProperty("request_flags"))
+                if (!$util.isInteger(message.request_flags))
+                    return "request_flags: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetFriendsAppsActivity_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetFriendsAppsActivity_Request} CPlayer_GetFriendsAppsActivity_Request
+         */
+        CPlayer_GetFriendsAppsActivity_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetFriendsAppsActivity_Request)
+                return object;
+            var message = new $root.CPlayer_GetFriendsAppsActivity_Request();
+            if (object.news_language != null)
+                message.news_language = String(object.news_language);
+            if (object.request_flags != null)
+                message.request_flags = object.request_flags >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetFriendsAppsActivity_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @static
+         * @param {CPlayer_GetFriendsAppsActivity_Request} message CPlayer_GetFriendsAppsActivity_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetFriendsAppsActivity_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.news_language = "";
+                object.request_flags = 0;
+            }
+            if (message.news_language != null && message.hasOwnProperty("news_language"))
+                object.news_language = message.news_language;
+            if (message.request_flags != null && message.hasOwnProperty("request_flags"))
+                object.request_flags = message.request_flags;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetFriendsAppsActivity_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetFriendsAppsActivity_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetFriendsAppsActivity_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetFriendsAppsActivity_Request;
+    })();
+    
+    $root.CPlayer_GetFriendsAppsActivity_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetFriendsAppsActivity_Response.
+         * @exports ICPlayer_GetFriendsAppsActivity_Response
+         * @interface ICPlayer_GetFriendsAppsActivity_Response
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [trending] CPlayer_GetFriendsAppsActivity_Response trending
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [recent_purchases] CPlayer_GetFriendsAppsActivity_Response recent_purchases
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [unowned] CPlayer_GetFriendsAppsActivity_Response unowned
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [popular] CPlayer_GetFriendsAppsActivity_Response popular
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [dont_forget] CPlayer_GetFriendsAppsActivity_Response dont_forget
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [being_discussed] CPlayer_GetFriendsAppsActivity_Response being_discussed
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [new_to_group] CPlayer_GetFriendsAppsActivity_Response new_to_group
+         * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>|null} [returned_to_group] CPlayer_GetFriendsAppsActivity_Response returned_to_group
+         * @property {number|null} [active_friend_count] CPlayer_GetFriendsAppsActivity_Response active_friend_count
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetFriendsAppsActivity_Response.
+         * @exports CPlayer_GetFriendsAppsActivity_Response
+         * @classdesc Represents a CPlayer_GetFriendsAppsActivity_Response.
+         * @implements ICPlayer_GetFriendsAppsActivity_Response
+         * @constructor
+         * @param {ICPlayer_GetFriendsAppsActivity_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetFriendsAppsActivity_Response(properties) {
+            this.trending = [];
+            this.recent_purchases = [];
+            this.unowned = [];
+            this.popular = [];
+            this.dont_forget = [];
+            this.being_discussed = [];
+            this.new_to_group = [];
+            this.returned_to_group = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response trending.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} trending
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.trending = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response recent_purchases.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} recent_purchases
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.recent_purchases = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response unowned.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} unowned
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.unowned = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response popular.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} popular
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.popular = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response dont_forget.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} dont_forget
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.dont_forget = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response being_discussed.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} being_discussed
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.being_discussed = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response new_to_group.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} new_to_group
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.new_to_group = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response returned_to_group.
+         * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo>} returned_to_group
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.returned_to_group = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsAppsActivity_Response active_friend_count.
+         * @member {number} active_friend_count
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.active_friend_count = 0;
+    
+        /**
+         * Creates a new CPlayer_GetFriendsAppsActivity_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {ICPlayer_GetFriendsAppsActivity_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetFriendsAppsActivity_Response} CPlayer_GetFriendsAppsActivity_Response instance
+         */
+        CPlayer_GetFriendsAppsActivity_Response.create = function create(properties) {
+            return new CPlayer_GetFriendsAppsActivity_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsAppsActivity_Response message. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {ICPlayer_GetFriendsAppsActivity_Response} message CPlayer_GetFriendsAppsActivity_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsAppsActivity_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.trending != null && message.trending.length)
+                for (var i = 0; i < message.trending.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.trending[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.recent_purchases != null && message.recent_purchases.length)
+                for (var i = 0; i < message.recent_purchases.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.recent_purchases[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.unowned != null && message.unowned.length)
+                for (var i = 0; i < message.unowned.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.unowned[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.popular != null && message.popular.length)
+                for (var i = 0; i < message.popular.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.popular[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.dont_forget != null && message.dont_forget.length)
+                for (var i = 0; i < message.dont_forget.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.dont_forget[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.being_discussed != null && message.being_discussed.length)
+                for (var i = 0; i < message.being_discussed.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.being_discussed[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.new_to_group != null && message.new_to_group.length)
+                for (var i = 0; i < message.new_to_group.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.new_to_group[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.returned_to_group != null && message.returned_to_group.length)
+                for (var i = 0; i < message.returned_to_group.length; ++i)
+                    $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.encode(message.returned_to_group[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.active_friend_count != null && message.hasOwnProperty("active_friend_count"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.active_friend_count);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsAppsActivity_Response message, length delimited. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {ICPlayer_GetFriendsAppsActivity_Response} message CPlayer_GetFriendsAppsActivity_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsAppsActivity_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsAppsActivity_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetFriendsAppsActivity_Response} CPlayer_GetFriendsAppsActivity_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsAppsActivity_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsAppsActivity_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.trending && message.trending.length))
+                        message.trending = [];
+                    message.trending.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.recent_purchases && message.recent_purchases.length))
+                        message.recent_purchases = [];
+                    message.recent_purchases.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    if (!(message.unowned && message.unowned.length))
+                        message.unowned = [];
+                    message.unowned.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    if (!(message.popular && message.popular.length))
+                        message.popular = [];
+                    message.popular.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    if (!(message.dont_forget && message.dont_forget.length))
+                        message.dont_forget = [];
+                    message.dont_forget.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 6:
+                    if (!(message.being_discussed && message.being_discussed.length))
+                        message.being_discussed = [];
+                    message.being_discussed.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 7:
+                    if (!(message.new_to_group && message.new_to_group.length))
+                        message.new_to_group = [];
+                    message.new_to_group.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 8:
+                    if (!(message.returned_to_group && message.returned_to_group.length))
+                        message.returned_to_group = [];
+                    message.returned_to_group.push($root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 9:
+                    message.active_friend_count = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsAppsActivity_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetFriendsAppsActivity_Response} CPlayer_GetFriendsAppsActivity_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsAppsActivity_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetFriendsAppsActivity_Response message.
+         * @function verify
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetFriendsAppsActivity_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.trending != null && message.hasOwnProperty("trending")) {
+                if (!Array.isArray(message.trending))
+                    return "trending: array expected";
+                for (var i = 0; i < message.trending.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.trending[i]);
+                    if (error)
+                        return "trending." + error;
+                }
+            }
+            if (message.recent_purchases != null && message.hasOwnProperty("recent_purchases")) {
+                if (!Array.isArray(message.recent_purchases))
+                    return "recent_purchases: array expected";
+                for (var i = 0; i < message.recent_purchases.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.recent_purchases[i]);
+                    if (error)
+                        return "recent_purchases." + error;
+                }
+            }
+            if (message.unowned != null && message.hasOwnProperty("unowned")) {
+                if (!Array.isArray(message.unowned))
+                    return "unowned: array expected";
+                for (var i = 0; i < message.unowned.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.unowned[i]);
+                    if (error)
+                        return "unowned." + error;
+                }
+            }
+            if (message.popular != null && message.hasOwnProperty("popular")) {
+                if (!Array.isArray(message.popular))
+                    return "popular: array expected";
+                for (var i = 0; i < message.popular.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.popular[i]);
+                    if (error)
+                        return "popular." + error;
+                }
+            }
+            if (message.dont_forget != null && message.hasOwnProperty("dont_forget")) {
+                if (!Array.isArray(message.dont_forget))
+                    return "dont_forget: array expected";
+                for (var i = 0; i < message.dont_forget.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.dont_forget[i]);
+                    if (error)
+                        return "dont_forget." + error;
+                }
+            }
+            if (message.being_discussed != null && message.hasOwnProperty("being_discussed")) {
+                if (!Array.isArray(message.being_discussed))
+                    return "being_discussed: array expected";
+                for (var i = 0; i < message.being_discussed.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.being_discussed[i]);
+                    if (error)
+                        return "being_discussed." + error;
+                }
+            }
+            if (message.new_to_group != null && message.hasOwnProperty("new_to_group")) {
+                if (!Array.isArray(message.new_to_group))
+                    return "new_to_group: array expected";
+                for (var i = 0; i < message.new_to_group.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.new_to_group[i]);
+                    if (error)
+                        return "new_to_group." + error;
+                }
+            }
+            if (message.returned_to_group != null && message.hasOwnProperty("returned_to_group")) {
+                if (!Array.isArray(message.returned_to_group))
+                    return "returned_to_group: array expected";
+                for (var i = 0; i < message.returned_to_group.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify(message.returned_to_group[i]);
+                    if (error)
+                        return "returned_to_group." + error;
+                }
+            }
+            if (message.active_friend_count != null && message.hasOwnProperty("active_friend_count"))
+                if (!$util.isInteger(message.active_friend_count))
+                    return "active_friend_count: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetFriendsAppsActivity_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetFriendsAppsActivity_Response} CPlayer_GetFriendsAppsActivity_Response
+         */
+        CPlayer_GetFriendsAppsActivity_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetFriendsAppsActivity_Response)
+                return object;
+            var message = new $root.CPlayer_GetFriendsAppsActivity_Response();
+            if (object.trending) {
+                if (!Array.isArray(object.trending))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.trending: array expected");
+                message.trending = [];
+                for (var i = 0; i < object.trending.length; ++i) {
+                    if (typeof object.trending[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.trending: object expected");
+                    message.trending[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.trending[i]);
+                }
+            }
+            if (object.recent_purchases) {
+                if (!Array.isArray(object.recent_purchases))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.recent_purchases: array expected");
+                message.recent_purchases = [];
+                for (var i = 0; i < object.recent_purchases.length; ++i) {
+                    if (typeof object.recent_purchases[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.recent_purchases: object expected");
+                    message.recent_purchases[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.recent_purchases[i]);
+                }
+            }
+            if (object.unowned) {
+                if (!Array.isArray(object.unowned))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.unowned: array expected");
+                message.unowned = [];
+                for (var i = 0; i < object.unowned.length; ++i) {
+                    if (typeof object.unowned[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.unowned: object expected");
+                    message.unowned[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.unowned[i]);
+                }
+            }
+            if (object.popular) {
+                if (!Array.isArray(object.popular))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.popular: array expected");
+                message.popular = [];
+                for (var i = 0; i < object.popular.length; ++i) {
+                    if (typeof object.popular[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.popular: object expected");
+                    message.popular[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.popular[i]);
+                }
+            }
+            if (object.dont_forget) {
+                if (!Array.isArray(object.dont_forget))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.dont_forget: array expected");
+                message.dont_forget = [];
+                for (var i = 0; i < object.dont_forget.length; ++i) {
+                    if (typeof object.dont_forget[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.dont_forget: object expected");
+                    message.dont_forget[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.dont_forget[i]);
+                }
+            }
+            if (object.being_discussed) {
+                if (!Array.isArray(object.being_discussed))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.being_discussed: array expected");
+                message.being_discussed = [];
+                for (var i = 0; i < object.being_discussed.length; ++i) {
+                    if (typeof object.being_discussed[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.being_discussed: object expected");
+                    message.being_discussed[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.being_discussed[i]);
+                }
+            }
+            if (object.new_to_group) {
+                if (!Array.isArray(object.new_to_group))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.new_to_group: array expected");
+                message.new_to_group = [];
+                for (var i = 0; i < object.new_to_group.length; ++i) {
+                    if (typeof object.new_to_group[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.new_to_group: object expected");
+                    message.new_to_group[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.new_to_group[i]);
+                }
+            }
+            if (object.returned_to_group) {
+                if (!Array.isArray(object.returned_to_group))
+                    throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.returned_to_group: array expected");
+                message.returned_to_group = [];
+                for (var i = 0; i < object.returned_to_group.length; ++i) {
+                    if (typeof object.returned_to_group[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.returned_to_group: object expected");
+                    message.returned_to_group[i] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.fromObject(object.returned_to_group[i]);
+                }
+            }
+            if (object.active_friend_count != null)
+                message.active_friend_count = object.active_friend_count >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetFriendsAppsActivity_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @static
+         * @param {CPlayer_GetFriendsAppsActivity_Response} message CPlayer_GetFriendsAppsActivity_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetFriendsAppsActivity_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.trending = [];
+                object.recent_purchases = [];
+                object.unowned = [];
+                object.popular = [];
+                object.dont_forget = [];
+                object.being_discussed = [];
+                object.new_to_group = [];
+                object.returned_to_group = [];
+            }
+            if (options.defaults)
+                object.active_friend_count = 0;
+            if (message.trending && message.trending.length) {
+                object.trending = [];
+                for (var j = 0; j < message.trending.length; ++j)
+                    object.trending[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.trending[j], options);
+            }
+            if (message.recent_purchases && message.recent_purchases.length) {
+                object.recent_purchases = [];
+                for (var j = 0; j < message.recent_purchases.length; ++j)
+                    object.recent_purchases[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.recent_purchases[j], options);
+            }
+            if (message.unowned && message.unowned.length) {
+                object.unowned = [];
+                for (var j = 0; j < message.unowned.length; ++j)
+                    object.unowned[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.unowned[j], options);
+            }
+            if (message.popular && message.popular.length) {
+                object.popular = [];
+                for (var j = 0; j < message.popular.length; ++j)
+                    object.popular[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.popular[j], options);
+            }
+            if (message.dont_forget && message.dont_forget.length) {
+                object.dont_forget = [];
+                for (var j = 0; j < message.dont_forget.length; ++j)
+                    object.dont_forget[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.dont_forget[j], options);
+            }
+            if (message.being_discussed && message.being_discussed.length) {
+                object.being_discussed = [];
+                for (var j = 0; j < message.being_discussed.length; ++j)
+                    object.being_discussed[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.being_discussed[j], options);
+            }
+            if (message.new_to_group && message.new_to_group.length) {
+                object.new_to_group = [];
+                for (var j = 0; j < message.new_to_group.length; ++j)
+                    object.new_to_group[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.new_to_group[j], options);
+            }
+            if (message.returned_to_group && message.returned_to_group.length) {
+                object.returned_to_group = [];
+                for (var j = 0; j < message.returned_to_group.length; ++j)
+                    object.returned_to_group[j] = $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.toObject(message.returned_to_group[j], options);
+            }
+            if (message.active_friend_count != null && message.hasOwnProperty("active_friend_count"))
+                object.active_friend_count = message.active_friend_count;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetFriendsAppsActivity_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetFriendsAppsActivity_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetFriendsAppsActivity_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime = (function() {
+    
+            /**
+             * Properties of a FriendPlayTime.
+             * @memberof CPlayer_GetFriendsAppsActivity_Response
+             * @interface IFriendPlayTime
+             * @property {number|Long|null} [steamid] FriendPlayTime steamid
+             * @property {number|null} [minutes_played_this_week] FriendPlayTime minutes_played_this_week
+             * @property {number|null} [minutes_played_two_weeks] FriendPlayTime minutes_played_two_weeks
+             * @property {number|null} [minutes_played_forever] FriendPlayTime minutes_played_forever
+             * @property {number|null} [event_count] FriendPlayTime event_count
+             */
+    
+            /**
+             * Constructs a new FriendPlayTime.
+             * @memberof CPlayer_GetFriendsAppsActivity_Response
+             * @classdesc Represents a FriendPlayTime.
+             * @implements IFriendPlayTime
+             * @constructor
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IFriendPlayTime=} [properties] Properties to set
+             */
+            function FriendPlayTime(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * FriendPlayTime steamid.
+             * @member {number|Long} steamid
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @instance
+             */
+            FriendPlayTime.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * FriendPlayTime minutes_played_this_week.
+             * @member {number} minutes_played_this_week
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @instance
+             */
+            FriendPlayTime.prototype.minutes_played_this_week = 0;
+    
+            /**
+             * FriendPlayTime minutes_played_two_weeks.
+             * @member {number} minutes_played_two_weeks
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @instance
+             */
+            FriendPlayTime.prototype.minutes_played_two_weeks = 0;
+    
+            /**
+             * FriendPlayTime minutes_played_forever.
+             * @member {number} minutes_played_forever
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @instance
+             */
+            FriendPlayTime.prototype.minutes_played_forever = 0;
+    
+            /**
+             * FriendPlayTime event_count.
+             * @member {number} event_count
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @instance
+             */
+            FriendPlayTime.prototype.event_count = 0;
+    
+            /**
+             * Creates a new FriendPlayTime instance using the specified properties.
+             * @function create
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IFriendPlayTime=} [properties] Properties to set
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime} FriendPlayTime instance
+             */
+            FriendPlayTime.create = function create(properties) {
+                return new FriendPlayTime(properties);
+            };
+    
+            /**
+             * Encodes the specified FriendPlayTime message. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime.verify|verify} messages.
+             * @function encode
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IFriendPlayTime} message FriendPlayTime message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FriendPlayTime.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+                if (message.minutes_played_this_week != null && message.hasOwnProperty("minutes_played_this_week"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.minutes_played_this_week);
+                if (message.minutes_played_two_weeks != null && message.hasOwnProperty("minutes_played_two_weeks"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.minutes_played_two_weeks);
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.minutes_played_forever);
+                if (message.event_count != null && message.hasOwnProperty("event_count"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.event_count);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified FriendPlayTime message, length delimited. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IFriendPlayTime} message FriendPlayTime message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FriendPlayTime.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a FriendPlayTime message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime} FriendPlayTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FriendPlayTime.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.steamid = reader.fixed64();
+                        break;
+                    case 2:
+                        message.minutes_played_this_week = reader.uint32();
+                        break;
+                    case 3:
+                        message.minutes_played_two_weeks = reader.uint32();
+                        break;
+                    case 4:
+                        message.minutes_played_forever = reader.uint32();
+                        break;
+                    case 5:
+                        message.event_count = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a FriendPlayTime message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime} FriendPlayTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FriendPlayTime.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a FriendPlayTime message.
+             * @function verify
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FriendPlayTime.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                        return "steamid: integer|Long expected";
+                if (message.minutes_played_this_week != null && message.hasOwnProperty("minutes_played_this_week"))
+                    if (!$util.isInteger(message.minutes_played_this_week))
+                        return "minutes_played_this_week: integer expected";
+                if (message.minutes_played_two_weeks != null && message.hasOwnProperty("minutes_played_two_weeks"))
+                    if (!$util.isInteger(message.minutes_played_two_weeks))
+                        return "minutes_played_two_weeks: integer expected";
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    if (!$util.isInteger(message.minutes_played_forever))
+                        return "minutes_played_forever: integer expected";
+                if (message.event_count != null && message.hasOwnProperty("event_count"))
+                    if (!$util.isInteger(message.event_count))
+                        return "event_count: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a FriendPlayTime message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime} FriendPlayTime
+             */
+            FriendPlayTime.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime)
+                    return object;
+                var message = new $root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime();
+                if (object.steamid != null)
+                    if ($util.Long)
+                        (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                    else if (typeof object.steamid === "string")
+                        message.steamid = parseInt(object.steamid, 10);
+                    else if (typeof object.steamid === "number")
+                        message.steamid = object.steamid;
+                    else if (typeof object.steamid === "object")
+                        message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+                if (object.minutes_played_this_week != null)
+                    message.minutes_played_this_week = object.minutes_played_this_week >>> 0;
+                if (object.minutes_played_two_weeks != null)
+                    message.minutes_played_two_weeks = object.minutes_played_two_weeks >>> 0;
+                if (object.minutes_played_forever != null)
+                    message.minutes_played_forever = object.minutes_played_forever >>> 0;
+                if (object.event_count != null)
+                    message.event_count = object.event_count >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a FriendPlayTime message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime} message FriendPlayTime
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FriendPlayTime.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steamid = options.longs === String ? "0" : 0;
+                    object.minutes_played_this_week = 0;
+                    object.minutes_played_two_weeks = 0;
+                    object.minutes_played_forever = 0;
+                    object.event_count = 0;
+                }
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (typeof message.steamid === "number")
+                        object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                    else
+                        object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+                if (message.minutes_played_this_week != null && message.hasOwnProperty("minutes_played_this_week"))
+                    object.minutes_played_this_week = message.minutes_played_this_week;
+                if (message.minutes_played_two_weeks != null && message.hasOwnProperty("minutes_played_two_weeks"))
+                    object.minutes_played_two_weeks = message.minutes_played_two_weeks;
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    object.minutes_played_forever = message.minutes_played_forever;
+                if (message.event_count != null && message.hasOwnProperty("event_count"))
+                    object.event_count = message.event_count;
+                return object;
+            };
+    
+            /**
+             * Converts this FriendPlayTime to JSON.
+             * @function toJSON
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FriendPlayTime.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return FriendPlayTime;
+        })();
+    
+        CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo = (function() {
+    
+            /**
+             * Properties of an AppFriendsInfo.
+             * @memberof CPlayer_GetFriendsAppsActivity_Response
+             * @interface IAppFriendsInfo
+             * @property {number|null} [appid] AppFriendsInfo appid
+             * @property {Array.<CPlayer_GetFriendsAppsActivity_Response.IFriendPlayTime>|null} [friends] AppFriendsInfo friends
+             * @property {number|null} [display_order] AppFriendsInfo display_order
+             */
+    
+            /**
+             * Constructs a new AppFriendsInfo.
+             * @memberof CPlayer_GetFriendsAppsActivity_Response
+             * @classdesc Represents an AppFriendsInfo.
+             * @implements IAppFriendsInfo
+             * @constructor
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo=} [properties] Properties to set
+             */
+            function AppFriendsInfo(properties) {
+                this.friends = [];
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * AppFriendsInfo appid.
+             * @member {number} appid
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @instance
+             */
+            AppFriendsInfo.prototype.appid = 0;
+    
+            /**
+             * AppFriendsInfo friends.
+             * @member {Array.<CPlayer_GetFriendsAppsActivity_Response.IFriendPlayTime>} friends
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @instance
+             */
+            AppFriendsInfo.prototype.friends = $util.emptyArray;
+    
+            /**
+             * AppFriendsInfo display_order.
+             * @member {number} display_order
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @instance
+             */
+            AppFriendsInfo.prototype.display_order = 0;
+    
+            /**
+             * Creates a new AppFriendsInfo instance using the specified properties.
+             * @function create
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo=} [properties] Properties to set
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo} AppFriendsInfo instance
+             */
+            AppFriendsInfo.create = function create(properties) {
+                return new AppFriendsInfo(properties);
+            };
+    
+            /**
+             * Encodes the specified AppFriendsInfo message. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify|verify} messages.
+             * @function encode
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo} message AppFriendsInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AppFriendsInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+                if (message.friends != null && message.friends.length)
+                    for (var i = 0; i < message.friends.length; ++i)
+                        $root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime.encode(message.friends[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.display_order != null && message.hasOwnProperty("display_order"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.display_order);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified AppFriendsInfo message, length delimited. Does not implicitly {@link CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.IAppFriendsInfo} message AppFriendsInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AppFriendsInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an AppFriendsInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo} AppFriendsInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AppFriendsInfo.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.appid = reader.uint32();
+                        break;
+                    case 2:
+                        if (!(message.friends && message.friends.length))
+                            message.friends = [];
+                        message.friends.push($root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime.decode(reader, reader.uint32()));
+                        break;
+                    case 3:
+                        message.display_order = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an AppFriendsInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo} AppFriendsInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AppFriendsInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an AppFriendsInfo message.
+             * @function verify
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AppFriendsInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    if (!$util.isInteger(message.appid))
+                        return "appid: integer expected";
+                if (message.friends != null && message.hasOwnProperty("friends")) {
+                    if (!Array.isArray(message.friends))
+                        return "friends: array expected";
+                    for (var i = 0; i < message.friends.length; ++i) {
+                        var error = $root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime.verify(message.friends[i]);
+                        if (error)
+                            return "friends." + error;
+                    }
+                }
+                if (message.display_order != null && message.hasOwnProperty("display_order"))
+                    if (!$util.isInteger(message.display_order))
+                        return "display_order: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates an AppFriendsInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo} AppFriendsInfo
+             */
+            AppFriendsInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo)
+                    return object;
+                var message = new $root.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo();
+                if (object.appid != null)
+                    message.appid = object.appid >>> 0;
+                if (object.friends) {
+                    if (!Array.isArray(object.friends))
+                        throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.friends: array expected");
+                    message.friends = [];
+                    for (var i = 0; i < object.friends.length; ++i) {
+                        if (typeof object.friends[i] !== "object")
+                            throw TypeError(".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo.friends: object expected");
+                        message.friends[i] = $root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime.fromObject(object.friends[i]);
+                    }
+                }
+                if (object.display_order != null)
+                    message.display_order = object.display_order >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an AppFriendsInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @static
+             * @param {CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo} message AppFriendsInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AppFriendsInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.arrays || options.defaults)
+                    object.friends = [];
+                if (options.defaults) {
+                    object.appid = 0;
+                    object.display_order = 0;
+                }
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    object.appid = message.appid;
+                if (message.friends && message.friends.length) {
+                    object.friends = [];
+                    for (var j = 0; j < message.friends.length; ++j)
+                        object.friends[j] = $root.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime.toObject(message.friends[j], options);
+                }
+                if (message.display_order != null && message.hasOwnProperty("display_order"))
+                    object.display_order = message.display_order;
+                return object;
+            };
+    
+            /**
+             * Converts this AppFriendsInfo to JSON.
+             * @function toJSON
+             * @memberof CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AppFriendsInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return AppFriendsInfo;
+        })();
+    
+        return CPlayer_GetFriendsAppsActivity_Response;
+    })();
+    
     $root.CPlayer_GetGameBadgeLevels_Request = (function() {
     
         /**
@@ -2427,6 +5105,5035 @@
         return CPlayer_GetGameBadgeLevels_Response;
     })();
     
+    $root.CPlayer_GetProfileBackground_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetProfileBackground_Request.
+         * @exports ICPlayer_GetProfileBackground_Request
+         * @interface ICPlayer_GetProfileBackground_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetProfileBackground_Request steamid
+         * @property {string|null} [language] CPlayer_GetProfileBackground_Request language
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetProfileBackground_Request.
+         * @exports CPlayer_GetProfileBackground_Request
+         * @classdesc Represents a CPlayer_GetProfileBackground_Request.
+         * @implements ICPlayer_GetProfileBackground_Request
+         * @constructor
+         * @param {ICPlayer_GetProfileBackground_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetProfileBackground_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetProfileBackground_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @instance
+         */
+        CPlayer_GetProfileBackground_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPlayer_GetProfileBackground_Request language.
+         * @member {string} language
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @instance
+         */
+        CPlayer_GetProfileBackground_Request.prototype.language = "";
+    
+        /**
+         * Creates a new CPlayer_GetProfileBackground_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {ICPlayer_GetProfileBackground_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetProfileBackground_Request} CPlayer_GetProfileBackground_Request instance
+         */
+        CPlayer_GetProfileBackground_Request.create = function create(properties) {
+            return new CPlayer_GetProfileBackground_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileBackground_Request message. Does not implicitly {@link CPlayer_GetProfileBackground_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {ICPlayer_GetProfileBackground_Request} message CPlayer_GetProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileBackground_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileBackground_Request message, length delimited. Does not implicitly {@link CPlayer_GetProfileBackground_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {ICPlayer_GetProfileBackground_Request} message CPlayer_GetProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileBackground_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileBackground_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetProfileBackground_Request} CPlayer_GetProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileBackground_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetProfileBackground_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileBackground_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetProfileBackground_Request} CPlayer_GetProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileBackground_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetProfileBackground_Request message.
+         * @function verify
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetProfileBackground_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetProfileBackground_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetProfileBackground_Request} CPlayer_GetProfileBackground_Request
+         */
+        CPlayer_GetProfileBackground_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetProfileBackground_Request)
+                return object;
+            var message = new $root.CPlayer_GetProfileBackground_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetProfileBackground_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @static
+         * @param {CPlayer_GetProfileBackground_Request} message CPlayer_GetProfileBackground_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetProfileBackground_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.language = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetProfileBackground_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetProfileBackground_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetProfileBackground_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetProfileBackground_Request;
+    })();
+    
+    $root.ProfileItem = (function() {
+    
+        /**
+         * Properties of a ProfileItem.
+         * @exports IProfileItem
+         * @interface IProfileItem
+         * @property {number|Long|null} [communityitemid] ProfileItem communityitemid
+         * @property {string|null} [image_small] ProfileItem image_small
+         * @property {string|null} [image_large] ProfileItem image_large
+         * @property {string|null} [name] ProfileItem name
+         * @property {string|null} [item_title] ProfileItem item_title
+         * @property {string|null} [item_description] ProfileItem item_description
+         * @property {number|null} [appid] ProfileItem appid
+         * @property {number|null} [item_type] ProfileItem item_type
+         * @property {number|null} [item_class] ProfileItem item_class
+         * @property {string|null} [movie_webm] ProfileItem movie_webm
+         * @property {string|null} [movie_mp4] ProfileItem movie_mp4
+         * @property {number|null} [equipped_flags] ProfileItem equipped_flags
+         */
+    
+        /**
+         * Constructs a new ProfileItem.
+         * @exports ProfileItem
+         * @classdesc Represents a ProfileItem.
+         * @implements IProfileItem
+         * @constructor
+         * @param {IProfileItem=} [properties] Properties to set
+         */
+        function ProfileItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * ProfileItem communityitemid.
+         * @member {number|Long} communityitemid
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.communityitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * ProfileItem image_small.
+         * @member {string} image_small
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.image_small = "";
+    
+        /**
+         * ProfileItem image_large.
+         * @member {string} image_large
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.image_large = "";
+    
+        /**
+         * ProfileItem name.
+         * @member {string} name
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.name = "";
+    
+        /**
+         * ProfileItem item_title.
+         * @member {string} item_title
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.item_title = "";
+    
+        /**
+         * ProfileItem item_description.
+         * @member {string} item_description
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.item_description = "";
+    
+        /**
+         * ProfileItem appid.
+         * @member {number} appid
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.appid = 0;
+    
+        /**
+         * ProfileItem item_type.
+         * @member {number} item_type
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.item_type = 0;
+    
+        /**
+         * ProfileItem item_class.
+         * @member {number} item_class
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.item_class = 0;
+    
+        /**
+         * ProfileItem movie_webm.
+         * @member {string} movie_webm
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.movie_webm = "";
+    
+        /**
+         * ProfileItem movie_mp4.
+         * @member {string} movie_mp4
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.movie_mp4 = "";
+    
+        /**
+         * ProfileItem equipped_flags.
+         * @member {number} equipped_flags
+         * @memberof ProfileItem
+         * @instance
+         */
+        ProfileItem.prototype.equipped_flags = 0;
+    
+        /**
+         * Creates a new ProfileItem instance using the specified properties.
+         * @function create
+         * @memberof ProfileItem
+         * @static
+         * @param {IProfileItem=} [properties] Properties to set
+         * @returns {ProfileItem} ProfileItem instance
+         */
+        ProfileItem.create = function create(properties) {
+            return new ProfileItem(properties);
+        };
+    
+        /**
+         * Encodes the specified ProfileItem message. Does not implicitly {@link ProfileItem.verify|verify} messages.
+         * @function encode
+         * @memberof ProfileItem
+         * @static
+         * @param {IProfileItem} message ProfileItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ProfileItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.communityitemid);
+            if (message.image_small != null && message.hasOwnProperty("image_small"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.image_small);
+            if (message.image_large != null && message.hasOwnProperty("image_large"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.image_large);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+            if (message.item_title != null && message.hasOwnProperty("item_title"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.item_title);
+            if (message.item_description != null && message.hasOwnProperty("item_description"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.item_description);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.appid);
+            if (message.item_type != null && message.hasOwnProperty("item_type"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.item_type);
+            if (message.item_class != null && message.hasOwnProperty("item_class"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.item_class);
+            if (message.movie_webm != null && message.hasOwnProperty("movie_webm"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.movie_webm);
+            if (message.movie_mp4 != null && message.hasOwnProperty("movie_mp4"))
+                writer.uint32(/* id 11, wireType 2 =*/90).string(message.movie_mp4);
+            if (message.equipped_flags != null && message.hasOwnProperty("equipped_flags"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.equipped_flags);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified ProfileItem message, length delimited. Does not implicitly {@link ProfileItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof ProfileItem
+         * @static
+         * @param {IProfileItem} message ProfileItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ProfileItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a ProfileItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof ProfileItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {ProfileItem} ProfileItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ProfileItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ProfileItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.communityitemid = reader.uint64();
+                    break;
+                case 2:
+                    message.image_small = reader.string();
+                    break;
+                case 3:
+                    message.image_large = reader.string();
+                    break;
+                case 4:
+                    message.name = reader.string();
+                    break;
+                case 5:
+                    message.item_title = reader.string();
+                    break;
+                case 6:
+                    message.item_description = reader.string();
+                    break;
+                case 7:
+                    message.appid = reader.uint32();
+                    break;
+                case 8:
+                    message.item_type = reader.uint32();
+                    break;
+                case 9:
+                    message.item_class = reader.uint32();
+                    break;
+                case 10:
+                    message.movie_webm = reader.string();
+                    break;
+                case 11:
+                    message.movie_mp4 = reader.string();
+                    break;
+                case 12:
+                    message.equipped_flags = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a ProfileItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof ProfileItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {ProfileItem} ProfileItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ProfileItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a ProfileItem message.
+         * @function verify
+         * @memberof ProfileItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ProfileItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (!$util.isInteger(message.communityitemid) && !(message.communityitemid && $util.isInteger(message.communityitemid.low) && $util.isInteger(message.communityitemid.high)))
+                    return "communityitemid: integer|Long expected";
+            if (message.image_small != null && message.hasOwnProperty("image_small"))
+                if (!$util.isString(message.image_small))
+                    return "image_small: string expected";
+            if (message.image_large != null && message.hasOwnProperty("image_large"))
+                if (!$util.isString(message.image_large))
+                    return "image_large: string expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.item_title != null && message.hasOwnProperty("item_title"))
+                if (!$util.isString(message.item_title))
+                    return "item_title: string expected";
+            if (message.item_description != null && message.hasOwnProperty("item_description"))
+                if (!$util.isString(message.item_description))
+                    return "item_description: string expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.item_type != null && message.hasOwnProperty("item_type"))
+                if (!$util.isInteger(message.item_type))
+                    return "item_type: integer expected";
+            if (message.item_class != null && message.hasOwnProperty("item_class"))
+                if (!$util.isInteger(message.item_class))
+                    return "item_class: integer expected";
+            if (message.movie_webm != null && message.hasOwnProperty("movie_webm"))
+                if (!$util.isString(message.movie_webm))
+                    return "movie_webm: string expected";
+            if (message.movie_mp4 != null && message.hasOwnProperty("movie_mp4"))
+                if (!$util.isString(message.movie_mp4))
+                    return "movie_mp4: string expected";
+            if (message.equipped_flags != null && message.hasOwnProperty("equipped_flags"))
+                if (!$util.isInteger(message.equipped_flags))
+                    return "equipped_flags: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a ProfileItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof ProfileItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {ProfileItem} ProfileItem
+         */
+        ProfileItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.ProfileItem)
+                return object;
+            var message = new $root.ProfileItem();
+            if (object.communityitemid != null)
+                if ($util.Long)
+                    (message.communityitemid = $util.Long.fromValue(object.communityitemid)).unsigned = true;
+                else if (typeof object.communityitemid === "string")
+                    message.communityitemid = parseInt(object.communityitemid, 10);
+                else if (typeof object.communityitemid === "number")
+                    message.communityitemid = object.communityitemid;
+                else if (typeof object.communityitemid === "object")
+                    message.communityitemid = new $util.LongBits(object.communityitemid.low >>> 0, object.communityitemid.high >>> 0).toNumber(true);
+            if (object.image_small != null)
+                message.image_small = String(object.image_small);
+            if (object.image_large != null)
+                message.image_large = String(object.image_large);
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.item_title != null)
+                message.item_title = String(object.item_title);
+            if (object.item_description != null)
+                message.item_description = String(object.item_description);
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.item_type != null)
+                message.item_type = object.item_type >>> 0;
+            if (object.item_class != null)
+                message.item_class = object.item_class >>> 0;
+            if (object.movie_webm != null)
+                message.movie_webm = String(object.movie_webm);
+            if (object.movie_mp4 != null)
+                message.movie_mp4 = String(object.movie_mp4);
+            if (object.equipped_flags != null)
+                message.equipped_flags = object.equipped_flags >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a ProfileItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof ProfileItem
+         * @static
+         * @param {ProfileItem} message ProfileItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ProfileItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.communityitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.communityitemid = options.longs === String ? "0" : 0;
+                object.image_small = "";
+                object.image_large = "";
+                object.name = "";
+                object.item_title = "";
+                object.item_description = "";
+                object.appid = 0;
+                object.item_type = 0;
+                object.item_class = 0;
+                object.movie_webm = "";
+                object.movie_mp4 = "";
+                object.equipped_flags = 0;
+            }
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (typeof message.communityitemid === "number")
+                    object.communityitemid = options.longs === String ? String(message.communityitemid) : message.communityitemid;
+                else
+                    object.communityitemid = options.longs === String ? $util.Long.prototype.toString.call(message.communityitemid) : options.longs === Number ? new $util.LongBits(message.communityitemid.low >>> 0, message.communityitemid.high >>> 0).toNumber(true) : message.communityitemid;
+            if (message.image_small != null && message.hasOwnProperty("image_small"))
+                object.image_small = message.image_small;
+            if (message.image_large != null && message.hasOwnProperty("image_large"))
+                object.image_large = message.image_large;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.item_title != null && message.hasOwnProperty("item_title"))
+                object.item_title = message.item_title;
+            if (message.item_description != null && message.hasOwnProperty("item_description"))
+                object.item_description = message.item_description;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.item_type != null && message.hasOwnProperty("item_type"))
+                object.item_type = message.item_type;
+            if (message.item_class != null && message.hasOwnProperty("item_class"))
+                object.item_class = message.item_class;
+            if (message.movie_webm != null && message.hasOwnProperty("movie_webm"))
+                object.movie_webm = message.movie_webm;
+            if (message.movie_mp4 != null && message.hasOwnProperty("movie_mp4"))
+                object.movie_mp4 = message.movie_mp4;
+            if (message.equipped_flags != null && message.hasOwnProperty("equipped_flags"))
+                object.equipped_flags = message.equipped_flags;
+            return object;
+        };
+    
+        /**
+         * Converts this ProfileItem to JSON.
+         * @function toJSON
+         * @memberof ProfileItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ProfileItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return ProfileItem;
+    })();
+    
+    $root.CPlayer_GetProfileBackground_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetProfileBackground_Response.
+         * @exports ICPlayer_GetProfileBackground_Response
+         * @interface ICPlayer_GetProfileBackground_Response
+         * @property {IProfileItem|null} [profile_background] CPlayer_GetProfileBackground_Response profile_background
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetProfileBackground_Response.
+         * @exports CPlayer_GetProfileBackground_Response
+         * @classdesc Represents a CPlayer_GetProfileBackground_Response.
+         * @implements ICPlayer_GetProfileBackground_Response
+         * @constructor
+         * @param {ICPlayer_GetProfileBackground_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetProfileBackground_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetProfileBackground_Response profile_background.
+         * @member {IProfileItem|null|undefined} profile_background
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @instance
+         */
+        CPlayer_GetProfileBackground_Response.prototype.profile_background = null;
+    
+        /**
+         * Creates a new CPlayer_GetProfileBackground_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {ICPlayer_GetProfileBackground_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetProfileBackground_Response} CPlayer_GetProfileBackground_Response instance
+         */
+        CPlayer_GetProfileBackground_Response.create = function create(properties) {
+            return new CPlayer_GetProfileBackground_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileBackground_Response message. Does not implicitly {@link CPlayer_GetProfileBackground_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {ICPlayer_GetProfileBackground_Response} message CPlayer_GetProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileBackground_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.profile_background != null && message.hasOwnProperty("profile_background"))
+                $root.ProfileItem.encode(message.profile_background, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileBackground_Response message, length delimited. Does not implicitly {@link CPlayer_GetProfileBackground_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {ICPlayer_GetProfileBackground_Response} message CPlayer_GetProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileBackground_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileBackground_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetProfileBackground_Response} CPlayer_GetProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileBackground_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetProfileBackground_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.profile_background = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileBackground_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetProfileBackground_Response} CPlayer_GetProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileBackground_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetProfileBackground_Response message.
+         * @function verify
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetProfileBackground_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.profile_background != null && message.hasOwnProperty("profile_background")) {
+                var error = $root.ProfileItem.verify(message.profile_background);
+                if (error)
+                    return "profile_background." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetProfileBackground_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetProfileBackground_Response} CPlayer_GetProfileBackground_Response
+         */
+        CPlayer_GetProfileBackground_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetProfileBackground_Response)
+                return object;
+            var message = new $root.CPlayer_GetProfileBackground_Response();
+            if (object.profile_background != null) {
+                if (typeof object.profile_background !== "object")
+                    throw TypeError(".CPlayer_GetProfileBackground_Response.profile_background: object expected");
+                message.profile_background = $root.ProfileItem.fromObject(object.profile_background);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetProfileBackground_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @static
+         * @param {CPlayer_GetProfileBackground_Response} message CPlayer_GetProfileBackground_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetProfileBackground_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.profile_background = null;
+            if (message.profile_background != null && message.hasOwnProperty("profile_background"))
+                object.profile_background = $root.ProfileItem.toObject(message.profile_background, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetProfileBackground_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetProfileBackground_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetProfileBackground_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetProfileBackground_Response;
+    })();
+    
+    $root.CPlayer_SetProfileBackground_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetProfileBackground_Request.
+         * @exports ICPlayer_SetProfileBackground_Request
+         * @interface ICPlayer_SetProfileBackground_Request
+         * @property {number|Long|null} [communityitemid] CPlayer_SetProfileBackground_Request communityitemid
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetProfileBackground_Request.
+         * @exports CPlayer_SetProfileBackground_Request
+         * @classdesc Represents a CPlayer_SetProfileBackground_Request.
+         * @implements ICPlayer_SetProfileBackground_Request
+         * @constructor
+         * @param {ICPlayer_SetProfileBackground_Request=} [properties] Properties to set
+         */
+        function CPlayer_SetProfileBackground_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_SetProfileBackground_Request communityitemid.
+         * @member {number|Long} communityitemid
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @instance
+         */
+        CPlayer_SetProfileBackground_Request.prototype.communityitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CPlayer_SetProfileBackground_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {ICPlayer_SetProfileBackground_Request=} [properties] Properties to set
+         * @returns {CPlayer_SetProfileBackground_Request} CPlayer_SetProfileBackground_Request instance
+         */
+        CPlayer_SetProfileBackground_Request.create = function create(properties) {
+            return new CPlayer_SetProfileBackground_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetProfileBackground_Request message. Does not implicitly {@link CPlayer_SetProfileBackground_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {ICPlayer_SetProfileBackground_Request} message CPlayer_SetProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetProfileBackground_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.communityitemid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetProfileBackground_Request message, length delimited. Does not implicitly {@link CPlayer_SetProfileBackground_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {ICPlayer_SetProfileBackground_Request} message CPlayer_SetProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetProfileBackground_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetProfileBackground_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetProfileBackground_Request} CPlayer_SetProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetProfileBackground_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetProfileBackground_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.communityitemid = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetProfileBackground_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetProfileBackground_Request} CPlayer_SetProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetProfileBackground_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetProfileBackground_Request message.
+         * @function verify
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetProfileBackground_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (!$util.isInteger(message.communityitemid) && !(message.communityitemid && $util.isInteger(message.communityitemid.low) && $util.isInteger(message.communityitemid.high)))
+                    return "communityitemid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetProfileBackground_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetProfileBackground_Request} CPlayer_SetProfileBackground_Request
+         */
+        CPlayer_SetProfileBackground_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetProfileBackground_Request)
+                return object;
+            var message = new $root.CPlayer_SetProfileBackground_Request();
+            if (object.communityitemid != null)
+                if ($util.Long)
+                    (message.communityitemid = $util.Long.fromValue(object.communityitemid)).unsigned = true;
+                else if (typeof object.communityitemid === "string")
+                    message.communityitemid = parseInt(object.communityitemid, 10);
+                else if (typeof object.communityitemid === "number")
+                    message.communityitemid = object.communityitemid;
+                else if (typeof object.communityitemid === "object")
+                    message.communityitemid = new $util.LongBits(object.communityitemid.low >>> 0, object.communityitemid.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetProfileBackground_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @static
+         * @param {CPlayer_SetProfileBackground_Request} message CPlayer_SetProfileBackground_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetProfileBackground_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.communityitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.communityitemid = options.longs === String ? "0" : 0;
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (typeof message.communityitemid === "number")
+                    object.communityitemid = options.longs === String ? String(message.communityitemid) : message.communityitemid;
+                else
+                    object.communityitemid = options.longs === String ? $util.Long.prototype.toString.call(message.communityitemid) : options.longs === Number ? new $util.LongBits(message.communityitemid.low >>> 0, message.communityitemid.high >>> 0).toNumber(true) : message.communityitemid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_SetProfileBackground_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetProfileBackground_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetProfileBackground_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetProfileBackground_Request;
+    })();
+    
+    $root.CPlayer_SetProfileBackground_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetProfileBackground_Response.
+         * @exports ICPlayer_SetProfileBackground_Response
+         * @interface ICPlayer_SetProfileBackground_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetProfileBackground_Response.
+         * @exports CPlayer_SetProfileBackground_Response
+         * @classdesc Represents a CPlayer_SetProfileBackground_Response.
+         * @implements ICPlayer_SetProfileBackground_Response
+         * @constructor
+         * @param {ICPlayer_SetProfileBackground_Response=} [properties] Properties to set
+         */
+        function CPlayer_SetProfileBackground_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_SetProfileBackground_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {ICPlayer_SetProfileBackground_Response=} [properties] Properties to set
+         * @returns {CPlayer_SetProfileBackground_Response} CPlayer_SetProfileBackground_Response instance
+         */
+        CPlayer_SetProfileBackground_Response.create = function create(properties) {
+            return new CPlayer_SetProfileBackground_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetProfileBackground_Response message. Does not implicitly {@link CPlayer_SetProfileBackground_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {ICPlayer_SetProfileBackground_Response} message CPlayer_SetProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetProfileBackground_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetProfileBackground_Response message, length delimited. Does not implicitly {@link CPlayer_SetProfileBackground_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {ICPlayer_SetProfileBackground_Response} message CPlayer_SetProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetProfileBackground_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetProfileBackground_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetProfileBackground_Response} CPlayer_SetProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetProfileBackground_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetProfileBackground_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetProfileBackground_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetProfileBackground_Response} CPlayer_SetProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetProfileBackground_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetProfileBackground_Response message.
+         * @function verify
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetProfileBackground_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetProfileBackground_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetProfileBackground_Response} CPlayer_SetProfileBackground_Response
+         */
+        CPlayer_SetProfileBackground_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetProfileBackground_Response)
+                return object;
+            return new $root.CPlayer_SetProfileBackground_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetProfileBackground_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @static
+         * @param {CPlayer_SetProfileBackground_Response} message CPlayer_SetProfileBackground_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetProfileBackground_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_SetProfileBackground_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetProfileBackground_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetProfileBackground_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetProfileBackground_Response;
+    })();
+    
+    $root.CPlayer_GetMiniProfileBackground_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetMiniProfileBackground_Request.
+         * @exports ICPlayer_GetMiniProfileBackground_Request
+         * @interface ICPlayer_GetMiniProfileBackground_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetMiniProfileBackground_Request steamid
+         * @property {string|null} [language] CPlayer_GetMiniProfileBackground_Request language
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetMiniProfileBackground_Request.
+         * @exports CPlayer_GetMiniProfileBackground_Request
+         * @classdesc Represents a CPlayer_GetMiniProfileBackground_Request.
+         * @implements ICPlayer_GetMiniProfileBackground_Request
+         * @constructor
+         * @param {ICPlayer_GetMiniProfileBackground_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetMiniProfileBackground_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetMiniProfileBackground_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @instance
+         */
+        CPlayer_GetMiniProfileBackground_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPlayer_GetMiniProfileBackground_Request language.
+         * @member {string} language
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @instance
+         */
+        CPlayer_GetMiniProfileBackground_Request.prototype.language = "";
+    
+        /**
+         * Creates a new CPlayer_GetMiniProfileBackground_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {ICPlayer_GetMiniProfileBackground_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetMiniProfileBackground_Request} CPlayer_GetMiniProfileBackground_Request instance
+         */
+        CPlayer_GetMiniProfileBackground_Request.create = function create(properties) {
+            return new CPlayer_GetMiniProfileBackground_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetMiniProfileBackground_Request message. Does not implicitly {@link CPlayer_GetMiniProfileBackground_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {ICPlayer_GetMiniProfileBackground_Request} message CPlayer_GetMiniProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetMiniProfileBackground_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetMiniProfileBackground_Request message, length delimited. Does not implicitly {@link CPlayer_GetMiniProfileBackground_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {ICPlayer_GetMiniProfileBackground_Request} message CPlayer_GetMiniProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetMiniProfileBackground_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetMiniProfileBackground_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetMiniProfileBackground_Request} CPlayer_GetMiniProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetMiniProfileBackground_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetMiniProfileBackground_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetMiniProfileBackground_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetMiniProfileBackground_Request} CPlayer_GetMiniProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetMiniProfileBackground_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetMiniProfileBackground_Request message.
+         * @function verify
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetMiniProfileBackground_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetMiniProfileBackground_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetMiniProfileBackground_Request} CPlayer_GetMiniProfileBackground_Request
+         */
+        CPlayer_GetMiniProfileBackground_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetMiniProfileBackground_Request)
+                return object;
+            var message = new $root.CPlayer_GetMiniProfileBackground_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetMiniProfileBackground_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @static
+         * @param {CPlayer_GetMiniProfileBackground_Request} message CPlayer_GetMiniProfileBackground_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetMiniProfileBackground_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.language = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetMiniProfileBackground_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetMiniProfileBackground_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetMiniProfileBackground_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetMiniProfileBackground_Request;
+    })();
+    
+    $root.CPlayer_GetMiniProfileBackground_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetMiniProfileBackground_Response.
+         * @exports ICPlayer_GetMiniProfileBackground_Response
+         * @interface ICPlayer_GetMiniProfileBackground_Response
+         * @property {IProfileItem|null} [profile_background] CPlayer_GetMiniProfileBackground_Response profile_background
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetMiniProfileBackground_Response.
+         * @exports CPlayer_GetMiniProfileBackground_Response
+         * @classdesc Represents a CPlayer_GetMiniProfileBackground_Response.
+         * @implements ICPlayer_GetMiniProfileBackground_Response
+         * @constructor
+         * @param {ICPlayer_GetMiniProfileBackground_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetMiniProfileBackground_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetMiniProfileBackground_Response profile_background.
+         * @member {IProfileItem|null|undefined} profile_background
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @instance
+         */
+        CPlayer_GetMiniProfileBackground_Response.prototype.profile_background = null;
+    
+        /**
+         * Creates a new CPlayer_GetMiniProfileBackground_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {ICPlayer_GetMiniProfileBackground_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetMiniProfileBackground_Response} CPlayer_GetMiniProfileBackground_Response instance
+         */
+        CPlayer_GetMiniProfileBackground_Response.create = function create(properties) {
+            return new CPlayer_GetMiniProfileBackground_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetMiniProfileBackground_Response message. Does not implicitly {@link CPlayer_GetMiniProfileBackground_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {ICPlayer_GetMiniProfileBackground_Response} message CPlayer_GetMiniProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetMiniProfileBackground_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.profile_background != null && message.hasOwnProperty("profile_background"))
+                $root.ProfileItem.encode(message.profile_background, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetMiniProfileBackground_Response message, length delimited. Does not implicitly {@link CPlayer_GetMiniProfileBackground_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {ICPlayer_GetMiniProfileBackground_Response} message CPlayer_GetMiniProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetMiniProfileBackground_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetMiniProfileBackground_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetMiniProfileBackground_Response} CPlayer_GetMiniProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetMiniProfileBackground_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetMiniProfileBackground_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.profile_background = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetMiniProfileBackground_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetMiniProfileBackground_Response} CPlayer_GetMiniProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetMiniProfileBackground_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetMiniProfileBackground_Response message.
+         * @function verify
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetMiniProfileBackground_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.profile_background != null && message.hasOwnProperty("profile_background")) {
+                var error = $root.ProfileItem.verify(message.profile_background);
+                if (error)
+                    return "profile_background." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetMiniProfileBackground_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetMiniProfileBackground_Response} CPlayer_GetMiniProfileBackground_Response
+         */
+        CPlayer_GetMiniProfileBackground_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetMiniProfileBackground_Response)
+                return object;
+            var message = new $root.CPlayer_GetMiniProfileBackground_Response();
+            if (object.profile_background != null) {
+                if (typeof object.profile_background !== "object")
+                    throw TypeError(".CPlayer_GetMiniProfileBackground_Response.profile_background: object expected");
+                message.profile_background = $root.ProfileItem.fromObject(object.profile_background);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetMiniProfileBackground_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @static
+         * @param {CPlayer_GetMiniProfileBackground_Response} message CPlayer_GetMiniProfileBackground_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetMiniProfileBackground_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.profile_background = null;
+            if (message.profile_background != null && message.hasOwnProperty("profile_background"))
+                object.profile_background = $root.ProfileItem.toObject(message.profile_background, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetMiniProfileBackground_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetMiniProfileBackground_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetMiniProfileBackground_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetMiniProfileBackground_Response;
+    })();
+    
+    $root.CPlayer_SetMiniProfileBackground_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetMiniProfileBackground_Request.
+         * @exports ICPlayer_SetMiniProfileBackground_Request
+         * @interface ICPlayer_SetMiniProfileBackground_Request
+         * @property {number|Long|null} [communityitemid] CPlayer_SetMiniProfileBackground_Request communityitemid
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetMiniProfileBackground_Request.
+         * @exports CPlayer_SetMiniProfileBackground_Request
+         * @classdesc Represents a CPlayer_SetMiniProfileBackground_Request.
+         * @implements ICPlayer_SetMiniProfileBackground_Request
+         * @constructor
+         * @param {ICPlayer_SetMiniProfileBackground_Request=} [properties] Properties to set
+         */
+        function CPlayer_SetMiniProfileBackground_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_SetMiniProfileBackground_Request communityitemid.
+         * @member {number|Long} communityitemid
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @instance
+         */
+        CPlayer_SetMiniProfileBackground_Request.prototype.communityitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CPlayer_SetMiniProfileBackground_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {ICPlayer_SetMiniProfileBackground_Request=} [properties] Properties to set
+         * @returns {CPlayer_SetMiniProfileBackground_Request} CPlayer_SetMiniProfileBackground_Request instance
+         */
+        CPlayer_SetMiniProfileBackground_Request.create = function create(properties) {
+            return new CPlayer_SetMiniProfileBackground_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetMiniProfileBackground_Request message. Does not implicitly {@link CPlayer_SetMiniProfileBackground_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {ICPlayer_SetMiniProfileBackground_Request} message CPlayer_SetMiniProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetMiniProfileBackground_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.communityitemid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetMiniProfileBackground_Request message, length delimited. Does not implicitly {@link CPlayer_SetMiniProfileBackground_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {ICPlayer_SetMiniProfileBackground_Request} message CPlayer_SetMiniProfileBackground_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetMiniProfileBackground_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetMiniProfileBackground_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetMiniProfileBackground_Request} CPlayer_SetMiniProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetMiniProfileBackground_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetMiniProfileBackground_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.communityitemid = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetMiniProfileBackground_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetMiniProfileBackground_Request} CPlayer_SetMiniProfileBackground_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetMiniProfileBackground_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetMiniProfileBackground_Request message.
+         * @function verify
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetMiniProfileBackground_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (!$util.isInteger(message.communityitemid) && !(message.communityitemid && $util.isInteger(message.communityitemid.low) && $util.isInteger(message.communityitemid.high)))
+                    return "communityitemid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetMiniProfileBackground_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetMiniProfileBackground_Request} CPlayer_SetMiniProfileBackground_Request
+         */
+        CPlayer_SetMiniProfileBackground_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetMiniProfileBackground_Request)
+                return object;
+            var message = new $root.CPlayer_SetMiniProfileBackground_Request();
+            if (object.communityitemid != null)
+                if ($util.Long)
+                    (message.communityitemid = $util.Long.fromValue(object.communityitemid)).unsigned = true;
+                else if (typeof object.communityitemid === "string")
+                    message.communityitemid = parseInt(object.communityitemid, 10);
+                else if (typeof object.communityitemid === "number")
+                    message.communityitemid = object.communityitemid;
+                else if (typeof object.communityitemid === "object")
+                    message.communityitemid = new $util.LongBits(object.communityitemid.low >>> 0, object.communityitemid.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetMiniProfileBackground_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @static
+         * @param {CPlayer_SetMiniProfileBackground_Request} message CPlayer_SetMiniProfileBackground_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetMiniProfileBackground_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.communityitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.communityitemid = options.longs === String ? "0" : 0;
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (typeof message.communityitemid === "number")
+                    object.communityitemid = options.longs === String ? String(message.communityitemid) : message.communityitemid;
+                else
+                    object.communityitemid = options.longs === String ? $util.Long.prototype.toString.call(message.communityitemid) : options.longs === Number ? new $util.LongBits(message.communityitemid.low >>> 0, message.communityitemid.high >>> 0).toNumber(true) : message.communityitemid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_SetMiniProfileBackground_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetMiniProfileBackground_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetMiniProfileBackground_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetMiniProfileBackground_Request;
+    })();
+    
+    $root.CPlayer_SetMiniProfileBackground_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetMiniProfileBackground_Response.
+         * @exports ICPlayer_SetMiniProfileBackground_Response
+         * @interface ICPlayer_SetMiniProfileBackground_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetMiniProfileBackground_Response.
+         * @exports CPlayer_SetMiniProfileBackground_Response
+         * @classdesc Represents a CPlayer_SetMiniProfileBackground_Response.
+         * @implements ICPlayer_SetMiniProfileBackground_Response
+         * @constructor
+         * @param {ICPlayer_SetMiniProfileBackground_Response=} [properties] Properties to set
+         */
+        function CPlayer_SetMiniProfileBackground_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_SetMiniProfileBackground_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {ICPlayer_SetMiniProfileBackground_Response=} [properties] Properties to set
+         * @returns {CPlayer_SetMiniProfileBackground_Response} CPlayer_SetMiniProfileBackground_Response instance
+         */
+        CPlayer_SetMiniProfileBackground_Response.create = function create(properties) {
+            return new CPlayer_SetMiniProfileBackground_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetMiniProfileBackground_Response message. Does not implicitly {@link CPlayer_SetMiniProfileBackground_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {ICPlayer_SetMiniProfileBackground_Response} message CPlayer_SetMiniProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetMiniProfileBackground_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetMiniProfileBackground_Response message, length delimited. Does not implicitly {@link CPlayer_SetMiniProfileBackground_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {ICPlayer_SetMiniProfileBackground_Response} message CPlayer_SetMiniProfileBackground_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetMiniProfileBackground_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetMiniProfileBackground_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetMiniProfileBackground_Response} CPlayer_SetMiniProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetMiniProfileBackground_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetMiniProfileBackground_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetMiniProfileBackground_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetMiniProfileBackground_Response} CPlayer_SetMiniProfileBackground_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetMiniProfileBackground_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetMiniProfileBackground_Response message.
+         * @function verify
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetMiniProfileBackground_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetMiniProfileBackground_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetMiniProfileBackground_Response} CPlayer_SetMiniProfileBackground_Response
+         */
+        CPlayer_SetMiniProfileBackground_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetMiniProfileBackground_Response)
+                return object;
+            return new $root.CPlayer_SetMiniProfileBackground_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetMiniProfileBackground_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @static
+         * @param {CPlayer_SetMiniProfileBackground_Response} message CPlayer_SetMiniProfileBackground_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetMiniProfileBackground_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_SetMiniProfileBackground_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetMiniProfileBackground_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetMiniProfileBackground_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetMiniProfileBackground_Response;
+    })();
+    
+    $root.CPlayer_GetAvatarFrame_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetAvatarFrame_Request.
+         * @exports ICPlayer_GetAvatarFrame_Request
+         * @interface ICPlayer_GetAvatarFrame_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetAvatarFrame_Request steamid
+         * @property {string|null} [language] CPlayer_GetAvatarFrame_Request language
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetAvatarFrame_Request.
+         * @exports CPlayer_GetAvatarFrame_Request
+         * @classdesc Represents a CPlayer_GetAvatarFrame_Request.
+         * @implements ICPlayer_GetAvatarFrame_Request
+         * @constructor
+         * @param {ICPlayer_GetAvatarFrame_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetAvatarFrame_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetAvatarFrame_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @instance
+         */
+        CPlayer_GetAvatarFrame_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPlayer_GetAvatarFrame_Request language.
+         * @member {string} language
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @instance
+         */
+        CPlayer_GetAvatarFrame_Request.prototype.language = "";
+    
+        /**
+         * Creates a new CPlayer_GetAvatarFrame_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {ICPlayer_GetAvatarFrame_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetAvatarFrame_Request} CPlayer_GetAvatarFrame_Request instance
+         */
+        CPlayer_GetAvatarFrame_Request.create = function create(properties) {
+            return new CPlayer_GetAvatarFrame_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAvatarFrame_Request message. Does not implicitly {@link CPlayer_GetAvatarFrame_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {ICPlayer_GetAvatarFrame_Request} message CPlayer_GetAvatarFrame_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAvatarFrame_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAvatarFrame_Request message, length delimited. Does not implicitly {@link CPlayer_GetAvatarFrame_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {ICPlayer_GetAvatarFrame_Request} message CPlayer_GetAvatarFrame_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAvatarFrame_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAvatarFrame_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetAvatarFrame_Request} CPlayer_GetAvatarFrame_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAvatarFrame_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetAvatarFrame_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAvatarFrame_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetAvatarFrame_Request} CPlayer_GetAvatarFrame_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAvatarFrame_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetAvatarFrame_Request message.
+         * @function verify
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetAvatarFrame_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetAvatarFrame_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetAvatarFrame_Request} CPlayer_GetAvatarFrame_Request
+         */
+        CPlayer_GetAvatarFrame_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetAvatarFrame_Request)
+                return object;
+            var message = new $root.CPlayer_GetAvatarFrame_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetAvatarFrame_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @static
+         * @param {CPlayer_GetAvatarFrame_Request} message CPlayer_GetAvatarFrame_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetAvatarFrame_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.language = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetAvatarFrame_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetAvatarFrame_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetAvatarFrame_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetAvatarFrame_Request;
+    })();
+    
+    $root.CPlayer_GetAvatarFrame_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetAvatarFrame_Response.
+         * @exports ICPlayer_GetAvatarFrame_Response
+         * @interface ICPlayer_GetAvatarFrame_Response
+         * @property {IProfileItem|null} [avatar_frame] CPlayer_GetAvatarFrame_Response avatar_frame
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetAvatarFrame_Response.
+         * @exports CPlayer_GetAvatarFrame_Response
+         * @classdesc Represents a CPlayer_GetAvatarFrame_Response.
+         * @implements ICPlayer_GetAvatarFrame_Response
+         * @constructor
+         * @param {ICPlayer_GetAvatarFrame_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetAvatarFrame_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetAvatarFrame_Response avatar_frame.
+         * @member {IProfileItem|null|undefined} avatar_frame
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @instance
+         */
+        CPlayer_GetAvatarFrame_Response.prototype.avatar_frame = null;
+    
+        /**
+         * Creates a new CPlayer_GetAvatarFrame_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {ICPlayer_GetAvatarFrame_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetAvatarFrame_Response} CPlayer_GetAvatarFrame_Response instance
+         */
+        CPlayer_GetAvatarFrame_Response.create = function create(properties) {
+            return new CPlayer_GetAvatarFrame_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAvatarFrame_Response message. Does not implicitly {@link CPlayer_GetAvatarFrame_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {ICPlayer_GetAvatarFrame_Response} message CPlayer_GetAvatarFrame_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAvatarFrame_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.avatar_frame != null && message.hasOwnProperty("avatar_frame"))
+                $root.ProfileItem.encode(message.avatar_frame, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAvatarFrame_Response message, length delimited. Does not implicitly {@link CPlayer_GetAvatarFrame_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {ICPlayer_GetAvatarFrame_Response} message CPlayer_GetAvatarFrame_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAvatarFrame_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAvatarFrame_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetAvatarFrame_Response} CPlayer_GetAvatarFrame_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAvatarFrame_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetAvatarFrame_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.avatar_frame = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAvatarFrame_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetAvatarFrame_Response} CPlayer_GetAvatarFrame_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAvatarFrame_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetAvatarFrame_Response message.
+         * @function verify
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetAvatarFrame_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.avatar_frame != null && message.hasOwnProperty("avatar_frame")) {
+                var error = $root.ProfileItem.verify(message.avatar_frame);
+                if (error)
+                    return "avatar_frame." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetAvatarFrame_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetAvatarFrame_Response} CPlayer_GetAvatarFrame_Response
+         */
+        CPlayer_GetAvatarFrame_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetAvatarFrame_Response)
+                return object;
+            var message = new $root.CPlayer_GetAvatarFrame_Response();
+            if (object.avatar_frame != null) {
+                if (typeof object.avatar_frame !== "object")
+                    throw TypeError(".CPlayer_GetAvatarFrame_Response.avatar_frame: object expected");
+                message.avatar_frame = $root.ProfileItem.fromObject(object.avatar_frame);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetAvatarFrame_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @static
+         * @param {CPlayer_GetAvatarFrame_Response} message CPlayer_GetAvatarFrame_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetAvatarFrame_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.avatar_frame = null;
+            if (message.avatar_frame != null && message.hasOwnProperty("avatar_frame"))
+                object.avatar_frame = $root.ProfileItem.toObject(message.avatar_frame, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetAvatarFrame_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetAvatarFrame_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetAvatarFrame_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetAvatarFrame_Response;
+    })();
+    
+    $root.CPlayer_SetAvatarFrame_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetAvatarFrame_Request.
+         * @exports ICPlayer_SetAvatarFrame_Request
+         * @interface ICPlayer_SetAvatarFrame_Request
+         * @property {number|Long|null} [communityitemid] CPlayer_SetAvatarFrame_Request communityitemid
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetAvatarFrame_Request.
+         * @exports CPlayer_SetAvatarFrame_Request
+         * @classdesc Represents a CPlayer_SetAvatarFrame_Request.
+         * @implements ICPlayer_SetAvatarFrame_Request
+         * @constructor
+         * @param {ICPlayer_SetAvatarFrame_Request=} [properties] Properties to set
+         */
+        function CPlayer_SetAvatarFrame_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_SetAvatarFrame_Request communityitemid.
+         * @member {number|Long} communityitemid
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @instance
+         */
+        CPlayer_SetAvatarFrame_Request.prototype.communityitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CPlayer_SetAvatarFrame_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {ICPlayer_SetAvatarFrame_Request=} [properties] Properties to set
+         * @returns {CPlayer_SetAvatarFrame_Request} CPlayer_SetAvatarFrame_Request instance
+         */
+        CPlayer_SetAvatarFrame_Request.create = function create(properties) {
+            return new CPlayer_SetAvatarFrame_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAvatarFrame_Request message. Does not implicitly {@link CPlayer_SetAvatarFrame_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {ICPlayer_SetAvatarFrame_Request} message CPlayer_SetAvatarFrame_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAvatarFrame_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.communityitemid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAvatarFrame_Request message, length delimited. Does not implicitly {@link CPlayer_SetAvatarFrame_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {ICPlayer_SetAvatarFrame_Request} message CPlayer_SetAvatarFrame_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAvatarFrame_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAvatarFrame_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetAvatarFrame_Request} CPlayer_SetAvatarFrame_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAvatarFrame_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetAvatarFrame_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.communityitemid = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAvatarFrame_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetAvatarFrame_Request} CPlayer_SetAvatarFrame_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAvatarFrame_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetAvatarFrame_Request message.
+         * @function verify
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetAvatarFrame_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (!$util.isInteger(message.communityitemid) && !(message.communityitemid && $util.isInteger(message.communityitemid.low) && $util.isInteger(message.communityitemid.high)))
+                    return "communityitemid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetAvatarFrame_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetAvatarFrame_Request} CPlayer_SetAvatarFrame_Request
+         */
+        CPlayer_SetAvatarFrame_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetAvatarFrame_Request)
+                return object;
+            var message = new $root.CPlayer_SetAvatarFrame_Request();
+            if (object.communityitemid != null)
+                if ($util.Long)
+                    (message.communityitemid = $util.Long.fromValue(object.communityitemid)).unsigned = true;
+                else if (typeof object.communityitemid === "string")
+                    message.communityitemid = parseInt(object.communityitemid, 10);
+                else if (typeof object.communityitemid === "number")
+                    message.communityitemid = object.communityitemid;
+                else if (typeof object.communityitemid === "object")
+                    message.communityitemid = new $util.LongBits(object.communityitemid.low >>> 0, object.communityitemid.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetAvatarFrame_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @static
+         * @param {CPlayer_SetAvatarFrame_Request} message CPlayer_SetAvatarFrame_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetAvatarFrame_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.communityitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.communityitemid = options.longs === String ? "0" : 0;
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (typeof message.communityitemid === "number")
+                    object.communityitemid = options.longs === String ? String(message.communityitemid) : message.communityitemid;
+                else
+                    object.communityitemid = options.longs === String ? $util.Long.prototype.toString.call(message.communityitemid) : options.longs === Number ? new $util.LongBits(message.communityitemid.low >>> 0, message.communityitemid.high >>> 0).toNumber(true) : message.communityitemid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_SetAvatarFrame_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetAvatarFrame_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetAvatarFrame_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetAvatarFrame_Request;
+    })();
+    
+    $root.CPlayer_SetAvatarFrame_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetAvatarFrame_Response.
+         * @exports ICPlayer_SetAvatarFrame_Response
+         * @interface ICPlayer_SetAvatarFrame_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetAvatarFrame_Response.
+         * @exports CPlayer_SetAvatarFrame_Response
+         * @classdesc Represents a CPlayer_SetAvatarFrame_Response.
+         * @implements ICPlayer_SetAvatarFrame_Response
+         * @constructor
+         * @param {ICPlayer_SetAvatarFrame_Response=} [properties] Properties to set
+         */
+        function CPlayer_SetAvatarFrame_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_SetAvatarFrame_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {ICPlayer_SetAvatarFrame_Response=} [properties] Properties to set
+         * @returns {CPlayer_SetAvatarFrame_Response} CPlayer_SetAvatarFrame_Response instance
+         */
+        CPlayer_SetAvatarFrame_Response.create = function create(properties) {
+            return new CPlayer_SetAvatarFrame_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAvatarFrame_Response message. Does not implicitly {@link CPlayer_SetAvatarFrame_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {ICPlayer_SetAvatarFrame_Response} message CPlayer_SetAvatarFrame_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAvatarFrame_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAvatarFrame_Response message, length delimited. Does not implicitly {@link CPlayer_SetAvatarFrame_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {ICPlayer_SetAvatarFrame_Response} message CPlayer_SetAvatarFrame_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAvatarFrame_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAvatarFrame_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetAvatarFrame_Response} CPlayer_SetAvatarFrame_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAvatarFrame_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetAvatarFrame_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAvatarFrame_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetAvatarFrame_Response} CPlayer_SetAvatarFrame_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAvatarFrame_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetAvatarFrame_Response message.
+         * @function verify
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetAvatarFrame_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetAvatarFrame_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetAvatarFrame_Response} CPlayer_SetAvatarFrame_Response
+         */
+        CPlayer_SetAvatarFrame_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetAvatarFrame_Response)
+                return object;
+            return new $root.CPlayer_SetAvatarFrame_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetAvatarFrame_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @static
+         * @param {CPlayer_SetAvatarFrame_Response} message CPlayer_SetAvatarFrame_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetAvatarFrame_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_SetAvatarFrame_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetAvatarFrame_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetAvatarFrame_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetAvatarFrame_Response;
+    })();
+    
+    $root.CPlayer_GetAnimatedAvatar_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetAnimatedAvatar_Request.
+         * @exports ICPlayer_GetAnimatedAvatar_Request
+         * @interface ICPlayer_GetAnimatedAvatar_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetAnimatedAvatar_Request steamid
+         * @property {string|null} [language] CPlayer_GetAnimatedAvatar_Request language
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetAnimatedAvatar_Request.
+         * @exports CPlayer_GetAnimatedAvatar_Request
+         * @classdesc Represents a CPlayer_GetAnimatedAvatar_Request.
+         * @implements ICPlayer_GetAnimatedAvatar_Request
+         * @constructor
+         * @param {ICPlayer_GetAnimatedAvatar_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetAnimatedAvatar_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetAnimatedAvatar_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @instance
+         */
+        CPlayer_GetAnimatedAvatar_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPlayer_GetAnimatedAvatar_Request language.
+         * @member {string} language
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @instance
+         */
+        CPlayer_GetAnimatedAvatar_Request.prototype.language = "";
+    
+        /**
+         * Creates a new CPlayer_GetAnimatedAvatar_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {ICPlayer_GetAnimatedAvatar_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetAnimatedAvatar_Request} CPlayer_GetAnimatedAvatar_Request instance
+         */
+        CPlayer_GetAnimatedAvatar_Request.create = function create(properties) {
+            return new CPlayer_GetAnimatedAvatar_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAnimatedAvatar_Request message. Does not implicitly {@link CPlayer_GetAnimatedAvatar_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {ICPlayer_GetAnimatedAvatar_Request} message CPlayer_GetAnimatedAvatar_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAnimatedAvatar_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAnimatedAvatar_Request message, length delimited. Does not implicitly {@link CPlayer_GetAnimatedAvatar_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {ICPlayer_GetAnimatedAvatar_Request} message CPlayer_GetAnimatedAvatar_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAnimatedAvatar_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAnimatedAvatar_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetAnimatedAvatar_Request} CPlayer_GetAnimatedAvatar_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAnimatedAvatar_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetAnimatedAvatar_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAnimatedAvatar_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetAnimatedAvatar_Request} CPlayer_GetAnimatedAvatar_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAnimatedAvatar_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetAnimatedAvatar_Request message.
+         * @function verify
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetAnimatedAvatar_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetAnimatedAvatar_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetAnimatedAvatar_Request} CPlayer_GetAnimatedAvatar_Request
+         */
+        CPlayer_GetAnimatedAvatar_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetAnimatedAvatar_Request)
+                return object;
+            var message = new $root.CPlayer_GetAnimatedAvatar_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetAnimatedAvatar_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @static
+         * @param {CPlayer_GetAnimatedAvatar_Request} message CPlayer_GetAnimatedAvatar_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetAnimatedAvatar_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.language = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetAnimatedAvatar_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetAnimatedAvatar_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetAnimatedAvatar_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetAnimatedAvatar_Request;
+    })();
+    
+    $root.CPlayer_GetAnimatedAvatar_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetAnimatedAvatar_Response.
+         * @exports ICPlayer_GetAnimatedAvatar_Response
+         * @interface ICPlayer_GetAnimatedAvatar_Response
+         * @property {IProfileItem|null} [avatar] CPlayer_GetAnimatedAvatar_Response avatar
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetAnimatedAvatar_Response.
+         * @exports CPlayer_GetAnimatedAvatar_Response
+         * @classdesc Represents a CPlayer_GetAnimatedAvatar_Response.
+         * @implements ICPlayer_GetAnimatedAvatar_Response
+         * @constructor
+         * @param {ICPlayer_GetAnimatedAvatar_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetAnimatedAvatar_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetAnimatedAvatar_Response avatar.
+         * @member {IProfileItem|null|undefined} avatar
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @instance
+         */
+        CPlayer_GetAnimatedAvatar_Response.prototype.avatar = null;
+    
+        /**
+         * Creates a new CPlayer_GetAnimatedAvatar_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {ICPlayer_GetAnimatedAvatar_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetAnimatedAvatar_Response} CPlayer_GetAnimatedAvatar_Response instance
+         */
+        CPlayer_GetAnimatedAvatar_Response.create = function create(properties) {
+            return new CPlayer_GetAnimatedAvatar_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAnimatedAvatar_Response message. Does not implicitly {@link CPlayer_GetAnimatedAvatar_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {ICPlayer_GetAnimatedAvatar_Response} message CPlayer_GetAnimatedAvatar_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAnimatedAvatar_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.avatar != null && message.hasOwnProperty("avatar"))
+                $root.ProfileItem.encode(message.avatar, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAnimatedAvatar_Response message, length delimited. Does not implicitly {@link CPlayer_GetAnimatedAvatar_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {ICPlayer_GetAnimatedAvatar_Response} message CPlayer_GetAnimatedAvatar_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAnimatedAvatar_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAnimatedAvatar_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetAnimatedAvatar_Response} CPlayer_GetAnimatedAvatar_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAnimatedAvatar_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetAnimatedAvatar_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.avatar = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAnimatedAvatar_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetAnimatedAvatar_Response} CPlayer_GetAnimatedAvatar_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAnimatedAvatar_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetAnimatedAvatar_Response message.
+         * @function verify
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetAnimatedAvatar_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.avatar != null && message.hasOwnProperty("avatar")) {
+                var error = $root.ProfileItem.verify(message.avatar);
+                if (error)
+                    return "avatar." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetAnimatedAvatar_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetAnimatedAvatar_Response} CPlayer_GetAnimatedAvatar_Response
+         */
+        CPlayer_GetAnimatedAvatar_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetAnimatedAvatar_Response)
+                return object;
+            var message = new $root.CPlayer_GetAnimatedAvatar_Response();
+            if (object.avatar != null) {
+                if (typeof object.avatar !== "object")
+                    throw TypeError(".CPlayer_GetAnimatedAvatar_Response.avatar: object expected");
+                message.avatar = $root.ProfileItem.fromObject(object.avatar);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetAnimatedAvatar_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @static
+         * @param {CPlayer_GetAnimatedAvatar_Response} message CPlayer_GetAnimatedAvatar_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetAnimatedAvatar_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.avatar = null;
+            if (message.avatar != null && message.hasOwnProperty("avatar"))
+                object.avatar = $root.ProfileItem.toObject(message.avatar, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetAnimatedAvatar_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetAnimatedAvatar_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetAnimatedAvatar_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetAnimatedAvatar_Response;
+    })();
+    
+    $root.CPlayer_SetAnimatedAvatar_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetAnimatedAvatar_Request.
+         * @exports ICPlayer_SetAnimatedAvatar_Request
+         * @interface ICPlayer_SetAnimatedAvatar_Request
+         * @property {number|Long|null} [communityitemid] CPlayer_SetAnimatedAvatar_Request communityitemid
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetAnimatedAvatar_Request.
+         * @exports CPlayer_SetAnimatedAvatar_Request
+         * @classdesc Represents a CPlayer_SetAnimatedAvatar_Request.
+         * @implements ICPlayer_SetAnimatedAvatar_Request
+         * @constructor
+         * @param {ICPlayer_SetAnimatedAvatar_Request=} [properties] Properties to set
+         */
+        function CPlayer_SetAnimatedAvatar_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_SetAnimatedAvatar_Request communityitemid.
+         * @member {number|Long} communityitemid
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @instance
+         */
+        CPlayer_SetAnimatedAvatar_Request.prototype.communityitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CPlayer_SetAnimatedAvatar_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {ICPlayer_SetAnimatedAvatar_Request=} [properties] Properties to set
+         * @returns {CPlayer_SetAnimatedAvatar_Request} CPlayer_SetAnimatedAvatar_Request instance
+         */
+        CPlayer_SetAnimatedAvatar_Request.create = function create(properties) {
+            return new CPlayer_SetAnimatedAvatar_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAnimatedAvatar_Request message. Does not implicitly {@link CPlayer_SetAnimatedAvatar_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {ICPlayer_SetAnimatedAvatar_Request} message CPlayer_SetAnimatedAvatar_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAnimatedAvatar_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.communityitemid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAnimatedAvatar_Request message, length delimited. Does not implicitly {@link CPlayer_SetAnimatedAvatar_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {ICPlayer_SetAnimatedAvatar_Request} message CPlayer_SetAnimatedAvatar_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAnimatedAvatar_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAnimatedAvatar_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetAnimatedAvatar_Request} CPlayer_SetAnimatedAvatar_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAnimatedAvatar_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetAnimatedAvatar_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.communityitemid = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAnimatedAvatar_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetAnimatedAvatar_Request} CPlayer_SetAnimatedAvatar_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAnimatedAvatar_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetAnimatedAvatar_Request message.
+         * @function verify
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetAnimatedAvatar_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (!$util.isInteger(message.communityitemid) && !(message.communityitemid && $util.isInteger(message.communityitemid.low) && $util.isInteger(message.communityitemid.high)))
+                    return "communityitemid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetAnimatedAvatar_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetAnimatedAvatar_Request} CPlayer_SetAnimatedAvatar_Request
+         */
+        CPlayer_SetAnimatedAvatar_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetAnimatedAvatar_Request)
+                return object;
+            var message = new $root.CPlayer_SetAnimatedAvatar_Request();
+            if (object.communityitemid != null)
+                if ($util.Long)
+                    (message.communityitemid = $util.Long.fromValue(object.communityitemid)).unsigned = true;
+                else if (typeof object.communityitemid === "string")
+                    message.communityitemid = parseInt(object.communityitemid, 10);
+                else if (typeof object.communityitemid === "number")
+                    message.communityitemid = object.communityitemid;
+                else if (typeof object.communityitemid === "object")
+                    message.communityitemid = new $util.LongBits(object.communityitemid.low >>> 0, object.communityitemid.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetAnimatedAvatar_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @static
+         * @param {CPlayer_SetAnimatedAvatar_Request} message CPlayer_SetAnimatedAvatar_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetAnimatedAvatar_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.communityitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.communityitemid = options.longs === String ? "0" : 0;
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (typeof message.communityitemid === "number")
+                    object.communityitemid = options.longs === String ? String(message.communityitemid) : message.communityitemid;
+                else
+                    object.communityitemid = options.longs === String ? $util.Long.prototype.toString.call(message.communityitemid) : options.longs === Number ? new $util.LongBits(message.communityitemid.low >>> 0, message.communityitemid.high >>> 0).toNumber(true) : message.communityitemid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_SetAnimatedAvatar_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetAnimatedAvatar_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetAnimatedAvatar_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetAnimatedAvatar_Request;
+    })();
+    
+    $root.CPlayer_SetAnimatedAvatar_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetAnimatedAvatar_Response.
+         * @exports ICPlayer_SetAnimatedAvatar_Response
+         * @interface ICPlayer_SetAnimatedAvatar_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetAnimatedAvatar_Response.
+         * @exports CPlayer_SetAnimatedAvatar_Response
+         * @classdesc Represents a CPlayer_SetAnimatedAvatar_Response.
+         * @implements ICPlayer_SetAnimatedAvatar_Response
+         * @constructor
+         * @param {ICPlayer_SetAnimatedAvatar_Response=} [properties] Properties to set
+         */
+        function CPlayer_SetAnimatedAvatar_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_SetAnimatedAvatar_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {ICPlayer_SetAnimatedAvatar_Response=} [properties] Properties to set
+         * @returns {CPlayer_SetAnimatedAvatar_Response} CPlayer_SetAnimatedAvatar_Response instance
+         */
+        CPlayer_SetAnimatedAvatar_Response.create = function create(properties) {
+            return new CPlayer_SetAnimatedAvatar_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAnimatedAvatar_Response message. Does not implicitly {@link CPlayer_SetAnimatedAvatar_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {ICPlayer_SetAnimatedAvatar_Response} message CPlayer_SetAnimatedAvatar_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAnimatedAvatar_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetAnimatedAvatar_Response message, length delimited. Does not implicitly {@link CPlayer_SetAnimatedAvatar_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {ICPlayer_SetAnimatedAvatar_Response} message CPlayer_SetAnimatedAvatar_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetAnimatedAvatar_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAnimatedAvatar_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetAnimatedAvatar_Response} CPlayer_SetAnimatedAvatar_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAnimatedAvatar_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetAnimatedAvatar_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetAnimatedAvatar_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetAnimatedAvatar_Response} CPlayer_SetAnimatedAvatar_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetAnimatedAvatar_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetAnimatedAvatar_Response message.
+         * @function verify
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetAnimatedAvatar_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetAnimatedAvatar_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetAnimatedAvatar_Response} CPlayer_SetAnimatedAvatar_Response
+         */
+        CPlayer_SetAnimatedAvatar_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetAnimatedAvatar_Response)
+                return object;
+            return new $root.CPlayer_SetAnimatedAvatar_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetAnimatedAvatar_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @static
+         * @param {CPlayer_SetAnimatedAvatar_Response} message CPlayer_SetAnimatedAvatar_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetAnimatedAvatar_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_SetAnimatedAvatar_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetAnimatedAvatar_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetAnimatedAvatar_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetAnimatedAvatar_Response;
+    })();
+    
+    $root.CPlayer_GetProfileItemsOwned_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetProfileItemsOwned_Request.
+         * @exports ICPlayer_GetProfileItemsOwned_Request
+         * @interface ICPlayer_GetProfileItemsOwned_Request
+         * @property {string|null} [language] CPlayer_GetProfileItemsOwned_Request language
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetProfileItemsOwned_Request.
+         * @exports CPlayer_GetProfileItemsOwned_Request
+         * @classdesc Represents a CPlayer_GetProfileItemsOwned_Request.
+         * @implements ICPlayer_GetProfileItemsOwned_Request
+         * @constructor
+         * @param {ICPlayer_GetProfileItemsOwned_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetProfileItemsOwned_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetProfileItemsOwned_Request language.
+         * @member {string} language
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @instance
+         */
+        CPlayer_GetProfileItemsOwned_Request.prototype.language = "";
+    
+        /**
+         * Creates a new CPlayer_GetProfileItemsOwned_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {ICPlayer_GetProfileItemsOwned_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetProfileItemsOwned_Request} CPlayer_GetProfileItemsOwned_Request instance
+         */
+        CPlayer_GetProfileItemsOwned_Request.create = function create(properties) {
+            return new CPlayer_GetProfileItemsOwned_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsOwned_Request message. Does not implicitly {@link CPlayer_GetProfileItemsOwned_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {ICPlayer_GetProfileItemsOwned_Request} message CPlayer_GetProfileItemsOwned_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsOwned_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsOwned_Request message, length delimited. Does not implicitly {@link CPlayer_GetProfileItemsOwned_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {ICPlayer_GetProfileItemsOwned_Request} message CPlayer_GetProfileItemsOwned_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsOwned_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsOwned_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetProfileItemsOwned_Request} CPlayer_GetProfileItemsOwned_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsOwned_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetProfileItemsOwned_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsOwned_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetProfileItemsOwned_Request} CPlayer_GetProfileItemsOwned_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsOwned_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetProfileItemsOwned_Request message.
+         * @function verify
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetProfileItemsOwned_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetProfileItemsOwned_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetProfileItemsOwned_Request} CPlayer_GetProfileItemsOwned_Request
+         */
+        CPlayer_GetProfileItemsOwned_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetProfileItemsOwned_Request)
+                return object;
+            var message = new $root.CPlayer_GetProfileItemsOwned_Request();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetProfileItemsOwned_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @static
+         * @param {CPlayer_GetProfileItemsOwned_Request} message CPlayer_GetProfileItemsOwned_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetProfileItemsOwned_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.language = "";
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetProfileItemsOwned_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetProfileItemsOwned_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetProfileItemsOwned_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetProfileItemsOwned_Request;
+    })();
+    
+    $root.CPlayer_GetProfileItemsOwned_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetProfileItemsOwned_Response.
+         * @exports ICPlayer_GetProfileItemsOwned_Response
+         * @interface ICPlayer_GetProfileItemsOwned_Response
+         * @property {Array.<IProfileItem>|null} [profile_backgrounds] CPlayer_GetProfileItemsOwned_Response profile_backgrounds
+         * @property {Array.<IProfileItem>|null} [mini_profile_backgrounds] CPlayer_GetProfileItemsOwned_Response mini_profile_backgrounds
+         * @property {Array.<IProfileItem>|null} [avatar_frames] CPlayer_GetProfileItemsOwned_Response avatar_frames
+         * @property {Array.<IProfileItem>|null} [animated_avatars] CPlayer_GetProfileItemsOwned_Response animated_avatars
+         * @property {Array.<IProfileItem>|null} [profile_modifiers] CPlayer_GetProfileItemsOwned_Response profile_modifiers
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetProfileItemsOwned_Response.
+         * @exports CPlayer_GetProfileItemsOwned_Response
+         * @classdesc Represents a CPlayer_GetProfileItemsOwned_Response.
+         * @implements ICPlayer_GetProfileItemsOwned_Response
+         * @constructor
+         * @param {ICPlayer_GetProfileItemsOwned_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetProfileItemsOwned_Response(properties) {
+            this.profile_backgrounds = [];
+            this.mini_profile_backgrounds = [];
+            this.avatar_frames = [];
+            this.animated_avatars = [];
+            this.profile_modifiers = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetProfileItemsOwned_Response profile_backgrounds.
+         * @member {Array.<IProfileItem>} profile_backgrounds
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsOwned_Response.prototype.profile_backgrounds = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetProfileItemsOwned_Response mini_profile_backgrounds.
+         * @member {Array.<IProfileItem>} mini_profile_backgrounds
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsOwned_Response.prototype.mini_profile_backgrounds = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetProfileItemsOwned_Response avatar_frames.
+         * @member {Array.<IProfileItem>} avatar_frames
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsOwned_Response.prototype.avatar_frames = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetProfileItemsOwned_Response animated_avatars.
+         * @member {Array.<IProfileItem>} animated_avatars
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsOwned_Response.prototype.animated_avatars = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetProfileItemsOwned_Response profile_modifiers.
+         * @member {Array.<IProfileItem>} profile_modifiers
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsOwned_Response.prototype.profile_modifiers = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetProfileItemsOwned_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {ICPlayer_GetProfileItemsOwned_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetProfileItemsOwned_Response} CPlayer_GetProfileItemsOwned_Response instance
+         */
+        CPlayer_GetProfileItemsOwned_Response.create = function create(properties) {
+            return new CPlayer_GetProfileItemsOwned_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsOwned_Response message. Does not implicitly {@link CPlayer_GetProfileItemsOwned_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {ICPlayer_GetProfileItemsOwned_Response} message CPlayer_GetProfileItemsOwned_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsOwned_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.profile_backgrounds != null && message.profile_backgrounds.length)
+                for (var i = 0; i < message.profile_backgrounds.length; ++i)
+                    $root.ProfileItem.encode(message.profile_backgrounds[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.mini_profile_backgrounds != null && message.mini_profile_backgrounds.length)
+                for (var i = 0; i < message.mini_profile_backgrounds.length; ++i)
+                    $root.ProfileItem.encode(message.mini_profile_backgrounds[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.avatar_frames != null && message.avatar_frames.length)
+                for (var i = 0; i < message.avatar_frames.length; ++i)
+                    $root.ProfileItem.encode(message.avatar_frames[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.animated_avatars != null && message.animated_avatars.length)
+                for (var i = 0; i < message.animated_avatars.length; ++i)
+                    $root.ProfileItem.encode(message.animated_avatars[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.profile_modifiers != null && message.profile_modifiers.length)
+                for (var i = 0; i < message.profile_modifiers.length; ++i)
+                    $root.ProfileItem.encode(message.profile_modifiers[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsOwned_Response message, length delimited. Does not implicitly {@link CPlayer_GetProfileItemsOwned_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {ICPlayer_GetProfileItemsOwned_Response} message CPlayer_GetProfileItemsOwned_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsOwned_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsOwned_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetProfileItemsOwned_Response} CPlayer_GetProfileItemsOwned_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsOwned_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetProfileItemsOwned_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.profile_backgrounds && message.profile_backgrounds.length))
+                        message.profile_backgrounds = [];
+                    message.profile_backgrounds.push($root.ProfileItem.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.mini_profile_backgrounds && message.mini_profile_backgrounds.length))
+                        message.mini_profile_backgrounds = [];
+                    message.mini_profile_backgrounds.push($root.ProfileItem.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    if (!(message.avatar_frames && message.avatar_frames.length))
+                        message.avatar_frames = [];
+                    message.avatar_frames.push($root.ProfileItem.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    if (!(message.animated_avatars && message.animated_avatars.length))
+                        message.animated_avatars = [];
+                    message.animated_avatars.push($root.ProfileItem.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    if (!(message.profile_modifiers && message.profile_modifiers.length))
+                        message.profile_modifiers = [];
+                    message.profile_modifiers.push($root.ProfileItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsOwned_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetProfileItemsOwned_Response} CPlayer_GetProfileItemsOwned_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsOwned_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetProfileItemsOwned_Response message.
+         * @function verify
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetProfileItemsOwned_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.profile_backgrounds != null && message.hasOwnProperty("profile_backgrounds")) {
+                if (!Array.isArray(message.profile_backgrounds))
+                    return "profile_backgrounds: array expected";
+                for (var i = 0; i < message.profile_backgrounds.length; ++i) {
+                    var error = $root.ProfileItem.verify(message.profile_backgrounds[i]);
+                    if (error)
+                        return "profile_backgrounds." + error;
+                }
+            }
+            if (message.mini_profile_backgrounds != null && message.hasOwnProperty("mini_profile_backgrounds")) {
+                if (!Array.isArray(message.mini_profile_backgrounds))
+                    return "mini_profile_backgrounds: array expected";
+                for (var i = 0; i < message.mini_profile_backgrounds.length; ++i) {
+                    var error = $root.ProfileItem.verify(message.mini_profile_backgrounds[i]);
+                    if (error)
+                        return "mini_profile_backgrounds." + error;
+                }
+            }
+            if (message.avatar_frames != null && message.hasOwnProperty("avatar_frames")) {
+                if (!Array.isArray(message.avatar_frames))
+                    return "avatar_frames: array expected";
+                for (var i = 0; i < message.avatar_frames.length; ++i) {
+                    var error = $root.ProfileItem.verify(message.avatar_frames[i]);
+                    if (error)
+                        return "avatar_frames." + error;
+                }
+            }
+            if (message.animated_avatars != null && message.hasOwnProperty("animated_avatars")) {
+                if (!Array.isArray(message.animated_avatars))
+                    return "animated_avatars: array expected";
+                for (var i = 0; i < message.animated_avatars.length; ++i) {
+                    var error = $root.ProfileItem.verify(message.animated_avatars[i]);
+                    if (error)
+                        return "animated_avatars." + error;
+                }
+            }
+            if (message.profile_modifiers != null && message.hasOwnProperty("profile_modifiers")) {
+                if (!Array.isArray(message.profile_modifiers))
+                    return "profile_modifiers: array expected";
+                for (var i = 0; i < message.profile_modifiers.length; ++i) {
+                    var error = $root.ProfileItem.verify(message.profile_modifiers[i]);
+                    if (error)
+                        return "profile_modifiers." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetProfileItemsOwned_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetProfileItemsOwned_Response} CPlayer_GetProfileItemsOwned_Response
+         */
+        CPlayer_GetProfileItemsOwned_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetProfileItemsOwned_Response)
+                return object;
+            var message = new $root.CPlayer_GetProfileItemsOwned_Response();
+            if (object.profile_backgrounds) {
+                if (!Array.isArray(object.profile_backgrounds))
+                    throw TypeError(".CPlayer_GetProfileItemsOwned_Response.profile_backgrounds: array expected");
+                message.profile_backgrounds = [];
+                for (var i = 0; i < object.profile_backgrounds.length; ++i) {
+                    if (typeof object.profile_backgrounds[i] !== "object")
+                        throw TypeError(".CPlayer_GetProfileItemsOwned_Response.profile_backgrounds: object expected");
+                    message.profile_backgrounds[i] = $root.ProfileItem.fromObject(object.profile_backgrounds[i]);
+                }
+            }
+            if (object.mini_profile_backgrounds) {
+                if (!Array.isArray(object.mini_profile_backgrounds))
+                    throw TypeError(".CPlayer_GetProfileItemsOwned_Response.mini_profile_backgrounds: array expected");
+                message.mini_profile_backgrounds = [];
+                for (var i = 0; i < object.mini_profile_backgrounds.length; ++i) {
+                    if (typeof object.mini_profile_backgrounds[i] !== "object")
+                        throw TypeError(".CPlayer_GetProfileItemsOwned_Response.mini_profile_backgrounds: object expected");
+                    message.mini_profile_backgrounds[i] = $root.ProfileItem.fromObject(object.mini_profile_backgrounds[i]);
+                }
+            }
+            if (object.avatar_frames) {
+                if (!Array.isArray(object.avatar_frames))
+                    throw TypeError(".CPlayer_GetProfileItemsOwned_Response.avatar_frames: array expected");
+                message.avatar_frames = [];
+                for (var i = 0; i < object.avatar_frames.length; ++i) {
+                    if (typeof object.avatar_frames[i] !== "object")
+                        throw TypeError(".CPlayer_GetProfileItemsOwned_Response.avatar_frames: object expected");
+                    message.avatar_frames[i] = $root.ProfileItem.fromObject(object.avatar_frames[i]);
+                }
+            }
+            if (object.animated_avatars) {
+                if (!Array.isArray(object.animated_avatars))
+                    throw TypeError(".CPlayer_GetProfileItemsOwned_Response.animated_avatars: array expected");
+                message.animated_avatars = [];
+                for (var i = 0; i < object.animated_avatars.length; ++i) {
+                    if (typeof object.animated_avatars[i] !== "object")
+                        throw TypeError(".CPlayer_GetProfileItemsOwned_Response.animated_avatars: object expected");
+                    message.animated_avatars[i] = $root.ProfileItem.fromObject(object.animated_avatars[i]);
+                }
+            }
+            if (object.profile_modifiers) {
+                if (!Array.isArray(object.profile_modifiers))
+                    throw TypeError(".CPlayer_GetProfileItemsOwned_Response.profile_modifiers: array expected");
+                message.profile_modifiers = [];
+                for (var i = 0; i < object.profile_modifiers.length; ++i) {
+                    if (typeof object.profile_modifiers[i] !== "object")
+                        throw TypeError(".CPlayer_GetProfileItemsOwned_Response.profile_modifiers: object expected");
+                    message.profile_modifiers[i] = $root.ProfileItem.fromObject(object.profile_modifiers[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetProfileItemsOwned_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @static
+         * @param {CPlayer_GetProfileItemsOwned_Response} message CPlayer_GetProfileItemsOwned_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetProfileItemsOwned_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.profile_backgrounds = [];
+                object.mini_profile_backgrounds = [];
+                object.avatar_frames = [];
+                object.animated_avatars = [];
+                object.profile_modifiers = [];
+            }
+            if (message.profile_backgrounds && message.profile_backgrounds.length) {
+                object.profile_backgrounds = [];
+                for (var j = 0; j < message.profile_backgrounds.length; ++j)
+                    object.profile_backgrounds[j] = $root.ProfileItem.toObject(message.profile_backgrounds[j], options);
+            }
+            if (message.mini_profile_backgrounds && message.mini_profile_backgrounds.length) {
+                object.mini_profile_backgrounds = [];
+                for (var j = 0; j < message.mini_profile_backgrounds.length; ++j)
+                    object.mini_profile_backgrounds[j] = $root.ProfileItem.toObject(message.mini_profile_backgrounds[j], options);
+            }
+            if (message.avatar_frames && message.avatar_frames.length) {
+                object.avatar_frames = [];
+                for (var j = 0; j < message.avatar_frames.length; ++j)
+                    object.avatar_frames[j] = $root.ProfileItem.toObject(message.avatar_frames[j], options);
+            }
+            if (message.animated_avatars && message.animated_avatars.length) {
+                object.animated_avatars = [];
+                for (var j = 0; j < message.animated_avatars.length; ++j)
+                    object.animated_avatars[j] = $root.ProfileItem.toObject(message.animated_avatars[j], options);
+            }
+            if (message.profile_modifiers && message.profile_modifiers.length) {
+                object.profile_modifiers = [];
+                for (var j = 0; j < message.profile_modifiers.length; ++j)
+                    object.profile_modifiers[j] = $root.ProfileItem.toObject(message.profile_modifiers[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetProfileItemsOwned_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetProfileItemsOwned_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetProfileItemsOwned_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetProfileItemsOwned_Response;
+    })();
+    
+    $root.CPlayer_GetProfileItemsEquipped_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetProfileItemsEquipped_Request.
+         * @exports ICPlayer_GetProfileItemsEquipped_Request
+         * @interface ICPlayer_GetProfileItemsEquipped_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetProfileItemsEquipped_Request steamid
+         * @property {string|null} [language] CPlayer_GetProfileItemsEquipped_Request language
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetProfileItemsEquipped_Request.
+         * @exports CPlayer_GetProfileItemsEquipped_Request
+         * @classdesc Represents a CPlayer_GetProfileItemsEquipped_Request.
+         * @implements ICPlayer_GetProfileItemsEquipped_Request
+         * @constructor
+         * @param {ICPlayer_GetProfileItemsEquipped_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetProfileItemsEquipped_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetProfileItemsEquipped_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @instance
+         */
+        CPlayer_GetProfileItemsEquipped_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPlayer_GetProfileItemsEquipped_Request language.
+         * @member {string} language
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @instance
+         */
+        CPlayer_GetProfileItemsEquipped_Request.prototype.language = "";
+    
+        /**
+         * Creates a new CPlayer_GetProfileItemsEquipped_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {ICPlayer_GetProfileItemsEquipped_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetProfileItemsEquipped_Request} CPlayer_GetProfileItemsEquipped_Request instance
+         */
+        CPlayer_GetProfileItemsEquipped_Request.create = function create(properties) {
+            return new CPlayer_GetProfileItemsEquipped_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsEquipped_Request message. Does not implicitly {@link CPlayer_GetProfileItemsEquipped_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {ICPlayer_GetProfileItemsEquipped_Request} message CPlayer_GetProfileItemsEquipped_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsEquipped_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsEquipped_Request message, length delimited. Does not implicitly {@link CPlayer_GetProfileItemsEquipped_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {ICPlayer_GetProfileItemsEquipped_Request} message CPlayer_GetProfileItemsEquipped_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsEquipped_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsEquipped_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetProfileItemsEquipped_Request} CPlayer_GetProfileItemsEquipped_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsEquipped_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetProfileItemsEquipped_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsEquipped_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetProfileItemsEquipped_Request} CPlayer_GetProfileItemsEquipped_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsEquipped_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetProfileItemsEquipped_Request message.
+         * @function verify
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetProfileItemsEquipped_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetProfileItemsEquipped_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetProfileItemsEquipped_Request} CPlayer_GetProfileItemsEquipped_Request
+         */
+        CPlayer_GetProfileItemsEquipped_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetProfileItemsEquipped_Request)
+                return object;
+            var message = new $root.CPlayer_GetProfileItemsEquipped_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetProfileItemsEquipped_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @static
+         * @param {CPlayer_GetProfileItemsEquipped_Request} message CPlayer_GetProfileItemsEquipped_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetProfileItemsEquipped_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.language = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetProfileItemsEquipped_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetProfileItemsEquipped_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetProfileItemsEquipped_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetProfileItemsEquipped_Request;
+    })();
+    
+    $root.CPlayer_GetProfileItemsEquipped_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetProfileItemsEquipped_Response.
+         * @exports ICPlayer_GetProfileItemsEquipped_Response
+         * @interface ICPlayer_GetProfileItemsEquipped_Response
+         * @property {IProfileItem|null} [profile_background] CPlayer_GetProfileItemsEquipped_Response profile_background
+         * @property {IProfileItem|null} [mini_profile_background] CPlayer_GetProfileItemsEquipped_Response mini_profile_background
+         * @property {IProfileItem|null} [avatar_frame] CPlayer_GetProfileItemsEquipped_Response avatar_frame
+         * @property {IProfileItem|null} [animated_avatar] CPlayer_GetProfileItemsEquipped_Response animated_avatar
+         * @property {IProfileItem|null} [profile_modifier] CPlayer_GetProfileItemsEquipped_Response profile_modifier
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetProfileItemsEquipped_Response.
+         * @exports CPlayer_GetProfileItemsEquipped_Response
+         * @classdesc Represents a CPlayer_GetProfileItemsEquipped_Response.
+         * @implements ICPlayer_GetProfileItemsEquipped_Response
+         * @constructor
+         * @param {ICPlayer_GetProfileItemsEquipped_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetProfileItemsEquipped_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetProfileItemsEquipped_Response profile_background.
+         * @member {IProfileItem|null|undefined} profile_background
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsEquipped_Response.prototype.profile_background = null;
+    
+        /**
+         * CPlayer_GetProfileItemsEquipped_Response mini_profile_background.
+         * @member {IProfileItem|null|undefined} mini_profile_background
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsEquipped_Response.prototype.mini_profile_background = null;
+    
+        /**
+         * CPlayer_GetProfileItemsEquipped_Response avatar_frame.
+         * @member {IProfileItem|null|undefined} avatar_frame
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsEquipped_Response.prototype.avatar_frame = null;
+    
+        /**
+         * CPlayer_GetProfileItemsEquipped_Response animated_avatar.
+         * @member {IProfileItem|null|undefined} animated_avatar
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsEquipped_Response.prototype.animated_avatar = null;
+    
+        /**
+         * CPlayer_GetProfileItemsEquipped_Response profile_modifier.
+         * @member {IProfileItem|null|undefined} profile_modifier
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @instance
+         */
+        CPlayer_GetProfileItemsEquipped_Response.prototype.profile_modifier = null;
+    
+        /**
+         * Creates a new CPlayer_GetProfileItemsEquipped_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {ICPlayer_GetProfileItemsEquipped_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetProfileItemsEquipped_Response} CPlayer_GetProfileItemsEquipped_Response instance
+         */
+        CPlayer_GetProfileItemsEquipped_Response.create = function create(properties) {
+            return new CPlayer_GetProfileItemsEquipped_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsEquipped_Response message. Does not implicitly {@link CPlayer_GetProfileItemsEquipped_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {ICPlayer_GetProfileItemsEquipped_Response} message CPlayer_GetProfileItemsEquipped_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsEquipped_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.profile_background != null && message.hasOwnProperty("profile_background"))
+                $root.ProfileItem.encode(message.profile_background, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.mini_profile_background != null && message.hasOwnProperty("mini_profile_background"))
+                $root.ProfileItem.encode(message.mini_profile_background, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.avatar_frame != null && message.hasOwnProperty("avatar_frame"))
+                $root.ProfileItem.encode(message.avatar_frame, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.animated_avatar != null && message.hasOwnProperty("animated_avatar"))
+                $root.ProfileItem.encode(message.animated_avatar, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.profile_modifier != null && message.hasOwnProperty("profile_modifier"))
+                $root.ProfileItem.encode(message.profile_modifier, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetProfileItemsEquipped_Response message, length delimited. Does not implicitly {@link CPlayer_GetProfileItemsEquipped_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {ICPlayer_GetProfileItemsEquipped_Response} message CPlayer_GetProfileItemsEquipped_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetProfileItemsEquipped_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsEquipped_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetProfileItemsEquipped_Response} CPlayer_GetProfileItemsEquipped_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsEquipped_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetProfileItemsEquipped_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.profile_background = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.mini_profile_background = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.avatar_frame = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.animated_avatar = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    message.profile_modifier = $root.ProfileItem.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetProfileItemsEquipped_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetProfileItemsEquipped_Response} CPlayer_GetProfileItemsEquipped_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetProfileItemsEquipped_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetProfileItemsEquipped_Response message.
+         * @function verify
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetProfileItemsEquipped_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.profile_background != null && message.hasOwnProperty("profile_background")) {
+                var error = $root.ProfileItem.verify(message.profile_background);
+                if (error)
+                    return "profile_background." + error;
+            }
+            if (message.mini_profile_background != null && message.hasOwnProperty("mini_profile_background")) {
+                var error = $root.ProfileItem.verify(message.mini_profile_background);
+                if (error)
+                    return "mini_profile_background." + error;
+            }
+            if (message.avatar_frame != null && message.hasOwnProperty("avatar_frame")) {
+                var error = $root.ProfileItem.verify(message.avatar_frame);
+                if (error)
+                    return "avatar_frame." + error;
+            }
+            if (message.animated_avatar != null && message.hasOwnProperty("animated_avatar")) {
+                var error = $root.ProfileItem.verify(message.animated_avatar);
+                if (error)
+                    return "animated_avatar." + error;
+            }
+            if (message.profile_modifier != null && message.hasOwnProperty("profile_modifier")) {
+                var error = $root.ProfileItem.verify(message.profile_modifier);
+                if (error)
+                    return "profile_modifier." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetProfileItemsEquipped_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetProfileItemsEquipped_Response} CPlayer_GetProfileItemsEquipped_Response
+         */
+        CPlayer_GetProfileItemsEquipped_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetProfileItemsEquipped_Response)
+                return object;
+            var message = new $root.CPlayer_GetProfileItemsEquipped_Response();
+            if (object.profile_background != null) {
+                if (typeof object.profile_background !== "object")
+                    throw TypeError(".CPlayer_GetProfileItemsEquipped_Response.profile_background: object expected");
+                message.profile_background = $root.ProfileItem.fromObject(object.profile_background);
+            }
+            if (object.mini_profile_background != null) {
+                if (typeof object.mini_profile_background !== "object")
+                    throw TypeError(".CPlayer_GetProfileItemsEquipped_Response.mini_profile_background: object expected");
+                message.mini_profile_background = $root.ProfileItem.fromObject(object.mini_profile_background);
+            }
+            if (object.avatar_frame != null) {
+                if (typeof object.avatar_frame !== "object")
+                    throw TypeError(".CPlayer_GetProfileItemsEquipped_Response.avatar_frame: object expected");
+                message.avatar_frame = $root.ProfileItem.fromObject(object.avatar_frame);
+            }
+            if (object.animated_avatar != null) {
+                if (typeof object.animated_avatar !== "object")
+                    throw TypeError(".CPlayer_GetProfileItemsEquipped_Response.animated_avatar: object expected");
+                message.animated_avatar = $root.ProfileItem.fromObject(object.animated_avatar);
+            }
+            if (object.profile_modifier != null) {
+                if (typeof object.profile_modifier !== "object")
+                    throw TypeError(".CPlayer_GetProfileItemsEquipped_Response.profile_modifier: object expected");
+                message.profile_modifier = $root.ProfileItem.fromObject(object.profile_modifier);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetProfileItemsEquipped_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @static
+         * @param {CPlayer_GetProfileItemsEquipped_Response} message CPlayer_GetProfileItemsEquipped_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetProfileItemsEquipped_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.profile_background = null;
+                object.mini_profile_background = null;
+                object.avatar_frame = null;
+                object.animated_avatar = null;
+                object.profile_modifier = null;
+            }
+            if (message.profile_background != null && message.hasOwnProperty("profile_background"))
+                object.profile_background = $root.ProfileItem.toObject(message.profile_background, options);
+            if (message.mini_profile_background != null && message.hasOwnProperty("mini_profile_background"))
+                object.mini_profile_background = $root.ProfileItem.toObject(message.mini_profile_background, options);
+            if (message.avatar_frame != null && message.hasOwnProperty("avatar_frame"))
+                object.avatar_frame = $root.ProfileItem.toObject(message.avatar_frame, options);
+            if (message.animated_avatar != null && message.hasOwnProperty("animated_avatar"))
+                object.animated_avatar = $root.ProfileItem.toObject(message.animated_avatar, options);
+            if (message.profile_modifier != null && message.hasOwnProperty("profile_modifier"))
+                object.profile_modifier = $root.ProfileItem.toObject(message.profile_modifier, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetProfileItemsEquipped_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetProfileItemsEquipped_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetProfileItemsEquipped_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetProfileItemsEquipped_Response;
+    })();
+    
+    $root.CPlayer_SetEquippedProfileItemFlags_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetEquippedProfileItemFlags_Request.
+         * @exports ICPlayer_SetEquippedProfileItemFlags_Request
+         * @interface ICPlayer_SetEquippedProfileItemFlags_Request
+         * @property {number|Long|null} [communityitemid] CPlayer_SetEquippedProfileItemFlags_Request communityitemid
+         * @property {number|null} [flags] CPlayer_SetEquippedProfileItemFlags_Request flags
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetEquippedProfileItemFlags_Request.
+         * @exports CPlayer_SetEquippedProfileItemFlags_Request
+         * @classdesc Represents a CPlayer_SetEquippedProfileItemFlags_Request.
+         * @implements ICPlayer_SetEquippedProfileItemFlags_Request
+         * @constructor
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Request=} [properties] Properties to set
+         */
+        function CPlayer_SetEquippedProfileItemFlags_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_SetEquippedProfileItemFlags_Request communityitemid.
+         * @member {number|Long} communityitemid
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @instance
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.prototype.communityitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CPlayer_SetEquippedProfileItemFlags_Request flags.
+         * @member {number} flags
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @instance
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.prototype.flags = 0;
+    
+        /**
+         * Creates a new CPlayer_SetEquippedProfileItemFlags_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Request=} [properties] Properties to set
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Request} CPlayer_SetEquippedProfileItemFlags_Request instance
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.create = function create(properties) {
+            return new CPlayer_SetEquippedProfileItemFlags_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetEquippedProfileItemFlags_Request message. Does not implicitly {@link CPlayer_SetEquippedProfileItemFlags_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Request} message CPlayer_SetEquippedProfileItemFlags_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.communityitemid);
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.flags);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetEquippedProfileItemFlags_Request message, length delimited. Does not implicitly {@link CPlayer_SetEquippedProfileItemFlags_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Request} message CPlayer_SetEquippedProfileItemFlags_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetEquippedProfileItemFlags_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Request} CPlayer_SetEquippedProfileItemFlags_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetEquippedProfileItemFlags_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.communityitemid = reader.uint64();
+                    break;
+                case 2:
+                    message.flags = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetEquippedProfileItemFlags_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Request} CPlayer_SetEquippedProfileItemFlags_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetEquippedProfileItemFlags_Request message.
+         * @function verify
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (!$util.isInteger(message.communityitemid) && !(message.communityitemid && $util.isInteger(message.communityitemid.low) && $util.isInteger(message.communityitemid.high)))
+                    return "communityitemid: integer|Long expected";
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                if (!$util.isInteger(message.flags))
+                    return "flags: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetEquippedProfileItemFlags_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Request} CPlayer_SetEquippedProfileItemFlags_Request
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetEquippedProfileItemFlags_Request)
+                return object;
+            var message = new $root.CPlayer_SetEquippedProfileItemFlags_Request();
+            if (object.communityitemid != null)
+                if ($util.Long)
+                    (message.communityitemid = $util.Long.fromValue(object.communityitemid)).unsigned = true;
+                else if (typeof object.communityitemid === "string")
+                    message.communityitemid = parseInt(object.communityitemid, 10);
+                else if (typeof object.communityitemid === "number")
+                    message.communityitemid = object.communityitemid;
+                else if (typeof object.communityitemid === "object")
+                    message.communityitemid = new $util.LongBits(object.communityitemid.low >>> 0, object.communityitemid.high >>> 0).toNumber(true);
+            if (object.flags != null)
+                message.flags = object.flags >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetEquippedProfileItemFlags_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @static
+         * @param {CPlayer_SetEquippedProfileItemFlags_Request} message CPlayer_SetEquippedProfileItemFlags_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.communityitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.communityitemid = options.longs === String ? "0" : 0;
+                object.flags = 0;
+            }
+            if (message.communityitemid != null && message.hasOwnProperty("communityitemid"))
+                if (typeof message.communityitemid === "number")
+                    object.communityitemid = options.longs === String ? String(message.communityitemid) : message.communityitemid;
+                else
+                    object.communityitemid = options.longs === String ? $util.Long.prototype.toString.call(message.communityitemid) : options.longs === Number ? new $util.LongBits(message.communityitemid.low >>> 0, message.communityitemid.high >>> 0).toNumber(true) : message.communityitemid;
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                object.flags = message.flags;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_SetEquippedProfileItemFlags_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetEquippedProfileItemFlags_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetEquippedProfileItemFlags_Request;
+    })();
+    
+    $root.CPlayer_SetEquippedProfileItemFlags_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetEquippedProfileItemFlags_Response.
+         * @exports ICPlayer_SetEquippedProfileItemFlags_Response
+         * @interface ICPlayer_SetEquippedProfileItemFlags_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetEquippedProfileItemFlags_Response.
+         * @exports CPlayer_SetEquippedProfileItemFlags_Response
+         * @classdesc Represents a CPlayer_SetEquippedProfileItemFlags_Response.
+         * @implements ICPlayer_SetEquippedProfileItemFlags_Response
+         * @constructor
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Response=} [properties] Properties to set
+         */
+        function CPlayer_SetEquippedProfileItemFlags_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_SetEquippedProfileItemFlags_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Response=} [properties] Properties to set
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Response} CPlayer_SetEquippedProfileItemFlags_Response instance
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.create = function create(properties) {
+            return new CPlayer_SetEquippedProfileItemFlags_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetEquippedProfileItemFlags_Response message. Does not implicitly {@link CPlayer_SetEquippedProfileItemFlags_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Response} message CPlayer_SetEquippedProfileItemFlags_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetEquippedProfileItemFlags_Response message, length delimited. Does not implicitly {@link CPlayer_SetEquippedProfileItemFlags_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Response} message CPlayer_SetEquippedProfileItemFlags_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetEquippedProfileItemFlags_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Response} CPlayer_SetEquippedProfileItemFlags_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetEquippedProfileItemFlags_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetEquippedProfileItemFlags_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Response} CPlayer_SetEquippedProfileItemFlags_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetEquippedProfileItemFlags_Response message.
+         * @function verify
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetEquippedProfileItemFlags_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetEquippedProfileItemFlags_Response} CPlayer_SetEquippedProfileItemFlags_Response
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetEquippedProfileItemFlags_Response)
+                return object;
+            return new $root.CPlayer_SetEquippedProfileItemFlags_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetEquippedProfileItemFlags_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @static
+         * @param {CPlayer_SetEquippedProfileItemFlags_Response} message CPlayer_SetEquippedProfileItemFlags_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_SetEquippedProfileItemFlags_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetEquippedProfileItemFlags_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetEquippedProfileItemFlags_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetEquippedProfileItemFlags_Response;
+    })();
+    
     $root.CPlayer_GetEmoticonList_Request = (function() {
     
         /**
@@ -3069,6 +10776,780 @@
         })();
     
         return CPlayer_GetEmoticonList_Response;
+    })();
+    
+    $root.CPlayer_GetAchievementsProgress_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetAchievementsProgress_Request.
+         * @exports ICPlayer_GetAchievementsProgress_Request
+         * @interface ICPlayer_GetAchievementsProgress_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetAchievementsProgress_Request steamid
+         * @property {string|null} [language] CPlayer_GetAchievementsProgress_Request language
+         * @property {Array.<number>|null} [appids] CPlayer_GetAchievementsProgress_Request appids
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetAchievementsProgress_Request.
+         * @exports CPlayer_GetAchievementsProgress_Request
+         * @classdesc Represents a CPlayer_GetAchievementsProgress_Request.
+         * @implements ICPlayer_GetAchievementsProgress_Request
+         * @constructor
+         * @param {ICPlayer_GetAchievementsProgress_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetAchievementsProgress_Request(properties) {
+            this.appids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetAchievementsProgress_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @instance
+         */
+        CPlayer_GetAchievementsProgress_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CPlayer_GetAchievementsProgress_Request language.
+         * @member {string} language
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @instance
+         */
+        CPlayer_GetAchievementsProgress_Request.prototype.language = "";
+    
+        /**
+         * CPlayer_GetAchievementsProgress_Request appids.
+         * @member {Array.<number>} appids
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @instance
+         */
+        CPlayer_GetAchievementsProgress_Request.prototype.appids = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetAchievementsProgress_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {ICPlayer_GetAchievementsProgress_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetAchievementsProgress_Request} CPlayer_GetAchievementsProgress_Request instance
+         */
+        CPlayer_GetAchievementsProgress_Request.create = function create(properties) {
+            return new CPlayer_GetAchievementsProgress_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAchievementsProgress_Request message. Does not implicitly {@link CPlayer_GetAchievementsProgress_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {ICPlayer_GetAchievementsProgress_Request} message CPlayer_GetAchievementsProgress_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAchievementsProgress_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.steamid);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.language);
+            if (message.appids != null && message.appids.length)
+                for (var i = 0; i < message.appids.length; ++i)
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.appids[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAchievementsProgress_Request message, length delimited. Does not implicitly {@link CPlayer_GetAchievementsProgress_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {ICPlayer_GetAchievementsProgress_Request} message CPlayer_GetAchievementsProgress_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAchievementsProgress_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAchievementsProgress_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetAchievementsProgress_Request} CPlayer_GetAchievementsProgress_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAchievementsProgress_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetAchievementsProgress_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.uint64();
+                    break;
+                case 2:
+                    message.language = reader.string();
+                    break;
+                case 3:
+                    if (!(message.appids && message.appids.length))
+                        message.appids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.appids.push(reader.uint32());
+                    } else
+                        message.appids.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAchievementsProgress_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetAchievementsProgress_Request} CPlayer_GetAchievementsProgress_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAchievementsProgress_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetAchievementsProgress_Request message.
+         * @function verify
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetAchievementsProgress_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            if (message.appids != null && message.hasOwnProperty("appids")) {
+                if (!Array.isArray(message.appids))
+                    return "appids: array expected";
+                for (var i = 0; i < message.appids.length; ++i)
+                    if (!$util.isInteger(message.appids[i]))
+                        return "appids: integer[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetAchievementsProgress_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetAchievementsProgress_Request} CPlayer_GetAchievementsProgress_Request
+         */
+        CPlayer_GetAchievementsProgress_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetAchievementsProgress_Request)
+                return object;
+            var message = new $root.CPlayer_GetAchievementsProgress_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+            if (object.language != null)
+                message.language = String(object.language);
+            if (object.appids) {
+                if (!Array.isArray(object.appids))
+                    throw TypeError(".CPlayer_GetAchievementsProgress_Request.appids: array expected");
+                message.appids = [];
+                for (var i = 0; i < object.appids.length; ++i)
+                    message.appids[i] = object.appids[i] >>> 0;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetAchievementsProgress_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @static
+         * @param {CPlayer_GetAchievementsProgress_Request} message CPlayer_GetAchievementsProgress_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetAchievementsProgress_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.appids = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.language = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            if (message.appids && message.appids.length) {
+                object.appids = [];
+                for (var j = 0; j < message.appids.length; ++j)
+                    object.appids[j] = message.appids[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetAchievementsProgress_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetAchievementsProgress_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetAchievementsProgress_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetAchievementsProgress_Request;
+    })();
+    
+    $root.CPlayer_GetAchievementsProgress_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetAchievementsProgress_Response.
+         * @exports ICPlayer_GetAchievementsProgress_Response
+         * @interface ICPlayer_GetAchievementsProgress_Response
+         * @property {Array.<CPlayer_GetAchievementsProgress_Response.IAchievementProgress>|null} [achievement_progress] CPlayer_GetAchievementsProgress_Response achievement_progress
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetAchievementsProgress_Response.
+         * @exports CPlayer_GetAchievementsProgress_Response
+         * @classdesc Represents a CPlayer_GetAchievementsProgress_Response.
+         * @implements ICPlayer_GetAchievementsProgress_Response
+         * @constructor
+         * @param {ICPlayer_GetAchievementsProgress_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetAchievementsProgress_Response(properties) {
+            this.achievement_progress = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetAchievementsProgress_Response achievement_progress.
+         * @member {Array.<CPlayer_GetAchievementsProgress_Response.IAchievementProgress>} achievement_progress
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @instance
+         */
+        CPlayer_GetAchievementsProgress_Response.prototype.achievement_progress = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetAchievementsProgress_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {ICPlayer_GetAchievementsProgress_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetAchievementsProgress_Response} CPlayer_GetAchievementsProgress_Response instance
+         */
+        CPlayer_GetAchievementsProgress_Response.create = function create(properties) {
+            return new CPlayer_GetAchievementsProgress_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAchievementsProgress_Response message. Does not implicitly {@link CPlayer_GetAchievementsProgress_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {ICPlayer_GetAchievementsProgress_Response} message CPlayer_GetAchievementsProgress_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAchievementsProgress_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.achievement_progress != null && message.achievement_progress.length)
+                for (var i = 0; i < message.achievement_progress.length; ++i)
+                    $root.CPlayer_GetAchievementsProgress_Response.AchievementProgress.encode(message.achievement_progress[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetAchievementsProgress_Response message, length delimited. Does not implicitly {@link CPlayer_GetAchievementsProgress_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {ICPlayer_GetAchievementsProgress_Response} message CPlayer_GetAchievementsProgress_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetAchievementsProgress_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAchievementsProgress_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetAchievementsProgress_Response} CPlayer_GetAchievementsProgress_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAchievementsProgress_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetAchievementsProgress_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.achievement_progress && message.achievement_progress.length))
+                        message.achievement_progress = [];
+                    message.achievement_progress.push($root.CPlayer_GetAchievementsProgress_Response.AchievementProgress.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetAchievementsProgress_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetAchievementsProgress_Response} CPlayer_GetAchievementsProgress_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetAchievementsProgress_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetAchievementsProgress_Response message.
+         * @function verify
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetAchievementsProgress_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.achievement_progress != null && message.hasOwnProperty("achievement_progress")) {
+                if (!Array.isArray(message.achievement_progress))
+                    return "achievement_progress: array expected";
+                for (var i = 0; i < message.achievement_progress.length; ++i) {
+                    var error = $root.CPlayer_GetAchievementsProgress_Response.AchievementProgress.verify(message.achievement_progress[i]);
+                    if (error)
+                        return "achievement_progress." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetAchievementsProgress_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetAchievementsProgress_Response} CPlayer_GetAchievementsProgress_Response
+         */
+        CPlayer_GetAchievementsProgress_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetAchievementsProgress_Response)
+                return object;
+            var message = new $root.CPlayer_GetAchievementsProgress_Response();
+            if (object.achievement_progress) {
+                if (!Array.isArray(object.achievement_progress))
+                    throw TypeError(".CPlayer_GetAchievementsProgress_Response.achievement_progress: array expected");
+                message.achievement_progress = [];
+                for (var i = 0; i < object.achievement_progress.length; ++i) {
+                    if (typeof object.achievement_progress[i] !== "object")
+                        throw TypeError(".CPlayer_GetAchievementsProgress_Response.achievement_progress: object expected");
+                    message.achievement_progress[i] = $root.CPlayer_GetAchievementsProgress_Response.AchievementProgress.fromObject(object.achievement_progress[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetAchievementsProgress_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @static
+         * @param {CPlayer_GetAchievementsProgress_Response} message CPlayer_GetAchievementsProgress_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetAchievementsProgress_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.achievement_progress = [];
+            if (message.achievement_progress && message.achievement_progress.length) {
+                object.achievement_progress = [];
+                for (var j = 0; j < message.achievement_progress.length; ++j)
+                    object.achievement_progress[j] = $root.CPlayer_GetAchievementsProgress_Response.AchievementProgress.toObject(message.achievement_progress[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetAchievementsProgress_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetAchievementsProgress_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetAchievementsProgress_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CPlayer_GetAchievementsProgress_Response.AchievementProgress = (function() {
+    
+            /**
+             * Properties of an AchievementProgress.
+             * @memberof CPlayer_GetAchievementsProgress_Response
+             * @interface IAchievementProgress
+             * @property {number|null} [appid] AchievementProgress appid
+             * @property {number|null} [unlocked] AchievementProgress unlocked
+             * @property {number|null} [total] AchievementProgress total
+             * @property {number|null} [percentage] AchievementProgress percentage
+             * @property {boolean|null} [all_unlocked] AchievementProgress all_unlocked
+             * @property {number|null} [cache_time] AchievementProgress cache_time
+             */
+    
+            /**
+             * Constructs a new AchievementProgress.
+             * @memberof CPlayer_GetAchievementsProgress_Response
+             * @classdesc Represents an AchievementProgress.
+             * @implements IAchievementProgress
+             * @constructor
+             * @param {CPlayer_GetAchievementsProgress_Response.IAchievementProgress=} [properties] Properties to set
+             */
+            function AchievementProgress(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * AchievementProgress appid.
+             * @member {number} appid
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @instance
+             */
+            AchievementProgress.prototype.appid = 0;
+    
+            /**
+             * AchievementProgress unlocked.
+             * @member {number} unlocked
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @instance
+             */
+            AchievementProgress.prototype.unlocked = 0;
+    
+            /**
+             * AchievementProgress total.
+             * @member {number} total
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @instance
+             */
+            AchievementProgress.prototype.total = 0;
+    
+            /**
+             * AchievementProgress percentage.
+             * @member {number} percentage
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @instance
+             */
+            AchievementProgress.prototype.percentage = 0;
+    
+            /**
+             * AchievementProgress all_unlocked.
+             * @member {boolean} all_unlocked
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @instance
+             */
+            AchievementProgress.prototype.all_unlocked = false;
+    
+            /**
+             * AchievementProgress cache_time.
+             * @member {number} cache_time
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @instance
+             */
+            AchievementProgress.prototype.cache_time = 0;
+    
+            /**
+             * Creates a new AchievementProgress instance using the specified properties.
+             * @function create
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {CPlayer_GetAchievementsProgress_Response.IAchievementProgress=} [properties] Properties to set
+             * @returns {CPlayer_GetAchievementsProgress_Response.AchievementProgress} AchievementProgress instance
+             */
+            AchievementProgress.create = function create(properties) {
+                return new AchievementProgress(properties);
+            };
+    
+            /**
+             * Encodes the specified AchievementProgress message. Does not implicitly {@link CPlayer_GetAchievementsProgress_Response.AchievementProgress.verify|verify} messages.
+             * @function encode
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {CPlayer_GetAchievementsProgress_Response.IAchievementProgress} message AchievementProgress message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AchievementProgress.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+                if (message.unlocked != null && message.hasOwnProperty("unlocked"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.unlocked);
+                if (message.total != null && message.hasOwnProperty("total"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.total);
+                if (message.percentage != null && message.hasOwnProperty("percentage"))
+                    writer.uint32(/* id 4, wireType 5 =*/37).float(message.percentage);
+                if (message.all_unlocked != null && message.hasOwnProperty("all_unlocked"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.all_unlocked);
+                if (message.cache_time != null && message.hasOwnProperty("cache_time"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.cache_time);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified AchievementProgress message, length delimited. Does not implicitly {@link CPlayer_GetAchievementsProgress_Response.AchievementProgress.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {CPlayer_GetAchievementsProgress_Response.IAchievementProgress} message AchievementProgress message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AchievementProgress.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an AchievementProgress message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPlayer_GetAchievementsProgress_Response.AchievementProgress} AchievementProgress
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AchievementProgress.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetAchievementsProgress_Response.AchievementProgress();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.appid = reader.uint32();
+                        break;
+                    case 2:
+                        message.unlocked = reader.uint32();
+                        break;
+                    case 3:
+                        message.total = reader.uint32();
+                        break;
+                    case 4:
+                        message.percentage = reader.float();
+                        break;
+                    case 5:
+                        message.all_unlocked = reader.bool();
+                        break;
+                    case 6:
+                        message.cache_time = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an AchievementProgress message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPlayer_GetAchievementsProgress_Response.AchievementProgress} AchievementProgress
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AchievementProgress.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an AchievementProgress message.
+             * @function verify
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AchievementProgress.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    if (!$util.isInteger(message.appid))
+                        return "appid: integer expected";
+                if (message.unlocked != null && message.hasOwnProperty("unlocked"))
+                    if (!$util.isInteger(message.unlocked))
+                        return "unlocked: integer expected";
+                if (message.total != null && message.hasOwnProperty("total"))
+                    if (!$util.isInteger(message.total))
+                        return "total: integer expected";
+                if (message.percentage != null && message.hasOwnProperty("percentage"))
+                    if (typeof message.percentage !== "number")
+                        return "percentage: number expected";
+                if (message.all_unlocked != null && message.hasOwnProperty("all_unlocked"))
+                    if (typeof message.all_unlocked !== "boolean")
+                        return "all_unlocked: boolean expected";
+                if (message.cache_time != null && message.hasOwnProperty("cache_time"))
+                    if (!$util.isInteger(message.cache_time))
+                        return "cache_time: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates an AchievementProgress message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPlayer_GetAchievementsProgress_Response.AchievementProgress} AchievementProgress
+             */
+            AchievementProgress.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPlayer_GetAchievementsProgress_Response.AchievementProgress)
+                    return object;
+                var message = new $root.CPlayer_GetAchievementsProgress_Response.AchievementProgress();
+                if (object.appid != null)
+                    message.appid = object.appid >>> 0;
+                if (object.unlocked != null)
+                    message.unlocked = object.unlocked >>> 0;
+                if (object.total != null)
+                    message.total = object.total >>> 0;
+                if (object.percentage != null)
+                    message.percentage = Number(object.percentage);
+                if (object.all_unlocked != null)
+                    message.all_unlocked = Boolean(object.all_unlocked);
+                if (object.cache_time != null)
+                    message.cache_time = object.cache_time >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an AchievementProgress message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @static
+             * @param {CPlayer_GetAchievementsProgress_Response.AchievementProgress} message AchievementProgress
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AchievementProgress.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.appid = 0;
+                    object.unlocked = 0;
+                    object.total = 0;
+                    object.percentage = 0;
+                    object.all_unlocked = false;
+                    object.cache_time = 0;
+                }
+                if (message.appid != null && message.hasOwnProperty("appid"))
+                    object.appid = message.appid;
+                if (message.unlocked != null && message.hasOwnProperty("unlocked"))
+                    object.unlocked = message.unlocked;
+                if (message.total != null && message.hasOwnProperty("total"))
+                    object.total = message.total;
+                if (message.percentage != null && message.hasOwnProperty("percentage"))
+                    object.percentage = options.json && !isFinite(message.percentage) ? String(message.percentage) : message.percentage;
+                if (message.all_unlocked != null && message.hasOwnProperty("all_unlocked"))
+                    object.all_unlocked = message.all_unlocked;
+                if (message.cache_time != null && message.hasOwnProperty("cache_time"))
+                    object.cache_time = message.cache_time;
+                return object;
+            };
+    
+            /**
+             * Converts this AchievementProgress to JSON.
+             * @function toJSON
+             * @memberof CPlayer_GetAchievementsProgress_Response.AchievementProgress
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AchievementProgress.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return AchievementProgress;
+        })();
+    
+        return CPlayer_GetAchievementsProgress_Response;
     })();
     
     $root.CPlayer_PostStatusToFriends_Request = (function() {
@@ -4733,6 +13214,15 @@
              * @property {number|null} [playtime_2weeks] Game playtime_2weeks
              * @property {number|null} [playtime_forever] Game playtime_forever
              * @property {number|null} [first_playtime] Game first_playtime
+             * @property {number|null} [playtime_windows_forever] Game playtime_windows_forever
+             * @property {number|null} [playtime_mac_forever] Game playtime_mac_forever
+             * @property {number|null} [playtime_linux_forever] Game playtime_linux_forever
+             * @property {number|null} [first_windows_playtime] Game first_windows_playtime
+             * @property {number|null} [first_mac_playtime] Game first_mac_playtime
+             * @property {number|null} [first_linux_playtime] Game first_linux_playtime
+             * @property {number|null} [last_windows_playtime] Game last_windows_playtime
+             * @property {number|null} [last_mac_playtime] Game last_mac_playtime
+             * @property {number|null} [last_linux_playtime] Game last_linux_playtime
              */
     
             /**
@@ -4791,6 +13281,78 @@
             Game.prototype.first_playtime = 0;
     
             /**
+             * Game playtime_windows_forever.
+             * @member {number} playtime_windows_forever
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_windows_forever = 0;
+    
+            /**
+             * Game playtime_mac_forever.
+             * @member {number} playtime_mac_forever
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_mac_forever = 0;
+    
+            /**
+             * Game playtime_linux_forever.
+             * @member {number} playtime_linux_forever
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.playtime_linux_forever = 0;
+    
+            /**
+             * Game first_windows_playtime.
+             * @member {number} first_windows_playtime
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.first_windows_playtime = 0;
+    
+            /**
+             * Game first_mac_playtime.
+             * @member {number} first_mac_playtime
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.first_mac_playtime = 0;
+    
+            /**
+             * Game first_linux_playtime.
+             * @member {number} first_linux_playtime
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.first_linux_playtime = 0;
+    
+            /**
+             * Game last_windows_playtime.
+             * @member {number} last_windows_playtime
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.last_windows_playtime = 0;
+    
+            /**
+             * Game last_mac_playtime.
+             * @member {number} last_mac_playtime
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.last_mac_playtime = 0;
+    
+            /**
+             * Game last_linux_playtime.
+             * @member {number} last_linux_playtime
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.last_linux_playtime = 0;
+    
+            /**
              * Creates a new Game instance using the specified properties.
              * @function create
              * @memberof CPlayer_GetLastPlayedTimes_Response.Game
@@ -4824,6 +13386,24 @@
                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.playtime_forever);
                 if (message.first_playtime != null && message.hasOwnProperty("first_playtime"))
                     writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.first_playtime);
+                if (message.playtime_windows_forever != null && message.hasOwnProperty("playtime_windows_forever"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.playtime_windows_forever);
+                if (message.playtime_mac_forever != null && message.hasOwnProperty("playtime_mac_forever"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.playtime_mac_forever);
+                if (message.playtime_linux_forever != null && message.hasOwnProperty("playtime_linux_forever"))
+                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.playtime_linux_forever);
+                if (message.first_windows_playtime != null && message.hasOwnProperty("first_windows_playtime"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.first_windows_playtime);
+                if (message.first_mac_playtime != null && message.hasOwnProperty("first_mac_playtime"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.first_mac_playtime);
+                if (message.first_linux_playtime != null && message.hasOwnProperty("first_linux_playtime"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.first_linux_playtime);
+                if (message.last_windows_playtime != null && message.hasOwnProperty("last_windows_playtime"))
+                    writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.last_windows_playtime);
+                if (message.last_mac_playtime != null && message.hasOwnProperty("last_mac_playtime"))
+                    writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.last_mac_playtime);
+                if (message.last_linux_playtime != null && message.hasOwnProperty("last_linux_playtime"))
+                    writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.last_linux_playtime);
                 return writer;
             };
     
@@ -4872,6 +13452,33 @@
                         break;
                     case 5:
                         message.first_playtime = reader.uint32();
+                        break;
+                    case 6:
+                        message.playtime_windows_forever = reader.int32();
+                        break;
+                    case 7:
+                        message.playtime_mac_forever = reader.int32();
+                        break;
+                    case 8:
+                        message.playtime_linux_forever = reader.int32();
+                        break;
+                    case 9:
+                        message.first_windows_playtime = reader.uint32();
+                        break;
+                    case 10:
+                        message.first_mac_playtime = reader.uint32();
+                        break;
+                    case 11:
+                        message.first_linux_playtime = reader.uint32();
+                        break;
+                    case 12:
+                        message.last_windows_playtime = reader.uint32();
+                        break;
+                    case 13:
+                        message.last_mac_playtime = reader.uint32();
+                        break;
+                    case 14:
+                        message.last_linux_playtime = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -4923,6 +13530,33 @@
                 if (message.first_playtime != null && message.hasOwnProperty("first_playtime"))
                     if (!$util.isInteger(message.first_playtime))
                         return "first_playtime: integer expected";
+                if (message.playtime_windows_forever != null && message.hasOwnProperty("playtime_windows_forever"))
+                    if (!$util.isInteger(message.playtime_windows_forever))
+                        return "playtime_windows_forever: integer expected";
+                if (message.playtime_mac_forever != null && message.hasOwnProperty("playtime_mac_forever"))
+                    if (!$util.isInteger(message.playtime_mac_forever))
+                        return "playtime_mac_forever: integer expected";
+                if (message.playtime_linux_forever != null && message.hasOwnProperty("playtime_linux_forever"))
+                    if (!$util.isInteger(message.playtime_linux_forever))
+                        return "playtime_linux_forever: integer expected";
+                if (message.first_windows_playtime != null && message.hasOwnProperty("first_windows_playtime"))
+                    if (!$util.isInteger(message.first_windows_playtime))
+                        return "first_windows_playtime: integer expected";
+                if (message.first_mac_playtime != null && message.hasOwnProperty("first_mac_playtime"))
+                    if (!$util.isInteger(message.first_mac_playtime))
+                        return "first_mac_playtime: integer expected";
+                if (message.first_linux_playtime != null && message.hasOwnProperty("first_linux_playtime"))
+                    if (!$util.isInteger(message.first_linux_playtime))
+                        return "first_linux_playtime: integer expected";
+                if (message.last_windows_playtime != null && message.hasOwnProperty("last_windows_playtime"))
+                    if (!$util.isInteger(message.last_windows_playtime))
+                        return "last_windows_playtime: integer expected";
+                if (message.last_mac_playtime != null && message.hasOwnProperty("last_mac_playtime"))
+                    if (!$util.isInteger(message.last_mac_playtime))
+                        return "last_mac_playtime: integer expected";
+                if (message.last_linux_playtime != null && message.hasOwnProperty("last_linux_playtime"))
+                    if (!$util.isInteger(message.last_linux_playtime))
+                        return "last_linux_playtime: integer expected";
                 return null;
             };
     
@@ -4948,6 +13582,24 @@
                     message.playtime_forever = object.playtime_forever | 0;
                 if (object.first_playtime != null)
                     message.first_playtime = object.first_playtime >>> 0;
+                if (object.playtime_windows_forever != null)
+                    message.playtime_windows_forever = object.playtime_windows_forever | 0;
+                if (object.playtime_mac_forever != null)
+                    message.playtime_mac_forever = object.playtime_mac_forever | 0;
+                if (object.playtime_linux_forever != null)
+                    message.playtime_linux_forever = object.playtime_linux_forever | 0;
+                if (object.first_windows_playtime != null)
+                    message.first_windows_playtime = object.first_windows_playtime >>> 0;
+                if (object.first_mac_playtime != null)
+                    message.first_mac_playtime = object.first_mac_playtime >>> 0;
+                if (object.first_linux_playtime != null)
+                    message.first_linux_playtime = object.first_linux_playtime >>> 0;
+                if (object.last_windows_playtime != null)
+                    message.last_windows_playtime = object.last_windows_playtime >>> 0;
+                if (object.last_mac_playtime != null)
+                    message.last_mac_playtime = object.last_mac_playtime >>> 0;
+                if (object.last_linux_playtime != null)
+                    message.last_linux_playtime = object.last_linux_playtime >>> 0;
                 return message;
             };
     
@@ -4970,6 +13622,15 @@
                     object.playtime_2weeks = 0;
                     object.playtime_forever = 0;
                     object.first_playtime = 0;
+                    object.playtime_windows_forever = 0;
+                    object.playtime_mac_forever = 0;
+                    object.playtime_linux_forever = 0;
+                    object.first_windows_playtime = 0;
+                    object.first_mac_playtime = 0;
+                    object.first_linux_playtime = 0;
+                    object.last_windows_playtime = 0;
+                    object.last_mac_playtime = 0;
+                    object.last_linux_playtime = 0;
                 }
                 if (message.appid != null && message.hasOwnProperty("appid"))
                     object.appid = message.appid;
@@ -4981,6 +13642,24 @@
                     object.playtime_forever = message.playtime_forever;
                 if (message.first_playtime != null && message.hasOwnProperty("first_playtime"))
                     object.first_playtime = message.first_playtime;
+                if (message.playtime_windows_forever != null && message.hasOwnProperty("playtime_windows_forever"))
+                    object.playtime_windows_forever = message.playtime_windows_forever;
+                if (message.playtime_mac_forever != null && message.hasOwnProperty("playtime_mac_forever"))
+                    object.playtime_mac_forever = message.playtime_mac_forever;
+                if (message.playtime_linux_forever != null && message.hasOwnProperty("playtime_linux_forever"))
+                    object.playtime_linux_forever = message.playtime_linux_forever;
+                if (message.first_windows_playtime != null && message.hasOwnProperty("first_windows_playtime"))
+                    object.first_windows_playtime = message.first_windows_playtime;
+                if (message.first_mac_playtime != null && message.hasOwnProperty("first_mac_playtime"))
+                    object.first_mac_playtime = message.first_mac_playtime;
+                if (message.first_linux_playtime != null && message.hasOwnProperty("first_linux_playtime"))
+                    object.first_linux_playtime = message.first_linux_playtime;
+                if (message.last_windows_playtime != null && message.hasOwnProperty("last_windows_playtime"))
+                    object.last_windows_playtime = message.last_windows_playtime;
+                if (message.last_mac_playtime != null && message.hasOwnProperty("last_mac_playtime"))
+                    object.last_mac_playtime = message.last_mac_playtime;
+                if (message.last_linux_playtime != null && message.hasOwnProperty("last_linux_playtime"))
+                    object.last_linux_playtime = message.last_linux_playtime;
                 return object;
             };
     
@@ -7318,6 +15997,7 @@
          * @interface ICPlayer_AddFriend_Response
          * @property {boolean|null} [invite_sent] CPlayer_AddFriend_Response invite_sent
          * @property {number|null} [friend_relationship] CPlayer_AddFriend_Response friend_relationship
+         * @property {number|null} [result] CPlayer_AddFriend_Response result
          */
     
         /**
@@ -7352,6 +16032,14 @@
         CPlayer_AddFriend_Response.prototype.friend_relationship = 0;
     
         /**
+         * CPlayer_AddFriend_Response result.
+         * @member {number} result
+         * @memberof CPlayer_AddFriend_Response
+         * @instance
+         */
+        CPlayer_AddFriend_Response.prototype.result = 0;
+    
+        /**
          * Creates a new CPlayer_AddFriend_Response instance using the specified properties.
          * @function create
          * @memberof CPlayer_AddFriend_Response
@@ -7379,6 +16067,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.invite_sent);
             if (message.friend_relationship != null && message.hasOwnProperty("friend_relationship"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.friend_relationship);
+            if (message.result != null && message.hasOwnProperty("result"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.result);
             return writer;
         };
     
@@ -7418,6 +16108,9 @@
                     break;
                 case 2:
                     message.friend_relationship = reader.uint32();
+                    break;
+                case 3:
+                    message.result = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7460,6 +16153,9 @@
             if (message.friend_relationship != null && message.hasOwnProperty("friend_relationship"))
                 if (!$util.isInteger(message.friend_relationship))
                     return "friend_relationship: integer expected";
+            if (message.result != null && message.hasOwnProperty("result"))
+                if (!$util.isInteger(message.result))
+                    return "result: integer expected";
             return null;
         };
     
@@ -7479,6 +16175,8 @@
                 message.invite_sent = Boolean(object.invite_sent);
             if (object.friend_relationship != null)
                 message.friend_relationship = object.friend_relationship >>> 0;
+            if (object.result != null)
+                message.result = object.result | 0;
             return message;
         };
     
@@ -7498,11 +16196,14 @@
             if (options.defaults) {
                 object.invite_sent = false;
                 object.friend_relationship = 0;
+                object.result = 0;
             }
             if (message.invite_sent != null && message.hasOwnProperty("invite_sent"))
                 object.invite_sent = message.invite_sent;
             if (message.friend_relationship != null && message.hasOwnProperty("friend_relationship"))
                 object.friend_relationship = message.friend_relationship;
+            if (message.result != null && message.hasOwnProperty("result"))
+                object.result = message.result;
             return object;
         };
     
@@ -10983,6 +19684,9 @@
          * @interface ICPlayer_GetDurationControl_Response
          * @property {boolean|null} [is_enabled] CPlayer_GetDurationControl_Response is_enabled
          * @property {number|null} [seconds] CPlayer_GetDurationControl_Response seconds
+         * @property {number|null} [seconds_today] CPlayer_GetDurationControl_Response seconds_today
+         * @property {boolean|null} [is_steamchina_account] CPlayer_GetDurationControl_Response is_steamchina_account
+         * @property {boolean|null} [is_age_verified] CPlayer_GetDurationControl_Response is_age_verified
          */
     
         /**
@@ -11017,6 +19721,30 @@
         CPlayer_GetDurationControl_Response.prototype.seconds = 0;
     
         /**
+         * CPlayer_GetDurationControl_Response seconds_today.
+         * @member {number} seconds_today
+         * @memberof CPlayer_GetDurationControl_Response
+         * @instance
+         */
+        CPlayer_GetDurationControl_Response.prototype.seconds_today = 0;
+    
+        /**
+         * CPlayer_GetDurationControl_Response is_steamchina_account.
+         * @member {boolean} is_steamchina_account
+         * @memberof CPlayer_GetDurationControl_Response
+         * @instance
+         */
+        CPlayer_GetDurationControl_Response.prototype.is_steamchina_account = false;
+    
+        /**
+         * CPlayer_GetDurationControl_Response is_age_verified.
+         * @member {boolean} is_age_verified
+         * @memberof CPlayer_GetDurationControl_Response
+         * @instance
+         */
+        CPlayer_GetDurationControl_Response.prototype.is_age_verified = false;
+    
+        /**
          * Creates a new CPlayer_GetDurationControl_Response instance using the specified properties.
          * @function create
          * @memberof CPlayer_GetDurationControl_Response
@@ -11044,6 +19772,12 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.is_enabled);
             if (message.seconds != null && message.hasOwnProperty("seconds"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.seconds);
+            if (message.seconds_today != null && message.hasOwnProperty("seconds_today"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.seconds_today);
+            if (message.is_steamchina_account != null && message.hasOwnProperty("is_steamchina_account"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.is_steamchina_account);
+            if (message.is_age_verified != null && message.hasOwnProperty("is_age_verified"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.is_age_verified);
             return writer;
         };
     
@@ -11083,6 +19817,15 @@
                     break;
                 case 2:
                     message.seconds = reader.int32();
+                    break;
+                case 3:
+                    message.seconds_today = reader.int32();
+                    break;
+                case 4:
+                    message.is_steamchina_account = reader.bool();
+                    break;
+                case 5:
+                    message.is_age_verified = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -11125,6 +19868,15 @@
             if (message.seconds != null && message.hasOwnProperty("seconds"))
                 if (!$util.isInteger(message.seconds))
                     return "seconds: integer expected";
+            if (message.seconds_today != null && message.hasOwnProperty("seconds_today"))
+                if (!$util.isInteger(message.seconds_today))
+                    return "seconds_today: integer expected";
+            if (message.is_steamchina_account != null && message.hasOwnProperty("is_steamchina_account"))
+                if (typeof message.is_steamchina_account !== "boolean")
+                    return "is_steamchina_account: boolean expected";
+            if (message.is_age_verified != null && message.hasOwnProperty("is_age_verified"))
+                if (typeof message.is_age_verified !== "boolean")
+                    return "is_age_verified: boolean expected";
             return null;
         };
     
@@ -11144,6 +19896,12 @@
                 message.is_enabled = Boolean(object.is_enabled);
             if (object.seconds != null)
                 message.seconds = object.seconds | 0;
+            if (object.seconds_today != null)
+                message.seconds_today = object.seconds_today | 0;
+            if (object.is_steamchina_account != null)
+                message.is_steamchina_account = Boolean(object.is_steamchina_account);
+            if (object.is_age_verified != null)
+                message.is_age_verified = Boolean(object.is_age_verified);
             return message;
         };
     
@@ -11163,11 +19921,20 @@
             if (options.defaults) {
                 object.is_enabled = false;
                 object.seconds = 0;
+                object.seconds_today = 0;
+                object.is_steamchina_account = false;
+                object.is_age_verified = false;
             }
             if (message.is_enabled != null && message.hasOwnProperty("is_enabled"))
                 object.is_enabled = message.is_enabled;
             if (message.seconds != null && message.hasOwnProperty("seconds"))
                 object.seconds = message.seconds;
+            if (message.seconds_today != null && message.hasOwnProperty("seconds_today"))
+                object.seconds_today = message.seconds_today;
+            if (message.is_steamchina_account != null && message.hasOwnProperty("is_steamchina_account"))
+                object.is_steamchina_account = message.is_steamchina_account;
+            if (message.is_age_verified != null && message.hasOwnProperty("is_age_verified"))
+                object.is_age_verified = message.is_age_verified;
             return object;
         };
     
@@ -11623,6 +20390,193 @@
         };
     
         return CPlayer_FriendNicknameChanged_Notification;
+    })();
+    
+    $root.CPlayer_FriendEquippedProfileItemsChanged_Notification = (function() {
+    
+        /**
+         * Properties of a CPlayer_FriendEquippedProfileItemsChanged_Notification.
+         * @exports ICPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @interface ICPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @property {number|null} [accountid] CPlayer_FriendEquippedProfileItemsChanged_Notification accountid
+         */
+    
+        /**
+         * Constructs a new CPlayer_FriendEquippedProfileItemsChanged_Notification.
+         * @exports CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @classdesc Represents a CPlayer_FriendEquippedProfileItemsChanged_Notification.
+         * @implements ICPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @constructor
+         * @param {ICPlayer_FriendEquippedProfileItemsChanged_Notification=} [properties] Properties to set
+         */
+        function CPlayer_FriendEquippedProfileItemsChanged_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_FriendEquippedProfileItemsChanged_Notification accountid.
+         * @member {number} accountid
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @instance
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.prototype.accountid = 0;
+    
+        /**
+         * Creates a new CPlayer_FriendEquippedProfileItemsChanged_Notification instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {ICPlayer_FriendEquippedProfileItemsChanged_Notification=} [properties] Properties to set
+         * @returns {CPlayer_FriendEquippedProfileItemsChanged_Notification} CPlayer_FriendEquippedProfileItemsChanged_Notification instance
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.create = function create(properties) {
+            return new CPlayer_FriendEquippedProfileItemsChanged_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_FriendEquippedProfileItemsChanged_Notification message. Does not implicitly {@link CPlayer_FriendEquippedProfileItemsChanged_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {ICPlayer_FriendEquippedProfileItemsChanged_Notification} message CPlayer_FriendEquippedProfileItemsChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.accountid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_FriendEquippedProfileItemsChanged_Notification message, length delimited. Does not implicitly {@link CPlayer_FriendEquippedProfileItemsChanged_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {ICPlayer_FriendEquippedProfileItemsChanged_Notification} message CPlayer_FriendEquippedProfileItemsChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_FriendEquippedProfileItemsChanged_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_FriendEquippedProfileItemsChanged_Notification} CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_FriendEquippedProfileItemsChanged_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.accountid = reader.fixed32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_FriendEquippedProfileItemsChanged_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_FriendEquippedProfileItemsChanged_Notification} CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_FriendEquippedProfileItemsChanged_Notification message.
+         * @function verify
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                if (!$util.isInteger(message.accountid))
+                    return "accountid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_FriendEquippedProfileItemsChanged_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_FriendEquippedProfileItemsChanged_Notification} CPlayer_FriendEquippedProfileItemsChanged_Notification
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_FriendEquippedProfileItemsChanged_Notification)
+                return object;
+            var message = new $root.CPlayer_FriendEquippedProfileItemsChanged_Notification();
+            if (object.accountid != null)
+                message.accountid = object.accountid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_FriendEquippedProfileItemsChanged_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @static
+         * @param {CPlayer_FriendEquippedProfileItemsChanged_Notification} message CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.accountid = 0;
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                object.accountid = message.accountid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_FriendEquippedProfileItemsChanged_Notification to JSON.
+         * @function toJSON
+         * @memberof CPlayer_FriendEquippedProfileItemsChanged_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_FriendEquippedProfileItemsChanged_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_FriendEquippedProfileItemsChanged_Notification;
     })();
     
     $root.CPlayer_NewSteamAnnouncementState_Notification = (function() {
@@ -12580,6 +21534,72 @@
          */
     
         /**
+         * Callback as used by {@link Player#getOwnedGames}.
+         * @memberof Player
+         * @typedef GetOwnedGamesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetOwnedGames_Response} [response] CPlayer_GetOwnedGames_Response
+         */
+    
+        /**
+         * Calls GetOwnedGames.
+         * @function getOwnedGames
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetOwnedGames_Request} request CPlayer_GetOwnedGames_Request message or plain object
+         * @param {Player.GetOwnedGamesCallback} callback Node-style callback called with the error, if any, and CPlayer_GetOwnedGames_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getOwnedGames = function getOwnedGames(request, callback) {
+            return this.rpcCall(getOwnedGames, $root.CPlayer_GetOwnedGames_Request, $root.CPlayer_GetOwnedGames_Response, request, callback);
+        }, "name", { value: "GetOwnedGames" });
+    
+        /**
+         * Calls GetOwnedGames.
+         * @function getOwnedGames
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetOwnedGames_Request} request CPlayer_GetOwnedGames_Request message or plain object
+         * @returns {Promise<CPlayer_GetOwnedGames_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getPlayNext}.
+         * @memberof Player
+         * @typedef GetPlayNextCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetPlayNext_Response} [response] CPlayer_GetPlayNext_Response
+         */
+    
+        /**
+         * Calls GetPlayNext.
+         * @function getPlayNext
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPlayNext_Request} request CPlayer_GetPlayNext_Request message or plain object
+         * @param {Player.GetPlayNextCallback} callback Node-style callback called with the error, if any, and CPlayer_GetPlayNext_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getPlayNext = function getPlayNext(request, callback) {
+            return this.rpcCall(getPlayNext, $root.CPlayer_GetPlayNext_Request, $root.CPlayer_GetPlayNext_Response, request, callback);
+        }, "name", { value: "GetPlayNext" });
+    
+        /**
+         * Calls GetPlayNext.
+         * @function getPlayNext
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPlayNext_Request} request CPlayer_GetPlayNext_Request message or plain object
+         * @returns {Promise<CPlayer_GetPlayNext_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link Player#getFriendsGameplayInfo}.
          * @memberof Player
          * @typedef GetFriendsGameplayInfoCallback
@@ -12609,6 +21629,39 @@
          * @instance
          * @param {ICPlayer_GetFriendsGameplayInfo_Request} request CPlayer_GetFriendsGameplayInfo_Request message or plain object
          * @returns {Promise<CPlayer_GetFriendsGameplayInfo_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getFriendsAppsActivity}.
+         * @memberof Player
+         * @typedef GetFriendsAppsActivityCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetFriendsAppsActivity_Response} [response] CPlayer_GetFriendsAppsActivity_Response
+         */
+    
+        /**
+         * Calls GetFriendsAppsActivity.
+         * @function getFriendsAppsActivity
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetFriendsAppsActivity_Request} request CPlayer_GetFriendsAppsActivity_Request message or plain object
+         * @param {Player.GetFriendsAppsActivityCallback} callback Node-style callback called with the error, if any, and CPlayer_GetFriendsAppsActivity_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getFriendsAppsActivity = function getFriendsAppsActivity(request, callback) {
+            return this.rpcCall(getFriendsAppsActivity, $root.CPlayer_GetFriendsAppsActivity_Request, $root.CPlayer_GetFriendsAppsActivity_Response, request, callback);
+        }, "name", { value: "GetFriendsAppsActivity" });
+    
+        /**
+         * Calls GetFriendsAppsActivity.
+         * @function getFriendsAppsActivity
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetFriendsAppsActivity_Request} request CPlayer_GetFriendsAppsActivity_Request message or plain object
+         * @returns {Promise<CPlayer_GetFriendsAppsActivity_Response>} Promise
          * @variation 2
          */
     
@@ -12646,6 +21699,369 @@
          */
     
         /**
+         * Callback as used by {@link Player#getProfileBackground}.
+         * @memberof Player
+         * @typedef GetProfileBackgroundCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetProfileBackground_Response} [response] CPlayer_GetProfileBackground_Response
+         */
+    
+        /**
+         * Calls GetProfileBackground.
+         * @function getProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetProfileBackground_Request} request CPlayer_GetProfileBackground_Request message or plain object
+         * @param {Player.GetProfileBackgroundCallback} callback Node-style callback called with the error, if any, and CPlayer_GetProfileBackground_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getProfileBackground = function getProfileBackground(request, callback) {
+            return this.rpcCall(getProfileBackground, $root.CPlayer_GetProfileBackground_Request, $root.CPlayer_GetProfileBackground_Response, request, callback);
+        }, "name", { value: "GetProfileBackground" });
+    
+        /**
+         * Calls GetProfileBackground.
+         * @function getProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetProfileBackground_Request} request CPlayer_GetProfileBackground_Request message or plain object
+         * @returns {Promise<CPlayer_GetProfileBackground_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#setProfileBackground}.
+         * @memberof Player
+         * @typedef SetProfileBackgroundCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_SetProfileBackground_Response} [response] CPlayer_SetProfileBackground_Response
+         */
+    
+        /**
+         * Calls SetProfileBackground.
+         * @function setProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetProfileBackground_Request} request CPlayer_SetProfileBackground_Request message or plain object
+         * @param {Player.SetProfileBackgroundCallback} callback Node-style callback called with the error, if any, and CPlayer_SetProfileBackground_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.setProfileBackground = function setProfileBackground(request, callback) {
+            return this.rpcCall(setProfileBackground, $root.CPlayer_SetProfileBackground_Request, $root.CPlayer_SetProfileBackground_Response, request, callback);
+        }, "name", { value: "SetProfileBackground" });
+    
+        /**
+         * Calls SetProfileBackground.
+         * @function setProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetProfileBackground_Request} request CPlayer_SetProfileBackground_Request message or plain object
+         * @returns {Promise<CPlayer_SetProfileBackground_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getMiniProfileBackground}.
+         * @memberof Player
+         * @typedef GetMiniProfileBackgroundCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetMiniProfileBackground_Response} [response] CPlayer_GetMiniProfileBackground_Response
+         */
+    
+        /**
+         * Calls GetMiniProfileBackground.
+         * @function getMiniProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetMiniProfileBackground_Request} request CPlayer_GetMiniProfileBackground_Request message or plain object
+         * @param {Player.GetMiniProfileBackgroundCallback} callback Node-style callback called with the error, if any, and CPlayer_GetMiniProfileBackground_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getMiniProfileBackground = function getMiniProfileBackground(request, callback) {
+            return this.rpcCall(getMiniProfileBackground, $root.CPlayer_GetMiniProfileBackground_Request, $root.CPlayer_GetMiniProfileBackground_Response, request, callback);
+        }, "name", { value: "GetMiniProfileBackground" });
+    
+        /**
+         * Calls GetMiniProfileBackground.
+         * @function getMiniProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetMiniProfileBackground_Request} request CPlayer_GetMiniProfileBackground_Request message or plain object
+         * @returns {Promise<CPlayer_GetMiniProfileBackground_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#setMiniProfileBackground}.
+         * @memberof Player
+         * @typedef SetMiniProfileBackgroundCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_SetMiniProfileBackground_Response} [response] CPlayer_SetMiniProfileBackground_Response
+         */
+    
+        /**
+         * Calls SetMiniProfileBackground.
+         * @function setMiniProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetMiniProfileBackground_Request} request CPlayer_SetMiniProfileBackground_Request message or plain object
+         * @param {Player.SetMiniProfileBackgroundCallback} callback Node-style callback called with the error, if any, and CPlayer_SetMiniProfileBackground_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.setMiniProfileBackground = function setMiniProfileBackground(request, callback) {
+            return this.rpcCall(setMiniProfileBackground, $root.CPlayer_SetMiniProfileBackground_Request, $root.CPlayer_SetMiniProfileBackground_Response, request, callback);
+        }, "name", { value: "SetMiniProfileBackground" });
+    
+        /**
+         * Calls SetMiniProfileBackground.
+         * @function setMiniProfileBackground
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetMiniProfileBackground_Request} request CPlayer_SetMiniProfileBackground_Request message or plain object
+         * @returns {Promise<CPlayer_SetMiniProfileBackground_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getAvatarFrame}.
+         * @memberof Player
+         * @typedef GetAvatarFrameCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetAvatarFrame_Response} [response] CPlayer_GetAvatarFrame_Response
+         */
+    
+        /**
+         * Calls GetAvatarFrame.
+         * @function getAvatarFrame
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetAvatarFrame_Request} request CPlayer_GetAvatarFrame_Request message or plain object
+         * @param {Player.GetAvatarFrameCallback} callback Node-style callback called with the error, if any, and CPlayer_GetAvatarFrame_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getAvatarFrame = function getAvatarFrame(request, callback) {
+            return this.rpcCall(getAvatarFrame, $root.CPlayer_GetAvatarFrame_Request, $root.CPlayer_GetAvatarFrame_Response, request, callback);
+        }, "name", { value: "GetAvatarFrame" });
+    
+        /**
+         * Calls GetAvatarFrame.
+         * @function getAvatarFrame
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetAvatarFrame_Request} request CPlayer_GetAvatarFrame_Request message or plain object
+         * @returns {Promise<CPlayer_GetAvatarFrame_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#setAvatarFrame}.
+         * @memberof Player
+         * @typedef SetAvatarFrameCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_SetAvatarFrame_Response} [response] CPlayer_SetAvatarFrame_Response
+         */
+    
+        /**
+         * Calls SetAvatarFrame.
+         * @function setAvatarFrame
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetAvatarFrame_Request} request CPlayer_SetAvatarFrame_Request message or plain object
+         * @param {Player.SetAvatarFrameCallback} callback Node-style callback called with the error, if any, and CPlayer_SetAvatarFrame_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.setAvatarFrame = function setAvatarFrame(request, callback) {
+            return this.rpcCall(setAvatarFrame, $root.CPlayer_SetAvatarFrame_Request, $root.CPlayer_SetAvatarFrame_Response, request, callback);
+        }, "name", { value: "SetAvatarFrame" });
+    
+        /**
+         * Calls SetAvatarFrame.
+         * @function setAvatarFrame
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetAvatarFrame_Request} request CPlayer_SetAvatarFrame_Request message or plain object
+         * @returns {Promise<CPlayer_SetAvatarFrame_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getAnimatedAvatar}.
+         * @memberof Player
+         * @typedef GetAnimatedAvatarCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetAnimatedAvatar_Response} [response] CPlayer_GetAnimatedAvatar_Response
+         */
+    
+        /**
+         * Calls GetAnimatedAvatar.
+         * @function getAnimatedAvatar
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetAnimatedAvatar_Request} request CPlayer_GetAnimatedAvatar_Request message or plain object
+         * @param {Player.GetAnimatedAvatarCallback} callback Node-style callback called with the error, if any, and CPlayer_GetAnimatedAvatar_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getAnimatedAvatar = function getAnimatedAvatar(request, callback) {
+            return this.rpcCall(getAnimatedAvatar, $root.CPlayer_GetAnimatedAvatar_Request, $root.CPlayer_GetAnimatedAvatar_Response, request, callback);
+        }, "name", { value: "GetAnimatedAvatar" });
+    
+        /**
+         * Calls GetAnimatedAvatar.
+         * @function getAnimatedAvatar
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetAnimatedAvatar_Request} request CPlayer_GetAnimatedAvatar_Request message or plain object
+         * @returns {Promise<CPlayer_GetAnimatedAvatar_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#setAnimatedAvatar}.
+         * @memberof Player
+         * @typedef SetAnimatedAvatarCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_SetAnimatedAvatar_Response} [response] CPlayer_SetAnimatedAvatar_Response
+         */
+    
+        /**
+         * Calls SetAnimatedAvatar.
+         * @function setAnimatedAvatar
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetAnimatedAvatar_Request} request CPlayer_SetAnimatedAvatar_Request message or plain object
+         * @param {Player.SetAnimatedAvatarCallback} callback Node-style callback called with the error, if any, and CPlayer_SetAnimatedAvatar_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.setAnimatedAvatar = function setAnimatedAvatar(request, callback) {
+            return this.rpcCall(setAnimatedAvatar, $root.CPlayer_SetAnimatedAvatar_Request, $root.CPlayer_SetAnimatedAvatar_Response, request, callback);
+        }, "name", { value: "SetAnimatedAvatar" });
+    
+        /**
+         * Calls SetAnimatedAvatar.
+         * @function setAnimatedAvatar
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetAnimatedAvatar_Request} request CPlayer_SetAnimatedAvatar_Request message or plain object
+         * @returns {Promise<CPlayer_SetAnimatedAvatar_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getProfileItemsOwned}.
+         * @memberof Player
+         * @typedef GetProfileItemsOwnedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetProfileItemsOwned_Response} [response] CPlayer_GetProfileItemsOwned_Response
+         */
+    
+        /**
+         * Calls GetProfileItemsOwned.
+         * @function getProfileItemsOwned
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetProfileItemsOwned_Request} request CPlayer_GetProfileItemsOwned_Request message or plain object
+         * @param {Player.GetProfileItemsOwnedCallback} callback Node-style callback called with the error, if any, and CPlayer_GetProfileItemsOwned_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getProfileItemsOwned = function getProfileItemsOwned(request, callback) {
+            return this.rpcCall(getProfileItemsOwned, $root.CPlayer_GetProfileItemsOwned_Request, $root.CPlayer_GetProfileItemsOwned_Response, request, callback);
+        }, "name", { value: "GetProfileItemsOwned" });
+    
+        /**
+         * Calls GetProfileItemsOwned.
+         * @function getProfileItemsOwned
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetProfileItemsOwned_Request} request CPlayer_GetProfileItemsOwned_Request message or plain object
+         * @returns {Promise<CPlayer_GetProfileItemsOwned_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getProfileItemsEquipped}.
+         * @memberof Player
+         * @typedef GetProfileItemsEquippedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetProfileItemsEquipped_Response} [response] CPlayer_GetProfileItemsEquipped_Response
+         */
+    
+        /**
+         * Calls GetProfileItemsEquipped.
+         * @function getProfileItemsEquipped
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetProfileItemsEquipped_Request} request CPlayer_GetProfileItemsEquipped_Request message or plain object
+         * @param {Player.GetProfileItemsEquippedCallback} callback Node-style callback called with the error, if any, and CPlayer_GetProfileItemsEquipped_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getProfileItemsEquipped = function getProfileItemsEquipped(request, callback) {
+            return this.rpcCall(getProfileItemsEquipped, $root.CPlayer_GetProfileItemsEquipped_Request, $root.CPlayer_GetProfileItemsEquipped_Response, request, callback);
+        }, "name", { value: "GetProfileItemsEquipped" });
+    
+        /**
+         * Calls GetProfileItemsEquipped.
+         * @function getProfileItemsEquipped
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetProfileItemsEquipped_Request} request CPlayer_GetProfileItemsEquipped_Request message or plain object
+         * @returns {Promise<CPlayer_GetProfileItemsEquipped_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#setEquippedProfileItemFlags}.
+         * @memberof Player
+         * @typedef SetEquippedProfileItemFlagsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_SetEquippedProfileItemFlags_Response} [response] CPlayer_SetEquippedProfileItemFlags_Response
+         */
+    
+        /**
+         * Calls SetEquippedProfileItemFlags.
+         * @function setEquippedProfileItemFlags
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Request} request CPlayer_SetEquippedProfileItemFlags_Request message or plain object
+         * @param {Player.SetEquippedProfileItemFlagsCallback} callback Node-style callback called with the error, if any, and CPlayer_SetEquippedProfileItemFlags_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.setEquippedProfileItemFlags = function setEquippedProfileItemFlags(request, callback) {
+            return this.rpcCall(setEquippedProfileItemFlags, $root.CPlayer_SetEquippedProfileItemFlags_Request, $root.CPlayer_SetEquippedProfileItemFlags_Response, request, callback);
+        }, "name", { value: "SetEquippedProfileItemFlags" });
+    
+        /**
+         * Calls SetEquippedProfileItemFlags.
+         * @function setEquippedProfileItemFlags
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetEquippedProfileItemFlags_Request} request CPlayer_SetEquippedProfileItemFlags_Request message or plain object
+         * @returns {Promise<CPlayer_SetEquippedProfileItemFlags_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link Player#getEmoticonList}.
          * @memberof Player
          * @typedef GetEmoticonListCallback
@@ -12675,6 +22091,39 @@
          * @instance
          * @param {ICPlayer_GetEmoticonList_Request} request CPlayer_GetEmoticonList_Request message or plain object
          * @returns {Promise<CPlayer_GetEmoticonList_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getAchievementsProgress}.
+         * @memberof Player
+         * @typedef GetAchievementsProgressCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetAchievementsProgress_Response} [response] CPlayer_GetAchievementsProgress_Response
+         */
+    
+        /**
+         * Calls GetAchievementsProgress.
+         * @function getAchievementsProgress
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetAchievementsProgress_Request} request CPlayer_GetAchievementsProgress_Request message or plain object
+         * @param {Player.GetAchievementsProgressCallback} callback Node-style callback called with the error, if any, and CPlayer_GetAchievementsProgress_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getAchievementsProgress = function getAchievementsProgress(request, callback) {
+            return this.rpcCall(getAchievementsProgress, $root.CPlayer_GetAchievementsProgress_Request, $root.CPlayer_GetAchievementsProgress_Response, request, callback);
+        }, "name", { value: "GetAchievementsProgress" });
+    
+        /**
+         * Calls GetAchievementsProgress.
+         * @function getAchievementsProgress
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetAchievementsProgress_Request} request CPlayer_GetAchievementsProgress_Request message or plain object
+         * @returns {Promise<CPlayer_GetAchievementsProgress_Response>} Promise
          * @variation 2
          */
     
@@ -13336,6 +22785,39 @@
          * @memberof PlayerClient
          * @instance
          * @param {ICPlayer_FriendNicknameChanged_Notification} request CPlayer_FriendNicknameChanged_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link PlayerClient#notifyFriendEquippedProfileItemsChanged}.
+         * @memberof PlayerClient
+         * @typedef NotifyFriendEquippedProfileItemsChangedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyFriendEquippedProfileItemsChanged.
+         * @function notifyFriendEquippedProfileItemsChanged
+         * @memberof PlayerClient
+         * @instance
+         * @param {ICPlayer_FriendEquippedProfileItemsChanged_Notification} request CPlayer_FriendEquippedProfileItemsChanged_Notification message or plain object
+         * @param {PlayerClient.NotifyFriendEquippedProfileItemsChangedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PlayerClient.prototype.notifyFriendEquippedProfileItemsChanged = function notifyFriendEquippedProfileItemsChanged(request, callback) {
+            return this.rpcCall(notifyFriendEquippedProfileItemsChanged, $root.CPlayer_FriendEquippedProfileItemsChanged_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyFriendEquippedProfileItemsChanged" });
+    
+        /**
+         * Calls NotifyFriendEquippedProfileItemsChanged.
+         * @function notifyFriendEquippedProfileItemsChanged
+         * @memberof PlayerClient
+         * @instance
+         * @param {ICPlayer_FriendEquippedProfileItemsChanged_Notification} request CPlayer_FriendEquippedProfileItemsChanged_Notification message or plain object
          * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */

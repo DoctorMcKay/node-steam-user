@@ -8,6 +8,8 @@ module.exports = {
 	"Member": 3,
 	"Kicked": 4,
 	"KickAcknowledged": 5,
+	"PendingApproval": 6,
+	"RequestDenied": 7,
 
 	// Value-to-name mapping for convenience
 	"0": "None",
@@ -16,4 +18,6 @@ module.exports = {
 	"3": "Member",
 	"4": "Kicked",
 	"5": "KickAcknowledged",
+	"6": "PendingApproval",
+	"7": "RequestDenied",
 };

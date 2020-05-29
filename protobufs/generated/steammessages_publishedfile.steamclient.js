@@ -17,6 +17,28 @@
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
     /**
+     * EPublishedFileRevision enum.
+     * @exports EPublishedFileRevision
+     * @enum {string}
+     * @property {number} k_EPublishedFileRevision_Default=0 k_EPublishedFileRevision_Default value
+     * @property {number} k_EPublishedFileRevision_Latest=1 k_EPublishedFileRevision_Latest value
+     * @property {number} k_EPublishedFileRevision_ApprovedSnapshot=2 k_EPublishedFileRevision_ApprovedSnapshot value
+     * @property {number} k_EPublishedFileRevision_ApprovedSnapshot_China=3 k_EPublishedFileRevision_ApprovedSnapshot_China value
+     * @property {number} k_EPublishedFileRevision_RejectedSnapshot=4 k_EPublishedFileRevision_RejectedSnapshot value
+     * @property {number} k_EPublishedFileRevision_RejectedSnapshot_China=5 k_EPublishedFileRevision_RejectedSnapshot_China value
+     */
+    $root.EPublishedFileRevision = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EPublishedFileRevision_Default"] = 0;
+        values[valuesById[1] = "k_EPublishedFileRevision_Latest"] = 1;
+        values[valuesById[2] = "k_EPublishedFileRevision_ApprovedSnapshot"] = 2;
+        values[valuesById[3] = "k_EPublishedFileRevision_ApprovedSnapshot_China"] = 3;
+        values[valuesById[4] = "k_EPublishedFileRevision_RejectedSnapshot"] = 4;
+        values[valuesById[5] = "k_EPublishedFileRevision_RejectedSnapshot_China"] = 5;
+        return values;
+    })();
+    
+    /**
      * EPublishedFileForSaleStatus enum.
      * @exports EPublishedFileForSaleStatus
      * @enum {string}
@@ -2060,6 +2082,8 @@
          * @property {number|null} [return_playtime_stats] CPublishedFile_GetDetails_Request return_playtime_stats
          * @property {number|null} [appid] CPublishedFile_GetDetails_Request appid
          * @property {boolean|null} [strip_description_bbcode] CPublishedFile_GetDetails_Request strip_description_bbcode
+         * @property {EPublishedFileRevision|null} [desired_revision] CPublishedFile_GetDetails_Request desired_revision
+         * @property {boolean|null} [includereactions] CPublishedFile_GetDetails_Request includereactions
          */
     
         /**
@@ -2183,6 +2207,22 @@
         CPublishedFile_GetDetails_Request.prototype.strip_description_bbcode = false;
     
         /**
+         * CPublishedFile_GetDetails_Request desired_revision.
+         * @member {EPublishedFileRevision} desired_revision
+         * @memberof CPublishedFile_GetDetails_Request
+         * @instance
+         */
+        CPublishedFile_GetDetails_Request.prototype.desired_revision = 0;
+    
+        /**
+         * CPublishedFile_GetDetails_Request includereactions.
+         * @member {boolean} includereactions
+         * @memberof CPublishedFile_GetDetails_Request
+         * @instance
+         */
+        CPublishedFile_GetDetails_Request.prototype.includereactions = false;
+    
+        /**
          * Creates a new CPublishedFile_GetDetails_Request instance using the specified properties.
          * @function create
          * @memberof CPublishedFile_GetDetails_Request
@@ -2233,6 +2273,10 @@
                 writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.appid);
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.strip_description_bbcode);
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.desired_revision);
+            if (message.includereactions != null && message.hasOwnProperty("includereactions"))
+                writer.uint32(/* id 17, wireType 0 =*/136).bool(message.includereactions);
             return writer;
         };
     
@@ -2313,6 +2357,12 @@
                 case 15:
                     message.strip_description_bbcode = reader.bool();
                     break;
+                case 16:
+                    message.desired_revision = reader.int32();
+                    break;
+                case 17:
+                    message.includereactions = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2391,6 +2441,21 @@
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 if (typeof message.strip_description_bbcode !== "boolean")
                     return "strip_description_bbcode: boolean expected";
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                switch (message.desired_revision) {
+                default:
+                    return "desired_revision: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
+            if (message.includereactions != null && message.hasOwnProperty("includereactions"))
+                if (typeof message.includereactions !== "boolean")
+                    return "includereactions: boolean expected";
             return null;
         };
     
@@ -2444,6 +2509,34 @@
                 message.appid = object.appid >>> 0;
             if (object.strip_description_bbcode != null)
                 message.strip_description_bbcode = Boolean(object.strip_description_bbcode);
+            switch (object.desired_revision) {
+            case "k_EPublishedFileRevision_Default":
+            case 0:
+                message.desired_revision = 0;
+                break;
+            case "k_EPublishedFileRevision_Latest":
+            case 1:
+                message.desired_revision = 1;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot":
+            case 2:
+                message.desired_revision = 2;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+            case 3:
+                message.desired_revision = 3;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot":
+            case 4:
+                message.desired_revision = 4;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot_China":
+            case 5:
+                message.desired_revision = 5;
+                break;
+            }
+            if (object.includereactions != null)
+                message.includereactions = Boolean(object.includereactions);
             return message;
         };
     
@@ -2475,6 +2568,8 @@
                 object.return_playtime_stats = 0;
                 object.appid = 0;
                 object.strip_description_bbcode = false;
+                object.desired_revision = options.enums === String ? "k_EPublishedFileRevision_Default" : 0;
+                object.includereactions = false;
             }
             if (message.publishedfileids && message.publishedfileids.length) {
                 object.publishedfileids = [];
@@ -2508,6 +2603,10 @@
                 object.appid = message.appid;
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 object.strip_description_bbcode = message.strip_description_bbcode;
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                object.desired_revision = options.enums === String ? $root.EPublishedFileRevision[message.desired_revision] : message.desired_revision;
+            if (message.includereactions != null && message.hasOwnProperty("includereactions"))
+                object.includereactions = message.includereactions;
             return object;
         };
     
@@ -2595,6 +2694,10 @@
          * @property {number|null} [language] PublishedFileDetails language
          * @property {boolean|null} [maybe_inappropriate_sex] PublishedFileDetails maybe_inappropriate_sex
          * @property {boolean|null} [maybe_inappropriate_violence] PublishedFileDetails maybe_inappropriate_violence
+         * @property {number|Long|null} [revision_change_number] PublishedFileDetails revision_change_number
+         * @property {EPublishedFileRevision|null} [revision] PublishedFileDetails revision
+         * @property {Array.<EPublishedFileRevision>|null} [available_revisions] PublishedFileDetails available_revisions
+         * @property {Array.<PublishedFileDetails.IReaction>|null} [reactions] PublishedFileDetails reactions
          */
     
         /**
@@ -2610,6 +2713,8 @@
             this.tags = [];
             this.children = [];
             this.kvtags = [];
+            this.available_revisions = [];
+            this.reactions = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3129,6 +3234,38 @@
         PublishedFileDetails.prototype.maybe_inappropriate_violence = false;
     
         /**
+         * PublishedFileDetails revision_change_number.
+         * @member {number|Long} revision_change_number
+         * @memberof PublishedFileDetails
+         * @instance
+         */
+        PublishedFileDetails.prototype.revision_change_number = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * PublishedFileDetails revision.
+         * @member {EPublishedFileRevision} revision
+         * @memberof PublishedFileDetails
+         * @instance
+         */
+        PublishedFileDetails.prototype.revision = 0;
+    
+        /**
+         * PublishedFileDetails available_revisions.
+         * @member {Array.<EPublishedFileRevision>} available_revisions
+         * @memberof PublishedFileDetails
+         * @instance
+         */
+        PublishedFileDetails.prototype.available_revisions = $util.emptyArray;
+    
+        /**
+         * PublishedFileDetails reactions.
+         * @member {Array.<PublishedFileDetails.IReaction>} reactions
+         * @memberof PublishedFileDetails
+         * @instance
+         */
+        PublishedFileDetails.prototype.reactions = $util.emptyArray;
+    
+        /**
          * Creates a new PublishedFileDetails instance using the specified properties.
          * @function create
          * @memberof PublishedFileDetails
@@ -3284,6 +3421,16 @@
                 writer.uint32(/* id 65, wireType 0 =*/520).bool(message.maybe_inappropriate_sex);
             if (message.maybe_inappropriate_violence != null && message.hasOwnProperty("maybe_inappropriate_violence"))
                 writer.uint32(/* id 66, wireType 0 =*/528).bool(message.maybe_inappropriate_violence);
+            if (message.revision_change_number != null && message.hasOwnProperty("revision_change_number"))
+                writer.uint32(/* id 67, wireType 0 =*/536).uint64(message.revision_change_number);
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                writer.uint32(/* id 68, wireType 0 =*/544).int32(message.revision);
+            if (message.available_revisions != null && message.available_revisions.length)
+                for (var i = 0; i < message.available_revisions.length; ++i)
+                    writer.uint32(/* id 69, wireType 0 =*/552).int32(message.available_revisions[i]);
+            if (message.reactions != null && message.reactions.length)
+                for (var i = 0; i < message.reactions.length; ++i)
+                    $root.PublishedFileDetails.Reaction.encode(message.reactions[i], writer.uint32(/* id 70, wireType 2 =*/562).fork()).ldelim();
             return writer;
         };
     
@@ -3517,6 +3664,27 @@
                     break;
                 case 66:
                     message.maybe_inappropriate_violence = reader.bool();
+                    break;
+                case 67:
+                    message.revision_change_number = reader.uint64();
+                    break;
+                case 68:
+                    message.revision = reader.int32();
+                    break;
+                case 69:
+                    if (!(message.available_revisions && message.available_revisions.length))
+                        message.available_revisions = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.available_revisions.push(reader.int32());
+                    } else
+                        message.available_revisions.push(reader.int32());
+                    break;
+                case 70:
+                    if (!(message.reactions && message.reactions.length))
+                        message.reactions = [];
+                    message.reactions.push($root.PublishedFileDetails.Reaction.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3775,6 +3943,46 @@
             if (message.maybe_inappropriate_violence != null && message.hasOwnProperty("maybe_inappropriate_violence"))
                 if (typeof message.maybe_inappropriate_violence !== "boolean")
                     return "maybe_inappropriate_violence: boolean expected";
+            if (message.revision_change_number != null && message.hasOwnProperty("revision_change_number"))
+                if (!$util.isInteger(message.revision_change_number) && !(message.revision_change_number && $util.isInteger(message.revision_change_number.low) && $util.isInteger(message.revision_change_number.high)))
+                    return "revision_change_number: integer|Long expected";
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                switch (message.revision) {
+                default:
+                    return "revision: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
+            if (message.available_revisions != null && message.hasOwnProperty("available_revisions")) {
+                if (!Array.isArray(message.available_revisions))
+                    return "available_revisions: array expected";
+                for (var i = 0; i < message.available_revisions.length; ++i)
+                    switch (message.available_revisions[i]) {
+                    default:
+                        return "available_revisions: enum value[] expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                        break;
+                    }
+            }
+            if (message.reactions != null && message.hasOwnProperty("reactions")) {
+                if (!Array.isArray(message.reactions))
+                    return "reactions: array expected";
+                for (var i = 0; i < message.reactions.length; ++i) {
+                    var error = $root.PublishedFileDetails.Reaction.verify(message.reactions[i]);
+                    if (error)
+                        return "reactions." + error;
+                }
+            }
             return null;
         };
     
@@ -4022,6 +4230,84 @@
                 message.maybe_inappropriate_sex = Boolean(object.maybe_inappropriate_sex);
             if (object.maybe_inappropriate_violence != null)
                 message.maybe_inappropriate_violence = Boolean(object.maybe_inappropriate_violence);
+            if (object.revision_change_number != null)
+                if ($util.Long)
+                    (message.revision_change_number = $util.Long.fromValue(object.revision_change_number)).unsigned = true;
+                else if (typeof object.revision_change_number === "string")
+                    message.revision_change_number = parseInt(object.revision_change_number, 10);
+                else if (typeof object.revision_change_number === "number")
+                    message.revision_change_number = object.revision_change_number;
+                else if (typeof object.revision_change_number === "object")
+                    message.revision_change_number = new $util.LongBits(object.revision_change_number.low >>> 0, object.revision_change_number.high >>> 0).toNumber(true);
+            switch (object.revision) {
+            case "k_EPublishedFileRevision_Default":
+            case 0:
+                message.revision = 0;
+                break;
+            case "k_EPublishedFileRevision_Latest":
+            case 1:
+                message.revision = 1;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot":
+            case 2:
+                message.revision = 2;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+            case 3:
+                message.revision = 3;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot":
+            case 4:
+                message.revision = 4;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot_China":
+            case 5:
+                message.revision = 5;
+                break;
+            }
+            if (object.available_revisions) {
+                if (!Array.isArray(object.available_revisions))
+                    throw TypeError(".PublishedFileDetails.available_revisions: array expected");
+                message.available_revisions = [];
+                for (var i = 0; i < object.available_revisions.length; ++i)
+                    switch (object.available_revisions[i]) {
+                    default:
+                    case "k_EPublishedFileRevision_Default":
+                    case 0:
+                        message.available_revisions[i] = 0;
+                        break;
+                    case "k_EPublishedFileRevision_Latest":
+                    case 1:
+                        message.available_revisions[i] = 1;
+                        break;
+                    case "k_EPublishedFileRevision_ApprovedSnapshot":
+                    case 2:
+                        message.available_revisions[i] = 2;
+                        break;
+                    case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+                    case 3:
+                        message.available_revisions[i] = 3;
+                        break;
+                    case "k_EPublishedFileRevision_RejectedSnapshot":
+                    case 4:
+                        message.available_revisions[i] = 4;
+                        break;
+                    case "k_EPublishedFileRevision_RejectedSnapshot_China":
+                    case 5:
+                        message.available_revisions[i] = 5;
+                        break;
+                    }
+            }
+            if (object.reactions) {
+                if (!Array.isArray(object.reactions))
+                    throw TypeError(".PublishedFileDetails.reactions: array expected");
+                message.reactions = [];
+                for (var i = 0; i < object.reactions.length; ++i) {
+                    if (typeof object.reactions[i] !== "object")
+                        throw TypeError(".PublishedFileDetails.reactions: object expected");
+                    message.reactions[i] = $root.PublishedFileDetails.Reaction.fromObject(object.reactions[i]);
+                }
+            }
             return message;
         };
     
@@ -4043,6 +4329,8 @@
                 object.tags = [];
                 object.children = [];
                 object.kvtags = [];
+                object.available_revisions = [];
+                object.reactions = [];
             }
             if (options.defaults) {
                 object.result = 0;
@@ -4141,6 +4429,12 @@
                 object.playtime_stats = null;
                 object.maybe_inappropriate_sex = false;
                 object.maybe_inappropriate_violence = false;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.revision_change_number = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.revision_change_number = options.longs === String ? "0" : 0;
+                object.revision = options.enums === String ? "k_EPublishedFileRevision_Default" : 0;
             }
             if (message.result != null && message.hasOwnProperty("result"))
                 object.result = message.result;
@@ -4309,6 +4603,23 @@
                 object.maybe_inappropriate_sex = message.maybe_inappropriate_sex;
             if (message.maybe_inappropriate_violence != null && message.hasOwnProperty("maybe_inappropriate_violence"))
                 object.maybe_inappropriate_violence = message.maybe_inappropriate_violence;
+            if (message.revision_change_number != null && message.hasOwnProperty("revision_change_number"))
+                if (typeof message.revision_change_number === "number")
+                    object.revision_change_number = options.longs === String ? String(message.revision_change_number) : message.revision_change_number;
+                else
+                    object.revision_change_number = options.longs === String ? $util.Long.prototype.toString.call(message.revision_change_number) : options.longs === Number ? new $util.LongBits(message.revision_change_number.low >>> 0, message.revision_change_number.high >>> 0).toNumber(true) : message.revision_change_number;
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                object.revision = options.enums === String ? $root.EPublishedFileRevision[message.revision] : message.revision;
+            if (message.available_revisions && message.available_revisions.length) {
+                object.available_revisions = [];
+                for (var j = 0; j < message.available_revisions.length; ++j)
+                    object.available_revisions[j] = options.enums === String ? $root.EPublishedFileRevision[message.available_revisions[j]] : message.available_revisions[j];
+            }
+            if (message.reactions && message.reactions.length) {
+                object.reactions = [];
+                for (var j = 0; j < message.reactions.length; ++j)
+                    object.reactions[j] = $root.PublishedFileDetails.Reaction.toObject(message.reactions[j], options);
+            }
             return object;
         };
     
@@ -6146,6 +6457,216 @@
             return PlaytimeStats;
         })();
     
+        PublishedFileDetails.Reaction = (function() {
+    
+            /**
+             * Properties of a Reaction.
+             * @memberof PublishedFileDetails
+             * @interface IReaction
+             * @property {number|null} [reactionid] Reaction reactionid
+             * @property {number|null} [count] Reaction count
+             */
+    
+            /**
+             * Constructs a new Reaction.
+             * @memberof PublishedFileDetails
+             * @classdesc Represents a Reaction.
+             * @implements IReaction
+             * @constructor
+             * @param {PublishedFileDetails.IReaction=} [properties] Properties to set
+             */
+            function Reaction(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Reaction reactionid.
+             * @member {number} reactionid
+             * @memberof PublishedFileDetails.Reaction
+             * @instance
+             */
+            Reaction.prototype.reactionid = 0;
+    
+            /**
+             * Reaction count.
+             * @member {number} count
+             * @memberof PublishedFileDetails.Reaction
+             * @instance
+             */
+            Reaction.prototype.count = 0;
+    
+            /**
+             * Creates a new Reaction instance using the specified properties.
+             * @function create
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {PublishedFileDetails.IReaction=} [properties] Properties to set
+             * @returns {PublishedFileDetails.Reaction} Reaction instance
+             */
+            Reaction.create = function create(properties) {
+                return new Reaction(properties);
+            };
+    
+            /**
+             * Encodes the specified Reaction message. Does not implicitly {@link PublishedFileDetails.Reaction.verify|verify} messages.
+             * @function encode
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {PublishedFileDetails.IReaction} message Reaction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Reaction.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.reactionid != null && message.hasOwnProperty("reactionid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.reactionid);
+                if (message.count != null && message.hasOwnProperty("count"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.count);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Reaction message, length delimited. Does not implicitly {@link PublishedFileDetails.Reaction.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {PublishedFileDetails.IReaction} message Reaction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Reaction.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Reaction message from the specified reader or buffer.
+             * @function decode
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {PublishedFileDetails.Reaction} Reaction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Reaction.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.PublishedFileDetails.Reaction();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.reactionid = reader.uint32();
+                        break;
+                    case 2:
+                        message.count = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Reaction message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {PublishedFileDetails.Reaction} Reaction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Reaction.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Reaction message.
+             * @function verify
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Reaction.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.reactionid != null && message.hasOwnProperty("reactionid"))
+                    if (!$util.isInteger(message.reactionid))
+                        return "reactionid: integer expected";
+                if (message.count != null && message.hasOwnProperty("count"))
+                    if (!$util.isInteger(message.count))
+                        return "count: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Reaction message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {PublishedFileDetails.Reaction} Reaction
+             */
+            Reaction.fromObject = function fromObject(object) {
+                if (object instanceof $root.PublishedFileDetails.Reaction)
+                    return object;
+                var message = new $root.PublishedFileDetails.Reaction();
+                if (object.reactionid != null)
+                    message.reactionid = object.reactionid >>> 0;
+                if (object.count != null)
+                    message.count = object.count >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Reaction message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof PublishedFileDetails.Reaction
+             * @static
+             * @param {PublishedFileDetails.Reaction} message Reaction
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Reaction.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.reactionid = 0;
+                    object.count = 0;
+                }
+                if (message.reactionid != null && message.hasOwnProperty("reactionid"))
+                    object.reactionid = message.reactionid;
+                if (message.count != null && message.hasOwnProperty("count"))
+                    object.count = message.count;
+                return object;
+            };
+    
+            /**
+             * Converts this Reaction to JSON.
+             * @function toJSON
+             * @memberof PublishedFileDetails.Reaction
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Reaction.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Reaction;
+        })();
+    
         return PublishedFileDetails;
     })();
     
@@ -6616,6 +7137,7 @@
              * @interface IWorkshopItem
              * @property {number|Long|null} [published_file_id] WorkshopItem published_file_id
              * @property {number|null} [time_updated] WorkshopItem time_updated
+             * @property {EPublishedFileRevision|null} [desired_revision] WorkshopItem desired_revision
              */
     
             /**
@@ -6650,6 +7172,14 @@
             WorkshopItem.prototype.time_updated = 0;
     
             /**
+             * WorkshopItem desired_revision.
+             * @member {EPublishedFileRevision} desired_revision
+             * @memberof CPublishedFile_GetItemInfo_Request.WorkshopItem
+             * @instance
+             */
+            WorkshopItem.prototype.desired_revision = 0;
+    
+            /**
              * Creates a new WorkshopItem instance using the specified properties.
              * @function create
              * @memberof CPublishedFile_GetItemInfo_Request.WorkshopItem
@@ -6677,6 +7207,8 @@
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
                 if (message.time_updated != null && message.hasOwnProperty("time_updated"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.time_updated);
+                if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.desired_revision);
                 return writer;
             };
     
@@ -6716,6 +7248,9 @@
                         break;
                     case 2:
                         message.time_updated = reader.uint32();
+                        break;
+                    case 3:
+                        message.desired_revision = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -6758,6 +7293,18 @@
                 if (message.time_updated != null && message.hasOwnProperty("time_updated"))
                     if (!$util.isInteger(message.time_updated))
                         return "time_updated: integer expected";
+                if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                    switch (message.desired_revision) {
+                    default:
+                        return "desired_revision: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                        break;
+                    }
                 return null;
             };
     
@@ -6784,6 +7331,32 @@
                         message.published_file_id = new $util.LongBits(object.published_file_id.low >>> 0, object.published_file_id.high >>> 0).toNumber();
                 if (object.time_updated != null)
                     message.time_updated = object.time_updated >>> 0;
+                switch (object.desired_revision) {
+                case "k_EPublishedFileRevision_Default":
+                case 0:
+                    message.desired_revision = 0;
+                    break;
+                case "k_EPublishedFileRevision_Latest":
+                case 1:
+                    message.desired_revision = 1;
+                    break;
+                case "k_EPublishedFileRevision_ApprovedSnapshot":
+                case 2:
+                    message.desired_revision = 2;
+                    break;
+                case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+                case 3:
+                    message.desired_revision = 3;
+                    break;
+                case "k_EPublishedFileRevision_RejectedSnapshot":
+                case 4:
+                    message.desired_revision = 4;
+                    break;
+                case "k_EPublishedFileRevision_RejectedSnapshot_China":
+                case 5:
+                    message.desired_revision = 5;
+                    break;
+                }
                 return message;
             };
     
@@ -6807,6 +7380,7 @@
                     } else
                         object.published_file_id = options.longs === String ? "0" : 0;
                     object.time_updated = 0;
+                    object.desired_revision = options.enums === String ? "k_EPublishedFileRevision_Default" : 0;
                 }
                 if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
                     if (typeof message.published_file_id === "number")
@@ -6815,6 +7389,8 @@
                         object.published_file_id = options.longs === String ? $util.Long.prototype.toString.call(message.published_file_id) : options.longs === Number ? new $util.LongBits(message.published_file_id.low >>> 0, message.published_file_id.high >>> 0).toNumber() : message.published_file_id;
                 if (message.time_updated != null && message.hasOwnProperty("time_updated"))
                     object.time_updated = message.time_updated;
+                if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                    object.desired_revision = options.enums === String ? $root.EPublishedFileRevision[message.desired_revision] : message.desired_revision;
                 return object;
             };
     
@@ -6843,6 +7419,7 @@
          * @interface ICPublishedFile_GetItemInfo_Response
          * @property {number|null} [update_time] CPublishedFile_GetItemInfo_Response update_time
          * @property {Array.<CPublishedFile_GetItemInfo_Response.IWorkshopItemInfo>|null} [workshop_items] CPublishedFile_GetItemInfo_Response workshop_items
+         * @property {Array.<number|Long>|null} [private_items] CPublishedFile_GetItemInfo_Response private_items
          */
     
         /**
@@ -6855,6 +7432,7 @@
          */
         function CPublishedFile_GetItemInfo_Response(properties) {
             this.workshop_items = [];
+            this.private_items = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -6876,6 +7454,14 @@
          * @instance
          */
         CPublishedFile_GetItemInfo_Response.prototype.workshop_items = $util.emptyArray;
+    
+        /**
+         * CPublishedFile_GetItemInfo_Response private_items.
+         * @member {Array.<number|Long>} private_items
+         * @memberof CPublishedFile_GetItemInfo_Response
+         * @instance
+         */
+        CPublishedFile_GetItemInfo_Response.prototype.private_items = $util.emptyArray;
     
         /**
          * Creates a new CPublishedFile_GetItemInfo_Response instance using the specified properties.
@@ -6906,6 +7492,9 @@
             if (message.workshop_items != null && message.workshop_items.length)
                 for (var i = 0; i < message.workshop_items.length; ++i)
                     $root.CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.encode(message.workshop_items[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.private_items != null && message.private_items.length)
+                for (var i = 0; i < message.private_items.length; ++i)
+                    writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.private_items[i]);
             return writer;
         };
     
@@ -6947,6 +7536,16 @@
                     if (!(message.workshop_items && message.workshop_items.length))
                         message.workshop_items = [];
                     message.workshop_items.push($root.CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    if (!(message.private_items && message.private_items.length))
+                        message.private_items = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.private_items.push(reader.fixed64());
+                    } else
+                        message.private_items.push(reader.fixed64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6995,6 +7594,13 @@
                         return "workshop_items." + error;
                 }
             }
+            if (message.private_items != null && message.hasOwnProperty("private_items")) {
+                if (!Array.isArray(message.private_items))
+                    return "private_items: array expected";
+                for (var i = 0; i < message.private_items.length; ++i)
+                    if (!$util.isInteger(message.private_items[i]) && !(message.private_items[i] && $util.isInteger(message.private_items[i].low) && $util.isInteger(message.private_items[i].high)))
+                        return "private_items: integer|Long[] expected";
+            }
             return null;
         };
     
@@ -7022,6 +7628,20 @@
                     message.workshop_items[i] = $root.CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.fromObject(object.workshop_items[i]);
                 }
             }
+            if (object.private_items) {
+                if (!Array.isArray(object.private_items))
+                    throw TypeError(".CPublishedFile_GetItemInfo_Response.private_items: array expected");
+                message.private_items = [];
+                for (var i = 0; i < object.private_items.length; ++i)
+                    if ($util.Long)
+                        (message.private_items[i] = $util.Long.fromValue(object.private_items[i])).unsigned = false;
+                    else if (typeof object.private_items[i] === "string")
+                        message.private_items[i] = parseInt(object.private_items[i], 10);
+                    else if (typeof object.private_items[i] === "number")
+                        message.private_items[i] = object.private_items[i];
+                    else if (typeof object.private_items[i] === "object")
+                        message.private_items[i] = new $util.LongBits(object.private_items[i].low >>> 0, object.private_items[i].high >>> 0).toNumber();
+            }
             return message;
         };
     
@@ -7038,8 +7658,10 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.workshop_items = [];
+                object.private_items = [];
+            }
             if (options.defaults)
                 object.update_time = 0;
             if (message.update_time != null && message.hasOwnProperty("update_time"))
@@ -7048,6 +7670,14 @@
                 object.workshop_items = [];
                 for (var j = 0; j < message.workshop_items.length; ++j)
                     object.workshop_items[j] = $root.CPublishedFile_GetItemInfo_Response.WorkshopItemInfo.toObject(message.workshop_items[j], options);
+            }
+            if (message.private_items && message.private_items.length) {
+                object.private_items = [];
+                for (var j = 0; j < message.private_items.length; ++j)
+                    if (typeof message.private_items[j] === "number")
+                        object.private_items[j] = options.longs === String ? String(message.private_items[j]) : message.private_items[j];
+                    else
+                        object.private_items[j] = options.longs === String ? $util.Long.prototype.toString.call(message.private_items[j]) : options.longs === Number ? new $util.LongBits(message.private_items[j].low >>> 0, message.private_items[j].high >>> 0).toNumber() : message.private_items[j];
             }
             return object;
         };
@@ -7369,6 +7999,7 @@
          * @property {string|null} [match_cloud_filename] CPublishedFile_GetUserFiles_Request match_cloud_filename
          * @property {number|null} [cache_max_age_seconds] CPublishedFile_GetUserFiles_Request cache_max_age_seconds
          * @property {number|null} [language] CPublishedFile_GetUserFiles_Request language
+         * @property {Array.<CPublishedFile_GetUserFiles_Request.ITagGroup>|null} [taggroups] CPublishedFile_GetUserFiles_Request taggroups
          * @property {boolean|null} [totalonly] CPublishedFile_GetUserFiles_Request totalonly
          * @property {boolean|null} [ids_only] CPublishedFile_GetUserFiles_Request ids_only
          * @property {boolean|null} [return_vote_data] CPublishedFile_GetUserFiles_Request return_vote_data
@@ -7381,6 +8012,8 @@
          * @property {boolean|null} [return_metadata] CPublishedFile_GetUserFiles_Request return_metadata
          * @property {number|null} [return_playtime_stats] CPublishedFile_GetUserFiles_Request return_playtime_stats
          * @property {boolean|null} [strip_description_bbcode] CPublishedFile_GetUserFiles_Request strip_description_bbcode
+         * @property {boolean|null} [return_reactions] CPublishedFile_GetUserFiles_Request return_reactions
+         * @property {EPublishedFileRevision|null} [desired_revision] CPublishedFile_GetUserFiles_Request desired_revision
          */
     
         /**
@@ -7395,6 +8028,7 @@
             this.requiredtags = [];
             this.excludedtags = [];
             this.required_kv_tags = [];
+            this.taggroups = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -7522,6 +8156,14 @@
         CPublishedFile_GetUserFiles_Request.prototype.language = 0;
     
         /**
+         * CPublishedFile_GetUserFiles_Request taggroups.
+         * @member {Array.<CPublishedFile_GetUserFiles_Request.ITagGroup>} taggroups
+         * @memberof CPublishedFile_GetUserFiles_Request
+         * @instance
+         */
+        CPublishedFile_GetUserFiles_Request.prototype.taggroups = $util.emptyArray;
+    
+        /**
          * CPublishedFile_GetUserFiles_Request totalonly.
          * @member {boolean} totalonly
          * @memberof CPublishedFile_GetUserFiles_Request
@@ -7618,6 +8260,22 @@
         CPublishedFile_GetUserFiles_Request.prototype.strip_description_bbcode = false;
     
         /**
+         * CPublishedFile_GetUserFiles_Request return_reactions.
+         * @member {boolean} return_reactions
+         * @memberof CPublishedFile_GetUserFiles_Request
+         * @instance
+         */
+        CPublishedFile_GetUserFiles_Request.prototype.return_reactions = false;
+    
+        /**
+         * CPublishedFile_GetUserFiles_Request desired_revision.
+         * @member {EPublishedFileRevision} desired_revision
+         * @memberof CPublishedFile_GetUserFiles_Request
+         * @instance
+         */
+        CPublishedFile_GetUserFiles_Request.prototype.desired_revision = 0;
+    
+        /**
          * Creates a new CPublishedFile_GetUserFiles_Request instance using the specified properties.
          * @function create
          * @memberof CPublishedFile_GetUserFiles_Request
@@ -7698,6 +8356,13 @@
                 writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.return_playtime_stats);
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 writer.uint32(/* id 32, wireType 0 =*/256).bool(message.strip_description_bbcode);
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                writer.uint32(/* id 33, wireType 0 =*/264).int32(message.desired_revision);
+            if (message.taggroups != null && message.taggroups.length)
+                for (var i = 0; i < message.taggroups.length; ++i)
+                    $root.CPublishedFile_GetUserFiles_Request.TagGroup.encode(message.taggroups[i], writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+            if (message.return_reactions != null && message.hasOwnProperty("return_reactions"))
+                writer.uint32(/* id 35, wireType 0 =*/280).bool(message.return_reactions);
             return writer;
         };
     
@@ -7783,6 +8448,11 @@
                 case 29:
                     message.language = reader.int32();
                     break;
+                case 34:
+                    if (!(message.taggroups && message.taggroups.length))
+                        message.taggroups = [];
+                    message.taggroups.push($root.CPublishedFile_GetUserFiles_Request.TagGroup.decode(reader, reader.uint32()));
+                    break;
                 case 17:
                     message.totalonly = reader.bool();
                     break;
@@ -7818,6 +8488,12 @@
                     break;
                 case 32:
                     message.strip_description_bbcode = reader.bool();
+                    break;
+                case 35:
+                    message.return_reactions = reader.bool();
+                    break;
+                case 33:
+                    message.desired_revision = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7913,6 +8589,15 @@
             if (message.language != null && message.hasOwnProperty("language"))
                 if (!$util.isInteger(message.language))
                     return "language: integer expected";
+            if (message.taggroups != null && message.hasOwnProperty("taggroups")) {
+                if (!Array.isArray(message.taggroups))
+                    return "taggroups: array expected";
+                for (var i = 0; i < message.taggroups.length; ++i) {
+                    var error = $root.CPublishedFile_GetUserFiles_Request.TagGroup.verify(message.taggroups[i]);
+                    if (error)
+                        return "taggroups." + error;
+                }
+            }
             if (message.totalonly != null && message.hasOwnProperty("totalonly"))
                 if (typeof message.totalonly !== "boolean")
                     return "totalonly: boolean expected";
@@ -7949,6 +8634,21 @@
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 if (typeof message.strip_description_bbcode !== "boolean")
                     return "strip_description_bbcode: boolean expected";
+            if (message.return_reactions != null && message.hasOwnProperty("return_reactions"))
+                if (typeof message.return_reactions !== "boolean")
+                    return "return_reactions: boolean expected";
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                switch (message.desired_revision) {
+                default:
+                    return "desired_revision: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
             return null;
         };
     
@@ -8019,6 +8719,16 @@
                 message.cache_max_age_seconds = object.cache_max_age_seconds >>> 0;
             if (object.language != null)
                 message.language = object.language | 0;
+            if (object.taggroups) {
+                if (!Array.isArray(object.taggroups))
+                    throw TypeError(".CPublishedFile_GetUserFiles_Request.taggroups: array expected");
+                message.taggroups = [];
+                for (var i = 0; i < object.taggroups.length; ++i) {
+                    if (typeof object.taggroups[i] !== "object")
+                        throw TypeError(".CPublishedFile_GetUserFiles_Request.taggroups: object expected");
+                    message.taggroups[i] = $root.CPublishedFile_GetUserFiles_Request.TagGroup.fromObject(object.taggroups[i]);
+                }
+            }
             if (object.totalonly != null)
                 message.totalonly = Boolean(object.totalonly);
             if (object.ids_only != null)
@@ -8043,6 +8753,34 @@
                 message.return_playtime_stats = object.return_playtime_stats >>> 0;
             if (object.strip_description_bbcode != null)
                 message.strip_description_bbcode = Boolean(object.strip_description_bbcode);
+            if (object.return_reactions != null)
+                message.return_reactions = Boolean(object.return_reactions);
+            switch (object.desired_revision) {
+            case "k_EPublishedFileRevision_Default":
+            case 0:
+                message.desired_revision = 0;
+                break;
+            case "k_EPublishedFileRevision_Latest":
+            case 1:
+                message.desired_revision = 1;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot":
+            case 2:
+                message.desired_revision = 2;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+            case 3:
+                message.desired_revision = 3;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot":
+            case 4:
+                message.desired_revision = 4;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot_China":
+            case 5:
+                message.desired_revision = 5;
+                break;
+            }
             return message;
         };
     
@@ -8063,6 +8801,7 @@
                 object.requiredtags = [];
                 object.excludedtags = [];
                 object.required_kv_tags = [];
+                object.taggroups = [];
             }
             if (options.defaults) {
                 if ($util.Long) {
@@ -8093,6 +8832,8 @@
                 object.language = 0;
                 object.return_playtime_stats = 0;
                 object.strip_description_bbcode = false;
+                object.desired_revision = options.enums === String ? "k_EPublishedFileRevision_Default" : 0;
+                object.return_reactions = false;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -8160,6 +8901,15 @@
                 object.return_playtime_stats = message.return_playtime_stats;
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 object.strip_description_bbcode = message.strip_description_bbcode;
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                object.desired_revision = options.enums === String ? $root.EPublishedFileRevision[message.desired_revision] : message.desired_revision;
+            if (message.taggroups && message.taggroups.length) {
+                object.taggroups = [];
+                for (var j = 0; j < message.taggroups.length; ++j)
+                    object.taggroups[j] = $root.CPublishedFile_GetUserFiles_Request.TagGroup.toObject(message.taggroups[j], options);
+            }
+            if (message.return_reactions != null && message.hasOwnProperty("return_reactions"))
+                object.return_reactions = message.return_reactions;
             return object;
         };
     
@@ -8382,6 +9132,209 @@
             };
     
             return KVTag;
+        })();
+    
+        CPublishedFile_GetUserFiles_Request.TagGroup = (function() {
+    
+            /**
+             * Properties of a TagGroup.
+             * @memberof CPublishedFile_GetUserFiles_Request
+             * @interface ITagGroup
+             * @property {Array.<string>|null} [tags] TagGroup tags
+             */
+    
+            /**
+             * Constructs a new TagGroup.
+             * @memberof CPublishedFile_GetUserFiles_Request
+             * @classdesc Represents a TagGroup.
+             * @implements ITagGroup
+             * @constructor
+             * @param {CPublishedFile_GetUserFiles_Request.ITagGroup=} [properties] Properties to set
+             */
+            function TagGroup(properties) {
+                this.tags = [];
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * TagGroup tags.
+             * @member {Array.<string>} tags
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @instance
+             */
+            TagGroup.prototype.tags = $util.emptyArray;
+    
+            /**
+             * Creates a new TagGroup instance using the specified properties.
+             * @function create
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_GetUserFiles_Request.ITagGroup=} [properties] Properties to set
+             * @returns {CPublishedFile_GetUserFiles_Request.TagGroup} TagGroup instance
+             */
+            TagGroup.create = function create(properties) {
+                return new TagGroup(properties);
+            };
+    
+            /**
+             * Encodes the specified TagGroup message. Does not implicitly {@link CPublishedFile_GetUserFiles_Request.TagGroup.verify|verify} messages.
+             * @function encode
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_GetUserFiles_Request.ITagGroup} message TagGroup message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TagGroup.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.tags != null && message.tags.length)
+                    for (var i = 0; i < message.tags.length; ++i)
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.tags[i]);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified TagGroup message, length delimited. Does not implicitly {@link CPublishedFile_GetUserFiles_Request.TagGroup.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_GetUserFiles_Request.ITagGroup} message TagGroup message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TagGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a TagGroup message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPublishedFile_GetUserFiles_Request.TagGroup} TagGroup
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TagGroup.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_GetUserFiles_Request.TagGroup();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        if (!(message.tags && message.tags.length))
+                            message.tags = [];
+                        message.tags.push(reader.string());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a TagGroup message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPublishedFile_GetUserFiles_Request.TagGroup} TagGroup
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TagGroup.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a TagGroup message.
+             * @function verify
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TagGroup.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.tags != null && message.hasOwnProperty("tags")) {
+                    if (!Array.isArray(message.tags))
+                        return "tags: array expected";
+                    for (var i = 0; i < message.tags.length; ++i)
+                        if (!$util.isString(message.tags[i]))
+                            return "tags: string[] expected";
+                }
+                return null;
+            };
+    
+            /**
+             * Creates a TagGroup message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPublishedFile_GetUserFiles_Request.TagGroup} TagGroup
+             */
+            TagGroup.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPublishedFile_GetUserFiles_Request.TagGroup)
+                    return object;
+                var message = new $root.CPublishedFile_GetUserFiles_Request.TagGroup();
+                if (object.tags) {
+                    if (!Array.isArray(object.tags))
+                        throw TypeError(".CPublishedFile_GetUserFiles_Request.TagGroup.tags: array expected");
+                    message.tags = [];
+                    for (var i = 0; i < object.tags.length; ++i)
+                        message.tags[i] = String(object.tags[i]);
+                }
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a TagGroup message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_GetUserFiles_Request.TagGroup} message TagGroup
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TagGroup.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.arrays || options.defaults)
+                    object.tags = [];
+                if (message.tags && message.tags.length) {
+                    object.tags = [];
+                    for (var j = 0; j < message.tags.length; ++j)
+                        object.tags[j] = message.tags[j];
+                }
+                return object;
+            };
+    
+            /**
+             * Converts this TagGroup to JSON.
+             * @function toJSON
+             * @memberof CPublishedFile_GetUserFiles_Request.TagGroup
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TagGroup.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return TagGroup;
         })();
     
         return CPublishedFile_GetUserFiles_Request;
@@ -11477,6 +12430,7 @@
          * @property {boolean|null} [match_all_tags] CPublishedFile_RefreshVotingQueue_Request match_all_tags
          * @property {Array.<string>|null} [excluded_tags] CPublishedFile_RefreshVotingQueue_Request excluded_tags
          * @property {number|null} [desired_queue_size] CPublishedFile_RefreshVotingQueue_Request desired_queue_size
+         * @property {EPublishedFileRevision|null} [desired_revision] CPublishedFile_RefreshVotingQueue_Request desired_revision
          */
     
         /**
@@ -11545,6 +12499,14 @@
         CPublishedFile_RefreshVotingQueue_Request.prototype.desired_queue_size = 0;
     
         /**
+         * CPublishedFile_RefreshVotingQueue_Request desired_revision.
+         * @member {EPublishedFileRevision} desired_revision
+         * @memberof CPublishedFile_RefreshVotingQueue_Request
+         * @instance
+         */
+        CPublishedFile_RefreshVotingQueue_Request.prototype.desired_revision = 0;
+    
+        /**
          * Creates a new CPublishedFile_RefreshVotingQueue_Request instance using the specified properties.
          * @function create
          * @memberof CPublishedFile_RefreshVotingQueue_Request
@@ -11582,6 +12544,8 @@
                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.excluded_tags[i]);
             if (message.desired_queue_size != null && message.hasOwnProperty("desired_queue_size"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.desired_queue_size);
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.desired_revision);
             return writer;
         };
     
@@ -11637,6 +12601,9 @@
                     break;
                 case 6:
                     message.desired_queue_size = reader.uint32();
+                    break;
+                case 8:
+                    message.desired_revision = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -11699,6 +12666,18 @@
             if (message.desired_queue_size != null && message.hasOwnProperty("desired_queue_size"))
                 if (!$util.isInteger(message.desired_queue_size))
                     return "desired_queue_size: integer expected";
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                switch (message.desired_revision) {
+                default:
+                    return "desired_revision: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
             return null;
         };
     
@@ -11736,6 +12715,32 @@
             }
             if (object.desired_queue_size != null)
                 message.desired_queue_size = object.desired_queue_size >>> 0;
+            switch (object.desired_revision) {
+            case "k_EPublishedFileRevision_Default":
+            case 0:
+                message.desired_revision = 0;
+                break;
+            case "k_EPublishedFileRevision_Latest":
+            case 1:
+                message.desired_revision = 1;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot":
+            case 2:
+                message.desired_revision = 2;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+            case 3:
+                message.desired_revision = 3;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot":
+            case 4:
+                message.desired_revision = 4;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot_China":
+            case 5:
+                message.desired_revision = 5;
+                break;
+            }
             return message;
         };
     
@@ -11761,6 +12766,7 @@
                 object.matching_file_type = 0;
                 object.match_all_tags = true;
                 object.desired_queue_size = 0;
+                object.desired_revision = options.enums === String ? "k_EPublishedFileRevision_Default" : 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -11780,6 +12786,8 @@
             }
             if (message.desired_queue_size != null && message.hasOwnProperty("desired_queue_size"))
                 object.desired_queue_size = message.desired_queue_size;
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                object.desired_revision = options.enums === String ? $root.EPublishedFileRevision[message.desired_revision] : message.desired_revision;
             return object;
         };
     
@@ -11982,6 +12990,7 @@
          * @property {number|null} [cache_max_age_seconds] CPublishedFile_QueryFiles_Request cache_max_age_seconds
          * @property {number|null} [language] CPublishedFile_QueryFiles_Request language
          * @property {Array.<CPublishedFile_QueryFiles_Request.IKVTag>|null} [required_kv_tags] CPublishedFile_QueryFiles_Request required_kv_tags
+         * @property {Array.<CPublishedFile_QueryFiles_Request.ITagGroup>|null} [taggroups] CPublishedFile_QueryFiles_Request taggroups
          * @property {boolean|null} [totalonly] CPublishedFile_QueryFiles_Request totalonly
          * @property {boolean|null} [ids_only] CPublishedFile_QueryFiles_Request ids_only
          * @property {boolean|null} [return_vote_data] CPublishedFile_QueryFiles_Request return_vote_data
@@ -11995,6 +13004,8 @@
          * @property {number|null} [return_playtime_stats] CPublishedFile_QueryFiles_Request return_playtime_stats
          * @property {boolean|null} [return_details] CPublishedFile_QueryFiles_Request return_details
          * @property {boolean|null} [strip_description_bbcode] CPublishedFile_QueryFiles_Request strip_description_bbcode
+         * @property {EPublishedFileRevision|null} [desired_revision] CPublishedFile_QueryFiles_Request desired_revision
+         * @property {boolean|null} [return_reactions] CPublishedFile_QueryFiles_Request return_reactions
          */
     
         /**
@@ -12011,6 +13022,7 @@
             this.required_flags = [];
             this.omitted_flags = [];
             this.required_kv_tags = [];
+            this.taggroups = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -12170,6 +13182,14 @@
         CPublishedFile_QueryFiles_Request.prototype.required_kv_tags = $util.emptyArray;
     
         /**
+         * CPublishedFile_QueryFiles_Request taggroups.
+         * @member {Array.<CPublishedFile_QueryFiles_Request.ITagGroup>} taggroups
+         * @memberof CPublishedFile_QueryFiles_Request
+         * @instance
+         */
+        CPublishedFile_QueryFiles_Request.prototype.taggroups = $util.emptyArray;
+    
+        /**
          * CPublishedFile_QueryFiles_Request totalonly.
          * @member {boolean} totalonly
          * @memberof CPublishedFile_QueryFiles_Request
@@ -12274,6 +13294,22 @@
         CPublishedFile_QueryFiles_Request.prototype.strip_description_bbcode = false;
     
         /**
+         * CPublishedFile_QueryFiles_Request desired_revision.
+         * @member {EPublishedFileRevision} desired_revision
+         * @memberof CPublishedFile_QueryFiles_Request
+         * @instance
+         */
+        CPublishedFile_QueryFiles_Request.prototype.desired_revision = 0;
+    
+        /**
+         * CPublishedFile_QueryFiles_Request return_reactions.
+         * @member {boolean} return_reactions
+         * @memberof CPublishedFile_QueryFiles_Request
+         * @instance
+         */
+        CPublishedFile_QueryFiles_Request.prototype.return_reactions = false;
+    
+        /**
          * Creates a new CPublishedFile_QueryFiles_Request instance using the specified properties.
          * @function create
          * @memberof CPublishedFile_QueryFiles_Request
@@ -12366,6 +13402,13 @@
                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.strip_description_bbcode);
             if (message.cursor != null && message.hasOwnProperty("cursor"))
                 writer.uint32(/* id 39, wireType 2 =*/314).string(message.cursor);
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                writer.uint32(/* id 40, wireType 0 =*/320).int32(message.desired_revision);
+            if (message.taggroups != null && message.taggroups.length)
+                for (var i = 0; i < message.taggroups.length; ++i)
+                    $root.CPublishedFile_QueryFiles_Request.TagGroup.encode(message.taggroups[i], writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+            if (message.return_reactions != null && message.hasOwnProperty("return_reactions"))
+                writer.uint32(/* id 43, wireType 0 =*/344).bool(message.return_reactions);
             return writer;
         };
     
@@ -12467,6 +13510,11 @@
                         message.required_kv_tags = [];
                     message.required_kv_tags.push($root.CPublishedFile_QueryFiles_Request.KVTag.decode(reader, reader.uint32()));
                     break;
+                case 42:
+                    if (!(message.taggroups && message.taggroups.length))
+                        message.taggroups = [];
+                    message.taggroups.push($root.CPublishedFile_QueryFiles_Request.TagGroup.decode(reader, reader.uint32()));
+                    break;
                 case 16:
                     message.totalonly = reader.bool();
                     break;
@@ -12505,6 +13553,12 @@
                     break;
                 case 38:
                     message.strip_description_bbcode = reader.bool();
+                    break;
+                case 40:
+                    message.desired_revision = reader.int32();
+                    break;
+                case 43:
+                    message.return_reactions = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -12620,6 +13674,15 @@
                         return "required_kv_tags." + error;
                 }
             }
+            if (message.taggroups != null && message.hasOwnProperty("taggroups")) {
+                if (!Array.isArray(message.taggroups))
+                    return "taggroups: array expected";
+                for (var i = 0; i < message.taggroups.length; ++i) {
+                    var error = $root.CPublishedFile_QueryFiles_Request.TagGroup.verify(message.taggroups[i]);
+                    if (error)
+                        return "taggroups." + error;
+                }
+            }
             if (message.totalonly != null && message.hasOwnProperty("totalonly"))
                 if (typeof message.totalonly !== "boolean")
                     return "totalonly: boolean expected";
@@ -12659,6 +13722,21 @@
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 if (typeof message.strip_description_bbcode !== "boolean")
                     return "strip_description_bbcode: boolean expected";
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                switch (message.desired_revision) {
+                default:
+                    return "desired_revision: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
+            if (message.return_reactions != null && message.hasOwnProperty("return_reactions"))
+                if (typeof message.return_reactions !== "boolean")
+                    return "return_reactions: boolean expected";
             return null;
         };
     
@@ -12747,6 +13825,16 @@
                     message.required_kv_tags[i] = $root.CPublishedFile_QueryFiles_Request.KVTag.fromObject(object.required_kv_tags[i]);
                 }
             }
+            if (object.taggroups) {
+                if (!Array.isArray(object.taggroups))
+                    throw TypeError(".CPublishedFile_QueryFiles_Request.taggroups: array expected");
+                message.taggroups = [];
+                for (var i = 0; i < object.taggroups.length; ++i) {
+                    if (typeof object.taggroups[i] !== "object")
+                        throw TypeError(".CPublishedFile_QueryFiles_Request.taggroups: object expected");
+                    message.taggroups[i] = $root.CPublishedFile_QueryFiles_Request.TagGroup.fromObject(object.taggroups[i]);
+                }
+            }
             if (object.totalonly != null)
                 message.totalonly = Boolean(object.totalonly);
             if (object.ids_only != null)
@@ -12773,6 +13861,34 @@
                 message.return_details = Boolean(object.return_details);
             if (object.strip_description_bbcode != null)
                 message.strip_description_bbcode = Boolean(object.strip_description_bbcode);
+            switch (object.desired_revision) {
+            case "k_EPublishedFileRevision_Default":
+            case 0:
+                message.desired_revision = 0;
+                break;
+            case "k_EPublishedFileRevision_Latest":
+            case 1:
+                message.desired_revision = 1;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot":
+            case 2:
+                message.desired_revision = 2;
+                break;
+            case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+            case 3:
+                message.desired_revision = 3;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot":
+            case 4:
+                message.desired_revision = 4;
+                break;
+            case "k_EPublishedFileRevision_RejectedSnapshot_China":
+            case 5:
+                message.desired_revision = 5;
+                break;
+            }
+            if (object.return_reactions != null)
+                message.return_reactions = Boolean(object.return_reactions);
             return message;
         };
     
@@ -12795,6 +13911,7 @@
                 object.required_flags = [];
                 object.omitted_flags = [];
                 object.required_kv_tags = [];
+                object.taggroups = [];
             }
             if (options.defaults) {
                 object.query_type = 0;
@@ -12828,6 +13945,8 @@
                 object.return_details = false;
                 object.strip_description_bbcode = false;
                 object.cursor = "";
+                object.desired_revision = options.enums === String ? "k_EPublishedFileRevision_Default" : 0;
+                object.return_reactions = false;
             }
             if (message.query_type != null && message.hasOwnProperty("query_type"))
                 object.query_type = message.query_type;
@@ -12911,6 +14030,15 @@
                 object.strip_description_bbcode = message.strip_description_bbcode;
             if (message.cursor != null && message.hasOwnProperty("cursor"))
                 object.cursor = message.cursor;
+            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+                object.desired_revision = options.enums === String ? $root.EPublishedFileRevision[message.desired_revision] : message.desired_revision;
+            if (message.taggroups && message.taggroups.length) {
+                object.taggroups = [];
+                for (var j = 0; j < message.taggroups.length; ++j)
+                    object.taggroups[j] = $root.CPublishedFile_QueryFiles_Request.TagGroup.toObject(message.taggroups[j], options);
+            }
+            if (message.return_reactions != null && message.hasOwnProperty("return_reactions"))
+                object.return_reactions = message.return_reactions;
             return object;
         };
     
@@ -13133,6 +14261,209 @@
             };
     
             return KVTag;
+        })();
+    
+        CPublishedFile_QueryFiles_Request.TagGroup = (function() {
+    
+            /**
+             * Properties of a TagGroup.
+             * @memberof CPublishedFile_QueryFiles_Request
+             * @interface ITagGroup
+             * @property {Array.<string>|null} [tags] TagGroup tags
+             */
+    
+            /**
+             * Constructs a new TagGroup.
+             * @memberof CPublishedFile_QueryFiles_Request
+             * @classdesc Represents a TagGroup.
+             * @implements ITagGroup
+             * @constructor
+             * @param {CPublishedFile_QueryFiles_Request.ITagGroup=} [properties] Properties to set
+             */
+            function TagGroup(properties) {
+                this.tags = [];
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * TagGroup tags.
+             * @member {Array.<string>} tags
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @instance
+             */
+            TagGroup.prototype.tags = $util.emptyArray;
+    
+            /**
+             * Creates a new TagGroup instance using the specified properties.
+             * @function create
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_QueryFiles_Request.ITagGroup=} [properties] Properties to set
+             * @returns {CPublishedFile_QueryFiles_Request.TagGroup} TagGroup instance
+             */
+            TagGroup.create = function create(properties) {
+                return new TagGroup(properties);
+            };
+    
+            /**
+             * Encodes the specified TagGroup message. Does not implicitly {@link CPublishedFile_QueryFiles_Request.TagGroup.verify|verify} messages.
+             * @function encode
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_QueryFiles_Request.ITagGroup} message TagGroup message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TagGroup.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.tags != null && message.tags.length)
+                    for (var i = 0; i < message.tags.length; ++i)
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.tags[i]);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified TagGroup message, length delimited. Does not implicitly {@link CPublishedFile_QueryFiles_Request.TagGroup.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_QueryFiles_Request.ITagGroup} message TagGroup message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TagGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a TagGroup message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPublishedFile_QueryFiles_Request.TagGroup} TagGroup
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TagGroup.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_QueryFiles_Request.TagGroup();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        if (!(message.tags && message.tags.length))
+                            message.tags = [];
+                        message.tags.push(reader.string());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a TagGroup message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPublishedFile_QueryFiles_Request.TagGroup} TagGroup
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TagGroup.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a TagGroup message.
+             * @function verify
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TagGroup.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.tags != null && message.hasOwnProperty("tags")) {
+                    if (!Array.isArray(message.tags))
+                        return "tags: array expected";
+                    for (var i = 0; i < message.tags.length; ++i)
+                        if (!$util.isString(message.tags[i]))
+                            return "tags: string[] expected";
+                }
+                return null;
+            };
+    
+            /**
+             * Creates a TagGroup message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPublishedFile_QueryFiles_Request.TagGroup} TagGroup
+             */
+            TagGroup.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPublishedFile_QueryFiles_Request.TagGroup)
+                    return object;
+                var message = new $root.CPublishedFile_QueryFiles_Request.TagGroup();
+                if (object.tags) {
+                    if (!Array.isArray(object.tags))
+                        throw TypeError(".CPublishedFile_QueryFiles_Request.TagGroup.tags: array expected");
+                    message.tags = [];
+                    for (var i = 0; i < object.tags.length; ++i)
+                        message.tags[i] = String(object.tags[i]);
+                }
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a TagGroup message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @static
+             * @param {CPublishedFile_QueryFiles_Request.TagGroup} message TagGroup
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TagGroup.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.arrays || options.defaults)
+                    object.tags = [];
+                if (message.tags && message.tags.length) {
+                    object.tags = [];
+                    for (var j = 0; j < message.tags.length; ++j)
+                        object.tags[j] = message.tags[j];
+                }
+                return object;
+            };
+    
+            /**
+             * Converts this TagGroup to JSON.
+             * @function toJSON
+             * @memberof CPublishedFile_QueryFiles_Request.TagGroup
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TagGroup.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return TagGroup;
         })();
     
         return CPublishedFile_QueryFiles_Request;
@@ -17383,6 +18714,700 @@
         return CPublishedFile_RemoveChild_Response;
     })();
     
+    $root.CPublishedFile_GetUserVoteSummary_Request = (function() {
+    
+        /**
+         * Properties of a CPublishedFile_GetUserVoteSummary_Request.
+         * @exports ICPublishedFile_GetUserVoteSummary_Request
+         * @interface ICPublishedFile_GetUserVoteSummary_Request
+         * @property {Array.<number|Long>|null} [publishedfileids] CPublishedFile_GetUserVoteSummary_Request publishedfileids
+         */
+    
+        /**
+         * Constructs a new CPublishedFile_GetUserVoteSummary_Request.
+         * @exports CPublishedFile_GetUserVoteSummary_Request
+         * @classdesc Represents a CPublishedFile_GetUserVoteSummary_Request.
+         * @implements ICPublishedFile_GetUserVoteSummary_Request
+         * @constructor
+         * @param {ICPublishedFile_GetUserVoteSummary_Request=} [properties] Properties to set
+         */
+        function CPublishedFile_GetUserVoteSummary_Request(properties) {
+            this.publishedfileids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPublishedFile_GetUserVoteSummary_Request publishedfileids.
+         * @member {Array.<number|Long>} publishedfileids
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @instance
+         */
+        CPublishedFile_GetUserVoteSummary_Request.prototype.publishedfileids = $util.emptyArray;
+    
+        /**
+         * Creates a new CPublishedFile_GetUserVoteSummary_Request instance using the specified properties.
+         * @function create
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {ICPublishedFile_GetUserVoteSummary_Request=} [properties] Properties to set
+         * @returns {CPublishedFile_GetUserVoteSummary_Request} CPublishedFile_GetUserVoteSummary_Request instance
+         */
+        CPublishedFile_GetUserVoteSummary_Request.create = function create(properties) {
+            return new CPublishedFile_GetUserVoteSummary_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_GetUserVoteSummary_Request message. Does not implicitly {@link CPublishedFile_GetUserVoteSummary_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {ICPublishedFile_GetUserVoteSummary_Request} message CPublishedFile_GetUserVoteSummary_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_GetUserVoteSummary_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.publishedfileids != null && message.publishedfileids.length)
+                for (var i = 0; i < message.publishedfileids.length; ++i)
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.publishedfileids[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_GetUserVoteSummary_Request message, length delimited. Does not implicitly {@link CPublishedFile_GetUserVoteSummary_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {ICPublishedFile_GetUserVoteSummary_Request} message CPublishedFile_GetUserVoteSummary_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_GetUserVoteSummary_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPublishedFile_GetUserVoteSummary_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPublishedFile_GetUserVoteSummary_Request} CPublishedFile_GetUserVoteSummary_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_GetUserVoteSummary_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_GetUserVoteSummary_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.publishedfileids && message.publishedfileids.length))
+                        message.publishedfileids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.publishedfileids.push(reader.fixed64());
+                    } else
+                        message.publishedfileids.push(reader.fixed64());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPublishedFile_GetUserVoteSummary_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPublishedFile_GetUserVoteSummary_Request} CPublishedFile_GetUserVoteSummary_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_GetUserVoteSummary_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPublishedFile_GetUserVoteSummary_Request message.
+         * @function verify
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPublishedFile_GetUserVoteSummary_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.publishedfileids != null && message.hasOwnProperty("publishedfileids")) {
+                if (!Array.isArray(message.publishedfileids))
+                    return "publishedfileids: array expected";
+                for (var i = 0; i < message.publishedfileids.length; ++i)
+                    if (!$util.isInteger(message.publishedfileids[i]) && !(message.publishedfileids[i] && $util.isInteger(message.publishedfileids[i].low) && $util.isInteger(message.publishedfileids[i].high)))
+                        return "publishedfileids: integer|Long[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPublishedFile_GetUserVoteSummary_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPublishedFile_GetUserVoteSummary_Request} CPublishedFile_GetUserVoteSummary_Request
+         */
+        CPublishedFile_GetUserVoteSummary_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPublishedFile_GetUserVoteSummary_Request)
+                return object;
+            var message = new $root.CPublishedFile_GetUserVoteSummary_Request();
+            if (object.publishedfileids) {
+                if (!Array.isArray(object.publishedfileids))
+                    throw TypeError(".CPublishedFile_GetUserVoteSummary_Request.publishedfileids: array expected");
+                message.publishedfileids = [];
+                for (var i = 0; i < object.publishedfileids.length; ++i)
+                    if ($util.Long)
+                        (message.publishedfileids[i] = $util.Long.fromValue(object.publishedfileids[i])).unsigned = false;
+                    else if (typeof object.publishedfileids[i] === "string")
+                        message.publishedfileids[i] = parseInt(object.publishedfileids[i], 10);
+                    else if (typeof object.publishedfileids[i] === "number")
+                        message.publishedfileids[i] = object.publishedfileids[i];
+                    else if (typeof object.publishedfileids[i] === "object")
+                        message.publishedfileids[i] = new $util.LongBits(object.publishedfileids[i].low >>> 0, object.publishedfileids[i].high >>> 0).toNumber();
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPublishedFile_GetUserVoteSummary_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @static
+         * @param {CPublishedFile_GetUserVoteSummary_Request} message CPublishedFile_GetUserVoteSummary_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPublishedFile_GetUserVoteSummary_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.publishedfileids = [];
+            if (message.publishedfileids && message.publishedfileids.length) {
+                object.publishedfileids = [];
+                for (var j = 0; j < message.publishedfileids.length; ++j)
+                    if (typeof message.publishedfileids[j] === "number")
+                        object.publishedfileids[j] = options.longs === String ? String(message.publishedfileids[j]) : message.publishedfileids[j];
+                    else
+                        object.publishedfileids[j] = options.longs === String ? $util.Long.prototype.toString.call(message.publishedfileids[j]) : options.longs === Number ? new $util.LongBits(message.publishedfileids[j].low >>> 0, message.publishedfileids[j].high >>> 0).toNumber() : message.publishedfileids[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPublishedFile_GetUserVoteSummary_Request to JSON.
+         * @function toJSON
+         * @memberof CPublishedFile_GetUserVoteSummary_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPublishedFile_GetUserVoteSummary_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPublishedFile_GetUserVoteSummary_Request;
+    })();
+    
+    $root.CPublishedFile_GetUserVoteSummary_Response = (function() {
+    
+        /**
+         * Properties of a CPublishedFile_GetUserVoteSummary_Response.
+         * @exports ICPublishedFile_GetUserVoteSummary_Response
+         * @interface ICPublishedFile_GetUserVoteSummary_Response
+         * @property {Array.<CPublishedFile_GetUserVoteSummary_Response.IVoteSummary>|null} [summaries] CPublishedFile_GetUserVoteSummary_Response summaries
+         */
+    
+        /**
+         * Constructs a new CPublishedFile_GetUserVoteSummary_Response.
+         * @exports CPublishedFile_GetUserVoteSummary_Response
+         * @classdesc Represents a CPublishedFile_GetUserVoteSummary_Response.
+         * @implements ICPublishedFile_GetUserVoteSummary_Response
+         * @constructor
+         * @param {ICPublishedFile_GetUserVoteSummary_Response=} [properties] Properties to set
+         */
+        function CPublishedFile_GetUserVoteSummary_Response(properties) {
+            this.summaries = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPublishedFile_GetUserVoteSummary_Response summaries.
+         * @member {Array.<CPublishedFile_GetUserVoteSummary_Response.IVoteSummary>} summaries
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @instance
+         */
+        CPublishedFile_GetUserVoteSummary_Response.prototype.summaries = $util.emptyArray;
+    
+        /**
+         * Creates a new CPublishedFile_GetUserVoteSummary_Response instance using the specified properties.
+         * @function create
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {ICPublishedFile_GetUserVoteSummary_Response=} [properties] Properties to set
+         * @returns {CPublishedFile_GetUserVoteSummary_Response} CPublishedFile_GetUserVoteSummary_Response instance
+         */
+        CPublishedFile_GetUserVoteSummary_Response.create = function create(properties) {
+            return new CPublishedFile_GetUserVoteSummary_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_GetUserVoteSummary_Response message. Does not implicitly {@link CPublishedFile_GetUserVoteSummary_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {ICPublishedFile_GetUserVoteSummary_Response} message CPublishedFile_GetUserVoteSummary_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_GetUserVoteSummary_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.summaries != null && message.summaries.length)
+                for (var i = 0; i < message.summaries.length; ++i)
+                    $root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary.encode(message.summaries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_GetUserVoteSummary_Response message, length delimited. Does not implicitly {@link CPublishedFile_GetUserVoteSummary_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {ICPublishedFile_GetUserVoteSummary_Response} message CPublishedFile_GetUserVoteSummary_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_GetUserVoteSummary_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPublishedFile_GetUserVoteSummary_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPublishedFile_GetUserVoteSummary_Response} CPublishedFile_GetUserVoteSummary_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_GetUserVoteSummary_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_GetUserVoteSummary_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.summaries && message.summaries.length))
+                        message.summaries = [];
+                    message.summaries.push($root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPublishedFile_GetUserVoteSummary_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPublishedFile_GetUserVoteSummary_Response} CPublishedFile_GetUserVoteSummary_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_GetUserVoteSummary_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPublishedFile_GetUserVoteSummary_Response message.
+         * @function verify
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPublishedFile_GetUserVoteSummary_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.summaries != null && message.hasOwnProperty("summaries")) {
+                if (!Array.isArray(message.summaries))
+                    return "summaries: array expected";
+                for (var i = 0; i < message.summaries.length; ++i) {
+                    var error = $root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary.verify(message.summaries[i]);
+                    if (error)
+                        return "summaries." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPublishedFile_GetUserVoteSummary_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPublishedFile_GetUserVoteSummary_Response} CPublishedFile_GetUserVoteSummary_Response
+         */
+        CPublishedFile_GetUserVoteSummary_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPublishedFile_GetUserVoteSummary_Response)
+                return object;
+            var message = new $root.CPublishedFile_GetUserVoteSummary_Response();
+            if (object.summaries) {
+                if (!Array.isArray(object.summaries))
+                    throw TypeError(".CPublishedFile_GetUserVoteSummary_Response.summaries: array expected");
+                message.summaries = [];
+                for (var i = 0; i < object.summaries.length; ++i) {
+                    if (typeof object.summaries[i] !== "object")
+                        throw TypeError(".CPublishedFile_GetUserVoteSummary_Response.summaries: object expected");
+                    message.summaries[i] = $root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary.fromObject(object.summaries[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPublishedFile_GetUserVoteSummary_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @static
+         * @param {CPublishedFile_GetUserVoteSummary_Response} message CPublishedFile_GetUserVoteSummary_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPublishedFile_GetUserVoteSummary_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.summaries = [];
+            if (message.summaries && message.summaries.length) {
+                object.summaries = [];
+                for (var j = 0; j < message.summaries.length; ++j)
+                    object.summaries[j] = $root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary.toObject(message.summaries[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPublishedFile_GetUserVoteSummary_Response to JSON.
+         * @function toJSON
+         * @memberof CPublishedFile_GetUserVoteSummary_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPublishedFile_GetUserVoteSummary_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CPublishedFile_GetUserVoteSummary_Response.VoteSummary = (function() {
+    
+            /**
+             * Properties of a VoteSummary.
+             * @memberof CPublishedFile_GetUserVoteSummary_Response
+             * @interface IVoteSummary
+             * @property {number|Long|null} [publishedfileid] VoteSummary publishedfileid
+             * @property {boolean|null} [vote_for] VoteSummary vote_for
+             * @property {boolean|null} [vote_against] VoteSummary vote_against
+             * @property {boolean|null} [reported] VoteSummary reported
+             */
+    
+            /**
+             * Constructs a new VoteSummary.
+             * @memberof CPublishedFile_GetUserVoteSummary_Response
+             * @classdesc Represents a VoteSummary.
+             * @implements IVoteSummary
+             * @constructor
+             * @param {CPublishedFile_GetUserVoteSummary_Response.IVoteSummary=} [properties] Properties to set
+             */
+            function VoteSummary(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * VoteSummary publishedfileid.
+             * @member {number|Long} publishedfileid
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @instance
+             */
+            VoteSummary.prototype.publishedfileid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * VoteSummary vote_for.
+             * @member {boolean} vote_for
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @instance
+             */
+            VoteSummary.prototype.vote_for = false;
+    
+            /**
+             * VoteSummary vote_against.
+             * @member {boolean} vote_against
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @instance
+             */
+            VoteSummary.prototype.vote_against = false;
+    
+            /**
+             * VoteSummary reported.
+             * @member {boolean} reported
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @instance
+             */
+            VoteSummary.prototype.reported = false;
+    
+            /**
+             * Creates a new VoteSummary instance using the specified properties.
+             * @function create
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {CPublishedFile_GetUserVoteSummary_Response.IVoteSummary=} [properties] Properties to set
+             * @returns {CPublishedFile_GetUserVoteSummary_Response.VoteSummary} VoteSummary instance
+             */
+            VoteSummary.create = function create(properties) {
+                return new VoteSummary(properties);
+            };
+    
+            /**
+             * Encodes the specified VoteSummary message. Does not implicitly {@link CPublishedFile_GetUserVoteSummary_Response.VoteSummary.verify|verify} messages.
+             * @function encode
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {CPublishedFile_GetUserVoteSummary_Response.IVoteSummary} message VoteSummary message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            VoteSummary.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.publishedfileid != null && message.hasOwnProperty("publishedfileid"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.publishedfileid);
+                if (message.vote_for != null && message.hasOwnProperty("vote_for"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.vote_for);
+                if (message.vote_against != null && message.hasOwnProperty("vote_against"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.vote_against);
+                if (message.reported != null && message.hasOwnProperty("reported"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reported);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified VoteSummary message, length delimited. Does not implicitly {@link CPublishedFile_GetUserVoteSummary_Response.VoteSummary.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {CPublishedFile_GetUserVoteSummary_Response.IVoteSummary} message VoteSummary message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            VoteSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a VoteSummary message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPublishedFile_GetUserVoteSummary_Response.VoteSummary} VoteSummary
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            VoteSummary.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.publishedfileid = reader.fixed64();
+                        break;
+                    case 2:
+                        message.vote_for = reader.bool();
+                        break;
+                    case 3:
+                        message.vote_against = reader.bool();
+                        break;
+                    case 4:
+                        message.reported = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a VoteSummary message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPublishedFile_GetUserVoteSummary_Response.VoteSummary} VoteSummary
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            VoteSummary.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a VoteSummary message.
+             * @function verify
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            VoteSummary.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.publishedfileid != null && message.hasOwnProperty("publishedfileid"))
+                    if (!$util.isInteger(message.publishedfileid) && !(message.publishedfileid && $util.isInteger(message.publishedfileid.low) && $util.isInteger(message.publishedfileid.high)))
+                        return "publishedfileid: integer|Long expected";
+                if (message.vote_for != null && message.hasOwnProperty("vote_for"))
+                    if (typeof message.vote_for !== "boolean")
+                        return "vote_for: boolean expected";
+                if (message.vote_against != null && message.hasOwnProperty("vote_against"))
+                    if (typeof message.vote_against !== "boolean")
+                        return "vote_against: boolean expected";
+                if (message.reported != null && message.hasOwnProperty("reported"))
+                    if (typeof message.reported !== "boolean")
+                        return "reported: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates a VoteSummary message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPublishedFile_GetUserVoteSummary_Response.VoteSummary} VoteSummary
+             */
+            VoteSummary.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary)
+                    return object;
+                var message = new $root.CPublishedFile_GetUserVoteSummary_Response.VoteSummary();
+                if (object.publishedfileid != null)
+                    if ($util.Long)
+                        (message.publishedfileid = $util.Long.fromValue(object.publishedfileid)).unsigned = false;
+                    else if (typeof object.publishedfileid === "string")
+                        message.publishedfileid = parseInt(object.publishedfileid, 10);
+                    else if (typeof object.publishedfileid === "number")
+                        message.publishedfileid = object.publishedfileid;
+                    else if (typeof object.publishedfileid === "object")
+                        message.publishedfileid = new $util.LongBits(object.publishedfileid.low >>> 0, object.publishedfileid.high >>> 0).toNumber();
+                if (object.vote_for != null)
+                    message.vote_for = Boolean(object.vote_for);
+                if (object.vote_against != null)
+                    message.vote_against = Boolean(object.vote_against);
+                if (object.reported != null)
+                    message.reported = Boolean(object.reported);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a VoteSummary message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @static
+             * @param {CPublishedFile_GetUserVoteSummary_Response.VoteSummary} message VoteSummary
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            VoteSummary.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.publishedfileid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.publishedfileid = options.longs === String ? "0" : 0;
+                    object.vote_for = false;
+                    object.vote_against = false;
+                    object.reported = false;
+                }
+                if (message.publishedfileid != null && message.hasOwnProperty("publishedfileid"))
+                    if (typeof message.publishedfileid === "number")
+                        object.publishedfileid = options.longs === String ? String(message.publishedfileid) : message.publishedfileid;
+                    else
+                        object.publishedfileid = options.longs === String ? $util.Long.prototype.toString.call(message.publishedfileid) : options.longs === Number ? new $util.LongBits(message.publishedfileid.low >>> 0, message.publishedfileid.high >>> 0).toNumber() : message.publishedfileid;
+                if (message.vote_for != null && message.hasOwnProperty("vote_for"))
+                    object.vote_for = message.vote_for;
+                if (message.vote_against != null && message.hasOwnProperty("vote_against"))
+                    object.vote_against = message.vote_against;
+                if (message.reported != null && message.hasOwnProperty("reported"))
+                    object.reported = message.reported;
+                return object;
+            };
+    
+            /**
+             * Converts this VoteSummary to JSON.
+             * @function toJSON
+             * @memberof CPublishedFile_GetUserVoteSummary_Response.VoteSummary
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            VoteSummary.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return VoteSummary;
+        })();
+    
+        return CPublishedFile_GetUserVoteSummary_Response;
+    })();
+    
     $root.CPublishedFile_FileSubscribed_Notification = (function() {
     
         /**
@@ -17396,6 +19421,7 @@
          * @property {number|null} [rtime_subscribed] CPublishedFile_FileSubscribed_Notification rtime_subscribed
          * @property {boolean|null} [is_depot_content] CPublishedFile_FileSubscribed_Notification is_depot_content
          * @property {number|null} [rtime_updated] CPublishedFile_FileSubscribed_Notification rtime_updated
+         * @property {Array.<CPublishedFile_FileSubscribed_Notification.IRevisionData>|null} [revisions] CPublishedFile_FileSubscribed_Notification revisions
          */
     
         /**
@@ -17407,6 +19433,7 @@
          * @param {ICPublishedFile_FileSubscribed_Notification=} [properties] Properties to set
          */
         function CPublishedFile_FileSubscribed_Notification(properties) {
+            this.revisions = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -17470,6 +19497,14 @@
         CPublishedFile_FileSubscribed_Notification.prototype.rtime_updated = 0;
     
         /**
+         * CPublishedFile_FileSubscribed_Notification revisions.
+         * @member {Array.<CPublishedFile_FileSubscribed_Notification.IRevisionData>} revisions
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.revisions = $util.emptyArray;
+    
+        /**
          * Creates a new CPublishedFile_FileSubscribed_Notification instance using the specified properties.
          * @function create
          * @memberof CPublishedFile_FileSubscribed_Notification
@@ -17507,6 +19542,9 @@
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.is_depot_content);
             if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.rtime_updated);
+            if (message.revisions != null && message.revisions.length)
+                for (var i = 0; i < message.revisions.length; ++i)
+                    $root.CPublishedFile_FileSubscribed_Notification.RevisionData.encode(message.revisions[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
             return writer;
         };
     
@@ -17561,6 +19599,11 @@
                     break;
                 case 7:
                     message.rtime_updated = reader.uint32();
+                    break;
+                case 8:
+                    if (!(message.revisions && message.revisions.length))
+                        message.revisions = [];
+                    message.revisions.push($root.CPublishedFile_FileSubscribed_Notification.RevisionData.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -17618,6 +19661,15 @@
             if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
                 if (!$util.isInteger(message.rtime_updated))
                     return "rtime_updated: integer expected";
+            if (message.revisions != null && message.hasOwnProperty("revisions")) {
+                if (!Array.isArray(message.revisions))
+                    return "revisions: array expected";
+                for (var i = 0; i < message.revisions.length; ++i) {
+                    var error = $root.CPublishedFile_FileSubscribed_Notification.RevisionData.verify(message.revisions[i]);
+                    if (error)
+                        return "revisions." + error;
+                }
+            }
             return null;
         };
     
@@ -17661,6 +19713,16 @@
                 message.is_depot_content = Boolean(object.is_depot_content);
             if (object.rtime_updated != null)
                 message.rtime_updated = object.rtime_updated >>> 0;
+            if (object.revisions) {
+                if (!Array.isArray(object.revisions))
+                    throw TypeError(".CPublishedFile_FileSubscribed_Notification.revisions: array expected");
+                message.revisions = [];
+                for (var i = 0; i < object.revisions.length; ++i) {
+                    if (typeof object.revisions[i] !== "object")
+                        throw TypeError(".CPublishedFile_FileSubscribed_Notification.revisions: object expected");
+                    message.revisions[i] = $root.CPublishedFile_FileSubscribed_Notification.RevisionData.fromObject(object.revisions[i]);
+                }
+            }
             return message;
         };
     
@@ -17677,6 +19739,8 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.revisions = [];
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -17714,6 +19778,11 @@
                 object.is_depot_content = message.is_depot_content;
             if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
                 object.rtime_updated = message.rtime_updated;
+            if (message.revisions && message.revisions.length) {
+                object.revisions = [];
+                for (var j = 0; j < message.revisions.length; ++j)
+                    object.revisions[j] = $root.CPublishedFile_FileSubscribed_Notification.RevisionData.toObject(message.revisions[j], options);
+            }
             return object;
         };
     
@@ -17727,6 +19796,285 @@
         CPublishedFile_FileSubscribed_Notification.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
+    
+        CPublishedFile_FileSubscribed_Notification.RevisionData = (function() {
+    
+            /**
+             * Properties of a RevisionData.
+             * @memberof CPublishedFile_FileSubscribed_Notification
+             * @interface IRevisionData
+             * @property {EPublishedFileRevision|null} [revision] RevisionData revision
+             * @property {number|Long|null} [file_hcontent] RevisionData file_hcontent
+             * @property {number|null} [rtime_updated] RevisionData rtime_updated
+             */
+    
+            /**
+             * Constructs a new RevisionData.
+             * @memberof CPublishedFile_FileSubscribed_Notification
+             * @classdesc Represents a RevisionData.
+             * @implements IRevisionData
+             * @constructor
+             * @param {CPublishedFile_FileSubscribed_Notification.IRevisionData=} [properties] Properties to set
+             */
+            function RevisionData(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * RevisionData revision.
+             * @member {EPublishedFileRevision} revision
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @instance
+             */
+            RevisionData.prototype.revision = 0;
+    
+            /**
+             * RevisionData file_hcontent.
+             * @member {number|Long} file_hcontent
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @instance
+             */
+            RevisionData.prototype.file_hcontent = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * RevisionData rtime_updated.
+             * @member {number} rtime_updated
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @instance
+             */
+            RevisionData.prototype.rtime_updated = 0;
+    
+            /**
+             * Creates a new RevisionData instance using the specified properties.
+             * @function create
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {CPublishedFile_FileSubscribed_Notification.IRevisionData=} [properties] Properties to set
+             * @returns {CPublishedFile_FileSubscribed_Notification.RevisionData} RevisionData instance
+             */
+            RevisionData.create = function create(properties) {
+                return new RevisionData(properties);
+            };
+    
+            /**
+             * Encodes the specified RevisionData message. Does not implicitly {@link CPublishedFile_FileSubscribed_Notification.RevisionData.verify|verify} messages.
+             * @function encode
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {CPublishedFile_FileSubscribed_Notification.IRevisionData} message RevisionData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            RevisionData.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.revision != null && message.hasOwnProperty("revision"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.revision);
+                if (message.file_hcontent != null && message.hasOwnProperty("file_hcontent"))
+                    writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.file_hcontent);
+                if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.rtime_updated);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified RevisionData message, length delimited. Does not implicitly {@link CPublishedFile_FileSubscribed_Notification.RevisionData.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {CPublishedFile_FileSubscribed_Notification.IRevisionData} message RevisionData message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            RevisionData.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a RevisionData message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPublishedFile_FileSubscribed_Notification.RevisionData} RevisionData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            RevisionData.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_FileSubscribed_Notification.RevisionData();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.revision = reader.int32();
+                        break;
+                    case 2:
+                        message.file_hcontent = reader.fixed64();
+                        break;
+                    case 3:
+                        message.rtime_updated = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a RevisionData message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPublishedFile_FileSubscribed_Notification.RevisionData} RevisionData
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            RevisionData.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a RevisionData message.
+             * @function verify
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            RevisionData.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.revision != null && message.hasOwnProperty("revision"))
+                    switch (message.revision) {
+                    default:
+                        return "revision: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                        break;
+                    }
+                if (message.file_hcontent != null && message.hasOwnProperty("file_hcontent"))
+                    if (!$util.isInteger(message.file_hcontent) && !(message.file_hcontent && $util.isInteger(message.file_hcontent.low) && $util.isInteger(message.file_hcontent.high)))
+                        return "file_hcontent: integer|Long expected";
+                if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
+                    if (!$util.isInteger(message.rtime_updated))
+                        return "rtime_updated: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a RevisionData message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPublishedFile_FileSubscribed_Notification.RevisionData} RevisionData
+             */
+            RevisionData.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPublishedFile_FileSubscribed_Notification.RevisionData)
+                    return object;
+                var message = new $root.CPublishedFile_FileSubscribed_Notification.RevisionData();
+                switch (object.revision) {
+                case "k_EPublishedFileRevision_Default":
+                case 0:
+                    message.revision = 0;
+                    break;
+                case "k_EPublishedFileRevision_Latest":
+                case 1:
+                    message.revision = 1;
+                    break;
+                case "k_EPublishedFileRevision_ApprovedSnapshot":
+                case 2:
+                    message.revision = 2;
+                    break;
+                case "k_EPublishedFileRevision_ApprovedSnapshot_China":
+                case 3:
+                    message.revision = 3;
+                    break;
+                case "k_EPublishedFileRevision_RejectedSnapshot":
+                case 4:
+                    message.revision = 4;
+                    break;
+                case "k_EPublishedFileRevision_RejectedSnapshot_China":
+                case 5:
+                    message.revision = 5;
+                    break;
+                }
+                if (object.file_hcontent != null)
+                    if ($util.Long)
+                        (message.file_hcontent = $util.Long.fromValue(object.file_hcontent)).unsigned = false;
+                    else if (typeof object.file_hcontent === "string")
+                        message.file_hcontent = parseInt(object.file_hcontent, 10);
+                    else if (typeof object.file_hcontent === "number")
+                        message.file_hcontent = object.file_hcontent;
+                    else if (typeof object.file_hcontent === "object")
+                        message.file_hcontent = new $util.LongBits(object.file_hcontent.low >>> 0, object.file_hcontent.high >>> 0).toNumber();
+                if (object.rtime_updated != null)
+                    message.rtime_updated = object.rtime_updated >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a RevisionData message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @static
+             * @param {CPublishedFile_FileSubscribed_Notification.RevisionData} message RevisionData
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            RevisionData.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.revision = options.enums === String ? "k_EPublishedFileRevision_Default" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.file_hcontent = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.file_hcontent = options.longs === String ? "0" : 0;
+                    object.rtime_updated = 0;
+                }
+                if (message.revision != null && message.hasOwnProperty("revision"))
+                    object.revision = options.enums === String ? $root.EPublishedFileRevision[message.revision] : message.revision;
+                if (message.file_hcontent != null && message.hasOwnProperty("file_hcontent"))
+                    if (typeof message.file_hcontent === "number")
+                        object.file_hcontent = options.longs === String ? String(message.file_hcontent) : message.file_hcontent;
+                    else
+                        object.file_hcontent = options.longs === String ? $util.Long.prototype.toString.call(message.file_hcontent) : options.longs === Number ? new $util.LongBits(message.file_hcontent.low >>> 0, message.file_hcontent.high >>> 0).toNumber() : message.file_hcontent;
+                if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
+                    object.rtime_updated = message.rtime_updated;
+                return object;
+            };
+    
+            /**
+             * Converts this RevisionData to JSON.
+             * @function toJSON
+             * @memberof CPublishedFile_FileSubscribed_Notification.RevisionData
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            RevisionData.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return RevisionData;
+        })();
     
         return CPublishedFile_FileSubscribed_Notification;
     })();
@@ -18934,6 +21282,39 @@
          * @instance
          * @param {ICPublishedFile_RemoveChild_Request} request CPublishedFile_RemoveChild_Request message or plain object
          * @returns {Promise<CPublishedFile_RemoveChild_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link PublishedFile#getUserVoteSummary}.
+         * @memberof PublishedFile
+         * @typedef GetUserVoteSummaryCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPublishedFile_GetUserVoteSummary_Response} [response] CPublishedFile_GetUserVoteSummary_Response
+         */
+    
+        /**
+         * Calls GetUserVoteSummary.
+         * @function getUserVoteSummary
+         * @memberof PublishedFile
+         * @instance
+         * @param {ICPublishedFile_GetUserVoteSummary_Request} request CPublishedFile_GetUserVoteSummary_Request message or plain object
+         * @param {PublishedFile.GetUserVoteSummaryCallback} callback Node-style callback called with the error, if any, and CPublishedFile_GetUserVoteSummary_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PublishedFile.prototype.getUserVoteSummary = function getUserVoteSummary(request, callback) {
+            return this.rpcCall(getUserVoteSummary, $root.CPublishedFile_GetUserVoteSummary_Request, $root.CPublishedFile_GetUserVoteSummary_Response, request, callback);
+        }, "name", { value: "GetUserVoteSummary" });
+    
+        /**
+         * Calls GetUserVoteSummary.
+         * @function getUserVoteSummary
+         * @memberof PublishedFile
+         * @instance
+         * @param {ICPublishedFile_GetUserVoteSummary_Request} request CPublishedFile_GetUserVoteSummary_Request message or plain object
+         * @returns {Promise<CPublishedFile_GetUserVoteSummary_Response>} Promise
          * @variation 2
          */
     

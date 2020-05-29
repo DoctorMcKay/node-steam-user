@@ -60,6 +60,851 @@
         return values;
     })();
     
+    $root.CUserAccount_GetAvailableValveDiscountPromotions_Request = (function() {
+    
+        /**
+         * Properties of a CUserAccount_GetAvailableValveDiscountPromotions_Request.
+         * @exports ICUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @interface ICUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @property {string|null} [country_code] CUserAccount_GetAvailableValveDiscountPromotions_Request country_code
+         */
+    
+        /**
+         * Constructs a new CUserAccount_GetAvailableValveDiscountPromotions_Request.
+         * @exports CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @classdesc Represents a CUserAccount_GetAvailableValveDiscountPromotions_Request.
+         * @implements ICUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @constructor
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Request=} [properties] Properties to set
+         */
+        function CUserAccount_GetAvailableValveDiscountPromotions_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_GetAvailableValveDiscountPromotions_Request country_code.
+         * @member {string} country_code
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @instance
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.prototype.country_code = "";
+    
+        /**
+         * Creates a new CUserAccount_GetAvailableValveDiscountPromotions_Request instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Request=} [properties] Properties to set
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Request} CUserAccount_GetAvailableValveDiscountPromotions_Request instance
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.create = function create(properties) {
+            return new CUserAccount_GetAvailableValveDiscountPromotions_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetAvailableValveDiscountPromotions_Request message. Does not implicitly {@link CUserAccount_GetAvailableValveDiscountPromotions_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Request} message CUserAccount_GetAvailableValveDiscountPromotions_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.country_code);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetAvailableValveDiscountPromotions_Request message, length delimited. Does not implicitly {@link CUserAccount_GetAvailableValveDiscountPromotions_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Request} message CUserAccount_GetAvailableValveDiscountPromotions_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetAvailableValveDiscountPromotions_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Request} CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_GetAvailableValveDiscountPromotions_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.country_code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetAvailableValveDiscountPromotions_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Request} CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_GetAvailableValveDiscountPromotions_Request message.
+         * @function verify
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                if (!$util.isString(message.country_code))
+                    return "country_code: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_GetAvailableValveDiscountPromotions_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Request} CUserAccount_GetAvailableValveDiscountPromotions_Request
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_GetAvailableValveDiscountPromotions_Request)
+                return object;
+            var message = new $root.CUserAccount_GetAvailableValveDiscountPromotions_Request();
+            if (object.country_code != null)
+                message.country_code = String(object.country_code);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_GetAvailableValveDiscountPromotions_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @static
+         * @param {CUserAccount_GetAvailableValveDiscountPromotions_Request} message CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.country_code = "";
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                object.country_code = message.country_code;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_GetAvailableValveDiscountPromotions_Request to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_GetAvailableValveDiscountPromotions_Request;
+    })();
+    
+    $root.CUserAccount_GetAvailableValveDiscountPromotions_Response = (function() {
+    
+        /**
+         * Properties of a CUserAccount_GetAvailableValveDiscountPromotions_Response.
+         * @exports ICUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @interface ICUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @property {Array.<CUserAccount_GetAvailableValveDiscountPromotions_Response.IValveDiscountPromotionDetails>|null} [promotions] CUserAccount_GetAvailableValveDiscountPromotions_Response promotions
+         */
+    
+        /**
+         * Constructs a new CUserAccount_GetAvailableValveDiscountPromotions_Response.
+         * @exports CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @classdesc Represents a CUserAccount_GetAvailableValveDiscountPromotions_Response.
+         * @implements ICUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @constructor
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Response=} [properties] Properties to set
+         */
+        function CUserAccount_GetAvailableValveDiscountPromotions_Response(properties) {
+            this.promotions = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_GetAvailableValveDiscountPromotions_Response promotions.
+         * @member {Array.<CUserAccount_GetAvailableValveDiscountPromotions_Response.IValveDiscountPromotionDetails>} promotions
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @instance
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.prototype.promotions = $util.emptyArray;
+    
+        /**
+         * Creates a new CUserAccount_GetAvailableValveDiscountPromotions_Response instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Response=} [properties] Properties to set
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response} CUserAccount_GetAvailableValveDiscountPromotions_Response instance
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.create = function create(properties) {
+            return new CUserAccount_GetAvailableValveDiscountPromotions_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetAvailableValveDiscountPromotions_Response message. Does not implicitly {@link CUserAccount_GetAvailableValveDiscountPromotions_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Response} message CUserAccount_GetAvailableValveDiscountPromotions_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.promotions != null && message.promotions.length)
+                for (var i = 0; i < message.promotions.length; ++i)
+                    $root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.encode(message.promotions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetAvailableValveDiscountPromotions_Response message, length delimited. Does not implicitly {@link CUserAccount_GetAvailableValveDiscountPromotions_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Response} message CUserAccount_GetAvailableValveDiscountPromotions_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetAvailableValveDiscountPromotions_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response} CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_GetAvailableValveDiscountPromotions_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.promotions && message.promotions.length))
+                        message.promotions = [];
+                    message.promotions.push($root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetAvailableValveDiscountPromotions_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response} CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_GetAvailableValveDiscountPromotions_Response message.
+         * @function verify
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.promotions != null && message.hasOwnProperty("promotions")) {
+                if (!Array.isArray(message.promotions))
+                    return "promotions: array expected";
+                for (var i = 0; i < message.promotions.length; ++i) {
+                    var error = $root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.verify(message.promotions[i]);
+                    if (error)
+                        return "promotions." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_GetAvailableValveDiscountPromotions_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response} CUserAccount_GetAvailableValveDiscountPromotions_Response
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_GetAvailableValveDiscountPromotions_Response)
+                return object;
+            var message = new $root.CUserAccount_GetAvailableValveDiscountPromotions_Response();
+            if (object.promotions) {
+                if (!Array.isArray(object.promotions))
+                    throw TypeError(".CUserAccount_GetAvailableValveDiscountPromotions_Response.promotions: array expected");
+                message.promotions = [];
+                for (var i = 0; i < object.promotions.length; ++i) {
+                    if (typeof object.promotions[i] !== "object")
+                        throw TypeError(".CUserAccount_GetAvailableValveDiscountPromotions_Response.promotions: object expected");
+                    message.promotions[i] = $root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.fromObject(object.promotions[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_GetAvailableValveDiscountPromotions_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @static
+         * @param {CUserAccount_GetAvailableValveDiscountPromotions_Response} message CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.promotions = [];
+            if (message.promotions && message.promotions.length) {
+                object.promotions = [];
+                for (var j = 0; j < message.promotions.length; ++j)
+                    object.promotions[j] = $root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.toObject(message.promotions[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_GetAvailableValveDiscountPromotions_Response to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails = (function() {
+    
+            /**
+             * Properties of a ValveDiscountPromotionDetails.
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+             * @interface IValveDiscountPromotionDetails
+             * @property {number|null} [promotionid] ValveDiscountPromotionDetails promotionid
+             * @property {string|null} [promotion_description] ValveDiscountPromotionDetails promotion_description
+             * @property {number|Long|null} [minimum_cart_amount] ValveDiscountPromotionDetails minimum_cart_amount
+             * @property {number|Long|null} [minimum_cart_amount_for_display] ValveDiscountPromotionDetails minimum_cart_amount_for_display
+             * @property {number|Long|null} [discount_amount] ValveDiscountPromotionDetails discount_amount
+             * @property {number|null} [currency_code] ValveDiscountPromotionDetails currency_code
+             * @property {number|null} [available_use_count] ValveDiscountPromotionDetails available_use_count
+             * @property {number|null} [promotional_discount_type] ValveDiscountPromotionDetails promotional_discount_type
+             * @property {number|null} [loyalty_reward_id] ValveDiscountPromotionDetails loyalty_reward_id
+             * @property {string|null} [localized_name_token] ValveDiscountPromotionDetails localized_name_token
+             * @property {number|null} [max_use_count] ValveDiscountPromotionDetails max_use_count
+             */
+    
+            /**
+             * Constructs a new ValveDiscountPromotionDetails.
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response
+             * @classdesc Represents a ValveDiscountPromotionDetails.
+             * @implements IValveDiscountPromotionDetails
+             * @constructor
+             * @param {CUserAccount_GetAvailableValveDiscountPromotions_Response.IValveDiscountPromotionDetails=} [properties] Properties to set
+             */
+            function ValveDiscountPromotionDetails(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ValveDiscountPromotionDetails promotionid.
+             * @member {number} promotionid
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.promotionid = 0;
+    
+            /**
+             * ValveDiscountPromotionDetails promotion_description.
+             * @member {string} promotion_description
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.promotion_description = "";
+    
+            /**
+             * ValveDiscountPromotionDetails minimum_cart_amount.
+             * @member {number|Long} minimum_cart_amount
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.minimum_cart_amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * ValveDiscountPromotionDetails minimum_cart_amount_for_display.
+             * @member {number|Long} minimum_cart_amount_for_display
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.minimum_cart_amount_for_display = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * ValveDiscountPromotionDetails discount_amount.
+             * @member {number|Long} discount_amount
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.discount_amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * ValveDiscountPromotionDetails currency_code.
+             * @member {number} currency_code
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.currency_code = 0;
+    
+            /**
+             * ValveDiscountPromotionDetails available_use_count.
+             * @member {number} available_use_count
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.available_use_count = 0;
+    
+            /**
+             * ValveDiscountPromotionDetails promotional_discount_type.
+             * @member {number} promotional_discount_type
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.promotional_discount_type = 0;
+    
+            /**
+             * ValveDiscountPromotionDetails loyalty_reward_id.
+             * @member {number} loyalty_reward_id
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.loyalty_reward_id = 0;
+    
+            /**
+             * ValveDiscountPromotionDetails localized_name_token.
+             * @member {string} localized_name_token
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.localized_name_token = "";
+    
+            /**
+             * ValveDiscountPromotionDetails max_use_count.
+             * @member {number} max_use_count
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             */
+            ValveDiscountPromotionDetails.prototype.max_use_count = 0;
+    
+            /**
+             * Creates a new ValveDiscountPromotionDetails instance using the specified properties.
+             * @function create
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {CUserAccount_GetAvailableValveDiscountPromotions_Response.IValveDiscountPromotionDetails=} [properties] Properties to set
+             * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails} ValveDiscountPromotionDetails instance
+             */
+            ValveDiscountPromotionDetails.create = function create(properties) {
+                return new ValveDiscountPromotionDetails(properties);
+            };
+    
+            /**
+             * Encodes the specified ValveDiscountPromotionDetails message. Does not implicitly {@link CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.verify|verify} messages.
+             * @function encode
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {CUserAccount_GetAvailableValveDiscountPromotions_Response.IValveDiscountPromotionDetails} message ValveDiscountPromotionDetails message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ValveDiscountPromotionDetails.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.promotionid != null && message.hasOwnProperty("promotionid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.promotionid);
+                if (message.promotion_description != null && message.hasOwnProperty("promotion_description"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.promotion_description);
+                if (message.minimum_cart_amount != null && message.hasOwnProperty("minimum_cart_amount"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.minimum_cart_amount);
+                if (message.minimum_cart_amount_for_display != null && message.hasOwnProperty("minimum_cart_amount_for_display"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.minimum_cart_amount_for_display);
+                if (message.discount_amount != null && message.hasOwnProperty("discount_amount"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.discount_amount);
+                if (message.currency_code != null && message.hasOwnProperty("currency_code"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.currency_code);
+                if (message.available_use_count != null && message.hasOwnProperty("available_use_count"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.available_use_count);
+                if (message.promotional_discount_type != null && message.hasOwnProperty("promotional_discount_type"))
+                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.promotional_discount_type);
+                if (message.loyalty_reward_id != null && message.hasOwnProperty("loyalty_reward_id"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.loyalty_reward_id);
+                if (message.localized_name_token != null && message.hasOwnProperty("localized_name_token"))
+                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.localized_name_token);
+                if (message.max_use_count != null && message.hasOwnProperty("max_use_count"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).int32(message.max_use_count);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ValveDiscountPromotionDetails message, length delimited. Does not implicitly {@link CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {CUserAccount_GetAvailableValveDiscountPromotions_Response.IValveDiscountPromotionDetails} message ValveDiscountPromotionDetails message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ValveDiscountPromotionDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ValveDiscountPromotionDetails message from the specified reader or buffer.
+             * @function decode
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails} ValveDiscountPromotionDetails
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ValveDiscountPromotionDetails.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.promotionid = reader.uint32();
+                        break;
+                    case 2:
+                        message.promotion_description = reader.string();
+                        break;
+                    case 3:
+                        message.minimum_cart_amount = reader.int64();
+                        break;
+                    case 4:
+                        message.minimum_cart_amount_for_display = reader.int64();
+                        break;
+                    case 5:
+                        message.discount_amount = reader.int64();
+                        break;
+                    case 6:
+                        message.currency_code = reader.int32();
+                        break;
+                    case 7:
+                        message.available_use_count = reader.int32();
+                        break;
+                    case 8:
+                        message.promotional_discount_type = reader.int32();
+                        break;
+                    case 9:
+                        message.loyalty_reward_id = reader.int32();
+                        break;
+                    case 10:
+                        message.localized_name_token = reader.string();
+                        break;
+                    case 11:
+                        message.max_use_count = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ValveDiscountPromotionDetails message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails} ValveDiscountPromotionDetails
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ValveDiscountPromotionDetails.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ValveDiscountPromotionDetails message.
+             * @function verify
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ValveDiscountPromotionDetails.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.promotionid != null && message.hasOwnProperty("promotionid"))
+                    if (!$util.isInteger(message.promotionid))
+                        return "promotionid: integer expected";
+                if (message.promotion_description != null && message.hasOwnProperty("promotion_description"))
+                    if (!$util.isString(message.promotion_description))
+                        return "promotion_description: string expected";
+                if (message.minimum_cart_amount != null && message.hasOwnProperty("minimum_cart_amount"))
+                    if (!$util.isInteger(message.minimum_cart_amount) && !(message.minimum_cart_amount && $util.isInteger(message.minimum_cart_amount.low) && $util.isInteger(message.minimum_cart_amount.high)))
+                        return "minimum_cart_amount: integer|Long expected";
+                if (message.minimum_cart_amount_for_display != null && message.hasOwnProperty("minimum_cart_amount_for_display"))
+                    if (!$util.isInteger(message.minimum_cart_amount_for_display) && !(message.minimum_cart_amount_for_display && $util.isInteger(message.minimum_cart_amount_for_display.low) && $util.isInteger(message.minimum_cart_amount_for_display.high)))
+                        return "minimum_cart_amount_for_display: integer|Long expected";
+                if (message.discount_amount != null && message.hasOwnProperty("discount_amount"))
+                    if (!$util.isInteger(message.discount_amount) && !(message.discount_amount && $util.isInteger(message.discount_amount.low) && $util.isInteger(message.discount_amount.high)))
+                        return "discount_amount: integer|Long expected";
+                if (message.currency_code != null && message.hasOwnProperty("currency_code"))
+                    if (!$util.isInteger(message.currency_code))
+                        return "currency_code: integer expected";
+                if (message.available_use_count != null && message.hasOwnProperty("available_use_count"))
+                    if (!$util.isInteger(message.available_use_count))
+                        return "available_use_count: integer expected";
+                if (message.promotional_discount_type != null && message.hasOwnProperty("promotional_discount_type"))
+                    if (!$util.isInteger(message.promotional_discount_type))
+                        return "promotional_discount_type: integer expected";
+                if (message.loyalty_reward_id != null && message.hasOwnProperty("loyalty_reward_id"))
+                    if (!$util.isInteger(message.loyalty_reward_id))
+                        return "loyalty_reward_id: integer expected";
+                if (message.localized_name_token != null && message.hasOwnProperty("localized_name_token"))
+                    if (!$util.isString(message.localized_name_token))
+                        return "localized_name_token: string expected";
+                if (message.max_use_count != null && message.hasOwnProperty("max_use_count"))
+                    if (!$util.isInteger(message.max_use_count))
+                        return "max_use_count: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ValveDiscountPromotionDetails message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails} ValveDiscountPromotionDetails
+             */
+            ValveDiscountPromotionDetails.fromObject = function fromObject(object) {
+                if (object instanceof $root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails)
+                    return object;
+                var message = new $root.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails();
+                if (object.promotionid != null)
+                    message.promotionid = object.promotionid >>> 0;
+                if (object.promotion_description != null)
+                    message.promotion_description = String(object.promotion_description);
+                if (object.minimum_cart_amount != null)
+                    if ($util.Long)
+                        (message.minimum_cart_amount = $util.Long.fromValue(object.minimum_cart_amount)).unsigned = false;
+                    else if (typeof object.minimum_cart_amount === "string")
+                        message.minimum_cart_amount = parseInt(object.minimum_cart_amount, 10);
+                    else if (typeof object.minimum_cart_amount === "number")
+                        message.minimum_cart_amount = object.minimum_cart_amount;
+                    else if (typeof object.minimum_cart_amount === "object")
+                        message.minimum_cart_amount = new $util.LongBits(object.minimum_cart_amount.low >>> 0, object.minimum_cart_amount.high >>> 0).toNumber();
+                if (object.minimum_cart_amount_for_display != null)
+                    if ($util.Long)
+                        (message.minimum_cart_amount_for_display = $util.Long.fromValue(object.minimum_cart_amount_for_display)).unsigned = false;
+                    else if (typeof object.minimum_cart_amount_for_display === "string")
+                        message.minimum_cart_amount_for_display = parseInt(object.minimum_cart_amount_for_display, 10);
+                    else if (typeof object.minimum_cart_amount_for_display === "number")
+                        message.minimum_cart_amount_for_display = object.minimum_cart_amount_for_display;
+                    else if (typeof object.minimum_cart_amount_for_display === "object")
+                        message.minimum_cart_amount_for_display = new $util.LongBits(object.minimum_cart_amount_for_display.low >>> 0, object.minimum_cart_amount_for_display.high >>> 0).toNumber();
+                if (object.discount_amount != null)
+                    if ($util.Long)
+                        (message.discount_amount = $util.Long.fromValue(object.discount_amount)).unsigned = false;
+                    else if (typeof object.discount_amount === "string")
+                        message.discount_amount = parseInt(object.discount_amount, 10);
+                    else if (typeof object.discount_amount === "number")
+                        message.discount_amount = object.discount_amount;
+                    else if (typeof object.discount_amount === "object")
+                        message.discount_amount = new $util.LongBits(object.discount_amount.low >>> 0, object.discount_amount.high >>> 0).toNumber();
+                if (object.currency_code != null)
+                    message.currency_code = object.currency_code | 0;
+                if (object.available_use_count != null)
+                    message.available_use_count = object.available_use_count | 0;
+                if (object.promotional_discount_type != null)
+                    message.promotional_discount_type = object.promotional_discount_type | 0;
+                if (object.loyalty_reward_id != null)
+                    message.loyalty_reward_id = object.loyalty_reward_id | 0;
+                if (object.localized_name_token != null)
+                    message.localized_name_token = String(object.localized_name_token);
+                if (object.max_use_count != null)
+                    message.max_use_count = object.max_use_count | 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ValveDiscountPromotionDetails message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @static
+             * @param {CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails} message ValveDiscountPromotionDetails
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ValveDiscountPromotionDetails.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.promotionid = 0;
+                    object.promotion_description = "";
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.minimum_cart_amount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.minimum_cart_amount = options.longs === String ? "0" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.minimum_cart_amount_for_display = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.minimum_cart_amount_for_display = options.longs === String ? "0" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.discount_amount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.discount_amount = options.longs === String ? "0" : 0;
+                    object.currency_code = 0;
+                    object.available_use_count = 0;
+                    object.promotional_discount_type = 0;
+                    object.loyalty_reward_id = 0;
+                    object.localized_name_token = "";
+                    object.max_use_count = 0;
+                }
+                if (message.promotionid != null && message.hasOwnProperty("promotionid"))
+                    object.promotionid = message.promotionid;
+                if (message.promotion_description != null && message.hasOwnProperty("promotion_description"))
+                    object.promotion_description = message.promotion_description;
+                if (message.minimum_cart_amount != null && message.hasOwnProperty("minimum_cart_amount"))
+                    if (typeof message.minimum_cart_amount === "number")
+                        object.minimum_cart_amount = options.longs === String ? String(message.minimum_cart_amount) : message.minimum_cart_amount;
+                    else
+                        object.minimum_cart_amount = options.longs === String ? $util.Long.prototype.toString.call(message.minimum_cart_amount) : options.longs === Number ? new $util.LongBits(message.minimum_cart_amount.low >>> 0, message.minimum_cart_amount.high >>> 0).toNumber() : message.minimum_cart_amount;
+                if (message.minimum_cart_amount_for_display != null && message.hasOwnProperty("minimum_cart_amount_for_display"))
+                    if (typeof message.minimum_cart_amount_for_display === "number")
+                        object.minimum_cart_amount_for_display = options.longs === String ? String(message.minimum_cart_amount_for_display) : message.minimum_cart_amount_for_display;
+                    else
+                        object.minimum_cart_amount_for_display = options.longs === String ? $util.Long.prototype.toString.call(message.minimum_cart_amount_for_display) : options.longs === Number ? new $util.LongBits(message.minimum_cart_amount_for_display.low >>> 0, message.minimum_cart_amount_for_display.high >>> 0).toNumber() : message.minimum_cart_amount_for_display;
+                if (message.discount_amount != null && message.hasOwnProperty("discount_amount"))
+                    if (typeof message.discount_amount === "number")
+                        object.discount_amount = options.longs === String ? String(message.discount_amount) : message.discount_amount;
+                    else
+                        object.discount_amount = options.longs === String ? $util.Long.prototype.toString.call(message.discount_amount) : options.longs === Number ? new $util.LongBits(message.discount_amount.low >>> 0, message.discount_amount.high >>> 0).toNumber() : message.discount_amount;
+                if (message.currency_code != null && message.hasOwnProperty("currency_code"))
+                    object.currency_code = message.currency_code;
+                if (message.available_use_count != null && message.hasOwnProperty("available_use_count"))
+                    object.available_use_count = message.available_use_count;
+                if (message.promotional_discount_type != null && message.hasOwnProperty("promotional_discount_type"))
+                    object.promotional_discount_type = message.promotional_discount_type;
+                if (message.loyalty_reward_id != null && message.hasOwnProperty("loyalty_reward_id"))
+                    object.loyalty_reward_id = message.loyalty_reward_id;
+                if (message.localized_name_token != null && message.hasOwnProperty("localized_name_token"))
+                    object.localized_name_token = message.localized_name_token;
+                if (message.max_use_count != null && message.hasOwnProperty("max_use_count"))
+                    object.max_use_count = message.max_use_count;
+                return object;
+            };
+    
+            /**
+             * Converts this ValveDiscountPromotionDetails to JSON.
+             * @function toJSON
+             * @memberof CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ValveDiscountPromotionDetails.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ValveDiscountPromotionDetails;
+        })();
+    
+        return CUserAccount_GetAvailableValveDiscountPromotions_Response;
+    })();
+    
     $root.CUserAccount_GetAccountLinkStatus_Request = (function() {
     
         /**
@@ -228,6 +1073,7 @@
          * @interface ICUserAccount_GetAccountLinkStatus_Response
          * @property {number|null} [pwid] CUserAccount_GetAccountLinkStatus_Response pwid
          * @property {number|null} [identity_verification] CUserAccount_GetAccountLinkStatus_Response identity_verification
+         * @property {boolean|null} [performed_age_verification] CUserAccount_GetAccountLinkStatus_Response performed_age_verification
          */
     
         /**
@@ -262,6 +1108,14 @@
         CUserAccount_GetAccountLinkStatus_Response.prototype.identity_verification = 0;
     
         /**
+         * CUserAccount_GetAccountLinkStatus_Response performed_age_verification.
+         * @member {boolean} performed_age_verification
+         * @memberof CUserAccount_GetAccountLinkStatus_Response
+         * @instance
+         */
+        CUserAccount_GetAccountLinkStatus_Response.prototype.performed_age_verification = false;
+    
+        /**
          * Creates a new CUserAccount_GetAccountLinkStatus_Response instance using the specified properties.
          * @function create
          * @memberof CUserAccount_GetAccountLinkStatus_Response
@@ -289,6 +1143,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.pwid);
             if (message.identity_verification != null && message.hasOwnProperty("identity_verification"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.identity_verification);
+            if (message.performed_age_verification != null && message.hasOwnProperty("performed_age_verification"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.performed_age_verification);
             return writer;
         };
     
@@ -328,6 +1184,9 @@
                     break;
                 case 2:
                     message.identity_verification = reader.uint32();
+                    break;
+                case 3:
+                    message.performed_age_verification = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -370,6 +1229,9 @@
             if (message.identity_verification != null && message.hasOwnProperty("identity_verification"))
                 if (!$util.isInteger(message.identity_verification))
                     return "identity_verification: integer expected";
+            if (message.performed_age_verification != null && message.hasOwnProperty("performed_age_verification"))
+                if (typeof message.performed_age_verification !== "boolean")
+                    return "performed_age_verification: boolean expected";
             return null;
         };
     
@@ -389,6 +1251,8 @@
                 message.pwid = object.pwid >>> 0;
             if (object.identity_verification != null)
                 message.identity_verification = object.identity_verification >>> 0;
+            if (object.performed_age_verification != null)
+                message.performed_age_verification = Boolean(object.performed_age_verification);
             return message;
         };
     
@@ -408,11 +1272,14 @@
             if (options.defaults) {
                 object.pwid = 0;
                 object.identity_verification = 0;
+                object.performed_age_verification = false;
             }
             if (message.pwid != null && message.hasOwnProperty("pwid"))
                 object.pwid = message.pwid;
             if (message.identity_verification != null && message.hasOwnProperty("identity_verification"))
                 object.identity_verification = message.identity_verification;
+            if (message.performed_age_verification != null && message.hasOwnProperty("performed_age_verification"))
+                object.performed_age_verification = message.performed_age_verification;
             return object;
         };
     
@@ -428,6 +1295,353 @@
         };
     
         return CUserAccount_GetAccountLinkStatus_Response;
+    })();
+    
+    $root.CUserAccount_CancelLicenseForApp_Request = (function() {
+    
+        /**
+         * Properties of a CUserAccount_CancelLicenseForApp_Request.
+         * @exports ICUserAccount_CancelLicenseForApp_Request
+         * @interface ICUserAccount_CancelLicenseForApp_Request
+         * @property {number|null} [appid] CUserAccount_CancelLicenseForApp_Request appid
+         */
+    
+        /**
+         * Constructs a new CUserAccount_CancelLicenseForApp_Request.
+         * @exports CUserAccount_CancelLicenseForApp_Request
+         * @classdesc Represents a CUserAccount_CancelLicenseForApp_Request.
+         * @implements ICUserAccount_CancelLicenseForApp_Request
+         * @constructor
+         * @param {ICUserAccount_CancelLicenseForApp_Request=} [properties] Properties to set
+         */
+        function CUserAccount_CancelLicenseForApp_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_CancelLicenseForApp_Request appid.
+         * @member {number} appid
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @instance
+         */
+        CUserAccount_CancelLicenseForApp_Request.prototype.appid = 0;
+    
+        /**
+         * Creates a new CUserAccount_CancelLicenseForApp_Request instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {ICUserAccount_CancelLicenseForApp_Request=} [properties] Properties to set
+         * @returns {CUserAccount_CancelLicenseForApp_Request} CUserAccount_CancelLicenseForApp_Request instance
+         */
+        CUserAccount_CancelLicenseForApp_Request.create = function create(properties) {
+            return new CUserAccount_CancelLicenseForApp_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CancelLicenseForApp_Request message. Does not implicitly {@link CUserAccount_CancelLicenseForApp_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {ICUserAccount_CancelLicenseForApp_Request} message CUserAccount_CancelLicenseForApp_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CancelLicenseForApp_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CancelLicenseForApp_Request message, length delimited. Does not implicitly {@link CUserAccount_CancelLicenseForApp_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {ICUserAccount_CancelLicenseForApp_Request} message CUserAccount_CancelLicenseForApp_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CancelLicenseForApp_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_CancelLicenseForApp_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_CancelLicenseForApp_Request} CUserAccount_CancelLicenseForApp_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CancelLicenseForApp_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_CancelLicenseForApp_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_CancelLicenseForApp_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_CancelLicenseForApp_Request} CUserAccount_CancelLicenseForApp_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CancelLicenseForApp_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_CancelLicenseForApp_Request message.
+         * @function verify
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_CancelLicenseForApp_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_CancelLicenseForApp_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_CancelLicenseForApp_Request} CUserAccount_CancelLicenseForApp_Request
+         */
+        CUserAccount_CancelLicenseForApp_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_CancelLicenseForApp_Request)
+                return object;
+            var message = new $root.CUserAccount_CancelLicenseForApp_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_CancelLicenseForApp_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @static
+         * @param {CUserAccount_CancelLicenseForApp_Request} message CUserAccount_CancelLicenseForApp_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_CancelLicenseForApp_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.appid = 0;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_CancelLicenseForApp_Request to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_CancelLicenseForApp_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_CancelLicenseForApp_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_CancelLicenseForApp_Request;
+    })();
+    
+    $root.CUserAccount_CancelLicenseForApp_Response = (function() {
+    
+        /**
+         * Properties of a CUserAccount_CancelLicenseForApp_Response.
+         * @exports ICUserAccount_CancelLicenseForApp_Response
+         * @interface ICUserAccount_CancelLicenseForApp_Response
+         */
+    
+        /**
+         * Constructs a new CUserAccount_CancelLicenseForApp_Response.
+         * @exports CUserAccount_CancelLicenseForApp_Response
+         * @classdesc Represents a CUserAccount_CancelLicenseForApp_Response.
+         * @implements ICUserAccount_CancelLicenseForApp_Response
+         * @constructor
+         * @param {ICUserAccount_CancelLicenseForApp_Response=} [properties] Properties to set
+         */
+        function CUserAccount_CancelLicenseForApp_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CUserAccount_CancelLicenseForApp_Response instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {ICUserAccount_CancelLicenseForApp_Response=} [properties] Properties to set
+         * @returns {CUserAccount_CancelLicenseForApp_Response} CUserAccount_CancelLicenseForApp_Response instance
+         */
+        CUserAccount_CancelLicenseForApp_Response.create = function create(properties) {
+            return new CUserAccount_CancelLicenseForApp_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CancelLicenseForApp_Response message. Does not implicitly {@link CUserAccount_CancelLicenseForApp_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {ICUserAccount_CancelLicenseForApp_Response} message CUserAccount_CancelLicenseForApp_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CancelLicenseForApp_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CancelLicenseForApp_Response message, length delimited. Does not implicitly {@link CUserAccount_CancelLicenseForApp_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {ICUserAccount_CancelLicenseForApp_Response} message CUserAccount_CancelLicenseForApp_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CancelLicenseForApp_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_CancelLicenseForApp_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_CancelLicenseForApp_Response} CUserAccount_CancelLicenseForApp_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CancelLicenseForApp_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_CancelLicenseForApp_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_CancelLicenseForApp_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_CancelLicenseForApp_Response} CUserAccount_CancelLicenseForApp_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CancelLicenseForApp_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_CancelLicenseForApp_Response message.
+         * @function verify
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_CancelLicenseForApp_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_CancelLicenseForApp_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_CancelLicenseForApp_Response} CUserAccount_CancelLicenseForApp_Response
+         */
+        CUserAccount_CancelLicenseForApp_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_CancelLicenseForApp_Response)
+                return object;
+            return new $root.CUserAccount_CancelLicenseForApp_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_CancelLicenseForApp_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @static
+         * @param {CUserAccount_CancelLicenseForApp_Response} message CUserAccount_CancelLicenseForApp_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_CancelLicenseForApp_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CUserAccount_CancelLicenseForApp_Response to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_CancelLicenseForApp_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_CancelLicenseForApp_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_CancelLicenseForApp_Response;
     })();
     
     $root.CUserAccount_CreateFriendInviteToken_Request = (function() {
@@ -3810,6 +5024,7 @@
          * @property {number|Long|null} [steamid] CEmbeddedClient_AuthorizeCurrentDevice_Request steamid
          * @property {number|null} [appid] CEmbeddedClient_AuthorizeCurrentDevice_Request appid
          * @property {string|null} [device_info] CEmbeddedClient_AuthorizeCurrentDevice_Request device_info
+         * @property {number|null} [deviceid] CEmbeddedClient_AuthorizeCurrentDevice_Request deviceid
          */
     
         /**
@@ -3852,6 +5067,14 @@
         CEmbeddedClient_AuthorizeCurrentDevice_Request.prototype.device_info = "";
     
         /**
+         * CEmbeddedClient_AuthorizeCurrentDevice_Request deviceid.
+         * @member {number} deviceid
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @instance
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.prototype.deviceid = 0;
+    
+        /**
          * Creates a new CEmbeddedClient_AuthorizeCurrentDevice_Request instance using the specified properties.
          * @function create
          * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
@@ -3881,6 +5104,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
             if (message.device_info != null && message.hasOwnProperty("device_info"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.device_info);
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.deviceid);
             return writer;
         };
     
@@ -3923,6 +5148,9 @@
                     break;
                 case 3:
                     message.device_info = reader.string();
+                    break;
+                case 4:
+                    message.deviceid = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3968,6 +5196,9 @@
             if (message.device_info != null && message.hasOwnProperty("device_info"))
                 if (!$util.isString(message.device_info))
                     return "device_info: string expected";
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                if (!$util.isInteger(message.deviceid))
+                    return "deviceid: integer expected";
             return null;
         };
     
@@ -3996,6 +5227,8 @@
                 message.appid = object.appid >>> 0;
             if (object.device_info != null)
                 message.device_info = String(object.device_info);
+            if (object.deviceid != null)
+                message.deviceid = object.deviceid >>> 0;
             return message;
         };
     
@@ -4020,6 +5253,7 @@
                     object.steamid = options.longs === String ? "0" : 0;
                 object.appid = 0;
                 object.device_info = "";
+                object.deviceid = 0;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -4030,6 +5264,8 @@
                 object.appid = message.appid;
             if (message.device_info != null && message.hasOwnProperty("device_info"))
                 object.device_info = message.device_info;
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                object.deviceid = message.deviceid;
             return object;
         };
     
@@ -4572,6 +5808,39 @@
         };
     
         /**
+         * Callback as used by {@link UserAccount#getAvailableValveDiscountPromotions}.
+         * @memberof UserAccount
+         * @typedef GetAvailableValveDiscountPromotionsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CUserAccount_GetAvailableValveDiscountPromotions_Response} [response] CUserAccount_GetAvailableValveDiscountPromotions_Response
+         */
+    
+        /**
+         * Calls GetAvailableValveDiscountPromotions.
+         * @function getAvailableValveDiscountPromotions
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Request} request CUserAccount_GetAvailableValveDiscountPromotions_Request message or plain object
+         * @param {UserAccount.GetAvailableValveDiscountPromotionsCallback} callback Node-style callback called with the error, if any, and CUserAccount_GetAvailableValveDiscountPromotions_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserAccount.prototype.getAvailableValveDiscountPromotions = function getAvailableValveDiscountPromotions(request, callback) {
+            return this.rpcCall(getAvailableValveDiscountPromotions, $root.CUserAccount_GetAvailableValveDiscountPromotions_Request, $root.CUserAccount_GetAvailableValveDiscountPromotions_Response, request, callback);
+        }, "name", { value: "GetAvailableValveDiscountPromotions" });
+    
+        /**
+         * Calls GetAvailableValveDiscountPromotions.
+         * @function getAvailableValveDiscountPromotions
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_GetAvailableValveDiscountPromotions_Request} request CUserAccount_GetAvailableValveDiscountPromotions_Request message or plain object
+         * @returns {Promise<CUserAccount_GetAvailableValveDiscountPromotions_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link UserAccount#getAccountLinkStatus}.
          * @memberof UserAccount
          * @typedef GetAccountLinkStatusCallback
@@ -4601,6 +5870,39 @@
          * @instance
          * @param {ICUserAccount_GetAccountLinkStatus_Request} request CUserAccount_GetAccountLinkStatus_Request message or plain object
          * @returns {Promise<CUserAccount_GetAccountLinkStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link UserAccount#cancelLicenseForApp}.
+         * @memberof UserAccount
+         * @typedef CancelLicenseForAppCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CUserAccount_CancelLicenseForApp_Response} [response] CUserAccount_CancelLicenseForApp_Response
+         */
+    
+        /**
+         * Calls CancelLicenseForApp.
+         * @function cancelLicenseForApp
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_CancelLicenseForApp_Request} request CUserAccount_CancelLicenseForApp_Request message or plain object
+         * @param {UserAccount.CancelLicenseForAppCallback} callback Node-style callback called with the error, if any, and CUserAccount_CancelLicenseForApp_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserAccount.prototype.cancelLicenseForApp = function cancelLicenseForApp(request, callback) {
+            return this.rpcCall(cancelLicenseForApp, $root.CUserAccount_CancelLicenseForApp_Request, $root.CUserAccount_CancelLicenseForApp_Response, request, callback);
+        }, "name", { value: "CancelLicenseForApp" });
+    
+        /**
+         * Calls CancelLicenseForApp.
+         * @function cancelLicenseForApp
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_CancelLicenseForApp_Request} request CUserAccount_CancelLicenseForApp_Request message or plain object
+         * @returns {Promise<CUserAccount_CancelLicenseForApp_Response>} Promise
          * @variation 2
          */
     

@@ -73,6 +73,7 @@
          * @property {number|null} [caps_bits] CHIDDeviceInfo caps_bits
          * @property {number|null} [session_id] CHIDDeviceInfo session_id
          * @property {number|null} [eControllerType] CHIDDeviceInfo eControllerType
+         * @property {boolean|null} [is_xinput_device] CHIDDeviceInfo is_xinput_device
          */
     
         /**
@@ -227,6 +228,14 @@
         CHIDDeviceInfo.prototype.eControllerType = 0;
     
         /**
+         * CHIDDeviceInfo is_xinput_device.
+         * @member {boolean} is_xinput_device
+         * @memberof CHIDDeviceInfo
+         * @instance
+         */
+        CHIDDeviceInfo.prototype.is_xinput_device = false;
+    
+        /**
          * Creates a new CHIDDeviceInfo instance using the specified properties.
          * @function create
          * @memberof CHIDDeviceInfo
@@ -284,6 +293,8 @@
                 writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.session_id);
             if (message.eControllerType != null && message.hasOwnProperty("eControllerType"))
                 writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.eControllerType);
+            if (message.is_xinput_device != null && message.hasOwnProperty("is_xinput_device"))
+                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.is_xinput_device);
             return writer;
         };
     
@@ -368,6 +379,9 @@
                     break;
                 case 17:
                     message.eControllerType = reader.uint32();
+                    break;
+                case 18:
+                    message.is_xinput_device = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -461,6 +475,9 @@
             if (message.eControllerType != null && message.hasOwnProperty("eControllerType"))
                 if (!$util.isInteger(message.eControllerType))
                     return "eControllerType: integer expected";
+            if (message.is_xinput_device != null && message.hasOwnProperty("is_xinput_device"))
+                if (typeof message.is_xinput_device !== "boolean")
+                    return "is_xinput_device: boolean expected";
             return null;
         };
     
@@ -522,6 +539,8 @@
                 message.session_id = object.session_id >>> 0;
             if (object.eControllerType != null)
                 message.eControllerType = object.eControllerType >>> 0;
+            if (object.is_xinput_device != null)
+                message.is_xinput_device = Boolean(object.is_xinput_device);
             return message;
         };
     
@@ -556,6 +575,7 @@
                 object.caps_bits = 0;
                 object.session_id = 0;
                 object.eControllerType = 0;
+                object.is_xinput_device = false;
             }
             if (message.location != null && message.hasOwnProperty("location"))
                 object.location = options.enums === String ? $root.EHIDDeviceLocation[message.location] : message.location;
@@ -591,6 +611,8 @@
                 object.session_id = message.session_id;
             if (message.eControllerType != null && message.hasOwnProperty("eControllerType"))
                 object.eControllerType = message.eControllerType;
+            if (message.is_xinput_device != null && message.hasOwnProperty("is_xinput_device"))
+                object.is_xinput_device = message.is_xinput_device;
             return object;
         };
     

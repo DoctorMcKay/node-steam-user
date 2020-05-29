@@ -2822,6 +2822,380 @@
         return CMsgClientNetworkingCertReply;
     })();
     
+    $root.CMsgClientNetworkingMobileCertRequest = (function() {
+    
+        /**
+         * Properties of a CMsgClientNetworkingMobileCertRequest.
+         * @exports ICMsgClientNetworkingMobileCertRequest
+         * @interface ICMsgClientNetworkingMobileCertRequest
+         * @property {number|null} [app_id] CMsgClientNetworkingMobileCertRequest app_id
+         */
+    
+        /**
+         * Constructs a new CMsgClientNetworkingMobileCertRequest.
+         * @exports CMsgClientNetworkingMobileCertRequest
+         * @classdesc Represents a CMsgClientNetworkingMobileCertRequest.
+         * @implements ICMsgClientNetworkingMobileCertRequest
+         * @constructor
+         * @param {ICMsgClientNetworkingMobileCertRequest=} [properties] Properties to set
+         */
+        function CMsgClientNetworkingMobileCertRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgClientNetworkingMobileCertRequest app_id.
+         * @member {number} app_id
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @instance
+         */
+        CMsgClientNetworkingMobileCertRequest.prototype.app_id = 0;
+    
+        /**
+         * Creates a new CMsgClientNetworkingMobileCertRequest instance using the specified properties.
+         * @function create
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {ICMsgClientNetworkingMobileCertRequest=} [properties] Properties to set
+         * @returns {CMsgClientNetworkingMobileCertRequest} CMsgClientNetworkingMobileCertRequest instance
+         */
+        CMsgClientNetworkingMobileCertRequest.create = function create(properties) {
+            return new CMsgClientNetworkingMobileCertRequest(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgClientNetworkingMobileCertRequest message. Does not implicitly {@link CMsgClientNetworkingMobileCertRequest.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {ICMsgClientNetworkingMobileCertRequest} message CMsgClientNetworkingMobileCertRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgClientNetworkingMobileCertRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgClientNetworkingMobileCertRequest message, length delimited. Does not implicitly {@link CMsgClientNetworkingMobileCertRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {ICMsgClientNetworkingMobileCertRequest} message CMsgClientNetworkingMobileCertRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgClientNetworkingMobileCertRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgClientNetworkingMobileCertRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgClientNetworkingMobileCertRequest} CMsgClientNetworkingMobileCertRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgClientNetworkingMobileCertRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientNetworkingMobileCertRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.app_id = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgClientNetworkingMobileCertRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgClientNetworkingMobileCertRequest} CMsgClientNetworkingMobileCertRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgClientNetworkingMobileCertRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgClientNetworkingMobileCertRequest message.
+         * @function verify
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgClientNetworkingMobileCertRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgClientNetworkingMobileCertRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgClientNetworkingMobileCertRequest} CMsgClientNetworkingMobileCertRequest
+         */
+        CMsgClientNetworkingMobileCertRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgClientNetworkingMobileCertRequest)
+                return object;
+            var message = new $root.CMsgClientNetworkingMobileCertRequest();
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgClientNetworkingMobileCertRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @static
+         * @param {CMsgClientNetworkingMobileCertRequest} message CMsgClientNetworkingMobileCertRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgClientNetworkingMobileCertRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.app_id = 0;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgClientNetworkingMobileCertRequest to JSON.
+         * @function toJSON
+         * @memberof CMsgClientNetworkingMobileCertRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgClientNetworkingMobileCertRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgClientNetworkingMobileCertRequest;
+    })();
+    
+    $root.CMsgClientNetworkingMobileCertReply = (function() {
+    
+        /**
+         * Properties of a CMsgClientNetworkingMobileCertReply.
+         * @exports ICMsgClientNetworkingMobileCertReply
+         * @interface ICMsgClientNetworkingMobileCertReply
+         * @property {string|null} [encoded_cert] CMsgClientNetworkingMobileCertReply encoded_cert
+         */
+    
+        /**
+         * Constructs a new CMsgClientNetworkingMobileCertReply.
+         * @exports CMsgClientNetworkingMobileCertReply
+         * @classdesc Represents a CMsgClientNetworkingMobileCertReply.
+         * @implements ICMsgClientNetworkingMobileCertReply
+         * @constructor
+         * @param {ICMsgClientNetworkingMobileCertReply=} [properties] Properties to set
+         */
+        function CMsgClientNetworkingMobileCertReply(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgClientNetworkingMobileCertReply encoded_cert.
+         * @member {string} encoded_cert
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @instance
+         */
+        CMsgClientNetworkingMobileCertReply.prototype.encoded_cert = "";
+    
+        /**
+         * Creates a new CMsgClientNetworkingMobileCertReply instance using the specified properties.
+         * @function create
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {ICMsgClientNetworkingMobileCertReply=} [properties] Properties to set
+         * @returns {CMsgClientNetworkingMobileCertReply} CMsgClientNetworkingMobileCertReply instance
+         */
+        CMsgClientNetworkingMobileCertReply.create = function create(properties) {
+            return new CMsgClientNetworkingMobileCertReply(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgClientNetworkingMobileCertReply message. Does not implicitly {@link CMsgClientNetworkingMobileCertReply.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {ICMsgClientNetworkingMobileCertReply} message CMsgClientNetworkingMobileCertReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgClientNetworkingMobileCertReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.encoded_cert != null && message.hasOwnProperty("encoded_cert"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.encoded_cert);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgClientNetworkingMobileCertReply message, length delimited. Does not implicitly {@link CMsgClientNetworkingMobileCertReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {ICMsgClientNetworkingMobileCertReply} message CMsgClientNetworkingMobileCertReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgClientNetworkingMobileCertReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgClientNetworkingMobileCertReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgClientNetworkingMobileCertReply} CMsgClientNetworkingMobileCertReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgClientNetworkingMobileCertReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientNetworkingMobileCertReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.encoded_cert = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgClientNetworkingMobileCertReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgClientNetworkingMobileCertReply} CMsgClientNetworkingMobileCertReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgClientNetworkingMobileCertReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgClientNetworkingMobileCertReply message.
+         * @function verify
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgClientNetworkingMobileCertReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.encoded_cert != null && message.hasOwnProperty("encoded_cert"))
+                if (!$util.isString(message.encoded_cert))
+                    return "encoded_cert: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgClientNetworkingMobileCertReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgClientNetworkingMobileCertReply} CMsgClientNetworkingMobileCertReply
+         */
+        CMsgClientNetworkingMobileCertReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgClientNetworkingMobileCertReply)
+                return object;
+            var message = new $root.CMsgClientNetworkingMobileCertReply();
+            if (object.encoded_cert != null)
+                message.encoded_cert = String(object.encoded_cert);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgClientNetworkingMobileCertReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @static
+         * @param {CMsgClientNetworkingMobileCertReply} message CMsgClientNetworkingMobileCertReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgClientNetworkingMobileCertReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.encoded_cert = "";
+            if (message.encoded_cert != null && message.hasOwnProperty("encoded_cert"))
+                object.encoded_cert = message.encoded_cert;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgClientNetworkingMobileCertReply to JSON.
+         * @function toJSON
+         * @memberof CMsgClientNetworkingMobileCertReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgClientNetworkingMobileCertReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgClientNetworkingMobileCertReply;
+    })();
+    
     $root.CMsgClientGetAppOwnershipTicket = (function() {
     
         /**
@@ -3688,7 +4062,7 @@
          * @interface ICMsgGSServerType
          * @property {number|null} [app_id_served] CMsgGSServerType app_id_served
          * @property {number|null} [flags] CMsgGSServerType flags
-         * @property {number|null} [game_ip_address] CMsgGSServerType game_ip_address
+         * @property {number|null} [deprecated_game_ip_address] CMsgGSServerType deprecated_game_ip_address
          * @property {number|null} [game_port] CMsgGSServerType game_port
          * @property {string|null} [game_dir] CMsgGSServerType game_dir
          * @property {string|null} [game_version] CMsgGSServerType game_version
@@ -3727,12 +4101,12 @@
         CMsgGSServerType.prototype.flags = 0;
     
         /**
-         * CMsgGSServerType game_ip_address.
-         * @member {number} game_ip_address
+         * CMsgGSServerType deprecated_game_ip_address.
+         * @member {number} deprecated_game_ip_address
          * @memberof CMsgGSServerType
          * @instance
          */
-        CMsgGSServerType.prototype.game_ip_address = 0;
+        CMsgGSServerType.prototype.deprecated_game_ip_address = 0;
     
         /**
          * CMsgGSServerType game_port.
@@ -3794,8 +4168,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id_served);
             if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.flags);
-            if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.game_ip_address);
+            if (message.deprecated_game_ip_address != null && message.hasOwnProperty("deprecated_game_ip_address"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.deprecated_game_ip_address);
             if (message.game_port != null && message.hasOwnProperty("game_port"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.game_port);
             if (message.game_dir != null && message.hasOwnProperty("game_dir"))
@@ -3845,7 +4219,7 @@
                     message.flags = reader.uint32();
                     break;
                 case 3:
-                    message.game_ip_address = reader.uint32();
+                    message.deprecated_game_ip_address = reader.uint32();
                     break;
                 case 4:
                     message.game_port = reader.uint32();
@@ -3900,9 +4274,9 @@
             if (message.flags != null && message.hasOwnProperty("flags"))
                 if (!$util.isInteger(message.flags))
                     return "flags: integer expected";
-            if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
-                if (!$util.isInteger(message.game_ip_address))
-                    return "game_ip_address: integer expected";
+            if (message.deprecated_game_ip_address != null && message.hasOwnProperty("deprecated_game_ip_address"))
+                if (!$util.isInteger(message.deprecated_game_ip_address))
+                    return "deprecated_game_ip_address: integer expected";
             if (message.game_port != null && message.hasOwnProperty("game_port"))
                 if (!$util.isInteger(message.game_port))
                     return "game_port: integer expected";
@@ -3934,8 +4308,8 @@
                 message.app_id_served = object.app_id_served >>> 0;
             if (object.flags != null)
                 message.flags = object.flags >>> 0;
-            if (object.game_ip_address != null)
-                message.game_ip_address = object.game_ip_address >>> 0;
+            if (object.deprecated_game_ip_address != null)
+                message.deprecated_game_ip_address = object.deprecated_game_ip_address >>> 0;
             if (object.game_port != null)
                 message.game_port = object.game_port >>> 0;
             if (object.game_dir != null)
@@ -3963,7 +4337,7 @@
             if (options.defaults) {
                 object.app_id_served = 0;
                 object.flags = 0;
-                object.game_ip_address = 0;
+                object.deprecated_game_ip_address = 0;
                 object.game_port = 0;
                 object.game_dir = "";
                 object.game_version = "";
@@ -3973,8 +4347,8 @@
                 object.app_id_served = message.app_id_served;
             if (message.flags != null && message.hasOwnProperty("flags"))
                 object.flags = message.flags;
-            if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
-                object.game_ip_address = message.game_ip_address;
+            if (message.deprecated_game_ip_address != null && message.hasOwnProperty("deprecated_game_ip_address"))
+                object.deprecated_game_ip_address = message.deprecated_game_ip_address;
             if (message.game_port != null && message.hasOwnProperty("game_port"))
                 object.game_port = message.game_port;
             if (message.game_dir != null && message.hasOwnProperty("game_dir"))
@@ -4399,8 +4773,9 @@
              * @memberof CMsgGSPlayerList
              * @interface IPlayer
              * @property {number|Long|null} [steam_id] Player steam_id
-             * @property {number|null} [public_ip] Player public_ip
+             * @property {number|null} [deprecated_public_ip] Player deprecated_public_ip
              * @property {Uint8Array|null} [token] Player token
+             * @property {ICMsgIPAddress|null} [public_ip] Player public_ip
              */
     
             /**
@@ -4427,12 +4802,12 @@
             Player.prototype.steam_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
             /**
-             * Player public_ip.
-             * @member {number} public_ip
+             * Player deprecated_public_ip.
+             * @member {number} deprecated_public_ip
              * @memberof CMsgGSPlayerList.Player
              * @instance
              */
-            Player.prototype.public_ip = 0;
+            Player.prototype.deprecated_public_ip = 0;
     
             /**
              * Player token.
@@ -4441,6 +4816,14 @@
              * @instance
              */
             Player.prototype.token = $util.newBuffer([]);
+    
+            /**
+             * Player public_ip.
+             * @member {ICMsgIPAddress|null|undefined} public_ip
+             * @memberof CMsgGSPlayerList.Player
+             * @instance
+             */
+            Player.prototype.public_ip = null;
     
             /**
              * Creates a new Player instance using the specified properties.
@@ -4468,10 +4851,12 @@
                     writer = $Writer.create();
                 if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.steam_id);
-                if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.public_ip);
+                if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.deprecated_public_ip);
                 if (message.token != null && message.hasOwnProperty("token"))
                     writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.token);
+                if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                    $root.CMsgIPAddress.encode(message.public_ip, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 return writer;
             };
     
@@ -4510,10 +4895,13 @@
                         message.steam_id = reader.uint64();
                         break;
                     case 2:
-                        message.public_ip = reader.uint32();
+                        message.deprecated_public_ip = reader.uint32();
                         break;
                     case 3:
                         message.token = reader.bytes();
+                        break;
+                    case 4:
+                        message.public_ip = $root.CMsgIPAddress.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -4553,12 +4941,17 @@
                 if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                     if (!$util.isInteger(message.steam_id) && !(message.steam_id && $util.isInteger(message.steam_id.low) && $util.isInteger(message.steam_id.high)))
                         return "steam_id: integer|Long expected";
-                if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                    if (!$util.isInteger(message.public_ip))
-                        return "public_ip: integer expected";
+                if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                    if (!$util.isInteger(message.deprecated_public_ip))
+                        return "deprecated_public_ip: integer expected";
                 if (message.token != null && message.hasOwnProperty("token"))
                     if (!(message.token && typeof message.token.length === "number" || $util.isString(message.token)))
                         return "token: buffer expected";
+                if (message.public_ip != null && message.hasOwnProperty("public_ip")) {
+                    var error = $root.CMsgIPAddress.verify(message.public_ip);
+                    if (error)
+                        return "public_ip." + error;
+                }
                 return null;
             };
     
@@ -4583,13 +4976,18 @@
                         message.steam_id = object.steam_id;
                     else if (typeof object.steam_id === "object")
                         message.steam_id = new $util.LongBits(object.steam_id.low >>> 0, object.steam_id.high >>> 0).toNumber(true);
-                if (object.public_ip != null)
-                    message.public_ip = object.public_ip >>> 0;
+                if (object.deprecated_public_ip != null)
+                    message.deprecated_public_ip = object.deprecated_public_ip >>> 0;
                 if (object.token != null)
                     if (typeof object.token === "string")
                         $util.base64.decode(object.token, message.token = $util.newBuffer($util.base64.length(object.token)), 0);
                     else if (object.token.length)
                         message.token = object.token;
+                if (object.public_ip != null) {
+                    if (typeof object.public_ip !== "object")
+                        throw TypeError(".CMsgGSPlayerList.Player.public_ip: object expected");
+                    message.public_ip = $root.CMsgIPAddress.fromObject(object.public_ip);
+                }
                 return message;
             };
     
@@ -4612,7 +5010,7 @@
                         object.steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.steam_id = options.longs === String ? "0" : 0;
-                    object.public_ip = 0;
+                    object.deprecated_public_ip = 0;
                     if (options.bytes === String)
                         object.token = "";
                     else {
@@ -4620,16 +5018,19 @@
                         if (options.bytes !== Array)
                             object.token = $util.newBuffer(object.token);
                     }
+                    object.public_ip = null;
                 }
                 if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                     if (typeof message.steam_id === "number")
                         object.steam_id = options.longs === String ? String(message.steam_id) : message.steam_id;
                     else
                         object.steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id) : options.longs === Number ? new $util.LongBits(message.steam_id.low >>> 0, message.steam_id.high >>> 0).toNumber(true) : message.steam_id;
-                if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                    object.public_ip = message.public_ip;
+                if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                    object.deprecated_public_ip = message.deprecated_public_ip;
                 if (message.token != null && message.hasOwnProperty("token"))
                     object.token = options.bytes === String ? $util.base64.encode(message.token, 0, message.token.length) : options.bytes === Array ? Array.prototype.slice.call(message.token) : message.token;
+                if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                    object.public_ip = $root.CMsgIPAddress.toObject(message.public_ip, options);
                 return object;
             };
     
@@ -4657,8 +5058,9 @@
          * @exports ICMsgGSUserPlaying
          * @interface ICMsgGSUserPlaying
          * @property {number|Long|null} [steam_id] CMsgGSUserPlaying steam_id
-         * @property {number|null} [public_ip] CMsgGSUserPlaying public_ip
+         * @property {number|null} [deprecated_public_ip] CMsgGSUserPlaying deprecated_public_ip
          * @property {Uint8Array|null} [token] CMsgGSUserPlaying token
+         * @property {ICMsgIPAddress|null} [public_ip] CMsgGSUserPlaying public_ip
          */
     
         /**
@@ -4685,12 +5087,12 @@
         CMsgGSUserPlaying.prototype.steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CMsgGSUserPlaying public_ip.
-         * @member {number} public_ip
+         * CMsgGSUserPlaying deprecated_public_ip.
+         * @member {number} deprecated_public_ip
          * @memberof CMsgGSUserPlaying
          * @instance
          */
-        CMsgGSUserPlaying.prototype.public_ip = 0;
+        CMsgGSUserPlaying.prototype.deprecated_public_ip = 0;
     
         /**
          * CMsgGSUserPlaying token.
@@ -4699,6 +5101,14 @@
          * @instance
          */
         CMsgGSUserPlaying.prototype.token = $util.newBuffer([]);
+    
+        /**
+         * CMsgGSUserPlaying public_ip.
+         * @member {ICMsgIPAddress|null|undefined} public_ip
+         * @memberof CMsgGSUserPlaying
+         * @instance
+         */
+        CMsgGSUserPlaying.prototype.public_ip = null;
     
         /**
          * Creates a new CMsgGSUserPlaying instance using the specified properties.
@@ -4726,10 +5136,12 @@
                 writer = $Writer.create();
             if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id);
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.public_ip);
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.deprecated_public_ip);
             if (message.token != null && message.hasOwnProperty("token"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.token);
+            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                $root.CMsgIPAddress.encode(message.public_ip, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
     
@@ -4768,10 +5180,13 @@
                     message.steam_id = reader.fixed64();
                     break;
                 case 2:
-                    message.public_ip = reader.uint32();
+                    message.deprecated_public_ip = reader.uint32();
                     break;
                 case 3:
                     message.token = reader.bytes();
+                    break;
+                case 4:
+                    message.public_ip = $root.CMsgIPAddress.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4811,12 +5226,17 @@
             if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                 if (!$util.isInteger(message.steam_id) && !(message.steam_id && $util.isInteger(message.steam_id.low) && $util.isInteger(message.steam_id.high)))
                     return "steam_id: integer|Long expected";
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                if (!$util.isInteger(message.public_ip))
-                    return "public_ip: integer expected";
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                if (!$util.isInteger(message.deprecated_public_ip))
+                    return "deprecated_public_ip: integer expected";
             if (message.token != null && message.hasOwnProperty("token"))
                 if (!(message.token && typeof message.token.length === "number" || $util.isString(message.token)))
                     return "token: buffer expected";
+            if (message.public_ip != null && message.hasOwnProperty("public_ip")) {
+                var error = $root.CMsgIPAddress.verify(message.public_ip);
+                if (error)
+                    return "public_ip." + error;
+            }
             return null;
         };
     
@@ -4841,13 +5261,18 @@
                     message.steam_id = object.steam_id;
                 else if (typeof object.steam_id === "object")
                     message.steam_id = new $util.LongBits(object.steam_id.low >>> 0, object.steam_id.high >>> 0).toNumber();
-            if (object.public_ip != null)
-                message.public_ip = object.public_ip >>> 0;
+            if (object.deprecated_public_ip != null)
+                message.deprecated_public_ip = object.deprecated_public_ip >>> 0;
             if (object.token != null)
                 if (typeof object.token === "string")
                     $util.base64.decode(object.token, message.token = $util.newBuffer($util.base64.length(object.token)), 0);
                 else if (object.token.length)
                     message.token = object.token;
+            if (object.public_ip != null) {
+                if (typeof object.public_ip !== "object")
+                    throw TypeError(".CMsgGSUserPlaying.public_ip: object expected");
+                message.public_ip = $root.CMsgIPAddress.fromObject(object.public_ip);
+            }
             return message;
         };
     
@@ -4870,7 +5295,7 @@
                     object.steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.steam_id = options.longs === String ? "0" : 0;
-                object.public_ip = 0;
+                object.deprecated_public_ip = 0;
                 if (options.bytes === String)
                     object.token = "";
                 else {
@@ -4878,16 +5303,19 @@
                     if (options.bytes !== Array)
                         object.token = $util.newBuffer(object.token);
                 }
+                object.public_ip = null;
             }
             if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                 if (typeof message.steam_id === "number")
                     object.steam_id = options.longs === String ? String(message.steam_id) : message.steam_id;
                 else
                     object.steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id) : options.longs === Number ? new $util.LongBits(message.steam_id.low >>> 0, message.steam_id.high >>> 0).toNumber() : message.steam_id;
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                object.public_ip = message.public_ip;
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                object.deprecated_public_ip = message.deprecated_public_ip;
             if (message.token != null && message.hasOwnProperty("token"))
                 object.token = options.bytes === String ? $util.base64.encode(message.token, 0, message.token.length) : options.bytes === Array ? Array.prototype.slice.call(message.token) : message.token;
+            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                object.public_ip = $root.CMsgIPAddress.toObject(message.public_ip, options);
             return object;
         };
     
@@ -5114,6 +5542,7 @@
          * @interface ICMsgClientGamesPlayed
          * @property {Array.<CMsgClientGamesPlayed.IGamePlayed>|null} [games_played] CMsgClientGamesPlayed games_played
          * @property {number|null} [client_os_type] CMsgClientGamesPlayed client_os_type
+         * @property {number|null} [cloud_gaming_platform] CMsgClientGamesPlayed cloud_gaming_platform
          */
     
         /**
@@ -5149,6 +5578,14 @@
         CMsgClientGamesPlayed.prototype.client_os_type = 0;
     
         /**
+         * CMsgClientGamesPlayed cloud_gaming_platform.
+         * @member {number} cloud_gaming_platform
+         * @memberof CMsgClientGamesPlayed
+         * @instance
+         */
+        CMsgClientGamesPlayed.prototype.cloud_gaming_platform = 0;
+    
+        /**
          * Creates a new CMsgClientGamesPlayed instance using the specified properties.
          * @function create
          * @memberof CMsgClientGamesPlayed
@@ -5177,6 +5614,8 @@
                     $root.CMsgClientGamesPlayed.GamePlayed.encode(message.games_played[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             if (message.client_os_type != null && message.hasOwnProperty("client_os_type"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.client_os_type);
+            if (message.cloud_gaming_platform != null && message.hasOwnProperty("cloud_gaming_platform"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.cloud_gaming_platform);
             return writer;
         };
     
@@ -5218,6 +5657,9 @@
                     break;
                 case 2:
                     message.client_os_type = reader.uint32();
+                    break;
+                case 3:
+                    message.cloud_gaming_platform = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5266,6 +5708,9 @@
             if (message.client_os_type != null && message.hasOwnProperty("client_os_type"))
                 if (!$util.isInteger(message.client_os_type))
                     return "client_os_type: integer expected";
+            if (message.cloud_gaming_platform != null && message.hasOwnProperty("cloud_gaming_platform"))
+                if (!$util.isInteger(message.cloud_gaming_platform))
+                    return "cloud_gaming_platform: integer expected";
             return null;
         };
     
@@ -5293,6 +5738,8 @@
             }
             if (object.client_os_type != null)
                 message.client_os_type = object.client_os_type >>> 0;
+            if (object.cloud_gaming_platform != null)
+                message.cloud_gaming_platform = object.cloud_gaming_platform >>> 0;
             return message;
         };
     
@@ -5311,8 +5758,10 @@
             var object = {};
             if (options.arrays || options.defaults)
                 object.games_played = [];
-            if (options.defaults)
+            if (options.defaults) {
                 object.client_os_type = 0;
+                object.cloud_gaming_platform = 0;
+            }
             if (message.games_played && message.games_played.length) {
                 object.games_played = [];
                 for (var j = 0; j < message.games_played.length; ++j)
@@ -5320,6 +5769,8 @@
             }
             if (message.client_os_type != null && message.hasOwnProperty("client_os_type"))
                 object.client_os_type = message.client_os_type;
+            if (message.cloud_gaming_platform != null && message.hasOwnProperty("cloud_gaming_platform"))
+                object.cloud_gaming_platform = message.cloud_gaming_platform;
             return object;
         };
     
@@ -5342,7 +5793,7 @@
              * @interface IGamePlayed
              * @property {number|Long|null} [steam_id_gs] GamePlayed steam_id_gs
              * @property {number|Long|null} [game_id] GamePlayed game_id
-             * @property {number|null} [game_ip_address] GamePlayed game_ip_address
+             * @property {number|null} [deprecated_game_ip_address] GamePlayed deprecated_game_ip_address
              * @property {number|null} [game_port] GamePlayed game_port
              * @property {boolean|null} [is_secure] GamePlayed is_secure
              * @property {Uint8Array|null} [token] GamePlayed token
@@ -5362,6 +5813,8 @@
              * @property {number|Long|null} [controller_workshop_file_id] GamePlayed controller_workshop_file_id
              * @property {number|null} [launch_source] GamePlayed launch_source
              * @property {number|null} [vr_hmd_runtime] GamePlayed vr_hmd_runtime
+             * @property {ICMsgIPAddress|null} [game_ip_address] GamePlayed game_ip_address
+             * @property {number|null} [controller_connection_type] GamePlayed controller_connection_type
              */
     
             /**
@@ -5396,12 +5849,12 @@
             GamePlayed.prototype.game_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
-             * GamePlayed game_ip_address.
-             * @member {number} game_ip_address
+             * GamePlayed deprecated_game_ip_address.
+             * @member {number} deprecated_game_ip_address
              * @memberof CMsgClientGamesPlayed.GamePlayed
              * @instance
              */
-            GamePlayed.prototype.game_ip_address = 0;
+            GamePlayed.prototype.deprecated_game_ip_address = 0;
     
             /**
              * GamePlayed game_port.
@@ -5556,6 +6009,22 @@
             GamePlayed.prototype.vr_hmd_runtime = 0;
     
             /**
+             * GamePlayed game_ip_address.
+             * @member {ICMsgIPAddress|null|undefined} game_ip_address
+             * @memberof CMsgClientGamesPlayed.GamePlayed
+             * @instance
+             */
+            GamePlayed.prototype.game_ip_address = null;
+    
+            /**
+             * GamePlayed controller_connection_type.
+             * @member {number} controller_connection_type
+             * @memberof CMsgClientGamesPlayed.GamePlayed
+             * @instance
+             */
+            GamePlayed.prototype.controller_connection_type = 0;
+    
+            /**
              * Creates a new GamePlayed instance using the specified properties.
              * @function create
              * @memberof CMsgClientGamesPlayed.GamePlayed
@@ -5583,8 +6052,8 @@
                     writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.steam_id_gs);
                 if (message.game_id != null && message.hasOwnProperty("game_id"))
                     writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.game_id);
-                if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.game_ip_address);
+                if (message.deprecated_game_ip_address != null && message.hasOwnProperty("deprecated_game_ip_address"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.deprecated_game_ip_address);
                 if (message.game_port != null && message.hasOwnProperty("game_port"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.game_port);
                 if (message.is_secure != null && message.hasOwnProperty("is_secure"))
@@ -5623,6 +6092,10 @@
                     writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.launch_source);
                 if (message.vr_hmd_runtime != null && message.hasOwnProperty("vr_hmd_runtime"))
                     writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.vr_hmd_runtime);
+                if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
+                    $root.CMsgIPAddress.encode(message.game_ip_address, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                if (message.controller_connection_type != null && message.hasOwnProperty("controller_connection_type"))
+                    writer.uint32(/* id 24, wireType 0 =*/192).uint32(message.controller_connection_type);
                 return writer;
             };
     
@@ -5664,7 +6137,7 @@
                         message.game_id = reader.fixed64();
                         break;
                     case 3:
-                        message.game_ip_address = reader.uint32();
+                        message.deprecated_game_ip_address = reader.uint32();
                         break;
                     case 4:
                         message.game_port = reader.uint32();
@@ -5723,6 +6196,12 @@
                     case 22:
                         message.vr_hmd_runtime = reader.uint32();
                         break;
+                    case 23:
+                        message.game_ip_address = $root.CMsgIPAddress.decode(reader, reader.uint32());
+                        break;
+                    case 24:
+                        message.controller_connection_type = reader.uint32();
+                        break;
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -5764,9 +6243,9 @@
                 if (message.game_id != null && message.hasOwnProperty("game_id"))
                     if (!$util.isInteger(message.game_id) && !(message.game_id && $util.isInteger(message.game_id.low) && $util.isInteger(message.game_id.high)))
                         return "game_id: integer|Long expected";
-                if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
-                    if (!$util.isInteger(message.game_ip_address))
-                        return "game_ip_address: integer expected";
+                if (message.deprecated_game_ip_address != null && message.hasOwnProperty("deprecated_game_ip_address"))
+                    if (!$util.isInteger(message.deprecated_game_ip_address))
+                        return "deprecated_game_ip_address: integer expected";
                 if (message.game_port != null && message.hasOwnProperty("game_port"))
                     if (!$util.isInteger(message.game_port))
                         return "game_port: integer expected";
@@ -5824,6 +6303,14 @@
                 if (message.vr_hmd_runtime != null && message.hasOwnProperty("vr_hmd_runtime"))
                     if (!$util.isInteger(message.vr_hmd_runtime))
                         return "vr_hmd_runtime: integer expected";
+                if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address")) {
+                    var error = $root.CMsgIPAddress.verify(message.game_ip_address);
+                    if (error)
+                        return "game_ip_address." + error;
+                }
+                if (message.controller_connection_type != null && message.hasOwnProperty("controller_connection_type"))
+                    if (!$util.isInteger(message.controller_connection_type))
+                        return "controller_connection_type: integer expected";
                 return null;
             };
     
@@ -5857,8 +6344,8 @@
                         message.game_id = object.game_id;
                     else if (typeof object.game_id === "object")
                         message.game_id = new $util.LongBits(object.game_id.low >>> 0, object.game_id.high >>> 0).toNumber();
-                if (object.game_ip_address != null)
-                    message.game_ip_address = object.game_ip_address >>> 0;
+                if (object.deprecated_game_ip_address != null)
+                    message.deprecated_game_ip_address = object.deprecated_game_ip_address >>> 0;
                 if (object.game_port != null)
                     message.game_port = object.game_port >>> 0;
                 if (object.is_secure != null)
@@ -5910,6 +6397,13 @@
                     message.launch_source = object.launch_source >>> 0;
                 if (object.vr_hmd_runtime != null)
                     message.vr_hmd_runtime = object.vr_hmd_runtime >>> 0;
+                if (object.game_ip_address != null) {
+                    if (typeof object.game_ip_address !== "object")
+                        throw TypeError(".CMsgClientGamesPlayed.GamePlayed.game_ip_address: object expected");
+                    message.game_ip_address = $root.CMsgIPAddress.fromObject(object.game_ip_address);
+                }
+                if (object.controller_connection_type != null)
+                    message.controller_connection_type = object.controller_connection_type >>> 0;
                 return message;
             };
     
@@ -5937,7 +6431,7 @@
                         object.game_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.game_id = options.longs === String ? "0" : 0;
-                    object.game_ip_address = 0;
+                    object.deprecated_game_ip_address = 0;
                     object.game_port = 0;
                     object.is_secure = false;
                     if (options.bytes === String)
@@ -5973,6 +6467,8 @@
                         object.controller_workshop_file_id = options.longs === String ? "0" : 0;
                     object.launch_source = 0;
                     object.vr_hmd_runtime = 0;
+                    object.game_ip_address = null;
+                    object.controller_connection_type = 0;
                 }
                 if (message.steam_id_gs != null && message.hasOwnProperty("steam_id_gs"))
                     if (typeof message.steam_id_gs === "number")
@@ -5984,8 +6480,8 @@
                         object.game_id = options.longs === String ? String(message.game_id) : message.game_id;
                     else
                         object.game_id = options.longs === String ? $util.Long.prototype.toString.call(message.game_id) : options.longs === Number ? new $util.LongBits(message.game_id.low >>> 0, message.game_id.high >>> 0).toNumber() : message.game_id;
-                if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
-                    object.game_ip_address = message.game_ip_address;
+                if (message.deprecated_game_ip_address != null && message.hasOwnProperty("deprecated_game_ip_address"))
+                    object.deprecated_game_ip_address = message.deprecated_game_ip_address;
                 if (message.game_port != null && message.hasOwnProperty("game_port"))
                     object.game_port = message.game_port;
                 if (message.is_secure != null && message.hasOwnProperty("is_secure"))
@@ -6027,6 +6523,10 @@
                     object.launch_source = message.launch_source;
                 if (message.vr_hmd_runtime != null && message.hasOwnProperty("vr_hmd_runtime"))
                     object.vr_hmd_runtime = message.vr_hmd_runtime;
+                if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
+                    object.game_ip_address = $root.CMsgIPAddress.toObject(message.game_ip_address, options);
+                if (message.controller_connection_type != null && message.hasOwnProperty("controller_connection_type"))
+                    object.controller_connection_type = message.controller_connection_type;
                 return object;
             };
     
@@ -7622,6 +8122,8 @@
              * @property {number|null} [initial_time_unit] License initial_time_unit
              * @property {number|null} [renewal_period] License renewal_period
              * @property {number|null} [renewal_time_unit] License renewal_time_unit
+             * @property {number|Long|null} [access_token] License access_token
+             * @property {number|null} [master_package_id] License master_package_id
              */
     
             /**
@@ -7768,6 +8270,22 @@
             License.prototype.renewal_time_unit = 0;
     
             /**
+             * License access_token.
+             * @member {number|Long} access_token
+             * @memberof CMsgClientLicenseList.License
+             * @instance
+             */
+            License.prototype.access_token = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * License master_package_id.
+             * @member {number} master_package_id
+             * @memberof CMsgClientLicenseList.License
+             * @instance
+             */
+            License.prototype.master_package_id = 0;
+    
+            /**
              * Creates a new License instance using the specified properties.
              * @function create
              * @memberof CMsgClientLicenseList.License
@@ -7823,6 +8341,10 @@
                     writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.renewal_period);
                 if (message.renewal_time_unit != null && message.hasOwnProperty("renewal_time_unit"))
                     writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.renewal_time_unit);
+                if (message.access_token != null && message.hasOwnProperty("access_token"))
+                    writer.uint32(/* id 17, wireType 0 =*/136).uint64(message.access_token);
+                if (message.master_package_id != null && message.hasOwnProperty("master_package_id"))
+                    writer.uint32(/* id 18, wireType 0 =*/144).uint32(message.master_package_id);
                 return writer;
             };
     
@@ -7904,6 +8426,12 @@
                         break;
                     case 16:
                         message.renewal_time_unit = reader.uint32();
+                        break;
+                    case 17:
+                        message.access_token = reader.uint64();
+                        break;
+                    case 18:
+                        message.master_package_id = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -7988,6 +8516,12 @@
                 if (message.renewal_time_unit != null && message.hasOwnProperty("renewal_time_unit"))
                     if (!$util.isInteger(message.renewal_time_unit))
                         return "renewal_time_unit: integer expected";
+                if (message.access_token != null && message.hasOwnProperty("access_token"))
+                    if (!$util.isInteger(message.access_token) && !(message.access_token && $util.isInteger(message.access_token.low) && $util.isInteger(message.access_token.high)))
+                        return "access_token: integer|Long expected";
+                if (message.master_package_id != null && message.hasOwnProperty("master_package_id"))
+                    if (!$util.isInteger(message.master_package_id))
+                        return "master_package_id: integer expected";
                 return null;
             };
     
@@ -8035,6 +8569,17 @@
                     message.renewal_period = object.renewal_period >>> 0;
                 if (object.renewal_time_unit != null)
                     message.renewal_time_unit = object.renewal_time_unit >>> 0;
+                if (object.access_token != null)
+                    if ($util.Long)
+                        (message.access_token = $util.Long.fromValue(object.access_token)).unsigned = true;
+                    else if (typeof object.access_token === "string")
+                        message.access_token = parseInt(object.access_token, 10);
+                    else if (typeof object.access_token === "number")
+                        message.access_token = object.access_token;
+                    else if (typeof object.access_token === "object")
+                        message.access_token = new $util.LongBits(object.access_token.low >>> 0, object.access_token.high >>> 0).toNumber(true);
+                if (object.master_package_id != null)
+                    message.master_package_id = object.master_package_id >>> 0;
                 return message;
             };
     
@@ -8068,6 +8613,12 @@
                     object.initial_time_unit = 0;
                     object.renewal_period = 0;
                     object.renewal_time_unit = 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.access_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.access_token = options.longs === String ? "0" : 0;
+                    object.master_package_id = 0;
                 }
                 if (message.package_id != null && message.hasOwnProperty("package_id"))
                     object.package_id = message.package_id;
@@ -8101,6 +8652,13 @@
                     object.renewal_period = message.renewal_period;
                 if (message.renewal_time_unit != null && message.hasOwnProperty("renewal_time_unit"))
                     object.renewal_time_unit = message.renewal_time_unit;
+                if (message.access_token != null && message.hasOwnProperty("access_token"))
+                    if (typeof message.access_token === "number")
+                        object.access_token = options.longs === String ? String(message.access_token) : message.access_token;
+                    else
+                        object.access_token = options.longs === String ? $util.Long.prototype.toString.call(message.access_token) : options.longs === Number ? new $util.LongBits(message.access_token.low >>> 0, message.access_token.high >>> 0).toNumber(true) : message.access_token;
+                if (message.master_package_id != null && message.hasOwnProperty("master_package_id"))
+                    object.master_package_id = message.master_package_id;
                 return object;
             };
     
@@ -12483,9 +13041,10 @@
          * @property {number|null} [lobby_type] CMsgClientMMSCreateLobby lobby_type
          * @property {number|null} [lobby_flags] CMsgClientMMSCreateLobby lobby_flags
          * @property {number|null} [cell_id] CMsgClientMMSCreateLobby cell_id
-         * @property {number|null} [public_ip] CMsgClientMMSCreateLobby public_ip
+         * @property {number|null} [deprecated_public_ip] CMsgClientMMSCreateLobby deprecated_public_ip
          * @property {Uint8Array|null} [metadata] CMsgClientMMSCreateLobby metadata
          * @property {string|null} [persona_name_owner] CMsgClientMMSCreateLobby persona_name_owner
+         * @property {ICMsgIPAddress|null} [public_ip] CMsgClientMMSCreateLobby public_ip
          */
     
         /**
@@ -12544,12 +13103,12 @@
         CMsgClientMMSCreateLobby.prototype.cell_id = 0;
     
         /**
-         * CMsgClientMMSCreateLobby public_ip.
-         * @member {number} public_ip
+         * CMsgClientMMSCreateLobby deprecated_public_ip.
+         * @member {number} deprecated_public_ip
          * @memberof CMsgClientMMSCreateLobby
          * @instance
          */
-        CMsgClientMMSCreateLobby.prototype.public_ip = 0;
+        CMsgClientMMSCreateLobby.prototype.deprecated_public_ip = 0;
     
         /**
          * CMsgClientMMSCreateLobby metadata.
@@ -12566,6 +13125,14 @@
          * @instance
          */
         CMsgClientMMSCreateLobby.prototype.persona_name_owner = "";
+    
+        /**
+         * CMsgClientMMSCreateLobby public_ip.
+         * @member {ICMsgIPAddress|null|undefined} public_ip
+         * @memberof CMsgClientMMSCreateLobby
+         * @instance
+         */
+        CMsgClientMMSCreateLobby.prototype.public_ip = null;
     
         /**
          * Creates a new CMsgClientMMSCreateLobby instance using the specified properties.
@@ -12601,12 +13168,14 @@
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.lobby_flags);
             if (message.cell_id != null && message.hasOwnProperty("cell_id"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.cell_id);
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.public_ip);
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.deprecated_public_ip);
             if (message.metadata != null && message.hasOwnProperty("metadata"))
                 writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.metadata);
             if (message.persona_name_owner != null && message.hasOwnProperty("persona_name_owner"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.persona_name_owner);
+            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                $root.CMsgIPAddress.encode(message.public_ip, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             return writer;
         };
     
@@ -12657,13 +13226,16 @@
                     message.cell_id = reader.uint32();
                     break;
                 case 6:
-                    message.public_ip = reader.uint32();
+                    message.deprecated_public_ip = reader.uint32();
                     break;
                 case 7:
                     message.metadata = reader.bytes();
                     break;
                 case 8:
                     message.persona_name_owner = reader.string();
+                    break;
+                case 9:
+                    message.public_ip = $root.CMsgIPAddress.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -12715,15 +13287,20 @@
             if (message.cell_id != null && message.hasOwnProperty("cell_id"))
                 if (!$util.isInteger(message.cell_id))
                     return "cell_id: integer expected";
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                if (!$util.isInteger(message.public_ip))
-                    return "public_ip: integer expected";
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                if (!$util.isInteger(message.deprecated_public_ip))
+                    return "deprecated_public_ip: integer expected";
             if (message.metadata != null && message.hasOwnProperty("metadata"))
                 if (!(message.metadata && typeof message.metadata.length === "number" || $util.isString(message.metadata)))
                     return "metadata: buffer expected";
             if (message.persona_name_owner != null && message.hasOwnProperty("persona_name_owner"))
                 if (!$util.isString(message.persona_name_owner))
                     return "persona_name_owner: string expected";
+            if (message.public_ip != null && message.hasOwnProperty("public_ip")) {
+                var error = $root.CMsgIPAddress.verify(message.public_ip);
+                if (error)
+                    return "public_ip." + error;
+            }
             return null;
         };
     
@@ -12749,8 +13326,8 @@
                 message.lobby_flags = object.lobby_flags | 0;
             if (object.cell_id != null)
                 message.cell_id = object.cell_id >>> 0;
-            if (object.public_ip != null)
-                message.public_ip = object.public_ip >>> 0;
+            if (object.deprecated_public_ip != null)
+                message.deprecated_public_ip = object.deprecated_public_ip >>> 0;
             if (object.metadata != null)
                 if (typeof object.metadata === "string")
                     $util.base64.decode(object.metadata, message.metadata = $util.newBuffer($util.base64.length(object.metadata)), 0);
@@ -12758,6 +13335,11 @@
                     message.metadata = object.metadata;
             if (object.persona_name_owner != null)
                 message.persona_name_owner = String(object.persona_name_owner);
+            if (object.public_ip != null) {
+                if (typeof object.public_ip !== "object")
+                    throw TypeError(".CMsgClientMMSCreateLobby.public_ip: object expected");
+                message.public_ip = $root.CMsgIPAddress.fromObject(object.public_ip);
+            }
             return message;
         };
     
@@ -12780,7 +13362,7 @@
                 object.lobby_type = 0;
                 object.lobby_flags = 0;
                 object.cell_id = 0;
-                object.public_ip = 0;
+                object.deprecated_public_ip = 0;
                 if (options.bytes === String)
                     object.metadata = "";
                 else {
@@ -12789,6 +13371,7 @@
                         object.metadata = $util.newBuffer(object.metadata);
                 }
                 object.persona_name_owner = "";
+                object.public_ip = null;
             }
             if (message.app_id != null && message.hasOwnProperty("app_id"))
                 object.app_id = message.app_id;
@@ -12800,12 +13383,14 @@
                 object.lobby_flags = message.lobby_flags;
             if (message.cell_id != null && message.hasOwnProperty("cell_id"))
                 object.cell_id = message.cell_id;
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                object.public_ip = message.public_ip;
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                object.deprecated_public_ip = message.deprecated_public_ip;
             if (message.metadata != null && message.hasOwnProperty("metadata"))
                 object.metadata = options.bytes === String ? $util.base64.encode(message.metadata, 0, message.metadata.length) : options.bytes === Array ? Array.prototype.slice.call(message.metadata) : message.metadata;
             if (message.persona_name_owner != null && message.hasOwnProperty("persona_name_owner"))
                 object.persona_name_owner = message.persona_name_owner;
+            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                object.public_ip = $root.CMsgIPAddress.toObject(message.public_ip, options);
             return object;
         };
     
@@ -14472,8 +15057,9 @@
          * @property {number|null} [app_id] CMsgClientMMSGetLobbyList app_id
          * @property {number|null} [num_lobbies_requested] CMsgClientMMSGetLobbyList num_lobbies_requested
          * @property {number|null} [cell_id] CMsgClientMMSGetLobbyList cell_id
-         * @property {number|null} [public_ip] CMsgClientMMSGetLobbyList public_ip
+         * @property {number|null} [deprecated_public_ip] CMsgClientMMSGetLobbyList deprecated_public_ip
          * @property {Array.<CMsgClientMMSGetLobbyList.IFilter>|null} [filters] CMsgClientMMSGetLobbyList filters
+         * @property {ICMsgIPAddress|null} [public_ip] CMsgClientMMSGetLobbyList public_ip
          */
     
         /**
@@ -14517,12 +15103,12 @@
         CMsgClientMMSGetLobbyList.prototype.cell_id = 0;
     
         /**
-         * CMsgClientMMSGetLobbyList public_ip.
-         * @member {number} public_ip
+         * CMsgClientMMSGetLobbyList deprecated_public_ip.
+         * @member {number} deprecated_public_ip
          * @memberof CMsgClientMMSGetLobbyList
          * @instance
          */
-        CMsgClientMMSGetLobbyList.prototype.public_ip = 0;
+        CMsgClientMMSGetLobbyList.prototype.deprecated_public_ip = 0;
     
         /**
          * CMsgClientMMSGetLobbyList filters.
@@ -14531,6 +15117,14 @@
          * @instance
          */
         CMsgClientMMSGetLobbyList.prototype.filters = $util.emptyArray;
+    
+        /**
+         * CMsgClientMMSGetLobbyList public_ip.
+         * @member {ICMsgIPAddress|null|undefined} public_ip
+         * @memberof CMsgClientMMSGetLobbyList
+         * @instance
+         */
+        CMsgClientMMSGetLobbyList.prototype.public_ip = null;
     
         /**
          * Creates a new CMsgClientMMSGetLobbyList instance using the specified properties.
@@ -14562,11 +15156,13 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.num_lobbies_requested);
             if (message.cell_id != null && message.hasOwnProperty("cell_id"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.cell_id);
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.public_ip);
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.deprecated_public_ip);
             if (message.filters != null && message.filters.length)
                 for (var i = 0; i < message.filters.length; ++i)
                     $root.CMsgClientMMSGetLobbyList.Filter.encode(message.filters[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                $root.CMsgIPAddress.encode(message.public_ip, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             return writer;
         };
     
@@ -14611,12 +15207,15 @@
                     message.cell_id = reader.uint32();
                     break;
                 case 5:
-                    message.public_ip = reader.uint32();
+                    message.deprecated_public_ip = reader.uint32();
                     break;
                 case 6:
                     if (!(message.filters && message.filters.length))
                         message.filters = [];
                     message.filters.push($root.CMsgClientMMSGetLobbyList.Filter.decode(reader, reader.uint32()));
+                    break;
+                case 7:
+                    message.public_ip = $root.CMsgIPAddress.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -14662,9 +15261,9 @@
             if (message.cell_id != null && message.hasOwnProperty("cell_id"))
                 if (!$util.isInteger(message.cell_id))
                     return "cell_id: integer expected";
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                if (!$util.isInteger(message.public_ip))
-                    return "public_ip: integer expected";
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                if (!$util.isInteger(message.deprecated_public_ip))
+                    return "deprecated_public_ip: integer expected";
             if (message.filters != null && message.hasOwnProperty("filters")) {
                 if (!Array.isArray(message.filters))
                     return "filters: array expected";
@@ -14673,6 +15272,11 @@
                     if (error)
                         return "filters." + error;
                 }
+            }
+            if (message.public_ip != null && message.hasOwnProperty("public_ip")) {
+                var error = $root.CMsgIPAddress.verify(message.public_ip);
+                if (error)
+                    return "public_ip." + error;
             }
             return null;
         };
@@ -14695,8 +15299,8 @@
                 message.num_lobbies_requested = object.num_lobbies_requested | 0;
             if (object.cell_id != null)
                 message.cell_id = object.cell_id >>> 0;
-            if (object.public_ip != null)
-                message.public_ip = object.public_ip >>> 0;
+            if (object.deprecated_public_ip != null)
+                message.deprecated_public_ip = object.deprecated_public_ip >>> 0;
             if (object.filters) {
                 if (!Array.isArray(object.filters))
                     throw TypeError(".CMsgClientMMSGetLobbyList.filters: array expected");
@@ -14706,6 +15310,11 @@
                         throw TypeError(".CMsgClientMMSGetLobbyList.filters: object expected");
                     message.filters[i] = $root.CMsgClientMMSGetLobbyList.Filter.fromObject(object.filters[i]);
                 }
+            }
+            if (object.public_ip != null) {
+                if (typeof object.public_ip !== "object")
+                    throw TypeError(".CMsgClientMMSGetLobbyList.public_ip: object expected");
+                message.public_ip = $root.CMsgIPAddress.fromObject(object.public_ip);
             }
             return message;
         };
@@ -14729,7 +15338,8 @@
                 object.app_id = 0;
                 object.num_lobbies_requested = 0;
                 object.cell_id = 0;
-                object.public_ip = 0;
+                object.deprecated_public_ip = 0;
+                object.public_ip = null;
             }
             if (message.app_id != null && message.hasOwnProperty("app_id"))
                 object.app_id = message.app_id;
@@ -14737,13 +15347,15 @@
                 object.num_lobbies_requested = message.num_lobbies_requested;
             if (message.cell_id != null && message.hasOwnProperty("cell_id"))
                 object.cell_id = message.cell_id;
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                object.public_ip = message.public_ip;
+            if (message.deprecated_public_ip != null && message.hasOwnProperty("deprecated_public_ip"))
+                object.deprecated_public_ip = message.deprecated_public_ip;
             if (message.filters && message.filters.length) {
                 object.filters = [];
                 for (var j = 0; j < message.filters.length; ++j)
                     object.filters[j] = $root.CMsgClientMMSGetLobbyList.Filter.toObject(message.filters[j], options);
             }
+            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
+                object.public_ip = $root.CMsgIPAddress.toObject(message.public_ip, options);
             return object;
         };
     
@@ -18553,9 +19165,10 @@
          * @interface ICMsgClientMMSSetLobbyGameServer
          * @property {number|null} [app_id] CMsgClientMMSSetLobbyGameServer app_id
          * @property {number|Long|null} [steam_id_lobby] CMsgClientMMSSetLobbyGameServer steam_id_lobby
-         * @property {number|null} [game_server_ip] CMsgClientMMSSetLobbyGameServer game_server_ip
+         * @property {number|null} [deprecated_game_server_ip] CMsgClientMMSSetLobbyGameServer deprecated_game_server_ip
          * @property {number|null} [game_server_port] CMsgClientMMSSetLobbyGameServer game_server_port
          * @property {number|Long|null} [game_server_steam_id] CMsgClientMMSSetLobbyGameServer game_server_steam_id
+         * @property {ICMsgIPAddress|null} [game_server_ip] CMsgClientMMSSetLobbyGameServer game_server_ip
          */
     
         /**
@@ -18590,12 +19203,12 @@
         CMsgClientMMSSetLobbyGameServer.prototype.steam_id_lobby = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CMsgClientMMSSetLobbyGameServer game_server_ip.
-         * @member {number} game_server_ip
+         * CMsgClientMMSSetLobbyGameServer deprecated_game_server_ip.
+         * @member {number} deprecated_game_server_ip
          * @memberof CMsgClientMMSSetLobbyGameServer
          * @instance
          */
-        CMsgClientMMSSetLobbyGameServer.prototype.game_server_ip = 0;
+        CMsgClientMMSSetLobbyGameServer.prototype.deprecated_game_server_ip = 0;
     
         /**
          * CMsgClientMMSSetLobbyGameServer game_server_port.
@@ -18612,6 +19225,14 @@
          * @instance
          */
         CMsgClientMMSSetLobbyGameServer.prototype.game_server_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgClientMMSSetLobbyGameServer game_server_ip.
+         * @member {ICMsgIPAddress|null|undefined} game_server_ip
+         * @memberof CMsgClientMMSSetLobbyGameServer
+         * @instance
+         */
+        CMsgClientMMSSetLobbyGameServer.prototype.game_server_ip = null;
     
         /**
          * Creates a new CMsgClientMMSSetLobbyGameServer instance using the specified properties.
@@ -18641,12 +19262,14 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
             if (message.steam_id_lobby != null && message.hasOwnProperty("steam_id_lobby"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steam_id_lobby);
-            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.game_server_ip);
+            if (message.deprecated_game_server_ip != null && message.hasOwnProperty("deprecated_game_server_ip"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.deprecated_game_server_ip);
             if (message.game_server_port != null && message.hasOwnProperty("game_server_port"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.game_server_port);
             if (message.game_server_steam_id != null && message.hasOwnProperty("game_server_steam_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.game_server_steam_id);
+            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
+                $root.CMsgIPAddress.encode(message.game_server_ip, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             return writer;
         };
     
@@ -18688,13 +19311,16 @@
                     message.steam_id_lobby = reader.fixed64();
                     break;
                 case 3:
-                    message.game_server_ip = reader.uint32();
+                    message.deprecated_game_server_ip = reader.uint32();
                     break;
                 case 4:
                     message.game_server_port = reader.uint32();
                     break;
                 case 5:
                     message.game_server_steam_id = reader.fixed64();
+                    break;
+                case 6:
+                    message.game_server_ip = $root.CMsgIPAddress.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -18737,15 +19363,20 @@
             if (message.steam_id_lobby != null && message.hasOwnProperty("steam_id_lobby"))
                 if (!$util.isInteger(message.steam_id_lobby) && !(message.steam_id_lobby && $util.isInteger(message.steam_id_lobby.low) && $util.isInteger(message.steam_id_lobby.high)))
                     return "steam_id_lobby: integer|Long expected";
-            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
-                if (!$util.isInteger(message.game_server_ip))
-                    return "game_server_ip: integer expected";
+            if (message.deprecated_game_server_ip != null && message.hasOwnProperty("deprecated_game_server_ip"))
+                if (!$util.isInteger(message.deprecated_game_server_ip))
+                    return "deprecated_game_server_ip: integer expected";
             if (message.game_server_port != null && message.hasOwnProperty("game_server_port"))
                 if (!$util.isInteger(message.game_server_port))
                     return "game_server_port: integer expected";
             if (message.game_server_steam_id != null && message.hasOwnProperty("game_server_steam_id"))
                 if (!$util.isInteger(message.game_server_steam_id) && !(message.game_server_steam_id && $util.isInteger(message.game_server_steam_id.low) && $util.isInteger(message.game_server_steam_id.high)))
                     return "game_server_steam_id: integer|Long expected";
+            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip")) {
+                var error = $root.CMsgIPAddress.verify(message.game_server_ip);
+                if (error)
+                    return "game_server_ip." + error;
+            }
             return null;
         };
     
@@ -18772,8 +19403,8 @@
                     message.steam_id_lobby = object.steam_id_lobby;
                 else if (typeof object.steam_id_lobby === "object")
                     message.steam_id_lobby = new $util.LongBits(object.steam_id_lobby.low >>> 0, object.steam_id_lobby.high >>> 0).toNumber();
-            if (object.game_server_ip != null)
-                message.game_server_ip = object.game_server_ip >>> 0;
+            if (object.deprecated_game_server_ip != null)
+                message.deprecated_game_server_ip = object.deprecated_game_server_ip >>> 0;
             if (object.game_server_port != null)
                 message.game_server_port = object.game_server_port >>> 0;
             if (object.game_server_steam_id != null)
@@ -18785,6 +19416,11 @@
                     message.game_server_steam_id = object.game_server_steam_id;
                 else if (typeof object.game_server_steam_id === "object")
                     message.game_server_steam_id = new $util.LongBits(object.game_server_steam_id.low >>> 0, object.game_server_steam_id.high >>> 0).toNumber();
+            if (object.game_server_ip != null) {
+                if (typeof object.game_server_ip !== "object")
+                    throw TypeError(".CMsgClientMMSSetLobbyGameServer.game_server_ip: object expected");
+                message.game_server_ip = $root.CMsgIPAddress.fromObject(object.game_server_ip);
+            }
             return message;
         };
     
@@ -18808,13 +19444,14 @@
                     object.steam_id_lobby = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.steam_id_lobby = options.longs === String ? "0" : 0;
-                object.game_server_ip = 0;
+                object.deprecated_game_server_ip = 0;
                 object.game_server_port = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.game_server_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.game_server_steam_id = options.longs === String ? "0" : 0;
+                object.game_server_ip = null;
             }
             if (message.app_id != null && message.hasOwnProperty("app_id"))
                 object.app_id = message.app_id;
@@ -18823,8 +19460,8 @@
                     object.steam_id_lobby = options.longs === String ? String(message.steam_id_lobby) : message.steam_id_lobby;
                 else
                     object.steam_id_lobby = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id_lobby) : options.longs === Number ? new $util.LongBits(message.steam_id_lobby.low >>> 0, message.steam_id_lobby.high >>> 0).toNumber() : message.steam_id_lobby;
-            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
-                object.game_server_ip = message.game_server_ip;
+            if (message.deprecated_game_server_ip != null && message.hasOwnProperty("deprecated_game_server_ip"))
+                object.deprecated_game_server_ip = message.deprecated_game_server_ip;
             if (message.game_server_port != null && message.hasOwnProperty("game_server_port"))
                 object.game_server_port = message.game_server_port;
             if (message.game_server_steam_id != null && message.hasOwnProperty("game_server_steam_id"))
@@ -18832,6 +19469,8 @@
                     object.game_server_steam_id = options.longs === String ? String(message.game_server_steam_id) : message.game_server_steam_id;
                 else
                     object.game_server_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.game_server_steam_id) : options.longs === Number ? new $util.LongBits(message.game_server_steam_id.low >>> 0, message.game_server_steam_id.high >>> 0).toNumber() : message.game_server_steam_id;
+            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
+                object.game_server_ip = $root.CMsgIPAddress.toObject(message.game_server_ip, options);
             return object;
         };
     
@@ -18857,9 +19496,10 @@
          * @interface ICMsgClientMMSLobbyGameServerSet
          * @property {number|null} [app_id] CMsgClientMMSLobbyGameServerSet app_id
          * @property {number|Long|null} [steam_id_lobby] CMsgClientMMSLobbyGameServerSet steam_id_lobby
-         * @property {number|null} [game_server_ip] CMsgClientMMSLobbyGameServerSet game_server_ip
+         * @property {number|null} [deprecated_game_server_ip] CMsgClientMMSLobbyGameServerSet deprecated_game_server_ip
          * @property {number|null} [game_server_port] CMsgClientMMSLobbyGameServerSet game_server_port
          * @property {number|Long|null} [game_server_steam_id] CMsgClientMMSLobbyGameServerSet game_server_steam_id
+         * @property {ICMsgIPAddress|null} [game_server_ip] CMsgClientMMSLobbyGameServerSet game_server_ip
          */
     
         /**
@@ -18894,12 +19534,12 @@
         CMsgClientMMSLobbyGameServerSet.prototype.steam_id_lobby = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CMsgClientMMSLobbyGameServerSet game_server_ip.
-         * @member {number} game_server_ip
+         * CMsgClientMMSLobbyGameServerSet deprecated_game_server_ip.
+         * @member {number} deprecated_game_server_ip
          * @memberof CMsgClientMMSLobbyGameServerSet
          * @instance
          */
-        CMsgClientMMSLobbyGameServerSet.prototype.game_server_ip = 0;
+        CMsgClientMMSLobbyGameServerSet.prototype.deprecated_game_server_ip = 0;
     
         /**
          * CMsgClientMMSLobbyGameServerSet game_server_port.
@@ -18916,6 +19556,14 @@
          * @instance
          */
         CMsgClientMMSLobbyGameServerSet.prototype.game_server_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgClientMMSLobbyGameServerSet game_server_ip.
+         * @member {ICMsgIPAddress|null|undefined} game_server_ip
+         * @memberof CMsgClientMMSLobbyGameServerSet
+         * @instance
+         */
+        CMsgClientMMSLobbyGameServerSet.prototype.game_server_ip = null;
     
         /**
          * Creates a new CMsgClientMMSLobbyGameServerSet instance using the specified properties.
@@ -18945,12 +19593,14 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
             if (message.steam_id_lobby != null && message.hasOwnProperty("steam_id_lobby"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steam_id_lobby);
-            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.game_server_ip);
+            if (message.deprecated_game_server_ip != null && message.hasOwnProperty("deprecated_game_server_ip"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.deprecated_game_server_ip);
             if (message.game_server_port != null && message.hasOwnProperty("game_server_port"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.game_server_port);
             if (message.game_server_steam_id != null && message.hasOwnProperty("game_server_steam_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.game_server_steam_id);
+            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
+                $root.CMsgIPAddress.encode(message.game_server_ip, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             return writer;
         };
     
@@ -18992,13 +19642,16 @@
                     message.steam_id_lobby = reader.fixed64();
                     break;
                 case 3:
-                    message.game_server_ip = reader.uint32();
+                    message.deprecated_game_server_ip = reader.uint32();
                     break;
                 case 4:
                     message.game_server_port = reader.uint32();
                     break;
                 case 5:
                     message.game_server_steam_id = reader.fixed64();
+                    break;
+                case 6:
+                    message.game_server_ip = $root.CMsgIPAddress.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -19041,15 +19694,20 @@
             if (message.steam_id_lobby != null && message.hasOwnProperty("steam_id_lobby"))
                 if (!$util.isInteger(message.steam_id_lobby) && !(message.steam_id_lobby && $util.isInteger(message.steam_id_lobby.low) && $util.isInteger(message.steam_id_lobby.high)))
                     return "steam_id_lobby: integer|Long expected";
-            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
-                if (!$util.isInteger(message.game_server_ip))
-                    return "game_server_ip: integer expected";
+            if (message.deprecated_game_server_ip != null && message.hasOwnProperty("deprecated_game_server_ip"))
+                if (!$util.isInteger(message.deprecated_game_server_ip))
+                    return "deprecated_game_server_ip: integer expected";
             if (message.game_server_port != null && message.hasOwnProperty("game_server_port"))
                 if (!$util.isInteger(message.game_server_port))
                     return "game_server_port: integer expected";
             if (message.game_server_steam_id != null && message.hasOwnProperty("game_server_steam_id"))
                 if (!$util.isInteger(message.game_server_steam_id) && !(message.game_server_steam_id && $util.isInteger(message.game_server_steam_id.low) && $util.isInteger(message.game_server_steam_id.high)))
                     return "game_server_steam_id: integer|Long expected";
+            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip")) {
+                var error = $root.CMsgIPAddress.verify(message.game_server_ip);
+                if (error)
+                    return "game_server_ip." + error;
+            }
             return null;
         };
     
@@ -19076,8 +19734,8 @@
                     message.steam_id_lobby = object.steam_id_lobby;
                 else if (typeof object.steam_id_lobby === "object")
                     message.steam_id_lobby = new $util.LongBits(object.steam_id_lobby.low >>> 0, object.steam_id_lobby.high >>> 0).toNumber();
-            if (object.game_server_ip != null)
-                message.game_server_ip = object.game_server_ip >>> 0;
+            if (object.deprecated_game_server_ip != null)
+                message.deprecated_game_server_ip = object.deprecated_game_server_ip >>> 0;
             if (object.game_server_port != null)
                 message.game_server_port = object.game_server_port >>> 0;
             if (object.game_server_steam_id != null)
@@ -19089,6 +19747,11 @@
                     message.game_server_steam_id = object.game_server_steam_id;
                 else if (typeof object.game_server_steam_id === "object")
                     message.game_server_steam_id = new $util.LongBits(object.game_server_steam_id.low >>> 0, object.game_server_steam_id.high >>> 0).toNumber();
+            if (object.game_server_ip != null) {
+                if (typeof object.game_server_ip !== "object")
+                    throw TypeError(".CMsgClientMMSLobbyGameServerSet.game_server_ip: object expected");
+                message.game_server_ip = $root.CMsgIPAddress.fromObject(object.game_server_ip);
+            }
             return message;
         };
     
@@ -19112,13 +19775,14 @@
                     object.steam_id_lobby = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.steam_id_lobby = options.longs === String ? "0" : 0;
-                object.game_server_ip = 0;
+                object.deprecated_game_server_ip = 0;
                 object.game_server_port = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.game_server_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.game_server_steam_id = options.longs === String ? "0" : 0;
+                object.game_server_ip = null;
             }
             if (message.app_id != null && message.hasOwnProperty("app_id"))
                 object.app_id = message.app_id;
@@ -19127,8 +19791,8 @@
                     object.steam_id_lobby = options.longs === String ? String(message.steam_id_lobby) : message.steam_id_lobby;
                 else
                     object.steam_id_lobby = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id_lobby) : options.longs === Number ? new $util.LongBits(message.steam_id_lobby.low >>> 0, message.steam_id_lobby.high >>> 0).toNumber() : message.steam_id_lobby;
-            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
-                object.game_server_ip = message.game_server_ip;
+            if (message.deprecated_game_server_ip != null && message.hasOwnProperty("deprecated_game_server_ip"))
+                object.deprecated_game_server_ip = message.deprecated_game_server_ip;
             if (message.game_server_port != null && message.hasOwnProperty("game_server_port"))
                 object.game_server_port = message.game_server_port;
             if (message.game_server_steam_id != null && message.hasOwnProperty("game_server_steam_id"))
@@ -19136,6 +19800,8 @@
                     object.game_server_steam_id = options.longs === String ? String(message.game_server_steam_id) : message.game_server_steam_id;
                 else
                     object.game_server_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.game_server_steam_id) : options.longs === Number ? new $util.LongBits(message.game_server_steam_id.low >>> 0, message.game_server_steam_id.high >>> 0).toNumber() : message.game_server_steam_id;
+            if (message.game_server_ip != null && message.hasOwnProperty("game_server_ip"))
+                object.game_server_ip = $root.CMsgIPAddress.toObject(message.game_server_ip, options);
             return object;
         };
     
@@ -39064,6 +39730,7 @@
          * @property {Array.<CMsgClientPICSProductInfoRequest.IAppInfo>|null} [apps] CMsgClientPICSProductInfoRequest apps
          * @property {boolean|null} [meta_data_only] CMsgClientPICSProductInfoRequest meta_data_only
          * @property {number|null} [num_prev_failed] CMsgClientPICSProductInfoRequest num_prev_failed
+         * @property {number|null} [supports_package_tokens] CMsgClientPICSProductInfoRequest supports_package_tokens
          */
     
         /**
@@ -39116,6 +39783,14 @@
         CMsgClientPICSProductInfoRequest.prototype.num_prev_failed = 0;
     
         /**
+         * CMsgClientPICSProductInfoRequest supports_package_tokens.
+         * @member {number} supports_package_tokens
+         * @memberof CMsgClientPICSProductInfoRequest
+         * @instance
+         */
+        CMsgClientPICSProductInfoRequest.prototype.supports_package_tokens = 0;
+    
+        /**
          * Creates a new CMsgClientPICSProductInfoRequest instance using the specified properties.
          * @function create
          * @memberof CMsgClientPICSProductInfoRequest
@@ -39149,6 +39824,8 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.meta_data_only);
             if (message.num_prev_failed != null && message.hasOwnProperty("num_prev_failed"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.num_prev_failed);
+            if (message.supports_package_tokens != null && message.hasOwnProperty("supports_package_tokens"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.supports_package_tokens);
             return writer;
         };
     
@@ -39198,6 +39875,9 @@
                     break;
                 case 4:
                     message.num_prev_failed = reader.uint32();
+                    break;
+                case 5:
+                    message.supports_package_tokens = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -39258,6 +39938,9 @@
             if (message.num_prev_failed != null && message.hasOwnProperty("num_prev_failed"))
                 if (!$util.isInteger(message.num_prev_failed))
                     return "num_prev_failed: integer expected";
+            if (message.supports_package_tokens != null && message.hasOwnProperty("supports_package_tokens"))
+                if (!$util.isInteger(message.supports_package_tokens))
+                    return "supports_package_tokens: integer expected";
             return null;
         };
     
@@ -39297,6 +39980,8 @@
                 message.meta_data_only = Boolean(object.meta_data_only);
             if (object.num_prev_failed != null)
                 message.num_prev_failed = object.num_prev_failed >>> 0;
+            if (object.supports_package_tokens != null)
+                message.supports_package_tokens = object.supports_package_tokens >>> 0;
             return message;
         };
     
@@ -39320,6 +40005,7 @@
             if (options.defaults) {
                 object.meta_data_only = false;
                 object.num_prev_failed = 0;
+                object.supports_package_tokens = 0;
             }
             if (message.packages && message.packages.length) {
                 object.packages = [];
@@ -39335,6 +40021,8 @@
                 object.meta_data_only = message.meta_data_only;
             if (message.num_prev_failed != null && message.hasOwnProperty("num_prev_failed"))
                 object.num_prev_failed = message.num_prev_failed;
+            if (message.supports_package_tokens != null && message.hasOwnProperty("supports_package_tokens"))
+                object.supports_package_tokens = message.supports_package_tokens;
             return object;
         };
     
@@ -46841,6 +47529,8 @@
      * @property {number} k_EClanFreeTrial=31 k_EClanFreeTrial value
      * @property {number} k_EClanSeasonRelease=32 k_EClanSeasonRelease value
      * @property {number} k_EClanSeasonUpdate=33 k_EClanSeasonUpdate value
+     * @property {number} k_EClanCrosspostEvent=34 k_EClanCrosspostEvent value
+     * @property {number} k_EClanInGameEventGeneral=35 k_EClanInGameEventGeneral value
      */
     $root.EProtoClanEventType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -46877,6 +47567,26 @@
         values[valuesById[31] = "k_EClanFreeTrial"] = 31;
         values[valuesById[32] = "k_EClanSeasonRelease"] = 32;
         values[valuesById[33] = "k_EClanSeasonUpdate"] = 33;
+        values[valuesById[34] = "k_EClanCrosspostEvent"] = 34;
+        values[valuesById[35] = "k_EClanInGameEventGeneral"] = 35;
+        return values;
+    })();
+    
+    /**
+     * PartnerEventNotificationType enum.
+     * @exports PartnerEventNotificationType
+     * @enum {string}
+     * @property {number} k_EEventStart=0 k_EEventStart value
+     * @property {number} k_EEventBroadcastStart=1 k_EEventBroadcastStart value
+     * @property {number} k_EEventMatchStart=2 k_EEventMatchStart value
+     * @property {number} k_EEventPartnerMaxType=3 k_EEventPartnerMaxType value
+     */
+    $root.PartnerEventNotificationType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EEventStart"] = 0;
+        values[valuesById[1] = "k_EEventBroadcastStart"] = 1;
+        values[valuesById[2] = "k_EEventMatchStart"] = 2;
+        values[valuesById[3] = "k_EEventPartnerMaxType"] = 3;
         return values;
     })();
     
@@ -47116,6 +47826,235 @@
         return CMsgIPAddress;
     })();
     
+    $root.CMsgIPAddressBucket = (function() {
+    
+        /**
+         * Properties of a CMsgIPAddressBucket.
+         * @exports ICMsgIPAddressBucket
+         * @interface ICMsgIPAddressBucket
+         * @property {ICMsgIPAddress|null} [original_ip_address] CMsgIPAddressBucket original_ip_address
+         * @property {number|Long|null} [bucket] CMsgIPAddressBucket bucket
+         */
+    
+        /**
+         * Constructs a new CMsgIPAddressBucket.
+         * @exports CMsgIPAddressBucket
+         * @classdesc Represents a CMsgIPAddressBucket.
+         * @implements ICMsgIPAddressBucket
+         * @constructor
+         * @param {ICMsgIPAddressBucket=} [properties] Properties to set
+         */
+        function CMsgIPAddressBucket(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgIPAddressBucket original_ip_address.
+         * @member {ICMsgIPAddress|null|undefined} original_ip_address
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         */
+        CMsgIPAddressBucket.prototype.original_ip_address = null;
+    
+        /**
+         * CMsgIPAddressBucket bucket.
+         * @member {number|Long} bucket
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         */
+        CMsgIPAddressBucket.prototype.bucket = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CMsgIPAddressBucket instance using the specified properties.
+         * @function create
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket=} [properties] Properties to set
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket instance
+         */
+        CMsgIPAddressBucket.create = function create(properties) {
+            return new CMsgIPAddressBucket(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddressBucket message. Does not implicitly {@link CMsgIPAddressBucket.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket} message CMsgIPAddressBucket message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddressBucket.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address"))
+                $root.CMsgIPAddress.encode(message.original_ip_address, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.bucket);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddressBucket message, length delimited. Does not implicitly {@link CMsgIPAddressBucket.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {ICMsgIPAddressBucket} message CMsgIPAddressBucket message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddressBucket.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgIPAddressBucket message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddressBucket.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgIPAddressBucket();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.original_ip_address = $root.CMsgIPAddress.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.bucket = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgIPAddressBucket message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddressBucket.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgIPAddressBucket message.
+         * @function verify
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgIPAddressBucket.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address")) {
+                var error = $root.CMsgIPAddress.verify(message.original_ip_address);
+                if (error)
+                    return "original_ip_address." + error;
+            }
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                if (!$util.isInteger(message.bucket) && !(message.bucket && $util.isInteger(message.bucket.low) && $util.isInteger(message.bucket.high)))
+                    return "bucket: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgIPAddressBucket message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgIPAddressBucket} CMsgIPAddressBucket
+         */
+        CMsgIPAddressBucket.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgIPAddressBucket)
+                return object;
+            var message = new $root.CMsgIPAddressBucket();
+            if (object.original_ip_address != null) {
+                if (typeof object.original_ip_address !== "object")
+                    throw TypeError(".CMsgIPAddressBucket.original_ip_address: object expected");
+                message.original_ip_address = $root.CMsgIPAddress.fromObject(object.original_ip_address);
+            }
+            if (object.bucket != null)
+                if ($util.Long)
+                    (message.bucket = $util.Long.fromValue(object.bucket)).unsigned = false;
+                else if (typeof object.bucket === "string")
+                    message.bucket = parseInt(object.bucket, 10);
+                else if (typeof object.bucket === "number")
+                    message.bucket = object.bucket;
+                else if (typeof object.bucket === "object")
+                    message.bucket = new $util.LongBits(object.bucket.low >>> 0, object.bucket.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgIPAddressBucket message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgIPAddressBucket
+         * @static
+         * @param {CMsgIPAddressBucket} message CMsgIPAddressBucket
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgIPAddressBucket.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.original_ip_address = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.bucket = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bucket = options.longs === String ? "0" : 0;
+            }
+            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address"))
+                object.original_ip_address = $root.CMsgIPAddress.toObject(message.original_ip_address, options);
+            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                if (typeof message.bucket === "number")
+                    object.bucket = options.longs === String ? String(message.bucket) : message.bucket;
+                else
+                    object.bucket = options.longs === String ? $util.Long.prototype.toString.call(message.bucket) : options.longs === Number ? new $util.LongBits(message.bucket.low >>> 0, message.bucket.high >>> 0).toNumber() : message.bucket;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgIPAddressBucket to JSON.
+         * @function toJSON
+         * @memberof CMsgIPAddressBucket
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgIPAddressBucket.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgIPAddressBucket;
+    })();
+    
     $root.CMsgProtoBufHeader = (function() {
     
         /**
@@ -47144,6 +48083,8 @@
          * @property {Array.<number>|null} [forward_to_sysid] CMsgProtoBufHeader forward_to_sysid
          * @property {number|null} [cm_sysid] CMsgProtoBufHeader cm_sysid
          * @property {string|null} [wg_token] CMsgProtoBufHeader wg_token
+         * @property {number|null} [launcher_type] CMsgProtoBufHeader launcher_type
+         * @property {number|null} [realm] CMsgProtoBufHeader realm
          * @property {number|null} [ip] CMsgProtoBufHeader ip
          * @property {Uint8Array|null} [ip_v6] CMsgProtoBufHeader ip_v6
          */
@@ -47341,6 +48282,22 @@
         CMsgProtoBufHeader.prototype.wg_token = "";
     
         /**
+         * CMsgProtoBufHeader launcher_type.
+         * @member {number} launcher_type
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.launcher_type = 0;
+    
+        /**
+         * CMsgProtoBufHeader realm.
+         * @member {number} realm
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.realm = 0;
+    
+        /**
          * CMsgProtoBufHeader ip.
          * @member {number} ip
          * @memberof CMsgProtoBufHeader
@@ -47443,6 +48400,10 @@
                 writer.uint32(/* id 29, wireType 2 =*/234).bytes(message.ip_v6);
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.wg_token);
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.launcher_type);
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                writer.uint32(/* id 32, wireType 0 =*/256).uint32(message.realm);
             return writer;
         };
     
@@ -47549,6 +48510,12 @@
                     break;
                 case 30:
                     message.wg_token = reader.string();
+                    break;
+                case 31:
+                    message.launcher_type = reader.uint32();
+                    break;
+                case 32:
+                    message.realm = reader.uint32();
                     break;
                 case 15:
                     message.ip = reader.uint32();
@@ -47662,6 +48629,12 @@
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 if (!$util.isString(message.wg_token))
                     return "wg_token: string expected";
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                if (!$util.isInteger(message.launcher_type))
+                    return "launcher_type: integer expected";
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                if (!$util.isInteger(message.realm))
+                    return "realm: integer expected";
             if (message.ip != null && message.hasOwnProperty("ip")) {
                 properties.ip_addr = 1;
                 if (!$util.isInteger(message.ip))
@@ -47773,6 +48746,10 @@
                 message.cm_sysid = object.cm_sysid >>> 0;
             if (object.wg_token != null)
                 message.wg_token = String(object.wg_token);
+            if (object.launcher_type != null)
+                message.launcher_type = object.launcher_type >>> 0;
+            if (object.realm != null)
+                message.realm = object.realm >>> 0;
             if (object.ip != null)
                 message.ip = object.ip >>> 0;
             if (object.ip_v6 != null)
@@ -47840,6 +48817,8 @@
                 object.is_from_external_source = false;
                 object.cm_sysid = 0;
                 object.wg_token = "";
+                object.launcher_type = 0;
+                object.realm = 0;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -47913,6 +48892,10 @@
             }
             if (message.wg_token != null && message.hasOwnProperty("wg_token"))
                 object.wg_token = message.wg_token;
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                object.launcher_type = message.launcher_type;
+            if (message.realm != null && message.hasOwnProperty("realm"))
+                object.realm = message.realm;
             return object;
         };
     
@@ -49153,6 +50136,7 @@
          * @property {boolean|null} [economy_support_supervisor] CMsgAppRights economy_support_supervisor
          * @property {boolean|null} [manage_pricing] CMsgAppRights manage_pricing
          * @property {boolean|null} [broadcast_live] CMsgAppRights broadcast_live
+         * @property {boolean|null} [view_marketing_traffic] CMsgAppRights view_marketing_traffic
          */
     
         /**
@@ -49291,6 +50275,14 @@
         CMsgAppRights.prototype.broadcast_live = false;
     
         /**
+         * CMsgAppRights view_marketing_traffic.
+         * @member {boolean} view_marketing_traffic
+         * @memberof CMsgAppRights
+         * @instance
+         */
+        CMsgAppRights.prototype.view_marketing_traffic = false;
+    
+        /**
          * Creates a new CMsgAppRights instance using the specified properties.
          * @function create
          * @memberof CMsgAppRights
@@ -49344,6 +50336,8 @@
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.manage_pricing);
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.broadcast_live);
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.view_marketing_traffic);
             return writer;
         };
     
@@ -49422,6 +50416,9 @@
                     break;
                 case 15:
                     message.broadcast_live = reader.bool();
+                    break;
+                case 16:
+                    message.view_marketing_traffic = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -49503,6 +50500,9 @@
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 if (typeof message.broadcast_live !== "boolean")
                     return "broadcast_live: boolean expected";
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                if (typeof message.view_marketing_traffic !== "boolean")
+                    return "view_marketing_traffic: boolean expected";
             return null;
         };
     
@@ -49548,6 +50548,8 @@
                 message.manage_pricing = Boolean(object.manage_pricing);
             if (object.broadcast_live != null)
                 message.broadcast_live = Boolean(object.broadcast_live);
+            if (object.view_marketing_traffic != null)
+                message.view_marketing_traffic = Boolean(object.view_marketing_traffic);
             return message;
         };
     
@@ -49580,6 +50582,7 @@
                 object.economy_support_supervisor = false;
                 object.manage_pricing = false;
                 object.broadcast_live = false;
+                object.view_marketing_traffic = false;
             }
             if (message.edit_info != null && message.hasOwnProperty("edit_info"))
                 object.edit_info = message.edit_info;
@@ -49611,6 +50614,8 @@
                 object.manage_pricing = message.manage_pricing;
             if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
                 object.broadcast_live = message.broadcast_live;
+            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+                object.view_marketing_traffic = message.view_marketing_traffic;
             return object;
         };
     
@@ -51064,6 +52069,9 @@
          * @property {number|null} [language] CCommunity_ClanAnnouncementInfo language
          * @property {boolean|null} [hidden] CCommunity_ClanAnnouncementInfo hidden
          * @property {number|Long|null} [forum_topic_id] CCommunity_ClanAnnouncementInfo forum_topic_id
+         * @property {number|Long|null} [event_gid] CCommunity_ClanAnnouncementInfo event_gid
+         * @property {number|null} [voteupcount] CCommunity_ClanAnnouncementInfo voteupcount
+         * @property {number|null} [votedowncount] CCommunity_ClanAnnouncementInfo votedowncount
          */
     
         /**
@@ -51179,6 +52187,30 @@
         CCommunity_ClanAnnouncementInfo.prototype.forum_topic_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
+         * CCommunity_ClanAnnouncementInfo event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CCommunity_ClanAnnouncementInfo voteupcount.
+         * @member {number} voteupcount
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.voteupcount = 0;
+    
+        /**
+         * CCommunity_ClanAnnouncementInfo votedowncount.
+         * @member {number} votedowncount
+         * @memberof CCommunity_ClanAnnouncementInfo
+         * @instance
+         */
+        CCommunity_ClanAnnouncementInfo.prototype.votedowncount = 0;
+    
+        /**
          * Creates a new CCommunity_ClanAnnouncementInfo instance using the specified properties.
          * @function create
          * @memberof CCommunity_ClanAnnouncementInfo
@@ -51227,6 +52259,12 @@
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.hidden);
             if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
                 writer.uint32(/* id 12, wireType 1 =*/97).fixed64(message.forum_topic_id);
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 13, wireType 1 =*/105).fixed64(message.event_gid);
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.voteupcount);
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.votedowncount);
             return writer;
         };
     
@@ -51298,6 +52336,15 @@
                     break;
                 case 12:
                     message.forum_topic_id = reader.fixed64();
+                    break;
+                case 13:
+                    message.event_gid = reader.fixed64();
+                    break;
+                case 14:
+                    message.voteupcount = reader.int32();
+                    break;
+                case 15:
+                    message.votedowncount = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -51374,6 +52421,15 @@
             if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
                 if (!$util.isInteger(message.forum_topic_id) && !(message.forum_topic_id && $util.isInteger(message.forum_topic_id.low) && $util.isInteger(message.forum_topic_id.high)))
                     return "forum_topic_id: integer|Long expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                if (!$util.isInteger(message.voteupcount))
+                    return "voteupcount: integer expected";
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                if (!$util.isInteger(message.votedowncount))
+                    return "votedowncount: integer expected";
             return null;
         };
     
@@ -51446,6 +52502,19 @@
                     message.forum_topic_id = object.forum_topic_id;
                 else if (typeof object.forum_topic_id === "object")
                     message.forum_topic_id = new $util.LongBits(object.forum_topic_id.low >>> 0, object.forum_topic_id.high >>> 0).toNumber();
+            if (object.event_gid != null)
+                if ($util.Long)
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.voteupcount != null)
+                message.voteupcount = object.voteupcount | 0;
+            if (object.votedowncount != null)
+                message.votedowncount = object.votedowncount | 0;
             return message;
         };
     
@@ -51492,6 +52561,13 @@
                     object.forum_topic_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.forum_topic_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.event_gid = options.longs === String ? "0" : 0;
+                object.voteupcount = 0;
+                object.votedowncount = 0;
             }
             if (message.gid != null && message.hasOwnProperty("gid"))
                 if (typeof message.gid === "number")
@@ -51532,6 +52608,15 @@
                     object.forum_topic_id = options.longs === String ? String(message.forum_topic_id) : message.forum_topic_id;
                 else
                     object.forum_topic_id = options.longs === String ? $util.Long.prototype.toString.call(message.forum_topic_id) : options.longs === Number ? new $util.LongBits(message.forum_topic_id.low >>> 0, message.forum_topic_id.high >>> 0).toNumber() : message.forum_topic_id;
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
+                else
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+                object.voteupcount = message.voteupcount;
+            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+                object.votedowncount = message.votedowncount;
             return object;
         };
     
@@ -51579,6 +52664,8 @@
          * @property {number|null} [ignore_count] CClanEventData ignore_count
          * @property {number|Long|null} [forum_topic_id] CClanEventData forum_topic_id
          * @property {number|null} [rtime32_last_modified] CClanEventData rtime32_last_modified
+         * @property {number|Long|null} [news_post_gid] CClanEventData news_post_gid
+         * @property {number|null} [rtime_mod_reviewed] CClanEventData rtime_mod_reviewed
          */
     
         /**
@@ -51789,6 +52876,22 @@
         CClanEventData.prototype.rtime32_last_modified = 0;
     
         /**
+         * CClanEventData news_post_gid.
+         * @member {number|Long} news_post_gid
+         * @memberof CClanEventData
+         * @instance
+         */
+        CClanEventData.prototype.news_post_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CClanEventData rtime_mod_reviewed.
+         * @member {number} rtime_mod_reviewed
+         * @memberof CClanEventData
+         * @instance
+         */
+        CClanEventData.prototype.rtime_mod_reviewed = 0;
+    
+        /**
          * Creates a new CClanEventData instance using the specified properties.
          * @function create
          * @memberof CClanEventData
@@ -51860,6 +52963,10 @@
                 writer.uint32(/* id 23, wireType 1 =*/185).fixed64(message.forum_topic_id);
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 writer.uint32(/* id 24, wireType 0 =*/192).uint32(message.rtime32_last_modified);
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                writer.uint32(/* id 25, wireType 1 =*/201).fixed64(message.news_post_gid);
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.rtime_mod_reviewed);
             return writer;
         };
     
@@ -51966,6 +53073,12 @@
                 case 24:
                     message.rtime32_last_modified = reader.uint32();
                     break;
+                case 25:
+                    message.news_post_gid = reader.fixed64();
+                    break;
+                case 26:
+                    message.rtime_mod_reviewed = reader.uint32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -52047,6 +53160,8 @@
                 case 31:
                 case 32:
                 case 33:
+                case 34:
+                case 35:
                     break;
                 }
             if (message.appid != null && message.hasOwnProperty("appid"))
@@ -52111,6 +53226,12 @@
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 if (!$util.isInteger(message.rtime32_last_modified))
                     return "rtime32_last_modified: integer expected";
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                if (!$util.isInteger(message.news_post_gid) && !(message.news_post_gid && $util.isInteger(message.news_post_gid.low) && $util.isInteger(message.news_post_gid.high)))
+                    return "news_post_gid: integer|Long expected";
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                if (!$util.isInteger(message.rtime_mod_reviewed))
+                    return "rtime_mod_reviewed: integer expected";
             return null;
         };
     
@@ -52279,6 +53400,14 @@
             case 33:
                 message.event_type = 33;
                 break;
+            case "k_EClanCrosspostEvent":
+            case 34:
+                message.event_type = 34;
+                break;
+            case "k_EClanInGameEventGeneral":
+            case 35:
+                message.event_type = 35;
+                break;
             }
             if (object.appid != null)
                 message.appid = object.appid >>> 0;
@@ -52344,6 +53473,17 @@
                     message.forum_topic_id = new $util.LongBits(object.forum_topic_id.low >>> 0, object.forum_topic_id.high >>> 0).toNumber();
             if (object.rtime32_last_modified != null)
                 message.rtime32_last_modified = object.rtime32_last_modified >>> 0;
+            if (object.news_post_gid != null)
+                if ($util.Long)
+                    (message.news_post_gid = $util.Long.fromValue(object.news_post_gid)).unsigned = false;
+                else if (typeof object.news_post_gid === "string")
+                    message.news_post_gid = parseInt(object.news_post_gid, 10);
+                else if (typeof object.news_post_gid === "number")
+                    message.news_post_gid = object.news_post_gid;
+                else if (typeof object.news_post_gid === "object")
+                    message.news_post_gid = new $util.LongBits(object.news_post_gid.low >>> 0, object.news_post_gid.high >>> 0).toNumber();
+            if (object.rtime_mod_reviewed != null)
+                message.rtime_mod_reviewed = object.rtime_mod_reviewed >>> 0;
             return message;
         };
     
@@ -52405,6 +53545,12 @@
                 } else
                     object.forum_topic_id = options.longs === String ? "0" : 0;
                 object.rtime32_last_modified = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.news_post_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.news_post_gid = options.longs === String ? "0" : 0;
+                object.rtime_mod_reviewed = 0;
             }
             if (message.gid != null && message.hasOwnProperty("gid"))
                 if (typeof message.gid === "number")
@@ -52469,6 +53615,13 @@
                     object.forum_topic_id = options.longs === String ? $util.Long.prototype.toString.call(message.forum_topic_id) : options.longs === Number ? new $util.LongBits(message.forum_topic_id.low >>> 0, message.forum_topic_id.high >>> 0).toNumber() : message.forum_topic_id;
             if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
                 object.rtime32_last_modified = message.rtime32_last_modified;
+            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+                if (typeof message.news_post_gid === "number")
+                    object.news_post_gid = options.longs === String ? String(message.news_post_gid) : message.news_post_gid;
+                else
+                    object.news_post_gid = options.longs === String ? $util.Long.prototype.toString.call(message.news_post_gid) : options.longs === Number ? new $util.LongBits(message.news_post_gid.low >>> 0, message.news_post_gid.high >>> 0).toNumber() : message.news_post_gid;
+            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+                object.rtime_mod_reviewed = message.rtime_mod_reviewed;
             return object;
         };
     
@@ -52484,6 +53637,392 @@
         };
     
         return CClanEventData;
+    })();
+    
+    $root.CBilling_Address = (function() {
+    
+        /**
+         * Properties of a CBilling_Address.
+         * @exports ICBilling_Address
+         * @interface ICBilling_Address
+         * @property {string|null} [first_name] CBilling_Address first_name
+         * @property {string|null} [last_name] CBilling_Address last_name
+         * @property {string|null} [address1] CBilling_Address address1
+         * @property {string|null} [address2] CBilling_Address address2
+         * @property {string|null} [city] CBilling_Address city
+         * @property {string|null} [us_state] CBilling_Address us_state
+         * @property {string|null} [country_code] CBilling_Address country_code
+         * @property {string|null} [postcode] CBilling_Address postcode
+         * @property {number|null} [zip_plus4] CBilling_Address zip_plus4
+         * @property {string|null} [phone] CBilling_Address phone
+         */
+    
+        /**
+         * Constructs a new CBilling_Address.
+         * @exports CBilling_Address
+         * @classdesc Represents a CBilling_Address.
+         * @implements ICBilling_Address
+         * @constructor
+         * @param {ICBilling_Address=} [properties] Properties to set
+         */
+        function CBilling_Address(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBilling_Address first_name.
+         * @member {string} first_name
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.first_name = "";
+    
+        /**
+         * CBilling_Address last_name.
+         * @member {string} last_name
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.last_name = "";
+    
+        /**
+         * CBilling_Address address1.
+         * @member {string} address1
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.address1 = "";
+    
+        /**
+         * CBilling_Address address2.
+         * @member {string} address2
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.address2 = "";
+    
+        /**
+         * CBilling_Address city.
+         * @member {string} city
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.city = "";
+    
+        /**
+         * CBilling_Address us_state.
+         * @member {string} us_state
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.us_state = "";
+    
+        /**
+         * CBilling_Address country_code.
+         * @member {string} country_code
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.country_code = "";
+    
+        /**
+         * CBilling_Address postcode.
+         * @member {string} postcode
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.postcode = "";
+    
+        /**
+         * CBilling_Address zip_plus4.
+         * @member {number} zip_plus4
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.zip_plus4 = 0;
+    
+        /**
+         * CBilling_Address phone.
+         * @member {string} phone
+         * @memberof CBilling_Address
+         * @instance
+         */
+        CBilling_Address.prototype.phone = "";
+    
+        /**
+         * Creates a new CBilling_Address instance using the specified properties.
+         * @function create
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address=} [properties] Properties to set
+         * @returns {CBilling_Address} CBilling_Address instance
+         */
+        CBilling_Address.create = function create(properties) {
+            return new CBilling_Address(properties);
+        };
+    
+        /**
+         * Encodes the specified CBilling_Address message. Does not implicitly {@link CBilling_Address.verify|verify} messages.
+         * @function encode
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address} message CBilling_Address message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBilling_Address.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.first_name);
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.last_name);
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.address1);
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.address2);
+            if (message.city != null && message.hasOwnProperty("city"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.city);
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.us_state);
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.country_code);
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.postcode);
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.zip_plus4);
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.phone);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBilling_Address message, length delimited. Does not implicitly {@link CBilling_Address.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBilling_Address
+         * @static
+         * @param {ICBilling_Address} message CBilling_Address message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBilling_Address.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBilling_Address message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBilling_Address
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBilling_Address} CBilling_Address
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBilling_Address.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBilling_Address();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.first_name = reader.string();
+                    break;
+                case 2:
+                    message.last_name = reader.string();
+                    break;
+                case 3:
+                    message.address1 = reader.string();
+                    break;
+                case 4:
+                    message.address2 = reader.string();
+                    break;
+                case 5:
+                    message.city = reader.string();
+                    break;
+                case 6:
+                    message.us_state = reader.string();
+                    break;
+                case 7:
+                    message.country_code = reader.string();
+                    break;
+                case 8:
+                    message.postcode = reader.string();
+                    break;
+                case 9:
+                    message.zip_plus4 = reader.int32();
+                    break;
+                case 10:
+                    message.phone = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBilling_Address message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBilling_Address
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBilling_Address} CBilling_Address
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBilling_Address.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBilling_Address message.
+         * @function verify
+         * @memberof CBilling_Address
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBilling_Address.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                if (!$util.isString(message.first_name))
+                    return "first_name: string expected";
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                if (!$util.isString(message.last_name))
+                    return "last_name: string expected";
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                if (!$util.isString(message.address1))
+                    return "address1: string expected";
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                if (!$util.isString(message.address2))
+                    return "address2: string expected";
+            if (message.city != null && message.hasOwnProperty("city"))
+                if (!$util.isString(message.city))
+                    return "city: string expected";
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                if (!$util.isString(message.us_state))
+                    return "us_state: string expected";
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                if (!$util.isString(message.country_code))
+                    return "country_code: string expected";
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                if (!$util.isString(message.postcode))
+                    return "postcode: string expected";
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                if (!$util.isInteger(message.zip_plus4))
+                    return "zip_plus4: integer expected";
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                if (!$util.isString(message.phone))
+                    return "phone: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBilling_Address message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBilling_Address
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBilling_Address} CBilling_Address
+         */
+        CBilling_Address.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBilling_Address)
+                return object;
+            var message = new $root.CBilling_Address();
+            if (object.first_name != null)
+                message.first_name = String(object.first_name);
+            if (object.last_name != null)
+                message.last_name = String(object.last_name);
+            if (object.address1 != null)
+                message.address1 = String(object.address1);
+            if (object.address2 != null)
+                message.address2 = String(object.address2);
+            if (object.city != null)
+                message.city = String(object.city);
+            if (object.us_state != null)
+                message.us_state = String(object.us_state);
+            if (object.country_code != null)
+                message.country_code = String(object.country_code);
+            if (object.postcode != null)
+                message.postcode = String(object.postcode);
+            if (object.zip_plus4 != null)
+                message.zip_plus4 = object.zip_plus4 | 0;
+            if (object.phone != null)
+                message.phone = String(object.phone);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBilling_Address message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBilling_Address
+         * @static
+         * @param {CBilling_Address} message CBilling_Address
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBilling_Address.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.first_name = "";
+                object.last_name = "";
+                object.address1 = "";
+                object.address2 = "";
+                object.city = "";
+                object.us_state = "";
+                object.country_code = "";
+                object.postcode = "";
+                object.zip_plus4 = 0;
+                object.phone = "";
+            }
+            if (message.first_name != null && message.hasOwnProperty("first_name"))
+                object.first_name = message.first_name;
+            if (message.last_name != null && message.hasOwnProperty("last_name"))
+                object.last_name = message.last_name;
+            if (message.address1 != null && message.hasOwnProperty("address1"))
+                object.address1 = message.address1;
+            if (message.address2 != null && message.hasOwnProperty("address2"))
+                object.address2 = message.address2;
+            if (message.city != null && message.hasOwnProperty("city"))
+                object.city = message.city;
+            if (message.us_state != null && message.hasOwnProperty("us_state"))
+                object.us_state = message.us_state;
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                object.country_code = message.country_code;
+            if (message.postcode != null && message.hasOwnProperty("postcode"))
+                object.postcode = message.postcode;
+            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+                object.zip_plus4 = message.zip_plus4;
+            if (message.phone != null && message.hasOwnProperty("phone"))
+                object.phone = message.phone;
+            return object;
+        };
+    
+        /**
+         * Converts this CBilling_Address to JSON.
+         * @function toJSON
+         * @memberof CBilling_Address
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBilling_Address.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBilling_Address;
     })();
     
     $root.google = (function() {

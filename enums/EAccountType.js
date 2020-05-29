@@ -13,7 +13,6 @@ module.exports = {
 	"Chat": 8,
 	"ConsoleUser": 9,
 	"AnonUser": 10,
-	"Max": 11,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -27,5 +26,4 @@ module.exports = {
 	"8": "Chat",
 	"9": "ConsoleUser",
 	"10": "AnonUser",
-	"11": "Max",
 };

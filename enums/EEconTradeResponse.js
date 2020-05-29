@@ -33,6 +33,8 @@ module.exports = {
 	"NeedsMobileConfirmation": 29,
 	"TradingHoldForClearedTradeOffersInitiator": 30,
 	"WouldExceedMaxAssetCount": 31,
+	"DisabledInRegion": 32,
+	"DisabledInPartnerRegion": 33,
 	"OKToDeliver": 50,
 
 	// Value-to-name mapping for convenience
@@ -66,5 +68,7 @@ module.exports = {
 	"29": "NeedsMobileConfirmation",
 	"30": "TradingHoldForClearedTradeOffersInitiator",
 	"31": "WouldExceedMaxAssetCount",
+	"32": "DisabledInRegion",
+	"33": "DisabledInPartnerRegion",
 	"50": "OKToDeliver",
 };

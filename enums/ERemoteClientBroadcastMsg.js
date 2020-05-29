@@ -14,6 +14,8 @@ module.exports = {
 	"AuthorizationCancelRequest": 9,
 	"StreamingCancelRequest": 10,
 	"ClientIDDeconflict": 11,
+	"StreamTransportSignal": 12,
+	"StreamingProgress": 13,
 
 	// Value-to-name mapping for convenience
 	"0": "Discovery",
@@ -28,4 +30,6 @@ module.exports = {
 	"9": "AuthorizationCancelRequest",
 	"10": "StreamingCancelRequest",
 	"11": "ClientIDDeconflict",
+	"12": "StreamTransportSignal",
+	"13": "StreamingProgress",
 };

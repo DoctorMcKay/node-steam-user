@@ -82,6 +82,7 @@
          * @property {number|Long|null} [rtmp_token] CBroadcast_BeginBroadcastSession_Request rtmp_token
          * @property {boolean|null} [thumbnail_upload] CBroadcast_BeginBroadcastSession_Request thumbnail_upload
          * @property {string|null} [client_beta] CBroadcast_BeginBroadcastSession_Request client_beta
+         * @property {number|null} [sysid] CBroadcast_BeginBroadcastSession_Request sysid
          */
     
         /**
@@ -164,6 +165,14 @@
         CBroadcast_BeginBroadcastSession_Request.prototype.client_beta = "";
     
         /**
+         * CBroadcast_BeginBroadcastSession_Request sysid.
+         * @member {number} sysid
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.sysid = 0;
+    
+        /**
          * Creates a new CBroadcast_BeginBroadcastSession_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_BeginBroadcastSession_Request
@@ -203,6 +212,8 @@
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.thumbnail_upload);
             if (message.client_beta != null && message.hasOwnProperty("client_beta"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.client_beta);
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.sysid);
             return writer;
         };
     
@@ -260,6 +271,9 @@
                     break;
                 case 8:
                     message.client_beta = reader.string();
+                    break;
+                case 9:
+                    message.sysid = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -320,6 +334,9 @@
             if (message.client_beta != null && message.hasOwnProperty("client_beta"))
                 if (!$util.isString(message.client_beta))
                     return "client_beta: string expected";
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
+                if (!$util.isInteger(message.sysid))
+                    return "sysid: integer expected";
             return null;
         };
     
@@ -372,6 +389,8 @@
                 message.thumbnail_upload = Boolean(object.thumbnail_upload);
             if (object.client_beta != null)
                 message.client_beta = String(object.client_beta);
+            if (object.sysid != null)
+                message.sysid = object.sysid >>> 0;
             return message;
         };
     
@@ -409,6 +428,7 @@
                     object.rtmp_token = options.longs === String ? "0" : 0;
                 object.thumbnail_upload = false;
                 object.client_beta = "";
+                object.sysid = 0;
             }
             if (message.permission != null && message.hasOwnProperty("permission"))
                 object.permission = message.permission;
@@ -435,6 +455,8 @@
                 object.thumbnail_upload = message.thumbnail_upload;
             if (message.client_beta != null && message.hasOwnProperty("client_beta"))
                 object.client_beta = message.client_beta;
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
+                object.sysid = message.sysid;
             return object;
         };
     
@@ -1116,6 +1138,7 @@
          * @property {number|Long|null} [rtmp_token] CBroadcast_StartBroadcastUpload_Request rtmp_token
          * @property {number|null} [upload_ip_address] CBroadcast_StartBroadcastUpload_Request upload_ip_address
          * @property {boolean|null} [is_replay] CBroadcast_StartBroadcastUpload_Request is_replay
+         * @property {number|null} [sysid] CBroadcast_StartBroadcastUpload_Request sysid
          */
     
         /**
@@ -1190,6 +1213,14 @@
         CBroadcast_StartBroadcastUpload_Request.prototype.is_replay = false;
     
         /**
+         * CBroadcast_StartBroadcastUpload_Request sysid.
+         * @member {number} sysid
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.sysid = 0;
+    
+        /**
          * Creates a new CBroadcast_StartBroadcastUpload_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_StartBroadcastUpload_Request
@@ -1227,6 +1258,8 @@
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.upload_ip_address);
             if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_replay);
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.sysid);
             return writer;
         };
     
@@ -1281,6 +1314,9 @@
                     break;
                 case 7:
                     message.is_replay = reader.bool();
+                    break;
+                case 8:
+                    message.sysid = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1338,6 +1374,9 @@
             if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 if (typeof message.is_replay !== "boolean")
                     return "is_replay: boolean expected";
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
+                if (!$util.isInteger(message.sysid))
+                    return "sysid: integer expected";
             return null;
         };
     
@@ -1381,6 +1420,8 @@
                 message.upload_ip_address = object.upload_ip_address >>> 0;
             if (object.is_replay != null)
                 message.is_replay = Boolean(object.is_replay);
+            if (object.sysid != null)
+                message.sysid = object.sysid >>> 0;
             return message;
         };
     
@@ -1413,6 +1454,7 @@
                     object.rtmp_token = options.longs === String ? "0" : 0;
                 object.upload_ip_address = 0;
                 object.is_replay = false;
+                object.sysid = 0;
             }
             if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 if (typeof message.broadcast_id === "number")
@@ -1434,6 +1476,8 @@
                 object.upload_ip_address = message.upload_ip_address;
             if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 object.is_replay = message.is_replay;
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
+                object.sysid = message.sysid;
             return object;
         };
     
@@ -6524,6 +6568,8 @@
          * @property {number|Long|null} [chat_id] CBroadcast_PostChatMessage_Request chat_id
          * @property {string|null} [message] CBroadcast_PostChatMessage_Request message
          * @property {number|null} [instance_id] CBroadcast_PostChatMessage_Request instance_id
+         * @property {number|null} [language] CBroadcast_PostChatMessage_Request language
+         * @property {string|null} [country_code] CBroadcast_PostChatMessage_Request country_code
          */
     
         /**
@@ -6566,6 +6612,22 @@
         CBroadcast_PostChatMessage_Request.prototype.instance_id = 0;
     
         /**
+         * CBroadcast_PostChatMessage_Request language.
+         * @member {number} language
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Request.prototype.language = 0;
+    
+        /**
+         * CBroadcast_PostChatMessage_Request country_code.
+         * @member {string} country_code
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Request.prototype.country_code = "";
+    
+        /**
          * Creates a new CBroadcast_PostChatMessage_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_PostChatMessage_Request
@@ -6595,6 +6657,10 @@
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
             if (message.instance_id != null && message.hasOwnProperty("instance_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.instance_id);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.language);
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.country_code);
             return writer;
         };
     
@@ -6637,6 +6703,12 @@
                     break;
                 case 3:
                     message.instance_id = reader.uint32();
+                    break;
+                case 4:
+                    message.language = reader.uint32();
+                    break;
+                case 5:
+                    message.country_code = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6682,6 +6754,12 @@
             if (message.instance_id != null && message.hasOwnProperty("instance_id"))
                 if (!$util.isInteger(message.instance_id))
                     return "instance_id: integer expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isInteger(message.language))
+                    return "language: integer expected";
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                if (!$util.isString(message.country_code))
+                    return "country_code: string expected";
             return null;
         };
     
@@ -6710,6 +6788,10 @@
                 message.message = String(object.message);
             if (object.instance_id != null)
                 message.instance_id = object.instance_id >>> 0;
+            if (object.language != null)
+                message.language = object.language >>> 0;
+            if (object.country_code != null)
+                message.country_code = String(object.country_code);
             return message;
         };
     
@@ -6734,6 +6816,8 @@
                     object.chat_id = options.longs === String ? "0" : 0;
                 object.message = "";
                 object.instance_id = 0;
+                object.language = 0;
+                object.country_code = "";
             }
             if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 if (typeof message.chat_id === "number")
@@ -6744,6 +6828,10 @@
                 object.message = message.message;
             if (message.instance_id != null && message.hasOwnProperty("instance_id"))
                 object.instance_id = message.instance_id;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
+                object.country_code = message.country_code;
             return object;
         };
     
@@ -15543,6 +15631,7 @@
          * @property {number|null} [start_time] CBroadcast_GetBroadcastUploadStats_Request start_time
          * @property {number|Long|null} [upload_id] CBroadcast_GetBroadcastUploadStats_Request upload_id
          * @property {number|Long|null} [steamid] CBroadcast_GetBroadcastUploadStats_Request steamid
+         * @property {number|Long|null} [session_id] CBroadcast_GetBroadcastUploadStats_Request session_id
          */
     
         /**
@@ -15593,6 +15682,14 @@
         CBroadcast_GetBroadcastUploadStats_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
+         * CBroadcast_GetBroadcastUploadStats_Request session_id.
+         * @member {number|Long} session_id
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.prototype.session_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CBroadcast_GetBroadcastUploadStats_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_GetBroadcastUploadStats_Request
@@ -15624,6 +15721,8 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.upload_id);
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.steamid);
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.session_id);
             return writer;
         };
     
@@ -15669,6 +15768,9 @@
                     break;
                 case 4:
                     message.steamid = reader.fixed64();
+                    break;
+                case 5:
+                    message.session_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -15717,6 +15819,9 @@
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
                     return "steamid: integer|Long expected";
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (!$util.isInteger(message.session_id) && !(message.session_id && $util.isInteger(message.session_id.low) && $util.isInteger(message.session_id.high)))
+                    return "session_id: integer|Long expected";
             return null;
         };
     
@@ -15754,6 +15859,15 @@
                     message.steamid = object.steamid;
                 else if (typeof object.steamid === "object")
                     message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.session_id != null)
+                if ($util.Long)
+                    (message.session_id = $util.Long.fromValue(object.session_id)).unsigned = true;
+                else if (typeof object.session_id === "string")
+                    message.session_id = parseInt(object.session_id, 10);
+                else if (typeof object.session_id === "number")
+                    message.session_id = object.session_id;
+                else if (typeof object.session_id === "object")
+                    message.session_id = new $util.LongBits(object.session_id.low >>> 0, object.session_id.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -15783,6 +15897,11 @@
                     object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.session_id = options.longs === String ? "0" : 0;
             }
             if (message.row_limit != null && message.hasOwnProperty("row_limit"))
                 object.row_limit = message.row_limit;
@@ -15798,6 +15917,11 @@
                     object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
                 else
                     object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (typeof message.session_id === "number")
+                    object.session_id = options.longs === String ? String(message.session_id) : message.session_id;
+                else
+                    object.session_id = options.longs === String ? $util.Long.prototype.toString.call(message.session_id) : options.longs === Number ? new $util.LongBits(message.session_id.low >>> 0, message.session_id.high >>> 0).toNumber(true) : message.session_id;
             return object;
         };
     
@@ -16045,6 +16169,7 @@
              * @property {number|null} [num_representations] UploadStats num_representations
              * @property {string|null} [app_name] UploadStats app_name
              * @property {boolean|null} [is_replay] UploadStats is_replay
+             * @property {number|Long|null} [session_id] UploadStats session_id
              */
     
             /**
@@ -16215,6 +16340,14 @@
             UploadStats.prototype.is_replay = false;
     
             /**
+             * UploadStats session_id.
+             * @member {number|Long} session_id
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.session_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
              * Creates a new UploadStats instance using the specified properties.
              * @function create
              * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
@@ -16276,6 +16409,8 @@
                     writer.uint32(/* id 18, wireType 2 =*/146).string(message.app_name);
                 if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                     writer.uint32(/* id 19, wireType 0 =*/152).bool(message.is_replay);
+                if (message.session_id != null && message.hasOwnProperty("session_id"))
+                    writer.uint32(/* id 20, wireType 0 =*/160).uint64(message.session_id);
                 return writer;
             };
     
@@ -16366,6 +16501,9 @@
                         break;
                     case 19:
                         message.is_replay = reader.bool();
+                        break;
+                    case 20:
+                        message.session_id = reader.uint64();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -16459,6 +16597,9 @@
                 if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                     if (typeof message.is_replay !== "boolean")
                         return "is_replay: boolean expected";
+                if (message.session_id != null && message.hasOwnProperty("session_id"))
+                    if (!$util.isInteger(message.session_id) && !(message.session_id && $util.isInteger(message.session_id.low) && $util.isInteger(message.session_id.high)))
+                        return "session_id: integer|Long expected";
                 return null;
             };
     
@@ -16533,6 +16674,15 @@
                     message.app_name = String(object.app_name);
                 if (object.is_replay != null)
                     message.is_replay = Boolean(object.is_replay);
+                if (object.session_id != null)
+                    if ($util.Long)
+                        (message.session_id = $util.Long.fromValue(object.session_id)).unsigned = true;
+                    else if (typeof object.session_id === "string")
+                        message.session_id = parseInt(object.session_id, 10);
+                    else if (typeof object.session_id === "number")
+                        message.session_id = object.session_id;
+                    else if (typeof object.session_id === "object")
+                        message.session_id = new $util.LongBits(object.session_id.low >>> 0, object.session_id.high >>> 0).toNumber(true);
                 return message;
             };
     
@@ -16581,6 +16731,11 @@
                     object.num_representations = 0;
                     object.app_name = "";
                     object.is_replay = false;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.session_id = options.longs === String ? "0" : 0;
                 }
                 if (message.upload_result != null && message.hasOwnProperty("upload_result"))
                     object.upload_result = message.upload_result;
@@ -16629,6 +16784,11 @@
                     object.app_name = message.app_name;
                 if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                     object.is_replay = message.is_replay;
+                if (message.session_id != null && message.hasOwnProperty("session_id"))
+                    if (typeof message.session_id === "number")
+                        object.session_id = options.longs === String ? String(message.session_id) : message.session_id;
+                    else
+                        object.session_id = options.longs === String ? $util.Long.prototype.toString.call(message.session_id) : options.longs === Number ? new $util.LongBits(message.session_id.low >>> 0, message.session_id.high >>> 0).toNumber(true) : message.session_id;
                 return object;
             };
     

@@ -1,6 +1,6 @@
 /**
-  * @enum EChatRoomMemberStateChange
-  */
+ * @enum EChatRoomMemberStateChange
+ */
 module.exports = {
 	"Invalid": 0,
 	"Joined": 1,

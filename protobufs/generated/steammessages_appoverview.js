@@ -35,8 +35,7 @@
      * @property {number} k_EDisplayStatusRegionRestricted=12 k_EDisplayStatusRegionRestricted value
      * @property {number} k_EDisplayStatusPresaleOnly=13 k_EDisplayStatusPresaleOnly value
      * @property {number} k_EDisplayStatusInvalidPlatform=14 k_EDisplayStatusInvalidPlatform value
-     * @property {number} k_EDisplayStatusParentalBlocked=15 k_EDisplayStatusParentalBlocked value
-     * @property {number} k_EDisplayStatusPreloadOnly=16 k_EDisplayStatusPreloadOnly value
+     * @property {number} k_EDisplayStatusPreloadComplete=16 k_EDisplayStatusPreloadComplete value
      * @property {number} k_EDisplayStatusBorrowerLocked=17 k_EDisplayStatusBorrowerLocked value
      * @property {number} k_EDisplayStatusUpdatePaused=18 k_EDisplayStatusUpdatePaused value
      * @property {number} k_EDisplayStatusUpdateQueued=19 k_EDisplayStatusUpdateQueued value
@@ -70,8 +69,7 @@
         values[valuesById[12] = "k_EDisplayStatusRegionRestricted"] = 12;
         values[valuesById[13] = "k_EDisplayStatusPresaleOnly"] = 13;
         values[valuesById[14] = "k_EDisplayStatusInvalidPlatform"] = 14;
-        values[valuesById[15] = "k_EDisplayStatusParentalBlocked"] = 15;
-        values[valuesById[16] = "k_EDisplayStatusPreloadOnly"] = 16;
+        values[valuesById[16] = "k_EDisplayStatusPreloadComplete"] = 16;
         values[valuesById[17] = "k_EDisplayStatusBorrowerLocked"] = 17;
         values[valuesById[18] = "k_EDisplayStatusUpdatePaused"] = 18;
         values[valuesById[19] = "k_EDisplayStatusUpdateQueued"] = 19;
@@ -108,7 +106,7 @@
      * @property {number} k_EAppTypeFranchise=1024 k_EAppTypeFranchise value
      * @property {number} k_EAppTypeVideo=2048 k_EAppTypeVideo value
      * @property {number} k_EAppTypePlugin=4096 k_EAppTypePlugin value
-     * @property {number} k_EAppTypeMusic=8192 k_EAppTypeMusic value
+     * @property {number} k_EAppTypeMusicAlbum=8192 k_EAppTypeMusicAlbum value
      * @property {number} k_EAppTypeSeries=16384 k_EAppTypeSeries value
      * @property {number} k_EAppTypeComic=32768 k_EAppTypeComic value
      * @property {number} k_EAppTypeBeta=65536 k_EAppTypeBeta value
@@ -131,7 +129,7 @@
         values[valuesById[1024] = "k_EAppTypeFranchise"] = 1024;
         values[valuesById[2048] = "k_EAppTypeVideo"] = 2048;
         values[valuesById[4096] = "k_EAppTypePlugin"] = 4096;
-        values[valuesById[8192] = "k_EAppTypeMusic"] = 8192;
+        values[valuesById[8192] = "k_EAppTypeMusicAlbum"] = 8192;
         values[valuesById[16384] = "k_EAppTypeSeries"] = 16384;
         values[valuesById[32768] = "k_EAppTypeComic"] = 32768;
         values[valuesById[65536] = "k_EAppTypeBeta"] = 65536;
@@ -407,470 +405,6 @@
         return CAppOverview_AppAssociation;
     })();
     
-    $root.CAppOverview_AppLanguageFeatures = (function() {
-    
-        /**
-         * Properties of a CAppOverview_AppLanguageFeatures.
-         * @exports ICAppOverview_AppLanguageFeatures
-         * @interface ICAppOverview_AppLanguageFeatures
-         * @property {string|null} [language] CAppOverview_AppLanguageFeatures language
-         * @property {boolean|null} [supported] CAppOverview_AppLanguageFeatures supported
-         * @property {boolean|null} [full_audio] CAppOverview_AppLanguageFeatures full_audio
-         * @property {boolean|null} [subtitles] CAppOverview_AppLanguageFeatures subtitles
-         */
-    
-        /**
-         * Constructs a new CAppOverview_AppLanguageFeatures.
-         * @exports CAppOverview_AppLanguageFeatures
-         * @classdesc Represents a CAppOverview_AppLanguageFeatures.
-         * @implements ICAppOverview_AppLanguageFeatures
-         * @constructor
-         * @param {ICAppOverview_AppLanguageFeatures=} [properties] Properties to set
-         */
-        function CAppOverview_AppLanguageFeatures(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CAppOverview_AppLanguageFeatures language.
-         * @member {string} language
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @instance
-         */
-        CAppOverview_AppLanguageFeatures.prototype.language = "";
-    
-        /**
-         * CAppOverview_AppLanguageFeatures supported.
-         * @member {boolean} supported
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @instance
-         */
-        CAppOverview_AppLanguageFeatures.prototype.supported = false;
-    
-        /**
-         * CAppOverview_AppLanguageFeatures full_audio.
-         * @member {boolean} full_audio
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @instance
-         */
-        CAppOverview_AppLanguageFeatures.prototype.full_audio = false;
-    
-        /**
-         * CAppOverview_AppLanguageFeatures subtitles.
-         * @member {boolean} subtitles
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @instance
-         */
-        CAppOverview_AppLanguageFeatures.prototype.subtitles = false;
-    
-        /**
-         * Creates a new CAppOverview_AppLanguageFeatures instance using the specified properties.
-         * @function create
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {ICAppOverview_AppLanguageFeatures=} [properties] Properties to set
-         * @returns {CAppOverview_AppLanguageFeatures} CAppOverview_AppLanguageFeatures instance
-         */
-        CAppOverview_AppLanguageFeatures.create = function create(properties) {
-            return new CAppOverview_AppLanguageFeatures(properties);
-        };
-    
-        /**
-         * Encodes the specified CAppOverview_AppLanguageFeatures message. Does not implicitly {@link CAppOverview_AppLanguageFeatures.verify|verify} messages.
-         * @function encode
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {ICAppOverview_AppLanguageFeatures} message CAppOverview_AppLanguageFeatures message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CAppOverview_AppLanguageFeatures.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.language != null && message.hasOwnProperty("language"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.language);
-            if (message.supported != null && message.hasOwnProperty("supported"))
-                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.supported);
-            if (message.full_audio != null && message.hasOwnProperty("full_audio"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.full_audio);
-            if (message.subtitles != null && message.hasOwnProperty("subtitles"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.subtitles);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CAppOverview_AppLanguageFeatures message, length delimited. Does not implicitly {@link CAppOverview_AppLanguageFeatures.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {ICAppOverview_AppLanguageFeatures} message CAppOverview_AppLanguageFeatures message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CAppOverview_AppLanguageFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CAppOverview_AppLanguageFeatures message from the specified reader or buffer.
-         * @function decode
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CAppOverview_AppLanguageFeatures} CAppOverview_AppLanguageFeatures
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CAppOverview_AppLanguageFeatures.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAppOverview_AppLanguageFeatures();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.language = reader.string();
-                    break;
-                case 2:
-                    message.supported = reader.bool();
-                    break;
-                case 3:
-                    message.full_audio = reader.bool();
-                    break;
-                case 4:
-                    message.subtitles = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CAppOverview_AppLanguageFeatures message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CAppOverview_AppLanguageFeatures} CAppOverview_AppLanguageFeatures
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CAppOverview_AppLanguageFeatures.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CAppOverview_AppLanguageFeatures message.
-         * @function verify
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CAppOverview_AppLanguageFeatures.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.language != null && message.hasOwnProperty("language"))
-                if (!$util.isString(message.language))
-                    return "language: string expected";
-            if (message.supported != null && message.hasOwnProperty("supported"))
-                if (typeof message.supported !== "boolean")
-                    return "supported: boolean expected";
-            if (message.full_audio != null && message.hasOwnProperty("full_audio"))
-                if (typeof message.full_audio !== "boolean")
-                    return "full_audio: boolean expected";
-            if (message.subtitles != null && message.hasOwnProperty("subtitles"))
-                if (typeof message.subtitles !== "boolean")
-                    return "subtitles: boolean expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CAppOverview_AppLanguageFeatures message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CAppOverview_AppLanguageFeatures} CAppOverview_AppLanguageFeatures
-         */
-        CAppOverview_AppLanguageFeatures.fromObject = function fromObject(object) {
-            if (object instanceof $root.CAppOverview_AppLanguageFeatures)
-                return object;
-            var message = new $root.CAppOverview_AppLanguageFeatures();
-            if (object.language != null)
-                message.language = String(object.language);
-            if (object.supported != null)
-                message.supported = Boolean(object.supported);
-            if (object.full_audio != null)
-                message.full_audio = Boolean(object.full_audio);
-            if (object.subtitles != null)
-                message.subtitles = Boolean(object.subtitles);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CAppOverview_AppLanguageFeatures message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @static
-         * @param {CAppOverview_AppLanguageFeatures} message CAppOverview_AppLanguageFeatures
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CAppOverview_AppLanguageFeatures.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.language = "";
-                object.supported = false;
-                object.full_audio = false;
-                object.subtitles = false;
-            }
-            if (message.language != null && message.hasOwnProperty("language"))
-                object.language = message.language;
-            if (message.supported != null && message.hasOwnProperty("supported"))
-                object.supported = message.supported;
-            if (message.full_audio != null && message.hasOwnProperty("full_audio"))
-                object.full_audio = message.full_audio;
-            if (message.subtitles != null && message.hasOwnProperty("subtitles"))
-                object.subtitles = message.subtitles;
-            return object;
-        };
-    
-        /**
-         * Converts this CAppOverview_AppLanguageFeatures to JSON.
-         * @function toJSON
-         * @memberof CAppOverview_AppLanguageFeatures
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CAppOverview_AppLanguageFeatures.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CAppOverview_AppLanguageFeatures;
-    })();
-    
-    $root.CAppOverview_PlayAreaDimensions = (function() {
-    
-        /**
-         * Properties of a CAppOverview_PlayAreaDimensions.
-         * @exports ICAppOverview_PlayAreaDimensions
-         * @interface ICAppOverview_PlayAreaDimensions
-         * @property {number|null} [width] CAppOverview_PlayAreaDimensions width
-         * @property {number|null} [height] CAppOverview_PlayAreaDimensions height
-         */
-    
-        /**
-         * Constructs a new CAppOverview_PlayAreaDimensions.
-         * @exports CAppOverview_PlayAreaDimensions
-         * @classdesc Represents a CAppOverview_PlayAreaDimensions.
-         * @implements ICAppOverview_PlayAreaDimensions
-         * @constructor
-         * @param {ICAppOverview_PlayAreaDimensions=} [properties] Properties to set
-         */
-        function CAppOverview_PlayAreaDimensions(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CAppOverview_PlayAreaDimensions width.
-         * @member {number} width
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @instance
-         */
-        CAppOverview_PlayAreaDimensions.prototype.width = 0;
-    
-        /**
-         * CAppOverview_PlayAreaDimensions height.
-         * @member {number} height
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @instance
-         */
-        CAppOverview_PlayAreaDimensions.prototype.height = 0;
-    
-        /**
-         * Creates a new CAppOverview_PlayAreaDimensions instance using the specified properties.
-         * @function create
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {ICAppOverview_PlayAreaDimensions=} [properties] Properties to set
-         * @returns {CAppOverview_PlayAreaDimensions} CAppOverview_PlayAreaDimensions instance
-         */
-        CAppOverview_PlayAreaDimensions.create = function create(properties) {
-            return new CAppOverview_PlayAreaDimensions(properties);
-        };
-    
-        /**
-         * Encodes the specified CAppOverview_PlayAreaDimensions message. Does not implicitly {@link CAppOverview_PlayAreaDimensions.verify|verify} messages.
-         * @function encode
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {ICAppOverview_PlayAreaDimensions} message CAppOverview_PlayAreaDimensions message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CAppOverview_PlayAreaDimensions.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.width != null && message.hasOwnProperty("width"))
-                writer.uint32(/* id 1, wireType 5 =*/13).float(message.width);
-            if (message.height != null && message.hasOwnProperty("height"))
-                writer.uint32(/* id 2, wireType 5 =*/21).float(message.height);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CAppOverview_PlayAreaDimensions message, length delimited. Does not implicitly {@link CAppOverview_PlayAreaDimensions.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {ICAppOverview_PlayAreaDimensions} message CAppOverview_PlayAreaDimensions message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CAppOverview_PlayAreaDimensions.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CAppOverview_PlayAreaDimensions message from the specified reader or buffer.
-         * @function decode
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CAppOverview_PlayAreaDimensions} CAppOverview_PlayAreaDimensions
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CAppOverview_PlayAreaDimensions.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAppOverview_PlayAreaDimensions();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.width = reader.float();
-                    break;
-                case 2:
-                    message.height = reader.float();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CAppOverview_PlayAreaDimensions message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CAppOverview_PlayAreaDimensions} CAppOverview_PlayAreaDimensions
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CAppOverview_PlayAreaDimensions.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CAppOverview_PlayAreaDimensions message.
-         * @function verify
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CAppOverview_PlayAreaDimensions.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.width != null && message.hasOwnProperty("width"))
-                if (typeof message.width !== "number")
-                    return "width: number expected";
-            if (message.height != null && message.hasOwnProperty("height"))
-                if (typeof message.height !== "number")
-                    return "height: number expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CAppOverview_PlayAreaDimensions message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CAppOverview_PlayAreaDimensions} CAppOverview_PlayAreaDimensions
-         */
-        CAppOverview_PlayAreaDimensions.fromObject = function fromObject(object) {
-            if (object instanceof $root.CAppOverview_PlayAreaDimensions)
-                return object;
-            var message = new $root.CAppOverview_PlayAreaDimensions();
-            if (object.width != null)
-                message.width = Number(object.width);
-            if (object.height != null)
-                message.height = Number(object.height);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CAppOverview_PlayAreaDimensions message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @static
-         * @param {CAppOverview_PlayAreaDimensions} message CAppOverview_PlayAreaDimensions
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CAppOverview_PlayAreaDimensions.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.width = 0;
-                object.height = 0;
-            }
-            if (message.width != null && message.hasOwnProperty("width"))
-                object.width = options.json && !isFinite(message.width) ? String(message.width) : message.width;
-            if (message.height != null && message.hasOwnProperty("height"))
-                object.height = options.json && !isFinite(message.height) ? String(message.height) : message.height;
-            return object;
-        };
-    
-        /**
-         * Converts this CAppOverview_PlayAreaDimensions to JSON.
-         * @function toJSON
-         * @memberof CAppOverview_PlayAreaDimensions
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CAppOverview_PlayAreaDimensions.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CAppOverview_PlayAreaDimensions;
-    })();
-    
     $root.CAppOverview_PerClientData = (function() {
     
         /**
@@ -883,6 +417,12 @@
          * @property {number|null} [status_percentage] CAppOverview_PerClientData status_percentage
          * @property {string|null} [active_beta] CAppOverview_PerClientData active_beta
          * @property {boolean|null} [installed] CAppOverview_PerClientData installed
+         * @property {number|Long|null} [bytes_downloaded] CAppOverview_PerClientData bytes_downloaded
+         * @property {number|Long|null} [bytes_total] CAppOverview_PerClientData bytes_total
+         * @property {boolean|null} [streaming_to_local_client] CAppOverview_PerClientData streaming_to_local_client
+         * @property {boolean|null} [is_available_on_current_platform] CAppOverview_PerClientData is_available_on_current_platform
+         * @property {boolean|null} [is_invalid_os_type] CAppOverview_PerClientData is_invalid_os_type
+         * @property {number|null} [playtime_left] CAppOverview_PerClientData playtime_left
          */
     
         /**
@@ -949,6 +489,54 @@
         CAppOverview_PerClientData.prototype.installed = false;
     
         /**
+         * CAppOverview_PerClientData bytes_downloaded.
+         * @member {number|Long} bytes_downloaded
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.bytes_downloaded = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAppOverview_PerClientData bytes_total.
+         * @member {number|Long} bytes_total
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.bytes_total = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAppOverview_PerClientData streaming_to_local_client.
+         * @member {boolean} streaming_to_local_client
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.streaming_to_local_client = false;
+    
+        /**
+         * CAppOverview_PerClientData is_available_on_current_platform.
+         * @member {boolean} is_available_on_current_platform
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.is_available_on_current_platform = false;
+    
+        /**
+         * CAppOverview_PerClientData is_invalid_os_type.
+         * @member {boolean} is_invalid_os_type
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.is_invalid_os_type = false;
+    
+        /**
+         * CAppOverview_PerClientData playtime_left.
+         * @member {number} playtime_left
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.playtime_left = 0;
+    
+        /**
          * Creates a new CAppOverview_PerClientData instance using the specified properties.
          * @function create
          * @memberof CAppOverview_PerClientData
@@ -984,6 +572,18 @@
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.active_beta);
             if (message.installed != null && message.hasOwnProperty("installed"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.installed);
+            if (message.bytes_downloaded != null && message.hasOwnProperty("bytes_downloaded"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.bytes_downloaded);
+            if (message.bytes_total != null && message.hasOwnProperty("bytes_total"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.bytes_total);
+            if (message.streaming_to_local_client != null && message.hasOwnProperty("streaming_to_local_client"))
+                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.streaming_to_local_client);
+            if (message.is_available_on_current_platform != null && message.hasOwnProperty("is_available_on_current_platform"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_available_on_current_platform);
+            if (message.is_invalid_os_type != null && message.hasOwnProperty("is_invalid_os_type"))
+                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.is_invalid_os_type);
+            if (message.playtime_left != null && message.hasOwnProperty("playtime_left"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.playtime_left);
             return writer;
         };
     
@@ -1035,6 +635,24 @@
                     break;
                 case 6:
                     message.installed = reader.bool();
+                    break;
+                case 7:
+                    message.bytes_downloaded = reader.uint64();
+                    break;
+                case 8:
+                    message.bytes_total = reader.uint64();
+                    break;
+                case 9:
+                    message.streaming_to_local_client = reader.bool();
+                    break;
+                case 10:
+                    message.is_available_on_current_platform = reader.bool();
+                    break;
+                case 11:
+                    message.is_invalid_os_type = reader.bool();
+                    break;
+                case 12:
+                    message.playtime_left = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1096,7 +714,6 @@
                 case 12:
                 case 13:
                 case 14:
-                case 15:
                 case 16:
                 case 17:
                 case 18:
@@ -1124,6 +741,24 @@
             if (message.installed != null && message.hasOwnProperty("installed"))
                 if (typeof message.installed !== "boolean")
                     return "installed: boolean expected";
+            if (message.bytes_downloaded != null && message.hasOwnProperty("bytes_downloaded"))
+                if (!$util.isInteger(message.bytes_downloaded) && !(message.bytes_downloaded && $util.isInteger(message.bytes_downloaded.low) && $util.isInteger(message.bytes_downloaded.high)))
+                    return "bytes_downloaded: integer|Long expected";
+            if (message.bytes_total != null && message.hasOwnProperty("bytes_total"))
+                if (!$util.isInteger(message.bytes_total) && !(message.bytes_total && $util.isInteger(message.bytes_total.low) && $util.isInteger(message.bytes_total.high)))
+                    return "bytes_total: integer|Long expected";
+            if (message.streaming_to_local_client != null && message.hasOwnProperty("streaming_to_local_client"))
+                if (typeof message.streaming_to_local_client !== "boolean")
+                    return "streaming_to_local_client: boolean expected";
+            if (message.is_available_on_current_platform != null && message.hasOwnProperty("is_available_on_current_platform"))
+                if (typeof message.is_available_on_current_platform !== "boolean")
+                    return "is_available_on_current_platform: boolean expected";
+            if (message.is_invalid_os_type != null && message.hasOwnProperty("is_invalid_os_type"))
+                if (typeof message.is_invalid_os_type !== "boolean")
+                    return "is_invalid_os_type: boolean expected";
+            if (message.playtime_left != null && message.hasOwnProperty("playtime_left"))
+                if (!$util.isInteger(message.playtime_left))
+                    return "playtime_left: integer expected";
             return null;
         };
     
@@ -1211,11 +846,7 @@
             case 14:
                 message.display_status = 14;
                 break;
-            case "k_EDisplayStatusParentalBlocked":
-            case 15:
-                message.display_status = 15;
-                break;
-            case "k_EDisplayStatusPreloadOnly":
+            case "k_EDisplayStatusPreloadComplete":
             case 16:
                 message.display_status = 16;
                 break;
@@ -1286,6 +917,32 @@
                 message.active_beta = String(object.active_beta);
             if (object.installed != null)
                 message.installed = Boolean(object.installed);
+            if (object.bytes_downloaded != null)
+                if ($util.Long)
+                    (message.bytes_downloaded = $util.Long.fromValue(object.bytes_downloaded)).unsigned = true;
+                else if (typeof object.bytes_downloaded === "string")
+                    message.bytes_downloaded = parseInt(object.bytes_downloaded, 10);
+                else if (typeof object.bytes_downloaded === "number")
+                    message.bytes_downloaded = object.bytes_downloaded;
+                else if (typeof object.bytes_downloaded === "object")
+                    message.bytes_downloaded = new $util.LongBits(object.bytes_downloaded.low >>> 0, object.bytes_downloaded.high >>> 0).toNumber(true);
+            if (object.bytes_total != null)
+                if ($util.Long)
+                    (message.bytes_total = $util.Long.fromValue(object.bytes_total)).unsigned = true;
+                else if (typeof object.bytes_total === "string")
+                    message.bytes_total = parseInt(object.bytes_total, 10);
+                else if (typeof object.bytes_total === "number")
+                    message.bytes_total = object.bytes_total;
+                else if (typeof object.bytes_total === "object")
+                    message.bytes_total = new $util.LongBits(object.bytes_total.low >>> 0, object.bytes_total.high >>> 0).toNumber(true);
+            if (object.streaming_to_local_client != null)
+                message.streaming_to_local_client = Boolean(object.streaming_to_local_client);
+            if (object.is_available_on_current_platform != null)
+                message.is_available_on_current_platform = Boolean(object.is_available_on_current_platform);
+            if (object.is_invalid_os_type != null)
+                message.is_invalid_os_type = Boolean(object.is_invalid_os_type);
+            if (object.playtime_left != null)
+                message.playtime_left = object.playtime_left >>> 0;
             return message;
         };
     
@@ -1313,6 +970,20 @@
                 object.status_percentage = 0;
                 object.active_beta = "";
                 object.installed = false;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bytes_downloaded = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bytes_downloaded = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bytes_total = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bytes_total = options.longs === String ? "0" : 0;
+                object.streaming_to_local_client = false;
+                object.is_available_on_current_platform = false;
+                object.is_invalid_os_type = false;
+                object.playtime_left = 0;
             }
             if (message.clientid != null && message.hasOwnProperty("clientid"))
                 if (typeof message.clientid === "number")
@@ -1329,6 +1000,24 @@
                 object.active_beta = message.active_beta;
             if (message.installed != null && message.hasOwnProperty("installed"))
                 object.installed = message.installed;
+            if (message.bytes_downloaded != null && message.hasOwnProperty("bytes_downloaded"))
+                if (typeof message.bytes_downloaded === "number")
+                    object.bytes_downloaded = options.longs === String ? String(message.bytes_downloaded) : message.bytes_downloaded;
+                else
+                    object.bytes_downloaded = options.longs === String ? $util.Long.prototype.toString.call(message.bytes_downloaded) : options.longs === Number ? new $util.LongBits(message.bytes_downloaded.low >>> 0, message.bytes_downloaded.high >>> 0).toNumber(true) : message.bytes_downloaded;
+            if (message.bytes_total != null && message.hasOwnProperty("bytes_total"))
+                if (typeof message.bytes_total === "number")
+                    object.bytes_total = options.longs === String ? String(message.bytes_total) : message.bytes_total;
+                else
+                    object.bytes_total = options.longs === String ? $util.Long.prototype.toString.call(message.bytes_total) : options.longs === Number ? new $util.LongBits(message.bytes_total.low >>> 0, message.bytes_total.high >>> 0).toNumber(true) : message.bytes_total;
+            if (message.streaming_to_local_client != null && message.hasOwnProperty("streaming_to_local_client"))
+                object.streaming_to_local_client = message.streaming_to_local_client;
+            if (message.is_available_on_current_platform != null && message.hasOwnProperty("is_available_on_current_platform"))
+                object.is_available_on_current_platform = message.is_available_on_current_platform;
+            if (message.is_invalid_os_type != null && message.hasOwnProperty("is_invalid_os_type"))
+                object.is_invalid_os_type = message.is_invalid_os_type;
+            if (message.playtime_left != null && message.hasOwnProperty("playtime_left"))
+                object.playtime_left = message.playtime_left;
             return object;
         };
     
@@ -1357,30 +1046,20 @@
          * @property {boolean|null} [visible_in_game_list] CAppOverview visible_in_game_list
          * @property {string|null} [sort_as] CAppOverview sort_as
          * @property {EProtoAppType|null} [app_type] CAppOverview app_type
-         * @property {boolean|null} [subscribed] CAppOverview subscribed
-         * @property {boolean|null} [favorite] CAppOverview favorite
-         * @property {boolean|null} [hidden] CAppOverview hidden
          * @property {number|null} [mru_index] CAppOverview mru_index
          * @property {number|null} [rt_recent_activity_time] CAppOverview rt_recent_activity_time
-         * @property {Array.<string>|null} [user_tag] CAppOverview user_tag
          * @property {number|null} [minutes_playtime_forever] CAppOverview minutes_playtime_forever
          * @property {number|null} [minutes_playtime_last_two_weeks] CAppOverview minutes_playtime_last_two_weeks
          * @property {number|null} [rt_last_time_played] CAppOverview rt_last_time_played
          * @property {Array.<number>|null} [store_tag] CAppOverview store_tag
          * @property {Array.<ICAppOverview_AppAssociation>|null} [association] CAppOverview association
-         * @property {number|null} [primary_genre] CAppOverview primary_genre
-         * @property {Array.<number>|null} [genre] CAppOverview genre
          * @property {Array.<number>|null} [store_category] CAppOverview store_category
-         * @property {Array.<ICAppOverview_AppLanguageFeatures>|null} [language_feature] CAppOverview language_feature
          * @property {number|null} [rt_original_release_date] CAppOverview rt_original_release_date
          * @property {number|null} [rt_steam_release_date] CAppOverview rt_steam_release_date
          * @property {string|null} [icon_hash] CAppOverview icon_hash
          * @property {string|null} [logo_hash] CAppOverview logo_hash
          * @property {EAppControllerSupportLevel|null} [controller_support] CAppOverview controller_support
          * @property {boolean|null} [vr_supported] CAppOverview vr_supported
-         * @property {number|null} [vr_controller_support] CAppOverview vr_controller_support
-         * @property {number|null} [vr_play_area_support] CAppOverview vr_play_area_support
-         * @property {ICAppOverview_PlayAreaDimensions|null} [vr_play_area_dimensions] CAppOverview vr_play_area_dimensions
          * @property {number|null} [metacritic_score] CAppOverview metacritic_score
          * @property {number|Long|null} [size_on_disk] CAppOverview size_on_disk
          * @property {boolean|null} [third_party_mod] CAppOverview third_party_mod
@@ -1392,6 +1071,17 @@
          * @property {number|Long|null} [most_available_clientid] CAppOverview most_available_clientid
          * @property {number|Long|null} [selected_clientid] CAppOverview selected_clientid
          * @property {number|null} [rt_store_asset_mtime] CAppOverview rt_store_asset_mtime
+         * @property {number|null} [rt_custom_image_mtime] CAppOverview rt_custom_image_mtime
+         * @property {number|null} [optional_parent_app_id] CAppOverview optional_parent_app_id
+         * @property {number|null} [owner_account_id] CAppOverview owner_account_id
+         * @property {boolean|null} [compat_mapping_enabled] CAppOverview compat_mapping_enabled
+         * @property {number|null} [compat_mapping_priority] CAppOverview compat_mapping_priority
+         * @property {string|null} [compat_mapping_tool_name] CAppOverview compat_mapping_tool_name
+         * @property {number|null} [review_score_with_bombs] CAppOverview review_score_with_bombs
+         * @property {number|null} [review_percentage_with_bombs] CAppOverview review_percentage_with_bombs
+         * @property {number|null} [review_score_without_bombs] CAppOverview review_score_without_bombs
+         * @property {number|null} [review_percentage_without_bombs] CAppOverview review_percentage_without_bombs
+         * @property {string|null} [library_id] CAppOverview library_id
          */
     
         /**
@@ -1403,12 +1093,9 @@
          * @param {ICAppOverview=} [properties] Properties to set
          */
         function CAppOverview(properties) {
-            this.user_tag = [];
             this.store_tag = [];
             this.association = [];
-            this.genre = [];
             this.store_category = [];
-            this.language_feature = [];
             this.per_client_data = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -1457,30 +1144,6 @@
         CAppOverview.prototype.app_type = 0;
     
         /**
-         * CAppOverview subscribed.
-         * @member {boolean} subscribed
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.subscribed = false;
-    
-        /**
-         * CAppOverview favorite.
-         * @member {boolean} favorite
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.favorite = false;
-    
-        /**
-         * CAppOverview hidden.
-         * @member {boolean} hidden
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.hidden = false;
-    
-        /**
          * CAppOverview mru_index.
          * @member {number} mru_index
          * @memberof CAppOverview
@@ -1495,14 +1158,6 @@
          * @instance
          */
         CAppOverview.prototype.rt_recent_activity_time = 0;
-    
-        /**
-         * CAppOverview user_tag.
-         * @member {Array.<string>} user_tag
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.user_tag = $util.emptyArray;
     
         /**
          * CAppOverview minutes_playtime_forever.
@@ -1545,36 +1200,12 @@
         CAppOverview.prototype.association = $util.emptyArray;
     
         /**
-         * CAppOverview primary_genre.
-         * @member {number} primary_genre
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.primary_genre = 0;
-    
-        /**
-         * CAppOverview genre.
-         * @member {Array.<number>} genre
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.genre = $util.emptyArray;
-    
-        /**
          * CAppOverview store_category.
          * @member {Array.<number>} store_category
          * @memberof CAppOverview
          * @instance
          */
         CAppOverview.prototype.store_category = $util.emptyArray;
-    
-        /**
-         * CAppOverview language_feature.
-         * @member {Array.<ICAppOverview_AppLanguageFeatures>} language_feature
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.language_feature = $util.emptyArray;
     
         /**
          * CAppOverview rt_original_release_date.
@@ -1623,30 +1254,6 @@
          * @instance
          */
         CAppOverview.prototype.vr_supported = false;
-    
-        /**
-         * CAppOverview vr_controller_support.
-         * @member {number} vr_controller_support
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.vr_controller_support = 0;
-    
-        /**
-         * CAppOverview vr_play_area_support.
-         * @member {number} vr_play_area_support
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.vr_play_area_support = 0;
-    
-        /**
-         * CAppOverview vr_play_area_dimensions.
-         * @member {ICAppOverview_PlayAreaDimensions|null|undefined} vr_play_area_dimensions
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.vr_play_area_dimensions = null;
     
         /**
          * CAppOverview metacritic_score.
@@ -1737,6 +1344,94 @@
         CAppOverview.prototype.rt_store_asset_mtime = 0;
     
         /**
+         * CAppOverview rt_custom_image_mtime.
+         * @member {number} rt_custom_image_mtime
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.rt_custom_image_mtime = 0;
+    
+        /**
+         * CAppOverview optional_parent_app_id.
+         * @member {number} optional_parent_app_id
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.optional_parent_app_id = 0;
+    
+        /**
+         * CAppOverview owner_account_id.
+         * @member {number} owner_account_id
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.owner_account_id = 0;
+    
+        /**
+         * CAppOverview compat_mapping_enabled.
+         * @member {boolean} compat_mapping_enabled
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.compat_mapping_enabled = false;
+    
+        /**
+         * CAppOverview compat_mapping_priority.
+         * @member {number} compat_mapping_priority
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.compat_mapping_priority = 0;
+    
+        /**
+         * CAppOverview compat_mapping_tool_name.
+         * @member {string} compat_mapping_tool_name
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.compat_mapping_tool_name = "";
+    
+        /**
+         * CAppOverview review_score_with_bombs.
+         * @member {number} review_score_with_bombs
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.review_score_with_bombs = 0;
+    
+        /**
+         * CAppOverview review_percentage_with_bombs.
+         * @member {number} review_percentage_with_bombs
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.review_percentage_with_bombs = 0;
+    
+        /**
+         * CAppOverview review_score_without_bombs.
+         * @member {number} review_score_without_bombs
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.review_score_without_bombs = 0;
+    
+        /**
+         * CAppOverview review_percentage_without_bombs.
+         * @member {number} review_percentage_without_bombs
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.review_percentage_without_bombs = 0;
+    
+        /**
+         * CAppOverview library_id.
+         * @member {string} library_id
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.library_id = "";
+    
+        /**
          * Creates a new CAppOverview instance using the specified properties.
          * @function create
          * @memberof CAppOverview
@@ -1770,19 +1465,10 @@
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.sort_as);
             if (message.app_type != null && message.hasOwnProperty("app_type"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.app_type);
-            if (message.subscribed != null && message.hasOwnProperty("subscribed"))
-                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.subscribed);
-            if (message.favorite != null && message.hasOwnProperty("favorite"))
-                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.favorite);
-            if (message.hidden != null && message.hasOwnProperty("hidden"))
-                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.hidden);
             if (message.mru_index != null && message.hasOwnProperty("mru_index"))
                 writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.mru_index);
             if (message.rt_recent_activity_time != null && message.hasOwnProperty("rt_recent_activity_time"))
                 writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.rt_recent_activity_time);
-            if (message.user_tag != null && message.user_tag.length)
-                for (var i = 0; i < message.user_tag.length; ++i)
-                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.user_tag[i]);
             if (message.minutes_playtime_forever != null && message.hasOwnProperty("minutes_playtime_forever"))
                 writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.minutes_playtime_forever);
             if (message.minutes_playtime_last_two_weeks != null && message.hasOwnProperty("minutes_playtime_last_two_weeks"))
@@ -1795,17 +1481,9 @@
             if (message.association != null && message.association.length)
                 for (var i = 0; i < message.association.length; ++i)
                     $root.CAppOverview_AppAssociation.encode(message.association[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-            if (message.primary_genre != null && message.hasOwnProperty("primary_genre"))
-                writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.primary_genre);
-            if (message.genre != null && message.genre.length)
-                for (var i = 0; i < message.genre.length; ++i)
-                    writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.genre[i]);
             if (message.store_category != null && message.store_category.length)
                 for (var i = 0; i < message.store_category.length; ++i)
                     writer.uint32(/* id 23, wireType 0 =*/184).uint32(message.store_category[i]);
-            if (message.language_feature != null && message.language_feature.length)
-                for (var i = 0; i < message.language_feature.length; ++i)
-                    $root.CAppOverview_AppLanguageFeatures.encode(message.language_feature[i], writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
             if (message.rt_original_release_date != null && message.hasOwnProperty("rt_original_release_date"))
                 writer.uint32(/* id 25, wireType 0 =*/200).uint32(message.rt_original_release_date);
             if (message.rt_steam_release_date != null && message.hasOwnProperty("rt_steam_release_date"))
@@ -1818,12 +1496,6 @@
                 writer.uint32(/* id 31, wireType 0 =*/248).int32(message.controller_support);
             if (message.vr_supported != null && message.hasOwnProperty("vr_supported"))
                 writer.uint32(/* id 32, wireType 0 =*/256).bool(message.vr_supported);
-            if (message.vr_controller_support != null && message.hasOwnProperty("vr_controller_support"))
-                writer.uint32(/* id 33, wireType 0 =*/264).uint32(message.vr_controller_support);
-            if (message.vr_play_area_support != null && message.hasOwnProperty("vr_play_area_support"))
-                writer.uint32(/* id 34, wireType 0 =*/272).uint32(message.vr_play_area_support);
-            if (message.vr_play_area_dimensions != null && message.hasOwnProperty("vr_play_area_dimensions"))
-                $root.CAppOverview_PlayAreaDimensions.encode(message.vr_play_area_dimensions, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
             if (message.metacritic_score != null && message.hasOwnProperty("metacritic_score"))
                 writer.uint32(/* id 36, wireType 0 =*/288).uint32(message.metacritic_score);
             if (message.size_on_disk != null && message.hasOwnProperty("size_on_disk"))
@@ -1847,6 +1519,28 @@
                 writer.uint32(/* id 45, wireType 0 =*/360).uint64(message.selected_clientid);
             if (message.rt_store_asset_mtime != null && message.hasOwnProperty("rt_store_asset_mtime"))
                 writer.uint32(/* id 46, wireType 0 =*/368).uint32(message.rt_store_asset_mtime);
+            if (message.rt_custom_image_mtime != null && message.hasOwnProperty("rt_custom_image_mtime"))
+                writer.uint32(/* id 47, wireType 0 =*/376).uint32(message.rt_custom_image_mtime);
+            if (message.optional_parent_app_id != null && message.hasOwnProperty("optional_parent_app_id"))
+                writer.uint32(/* id 48, wireType 0 =*/384).uint32(message.optional_parent_app_id);
+            if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
+                writer.uint32(/* id 49, wireType 0 =*/392).uint32(message.owner_account_id);
+            if (message.compat_mapping_enabled != null && message.hasOwnProperty("compat_mapping_enabled"))
+                writer.uint32(/* id 50, wireType 0 =*/400).bool(message.compat_mapping_enabled);
+            if (message.compat_mapping_priority != null && message.hasOwnProperty("compat_mapping_priority"))
+                writer.uint32(/* id 51, wireType 0 =*/408).uint32(message.compat_mapping_priority);
+            if (message.compat_mapping_tool_name != null && message.hasOwnProperty("compat_mapping_tool_name"))
+                writer.uint32(/* id 52, wireType 2 =*/418).string(message.compat_mapping_tool_name);
+            if (message.review_score_with_bombs != null && message.hasOwnProperty("review_score_with_bombs"))
+                writer.uint32(/* id 53, wireType 0 =*/424).uint32(message.review_score_with_bombs);
+            if (message.review_percentage_with_bombs != null && message.hasOwnProperty("review_percentage_with_bombs"))
+                writer.uint32(/* id 54, wireType 0 =*/432).uint32(message.review_percentage_with_bombs);
+            if (message.review_score_without_bombs != null && message.hasOwnProperty("review_score_without_bombs"))
+                writer.uint32(/* id 55, wireType 0 =*/440).uint32(message.review_score_without_bombs);
+            if (message.review_percentage_without_bombs != null && message.hasOwnProperty("review_percentage_without_bombs"))
+                writer.uint32(/* id 56, wireType 0 =*/448).uint32(message.review_percentage_without_bombs);
+            if (message.library_id != null && message.hasOwnProperty("library_id"))
+                writer.uint32(/* id 57, wireType 2 =*/458).string(message.library_id);
             return writer;
         };
     
@@ -1896,25 +1590,11 @@
                 case 7:
                     message.app_type = reader.int32();
                     break;
-                case 9:
-                    message.subscribed = reader.bool();
-                    break;
-                case 11:
-                    message.favorite = reader.bool();
-                    break;
-                case 12:
-                    message.hidden = reader.bool();
-                    break;
                 case 13:
                     message.mru_index = reader.uint32();
                     break;
                 case 14:
                     message.rt_recent_activity_time = reader.uint32();
-                    break;
-                case 15:
-                    if (!(message.user_tag && message.user_tag.length))
-                        message.user_tag = [];
-                    message.user_tag.push(reader.string());
                     break;
                 case 16:
                     message.minutes_playtime_forever = reader.uint32();
@@ -1940,19 +1620,6 @@
                         message.association = [];
                     message.association.push($root.CAppOverview_AppAssociation.decode(reader, reader.uint32()));
                     break;
-                case 21:
-                    message.primary_genre = reader.uint32();
-                    break;
-                case 22:
-                    if (!(message.genre && message.genre.length))
-                        message.genre = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.genre.push(reader.uint32());
-                    } else
-                        message.genre.push(reader.uint32());
-                    break;
                 case 23:
                     if (!(message.store_category && message.store_category.length))
                         message.store_category = [];
@@ -1962,11 +1629,6 @@
                             message.store_category.push(reader.uint32());
                     } else
                         message.store_category.push(reader.uint32());
-                    break;
-                case 24:
-                    if (!(message.language_feature && message.language_feature.length))
-                        message.language_feature = [];
-                    message.language_feature.push($root.CAppOverview_AppLanguageFeatures.decode(reader, reader.uint32()));
                     break;
                 case 25:
                     message.rt_original_release_date = reader.uint32();
@@ -1985,15 +1647,6 @@
                     break;
                 case 32:
                     message.vr_supported = reader.bool();
-                    break;
-                case 33:
-                    message.vr_controller_support = reader.uint32();
-                    break;
-                case 34:
-                    message.vr_play_area_support = reader.uint32();
-                    break;
-                case 35:
-                    message.vr_play_area_dimensions = $root.CAppOverview_PlayAreaDimensions.decode(reader, reader.uint32());
                     break;
                 case 36:
                     message.metacritic_score = reader.uint32();
@@ -2029,6 +1682,39 @@
                     break;
                 case 46:
                     message.rt_store_asset_mtime = reader.uint32();
+                    break;
+                case 47:
+                    message.rt_custom_image_mtime = reader.uint32();
+                    break;
+                case 48:
+                    message.optional_parent_app_id = reader.uint32();
+                    break;
+                case 49:
+                    message.owner_account_id = reader.uint32();
+                    break;
+                case 50:
+                    message.compat_mapping_enabled = reader.bool();
+                    break;
+                case 51:
+                    message.compat_mapping_priority = reader.uint32();
+                    break;
+                case 52:
+                    message.compat_mapping_tool_name = reader.string();
+                    break;
+                case 53:
+                    message.review_score_with_bombs = reader.uint32();
+                    break;
+                case 54:
+                    message.review_percentage_with_bombs = reader.uint32();
+                    break;
+                case 55:
+                    message.review_score_without_bombs = reader.uint32();
+                    break;
+                case 56:
+                    message.review_percentage_without_bombs = reader.uint32();
+                    break;
+                case 57:
+                    message.library_id = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2103,28 +1789,12 @@
                 case -2147483648:
                     break;
                 }
-            if (message.subscribed != null && message.hasOwnProperty("subscribed"))
-                if (typeof message.subscribed !== "boolean")
-                    return "subscribed: boolean expected";
-            if (message.favorite != null && message.hasOwnProperty("favorite"))
-                if (typeof message.favorite !== "boolean")
-                    return "favorite: boolean expected";
-            if (message.hidden != null && message.hasOwnProperty("hidden"))
-                if (typeof message.hidden !== "boolean")
-                    return "hidden: boolean expected";
             if (message.mru_index != null && message.hasOwnProperty("mru_index"))
                 if (!$util.isInteger(message.mru_index))
                     return "mru_index: integer expected";
             if (message.rt_recent_activity_time != null && message.hasOwnProperty("rt_recent_activity_time"))
                 if (!$util.isInteger(message.rt_recent_activity_time))
                     return "rt_recent_activity_time: integer expected";
-            if (message.user_tag != null && message.hasOwnProperty("user_tag")) {
-                if (!Array.isArray(message.user_tag))
-                    return "user_tag: array expected";
-                for (var i = 0; i < message.user_tag.length; ++i)
-                    if (!$util.isString(message.user_tag[i]))
-                        return "user_tag: string[] expected";
-            }
             if (message.minutes_playtime_forever != null && message.hasOwnProperty("minutes_playtime_forever"))
                 if (!$util.isInteger(message.minutes_playtime_forever))
                     return "minutes_playtime_forever: integer expected";
@@ -2150,31 +1820,12 @@
                         return "association." + error;
                 }
             }
-            if (message.primary_genre != null && message.hasOwnProperty("primary_genre"))
-                if (!$util.isInteger(message.primary_genre))
-                    return "primary_genre: integer expected";
-            if (message.genre != null && message.hasOwnProperty("genre")) {
-                if (!Array.isArray(message.genre))
-                    return "genre: array expected";
-                for (var i = 0; i < message.genre.length; ++i)
-                    if (!$util.isInteger(message.genre[i]))
-                        return "genre: integer[] expected";
-            }
             if (message.store_category != null && message.hasOwnProperty("store_category")) {
                 if (!Array.isArray(message.store_category))
                     return "store_category: array expected";
                 for (var i = 0; i < message.store_category.length; ++i)
                     if (!$util.isInteger(message.store_category[i]))
                         return "store_category: integer[] expected";
-            }
-            if (message.language_feature != null && message.hasOwnProperty("language_feature")) {
-                if (!Array.isArray(message.language_feature))
-                    return "language_feature: array expected";
-                for (var i = 0; i < message.language_feature.length; ++i) {
-                    var error = $root.CAppOverview_AppLanguageFeatures.verify(message.language_feature[i]);
-                    if (error)
-                        return "language_feature." + error;
-                }
             }
             if (message.rt_original_release_date != null && message.hasOwnProperty("rt_original_release_date"))
                 if (!$util.isInteger(message.rt_original_release_date))
@@ -2200,17 +1851,6 @@
             if (message.vr_supported != null && message.hasOwnProperty("vr_supported"))
                 if (typeof message.vr_supported !== "boolean")
                     return "vr_supported: boolean expected";
-            if (message.vr_controller_support != null && message.hasOwnProperty("vr_controller_support"))
-                if (!$util.isInteger(message.vr_controller_support))
-                    return "vr_controller_support: integer expected";
-            if (message.vr_play_area_support != null && message.hasOwnProperty("vr_play_area_support"))
-                if (!$util.isInteger(message.vr_play_area_support))
-                    return "vr_play_area_support: integer expected";
-            if (message.vr_play_area_dimensions != null && message.hasOwnProperty("vr_play_area_dimensions")) {
-                var error = $root.CAppOverview_PlayAreaDimensions.verify(message.vr_play_area_dimensions);
-                if (error)
-                    return "vr_play_area_dimensions." + error;
-            }
             if (message.metacritic_score != null && message.hasOwnProperty("metacritic_score"))
                 if (!$util.isInteger(message.metacritic_score))
                     return "metacritic_score: integer expected";
@@ -2250,6 +1890,39 @@
             if (message.rt_store_asset_mtime != null && message.hasOwnProperty("rt_store_asset_mtime"))
                 if (!$util.isInteger(message.rt_store_asset_mtime))
                     return "rt_store_asset_mtime: integer expected";
+            if (message.rt_custom_image_mtime != null && message.hasOwnProperty("rt_custom_image_mtime"))
+                if (!$util.isInteger(message.rt_custom_image_mtime))
+                    return "rt_custom_image_mtime: integer expected";
+            if (message.optional_parent_app_id != null && message.hasOwnProperty("optional_parent_app_id"))
+                if (!$util.isInteger(message.optional_parent_app_id))
+                    return "optional_parent_app_id: integer expected";
+            if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
+                if (!$util.isInteger(message.owner_account_id))
+                    return "owner_account_id: integer expected";
+            if (message.compat_mapping_enabled != null && message.hasOwnProperty("compat_mapping_enabled"))
+                if (typeof message.compat_mapping_enabled !== "boolean")
+                    return "compat_mapping_enabled: boolean expected";
+            if (message.compat_mapping_priority != null && message.hasOwnProperty("compat_mapping_priority"))
+                if (!$util.isInteger(message.compat_mapping_priority))
+                    return "compat_mapping_priority: integer expected";
+            if (message.compat_mapping_tool_name != null && message.hasOwnProperty("compat_mapping_tool_name"))
+                if (!$util.isString(message.compat_mapping_tool_name))
+                    return "compat_mapping_tool_name: string expected";
+            if (message.review_score_with_bombs != null && message.hasOwnProperty("review_score_with_bombs"))
+                if (!$util.isInteger(message.review_score_with_bombs))
+                    return "review_score_with_bombs: integer expected";
+            if (message.review_percentage_with_bombs != null && message.hasOwnProperty("review_percentage_with_bombs"))
+                if (!$util.isInteger(message.review_percentage_with_bombs))
+                    return "review_percentage_with_bombs: integer expected";
+            if (message.review_score_without_bombs != null && message.hasOwnProperty("review_score_without_bombs"))
+                if (!$util.isInteger(message.review_score_without_bombs))
+                    return "review_score_without_bombs: integer expected";
+            if (message.review_percentage_without_bombs != null && message.hasOwnProperty("review_percentage_without_bombs"))
+                if (!$util.isInteger(message.review_percentage_without_bombs))
+                    return "review_percentage_without_bombs: integer expected";
+            if (message.library_id != null && message.hasOwnProperty("library_id"))
+                if (!$util.isString(message.library_id))
+                    return "library_id: string expected";
             return null;
         };
     
@@ -2330,7 +2003,7 @@
             case 4096:
                 message.app_type = 4096;
                 break;
-            case "k_EAppTypeMusic":
+            case "k_EAppTypeMusicAlbum":
             case 8192:
                 message.app_type = 8192;
                 break;
@@ -2355,23 +2028,10 @@
                 message.app_type = -2147483648;
                 break;
             }
-            if (object.subscribed != null)
-                message.subscribed = Boolean(object.subscribed);
-            if (object.favorite != null)
-                message.favorite = Boolean(object.favorite);
-            if (object.hidden != null)
-                message.hidden = Boolean(object.hidden);
             if (object.mru_index != null)
                 message.mru_index = object.mru_index >>> 0;
             if (object.rt_recent_activity_time != null)
                 message.rt_recent_activity_time = object.rt_recent_activity_time >>> 0;
-            if (object.user_tag) {
-                if (!Array.isArray(object.user_tag))
-                    throw TypeError(".CAppOverview.user_tag: array expected");
-                message.user_tag = [];
-                for (var i = 0; i < object.user_tag.length; ++i)
-                    message.user_tag[i] = String(object.user_tag[i]);
-            }
             if (object.minutes_playtime_forever != null)
                 message.minutes_playtime_forever = object.minutes_playtime_forever >>> 0;
             if (object.minutes_playtime_last_two_weeks != null)
@@ -2395,31 +2055,12 @@
                     message.association[i] = $root.CAppOverview_AppAssociation.fromObject(object.association[i]);
                 }
             }
-            if (object.primary_genre != null)
-                message.primary_genre = object.primary_genre >>> 0;
-            if (object.genre) {
-                if (!Array.isArray(object.genre))
-                    throw TypeError(".CAppOverview.genre: array expected");
-                message.genre = [];
-                for (var i = 0; i < object.genre.length; ++i)
-                    message.genre[i] = object.genre[i] >>> 0;
-            }
             if (object.store_category) {
                 if (!Array.isArray(object.store_category))
                     throw TypeError(".CAppOverview.store_category: array expected");
                 message.store_category = [];
                 for (var i = 0; i < object.store_category.length; ++i)
                     message.store_category[i] = object.store_category[i] >>> 0;
-            }
-            if (object.language_feature) {
-                if (!Array.isArray(object.language_feature))
-                    throw TypeError(".CAppOverview.language_feature: array expected");
-                message.language_feature = [];
-                for (var i = 0; i < object.language_feature.length; ++i) {
-                    if (typeof object.language_feature[i] !== "object")
-                        throw TypeError(".CAppOverview.language_feature: object expected");
-                    message.language_feature[i] = $root.CAppOverview_AppLanguageFeatures.fromObject(object.language_feature[i]);
-                }
             }
             if (object.rt_original_release_date != null)
                 message.rt_original_release_date = object.rt_original_release_date >>> 0;
@@ -2445,15 +2086,6 @@
             }
             if (object.vr_supported != null)
                 message.vr_supported = Boolean(object.vr_supported);
-            if (object.vr_controller_support != null)
-                message.vr_controller_support = object.vr_controller_support >>> 0;
-            if (object.vr_play_area_support != null)
-                message.vr_play_area_support = object.vr_play_area_support >>> 0;
-            if (object.vr_play_area_dimensions != null) {
-                if (typeof object.vr_play_area_dimensions !== "object")
-                    throw TypeError(".CAppOverview.vr_play_area_dimensions: object expected");
-                message.vr_play_area_dimensions = $root.CAppOverview_PlayAreaDimensions.fromObject(object.vr_play_area_dimensions);
-            }
             if (object.metacritic_score != null)
                 message.metacritic_score = object.metacritic_score >>> 0;
             if (object.size_on_disk != null)
@@ -2505,6 +2137,28 @@
                     message.selected_clientid = new $util.LongBits(object.selected_clientid.low >>> 0, object.selected_clientid.high >>> 0).toNumber(true);
             if (object.rt_store_asset_mtime != null)
                 message.rt_store_asset_mtime = object.rt_store_asset_mtime >>> 0;
+            if (object.rt_custom_image_mtime != null)
+                message.rt_custom_image_mtime = object.rt_custom_image_mtime >>> 0;
+            if (object.optional_parent_app_id != null)
+                message.optional_parent_app_id = object.optional_parent_app_id >>> 0;
+            if (object.owner_account_id != null)
+                message.owner_account_id = object.owner_account_id >>> 0;
+            if (object.compat_mapping_enabled != null)
+                message.compat_mapping_enabled = Boolean(object.compat_mapping_enabled);
+            if (object.compat_mapping_priority != null)
+                message.compat_mapping_priority = object.compat_mapping_priority >>> 0;
+            if (object.compat_mapping_tool_name != null)
+                message.compat_mapping_tool_name = String(object.compat_mapping_tool_name);
+            if (object.review_score_with_bombs != null)
+                message.review_score_with_bombs = object.review_score_with_bombs >>> 0;
+            if (object.review_percentage_with_bombs != null)
+                message.review_percentage_with_bombs = object.review_percentage_with_bombs >>> 0;
+            if (object.review_score_without_bombs != null)
+                message.review_score_without_bombs = object.review_score_without_bombs >>> 0;
+            if (object.review_percentage_without_bombs != null)
+                message.review_percentage_without_bombs = object.review_percentage_without_bombs >>> 0;
+            if (object.library_id != null)
+                message.library_id = String(object.library_id);
             return message;
         };
     
@@ -2522,12 +2176,9 @@
                 options = {};
             var object = {};
             if (options.arrays || options.defaults) {
-                object.user_tag = [];
                 object.store_tag = [];
                 object.association = [];
-                object.genre = [];
                 object.store_category = [];
-                object.language_feature = [];
                 object.per_client_data = [];
             }
             if (options.defaults) {
@@ -2536,24 +2187,17 @@
                 object.visible_in_game_list = false;
                 object.sort_as = "";
                 object.app_type = options.enums === String ? "k_EAppTypeInvalid" : 0;
-                object.subscribed = false;
-                object.favorite = false;
-                object.hidden = false;
                 object.mru_index = 0;
                 object.rt_recent_activity_time = 0;
                 object.minutes_playtime_forever = 0;
                 object.minutes_playtime_last_two_weeks = 0;
                 object.rt_last_time_played = 0;
-                object.primary_genre = 0;
                 object.rt_original_release_date = 0;
                 object.rt_steam_release_date = 0;
                 object.icon_hash = "";
                 object.logo_hash = "";
                 object.controller_support = options.enums === String ? "k_EAppControllerSupportLevelNone" : 0;
                 object.vr_supported = false;
-                object.vr_controller_support = 0;
-                object.vr_play_area_support = 0;
-                object.vr_play_area_dimensions = null;
                 object.metacritic_score = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
@@ -2576,6 +2220,17 @@
                 } else
                     object.selected_clientid = options.longs === String ? "0" : 0;
                 object.rt_store_asset_mtime = 0;
+                object.rt_custom_image_mtime = 0;
+                object.optional_parent_app_id = 0;
+                object.owner_account_id = 0;
+                object.compat_mapping_enabled = false;
+                object.compat_mapping_priority = 0;
+                object.compat_mapping_tool_name = "";
+                object.review_score_with_bombs = 0;
+                object.review_percentage_with_bombs = 0;
+                object.review_score_without_bombs = 0;
+                object.review_percentage_without_bombs = 0;
+                object.library_id = "";
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -2587,21 +2242,10 @@
                 object.sort_as = message.sort_as;
             if (message.app_type != null && message.hasOwnProperty("app_type"))
                 object.app_type = options.enums === String ? $root.EProtoAppType[message.app_type] : message.app_type;
-            if (message.subscribed != null && message.hasOwnProperty("subscribed"))
-                object.subscribed = message.subscribed;
-            if (message.favorite != null && message.hasOwnProperty("favorite"))
-                object.favorite = message.favorite;
-            if (message.hidden != null && message.hasOwnProperty("hidden"))
-                object.hidden = message.hidden;
             if (message.mru_index != null && message.hasOwnProperty("mru_index"))
                 object.mru_index = message.mru_index;
             if (message.rt_recent_activity_time != null && message.hasOwnProperty("rt_recent_activity_time"))
                 object.rt_recent_activity_time = message.rt_recent_activity_time;
-            if (message.user_tag && message.user_tag.length) {
-                object.user_tag = [];
-                for (var j = 0; j < message.user_tag.length; ++j)
-                    object.user_tag[j] = message.user_tag[j];
-            }
             if (message.minutes_playtime_forever != null && message.hasOwnProperty("minutes_playtime_forever"))
                 object.minutes_playtime_forever = message.minutes_playtime_forever;
             if (message.minutes_playtime_last_two_weeks != null && message.hasOwnProperty("minutes_playtime_last_two_weeks"))
@@ -2618,22 +2262,10 @@
                 for (var j = 0; j < message.association.length; ++j)
                     object.association[j] = $root.CAppOverview_AppAssociation.toObject(message.association[j], options);
             }
-            if (message.primary_genre != null && message.hasOwnProperty("primary_genre"))
-                object.primary_genre = message.primary_genre;
-            if (message.genre && message.genre.length) {
-                object.genre = [];
-                for (var j = 0; j < message.genre.length; ++j)
-                    object.genre[j] = message.genre[j];
-            }
             if (message.store_category && message.store_category.length) {
                 object.store_category = [];
                 for (var j = 0; j < message.store_category.length; ++j)
                     object.store_category[j] = message.store_category[j];
-            }
-            if (message.language_feature && message.language_feature.length) {
-                object.language_feature = [];
-                for (var j = 0; j < message.language_feature.length; ++j)
-                    object.language_feature[j] = $root.CAppOverview_AppLanguageFeatures.toObject(message.language_feature[j], options);
             }
             if (message.rt_original_release_date != null && message.hasOwnProperty("rt_original_release_date"))
                 object.rt_original_release_date = message.rt_original_release_date;
@@ -2647,12 +2279,6 @@
                 object.controller_support = options.enums === String ? $root.EAppControllerSupportLevel[message.controller_support] : message.controller_support;
             if (message.vr_supported != null && message.hasOwnProperty("vr_supported"))
                 object.vr_supported = message.vr_supported;
-            if (message.vr_controller_support != null && message.hasOwnProperty("vr_controller_support"))
-                object.vr_controller_support = message.vr_controller_support;
-            if (message.vr_play_area_support != null && message.hasOwnProperty("vr_play_area_support"))
-                object.vr_play_area_support = message.vr_play_area_support;
-            if (message.vr_play_area_dimensions != null && message.hasOwnProperty("vr_play_area_dimensions"))
-                object.vr_play_area_dimensions = $root.CAppOverview_PlayAreaDimensions.toObject(message.vr_play_area_dimensions, options);
             if (message.metacritic_score != null && message.hasOwnProperty("metacritic_score"))
                 object.metacritic_score = message.metacritic_score;
             if (message.size_on_disk != null && message.hasOwnProperty("size_on_disk"))
@@ -2687,6 +2313,28 @@
                     object.selected_clientid = options.longs === String ? $util.Long.prototype.toString.call(message.selected_clientid) : options.longs === Number ? new $util.LongBits(message.selected_clientid.low >>> 0, message.selected_clientid.high >>> 0).toNumber(true) : message.selected_clientid;
             if (message.rt_store_asset_mtime != null && message.hasOwnProperty("rt_store_asset_mtime"))
                 object.rt_store_asset_mtime = message.rt_store_asset_mtime;
+            if (message.rt_custom_image_mtime != null && message.hasOwnProperty("rt_custom_image_mtime"))
+                object.rt_custom_image_mtime = message.rt_custom_image_mtime;
+            if (message.optional_parent_app_id != null && message.hasOwnProperty("optional_parent_app_id"))
+                object.optional_parent_app_id = message.optional_parent_app_id;
+            if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
+                object.owner_account_id = message.owner_account_id;
+            if (message.compat_mapping_enabled != null && message.hasOwnProperty("compat_mapping_enabled"))
+                object.compat_mapping_enabled = message.compat_mapping_enabled;
+            if (message.compat_mapping_priority != null && message.hasOwnProperty("compat_mapping_priority"))
+                object.compat_mapping_priority = message.compat_mapping_priority;
+            if (message.compat_mapping_tool_name != null && message.hasOwnProperty("compat_mapping_tool_name"))
+                object.compat_mapping_tool_name = message.compat_mapping_tool_name;
+            if (message.review_score_with_bombs != null && message.hasOwnProperty("review_score_with_bombs"))
+                object.review_score_with_bombs = message.review_score_with_bombs;
+            if (message.review_percentage_with_bombs != null && message.hasOwnProperty("review_percentage_with_bombs"))
+                object.review_percentage_with_bombs = message.review_percentage_with_bombs;
+            if (message.review_score_without_bombs != null && message.hasOwnProperty("review_score_without_bombs"))
+                object.review_score_without_bombs = message.review_score_without_bombs;
+            if (message.review_percentage_without_bombs != null && message.hasOwnProperty("review_percentage_without_bombs"))
+                object.review_percentage_without_bombs = message.review_percentage_without_bombs;
+            if (message.library_id != null && message.hasOwnProperty("library_id"))
+                object.library_id = message.library_id;
             return object;
         };
     
@@ -2954,6 +2602,463 @@
         };
     
         return CAppOverview_Change;
+    })();
+    
+    $root.CAppBootstrapData = (function() {
+    
+        /**
+         * Properties of a CAppBootstrapData.
+         * @exports ICAppBootstrapData
+         * @interface ICAppBootstrapData
+         * @property {number|null} [appid] CAppBootstrapData appid
+         * @property {boolean|null} [hidden] CAppBootstrapData hidden
+         * @property {Array.<string>|null} [user_tag] CAppBootstrapData user_tag
+         */
+    
+        /**
+         * Constructs a new CAppBootstrapData.
+         * @exports CAppBootstrapData
+         * @classdesc Represents a CAppBootstrapData.
+         * @implements ICAppBootstrapData
+         * @constructor
+         * @param {ICAppBootstrapData=} [properties] Properties to set
+         */
+        function CAppBootstrapData(properties) {
+            this.user_tag = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAppBootstrapData appid.
+         * @member {number} appid
+         * @memberof CAppBootstrapData
+         * @instance
+         */
+        CAppBootstrapData.prototype.appid = 0;
+    
+        /**
+         * CAppBootstrapData hidden.
+         * @member {boolean} hidden
+         * @memberof CAppBootstrapData
+         * @instance
+         */
+        CAppBootstrapData.prototype.hidden = false;
+    
+        /**
+         * CAppBootstrapData user_tag.
+         * @member {Array.<string>} user_tag
+         * @memberof CAppBootstrapData
+         * @instance
+         */
+        CAppBootstrapData.prototype.user_tag = $util.emptyArray;
+    
+        /**
+         * Creates a new CAppBootstrapData instance using the specified properties.
+         * @function create
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {ICAppBootstrapData=} [properties] Properties to set
+         * @returns {CAppBootstrapData} CAppBootstrapData instance
+         */
+        CAppBootstrapData.create = function create(properties) {
+            return new CAppBootstrapData(properties);
+        };
+    
+        /**
+         * Encodes the specified CAppBootstrapData message. Does not implicitly {@link CAppBootstrapData.verify|verify} messages.
+         * @function encode
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {ICAppBootstrapData} message CAppBootstrapData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAppBootstrapData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.hidden);
+            if (message.user_tag != null && message.user_tag.length)
+                for (var i = 0; i < message.user_tag.length; ++i)
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.user_tag[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAppBootstrapData message, length delimited. Does not implicitly {@link CAppBootstrapData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {ICAppBootstrapData} message CAppBootstrapData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAppBootstrapData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAppBootstrapData message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAppBootstrapData} CAppBootstrapData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAppBootstrapData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAppBootstrapData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.hidden = reader.bool();
+                    break;
+                case 3:
+                    if (!(message.user_tag && message.user_tag.length))
+                        message.user_tag = [];
+                    message.user_tag.push(reader.string());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAppBootstrapData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAppBootstrapData} CAppBootstrapData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAppBootstrapData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAppBootstrapData message.
+         * @function verify
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAppBootstrapData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
+                if (typeof message.hidden !== "boolean")
+                    return "hidden: boolean expected";
+            if (message.user_tag != null && message.hasOwnProperty("user_tag")) {
+                if (!Array.isArray(message.user_tag))
+                    return "user_tag: array expected";
+                for (var i = 0; i < message.user_tag.length; ++i)
+                    if (!$util.isString(message.user_tag[i]))
+                        return "user_tag: string[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CAppBootstrapData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAppBootstrapData} CAppBootstrapData
+         */
+        CAppBootstrapData.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAppBootstrapData)
+                return object;
+            var message = new $root.CAppBootstrapData();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.hidden != null)
+                message.hidden = Boolean(object.hidden);
+            if (object.user_tag) {
+                if (!Array.isArray(object.user_tag))
+                    throw TypeError(".CAppBootstrapData.user_tag: array expected");
+                message.user_tag = [];
+                for (var i = 0; i < object.user_tag.length; ++i)
+                    message.user_tag[i] = String(object.user_tag[i]);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAppBootstrapData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAppBootstrapData
+         * @static
+         * @param {CAppBootstrapData} message CAppBootstrapData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAppBootstrapData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.user_tag = [];
+            if (options.defaults) {
+                object.appid = 0;
+                object.hidden = false;
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
+                object.hidden = message.hidden;
+            if (message.user_tag && message.user_tag.length) {
+                object.user_tag = [];
+                for (var j = 0; j < message.user_tag.length; ++j)
+                    object.user_tag[j] = message.user_tag[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CAppBootstrapData to JSON.
+         * @function toJSON
+         * @memberof CAppBootstrapData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAppBootstrapData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAppBootstrapData;
+    })();
+    
+    $root.CLibraryBootstrapData = (function() {
+    
+        /**
+         * Properties of a CLibraryBootstrapData.
+         * @exports ICLibraryBootstrapData
+         * @interface ICLibraryBootstrapData
+         * @property {Array.<ICAppBootstrapData>|null} [app_data] CLibraryBootstrapData app_data
+         */
+    
+        /**
+         * Constructs a new CLibraryBootstrapData.
+         * @exports CLibraryBootstrapData
+         * @classdesc Represents a CLibraryBootstrapData.
+         * @implements ICLibraryBootstrapData
+         * @constructor
+         * @param {ICLibraryBootstrapData=} [properties] Properties to set
+         */
+        function CLibraryBootstrapData(properties) {
+            this.app_data = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CLibraryBootstrapData app_data.
+         * @member {Array.<ICAppBootstrapData>} app_data
+         * @memberof CLibraryBootstrapData
+         * @instance
+         */
+        CLibraryBootstrapData.prototype.app_data = $util.emptyArray;
+    
+        /**
+         * Creates a new CLibraryBootstrapData instance using the specified properties.
+         * @function create
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {ICLibraryBootstrapData=} [properties] Properties to set
+         * @returns {CLibraryBootstrapData} CLibraryBootstrapData instance
+         */
+        CLibraryBootstrapData.create = function create(properties) {
+            return new CLibraryBootstrapData(properties);
+        };
+    
+        /**
+         * Encodes the specified CLibraryBootstrapData message. Does not implicitly {@link CLibraryBootstrapData.verify|verify} messages.
+         * @function encode
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {ICLibraryBootstrapData} message CLibraryBootstrapData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CLibraryBootstrapData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.app_data != null && message.app_data.length)
+                for (var i = 0; i < message.app_data.length; ++i)
+                    $root.CAppBootstrapData.encode(message.app_data[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CLibraryBootstrapData message, length delimited. Does not implicitly {@link CLibraryBootstrapData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {ICLibraryBootstrapData} message CLibraryBootstrapData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CLibraryBootstrapData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CLibraryBootstrapData message from the specified reader or buffer.
+         * @function decode
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CLibraryBootstrapData} CLibraryBootstrapData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CLibraryBootstrapData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CLibraryBootstrapData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.app_data && message.app_data.length))
+                        message.app_data = [];
+                    message.app_data.push($root.CAppBootstrapData.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CLibraryBootstrapData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CLibraryBootstrapData} CLibraryBootstrapData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CLibraryBootstrapData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CLibraryBootstrapData message.
+         * @function verify
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CLibraryBootstrapData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.app_data != null && message.hasOwnProperty("app_data")) {
+                if (!Array.isArray(message.app_data))
+                    return "app_data: array expected";
+                for (var i = 0; i < message.app_data.length; ++i) {
+                    var error = $root.CAppBootstrapData.verify(message.app_data[i]);
+                    if (error)
+                        return "app_data." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CLibraryBootstrapData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CLibraryBootstrapData} CLibraryBootstrapData
+         */
+        CLibraryBootstrapData.fromObject = function fromObject(object) {
+            if (object instanceof $root.CLibraryBootstrapData)
+                return object;
+            var message = new $root.CLibraryBootstrapData();
+            if (object.app_data) {
+                if (!Array.isArray(object.app_data))
+                    throw TypeError(".CLibraryBootstrapData.app_data: array expected");
+                message.app_data = [];
+                for (var i = 0; i < object.app_data.length; ++i) {
+                    if (typeof object.app_data[i] !== "object")
+                        throw TypeError(".CLibraryBootstrapData.app_data: object expected");
+                    message.app_data[i] = $root.CAppBootstrapData.fromObject(object.app_data[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CLibraryBootstrapData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CLibraryBootstrapData
+         * @static
+         * @param {CLibraryBootstrapData} message CLibraryBootstrapData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CLibraryBootstrapData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.app_data = [];
+            if (message.app_data && message.app_data.length) {
+                object.app_data = [];
+                for (var j = 0; j < message.app_data.length; ++j)
+                    object.app_data[j] = $root.CAppBootstrapData.toObject(message.app_data[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CLibraryBootstrapData to JSON.
+         * @function toJSON
+         * @memberof CLibraryBootstrapData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CLibraryBootstrapData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CLibraryBootstrapData;
     })();
 
     return $root;

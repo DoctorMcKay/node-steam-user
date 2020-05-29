@@ -1754,6 +1754,8 @@
          * @property {boolean|null} [marketable] CEconItem_Description marketable
          * @property {Array.<ICEconItem_Tag>|null} [tags] CEconItem_Description tags
          * @property {string|null} [item_expiration] CEconItem_Description item_expiration
+         * @property {string|null} [market_buy_country_restriction] CEconItem_Description market_buy_country_restriction
+         * @property {string|null} [market_sell_country_restriction] CEconItem_Description market_sell_country_restriction
          */
     
         /**
@@ -2003,6 +2005,22 @@
         CEconItem_Description.prototype.item_expiration = "";
     
         /**
+         * CEconItem_Description market_buy_country_restriction.
+         * @member {string} market_buy_country_restriction
+         * @memberof CEconItem_Description
+         * @instance
+         */
+        CEconItem_Description.prototype.market_buy_country_restriction = "";
+    
+        /**
+         * CEconItem_Description market_sell_country_restriction.
+         * @member {string} market_sell_country_restriction
+         * @memberof CEconItem_Description
+         * @instance
+         */
+        CEconItem_Description.prototype.market_sell_country_restriction = "";
+    
+        /**
          * Creates a new CEconItem_Description instance using the specified properties.
          * @function create
          * @memberof CEconItem_Description
@@ -2089,6 +2107,10 @@
                 writer.uint32(/* id 27, wireType 2 =*/218).string(message.item_expiration);
             if (message.market_fee_app != null && message.hasOwnProperty("market_fee_app"))
                 writer.uint32(/* id 28, wireType 0 =*/224).int32(message.market_fee_app);
+            if (message.market_buy_country_restriction != null && message.hasOwnProperty("market_buy_country_restriction"))
+                writer.uint32(/* id 30, wireType 2 =*/242).string(message.market_buy_country_restriction);
+            if (message.market_sell_country_restriction != null && message.hasOwnProperty("market_sell_country_restriction"))
+                writer.uint32(/* id 31, wireType 2 =*/250).string(message.market_sell_country_restriction);
             return writer;
         };
     
@@ -2220,6 +2242,12 @@
                     break;
                 case 27:
                     message.item_expiration = reader.string();
+                    break;
+                case 30:
+                    message.market_buy_country_restriction = reader.string();
+                    break;
+                case 31:
+                    message.market_sell_country_restriction = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2382,6 +2410,12 @@
             if (message.item_expiration != null && message.hasOwnProperty("item_expiration"))
                 if (!$util.isString(message.item_expiration))
                     return "item_expiration: string expected";
+            if (message.market_buy_country_restriction != null && message.hasOwnProperty("market_buy_country_restriction"))
+                if (!$util.isString(message.market_buy_country_restriction))
+                    return "market_buy_country_restriction: string expected";
+            if (message.market_sell_country_restriction != null && message.hasOwnProperty("market_sell_country_restriction"))
+                if (!$util.isString(message.market_sell_country_restriction))
+                    return "market_sell_country_restriction: string expected";
             return null;
         };
     
@@ -2523,6 +2557,10 @@
             }
             if (object.item_expiration != null)
                 message.item_expiration = String(object.item_expiration);
+            if (object.market_buy_country_restriction != null)
+                message.market_buy_country_restriction = String(object.market_buy_country_restriction);
+            if (object.market_sell_country_restriction != null)
+                message.market_sell_country_restriction = String(object.market_sell_country_restriction);
             return message;
         };
     
@@ -2578,6 +2616,8 @@
                 object.marketable = false;
                 object.item_expiration = "";
                 object.market_fee_app = 0;
+                object.market_buy_country_restriction = "";
+                object.market_sell_country_restriction = "";
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -2662,6 +2702,10 @@
                 object.item_expiration = message.item_expiration;
             if (message.market_fee_app != null && message.hasOwnProperty("market_fee_app"))
                 object.market_fee_app = message.market_fee_app;
+            if (message.market_buy_country_restriction != null && message.hasOwnProperty("market_buy_country_restriction"))
+                object.market_buy_country_restriction = message.market_buy_country_restriction;
+            if (message.market_sell_country_restriction != null && message.hasOwnProperty("market_sell_country_restriction"))
+                object.market_sell_country_restriction = message.market_sell_country_restriction;
             return object;
         };
     
