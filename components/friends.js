@@ -385,6 +385,7 @@ SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
 			});
 
 			resolve({
+				// these two level properties exist because we were using playerLevel while the docs said steamLevel
 				"steamLevel": body.player_level,
 				"playerLevel": body.player_level,
 				"regularBadgeLevel": regular,
