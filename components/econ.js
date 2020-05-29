@@ -10,7 +10,7 @@ const Helpers = require('./helpers.js');
  * @param {int} appid
  * @param {{classid: int, instanceid?: int}[]} classes
  * @param {function} [callback]
- * @return Promise
+ * @returns {Promise}
  */
 SteamUser.prototype.getAssetClassInfo = function(language, appid, classes, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['descriptions'], callback, (resolve, reject) => {
@@ -23,10 +23,10 @@ SteamUser.prototype.getAssetClassInfo = function(language, appid, classes, callb
 /**
  * Gets your account's trade URL.
  * @param {function} [callback]
- * @return Promise
+ * @returns {Promise}
  */
 SteamUser.prototype.getTradeURL = function(callback) {
-	return StdLib.Promises.timeoutCallbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this._sendUnified("Econ.GetTradeOfferAccessToken#1", {}, (body) => {
 			resolve({
 				"token": body.trade_offer_access_token,
@@ -39,7 +39,7 @@ SteamUser.prototype.getTradeURL = function(callback) {
 /**
  * Makes a new trade URL for your account.
  * @param {function} [callback]
- * @return Promise
+ * @returns {Promise}
  */
 SteamUser.prototype.changeTradeURL = function(callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
@@ -81,4 +81,51 @@ SteamUser.prototype.getEmoticonList = function(callback) {
 			resolve({"emoticons": out});
 		});
 	});
+};
+
+/**
+ * Retrieves a user's active profile background item.
+ * @param {SteamID|string} steamID - Either a SteamID object or a string which can parse into one
+ * @param {{language?: string}} [options]
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.getUserProfileBackground = function(steamID, options, callback) {
+	if (typeof options == 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		steamID = Helpers.steamID(steamID);
+
+		this._sendUnified('Player.GetProfileBackground#1', {
+			steamid: steamID.toString(),
+			language: options.language || 'english'
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			if (typeof body.profile_background == 'undefined') {
+				return reject(new Error('Malformed response'));
+			}
+
+			let background = body.profile_background;
+			if (!background || !background.image_large) {
+				return resolve(null); // no background
+			}
+
+			['image_large', 'image_small', 'movie_webm', 'movie_mp4'].forEach((key) => {
+				if (background[key]) {
+					background[key] = 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/' + background[key];
+				}
+			});
+
+			return resolve(background);
+		});
+	})
 };

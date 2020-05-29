@@ -687,7 +687,7 @@ SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, c
  * Get the list of a user's owned apps.
  * @param {SteamID|string} steamID - Either a SteamID object or a string that can parse into one
  * @param {{includePlayedFreeGames?: boolean, filterAppids?: number[], includeFreeSub?: boolean}} [options]
- * @param {function} callback
+ * @param {function} [callback]
  * @returns {Promise}
  */
 SteamUser.prototype.getUserOwnedApps = function(steamID, options, callback) {

@@ -1152,6 +1152,30 @@ Retrieves a user's list of owned apps. The user's games must not be private.
 *This is functionally identical to [IPlayerService/GetOwnedGames](https://steamapi.xpaw.me/#IPlayerService/GetOwnedGames)
 but with some minor data processing.*
 
+### getUserProfileBackground(steamID[, options], callback)
+- `steamID` - Either a `SteamID` object or a string that can parse into one
+- `options` - Optional. An object with zero or more of these properties:
+    - `language` - A language to localize item data into. Defaults to `english`
+- `callback` - Called when the request completes.
+    - `err` - An `Error` object on failure or `null` on success.
+    - `response` - The response object. Will be `null` if the user has no profile background.
+        - `communityitemid` - The asset ID of the item which is the user's current profile background
+        - `image_small` - The URL to a small version of the image. May be `null`.
+        - `image_large` - The URL to the full size of the image.
+        - `name` - The internal name of the item
+        - `item_title` - The localized name of the item
+        - `item_description` - The localized description of the item
+        - `appid` - The AppID of the app which owns this background
+        - `item_type`
+        - `item_class`
+        - `movie_webm`
+        - `movie_mp4`
+        - `equipped_flags`
+
+**v4.16.0 or later is required to use this method**
+
+Retrieves the details of a user's current profile background.
+
 ### inviteToGroup(userSteamID, groupSteamID)
 - `userSteamID` - The SteamID of the user you want to invite, as a `SteamID` object or a string which can parse into one
 - `groupSteamID` - The SteamID of the group you want to invite the user to, as a `SteamID` object or a string which can parse into one
