@@ -683,6 +683,55 @@ SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, c
 	});
 };
 
+/**
+ * Get the list of a user's owned apps.
+ * @param {SteamID|string} steamID - Either a SteamID object or a string that can parse into one
+ * @param {{includePlayedFreeGames?: boolean, filterAppids?: number[], includeFreeSub?: boolean}} [options]
+ * @param {function} callback
+ * @returns {Promise}
+ */
+SteamUser.prototype.getUserOwnedApps = function(steamID, options, callback) {
+	if (typeof options == 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return new StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		steamID = Helpers.steamID(steamID);
+		this._sendUnified('Player.GetOwnedGames#1', {
+			steamid: steamID.toString(),
+			include_appinfo: true,
+			include_played_free_games: options.includePlayedFreeGames || false,
+			appids_filter: options.filterAppids || undefined,
+			include_free_sub: options.includeFreeSub || false
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			let response = {
+				app_count: body.game_count,
+				apps: body.games.map((app) => {
+					if (app.img_icon_url) {
+						app.img_icon_url = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/${app.appid}/${app.img_icon_url}.jpg`;
+					}
+
+					if (app.img_logo_url) {
+						app.img_logo_url = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/${app.appid}/${app.img_logo_url}.jpg`;
+					}
+
+					return app;
+				})
+			};
+
+			resolve(response);
+		});
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {

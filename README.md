@@ -1100,7 +1100,7 @@ you want to be doubly sure.
 ### setNickname(steamID, nickname[, callback])
 - `steamID` - The SteamID of the user on whom you want to set a nickname, as a `SteamID` object or a string that can parse into one
 - `nickname` - The user's new nickname, as a string. Empty string to remove.
-- `callback` - Optional. Emitted when the request completes.
+- `callback` - Optional. Called when the request completes.
     - `err` - An `Error` object on failure or `null` on success.
 
 **v3.15.0 or later is required to use this method**
@@ -1122,6 +1122,35 @@ wasn't saved on the server. You can detect this case by calling `getNicknames`.
 **v3.8.0 or later is required to use this method**
 
 Gets your own Steam Level, and the level you have on a badge for a particular game.
+
+### getUserOwnedApps(steamID[, options], callback)
+- `steamID` - Either a `SteamID` object or a string that can parse into one
+- `options` - Optional. An object with zero or more of these properties:
+    - `includePlayedFreeGames` - Set to `true` to include free games that the user has used before. Default `false`.
+    - `filterAppids` - Pass an array of numeric AppIDs here to only retrieve those apps
+    - `includeFreeSub` - Set to `true` to include apps owned through Steam Sub 0
+- `callback` - Called when the request completes.
+    - `err` - An `Error` object on failure or `null` on success.
+    - `response` - The response object
+        - `game_count` - A number indicating how many total apps this user owns
+        - `games` - An array of objects:
+            - `appid` - The ID of the app
+            - `name` - The name of the app
+            - `playtime_2weeks` - How many minutes this user has played in the past 2 weeks (may be `null`)
+            - `playtime_forever` - How many minutes this user has played all time
+            - `img_icon_url` - A URL to the app's 32x32 square icon image
+            - `img_logo_url` - A URL to the app's 184x69 capsule logo image
+            - `has_community_visible_stats` - `true` if this app has visible community stats (e.g. /profiles/:steamID/stats/:appid)
+            - `playtime_windows_forever` - How many minutes this user has played all time on Windows
+            - `playtime_mac_forever` - How many minutes this user has played all time on Mac
+            - `playtime_linux_forever` - How many minutes this user has played all time on Linux
+
+**v4.16.0 or later is required to use this method**
+
+Retrieves a user's list of owned apps. The user's games must not be private.
+
+*This is functionally identical to [IPlayerService/GetOwnedGames](https://steamapi.xpaw.me/#IPlayerService/GetOwnedGames)
+but with some minor data processing.*
 
 ### inviteToGroup(userSteamID, groupSteamID)
 - `userSteamID` - The SteamID of the user you want to invite, as a `SteamID` object or a string which can parse into one
