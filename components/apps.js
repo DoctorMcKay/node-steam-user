@@ -524,7 +524,7 @@ SteamUser.prototype._getChangelistUpdate = function() {
  * @private
  */
 SteamUser.prototype._addAppToCache = function(appid) {
-	if (!this.options.enablePicsCache) {
+	if (!this.options.enablePicsCache || appid == 0) {
 		return;
 	}
 
@@ -533,7 +533,7 @@ SteamUser.prototype._addAppToCache = function(appid) {
 		return;
 	}
 
-	this.getProductInfo([appid], [], false, null, PICSRequestType.AddToCache);
+	this.getProductInfo([appid], [], false, null, PICSRequestType.AddToCache).catch(() => {});
 };
 
 /**

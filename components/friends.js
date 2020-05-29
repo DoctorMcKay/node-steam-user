@@ -713,7 +713,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, funct
 
 			this._emitIdEvent('user', sid, processedUser);
 
-			if (processedUser.gameid) {
+			if (processedUser.gameid && processedUser.gameid != 0) {
 				this._addAppToCache(processedUser.gameid);
 			}
 
