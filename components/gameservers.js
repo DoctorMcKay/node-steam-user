@@ -26,8 +26,9 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
 				return;
 			}
 
+			// TODO add ipv6 support someday
 			resolve({
-				"servers": (body.servers || []).map((server) => {
+				"servers": (body.servers || []).filter(server => server.server_ip && server.server_ip.v4).map((server) => {
 					return {
 						"ip": StdLib.IPv4.intToString(server.server_ip),
 						"port": server.server_port,

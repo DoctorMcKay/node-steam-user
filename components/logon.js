@@ -53,25 +53,25 @@ SteamUser.prototype.logOn = function(details) {
 			}
 
 			this._logOnDetails = {
-				"account_name": details.accountName,
-				"password": details.password,
-				"login_key": details.loginKey,
-				"auth_code": details.authCode,
-				"two_factor_code": details.twoFactorCode,
-				"should_remember_password": !!details.rememberPassword,
-				"obfuscated_private_ip": {"v4": logonId || 0},
-				"protocol_version": PROTOCOL_VERSION,
-				"supports_rate_limit_response": !!details.accountName,
-				"machine_name": details.accountName ? (details.machineName || "") : "",
-				"ping_ms_from_cell_search": details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
-				"client_language": details.accountName ? "english" : "",
-				"client_os_type": Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
-				"anon_user_target_account_name": details.accountName ? "" : "anonymous",
-				"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine),
-				"ui_mode": undefined,
-				"chat_mode": 2, // enable new chat
-				"web_logon_nonce": details.webLogonToken && details.steamID ? details.webLogonToken : undefined,
-				"_steamid": details.steamID
+				account_name: details.accountName,
+				password: details.password,
+				login_key: details.loginKey,
+				auth_code: details.authCode,
+				two_factor_code: details.twoFactorCode,
+				should_remember_password: !!details.rememberPassword,
+				obfuscated_private_ip: {v4: logonId || 0},
+				protocol_version: PROTOCOL_VERSION,
+				supports_rate_limit_response: !!details.accountName,
+				machine_name: details.accountName ? (details.machineName || '') : '',
+				ping_ms_from_cell_search: details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
+				client_language: details.accountName ? 'english' : '',
+				client_os_type: Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
+				anon_user_target_account_name: details.accountName ? '' : 'anonymous',
+				steamguard_dont_remember_computer: !!(details.accountName && details.authCode && details.dontRememberMachine),
+				ui_mode: undefined,
+				chat_mode: 2, // enable new chat
+				web_logon_nonce: details.webLogonToken && details.steamID ? details.webLogonToken : undefined,
+				_steamid: details.steamID
 			};
 		}
 
