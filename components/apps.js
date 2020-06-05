@@ -247,7 +247,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 					let data = {
 						"changenumber": pkg.change_number,
 						"missingToken": !!pkg.missing_token,
-						"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
+						"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
 					};
 
 					if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
