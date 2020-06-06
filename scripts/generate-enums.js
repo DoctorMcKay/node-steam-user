@@ -22,7 +22,13 @@ const ENUMS_WITH_DIFFERENT_PREFIXES_FROM_THEIR_NAMES = {
 	"EStreamingDataType": "k_EStreaming",
 	"EStreamMouseWheelDirection": "k_EStreamMouseWheel",
 	"EStreamQualityPreference": "k_EStreamQuality",
-	"EStreamStatsMessage": "k_EStreamStats"
+	"EStreamStatsMessage": "k_EStreamStats",
+	"EChatRoomNotificationLevel": "k_EChatroomNotificationLevel"
+};
+
+// Some enums are just named wrong
+const ENUM_NAMES_TO_FIX = {
+	"EChatroomNotificationLevel": "EChatRoomNotificationLevel"
 };
 
 // Generate enums
@@ -31,6 +37,7 @@ if (!FS.existsSync(__dirname + '/../enums')) {
 }
 
 let g_EnumNames = {};
+let g_EnumNamesNormalized = {};
 
 processProtobufEnums();
 download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/SteamLanguage", function(data) {
@@ -64,6 +71,9 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 					if ((match = line.match(/^enum (E[a-zA-Z0-9]+)(<[a-z]+>)?( flags)?/))) {
 						// Okay, this is an enum assuming the next line is a bracket
 						currentEnum = match[1];
+						if (ENUM_NAMES_TO_FIX[currentEnum]) {
+							currentEnum = ENUM_NAMES_TO_FIX[currentEnum];
+						}
 					}
 				} else if (typeof currentEnum === 'string') {
 					if (line != "{") {
@@ -113,6 +123,12 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 
 						FS.writeFileSync(__dirname + '/../enums/' + currentEnum.name + '.js', file);
 						g_EnumNames[currentEnum.name] = true;
+						let normalized = currentEnum.name.toLowerCase();
+						if (g_EnumNamesNormalized[normalized] && g_EnumNamesNormalized[normalized] != currentEnum.name) {
+							throw new Error(`Duplicate enum ${currentEnum.name}`);
+						}
+
+						g_EnumNamesNormalized[normalized] = currentEnum.name;
 						currentEnum = null;
 					} else if ((match = line.match(/^([A-Za-z0-9_]+) = ([^;]+);(.*)$/))) {
 						let name = match[1];
@@ -178,6 +194,11 @@ function processProtobufEnums() {
 
 		console.log(`Generating ${enumName}.js...`);
 		let thisEnum = Schema[enumName];
+
+		if (ENUM_NAMES_TO_FIX[enumName]) {
+			enumName = ENUM_NAMES_TO_FIX[enumName];
+		}
+
 		let processed = [];
 		for (let i in thisEnum) {
 			if (!thisEnum.hasOwnProperty(i)) {
@@ -203,6 +224,11 @@ function processProtobufEnums() {
 		FS.writeFileSync(`${__dirname}/../enums/${enumName}.js`, enumFile);
 
 		g_EnumNames[enumName] = true;
+		let normalized = enumName.toLowerCase();
+		if (g_EnumNamesNormalized[normalized] && g_EnumNamesNormalized[normalized] != enumName) {
+			throw new Error(`Duplicate enum ${enumName}`);
+		}
+		g_EnumNamesNormalized[normalized] = enumName;
 	}
 
 	console.log("Finished processing protobuf enums");

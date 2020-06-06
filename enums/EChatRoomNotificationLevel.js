@@ -1,5 +1,5 @@
 /**
- * @enum EChatroomNotificationLevel
+ * @enum EChatRoomNotificationLevel
  */
 module.exports = {
 	"Invalid": 0,
