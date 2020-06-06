@@ -1202,8 +1202,10 @@ Profile item objects have these properties:
 
 Retrieves a list of a given user's equipped profile items.
 
-### setProfileBackground(backgroundAssetID)
+### setProfileBackground(backgroundAssetID[, callback])
 - `backgroundAssetID` - The asset ID of the item you want to set as your background. Use `0` to remove your background.
+- `callback` - Optional. Called when the request completes.
+    - `err` - An `Error` object on failure or `null` on success.
 
 **v4.16.0 or later is required to use this method**
 
