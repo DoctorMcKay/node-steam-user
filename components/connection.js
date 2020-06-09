@@ -11,7 +11,7 @@ SteamUser.prototype._handleConnectionClose = function() {
 	if (!this.steamID) {
 		// connection closed while connecting; reconnect
 		clearInterval(this._heartbeatInterval);
-		this._doConnection();
+		setTimeout(() => this._doConnection(), 1000);
 	} else {
 		// connection closed while we were connected; fire logoff
 		this._handleLogOff(SteamUser.EResult.NoConnection, 'NoConnection');
