@@ -78,12 +78,11 @@ SteamUser.prototype.getContentServers = function(callback) {
  * @return Promise
  */
 SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
-	// Cached locally?
-
 	appID = parseInt(appID, 10);
 	depotID = parseInt(depotID, 10);
 
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['key'], callback, async (resolve, reject) => {
+		// Check if it's cached locally
 		let filename = `depot_key_${appID}_${depotID}.bin`;
 		let file = await this._readFile(filename);
 		if (file && file.length > 4 && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
@@ -116,25 +115,37 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
  * @param {string} hostname - The hostname of the CDN server for which we want a token
  * @param {function} [callback]
  * @return Promise
+ * @deprecated Steam no longer uses CDN auth tokens; these are always empty strings. This function will not be removed as it is possible CDN auth tokens will start being used again in the future.
  */
 SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['token', 'expires'], callback, (resolve, reject) => {
+		// Just return an empty string
+		let date = new Date();
+		date.setDate(date.getDate() + 14);
+
+		return resolve({
+			token: '',
+			expires: date
+		});
+
+		// Dead code follows
+
 		if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
 			return resolve(this._contentServerTokens[depotID + '_' + hostname]);
 		}
 
 		this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {
-			"app_id": appID,
-			"depot_id": depotID,
-			"host_name": hostname
+			app_id: appID,
+			depot_id: depotID,
+			host_name: hostname
 		}, (body) => {
 			if (body.eresult != SteamUser.EResult.OK) {
 				return reject(Helpers.eresultError(body.eresult));
 			}
 
 			return resolve(this._contentServerTokens[depotID + '_' + hostname] = {
-				"token": body.token,
-				"expires": new Date(body.expiration_time * 1000)
+				token: body.token,
+				expires: new Date(body.expiration_time * 1000)
 			});
 		});
 	});
@@ -149,32 +160,15 @@ SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callbac
  * @return Promise
  */
 SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['manifest'], callback, (resolve, reject) => {
-		this.getRawManifest(appID, depotID, manifestID, (err, manifest) => {
-			if (err) {
-				return reject(err);
-			}
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['manifest'], callback, async (resolve, reject) => {
+		let manifest = ContentManifest.parse((await this.getRawManifest(appID, depotID, manifestID)).manifest);
 
-			try {
-				manifest = ContentManifest.parse(manifest);
-			} catch (ex) {
-				return reject(ex);
-			}
+		if (!manifest.filenames_encrypted) {
+			return resolve({manifest});
+		}
 
-
-			if (!manifest.filenames_encrypted) {
-				return resolve({manifest});
-			}
-
-			this.getDepotDecryptionKey(appID, depotID, (err, key) => {
-				if (err) {
-					return reject(err);
-				}
-
-				ContentManifest.decryptFilenames(manifest, key);
-				return resolve({manifest});
-			});
-		});
+		ContentManifest.decryptFilenames(manifest, (await this.getDepotDecryptionKey(appID, depotID)).key);
+		return resolve({manifest});
 	});
 };
 
@@ -186,39 +180,27 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
  * @param {function} [callback]
  */
 SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callback) {
-	return StdLib.Promises.callbackPromise(['manifest'], callback, (resolve, reject) => {
-		this.getContentServers((err, servers) => {
+	return StdLib.Promises.callbackPromise(['manifest'], callback, async (resolve, reject) => {
+		let {servers} = await this.getContentServers();
+		let server = servers[Math.floor(Math.random() * servers.length)];
+		let urlBase = "http://" + server.Host;
+		let vhost = server.vhost || server.Host;
+
+		download(`${urlBase}/depot/${depotID}/manifest/${manifestID}/5`, vhost, async (err, res) => {
 			if (err) {
 				return reject(err);
 			}
 
-			let server = servers[Math.floor(Math.random() * servers.length)];
-			let urlBase = "http://" + server.Host;
-			let vhost = server.vhost || server.Host;
+			if (res.type != 'complete') {
+				return;
+			}
 
-			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
-				if (err) {
-					return reject(err);
-				}
-
-				download(urlBase + "/depot/" + depotID + "/manifest/" + manifestID + "/5" + token, vhost, (err, res) => {
-					if (err) {
-						return reject(err);
-					}
-
-					if (res.type != 'complete') {
-						return;
-					}
-
-					unzip(res.data, (err, manifest) => {
-						if (err) {
-							return reject(err);
-						} else {
-							return resolve({manifest});
-						}
-					});
-				});
-			});
+			try {
+				let manifest = await unzip(res.data);
+				return resolve({manifest});
+			} catch (ex) {
+				return reject(ex);
+			}
 		});
 	});
 };
@@ -240,59 +222,35 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 
 	chunkSha1 = chunkSha1.toLowerCase();
 
-	return StdLib.Promises.callbackPromise(['chunk'], callback, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise(['chunk'], callback, async (resolve, reject) => {
 		if (!contentServer) {
-			this.getContentServers((err, servers) => {
-				if (err) {
-					return reject(err);
-				}
-
-				contentServer = servers[Math.floor(Math.random() * servers.length)];
-				performDownload.call(this);
-			});
-		} else {
-			performDownload.call(this);
+			let {servers} = await this.getContentServers();
+			contentServer = servers[Math.floor(Math.random() * servers.length)];
 		}
 
-		function performDownload() {
-			let urlBase = "http://" + contentServer.Host;
-			let vhost = contentServer.vhost || contentServer.Host;
+		let urlBase = "http://" + contentServer.Host;
+		let vhost = contentServer.vhost || contentServer.Host;
+		let {key} = await this.getDepotDecryptionKey(appID, depotID);
 
-			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
-				if (err) {
-					return reject(err);
+		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}`, vhost, async (err, res) => {
+			if (err) {
+				return reject(err);
+			}
+
+			if (res.type != 'complete') {
+				return;
+			}
+
+			try {
+				let result = await unzip(SteamCrypto.symmetricDecrypt(res.data, key));
+				if (StdLib.Hashing.sha1(result) != chunkSha1) {
+					return reject(new Error('Checksum mismatch'));
 				}
-
-				this.getDepotDecryptionKey(appID, depotID, (err, key) => {
-					if (err) {
-						return reject(err);
-					}
-
-					download(urlBase + "/depot/" + depotID + "/chunk/" + chunkSha1 + token, vhost, (err, res) => {
-						if (err) {
-							return reject(err);
-						}
-
-						if (res.type != 'complete') {
-							return;
-						}
-
-						unzip(SteamCrypto.symmetricDecrypt(res.data, key), (err, result) => {
-							if (err) {
-								return reject(err);
-							}
-
-							// Verify the SHA1
-							if (StdLib.Hashing.sha1(result) != chunkSha1) {
-								return reject(new Error("Checksum mismatch"));
-							}
-
-							return resolve({"chunk": result});
-						});
-					});
-				});
-			});
-		}
+				return resolve({chunk: result});
+			} catch (ex) {
+				return reject(ex);
+			}
+		});
 	});
 };
 
@@ -311,7 +269,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		outputFilePath = null;
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise(null, callback, async (resolve, reject) => {
 		if (fileManifest.flags & SteamUser.EDepotFileFlag.Directory) {
 			return reject(new Error("Attempted to download a directory " + fileManifest.filename));
 		}
@@ -321,7 +279,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		fileManifest.size = parseInt(fileManifest.size, 10);
 		let bytesDownloaded = 0;
 
-		let availableServers;
+		let {servers: availableServers} = await this.getContentServers();
 		let servers = [];
 		let serversInUse = [];
 		let currentServerIdx = 0;
@@ -329,19 +287,14 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		let outputFd;
 		let killed = false;
 
-		this.getContentServers((err, contentServers) => {
-			if (err) {
-				return reject(err);
-			}
+		// Choose some content servers
+		for (let i = 0; i < numWorkers; i++) {
+			assignServer(i);
+			serversInUse.push(false);
+		}
 
-			// Choose some content servers
-			availableServers = contentServers;
-			for (let i = 0; i < numWorkers; i++) {
-				assignServer(i);
-				serversInUse.push(false);
-			}
-
-			if (outputFilePath) {
+		if (outputFilePath) {
+			await new Promise((resolve, reject) => {
 				FS.open(outputFilePath, "w", (err, fd) => {
 					if (err) {
 						return reject(err);
@@ -354,127 +307,124 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 							return reject(err);
 						}
 
-						beginDownload.call(this);
+						return resolve();
 					});
 				});
-			} else {
-				downloadBuffer = Buffer.alloc(parseInt(fileManifest.size, 10));
-				beginDownload.call(this);
+			});
+		} else {
+			downloadBuffer = Buffer.alloc(parseInt(fileManifest.size, 10));
+		}
+
+		let self = this;
+		let queue = new StdLib.DataStructures.AsyncQueue(function dlChunk(chunk, cb) {
+			let serverIdx;
+
+			while (true) {
+				// Find the next available download slot
+				if (serversInUse[currentServerIdx]) {
+					incrementCurrentServerIdx();
+				} else {
+					serverIdx = currentServerIdx;
+					serversInUse[serverIdx] = true;
+					break;
+				}
 			}
-		});
 
-		function beginDownload() {
-			let self = this;
-			let queue = new StdLib.DataStructures.AsyncQueue(function dlChunk(chunk, cb) {
-				let serverIdx;
+			self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
+				serversInUse[serverIdx] = false;
 
-				while (true) {
-					// Find the next available download slot
-					if (serversInUse[currentServerIdx]) {
-						incrementCurrentServerIdx();
-					} else {
-						serverIdx = currentServerIdx;
-						serversInUse[serverIdx] = true;
-						break;
-					}
+				if (killed) {
+					return;
 				}
 
-				self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
-					serversInUse[serverIdx] = false;
-
-					if (killed) {
-						return;
+				if (err) {
+					// Error downloading chunk
+					if ((chunk.retries && chunk.retries >= 5) || availableServers.length == 0) {
+						// This chunk hasn't been retired the max times yet, and we have servers left.
+						reject(err);
+						queue.kill();
+						killed = true;
+					} else {
+						chunk.retries = chunk.retries || 0;
+						chunk.retries++;
+						assignServer(serverIdx);
+						dlChunk(chunk, cb);
 					}
 
-					if (err) {
-						// Error downloading chunk
-						if ((chunk.retries && chunk.retries >= 5) || availableServers.length == 0) {
-							// This chunk hasn't been retired the max times yet, and we have servers left.
+					return;
+				}
+
+				bytesDownloaded += data.length;
+				if (typeof callback === 'function') {
+					callback(null, {
+						"type": "progress",
+						bytesDownloaded,
+						"totalSizeBytes": fileManifest.size
+					});
+				}
+
+				// Chunk downloaded successfully
+				if (outputFilePath) {
+					FS.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), (err) => {
+						if (err) {
 							reject(err);
 							queue.kill();
 							killed = true;
 						} else {
-							chunk.retries = chunk.retries || 0;
-							chunk.retries++;
-							assignServer(serverIdx);
-							dlChunk(chunk, cb);
+							cb();
 						}
-
-						return;
-					}
-
-					bytesDownloaded += data.length;
-					if (typeof callback === 'function') {
-						callback(null, {
-							"type": "progress",
-							bytesDownloaded,
-							"totalSizeBytes": fileManifest.size
-						});
-					}
-
-					// Chunk downloaded successfully
-					if (outputFilePath) {
-						FS.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), (err) => {
-							if (err) {
-								reject(err);
-								queue.kill();
-								killed = true;
-							} else {
-								cb();
-							}
-						});
-					} else {
-						data.copy(downloadBuffer, parseInt(chunk.offset, 10));
-						cb();
-					}
-				});
-			}, numWorkers);
-
-			fileManifest.chunks.forEach((chunk) => {
-				queue.push(JSON.parse(JSON.stringify(chunk)));
-			});
-
-			queue.drain = () => {
-				// Verify hash
-				let hash;
-				if (outputFilePath) {
-					FS.close(outputFd, (err) => {
-						if (err) {
-							return reject(err);
-						}
-
-						// File closed. Now re-open it so we can hash it!
-						hash = require('crypto').createHash('sha1');
-						FS.createReadStream(outputFilePath).pipe(hash);
-						hash.on('readable', () => {
-							if (!hash.read) {
-								return; // already done
-							}
-
-							hash = hash.read();
-							if (hash.toString('hex') != fileManifest.sha_content) {
-								return reject(new Error("File checksum mismatch"));
-							} else {
-								resolve({
-									"type": "complete"
-								});
-							}
-						});
 					});
 				} else {
-					hash = require('crypto').createHash('sha1');
-					hash.update(downloadBuffer);
-					if (hash.digest('hex') != fileManifest.sha_content) {
-						return reject(new Error("File checksum mismatch"));
+					data.copy(downloadBuffer, parseInt(chunk.offset, 10));
+					cb();
+				}
+			});
+		}, numWorkers);
+
+		fileManifest.chunks.forEach((chunk) => {
+			queue.push(JSON.parse(JSON.stringify(chunk)));
+		});
+
+		queue.drain = () => {
+			// Verify hash
+			let hash;
+			if (outputFilePath) {
+				FS.close(outputFd, (err) => {
+					if (err) {
+						return reject(err);
 					}
 
-					return resolve({
-						"type": "complete",
-						"file": downloadBuffer
+					// File closed. Now re-open it so we can hash it!
+					hash = require('crypto').createHash('sha1');
+					FS.createReadStream(outputFilePath).pipe(hash);
+					hash.on('readable', () => {
+						if (!hash.read) {
+							return; // already done
+						}
+
+						hash = hash.read();
+						if (hash.toString('hex') != fileManifest.sha_content) {
+							return reject(new Error("File checksum mismatch"));
+						} else {
+							resolve({
+								"type": "complete"
+							});
+						}
 					});
+				});
+			} else {
+				hash = require('crypto').createHash('sha1');
+				hash.update(downloadBuffer);
+				if (hash.digest('hex') != fileManifest.sha_content) {
+					return reject(new Error("File checksum mismatch"));
 				}
-			};
-		}
+
+				return resolve({
+					"type": "complete",
+					"file": downloadBuffer
+				});
+			}
+		};
 
 		function assignServer(idx) {
 			servers[idx] = availableServers.splice(Math.floor(Math.random() * availableServers.length), 1)[0];
@@ -504,7 +454,7 @@ SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callbac
 
 			let branches = {};
 			(body.betapasswords || []).forEach((beta) => {
-				branches[beta.betaname] = new Buffer(beta.betapassword, 'hex');
+				branches[beta.betaname] = Buffer.from(beta.betapassword, 'hex');
 			});
 
 			return resolve({"keys": branches});
@@ -546,7 +496,7 @@ function download(url, hostHeader, destinationFilename, callback) {
 
 		let totalSizeBytes = parseInt(res.headers['content-length'] || 0, 10);
 		let receivedBytes = 0;
-		let dataBuffer = new Buffer(0);
+		let dataBuffer = Buffer.alloc(0);
 
 		if (destinationFilename) {
 			stream.pipe(require('fs').createWriteStream(destinationFilename));
@@ -554,7 +504,7 @@ function download(url, hostHeader, destinationFilename, callback) {
 
 		stream.on('data', (chunk) => {
 			if (typeof chunk === 'string') {
-				chunk = new Buffer(chunk, 'binary');
+				chunk = Buffer.from(chunk, 'binary');
 			}
 
 			receivedBytes += chunk.length;
@@ -578,60 +528,56 @@ function download(url, hostHeader, destinationFilename, callback) {
 	req.end();
 }
 
-function unzip(data, callback) {
-	// VZip or zip?
-	if (data.readUInt16LE(0) == VZIP_HEADER) {
-		// VZip
-		data = ByteBuffer.wrap(data, ByteBuffer.LITTLE_ENDIAN);
+function unzip(data) {
+	return new Promise((resolve, reject) => {
+		// VZip or zip?
+		if (data.readUInt16LE(0) != VZIP_HEADER) {
+			// Standard zip
+			return resolve((new AdmZip(data)).readFile('z'));
+		} else {
+			// VZip
+			data = ByteBuffer.wrap(data, ByteBuffer.LITTLE_ENDIAN);
 
-		data.skip(2); // header
-		if (String.fromCharCode(data.readByte()) != 'a') {
-			callback(new Error("Expected VZip version 'a'"));
-		}
-
-		data.skip(4); // either a timestamp or a CRC; either way, forget it
-		let properties = data.slice(data.offset, data.offset + 5).toBuffer();
-		data.skip(5);
-
-		let compressedData = data.slice(data.offset, data.limit - 10);
-		data.skip(compressedData.remaining());
-
-		let decompressedCrc = data.readUint32();
-		let decompressedSize = data.readUint32();
-		if (data.readUint16() != VZIP_FOOTER) {
-			callback(new Error("Didn't see expected VZip footer"));
-		}
-
-		let uncompressedSizeBuffer = new Buffer(8);
-		uncompressedSizeBuffer.writeUInt32LE(decompressedSize, 0);
-		uncompressedSizeBuffer.writeUInt32LE(0, 4);
-
-		LZMA.decompress(Buffer.concat([properties, uncompressedSizeBuffer, compressedData.toBuffer()]), (result, err) => {
-			if (err) {
-				callback(err);
-				return;
+			data.skip(2); // header
+			if (String.fromCharCode(data.readByte()) != 'a') {
+				return reject(new Error("Expected VZip version 'a'"));
 			}
 
-			result = new Buffer(result); // it's a byte array
+			data.skip(4); // either a timestamp or a CRC; either way, forget it
+			let properties = data.slice(data.offset, data.offset + 5).toBuffer();
+			data.skip(5);
 
-			// Verify the result
-			if (decompressedSize != result.length) {
-				callback(new Error("Decompressed size was not valid"));
-				return;
+			let compressedData = data.slice(data.offset, data.limit - 10);
+			data.skip(compressedData.remaining());
+
+			let decompressedCrc = data.readUint32();
+			let decompressedSize = data.readUint32();
+			if (data.readUint16() != VZIP_FOOTER) {
+				return reject(new Error("Didn't see expected VZip footer"));
 			}
 
-			if (StdLib.Hashing.crc32(result) != decompressedCrc) {
-				callback(new Error("CRC check failed on decompressed data"));
-				return;
-			}
+			let uncompressedSizeBuffer = Buffer.alloc(8);
+			uncompressedSizeBuffer.writeUInt32LE(decompressedSize, 0);
+			uncompressedSizeBuffer.writeUInt32LE(0, 4);
 
-			callback(null, result);
-		});
-	} else {
-		try {
-			callback(null, (new AdmZip(data)).readFile('z'));
-		} catch (ex) {
-			callback(ex);
+			LZMA.decompress(Buffer.concat([properties, uncompressedSizeBuffer, compressedData.toBuffer()]), (result, err) => {
+				if (err) {
+					return reject(err);
+				}
+
+				result = Buffer.from(result); // it's a byte array
+
+				// Verify the result
+				if (decompressedSize != result.length) {
+					return reject(new Error("Decompressed size was not valid"));
+				}
+
+				if (StdLib.Hashing.crc32(result) != decompressedCrc) {
+					return reject(new Error("CRC check failed on decompressed data"));
+				}
+
+				return resolve(result);
+			});
 		}
-	}
+	});
 }
