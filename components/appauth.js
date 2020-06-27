@@ -20,7 +20,7 @@ const SteamUser = require('../index.js');
 SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) {
 	if (typeof userData === 'function') {
 		callback = userData;
-		userData = new Buffer(0);
+		userData = Buffer.alloc(0);
 	}
 
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['encryptedAppTicket'], callback, (resolve, reject) => {

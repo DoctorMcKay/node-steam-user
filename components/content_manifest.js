@@ -90,7 +90,7 @@ exports.decryptFilenames = function(manifest, key) {
 	}
 
 	(manifest.files || []).forEach(function(file) {
-		file.filename = SteamCrypto.symmetricDecrypt(new Buffer(file.filename, 'base64'), key);
+		file.filename = SteamCrypto.symmetricDecrypt(Buffer.from(file.filename, 'base64'), key);
 		file.filename = file.filename.slice(0, file.filename.indexOf(0)).toString('utf8');
 
 		// Verify the sha1

@@ -37,7 +37,7 @@ function TCPConnection(user) {
 		url.localAddress = user.options.localAddress;
 		url.localPort = user.options.localPort;
 		if (url.auth) {
-			url.headers = {"Proxy-Authorization": "Basic " + (new Buffer(url.auth, 'utf8')).toString('base64')};
+			url.headers = {"Proxy-Authorization": "Basic " + (Buffer.from(url.auth, 'utf8')).toString('base64')};
 			delete url.auth;
 		}
 
@@ -84,7 +84,7 @@ function TCPConnection(user) {
 			"localAddress": user.options.localAddress,
 			"localPort": user.options.localPort
 		});
-		
+
 		this.stream.setTimeout(this.user._connectTimeout);
 	}
 }
