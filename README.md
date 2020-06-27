@@ -1776,7 +1776,7 @@ Emitted on logon and when wallet balance changes. The [`wallet`](#wallet) proper
 - `licenses` - An array of licenses
 
 Contains the license data for the packages which your Steam account owns. To see license object structure, see
-[`CMsgClientLicenseList.License`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/Protobufs/steamclient/steammessages_clientserver.proto#L307-L320).
+[`CMsgClientLicenseList.License`](https://github.com/DoctorMcKay/node-steam-user/blob/master/protobufs/steammessages_clientserver.proto#L214-L233).
 
 Emitted on logon and when licenses change. The [`licenses`](#licenses) property will be updated after this event is
 emitted.
