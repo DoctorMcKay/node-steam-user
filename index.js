@@ -276,8 +276,7 @@ require('./components/cdn.js');
 require('./components/econ.js');
 require('./components/store.js');
 require('./components/gamecoordinator.js');
-require('./components/device.js');
-require('./components/borrowers.js');
+require('./components/familysharing.js');
 
 /**
  * Called when the request completes.
