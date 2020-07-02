@@ -216,6 +216,17 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			}
 		});
 
+		if (inclTokens) {
+			packages.filter(pkg => !pkg.access_token).forEach((pkg) => {
+				// Check if we have a license for this package which includes a token
+				let license = this.licenses.find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
+				if (license) {
+					this.emit('debug', `Using token "${license.access_token}" from license for package ${pkg.packageid}`);
+					pkg.access_token = license.access_token;
+				}
+			});
+		}
+
 		this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {
 			"apps": apps,
 			"packages": packages
