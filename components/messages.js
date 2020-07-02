@@ -123,6 +123,12 @@ protobufs[EMsg.ClientFromGC] = Schema.CMsgGCClient;
 protobufs[EMsg.ClientRichPresenceUpload] = Schema.CMsgClientRichPresenceUpload;
 protobufs[EMsg.ClientGetEmoticonList] = Schema.CMsgClientGetEmoticonList;
 protobufs[EMsg.ClientEmoticonList] = Schema.CMsgClientEmoticonList;
+protobufs[EMsg.ClientGetAuthorizedDevicesResponse] = Schema.CMsgClientGetAuthorizedDevices;
+protobufs[EMsg.ClientAuthorizeLocalDeviceRequest] = Schema.CMsgClientAuthorizeLocalDeviceRequest;
+protobufs[EMsg.ClientAuthorizeLocalDeviceResponse] = Schema.CMsgClientAuthorizeLocalDevice;
+protobufs[EMsg.ClientDeauthorizeDeviceRequest] = Schema.CMsgClientDeauthorizeDeviceRequest;
+protobufs[EMsg.ClientDeauthorizeDevice] = Schema.CMsgClientDeauthorizeDevice;
+protobufs[EMsg.ClientUseLocalDeviceAuthorizations] = Schema.CMsgClientUseLocalDeviceAuthorizations;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
@@ -293,6 +299,12 @@ protobufs['UserAccount.RedeemFriendInviteToken#1_Request'] = Schema.CUserAccount
 protobufs['UserAccount.RedeemFriendInviteToken#1_Response'] = Schema.CUserAccount_RedeemFriendInviteToken_Response;
 protobufs['UserAccount.RevokeFriendInviteToken#1_Request'] = Schema.CUserAccount_RevokeFriendInviteToken_Request;
 protobufs['UserAccount.RevokeFriendInviteToken#1_Response'] = Schema.CUserAccount_RevokeFriendInviteToken_Response;
+protobufs['DeviceAuth.GetOwnAuthorizedDevices#1_Request'] = Schema.CDeviceAuth_GetOwnAuthorizedDevices_Request;
+protobufs['DeviceAuth.GetOwnAuthorizedDevices#1_Response'] = Schema.CDeviceAuth_GetOwnAuthorizedDevices_Response;
+protobufs['DeviceAuth.AddAuthorizedBorrowers#1_Request'] = Schema.CDeviceAuth_AddAuthorizedBorrowers_Request;
+protobufs['DeviceAuth.AddAuthorizedBorrowers#1_Response'] = Schema.CDeviceAuth_AddAuthorizedBorrowers_Response;
+protobufs['DeviceAuth.RemoveAuthorizedBorrowers#1_Request'] = Schema.CDeviceAuth_RemoveAuthorizedBorrowers_Request;
+protobufs['DeviceAuth.RemoveAuthorizedBorrowers#1_Response'] = Schema.CDeviceAuth_RemoveAuthorizedBorrowers_Response;
 
 /**
  * Encode a protobuf.
