@@ -28,6 +28,9 @@ Install it from [npm](https://www.npmjs.com/package/steam-user):
 - [Methods](#methods-)
 - [Events](#events-)
 
+Some of the documentation for `SteamUser`, especially documentation for experimental features (but not exclusively),
+is located in [the GitHub wiki](https://github.com/DoctorMcKay/node-steam-user/wiki).
+
 # Patterns [^](#contents)
 
 There are a number of coding patterns that are repeated throughout `SteamUser`. **Please read this section in its
