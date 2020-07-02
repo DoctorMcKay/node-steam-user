@@ -115,21 +115,9 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
  * @param {string} hostname - The hostname of the CDN server for which we want a token
  * @param {function} [callback]
  * @return Promise
- * @deprecated Steam no longer uses CDN auth tokens; these are always empty strings. This function will not be removed as it is possible CDN auth tokens will start being used again in the future.
  */
 SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['token', 'expires'], callback, (resolve, reject) => {
-		// Just return an empty string
-		let date = new Date();
-		date.setDate(date.getDate() + 14);
-
-		return resolve({
-			token: '',
-			expires: date
-		});
-
-		// Dead code follows
-
 		if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
 			return resolve(this._contentServerTokens[depotID + '_' + hostname]);
 		}
@@ -185,8 +173,9 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 		let server = servers[Math.floor(Math.random() * servers.length)];
 		let urlBase = "http://" + server.Host;
 		let vhost = server.vhost || server.Host;
+		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
-		download(`${urlBase}/depot/${depotID}/manifest/${manifestID}/5`, vhost, async (err, res) => {
+		download(`${urlBase}/depot/${depotID}/manifest/${manifestID}/5${token}`, vhost, async (err, res) => {
 			if (err) {
 				return reject(err);
 			}
@@ -231,8 +220,9 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 		let urlBase = "http://" + contentServer.Host;
 		let vhost = contentServer.vhost || contentServer.Host;
 		let {key} = await this.getDepotDecryptionKey(appID, depotID);
+		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
-		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}`, vhost, async (err, res) => {
+		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}${token}`, vhost, async (err, res) => {
 			if (err) {
 				return reject(err);
 			}
