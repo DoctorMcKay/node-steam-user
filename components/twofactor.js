@@ -1,7 +1,6 @@
 const StdLib = require('@doctormckay/stdlib');
 const SteamTotp = require('steam-totp');
 
-const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 /**
