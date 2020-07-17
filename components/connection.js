@@ -21,6 +21,8 @@ SteamUser.prototype._handleConnectionClose = function() {
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ChannelEncryptRequest, function(body) {
+	if (!this._connection || !this._connection.stream) // cannot begin login without a socket, abort
+		return;
 	this._connection.stream.setTimeout(0);
 
 	let protocol = body.readUint32();
