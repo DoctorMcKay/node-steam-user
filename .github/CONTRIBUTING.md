@@ -19,7 +19,7 @@ Submitting an issue?
 		- For example, if you want the ability to load your Steam inventory, that would go better in [`node-steamcommunity`](https://github.com/DoctorMcKay/node-steamcommunity).
 - If you're **asking a question** or **requesting support**, please don't submit a GitHub issue.
 	- Issues are only for problems directly relating to the module's code.
-	- Please [post a thread in the Steam group](https://steamcommunity.com/groups/SteamRE/discussions/4/) instead.
+	- Please [post a thread in the dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/) instead.
 
 # Pull Requests
 
