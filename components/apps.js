@@ -123,6 +123,48 @@ SteamUser.prototype.uploadRichPresence = function(appid, richPresence) {
 };
 
 /**
+ * Request rich presence data of one or more users for an appid.
+ * @param {int} appid - The appid to get rich presence data for
+ * @param {SteamID[]|string[]|SteamID|string} steamIDs - SteamIDs of users to request rich presence data for
+ * @param {function} [callback] - Called with 'users' parameter with each key being a SteamID and value being the rich presence response if received
+ * @return Promise
+ */
+SteamUser.prototype.requestRichPresence = function(appid, steamIDs, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['users'], callback, (resolve, reject) => {
+		if (!Array.isArray(steamIDs)) {
+			steamIDs = [steamIDs];
+		}
+
+		this._send({
+			"msg": SteamUser.EMsg.ClientRichPresenceRequest,
+			"proto": {
+				"routing_appid": appid
+			},
+		}, {
+			"steamid_request": steamIDs.map(sid => Helpers.steamID(sid).getSteamID64())
+		}, (body) => {
+			let response = {};
+			body.rich_presence = body.rich_presence || [];
+			for (let rp of body.rich_presence) {
+				let kv = rp.rich_presence_kv;
+				if (!kv || !rp.steamid_user) {
+					continue;
+				}
+
+				try {
+					let kvObj = BinaryKVParser.parse(kv); // This will throw in the event of there being no RP data (e.g. user not in game)
+					if (kvObj.RP) {
+						response[rp.steamid_user] = kvObj.RP;
+					}
+				} catch(e) {}
+			}
+
+			resolve({"users": response});
+		});
+	});
+};
+
+/**
  * Get count of people playing a Steam app. Use appid 0 to get number of people connected to Steam.
  * @param {int} appid
  * @param {function} [callback] - Args (eresult, player count)
