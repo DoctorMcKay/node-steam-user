@@ -970,6 +970,7 @@ SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChange
 	}
 });
 
+
 function processUser(steamUser, user) {
 	return new Promise((resolve) => {
 		g_ProcessPersonaSemaphore.wait(async (release) => {
@@ -1023,51 +1024,12 @@ function processUser(steamUser, user) {
 				return resolve(user);
 			}
 
-			let localizationTokens;
-			if (steamUser._richPresenceLocalization[user.gameid] && steamUser._richPresenceLocalization[user.gameid].timestamp > (Date.now() - (1000 * 60 * 60 * 24))) {
-				// We already have localization
-				localizationTokens = steamUser._richPresenceLocalization[user.gameid].tokens;
-			} else {
-				try {
-					localizationTokens = (await steamUser.getAppRichPresenceLocalization(user.gameid, steamUser.options.language || "english")).tokens;
-				} catch (ex) {
-					// Oh well
-					delete user.rich_presence_string;
-					release();
-					return resolve(user);
-				}
+			try {
+				user.rich_presence_string = await steamUser._getRPLocalizedString(user.gameid, rpTokens);
+			} catch (ex) {
+				delete user.rich_presence_string;
 			}
 
-			for (let i in rpTokens) {
-				if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i]]) {
-					rpTokens[i] = localizationTokens[rpTokens[i]];
-				}
-			}
-
-			let rpString = rpTokens.steam_display;
-			while (true) {
-				let newRpString = rpString;
-				for (let i in rpTokens) {
-					if (rpTokens.hasOwnProperty(i)) {
-						newRpString = newRpString.replace(new RegExp('%' + i + '%', 'gi'), rpTokens[i]);
-					}
-				}
-
-				(newRpString.match(/{#[^}]+}/g) || []).forEach((token) => {
-					token = token.substring(1, token.length - 1);
-					if (localizationTokens[token]) {
-						newRpString = newRpString.replace(new RegExp('{' + token + '}', 'gi'), localizationTokens[token]);
-					}
-				});
-
-				if (newRpString == rpString) {
-					break;
-				} else {
-					rpString = newRpString;
-				}
-			}
-
-			user.rich_presence_string = rpString;
 			release();
 			return resolve(user);
 		});

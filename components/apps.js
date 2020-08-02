@@ -142,7 +142,7 @@ SteamUser.prototype.requestRichPresence = function(appid, steamIDs, callback) {
 			},
 		}, {
 			"steamid_request": steamIDs.map(sid => Helpers.steamID(sid).getSteamID64())
-		}, (body) => {
+		}, async (body) => {
 			let response = {};
 			body.rich_presence = body.rich_presence || [];
 			for (let rp of body.rich_presence) {
@@ -154,7 +154,10 @@ SteamUser.prototype.requestRichPresence = function(appid, steamIDs, callback) {
 				try {
 					let kvObj = BinaryKVParser.parse(kv); // This will throw in the event of there being no RP data (e.g. user not in game)
 					if (kvObj.RP) {
-						response[rp.steamid_user] = kvObj.RP;
+						response[rp.steamid_user] = {
+							"RP": kvObj.RP,
+						};
+						response[rp.steamid_user].localizedString = await this._getRPLocalizedString(appid, kvObj.RP);
 					}
 				} catch(e) {}
 			}
@@ -460,6 +463,59 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 				"packageDeniedTokens": body.package_denied_tokens || []
 			});
 		});
+	});
+};
+
+SteamUser.prototype._getRPLocalizedString = function(appid, tokens) {
+	return new Promise(async (resolve, reject) => {
+		if (!tokens.steam_display) {
+			// Nothing to do here
+			return reject();
+		}
+
+		let localizationTokens;
+		if (this._richPresenceLocalization[appid] && this._richPresenceLocalization[appid].timestamp > (Date.now() - (1000 * 60 * 60 * 24))) {
+			// We already have localization
+			localizationTokens = this._richPresenceLocalization[appid].tokens;
+		} else {
+			try {
+				localizationTokens = (await this.getAppRichPresenceLocalization(appid, this.options.language || "english")).tokens;
+			} catch (ex) {
+				// Oh well
+				return reject(ex);
+			}
+		}
+
+		let rpTokens = JSON.parse(JSON.stringify(tokens)); // So we don't modify the original objects
+		for (let i in rpTokens) {
+			if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i]]) {
+				rpTokens[i] = localizationTokens[rpTokens[i]];
+			}
+		}
+
+		let rpString = rpTokens.steam_display;
+		while (true) {
+			let newRpString = rpString;
+			for (let i in rpTokens) {
+				if (rpTokens.hasOwnProperty(i)) {
+					newRpString = newRpString.replace(new RegExp('%' + i + '%', 'gi'), rpTokens[i]);
+				}
+			}
+
+			(newRpString.match(/{#[^}]+}/g) || []).forEach((token) => {
+				token = token.substring(1, token.length - 1);
+				if (localizationTokens[token]) {
+					newRpString = newRpString.replace(new RegExp('{' + token + '}', 'gi'), localizationTokens[token]);
+				}
+			});
+
+			if (newRpString == rpString) {
+				break;
+			} else {
+				rpString = newRpString;
+			}
+		}
+		return resolve(rpString);
 	});
 };
 
