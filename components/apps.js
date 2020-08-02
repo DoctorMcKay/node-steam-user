@@ -466,6 +466,9 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 	});
 };
 
+/**
+ * @private
+ */
 SteamUser.prototype._getRPLocalizedString = function(appid, tokens) {
 	return new Promise(async (resolve, reject) => {
 		if (!tokens.steam_display) {
