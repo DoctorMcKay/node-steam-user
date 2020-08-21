@@ -579,6 +579,7 @@ You'll be sent an SMS with an activation code that you'll need to provide to `fi
 Properties of note in the `response` object:
 - `status` - A value from `EResult`. If this is not `OK` (1), then the request failed.
 - `shared_secret` - This is your secret that's used for two-factor authentication.
+- `identity_secret` - This is your secret that's used for trade confirmation.
 - `revocation_code` - You will need this in the future to disable two-factor authentication.
 
 ### finalizeTwoFactor(secret, activationCode, callback)
