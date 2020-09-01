@@ -523,7 +523,8 @@ function unzip(data) {
 		// VZip or zip?
 		if (data.readUInt16LE(0) != VZIP_HEADER) {
 			// Standard zip
-			return resolve((new AdmZip(data)).readFile('z'));
+			let unzip = new AdmZip(data);
+			return resolve(unzip.readFile(unzip.getEntries()[0]));
 		} else {
 			// VZip
 			data = ByteBuffer.wrap(data, ByteBuffer.LITTLE_ENDIAN);
