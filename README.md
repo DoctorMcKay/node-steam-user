@@ -1065,6 +1065,15 @@ This will subsequently be parsed like this:
 Requests localized rich presence strings for a particular app in the given language. This will allow you to decode the
 `rich_presence` array in the [`user`](#user) event into the localized string displayed in the Steam client.
 
+### requestRichPresence(appID, steamIDs, callback)
+- `appID` - The ID of the app for which you want to get rich presence data for
+- `steamIDs` - An array of SteamID objects or strings that can parse into SteamID objects
+- `callback` - Called when the requested data is available.
+	- `err` - An `Error` object on failure, or `null` on success
+	- `users` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are objects containing the received rich presence data. If no data was received for a SteamID there will be no key for that SteamID (and therefore no value).
+
+**v or later is required to use this method**
+
 ### getSteamLevels(steamids, callback)
 - `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
 - `callback` - Called when the requested data is available.

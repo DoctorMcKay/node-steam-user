@@ -123,6 +123,51 @@ SteamUser.prototype.uploadRichPresence = function(appid, richPresence) {
 };
 
 /**
+ * Request rich presence data of one or more users for an appid.
+ * @param {int} appid - The appid to get rich presence data for
+ * @param {SteamID[]|string[]|SteamID|string} steamIDs - SteamIDs of users to request rich presence data for
+ * @param {function} [callback] - Called with 'users' parameter with each key being a SteamID and value being the rich presence response if received
+ * @return Promise
+ */
+SteamUser.prototype.requestRichPresence = function(appid, steamIDs, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['users'], callback, (resolve, reject) => {
+		if (!Array.isArray(steamIDs)) {
+			steamIDs = [steamIDs];
+		}
+
+		this._send({
+			"msg": SteamUser.EMsg.ClientRichPresenceRequest,
+			"proto": {
+				"routing_appid": appid
+			},
+		}, {
+			"steamid_request": steamIDs.map(sid => Helpers.steamID(sid).getSteamID64())
+		}, async (body) => {
+			let response = {};
+			body.rich_presence = body.rich_presence || [];
+			for (let rp of body.rich_presence) {
+				let kv = rp.rich_presence_kv;
+				if (!kv || !rp.steamid_user) {
+					continue;
+				}
+
+				try {
+					let kvObj = BinaryKVParser.parse(kv); // This will throw in the event of there being no RP data (e.g. user not in game)
+					if (kvObj.RP) {
+						response[rp.steamid_user] = {
+							"RP": kvObj.RP,
+						};
+						response[rp.steamid_user].localizedString = await this._getRPLocalizedString(appid, kvObj.RP);
+					}
+				} catch(e) {}
+			}
+
+			resolve({"users": response});
+		});
+	});
+};
+
+/**
  * Get count of people playing a Steam app. Use appid 0 to get number of people connected to Steam.
  * @param {int} appid
  * @param {function} [callback] - Args (eresult, player count)
@@ -418,6 +463,62 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 				"packageDeniedTokens": body.package_denied_tokens || []
 			});
 		});
+	});
+};
+
+/**
+ * @private
+ */
+SteamUser.prototype._getRPLocalizedString = function(appid, tokens) {
+	return new Promise(async (resolve, reject) => {
+		if (!tokens.steam_display) {
+			// Nothing to do here
+			return reject();
+		}
+
+		let localizationTokens;
+		if (this._richPresenceLocalization[appid] && this._richPresenceLocalization[appid].timestamp > (Date.now() - (1000 * 60 * 60 * 24))) {
+			// We already have localization
+			localizationTokens = this._richPresenceLocalization[appid].tokens;
+		} else {
+			try {
+				localizationTokens = (await this.getAppRichPresenceLocalization(appid, this.options.language || "english")).tokens;
+			} catch (ex) {
+				// Oh well
+				return reject(ex);
+			}
+		}
+
+		let rpTokens = JSON.parse(JSON.stringify(tokens)); // So we don't modify the original objects
+		for (let i in rpTokens) {
+			if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i]]) {
+				rpTokens[i] = localizationTokens[rpTokens[i]];
+			}
+		}
+
+		let rpString = rpTokens.steam_display;
+		while (true) {
+			let newRpString = rpString;
+			for (let i in rpTokens) {
+				if (rpTokens.hasOwnProperty(i)) {
+					newRpString = newRpString.replace(new RegExp('%' + i + '%', 'gi'), rpTokens[i]);
+				}
+			}
+
+			(newRpString.match(/{#[^}]+}/g) || []).forEach((token) => {
+				token = token.substring(1, token.length - 1);
+				if (localizationTokens[token]) {
+					newRpString = newRpString.replace(new RegExp('{' + token + '}', 'gi'), localizationTokens[token]);
+				}
+			});
+
+			if (newRpString == rpString) {
+				break;
+			} else {
+				rpString = newRpString;
+			}
+		}
+		return resolve(rpString);
 	});
 };
 
