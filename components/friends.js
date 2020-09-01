@@ -1,3 +1,4 @@
+const BinaryKVParser = require('binarykvparser');
 const ByteBuffer = require('bytebuffer');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
@@ -642,14 +643,28 @@ SteamUser.prototype.getNicknames = function(callback) {
 /**
  * Get the localization keys for rich presence for an app on Steam.
  * @param {int} appID - The app you want rich presence localizations for
- * @param {string} language - The full name of the language you want localizations for (e.g. "english" or "spanish")
+ * @param {string} [language] - The full name of the language you want localizations for (e.g. "english" or "spanish"); defaults to language passed to constructor
  * @param {function} [callback]
  * @returns {Promise}
  */
 SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		let cacheKey = `${appID}_${language}`;
+		let cache = this._richPresenceLocalization[cacheKey];
+		if (cache && Date.now() - cache.timestamp < (1000 * 60 * 60)) {
+			// Cache for 1 hour
+			return resolve({tokens: cache.tokens});
+		}
+
+		if (typeof language == 'function') {
+			callback = language;
+			language = null;
+		}
+
+		language = language || this.options.language || 'english';
+
 		this._sendUnified('Community.GetAppRichPresenceLocalization#1', {
-			"appid": appID,
+			appid: appID,
 			language
 		}, (body) => {
 			if (body.appid != appID) {
@@ -672,8 +687,8 @@ SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, c
 			}
 
 			if (Object.keys(tokens).length > 0) {
-				this._richPresenceLocalization[appID] = {
-					"timestamp": Date.now(),
+				this._richPresenceLocalization[cacheKey] = {
+					timestamp: Date.now(),
 					tokens
 				};
 			}
@@ -719,13 +734,19 @@ SteamUser.prototype.uploadRichPresence = function(appid, richPresence) {
  * Request rich presence data of one or more users for an appid.
  * @param {int} appid - The appid to get rich presence data for
  * @param {SteamID[]|string[]|SteamID|string} steamIDs - SteamIDs of users to request rich presence data for
+ * @param {string} [language] - Language to get localized strings in. Defaults to language passed to constructor.
  * @param {function} [callback] - Called or resolved with 'users' property with each key being a SteamID and value being the rich presence response if received
  * @return Promise
  */
-SteamUser.prototype.requestRichPresence = function(appid, steamIDs, callback) {
+SteamUser.prototype.requestRichPresence = function(appid, steamIDs, language, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		if (!Array.isArray(steamIDs)) {
 			steamIDs = [steamIDs];
+		}
+
+		if (typeof language == 'function') {
+			callback = language;
+			language = null;
 		}
 
 		this._send({
@@ -750,8 +771,10 @@ SteamUser.prototype.requestRichPresence = function(appid, steamIDs, callback) {
 					if (kvObj && kvObj.RP) {
 						response[rp.steamid_user] = {
 							richPresence: kvObj.RP,
-							localizedString: await this._getRPLocalizedString(appid, kvObj.RP)
+							localizedString: null,
 						};
+						// Do this separately as it will reject if it cannot localize
+						response[rp.steamid_user].localizedString = await this._getRPLocalizedString(appid, kvObj.RP, language);
 					}
 				} catch (e) {
 					// don't care, there's nothing here
@@ -1119,7 +1142,7 @@ function processUser(steamUser, user) {
 /**
  * @private
  */
-SteamUser.prototype._getRPLocalizedString = function(appid, tokens) {
+SteamUser.prototype._getRPLocalizedString = function(appid, tokens, language) {
 	return new Promise(async (resolve, reject) => {
 		if (!tokens.steam_display) {
 			// Nothing to do here
@@ -1127,16 +1150,11 @@ SteamUser.prototype._getRPLocalizedString = function(appid, tokens) {
 		}
 
 		let localizationTokens;
-		if (this._richPresenceLocalization[appid] && this._richPresenceLocalization[appid].timestamp > (Date.now() - (1000 * 60 * 60 * 24))) {
-			// We already have localization
-			localizationTokens = this._richPresenceLocalization[appid].tokens;
-		} else {
-			try {
-				localizationTokens = (await this.getAppRichPresenceLocalization(appid, this.options.language || 'english')).tokens;
-			} catch (ex) {
-				// Oh well
-				return reject(ex);
-			}
+		try {
+			localizationTokens = (await this.getAppRichPresenceLocalization(appid, language || this.options.language)).tokens;
+		} catch (ex) {
+			// Oh well
+			return reject(ex);
 		}
 
 		let rpTokens = JSON.parse(JSON.stringify(tokens)); // So we don't modify the original objects
