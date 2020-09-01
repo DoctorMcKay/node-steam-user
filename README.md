@@ -1077,7 +1077,7 @@ Requests localized rich presence strings for a particular app in the given langu
 **v4.18.0 or later is required to use this method**
 
 Requests rich presence key/value data and localized strings as displayed in Steam for a list of given users, for a given
-app. Response object looks like this:
+app. You do not need to be friends with the requested users. Response object looks like this:
 
 ```json
 {
