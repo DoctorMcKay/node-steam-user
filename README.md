@@ -240,7 +240,7 @@ Defaults to `Auto`.
 ### language
 
 Set this to the full name of a language (e.g. "english" or "spanish") to localize specific things within steam-user.
-Currently this is only used to localize `rich_presence_string` in [`user`](#user) event data.
+Currently this is only used to localize `rich_presence_string` in [`user`](#user) event data and in `requestRichPresence`.
 
 Added in 4.0.0.
 
@@ -1068,11 +1068,37 @@ Requests localized rich presence strings for a particular app in the given langu
 ### requestRichPresence(appID, steamIDs, callback)
 - `appID` - The ID of the app for which you want to get rich presence data for
 - `steamIDs` - An array of SteamID objects or strings that can parse into SteamID objects
+- `language` - Optional. A string containing a full language name (e.g. `'english'` or `'spanish'`). Defaults to language passed in constructor or `setOption` if omitted.
 - `callback` - Called when the requested data is available.
 	- `err` - An `Error` object on failure, or `null` on success
-	- `users` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are objects containing the received rich presence data. If no data was received for a SteamID there will be no key for that SteamID (and therefore no value).
+	- `response` - The response object
+	    - `users` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are objects containing the received rich presence data. If no data was received for a SteamID there will be no key for that SteamID (and therefore no value).
 
-**v or later is required to use this method**
+**v4.18.0 or later is required to use this method**
+
+Requests rich presence key/value data and localized strings as displayed in Steam for a list of given users, for a given
+app. Response object looks like this:
+
+```json
+{
+    "users": {
+        "76561198006409530": {
+            "richPresence": {
+                "status": "Playing CS:GO",
+                "version": "13765",
+                "time": "15.851017",
+                "game:state": "lobby",
+                "steam_display": "#display_Menu",
+                "connect": "+gcconnectG02C0193A"
+            },
+            "localizedString": "Playing CS:GO"
+        }
+    }
+}
+```
+
+If the Steam display string cannot be localized, then `localizedString` will be null. This is the case when there exists
+no translation for the language you selected.
 
 ### getSteamLevels(steamids, callback)
 - `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
