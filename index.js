@@ -44,8 +44,7 @@ class SteamUser extends EventEmitter {
 		this._authSeqMe = 0;
 		this._authSeqThem = 0;
 		this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
-		this._contentServers = [];
-		this._contentServersTimestamp = 0;
+		this._contentServerCache = {};
 		this._contentServerTokens = {};
 		this._lastNotificationCounts = {};
 		this._sessionID = 0;

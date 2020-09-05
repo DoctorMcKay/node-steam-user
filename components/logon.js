@@ -152,23 +152,18 @@ SteamUser.prototype.logOn = function(details) {
 
 		if (!this._cmList || !this._cmList.time || Date.now() - this._cmList.time > (1000 * 60 * 60 * 24 * 7)) {
 			// CM list is out of date (more than 7 days old, or doesn't exist). Let's grab a new copy from the WebAPI
-			await new Promise((resolve, reject) => {
-				this.emit('debug', 'Getting CM list from WebAPI');
-				this._apiRequest("GET", "ISteamDirectory", "GetCMList", 1, {"cellid": this._logOnDetails.cell_id || 0}, (err, res) => {
-					if (err || !res.response || res.response.result != 1 || !res.response.serverlist) {
-						return resolve(); // just fallback to the built-in list
-					} else {
-						this._cmList = {
-							"tcp_servers": Helpers.fixVdfArray(res.response.serverlist),
-							"websocket_servers": Helpers.fixVdfArray(res.response.serverlist_websockets),
-							"time": Date.now()
-						};
-
-						this._saveCMList();
-						resolve();
-					}
-				});
-			});
+			this.emit('debug', 'Getting CM list from WebAPI');
+			try {
+				let res = await this._apiRequest('GET', 'ISteamDirectory', 'GetCMList', 1, {cellid: this._logOnDetails.cell_id || 0});
+				this._cmList = {
+					tcp_servers: Helpers.fixVdfArray(res.response.serverlist),
+					websocket_servers: Helpers.fixVdfArray(res.response.serverlist_websockets),
+					time: Date.now()
+				};
+				this._saveCMList();
+			} catch (ex) {
+				this.emit('debug', `WebAPI error getting CMList: ${ex.message}`);
+			}
 		}
 
 		if (!this._cmList) {

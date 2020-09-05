@@ -8,86 +8,82 @@ const SteamUser = require('../index.js');
 const USER_AGENT = "Valve/Steam HTTP Client 1.0";
 const HOSTNAME = "api.steampowered.com";
 
-SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, data, callback) {
-	if (typeof data === 'function') {
-		callback = data;
-		data = {};
-	}
+SteamUser.prototype._apiRequest = async function(httpMethod, iface, method, version, data) {
+	return new Promise((resolve, reject) => {
+		data = data || {};
+		httpMethod = httpMethod.toUpperCase(); // just in case
 
-	httpMethod = httpMethod.toUpperCase(); // just in case
-
-	// Pad the version with zeroes to make it 4 digits long, because Valve
-	version = version.toString();
-	while (version.length < 4) {
-		version = '0' + version;
-	}
-
-	data.format = "vdf"; // for parity with the Steam client
-
-	let query = buildQueryString(data);
-	let headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
-	let path = "/" + iface + "/" + method + "/v" + version + "/";
-
-	if (httpMethod == "POST") {
-		headers['Content-Type'] = 'application/x-www-form-urlencoded';
-		headers['Content-Length'] = Buffer.byteLength(query);
-	} else {
-		path += "?" + query;
-	}
-
-	let options = {
-		"hostname": HOSTNAME,
-		"path": path,
-		"method": httpMethod,
-		"headers": headers
-	};
-
-	if (this.options.localAddress) {
-		options.localAddress = this.options.localAddress;
-	}
-
-	if (this.options.httpProxy) {
-		options.agent = StdLib.HTTP.getProxyAgent(true, this.options.httpProxy);
-	}
-
-	let req = HTTPS.request(options, (res) => {
-		this.emit('debug', "API " + options.method + " request to https://" + HOSTNAME + path + ": " + res.statusCode);
-
-		if (res.statusCode != 200) {
-			res.on('data', function() {}); // discard the response
-			callback(new Error("HTTP error " + res.statusCode));
-			return;
+		// Pad the version with zeroes to make it 4 digits long, because Valve
+		version = version.toString();
+		while (version.length < 4) {
+			version = '0' + version;
 		}
 
-		let responseData = "";
+		data.format = 'vdf'; // for parity with the Steam client
 
-		let stream = res;
-		if (res.headers['content-encoding'] && res.headers['content-encoding'].toLowerCase() == 'gzip') {
-			stream = Zlib.createGunzip();
-			res.pipe(stream);
+		let query = buildQueryString(data);
+		let headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
+		let path = `/${iface}/${method}/v${version}/`;
+
+		if (httpMethod == 'POST') {
+			headers['Content-Type'] = 'application/x-www-form-urlencoded';
+			headers['Content-Length'] = Buffer.byteLength(query);
+		} else {
+			path += '?' + query;
 		}
 
-		stream.on('data', function(data) {
-			responseData += data;
-		});
+		let options = {
+			hostname: HOSTNAME,
+			path,
+			method: httpMethod,
+			headers
+		};
 
-		stream.on('end', function() {
-			try {
-				responseData = VDF.parse(responseData);
-			} catch (ex) {
-				callback(ex);
-				return;
+		if (this.options.localAddress) {
+			options.localAddress = this.options.localAddress;
+		}
+
+		if (this.options.httpProxy) {
+			options.agent = StdLib.HTTP.getProxyAgent(true, this.options.httpProxy);
+		}
+
+		let req = HTTPS.request(options, (res) => {
+			this.emit('debug', `API ${options.method} request to https://${HOSTNAME}${path}: ${res.statusCode}`);
+
+			if (res.statusCode != 200) {
+				res.on('data', () => {}); // discard the response
+				return reject(new Error('HTTP error ' + res.statusCode));
 			}
 
-			callback(null, responseData);
+			let responseData = '';
+
+			let stream = res;
+			if (res.headers['content-encoding'] && res.headers['content-encoding'].toLowerCase() == 'gzip') {
+				stream = Zlib.createGunzip();
+				res.pipe(stream);
+			}
+
+			stream.on('data', function(data) {
+				responseData += data;
+			});
+
+			stream.on('end', function() {
+				try {
+					responseData = VDF.parse(responseData);
+				} catch (ex) {
+					return reject(ex);
+				}
+
+				resolve(responseData);
+			});
 		});
-	});
 
-	req.on('error', function(err) {
-		callback(err);
-	});
+		req.on('error', function(err) {
+			reject(err);
+		});
 
-	req.end(httpMethod == "POST" ? query : null);
+		req.end(httpMethod == "POST" ? query : null);
+	});
 };
 
 function buildQueryString(data) {

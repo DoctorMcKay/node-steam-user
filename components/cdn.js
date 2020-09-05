@@ -15,58 +15,75 @@ const VZIP_FOOTER = 0x767A;
 
 /**
  * Get the list of currently-available content servers.
+ * @param {int} [appid] - If you know the appid you want to download, pass it here as some content servers only provide content for specific games
  * @param {function} [callback]
  * @return Promise
  */
-SteamUser.prototype.getContentServers = function(callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, (resolve, reject) => {
-		if (this._contentServers.length > 0 && Date.now() - this._contentServersTimestamp < (1000 * 60 * 60)) {
-			return resolve({"servers": JSON.parse(JSON.stringify(this._contentServers))});
+SteamUser.prototype.getContentServers = function(appid, callback) {
+	if (typeof appid == 'function') {
+		callback = appid;
+		appid = null;
+	}
+
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, async (resolve, reject) => {
+		let res;
+		if (this._contentServerCache && this._contentServerCache.timestamp && Date.now() - this._contentServerCache.timestamp < (1000 * 60 * 60)) {
+			// Cache for 1 hour
+			res = this._contentServerCache.response;
+		} else {
+			res = await this._apiRequest('GET', 'IContentServerDirectoryService', 'GetServersForSteamPipe', 1, {cell_id: this.cellID || 0});
 		}
 
-		this._apiRequest("GET", "IContentServerDirectoryService", "GetServersForSteamPipe", 1, {"cell_id": this.cellID || 0}, (err, res) => {
-			if (err) {
-				return reject(err);
+		if (!res || !res.response || !res.response.servers) {
+			return reject(new Error('Malformed response'));
+		}
+
+		this._contentServerCache = {
+			timestamp: Date.now(),
+			response: res
+		};
+
+		let servers = [];
+
+		for (let serverKey in res.response.servers) {
+			let server = res.response.servers[serverKey];
+			if (server.allowed_app_ids && appid && !server.allowed_app_ids.includes(appid)) {
+				continue;
 			}
 
-			if (!res || !res.response || !res.response.servers) {
-				return reject(new Error("Malformed response"));
+			if (server.type == 'CDN' || server.type == 'SteamCache') {
+				servers.push(server);
+			}
+		}
+
+		if (servers.length == 0) {
+			return reject(new Error('No content servers available'));
+		}
+
+		servers = servers.map((srv) => {
+			let processedSrv = {
+				type: srv.type,
+				sourceid: srv.source_id,
+				cell: srv.cell_id,
+				load: srv.load,
+				preferred_server: srv.preferred_server,
+				weightedload: srv.weighted_load,
+				NumEntriesInClientList: srv.num_entries_in_client_list,
+				Host: srv.host,
+				vhost: srv.vhost,
+				https_support: srv.https_support,
+				usetokenauth: '1'
+			};
+
+			if (srv.allowed_app_ids) {
+				processedSrv.allowed_app_ids = srv.allowed_app_ids;
 			}
 
-			let servers = [];
-
-			for (let serverKey in res.response.servers) {
-				let server = res.response.servers[serverKey];
-				if (server.type == "CDN" || server.type == "SteamCache") {
-					servers.push(server);
-				}
-			}
-
-			if (servers.length == 0) {
-				return reject(new Error("No content servers available"));
-			}
-
-			servers = servers.map((srv) => {
-				return {
-					"type": srv.type,
-					"sourceid": srv.source_id,
-					"cell": srv.cell_id,
-					"load": srv.load,
-					"preferred_server": srv.preferred_server,
-					"weightedload": srv.weighted_load,
-					"NumEntriesInClientList": srv.num_entries_in_client_list,
-					"Host": srv.host,
-					"vhost": srv.vhost,
-					"https_support": srv.https_support,
-					"usetokenauth": "1"
-				};
-			});
-
-			this._contentServers = servers;
-			this._contentServersTimestamp = Date.now();
-			// Return a copy of the array, not the original
-			return resolve({"servers": JSON.parse(JSON.stringify(servers))});
+			return processedSrv;
 		});
+
+		// Return a copy of the array, not the original
+		return resolve({servers: JSON.parse(JSON.stringify(servers))});
 	});
 };
 
@@ -169,7 +186,7 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
  */
 SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callback) {
 	return StdLib.Promises.callbackPromise(['manifest'], callback, async (resolve, reject) => {
-		let {servers} = await this.getContentServers();
+		let {servers} = await this.getContentServers(appID);
 		let server = servers[Math.floor(Math.random() * servers.length)];
 		let urlBase = "http://" + server.Host;
 		let vhost = server.vhost || server.Host;
@@ -213,7 +230,7 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 
 	return StdLib.Promises.callbackPromise(['chunk'], callback, async (resolve, reject) => {
 		if (!contentServer) {
-			let {servers} = await this.getContentServers();
+			let {servers} = await this.getContentServers(appID);
 			contentServer = servers[Math.floor(Math.random() * servers.length)];
 		}
 
@@ -269,7 +286,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		fileManifest.size = parseInt(fileManifest.size, 10);
 		let bytesDownloaded = 0;
 
-		let {servers: availableServers} = await this.getContentServers();
+		let {servers: availableServers} = await this.getContentServers(appID);
 		let servers = [];
 		let serversInUse = [];
 		let currentServerIdx = 0;
