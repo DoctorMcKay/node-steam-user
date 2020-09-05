@@ -193,7 +193,7 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 	return StdLib.Promises.callbackPromise(['manifest'], callback, async (resolve, reject) => {
 		let {servers} = await this.getContentServers(appID);
 		let server = servers[Math.floor(Math.random() * servers.length)];
-		let urlBase = "http://" + server.Host;
+		let urlBase = (server.https_support == 'mandatory' ? 'https://' : 'http://') + server.Host;
 		let vhost = server.vhost || server.Host;
 		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
@@ -239,7 +239,7 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 			contentServer = servers[Math.floor(Math.random() * servers.length)];
 		}
 
-		let urlBase = "http://" + contentServer.Host;
+		let urlBase = (contentServer.https_support == 'mandatory' ? 'https://' : 'http://') + contentServer.Host;
 		let vhost = contentServer.vhost || contentServer.Host;
 		let {key} = await this.getDepotDecryptionKey(appID, depotID);
 		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
