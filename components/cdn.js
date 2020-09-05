@@ -82,6 +82,11 @@ SteamUser.prototype.getContentServers = function(appid, callback) {
 			return processedSrv;
 		});
 
+		if (servers.length == 0) {
+			delete this._contentServerCache;
+			return reject(new Error('No servers found'));
+		}
+
 		// Return a copy of the array, not the original
 		return resolve({servers: JSON.parse(JSON.stringify(servers))});
 	});
