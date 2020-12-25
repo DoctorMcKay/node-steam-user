@@ -1055,7 +1055,8 @@ function parseBbCode(str) {
 			"random",
 			"flip",
 			"tradeofferlink",
-			"tradeoffer"
+			"tradeoffer",
+			"sticker"
 		]
 	});
 
