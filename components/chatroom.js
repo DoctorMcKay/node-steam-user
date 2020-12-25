@@ -1056,7 +1056,8 @@ function parseBbCode(str) {
 			"flip",
 			"tradeofferlink",
 			"tradeoffer",
-			"sticker"
+			"sticker",
+			"gameinvite"
 		]
 	});
 
