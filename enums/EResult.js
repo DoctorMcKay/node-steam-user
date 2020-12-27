@@ -127,6 +127,9 @@ module.exports = {
 	"AccountHasBeenDeleted": 114,
 	"AccountHasAnExistingUserCancelledLicense": 115,
 	"DeniedDueToCommunityCooldown": 116,
+	"NoLauncherSpecified": 117,
+	"MustAgreeToSSA": 118,
+	"ClientNoLongerSupported": 119,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -245,4 +248,7 @@ module.exports = {
 	"114": "AccountHasBeenDeleted",
 	"115": "AccountHasAnExistingUserCancelledLicense",
 	"116": "DeniedDueToCommunityCooldown",
+	"117": "NoLauncherSpecified",
+	"118": "MustAgreeToSSA",
+	"119": "ClientNoLongerSupported",
 };
