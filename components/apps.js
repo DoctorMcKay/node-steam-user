@@ -262,6 +262,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			});
 
 			(body.apps || []).forEach((app) => {
+				// _parsedData will be populated if we have the PICS cache enabled.
+				// If we don't, we need to parse the data here.
 				response.apps[app.appid] = app._parsedData || {
 					"changenumber": app.change_number,
 					"missingToken": !!app.missing_token,
