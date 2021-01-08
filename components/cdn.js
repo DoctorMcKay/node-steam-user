@@ -491,7 +491,8 @@ function download(url, hostHeader, destinationFilename, callback) {
 		"User-Agent": "Valve/Steam HTTP Client 1.0"
 	};
 
-	let req = require('http').request(options, (res) => {
+	let module = options.protocol.replace(':', '');
+	let req = require(module).request(options, (res) => {
 		if (res.statusCode != 200) {
 			callback(new Error("HTTP error " + res.statusCode));
 			return;
