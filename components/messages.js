@@ -411,7 +411,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		this._jobs[jobIdSource] = callback;
 
 		// Clean up old job callbacks after 2 minutes
-		setTimeout(() => delete this._jobs[jobIdSource], 1000 * 60 * 2);
+		this._jobCleanupTimers.push(setTimeout(() => delete this._jobs[jobIdSource], 1000 * 60 * 2));
 	}
 
 	let emsgName = EMsg[emsg] || emsg;

@@ -15,41 +15,8 @@ class SteamUser extends EventEmitter {
 
 		this.chat = new SteamChatRoomClient(this);
 
-		// Account info
-		this.limitations = null;
-		this.vac = null;
-		this.wallet = null;
-		this.emailInfo = null;
-		this.licenses = null;
-		this.gifts = null;
-
-		// Friends and users info
-		this.users = {};
-		this.groups = {};
-		this.chats = {};
-		this.myFriends = {};
-		this.myGroups = {};
-		this.myFriendGroups = {};
-		this.myNicknames = {};
-		this.steamServers = {};
-		this.contentServersReady = false;
-		this.playingState = {blocked: false, appid: 0};
-		this._playingBlocked = false;
-		this._playingAppIds = [];
-
-		this._gcTokens = []; // game connect tokens
-		this._connectTime = 0;
-		this._connectionCount = 0;
+		this._initProperties();
 		this._connectTimeout = 1000;
-		this._authSeqMe = 0;
-		this._authSeqThem = 0;
-		this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
-		this._contentServerCache = {};
-		this._contentServerTokens = {};
-		this._lastNotificationCounts = {};
-		this._sessionID = 0;
-		this._jobs = {};
-		this._richPresenceLocalization = {};
 		this._initialized = false;
 
 		// App and package cache
@@ -92,6 +59,47 @@ class SteamUser extends EventEmitter {
 		}
 
 		this._initialized = true;
+	}
+
+	_initProperties() {
+		// Account info
+		this.limitations = null;
+		this.vac = null;
+		this.wallet = null;
+		this.emailInfo = null;
+		this.licenses = null;
+		this.gifts = null;
+
+		// Friends and users info
+		this.users = {};
+		this.groups = {};
+		this.chats = {};
+		this.myFriends = {};
+		this.myGroups = {};
+		this.myFriendGroups = {};
+		this.myNicknames = {};
+		this.steamServers = {};
+		this.contentServersReady = false;
+		this.playingState = {blocked: false, appid: 0};
+		this._playingBlocked = false;
+		this._playingAppIds = [];
+
+		this._gcTokens = []; // game connect tokens
+		this._connectTime = 0;
+		this._connectionCount = 0;
+		this._authSeqMe = 0;
+		this._authSeqThem = 0;
+		this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
+		this._contentServerCache = {};
+		this._contentServerTokens = {};
+		this._lastNotificationCounts = {};
+		this._sessionID = 0;
+		this._currentJobID = 0;
+		this._currentGCJobID = 0;
+		this._jobs = {};
+		this._jobsGC = {};
+		this._jobCleanupTimers = [];
+		this._richPresenceLocalization = {};
 	}
 
 	get packageName() {

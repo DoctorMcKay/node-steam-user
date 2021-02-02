@@ -24,18 +24,9 @@ SteamUser.prototype.logOn = function(details) {
 		}
 
 		this.steamID = null;
-		this.limitations = null;
-		this.wallet = null;
-		this.emailInfo = null;
-		this.licenses = null;
+		this._initProperties();
 
 		this._loggingOff = false;
-
-		this.users = {};
-		this.groups = {};
-		this.chats = {};
-		this.myFriends = {};
-		this.myGroups = {};
 
 		if (details !== true) {
 			// We're not logging on with saved details
@@ -391,14 +382,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			this.contentServersReady = true;
 
 			this._connectTime = Date.now();
-			this._connectionCount = 0;
-			this._connectTimeout = 1000;
-			this._gcTokens = [];
-			this._contentServerTokens = {};
-			this._currentJobID = 0;
-			this._currentGCJobID = 0;
-			this._jobs = {};
-			this._jobsGC = {};
+			this._connectTimeout = 1000; // reset exponential connect backoff
 
 			if (this._logOnDetails.login_key) {
 				// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.
@@ -525,12 +509,8 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 	delete this.cellID;
 	this.contentServersReady = false;
 
-	this._gcTokens = [];
-	this._connectionCount = 0;
-	this._connectTime = 0;
-	this._contentServers = [];
-	this._contentServersTimestamp = 0;
-	this._contentServerTokens = {};
+	this._jobCleanupTimers.forEach(timer => clearTimeout(timer));
+	this._initProperties();
 
 	this._clearChangelistUpdateTimer();
 	clearInterval(this._heartbeatInterval);

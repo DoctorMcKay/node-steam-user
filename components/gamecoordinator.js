@@ -23,7 +23,7 @@ SteamUser.prototype.sendToGC = function(appid, msgType, protoBufHeader, payload,
 		this._jobsGC[sourceJobId] = callback;
 
 		// Clean up job callbacks after 2 minutes
-		setTimeout(() => delete this._jobsGC[sourceJobId], 1000 * 60 * 2);
+		this._jobCleanupTimers.push(setTimeout(() => delete this._jobsGC[sourceJobId], 1000 * 60 * 2));
 	}
 
 	this.emit('debug', `Sending ${appid} GC message ${msgType}`);
