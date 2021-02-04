@@ -1611,6 +1611,8 @@ in sub 0, you need to request a license for it using this method.
 If successful, calling this method will result in the [`licenses`](#licenses-1) event being emitted containing your new
 license(s).
 
+**Please note:** This method is rate-limited to approximately 50 apps per hour.
+
 ### getEncryptedAppTicket(appid[, userData], callback)
 - `appid` - The Steam AppID of the app for which you want a ticket
 - `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.
