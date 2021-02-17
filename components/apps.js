@@ -162,7 +162,6 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			"unknownApps": [],
 			"unknownPackages": []
 		};
-		let callbackFired = false;
 
 		apps = apps.map((app) => {
 			if (typeof app === 'object') {
