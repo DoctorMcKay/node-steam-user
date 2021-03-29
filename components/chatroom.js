@@ -1058,7 +1058,8 @@ function parseBbCode(str) {
 			'tradeoffer',
 			'sticker',
 			'gameinvite',
-			'og'
+			'og',
+			'roomeffect'
 		]
 	});
 
