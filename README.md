@@ -13,6 +13,8 @@ be a self-contained module which provides all the functionality expected of a St
 
 **Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
 
+[Upgrading from v3?](https://github.com/DoctorMcKay/node-steam-user/releases/tag/v4.0.0)
+
 ## Installation
 
 Install it from [npm](https://www.npmjs.com/package/steam-user):
@@ -440,6 +442,8 @@ Contains the version of this page. For example, `"4.2.0"`. This allows other mod
 - `options` - An optional object containing zero or more [options](#options-) to set for this `SteamUser`.
 
 Constructs a new `SteamUser`.
+
+Prior to v4.0.0, it was possible to pass a SteamClient instance as the first argument to this constructor. This functionality was removed in v4.0.0. [See the full list of v4 changes.](https://github.com/DoctorMcKay/node-steam-user/releases/tag/v4.0.0)
 
 ### setOption(option, value)
 - `option` - The name of the option to set
