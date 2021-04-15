@@ -292,7 +292,7 @@ URL). Falsy if you don't have one.
 An object containing information about your account. `null` until [`accountInfo`](#accountinfo-1) is emitted.
 
 - `name` - Your account's Steam (persona) name
-- `country` - The character code from which you're logging in (via GeoIP), e.g. "US"
+- `country` - The country code from which you're logging in (via GeoIP), e.g. "US"
 - `authedMachines` - How many machines are authorized to login to your account with Steam Guard
 - `flags` - Your account's bitwise [flags](https://github.com/SteamRE/SteamKit/blob/b80cdf5249891d54c655e39262d8267c7b40b249/Resources/SteamLanguage/enums.steamd#L81-L113)
 - `facebookID` - If your account is linked with Facebook, this is your Facebook account ID
@@ -434,7 +434,7 @@ Contains the name of this package. The value is always `"steam-user"`. This allo
 
 **v4.2.0 or later is required to use this property**
 
-Contains the version of this page. For example, `"4.2.0"`. This allows other modules to verify interoperability.
+Contains the version of this package. For example, `"4.2.0"`. This allows other modules to verify interoperability.
 
 # Methods [^](#contents)
 
