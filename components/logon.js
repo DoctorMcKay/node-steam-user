@@ -279,6 +279,8 @@ SteamUser.prototype._disconnect = function(suppressLogoff) {
 	clearTimeout(this._logonTimeout); // cancel any queued reconnect attempt
 	clearTimeout(this._logonMsgTimeout);
 
+	this.emit('debug', 'Disconnecting' + (suppressLogoff ? ' without sending logoff' : ''));
+
 	if (this.steamID && !suppressLogoff) {
 		this._loggingOff = true;
 		this._send(SteamUser.EMsg.ClientLogOff, {});
