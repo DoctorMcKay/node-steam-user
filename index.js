@@ -18,6 +18,7 @@ class SteamUser extends EventEmitter {
 		this._initProperties();
 		this._connectTimeout = 1000;
 		this._initialized = false;
+		this._multiCount = 0;
 
 		// App and package cache
 		this._changelistUpdateTimer = null;

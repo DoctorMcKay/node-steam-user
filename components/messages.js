@@ -459,9 +459,10 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 /**
  * Handles a raw binary netmessage by parsing the header and routing it appropriately
  * @param {Buffer} buffer
+ * @param {BaseConnection} [conn]
  * @private
  */
-SteamUser.prototype._handleNetMessage = function(buffer) {
+SteamUser.prototype._handleNetMessage = function(buffer, conn) {
 	let buf = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 
 	let rawEMsg = buf.readUint32();
@@ -503,18 +504,21 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 		delete this._tempSteamID;
 	}
 
-	this._handleMessage(header, buf.slice());
+	this._handleMessage(header, buf.slice(), conn);
 };
 
 /**
  * Handles and routes a parsed message
  * @param {object} header
  * @param {ByteBuffer} bodyBuf
+ * @param {BaseConnection} [conn]
  * @private
  */
-SteamUser.prototype._handleMessage = function(header, bodyBuf) {
+SteamUser.prototype._handleMessage = function(header, bodyBuf, conn) {
 	let msgName = EMsg[header.msg] || header.msg;
 	let handlerName = header.msg;
+
+	let debugPrefix = conn ? `[${conn.connectionType[0]}${conn.connectionId}] ` : '';
 
 	let isServiceMethodMsg = [EMsg.ServiceMethod, EMsg.ServiceMethodResponse].includes(header.msg);
 	if (isServiceMethodMsg) {
@@ -525,17 +529,17 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 				msgName += '_Response';
 			}
 		} else {
-			this.emit('debug', 'Got ' + (header.msg == EMsg.ServiceMethod ? 'ServiceMethod' : 'ServiceMethodResponse') + ' without target_job_name');
+			this.emit('debug', debugPrefix + 'Got ' + (header.msg == EMsg.ServiceMethod ? 'ServiceMethod' : 'ServiceMethodResponse') + ' without target_job_name');
 			return;
 		}
 	}
 
 	if (!isServiceMethodMsg && header.proto && header.proto.target_job_name) {
-		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
+		this.emit('debug', debugPrefix + 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
 	}
 
 	if (!this._handlerManager.hasHandler(handlerName) && !this._jobs[header.targetJobID]) {
-		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Unhandled message: ' + msgName);
+		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', debugPrefix + 'Unhandled message: ' + msgName);
 		return;
 	}
 
@@ -544,7 +548,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		body = exports.decodeProto(protobufs[handlerName], bodyBuf);
 	}
 
-	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Handled message: ' + msgName);
+	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', debugPrefix + 'Handled message: ' + msgName);
 
 	let cb = null;
 	if (header.sourceJobID != JOBID_NONE) {
@@ -574,31 +578,36 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(EMsg.Multi, function(body) {
-	this.emit('debug-verbose', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + 'multi msg');
+SteamUser.prototype._handlerManager.add(EMsg.Multi, async function(body) {
+	let multiId = ++this._multiCount;
+	this.emit('debug-verbose', `=== Processing ${body.size_unzipped ? 'gzipped multi msg' : 'multi msg'} #${multiId} ===`);
 
 	let payload = body.message_body;
 	if (body.size_unzipped) {
-		Zlib.gunzip(payload, (err, unzipped) => {
-			if (err) {
-				this.emit('error', err);
-				this._disconnect(true);
-				return;
-			}
+		try {
+			payload = await new Promise((resolve, reject) => {
+				Zlib.gunzip(payload, (err, unzipped) => {
+					if (err) {
+						return reject(err);
+					}
 
-			processMulti.call(this, unzipped);
-		});
-	} else {
-		processMulti.call(this, payload);
-	}
-
-	function processMulti(payload) {
-		while (payload.length && (this.steamID || this._tempSteamID)) {
-			let subSize = payload.readUInt32LE(0);
-			this._handleNetMessage(payload.slice(4, 4 + subSize));
-			payload = payload.slice(4 + subSize);
+					resolve(unzipped);
+				});
+			});
+		} catch (ex) {
+			this.emit('error', err);
+			this._disconnect(true);
+			return;
 		}
 	}
+
+	while (payload.length && (this.steamID || this._tempSteamID)) {
+		let subSize = payload.readUInt32LE(0);
+		this._handleNetMessage(payload.slice(4, 4 + subSize));
+		payload = payload.slice(4 + subSize);
+	}
+
+	this.emit('debug-verbose', `=== Finished processing multi msg #${multiId} ===`);
 });
 
 // Unified messages
