@@ -101,6 +101,8 @@ class SteamUser extends EventEmitter {
 		this._jobsGC = {};
 		this._jobCleanupTimers = [];
 		this._richPresenceLocalization = {};
+		this._incomingMessageQueue = [];
+		this._useMessageQueue = false; // we only use the message queue while we're processing a multi message
 	}
 
 	get packageName() {

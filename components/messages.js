@@ -471,6 +471,13 @@ SteamUser.prototype._handleNetMessage = function(buffer, conn, multiId) {
 		return;
 	}
 
+	if (this._useMessageQueue && !multiId) {
+		// Multi sub-messages skip the queue because we need messages contained in a decoded multi to be processed first
+		this._incomingMessageQueue.push(arguments);
+		this.emit('debug', `Enqueued incoming message; queue size is now ${this._incomingMessageQueue.length}`);
+		return;
+	}
+
 	let buf = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 
 	let rawEMsg = buf.readUint32();
@@ -598,6 +605,8 @@ SteamUser.prototype._processMulti = async function(header, body, conn) {
 	let payload = body.message_body;
 	if (body.size_unzipped) {
 		try {
+			// Turn on the message queue while we're unzipping, so nothing gets processed before this
+			this._useMessageQueue = true;
 			payload = await new Promise((resolve, reject) => {
 				Zlib.gunzip(payload, (err, unzipped) => {
 					if (err) {
@@ -625,7 +634,13 @@ SteamUser.prototype._processMulti = async function(header, body, conn) {
 		payload = payload.slice(4 + subSize);
 	}
 
-	this.emit('debug-verbose', `=== Finished processing multi msg ${multiId} ===`);
+	this.emit('debug-verbose', `=== Finished processing multi msg ${multiId}; now clearing queue of size ${this._incomingMessageQueue.length} ===`);
+
+	// Go ahead and process anything in the queue now
+	this._useMessageQueue = false;
+	while (this._incomingMessageQueue.length > 0) {
+		this._handleNetMessage.apply(this, this._incomingMessageQueue.splice(0, 1)[0]);
+	}
 };
 
 // Unified messages
