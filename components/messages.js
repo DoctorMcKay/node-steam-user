@@ -460,9 +460,17 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
  * Handles a raw binary netmessage by parsing the header and routing it appropriately
  * @param {Buffer} buffer
  * @param {BaseConnection} [conn]
+ * @param {string} [multiId]
  * @private
  */
-SteamUser.prototype._handleNetMessage = function(buffer, conn) {
+SteamUser.prototype._handleNetMessage = function(buffer, conn, multiId) {
+	if (conn && conn != this._connection) {
+		let ghostConnId = conn.connectionType[0] + conn.connectionId;
+		let expectedConnId = this._connection ? (this._connection.connectionType[0] + this._connection.connectionId) : 'NO CONNECTION';
+		process.emitWarning(`Received net message from ghost connection ${ghostConnId} (expected ${expectedConnId})`);
+		return;
+	}
+
 	let buf = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 
 	let rawEMsg = buf.readUint32();
@@ -504,7 +512,7 @@ SteamUser.prototype._handleNetMessage = function(buffer, conn) {
 		delete this._tempSteamID;
 	}
 
-	this._handleMessage(header, buf.slice(), conn);
+	this._handleMessage(header, buf.slice(), conn, multiId);
 };
 
 /**
@@ -512,13 +520,20 @@ SteamUser.prototype._handleNetMessage = function(buffer, conn) {
  * @param {object} header
  * @param {ByteBuffer} bodyBuf
  * @param {BaseConnection} [conn]
+ * @param {string} [multiId]
  * @private
  */
-SteamUser.prototype._handleMessage = function(header, bodyBuf, conn) {
+SteamUser.prototype._handleMessage = function(header, bodyBuf, conn, multiId) {
+	// Is this a multi? If yes, short-circuit and just process it now.
+	if (header.msg == EMsg.Multi) {
+		this._processMulti(header, exports.decodeProto(protobufs[EMsg.Multi], bodyBuf), conn);
+		return;
+	}
+
 	let msgName = EMsg[header.msg] || header.msg;
 	let handlerName = header.msg;
 
-	let debugPrefix = conn ? `[${conn.connectionType[0]}${conn.connectionId}] ` : '';
+	let debugPrefix = multiId ? `[${multiId}] ` : (conn ? `[${conn.connectionType[0]}${conn.connectionId}] ` : '');
 
 	let isServiceMethodMsg = [EMsg.ServiceMethod, EMsg.ServiceMethodResponse].includes(header.msg);
 	if (isServiceMethodMsg) {
@@ -576,11 +591,9 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf, conn) {
 	}
 };
 
-// Handlers
-
-SteamUser.prototype._handlerManager.add(EMsg.Multi, async function(body) {
-	let multiId = ++this._multiCount;
-	this.emit('debug-verbose', `=== Processing ${body.size_unzipped ? 'gzipped multi msg' : 'multi msg'} #${multiId} ===`);
+SteamUser.prototype._processMulti = async function(header, body, conn) {
+	let multiId = conn.connectionType[0] + conn.connectionId + '#' + (++this._multiCount);
+	this.emit('debug-verbose', `=== Processing ${body.size_unzipped ? 'gzipped multi msg' : 'multi msg'} ${multiId} (${body.message_body.length} bytes) ===`);
 
 	let payload = body.message_body;
 	if (body.size_unzipped) {
@@ -601,14 +614,19 @@ SteamUser.prototype._handlerManager.add(EMsg.Multi, async function(body) {
 		}
 	}
 
+	if (!this._connection || this._connection != conn) {
+		this.emit('debug', `=== Bailing out on processing multi msg ${multiId} because our connection is lost! ===`);
+		return;
+	}
+
 	while (payload.length && (this.steamID || this._tempSteamID)) {
 		let subSize = payload.readUInt32LE(0);
-		this._handleNetMessage(payload.slice(4, 4 + subSize));
+		this._handleNetMessage(payload.slice(4, 4 + subSize), conn, multiId);
 		payload = payload.slice(4 + subSize);
 	}
 
-	this.emit('debug-verbose', `=== Finished processing multi msg #${multiId} ===`);
-});
+	this.emit('debug-verbose', `=== Finished processing multi msg ${multiId} ===`);
+};
 
 // Unified messages
 
