@@ -595,7 +595,7 @@ SteamUser.prototype._handlerManager.add(EMsg.Multi, async function(body) {
 				});
 			});
 		} catch (ex) {
-			this.emit('error', err);
+			this.emit('error', ex);
 			this._disconnect(true);
 			return;
 		}
