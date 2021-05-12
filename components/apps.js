@@ -520,7 +520,7 @@ SteamUser.prototype._getLicenseInfo = async function() {
 	let result;
 
 	try {
-		result = await this.getProductInfo([], packageids, false, undefined, PICSRequestType.Licenses);
+		result = await this.getProductInfo([], packageids, true, undefined, PICSRequestType.Licenses);
 	} catch (ex) {
 		this.emit('debug', `Error retrieving package info for licenses: ${ex.message}`);
 		return;
