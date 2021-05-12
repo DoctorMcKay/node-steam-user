@@ -535,7 +535,7 @@ SteamUser.prototype._getLicenseInfo = async function() {
 	}
 
 	try {
-		await this.getProductInfo(appids, [], false, undefined, PICSRequestType.PackageContents);
+		await this.getProductInfo(appids, [], true, undefined, PICSRequestType.PackageContents);
 		this.emit('appOwnershipCached');
 	} catch (ex) {
 		this.emit('debug', `Error retrieving app info for licenses: ${ex.message}`);
