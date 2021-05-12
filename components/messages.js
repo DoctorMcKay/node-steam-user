@@ -603,10 +603,13 @@ SteamUser.prototype._processMulti = async function(header, body, conn) {
 	this.emit('debug-verbose', `=== Processing ${body.size_unzipped ? 'gzipped multi msg' : 'multi msg'} ${multiId} (${body.message_body.length} bytes) ===`);
 
 	let payload = body.message_body;
+
+	// Enable the message queue while we're unzipping the message (or waiting until the next event loop cycle).
+	// This prevents any messages from getting processed out of order.
+	this._useMessageQueue = true;
+
 	if (body.size_unzipped) {
 		try {
-			// Turn on the message queue while we're unzipping, so nothing gets processed before this
-			this._useMessageQueue = true;
 			payload = await new Promise((resolve, reject) => {
 				Zlib.gunzip(payload, (err, unzipped) => {
 					if (err) {
@@ -621,6 +624,12 @@ SteamUser.prototype._processMulti = async function(header, body, conn) {
 			this._disconnect(true);
 			return;
 		}
+	} else {
+		// Await a setImmediate promise to guarantee that multi msg processing always takes at least one iteration of the event loop.
+		// This avoids message queue processing shenanigans. Waiting until the next iteration of the event loop enables
+		// _handleNetMessage at the end of this method to return immediately, which will thus exit the clear-queue loop
+		// because the queue got re-enabled. Prevents the queue from being cleared in multiple places at once.
+		await new Promise(resolve => setImmediate(resolve));
 	}
 
 	if (!this._connection || this._connection != conn) {
@@ -636,10 +645,19 @@ SteamUser.prototype._processMulti = async function(header, body, conn) {
 
 	this.emit('debug-verbose', `=== Finished processing multi msg ${multiId}; now clearing queue of size ${this._incomingMessageQueue.length} ===`);
 
-	// Go ahead and process anything in the queue now
+	// Go ahead and process anything in the queue now. First disable the message queue. We don't need to worry about
+	// newly-received messages sneaking in ahead of the queue being cleared, since message processing is synchronous.
+	// If we encounter another multi msg, the message queue will get re-enabled.
 	this._useMessageQueue = false;
-	while (this._incomingMessageQueue.length > 0) {
-		this._handleNetMessage.apply(this, this._incomingMessageQueue.splice(0, 1)[0]);
+
+	// Continue to pop items from the message queue until it's empty, or it gets re-enabled. If the message queue gets
+	// re-enabled, immediately stop popping items from it to avoid stuff getting out of order.
+	while (this._incomingMessageQueue.length > 0 && !this._useMessageQueue) {
+		this._handleNetMessage.apply(this, this._incomingMessageQueue.shift());
+	}
+
+	if (this._incomingMessageQueue.length > 0) {
+		this.emit('debug-verbose', `[${multiId}] Message queue processing ended early with ${this._incomingMessageQueue.length} elements remaining`);
 	}
 };
 
