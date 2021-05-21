@@ -467,7 +467,7 @@ SteamUser.prototype._handleNetMessage = function(buffer, conn, multiId) {
 	if (conn && conn != this._connection) {
 		let ghostConnId = conn.connectionType[0] + conn.connectionId;
 		let expectedConnId = this._connection ? (this._connection.connectionType[0] + this._connection.connectionId) : 'NO CONNECTION';
-		process.emitWarning(`Received net message from ghost connection ${ghostConnId} (expected ${expectedConnId})`);
+		this.emit('debug', `Received net message from ghost connection ${ghostConnId} (expected ${expectedConnId})`);
 		return;
 	}
 
