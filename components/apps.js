@@ -572,8 +572,8 @@ SteamUser.prototype.getOwnedApps = function(excludeSharedLicenses) {
 
 		pkg = pkg.packageinfo;
 
-		if (pkg.extended && pkg.extended.expirytime && pkg.extended.expirytime <= Math.floor(Date.now() / 1000) && !pkg.extended.freepromotion) {
-			return; // This package has expired. Free weekend, usually. Free promotions are yours to keep permanently, though.
+		if (pkg.extended && pkg.extended.expirytime && !pkg.extended.freepromotion) {
+			return; // Skip: Free weekend, usually. Free promotions are yours to keep permanently, though.
 		}
 
 		(pkg.appids || []).forEach((appid) => {
@@ -629,8 +629,8 @@ SteamUser.prototype.getOwnedDepots = function(excludeSharedLicenses) {
 
 		pkg = pkg.packageinfo;
 
-		if (pkg.extended && pkg.extended.expirytime && pkg.extended.expirytime <= Math.floor(Date.now() / 1000) && !pkg.extended.freepromotion) {
-			return; // This package has expired. Free weekend, usually. Free promotions are yours to keep permanently, though.
+		if (pkg.extended && pkg.extended.expirytime && !pkg.extended.freepromotion) {
+			return; // Skip: Free weekend, usually. Free promotions are yours to keep permanently, though.
 		}
 
 		(pkg.depotids || []).forEach(function(depotid) {
