@@ -681,6 +681,7 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 	}
 
 	const defaults = {
+		free: true, // By default, include free licenses (Sub 0 & FreeOnDemand & NoCost)
 		shared: false, // By default, exclude shared licenses
 		expiring: false // By default, exclude licenses that are going to expire (free weekends)
 	};
@@ -708,6 +709,15 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 		}
 
 		pkg = pkg.packageinfo;
+
+		// If exclude all free (sub 0, FreeOnDemand, or NoCost)
+		if (!options.free) {
+			owned = owned
+					&& pkg.packageid !== 0
+					&& pkg.billingtype !== SteamUser.EBillingType.NoCost
+					&& pkg.billingtype !== SteamUser.EBillingType.FreeOnDemand;
+		}
+
 		// If not temporary (free promotions are yours to keep permanently)
 		if (!pkg.extended || !pkg.extended.expirytime || pkg.extended.freepromotion) {
 			return owned;
