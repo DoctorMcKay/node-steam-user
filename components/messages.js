@@ -6,6 +6,7 @@ const Zlib = require('zlib');
 const Schema = require('../protobufs/generated/_load.js');
 
 const EMsg = SteamUser.EMsg;
+const EResult = SteamUser.EResult;
 
 const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
@@ -458,7 +459,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 
 /**
  * Handles a raw binary netmessage by parsing the header and routing it appropriately
- * @param {Buffer} buffer
+ * @param {Buffer|string} buffer
  * @param {BaseConnection} [conn]
  * @param {string} [multiId]
  * @private
@@ -475,6 +476,12 @@ SteamUser.prototype._handleNetMessage = function(buffer, conn, multiId) {
 		// Multi sub-messages skip the queue because we need messages contained in a decoded multi to be processed first
 		this._incomingMessageQueue.push(arguments);
 		this.emit('debug', `Enqueued incoming message; queue size is now ${this._incomingMessageQueue.length}`);
+		return;
+	}
+
+	if (buffer === '__CLOSE__') {
+		// This is an enqueued connection closure
+		this._handleConnectionClose(conn);
 		return;
 	}
 
@@ -570,7 +577,11 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf, conn, multiId) {
 		body = exports.decodeProto(protobufs[handlerName], bodyBuf);
 	}
 
-	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', debugPrefix + 'Handled message: ' + msgName);
+	let handledMessageDebugMsg = debugPrefix + 'Handled message: ' + msgName;
+	if (header.msg == EMsg.ClientLogOnResponse) {
+		handledMessageDebugMsg += ` (${EResult[body.eresult] || body.eresult})`;
+	}
+	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', handledMessageDebugMsg);
 
 	let cb = null;
 	if (header.sourceJobID != JOBID_NONE) {
@@ -633,7 +644,7 @@ SteamUser.prototype._processMulti = async function(header, body, conn) {
 	}
 
 	if (!this._connection || this._connection != conn) {
-		this.emit('debug', `=== Bailing out on processing multi msg ${multiId} because our connection is lost! ===`);
+		this.emit('debug', `=== Bailing out on processing multi msg ${multiId} because our connection is ${!this._connection ? 'lost' : 'different'}! ===`);
 		return;
 	}
 
