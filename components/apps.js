@@ -715,7 +715,8 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 			owned = owned
 					&& pkg.packageid !== 0
 					&& pkg.billingtype !== SteamUser.EBillingType.NoCost
-					&& pkg.billingtype !== SteamUser.EBillingType.FreeOnDemand;
+					&& pkg.billingtype !== SteamUser.EBillingType.FreeOnDemand
+					&& pkg.billingtype !== SteamUser.EBillingType.FreeCommercialLicense;
 		}
 
 		// If not temporary (free promotions are yours to keep permanently)
