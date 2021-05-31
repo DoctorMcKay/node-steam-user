@@ -19,7 +19,7 @@ client.on('loggedOn', function() {
 
 client.on('licenses', function(licenses) {
 	console.log("Our account owns " + licenses.length + " license" + (licenses.length == 1 ? '' : 's') + ".");
-	fs.writeFile('licenses.json', JSON.stringify(client.licenses, null, 4), 'utf8', function(error) {
+	fs.writeFile('licenses.json', JSON.stringify(licenses, null, 4), 'utf8', function(error) {
 		console.log(error || "Successfully dumped our steam licenses to licenses.json");
 	});
 });
