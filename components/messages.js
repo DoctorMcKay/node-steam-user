@@ -454,7 +454,9 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		hdrBuf.writeUint32(this._sessionID || 0);
 	}
 
-	this._connection.send(Buffer.concat([hdrBuf.flip().toBuffer(), body]));
+	let outputBuffer = Buffer.concat([hdrBuf.flip().toBuffer(), body]);
+	this.emit('debug-traffic-outgoing', outputBuffer, header.msg);
+	this._connection.send(outputBuffer);
 };
 
 /**
@@ -490,6 +492,8 @@ SteamUser.prototype._handleNetMessage = function(buffer, conn, multiId) {
 	let rawEMsg = buf.readUint32();
 	let eMsg = rawEMsg & ~PROTO_MASK;
 	let isProtobuf = !!(rawEMsg & PROTO_MASK);
+
+	this.emit('debug-traffic-incoming', buffer, eMsg);
 
 	let header = {"msg": eMsg};
 	if ([EMsg.ChannelEncryptRequest, EMsg.ChannelEncryptResult].includes(eMsg)) {
