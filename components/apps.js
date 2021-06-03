@@ -546,7 +546,7 @@ SteamUser.prototype._getLicenseInfo = async function() {
 	let appids = [];
 
 	for (let pkgid in packages) {
-		((packages[pkgid].packageinfo || {}).appids || []).filter(appid => appids.includes(appid)).forEach(appid => appids.push(appid));
+		((packages[pkgid].packageinfo || {}).appids || []).filter(appid => !appids.includes(appid)).forEach(appid => appids.push(appid));
 	}
 
 	try {
