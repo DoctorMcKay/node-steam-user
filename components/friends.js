@@ -29,11 +29,30 @@ SteamUser.prototype.setUIMode = function(mode) {
 };
 
 /**
+ * Get list of friends who play a specific game.
+ * @param {int} appid - AppID of game in question
+ * @param {function} [callback]
+ */
+SteamUser.prototype.getFriendsThatPlay = function(appid, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['countFriends'], callback, (resolve, reject) => {
+		this._send(SteamUser.EMsg.ClientGetFriendsWhoPlayGame, {"gameId": appid}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
+			}
+
+			resolve({
+				"countFriends": body.countFriends
+			});
+		});
+	});
+};
+
+/**
  * Send (or accept) a friend invitiation.
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to add, or a string which can parse into one.
  * @param {function} [callback] - Optional. Called with `err` and `name` parameters on completion.
  */
-SteamUser.prototype.addFriend = function(steamID, callback) {
+ SteamUser.prototype.addFriend = function(steamID, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['personaName'], callback, true, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientAddFriend, {"steamid_to_add": Helpers.steamID(steamID).getSteamID64()}, (body) => {
 			if (body.eresult != SteamUser.EResult.OK) {

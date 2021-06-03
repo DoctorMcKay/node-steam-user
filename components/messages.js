@@ -132,6 +132,8 @@ protobufs[EMsg.ClientAuthorizeLocalDeviceResponse] = Schema.CMsgClientAuthorizeL
 protobufs[EMsg.ClientDeauthorizeDeviceRequest] = Schema.CMsgClientDeauthorizeDeviceRequest;
 protobufs[EMsg.ClientDeauthorizeDevice] = Schema.CMsgClientDeauthorizeDevice;
 protobufs[EMsg.ClientUseLocalDeviceAuthorizations] = Schema.CMsgClientUseLocalDeviceAuthorizations;
+protobufs[EMsg.ClientGetFriendsWhoPlayGame] = Schema.CMsgClientGetFriendsWhoPlayGame;
+protobufs[EMsg.ClientGetFriendsWhoPlayGameResponse] = Schema.CMsgClientGetFriendsWhoPlayGameResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
