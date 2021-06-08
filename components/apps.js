@@ -726,7 +726,7 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 		}
 
 		// If exclude all expiring licenses
-		if (options.expiring) {
+		if (!options.expiring) {
 			return false; // return false, since this license is temporary (does not matter if not expired yet)
 		// Else only allow non-expired licenses
 		} else {
