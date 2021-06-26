@@ -149,8 +149,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		inclTokens = false;
 	}
 
-	// This one actually can take a while, so allow it to go as long as 5 minutes
-	return StdLib.Promises.timeoutCallbackPromise(300000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
+	// This one actually can take a while, so allow it to go as long as 10 minutes
+	return StdLib.Promises.timeoutCallbackPromise(600000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
 		requestType = requestType || PICSRequestType.User;
 
 		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
