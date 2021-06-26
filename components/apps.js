@@ -149,8 +149,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		inclTokens = false;
 	}
 
-	// This one actually can take a while, so allow it to go as long as 90 seconds
-	return StdLib.Promises.timeoutCallbackPromise(90000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
+	// This one actually can take a while, so allow it to go as long as 10 minutes
+	return StdLib.Promises.timeoutCallbackPromise(600000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
 		requestType = requestType || PICSRequestType.User;
 
 		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
@@ -509,6 +509,20 @@ SteamUser.prototype._addAppToCache = function(appid) {
 };
 
 /**
+ * Throws error if enablePicsCache option is not enabled or appOwnershipCached event has not been emitted.
+ * @private
+ */
+SteamUser.prototype._ensurePicsCache = function() {
+	if (!this.options.enablePicsCache) {
+		throw new Error("PICS cache is not enabled.");
+	}
+
+    if (!this.picsCache.ownershipModified) {
+		throw new Error("No data in PICS package cache yet.");
+    }
+}
+
+/**
  * @private
  */
 SteamUser.prototype._getLicenseInfo = async function() {
@@ -516,11 +530,12 @@ SteamUser.prototype._getLicenseInfo = async function() {
 		return;
 	}
 
-	let packageids = this.getOwnedPackages();
+	// Get all owned lisense id's
+	let packageids = this.licenses.map(license => license.package_id);
 	let result;
 
 	try {
-		result = await this.getProductInfo([], packageids, false, undefined, PICSRequestType.Licenses);
+		result = await this.getProductInfo([], packageids, true, undefined, PICSRequestType.Licenses);
 	} catch (ex) {
 		this.emit('debug', `Error retrieving package info for licenses: ${ex.message}`);
 		return;
@@ -531,11 +546,12 @@ SteamUser.prototype._getLicenseInfo = async function() {
 	let appids = [];
 
 	for (let pkgid in packages) {
-		((packages[pkgid].packageinfo || {}).appids || []).filter(appid => appids.includes(appid)).forEach(appid => appids.push(appid));
+		((packages[pkgid].packageinfo || {}).appids || []).filter(appid => !appids.includes(appid)).forEach(appid => appids.push(appid));
 	}
 
 	try {
-		await this.getProductInfo(appids, [], false, undefined, PICSRequestType.PackageContents);
+		await this.getProductInfo(appids, [], true, undefined, PICSRequestType.PackageContents);
+        this.picsCache.ownershipModified = Date.now();
 		this.emit('appOwnershipCached');
 	} catch (ex) {
 		this.emit('debug', `Error retrieving app info for licenses: ${ex.message}`);
@@ -545,37 +561,28 @@ SteamUser.prototype._getLicenseInfo = async function() {
 /**
  * Get list of appids this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
- * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
+ * @param {object} options - Options for what counts for ownership
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedApps = function(excludeSharedLicenses) {
-	if (!this.options.enablePicsCache) {
-		throw new Error("PICS cache is not enabled.");
-	}
+SteamUser.prototype.getOwnedApps = function(options) {
+	this._ensurePicsCache();
 
-	if (!this.picsCache.packages) {
-		throw new Error("No data in PICS package cache yet.");
-	}
-
-	let ownedPackages = this.getOwnedPackages(excludeSharedLicenses);
+	let ownedPackages = this.getOwnedPackages(options);
 	let appids = {};
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
+			this.emit('debug', `Failed to get owned apps for package ${pkg.packageid}`);
 			return;
 		}
 
 		pkg = this.picsCache.packages[pkg];
 		if (!pkg.packageinfo) {
+			this.emit('debug', `Failed to get owned apps for package ${pkg.packageid}`);
 			return;
 		}
 
 		pkg = pkg.packageinfo;
-
-		if (pkg.extended && pkg.extended.expirytime && pkg.extended.expirytime <= Math.floor(Date.now() / 1000)) {
-			return; // This package has expired. Free weekend, usually
-		}
-
 		(pkg.appids || []).forEach((appid) => {
 			if (!appids[appid]) {
 				appids[appid] = true;
@@ -592,47 +599,38 @@ SteamUser.prototype.getOwnedApps = function(excludeSharedLicenses) {
  * Check if this account owns an app. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} appid
- * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
+ * @param {object} options - Options for what counts for ownership
  * @returns {boolean}
  */
-SteamUser.prototype.ownsApp = function(appid, excludeSharedLicenses) {
-	return this.getOwnedApps(excludeSharedLicenses).indexOf(parseInt(appid, 10)) != -1;
+SteamUser.prototype.ownsApp = function(appid, options) {
+	return this.getOwnedApps(options).indexOf(parseInt(appid, 10)) != -1;
 };
 
 /**
  * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
- * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
+ * @param {object} options - Options for what counts for ownership
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedDepots = function(excludeSharedLicenses) {
-	if (!this.options.enablePicsCache) {
-		throw new Error("PICS cache is not enabled.");
-	}
+SteamUser.prototype.getOwnedDepots = function(options) {
+	this._ensurePicsCache();
 
-	if (!this.picsCache.packages) {
-		throw new Error("No data in PICS package cache yet.");
-	}
-
-	let ownedPackages = this.getOwnedPackages(excludeSharedLicenses);
+	let ownedPackages = this.getOwnedPackages(options);
 	let depotids = {};
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
+			this.emit('debug', `Failed to get owned depots for package ${pkg.packageid}`);
 			return;
 		}
 
 		pkg = this.picsCache.packages[pkg];
 		if (!pkg.packageinfo) {
+			this.emit('debug', `Failed to get owned depots for package ${pkg.packageid}`);
 			return;
 		}
 
 		pkg = pkg.packageinfo;
-
-		if (pkg.extended && pkg.extended.expirytime && pkg.extended.expirytime <= Math.floor(Date.now() / 1000)) {
-			return; // This package has expired. Free weekend, usually
-		}
-
 		(pkg.depotids || []).forEach(function(depotid) {
 			if (!depotids[depotid]) {
 				depotids[depotid] = true;
@@ -649,33 +647,94 @@ SteamUser.prototype.getOwnedDepots = function(excludeSharedLicenses) {
  * Check if this account owns a depot. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} depotid
- * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
+ * @param {object} options - Options for what counts for ownership
  * @returns {boolean}
  */
-SteamUser.prototype.ownsDepot = function(depotid, excludeSharedLicenses) {
-	return this.getOwnedDepots(excludeSharedLicenses).indexOf(parseInt(depotid, 10)) != -1;
+SteamUser.prototype.ownsDepot = function(depotid, options) {
+	return this.getOwnedDepots(options).indexOf(parseInt(depotid, 10)) != -1;
 };
 
 /**
- * Returns an array of package IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
- * has been emitted.
- * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
+ * Returns an array of package IDs this account owns (different from owned licenses). Only works if enablePicsCache
+ * option is enabled and appOwnershipCached event has been emitted.
+ * @param {object} options - Options for what counts for ownership
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedPackages = function(excludeSharedLicenses) {
+SteamUser.prototype.getOwnedPackages = function(options) {
 	if (this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
 		throw new Error("We don't have our license list yet.");
 	}
 
+	// We're anonymous
 	if (this.steamID.type == SteamID.Type.ANON_USER) {
 		return [17906];
 	}
 
 	// We're an individual user
-	let packages = this.licenses;
-	if (excludeSharedLicenses) {
-		packages = packages.filter(license => license.owner_id == this.steamID.accountid);
+	this._ensurePicsCache();
+
+	// Adds support for the previous syntax
+	if (typeof options === 'boolean') {
+		options = {
+			"shared": !options // !excludeSharedLicenses
+		}
 	}
+
+	const defaults = {
+		free: true, // By default, include free licenses (Sub 0 & FreeOnDemand & NoCost)
+		shared: false, // By default, exclude shared licenses
+		expiring: false // By default, exclude licenses that are going to expire (free weekends)
+	};
+	options = { ...defaults, ...options };
+
+	let packages = this.licenses;
+	packages = packages.filter((license) => {
+		let owned = true;
+
+		// If exclude shared licenses
+		if (!options.shared) {
+			owned = owned && license.owner_id == this.steamID.accountid
+		}
+
+		let pkg = license.package_id;
+		if (!this.picsCache.packages[pkg]) {
+			this.emit('debug', `Failed to get pics cache info for package ${pkg.packageid}`);
+			return owned;
+		}
+
+		pkg = this.picsCache.packages[pkg];
+		if (!pkg.packageinfo) {
+			this.emit('debug', `Failed to get pics cache info for package ${pkg.packageid}`);
+			return owned;
+		}
+
+		pkg = pkg.packageinfo;
+
+		// If exclude all free (sub 0, FreeOnDemand, or NoCost)
+		if (!options.free) {
+			owned = owned
+					&& pkg.packageid !== 0
+					&& pkg.billingtype !== SteamUser.EBillingType.NoCost
+					&& pkg.billingtype !== SteamUser.EBillingType.GuestPass
+					&& pkg.billingtype !== SteamUser.EBillingType.FreeOnDemand
+					&& pkg.billingtype !== SteamUser.EBillingType.FreeCommercialLicense;
+		}
+
+		// If not temporary (free promotions are yours to keep permanently)
+		if (!pkg.extended || !pkg.extended.expirytime || pkg.extended.freepromotion) {
+			return owned;
+		}
+
+		// If exclude all expiring licenses
+		if (!options.expiring) {
+			return false; // return false, since this license is temporary (does not matter if not expired yet)
+		// Else only allow non-expired licenses
+		} else {
+			owned = owned && pkg.extended.expirytime <= Math.floor(Date.now() / 1000);
+		}
+
+		return owned;
+	});
 	packages = packages.map(license => license.package_id);
 	packages.sort(sortNumeric);
 	return packages;
@@ -685,11 +744,11 @@ SteamUser.prototype.getOwnedPackages = function(excludeSharedLicenses) {
  * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int|string} packageid
- * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
+ * @param {object} options - Options for what counts for ownership
  * @returns {boolean}
  */
-SteamUser.prototype.ownsPackage = function(packageid, excludeSharedLicenses) {
-	return this.getOwnedPackages(excludeSharedLicenses).indexOf(parseInt(packageid, 10)) != -1;
+SteamUser.prototype.ownsPackage = function(packageid, options) {
+	return this.getOwnedPackages(options).indexOf(parseInt(packageid, 10)) != -1;
 };
 
 function sortNumeric(a, b) {
