@@ -709,7 +709,7 @@ function sortNumeric(a, b) {
  * @return Promise
  */
 SteamUser.prototype.redeemKey = function(key, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(90000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, (body) => {
 			let packageList = {};
 
