@@ -22,4 +22,6 @@ client.on('licenses', function(licenses) {
 	fs.writeFile('licenses.json', JSON.stringify(licenses, null, 4), 'utf8', function(error) {
 		console.log(error || "Successfully dumped our steam licenses to licenses.json");
 	});
+
+	client.logOff();
 });
