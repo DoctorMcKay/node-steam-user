@@ -149,8 +149,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		inclTokens = false;
 	}
 
-	// This one actually can take a while, so allow it to go as long as 10 minutes
-	return StdLib.Promises.timeoutCallbackPromise(600000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
+	// This one actually can take a while, so allow it to go as long as 60 minutes
+	return StdLib.Promises.timeoutCallbackPromise(3600000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
 		requestType = requestType || PICSRequestType.User;
 
 		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
@@ -654,45 +654,62 @@ SteamUser.prototype.ownsDepot = function(depotid, options) {
 	return this.getOwnedDepots(options).indexOf(parseInt(depotid, 10)) != -1;
 };
 
+
+
 /**
- * Returns an array of package IDs this account owns (different from owned licenses). Only works if enablePicsCache
- * option is enabled and appOwnershipCached event has been emitted.
+ * Returns an array of licenses this account owns.
+ * @returns {int[]}
+ */
+SteamUser.prototype.getOwnedLicenses = function() {
+	if (!this.licenses) {
+		throw new Error("We don't have our license list yet.");
+	}
+
+	return this.licenses;
+}
+
+/**
+ * Returns an array of package IDs this account owns (different from owned licenses). The filter options
+ * only work, if enablePicsCache option is enabled and appOwnershipCached event has been emitted.
  * @param {object} options - Options for what counts for ownership
  * @returns {int[]}
  */
 SteamUser.prototype.getOwnedPackages = function(options) {
-	if (this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
-		throw new Error("We don't have our license list yet.");
-	}
-
 	// We're anonymous
 	if (this.steamID.type == SteamID.Type.ANON_USER) {
 		return [17906];
 	}
 
-	// We're an individual user
-	this._ensurePicsCache();
+	let packages = this.getOwnedLicenses();
 
 	// Adds support for the previous syntax
 	if (typeof options === 'boolean') {
-		options = {
-			"shared": !options // !excludeSharedLicenses
+		let excludeSharedLicenses = options;
+		if (excludeSharedLicenses) {
+			packages = packages.filter(license => license.owner_id == this.steamID.accountid);
 		}
+		return packages.map(license => license.package_id);
+	}
+	// If there is nothing to filter, no pics cache needed (supports old behavior)
+	if (!options || (options.excludeFree === options.exludeShared === options.excludeFree === false)) {
+		return packages.map(license => license.package_id);
 	}
 
-	const defaults = {
-		free: true, // By default, include free licenses (Sub 0 & FreeOnDemand & NoCost)
-		shared: false, // By default, exclude shared licenses
-		expiring: false // By default, exclude licenses that are going to expire (free weekends)
-	};
-	options = { ...defaults, ...options };
+	// We're an individual user
+	this._ensurePicsCache();
 
-	let packages = this.licenses;
+	const defaults = {
+		excludeFree: false, // By default, include free licenses (Sub 0 & FreeOnDemand & NoCost)
+		excludeShared: true, // By default, exclude shared licenses
+		excludeExpired: true // By default, exclude licenses that are going to expire (free weekends)
+	};
+	options = Object.assign(defaults, options);
+
 	packages = packages.filter((license) => {
 		let owned = true;
 
 		// If exclude shared licenses
-		if (!options.shared) {
+		if (options.excludeShared) {
 			owned = owned && license.owner_id == this.steamID.accountid
 		}
 
@@ -711,7 +728,7 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 		pkg = pkg.packageinfo;
 
 		// If exclude all free (sub 0, FreeOnDemand, or NoCost)
-		if (!options.free) {
+		if (options.excludeFree) {
 			owned = owned
 					&& pkg.packageid !== 0
 					&& pkg.billingtype !== SteamUser.EBillingType.NoCost
@@ -726,7 +743,7 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 		}
 
 		// If exclude all expiring licenses
-		if (!options.expiring) {
+		if (options.excludeExpired) {
 			return false; // return false, since this license is temporary (does not matter if not expired yet)
 		// Else only allow non-expired licenses
 		} else {
