@@ -1678,6 +1678,10 @@ You should collect the code from the user somehow and then call the `callback` w
 
 If no listener is bound to this event, then `steam-user` will prompt the user for a code via stdin.
 
+**If you are using 2FA, you need to check the `lastCodeWrong` argument.** If it's true, then the last code you provided
+was incorrect (likely already used). In this case, you should wait 30 seconds to allow the TOTP algorithm to generate a
+new code. Failure to do so will result in a login loop, causing your IP address to be temporarily banned.
+
 Example:
 
 ```js

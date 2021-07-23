@@ -855,6 +855,11 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, funct
 		}
 
 		processUser(this, user).then((processedUser) => {
+			if (!this.users[sid64]) {
+				// We must have logged off or disconnected between then and now
+				return;
+			}
+
 			/**
 			 * Emitted when we receive persona info about a user.
 			 * You can also listen for user#steamid64 to get info only for a specific user.
@@ -1093,14 +1098,14 @@ function processUser(steamUser, user) {
 				let hash = user.avatar_hash.toString('hex');
 
 				// handle default avatar
-				if (hash === "0000000000000000000000000000000000000000") {
-					hash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
+				if (hash === '0000000000000000000000000000000000000000') {
+					hash = 'fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb';
 				}
 
-				user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
-				user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
-				user.avatar_url_full = user.avatar_url_icon + "_full.jpg";
-				user.avatar_url_icon += ".jpg";
+				user.avatar_url_icon = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/${hash.substring(0, 2)}/${hash}`;
+				user.avatar_url_medium = `${user.avatar_url_icon}_medium.jpg`;
+				user.avatar_url_full = `${user.avatar_url_icon}_full.jpg`;
+				user.avatar_url_icon += '.jpg';
 			}
 
 			// only delete rich_presence_string if we have confirmation that the user isn't in-game

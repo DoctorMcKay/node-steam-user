@@ -100,7 +100,7 @@ class WebSocketConnection extends BaseConnection {
 
 			this._disconnected = true;
 			this._debug('WebSocket disconnected with code ' + code + ' and reason: ' + reason);
-			this.user._handleConnectionClose();
+			this.user._handleConnectionClose(this);
 		});
 
 		this.stream.on('error', (err) => {
@@ -115,7 +115,7 @@ class WebSocketConnection extends BaseConnection {
 				// This error happened while connecting to the proxy
 				this.user.emit('error', err);
 			} else {
-				this.user._handleConnectionClose();
+				this.user._handleConnectionClose(this);
 			}
 		});
 
@@ -174,7 +174,7 @@ class WebSocketConnection extends BaseConnection {
 			try {
 				this._disconnected = true;
 				this.stream.disconnect(WS13.StatusCode.AbnormalTermination);
-				this.user._handleConnectionClose();
+				this.user._handleConnectionClose(this);
 			} catch (ex) {
 				this._debug('WebSocket teardown error: ' + ex.message);
 			}

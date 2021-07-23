@@ -4,7 +4,24 @@ const SteamCrypto = require('@doctormckay/steam-crypto');
 
 const SteamUser = require('../index.js');
 
-SteamUser.prototype._handleConnectionClose = function() {
+/**
+ * Handle the closure of our underlying connection.
+ * @param {BaseConnection} conn
+ * @private
+ */
+SteamUser.prototype._handleConnectionClose = function(conn) {
+	let connPrefix = conn.connectionType[0] + conn.connectionId;
+
+	// If the message queue is currently enabled, we need to enqueue processing of the connection close.
+	// Otherwise we might handle the closed connection too early, e.g. before processing ClientLogOnResponse
+	if (this._useMessageQueue) {
+		this.emit('debug', `[${connPrefix}] Connection closed, but message queue is active. Enqueueing __CLOSE__`);
+		this._incomingMessageQueue.push(['__CLOSE__', conn]);
+		return;
+	}
+
+	this.emit('debug', `[${connPrefix}] Handling connection close`);
+
 	clearTimeout(this._logonMsgTimeout);
 	delete this._logonMsgTimeout;
 
@@ -24,7 +41,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ChannelEncryptRequest, fu
 	if (!this._connection || !this._connection.stream) { // cannot begin login without a socket, abort
 		return;
 	}
-	
+
 	this._connection.stream.setTimeout(0);
 
 	let protocol = body.readUint32();
