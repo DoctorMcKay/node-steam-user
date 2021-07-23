@@ -97,7 +97,7 @@ class TCPConnection extends BaseConnection {
 		this.stream.on('readable', this._readMessage.bind(this));
 		this.stream.on('error', (err) => this._debug('TCP connection error: ' + err.message)); // "close" will be emitted and we'll reconnect
 		this.stream.on('end', () => this._debug('TCP connection ended'));
-		this.stream.on('close', this.user._handleConnectionClose.bind(this.user));
+		this.stream.on('close', () => this.user._handleConnectionClose(this));
 
 		this.stream.on('connect', () => {
 			this._debug('TCP connection established');
