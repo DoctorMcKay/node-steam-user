@@ -685,14 +685,17 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 
 	// Adds support for the previous syntax
 	if (!options) {
-		return packages.map(license => license.package_id);
+		// Slight deviation of old method: don't return expired licenses
+		return packages.filter(license => license.flags !== SteamUser.ELicenseFlags.Expired).map(license => license.package_id);
 	}
+	// If options is a boolean, we asssume it's excludeSharedLicenses
 	if (typeof options === 'boolean') {
 		let excludeSharedLicenses = options;
 		if (excludeSharedLicenses) {
 			packages = packages.filter(license => license.owner_id == this.steamID.accountid);
 		}
-		return packages.map(license => license.package_id);
+		// Slight deviation of old method: don't return expired licenses
+		return packages.filter(license => license.flags !== SteamUser.ELicenseFlags.Expired).map(license => license.package_id);
 	}
 
 	// Handle options
@@ -705,7 +708,7 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 		options = Object.assign(defaults, options);
 
 		// If there is nothing to filter, no pics cache needed
-		if (options.excludeFree === options.exludeShared === options.excludeFree === false) {
+		if (!options.excludeFree && !options.exludeShared && !options.excludeFree) {
 			return packages.map(license => license.package_id);
 		}
 	}
@@ -719,26 +722,31 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 		packageFilter = options;
 	} else if (typeof options === 'object') {
 		packageFilter = (license) => {
-			let owned = true;
+
+			// If expired, filter it out, regardless of the options
+			if (license.flags === SteamUser.ELicenseFlags.Expired) {
+				return false;
+			}
 
 			// If exclude shared licenses
-			if (options.excludeShared) {
-				owned = owned && license.owner_id == this.steamID.accountid
+			if (options.excludeShared && license.owner_id !== this.steamID.accountid) {
+				return false;
 			}
 
 			let pkg = license.package_id;
 			if (!this.picsCache.packages[pkg]) {
-				this.emit('debug', `Failed to get pics cache info for package ${pkg.packageid}`);
-				return owned;
+				this._warn(`Failed to filter package ${pkg.packageid} (no pics cache info available)`);
+				return false;
 			}
 
 			pkg = this.picsCache.packages[pkg];
 			if (!pkg.packageinfo) {
-				this.emit('debug', `Failed to get pics cache info for package ${pkg.packageid}`);
-				return owned;
+				this._warn(`Failed to filter package ${pkg.packageid} (no pics cache info available)`);
+				return false;
 			}
 
 			pkg = pkg.packageinfo;
+			let owned = true;
 
 			// If exclude all free (sub 0, FreeOnDemand, or NoCost)
 			if (options.excludeFree) {
