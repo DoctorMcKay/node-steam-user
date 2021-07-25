@@ -733,6 +733,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 		packageFilter = (license) => {
 
 			// If expired, filter it out, regardless of the filter options
+			// Assumes: license expired flag <=> package expirytime passed
 			if (license.flags & SteamUser.ELicenseFlags.Expired) {
 				return false;
 			}
@@ -767,10 +768,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 
 			// If exclude all expiring licenses
 			if (filter.excludeExpiring) {
-				return false; // return false, since this license is temporary (does not matter if not expired yet)
-			// Else only allow non-expired licenses
-			} else {
-				owned = owned && pkg.extended.expirytime <= Math.floor(Date.now() / 1000);
+				return false; // return false, since this license is temporary (but not expired)
 			}
 
 			return owned;
@@ -792,7 +790,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
  * @private
  */
  SteamUser.prototype._returnPackages = function(packages, packageFilter) {
-	// If no packageFilter is provided, only filter out expired licenses
+	// If no packageFilter is provided, only keep non-expired licenses
 	packageFilter = packageFilter || (license => !(license.flags & SteamUser.ELicenseFlags.Expired));
 	packages = packages.filter(packageFilter);
 	packages = packages.map(license => license.package_id);
