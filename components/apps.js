@@ -654,8 +654,6 @@ SteamUser.prototype.ownsDepot = function(depotid, filter) {
 	return this.getOwnedDepots(filter).indexOf(parseInt(depotid, 10)) != -1;
 };
 
-
-
 /**
  * Returns an array of licenses this account owns.
  * @returns {int[]}
@@ -666,7 +664,7 @@ SteamUser.prototype.getOwnedLicenses = function() {
 	}
 
 	return this.licenses;
-}
+};
 
 /**
  * Returns an array of package IDs this account owns (different from owned licenses). The filter only
@@ -793,7 +791,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 	packages = packages.map(license => license.package_id);
 	packages.sort(sortNumeric);
 	return packages;
-}
+};
 
 /**
  * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
