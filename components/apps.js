@@ -705,7 +705,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 			excludeShared: false, // By default, include shared licenses
 			excludeExpiring: false // By default, include licenses that are going to expire in the future (free weekends)
 		};
-		filter = Object.assign(defaults, filter);
+		filter = Object.assign(defaults, this.options.ownershipFilter, filter);
 
 		// If there is nothing to filter, no pics cache needed
 		if (!filter.excludeFree && !filter.exludeShared && !filter.excludeExpiring) {
