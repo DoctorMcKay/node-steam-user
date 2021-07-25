@@ -750,28 +750,28 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 			}
 
 			let pkg = this.picsCache.packages[subid].packageinfo;
-			let owned = true;
 
 			// If exclude all free (sub 0 is covered by NoCost)
 			if (filter.excludeFree) {
-				owned = owned
-						&& pkg.billingtype !== SteamUser.EBillingType.NoCost
-						&& pkg.billingtype !== SteamUser.EBillingType.GuestPass
-						&& pkg.billingtype !== SteamUser.EBillingType.FreeOnDemand
-						&& pkg.billingtype !== SteamUser.EBillingType.FreeCommercialLicense;
+				switch (pkg.billingtype) {
+					case SteamUser.EBillingType.NoCost:
+					case SteamUser.EBillingType.GuestPass: // count guest pass as free
+					case SteamUser.EBillingType.FreeOnDemand:
+					case SteamUser.EBillingType.FreeCommercialLicense:
+						return false;
+				}
 			}
 
-			// If not temporary (free promotions are yours to keep permanently)
-			if (!pkg.extended || !pkg.extended.expirytime || pkg.extended.freepromotion) {
-				return owned;
-			}
-
-			// If exclude all expiring licenses
+			// If exclude all expiring licenses (not free promotions, which are yours to keep permanently)
 			if (filter.excludeExpiring) {
-				return false; // return false, since this license is temporary (but not expired)
+				switch (true) {
+					case pkg.billingtype === SteamUser.EBillingType.GuestPass: // count guest pass as temporary
+					case pkg.extended && pkg.extended.expirytime && !pkg.extended.freepromotion:
+						return false; // return false, since this license is temporary (but not expired, as expired has been filtered out already)
+				}
 			}
 
-			return owned;
+			return true;
 		}
 	}
 
