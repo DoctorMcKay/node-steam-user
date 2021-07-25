@@ -707,19 +707,16 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 		};
 		filter = Object.assign(defaults, this.options.ownershipFilter, filter);
 
-		// If there is nothing to filter, no pics cache needed
-		if (!filter.excludeFree && !filter.exludeShared && !filter.excludeExpiring) {
-			return this._returnPackages(packages);
-		}
-
-		// We don't need pics cache for only excludeShared
-		if (!filter.excludeFree && filter.exludeShared && !filter.excludeExpiring) {
-			packages = packages.filter(license => license.owner_id == this.steamID.accountid);
+		// No PICS cache needed: {F=0,S=1,E=0}, {F=0,S=0,E=0}
+		if (!filter.excludeFree && !filter.excludeExpiring) {
+			if (filter.exludeShared) {
+				packages = packages.filter(license => license.owner_id == this.steamID.accountid);
+			}
 			return this._returnPackages(packages);
 		}
 	}
 
-	// From this point, we need pics cache to be enabled
+	// From this point, we need PICS cache to be enabled
 	this._ensurePicsCache();
 
 	// Determine the filter function
@@ -727,6 +724,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 	if (typeof filter === 'function') {
 		packageFilter = filter;
 	} else if (typeof filter === 'object') {
+		// Possible options: {F=1,S=1,E=1}, {F=1,S=0,E=1}, {F=0,S=1,E=1}, {F=0,S=0,E=1}, {F=1,S=1,E=0}, {F=1,S=0,E=0}
 		packageFilter = (license) => {
 
 			// If expired, filter it out, regardless of the filter options
@@ -741,7 +739,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 
 			let subid = license.package_id;
 			if (!this.picsCache.packages[subid] || !this.picsCache.packages[subid].packageinfo) {
-				this._warn(`Failed to filter package ${subid} (no pics cache info available)`);
+				this._warn(`Failed to filter package ${subid} (no PICS cache info available)`);
 				return false;
 			}
 
@@ -790,7 +788,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
  */
  SteamUser.prototype._returnPackages = function(packages, packageFilter) {
 	// If no packageFilter is provided, only filter out expired licenses
-	packageFilter = packageFilter || (license => license.flags & SteamUser.ELicenseFlags.Expired);
+	packageFilter = packageFilter || (license => !(license.flags & SteamUser.ELicenseFlags.Expired));
 	packages = packages.filter(packageFilter);
 	packages = packages.map(license => license.package_id);
 	packages.sort(sortNumeric);
