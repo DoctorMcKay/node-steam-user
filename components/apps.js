@@ -705,7 +705,12 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 			excludeShared: false, // By default, include shared licenses
 			excludeExpiring: false // By default, include licenses that are going to expire in the future (free weekends)
 		};
-		filter = Object.assign(defaults, this.options.ownershipFilter, filter);
+
+		if (typeof this.options.ownershipFilter === 'object') {
+			filter = Object.assign(defaults, this.options.ownershipFilter, filter);
+		} else {
+			filter = Object.assign(defaults, filter);
+		}
 
 		// No PICS cache needed: {F=0,S=1,E=0}, {F=0,S=0,E=0}
 		if (!filter.excludeFree && !filter.excludeExpiring) {
