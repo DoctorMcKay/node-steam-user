@@ -599,23 +599,23 @@ SteamUser.prototype.getOwnedApps = function(options) {
  * Check if this account owns an app. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} appid
- * @param {object|function} options - Options for what counts for ownership, or a custom filter function
+ * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
  * @returns {boolean}
  */
-SteamUser.prototype.ownsApp = function(appid, options) {
-	return this.getOwnedApps(options).indexOf(parseInt(appid, 10)) != -1;
+SteamUser.prototype.ownsApp = function(appid, filter) {
+	return this.getOwnedApps(filter).indexOf(parseInt(appid, 10)) != -1;
 };
 
 /**
  * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
- * @param {object|function} options - Options for what counts for ownership, or a custom filter function
+ * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedDepots = function(options) {
+SteamUser.prototype.getOwnedDepots = function(filter) {
 	this._ensurePicsCache();
 
-	let ownedPackages = this.getOwnedPackages(options);
+	let ownedPackages = this.getOwnedPackages(filter);
 	let depotids = {};
 
 	ownedPackages.forEach((pkg) => {
@@ -647,11 +647,11 @@ SteamUser.prototype.getOwnedDepots = function(options) {
  * Check if this account owns a depot. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} depotid
- * @param {object|function} options - Options for what counts for ownership, or a custom filter function
+ * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
  * @returns {boolean}
  */
-SteamUser.prototype.ownsDepot = function(depotid, options) {
-	return this.getOwnedDepots(options).indexOf(parseInt(depotid, 10)) != -1;
+SteamUser.prototype.ownsDepot = function(depotid, filter) {
+	return this.getOwnedDepots(filter).indexOf(parseInt(depotid, 10)) != -1;
 };
 
 
@@ -669,12 +669,12 @@ SteamUser.prototype.getOwnedLicenses = function() {
 }
 
 /**
- * Returns an array of package IDs this account owns (different from owned licenses). The filter options
- * only work, if enablePicsCache option is enabled and appOwnershipCached event has been emitted.
- * @param {object|function} options - Options for what counts for ownership, or a custom filter function
+ * Returns an array of package IDs this account owns (different from owned licenses). The filter only
+ * works, if enablePicsCache option is enabled and appOwnershipCached event has been emitted.
+ * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedPackages = function(options) {
+SteamUser.prototype.getOwnedPackages = function(filter) {
 	// We're anonymous
 	if (this.steamID.type == SteamID.Type.ANON_USER) {
 		return [17906];
@@ -683,33 +683,39 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 	// We're an individual user
 	let packages = this.getOwnedLicenses();
 
-	// Adds support for the previous syntax
-	if (!options) {
-		// Slight deviation of old method: don't return expired licenses
-		return packages.filter(license => license.flags !== SteamUser.ELicenseFlags.Expired).map(license => license.package_id);
+	// If passed filter argument is empty, and global ownership filter is set, use it
+	if (!filter && this.options.ownershipFilter) {
+		filter = this.options.ownershipFilter;
 	}
-	// If options is a boolean, we asssume it's excludeSharedLicenses
-	if (typeof options === 'boolean') {
-		let excludeSharedLicenses = options;
+
+	// Support for the old syntax and behavior (<= v4.19.12)
+	if (!filter) {
+		// Slight deviation of old behavior: don't return expired licenses
+		return this._returnPackages(packages);
+	}
+	// If filter options is a boolean, we asssume it's excludeSharedLicenses
+	if (typeof filter === 'boolean') {
+		let excludeSharedLicenses = filter;
 		if (excludeSharedLicenses) {
 			packages = packages.filter(license => license.owner_id == this.steamID.accountid);
 		}
-		// Slight deviation of old method: don't return expired licenses
-		return packages.filter(license => license.flags !== SteamUser.ELicenseFlags.Expired).map(license => license.package_id);
+		// Slight deviation of old behavior: don't return expired licenses
+		return this._returnPackages(packages);
 	}
 
-	// Handle options
-	if (typeof options === 'object') {
+	// New behavior from this point on
+	// Handle filter options
+	if (typeof filter === 'object') {
 		const defaults = {
-			excludeFree: false, // By default, include free licenses (Sub 0 & FreeOnDemand & NoCost)
+			excludeFree: false, // By default, include free licenses (FreeOnDemand, NoCost, etc.)
 			excludeShared: true, // By default, exclude shared licenses
-			excludeExpired: true // By default, exclude licenses that are going to expire (free weekends)
+			excludeExpiring: true // By default, exclude licenses that are going to expire in the future (free weekends)
 		};
-		options = Object.assign(defaults, options);
+		filter = Object.assign(defaults, filter);
 
 		// If there is nothing to filter, no pics cache needed
-		if (!options.excludeFree && !options.exludeShared && !options.excludeFree) {
-			return packages.map(license => license.package_id);
+		if (!filter.excludeFree && !filter.exludeShared && !filter.excludeFree) {
+			return this._returnPackages(packages);
 		}
 	}
 
@@ -718,40 +724,33 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 
 	// Determine the filter function
 	let packageFilter = () => true;
-	if (typeof options === 'function') {
-		packageFilter = options;
-	} else if (typeof options === 'object') {
+	if (typeof filter === 'function') {
+		packageFilter = filter;
+	} else if (typeof filter === 'object') {
 		packageFilter = (license) => {
 
-			// If expired, filter it out, regardless of the options
+			// If expired, filter it out, regardless of the filter options
 			if (license.flags === SteamUser.ELicenseFlags.Expired) {
 				return false;
 			}
 
 			// If exclude shared licenses
-			if (options.excludeShared && license.owner_id !== this.steamID.accountid) {
+			if (filter.excludeShared && license.owner_id !== this.steamID.accountid) {
 				return false;
 			}
 
-			let pkg = license.package_id;
-			if (!this.picsCache.packages[pkg]) {
-				this._warn(`Failed to filter package ${pkg.packageid} (no pics cache info available)`);
+			let subid = license.package_id;
+			if (!this.picsCache.packages[subid] || !this.picsCache.packages[subid].packageinfo) {
+				this._warn(`Failed to filter package ${subid} (no pics cache info available)`);
 				return false;
 			}
 
-			pkg = this.picsCache.packages[pkg];
-			if (!pkg.packageinfo) {
-				this._warn(`Failed to filter package ${pkg.packageid} (no pics cache info available)`);
-				return false;
-			}
-
-			pkg = pkg.packageinfo;
+			let pkg = this.picsCache.packages[subid].packageinfo;
 			let owned = true;
 
-			// If exclude all free (sub 0, FreeOnDemand, or NoCost)
-			if (options.excludeFree) {
+			// If exclude all free (Sub 0 is covered by NoCost)
+			if (filter.excludeFree) {
 				owned = owned
-						&& pkg.packageid !== 0
 						&& pkg.billingtype !== SteamUser.EBillingType.NoCost
 						&& pkg.billingtype !== SteamUser.EBillingType.GuestPass
 						&& pkg.billingtype !== SteamUser.EBillingType.FreeOnDemand
@@ -764,7 +763,7 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 			}
 
 			// If exclude all expiring licenses
-			if (options.excludeExpired) {
+			if (filter.excludeExpiring) {
 				return false; // return false, since this license is temporary (does not matter if not expired yet)
 			// Else only allow non-expired licenses
 			} else {
@@ -777,11 +776,24 @@ SteamUser.prototype.getOwnedPackages = function(options) {
 		this._warn('Somehow neither a function, or a filter object, is provided for the owned package filter function');
 	}
 
+	return this._returnPackages(packages, packageFilter);
+};
+
+/**
+ * Note: The reason why ELicenseFlags.Expired licenses are not filtered out from the beginning of getOwnedPackages(),
+ * 		 is so people who provide a filter function as argument can choose to keep them included.
+ * @param {object[]} packages - this.licenses
+ * @param {function} packageFilter - A filter function
+ * @private
+ */
+ SteamUser.prototype._returnPackages = function(packages, packageFilter) {
+	// If no packageFilter is provided, only filter out expired licenses
+	packageFilter = packageFilter || (license => license.flags !== SteamUser.ELicenseFlags.Expired);
 	packages = packages.filter(packageFilter);
 	packages = packages.map(license => license.package_id);
 	packages.sort(sortNumeric);
 	return packages;
-};
+}
 
 /**
  * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
