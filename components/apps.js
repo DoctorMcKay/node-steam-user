@@ -572,13 +572,13 @@ SteamUser.prototype.getOwnedApps = function(filter) {
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
-			this._warn(`Failed to get owned apps for package ${pkg.packageid}`);
+			this._warn(`Failed to get owned apps for package ${pkg}`);
 			return;
 		}
 
 		pkg = this.picsCache.packages[pkg];
 		if (!pkg.packageinfo) {
-			this._warn(`Failed to get owned apps for package ${pkg.packageid}`);
+			this._warn(`Failed to get owned apps for package ${pkg}`);
 			return;
 		}
 
@@ -620,13 +620,13 @@ SteamUser.prototype.getOwnedDepots = function(filter) {
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
-			this._warn(`Failed to get owned depots for package ${pkg.packageid}`);
+			this._warn(`Failed to get owned depots for package ${pkg}`);
 			return;
 		}
 
 		pkg = this.picsCache.packages[pkg];
 		if (!pkg.packageinfo) {
-			this._warn(`Failed to get owned depots for package ${pkg.packageid}`);
+			this._warn(`Failed to get owned depots for package ${pkg}`);
 			return;
 		}
 
@@ -743,13 +743,13 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 				return false;
 			}
 
-			let subid = license.package_id;
-			if (!this.picsCache.packages[subid] || !this.picsCache.packages[subid].packageinfo) {
-				this._warn(`Failed to filter package ${subid} (no PICS cache info available)`);
+			let id = license.package_id;
+			if (!this.picsCache.packages[id] || !this.picsCache.packages[id].packageinfo) {
+				this._warn(`Failed to filter package ${id} (no PICS cache info available)`);
 				return false;
 			}
 
-			let pkg = this.picsCache.packages[subid].packageinfo;
+			let pkg = this.picsCache.packages[id].packageinfo;
 
 			// If exclude all free (sub 0 is covered by NoCost)
 			if (filter.excludeFree) {
