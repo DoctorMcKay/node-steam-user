@@ -693,8 +693,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 	}
 	// If filter options is a boolean, we asssume it's excludeSharedLicenses
 	if (typeof filter === 'boolean') {
-		let excludeSharedLicenses = filter;
-		filter = {excludeShared: excludeSharedLicenses};
+		filter = {excludeShared: filter};
 	}
 
 	// New behavior from this point on
