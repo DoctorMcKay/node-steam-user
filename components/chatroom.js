@@ -405,6 +405,10 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 		options.containsBbCode = true;
 	}
 
+	if (options.containsBbCode) {
+		message = message.replace(/\[/g, '\\[');
+	}
+
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("FriendMessages.SendMessage#1", {
 			"steamid": Helpers.steamID(steamId).toString(),

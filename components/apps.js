@@ -149,8 +149,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		inclTokens = false;
 	}
 
-	// This one actually can take a while, so allow it to go as long as 90 seconds
-	return StdLib.Promises.timeoutCallbackPromise(90000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
+	// This one actually can take a while, so allow it to go as long as 10 minutes
+	return StdLib.Promises.timeoutCallbackPromise(600000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
 		requestType = requestType || PICSRequestType.User;
 
 		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
@@ -531,7 +531,7 @@ SteamUser.prototype._getLicenseInfo = async function() {
 	let appids = [];
 
 	for (let pkgid in packages) {
-		((packages[pkgid].packageinfo || {}).appids || []).filter(appid => appids.includes(appid)).forEach(appid => appids.push(appid));
+		((packages[pkgid].packageinfo || {}).appids || []).filter(appid => !appids.includes(appid)).forEach(appid => appids.push(appid));
 	}
 
 	try {
@@ -709,7 +709,7 @@ function sortNumeric(a, b) {
  * @return Promise
  */
 SteamUser.prototype.redeemKey = function(key, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(90000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, (body) => {
 			let packageList = {};
 

@@ -1,5 +1,6 @@
 node_modules/
 test.js
+test/
 resources/servers.json
 dev_data.json
 
