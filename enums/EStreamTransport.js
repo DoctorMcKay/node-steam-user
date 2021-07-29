@@ -7,8 +7,9 @@ module.exports = {
 	"UDPRelay": 2,
 	"WebRTC": 3,
 	"SDR": 4,
-	"SNS": 5,
-	"SNS": 6,
+	"UDP_SNS": 5,
+	"SNS": 6, // obsolete
+	"UDPRelay_SNS": 6,
 
 	// Value-to-name mapping for convenience
 	"0": "None",
@@ -16,6 +17,6 @@ module.exports = {
 	"2": "UDPRelay",
 	"3": "WebRTC",
 	"4": "SDR",
-	"5": "SNS",
-	"6": "SNS",
+	"5": "UDP_SNS",
+	"6": "UDPRelay_SNS",
 };

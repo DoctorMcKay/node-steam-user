@@ -1,6 +1,6 @@
 /**
- * @enum EDisplayStatus
- */
+  * @enum EDisplayStatus
+  */
 module.exports = {
 	"Invalid": 0,
 	"Launching": 1,
@@ -17,8 +17,9 @@ module.exports = {
 	"RegionRestricted": 12,
 	"PresaleOnly": 13,
 	"InvalidPlatform": 14,
-	"ParentalBlocked": 15,
-	"PreloadOnly": 16,
+	"ParentalBlocked": 15, // removed
+	"PreloadOnly": 16, // obsolete
+	"PreloadComplete": 16,
 	"BorrowerLocked": 17,
 	"UpdatePaused": 18,
 	"UpdateQueued": 19,
@@ -52,7 +53,7 @@ module.exports = {
 	"13": "PresaleOnly",
 	"14": "InvalidPlatform",
 	"15": "ParentalBlocked",
-	"16": "PreloadOnly",
+	"16": "PreloadComplete",
 	"17": "BorrowerLocked",
 	"18": "UpdatePaused",
 	"19": "UpdateQueued",

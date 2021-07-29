@@ -2,14 +2,14 @@
   * @enum E_STAR_GlyphWriteResult
   */
 module.exports = {
-	"_Success": 0,
-	"_InvalidMessage": 1,
-	"_InvalidJSON": 2,
-	"_SQLError": 3,
+	"Success": 0,
+	"InvalidMessage": 1,
+	"InvalidJSON": 2,
+	"SQLError": 3,
 
 	// Value-to-name mapping for convenience
-	"0": "_Success",
-	"1": "_InvalidMessage",
-	"2": "_InvalidJSON",
-	"3": "_SQLError",
+	"0": "Success",
+	"1": "InvalidMessage",
+	"2": "InvalidJSON",
+	"3": "SQLError",
 };
