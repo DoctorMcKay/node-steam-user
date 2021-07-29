@@ -19,7 +19,7 @@
     /**
      * EMsg enum.
      * @exports EMsg
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EMsgInvalid=0 k_EMsgInvalid value
      * @property {number} k_EMsgMulti=1 k_EMsgMulti value
      * @property {number} k_EMsgProtobufWrapped=2 k_EMsgProtobufWrapped value
@@ -3025,7 +3025,7 @@
     /**
      * EClientPersonaStateFlag enum.
      * @exports EClientPersonaStateFlag
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EClientPersonaStateFlagStatus=1 k_EClientPersonaStateFlagStatus value
      * @property {number} k_EClientPersonaStateFlagPlayerName=2 k_EClientPersonaStateFlagPlayerName value
      * @property {number} k_EClientPersonaStateFlagQueryPort=4 k_EClientPersonaStateFlagQueryPort value
@@ -3063,7 +3063,7 @@
     /**
      * EMsgClanAccountFlags enum.
      * @exports EMsgClanAccountFlags
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EMsgClanAccountFlagPublic=1 k_EMsgClanAccountFlagPublic value
      * @property {number} k_EMsgClanAccountFlagLarge=2 k_EMsgClanAccountFlagLarge value
      * @property {number} k_EMsgClanAccountFlagLocked=4 k_EMsgClanAccountFlagLocked value
@@ -3083,7 +3083,7 @@
     /**
      * ESteamReviewScore enum.
      * @exports ESteamReviewScore
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_ESteamReviewScore_OverwhelminglyPositive=9 k_ESteamReviewScore_OverwhelminglyPositive value
      * @property {number} k_ESteamReviewScore_VeryPositive=8 k_ESteamReviewScore_VeryPositive value
      * @property {number} k_ESteamReviewScore_Positive=7 k_ESteamReviewScore_Positive value

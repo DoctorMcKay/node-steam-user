@@ -192,23 +192,23 @@
         CMsgClientUCMAddScreenshot.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.filename != null && message.hasOwnProperty("filename"))
+            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.filename);
-            if (message.thumbname != null && message.hasOwnProperty("thumbname"))
+            if (message.thumbname != null && Object.hasOwnProperty.call(message, "thumbname"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.thumbname);
-            if (message.rtime32_created != null && message.hasOwnProperty("rtime32_created"))
+            if (message.rtime32_created != null && Object.hasOwnProperty.call(message, "rtime32_created"))
                 writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.rtime32_created);
-            if (message.width != null && message.hasOwnProperty("width"))
+            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.width);
-            if (message.height != null && message.hasOwnProperty("height"))
+            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.height);
-            if (message.permissions != null && message.hasOwnProperty("permissions"))
+            if (message.permissions != null && Object.hasOwnProperty.call(message, "permissions"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.permissions);
-            if (message.caption != null && message.hasOwnProperty("caption"))
+            if (message.caption != null && Object.hasOwnProperty.call(message, "caption"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.caption);
-            if (message.shortcut_name != null && message.hasOwnProperty("shortcut_name"))
+            if (message.shortcut_name != null && Object.hasOwnProperty.call(message, "shortcut_name"))
                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.shortcut_name);
             if (message.tag != null && message.tag.length)
                 for (var i = 0; i < message.tag.length; ++i)
@@ -216,12 +216,12 @@
             if (message.tagged_steamid != null && message.tagged_steamid.length)
                 for (var i = 0; i < message.tagged_steamid.length; ++i)
                     writer.uint32(/* id 11, wireType 1 =*/89).fixed64(message.tagged_steamid[i]);
-            if (message.spoiler_tag != null && message.hasOwnProperty("spoiler_tag"))
+            if (message.spoiler_tag != null && Object.hasOwnProperty.call(message, "spoiler_tag"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.spoiler_tag);
             if (message.tagged_publishedfileid != null && message.tagged_publishedfileid.length)
                 for (var i = 0; i < message.tagged_publishedfileid.length; ++i)
                     writer.uint32(/* id 13, wireType 0 =*/104).uint64(message.tagged_publishedfileid[i]);
-            if (message.vr_filename != null && message.hasOwnProperty("vr_filename"))
+            if (message.vr_filename != null && Object.hasOwnProperty.call(message, "vr_filename"))
                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.vr_filename);
             return writer;
         };
@@ -637,9 +637,9 @@
             Tag.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.tag_name != null && message.hasOwnProperty("tag_name"))
+                if (message.tag_name != null && Object.hasOwnProperty.call(message, "tag_name"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.tag_name);
-                if (message.tag_value != null && message.hasOwnProperty("tag_value"))
+                if (message.tag_value != null && Object.hasOwnProperty.call(message, "tag_value"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.tag_value);
                 return writer;
             };
@@ -850,9 +850,9 @@
         CMsgClientUCMAddScreenshotResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.screenshotid != null && message.hasOwnProperty("screenshotid"))
+            if (message.screenshotid != null && Object.hasOwnProperty.call(message, "screenshotid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.screenshotid);
             return writer;
         };
@@ -1065,7 +1065,7 @@
         CMsgClientUCMDeleteScreenshot.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.screenshotid != null && message.hasOwnProperty("screenshotid"))
+            if (message.screenshotid != null && Object.hasOwnProperty.call(message, "screenshotid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.screenshotid);
             return writer;
         };
@@ -1266,7 +1266,7 @@
         CMsgClientUCMDeleteScreenshotResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             return writer;
         };
@@ -1580,36 +1580,36 @@
         CMsgClientUCMPublishFile.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.file_name != null && message.hasOwnProperty("file_name"))
+            if (message.file_name != null && Object.hasOwnProperty.call(message, "file_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.file_name);
-            if (message.preview_file_name != null && message.hasOwnProperty("preview_file_name"))
+            if (message.preview_file_name != null && Object.hasOwnProperty.call(message, "preview_file_name"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.preview_file_name);
-            if (message.consumer_app_id != null && message.hasOwnProperty("consumer_app_id"))
+            if (message.consumer_app_id != null && Object.hasOwnProperty.call(message, "consumer_app_id"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.consumer_app_id);
-            if (message.title != null && message.hasOwnProperty("title"))
+            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
-            if (message.description != null && message.hasOwnProperty("description"))
+            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
             if (message.tags != null && message.tags.length)
                 for (var i = 0; i < message.tags.length; ++i)
                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.tags[i]);
-            if (message.workshop_file != null && message.hasOwnProperty("workshop_file"))
+            if (message.workshop_file != null && Object.hasOwnProperty.call(message, "workshop_file"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.workshop_file);
-            if (message.visibility != null && message.hasOwnProperty("visibility"))
+            if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.visibility);
-            if (message.file_type != null && message.hasOwnProperty("file_type"))
+            if (message.file_type != null && Object.hasOwnProperty.call(message, "file_type"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.file_type);
-            if (message.url != null && message.hasOwnProperty("url"))
+            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.url);
-            if (message.video_provider != null && message.hasOwnProperty("video_provider"))
+            if (message.video_provider != null && Object.hasOwnProperty.call(message, "video_provider"))
                 writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.video_provider);
-            if (message.video_account_name != null && message.hasOwnProperty("video_account_name"))
+            if (message.video_account_name != null && Object.hasOwnProperty.call(message, "video_account_name"))
                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.video_account_name);
-            if (message.video_identifier != null && message.hasOwnProperty("video_identifier"))
+            if (message.video_identifier != null && Object.hasOwnProperty.call(message, "video_identifier"))
                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.video_identifier);
-            if (message.in_progress != null && message.hasOwnProperty("in_progress"))
+            if (message.in_progress != null && Object.hasOwnProperty.call(message, "in_progress"))
                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.in_progress);
             return writer;
         };
@@ -1984,11 +1984,11 @@
         CMsgClientUCMPublishFileResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+            if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.published_file_id);
-            if (message.needs_workshop_legal_agreement_acceptance != null && message.hasOwnProperty("needs_workshop_legal_agreement_acceptance"))
+            if (message.needs_workshop_legal_agreement_acceptance != null && Object.hasOwnProperty.call(message, "needs_workshop_legal_agreement_acceptance"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.needs_workshop_legal_agreement_acceptance);
             return writer;
         };
@@ -2460,50 +2460,50 @@
         CMsgClientUCMUpdatePublishedFile.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+            if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.published_file_id);
-            if (message.file_name != null && message.hasOwnProperty("file_name"))
+            if (message.file_name != null && Object.hasOwnProperty.call(message, "file_name"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.file_name);
-            if (message.preview_file_name != null && message.hasOwnProperty("preview_file_name"))
+            if (message.preview_file_name != null && Object.hasOwnProperty.call(message, "preview_file_name"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.preview_file_name);
-            if (message.title != null && message.hasOwnProperty("title"))
+            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
-            if (message.description != null && message.hasOwnProperty("description"))
+            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
             if (message.tags != null && message.tags.length)
                 for (var i = 0; i < message.tags.length; ++i)
                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.tags[i]);
-            if (message.visibility != null && message.hasOwnProperty("visibility"))
+            if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.visibility);
-            if (message.update_file != null && message.hasOwnProperty("update_file"))
+            if (message.update_file != null && Object.hasOwnProperty.call(message, "update_file"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.update_file);
-            if (message.update_preview_file != null && message.hasOwnProperty("update_preview_file"))
+            if (message.update_preview_file != null && Object.hasOwnProperty.call(message, "update_preview_file"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.update_preview_file);
-            if (message.update_title != null && message.hasOwnProperty("update_title"))
+            if (message.update_title != null && Object.hasOwnProperty.call(message, "update_title"))
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.update_title);
-            if (message.update_description != null && message.hasOwnProperty("update_description"))
+            if (message.update_description != null && Object.hasOwnProperty.call(message, "update_description"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.update_description);
-            if (message.update_tags != null && message.hasOwnProperty("update_tags"))
+            if (message.update_tags != null && Object.hasOwnProperty.call(message, "update_tags"))
                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.update_tags);
-            if (message.update_visibility != null && message.hasOwnProperty("update_visibility"))
+            if (message.update_visibility != null && Object.hasOwnProperty.call(message, "update_visibility"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.update_visibility);
-            if (message.change_description != null && message.hasOwnProperty("change_description"))
+            if (message.change_description != null && Object.hasOwnProperty.call(message, "change_description"))
                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.change_description);
-            if (message.update_url != null && message.hasOwnProperty("update_url"))
+            if (message.update_url != null && Object.hasOwnProperty.call(message, "update_url"))
                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.update_url);
-            if (message.url != null && message.hasOwnProperty("url"))
+            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.url);
-            if (message.update_content_manifest != null && message.hasOwnProperty("update_content_manifest"))
+            if (message.update_content_manifest != null && Object.hasOwnProperty.call(message, "update_content_manifest"))
                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.update_content_manifest);
-            if (message.content_manifest != null && message.hasOwnProperty("content_manifest"))
+            if (message.content_manifest != null && Object.hasOwnProperty.call(message, "content_manifest"))
                 writer.uint32(/* id 19, wireType 1 =*/153).fixed64(message.content_manifest);
-            if (message.metadata != null && message.hasOwnProperty("metadata"))
+            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.metadata);
-            if (message.update_metadata != null && message.hasOwnProperty("update_metadata"))
+            if (message.update_metadata != null && Object.hasOwnProperty.call(message, "update_metadata"))
                 writer.uint32(/* id 21, wireType 0 =*/168).bool(message.update_metadata);
-            if (message.language != null && message.hasOwnProperty("language"))
+            if (message.language != null && Object.hasOwnProperty.call(message, "language"))
                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.language);
             if (message.removed_kvtags != null && message.removed_kvtags.length)
                 for (var i = 0; i < message.removed_kvtags.length; ++i)
@@ -2517,9 +2517,9 @@
             if (message.previews_to_remove != null && message.previews_to_remove.length)
                 for (var i = 0; i < message.previews_to_remove.length; ++i)
                     writer.uint32(/* id 26, wireType 0 =*/208).int32(message.previews_to_remove[i]);
-            if (message.clear_in_progress != null && message.hasOwnProperty("clear_in_progress"))
+            if (message.clear_in_progress != null && Object.hasOwnProperty.call(message, "clear_in_progress"))
                 writer.uint32(/* id 27, wireType 0 =*/216).bool(message.clear_in_progress);
-            if (message.remove_all_kvtags != null && message.hasOwnProperty("remove_all_kvtags"))
+            if (message.remove_all_kvtags != null && Object.hasOwnProperty.call(message, "remove_all_kvtags"))
                 writer.uint32(/* id 28, wireType 0 =*/224).bool(message.remove_all_kvtags);
             return writer;
         };
@@ -3125,9 +3125,9 @@
             KeyValueTag.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.key != null && message.hasOwnProperty("key"))
+                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-                if (message.value != null && message.hasOwnProperty("value"))
+                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
                 return writer;
             };
@@ -3362,15 +3362,15 @@
             AdditionalPreview.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.original_file_name != null && message.hasOwnProperty("original_file_name"))
+                if (message.original_file_name != null && Object.hasOwnProperty.call(message, "original_file_name"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.original_file_name);
-                if (message.internal_file_name != null && message.hasOwnProperty("internal_file_name"))
+                if (message.internal_file_name != null && Object.hasOwnProperty.call(message, "internal_file_name"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.internal_file_name);
-                if (message.videoid != null && message.hasOwnProperty("videoid"))
+                if (message.videoid != null && Object.hasOwnProperty.call(message, "videoid"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.videoid);
-                if (message.preview_type != null && message.hasOwnProperty("preview_type"))
+                if (message.preview_type != null && Object.hasOwnProperty.call(message, "preview_type"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.preview_type);
-                if (message.update_index != null && message.hasOwnProperty("update_index"))
+                if (message.update_index != null && Object.hasOwnProperty.call(message, "update_index"))
                     writer.uint32(/* id 5, wireType 0 =*/40).int32(message.update_index);
                 return writer;
             };
@@ -3614,9 +3614,9 @@
         CMsgClientUCMUpdatePublishedFileResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.needs_workshop_legal_agreement_acceptance != null && message.hasOwnProperty("needs_workshop_legal_agreement_acceptance"))
+            if (message.needs_workshop_legal_agreement_acceptance != null && Object.hasOwnProperty.call(message, "needs_workshop_legal_agreement_acceptance"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.needs_workshop_legal_agreement_acceptance);
             return writer;
         };
@@ -3824,9 +3824,9 @@
         CMsgClientUCMDeletePublishedFile.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+            if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
             return writer;
         };
@@ -4039,7 +4039,7 @@
         CMsgClientUCMDeletePublishedFileResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             return writer;
         };
@@ -4244,11 +4244,11 @@
         CMsgClientUCMEnumerateUserPublishedFiles.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.start_index != null && message.hasOwnProperty("start_index"))
+            if (message.start_index != null && Object.hasOwnProperty.call(message, "start_index"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_index);
-            if (message.sort_order != null && message.hasOwnProperty("sort_order"))
+            if (message.sort_order != null && Object.hasOwnProperty.call(message, "sort_order"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.sort_order);
             return writer;
         };
@@ -4477,12 +4477,12 @@
         CMsgClientUCMEnumerateUserPublishedFilesResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.published_files != null && message.published_files.length)
                 for (var i = 0; i < message.published_files.length; ++i)
                     $root.CMsgClientUCMEnumerateUserPublishedFilesResponse.PublishedFileId.encode(message.published_files[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.total_results != null && message.hasOwnProperty("total_results"))
+            if (message.total_results != null && Object.hasOwnProperty.call(message, "total_results"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.total_results);
             return writer;
         };
@@ -4709,7 +4709,7 @@
             PublishedFileId.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
                 return writer;
             };
@@ -4949,15 +4949,15 @@
         CMsgClientUCMEnumerateUserSubscribedFiles.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.start_index != null && message.hasOwnProperty("start_index"))
+            if (message.start_index != null && Object.hasOwnProperty.call(message, "start_index"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_index);
-            if (message.list_type != null && message.hasOwnProperty("list_type"))
+            if (message.list_type != null && Object.hasOwnProperty.call(message, "list_type"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.list_type);
-            if (message.matching_file_type != null && message.hasOwnProperty("matching_file_type"))
+            if (message.matching_file_type != null && Object.hasOwnProperty.call(message, "matching_file_type"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.matching_file_type);
-            if (message.count != null && message.hasOwnProperty("count"))
+            if (message.count != null && Object.hasOwnProperty.call(message, "count"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.count);
             return writer;
         };
@@ -5208,12 +5208,12 @@
         CMsgClientUCMEnumerateUserSubscribedFilesResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.subscribed_files != null && message.subscribed_files.length)
                 for (var i = 0; i < message.subscribed_files.length; ++i)
                     $root.CMsgClientUCMEnumerateUserSubscribedFilesResponse.PublishedFileId.encode(message.subscribed_files[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.total_results != null && message.hasOwnProperty("total_results"))
+            if (message.total_results != null && Object.hasOwnProperty.call(message, "total_results"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.total_results);
             return writer;
         };
@@ -5449,9 +5449,9 @@
             PublishedFileId.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.rtime32_subscribed != null && message.hasOwnProperty("rtime32_subscribed"))
+                if (message.rtime32_subscribed != null && Object.hasOwnProperty.call(message, "rtime32_subscribed"))
                     writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.rtime32_subscribed);
                 return writer;
             };
@@ -5694,13 +5694,13 @@
         CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.start_index != null && message.hasOwnProperty("start_index"))
+            if (message.start_index != null && Object.hasOwnProperty.call(message, "start_index"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_index);
-            if (message.start_time != null && message.hasOwnProperty("start_time"))
+            if (message.start_time != null && Object.hasOwnProperty.call(message, "start_time"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.start_time);
-            if (message.desired_revision != null && message.hasOwnProperty("desired_revision"))
+            if (message.desired_revision != null && Object.hasOwnProperty.call(message, "desired_revision"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.desired_revision);
             return writer;
         };
@@ -5940,12 +5940,12 @@
         CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.subscribed_files != null && message.subscribed_files.length)
                 for (var i = 0; i < message.subscribed_files.length; ++i)
                     $root.CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId.encode(message.subscribed_files[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.total_results != null && message.hasOwnProperty("total_results"))
+            if (message.total_results != null && Object.hasOwnProperty.call(message, "total_results"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.total_results);
             return writer;
         };
@@ -6226,19 +6226,19 @@
             PublishedFileId.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.rtime32_subscribed != null && message.hasOwnProperty("rtime32_subscribed"))
+                if (message.rtime32_subscribed != null && Object.hasOwnProperty.call(message, "rtime32_subscribed"))
                     writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.rtime32_subscribed);
-                if (message.appid != null && message.hasOwnProperty("appid"))
+                if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.appid);
-                if (message.file_hcontent != null && message.hasOwnProperty("file_hcontent"))
+                if (message.file_hcontent != null && Object.hasOwnProperty.call(message, "file_hcontent"))
                     writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.file_hcontent);
-                if (message.file_size != null && message.hasOwnProperty("file_size"))
+                if (message.file_size != null && Object.hasOwnProperty.call(message, "file_size"))
                     writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.file_size);
-                if (message.rtime32_last_updated != null && message.hasOwnProperty("rtime32_last_updated"))
+                if (message.rtime32_last_updated != null && Object.hasOwnProperty.call(message, "rtime32_last_updated"))
                     writer.uint32(/* id 6, wireType 5 =*/53).fixed32(message.rtime32_last_updated);
-                if (message.is_depot_content != null && message.hasOwnProperty("is_depot_content"))
+                if (message.is_depot_content != null && Object.hasOwnProperty.call(message, "is_depot_content"))
                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_depot_content);
                 return writer;
             };
@@ -6577,19 +6577,19 @@
         CMsgClientUCMPublishedFileUpdated.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+            if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
-            if (message.time_updated != null && message.hasOwnProperty("time_updated"))
+            if (message.time_updated != null && Object.hasOwnProperty.call(message, "time_updated"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.time_updated);
-            if (message.hcontent != null && message.hasOwnProperty("hcontent"))
+            if (message.hcontent != null && Object.hasOwnProperty.call(message, "hcontent"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.hcontent);
-            if (message.file_size != null && message.hasOwnProperty("file_size"))
+            if (message.file_size != null && Object.hasOwnProperty.call(message, "file_size"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.file_size);
-            if (message.is_depot_content != null && message.hasOwnProperty("is_depot_content"))
+            if (message.is_depot_content != null && Object.hasOwnProperty.call(message, "is_depot_content"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.is_depot_content);
-            if (message.revision != null && message.hasOwnProperty("revision"))
+            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.revision);
             return writer;
         };
@@ -6889,11 +6889,11 @@
         CMsgClientWorkshopItemChangesRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.last_time_updated != null && message.hasOwnProperty("last_time_updated"))
+            if (message.last_time_updated != null && Object.hasOwnProperty.call(message, "last_time_updated"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.last_time_updated);
-            if (message.num_items_needed != null && message.hasOwnProperty("num_items_needed"))
+            if (message.num_items_needed != null && Object.hasOwnProperty.call(message, "num_items_needed"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.num_items_needed);
             return writer;
         };
@@ -7122,9 +7122,9 @@
         CMsgClientWorkshopItemChangesResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.update_time != null && message.hasOwnProperty("update_time"))
+            if (message.update_time != null && Object.hasOwnProperty.call(message, "update_time"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.update_time);
             if (message.workshop_items != null && message.workshop_items.length)
                 for (var i = 0; i < message.workshop_items.length; ++i)
@@ -7372,11 +7372,11 @@
             WorkshopItemInfo.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.time_updated != null && message.hasOwnProperty("time_updated"))
+                if (message.time_updated != null && Object.hasOwnProperty.call(message, "time_updated"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.time_updated);
-                if (message.manifest_id != null && message.hasOwnProperty("manifest_id"))
+                if (message.manifest_id != null && Object.hasOwnProperty.call(message, "manifest_id"))
                     writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.manifest_id);
                 return writer;
             };
@@ -7636,9 +7636,9 @@
         CMsgClientWorkshopItemInfoRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.last_time_updated != null && message.hasOwnProperty("last_time_updated"))
+            if (message.last_time_updated != null && Object.hasOwnProperty.call(message, "last_time_updated"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.last_time_updated);
             if (message.workshop_items != null && message.workshop_items.length)
                 for (var i = 0; i < message.workshop_items.length; ++i)
@@ -7877,9 +7877,9 @@
             WorkshopItem.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.time_updated != null && message.hasOwnProperty("time_updated"))
+                if (message.time_updated != null && Object.hasOwnProperty.call(message, "time_updated"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.time_updated);
                 return writer;
             };
@@ -8124,9 +8124,9 @@
         CMsgClientWorkshopItemInfoResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.update_time != null && message.hasOwnProperty("update_time"))
+            if (message.update_time != null && Object.hasOwnProperty.call(message, "update_time"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.update_time);
             if (message.workshop_items != null && message.workshop_items.length)
                 for (var i = 0; i < message.workshop_items.length; ++i)
@@ -8427,13 +8427,13 @@
             WorkshopItemInfo.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.time_updated != null && message.hasOwnProperty("time_updated"))
+                if (message.time_updated != null && Object.hasOwnProperty.call(message, "time_updated"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.time_updated);
-                if (message.manifest_id != null && message.hasOwnProperty("manifest_id"))
+                if (message.manifest_id != null && Object.hasOwnProperty.call(message, "manifest_id"))
                     writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.manifest_id);
-                if (message.is_legacy != null && message.hasOwnProperty("is_legacy"))
+                if (message.is_legacy != null && Object.hasOwnProperty.call(message, "is_legacy"))
                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.is_legacy);
                 return writer;
             };
@@ -8723,9 +8723,9 @@
         CMsgClientUCMGetPublishedFilesForUser.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.creator_steam_id != null && message.hasOwnProperty("creator_steam_id"))
+            if (message.creator_steam_id != null && Object.hasOwnProperty.call(message, "creator_steam_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.creator_steam_id);
             if (message.required_tags != null && message.required_tags.length)
                 for (var i = 0; i < message.required_tags.length; ++i)
@@ -8733,7 +8733,7 @@
             if (message.excluded_tags != null && message.excluded_tags.length)
                 for (var i = 0; i < message.excluded_tags.length; ++i)
                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.excluded_tags[i]);
-            if (message.start_index != null && message.hasOwnProperty("start_index"))
+            if (message.start_index != null && Object.hasOwnProperty.call(message, "start_index"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.start_index);
             return writer;
         };
@@ -9028,12 +9028,12 @@
         CMsgClientUCMGetPublishedFilesForUserResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.published_files != null && message.published_files.length)
                 for (var i = 0; i < message.published_files.length; ++i)
                     $root.CMsgClientUCMGetPublishedFilesForUserResponse.PublishedFileId.encode(message.published_files[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.total_results != null && message.hasOwnProperty("total_results"))
+            if (message.total_results != null && Object.hasOwnProperty.call(message, "total_results"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.total_results);
             return writer;
         };
@@ -9260,7 +9260,7 @@
             PublishedFileId.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
                 return writer;
             };
@@ -9482,11 +9482,11 @@
         CMsgClientUCMSetUserPublishedFileAction.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+            if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
-            if (message.action != null && message.hasOwnProperty("action"))
+            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.action);
             return writer;
         };
@@ -9710,7 +9710,7 @@
         CMsgClientUCMSetUserPublishedFileActionResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             return writer;
         };
@@ -9915,11 +9915,11 @@
         CMsgClientUCMEnumeratePublishedFilesByUserAction.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.start_index != null && message.hasOwnProperty("start_index"))
+            if (message.start_index != null && Object.hasOwnProperty.call(message, "start_index"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_index);
-            if (message.action != null && message.hasOwnProperty("action"))
+            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.action);
             return writer;
         };
@@ -10148,12 +10148,12 @@
         CMsgClientUCMEnumeratePublishedFilesByUserActionResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.published_files != null && message.published_files.length)
                 for (var i = 0; i < message.published_files.length; ++i)
                     $root.CMsgClientUCMEnumeratePublishedFilesByUserActionResponse.PublishedFileId.encode(message.published_files[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.total_results != null && message.hasOwnProperty("total_results"))
+            if (message.total_results != null && Object.hasOwnProperty.call(message, "total_results"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.total_results);
             return writer;
         };
@@ -10389,9 +10389,9 @@
             PublishedFileId.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.rtime_time_stamp != null && message.hasOwnProperty("rtime_time_stamp"))
+                if (message.rtime_time_stamp != null && Object.hasOwnProperty.call(message, "rtime_time_stamp"))
                     writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.rtime_time_stamp);
                 return writer;
             };
@@ -10803,15 +10803,15 @@
         CMsgClientUpdateUserGameInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid_idgs != null && message.hasOwnProperty("steamid_idgs"))
+            if (message.steamid_idgs != null && Object.hasOwnProperty.call(message, "steamid_idgs"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid_idgs);
-            if (message.gameid != null && message.hasOwnProperty("gameid"))
+            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.gameid);
-            if (message.game_ip != null && message.hasOwnProperty("game_ip"))
+            if (message.game_ip != null && Object.hasOwnProperty.call(message, "game_ip"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.game_ip);
-            if (message.game_port != null && message.hasOwnProperty("game_port"))
+            if (message.game_port != null && Object.hasOwnProperty.call(message, "game_port"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.game_port);
-            if (message.token != null && message.hasOwnProperty("token"))
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.token);
             return writer;
         };
@@ -11090,7 +11090,7 @@
         CMsgClientRichPresenceUpload.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.rich_presence_kv != null && message.hasOwnProperty("rich_presence_kv"))
+            if (message.rich_presence_kv != null && Object.hasOwnProperty.call(message, "rich_presence_kv"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.rich_presence_kv);
             if (message.steamid_broadcast != null && message.steamid_broadcast.length)
                 for (var i = 0; i < message.steamid_broadcast.length; ++i)
@@ -11762,9 +11762,9 @@
             RichPresence.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.steamid_user != null && message.hasOwnProperty("steamid_user"))
+                if (message.steamid_user != null && Object.hasOwnProperty.call(message, "steamid_user"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid_user);
-                if (message.rich_presence_kv != null && message.hasOwnProperty("rich_presence_kv"))
+                if (message.rich_presence_kv != null && Object.hasOwnProperty.call(message, "rich_presence_kv"))
                     writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.rich_presence_kv);
                 return writer;
             };
@@ -11989,7 +11989,7 @@
         CMsgClientCheckFileSignature.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
             return writer;
         };
@@ -12257,25 +12257,25 @@
         CMsgClientCheckFileSignatureResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.pid != null && message.hasOwnProperty("pid"))
+            if (message.pid != null && Object.hasOwnProperty.call(message, "pid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.pid);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.eresult);
-            if (message.filename != null && message.hasOwnProperty("filename"))
+            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filename);
-            if (message.esignatureresult != null && message.hasOwnProperty("esignatureresult"))
+            if (message.esignatureresult != null && Object.hasOwnProperty.call(message, "esignatureresult"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.esignatureresult);
-            if (message.sha_file != null && message.hasOwnProperty("sha_file"))
+            if (message.sha_file != null && Object.hasOwnProperty.call(message, "sha_file"))
                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.sha_file);
-            if (message.signatureheader != null && message.hasOwnProperty("signatureheader"))
+            if (message.signatureheader != null && Object.hasOwnProperty.call(message, "signatureheader"))
                 writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.signatureheader);
-            if (message.filesize != null && message.hasOwnProperty("filesize"))
+            if (message.filesize != null && Object.hasOwnProperty.call(message, "filesize"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.filesize);
-            if (message.getlasterror != null && message.hasOwnProperty("getlasterror"))
+            if (message.getlasterror != null && Object.hasOwnProperty.call(message, "getlasterror"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.getlasterror);
-            if (message.evalvesignaturecheckdetail != null && message.hasOwnProperty("evalvesignaturecheckdetail"))
+            if (message.evalvesignaturecheckdetail != null && Object.hasOwnProperty.call(message, "evalvesignaturecheckdetail"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.evalvesignaturecheckdetail);
             return writer;
         };
@@ -12598,11 +12598,11 @@
         CMsgClientReadMachineAuth.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.filename != null && message.hasOwnProperty("filename"))
+            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
-            if (message.offset != null && message.hasOwnProperty("offset"))
+            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.offset);
-            if (message.cubtoread != null && message.hasOwnProperty("cubtoread"))
+            if (message.cubtoread != null && Object.hasOwnProperty.call(message, "cubtoread"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.cubtoread);
             return writer;
         };
@@ -12884,23 +12884,23 @@
         CMsgClientReadMachineAuthResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.filename != null && message.hasOwnProperty("filename"))
+            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eresult);
-            if (message.filesize != null && message.hasOwnProperty("filesize"))
+            if (message.filesize != null && Object.hasOwnProperty.call(message, "filesize"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.filesize);
-            if (message.sha_file != null && message.hasOwnProperty("sha_file"))
+            if (message.sha_file != null && Object.hasOwnProperty.call(message, "sha_file"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.sha_file);
-            if (message.getlasterror != null && message.hasOwnProperty("getlasterror"))
+            if (message.getlasterror != null && Object.hasOwnProperty.call(message, "getlasterror"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.getlasterror);
-            if (message.offset != null && message.hasOwnProperty("offset"))
+            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.offset);
-            if (message.cubread != null && message.hasOwnProperty("cubread"))
+            if (message.cubread != null && Object.hasOwnProperty.call(message, "cubread"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.cubread);
-            if (message.bytes_read != null && message.hasOwnProperty("bytes_read"))
+            if (message.bytes_read != null && Object.hasOwnProperty.call(message, "bytes_read"))
                 writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.bytes_read);
-            if (message.filename_sentry != null && message.hasOwnProperty("filename_sentry"))
+            if (message.filename_sentry != null && Object.hasOwnProperty.call(message, "filename_sentry"))
                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.filename_sentry);
             return writer;
         };
@@ -13257,21 +13257,21 @@
         CMsgClientUpdateMachineAuth.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.filename != null && message.hasOwnProperty("filename"))
+            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
-            if (message.offset != null && message.hasOwnProperty("offset"))
+            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.offset);
-            if (message.cubtowrite != null && message.hasOwnProperty("cubtowrite"))
+            if (message.cubtowrite != null && Object.hasOwnProperty.call(message, "cubtowrite"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.cubtowrite);
-            if (message.bytes != null && message.hasOwnProperty("bytes"))
+            if (message.bytes != null && Object.hasOwnProperty.call(message, "bytes"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.bytes);
-            if (message.otp_type != null && message.hasOwnProperty("otp_type"))
+            if (message.otp_type != null && Object.hasOwnProperty.call(message, "otp_type"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.otp_type);
-            if (message.otp_identifier != null && message.hasOwnProperty("otp_identifier"))
+            if (message.otp_identifier != null && Object.hasOwnProperty.call(message, "otp_identifier"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.otp_identifier);
-            if (message.otp_sharedsecret != null && message.hasOwnProperty("otp_sharedsecret"))
+            if (message.otp_sharedsecret != null && Object.hasOwnProperty.call(message, "otp_sharedsecret"))
                 writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.otp_sharedsecret);
-            if (message.otp_timedrift != null && message.hasOwnProperty("otp_timedrift"))
+            if (message.otp_timedrift != null && Object.hasOwnProperty.call(message, "otp_timedrift"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.otp_timedrift);
             return writer;
         };
@@ -13635,25 +13635,25 @@
         CMsgClientUpdateMachineAuthResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.filename != null && message.hasOwnProperty("filename"))
+            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eresult);
-            if (message.filesize != null && message.hasOwnProperty("filesize"))
+            if (message.filesize != null && Object.hasOwnProperty.call(message, "filesize"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.filesize);
-            if (message.sha_file != null && message.hasOwnProperty("sha_file"))
+            if (message.sha_file != null && Object.hasOwnProperty.call(message, "sha_file"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.sha_file);
-            if (message.getlasterror != null && message.hasOwnProperty("getlasterror"))
+            if (message.getlasterror != null && Object.hasOwnProperty.call(message, "getlasterror"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.getlasterror);
-            if (message.offset != null && message.hasOwnProperty("offset"))
+            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.offset);
-            if (message.cubwrote != null && message.hasOwnProperty("cubwrote"))
+            if (message.cubwrote != null && Object.hasOwnProperty.call(message, "cubwrote"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.cubwrote);
-            if (message.otp_type != null && message.hasOwnProperty("otp_type"))
+            if (message.otp_type != null && Object.hasOwnProperty.call(message, "otp_type"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.otp_type);
-            if (message.otp_value != null && message.hasOwnProperty("otp_value"))
+            if (message.otp_value != null && Object.hasOwnProperty.call(message, "otp_value"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.otp_value);
-            if (message.otp_identifier != null && message.hasOwnProperty("otp_identifier"))
+            if (message.otp_identifier != null && Object.hasOwnProperty.call(message, "otp_identifier"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.otp_identifier);
             return writer;
         };
@@ -14039,27 +14039,27 @@
         CMsgClientRequestMachineAuth.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.filename != null && message.hasOwnProperty("filename"))
+            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
-            if (message.eresult_sentryfile != null && message.hasOwnProperty("eresult_sentryfile"))
+            if (message.eresult_sentryfile != null && Object.hasOwnProperty.call(message, "eresult_sentryfile"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eresult_sentryfile);
-            if (message.filesize != null && message.hasOwnProperty("filesize"))
+            if (message.filesize != null && Object.hasOwnProperty.call(message, "filesize"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.filesize);
-            if (message.sha_sentryfile != null && message.hasOwnProperty("sha_sentryfile"))
+            if (message.sha_sentryfile != null && Object.hasOwnProperty.call(message, "sha_sentryfile"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.sha_sentryfile);
-            if (message.lock_account_action != null && message.hasOwnProperty("lock_account_action"))
+            if (message.lock_account_action != null && Object.hasOwnProperty.call(message, "lock_account_action"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.lock_account_action);
-            if (message.otp_type != null && message.hasOwnProperty("otp_type"))
+            if (message.otp_type != null && Object.hasOwnProperty.call(message, "otp_type"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.otp_type);
-            if (message.otp_identifier != null && message.hasOwnProperty("otp_identifier"))
+            if (message.otp_identifier != null && Object.hasOwnProperty.call(message, "otp_identifier"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.otp_identifier);
-            if (message.otp_sharedsecret != null && message.hasOwnProperty("otp_sharedsecret"))
+            if (message.otp_sharedsecret != null && Object.hasOwnProperty.call(message, "otp_sharedsecret"))
                 writer.uint32(/* id 9, wireType 2 =*/74).bytes(message.otp_sharedsecret);
-            if (message.otp_value != null && message.hasOwnProperty("otp_value"))
+            if (message.otp_value != null && Object.hasOwnProperty.call(message, "otp_value"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.otp_value);
-            if (message.machine_name != null && message.hasOwnProperty("machine_name"))
+            if (message.machine_name != null && Object.hasOwnProperty.call(message, "machine_name"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.machine_name);
-            if (message.machine_name_userchosen != null && message.hasOwnProperty("machine_name_userchosen"))
+            if (message.machine_name_userchosen != null && Object.hasOwnProperty.call(message, "machine_name_userchosen"))
                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.machine_name_userchosen);
             return writer;
         };
@@ -14375,7 +14375,7 @@
         CMsgClientRequestMachineAuthResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eresult);
             return writer;
         };
@@ -14562,7 +14562,7 @@
         CMsgClientRegisterKey.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key != null && message.hasOwnProperty("key"))
+            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
             return writer;
         };
@@ -14767,11 +14767,11 @@
         CMsgClientPurchaseResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.purchase_result_details != null && message.hasOwnProperty("purchase_result_details"))
+            if (message.purchase_result_details != null && Object.hasOwnProperty.call(message, "purchase_result_details"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.purchase_result_details);
-            if (message.purchase_receipt_info != null && message.hasOwnProperty("purchase_receipt_info"))
+            if (message.purchase_receipt_info != null && Object.hasOwnProperty.call(message, "purchase_receipt_info"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.purchase_receipt_info);
             return writer;
         };
@@ -15035,17 +15035,17 @@
         CMsgClientActivateOEMLicense.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.bios_manufacturer != null && message.hasOwnProperty("bios_manufacturer"))
+            if (message.bios_manufacturer != null && Object.hasOwnProperty.call(message, "bios_manufacturer"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.bios_manufacturer);
-            if (message.bios_serialnumber != null && message.hasOwnProperty("bios_serialnumber"))
+            if (message.bios_serialnumber != null && Object.hasOwnProperty.call(message, "bios_serialnumber"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.bios_serialnumber);
-            if (message.license_file != null && message.hasOwnProperty("license_file"))
+            if (message.license_file != null && Object.hasOwnProperty.call(message, "license_file"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.license_file);
-            if (message.mainboard_manufacturer != null && message.hasOwnProperty("mainboard_manufacturer"))
+            if (message.mainboard_manufacturer != null && Object.hasOwnProperty.call(message, "mainboard_manufacturer"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.mainboard_manufacturer);
-            if (message.mainboard_product != null && message.hasOwnProperty("mainboard_product"))
+            if (message.mainboard_product != null && Object.hasOwnProperty.call(message, "mainboard_product"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.mainboard_product);
-            if (message.mainboard_serialnumber != null && message.hasOwnProperty("mainboard_serialnumber"))
+            if (message.mainboard_serialnumber != null && Object.hasOwnProperty.call(message, "mainboard_serialnumber"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.mainboard_serialnumber);
             return writer;
         };
@@ -15297,7 +15297,7 @@
         CMsgClientRegisterOEMMachine.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.oem_register_file != null && message.hasOwnProperty("oem_register_file"))
+            if (message.oem_register_file != null && Object.hasOwnProperty.call(message, "oem_register_file"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.oem_register_file);
             return writer;
         };
@@ -15493,7 +15493,7 @@
         CMsgClientRegisterOEMMachineResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eresult);
             return writer;
         };
@@ -15689,9 +15689,9 @@
         CMsgClientPurchaseWithMachineID.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.package_id != null && message.hasOwnProperty("package_id"))
+            if (message.package_id != null && Object.hasOwnProperty.call(message, "package_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.package_id);
-            if (message.machine_info != null && message.hasOwnProperty("machine_info"))
+            if (message.machine_info != null && Object.hasOwnProperty.call(message, "machine_info"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.machine_info);
             return writer;
         };
@@ -15917,11 +15917,11 @@
         CMsgTrading_InitiateTradeRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.trade_request_id != null && message.hasOwnProperty("trade_request_id"))
+            if (message.trade_request_id != null && Object.hasOwnProperty.call(message, "trade_request_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.trade_request_id);
-            if (message.other_steamid != null && message.hasOwnProperty("other_steamid"))
+            if (message.other_steamid != null && Object.hasOwnProperty.call(message, "other_steamid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.other_steamid);
-            if (message.other_name != null && message.hasOwnProperty("other_name"))
+            if (message.other_name != null && Object.hasOwnProperty.call(message, "other_name"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.other_name);
             return writer;
         };
@@ -16217,23 +16217,23 @@
         CMsgTrading_InitiateTradeResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.response != null && message.hasOwnProperty("response"))
+            if (message.response != null && Object.hasOwnProperty.call(message, "response"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.response);
-            if (message.trade_request_id != null && message.hasOwnProperty("trade_request_id"))
+            if (message.trade_request_id != null && Object.hasOwnProperty.call(message, "trade_request_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.trade_request_id);
-            if (message.other_steamid != null && message.hasOwnProperty("other_steamid"))
+            if (message.other_steamid != null && Object.hasOwnProperty.call(message, "other_steamid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.other_steamid);
-            if (message.steamguard_required_days != null && message.hasOwnProperty("steamguard_required_days"))
+            if (message.steamguard_required_days != null && Object.hasOwnProperty.call(message, "steamguard_required_days"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.steamguard_required_days);
-            if (message.new_device_cooldown_days != null && message.hasOwnProperty("new_device_cooldown_days"))
+            if (message.new_device_cooldown_days != null && Object.hasOwnProperty.call(message, "new_device_cooldown_days"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.new_device_cooldown_days);
-            if (message.default_password_reset_probation_days != null && message.hasOwnProperty("default_password_reset_probation_days"))
+            if (message.default_password_reset_probation_days != null && Object.hasOwnProperty.call(message, "default_password_reset_probation_days"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.default_password_reset_probation_days);
-            if (message.password_reset_probation_days != null && message.hasOwnProperty("password_reset_probation_days"))
+            if (message.password_reset_probation_days != null && Object.hasOwnProperty.call(message, "password_reset_probation_days"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.password_reset_probation_days);
-            if (message.default_email_change_probation_days != null && message.hasOwnProperty("default_email_change_probation_days"))
+            if (message.default_email_change_probation_days != null && Object.hasOwnProperty.call(message, "default_email_change_probation_days"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.default_email_change_probation_days);
-            if (message.email_change_probation_days != null && message.hasOwnProperty("email_change_probation_days"))
+            if (message.email_change_probation_days != null && Object.hasOwnProperty.call(message, "email_change_probation_days"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.email_change_probation_days);
             return writer;
         };
@@ -16523,7 +16523,7 @@
         CMsgTrading_CancelTradeRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.other_steamid != null && message.hasOwnProperty("other_steamid"))
+            if (message.other_steamid != null && Object.hasOwnProperty.call(message, "other_steamid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.other_steamid);
             return writer;
         };
@@ -16724,7 +16724,7 @@
         CMsgTrading_StartSession.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.other_steamid != null && message.hasOwnProperty("other_steamid"))
+            if (message.other_steamid != null && Object.hasOwnProperty.call(message, "other_steamid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.other_steamid);
             return writer;
         };
@@ -16943,11 +16943,11 @@
         CMsgClientGetCDNAuthToken.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.depot_id != null && message.hasOwnProperty("depot_id"))
+            if (message.depot_id != null && Object.hasOwnProperty.call(message, "depot_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.depot_id);
-            if (message.host_name != null && message.hasOwnProperty("host_name"))
+            if (message.host_name != null && Object.hasOwnProperty.call(message, "host_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.host_name);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.app_id);
             return writer;
         };
@@ -17166,9 +17166,9 @@
         CMsgClientGetDepotDecryptionKey.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.depot_id != null && message.hasOwnProperty("depot_id"))
+            if (message.depot_id != null && Object.hasOwnProperty.call(message, "depot_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.depot_id);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
             return writer;
         };
@@ -17385,11 +17385,11 @@
         CMsgClientGetDepotDecryptionKeyResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.depot_id != null && message.hasOwnProperty("depot_id"))
+            if (message.depot_id != null && Object.hasOwnProperty.call(message, "depot_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.depot_id);
-            if (message.depot_encryption_key != null && message.hasOwnProperty("depot_encryption_key"))
+            if (message.depot_encryption_key != null && Object.hasOwnProperty.call(message, "depot_encryption_key"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.depot_encryption_key);
             return writer;
         };
@@ -17617,9 +17617,9 @@
         CMsgClientCheckAppBetaPassword.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.betapassword != null && message.hasOwnProperty("betapassword"))
+            if (message.betapassword != null && Object.hasOwnProperty.call(message, "betapassword"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.betapassword);
             return writer;
         };
@@ -17828,7 +17828,7 @@
         CMsgClientCheckAppBetaPasswordResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.betapasswords != null && message.betapasswords.length)
                 for (var i = 0; i < message.betapasswords.length; ++i)
@@ -18055,9 +18055,9 @@
             BetaPassword.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.betaname != null && message.hasOwnProperty("betaname"))
+                if (message.betaname != null && Object.hasOwnProperty.call(message, "betaname"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.betaname);
-                if (message.betapassword != null && message.hasOwnProperty("betapassword"))
+                if (message.betapassword != null && Object.hasOwnProperty.call(message, "betapassword"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.betapassword);
                 return writer;
             };
@@ -18449,50 +18449,50 @@
         CMsgClientUpdateAppJobReport.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
             if (message.depot_ids != null && message.depot_ids.length)
                 for (var i = 0; i < message.depot_ids.length; ++i)
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.depot_ids[i]);
-            if (message.app_state != null && message.hasOwnProperty("app_state"))
+            if (message.app_state != null && Object.hasOwnProperty.call(message, "app_state"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.app_state);
-            if (message.job_app_error != null && message.hasOwnProperty("job_app_error"))
+            if (message.job_app_error != null && Object.hasOwnProperty.call(message, "job_app_error"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.job_app_error);
-            if (message.error_details != null && message.hasOwnProperty("error_details"))
+            if (message.error_details != null && Object.hasOwnProperty.call(message, "error_details"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.error_details);
-            if (message.job_duration != null && message.hasOwnProperty("job_duration"))
+            if (message.job_duration != null && Object.hasOwnProperty.call(message, "job_duration"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.job_duration);
-            if (message.files_validation_failed != null && message.hasOwnProperty("files_validation_failed"))
+            if (message.files_validation_failed != null && Object.hasOwnProperty.call(message, "files_validation_failed"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.files_validation_failed);
-            if (message.job_bytes_downloaded != null && message.hasOwnProperty("job_bytes_downloaded"))
+            if (message.job_bytes_downloaded != null && Object.hasOwnProperty.call(message, "job_bytes_downloaded"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.job_bytes_downloaded);
-            if (message.job_bytes_staged != null && message.hasOwnProperty("job_bytes_staged"))
+            if (message.job_bytes_staged != null && Object.hasOwnProperty.call(message, "job_bytes_staged"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.job_bytes_staged);
-            if (message.bytes_comitted != null && message.hasOwnProperty("bytes_comitted"))
+            if (message.bytes_comitted != null && Object.hasOwnProperty.call(message, "bytes_comitted"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint64(message.bytes_comitted);
-            if (message.start_app_state != null && message.hasOwnProperty("start_app_state"))
+            if (message.start_app_state != null && Object.hasOwnProperty.call(message, "start_app_state"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.start_app_state);
-            if (message.stats_machine_id != null && message.hasOwnProperty("stats_machine_id"))
+            if (message.stats_machine_id != null && Object.hasOwnProperty.call(message, "stats_machine_id"))
                 writer.uint32(/* id 12, wireType 1 =*/97).fixed64(message.stats_machine_id);
-            if (message.branch_name != null && message.hasOwnProperty("branch_name"))
+            if (message.branch_name != null && Object.hasOwnProperty.call(message, "branch_name"))
                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.branch_name);
-            if (message.total_bytes_downloaded != null && message.hasOwnProperty("total_bytes_downloaded"))
+            if (message.total_bytes_downloaded != null && Object.hasOwnProperty.call(message, "total_bytes_downloaded"))
                 writer.uint32(/* id 14, wireType 0 =*/112).uint64(message.total_bytes_downloaded);
-            if (message.total_bytes_staged != null && message.hasOwnProperty("total_bytes_staged"))
+            if (message.total_bytes_staged != null && Object.hasOwnProperty.call(message, "total_bytes_staged"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint64(message.total_bytes_staged);
-            if (message.total_bytes_restored != null && message.hasOwnProperty("total_bytes_restored"))
+            if (message.total_bytes_restored != null && Object.hasOwnProperty.call(message, "total_bytes_restored"))
                 writer.uint32(/* id 16, wireType 0 =*/128).uint64(message.total_bytes_restored);
-            if (message.is_borrowed != null && message.hasOwnProperty("is_borrowed"))
+            if (message.is_borrowed != null && Object.hasOwnProperty.call(message, "is_borrowed"))
                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.is_borrowed);
-            if (message.is_free_weekend != null && message.hasOwnProperty("is_free_weekend"))
+            if (message.is_free_weekend != null && Object.hasOwnProperty.call(message, "is_free_weekend"))
                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.is_free_weekend);
-            if (message.total_bytes_legacy != null && message.hasOwnProperty("total_bytes_legacy"))
+            if (message.total_bytes_legacy != null && Object.hasOwnProperty.call(message, "total_bytes_legacy"))
                 writer.uint32(/* id 19, wireType 0 =*/152).uint64(message.total_bytes_legacy);
-            if (message.total_bytes_patched != null && message.hasOwnProperty("total_bytes_patched"))
+            if (message.total_bytes_patched != null && Object.hasOwnProperty.call(message, "total_bytes_patched"))
                 writer.uint32(/* id 20, wireType 0 =*/160).uint64(message.total_bytes_patched);
-            if (message.total_bytes_saved != null && message.hasOwnProperty("total_bytes_saved"))
+            if (message.total_bytes_saved != null && Object.hasOwnProperty.call(message, "total_bytes_saved"))
                 writer.uint32(/* id 21, wireType 0 =*/168).uint64(message.total_bytes_saved);
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+            if (message.cell_id != null && Object.hasOwnProperty.call(message, "cell_id"))
                 writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.cell_id);
             return writer;
         };
@@ -19125,19 +19125,19 @@
         CMsgClientDPContentStatsReport.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.stats_machine_id != null && message.hasOwnProperty("stats_machine_id"))
+            if (message.stats_machine_id != null && Object.hasOwnProperty.call(message, "stats_machine_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.stats_machine_id);
-            if (message.country_code != null && message.hasOwnProperty("country_code"))
+            if (message.country_code != null && Object.hasOwnProperty.call(message, "country_code"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.country_code);
-            if (message.os_type != null && message.hasOwnProperty("os_type"))
+            if (message.os_type != null && Object.hasOwnProperty.call(message, "os_type"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.os_type);
-            if (message.language != null && message.hasOwnProperty("language"))
+            if (message.language != null && Object.hasOwnProperty.call(message, "language"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.language);
-            if (message.num_install_folders != null && message.hasOwnProperty("num_install_folders"))
+            if (message.num_install_folders != null && Object.hasOwnProperty.call(message, "num_install_folders"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.num_install_folders);
-            if (message.num_installed_games != null && message.hasOwnProperty("num_installed_games"))
+            if (message.num_installed_games != null && Object.hasOwnProperty.call(message, "num_installed_games"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.num_installed_games);
-            if (message.size_installed_games != null && message.hasOwnProperty("size_installed_games"))
+            if (message.size_installed_games != null && Object.hasOwnProperty.call(message, "size_installed_games"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.size_installed_games);
             return writer;
         };
@@ -19437,11 +19437,11 @@
         CMsgClientGetCDNAuthTokenResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eresult);
-            if (message.token != null && message.hasOwnProperty("token"))
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.token);
-            if (message.expiration_time != null && message.hasOwnProperty("expiration_time"))
+            if (message.expiration_time != null && Object.hasOwnProperty.call(message, "expiration_time"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.expiration_time);
             return writer;
         };
@@ -19670,12 +19670,12 @@
         CMsgDownloadRateStatistics.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+            if (message.cell_id != null && Object.hasOwnProperty.call(message, "cell_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cell_id);
             if (message.stats != null && message.stats.length)
                 for (var i = 0; i < message.stats.length; ++i)
                     $root.CMsgDownloadRateStatistics.StatsInfo.encode(message.stats[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.throttling_kbps != null && message.hasOwnProperty("throttling_kbps"))
+            if (message.throttling_kbps != null && Object.hasOwnProperty.call(message, "throttling_kbps"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.throttling_kbps);
             return writer;
         };
@@ -19965,21 +19965,21 @@
             StatsInfo.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.source_type != null && message.hasOwnProperty("source_type"))
+                if (message.source_type != null && Object.hasOwnProperty.call(message, "source_type"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.source_type);
-                if (message.source_id != null && message.hasOwnProperty("source_id"))
+                if (message.source_id != null && Object.hasOwnProperty.call(message, "source_id"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.source_id);
-                if (message.seconds != null && message.hasOwnProperty("seconds"))
+                if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seconds);
-                if (message.bytes != null && message.hasOwnProperty("bytes"))
+                if (message.bytes != null && Object.hasOwnProperty.call(message, "bytes"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.bytes);
-                if (message.host_name != null && message.hasOwnProperty("host_name"))
+                if (message.host_name != null && Object.hasOwnProperty.call(message, "host_name"))
                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.host_name);
-                if (message.microseconds != null && message.hasOwnProperty("microseconds"))
+                if (message.microseconds != null && Object.hasOwnProperty.call(message, "microseconds"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.microseconds);
-                if (message.used_ipv6 != null && message.hasOwnProperty("used_ipv6"))
+                if (message.used_ipv6 != null && Object.hasOwnProperty.call(message, "used_ipv6"))
                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.used_ipv6);
-                if (message.proxied != null && message.hasOwnProperty("proxied"))
+                if (message.proxied != null && Object.hasOwnProperty.call(message, "proxied"))
                     writer.uint32(/* id 8, wireType 0 =*/64).bool(message.proxied);
                 return writer;
             };
@@ -20284,9 +20284,9 @@
         CMsgClientRequestAccountData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.account_or_email != null && message.hasOwnProperty("account_or_email"))
+            if (message.account_or_email != null && Object.hasOwnProperty.call(message, "account_or_email"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.account_or_email);
-            if (message.action != null && message.hasOwnProperty("action"))
+            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.action);
             return writer;
         };
@@ -20539,19 +20539,19 @@
         CMsgClientRequestAccountDataResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.action != null && message.hasOwnProperty("action"))
+            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.action);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eresult);
-            if (message.account_name != null && message.hasOwnProperty("account_name"))
+            if (message.account_name != null && Object.hasOwnProperty.call(message, "account_name"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.account_name);
-            if (message.ct_matches != null && message.hasOwnProperty("ct_matches"))
+            if (message.ct_matches != null && Object.hasOwnProperty.call(message, "ct_matches"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.ct_matches);
-            if (message.account_name_suggestion1 != null && message.hasOwnProperty("account_name_suggestion1"))
+            if (message.account_name_suggestion1 != null && Object.hasOwnProperty.call(message, "account_name_suggestion1"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.account_name_suggestion1);
-            if (message.account_name_suggestion2 != null && message.hasOwnProperty("account_name_suggestion2"))
+            if (message.account_name_suggestion2 != null && Object.hasOwnProperty.call(message, "account_name_suggestion2"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.account_name_suggestion2);
-            if (message.account_name_suggestion3 != null && message.hasOwnProperty("account_name_suggestion3"))
+            if (message.account_name_suggestion3 != null && Object.hasOwnProperty.call(message, "account_name_suggestion3"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.account_name_suggestion3);
             return writer;
         };
@@ -20841,15 +20841,15 @@
         CMsgClientUGSGetGlobalStats.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.gameid != null && message.hasOwnProperty("gameid"))
+            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.gameid);
-            if (message.history_days_requested != null && message.hasOwnProperty("history_days_requested"))
+            if (message.history_days_requested != null && Object.hasOwnProperty.call(message, "history_days_requested"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.history_days_requested);
-            if (message.time_last_requested != null && message.hasOwnProperty("time_last_requested"))
+            if (message.time_last_requested != null && Object.hasOwnProperty.call(message, "time_last_requested"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.time_last_requested);
-            if (message.first_day_cached != null && message.hasOwnProperty("first_day_cached"))
+            if (message.first_day_cached != null && Object.hasOwnProperty.call(message, "first_day_cached"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.first_day_cached);
-            if (message.days_cached != null && message.hasOwnProperty("days_cached"))
+            if (message.days_cached != null && Object.hasOwnProperty.call(message, "days_cached"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.days_cached);
             return writer;
         };
@@ -21123,11 +21123,11 @@
         CMsgClientUGSGetGlobalStatsResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+            if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
                 writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.timestamp);
-            if (message.day_current != null && message.hasOwnProperty("day_current"))
+            if (message.day_current != null && Object.hasOwnProperty.call(message, "day_current"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day_current);
             if (message.days != null && message.days.length)
                 for (var i = 0; i < message.days.length; ++i)
@@ -21378,7 +21378,7 @@
             Day.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.day_id != null && message.hasOwnProperty("day_id"))
+                if (message.day_id != null && Object.hasOwnProperty.call(message, "day_id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.day_id);
                 if (message.stats != null && message.stats.length)
                     for (var i = 0; i < message.stats.length; ++i)
@@ -21605,9 +21605,9 @@
                 Stat.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.stat_id != null && message.hasOwnProperty("stat_id"))
+                    if (message.stat_id != null && Object.hasOwnProperty.call(message, "stat_id"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.stat_id);
-                    if (message.data != null && message.hasOwnProperty("data"))
+                    if (message.data != null && Object.hasOwnProperty.call(message, "data"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int64(message.data);
                     return writer;
                 };
@@ -22025,52 +22025,52 @@
         CMsgGameServerData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id_gs != null && message.hasOwnProperty("steam_id_gs"))
+            if (message.steam_id_gs != null && Object.hasOwnProperty.call(message, "steam_id_gs"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id_gs);
-            if (message.deprecated_ip != null && message.hasOwnProperty("deprecated_ip"))
+            if (message.deprecated_ip != null && Object.hasOwnProperty.call(message, "deprecated_ip"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.deprecated_ip);
-            if (message.query_port != null && message.hasOwnProperty("query_port"))
+            if (message.query_port != null && Object.hasOwnProperty.call(message, "query_port"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.query_port);
-            if (message.game_port != null && message.hasOwnProperty("game_port"))
+            if (message.game_port != null && Object.hasOwnProperty.call(message, "game_port"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.game_port);
-            if (message.sourcetv_port != null && message.hasOwnProperty("sourcetv_port"))
+            if (message.sourcetv_port != null && Object.hasOwnProperty.call(message, "sourcetv_port"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.sourcetv_port);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.app_id);
-            if (message.gamedir != null && message.hasOwnProperty("gamedir"))
+            if (message.gamedir != null && Object.hasOwnProperty.call(message, "gamedir"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.gamedir);
-            if (message.version != null && message.hasOwnProperty("version"))
+            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.version);
-            if (message.product != null && message.hasOwnProperty("product"))
+            if (message.product != null && Object.hasOwnProperty.call(message, "product"))
                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.product);
-            if (message.region != null && message.hasOwnProperty("region"))
+            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.region);
             if (message.players != null && message.players.length)
                 for (var i = 0; i < message.players.length; ++i)
                     $root.CMsgGameServerData.Player.encode(message.players[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-            if (message.max_players != null && message.hasOwnProperty("max_players"))
+            if (message.max_players != null && Object.hasOwnProperty.call(message, "max_players"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.max_players);
-            if (message.bot_count != null && message.hasOwnProperty("bot_count"))
+            if (message.bot_count != null && Object.hasOwnProperty.call(message, "bot_count"))
                 writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.bot_count);
-            if (message.password != null && message.hasOwnProperty("password"))
+            if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.password);
-            if (message.secure != null && message.hasOwnProperty("secure"))
+            if (message.secure != null && Object.hasOwnProperty.call(message, "secure"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.secure);
-            if (message.dedicated != null && message.hasOwnProperty("dedicated"))
+            if (message.dedicated != null && Object.hasOwnProperty.call(message, "dedicated"))
                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.dedicated);
-            if (message.os != null && message.hasOwnProperty("os"))
+            if (message.os != null && Object.hasOwnProperty.call(message, "os"))
                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.os);
-            if (message.game_data != null && message.hasOwnProperty("game_data"))
+            if (message.game_data != null && Object.hasOwnProperty.call(message, "game_data"))
                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.game_data);
-            if (message.game_data_version != null && message.hasOwnProperty("game_data_version"))
+            if (message.game_data_version != null && Object.hasOwnProperty.call(message, "game_data_version"))
                 writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.game_data_version);
-            if (message.game_type != null && message.hasOwnProperty("game_type"))
+            if (message.game_type != null && Object.hasOwnProperty.call(message, "game_type"))
                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.game_type);
-            if (message.map != null && message.hasOwnProperty("map"))
+            if (message.map != null && Object.hasOwnProperty.call(message, "map"))
                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.map);
-            if (message.name != null && message.hasOwnProperty("name"))
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.name);
-            if (message.game_ip_address != null && message.hasOwnProperty("game_ip_address"))
+            if (message.game_ip_address != null && Object.hasOwnProperty.call(message, "game_ip_address"))
                 $root.CMsgIPAddress.encode(message.game_ip_address, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
             return writer;
         };
@@ -22536,7 +22536,7 @@
             Player.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id);
                 return writer;
             };
@@ -22767,13 +22767,13 @@
         CMsgGameServerRemove.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+            if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id);
-            if (message.deprecated_ip != null && message.hasOwnProperty("deprecated_ip"))
+            if (message.deprecated_ip != null && Object.hasOwnProperty.call(message, "deprecated_ip"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.deprecated_ip);
-            if (message.query_port != null && message.hasOwnProperty("query_port"))
+            if (message.query_port != null && Object.hasOwnProperty.call(message, "query_port"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.query_port);
-            if (message.ip != null && message.hasOwnProperty("ip"))
+            if (message.ip != null && Object.hasOwnProperty.call(message, "ip"))
                 $root.CMsgIPAddress.encode(message.ip, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
@@ -23049,15 +23049,15 @@
         CMsgClientGMSServerQuery.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-            if (message.geo_location_ip != null && message.hasOwnProperty("geo_location_ip"))
+            if (message.geo_location_ip != null && Object.hasOwnProperty.call(message, "geo_location_ip"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.geo_location_ip);
-            if (message.region_code != null && message.hasOwnProperty("region_code"))
+            if (message.region_code != null && Object.hasOwnProperty.call(message, "region_code"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.region_code);
-            if (message.filter_text != null && message.hasOwnProperty("filter_text"))
+            if (message.filter_text != null && Object.hasOwnProperty.call(message, "filter_text"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter_text);
-            if (message.max_servers != null && message.hasOwnProperty("max_servers"))
+            if (message.max_servers != null && Object.hasOwnProperty.call(message, "max_servers"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.max_servers);
             return writer;
         };
@@ -23302,7 +23302,7 @@
             if (message.servers != null && message.servers.length)
                 for (var i = 0; i < message.servers.length; ++i)
                     $root.CMsgGMSClientServerQueryResponse.Server.encode(message.servers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.error != null && message.hasOwnProperty("error"))
+            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.error);
             return writer;
         };
@@ -23544,13 +23544,13 @@
             Server.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.deprecated_server_ip != null && message.hasOwnProperty("deprecated_server_ip"))
+                if (message.deprecated_server_ip != null && Object.hasOwnProperty.call(message, "deprecated_server_ip"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.deprecated_server_ip);
-                if (message.server_port != null && message.hasOwnProperty("server_port"))
+                if (message.server_port != null && Object.hasOwnProperty.call(message, "server_port"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.server_port);
-                if (message.auth_players != null && message.hasOwnProperty("auth_players"))
+                if (message.auth_players != null && Object.hasOwnProperty.call(message, "auth_players"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.auth_players);
-                if (message.server_ip != null && message.hasOwnProperty("server_ip"))
+                if (message.server_ip != null && Object.hasOwnProperty.call(message, "server_ip"))
                     $root.CMsgIPAddress.encode(message.server_ip, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 return writer;
             };
@@ -23797,11 +23797,11 @@
         CMsgGameServerOutOfDate.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id_gs != null && message.hasOwnProperty("steam_id_gs"))
+            if (message.steam_id_gs != null && Object.hasOwnProperty.call(message, "steam_id_gs"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id_gs);
-            if (message.reject != null && message.hasOwnProperty("reject"))
+            if (message.reject != null && Object.hasOwnProperty.call(message, "reject"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.reject);
-            if (message.message != null && message.hasOwnProperty("message"))
+            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
             return writer;
         };
@@ -24025,7 +24025,7 @@
         CMsgClientRedeemGuestPass.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.guest_pass_id != null && message.hasOwnProperty("guest_pass_id"))
+            if (message.guest_pass_id != null && Object.hasOwnProperty.call(message, "guest_pass_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.guest_pass_id);
             return writer;
         };
@@ -24244,11 +24244,11 @@
         CMsgClientRedeemGuestPassResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eresult);
-            if (message.package_id != null && message.hasOwnProperty("package_id"))
+            if (message.package_id != null && Object.hasOwnProperty.call(message, "package_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.package_id);
-            if (message.must_own_appid != null && message.hasOwnProperty("must_own_appid"))
+            if (message.must_own_appid != null && Object.hasOwnProperty.call(message, "must_own_appid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.must_own_appid);
             return writer;
         };
@@ -24676,7 +24676,7 @@
         CMsgClientGetClanActivityCountsResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eresult);
             return writer;
         };
@@ -24899,15 +24899,15 @@
         CMsgClientOGSReportString.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.accumulated != null && message.hasOwnProperty("accumulated"))
+            if (message.accumulated != null && Object.hasOwnProperty.call(message, "accumulated"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.accumulated);
-            if (message.sessionid != null && message.hasOwnProperty("sessionid"))
+            if (message.sessionid != null && Object.hasOwnProperty.call(message, "sessionid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.sessionid);
-            if (message.severity != null && message.hasOwnProperty("severity"))
+            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.severity);
-            if (message.formatter != null && message.hasOwnProperty("formatter"))
+            if (message.formatter != null && Object.hasOwnProperty.call(message, "formatter"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.formatter);
-            if (message.varargs != null && message.hasOwnProperty("varargs"))
+            if (message.varargs != null && Object.hasOwnProperty.call(message, "varargs"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.varargs);
             return writer;
         };
@@ -25180,11 +25180,11 @@
         CMsgClientOGSReportBug.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.sessionid != null && message.hasOwnProperty("sessionid"))
+            if (message.sessionid != null && Object.hasOwnProperty.call(message, "sessionid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.sessionid);
-            if (message.bugtext != null && message.hasOwnProperty("bugtext"))
+            if (message.bugtext != null && Object.hasOwnProperty.call(message, "bugtext"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.bugtext);
-            if (message.screenshot != null && message.hasOwnProperty("screenshot"))
+            if (message.screenshot != null && Object.hasOwnProperty.call(message, "screenshot"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.screenshot);
             return writer;
         };
@@ -25417,7 +25417,7 @@
         CMsgGSAssociateWithClan.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id_clan != null && message.hasOwnProperty("steam_id_clan"))
+            if (message.steam_id_clan != null && Object.hasOwnProperty.call(message, "steam_id_clan"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id_clan);
             return writer;
         };
@@ -25627,9 +25627,9 @@
         CMsgGSAssociateWithClanResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id_clan != null && message.hasOwnProperty("steam_id_clan"))
+            if (message.steam_id_clan != null && Object.hasOwnProperty.call(message, "steam_id_clan"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id_clan);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eresult);
             return writer;
         };
@@ -25842,7 +25842,7 @@
         CMsgGSComputeNewPlayerCompatibility.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id_candidate != null && message.hasOwnProperty("steam_id_candidate"))
+            if (message.steam_id_candidate != null && Object.hasOwnProperty.call(message, "steam_id_candidate"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id_candidate);
             return writer;
         };
@@ -26088,17 +26088,17 @@
         CMsgGSComputeNewPlayerCompatibilityResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id_candidate != null && message.hasOwnProperty("steam_id_candidate"))
+            if (message.steam_id_candidate != null && Object.hasOwnProperty.call(message, "steam_id_candidate"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id_candidate);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eresult);
-            if (message.is_clan_member != null && message.hasOwnProperty("is_clan_member"))
+            if (message.is_clan_member != null && Object.hasOwnProperty.call(message, "is_clan_member"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.is_clan_member);
-            if (message.ct_dont_like_you != null && message.hasOwnProperty("ct_dont_like_you"))
+            if (message.ct_dont_like_you != null && Object.hasOwnProperty.call(message, "ct_dont_like_you"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.ct_dont_like_you);
-            if (message.ct_you_dont_like != null && message.hasOwnProperty("ct_you_dont_like"))
+            if (message.ct_you_dont_like != null && Object.hasOwnProperty.call(message, "ct_you_dont_like"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.ct_you_dont_like);
-            if (message.ct_clanmembers_dont_like_you != null && message.hasOwnProperty("ct_clanmembers_dont_like_you"))
+            if (message.ct_clanmembers_dont_like_you != null && Object.hasOwnProperty.call(message, "ct_clanmembers_dont_like_you"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.ct_clanmembers_dont_like_you);
             return writer;
         };
@@ -26560,17 +26560,17 @@
         CMsgGCClient.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.msgtype != null && message.hasOwnProperty("msgtype"))
+            if (message.msgtype != null && Object.hasOwnProperty.call(message, "msgtype"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.msgtype);
-            if (message.payload != null && message.hasOwnProperty("payload"))
+            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.payload);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
+            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.steamid);
-            if (message.gcname != null && message.hasOwnProperty("gcname"))
+            if (message.gcname != null && Object.hasOwnProperty.call(message, "gcname"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.gcname);
-            if (message.ip != null && message.hasOwnProperty("ip"))
+            if (message.ip != null && Object.hasOwnProperty.call(message, "ip"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.ip);
             return writer;
         };
@@ -27064,7 +27064,7 @@
         CMsgClientRequestFreeLicenseResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eresult);
             if (message.granted_packageids != null && message.granted_packageids.length)
                 for (var i = 0; i < message.granted_packageids.length; ++i)
@@ -27382,21 +27382,21 @@
         CMsgDRMDownloadRequestWithCrashData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.download_flags != null && message.hasOwnProperty("download_flags"))
+            if (message.download_flags != null && Object.hasOwnProperty.call(message, "download_flags"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.download_flags);
-            if (message.download_types_known != null && message.hasOwnProperty("download_types_known"))
+            if (message.download_types_known != null && Object.hasOwnProperty.call(message, "download_types_known"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.download_types_known);
-            if (message.guid_drm != null && message.hasOwnProperty("guid_drm"))
+            if (message.guid_drm != null && Object.hasOwnProperty.call(message, "guid_drm"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.guid_drm);
-            if (message.guid_split != null && message.hasOwnProperty("guid_split"))
+            if (message.guid_split != null && Object.hasOwnProperty.call(message, "guid_split"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.guid_split);
-            if (message.guid_merge != null && message.hasOwnProperty("guid_merge"))
+            if (message.guid_merge != null && Object.hasOwnProperty.call(message, "guid_merge"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.guid_merge);
-            if (message.module_name != null && message.hasOwnProperty("module_name"))
+            if (message.module_name != null && Object.hasOwnProperty.call(message, "module_name"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.module_name);
-            if (message.module_path != null && message.hasOwnProperty("module_path"))
+            if (message.module_path != null && Object.hasOwnProperty.call(message, "module_path"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.module_path);
-            if (message.crash_data != null && message.hasOwnProperty("crash_data"))
+            if (message.crash_data != null && Object.hasOwnProperty.call(message, "crash_data"))
                 writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.crash_data);
             return writer;
         };
@@ -27760,21 +27760,21 @@
         CMsgDRMDownloadResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eresult);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
-            if (message.blob_download_type != null && message.hasOwnProperty("blob_download_type"))
+            if (message.blob_download_type != null && Object.hasOwnProperty.call(message, "blob_download_type"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.blob_download_type);
-            if (message.merge_guid != null && message.hasOwnProperty("merge_guid"))
+            if (message.merge_guid != null && Object.hasOwnProperty.call(message, "merge_guid"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.merge_guid);
-            if (message.download_file_dfs_ip != null && message.hasOwnProperty("download_file_dfs_ip"))
+            if (message.download_file_dfs_ip != null && Object.hasOwnProperty.call(message, "download_file_dfs_ip"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.download_file_dfs_ip);
-            if (message.download_file_dfs_port != null && message.hasOwnProperty("download_file_dfs_port"))
+            if (message.download_file_dfs_port != null && Object.hasOwnProperty.call(message, "download_file_dfs_port"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.download_file_dfs_port);
-            if (message.download_file_url != null && message.hasOwnProperty("download_file_url"))
+            if (message.download_file_url != null && Object.hasOwnProperty.call(message, "download_file_url"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.download_file_url);
-            if (message.module_path != null && message.hasOwnProperty("module_path"))
+            if (message.module_path != null && Object.hasOwnProperty.call(message, "module_path"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.module_path);
             return writer;
         };
@@ -28111,21 +28111,21 @@
         CMsgDRMFinalResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eResult != null && message.hasOwnProperty("eResult"))
+            if (message.eResult != null && Object.hasOwnProperty.call(message, "eResult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eResult);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
+            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
-            if (message.blob_download_type != null && message.hasOwnProperty("blob_download_type"))
+            if (message.blob_download_type != null && Object.hasOwnProperty.call(message, "blob_download_type"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.blob_download_type);
-            if (message.error_detail != null && message.hasOwnProperty("error_detail"))
+            if (message.error_detail != null && Object.hasOwnProperty.call(message, "error_detail"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.error_detail);
-            if (message.merge_guid != null && message.hasOwnProperty("merge_guid"))
+            if (message.merge_guid != null && Object.hasOwnProperty.call(message, "merge_guid"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.merge_guid);
-            if (message.download_file_dfs_ip != null && message.hasOwnProperty("download_file_dfs_ip"))
+            if (message.download_file_dfs_ip != null && Object.hasOwnProperty.call(message, "download_file_dfs_ip"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.download_file_dfs_ip);
-            if (message.download_file_dfs_port != null && message.hasOwnProperty("download_file_dfs_port"))
+            if (message.download_file_dfs_port != null && Object.hasOwnProperty.call(message, "download_file_dfs_port"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.download_file_dfs_port);
-            if (message.download_file_url != null && message.hasOwnProperty("download_file_url"))
+            if (message.download_file_url != null && Object.hasOwnProperty.call(message, "download_file_url"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.download_file_url);
             return writer;
         };
@@ -28399,7 +28399,7 @@
         CMsgClientDPCheckSpecialSurvey.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.survey_id != null && message.hasOwnProperty("survey_id"))
+            if (message.survey_id != null && Object.hasOwnProperty.call(message, "survey_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.survey_id);
             return writer;
         };
@@ -28631,17 +28631,17 @@
         CMsgClientDPCheckSpecialSurveyResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eResult != null && message.hasOwnProperty("eResult"))
+            if (message.eResult != null && Object.hasOwnProperty.call(message, "eResult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eResult);
-            if (message.state != null && message.hasOwnProperty("state"))
+            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.state);
-            if (message.name != null && message.hasOwnProperty("name"))
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-            if (message.custom_url != null && message.hasOwnProperty("custom_url"))
+            if (message.custom_url != null && Object.hasOwnProperty.call(message, "custom_url"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.custom_url);
-            if (message.include_software != null && message.hasOwnProperty("include_software"))
+            if (message.include_software != null && Object.hasOwnProperty.call(message, "include_software"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.include_software);
-            if (message.token != null && message.hasOwnProperty("token"))
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.token);
             return writer;
         };
@@ -28902,9 +28902,9 @@
         CMsgClientDPSendSpecialSurveyResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.survey_id != null && message.hasOwnProperty("survey_id"))
+            if (message.survey_id != null && Object.hasOwnProperty.call(message, "survey_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.survey_id);
-            if (message.data != null && message.hasOwnProperty("data"))
+            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
             return writer;
         };
@@ -29121,9 +29121,9 @@
         CMsgClientDPSendSpecialSurveyResponseReply.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eResult != null && message.hasOwnProperty("eResult"))
+            if (message.eResult != null && Object.hasOwnProperty.call(message, "eResult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eResult);
-            if (message.token != null && message.hasOwnProperty("token"))
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.token);
             return writer;
         };
@@ -29340,9 +29340,9 @@
         CMsgClientRequestForgottenPasswordEmail.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.account_name != null && message.hasOwnProperty("account_name"))
+            if (message.account_name != null && Object.hasOwnProperty.call(message, "account_name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.account_name);
-            if (message.password_tried != null && message.hasOwnProperty("password_tried"))
+            if (message.password_tried != null && Object.hasOwnProperty.call(message, "password_tried"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.password_tried);
             return writer;
         };
@@ -29550,9 +29550,9 @@
         CMsgClientRequestForgottenPasswordEmailResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eResult != null && message.hasOwnProperty("eResult"))
+            if (message.eResult != null && Object.hasOwnProperty.call(message, "eResult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.eResult);
-            if (message.use_secret_question != null && message.hasOwnProperty("use_secret_question"))
+            if (message.use_secret_question != null && Object.hasOwnProperty.call(message, "use_secret_question"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.use_secret_question);
             return writer;
         };
@@ -29761,7 +29761,7 @@
         CMsgClientItemAnnouncements.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.count_new_items != null && message.hasOwnProperty("count_new_items"))
+            if (message.count_new_items != null && Object.hasOwnProperty.call(message, "count_new_items"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.count_new_items);
             if (message.unseen_items != null && message.unseen_items.length)
                 for (var i = 0; i < message.unseen_items.length; ++i)
@@ -30024,17 +30024,17 @@
             UnseenItem.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.appid != null && message.hasOwnProperty("appid"))
+                if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-                if (message.context_id != null && message.hasOwnProperty("context_id"))
+                if (message.context_id != null && Object.hasOwnProperty.call(message, "context_id"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.context_id);
-                if (message.asset_id != null && message.hasOwnProperty("asset_id"))
+                if (message.asset_id != null && Object.hasOwnProperty.call(message, "asset_id"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.asset_id);
-                if (message.amount != null && message.hasOwnProperty("amount"))
+                if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.amount);
-                if (message.rtime32_gained != null && message.hasOwnProperty("rtime32_gained"))
+                if (message.rtime32_gained != null && Object.hasOwnProperty.call(message, "rtime32_gained"))
                     writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.rtime32_gained);
-                if (message.source_appid != null && message.hasOwnProperty("source_appid"))
+                if (message.source_appid != null && Object.hasOwnProperty.call(message, "source_appid"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.source_appid);
                 return writer;
             };
@@ -30696,9 +30696,9 @@
             Notification.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.user_notification_type != null && message.hasOwnProperty("user_notification_type"))
+                if (message.user_notification_type != null && Object.hasOwnProperty.call(message, "user_notification_type"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.user_notification_type);
-                if (message.count != null && message.hasOwnProperty("count"))
+                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.count);
                 return writer;
             };
@@ -30918,11 +30918,11 @@
         CMsgClientCommentNotifications.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.count_new_comments != null && message.hasOwnProperty("count_new_comments"))
+            if (message.count_new_comments != null && Object.hasOwnProperty.call(message, "count_new_comments"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.count_new_comments);
-            if (message.count_new_comments_owner != null && message.hasOwnProperty("count_new_comments_owner"))
+            if (message.count_new_comments_owner != null && Object.hasOwnProperty.call(message, "count_new_comments_owner"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.count_new_comments_owner);
-            if (message.count_new_comments_subscriptions != null && message.hasOwnProperty("count_new_comments_subscriptions"))
+            if (message.count_new_comments_subscriptions != null && Object.hasOwnProperty.call(message, "count_new_comments_subscriptions"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.count_new_comments_subscriptions);
             return writer;
         };
@@ -31302,7 +31302,7 @@
         CMsgClientOfflineMessageNotification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.offline_messages != null && message.hasOwnProperty("offline_messages"))
+            if (message.offline_messages != null && Object.hasOwnProperty.call(message, "offline_messages"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.offline_messages);
             if (message.friends_with_offline_messages != null && message.friends_with_offline_messages.length)
                 for (var i = 0; i < message.friends_with_offline_messages.length; ++i)
@@ -31683,7 +31683,7 @@
         CMsgClientChatGetFriendMessageHistory.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
+            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
             return writer;
         };
@@ -31903,9 +31903,9 @@
         CMsgClientChatGetFriendMessageHistoryResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
+            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.success != null && message.hasOwnProperty("success"))
+            if (message.success != null && Object.hasOwnProperty.call(message, "success"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.success);
             if (message.messages != null && message.messages.length)
                 for (var i = 0; i < message.messages.length; ++i)
@@ -32176,13 +32176,13 @@
             FriendMessage.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.accountid != null && message.hasOwnProperty("accountid"))
+                if (message.accountid != null && Object.hasOwnProperty.call(message, "accountid"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.accountid);
-                if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.timestamp);
-                if (message.message != null && message.hasOwnProperty("message"))
+                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
-                if (message.unread != null && message.hasOwnProperty("unread"))
+                if (message.unread != null && Object.hasOwnProperty.call(message, "unread"))
                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.unread);
                 return writer;
             };
@@ -32988,9 +32988,9 @@
             Friend.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.accountid != null && message.hasOwnProperty("accountid"))
+                if (message.accountid != null && Object.hasOwnProperty.call(message, "accountid"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.accountid);
-                if (message.level != null && message.hasOwnProperty("level"))
+                if (message.level != null && Object.hasOwnProperty.call(message, "level"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.level);
                 return writer;
             };
@@ -33237,17 +33237,17 @@
         CMsgClientEmailAddrInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.email_address != null && message.hasOwnProperty("email_address"))
+            if (message.email_address != null && Object.hasOwnProperty.call(message, "email_address"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.email_address);
-            if (message.email_is_validated != null && message.hasOwnProperty("email_is_validated"))
+            if (message.email_is_validated != null && Object.hasOwnProperty.call(message, "email_is_validated"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.email_is_validated);
-            if (message.email_validation_changed != null && message.hasOwnProperty("email_validation_changed"))
+            if (message.email_validation_changed != null && Object.hasOwnProperty.call(message, "email_validation_changed"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.email_validation_changed);
-            if (message.credential_change_requires_code != null && message.hasOwnProperty("credential_change_requires_code"))
+            if (message.credential_change_requires_code != null && Object.hasOwnProperty.call(message, "credential_change_requires_code"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.credential_change_requires_code);
-            if (message.password_or_secretqa_change_requires_code != null && message.hasOwnProperty("password_or_secretqa_change_requires_code"))
+            if (message.password_or_secretqa_change_requires_code != null && Object.hasOwnProperty.call(message, "password_or_secretqa_change_requires_code"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.password_or_secretqa_change_requires_code);
-            if (message.remind_user_about_email != null && message.hasOwnProperty("remind_user_about_email"))
+            if (message.remind_user_about_email != null && Object.hasOwnProperty.call(message, "remind_user_about_email"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.remind_user_about_email);
             return writer;
         };
@@ -33695,7 +33695,7 @@
             PublishedFileId.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
                 return writer;
             };
@@ -33909,7 +33909,7 @@
         CMsgCREItemVoteSummaryResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.item_vote_summaries != null && message.item_vote_summaries.length)
                 for (var i = 0; i < message.item_vote_summaries.length; ++i)
@@ -34163,15 +34163,15 @@
             ItemVoteSummary.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.votes_for != null && message.hasOwnProperty("votes_for"))
+                if (message.votes_for != null && Object.hasOwnProperty.call(message, "votes_for"))
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.votes_for);
-                if (message.votes_against != null && message.hasOwnProperty("votes_against"))
+                if (message.votes_against != null && Object.hasOwnProperty.call(message, "votes_against"))
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.votes_against);
-                if (message.reports != null && message.hasOwnProperty("reports"))
+                if (message.reports != null && Object.hasOwnProperty.call(message, "reports"))
                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.reports);
-                if (message.score != null && message.hasOwnProperty("score"))
+                if (message.score != null && Object.hasOwnProperty.call(message, "score"))
                     writer.uint32(/* id 5, wireType 5 =*/45).float(message.score);
                 return writer;
             };
@@ -34429,9 +34429,9 @@
         CMsgCREUpdateUserPublishedItemVote.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+            if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-            if (message.vote_up != null && message.hasOwnProperty("vote_up"))
+            if (message.vote_up != null && Object.hasOwnProperty.call(message, "vote_up"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.vote_up);
             return writer;
         };
@@ -34644,7 +34644,7 @@
         CMsgCREUpdateUserPublishedItemVoteResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             return writer;
         };
@@ -35036,7 +35036,7 @@
             PublishedFileId.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
                 return writer;
             };
@@ -35250,7 +35250,7 @@
         CMsgCREGetUserPublishedItemVoteDetailsResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.user_item_vote_details != null && message.user_item_vote_details.length)
                 for (var i = 0; i < message.user_item_vote_details.length; ++i)
@@ -35477,9 +35477,9 @@
             UserItemVoteDetail.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (message.published_file_id != null && Object.hasOwnProperty.call(message, "published_file_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
-                if (message.vote != null && message.hasOwnProperty("vote"))
+                if (message.vote != null && Object.hasOwnProperty.call(message, "vote"))
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.vote);
                 return writer;
             };
@@ -35714,9 +35714,9 @@
         CMsgGameServerPingSample.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.my_ip != null && message.hasOwnProperty("my_ip"))
+            if (message.my_ip != null && Object.hasOwnProperty.call(message, "my_ip"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.my_ip);
-            if (message.gs_app_id != null && message.hasOwnProperty("gs_app_id"))
+            if (message.gs_app_id != null && Object.hasOwnProperty.call(message, "gs_app_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gs_app_id);
             if (message.gs_samples != null && message.gs_samples.length)
                 for (var i = 0; i < message.gs_samples.length; ++i)
@@ -35964,11 +35964,11 @@
             Sample.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.ip != null && message.hasOwnProperty("ip"))
+                if (message.ip != null && Object.hasOwnProperty.call(message, "ip"))
                     writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.ip);
-                if (message.avg_ping_ms != null && message.hasOwnProperty("avg_ping_ms"))
+                if (message.avg_ping_ms != null && Object.hasOwnProperty.call(message, "avg_ping_ms"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.avg_ping_ms);
-                if (message.stddev_ping_ms_x10 != null && message.hasOwnProperty("stddev_ping_ms_x10"))
+                if (message.stddev_ping_ms_x10 != null && Object.hasOwnProperty.call(message, "stddev_ping_ms_x10"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.stddev_ping_ms_x10);
                 return writer;
             };
@@ -36181,7 +36181,7 @@
         CMsgFSGetFollowerCount.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+            if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id);
             return writer;
         };
@@ -36391,9 +36391,9 @@
         CMsgFSGetFollowerCountResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.count != null && message.hasOwnProperty("count"))
+            if (message.count != null && Object.hasOwnProperty.call(message, "count"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.count);
             return writer;
         };
@@ -36592,7 +36592,7 @@
         CMsgFSGetIsFollowing.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+            if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id);
             return writer;
         };
@@ -36802,9 +36802,9 @@
         CMsgFSGetIsFollowingResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.is_following != null && message.hasOwnProperty("is_following"))
+            if (message.is_following != null && Object.hasOwnProperty.call(message, "is_following"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.is_following);
             return writer;
         };
@@ -37003,7 +37003,7 @@
         CMsgFSEnumerateFollowingList.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.start_index != null && message.hasOwnProperty("start_index"))
+            if (message.start_index != null && Object.hasOwnProperty.call(message, "start_index"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.start_index);
             return writer;
         };
@@ -37209,9 +37209,9 @@
         CMsgFSEnumerateFollowingListResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.total_results != null && message.hasOwnProperty("total_results"))
+            if (message.total_results != null && Object.hasOwnProperty.call(message, "total_results"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.total_results);
             if (message.steam_ids != null && message.steam_ids.length)
                 for (var i = 0; i < message.steam_ids.length; ++i)
@@ -37454,7 +37454,7 @@
         CMsgDPGetNumberOfCurrentPlayers.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
             return writer;
         };
@@ -37650,9 +37650,9 @@
         CMsgDPGetNumberOfCurrentPlayersResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.player_count != null && message.hasOwnProperty("player_count"))
+            if (message.player_count != null && Object.hasOwnProperty.call(message, "player_count"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.player_count);
             return writer;
         };
@@ -37869,11 +37869,11 @@
         CMsgClientFriendUserStatusPublished.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.friend_steamid != null && message.hasOwnProperty("friend_steamid"))
+            if (message.friend_steamid != null && Object.hasOwnProperty.call(message, "friend_steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.friend_steamid);
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
-            if (message.status_text != null && message.hasOwnProperty("status_text"))
+            if (message.status_text != null && Object.hasOwnProperty.call(message, "status_text"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.status_text);
             return writer;
         };
@@ -38115,11 +38115,11 @@
         CMsgClientServiceMethodLegacy.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.method_name != null && message.hasOwnProperty("method_name"))
+            if (message.method_name != null && Object.hasOwnProperty.call(message, "method_name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.method_name);
-            if (message.serialized_method != null && message.hasOwnProperty("serialized_method"))
+            if (message.serialized_method != null && Object.hasOwnProperty.call(message, "serialized_method"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.serialized_method);
-            if (message.is_notification != null && message.hasOwnProperty("is_notification"))
+            if (message.is_notification != null && Object.hasOwnProperty.call(message, "is_notification"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.is_notification);
             return writer;
         };
@@ -38347,9 +38347,9 @@
         CMsgClientServiceMethodLegacyResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.method_name != null && message.hasOwnProperty("method_name"))
+            if (message.method_name != null && Object.hasOwnProperty.call(message, "method_name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.method_name);
-            if (message.serialized_method_response != null && message.hasOwnProperty("serialized_method_response"))
+            if (message.serialized_method_response != null && Object.hasOwnProperty.call(message, "serialized_method_response"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.serialized_method_response);
             return writer;
         };
@@ -38566,9 +38566,9 @@
         CMsgClientUIMode.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.uimode != null && message.hasOwnProperty("uimode"))
+            if (message.uimode != null && Object.hasOwnProperty.call(message, "uimode"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.uimode);
-            if (message.chat_mode != null && message.hasOwnProperty("chat_mode"))
+            if (message.chat_mode != null && Object.hasOwnProperty.call(message, "chat_mode"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.chat_mode);
             return writer;
         };
@@ -38767,7 +38767,7 @@
         CMsgClientVanityURLChangedNotification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.vanity_url != null && message.hasOwnProperty("vanity_url"))
+            if (message.vanity_url != null && Object.hasOwnProperty.call(message, "vanity_url"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.vanity_url);
             return writer;
         };
@@ -38972,11 +38972,11 @@
         CMsgClientAuthorizeLocalDeviceRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.device_description != null && message.hasOwnProperty("device_description"))
+            if (message.device_description != null && Object.hasOwnProperty.call(message, "device_description"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.device_description);
-            if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
+            if (message.owner_account_id != null && Object.hasOwnProperty.call(message, "owner_account_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.owner_account_id);
-            if (message.local_device_token != null && message.hasOwnProperty("local_device_token"))
+            if (message.local_device_token != null && Object.hasOwnProperty.call(message, "local_device_token"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.local_device_token);
             return writer;
         };
@@ -39218,11 +39218,11 @@
         CMsgClientAuthorizeLocalDevice.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
+            if (message.owner_account_id != null && Object.hasOwnProperty.call(message, "owner_account_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.owner_account_id);
-            if (message.authed_device_token != null && message.hasOwnProperty("authed_device_token"))
+            if (message.authed_device_token != null && Object.hasOwnProperty.call(message, "authed_device_token"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.authed_device_token);
             return writer;
         };
@@ -39464,11 +39464,11 @@
         CMsgClientAuthorizeLocalDeviceNotification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
+            if (message.owner_account_id != null && Object.hasOwnProperty.call(message, "owner_account_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.owner_account_id);
-            if (message.local_device_token != null && message.hasOwnProperty("local_device_token"))
+            if (message.local_device_token != null && Object.hasOwnProperty.call(message, "local_device_token"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.local_device_token);
             return writer;
         };
@@ -39701,9 +39701,9 @@
         CMsgClientDeauthorizeDeviceRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.deauthorization_account_id != null && message.hasOwnProperty("deauthorization_account_id"))
+            if (message.deauthorization_account_id != null && Object.hasOwnProperty.call(message, "deauthorization_account_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.deauthorization_account_id);
-            if (message.deauthorization_device_token != null && message.hasOwnProperty("deauthorization_device_token"))
+            if (message.deauthorization_device_token != null && Object.hasOwnProperty.call(message, "deauthorization_device_token"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.deauthorization_device_token);
             return writer;
         };
@@ -39925,9 +39925,9 @@
         CMsgClientDeauthorizeDevice.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.deauthorization_account_id != null && message.hasOwnProperty("deauthorization_account_id"))
+            if (message.deauthorization_account_id != null && Object.hasOwnProperty.call(message, "deauthorization_account_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.deauthorization_account_id);
             return writer;
         };
@@ -40384,9 +40384,9 @@
             DeviceToken.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
+                if (message.owner_account_id != null && Object.hasOwnProperty.call(message, "owner_account_id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.owner_account_id);
-                if (message.token_id != null && message.hasOwnProperty("token_id"))
+                if (message.token_id != null && Object.hasOwnProperty.call(message, "token_id"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.token_id);
                 return writer;
             };
@@ -40772,7 +40772,7 @@
         CMsgClientGetAuthorizedDevicesResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             if (message.authorized_device != null && message.authorized_device.length)
                 for (var i = 0; i < message.authorized_device.length; ++i)
@@ -41035,17 +41035,17 @@
             AuthorizedDevice.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.auth_device_token != null && message.hasOwnProperty("auth_device_token"))
+                if (message.auth_device_token != null && Object.hasOwnProperty.call(message, "auth_device_token"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.auth_device_token);
-                if (message.device_name != null && message.hasOwnProperty("device_name"))
+                if (message.device_name != null && Object.hasOwnProperty.call(message, "device_name"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.device_name);
-                if (message.last_access_time != null && message.hasOwnProperty("last_access_time"))
+                if (message.last_access_time != null && Object.hasOwnProperty.call(message, "last_access_time"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.last_access_time);
-                if (message.borrower_id != null && message.hasOwnProperty("borrower_id"))
+                if (message.borrower_id != null && Object.hasOwnProperty.call(message, "borrower_id"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.borrower_id);
-                if (message.is_pending != null && message.hasOwnProperty("is_pending"))
+                if (message.is_pending != null && Object.hasOwnProperty.call(message, "is_pending"))
                     writer.uint32(/* id 5, wireType 0 =*/40).bool(message.is_pending);
-                if (message.app_played != null && message.hasOwnProperty("app_played"))
+                if (message.app_played != null && Object.hasOwnProperty.call(message, "app_played"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.app_played);
                 return writer;
             };
@@ -41318,7 +41318,7 @@
             if (message.locked_library != null && message.locked_library.length)
                 for (var i = 0; i < message.locked_library.length; ++i)
                     $root.CMsgClientSharedLibraryLockStatus.LockedLibrary.encode(message.locked_library[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.own_library_locked_by != null && message.hasOwnProperty("own_library_locked_by"))
+            if (message.own_library_locked_by != null && Object.hasOwnProperty.call(message, "own_library_locked_by"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.own_library_locked_by);
             return writer;
         };
@@ -41542,9 +41542,9 @@
             LockedLibrary.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.owner_id != null && message.hasOwnProperty("owner_id"))
+                if (message.owner_id != null && Object.hasOwnProperty.call(message, "owner_id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.owner_id);
-                if (message.locked_by != null && message.hasOwnProperty("locked_by"))
+                if (message.locked_by != null && Object.hasOwnProperty.call(message, "locked_by"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.locked_by);
                 return writer;
             };
@@ -41756,7 +41756,7 @@
         CMsgClientSharedLibraryStopPlaying.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.seconds_left != null && message.hasOwnProperty("seconds_left"))
+            if (message.seconds_left != null && Object.hasOwnProperty.call(message, "seconds_left"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.seconds_left);
             if (message.stop_apps != null && message.stop_apps.length)
                 for (var i = 0; i < message.stop_apps.length; ++i)
@@ -41983,9 +41983,9 @@
             StopApp.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
-                if (message.owner_id != null && message.hasOwnProperty("owner_id"))
+                if (message.owner_id != null && Object.hasOwnProperty.call(message, "owner_id"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.owner_id);
                 return writer;
             };
@@ -42268,25 +42268,25 @@
         CMsgClientServiceCall.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.sysid_routing != null && message.hasOwnProperty("sysid_routing"))
+            if (message.sysid_routing != null && Object.hasOwnProperty.call(message, "sysid_routing"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.sysid_routing);
-            if (message.call_handle != null && message.hasOwnProperty("call_handle"))
+            if (message.call_handle != null && Object.hasOwnProperty.call(message, "call_handle"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.call_handle);
-            if (message.module_crc != null && message.hasOwnProperty("module_crc"))
+            if (message.module_crc != null && Object.hasOwnProperty.call(message, "module_crc"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.module_crc);
-            if (message.module_hash != null && message.hasOwnProperty("module_hash"))
+            if (message.module_hash != null && Object.hasOwnProperty.call(message, "module_hash"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.module_hash);
-            if (message.function_id != null && message.hasOwnProperty("function_id"))
+            if (message.function_id != null && Object.hasOwnProperty.call(message, "function_id"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.function_id);
-            if (message.cub_output_max != null && message.hasOwnProperty("cub_output_max"))
+            if (message.cub_output_max != null && Object.hasOwnProperty.call(message, "cub_output_max"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.cub_output_max);
-            if (message.flags != null && message.hasOwnProperty("flags"))
+            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.flags);
-            if (message.callparameter != null && message.hasOwnProperty("callparameter"))
+            if (message.callparameter != null && Object.hasOwnProperty.call(message, "callparameter"))
                 writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.callparameter);
-            if (message.ping_only != null && message.hasOwnProperty("ping_only"))
+            if (message.ping_only != null && Object.hasOwnProperty.call(message, "ping_only"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.ping_only);
-            if (message.max_outstanding_calls != null && message.hasOwnProperty("max_outstanding_calls"))
+            if (message.max_outstanding_calls != null && Object.hasOwnProperty.call(message, "max_outstanding_calls"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.max_outstanding_calls);
             return writer;
         };
@@ -42618,11 +42618,11 @@
         CMsgClientServiceModule.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.module_crc != null && message.hasOwnProperty("module_crc"))
+            if (message.module_crc != null && Object.hasOwnProperty.call(message, "module_crc"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.module_crc);
-            if (message.module_hash != null && message.hasOwnProperty("module_hash"))
+            if (message.module_hash != null && Object.hasOwnProperty.call(message, "module_hash"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.module_hash);
-            if (message.module_content != null && message.hasOwnProperty("module_content"))
+            if (message.module_content != null && Object.hasOwnProperty.call(message, "module_content"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.module_content);
             return writer;
         };
@@ -43030,47 +43030,47 @@
         CMsgClientServiceCallResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.sysid_routing != null && message.hasOwnProperty("sysid_routing"))
+            if (message.sysid_routing != null && Object.hasOwnProperty.call(message, "sysid_routing"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.sysid_routing);
-            if (message.call_handle != null && message.hasOwnProperty("call_handle"))
+            if (message.call_handle != null && Object.hasOwnProperty.call(message, "call_handle"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.call_handle);
-            if (message.module_crc != null && message.hasOwnProperty("module_crc"))
+            if (message.module_crc != null && Object.hasOwnProperty.call(message, "module_crc"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.module_crc);
-            if (message.module_hash != null && message.hasOwnProperty("module_hash"))
+            if (message.module_hash != null && Object.hasOwnProperty.call(message, "module_hash"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.module_hash);
-            if (message.ecallresult != null && message.hasOwnProperty("ecallresult"))
+            if (message.ecallresult != null && Object.hasOwnProperty.call(message, "ecallresult"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.ecallresult);
-            if (message.result_content != null && message.hasOwnProperty("result_content"))
+            if (message.result_content != null && Object.hasOwnProperty.call(message, "result_content"))
                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.result_content);
-            if (message.os_version_info != null && message.hasOwnProperty("os_version_info"))
+            if (message.os_version_info != null && Object.hasOwnProperty.call(message, "os_version_info"))
                 writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.os_version_info);
-            if (message.system_info != null && message.hasOwnProperty("system_info"))
+            if (message.system_info != null && Object.hasOwnProperty.call(message, "system_info"))
                 writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.system_info);
-            if (message.load_address != null && message.hasOwnProperty("load_address"))
+            if (message.load_address != null && Object.hasOwnProperty.call(message, "load_address"))
                 writer.uint32(/* id 9, wireType 1 =*/73).fixed64(message.load_address);
-            if (message.exception_record != null && message.hasOwnProperty("exception_record"))
+            if (message.exception_record != null && Object.hasOwnProperty.call(message, "exception_record"))
                 writer.uint32(/* id 10, wireType 2 =*/82).bytes(message.exception_record);
-            if (message.portable_os_version_info != null && message.hasOwnProperty("portable_os_version_info"))
+            if (message.portable_os_version_info != null && Object.hasOwnProperty.call(message, "portable_os_version_info"))
                 writer.uint32(/* id 11, wireType 2 =*/90).bytes(message.portable_os_version_info);
-            if (message.portable_system_info != null && message.hasOwnProperty("portable_system_info"))
+            if (message.portable_system_info != null && Object.hasOwnProperty.call(message, "portable_system_info"))
                 writer.uint32(/* id 12, wireType 2 =*/98).bytes(message.portable_system_info);
-            if (message.was_converted != null && message.hasOwnProperty("was_converted"))
+            if (message.was_converted != null && Object.hasOwnProperty.call(message, "was_converted"))
                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.was_converted);
-            if (message.internal_result != null && message.hasOwnProperty("internal_result"))
+            if (message.internal_result != null && Object.hasOwnProperty.call(message, "internal_result"))
                 writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.internal_result);
-            if (message.current_count != null && message.hasOwnProperty("current_count"))
+            if (message.current_count != null && Object.hasOwnProperty.call(message, "current_count"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.current_count);
-            if (message.last_call_handle != null && message.hasOwnProperty("last_call_handle"))
+            if (message.last_call_handle != null && Object.hasOwnProperty.call(message, "last_call_handle"))
                 writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.last_call_handle);
-            if (message.last_call_module_crc != null && message.hasOwnProperty("last_call_module_crc"))
+            if (message.last_call_module_crc != null && Object.hasOwnProperty.call(message, "last_call_module_crc"))
                 writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.last_call_module_crc);
-            if (message.last_call_sysid_routing != null && message.hasOwnProperty("last_call_sysid_routing"))
+            if (message.last_call_sysid_routing != null && Object.hasOwnProperty.call(message, "last_call_sysid_routing"))
                 writer.uint32(/* id 18, wireType 2 =*/146).bytes(message.last_call_sysid_routing);
-            if (message.last_ecallresult != null && message.hasOwnProperty("last_ecallresult"))
+            if (message.last_ecallresult != null && Object.hasOwnProperty.call(message, "last_ecallresult"))
                 writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.last_ecallresult);
-            if (message.last_callissue_delta != null && message.hasOwnProperty("last_callissue_delta"))
+            if (message.last_callissue_delta != null && Object.hasOwnProperty.call(message, "last_callissue_delta"))
                 writer.uint32(/* id 20, wireType 0 =*/160).uint32(message.last_callissue_delta);
-            if (message.last_callcomplete_delta != null && message.hasOwnProperty("last_callcomplete_delta"))
+            if (message.last_callcomplete_delta != null && Object.hasOwnProperty.call(message, "last_callcomplete_delta"))
                 writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.last_callcomplete_delta);
             return writer;
         };
@@ -43742,9 +43742,9 @@
         CMsgAMUnlockStreamingResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.encryption_key != null && message.hasOwnProperty("encryption_key"))
+            if (message.encryption_key != null && Object.hasOwnProperty.call(message, "encryption_key"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.encryption_key);
             return writer;
         };
@@ -44112,7 +44112,7 @@
         CMsgAMUnlockHEVCResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
             return writer;
         };
@@ -44308,9 +44308,9 @@
         CMsgClientPlayingSessionState.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.playing_blocked != null && message.hasOwnProperty("playing_blocked"))
+            if (message.playing_blocked != null && Object.hasOwnProperty.call(message, "playing_blocked"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.playing_blocked);
-            if (message.playing_app != null && message.hasOwnProperty("playing_app"))
+            if (message.playing_app != null && Object.hasOwnProperty.call(message, "playing_app"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.playing_app);
             return writer;
         };
@@ -44509,7 +44509,7 @@
         CMsgClientKickPlayingSession.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.only_stop_game != null && message.hasOwnProperty("only_stop_game"))
+            if (message.only_stop_game != null && Object.hasOwnProperty.call(message, "only_stop_game"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.only_stop_game);
             return writer;
         };
@@ -44723,13 +44723,13 @@
         CMsgClientVoiceCallPreAuthorize.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.caller_steamid != null && message.hasOwnProperty("caller_steamid"))
+            if (message.caller_steamid != null && Object.hasOwnProperty.call(message, "caller_steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.caller_steamid);
-            if (message.receiver_steamid != null && message.hasOwnProperty("receiver_steamid"))
+            if (message.receiver_steamid != null && Object.hasOwnProperty.call(message, "receiver_steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.receiver_steamid);
-            if (message.caller_id != null && message.hasOwnProperty("caller_id"))
+            if (message.caller_id != null && Object.hasOwnProperty.call(message, "caller_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.caller_id);
-            if (message.hangup != null && message.hasOwnProperty("hangup"))
+            if (message.hangup != null && Object.hasOwnProperty.call(message, "hangup"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.hangup);
             return writer;
         };
@@ -45005,13 +45005,13 @@
         CMsgClientVoiceCallPreAuthorizeResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.caller_steamid != null && message.hasOwnProperty("caller_steamid"))
+            if (message.caller_steamid != null && Object.hasOwnProperty.call(message, "caller_steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.caller_steamid);
-            if (message.receiver_steamid != null && message.hasOwnProperty("receiver_steamid"))
+            if (message.receiver_steamid != null && Object.hasOwnProperty.call(message, "receiver_steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.receiver_steamid);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.eresult);
-            if (message.caller_id != null && message.hasOwnProperty("caller_id"))
+            if (message.caller_id != null && Object.hasOwnProperty.call(message, "caller_id"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.caller_id);
             return writer;
         };
@@ -45269,9 +45269,9 @@
         CMsgBadgeCraftedNotification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.badge_level != null && message.hasOwnProperty("badge_level"))
+            if (message.badge_level != null && Object.hasOwnProperty.call(message, "badge_level"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.badge_level);
             return writer;
         };
@@ -45417,7 +45417,7 @@
     /**
      * EProtoClanEventType enum.
      * @exports EProtoClanEventType
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EClanOtherEvent=1 k_EClanOtherEvent value
      * @property {number} k_EClanGameEvent=2 k_EClanGameEvent value
      * @property {number} k_EClanPartyEvent=3 k_EClanPartyEvent value
@@ -45497,7 +45497,7 @@
     /**
      * PartnerEventNotificationType enum.
      * @exports PartnerEventNotificationType
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EEventStart=0 k_EEventStart value
      * @property {number} k_EEventBroadcastStart=1 k_EEventBroadcastStart value
      * @property {number} k_EEventMatchStart=2 k_EEventMatchStart value
@@ -45591,9 +45591,9 @@
         CMsgIPAddress.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.v4 != null && message.hasOwnProperty("v4"))
+            if (message.v4 != null && Object.hasOwnProperty.call(message, "v4"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.v4);
-            if (message.v6 != null && message.hasOwnProperty("v6"))
+            if (message.v6 != null && Object.hasOwnProperty.call(message, "v6"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.v6);
             return writer;
         };
@@ -45813,9 +45813,9 @@
         CMsgIPAddressBucket.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.original_ip_address != null && message.hasOwnProperty("original_ip_address"))
+            if (message.original_ip_address != null && Object.hasOwnProperty.call(message, "original_ip_address"))
                 $root.CMsgIPAddress.encode(message.original_ip_address, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.bucket != null && message.hasOwnProperty("bucket"))
+            if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.bucket);
             return writer;
         };
@@ -46273,58 +46273,58 @@
         CMsgProtoBufHeader.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
+            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.client_sessionid != null && message.hasOwnProperty("client_sessionid"))
+            if (message.client_sessionid != null && Object.hasOwnProperty.call(message, "client_sessionid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.client_sessionid);
-            if (message.routing_appid != null && message.hasOwnProperty("routing_appid"))
+            if (message.routing_appid != null && Object.hasOwnProperty.call(message, "routing_appid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.routing_appid);
-            if (message.jobid_source != null && message.hasOwnProperty("jobid_source"))
+            if (message.jobid_source != null && Object.hasOwnProperty.call(message, "jobid_source"))
                 writer.uint32(/* id 10, wireType 1 =*/81).fixed64(message.jobid_source);
-            if (message.jobid_target != null && message.hasOwnProperty("jobid_target"))
+            if (message.jobid_target != null && Object.hasOwnProperty.call(message, "jobid_target"))
                 writer.uint32(/* id 11, wireType 1 =*/89).fixed64(message.jobid_target);
-            if (message.target_job_name != null && message.hasOwnProperty("target_job_name"))
+            if (message.target_job_name != null && Object.hasOwnProperty.call(message, "target_job_name"))
                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.target_job_name);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 13, wireType 0 =*/104).int32(message.eresult);
-            if (message.error_message != null && message.hasOwnProperty("error_message"))
+            if (message.error_message != null && Object.hasOwnProperty.call(message, "error_message"))
                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.error_message);
-            if (message.ip != null && message.hasOwnProperty("ip"))
+            if (message.ip != null && Object.hasOwnProperty.call(message, "ip"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.ip);
-            if (message.auth_account_flags != null && message.hasOwnProperty("auth_account_flags"))
+            if (message.auth_account_flags != null && Object.hasOwnProperty.call(message, "auth_account_flags"))
                 writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.auth_account_flags);
-            if (message.transport_error != null && message.hasOwnProperty("transport_error"))
+            if (message.transport_error != null && Object.hasOwnProperty.call(message, "transport_error"))
                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.transport_error);
-            if (message.messageid != null && message.hasOwnProperty("messageid"))
+            if (message.messageid != null && Object.hasOwnProperty.call(message, "messageid"))
                 writer.uint32(/* id 18, wireType 0 =*/144).uint64(message.messageid);
-            if (message.publisher_group_id != null && message.hasOwnProperty("publisher_group_id"))
+            if (message.publisher_group_id != null && Object.hasOwnProperty.call(message, "publisher_group_id"))
                 writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.publisher_group_id);
-            if (message.sysid != null && message.hasOwnProperty("sysid"))
+            if (message.sysid != null && Object.hasOwnProperty.call(message, "sysid"))
                 writer.uint32(/* id 20, wireType 0 =*/160).uint32(message.sysid);
-            if (message.trace_tag != null && message.hasOwnProperty("trace_tag"))
+            if (message.trace_tag != null && Object.hasOwnProperty.call(message, "trace_tag"))
                 writer.uint32(/* id 21, wireType 0 =*/168).uint64(message.trace_tag);
-            if (message.token_source != null && message.hasOwnProperty("token_source"))
+            if (message.token_source != null && Object.hasOwnProperty.call(message, "token_source"))
                 writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.token_source);
-            if (message.admin_spoofing_user != null && message.hasOwnProperty("admin_spoofing_user"))
+            if (message.admin_spoofing_user != null && Object.hasOwnProperty.call(message, "admin_spoofing_user"))
                 writer.uint32(/* id 23, wireType 0 =*/184).bool(message.admin_spoofing_user);
-            if (message.seq_num != null && message.hasOwnProperty("seq_num"))
+            if (message.seq_num != null && Object.hasOwnProperty.call(message, "seq_num"))
                 writer.uint32(/* id 24, wireType 0 =*/192).int32(message.seq_num);
-            if (message.webapi_key_id != null && message.hasOwnProperty("webapi_key_id"))
+            if (message.webapi_key_id != null && Object.hasOwnProperty.call(message, "webapi_key_id"))
                 writer.uint32(/* id 25, wireType 0 =*/200).uint32(message.webapi_key_id);
-            if (message.is_from_external_source != null && message.hasOwnProperty("is_from_external_source"))
+            if (message.is_from_external_source != null && Object.hasOwnProperty.call(message, "is_from_external_source"))
                 writer.uint32(/* id 26, wireType 0 =*/208).bool(message.is_from_external_source);
             if (message.forward_to_sysid != null && message.forward_to_sysid.length)
                 for (var i = 0; i < message.forward_to_sysid.length; ++i)
                     writer.uint32(/* id 27, wireType 0 =*/216).uint32(message.forward_to_sysid[i]);
-            if (message.cm_sysid != null && message.hasOwnProperty("cm_sysid"))
+            if (message.cm_sysid != null && Object.hasOwnProperty.call(message, "cm_sysid"))
                 writer.uint32(/* id 28, wireType 0 =*/224).uint32(message.cm_sysid);
-            if (message.ip_v6 != null && message.hasOwnProperty("ip_v6"))
+            if (message.ip_v6 != null && Object.hasOwnProperty.call(message, "ip_v6"))
                 writer.uint32(/* id 29, wireType 2 =*/234).bytes(message.ip_v6);
-            if (message.wg_token != null && message.hasOwnProperty("wg_token"))
+            if (message.wg_token != null && Object.hasOwnProperty.call(message, "wg_token"))
                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.wg_token);
-            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+            if (message.launcher_type != null && Object.hasOwnProperty.call(message, "launcher_type"))
                 writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.launcher_type);
-            if (message.realm != null && message.hasOwnProperty("realm"))
+            if (message.realm != null && Object.hasOwnProperty.call(message, "realm"))
                 writer.uint32(/* id 32, wireType 0 =*/256).uint32(message.realm);
             return writer;
         };
@@ -46900,9 +46900,9 @@
         CMsgMulti.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.size_unzipped != null && message.hasOwnProperty("size_unzipped"))
+            if (message.size_unzipped != null && Object.hasOwnProperty.call(message, "size_unzipped"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.size_unzipped);
-            if (message.message_body != null && message.hasOwnProperty("message_body"))
+            if (message.message_body != null && Object.hasOwnProperty.call(message, "message_body"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.message_body);
             return writer;
         };
@@ -47110,7 +47110,7 @@
         CMsgProtobufWrapped.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.message_body != null && message.hasOwnProperty("message_body"))
+            if (message.message_body != null && Object.hasOwnProperty.call(message, "message_body"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.message_body);
             return writer;
         };
@@ -47360,19 +47360,19 @@
         CMsgAuthTicket.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.estate != null && message.hasOwnProperty("estate"))
+            if (message.estate != null && Object.hasOwnProperty.call(message, "estate"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.estate);
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
+            if (message.eresult != null && Object.hasOwnProperty.call(message, "eresult"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.eresult);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
+            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.steamid);
-            if (message.gameid != null && message.hasOwnProperty("gameid"))
+            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.gameid);
-            if (message.h_steam_pipe != null && message.hasOwnProperty("h_steam_pipe"))
+            if (message.h_steam_pipe != null && Object.hasOwnProperty.call(message, "h_steam_pipe"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.h_steam_pipe);
-            if (message.ticket_crc != null && message.hasOwnProperty("ticket_crc"))
+            if (message.ticket_crc != null && Object.hasOwnProperty.call(message, "ticket_crc"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.ticket_crc);
-            if (message.ticket != null && message.hasOwnProperty("ticket"))
+            if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
                 writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.ticket);
             return writer;
         };
@@ -47762,29 +47762,29 @@
         CCDDBAppDetailCommon.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.name != null && message.hasOwnProperty("name"))
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-            if (message.icon != null && message.hasOwnProperty("icon"))
+            if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.icon);
-            if (message.logo != null && message.hasOwnProperty("logo"))
+            if (message.logo != null && Object.hasOwnProperty.call(message, "logo"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.logo);
-            if (message.logo_small != null && message.hasOwnProperty("logo_small"))
+            if (message.logo_small != null && Object.hasOwnProperty.call(message, "logo_small"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.logo_small);
-            if (message.tool != null && message.hasOwnProperty("tool"))
+            if (message.tool != null && Object.hasOwnProperty.call(message, "tool"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.tool);
-            if (message.demo != null && message.hasOwnProperty("demo"))
+            if (message.demo != null && Object.hasOwnProperty.call(message, "demo"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.demo);
-            if (message.media != null && message.hasOwnProperty("media"))
+            if (message.media != null && Object.hasOwnProperty.call(message, "media"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.media);
-            if (message.community_visible_stats != null && message.hasOwnProperty("community_visible_stats"))
+            if (message.community_visible_stats != null && Object.hasOwnProperty.call(message, "community_visible_stats"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.community_visible_stats);
-            if (message.friendly_name != null && message.hasOwnProperty("friendly_name"))
+            if (message.friendly_name != null && Object.hasOwnProperty.call(message, "friendly_name"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.friendly_name);
-            if (message.propagation != null && message.hasOwnProperty("propagation"))
+            if (message.propagation != null && Object.hasOwnProperty.call(message, "propagation"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.propagation);
-            if (message.has_adult_content != null && message.hasOwnProperty("has_adult_content"))
+            if (message.has_adult_content != null && Object.hasOwnProperty.call(message, "has_adult_content"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.has_adult_content);
             return writer;
         };
@@ -48228,37 +48228,37 @@
         CMsgAppRights.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.edit_info != null && message.hasOwnProperty("edit_info"))
+            if (message.edit_info != null && Object.hasOwnProperty.call(message, "edit_info"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.edit_info);
-            if (message.publish != null && message.hasOwnProperty("publish"))
+            if (message.publish != null && Object.hasOwnProperty.call(message, "publish"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.publish);
-            if (message.view_error_data != null && message.hasOwnProperty("view_error_data"))
+            if (message.view_error_data != null && Object.hasOwnProperty.call(message, "view_error_data"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.view_error_data);
-            if (message.download != null && message.hasOwnProperty("download"))
+            if (message.download != null && Object.hasOwnProperty.call(message, "download"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.download);
-            if (message.upload_cdkeys != null && message.hasOwnProperty("upload_cdkeys"))
+            if (message.upload_cdkeys != null && Object.hasOwnProperty.call(message, "upload_cdkeys"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.upload_cdkeys);
-            if (message.generate_cdkeys != null && message.hasOwnProperty("generate_cdkeys"))
+            if (message.generate_cdkeys != null && Object.hasOwnProperty.call(message, "generate_cdkeys"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.generate_cdkeys);
-            if (message.view_financials != null && message.hasOwnProperty("view_financials"))
+            if (message.view_financials != null && Object.hasOwnProperty.call(message, "view_financials"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.view_financials);
-            if (message.manage_ceg != null && message.hasOwnProperty("manage_ceg"))
+            if (message.manage_ceg != null && Object.hasOwnProperty.call(message, "manage_ceg"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.manage_ceg);
-            if (message.manage_signing != null && message.hasOwnProperty("manage_signing"))
+            if (message.manage_signing != null && Object.hasOwnProperty.call(message, "manage_signing"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.manage_signing);
-            if (message.manage_cdkeys != null && message.hasOwnProperty("manage_cdkeys"))
+            if (message.manage_cdkeys != null && Object.hasOwnProperty.call(message, "manage_cdkeys"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.manage_cdkeys);
-            if (message.edit_marketing != null && message.hasOwnProperty("edit_marketing"))
+            if (message.edit_marketing != null && Object.hasOwnProperty.call(message, "edit_marketing"))
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.edit_marketing);
-            if (message.economy_support != null && message.hasOwnProperty("economy_support"))
+            if (message.economy_support != null && Object.hasOwnProperty.call(message, "economy_support"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.economy_support);
-            if (message.economy_support_supervisor != null && message.hasOwnProperty("economy_support_supervisor"))
+            if (message.economy_support_supervisor != null && Object.hasOwnProperty.call(message, "economy_support_supervisor"))
                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.economy_support_supervisor);
-            if (message.manage_pricing != null && message.hasOwnProperty("manage_pricing"))
+            if (message.manage_pricing != null && Object.hasOwnProperty.call(message, "manage_pricing"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.manage_pricing);
-            if (message.broadcast_live != null && message.hasOwnProperty("broadcast_live"))
+            if (message.broadcast_live != null && Object.hasOwnProperty.call(message, "broadcast_live"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.broadcast_live);
-            if (message.view_marketing_traffic != null && message.hasOwnProperty("view_marketing_traffic"))
+            if (message.view_marketing_traffic != null && Object.hasOwnProperty.call(message, "view_marketing_traffic"))
                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.view_marketing_traffic);
             return writer;
         };
@@ -48730,21 +48730,21 @@
         CCuratorPreferences.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.supported_languages != null && message.hasOwnProperty("supported_languages"))
+            if (message.supported_languages != null && Object.hasOwnProperty.call(message, "supported_languages"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.supported_languages);
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
+            if (message.platform_windows != null && Object.hasOwnProperty.call(message, "platform_windows"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.platform_windows);
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
+            if (message.platform_mac != null && Object.hasOwnProperty.call(message, "platform_mac"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.platform_mac);
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
+            if (message.platform_linux != null && Object.hasOwnProperty.call(message, "platform_linux"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.platform_linux);
-            if (message.vr_content != null && message.hasOwnProperty("vr_content"))
+            if (message.vr_content != null && Object.hasOwnProperty.call(message, "vr_content"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.vr_content);
-            if (message.adult_content_violence != null && message.hasOwnProperty("adult_content_violence"))
+            if (message.adult_content_violence != null && Object.hasOwnProperty.call(message, "adult_content_violence"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.adult_content_violence);
-            if (message.adult_content_sex != null && message.hasOwnProperty("adult_content_sex"))
+            if (message.adult_content_sex != null && Object.hasOwnProperty.call(message, "adult_content_sex"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.adult_content_sex);
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
+            if (message.timestamp_updated != null && Object.hasOwnProperty.call(message, "timestamp_updated"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.timestamp_updated);
             if (message.tagids_curated != null && message.tagids_curated.length)
                 for (var i = 0; i < message.tagids_curated.length; ++i)
@@ -48752,13 +48752,13 @@
             if (message.tagids_filtered != null && message.tagids_filtered.length)
                 for (var i = 0; i < message.tagids_filtered.length; ++i)
                     writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.tagids_filtered[i]);
-            if (message.website_title != null && message.hasOwnProperty("website_title"))
+            if (message.website_title != null && Object.hasOwnProperty.call(message, "website_title"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.website_title);
-            if (message.website_url != null && message.hasOwnProperty("website_url"))
+            if (message.website_url != null && Object.hasOwnProperty.call(message, "website_url"))
                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.website_url);
-            if (message.discussion_url != null && message.hasOwnProperty("discussion_url"))
+            if (message.discussion_url != null && Object.hasOwnProperty.call(message, "discussion_url"))
                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.discussion_url);
-            if (message.show_broadcast != null && message.hasOwnProperty("show_broadcast"))
+            if (message.show_broadcast != null && Object.hasOwnProperty.call(message, "show_broadcast"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.show_broadcast);
             return writer;
         };
@@ -49138,9 +49138,9 @@
         CLocalizationToken.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.language != null && message.hasOwnProperty("language"))
+            if (message.language != null && Object.hasOwnProperty.call(message, "language"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.language);
-            if (message.localized_string != null && message.hasOwnProperty("localized_string"))
+            if (message.localized_string != null && Object.hasOwnProperty.call(message, "localized_string"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.localized_string);
             return writer;
         };
@@ -49420,25 +49420,25 @@
         CClanEventUserNewsTuple.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.clanid != null && message.hasOwnProperty("clanid"))
+            if (message.clanid != null && Object.hasOwnProperty.call(message, "clanid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.clanid);
-            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+            if (message.event_gid != null && Object.hasOwnProperty.call(message, "event_gid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.event_gid);
-            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+            if (message.announcement_gid != null && Object.hasOwnProperty.call(message, "announcement_gid"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.announcement_gid);
-            if (message.rtime_start != null && message.hasOwnProperty("rtime_start"))
+            if (message.rtime_start != null && Object.hasOwnProperty.call(message, "rtime_start"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.rtime_start);
-            if (message.rtime_end != null && message.hasOwnProperty("rtime_end"))
+            if (message.rtime_end != null && Object.hasOwnProperty.call(message, "rtime_end"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.rtime_end);
-            if (message.priority_score != null && message.hasOwnProperty("priority_score"))
+            if (message.priority_score != null && Object.hasOwnProperty.call(message, "priority_score"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.priority_score);
-            if (message.type != null && message.hasOwnProperty("type"))
+            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.type);
-            if (message.clamp_range_slot != null && message.hasOwnProperty("clamp_range_slot"))
+            if (message.clamp_range_slot != null && Object.hasOwnProperty.call(message, "clamp_range_slot"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.clamp_range_slot);
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.appid);
-            if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
+            if (message.rtime32_last_modified != null && Object.hasOwnProperty.call(message, "rtime32_last_modified"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.rtime32_last_modified);
             return writer;
         };
@@ -49781,11 +49781,11 @@
         CClanMatchEventByRange.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.rtime_before != null && message.hasOwnProperty("rtime_before"))
+            if (message.rtime_before != null && Object.hasOwnProperty.call(message, "rtime_before"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.rtime_before);
-            if (message.rtime_after != null && message.hasOwnProperty("rtime_after"))
+            if (message.rtime_after != null && Object.hasOwnProperty.call(message, "rtime_after"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.rtime_after);
-            if (message.qualified != null && message.hasOwnProperty("qualified"))
+            if (message.qualified != null && Object.hasOwnProperty.call(message, "qualified"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.qualified);
             if (message.events != null && message.events.length)
                 for (var i = 0; i < message.events.length; ++i)
@@ -50156,36 +50156,36 @@
         CCommunity_ClanAnnouncementInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.gid != null && message.hasOwnProperty("gid"))
+            if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.gid);
-            if (message.clanid != null && message.hasOwnProperty("clanid"))
+            if (message.clanid != null && Object.hasOwnProperty.call(message, "clanid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.clanid);
-            if (message.posterid != null && message.hasOwnProperty("posterid"))
+            if (message.posterid != null && Object.hasOwnProperty.call(message, "posterid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.posterid);
-            if (message.headline != null && message.hasOwnProperty("headline"))
+            if (message.headline != null && Object.hasOwnProperty.call(message, "headline"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.headline);
-            if (message.posttime != null && message.hasOwnProperty("posttime"))
+            if (message.posttime != null && Object.hasOwnProperty.call(message, "posttime"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.posttime);
-            if (message.updatetime != null && message.hasOwnProperty("updatetime"))
+            if (message.updatetime != null && Object.hasOwnProperty.call(message, "updatetime"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.updatetime);
-            if (message.body != null && message.hasOwnProperty("body"))
+            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.body);
-            if (message.commentcount != null && message.hasOwnProperty("commentcount"))
+            if (message.commentcount != null && Object.hasOwnProperty.call(message, "commentcount"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.commentcount);
             if (message.tags != null && message.tags.length)
                 for (var i = 0; i < message.tags.length; ++i)
                     writer.uint32(/* id 9, wireType 2 =*/74).string(message.tags[i]);
-            if (message.language != null && message.hasOwnProperty("language"))
+            if (message.language != null && Object.hasOwnProperty.call(message, "language"))
                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.language);
-            if (message.hidden != null && message.hasOwnProperty("hidden"))
+            if (message.hidden != null && Object.hasOwnProperty.call(message, "hidden"))
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.hidden);
-            if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
+            if (message.forum_topic_id != null && Object.hasOwnProperty.call(message, "forum_topic_id"))
                 writer.uint32(/* id 12, wireType 1 =*/97).fixed64(message.forum_topic_id);
-            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+            if (message.event_gid != null && Object.hasOwnProperty.call(message, "event_gid"))
                 writer.uint32(/* id 13, wireType 1 =*/105).fixed64(message.event_gid);
-            if (message.voteupcount != null && message.hasOwnProperty("voteupcount"))
+            if (message.voteupcount != null && Object.hasOwnProperty.call(message, "voteupcount"))
                 writer.uint32(/* id 14, wireType 0 =*/112).int32(message.voteupcount);
-            if (message.votedowncount != null && message.hasOwnProperty("votedowncount"))
+            if (message.votedowncount != null && Object.hasOwnProperty.call(message, "votedowncount"))
                 writer.uint32(/* id 15, wireType 0 =*/120).int32(message.votedowncount);
             return writer;
         };
@@ -50837,57 +50837,57 @@
         CClanEventData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.gid != null && message.hasOwnProperty("gid"))
+            if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.gid);
-            if (message.clan_steamid != null && message.hasOwnProperty("clan_steamid"))
+            if (message.clan_steamid != null && Object.hasOwnProperty.call(message, "clan_steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.clan_steamid);
-            if (message.event_name != null && message.hasOwnProperty("event_name"))
+            if (message.event_name != null && Object.hasOwnProperty.call(message, "event_name"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.event_name);
-            if (message.event_type != null && message.hasOwnProperty("event_type"))
+            if (message.event_type != null && Object.hasOwnProperty.call(message, "event_type"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.event_type);
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.appid);
-            if (message.server_address != null && message.hasOwnProperty("server_address"))
+            if (message.server_address != null && Object.hasOwnProperty.call(message, "server_address"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.server_address);
-            if (message.server_password != null && message.hasOwnProperty("server_password"))
+            if (message.server_password != null && Object.hasOwnProperty.call(message, "server_password"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.server_password);
-            if (message.rtime32_start_time != null && message.hasOwnProperty("rtime32_start_time"))
+            if (message.rtime32_start_time != null && Object.hasOwnProperty.call(message, "rtime32_start_time"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.rtime32_start_time);
-            if (message.rtime32_end_time != null && message.hasOwnProperty("rtime32_end_time"))
+            if (message.rtime32_end_time != null && Object.hasOwnProperty.call(message, "rtime32_end_time"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.rtime32_end_time);
-            if (message.comment_count != null && message.hasOwnProperty("comment_count"))
+            if (message.comment_count != null && Object.hasOwnProperty.call(message, "comment_count"))
                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.comment_count);
-            if (message.creator_steamid != null && message.hasOwnProperty("creator_steamid"))
+            if (message.creator_steamid != null && Object.hasOwnProperty.call(message, "creator_steamid"))
                 writer.uint32(/* id 11, wireType 1 =*/89).fixed64(message.creator_steamid);
-            if (message.last_update_steamid != null && message.hasOwnProperty("last_update_steamid"))
+            if (message.last_update_steamid != null && Object.hasOwnProperty.call(message, "last_update_steamid"))
                 writer.uint32(/* id 12, wireType 1 =*/97).fixed64(message.last_update_steamid);
-            if (message.event_notes != null && message.hasOwnProperty("event_notes"))
+            if (message.event_notes != null && Object.hasOwnProperty.call(message, "event_notes"))
                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.event_notes);
-            if (message.jsondata != null && message.hasOwnProperty("jsondata"))
+            if (message.jsondata != null && Object.hasOwnProperty.call(message, "jsondata"))
                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.jsondata);
-            if (message.announcement_body != null && message.hasOwnProperty("announcement_body"))
+            if (message.announcement_body != null && Object.hasOwnProperty.call(message, "announcement_body"))
                 $root.CCommunity_ClanAnnouncementInfo.encode(message.announcement_body, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
-            if (message.published != null && message.hasOwnProperty("published"))
+            if (message.published != null && Object.hasOwnProperty.call(message, "published"))
                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.published);
-            if (message.hidden != null && message.hasOwnProperty("hidden"))
+            if (message.hidden != null && Object.hasOwnProperty.call(message, "hidden"))
                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.hidden);
-            if (message.rtime32_visibility_start != null && message.hasOwnProperty("rtime32_visibility_start"))
+            if (message.rtime32_visibility_start != null && Object.hasOwnProperty.call(message, "rtime32_visibility_start"))
                 writer.uint32(/* id 18, wireType 0 =*/144).uint32(message.rtime32_visibility_start);
-            if (message.rtime32_visibility_end != null && message.hasOwnProperty("rtime32_visibility_end"))
+            if (message.rtime32_visibility_end != null && Object.hasOwnProperty.call(message, "rtime32_visibility_end"))
                 writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.rtime32_visibility_end);
-            if (message.broadcaster_accountid != null && message.hasOwnProperty("broadcaster_accountid"))
+            if (message.broadcaster_accountid != null && Object.hasOwnProperty.call(message, "broadcaster_accountid"))
                 writer.uint32(/* id 20, wireType 0 =*/160).uint32(message.broadcaster_accountid);
-            if (message.follower_count != null && message.hasOwnProperty("follower_count"))
+            if (message.follower_count != null && Object.hasOwnProperty.call(message, "follower_count"))
                 writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.follower_count);
-            if (message.ignore_count != null && message.hasOwnProperty("ignore_count"))
+            if (message.ignore_count != null && Object.hasOwnProperty.call(message, "ignore_count"))
                 writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.ignore_count);
-            if (message.forum_topic_id != null && message.hasOwnProperty("forum_topic_id"))
+            if (message.forum_topic_id != null && Object.hasOwnProperty.call(message, "forum_topic_id"))
                 writer.uint32(/* id 23, wireType 1 =*/185).fixed64(message.forum_topic_id);
-            if (message.rtime32_last_modified != null && message.hasOwnProperty("rtime32_last_modified"))
+            if (message.rtime32_last_modified != null && Object.hasOwnProperty.call(message, "rtime32_last_modified"))
                 writer.uint32(/* id 24, wireType 0 =*/192).uint32(message.rtime32_last_modified);
-            if (message.news_post_gid != null && message.hasOwnProperty("news_post_gid"))
+            if (message.news_post_gid != null && Object.hasOwnProperty.call(message, "news_post_gid"))
                 writer.uint32(/* id 25, wireType 1 =*/201).fixed64(message.news_post_gid);
-            if (message.rtime_mod_reviewed != null && message.hasOwnProperty("rtime_mod_reviewed"))
+            if (message.rtime_mod_reviewed != null && Object.hasOwnProperty.call(message, "rtime_mod_reviewed"))
                 writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.rtime_mod_reviewed);
             return writer;
         };
@@ -51698,25 +51698,25 @@
         CBilling_Address.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.first_name != null && message.hasOwnProperty("first_name"))
+            if (message.first_name != null && Object.hasOwnProperty.call(message, "first_name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.first_name);
-            if (message.last_name != null && message.hasOwnProperty("last_name"))
+            if (message.last_name != null && Object.hasOwnProperty.call(message, "last_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.last_name);
-            if (message.address1 != null && message.hasOwnProperty("address1"))
+            if (message.address1 != null && Object.hasOwnProperty.call(message, "address1"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.address1);
-            if (message.address2 != null && message.hasOwnProperty("address2"))
+            if (message.address2 != null && Object.hasOwnProperty.call(message, "address2"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.address2);
-            if (message.city != null && message.hasOwnProperty("city"))
+            if (message.city != null && Object.hasOwnProperty.call(message, "city"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.city);
-            if (message.us_state != null && message.hasOwnProperty("us_state"))
+            if (message.us_state != null && Object.hasOwnProperty.call(message, "us_state"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.us_state);
-            if (message.country_code != null && message.hasOwnProperty("country_code"))
+            if (message.country_code != null && Object.hasOwnProperty.call(message, "country_code"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.country_code);
-            if (message.postcode != null && message.hasOwnProperty("postcode"))
+            if (message.postcode != null && Object.hasOwnProperty.call(message, "postcode"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.postcode);
-            if (message.zip_plus4 != null && message.hasOwnProperty("zip_plus4"))
+            if (message.zip_plus4 != null && Object.hasOwnProperty.call(message, "zip_plus4"))
                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.zip_plus4);
-            if (message.phone != null && message.hasOwnProperty("phone"))
+            if (message.phone != null && Object.hasOwnProperty.call(message, "phone"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.phone);
             return writer;
         };
@@ -52326,9 +52326,9 @@
                 FileDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message["package"] != null && message.hasOwnProperty("package"))
+                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message["package"]);
                     if (message.dependency != null && message.dependency.length)
                         for (var i = 0; i < message.dependency.length; ++i)
@@ -52345,9 +52345,9 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info"))
+                    if (message.source_code_info != null && Object.hasOwnProperty.call(message, "source_code_info"))
                         $root.google.protobuf.SourceCodeInfo.encode(message.source_code_info, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     if (message.public_dependency != null && message.public_dependency.length)
                         for (var i = 0; i < message.public_dependency.length; ++i)
@@ -52860,7 +52860,7 @@
                 DescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.field != null && message.field.length)
                         for (var i = 0; i < message.field.length; ++i)
@@ -52877,7 +52877,7 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.oneof_decl != null && message.oneof_decl.length)
                         for (var i = 0; i < message.oneof_decl.length; ++i)
@@ -53272,9 +53272,9 @@
                     ExtensionRange.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
                         return writer;
                     };
@@ -53548,23 +53548,23 @@
                 FieldDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.extendee);
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.number);
-                    if (message.label != null && message.hasOwnProperty("label"))
+                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.label);
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
-                    if (message.type_name != null && message.hasOwnProperty("type_name"))
+                    if (message.type_name != null && Object.hasOwnProperty.call(message, "type_name"))
                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.type_name);
-                    if (message.default_value != null && message.hasOwnProperty("default_value"))
+                    if (message.default_value != null && Object.hasOwnProperty.call(message, "default_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.default_value);
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
+                    if (message.oneof_index != null && Object.hasOwnProperty.call(message, "oneof_index"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneof_index);
                     return writer;
                 };
@@ -53900,7 +53900,7 @@
                 /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
-                 * @enum {string}
+                 * @enum {number}
                  * @property {number} TYPE_DOUBLE=1 TYPE_DOUBLE value
                  * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
                  * @property {number} TYPE_INT64=3 TYPE_INT64 value
@@ -53946,7 +53946,7 @@
                 /**
                  * Label enum.
                  * @name google.protobuf.FieldDescriptorProto.Label
-                 * @enum {string}
+                 * @enum {number}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
                  * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
@@ -54018,7 +54018,7 @@
                 OneofDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     return writer;
                 };
@@ -54224,12 +54224,12 @@
                 EnumDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.value != null && message.value.length)
                         for (var i = 0; i < message.value.length; ++i)
                             $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -54482,11 +54482,11 @@
                 EnumValueDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -54720,12 +54720,12 @@
                 ServiceDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.method != null && message.method.length)
                         for (var i = 0; i < message.method.length; ++i)
                             $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -54987,13 +54987,13 @@
                 MethodDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.input_type != null && message.hasOwnProperty("input_type"))
+                    if (message.input_type != null && Object.hasOwnProperty.call(message, "input_type"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.input_type);
-                    if (message.output_type != null && message.hasOwnProperty("output_type"))
+                    if (message.output_type != null && Object.hasOwnProperty.call(message, "output_type"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.output_type);
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     return writer;
                 };
@@ -55328,32 +55328,32 @@
                 FileOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.java_package != null && message.hasOwnProperty("java_package"))
+                    if (message.java_package != null && Object.hasOwnProperty.call(message, "java_package"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.java_package);
-                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
+                    if (message.java_outer_classname != null && Object.hasOwnProperty.call(message, "java_outer_classname"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.java_outer_classname);
-                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
+                    if (message.optimize_for != null && Object.hasOwnProperty.call(message, "optimize_for"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.optimize_for);
-                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
+                    if (message.java_multiple_files != null && Object.hasOwnProperty.call(message, "java_multiple_files"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.java_multiple_files);
-                    if (message.go_package != null && message.hasOwnProperty("go_package"))
+                    if (message.go_package != null && Object.hasOwnProperty.call(message, "go_package"))
                         writer.uint32(/* id 11, wireType 2 =*/90).string(message.go_package);
-                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
+                    if (message.cc_generic_services != null && Object.hasOwnProperty.call(message, "cc_generic_services"))
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.cc_generic_services);
-                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
+                    if (message.java_generic_services != null && Object.hasOwnProperty.call(message, "java_generic_services"))
                         writer.uint32(/* id 17, wireType 0 =*/136).bool(message.java_generic_services);
-                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
+                    if (message.py_generic_services != null && Object.hasOwnProperty.call(message, "py_generic_services"))
                         writer.uint32(/* id 18, wireType 0 =*/144).bool(message.py_generic_services);
-                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
+                    if (message.java_generate_equals_and_hash != null && Object.hasOwnProperty.call(message, "java_generate_equals_and_hash"))
                         writer.uint32(/* id 20, wireType 0 =*/160).bool(message.java_generate_equals_and_hash);
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 23, wireType 0 =*/184).bool(message.deprecated);
-                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
+                    if (message.java_string_check_utf8 != null && Object.hasOwnProperty.call(message, "java_string_check_utf8"))
                         writer.uint32(/* id 27, wireType 0 =*/216).bool(message.java_string_check_utf8);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".force_php_generation"] != null && message.hasOwnProperty(".force_php_generation"))
+                    if (message[".force_php_generation"] != null && Object.hasOwnProperty.call(message, ".force_php_generation"))
                         writer.uint32(/* id 50000, wireType 0 =*/400000).bool(message[".force_php_generation"]);
                     return writer;
                 };
@@ -55655,7 +55655,7 @@
                 /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
-                 * @enum {string}
+                 * @enum {number}
                  * @property {number} SPEED=1 SPEED value
                  * @property {number} CODE_SIZE=2 CODE_SIZE value
                  * @property {number} LITE_RUNTIME=3 LITE_RUNTIME value
@@ -55773,18 +55773,18 @@
                 MessageOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
+                    if (message.message_set_wire_format != null && Object.hasOwnProperty.call(message, "message_set_wire_format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.message_set_wire_format);
-                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
+                    if (message.no_standard_descriptor_accessor != null && Object.hasOwnProperty.call(message, "no_standard_descriptor_accessor"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.no_standard_descriptor_accessor);
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".msgpool_soft_limit"] != null && message.hasOwnProperty(".msgpool_soft_limit"))
+                    if (message[".msgpool_soft_limit"] != null && Object.hasOwnProperty.call(message, ".msgpool_soft_limit"))
                         writer.uint32(/* id 50000, wireType 0 =*/400000).int32(message[".msgpool_soft_limit"]);
-                    if (message[".msgpool_hard_limit"] != null && message.hasOwnProperty(".msgpool_hard_limit"))
+                    if (message[".msgpool_hard_limit"] != null && Object.hasOwnProperty.call(message, ".msgpool_hard_limit"))
                         writer.uint32(/* id 50001, wireType 0 =*/400008).int32(message[".msgpool_hard_limit"]);
                     return writer;
                 };
@@ -56111,22 +56111,22 @@
                 FieldOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
-                    if (message.packed != null && message.hasOwnProperty("packed"))
+                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.packed);
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
-                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
                         writer.uint32(/* id 5, wireType 0 =*/40).bool(message.lazy);
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
+                    if (message.experimental_map_key != null && Object.hasOwnProperty.call(message, "experimental_map_key"))
                         writer.uint32(/* id 9, wireType 2 =*/74).string(message.experimental_map_key);
-                    if (message.weak != null && message.hasOwnProperty("weak"))
+                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".php_output_always_number"] != null && message.hasOwnProperty(".php_output_always_number"))
+                    if (message[".php_output_always_number"] != null && Object.hasOwnProperty.call(message, ".php_output_always_number"))
                         writer.uint32(/* id 50020, wireType 0 =*/400160).bool(message[".php_output_always_number"]);
                     return writer;
                 };
@@ -56373,7 +56373,7 @@
                 /**
                  * CType enum.
                  * @name google.protobuf.FieldOptions.CType
-                 * @enum {string}
+                 * @enum {number}
                  * @property {number} STRING=0 STRING value
                  * @property {number} CORD=1 CORD value
                  * @property {number} STRING_PIECE=2 STRING_PIECE value
@@ -56464,9 +56464,9 @@
                 EnumOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
+                    if (message.allow_alias != null && Object.hasOwnProperty.call(message, "allow_alias"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allow_alias);
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
@@ -56709,7 +56709,7 @@
                 EnumValueOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
@@ -56940,7 +56940,7 @@
                 ServiceOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
@@ -57171,7 +57171,7 @@
                 MethodOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
@@ -57450,17 +57450,17 @@
                     if (message.name != null && message.name.length)
                         for (var i = 0; i < message.name.length; ++i)
                             $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
+                    if (message.identifier_value != null && Object.hasOwnProperty.call(message, "identifier_value"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifier_value);
-                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
+                    if (message.positive_int_value != null && Object.hasOwnProperty.call(message, "positive_int_value"))
                         writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.positive_int_value);
-                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
+                    if (message.negative_int_value != null && Object.hasOwnProperty.call(message, "negative_int_value"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int64(message.negative_int_value);
-                    if (message.double_value != null && message.hasOwnProperty("double_value"))
+                    if (message.double_value != null && Object.hasOwnProperty.call(message, "double_value"))
                         writer.uint32(/* id 6, wireType 1 =*/49).double(message.double_value);
-                    if (message.string_value != null && message.hasOwnProperty("string_value"))
+                    if (message.string_value != null && Object.hasOwnProperty.call(message, "string_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.string_value);
-                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
+                    if (message.aggregate_value != null && Object.hasOwnProperty.call(message, "aggregate_value"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.aggregate_value);
                     return writer;
                 };
@@ -58227,9 +58227,9 @@
                                 writer.int32(message.span[i]);
                             writer.ldelim();
                         }
-                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
+                        if (message.leading_comments != null && Object.hasOwnProperty.call(message, "leading_comments"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.leading_comments);
-                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
+                        if (message.trailing_comments != null && Object.hasOwnProperty.call(message, "trailing_comments"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.trailing_comments);
                         return writer;
                     };

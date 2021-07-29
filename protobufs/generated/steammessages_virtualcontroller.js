@@ -19,7 +19,7 @@
     /**
      * EInputMode enum.
      * @exports EInputMode
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EInputModeUnknown=0 k_EInputModeUnknown value
      * @property {number} k_EInputModeMouse=1 k_EInputModeMouse value
      * @property {number} k_EInputModeController=2 k_EInputModeController value
@@ -37,7 +37,7 @@
     /**
      * EMouseMode enum.
      * @exports EMouseMode
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EMouseModeUnknown=0 k_EMouseModeUnknown value
      * @property {number} k_EMouseModeRelativeCursor=1 k_EMouseModeRelativeCursor value
      * @property {number} k_EMouseModeAbsoluteCursor=2 k_EMouseModeAbsoluteCursor value
@@ -57,7 +57,7 @@
     /**
      * EControllerElementType enum.
      * @exports EControllerElementType
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EControllerElementTypeNone=-1 k_EControllerElementTypeNone value
      * @property {number} k_EControllerElementTypeThumb=0 k_EControllerElementTypeThumb value
      * @property {number} k_EControllerElementTypeButtonSteam=1 k_EControllerElementTypeButtonSteam value
@@ -239,17 +239,17 @@
         CVirtualControllerElement.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.type != null && message.hasOwnProperty("type"))
+            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-            if (message.visible != null && message.hasOwnProperty("visible"))
+            if (message.visible != null && Object.hasOwnProperty.call(message, "visible"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.visible);
-            if (message.x_position != null && message.hasOwnProperty("x_position"))
+            if (message.x_position != null && Object.hasOwnProperty.call(message, "x_position"))
                 writer.uint32(/* id 3, wireType 5 =*/29).float(message.x_position);
-            if (message.y_position != null && message.hasOwnProperty("y_position"))
+            if (message.y_position != null && Object.hasOwnProperty.call(message, "y_position"))
                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.y_position);
-            if (message.x_scale != null && message.hasOwnProperty("x_scale"))
+            if (message.x_scale != null && Object.hasOwnProperty.call(message, "x_scale"))
                 writer.uint32(/* id 5, wireType 5 =*/45).float(message.x_scale);
-            if (message.y_scale != null && message.hasOwnProperty("y_scale"))
+            if (message.y_scale != null && Object.hasOwnProperty.call(message, "y_scale"))
                 writer.uint32(/* id 6, wireType 5 =*/53).float(message.y_scale);
             return writer;
         };
@@ -707,13 +707,13 @@
         CVirtualControllerColor.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.r != null && message.hasOwnProperty("r"))
+            if (message.r != null && Object.hasOwnProperty.call(message, "r"))
                 writer.uint32(/* id 1, wireType 5 =*/13).float(message.r);
-            if (message.g != null && message.hasOwnProperty("g"))
+            if (message.g != null && Object.hasOwnProperty.call(message, "g"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.g);
-            if (message.b != null && message.hasOwnProperty("b"))
+            if (message.b != null && Object.hasOwnProperty.call(message, "b"))
                 writer.uint32(/* id 3, wireType 5 =*/29).float(message.b);
-            if (message.a != null && message.hasOwnProperty("a"))
+            if (message.a != null && Object.hasOwnProperty.call(message, "a"))
                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.a);
             return writer;
         };
@@ -962,14 +962,14 @@
         CVirtualControllerLayout.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.layout_version != null && message.hasOwnProperty("layout_version"))
+            if (message.layout_version != null && Object.hasOwnProperty.call(message, "layout_version"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.layout_version);
-            if (message.actionset_id != null && message.hasOwnProperty("actionset_id"))
+            if (message.actionset_id != null && Object.hasOwnProperty.call(message, "actionset_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.actionset_id);
             if (message.elements != null && message.elements.length)
                 for (var i = 0; i < message.elements.length; ++i)
                     $root.CVirtualControllerElement.encode(message.elements[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.color != null && message.hasOwnProperty("color"))
+            if (message.color != null && Object.hasOwnProperty.call(message, "color"))
                 $root.CVirtualControllerColor.encode(message.color, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
@@ -1300,23 +1300,23 @@
             if (message.layouts != null && message.layouts.length)
                 for (var i = 0; i < message.layouts.length; ++i)
                     $root.CVirtualControllerLayout.encode(message.layouts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.input_mode != null && message.hasOwnProperty("input_mode"))
+            if (message.input_mode != null && Object.hasOwnProperty.call(message, "input_mode"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.input_mode);
-            if (message.mouse_mode != null && message.hasOwnProperty("mouse_mode"))
+            if (message.mouse_mode != null && Object.hasOwnProperty.call(message, "mouse_mode"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.mouse_mode);
-            if (message.trackpad_sensitivity != null && message.hasOwnProperty("trackpad_sensitivity"))
+            if (message.trackpad_sensitivity != null && Object.hasOwnProperty.call(message, "trackpad_sensitivity"))
                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.trackpad_sensitivity);
-            if (message.pinch_zoom_enabled != null && message.hasOwnProperty("pinch_zoom_enabled"))
+            if (message.pinch_zoom_enabled != null && Object.hasOwnProperty.call(message, "pinch_zoom_enabled"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.pinch_zoom_enabled);
-            if (message.pinch_zoom_x != null && message.hasOwnProperty("pinch_zoom_x"))
+            if (message.pinch_zoom_x != null && Object.hasOwnProperty.call(message, "pinch_zoom_x"))
                 writer.uint32(/* id 6, wireType 5 =*/53).float(message.pinch_zoom_x);
-            if (message.pinch_zoom_y != null && message.hasOwnProperty("pinch_zoom_y"))
+            if (message.pinch_zoom_y != null && Object.hasOwnProperty.call(message, "pinch_zoom_y"))
                 writer.uint32(/* id 7, wireType 5 =*/61).float(message.pinch_zoom_y);
-            if (message.pinch_zoom_scale != null && message.hasOwnProperty("pinch_zoom_scale"))
+            if (message.pinch_zoom_scale != null && Object.hasOwnProperty.call(message, "pinch_zoom_scale"))
                 writer.uint32(/* id 8, wireType 5 =*/69).float(message.pinch_zoom_scale);
-            if (message.shaken != null && message.hasOwnProperty("shaken"))
+            if (message.shaken != null && Object.hasOwnProperty.call(message, "shaken"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.shaken);
-            if (message.mouse_offscreen != null && message.hasOwnProperty("mouse_offscreen"))
+            if (message.mouse_offscreen != null && Object.hasOwnProperty.call(message, "mouse_offscreen"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.mouse_offscreen);
             return writer;
         };
@@ -1693,12 +1693,12 @@
         CVirtualControllerConfig.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.name != null && message.hasOwnProperty("name"))
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
             if (message.actionsets != null && message.actionsets.length)
                 for (var i = 0; i < message.actionsets.length; ++i)
                     $root.CVirtualControllerConfig.ActionSet.encode(message.actionsets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.default_mouse_mode != null && message.hasOwnProperty("default_mouse_mode"))
+            if (message.default_mouse_mode != null && Object.hasOwnProperty.call(message, "default_mouse_mode"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.default_mouse_mode);
             return writer;
         };
@@ -2079,35 +2079,35 @@
             Control.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.name != null && message.hasOwnProperty("name"))
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                if (message.icon != null && message.hasOwnProperty("icon"))
+                if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.icon);
-                if (message.input_source != null && message.hasOwnProperty("input_source"))
+                if (message.input_source != null && Object.hasOwnProperty.call(message, "input_source"))
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.input_source);
-                if (message.input_mode != null && message.hasOwnProperty("input_mode"))
+                if (message.input_mode != null && Object.hasOwnProperty.call(message, "input_mode"))
                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.input_mode);
-                if (message.input_element != null && message.hasOwnProperty("input_element"))
+                if (message.input_element != null && Object.hasOwnProperty.call(message, "input_element"))
                     writer.uint32(/* id 5, wireType 0 =*/40).int32(message.input_element);
-                if (message.output_gamepad != null && message.hasOwnProperty("output_gamepad"))
+                if (message.output_gamepad != null && Object.hasOwnProperty.call(message, "output_gamepad"))
                     writer.uint32(/* id 6, wireType 0 =*/48).int32(message.output_gamepad);
-                if (message.output_keyboard != null && message.hasOwnProperty("output_keyboard"))
+                if (message.output_keyboard != null && Object.hasOwnProperty.call(message, "output_keyboard"))
                     writer.uint32(/* id 7, wireType 0 =*/56).int32(message.output_keyboard);
-                if (message.output_mouse != null && message.hasOwnProperty("output_mouse"))
+                if (message.output_mouse != null && Object.hasOwnProperty.call(message, "output_mouse"))
                     writer.uint32(/* id 8, wireType 0 =*/64).int32(message.output_mouse);
-                if (message.icon_foreground != null && message.hasOwnProperty("icon_foreground"))
+                if (message.icon_foreground != null && Object.hasOwnProperty.call(message, "icon_foreground"))
                     writer.uint32(/* id 9, wireType 2 =*/74).string(message.icon_foreground);
-                if (message.icon_background != null && message.hasOwnProperty("icon_background"))
+                if (message.icon_background != null && Object.hasOwnProperty.call(message, "icon_background"))
                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.icon_background);
-                if (message.input_toggle != null && message.hasOwnProperty("input_toggle"))
+                if (message.input_toggle != null && Object.hasOwnProperty.call(message, "input_toggle"))
                     writer.uint32(/* id 11, wireType 0 =*/88).bool(message.input_toggle);
-                if (message.input_activate_stick_or_trackpad != null && message.hasOwnProperty("input_activate_stick_or_trackpad"))
+                if (message.input_activate_stick_or_trackpad != null && Object.hasOwnProperty.call(message, "input_activate_stick_or_trackpad"))
                     writer.uint32(/* id 12, wireType 0 =*/96).int32(message.input_activate_stick_or_trackpad);
-                if (message.activation_type != null && message.hasOwnProperty("activation_type"))
+                if (message.activation_type != null && Object.hasOwnProperty.call(message, "activation_type"))
                     writer.uint32(/* id 13, wireType 0 =*/104).int32(message.activation_type);
-                if (message.long_press_ms != null && message.hasOwnProperty("long_press_ms"))
+                if (message.long_press_ms != null && Object.hasOwnProperty.call(message, "long_press_ms"))
                     writer.uint32(/* id 14, wireType 0 =*/112).int32(message.long_press_ms);
-                if (message.double_press_ms != null && message.hasOwnProperty("double_press_ms"))
+                if (message.double_press_ms != null && Object.hasOwnProperty.call(message, "double_press_ms"))
                     writer.uint32(/* id 15, wireType 0 =*/120).int32(message.double_press_ms);
                 return writer;
             };
@@ -2477,11 +2477,11 @@
             ActionSet.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.id != null && message.hasOwnProperty("id"))
+                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
-                if (message.parent_id != null && message.hasOwnProperty("parent_id"))
+                if (message.parent_id != null && Object.hasOwnProperty.call(message, "parent_id"))
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.parent_id);
-                if (message.name != null && message.hasOwnProperty("name"))
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
                 if (message.controls != null && message.controls.length)
                     for (var i = 0; i < message.controls.length; ++i)
@@ -2773,17 +2773,17 @@
         CVirtualControllerLayoutPackage.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
+            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.creator != null && message.hasOwnProperty("creator"))
+            if (message.creator != null && Object.hasOwnProperty.call(message, "creator"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.creator);
-            if (message.initial_revision != null && message.hasOwnProperty("initial_revision"))
+            if (message.initial_revision != null && Object.hasOwnProperty.call(message, "initial_revision"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.initial_revision);
-            if (message.saved_revision != null && message.hasOwnProperty("saved_revision"))
+            if (message.saved_revision != null && Object.hasOwnProperty.call(message, "saved_revision"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.saved_revision);
-            if (message.config != null && message.hasOwnProperty("config"))
+            if (message.config != null && Object.hasOwnProperty.call(message, "config"))
                 $root.CVirtualControllerConfig.encode(message.config, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.layouts != null && message.hasOwnProperty("layouts"))
+            if (message.layouts != null && Object.hasOwnProperty.call(message, "layouts"))
                 $root.CVirtualControllerLayouts.encode(message.layouts, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             return writer;
         };
@@ -3086,15 +3086,15 @@
         CVirtualControllerGlobalConfig.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.feedback_enabled != null && message.hasOwnProperty("feedback_enabled"))
+            if (message.feedback_enabled != null && Object.hasOwnProperty.call(message, "feedback_enabled"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.feedback_enabled);
-            if (message.gyroscope_enabled != null && message.hasOwnProperty("gyroscope_enabled"))
+            if (message.gyroscope_enabled != null && Object.hasOwnProperty.call(message, "gyroscope_enabled"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.gyroscope_enabled);
-            if (message.auto_fade_enabled != null && message.hasOwnProperty("auto_fade_enabled"))
+            if (message.auto_fade_enabled != null && Object.hasOwnProperty.call(message, "auto_fade_enabled"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.auto_fade_enabled);
-            if (message.rumble_enabled != null && message.hasOwnProperty("rumble_enabled"))
+            if (message.rumble_enabled != null && Object.hasOwnProperty.call(message, "rumble_enabled"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.rumble_enabled);
-            if (message.shake_fade_enabled != null && message.hasOwnProperty("shake_fade_enabled"))
+            if (message.shake_fade_enabled != null && Object.hasOwnProperty.call(message, "shake_fade_enabled"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.shake_fade_enabled);
             return writer;
         };

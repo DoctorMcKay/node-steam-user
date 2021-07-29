@@ -108,15 +108,15 @@
         EncryptedAppTicket.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ticket_version_no != null && message.hasOwnProperty("ticket_version_no"))
+            if (message.ticket_version_no != null && Object.hasOwnProperty.call(message, "ticket_version_no"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.ticket_version_no);
-            if (message.crc_encryptedticket != null && message.hasOwnProperty("crc_encryptedticket"))
+            if (message.crc_encryptedticket != null && Object.hasOwnProperty.call(message, "crc_encryptedticket"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.crc_encryptedticket);
-            if (message.cb_encrypteduserdata != null && message.hasOwnProperty("cb_encrypteduserdata"))
+            if (message.cb_encrypteduserdata != null && Object.hasOwnProperty.call(message, "cb_encrypteduserdata"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.cb_encrypteduserdata);
-            if (message.cb_encrypted_appownershipticket != null && message.hasOwnProperty("cb_encrypted_appownershipticket"))
+            if (message.cb_encrypted_appownershipticket != null && Object.hasOwnProperty.call(message, "cb_encrypted_appownershipticket"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.cb_encrypted_appownershipticket);
-            if (message.encrypted_ticket != null && message.hasOwnProperty("encrypted_ticket"))
+            if (message.encrypted_ticket != null && Object.hasOwnProperty.call(message, "encrypted_ticket"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.encrypted_ticket);
             return writer;
         };

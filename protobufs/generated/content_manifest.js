@@ -19,7 +19,7 @@
     /**
      * EContentDeltaChunkDataLocation enum.
      * @exports EContentDeltaChunkDataLocation
-     * @enum {string}
+     * @enum {number}
      * @property {number} k_EContentDeltaChunkDataLocationInProtobuf=0 k_EContentDeltaChunkDataLocationInProtobuf value
      * @property {number} k_EContentDeltaChunkDataLocationAfterProtobuf=1 k_EContentDeltaChunkDataLocationAfterProtobuf value
      */
@@ -346,20 +346,20 @@
             FileMapping.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.filename != null && message.hasOwnProperty("filename"))
+                if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
-                if (message.size != null && message.hasOwnProperty("size"))
+                if (message.size != null && Object.hasOwnProperty.call(message, "size"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.size);
-                if (message.flags != null && message.hasOwnProperty("flags"))
+                if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.flags);
-                if (message.sha_filename != null && message.hasOwnProperty("sha_filename"))
+                if (message.sha_filename != null && Object.hasOwnProperty.call(message, "sha_filename"))
                     writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.sha_filename);
-                if (message.sha_content != null && message.hasOwnProperty("sha_content"))
+                if (message.sha_content != null && Object.hasOwnProperty.call(message, "sha_content"))
                     writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.sha_content);
                 if (message.chunks != null && message.chunks.length)
                     for (var i = 0; i < message.chunks.length; ++i)
                         $root.ContentManifestPayload.FileMapping.ChunkData.encode(message.chunks[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                if (message.linktarget != null && message.hasOwnProperty("linktarget"))
+                if (message.linktarget != null && Object.hasOwnProperty.call(message, "linktarget"))
                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.linktarget);
                 return writer;
             };
@@ -698,15 +698,15 @@
                 ChunkData.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.sha != null && message.hasOwnProperty("sha"))
+                    if (message.sha != null && Object.hasOwnProperty.call(message, "sha"))
                         writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.sha);
-                    if (message.crc != null && message.hasOwnProperty("crc"))
+                    if (message.crc != null && Object.hasOwnProperty.call(message, "crc"))
                         writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.crc);
-                    if (message.offset != null && message.hasOwnProperty("offset"))
+                    if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
                         writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.offset);
-                    if (message.cb_original != null && message.hasOwnProperty("cb_original"))
+                    if (message.cb_original != null && Object.hasOwnProperty.call(message, "cb_original"))
                         writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.cb_original);
-                    if (message.cb_compressed != null && message.hasOwnProperty("cb_compressed"))
+                    if (message.cb_compressed != null && Object.hasOwnProperty.call(message, "cb_compressed"))
                         writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.cb_compressed);
                     return writer;
                 };
@@ -1039,23 +1039,23 @@
         ContentManifestMetadata.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.depot_id != null && message.hasOwnProperty("depot_id"))
+            if (message.depot_id != null && Object.hasOwnProperty.call(message, "depot_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.depot_id);
-            if (message.gid_manifest != null && message.hasOwnProperty("gid_manifest"))
+            if (message.gid_manifest != null && Object.hasOwnProperty.call(message, "gid_manifest"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.gid_manifest);
-            if (message.creation_time != null && message.hasOwnProperty("creation_time"))
+            if (message.creation_time != null && Object.hasOwnProperty.call(message, "creation_time"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.creation_time);
-            if (message.filenames_encrypted != null && message.hasOwnProperty("filenames_encrypted"))
+            if (message.filenames_encrypted != null && Object.hasOwnProperty.call(message, "filenames_encrypted"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.filenames_encrypted);
-            if (message.cb_disk_original != null && message.hasOwnProperty("cb_disk_original"))
+            if (message.cb_disk_original != null && Object.hasOwnProperty.call(message, "cb_disk_original"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.cb_disk_original);
-            if (message.cb_disk_compressed != null && message.hasOwnProperty("cb_disk_compressed"))
+            if (message.cb_disk_compressed != null && Object.hasOwnProperty.call(message, "cb_disk_compressed"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.cb_disk_compressed);
-            if (message.unique_chunks != null && message.hasOwnProperty("unique_chunks"))
+            if (message.unique_chunks != null && Object.hasOwnProperty.call(message, "unique_chunks"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.unique_chunks);
-            if (message.crc_encrypted != null && message.hasOwnProperty("crc_encrypted"))
+            if (message.crc_encrypted != null && Object.hasOwnProperty.call(message, "crc_encrypted"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.crc_encrypted);
-            if (message.crc_clear != null && message.hasOwnProperty("crc_clear"))
+            if (message.crc_clear != null && Object.hasOwnProperty.call(message, "crc_clear"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.crc_clear);
             return writer;
         };
@@ -1373,7 +1373,7 @@
         ContentManifestSignature.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.signature != null && message.hasOwnProperty("signature"))
+            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.signature);
             return writer;
         };
@@ -1606,16 +1606,16 @@
         ContentDeltaChunks.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.depot_id != null && message.hasOwnProperty("depot_id"))
+            if (message.depot_id != null && Object.hasOwnProperty.call(message, "depot_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.depot_id);
-            if (message.manifest_id_source != null && message.hasOwnProperty("manifest_id_source"))
+            if (message.manifest_id_source != null && Object.hasOwnProperty.call(message, "manifest_id_source"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.manifest_id_source);
-            if (message.manifest_id_target != null && message.hasOwnProperty("manifest_id_target"))
+            if (message.manifest_id_target != null && Object.hasOwnProperty.call(message, "manifest_id_target"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.manifest_id_target);
             if (message.deltaChunks != null && message.deltaChunks.length)
                 for (var i = 0; i < message.deltaChunks.length; ++i)
                     $root.ContentDeltaChunks.DeltaChunk.encode(message.deltaChunks[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.chunk_data_location != null && message.hasOwnProperty("chunk_data_location"))
+            if (message.chunk_data_location != null && Object.hasOwnProperty.call(message, "chunk_data_location"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.chunk_data_location);
             return writer;
         };
@@ -1950,17 +1950,17 @@
             DeltaChunk.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.sha_source != null && message.hasOwnProperty("sha_source"))
+                if (message.sha_source != null && Object.hasOwnProperty.call(message, "sha_source"))
                     writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.sha_source);
-                if (message.sha_target != null && message.hasOwnProperty("sha_target"))
+                if (message.sha_target != null && Object.hasOwnProperty.call(message, "sha_target"))
                     writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.sha_target);
-                if (message.size_original != null && message.hasOwnProperty("size_original"))
+                if (message.size_original != null && Object.hasOwnProperty.call(message, "size_original"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.size_original);
-                if (message.patch_method != null && message.hasOwnProperty("patch_method"))
+                if (message.patch_method != null && Object.hasOwnProperty.call(message, "patch_method"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.patch_method);
-                if (message.chunk != null && message.hasOwnProperty("chunk"))
+                if (message.chunk != null && Object.hasOwnProperty.call(message, "chunk"))
                     writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.chunk);
-                if (message.size_delta != null && message.hasOwnProperty("size_delta"))
+                if (message.size_delta != null && Object.hasOwnProperty.call(message, "size_delta"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.size_delta);
                 return writer;
             };
