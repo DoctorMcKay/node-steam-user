@@ -255,6 +255,12 @@ function processProtobufEnums() {
 		if (!changed) {
 			// Enum did not change
 			console.log('unchanged');
+			g_EnumNames[enumName] = true;
+			let normalized = enumName.toLowerCase();
+			if (g_EnumNamesNormalized[normalized] && g_EnumNamesNormalized[normalized] != enumName) {
+				throw new Error(`Duplicate enum ${enumName}`);
+			}
+			g_EnumNamesNormalized[normalized] = enumName;
 			continue;
 		}
 
