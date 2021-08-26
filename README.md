@@ -1617,6 +1617,10 @@ license(s).
 
 **Please note:** This method is rate-limited to approximately 50 apps per hour.
 
+**Please note:** This method only works with free-on-demand licenses. Promotional free licenses
+(i.e. "free to keep for a limited time") cannot be requested using this method. You can request such licenses using
+the steamstore module's [addFreeLicense](https://github.com/DoctorMcKay/node-steamstore#addfreelicensesubid-callback) method.
+
 ### getEncryptedAppTicket(appid[, userData], callback)
 - `appid` - The Steam AppID of the app for which you want a ticket
 - `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.
