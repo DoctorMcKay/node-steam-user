@@ -1,0 +1,1266 @@
+{
+  "options": {
+    "cc_generic_services": false,
+    "optimize_for": "SPEED"
+  },
+  "nested": {
+    "EInternalAccountType": {
+      "values": {
+        "k_EInternalSteamAccountType": 1,
+        "k_EInternalClanType": 2,
+        "k_EInternalAppType": 3,
+        "k_EInternalBroadcastChannelType": 4
+      }
+    },
+    "EExternalAccountType": {
+      "values": {
+        "k_EExternalNone": 0,
+        "k_EExternalSteamAccount": 1,
+        "k_EExternalGoogleAccount": 2,
+        "k_EExternalFacebookAccount": 3,
+        "k_EExternalTwitterAccount": 4,
+        "k_EExternalTwitchAccount": 5,
+        "k_EExternalYouTubeChannelAccount": 6,
+        "k_EExternalFacebookPage": 7
+      }
+    },
+    "CUserAccount_GetAvailableValveDiscountPromotions_Request": {
+      "fields": {
+        "country_code": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CUserAccount_GetAvailableValveDiscountPromotions_Response": {
+      "fields": {
+        "promotions": {
+          "rule": "repeated",
+          "type": ".CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails",
+          "id": 1
+        }
+      },
+      "nested": {
+        "ValveDiscountPromotionDetails": {
+          "fields": {
+            "promotionid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "promotion_description": {
+              "type": "string",
+              "id": 2
+            },
+            "minimum_cart_amount": {
+              "type": "int64",
+              "id": 3
+            },
+            "minimum_cart_amount_for_display": {
+              "type": "int64",
+              "id": 4
+            },
+            "discount_amount": {
+              "type": "int64",
+              "id": 5
+            },
+            "currency_code": {
+              "type": "int32",
+              "id": 6
+            },
+            "available_use_count": {
+              "type": "int32",
+              "id": 7
+            },
+            "promotional_discount_type": {
+              "type": "int32",
+              "id": 8
+            },
+            "loyalty_reward_id": {
+              "type": "int32",
+              "id": 9
+            },
+            "localized_name_token": {
+              "type": "string",
+              "id": 10
+            },
+            "max_use_count": {
+              "type": "int32",
+              "id": 11
+            }
+          }
+        }
+      }
+    },
+    "CUserAccount_GetAccountLinkStatus_Request": {
+      "fields": {}
+    },
+    "CUserAccount_GetAccountLinkStatus_Response": {
+      "fields": {
+        "pwid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "identity_verification": {
+          "type": "uint32",
+          "id": 2
+        },
+        "performed_age_verification": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CUserAccount_CancelLicenseForApp_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CUserAccount_CancelLicenseForApp_Response": {
+      "fields": {}
+    },
+    "CUserAccount_CreateFriendInviteToken_Request": {
+      "fields": {
+        "invite_limit": {
+          "type": "uint32",
+          "id": 1
+        },
+        "invite_duration": {
+          "type": "uint32",
+          "id": 2
+        },
+        "invite_note": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CUserAccount_CreateFriendInviteToken_Response": {
+      "fields": {
+        "invite_token": {
+          "type": "string",
+          "id": 1
+        },
+        "invite_limit": {
+          "type": "uint64",
+          "id": 2
+        },
+        "invite_duration": {
+          "type": "uint64",
+          "id": 3
+        },
+        "time_created": {
+          "type": "fixed32",
+          "id": 4
+        },
+        "valid": {
+          "type": "bool",
+          "id": 5
+        }
+      }
+    },
+    "CUserAccount_GetFriendInviteTokens_Request": {
+      "fields": {}
+    },
+    "CUserAccount_GetFriendInviteTokens_Response": {
+      "fields": {
+        "tokens": {
+          "rule": "repeated",
+          "type": ".CUserAccount_CreateFriendInviteToken_Response",
+          "id": 1
+        }
+      }
+    },
+    "CUserAccount_ViewFriendInviteToken_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "invite_token": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CUserAccount_ViewFriendInviteToken_Response": {
+      "fields": {
+        "valid": {
+          "type": "bool",
+          "id": 1
+        },
+        "steamid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "invite_duration": {
+          "type": "uint64",
+          "id": 3
+        }
+      }
+    },
+    "CUserAccount_RedeemFriendInviteToken_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "invite_token": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CUserAccount_RedeemFriendInviteToken_Response": {
+      "fields": {}
+    },
+    "CUserAccount_RevokeFriendInviteToken_Request": {
+      "fields": {
+        "invite_token": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CUserAccount_RevokeFriendInviteToken_Response": {
+      "fields": {}
+    },
+    "CUserAccount_RegisterCompatTool_Request": {
+      "fields": {
+        "compat_tool": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CUserAccount_RegisterCompatTool_Response": {
+      "fields": {}
+    },
+    "CAccountLinking_GetLinkedAccountInfo_Request": {
+      "fields": {
+        "account_type": {
+          "type": ".EInternalAccountType",
+          "id": 1,
+          "options": {
+            "default": "k_EInternalSteamAccountType"
+          }
+        },
+        "account_id": {
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "(description)": "Internal account ID"
+          }
+        },
+        "filter": {
+          "type": ".EExternalAccountType",
+          "id": 3,
+          "options": {
+            "default": "k_EExternalNone",
+            "(description)": "if specified then only return this external account type"
+          }
+        },
+        "return_access_token": {
+          "type": "bool",
+          "id": 4,
+          "options": {
+            "(description)": "if provided and true, then returns valid access token if available. It may refresh the token. "
+          }
+        }
+      }
+    },
+    "CAccountLinking_GetLinkedAccountInfo_Response": {
+      "fields": {
+        "external_accounts": {
+          "rule": "repeated",
+          "type": ".CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response",
+          "id": 1
+        }
+      },
+      "nested": {
+        "CExternalAccountTuple_Response": {
+          "fields": {
+            "external_type": {
+              "type": ".EExternalAccountType",
+              "id": 1,
+              "options": {
+                "default": "k_EExternalNone"
+              }
+            },
+            "external_id": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "(description)": "unique external account identifier"
+              }
+            },
+            "external_user_name": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "(description)": "user readable; best effort"
+              }
+            },
+            "external_url": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "(description)": "required for all, can be a sentinal to verify correctness"
+              }
+            },
+            "access_token": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "(description)": "provided if requeest and it was valid."
+              }
+            },
+            "access_token_secret": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "(description)": "required for OAuth v1 and signing the message, provided with access token."
+              }
+            },
+            "is_valid": {
+              "type": "bool",
+              "id": 7,
+              "options": {
+                "(description)": "If false, it means access token no longer work (expired, disconnected) and the link is now broken. Inform user to refresh."
+              }
+            }
+          }
+        }
+      }
+    },
+    "CEmbeddedClient_AuthorizeCurrentDevice_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "device_info": {
+          "type": "string",
+          "id": 3
+        },
+        "deviceid": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CEmbeddedClient_Token": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_token": {
+          "type": "bytes",
+          "id": 2
+        },
+        "expiry": {
+          "type": "uint32",
+          "id": 3
+        },
+        "deviceid": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CEmbeddedClient_AuthorizeDevice_Response": {
+      "fields": {
+        "result": {
+          "type": "uint32",
+          "id": 1
+        },
+        "token": {
+          "type": ".CEmbeddedClient_Token",
+          "id": 2
+        }
+      }
+    },
+    "UserAccount": {
+      "options": {
+        "(service_description)": "A service to get user account information"
+      },
+      "methods": {
+        "GetAvailableValveDiscountPromotions": {
+          "requestType": ".CUserAccount_GetAvailableValveDiscountPromotions_Request",
+          "responseType": ".CUserAccount_GetAvailableValveDiscountPromotions_Response",
+          "options": {
+            "(method_description)": "Gets the available promotional discounts available to the user"
+          }
+        },
+        "GetAccountLinkStatus": {
+          "requestType": ".CUserAccount_GetAccountLinkStatus_Request",
+          "responseType": ".CUserAccount_GetAccountLinkStatus_Response",
+          "options": {
+            "(method_description)": "Fetches account link status"
+          }
+        },
+        "CancelLicenseForApp": {
+          "requestType": ".CUserAccount_CancelLicenseForApp_Request",
+          "responseType": ".CUserAccount_CancelLicenseForApp_Response",
+          "options": {
+            "(method_description)": "Cancels a free license for a user"
+          }
+        },
+        "CreateFriendInviteToken": {
+          "requestType": ".CUserAccount_CreateFriendInviteToken_Request",
+          "responseType": ".CUserAccount_CreateFriendInviteToken_Response",
+          "options": {
+            "(method_description)": "Create a limited-use token that can be used to create a friend request"
+          }
+        },
+        "GetFriendInviteTokens": {
+          "requestType": ".CUserAccount_GetFriendInviteTokens_Request",
+          "responseType": ".CUserAccount_GetFriendInviteTokens_Response",
+          "options": {
+            "(method_description)": "Get the set of active tokens for the user"
+          }
+        },
+        "ViewFriendInviteToken": {
+          "requestType": ".CUserAccount_ViewFriendInviteToken_Request",
+          "responseType": ".CUserAccount_ViewFriendInviteToken_Response",
+          "options": {
+            "(method_description)": "View details about an invite token "
+          }
+        },
+        "RedeemFriendInviteToken": {
+          "requestType": ".CUserAccount_RedeemFriendInviteToken_Request",
+          "responseType": ".CUserAccount_RedeemFriendInviteToken_Response",
+          "options": {
+            "(method_description)": "Create a friend relationship using the given invite token"
+          }
+        },
+        "RevokeFriendInviteToken": {
+          "requestType": ".CUserAccount_RevokeFriendInviteToken_Request",
+          "responseType": ".CUserAccount_RevokeFriendInviteToken_Response",
+          "options": {
+            "(method_description)": "Revoke an active friend invite token"
+          }
+        },
+        "RegisterCompatTool": {
+          "requestType": ".CUserAccount_RegisterCompatTool_Request",
+          "responseType": ".CUserAccount_RegisterCompatTool_Response",
+          "options": {
+            "(method_description)": "Register intended account usage of a tool"
+          }
+        }
+      }
+    },
+    "AccountLinking": {
+      "options": {
+        "(service_description)": "A service to manage and link to external accounts"
+      },
+      "methods": {
+        "GetLinkedAccountInfo": {
+          "requestType": ".CAccountLinking_GetLinkedAccountInfo_Request",
+          "responseType": ".CAccountLinking_GetLinkedAccountInfo_Response",
+          "options": {
+            "(method_description)": "List all my active linked external accounts; may be requested to return the access token"
+          }
+        }
+      }
+    },
+    "EmbeddedClient": {
+      "options": {
+        "(service_description)": "Service to authorize and manage Steam functions directly embedded in games"
+      },
+      "methods": {
+        "AuthorizeCurrentDevice": {
+          "requestType": ".CEmbeddedClient_AuthorizeCurrentDevice_Request",
+          "responseType": ".CEmbeddedClient_AuthorizeDevice_Response",
+          "options": {
+            "(method_description)": "Use a logged-in (password/etc) session to create a durable access token"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

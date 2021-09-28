@@ -1,0 +1,480 @@
+{
+  "nested": {
+    "CRemoteClient_CreateSession_Request": {
+      "fields": {}
+    },
+    "CRemoteClient_CreateSession_Response": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "euniverse": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "CRemoteClient_StartPairing_Request": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_StartPairing_Response": {
+      "fields": {
+        "pin": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_SetPairingInfo_Request": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "device_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "request": {
+          "type": "bytes",
+          "id": 3
+        }
+      }
+    },
+    "CRemoteClient_SetPairingInfo_Response": {
+      "fields": {}
+    },
+    "CRemoteClient_GetPairingInfo_Request": {
+      "fields": {
+        "pin": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_GetPairingInfo_Response": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "device_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "request": {
+          "type": "bytes",
+          "id": 3
+        }
+      }
+    },
+    "CRemoteClient_CancelPairing_Request": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_CancelPairing_Response": {
+      "fields": {}
+    },
+    "CRemoteClient_RegisterStatusUpdate_Notification": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "device_id": {
+          "type": "fixed64",
+          "id": 3
+        }
+      }
+    },
+    "CRemoteClient_UnregisterStatusUpdate_Notification": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CRemoteClient_Online_Notification": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_RemotePacket_Notification": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "payload": {
+          "type": "bytes",
+          "id": 4
+        }
+      }
+    },
+    "CRemoteClient_ReplyPacket_Notification": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "payload": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CRemoteClient_GetReplies_Request": {
+      "fields": {
+        "session_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_GetReplies_Response": {
+      "fields": {
+        "payload": {
+          "rule": "repeated",
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_AllocateTURNServer_Request": {
+      "fields": {
+        "cellid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "credentials": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CRemoteClient_AllocateTURNServer_Response": {
+      "fields": {
+        "turn_server": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_AllocateRelayServer_Request": {
+      "fields": {
+        "cellid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "credentials": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CRemoteClient_AllocateRelayServer_Response": {
+      "fields": {
+        "relay_server": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_AllocateSDR_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_AllocateSDR_Response": {
+      "fields": {}
+    },
+    "CRemoteClient_SteamBroadcast_Notification": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clientid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "payload": {
+          "type": "bytes",
+          "id": 3
+        }
+      }
+    },
+    "CRemoteClient_SteamToSteam_Notification": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "src_clientid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "dst_clientid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "secretid": {
+          "type": "uint32",
+          "id": 4
+        },
+        "encrypted_payload": {
+          "type": "bytes",
+          "id": 5
+        }
+      }
+    },
+    "CRemotePlay_SessionStarted_Request": {
+      "fields": {
+        "host_account_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "client_account_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "device_form_factor": {
+          "type": "int32",
+          "id": 4
+        },
+        "remote_play_together": {
+          "type": "bool",
+          "id": 5
+        },
+        "guest_session": {
+          "type": "bool",
+          "id": 6
+        }
+      }
+    },
+    "CRemotePlay_SessionStarted_Response": {
+      "fields": {
+        "record_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CRemotePlay_SessionStopped_Notification": {
+      "fields": {
+        "record_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "used_x264": {
+          "type": "bool",
+          "id": 2
+        },
+        "used_h264": {
+          "type": "bool",
+          "id": 3
+        },
+        "used_hevc": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CRemotePlayTogether_Notification": {
+      "oneofs": {
+        "Message": {
+          "oneof": [
+            "group_updated"
+          ]
+        }
+      },
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "group_updated": {
+          "type": ".CRemotePlayTogether_Notification.GroupUpdated",
+          "id": 2
+        }
+      },
+      "nested": {
+        "Player": {
+          "fields": {
+            "steamid": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "guestid": {
+              "type": "uint32",
+              "id": 2
+            },
+            "avatar_hash": {
+              "type": "bytes",
+              "id": 3
+            },
+            "keyboard_enabled": {
+              "type": "bool",
+              "id": 4
+            },
+            "mouse_enabled": {
+              "type": "bool",
+              "id": 5
+            },
+            "controller_enabled": {
+              "type": "bool",
+              "id": 6
+            }
+          }
+        },
+        "ControllerSlot_obsolete": {
+          "fields": {
+            "slotid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "steamid": {
+              "type": "fixed64",
+              "id": 2
+            }
+          }
+        },
+        "ControllerSlot": {
+          "fields": {
+            "slotid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "player": {
+              "type": ".CRemotePlayTogether_Notification.Player",
+              "id": 2
+            }
+          }
+        },
+        "GroupUpdated": {
+          "fields": {
+            "host_steamid": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "host_clientid": {
+              "type": "fixed64",
+              "id": 2
+            },
+            "players_obsolete": {
+              "rule": "repeated",
+              "type": "fixed64",
+              "id": 3,
+              "options": {
+                "packed": false
+              }
+            },
+            "host_gameid": {
+              "type": "fixed64",
+              "id": 4
+            },
+            "controller_slots_obsolete": {
+              "rule": "repeated",
+              "type": ".CRemotePlayTogether_Notification.ControllerSlot_obsolete",
+              "id": 5
+            },
+            "has_new_players": {
+              "type": "bool",
+              "id": 6
+            },
+            "player_slots": {
+              "rule": "repeated",
+              "type": ".CRemotePlayTogether_Notification.Player",
+              "id": 7
+            },
+            "controller_slots": {
+              "rule": "repeated",
+              "type": ".CRemotePlayTogether_Notification.ControllerSlot",
+              "id": 8
+            }
+          }
+        }
+      }
+    },
+    "CRemoteClient_CreateRemotePlayTogetherInvitation_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "launch_parameters": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CRemoteClient_CreateRemotePlayTogetherInvitation_Response": {
+      "fields": {
+        "invitation_code": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_DeleteRemotePlayTogetherInvitation_Request": {
+      "fields": {
+        "invitation_code": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_DeleteRemotePlayTogetherInvitation_Response": {
+      "fields": {}
+    },
+    "CRemoteClient_LookupRemotePlayTogetherInvitation_Request": {
+      "fields": {
+        "invitation_code": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CRemoteClient_LookupRemotePlayTogetherInvitation_Response": {
+      "fields": {
+        "invitation_url": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    }
+  }
+}

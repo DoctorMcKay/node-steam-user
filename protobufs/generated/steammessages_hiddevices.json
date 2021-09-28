@@ -1,0 +1,446 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "EHIDDeviceLocation": {
+      "values": {
+        "k_EDeviceLocationLocal": 0,
+        "k_EDeviceLocationRemote": 2,
+        "k_EDeviceLocationAny": 3
+      }
+    },
+    "EHIDDeviceDisconnectMethod": {
+      "values": {
+        "k_EDeviceDisconnectMethodUnknown": 0,
+        "k_EDeviceDisconnectMethodBluetooth": 1,
+        "k_EDeviceDisconnectMethodFeatureReport": 2,
+        "k_EDeviceDisconnectMethodOutputReport": 3
+      }
+    },
+    "CHIDDeviceInfo": {
+      "fields": {
+        "location": {
+          "type": ".EHIDDeviceLocation",
+          "id": 1,
+          "options": {
+            "default": "k_EDeviceLocationLocal"
+          }
+        },
+        "path": {
+          "type": "string",
+          "id": 2
+        },
+        "vendor_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "product_id": {
+          "type": "uint32",
+          "id": 4
+        },
+        "serial_number": {
+          "type": "string",
+          "id": 5
+        },
+        "release_number": {
+          "type": "uint32",
+          "id": 6
+        },
+        "manufacturer_string": {
+          "type": "string",
+          "id": 7
+        },
+        "product_string": {
+          "type": "string",
+          "id": 8
+        },
+        "usage_page": {
+          "type": "uint32",
+          "id": 9
+        },
+        "usage": {
+          "type": "uint32",
+          "id": 10
+        },
+        "interface_number": {
+          "type": "int32",
+          "id": 11,
+          "options": {
+            "default": -1
+          }
+        },
+        "ostype": {
+          "type": "int32",
+          "id": 12,
+          "options": {
+            "default": -1
+          }
+        },
+        "is_generic_gamepad": {
+          "type": "bool",
+          "id": 13
+        },
+        "is_generic_joystick": {
+          "type": "bool",
+          "id": 14
+        },
+        "caps_bits": {
+          "type": "uint32",
+          "id": 15
+        },
+        "session_id": {
+          "type": "uint32",
+          "id": 16
+        },
+        "eControllerType": {
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "default": 0
+          }
+        },
+        "is_xinput_device": {
+          "type": "bool",
+          "id": 18,
+          "options": {
+            "default": false
+          }
+        },
+        "session_remote_play_together_appid": {
+          "type": "uint32",
+          "id": 19
+        }
+      }
+    },
+    "CHIDDeviceInputReport": {
+      "fields": {
+        "full_report": {
+          "type": "bytes",
+          "id": 1
+        },
+        "delta_report": {
+          "type": "bytes",
+          "id": 2
+        },
+        "delta_report_size": {
+          "type": "uint32",
+          "id": 3
+        },
+        "delta_report_crc": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CHIDMessageToRemote": {
+      "oneofs": {
+        "command": {
+          "oneof": [
+            "device_open",
+            "device_close",
+            "device_write",
+            "device_read",
+            "device_send_feature_report",
+            "device_get_feature_report",
+            "device_get_vendor_string",
+            "device_get_product_string",
+            "device_get_serial_number_string",
+            "device_start_input_reports",
+            "device_request_full_report",
+            "device_disconnect"
+          ]
+        }
+      },
+      "fields": {
+        "request_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "device_open": {
+          "type": ".CHIDMessageToRemote.DeviceOpen",
+          "id": 2
+        },
+        "device_close": {
+          "type": ".CHIDMessageToRemote.DeviceClose",
+          "id": 3
+        },
+        "device_write": {
+          "type": ".CHIDMessageToRemote.DeviceWrite",
+          "id": 4
+        },
+        "device_read": {
+          "type": ".CHIDMessageToRemote.DeviceRead",
+          "id": 5
+        },
+        "device_send_feature_report": {
+          "type": ".CHIDMessageToRemote.DeviceSendFeatureReport",
+          "id": 6
+        },
+        "device_get_feature_report": {
+          "type": ".CHIDMessageToRemote.DeviceGetFeatureReport",
+          "id": 7
+        },
+        "device_get_vendor_string": {
+          "type": ".CHIDMessageToRemote.DeviceGetVendorString",
+          "id": 8
+        },
+        "device_get_product_string": {
+          "type": ".CHIDMessageToRemote.DeviceGetProductString",
+          "id": 9
+        },
+        "device_get_serial_number_string": {
+          "type": ".CHIDMessageToRemote.DeviceGetSerialNumberString",
+          "id": 10
+        },
+        "device_start_input_reports": {
+          "type": ".CHIDMessageToRemote.DeviceStartInputReports",
+          "id": 11
+        },
+        "device_request_full_report": {
+          "type": ".CHIDMessageToRemote.DeviceRequestFullReport",
+          "id": 12
+        },
+        "device_disconnect": {
+          "type": ".CHIDMessageToRemote.DeviceDisconnect",
+          "id": 13
+        }
+      },
+      "nested": {
+        "DeviceOpen": {
+          "fields": {
+            "info": {
+              "type": ".CHIDDeviceInfo",
+              "id": 1
+            }
+          }
+        },
+        "DeviceClose": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "DeviceWrite": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            },
+            "data": {
+              "type": "bytes",
+              "id": 2
+            }
+          }
+        },
+        "DeviceRead": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            },
+            "length": {
+              "type": "uint32",
+              "id": 2
+            },
+            "timeout_ms": {
+              "type": "int32",
+              "id": 3
+            }
+          }
+        },
+        "DeviceSendFeatureReport": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            },
+            "data": {
+              "type": "bytes",
+              "id": 2
+            }
+          }
+        },
+        "DeviceGetFeatureReport": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            },
+            "report_number": {
+              "type": "bytes",
+              "id": 2
+            },
+            "length": {
+              "type": "uint32",
+              "id": 3
+            }
+          }
+        },
+        "DeviceGetVendorString": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "DeviceGetProductString": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "DeviceGetSerialNumberString": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "DeviceStartInputReports": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            },
+            "length": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        },
+        "DeviceRequestFullReport": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "DeviceDisconnect": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            },
+            "disconnectMethod": {
+              "type": ".EHIDDeviceDisconnectMethod",
+              "id": 2,
+              "options": {
+                "default": "k_EDeviceDisconnectMethodUnknown"
+              }
+            },
+            "data": {
+              "type": "bytes",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CHIDMessageFromRemote": {
+      "oneofs": {
+        "command": {
+          "oneof": [
+            "update_device_list",
+            "response",
+            "reports",
+            "close_device",
+            "close_all_devices"
+          ]
+        }
+      },
+      "fields": {
+        "update_device_list": {
+          "type": ".CHIDMessageFromRemote.UpdateDeviceList",
+          "id": 1
+        },
+        "response": {
+          "type": ".CHIDMessageFromRemote.RequestResponse",
+          "id": 2
+        },
+        "reports": {
+          "type": ".CHIDMessageFromRemote.DeviceInputReports",
+          "id": 3
+        },
+        "close_device": {
+          "type": ".CHIDMessageFromRemote.CloseDevice",
+          "id": 4
+        },
+        "close_all_devices": {
+          "type": ".CHIDMessageFromRemote.CloseAllDevices",
+          "id": 5
+        }
+      },
+      "nested": {
+        "UpdateDeviceList": {
+          "fields": {
+            "devices": {
+              "rule": "repeated",
+              "type": ".CHIDDeviceInfo",
+              "id": 1
+            }
+          }
+        },
+        "RequestResponse": {
+          "fields": {
+            "request_id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "result": {
+              "type": "int32",
+              "id": 2
+            },
+            "data": {
+              "type": "bytes",
+              "id": 3
+            }
+          }
+        },
+        "DeviceInputReports": {
+          "fields": {
+            "device_reports": {
+              "rule": "repeated",
+              "type": ".CHIDMessageFromRemote.DeviceInputReports.DeviceInputReport",
+              "id": 1
+            }
+          },
+          "nested": {
+            "DeviceInputReport": {
+              "fields": {
+                "device": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "reports": {
+                  "rule": "repeated",
+                  "type": ".CHIDDeviceInputReport",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "CloseDevice": {
+          "fields": {
+            "device": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "CloseAllDevices": {
+          "fields": {}
+        }
+      }
+    }
+  }
+}

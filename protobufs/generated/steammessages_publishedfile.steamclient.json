@@ -1,0 +1,4196 @@
+{
+  "options": {
+    "cc_generic_services": true,
+    "optimize_for": "SPEED",
+    "(force_php_generation)": true
+  },
+  "nested": {
+    "EPublishedFileRevision": {
+      "values": {
+        "k_EPublishedFileRevision_Default": 0,
+        "k_EPublishedFileRevision_Latest": 1,
+        "k_EPublishedFileRevision_ApprovedSnapshot": 2,
+        "k_EPublishedFileRevision_ApprovedSnapshot_China": 3,
+        "k_EPublishedFileRevision_RejectedSnapshot": 4,
+        "k_EPublishedFileRevision_RejectedSnapshot_China": 5
+      }
+    },
+    "EPublishedFileForSaleStatus": {
+      "values": {
+        "k_PFFSS_NotForSale": 0,
+        "k_PFFSS_PendingApproval": 1,
+        "k_PFFSS_ApprovedForSale": 2,
+        "k_PFFSS_RejectedForSale": 3,
+        "k_PFFSS_NoLongerForSale": 4,
+        "k_PFFSS_TentativeApproval": 5
+      }
+    },
+    "CPublishedFile_Subscribe_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "list_type": {
+          "type": "uint32",
+          "id": 2
+        },
+        "appid": {
+          "type": "int32",
+          "id": 3
+        },
+        "notify_client": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CPublishedFile_Subscribe_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_Unsubscribe_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "list_type": {
+          "type": "uint32",
+          "id": 2
+        },
+        "appid": {
+          "type": "int32",
+          "id": 3
+        },
+        "notify_client": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CPublishedFile_Unsubscribe_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_CanSubscribe_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CPublishedFile_CanSubscribe_Response": {
+      "fields": {
+        "can_subscribe": {
+          "type": "bool",
+          "id": 1
+        }
+      }
+    },
+    "CPublishedFile_Publish_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "App Id this file is being published FROM."
+          }
+        },
+        "consumer_appid": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "(description)": "App Id this file is being published TO."
+          }
+        },
+        "cloudfilename": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "Name of the file to publish in the user's cloud."
+          }
+        },
+        "preview_cloudfilename": {
+          "type": "string",
+          "id": 4,
+          "options": {
+            "(description)": "Name of the file to use as the published file's preview."
+          }
+        },
+        "title": {
+          "type": "string",
+          "id": 5,
+          "options": {
+            "(description)": "Text title for the published file."
+          }
+        },
+        "file_description": {
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "Text description for the published file."
+          }
+        },
+        "file_type": {
+          "type": "uint32",
+          "id": 7,
+          "options": {
+            "(description)": "(EWorkshopFileType) Type of Workshop file to publish."
+          }
+        },
+        "consumer_shortcut_name": {
+          "type": "string",
+          "id": 8,
+          "options": {
+            "(description)": "Shortcut name for the published file."
+          }
+        },
+        "youtube_username": {
+          "type": "string",
+          "id": 9,
+          "options": {
+            "(description)": "(Optional) User's YouTube account username."
+          }
+        },
+        "youtube_videoid": {
+          "type": "string",
+          "id": 10,
+          "options": {
+            "(description)": "(Optional) Video Id of a YouTube video for this published file."
+          }
+        },
+        "visibility": {
+          "type": "uint32",
+          "id": 11,
+          "options": {
+            "(description)": "(ERemoteStoragePublishedFileVisibility) Visibility of the published file (private, friends, public, etc.)"
+          }
+        },
+        "redirect_uri": {
+          "type": "string",
+          "id": 12,
+          "options": {
+            "(description)": "(Optional) If supplied, the resulting published file's Id is appended to the URI."
+          }
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 13,
+          "options": {
+            "(description)": "Array of text tags to apply to the published file."
+          }
+        },
+        "collection_type": {
+          "type": "string",
+          "id": 14,
+          "options": {
+            "(description)": "(Optional) Type of collection the published file represents."
+          }
+        },
+        "game_type": {
+          "type": "string",
+          "id": 15,
+          "options": {
+            "(description)": "(Optional) Type of game the published file represents."
+          }
+        },
+        "url": {
+          "type": "string",
+          "id": 16,
+          "options": {
+            "(description)": "(Optional) If this represents a game, this is the URL to that game's page."
+          }
+        }
+      }
+    },
+    "CPublishedFile_Publish_Response": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "redirect_uri": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CPublishedFile_GetDetails_Request": {
+      "fields": {
+        "publishedfileids": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Set of published file Ids to retrieve details for.",
+            "packed": false
+          }
+        },
+        "includetags": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "If true, return tag information in the returned details."
+          }
+        },
+        "includeadditionalpreviews": {
+          "type": "bool",
+          "id": 3,
+          "options": {
+            "(description)": "If true, return preview information in the returned details."
+          }
+        },
+        "includechildren": {
+          "type": "bool",
+          "id": 4,
+          "options": {
+            "(description)": "If true, return children in the returned details."
+          }
+        },
+        "includekvtags": {
+          "type": "bool",
+          "id": 5,
+          "options": {
+            "(description)": "If true, return key value tags in the returned details."
+          }
+        },
+        "includevotes": {
+          "type": "bool",
+          "id": 6,
+          "options": {
+            "(description)": "If true, return vote data in the returned details."
+          }
+        },
+        "short_description": {
+          "type": "bool",
+          "id": 8,
+          "options": {
+            "(description)": "If true, return a short description instead of the full description."
+          }
+        },
+        "includeforsaledata": {
+          "type": "bool",
+          "id": 10,
+          "options": {
+            "(description)": "If true, return pricing data, if applicable."
+          }
+        },
+        "includemetadata": {
+          "type": "bool",
+          "id": 11,
+          "options": {
+            "(description)": "If true, populate the metadata field."
+          }
+        },
+        "language": {
+          "type": "int32",
+          "id": 12,
+          "options": {
+            "default": 0,
+            "(description)": "Specifies the localized text to return. Defaults to English."
+          }
+        },
+        "return_playtime_stats": {
+          "type": "uint32",
+          "id": 13,
+          "options": {
+            "(description)": "Return playtime stats for the specified number of days before today."
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 14
+        },
+        "strip_description_bbcode": {
+          "type": "bool",
+          "id": 15,
+          "options": {
+            "(description)": "Strips BBCode from descriptions."
+          }
+        },
+        "desired_revision": {
+          "type": ".EPublishedFileRevision",
+          "id": 16,
+          "options": {
+            "default": "k_EPublishedFileRevision_Default",
+            "(description)": "Return the data for the specified revision."
+          }
+        },
+        "includereactions": {
+          "type": "bool",
+          "id": 17,
+          "options": {
+            "default": false,
+            "(description)": "If true, then reactions to items will be returned."
+          }
+        }
+      }
+    },
+    "PublishedFileDetails": {
+      "fields": {
+        "result": {
+          "type": "uint32",
+          "id": 1
+        },
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "creator": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "creator_appid": {
+          "type": "uint32",
+          "id": 4
+        },
+        "consumer_appid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "consumer_shortcutid": {
+          "type": "uint32",
+          "id": 6
+        },
+        "filename": {
+          "type": "string",
+          "id": 7
+        },
+        "file_size": {
+          "type": "uint64",
+          "id": 8
+        },
+        "preview_file_size": {
+          "type": "uint64",
+          "id": 9
+        },
+        "file_url": {
+          "type": "string",
+          "id": 10
+        },
+        "preview_url": {
+          "type": "string",
+          "id": 11
+        },
+        "youtubevideoid": {
+          "type": "string",
+          "id": 12
+        },
+        "url": {
+          "type": "string",
+          "id": 13
+        },
+        "hcontent_file": {
+          "type": "fixed64",
+          "id": 14
+        },
+        "hcontent_preview": {
+          "type": "fixed64",
+          "id": 15
+        },
+        "title": {
+          "type": "string",
+          "id": 16
+        },
+        "file_description": {
+          "type": "string",
+          "id": 17
+        },
+        "short_description": {
+          "type": "string",
+          "id": 18
+        },
+        "time_created": {
+          "type": "uint32",
+          "id": 19
+        },
+        "time_updated": {
+          "type": "uint32",
+          "id": 20
+        },
+        "visibility": {
+          "type": "uint32",
+          "id": 21
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 22
+        },
+        "workshop_file": {
+          "type": "bool",
+          "id": 23
+        },
+        "workshop_accepted": {
+          "type": "bool",
+          "id": 24
+        },
+        "show_subscribe_all": {
+          "type": "bool",
+          "id": 25
+        },
+        "num_comments_developer": {
+          "type": "int32",
+          "id": 26
+        },
+        "num_comments_public": {
+          "type": "int32",
+          "id": 27
+        },
+        "banned": {
+          "type": "bool",
+          "id": 28
+        },
+        "ban_reason": {
+          "type": "string",
+          "id": 29
+        },
+        "banner": {
+          "type": "fixed64",
+          "id": 30
+        },
+        "can_be_deleted": {
+          "type": "bool",
+          "id": 31
+        },
+        "incompatible": {
+          "type": "bool",
+          "id": 32
+        },
+        "app_name": {
+          "type": "string",
+          "id": 33
+        },
+        "file_type": {
+          "type": "uint32",
+          "id": 34
+        },
+        "can_subscribe": {
+          "type": "bool",
+          "id": 35
+        },
+        "subscriptions": {
+          "type": "uint32",
+          "id": 36
+        },
+        "favorited": {
+          "type": "uint32",
+          "id": 37
+        },
+        "followers": {
+          "type": "uint32",
+          "id": 38
+        },
+        "lifetime_subscriptions": {
+          "type": "uint32",
+          "id": 39
+        },
+        "lifetime_favorited": {
+          "type": "uint32",
+          "id": 40
+        },
+        "lifetime_followers": {
+          "type": "uint32",
+          "id": 41
+        },
+        "lifetime_playtime": {
+          "type": "uint64",
+          "id": 62
+        },
+        "lifetime_playtime_sessions": {
+          "type": "uint64",
+          "id": 63
+        },
+        "views": {
+          "type": "uint32",
+          "id": 42
+        },
+        "image_width": {
+          "type": "uint32",
+          "id": 43
+        },
+        "image_height": {
+          "type": "uint32",
+          "id": 44
+        },
+        "image_url": {
+          "type": "string",
+          "id": 45
+        },
+        "spoiler_tag": {
+          "type": "bool",
+          "id": 46
+        },
+        "shortcutid": {
+          "type": "uint32",
+          "id": 47
+        },
+        "shortcutname": {
+          "type": "string",
+          "id": 48
+        },
+        "num_children": {
+          "type": "uint32",
+          "id": 49
+        },
+        "num_reports": {
+          "type": "uint32",
+          "id": 50
+        },
+        "previews": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails.Preview",
+          "id": 51
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails.Tag",
+          "id": 52
+        },
+        "children": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails.Child",
+          "id": 53
+        },
+        "kvtags": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails.KVTag",
+          "id": 54
+        },
+        "vote_data": {
+          "type": ".PublishedFileDetails.VoteData",
+          "id": 55
+        },
+        "playtime_stats": {
+          "type": ".PublishedFileDetails.PlaytimeStats",
+          "id": 64
+        },
+        "time_subscribed": {
+          "type": "uint32",
+          "id": 56,
+          "options": {
+            "(description)": "Only valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls"
+          }
+        },
+        "for_sale_data": {
+          "type": ".PublishedFileDetails.ForSaleData",
+          "id": 57,
+          "options": {
+            "(description)": "Pricing information, if applicable."
+          }
+        },
+        "metadata": {
+          "type": "string",
+          "id": 58,
+          "options": {
+            "(description)": "Metadata associated with the item"
+          }
+        },
+        "language": {
+          "type": "int32",
+          "id": 61,
+          "options": {
+            "default": 0,
+            "(description)": "The language of the title and description."
+          }
+        },
+        "maybe_inappropriate_sex": {
+          "type": "bool",
+          "id": 65
+        },
+        "maybe_inappropriate_violence": {
+          "type": "bool",
+          "id": 66
+        },
+        "revision_change_number": {
+          "type": "uint64",
+          "id": 67,
+          "options": {
+            "(description)": "The change number for the specified revision."
+          }
+        },
+        "revision": {
+          "type": ".EPublishedFileRevision",
+          "id": 68,
+          "options": {
+            "default": "k_EPublishedFileRevision_Default",
+            "(description)": "The revision of the data returned, usually k_EPublishedFileRevision_Latest, but can be another revision/snapshot depending on the caller."
+          }
+        },
+        "available_revisions": {
+          "rule": "repeated",
+          "type": ".EPublishedFileRevision",
+          "id": 69,
+          "options": {
+            "(description)": "Available revisions",
+            "packed": false
+          }
+        },
+        "reactions": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails.Reaction",
+          "id": 70,
+          "options": {
+            "(description)": "Reactions to this item"
+          }
+        },
+        "ban_text_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 71,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
+          }
+        }
+      },
+      "nested": {
+        "Tag": {
+          "fields": {
+            "tag": {
+              "type": "string",
+              "id": 1
+            },
+            "adminonly": {
+              "type": "bool",
+              "id": 2
+            },
+            "display_name": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
+        "Preview": {
+          "fields": {
+            "previewid": {
+              "type": "uint64",
+              "id": 1
+            },
+            "sortorder": {
+              "type": "uint32",
+              "id": 2
+            },
+            "url": {
+              "type": "string",
+              "id": 3
+            },
+            "size": {
+              "type": "uint32",
+              "id": 4
+            },
+            "filename": {
+              "type": "string",
+              "id": 5
+            },
+            "youtubevideoid": {
+              "type": "string",
+              "id": 6
+            },
+            "preview_type": {
+              "type": "uint32",
+              "id": 7
+            },
+            "external_reference": {
+              "type": "string",
+              "id": 8
+            }
+          }
+        },
+        "Child": {
+          "fields": {
+            "publishedfileid": {
+              "type": "uint64",
+              "id": 1
+            },
+            "sortorder": {
+              "type": "uint32",
+              "id": 2
+            },
+            "file_type": {
+              "type": "uint32",
+              "id": 3
+            }
+          }
+        },
+        "KVTag": {
+          "fields": {
+            "key": {
+              "type": "string",
+              "id": 1
+            },
+            "value": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "VoteData": {
+          "fields": {
+            "score": {
+              "type": "float",
+              "id": 1
+            },
+            "votes_up": {
+              "type": "uint32",
+              "id": 2
+            },
+            "votes_down": {
+              "type": "uint32",
+              "id": 3
+            }
+          }
+        },
+        "ForSaleData": {
+          "fields": {
+            "is_for_sale": {
+              "type": "bool",
+              "id": 1
+            },
+            "price_category": {
+              "type": "uint32",
+              "id": 2
+            },
+            "estatus": {
+              "type": ".EPublishedFileForSaleStatus",
+              "id": 3,
+              "options": {
+                "default": "k_PFFSS_NotForSale"
+              }
+            },
+            "price_category_floor": {
+              "type": "uint32",
+              "id": 4
+            },
+            "price_is_pay_what_you_want": {
+              "type": "bool",
+              "id": 5
+            },
+            "discount_percentage": {
+              "type": "uint32",
+              "id": 6
+            }
+          }
+        },
+        "PlaytimeStats": {
+          "fields": {
+            "playtime_seconds": {
+              "type": "uint64",
+              "id": 1
+            },
+            "num_sessions": {
+              "type": "uint64",
+              "id": 2
+            }
+          }
+        },
+        "Reaction": {
+          "fields": {
+            "reactionid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "count": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_GetDetails_Response": {
+      "fields": {
+        "publishedfiledetails": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails",
+          "id": 1
+        }
+      }
+    },
+    "CPublishedFile_GetItemInfo_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "last_time_updated": {
+          "type": "uint32",
+          "id": 2
+        },
+        "workshop_items": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetItemInfo_Request.WorkshopItem",
+          "id": 3
+        }
+      },
+      "nested": {
+        "WorkshopItem": {
+          "fields": {
+            "published_file_id": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "time_updated": {
+              "type": "uint32",
+              "id": 2
+            },
+            "desired_revision": {
+              "type": ".EPublishedFileRevision",
+              "id": 3,
+              "options": {
+                "default": "k_EPublishedFileRevision_Default",
+                "(description)": "Return the data for the specified revision."
+              }
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_GetItemInfo_Response": {
+      "fields": {
+        "update_time": {
+          "type": "uint32",
+          "id": 1
+        },
+        "workshop_items": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetItemInfo_Response.WorkshopItemInfo",
+          "id": 2
+        },
+        "private_items": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "packed": false
+          }
+        }
+      },
+      "nested": {
+        "WorkshopItemInfo": {
+          "fields": {
+            "published_file_id": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "time_updated": {
+              "type": "uint32",
+              "id": 2
+            },
+            "manifest_id": {
+              "type": "fixed64",
+              "id": 3
+            },
+            "flags": {
+              "type": "uint32",
+              "id": 4
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_GetUserFiles_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Steam ID of the user whose files are being requested."
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "(description)": "App Id of the app that the files were published to."
+          }
+        },
+        "page": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "default": 1,
+            "(description)": "(Optional) Starting page for results."
+          }
+        },
+        "numperpage": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "default": 1,
+            "(description)": "(Optional) The number of results, per page to return."
+          }
+        },
+        "type": {
+          "type": "string",
+          "id": 6,
+          "options": {
+            "default": "myfiles",
+            "(description)": "(Optional) Type of files to be returned."
+          }
+        },
+        "sortmethod": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "default": "lastupdated",
+            "(description)": "(Optional) Sorting method to use on returned values."
+          }
+        },
+        "privacy": {
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "(description)": "(optional) Filter by privacy settings."
+          }
+        },
+        "requiredtags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 10,
+          "options": {
+            "(description)": "(Optional) Tags that must be present on a published file to satisfy the query."
+          }
+        },
+        "excludedtags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 11,
+          "options": {
+            "(description)": "(Optional) Tags that must NOT be present on a published file to satisfy the query."
+          }
+        },
+        "required_kv_tags": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetUserFiles_Request.KVTag",
+          "id": 30,
+          "options": {
+            "(description)": "Required key-value tags to match on."
+          }
+        },
+        "filetype": {
+          "type": "uint32",
+          "id": 14,
+          "options": {
+            "(description)": "(Optional) File type to match files to."
+          }
+        },
+        "creator_appid": {
+          "type": "uint32",
+          "id": 15,
+          "options": {
+            "(description)": "App Id of the app that published the files, only matched if specified."
+          }
+        },
+        "match_cloud_filename": {
+          "type": "string",
+          "id": 16,
+          "options": {
+            "(description)": "Match this cloud filename if specified."
+          }
+        },
+        "cache_max_age_seconds": {
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "default": 0,
+            "(description)": "Allow stale data to be returned for the specified number of seconds."
+          }
+        },
+        "language": {
+          "type": "int32",
+          "id": 29,
+          "options": {
+            "default": 0,
+            "(description)": "Specifies the localized text to return. Defaults to English."
+          }
+        },
+        "taggroups": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetUserFiles_Request.TagGroup",
+          "id": 34,
+          "options": {
+            "(description)": "(Optional) At least one of the tags must be present on a published file to satisfy the query."
+          }
+        },
+        "totalonly": {
+          "type": "bool",
+          "id": 17,
+          "options": {
+            "(description)": "(Optional) If true, only return the total number of files that satisfy this query."
+          }
+        },
+        "ids_only": {
+          "type": "bool",
+          "id": 18,
+          "options": {
+            "(description)": "(Optional) If true, only return the published file ids of files that satisfy this query."
+          }
+        },
+        "return_vote_data": {
+          "type": "bool",
+          "id": 19,
+          "options": {
+            "default": true,
+            "(description)": "Return vote data"
+          }
+        },
+        "return_tags": {
+          "type": "bool",
+          "id": 20,
+          "options": {
+            "(description)": "Return tags in the file details"
+          }
+        },
+        "return_kv_tags": {
+          "type": "bool",
+          "id": 21,
+          "options": {
+            "default": true,
+            "(description)": "Return key-value tags in the file details"
+          }
+        },
+        "return_previews": {
+          "type": "bool",
+          "id": 22,
+          "options": {
+            "(description)": "Return preview image and video details in the file details"
+          }
+        },
+        "return_children": {
+          "type": "bool",
+          "id": 23,
+          "options": {
+            "(description)": "Return child item ids in the file details"
+          }
+        },
+        "return_short_description": {
+          "type": "bool",
+          "id": 24,
+          "options": {
+            "default": true,
+            "(description)": "Populate the short_description field instead of file_description"
+          }
+        },
+        "return_for_sale_data": {
+          "type": "bool",
+          "id": 26,
+          "options": {
+            "(description)": "Return pricing information, if applicable"
+          }
+        },
+        "return_metadata": {
+          "type": "bool",
+          "id": 28,
+          "options": {
+            "default": false,
+            "(description)": "Populate the metadata field"
+          }
+        },
+        "return_playtime_stats": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "(description)": "Return playtime stats for the specified number of days before today."
+          }
+        },
+        "strip_description_bbcode": {
+          "type": "bool",
+          "id": 32,
+          "options": {
+            "(description)": "Strips BBCode from descriptions."
+          }
+        },
+        "return_reactions": {
+          "type": "bool",
+          "id": 35,
+          "options": {
+            "default": false,
+            "(description)": "If true, then reactions to items will be returned."
+          }
+        },
+        "startindex_override": {
+          "type": "uint32",
+          "id": 25,
+          "options": {
+            "(description)": "Backwards compatible for the client."
+          }
+        },
+        "desired_revision": {
+          "type": ".EPublishedFileRevision",
+          "id": 33,
+          "options": {
+            "default": "k_EPublishedFileRevision_Default",
+            "(description)": "Return the data for the specified revision."
+          }
+        }
+      },
+      "nested": {
+        "KVTag": {
+          "fields": {
+            "key": {
+              "type": "string",
+              "id": 1
+            },
+            "value": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "TagGroup": {
+          "fields": {
+            "tags": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_GetUserFiles_Response": {
+      "fields": {
+        "total": {
+          "type": "uint32",
+          "id": 1
+        },
+        "startindex": {
+          "type": "uint32",
+          "id": 2
+        },
+        "publishedfiledetails": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails",
+          "id": 3
+        },
+        "apps": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetUserFiles_Response.App",
+          "id": 4
+        }
+      },
+      "nested": {
+        "App": {
+          "fields": {
+            "appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "name": {
+              "type": "string",
+              "id": 2
+            },
+            "shortcutid": {
+              "type": "uint32",
+              "id": 3
+            },
+            "private": {
+              "type": "bool",
+              "id": 4
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_AreFilesInSubscriptionList_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "publishedfileids": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        },
+        "listtype": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "See EUCMListType"
+          }
+        },
+        "filetype": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "See EPublishedFileInfoMatchingFileType"
+          }
+        },
+        "workshopfiletype": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "See EWorkshopFileType.  If specified, overrides filetype"
+          }
+        }
+      }
+    },
+    "CPublishedFile_AreFilesInSubscriptionList_Response": {
+      "fields": {
+        "files": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_AreFilesInSubscriptionList_Response.InList",
+          "id": 1
+        }
+      },
+      "nested": {
+        "InList": {
+          "fields": {
+            "publishedfileid": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "inlist": {
+              "type": "bool",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_Update_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "App Id this published file belongs to."
+          }
+        },
+        "publishedfileid": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "Published file id of the file we'd like update."
+          }
+        },
+        "title": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "(Optional) Title of the published file."
+          }
+        },
+        "file_description": {
+          "type": "string",
+          "id": 4,
+          "options": {
+            "(description)": "(Optional) Description of the published file."
+          }
+        },
+        "visibility": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "(Optional) Visibility of the published file."
+          }
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "(Optional) Set of tags for the published file."
+          }
+        },
+        "filename": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "(Optional) Filename for the published file."
+          }
+        },
+        "preview_filename": {
+          "type": "string",
+          "id": 8,
+          "options": {
+            "(description)": "(Optional) Preview filename for the published file."
+          }
+        },
+        "image_width": {
+          "type": "uint32",
+          "id": 15,
+          "options": {
+            "(description)": "(Optional) If this is an image file, you can specify the image width."
+          }
+        },
+        "image_height": {
+          "type": "uint32",
+          "id": 16,
+          "options": {
+            "(description)": "(Optional) If this is an image file, you can specify the image height."
+          }
+        }
+      }
+    },
+    "CPublishedFile_Update_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_GetChangeHistoryEntry_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Published file id of the file we'd like to get the change history for."
+          }
+        },
+        "timestamp": {
+          "type": "uint32",
+          "id": 2
+        },
+        "language": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CPublishedFile_GetChangeHistoryEntry_Response": {
+      "fields": {
+        "change_description": {
+          "type": "string",
+          "id": 1
+        },
+        "language": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "CPublishedFile_GetChangeHistory_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Published file id of the file we'd like to get the change history for."
+          }
+        },
+        "total_only": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "Return the total number of changes only."
+          }
+        },
+        "startindex": {
+          "type": "uint32",
+          "id": 3
+        },
+        "count": {
+          "type": "uint32",
+          "id": 4
+        },
+        "language": {
+          "type": "int32",
+          "id": 5,
+          "options": {
+            "default": 0,
+            "(description)": "Desired language"
+          }
+        }
+      }
+    },
+    "CPublishedFile_GetChangeHistory_Response": {
+      "fields": {
+        "changes": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetChangeHistory_Response.ChangeLog",
+          "id": 1
+        },
+        "total": {
+          "type": "uint32",
+          "id": 2
+        }
+      },
+      "nested": {
+        "ChangeLog": {
+          "fields": {
+            "timestamp": {
+              "type": "uint32",
+              "id": 1
+            },
+            "change_description": {
+              "type": "string",
+              "id": 2
+            },
+            "language": {
+              "type": "int32",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_RefreshVotingQueue_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "matching_file_type": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "(description)": "EPublishedFileInfoMatchingFileType"
+          }
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "Include files that have all the tags or any of the tags if match_all_tags is set to false."
+          }
+        },
+        "match_all_tags": {
+          "type": "bool",
+          "id": 4,
+          "options": {
+            "default": true,
+            "(description)": "If true, then files must have all the tags specified.  If false, then must have at least one of the tags specified."
+          }
+        },
+        "excluded_tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 5,
+          "options": {
+            "(description)": "Exclude any files that have any of these tags."
+          }
+        },
+        "desired_queue_size": {
+          "type": "uint32",
+          "id": 6,
+          "options": {
+            "(description)": "Desired number of items in the voting queue.  May be clamped by the server"
+          }
+        },
+        "desired_revision": {
+          "type": ".EPublishedFileRevision",
+          "id": 8,
+          "options": {
+            "default": "k_EPublishedFileRevision_Default",
+            "(description)": "Filter to items that have data for the specified revision."
+          }
+        }
+      }
+    },
+    "CPublishedFile_RefreshVotingQueue_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_QueryFiles_Request": {
+      "fields": {
+        "query_type": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "enumeration EPublishedFileQueryType in clientenums.h"
+          }
+        },
+        "page": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "(description)": "Current page"
+          }
+        },
+        "cursor": {
+          "type": "string",
+          "id": 39,
+          "options": {
+            "(description)": "Cursor to paginate through the results (set to '*' for the first request).  Prefer this over using the page parameter, as it will allow you to do deep pagination.  When used, the page parameter will be ignored."
+          }
+        },
+        "numperpage": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "default": 1,
+            "(description)": "(Optional) The number of results, per page to return."
+          }
+        },
+        "creator_appid": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "App that created the files"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "App that consumes the files"
+          }
+        },
+        "requiredtags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "Tags to match on. See match_all_tags parameter below"
+          }
+        },
+        "excludedtags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "(Optional) Tags that must NOT be present on a published file to satisfy the query."
+          }
+        },
+        "match_all_tags": {
+          "type": "bool",
+          "id": 8,
+          "options": {
+            "default": true,
+            "(description)": "If true, then items must have all the tags specified, otherwise they must have at least one of the tags."
+          }
+        },
+        "required_flags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 9,
+          "options": {
+            "(description)": "Required flags that must be set on any returned items"
+          }
+        },
+        "omitted_flags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 10,
+          "options": {
+            "(description)": "Flags that must not be set on any returned items"
+          }
+        },
+        "search_text": {
+          "type": "string",
+          "id": 11,
+          "options": {
+            "(description)": "Text to match in the item's title or description"
+          }
+        },
+        "filetype": {
+          "type": "uint32",
+          "id": 12,
+          "options": {
+            "(description)": "EPublishedFileInfoMatchingFileType"
+          }
+        },
+        "child_publishedfileid": {
+          "type": "fixed64",
+          "id": 13,
+          "options": {
+            "(description)": "Find all items that reference the given item."
+          }
+        },
+        "days": {
+          "type": "uint32",
+          "id": 14,
+          "options": {
+            "(description)": "If query_type is k_PublishedFileQueryType_RankedByTrend, then this is the number of days to get votes for [1,7]."
+          }
+        },
+        "include_recent_votes_only": {
+          "type": "bool",
+          "id": 15,
+          "options": {
+            "(description)": "If query_type is k_PublishedFileQueryType_RankedByTrend, then limit result set just to items that have votes within the day range given"
+          }
+        },
+        "cache_max_age_seconds": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0,
+            "(description)": "Allow stale data to be returned for the specified number of seconds."
+          }
+        },
+        "language": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": 0,
+            "(description)": "Language to search in and also what gets returned. Defaults to English."
+          }
+        },
+        "required_kv_tags": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_QueryFiles_Request.KVTag",
+          "id": 34,
+          "options": {
+            "(description)": "Required key-value tags to match on."
+          }
+        },
+        "taggroups": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_QueryFiles_Request.TagGroup",
+          "id": 42,
+          "options": {
+            "(description)": "(Optional) At least one of the tags must be present on a published file to satisfy the query."
+          }
+        },
+        "date_range_created": {
+          "type": ".CPublishedFile_QueryFiles_Request.DateRange",
+          "id": 44,
+          "options": {
+            "(description)": "(Optional) Filter to items created within this range."
+          }
+        },
+        "date_range_updated": {
+          "type": ".CPublishedFile_QueryFiles_Request.DateRange",
+          "id": 45,
+          "options": {
+            "(description)": "(Optional) Filter to items updated within this range."
+          }
+        },
+        "totalonly": {
+          "type": "bool",
+          "id": 16,
+          "options": {
+            "(description)": "(Optional) If true, only return the total number of files that satisfy this query."
+          }
+        },
+        "ids_only": {
+          "type": "bool",
+          "id": 35,
+          "options": {
+            "(description)": "(Optional) If true, only return the published file ids of files that satisfy this query."
+          }
+        },
+        "return_vote_data": {
+          "type": "bool",
+          "id": 17,
+          "options": {
+            "(description)": "Return vote data"
+          }
+        },
+        "return_tags": {
+          "type": "bool",
+          "id": 18,
+          "options": {
+            "(description)": "Return tags in the file details"
+          }
+        },
+        "return_kv_tags": {
+          "type": "bool",
+          "id": 19,
+          "options": {
+            "(description)": "Return key-value tags in the file details"
+          }
+        },
+        "return_previews": {
+          "type": "bool",
+          "id": 20,
+          "options": {
+            "(description)": "Return preview image and video details in the file details"
+          }
+        },
+        "return_children": {
+          "type": "bool",
+          "id": 21,
+          "options": {
+            "(description)": "Return child item ids in the file details"
+          }
+        },
+        "return_short_description": {
+          "type": "bool",
+          "id": 22,
+          "options": {
+            "(description)": "Populate the short_description field instead of file_description"
+          }
+        },
+        "return_for_sale_data": {
+          "type": "bool",
+          "id": 30,
+          "options": {
+            "(description)": "Return pricing information, if applicable"
+          }
+        },
+        "return_metadata": {
+          "type": "bool",
+          "id": 32,
+          "options": {
+            "default": false,
+            "(description)": "Populate the metadata"
+          }
+        },
+        "return_playtime_stats": {
+          "type": "uint32",
+          "id": 36,
+          "options": {
+            "(description)": "Return playtime stats for the specified number of days before today."
+          }
+        },
+        "return_details": {
+          "type": "bool",
+          "id": 37,
+          "options": {
+            "(description)": "By default, if none of the other 'return_*' fields are set, only some voting details are returned. Set this to true to return the default set of details."
+          }
+        },
+        "strip_description_bbcode": {
+          "type": "bool",
+          "id": 38,
+          "options": {
+            "(description)": "Strips BBCode from descriptions."
+          }
+        },
+        "desired_revision": {
+          "type": ".EPublishedFileRevision",
+          "id": 40,
+          "options": {
+            "default": "k_EPublishedFileRevision_Default",
+            "(description)": "Return the data for the specified revision."
+          }
+        },
+        "return_reactions": {
+          "type": "bool",
+          "id": 43,
+          "options": {
+            "default": false,
+            "(description)": "If true, then reactions to items will be returned."
+          }
+        }
+      },
+      "nested": {
+        "KVTag": {
+          "fields": {
+            "key": {
+              "type": "string",
+              "id": 1
+            },
+            "value": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "TagGroup": {
+          "fields": {
+            "tags": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "DateRange": {
+          "fields": {
+            "timestamp_start": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "(Optional) Include items with the relevant date field after this value."
+              }
+            },
+            "timestamp_end": {
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "(Optional) Include items with the relevant date field before this value."
+              }
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_QueryFiles_Response": {
+      "fields": {
+        "total": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "Number of matches found, not necessarily number of items returned"
+          }
+        },
+        "publishedfiledetails": {
+          "rule": "repeated",
+          "type": ".PublishedFileDetails",
+          "id": 2,
+          "options": {
+            "(description)": "Each file details will be populated, depending on what return values were requested."
+          }
+        },
+        "next_cursor": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "If a paging cursor was used, then this will be the next cursor to use for paging through results"
+          }
+        }
+      }
+    },
+    "CPublishedFile_AddAppRelationship_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "relationship": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CPublishedFile_AddAppRelationship_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_RemoveAppRelationship_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "relationship": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CPublishedFile_RemoveAppRelationship_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_GetAppRelationships_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CPublishedFile_GetAppRelationships_Response": {
+      "fields": {
+        "app_relationships": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetAppRelationships_Response.AppRelationship",
+          "id": 3
+        }
+      },
+      "nested": {
+        "AppRelationship": {
+          "fields": {
+            "appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "relationship": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_StartPlaytimeTracking_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "publishedfileids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CPublishedFile_StartPlaytimeTracking_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_StopPlaytimeTracking_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "publishedfileids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CPublishedFile_StopPlaytimeTracking_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_SetPlaytimeForControllerConfigs_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "controller_config_usage": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage",
+          "id": 2
+        }
+      },
+      "nested": {
+        "ControllerConfigUsage": {
+          "fields": {
+            "publishedfileid": {
+              "type": "uint64",
+              "id": 1
+            },
+            "seconds_active": {
+              "type": "float",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_SetPlaytimeForControllerConfigs_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_AddChild_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "child_publishedfileid": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CPublishedFile_AddChild_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_RemoveChild_Request": {
+      "fields": {
+        "publishedfileid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "child_publishedfileid": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CPublishedFile_RemoveChild_Response": {
+      "fields": {}
+    },
+    "CPublishedFile_GetUserVoteSummary_Request": {
+      "fields": {
+        "publishedfileids": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CPublishedFile_GetUserVoteSummary_Response": {
+      "fields": {
+        "summaries": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetUserVoteSummary_Response.VoteSummary",
+          "id": 1
+        }
+      },
+      "nested": {
+        "VoteSummary": {
+          "fields": {
+            "publishedfileid": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "vote_for": {
+              "type": "bool",
+              "id": 2
+            },
+            "vote_against": {
+              "type": "bool",
+              "id": 3
+            },
+            "reported": {
+              "type": "bool",
+              "id": 4
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_GetItemChanges_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "last_time_updated": {
+          "type": "uint32",
+          "id": 2
+        },
+        "num_items_max": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CPublishedFile_GetItemChanges_Response": {
+      "fields": {
+        "update_time": {
+          "type": "uint32",
+          "id": 1
+        },
+        "workshop_items": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetItemChanges_Response.WorkshopItemInfo",
+          "id": 2
+        }
+      },
+      "nested": {
+        "WorkshopItemInfo": {
+          "fields": {
+            "published_file_id": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "time_updated": {
+              "type": "uint32",
+              "id": 2
+            },
+            "manifest_id": {
+              "type": "fixed64",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_FileSubscribed_Notification": {
+      "fields": {
+        "published_file_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "PublishedFileID_t for the content"
+          }
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "file_hcontent": {
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "(description)": "UGC file handle or manifest GID"
+          }
+        },
+        "file_size": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime_subscribed": {
+          "type": "uint32",
+          "id": 5
+        },
+        "is_depot_content": {
+          "type": "bool",
+          "id": 6,
+          "options": {
+            "(description)": "True if workshop item is delivered via Steampipe"
+          }
+        },
+        "rtime_updated": {
+          "type": "uint32",
+          "id": 7,
+          "options": {
+            "(description)": "Last time content updated"
+          }
+        },
+        "revisions": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_FileSubscribed_Notification.RevisionData",
+          "id": 8,
+          "options": {
+            "(description)": "Data for each of the revisions that this item has"
+          }
+        }
+      },
+      "nested": {
+        "RevisionData": {
+          "fields": {
+            "revision": {
+              "type": ".EPublishedFileRevision",
+              "id": 1,
+              "options": {
+                "default": "k_EPublishedFileRevision_Default"
+              }
+            },
+            "file_hcontent": {
+              "type": "fixed64",
+              "id": 2,
+              "options": {
+                "(description)": "Manifest GID"
+              }
+            },
+            "rtime_updated": {
+              "type": "uint32",
+              "id": 3,
+              "options": {
+                "(description)": "Last time content updated"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CPublishedFile_FileUnsubscribed_Notification": {
+      "fields": {
+        "published_file_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "PublishedFileID_t for the content"
+          }
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CPublishedFile_FileDeleted_Client_Notification": {
+      "fields": {
+        "published_file_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "PublishedFileID_t for the content"
+          }
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "PublishedFile": {
+      "options": {
+        "(service_description)": "A service to access published file data"
+      },
+      "methods": {
+        "Subscribe": {
+          "requestType": ".CPublishedFile_Subscribe_Request",
+          "responseType": ".CPublishedFile_Subscribe_Response",
+          "options": {
+            "(method_description)": "Subscribes the user to the published file"
+          }
+        },
+        "Unsubscribe": {
+          "requestType": ".CPublishedFile_Unsubscribe_Request",
+          "responseType": ".CPublishedFile_Unsubscribe_Response",
+          "options": {
+            "(method_description)": "Unsubscribes the user from the published file"
+          }
+        },
+        "CanSubscribe": {
+          "requestType": ".CPublishedFile_CanSubscribe_Request",
+          "responseType": ".CPublishedFile_CanSubscribe_Response",
+          "options": {
+            "(method_description)": "Check if the user can subscribe to the published file"
+          }
+        },
+        "Publish": {
+          "requestType": ".CPublishedFile_Publish_Request",
+          "responseType": ".CPublishedFile_Publish_Response",
+          "options": {
+            "(method_description)": "Publishes a clouded user file to the Workshop."
+          }
+        },
+        "GetDetails": {
+          "requestType": ".CPublishedFile_GetDetails_Request",
+          "responseType": ".CPublishedFile_GetDetails_Response",
+          "options": {
+            "(method_description)": "Retrieves information about a set of published files."
+          }
+        },
+        "GetItemInfo": {
+          "requestType": ".CPublishedFile_GetItemInfo_Request",
+          "responseType": ".CPublishedFile_GetItemInfo_Response",
+          "options": {
+            "(method_description)": "Retrieves information about a set of published files."
+          }
+        },
+        "GetUserFiles": {
+          "requestType": ".CPublishedFile_GetUserFiles_Request",
+          "responseType": ".CPublishedFile_GetUserFiles_Response",
+          "options": {
+            "(method_description)": "Retrieves files published by a user."
+          }
+        },
+        "AreFilesInSubscriptionList": {
+          "requestType": ".CPublishedFile_AreFilesInSubscriptionList_Request",
+          "responseType": ".CPublishedFile_AreFilesInSubscriptionList_Response",
+          "options": {
+            "(method_description)": "Determines which files in the given list are in a user's subscription list"
+          }
+        },
+        "Update": {
+          "requestType": ".CPublishedFile_Update_Request",
+          "responseType": ".CPublishedFile_Update_Response",
+          "options": {
+            "(method_description)": "Updates information about a published file."
+          }
+        },
+        "GetChangeHistoryEntry": {
+          "requestType": ".CPublishedFile_GetChangeHistoryEntry_Request",
+          "responseType": ".CPublishedFile_GetChangeHistoryEntry_Response",
+          "options": {
+            "(method_description)": "Returns data on a specific change history entry for a published file"
+          }
+        },
+        "GetChangeHistory": {
+          "requestType": ".CPublishedFile_GetChangeHistory_Request",
+          "responseType": ".CPublishedFile_GetChangeHistory_Response",
+          "options": {
+            "(method_description)": "Returns data on the change history for a published file"
+          }
+        },
+        "RefreshVotingQueue": {
+          "requestType": ".CPublishedFile_RefreshVotingQueue_Request",
+          "responseType": ".CPublishedFile_RefreshVotingQueue_Response",
+          "options": {
+            "(method_description)": "Refresh the voting queue for the user"
+          }
+        },
+        "QueryFiles": {
+          "requestType": ".CPublishedFile_QueryFiles_Request",
+          "responseType": ".CPublishedFile_QueryFiles_Response",
+          "options": {
+            "(method_description)": "Performs a search query for published files"
+          }
+        },
+        "AddAppRelationship": {
+          "requestType": ".CPublishedFile_AddAppRelationship_Request",
+          "responseType": ".CPublishedFile_AddAppRelationship_Response",
+          "options": {
+            "(method_description)": "Adds a relationship between the published file and the given app"
+          }
+        },
+        "RemoveAppRelationship": {
+          "requestType": ".CPublishedFile_RemoveAppRelationship_Request",
+          "responseType": ".CPublishedFile_RemoveAppRelationship_Response",
+          "options": {
+            "(method_description)": "Remove a relationship between the published file and the given app"
+          }
+        },
+        "GetAppRelationships": {
+          "requestType": ".CPublishedFile_GetAppRelationships_Request",
+          "responseType": ".CPublishedFile_GetAppRelationships_Response",
+          "options": {
+            "(method_description)": "Returns the list of app relationships for this published file"
+          }
+        },
+        "StartPlaytimeTracking": {
+          "requestType": ".CPublishedFile_StartPlaytimeTracking_Request",
+          "responseType": ".CPublishedFile_StartPlaytimeTracking_Response",
+          "options": {
+            "(method_description)": "Start usage tracking for a given set of published files"
+          }
+        },
+        "StopPlaytimeTracking": {
+          "requestType": ".CPublishedFile_StopPlaytimeTracking_Request",
+          "responseType": ".CPublishedFile_StopPlaytimeTracking_Response",
+          "options": {
+            "(method_description)": "Stops usage tracking for a given set of published files"
+          }
+        },
+        "StopPlaytimeTrackingForAllAppItems": {
+          "requestType": ".CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request",
+          "responseType": ".CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response",
+          "options": {
+            "(method_description)": "Stops usage tracking for all items currently tracked for the specified app"
+          }
+        },
+        "SetPlaytimeForControllerConfigs": {
+          "requestType": ".CPublishedFile_SetPlaytimeForControllerConfigs_Request",
+          "responseType": ".CPublishedFile_SetPlaytimeForControllerConfigs_Response",
+          "options": {
+            "(method_description)": "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs"
+          }
+        },
+        "AddChild": {
+          "requestType": ".CPublishedFile_AddChild_Request",
+          "responseType": ".CPublishedFile_AddChild_Response",
+          "options": {
+            "(method_description)": "Adds a parent->child relationship between the given items."
+          }
+        },
+        "RemoveChild": {
+          "requestType": ".CPublishedFile_RemoveChild_Request",
+          "responseType": ".CPublishedFile_RemoveChild_Response",
+          "options": {
+            "(method_description)": "Removes parent->child relationship between the given items."
+          }
+        },
+        "GetUserVoteSummary": {
+          "requestType": ".CPublishedFile_GetUserVoteSummary_Request",
+          "responseType": ".CPublishedFile_GetUserVoteSummary_Response",
+          "options": {
+            "(method_description)": "Get user vote summary"
+          }
+        },
+        "GetItemChanges": {
+          "requestType": ".CPublishedFile_GetItemChanges_Request",
+          "responseType": ".CPublishedFile_GetItemChanges_Response",
+          "options": {
+            "(method_description)": "Get list of updated items since given date"
+          }
+        }
+      }
+    },
+    "PublishedFileClient": {
+      "options": {
+        "(service_description)": "Published file client notifications",
+        "(service_execution_site)": "k_EProtoExecutionSiteSteamClient"
+      },
+      "methods": {
+        "NotifyFileSubscribed": {
+          "requestType": ".CPublishedFile_FileSubscribed_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from the server when a user subscribes to a file"
+          }
+        },
+        "NotifyFileUnsubscribed": {
+          "requestType": ".CPublishedFile_FileUnsubscribed_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from the server when a user unsubscribes from a file"
+          }
+        },
+        "NotifyFileDeleted": {
+          "requestType": ".CPublishedFile_FileDeleted_Client_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from the server when a published file is deleted"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "EPublishedFileQueryType": {
+      "values": {
+        "k_PublishedFileQueryType_RankedByVote": 0,
+        "k_PublishedFileQueryType_RankedByPublicationDate": 1,
+        "k_PublishedFileQueryType_AcceptedForGameRankedByAcceptanceDate": 2,
+        "k_PublishedFileQueryType_RankedByTrend": 3,
+        "k_PublishedFileQueryType_FavoritedByFriendsRankedByPublicationDate": 4,
+        "k_PublishedFileQueryType_CreatedByFriendsRankedByPublicationDate": 5,
+        "k_PublishedFileQueryType_RankedByNumTimesReported": 6,
+        "k_PublishedFileQueryType_CreatedByFollowedUsersRankedByPublicationDate": 7,
+        "k_PublishedFileQueryType_NotYetRated": 8,
+        "k_PublishedFileQueryType_RankedByTotalUniqueSubscriptions": 9,
+        "k_PublishedFileQueryType_RankedByTotalVotesAsc": 10,
+        "k_PublishedFileQueryType_RankedByVotesUp": 11,
+        "k_PublishedFileQueryType_RankedByTextSearch": 12,
+        "k_PublishedFileQueryType_RankedByPlaytimeTrend": 13,
+        "k_PublishedFileQueryType_RankedByTotalPlaytime": 14,
+        "k_PublishedFileQueryType_RankedByAveragePlaytimeTrend": 15,
+        "k_PublishedFileQueryType_RankedByLifetimeAveragePlaytime": 16,
+        "k_PublishedFileQueryType_RankedByPlaytimeSessionsTrend": 17,
+        "k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions": 18,
+        "k_PublishedFileQueryType_RankedByInappropriateContentRating": 19,
+        "k_PublishedFileQueryType_RankedByBanContentCheck": 20,
+        "k_PublishedFileQueryType_RankedByLastUpdatedDate": 21
+      }
+    },
+    "EPublishedFileInappropriateProvider": {
+      "values": {
+        "k_EPublishedFileInappropriateProvider_Invalid": 0,
+        "k_EPublishedFileInappropriateProvider_Google": 1,
+        "k_EPublishedFileInappropriateProvider_Amazon": 2
+      }
+    },
+    "EPublishedFileInappropriateResult": {
+      "values": {
+        "k_EPublishedFileInappropriateResult_NotScanned": 0,
+        "k_EPublishedFileInappropriateResult_VeryUnlikely": 1,
+        "k_EPublishedFileInappropriateResult_Unlikely": 30,
+        "k_EPublishedFileInappropriateResult_Possible": 50,
+        "k_EPublishedFileInappropriateResult_Likely": 75,
+        "k_EPublishedFileInappropriateResult_VeryLikely": 100
+      }
+    },
+    "EPersonaStateFlag": {
+      "values": {
+        "k_EPersonaStateFlag_HasRichPresence": 1,
+        "k_EPersonaStateFlag_InJoinableGame": 2,
+        "k_EPersonaStateFlag_Golden": 4,
+        "k_EPersonaStateFlag_RemotePlayTogether": 8,
+        "k_EPersonaStateFlag_ClientTypeWeb": 256,
+        "k_EPersonaStateFlag_ClientTypeMobile": 512,
+        "k_EPersonaStateFlag_ClientTypeTenfoot": 1024,
+        "k_EPersonaStateFlag_ClientTypeVR": 2048,
+        "k_EPersonaStateFlag_LaunchTypeGamepad": 4096,
+        "k_EPersonaStateFlag_LaunchTypeCompatTool": 8192
+      }
+    },
+    "EContentCheckProvider": {
+      "values": {
+        "k_EContentCheckProvider_Invalid": 0,
+        "k_EContentCheckProvider_Google": 1,
+        "k_EContentCheckProvider_Amazon": 2,
+        "k_EContentCheckProvider_Local": 3
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
+      }
+    },
+    "EProfileCustomizationType": {
+      "values": {
+        "k_EProfileCustomizationTypeInvalid": 0,
+        "k_EProfileCustomizationTypeRareAchievementShowcase": 1,
+        "k_EProfileCustomizationTypeGameCollector": 2,
+        "k_EProfileCustomizationTypeItemShowcase": 3,
+        "k_EProfileCustomizationTypeTradeShowcase": 4,
+        "k_EProfileCustomizationTypeBadges": 5,
+        "k_EProfileCustomizationTypeFavoriteGame": 6,
+        "k_EProfileCustomizationTypeScreenshotShowcase": 7,
+        "k_EProfileCustomizationTypeCustomText": 8,
+        "k_EProfileCustomizationTypeFavoriteGroup": 9,
+        "k_EProfileCustomizationTypeRecommendation": 10,
+        "k_EProfileCustomizationTypeWorkshopItem": 11,
+        "k_EProfileCustomizationTypeMyWorkshop": 12,
+        "k_EProfileCustomizationTypeArtworkShowcase": 13,
+        "k_EProfileCustomizationTypeVideoShowcase": 14,
+        "k_EProfileCustomizationTypeGuides": 15,
+        "k_EProfileCustomizationTypeMyGuides": 16,
+        "k_EProfileCustomizationTypeAchievements": 17,
+        "k_EProfileCustomizationTypeGreenlight": 18,
+        "k_EProfileCustomizationTypeMyGreenlight": 19,
+        "k_EProfileCustomizationTypeSalien": 20,
+        "k_EProfileCustomizationTypeLoyaltyRewardReactions": 21,
+        "k_EProfileCustomizationTypeSingleArtworkShowcase": 22,
+        "k_EProfileCustomizationTypeAchievementsCompletionist": 23
+      }
+    },
+    "EPublishedFileStorageSystem": {
+      "values": {
+        "k_EPublishedFileStorageSystemInvalid": 0,
+        "k_EPublishedFileStorageSystemLegacyCloud": 1,
+        "k_EPublishedFileStorageSystemDepot": 2,
+        "k_EPublishedFileStorageSystemUGCCloud": 3
+      }
+    },
+    "ECloudStoragePersistState": {
+      "values": {
+        "k_ECloudStoragePersistStatePersisted": 0,
+        "k_ECloudStoragePersistStateForgotten": 1,
+        "k_ECloudStoragePersistStateDeleted": 2
+      }
+    },
+    "EBluetoothDeviceType": {
+      "values": {
+        "k_BluetoothDeviceType_Invalid": 0,
+        "k_BluetoothDeviceType_Unknown": 1,
+        "k_BluetoothDeviceType_Phone": 2,
+        "k_BluetoothDeviceType_Computer": 3,
+        "k_BluetoothDeviceType_Headset": 4,
+        "k_BluetoothDeviceType_Headphones": 5,
+        "k_BluetoothDeviceType_Speakers": 6,
+        "k_BluetoothDeviceType_OtherAudio": 7,
+        "k_BluetoothDeviceType_Mouse": 8,
+        "k_BluetoothDeviceType_Joystick": 9,
+        "k_BluetoothDeviceType_Gamepad": 10,
+        "k_BluetoothDeviceType_Keyboard": 11
+      }
+    },
+    "EStorageBlockContentType": {
+      "values": {
+        "k_EStorageBlockContentType_Invalid": 0,
+        "k_EStorageBlockContentType_Unknown": 1,
+        "k_EStorageBlockContentType_FileSystem": 2,
+        "k_EStorageBlockContentType_Crypto": 3,
+        "k_EStorageBlockContentType_Raid": 4
+      }
+    },
+    "EStorageBlockFileSystemType": {
+      "values": {
+        "k_EStorageBlockFileSystemType_Invalid": 0,
+        "k_EStorageBlockFileSystemType_Unknown": 1,
+        "k_EStorageBlockFileSystemType_VFat": 2,
+        "k_EStorageBlockFileSystemType_Ext4": 3
+      }
+    },
+    "msgpool_soft_limit": {
+      "type": "int32",
+      "id": 50000,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 32
+      }
+    },
+    "msgpool_hard_limit": {
+      "type": "int32",
+      "id": 50001,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 384
+      }
+    },
+    "force_php_generation": {
+      "type": "bool",
+      "id": 50000,
+      "extend": ".google.protobuf.FileOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "php_output_always_number": {
+      "type": "bool",
+      "id": 50020,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EProtoClanEventType": {
+      "values": {
+        "k_EClanOtherEvent": 1,
+        "k_EClanGameEvent": 2,
+        "k_EClanPartyEvent": 3,
+        "k_EClanMeetingEvent": 4,
+        "k_EClanSpecialCauseEvent": 5,
+        "k_EClanMusicAndArtsEvent": 6,
+        "k_EClanSportsEvent": 7,
+        "k_EClanTripEvent": 8,
+        "k_EClanChatEvent": 9,
+        "k_EClanGameReleaseEvent": 10,
+        "k_EClanBroadcastEvent": 11,
+        "k_EClanSmallUpdateEvent": 12,
+        "k_EClanPreAnnounceMajorUpdateEvent": 13,
+        "k_EClanMajorUpdateEvent": 14,
+        "k_EClanDLCReleaseEvent": 15,
+        "k_EClanFutureReleaseEvent": 16,
+        "k_EClanESportTournamentStreamEvent": 17,
+        "k_EClanDevStreamEvent": 18,
+        "k_EClanFamousStreamEvent": 19,
+        "k_EClanGameSalesEvent": 20,
+        "k_EClanGameItemSalesEvent": 21,
+        "k_EClanInGameBonusXPEvent": 22,
+        "k_EClanInGameLootEvent": 23,
+        "k_EClanInGamePerksEvent": 24,
+        "k_EClanInGameChallengeEvent": 25,
+        "k_EClanInGameContestEvent": 26,
+        "k_EClanIRLEvent": 27,
+        "k_EClanNewsEvent": 28,
+        "k_EClanBetaReleaseEvent": 29,
+        "k_EClanInGameContentReleaseEvent": 30,
+        "k_EClanFreeTrial": 31,
+        "k_EClanSeasonRelease": 32,
+        "k_EClanSeasonUpdate": 33,
+        "k_EClanCrosspostEvent": 34,
+        "k_EClanInGameEventGeneral": 35
+      }
+    },
+    "PartnerEventNotificationType": {
+      "values": {
+        "k_EEventStart": 0,
+        "k_EEventBroadcastStart": 1,
+        "k_EEventMatchStart": 2,
+        "k_EEventPartnerMaxType": 3
+      }
+    },
+    "CMsgIPAddress": {
+      "oneofs": {
+        "ip": {
+          "oneof": [
+            "v4",
+            "v6"
+          ]
+        }
+      },
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgIPAddressBucket": {
+      "fields": {
+        "original_ip_address": {
+          "type": ".CMsgIPAddress",
+          "id": 1
+        },
+        "bucket": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtoBufHeader": {
+      "oneofs": {
+        "ip_addr": {
+          "oneof": [
+            "ip",
+            "ip_v6"
+          ]
+        }
+      },
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_sessionid": {
+          "type": "int32",
+          "id": 2
+        },
+        "routing_appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "jobid_source": {
+          "type": "fixed64",
+          "id": 10,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "jobid_target": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "target_job_name": {
+          "type": "string",
+          "id": 12
+        },
+        "seq_num": {
+          "type": "int32",
+          "id": 24
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "default": 2
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "id": 14
+        },
+        "auth_account_flags": {
+          "type": "uint32",
+          "id": 16
+        },
+        "token_source": {
+          "type": "uint32",
+          "id": 22
+        },
+        "admin_spoofing_user": {
+          "type": "bool",
+          "id": 23
+        },
+        "transport_error": {
+          "type": "int32",
+          "id": 17,
+          "options": {
+            "default": 1
+          }
+        },
+        "messageid": {
+          "type": "uint64",
+          "id": 18,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "publisher_group_id": {
+          "type": "uint32",
+          "id": 19
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "trace_tag": {
+          "type": "uint64",
+          "id": 21
+        },
+        "webapi_key_id": {
+          "type": "uint32",
+          "id": 25
+        },
+        "is_from_external_source": {
+          "type": "bool",
+          "id": 26
+        },
+        "forward_to_sysid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_sysid": {
+          "type": "uint32",
+          "id": 28
+        },
+        "wg_token": {
+          "type": "string",
+          "id": 30
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "realm": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        },
+        "ip": {
+          "type": "uint32",
+          "id": 15
+        },
+        "ip_v6": {
+          "type": "bytes",
+          "id": 29
+        }
+      }
+    },
+    "CMsgMulti": {
+      "fields": {
+        "size_unzipped": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message_body": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtobufWrapped": {
+      "fields": {
+        "message_body": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgAuthTicket": {
+      "fields": {
+        "estate": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "h_steam_pipe": {
+          "type": "uint32",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 7
+        }
+      }
+    },
+    "CCDDBAppDetailCommon": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "icon": {
+          "type": "string",
+          "id": 3
+        },
+        "logo": {
+          "type": "string",
+          "id": 4
+        },
+        "logo_small": {
+          "type": "string",
+          "id": 5
+        },
+        "tool": {
+          "type": "bool",
+          "id": 6
+        },
+        "demo": {
+          "type": "bool",
+          "id": 7
+        },
+        "media": {
+          "type": "bool",
+          "id": 8
+        },
+        "community_visible_stats": {
+          "type": "bool",
+          "id": 9
+        },
+        "friendly_name": {
+          "type": "string",
+          "id": 10
+        },
+        "propagation": {
+          "type": "string",
+          "id": 11
+        },
+        "has_adult_content": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_visible_in_steam_china": {
+          "type": "bool",
+          "id": 13
+        }
+      }
+    },
+    "CMsgAppRights": {
+      "fields": {
+        "edit_info": {
+          "type": "bool",
+          "id": 1
+        },
+        "publish": {
+          "type": "bool",
+          "id": 2
+        },
+        "view_error_data": {
+          "type": "bool",
+          "id": 3
+        },
+        "download": {
+          "type": "bool",
+          "id": 4
+        },
+        "upload_cdkeys": {
+          "type": "bool",
+          "id": 5
+        },
+        "generate_cdkeys": {
+          "type": "bool",
+          "id": 6
+        },
+        "view_financials": {
+          "type": "bool",
+          "id": 7
+        },
+        "manage_ceg": {
+          "type": "bool",
+          "id": 8
+        },
+        "manage_signing": {
+          "type": "bool",
+          "id": 9
+        },
+        "manage_cdkeys": {
+          "type": "bool",
+          "id": 10
+        },
+        "edit_marketing": {
+          "type": "bool",
+          "id": 11
+        },
+        "economy_support": {
+          "type": "bool",
+          "id": 12
+        },
+        "economy_support_supervisor": {
+          "type": "bool",
+          "id": 13
+        },
+        "manage_pricing": {
+          "type": "bool",
+          "id": 14
+        },
+        "broadcast_live": {
+          "type": "bool",
+          "id": 15
+        },
+        "view_marketing_traffic": {
+          "type": "bool",
+          "id": 16
+        },
+        "edit_store_display_content": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CCuratorPreferences": {
+      "fields": {
+        "supported_languages": {
+          "type": "uint32",
+          "id": 1
+        },
+        "platform_windows": {
+          "type": "bool",
+          "id": 2
+        },
+        "platform_mac": {
+          "type": "bool",
+          "id": 3
+        },
+        "platform_linux": {
+          "type": "bool",
+          "id": 4
+        },
+        "vr_content": {
+          "type": "bool",
+          "id": 5
+        },
+        "adult_content_violence": {
+          "type": "bool",
+          "id": 6
+        },
+        "adult_content_sex": {
+          "type": "bool",
+          "id": 7
+        },
+        "timestamp_updated": {
+          "type": "uint32",
+          "id": 8
+        },
+        "tagids_curated": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "packed": false
+          }
+        },
+        "tagids_filtered": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "website_title": {
+          "type": "string",
+          "id": 11
+        },
+        "website_url": {
+          "type": "string",
+          "id": 12
+        },
+        "discussion_url": {
+          "type": "string",
+          "id": 13
+        },
+        "show_broadcast": {
+          "type": "bool",
+          "id": 14
+        }
+      }
+    },
+    "CLocalizationToken": {
+      "fields": {
+        "language": {
+          "type": "uint32",
+          "id": 1
+        },
+        "localized_string": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClanEventUserNewsTuple": {
+      "fields": {
+        "clanid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "announcement_gid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "rtime_start": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime_end": {
+          "type": "uint32",
+          "id": 5
+        },
+        "priority_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "type": {
+          "type": "uint32",
+          "id": 7
+        },
+        "clamp_range_slot": {
+          "type": "uint32",
+          "id": 8
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CClanMatchEventByRange": {
+      "fields": {
+        "rtime_before": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rtime_after": {
+          "type": "uint32",
+          "id": 2
+        },
+        "qualified": {
+          "type": "uint32",
+          "id": 3
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CClanEventUserNewsTuple",
+          "id": 4
+        }
+      }
+    },
+    "CCommunity_ClanAnnouncementInfo": {
+      "fields": {
+        "gid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "clanid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "posterid": {
+          "type": "uint64",
+          "id": 3
+        },
+        "headline": {
+          "type": "string",
+          "id": 4
+        },
+        "posttime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "updatetime": {
+          "type": "uint32",
+          "id": 6
+        },
+        "body": {
+          "type": "string",
+          "id": 7
+        },
+        "commentcount": {
+          "type": "int32",
+          "id": 8
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 9
+        },
+        "language": {
+          "type": "int32",
+          "id": 10
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 11
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 13
+        },
+        "voteupcount": {
+          "type": "int32",
+          "id": 14
+        },
+        "votedowncount": {
+          "type": "int32",
+          "id": 15
+        }
+      }
+    },
+    "CClanEventData": {
+      "fields": {
+        "gid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "event_name": {
+          "type": "string",
+          "id": 3
+        },
+        "event_type": {
+          "type": ".EProtoClanEventType",
+          "id": 4,
+          "options": {
+            "default": "k_EClanOtherEvent"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "server_address": {
+          "type": "string",
+          "id": 6
+        },
+        "server_password": {
+          "type": "string",
+          "id": 7
+        },
+        "rtime32_start_time": {
+          "type": "uint32",
+          "id": 8
+        },
+        "rtime32_end_time": {
+          "type": "uint32",
+          "id": 9
+        },
+        "comment_count": {
+          "type": "int32",
+          "id": 10
+        },
+        "creator_steamid": {
+          "type": "fixed64",
+          "id": 11
+        },
+        "last_update_steamid": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_notes": {
+          "type": "string",
+          "id": 13
+        },
+        "jsondata": {
+          "type": "string",
+          "id": 14
+        },
+        "announcement_body": {
+          "type": ".CCommunity_ClanAnnouncementInfo",
+          "id": 15
+        },
+        "published": {
+          "type": "bool",
+          "id": 16
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 17
+        },
+        "rtime32_visibility_start": {
+          "type": "uint32",
+          "id": 18
+        },
+        "rtime32_visibility_end": {
+          "type": "uint32",
+          "id": 19
+        },
+        "broadcaster_accountid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "follower_count": {
+          "type": "uint32",
+          "id": 21
+        },
+        "ignore_count": {
+          "type": "uint32",
+          "id": 22
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 23
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 24
+        },
+        "news_post_gid": {
+          "type": "fixed64",
+          "id": 25
+        },
+        "rtime_mod_reviewed": {
+          "type": "uint32",
+          "id": 26
+        },
+        "featured_app_tagid": {
+          "type": "uint32",
+          "id": 27
+        },
+        "referenced_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 28,
+          "options": {
+            "packed": false
+          }
+        },
+        "build_id": {
+          "type": "uint32",
+          "id": 29
+        },
+        "build_branch": {
+          "type": "string",
+          "id": 30
+        }
+      }
+    },
+    "CBilling_Address": {
+      "fields": {
+        "first_name": {
+          "type": "string",
+          "id": 1
+        },
+        "last_name": {
+          "type": "string",
+          "id": 2
+        },
+        "address1": {
+          "type": "string",
+          "id": 3
+        },
+        "address2": {
+          "type": "string",
+          "id": 4
+        },
+        "city": {
+          "type": "string",
+          "id": 5
+        },
+        "us_state": {
+          "type": "string",
+          "id": 6
+        },
+        "country_code": {
+          "type": "string",
+          "id": 7
+        },
+        "postcode": {
+          "type": "string",
+          "id": 8
+        },
+        "zip_plus4": {
+          "type": "int32",
+          "id": 9
+        },
+        "phone": {
+          "type": "string",
+          "id": 10
+        }
+      }
+    },
+    "CPackageReservationStatus": {
+      "fields": {
+        "packageid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "reservation_state": {
+          "type": "int32",
+          "id": 2
+        },
+        "queue_position": {
+          "type": "int32",
+          "id": 3
+        },
+        "total_queue_size": {
+          "type": "int32",
+          "id": 4
+        },
+        "reservation_country_code": {
+          "type": "string",
+          "id": 5
+        },
+        "expired": {
+          "type": "bool",
+          "id": 6
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 7
+        },
+        "time_reserved": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    }
+  }
+}

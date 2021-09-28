@@ -1,0 +1,2270 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "ESteamDatagramMsgID": {
+      "values": {
+        "k_ESteamDatagramMsg_Invalid": 0,
+        "k_ESteamDatagramMsg_RouterPingRequest": 1,
+        "k_ESteamDatagramMsg_RouterPingReply": 2,
+        "k_ESteamDatagramMsg_GameserverPingRequest": 3,
+        "k_ESteamDatagramMsg_LegacyGameserverPingReply": 4,
+        "k_ESteamDatagramMsg_GameserverSessionRequest": 5,
+        "k_ESteamDatagramMsg_GameserverSessionEstablished": 6,
+        "k_ESteamDatagramMsg_NoSession": 7,
+        "k_ESteamDatagramMsg_Diagnostic": 8,
+        "k_ESteamDatagramMsg_DataClientToRouter": 9,
+        "k_ESteamDatagramMsg_DataRouterToServer": 10,
+        "k_ESteamDatagramMsg_DataServerToRouter": 11,
+        "k_ESteamDatagramMsg_DataRouterToClient": 12,
+        "k_ESteamDatagramMsg_Stats": 13,
+        "k_ESteamDatagramMsg_ClientPingSampleRequest": 14,
+        "k_ESteamDatagramMsg_ClientPingSampleReply": 15,
+        "k_ESteamDatagramMsg_ClientToRouterSwitchedPrimary": 16,
+        "k_ESteamDatagramMsg_RelayHealth": 17,
+        "k_ESteamDatagramMsg_ConnectRequest": 18,
+        "k_ESteamDatagramMsg_ConnectOK": 19,
+        "k_ESteamDatagramMsg_ConnectionClosed": 20,
+        "k_ESteamDatagramMsg_NoConnection": 21,
+        "k_ESteamDatagramMsg_RelayToRelayPingRequest": 22,
+        "k_ESteamDatagramMsg_RelayToRelayPingReply": 23,
+        "k_ESteamDatagramMsg_P2PSessionRequest": 24,
+        "k_ESteamDatagramMsg_P2PSessionEstablished": 25,
+        "k_ESteamDatagramMsg_P2PStatsClient": 26,
+        "k_ESteamDatagramMsg_P2PStatsRelay": 27,
+        "k_ESteamDatagramMsg_P2PBadRoute": 28,
+        "k_ESteamDatagramMsg_GameserverPingReply": 29,
+        "k_ESteamDatagramMsg_GameserverRegistration": 30,
+        "k_ESteamDatagramMsg_SetSecondaryAddressRequest": 31,
+        "k_ESteamDatagramMsg_SetSecondaryAddressResult": 32
+      }
+    },
+    "CMsgSteamDatagramRouterPingReply": {
+      "fields": {
+        "client_timestamp": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "latency_datacenter_ids": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 2
+        },
+        "latency_ping_ms": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 3
+        },
+        "latency_datacenter_ids_p2p": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 14
+        },
+        "latency_ping_ms_p2p": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 15
+        },
+        "your_public_ip": {
+          "type": "fixed32",
+          "id": 4
+        },
+        "your_public_port": {
+          "type": "fixed32",
+          "id": 11
+        },
+        "server_time": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "challenge": {
+          "type": "fixed64",
+          "id": 6
+        },
+        "seconds_until_shutdown": {
+          "type": "uint32",
+          "id": 7
+        },
+        "client_cookie": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "scoring_penalty_relay_cluster": {
+          "type": "uint32",
+          "id": 9
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 12
+        },
+        "route_exceptions": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramRouterPingReply.RouteException",
+          "id": 10
+        },
+        "alt_addresses": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramRouterPingReply.AltAddress",
+          "id": 13
+        }
+      },
+      "nested": {
+        "RouteException": {
+          "fields": {
+            "data_center_id": {
+              "type": "fixed32",
+              "id": 1
+            },
+            "flags": {
+              "type": "uint32",
+              "id": 2
+            },
+            "penalty": {
+              "type": "uint32",
+              "id": 3
+            }
+          }
+        },
+        "AltAddress": {
+          "fields": {
+            "ipv4": {
+              "type": "fixed32",
+              "id": 1
+            },
+            "port": {
+              "type": "uint32",
+              "id": 2
+            },
+            "penalty": {
+              "type": "uint32",
+              "id": 3
+            },
+            "protocol": {
+              "type": ".CMsgSteamDatagramRouterPingReply.AltAddress.Protocol",
+              "id": 4,
+              "options": {
+                "default": "DefaultProtocol"
+              }
+            },
+            "id": {
+              "type": "string",
+              "id": 5
+            }
+          },
+          "nested": {
+            "Protocol": {
+              "values": {
+                "DefaultProtocol": 0,
+                "NetworkNext": 1
+              }
+            }
+          }
+        },
+        "Flags": {
+          "values": {
+            "FLAG_MAYBE_MORE_DATA_CENTERS": 1,
+            "FLAG_MAYBE_MORE_ALT_ADDRESSES": 2
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramGameserverPingRequest": {
+      "fields": {
+        "your_public_ip": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "your_public_port": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "server_time": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "challenge": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "router_timestamp": {
+          "type": "fixed32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSteamDatagramLegacyGameserverPingReply": {
+      "fields": {
+        "router_timestamp": {
+          "type": "fixed32",
+          "id": 4
+        },
+        "dummy_pad": {
+          "type": "fixed64",
+          "id": 99
+        }
+      }
+    },
+    "CMsgSteamDatagramGameserverPingReply": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 1
+        },
+        "signed_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 3
+        }
+      },
+      "nested": {
+        "SignedData": {
+          "fields": {
+            "challenge_time": {
+              "type": "fixed32",
+              "id": 2
+            },
+            "challenge": {
+              "type": "fixed64",
+              "id": 3
+            },
+            "router_timestamp": {
+              "type": "fixed32",
+              "id": 4
+            },
+            "data_center_id": {
+              "type": "fixed32",
+              "id": 5
+            },
+            "appid": {
+              "type": "uint32",
+              "id": 6
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramNoSessionRelayToClient": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 7
+        },
+        "your_public_ip": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "your_public_port": {
+          "type": "fixed32",
+          "id": 6
+        },
+        "server_time": {
+          "type": "fixed32",
+          "id": 3
+        },
+        "challenge": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "seconds_until_shutdown": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgSteamDatagramNoSessionRelayToPeer": {
+      "fields": {
+        "legacy_relay_session_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "from_relay_session_id": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "from_connection_id": {
+          "type": "fixed32",
+          "id": 7
+        },
+        "kludge_pad": {
+          "type": "fixed64",
+          "id": 99
+        }
+      }
+    },
+    "CMsgSteamDatagramClientPingSampleRequest": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSteamDatagramClientPingSampleReply": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "override_active": {
+          "type": "bool",
+          "id": 4
+        },
+        "pops": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramClientPingSampleReply.POP",
+          "id": 2
+        },
+        "legacy_data_centers": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter",
+          "id": 3
+        }
+      },
+      "nested": {
+        "POP": {
+          "fields": {
+            "pop_id": {
+              "type": "fixed32",
+              "id": 1
+            },
+            "default_front_ping_ms": {
+              "type": "uint32",
+              "id": 2
+            },
+            "cluster_penalty": {
+              "type": "uint32",
+              "id": 4
+            },
+            "alt_addresses": {
+              "rule": "repeated",
+              "type": ".CMsgSteamDatagramClientPingSampleReply.POP.AltAddress",
+              "id": 7
+            },
+            "default_e2e_ping_ms": {
+              "type": "uint32",
+              "id": 3
+            },
+            "default_e2e_score": {
+              "type": "uint32",
+              "id": 5
+            },
+            "p2p_via_peer_relay_pop_id": {
+              "type": "fixed32",
+              "id": 6
+            },
+            "best_dc_ping_ms": {
+              "type": "uint32",
+              "id": 9
+            },
+            "best_dc_score": {
+              "type": "uint32",
+              "id": 10
+            },
+            "best_dc_via_relay_pop_id": {
+              "type": "fixed32",
+              "id": 11
+            },
+            "default_dc_ping_ms": {
+              "type": "uint32",
+              "id": 12
+            },
+            "default_dc_score": {
+              "type": "uint32",
+              "id": 13
+            },
+            "default_dc_via_relay_pop_id": {
+              "type": "fixed32",
+              "id": 14
+            },
+            "test_dc_ping_ms": {
+              "type": "uint32",
+              "id": 15
+            },
+            "test_dc_score": {
+              "type": "uint32",
+              "id": 16
+            },
+            "test_dc_via_relay_pop_id": {
+              "type": "fixed32",
+              "id": 17
+            }
+          },
+          "nested": {
+            "AltAddress": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "front_ping_ms": {
+                  "type": "uint32",
+                  "id": 2
+                },
+                "penalty": {
+                  "type": "uint32",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
+        "LegacyDataCenter": {
+          "fields": {
+            "data_center_id": {
+              "type": "fixed32",
+              "id": 1
+            },
+            "best_dc_via_relay_pop_id": {
+              "type": "fixed32",
+              "id": 2
+            },
+            "best_dc_ping_ms": {
+              "type": "uint32",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramClientSwitchedPrimary": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "from_ip": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "from_port": {
+          "type": "uint32",
+          "id": 3
+        },
+        "from_router_cluster": {
+          "type": "fixed32",
+          "id": 4
+        },
+        "from_active_time": {
+          "type": "uint32",
+          "id": 5
+        },
+        "from_active_packets_recv": {
+          "type": "uint32",
+          "id": 6
+        },
+        "from_dropped_reason": {
+          "type": "string",
+          "id": 7
+        },
+        "gap_ms": {
+          "type": "uint32",
+          "id": 8
+        },
+        "from_quality_now": {
+          "type": ".CMsgSteamDatagramClientSwitchedPrimary.RouterQuality",
+          "id": 9
+        },
+        "to_quality_now": {
+          "type": ".CMsgSteamDatagramClientSwitchedPrimary.RouterQuality",
+          "id": 10
+        },
+        "from_quality_then": {
+          "type": ".CMsgSteamDatagramClientSwitchedPrimary.RouterQuality",
+          "id": 11
+        },
+        "to_quality_then": {
+          "type": ".CMsgSteamDatagramClientSwitchedPrimary.RouterQuality",
+          "id": 12
+        }
+      },
+      "nested": {
+        "RouterQuality": {
+          "fields": {
+            "score": {
+              "type": "uint32",
+              "id": 1
+            },
+            "front_ping": {
+              "type": "uint32",
+              "id": 2
+            },
+            "back_ping": {
+              "type": "uint32",
+              "id": 3
+            },
+            "seconds_until_down": {
+              "type": "uint32",
+              "id": 4
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectRequest": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "my_timestamp": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "ping_est_ms": {
+          "type": "uint32",
+          "id": 5
+        },
+        "virtual_port": {
+          "type": "uint32",
+          "id": 9
+        },
+        "gameserver_relay_session_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "crypt": {
+          "type": ".CMsgSteamDatagramSessionCryptInfoSigned",
+          "id": 6
+        },
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 7
+        },
+        "routing_secret": {
+          "type": "fixed64",
+          "id": 10
+        },
+        "legacy_client_steam_id": {
+          "type": "fixed64",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectOK": {
+      "fields": {
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "server_connection_id": {
+          "type": "fixed32",
+          "id": 7
+        },
+        "your_timestamp": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "delay_time_usec": {
+          "type": "uint32",
+          "id": 4
+        },
+        "gameserver_relay_session_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "crypt": {
+          "type": ".CMsgSteamDatagramSessionCryptInfoSigned",
+          "id": 5
+        },
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 6
+        }
+      }
+    },
+    "CMsgSteamNetworkingP2PSDRRoutingSummary": {
+      "fields": {
+        "initial_ping": {
+          "type": "uint32",
+          "id": 1
+        },
+        "initial_ping_front_local": {
+          "type": "uint32",
+          "id": 2
+        },
+        "initial_ping_front_remote": {
+          "type": "uint32",
+          "id": 3
+        },
+        "initial_score": {
+          "type": "uint32",
+          "id": 4
+        },
+        "initial_pop_local": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "initial_pop_remote": {
+          "type": "fixed32",
+          "id": 6
+        },
+        "best_ping": {
+          "type": "uint32",
+          "id": 11
+        },
+        "best_ping_front_local": {
+          "type": "uint32",
+          "id": 12
+        },
+        "best_ping_front_remote": {
+          "type": "uint32",
+          "id": 13
+        },
+        "best_score": {
+          "type": "uint32",
+          "id": 14
+        },
+        "best_pop_local": {
+          "type": "fixed32",
+          "id": 15
+        },
+        "best_pop_remote": {
+          "type": "fixed32",
+          "id": 16
+        },
+        "best_time": {
+          "type": "uint32",
+          "id": 17
+        },
+        "negotiation_ms": {
+          "type": "uint32",
+          "id": 7
+        },
+        "selected_seconds": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgSteamDatagramP2PRoutingSummary": {
+      "fields": {
+        "ice": {
+          "type": ".CMsgSteamNetworkingICESessionSummary",
+          "id": 2
+        },
+        "sdr": {
+          "type": ".CMsgSteamNetworkingP2PSDRRoutingSummary",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionClosed": {
+      "fields": {
+        "to_connection_id": {
+          "type": "fixed32",
+          "id": 7
+        },
+        "from_connection_id": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "from_identity_string": {
+          "type": "string",
+          "id": 15
+        },
+        "legacy_from_identity_binary": {
+          "type": ".CMsgSteamNetworkingIdentityLegacyBinary",
+          "id": 13
+        },
+        "legacy_from_steam_id": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "legacy_gameserver_relay_session_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "to_relay_session_id": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "from_relay_session_id": {
+          "type": "fixed32",
+          "id": 10
+        },
+        "forward_target_relay_routing_token": {
+          "type": "bytes",
+          "id": 11
+        },
+        "forward_target_revision": {
+          "type": "uint32",
+          "id": 12
+        },
+        "relay_mode": {
+          "type": ".CMsgSteamDatagramConnectionClosed.ERelayMode",
+          "id": 4,
+          "options": {
+            "default": "None"
+          }
+        },
+        "debug": {
+          "type": "string",
+          "id": 5
+        },
+        "reason_code": {
+          "type": "uint32",
+          "id": 6
+        },
+        "routing_secret": {
+          "type": "fixed64",
+          "id": 14
+        },
+        "not_primary_session": {
+          "type": "bool",
+          "id": 16
+        },
+        "not_primary_transport": {
+          "type": "bool",
+          "id": 19
+        },
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 17
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 18
+        },
+        "p2p_routing_summary": {
+          "type": ".CMsgSteamDatagramP2PRoutingSummary",
+          "id": 21
+        }
+      },
+      "nested": {
+        "ERelayMode": {
+          "values": {
+            "None": 0,
+            "EndToEnd": 1,
+            "ClosedByPeer": 2
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramNoConnection": {
+      "fields": {
+        "to_connection_id": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "from_connection_id": {
+          "type": "fixed32",
+          "id": 6
+        },
+        "legacy_gameserver_relay_session_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "to_relay_session_id": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "from_relay_session_id": {
+          "type": "fixed32",
+          "id": 10
+        },
+        "from_identity_string": {
+          "type": "string",
+          "id": 7
+        },
+        "legacy_from_steam_id": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "end_to_end": {
+          "type": "bool",
+          "id": 4
+        },
+        "not_primary_session": {
+          "type": "bool",
+          "id": 12
+        },
+        "not_primary_transport": {
+          "type": "bool",
+          "id": 15
+        },
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 13
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 14
+        },
+        "p2p_routing_summary": {
+          "type": ".CMsgSteamDatagramP2PRoutingSummary",
+          "id": 16
+        },
+        "routing_secret": {
+          "type": "fixed64",
+          "id": 11
+        },
+        "dummy_pad": {
+          "type": "fixed32",
+          "id": 1023
+        }
+      }
+    },
+    "CMsgSteamDatagramGameserverSessionRequest": {
+      "fields": {
+        "ticket": {
+          "type": "bytes",
+          "id": 1
+        },
+        "challenge_time": {
+          "type": "fixed32",
+          "id": 3
+        },
+        "challenge": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "server_connection_id": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "network_config_version": {
+          "type": "uint32",
+          "id": 6
+        },
+        "protocol_version": {
+          "type": "uint32",
+          "id": 7
+        },
+        "platform": {
+          "type": "string",
+          "id": 9
+        },
+        "build": {
+          "type": "string",
+          "id": 10
+        }
+      }
+    },
+    "CMsgSteamDatagramGameserverSessionEstablished": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "gameserver_identity_string": {
+          "type": "string",
+          "id": 2
+        },
+        "seconds_until_shutdown": {
+          "type": "uint32",
+          "id": 4
+        },
+        "seq_num_r2c": {
+          "type": "uint32",
+          "id": 6
+        },
+        "dummy_legacy_identity_binary": {
+          "type": "bytes",
+          "id": 7
+        },
+        "legacy_gameserver_steamid": {
+          "type": "fixed64",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionStatsClientToRouter": {
+      "fields": {
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 1
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 2
+        },
+        "ack_relay": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 4,
+          "options": {
+            "packed": false
+          }
+        },
+        "legacy_ack_e2e": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 6
+        },
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "seq_num_c2r": {
+          "type": "uint32",
+          "id": 9
+        },
+        "seq_num_e2e": {
+          "type": "uint32",
+          "id": 10
+        }
+      },
+      "nested": {
+        "Flags": {
+          "values": {
+            "ACK_REQUEST_RELAY": 1,
+            "ACK_REQUEST_E2E": 2,
+            "ACK_REQUEST_IMMEDIATE": 4,
+            "NOT_PRIMARY_SESSION": 8
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionStatsRouterToClient": {
+      "fields": {
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 1
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 2
+        },
+        "seconds_until_shutdown": {
+          "type": "uint32",
+          "id": 6
+        },
+        "migrate_request_ip": {
+          "type": "fixed32",
+          "id": 10
+        },
+        "migrate_request_port": {
+          "type": "uint32",
+          "id": 11
+        },
+        "scoring_penalty_relay_cluster": {
+          "type": "uint32",
+          "id": 12
+        },
+        "ack_relay": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 13,
+          "options": {
+            "packed": false
+          }
+        },
+        "legacy_ack_e2e": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 14,
+          "options": {
+            "packed": false
+          }
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 15
+        },
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 7
+        },
+        "seq_num_r2c": {
+          "type": "uint32",
+          "id": 8
+        },
+        "seq_num_e2e": {
+          "type": "uint32",
+          "id": 9
+        }
+      },
+      "nested": {
+        "Flags": {
+          "values": {
+            "ACK_REQUEST_RELAY": 1,
+            "ACK_REQUEST_E2E": 2,
+            "ACK_REQUEST_IMMEDIATE": 4
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionStatsRouterToServer": {
+      "fields": {
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 1
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 2
+        },
+        "ack_relay": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "legacy_ack_e2e": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 11,
+          "options": {
+            "packed": false
+          }
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 12
+        },
+        "seq_num_r2s": {
+          "type": "uint32",
+          "id": 5
+        },
+        "seq_num_e2e": {
+          "type": "uint32",
+          "id": 6
+        },
+        "client_identity_string": {
+          "type": "string",
+          "id": 15
+        },
+        "legacy_client_steam_id": {
+          "type": "fixed64",
+          "id": 7
+        },
+        "relay_session_id": {
+          "type": "uint32",
+          "id": 8
+        },
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "server_connection_id": {
+          "type": "fixed32",
+          "id": 13
+        },
+        "routing_secret": {
+          "type": "fixed64",
+          "id": 14
+        }
+      },
+      "nested": {
+        "Flags": {
+          "values": {
+            "ACK_REQUEST_RELAY": 1,
+            "ACK_REQUEST_E2E": 2,
+            "ACK_REQUEST_IMMEDIATE": 4
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionStatsServerToRouter": {
+      "fields": {
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 1
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 2
+        },
+        "ack_relay": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 8,
+          "options": {
+            "packed": false
+          }
+        },
+        "legacy_ack_e2e": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 9,
+          "options": {
+            "packed": false
+          }
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 10
+        },
+        "seq_num_s2r": {
+          "type": "uint32",
+          "id": 3
+        },
+        "seq_num_e2e": {
+          "type": "uint32",
+          "id": 4
+        },
+        "relay_session_id": {
+          "type": "uint32",
+          "id": 6
+        },
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 7
+        },
+        "server_connection_id": {
+          "type": "fixed32",
+          "id": 11
+        }
+      },
+      "nested": {
+        "Flags": {
+          "values": {
+            "ACK_REQUEST_RELAY": 1,
+            "ACK_REQUEST_E2E": 2,
+            "ACK_REQUEST_IMMEDIATE": 4
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramP2PSessionRequestBody": {
+      "fields": {
+        "challenge_time": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "challenge": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 3
+        },
+        "legacy_peer_steam_id": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "peer_identity_string": {
+          "type": "string",
+          "id": 11
+        },
+        "peer_connection_id": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "protocol_version": {
+          "type": "uint32",
+          "id": 8
+        },
+        "network_config_version": {
+          "type": "uint32",
+          "id": 9
+        },
+        "unused_public_ip": {
+          "type": "fixed32",
+          "id": 10
+        },
+        "platform": {
+          "type": "string",
+          "id": 12
+        },
+        "build": {
+          "type": "string",
+          "id": 13
+        }
+      }
+    },
+    "CMsgSteamDatagramP2PSessionRequest": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 1
+        },
+        "body": {
+          "type": "bytes",
+          "id": 2
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSteamDatagramP2PSessionEstablished": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "seconds_until_shutdown": {
+          "type": "uint32",
+          "id": 3
+        },
+        "relay_routing_token": {
+          "type": "bytes",
+          "id": 4
+        },
+        "seq_num_r2c": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionStatsP2PClientToRouter": {
+      "fields": {
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 1
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 2
+        },
+        "p2p_routing_summary": {
+          "type": ".CMsgSteamDatagramP2PRoutingSummary",
+          "id": 14
+        },
+        "ack_relay": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 3,
+          "options": {
+            "packed": false
+          }
+        },
+        "legacy_ack_e2e": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 4,
+          "options": {
+            "packed": false
+          }
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 5
+        },
+        "forward_target_relay_routing_token": {
+          "type": "bytes",
+          "id": 6
+        },
+        "forward_target_revision": {
+          "type": "uint32",
+          "id": 7
+        },
+        "routes": {
+          "type": "bytes",
+          "id": 8
+        },
+        "ack_peer_routes_revision": {
+          "type": "uint32",
+          "id": 9
+        },
+        "connection_id": {
+          "type": "fixed32",
+          "id": 10
+        },
+        "seq_num_c2r": {
+          "type": "uint32",
+          "id": 11
+        },
+        "seq_num_e2e": {
+          "type": "uint32",
+          "id": 12
+        }
+      },
+      "nested": {
+        "Flags": {
+          "values": {
+            "ACK_REQUEST_RELAY": 1,
+            "ACK_REQUEST_E2E": 2,
+            "ACK_REQUEST_IMMEDIATE": 4,
+            "NOT_PRIMARY_SESSION": 8,
+            "NOT_PRIMARY_TRANSPORT_E2E": 16
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionStatsP2PRouterToClient": {
+      "fields": {
+        "quality_relay": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 1
+        },
+        "quality_e2e": {
+          "type": ".CMsgSteamDatagramConnectionQuality",
+          "id": 2
+        },
+        "seconds_until_shutdown": {
+          "type": "uint32",
+          "id": 3
+        },
+        "migrate_request_ip": {
+          "type": "fixed32",
+          "id": 4
+        },
+        "migrate_request_port": {
+          "type": "uint32",
+          "id": 5
+        },
+        "scoring_penalty_relay_cluster": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ack_relay": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 7,
+          "options": {
+            "packed": false
+          }
+        },
+        "legacy_ack_e2e": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 8,
+          "options": {
+            "packed": false
+          }
+        },
+        "flags": {
+          "type": "uint32",
+          "id": 9
+        },
+        "ack_forward_target_revision": {
+          "type": "uint32",
+          "id": 10
+        },
+        "routes": {
+          "type": "bytes",
+          "id": 11
+        },
+        "ack_peer_routes_revision": {
+          "type": "uint32",
+          "id": 12
+        },
+        "connection_id": {
+          "type": "fixed32",
+          "id": 13
+        },
+        "seq_num_r2c": {
+          "type": "uint32",
+          "id": 14
+        },
+        "seq_num_e2e": {
+          "type": "uint32",
+          "id": 15
+        }
+      },
+      "nested": {
+        "Flags": {
+          "values": {
+            "ACK_REQUEST_RELAY": 1,
+            "ACK_REQUEST_E2E": 2,
+            "ACK_REQUEST_IMMEDIATE": 4,
+            "NOT_PRIMARY_TRANSPORT_E2E": 16
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramP2PBadRouteRouterToClient": {
+      "fields": {
+        "connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "failed_relay_routing_token": {
+          "type": "bytes",
+          "id": 2
+        },
+        "ack_forward_target_revision": {
+          "type": "uint32",
+          "id": 3
+        },
+        "kludge_pad": {
+          "type": "fixed64",
+          "id": 99
+        }
+      }
+    },
+    "CMsgSteamDatagramP2PRoutes": {
+      "fields": {
+        "relay_clusters": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramP2PRoutes.RelayCluster",
+          "id": 1
+        },
+        "routes": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramP2PRoutes.Route",
+          "id": 2
+        },
+        "revision": {
+          "type": "uint32",
+          "id": 3
+        }
+      },
+      "nested": {
+        "RelayCluster": {
+          "fields": {
+            "pop_id": {
+              "type": "fixed32",
+              "id": 1
+            },
+            "ping_ms": {
+              "type": "uint32",
+              "id": 2
+            },
+            "score_penalty": {
+              "type": "uint32",
+              "id": 3
+            },
+            "session_relay_routing_token": {
+              "type": "bytes",
+              "id": 4
+            }
+          }
+        },
+        "Route": {
+          "fields": {
+            "my_pop_id": {
+              "type": "fixed32",
+              "id": 1
+            },
+            "your_pop_id": {
+              "type": "fixed32",
+              "id": 2
+            },
+            "legacy_score": {
+              "type": "uint32",
+              "id": 3
+            },
+            "interior_score": {
+              "type": "uint32",
+              "id": 4
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramSetSecondaryAddressRequest": {
+      "fields": {
+        "client_main_ip": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "client_main_port": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "client_connection_id": {
+          "type": "fixed32",
+          "id": 3
+        },
+        "client_identity": {
+          "type": "string",
+          "id": 4
+        },
+        "request_send_duplication": {
+          "type": "bool",
+          "id": 5
+        },
+        "kludge_pad": {
+          "type": "bytes",
+          "id": 99
+        }
+      }
+    },
+    "CMsgSteamDatagramSetSecondaryAddressResult": {
+      "fields": {
+        "success": {
+          "type": "bool",
+          "id": 1
+        },
+        "message": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSteamNetworkingIdentityLegacyBinary": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 16
+        },
+        "xbox_pairwise_id": {
+          "type": "string",
+          "id": 17
+        },
+        "generic_bytes": {
+          "type": "bytes",
+          "id": 2
+        },
+        "generic_string": {
+          "type": "string",
+          "id": 3
+        },
+        "ipv6_and_port": {
+          "type": "bytes",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificate": {
+      "fields": {
+        "key_type": {
+          "type": ".CMsgSteamDatagramCertificate.EKeyType",
+          "id": 1,
+          "options": {
+            "default": "INVALID"
+          }
+        },
+        "key_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "legacy_steam_id": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "legacy_identity_binary": {
+          "type": ".CMsgSteamNetworkingIdentityLegacyBinary",
+          "id": 11
+        },
+        "identity_string": {
+          "type": "string",
+          "id": 12
+        },
+        "gameserver_datacenter_ids": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        },
+        "time_created": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "time_expiry": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "app_ids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        }
+      },
+      "nested": {
+        "EKeyType": {
+          "values": {
+            "INVALID": 0,
+            "ED25519": 1
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateSigned": {
+      "fields": {
+        "cert": {
+          "type": "bytes",
+          "id": 4
+        },
+        "ca_key_id": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "ca_signature": {
+          "type": "bytes",
+          "id": 6
+        },
+        "private_key_data": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateRequest": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificate",
+          "id": 1
+        }
+      }
+    },
+    "ESteamNetworkingSocketsCipher": {
+      "values": {
+        "k_ESteamNetworkingSocketsCipher_INVALID": 0,
+        "k_ESteamNetworkingSocketsCipher_NULL": 1,
+        "k_ESteamNetworkingSocketsCipher_AES_256_GCM": 2
+      }
+    },
+    "CMsgSteamDatagramSessionCryptInfo": {
+      "fields": {
+        "key_type": {
+          "type": ".CMsgSteamDatagramSessionCryptInfo.EKeyType",
+          "id": 1,
+          "options": {
+            "default": "INVALID"
+          }
+        },
+        "key_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "nonce": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "protocol_version": {
+          "type": "uint32",
+          "id": 4
+        },
+        "ciphers": {
+          "rule": "repeated",
+          "type": ".ESteamNetworkingSocketsCipher",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        }
+      },
+      "nested": {
+        "EKeyType": {
+          "values": {
+            "INVALID": 0,
+            "CURVE25519": 1
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramSessionCryptInfoSigned": {
+      "fields": {
+        "info": {
+          "type": "bytes",
+          "id": 1
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSteamDatagramDiagnostic": {
+      "fields": {
+        "severity": {
+          "type": "uint32",
+          "id": 1
+        },
+        "text": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSteamDatagramLinkInstantaneousStats": {
+      "fields": {
+        "out_packets_per_sec_x10": {
+          "type": "uint32",
+          "id": 1
+        },
+        "out_bytes_per_sec": {
+          "type": "uint32",
+          "id": 2
+        },
+        "in_packets_per_sec_x10": {
+          "type": "uint32",
+          "id": 3
+        },
+        "in_bytes_per_sec": {
+          "type": "uint32",
+          "id": 4
+        },
+        "ping_ms": {
+          "type": "uint32",
+          "id": 5
+        },
+        "packets_dropped_pct": {
+          "type": "uint32",
+          "id": 6
+        },
+        "packets_weird_sequence_pct": {
+          "type": "uint32",
+          "id": 7
+        },
+        "peak_jitter_usec": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgSteamDatagramLinkLifetimeStats": {
+      "fields": {
+        "connected_seconds": {
+          "type": "uint32",
+          "id": 2
+        },
+        "packets_sent": {
+          "type": "uint64",
+          "id": 3
+        },
+        "kb_sent": {
+          "type": "uint64",
+          "id": 4
+        },
+        "packets_recv": {
+          "type": "uint64",
+          "id": 5
+        },
+        "kb_recv": {
+          "type": "uint64",
+          "id": 6
+        },
+        "packets_recv_sequenced": {
+          "type": "uint64",
+          "id": 7
+        },
+        "packets_recv_dropped": {
+          "type": "uint64",
+          "id": 8
+        },
+        "packets_recv_out_of_order": {
+          "type": "uint64",
+          "id": 9
+        },
+        "packets_recv_duplicate": {
+          "type": "uint64",
+          "id": 10
+        },
+        "packets_recv_lurch": {
+          "type": "uint64",
+          "id": 11
+        },
+        "multipath_packets_recv_sequenced": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 12,
+          "options": {
+            "packed": false
+          }
+        },
+        "multipath_packets_recv_later": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 13,
+          "options": {
+            "packed": false
+          }
+        },
+        "multipath_send_enabled": {
+          "type": "uint32",
+          "id": 14
+        },
+        "quality_histogram_100": {
+          "type": "uint32",
+          "id": 21
+        },
+        "quality_histogram_99": {
+          "type": "uint32",
+          "id": 22
+        },
+        "quality_histogram_97": {
+          "type": "uint32",
+          "id": 23
+        },
+        "quality_histogram_95": {
+          "type": "uint32",
+          "id": 24
+        },
+        "quality_histogram_90": {
+          "type": "uint32",
+          "id": 25
+        },
+        "quality_histogram_75": {
+          "type": "uint32",
+          "id": 26
+        },
+        "quality_histogram_50": {
+          "type": "uint32",
+          "id": 27
+        },
+        "quality_histogram_1": {
+          "type": "uint32",
+          "id": 28
+        },
+        "quality_histogram_dead": {
+          "type": "uint32",
+          "id": 29
+        },
+        "quality_ntile_2nd": {
+          "type": "uint32",
+          "id": 30
+        },
+        "quality_ntile_5th": {
+          "type": "uint32",
+          "id": 31
+        },
+        "quality_ntile_25th": {
+          "type": "uint32",
+          "id": 32
+        },
+        "quality_ntile_50th": {
+          "type": "uint32",
+          "id": 33
+        },
+        "ping_histogram_25": {
+          "type": "uint32",
+          "id": 41
+        },
+        "ping_histogram_50": {
+          "type": "uint32",
+          "id": 42
+        },
+        "ping_histogram_75": {
+          "type": "uint32",
+          "id": 43
+        },
+        "ping_histogram_100": {
+          "type": "uint32",
+          "id": 44
+        },
+        "ping_histogram_125": {
+          "type": "uint32",
+          "id": 45
+        },
+        "ping_histogram_150": {
+          "type": "uint32",
+          "id": 46
+        },
+        "ping_histogram_200": {
+          "type": "uint32",
+          "id": 47
+        },
+        "ping_histogram_300": {
+          "type": "uint32",
+          "id": 48
+        },
+        "ping_histogram_max": {
+          "type": "uint32",
+          "id": 49
+        },
+        "ping_ntile_5th": {
+          "type": "uint32",
+          "id": 50
+        },
+        "ping_ntile_50th": {
+          "type": "uint32",
+          "id": 51
+        },
+        "ping_ntile_75th": {
+          "type": "uint32",
+          "id": 52
+        },
+        "ping_ntile_95th": {
+          "type": "uint32",
+          "id": 53
+        },
+        "ping_ntile_98th": {
+          "type": "uint32",
+          "id": 54
+        },
+        "jitter_histogram_negligible": {
+          "type": "uint32",
+          "id": 61
+        },
+        "jitter_histogram_1": {
+          "type": "uint32",
+          "id": 62
+        },
+        "jitter_histogram_2": {
+          "type": "uint32",
+          "id": 63
+        },
+        "jitter_histogram_5": {
+          "type": "uint32",
+          "id": 64
+        },
+        "jitter_histogram_10": {
+          "type": "uint32",
+          "id": 65
+        },
+        "jitter_histogram_20": {
+          "type": "uint32",
+          "id": 66
+        },
+        "txspeed_max": {
+          "type": "uint32",
+          "id": 67
+        },
+        "txspeed_histogram_16": {
+          "type": "uint32",
+          "id": 68
+        },
+        "txspeed_histogram_32": {
+          "type": "uint32",
+          "id": 69
+        },
+        "txspeed_histogram_64": {
+          "type": "uint32",
+          "id": 70
+        },
+        "txspeed_histogram_128": {
+          "type": "uint32",
+          "id": 71
+        },
+        "txspeed_histogram_256": {
+          "type": "uint32",
+          "id": 72
+        },
+        "txspeed_histogram_512": {
+          "type": "uint32",
+          "id": 73
+        },
+        "txspeed_histogram_1024": {
+          "type": "uint32",
+          "id": 74
+        },
+        "txspeed_histogram_max": {
+          "type": "uint32",
+          "id": 75
+        },
+        "txspeed_ntile_5th": {
+          "type": "uint32",
+          "id": 76
+        },
+        "txspeed_ntile_50th": {
+          "type": "uint32",
+          "id": 77
+        },
+        "txspeed_ntile_75th": {
+          "type": "uint32",
+          "id": 78
+        },
+        "txspeed_ntile_95th": {
+          "type": "uint32",
+          "id": 79
+        },
+        "txspeed_ntile_98th": {
+          "type": "uint32",
+          "id": 80
+        },
+        "rxspeed_max": {
+          "type": "uint32",
+          "id": 81
+        },
+        "rxspeed_histogram_16": {
+          "type": "uint32",
+          "id": 82
+        },
+        "rxspeed_histogram_32": {
+          "type": "uint32",
+          "id": 83
+        },
+        "rxspeed_histogram_64": {
+          "type": "uint32",
+          "id": 84
+        },
+        "rxspeed_histogram_128": {
+          "type": "uint32",
+          "id": 85
+        },
+        "rxspeed_histogram_256": {
+          "type": "uint32",
+          "id": 86
+        },
+        "rxspeed_histogram_512": {
+          "type": "uint32",
+          "id": 87
+        },
+        "rxspeed_histogram_1024": {
+          "type": "uint32",
+          "id": 88
+        },
+        "rxspeed_histogram_max": {
+          "type": "uint32",
+          "id": 89
+        },
+        "rxspeed_ntile_5th": {
+          "type": "uint32",
+          "id": 90
+        },
+        "rxspeed_ntile_50th": {
+          "type": "uint32",
+          "id": 91
+        },
+        "rxspeed_ntile_75th": {
+          "type": "uint32",
+          "id": 92
+        },
+        "rxspeed_ntile_95th": {
+          "type": "uint32",
+          "id": 93
+        },
+        "rxspeed_ntile_98th": {
+          "type": "uint32",
+          "id": 94
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionQuality": {
+      "fields": {
+        "instantaneous": {
+          "type": ".CMsgSteamDatagramLinkInstantaneousStats",
+          "id": 1
+        },
+        "lifetime": {
+          "type": ".CMsgSteamDatagramLinkLifetimeStats",
+          "id": 2
+        }
+      }
+    },
+    "CMsgICERendezvous": {
+      "fields": {
+        "auth": {
+          "type": ".CMsgICERendezvous.Auth",
+          "id": 2
+        },
+        "add_candidate": {
+          "type": ".CMsgICERendezvous.Candidate",
+          "id": 1
+        }
+      },
+      "nested": {
+        "Auth": {
+          "fields": {
+            "pwd_frag": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "Candidate": {
+          "fields": {
+            "candidate": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamNetworkingP2PRendezvous": {
+      "fields": {
+        "from_identity": {
+          "type": "string",
+          "id": 8
+        },
+        "from_connection_id": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "to_identity": {
+          "type": "string",
+          "id": 10
+        },
+        "to_connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "sdr_routes": {
+          "type": "bytes",
+          "id": 2
+        },
+        "ack_peer_routes_revision": {
+          "type": "uint32",
+          "id": 3
+        },
+        "ice_enabled": {
+          "type": "bool",
+          "id": 7
+        },
+        "hosted_server_ticket": {
+          "type": "bytes",
+          "id": 14
+        },
+        "connect_request": {
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ConnectRequest",
+          "id": 4
+        },
+        "connect_ok": {
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ConnectOK",
+          "id": 5
+        },
+        "connection_closed": {
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ConnectionClosed",
+          "id": 6
+        },
+        "ack_reliable_msg": {
+          "type": "uint32",
+          "id": 11
+        },
+        "first_reliable_msg": {
+          "type": "uint32",
+          "id": 12
+        },
+        "reliable_messages": {
+          "rule": "repeated",
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ReliableMessage",
+          "id": 13
+        },
+        "application_messages": {
+          "rule": "repeated",
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ApplicationMessage",
+          "id": 15
+        }
+      },
+      "nested": {
+        "ConnectRequest": {
+          "fields": {
+            "crypt": {
+              "type": ".CMsgSteamDatagramSessionCryptInfoSigned",
+              "id": 6
+            },
+            "cert": {
+              "type": ".CMsgSteamDatagramCertificateSigned",
+              "id": 7
+            },
+            "to_virtual_port": {
+              "type": "uint32",
+              "id": 9
+            },
+            "from_virtual_port": {
+              "type": "uint32",
+              "id": 10
+            },
+            "from_fakeip": {
+              "type": "string",
+              "id": 11
+            }
+          }
+        },
+        "ConnectOK": {
+          "fields": {
+            "crypt": {
+              "type": ".CMsgSteamDatagramSessionCryptInfoSigned",
+              "id": 5
+            },
+            "cert": {
+              "type": ".CMsgSteamDatagramCertificateSigned",
+              "id": 6
+            }
+          }
+        },
+        "ConnectionClosed": {
+          "fields": {
+            "debug": {
+              "type": "string",
+              "id": 5
+            },
+            "reason_code": {
+              "type": "uint32",
+              "id": 6
+            }
+          }
+        },
+        "ReliableMessage": {
+          "fields": {
+            "ice": {
+              "type": ".CMsgICERendezvous",
+              "id": 1
+            }
+          }
+        },
+        "ApplicationMessage": {
+          "fields": {
+            "data": {
+              "type": "bytes",
+              "id": 1
+            },
+            "msg_num": {
+              "type": "uint64",
+              "id": 2
+            },
+            "flags": {
+              "type": "uint32",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamNetworkingICESessionSummary": {
+      "fields": {
+        "failure_reason_code": {
+          "type": "uint32",
+          "id": 7
+        },
+        "local_candidate_types": {
+          "type": "uint32",
+          "id": 1
+        },
+        "remote_candidate_types": {
+          "type": "uint32",
+          "id": 2
+        },
+        "initial_route_kind": {
+          "type": "uint32",
+          "id": 3
+        },
+        "initial_ping": {
+          "type": "uint32",
+          "id": 4
+        },
+        "initial_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "negotiation_ms": {
+          "type": "uint32",
+          "id": 5
+        },
+        "best_route_kind": {
+          "type": "uint32",
+          "id": 16
+        },
+        "best_ping": {
+          "type": "uint32",
+          "id": 17
+        },
+        "best_score": {
+          "type": "uint32",
+          "id": 18
+        },
+        "best_time": {
+          "type": "uint32",
+          "id": 19
+        },
+        "selected_seconds": {
+          "type": "uint32",
+          "id": 12
+        },
+        "user_settings": {
+          "type": "uint32",
+          "id": 13
+        },
+        "ice_enable_var": {
+          "type": "uint32",
+          "id": 14
+        },
+        "local_candidate_types_allowed": {
+          "type": "uint32",
+          "id": 15
+        }
+      }
+    }
+  }
+}

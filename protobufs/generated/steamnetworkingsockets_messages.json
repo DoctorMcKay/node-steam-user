@@ -1,0 +1,779 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "ESteamNetworkingSocketsCipher": {
+      "values": {
+        "k_ESteamNetworkingSocketsCipher_INVALID": 0,
+        "k_ESteamNetworkingSocketsCipher_NULL": 1,
+        "k_ESteamNetworkingSocketsCipher_AES_256_GCM": 2
+      }
+    },
+    "CMsgSteamDatagramSessionCryptInfo": {
+      "fields": {
+        "key_type": {
+          "type": ".CMsgSteamDatagramSessionCryptInfo.EKeyType",
+          "id": 1,
+          "options": {
+            "default": "INVALID"
+          }
+        },
+        "key_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "nonce": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "protocol_version": {
+          "type": "uint32",
+          "id": 4
+        },
+        "ciphers": {
+          "rule": "repeated",
+          "type": ".ESteamNetworkingSocketsCipher",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        }
+      },
+      "nested": {
+        "EKeyType": {
+          "values": {
+            "INVALID": 0,
+            "CURVE25519": 1
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramSessionCryptInfoSigned": {
+      "fields": {
+        "info": {
+          "type": "bytes",
+          "id": 1
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSteamDatagramDiagnostic": {
+      "fields": {
+        "severity": {
+          "type": "uint32",
+          "id": 1
+        },
+        "text": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSteamDatagramLinkInstantaneousStats": {
+      "fields": {
+        "out_packets_per_sec_x10": {
+          "type": "uint32",
+          "id": 1
+        },
+        "out_bytes_per_sec": {
+          "type": "uint32",
+          "id": 2
+        },
+        "in_packets_per_sec_x10": {
+          "type": "uint32",
+          "id": 3
+        },
+        "in_bytes_per_sec": {
+          "type": "uint32",
+          "id": 4
+        },
+        "ping_ms": {
+          "type": "uint32",
+          "id": 5
+        },
+        "packets_dropped_pct": {
+          "type": "uint32",
+          "id": 6
+        },
+        "packets_weird_sequence_pct": {
+          "type": "uint32",
+          "id": 7
+        },
+        "peak_jitter_usec": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgSteamDatagramLinkLifetimeStats": {
+      "fields": {
+        "connected_seconds": {
+          "type": "uint32",
+          "id": 2
+        },
+        "packets_sent": {
+          "type": "uint64",
+          "id": 3
+        },
+        "kb_sent": {
+          "type": "uint64",
+          "id": 4
+        },
+        "packets_recv": {
+          "type": "uint64",
+          "id": 5
+        },
+        "kb_recv": {
+          "type": "uint64",
+          "id": 6
+        },
+        "packets_recv_sequenced": {
+          "type": "uint64",
+          "id": 7
+        },
+        "packets_recv_dropped": {
+          "type": "uint64",
+          "id": 8
+        },
+        "packets_recv_out_of_order": {
+          "type": "uint64",
+          "id": 9
+        },
+        "packets_recv_duplicate": {
+          "type": "uint64",
+          "id": 10
+        },
+        "packets_recv_lurch": {
+          "type": "uint64",
+          "id": 11
+        },
+        "multipath_packets_recv_sequenced": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 12,
+          "options": {
+            "packed": false
+          }
+        },
+        "multipath_packets_recv_later": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 13,
+          "options": {
+            "packed": false
+          }
+        },
+        "multipath_send_enabled": {
+          "type": "uint32",
+          "id": 14
+        },
+        "quality_histogram_100": {
+          "type": "uint32",
+          "id": 21
+        },
+        "quality_histogram_99": {
+          "type": "uint32",
+          "id": 22
+        },
+        "quality_histogram_97": {
+          "type": "uint32",
+          "id": 23
+        },
+        "quality_histogram_95": {
+          "type": "uint32",
+          "id": 24
+        },
+        "quality_histogram_90": {
+          "type": "uint32",
+          "id": 25
+        },
+        "quality_histogram_75": {
+          "type": "uint32",
+          "id": 26
+        },
+        "quality_histogram_50": {
+          "type": "uint32",
+          "id": 27
+        },
+        "quality_histogram_1": {
+          "type": "uint32",
+          "id": 28
+        },
+        "quality_histogram_dead": {
+          "type": "uint32",
+          "id": 29
+        },
+        "quality_ntile_2nd": {
+          "type": "uint32",
+          "id": 30
+        },
+        "quality_ntile_5th": {
+          "type": "uint32",
+          "id": 31
+        },
+        "quality_ntile_25th": {
+          "type": "uint32",
+          "id": 32
+        },
+        "quality_ntile_50th": {
+          "type": "uint32",
+          "id": 33
+        },
+        "ping_histogram_25": {
+          "type": "uint32",
+          "id": 41
+        },
+        "ping_histogram_50": {
+          "type": "uint32",
+          "id": 42
+        },
+        "ping_histogram_75": {
+          "type": "uint32",
+          "id": 43
+        },
+        "ping_histogram_100": {
+          "type": "uint32",
+          "id": 44
+        },
+        "ping_histogram_125": {
+          "type": "uint32",
+          "id": 45
+        },
+        "ping_histogram_150": {
+          "type": "uint32",
+          "id": 46
+        },
+        "ping_histogram_200": {
+          "type": "uint32",
+          "id": 47
+        },
+        "ping_histogram_300": {
+          "type": "uint32",
+          "id": 48
+        },
+        "ping_histogram_max": {
+          "type": "uint32",
+          "id": 49
+        },
+        "ping_ntile_5th": {
+          "type": "uint32",
+          "id": 50
+        },
+        "ping_ntile_50th": {
+          "type": "uint32",
+          "id": 51
+        },
+        "ping_ntile_75th": {
+          "type": "uint32",
+          "id": 52
+        },
+        "ping_ntile_95th": {
+          "type": "uint32",
+          "id": 53
+        },
+        "ping_ntile_98th": {
+          "type": "uint32",
+          "id": 54
+        },
+        "jitter_histogram_negligible": {
+          "type": "uint32",
+          "id": 61
+        },
+        "jitter_histogram_1": {
+          "type": "uint32",
+          "id": 62
+        },
+        "jitter_histogram_2": {
+          "type": "uint32",
+          "id": 63
+        },
+        "jitter_histogram_5": {
+          "type": "uint32",
+          "id": 64
+        },
+        "jitter_histogram_10": {
+          "type": "uint32",
+          "id": 65
+        },
+        "jitter_histogram_20": {
+          "type": "uint32",
+          "id": 66
+        },
+        "txspeed_max": {
+          "type": "uint32",
+          "id": 67
+        },
+        "txspeed_histogram_16": {
+          "type": "uint32",
+          "id": 68
+        },
+        "txspeed_histogram_32": {
+          "type": "uint32",
+          "id": 69
+        },
+        "txspeed_histogram_64": {
+          "type": "uint32",
+          "id": 70
+        },
+        "txspeed_histogram_128": {
+          "type": "uint32",
+          "id": 71
+        },
+        "txspeed_histogram_256": {
+          "type": "uint32",
+          "id": 72
+        },
+        "txspeed_histogram_512": {
+          "type": "uint32",
+          "id": 73
+        },
+        "txspeed_histogram_1024": {
+          "type": "uint32",
+          "id": 74
+        },
+        "txspeed_histogram_max": {
+          "type": "uint32",
+          "id": 75
+        },
+        "txspeed_ntile_5th": {
+          "type": "uint32",
+          "id": 76
+        },
+        "txspeed_ntile_50th": {
+          "type": "uint32",
+          "id": 77
+        },
+        "txspeed_ntile_75th": {
+          "type": "uint32",
+          "id": 78
+        },
+        "txspeed_ntile_95th": {
+          "type": "uint32",
+          "id": 79
+        },
+        "txspeed_ntile_98th": {
+          "type": "uint32",
+          "id": 80
+        },
+        "rxspeed_max": {
+          "type": "uint32",
+          "id": 81
+        },
+        "rxspeed_histogram_16": {
+          "type": "uint32",
+          "id": 82
+        },
+        "rxspeed_histogram_32": {
+          "type": "uint32",
+          "id": 83
+        },
+        "rxspeed_histogram_64": {
+          "type": "uint32",
+          "id": 84
+        },
+        "rxspeed_histogram_128": {
+          "type": "uint32",
+          "id": 85
+        },
+        "rxspeed_histogram_256": {
+          "type": "uint32",
+          "id": 86
+        },
+        "rxspeed_histogram_512": {
+          "type": "uint32",
+          "id": 87
+        },
+        "rxspeed_histogram_1024": {
+          "type": "uint32",
+          "id": 88
+        },
+        "rxspeed_histogram_max": {
+          "type": "uint32",
+          "id": 89
+        },
+        "rxspeed_ntile_5th": {
+          "type": "uint32",
+          "id": 90
+        },
+        "rxspeed_ntile_50th": {
+          "type": "uint32",
+          "id": 91
+        },
+        "rxspeed_ntile_75th": {
+          "type": "uint32",
+          "id": 92
+        },
+        "rxspeed_ntile_95th": {
+          "type": "uint32",
+          "id": 93
+        },
+        "rxspeed_ntile_98th": {
+          "type": "uint32",
+          "id": 94
+        }
+      }
+    },
+    "CMsgSteamDatagramConnectionQuality": {
+      "fields": {
+        "instantaneous": {
+          "type": ".CMsgSteamDatagramLinkInstantaneousStats",
+          "id": 1
+        },
+        "lifetime": {
+          "type": ".CMsgSteamDatagramLinkLifetimeStats",
+          "id": 2
+        }
+      }
+    },
+    "CMsgICERendezvous": {
+      "fields": {
+        "auth": {
+          "type": ".CMsgICERendezvous.Auth",
+          "id": 2
+        },
+        "add_candidate": {
+          "type": ".CMsgICERendezvous.Candidate",
+          "id": 1
+        }
+      },
+      "nested": {
+        "Auth": {
+          "fields": {
+            "pwd_frag": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "Candidate": {
+          "fields": {
+            "candidate": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamNetworkingP2PRendezvous": {
+      "fields": {
+        "from_identity": {
+          "type": "string",
+          "id": 8
+        },
+        "from_connection_id": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "to_identity": {
+          "type": "string",
+          "id": 10
+        },
+        "to_connection_id": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "sdr_routes": {
+          "type": "bytes",
+          "id": 2
+        },
+        "ack_peer_routes_revision": {
+          "type": "uint32",
+          "id": 3
+        },
+        "ice_enabled": {
+          "type": "bool",
+          "id": 7
+        },
+        "hosted_server_ticket": {
+          "type": "bytes",
+          "id": 14
+        },
+        "connect_request": {
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ConnectRequest",
+          "id": 4
+        },
+        "connect_ok": {
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ConnectOK",
+          "id": 5
+        },
+        "connection_closed": {
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ConnectionClosed",
+          "id": 6
+        },
+        "ack_reliable_msg": {
+          "type": "uint32",
+          "id": 11
+        },
+        "first_reliable_msg": {
+          "type": "uint32",
+          "id": 12
+        },
+        "reliable_messages": {
+          "rule": "repeated",
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ReliableMessage",
+          "id": 13
+        },
+        "application_messages": {
+          "rule": "repeated",
+          "type": ".CMsgSteamNetworkingP2PRendezvous.ApplicationMessage",
+          "id": 15
+        }
+      },
+      "nested": {
+        "ConnectRequest": {
+          "fields": {
+            "crypt": {
+              "type": ".CMsgSteamDatagramSessionCryptInfoSigned",
+              "id": 6
+            },
+            "cert": {
+              "type": ".CMsgSteamDatagramCertificateSigned",
+              "id": 7
+            },
+            "to_virtual_port": {
+              "type": "uint32",
+              "id": 9
+            },
+            "from_virtual_port": {
+              "type": "uint32",
+              "id": 10
+            },
+            "from_fakeip": {
+              "type": "string",
+              "id": 11
+            }
+          }
+        },
+        "ConnectOK": {
+          "fields": {
+            "crypt": {
+              "type": ".CMsgSteamDatagramSessionCryptInfoSigned",
+              "id": 5
+            },
+            "cert": {
+              "type": ".CMsgSteamDatagramCertificateSigned",
+              "id": 6
+            }
+          }
+        },
+        "ConnectionClosed": {
+          "fields": {
+            "debug": {
+              "type": "string",
+              "id": 5
+            },
+            "reason_code": {
+              "type": "uint32",
+              "id": 6
+            }
+          }
+        },
+        "ReliableMessage": {
+          "fields": {
+            "ice": {
+              "type": ".CMsgICERendezvous",
+              "id": 1
+            }
+          }
+        },
+        "ApplicationMessage": {
+          "fields": {
+            "data": {
+              "type": "bytes",
+              "id": 1
+            },
+            "msg_num": {
+              "type": "uint64",
+              "id": 2
+            },
+            "flags": {
+              "type": "uint32",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamNetworkingICESessionSummary": {
+      "fields": {
+        "failure_reason_code": {
+          "type": "uint32",
+          "id": 7
+        },
+        "local_candidate_types": {
+          "type": "uint32",
+          "id": 1
+        },
+        "remote_candidate_types": {
+          "type": "uint32",
+          "id": 2
+        },
+        "initial_route_kind": {
+          "type": "uint32",
+          "id": 3
+        },
+        "initial_ping": {
+          "type": "uint32",
+          "id": 4
+        },
+        "initial_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "negotiation_ms": {
+          "type": "uint32",
+          "id": 5
+        },
+        "best_route_kind": {
+          "type": "uint32",
+          "id": 16
+        },
+        "best_ping": {
+          "type": "uint32",
+          "id": 17
+        },
+        "best_score": {
+          "type": "uint32",
+          "id": 18
+        },
+        "best_time": {
+          "type": "uint32",
+          "id": 19
+        },
+        "selected_seconds": {
+          "type": "uint32",
+          "id": 12
+        },
+        "user_settings": {
+          "type": "uint32",
+          "id": 13
+        },
+        "ice_enable_var": {
+          "type": "uint32",
+          "id": 14
+        },
+        "local_candidate_types_allowed": {
+          "type": "uint32",
+          "id": 15
+        }
+      }
+    },
+    "CMsgSteamNetworkingIdentityLegacyBinary": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 16
+        },
+        "xbox_pairwise_id": {
+          "type": "string",
+          "id": 17
+        },
+        "generic_bytes": {
+          "type": "bytes",
+          "id": 2
+        },
+        "generic_string": {
+          "type": "string",
+          "id": 3
+        },
+        "ipv6_and_port": {
+          "type": "bytes",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificate": {
+      "fields": {
+        "key_type": {
+          "type": ".CMsgSteamDatagramCertificate.EKeyType",
+          "id": 1,
+          "options": {
+            "default": "INVALID"
+          }
+        },
+        "key_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "legacy_steam_id": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "legacy_identity_binary": {
+          "type": ".CMsgSteamNetworkingIdentityLegacyBinary",
+          "id": 11
+        },
+        "identity_string": {
+          "type": "string",
+          "id": 12
+        },
+        "gameserver_datacenter_ids": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        },
+        "time_created": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "time_expiry": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "app_ids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        }
+      },
+      "nested": {
+        "EKeyType": {
+          "values": {
+            "INVALID": 0,
+            "ED25519": 1
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateSigned": {
+      "fields": {
+        "cert": {
+          "type": "bytes",
+          "id": 4
+        },
+        "ca_key_id": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "ca_signature": {
+          "type": "bytes",
+          "id": 6
+        },
+        "private_key_data": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateRequest": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificate",
+          "id": 1
+        }
+      }
+    }
+  }
+}

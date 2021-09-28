@@ -1,0 +1,119 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "CMsgSteamNetworkingIdentityLegacyBinary": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 16
+        },
+        "xbox_pairwise_id": {
+          "type": "string",
+          "id": 17
+        },
+        "generic_bytes": {
+          "type": "bytes",
+          "id": 2
+        },
+        "generic_string": {
+          "type": "string",
+          "id": 3
+        },
+        "ipv6_and_port": {
+          "type": "bytes",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificate": {
+      "fields": {
+        "key_type": {
+          "type": ".CMsgSteamDatagramCertificate.EKeyType",
+          "id": 1,
+          "options": {
+            "default": "INVALID"
+          }
+        },
+        "key_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "legacy_steam_id": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "legacy_identity_binary": {
+          "type": ".CMsgSteamNetworkingIdentityLegacyBinary",
+          "id": 11
+        },
+        "identity_string": {
+          "type": "string",
+          "id": 12
+        },
+        "gameserver_datacenter_ids": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        },
+        "time_created": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "time_expiry": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "app_ids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        }
+      },
+      "nested": {
+        "EKeyType": {
+          "values": {
+            "INVALID": 0,
+            "ED25519": 1
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateSigned": {
+      "fields": {
+        "cert": {
+          "type": "bytes",
+          "id": 4
+        },
+        "ca_key_id": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "ca_signature": {
+          "type": "bytes",
+          "id": 6
+        },
+        "private_key_data": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateRequest": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificate",
+          "id": 1
+        }
+      }
+    }
+  }
+}

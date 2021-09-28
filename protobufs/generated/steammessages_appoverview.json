@@ -1,0 +1,435 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": true
+  },
+  "nested": {
+    "EDisplayStatus": {
+      "values": {
+        "k_EDisplayStatusInvalid": 0,
+        "k_EDisplayStatusLaunching": 1,
+        "k_EDisplayStatusUninstalling": 2,
+        "k_EDisplayStatusInstalling": 3,
+        "k_EDisplayStatusRunning": 4,
+        "k_EDisplayStatusValidating": 5,
+        "k_EDisplayStatusUpdating": 6,
+        "k_EDisplayStatusDownloading": 7,
+        "k_EDisplayStatusSynchronizing": 8,
+        "k_EDisplayStatusReadyToInstall": 9,
+        "k_EDisplayStatusReadyToPreload": 10,
+        "k_EDisplayStatusReadyToLaunch": 11,
+        "k_EDisplayStatusRegionRestricted": 12,
+        "k_EDisplayStatusPresaleOnly": 13,
+        "k_EDisplayStatusInvalidPlatform": 14,
+        "k_EDisplayStatusPreloadComplete": 16,
+        "k_EDisplayStatusBorrowerLocked": 17,
+        "k_EDisplayStatusUpdatePaused": 18,
+        "k_EDisplayStatusUpdateQueued": 19,
+        "k_EDisplayStatusUpdateRequired": 20,
+        "k_EDisplayStatusUpdateDisabled": 21,
+        "k_EDisplayStatusDownloadPaused": 22,
+        "k_EDisplayStatusDownloadQueued": 23,
+        "k_EDisplayStatusDownloadRequired": 24,
+        "k_EDisplayStatusDownloadDisabled": 25,
+        "k_EDisplayStatusLicensePending": 26,
+        "k_EDisplayStatusLicenseExpired": 27,
+        "k_EDisplayStatusAvailForFree": 28,
+        "k_EDisplayStatusAvailToBorrow": 29,
+        "k_EDisplayStatusAvailGuestPass": 30,
+        "k_EDisplayStatusPurchase": 31,
+        "k_EDisplayStatusUnavailable": 32,
+        "k_EDisplayStatusNotLaunchable": 33
+      }
+    },
+    "EProtoAppType": {
+      "values": {
+        "k_EAppTypeInvalid": 0,
+        "k_EAppTypeGame": 1,
+        "k_EAppTypeApplication": 2,
+        "k_EAppTypeTool": 4,
+        "k_EAppTypeDemo": 8,
+        "k_EAppTypeDeprected": 16,
+        "k_EAppTypeDLC": 32,
+        "k_EAppTypeGuide": 64,
+        "k_EAppTypeDriver": 128,
+        "k_EAppTypeConfig": 256,
+        "k_EAppTypeHardware": 512,
+        "k_EAppTypeFranchise": 1024,
+        "k_EAppTypeVideo": 2048,
+        "k_EAppTypePlugin": 4096,
+        "k_EAppTypeMusicAlbum": 8192,
+        "k_EAppTypeSeries": 16384,
+        "k_EAppTypeComic": 32768,
+        "k_EAppTypeBeta": 65536,
+        "k_EAppTypeShortcut": 1073741824,
+        "k_EAppTypeDepotOnly": -2147483648
+      }
+    },
+    "EAppAssociationType": {
+      "values": {
+        "k_EAppAssociationTypeInvalid": 0,
+        "k_EAppAssociationTypePublisher": 1,
+        "k_EAppAssociationTypeDeveloper": 2,
+        "k_EAppAssociationTypeFranchise": 3
+      }
+    },
+    "EAppControllerSupportLevel": {
+      "values": {
+        "k_EAppControllerSupportLevelNone": 0,
+        "k_EAppControllerSupportLevelPartial": 1,
+        "k_EAppControllerSupportLevelFull": 2
+      }
+    },
+    "CAppOverview_AppAssociation": {
+      "fields": {
+        "type": {
+          "type": ".EAppAssociationType",
+          "id": 1,
+          "options": {
+            "default": "k_EAppAssociationTypeInvalid"
+          }
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CAppOverview_PerClientData": {
+      "fields": {
+        "clientid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "client_name": {
+          "type": "string",
+          "id": 2
+        },
+        "display_status": {
+          "type": ".EDisplayStatus",
+          "id": 3,
+          "options": {
+            "default": "k_EDisplayStatusInvalid"
+          }
+        },
+        "status_percentage": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "default": 0
+          }
+        },
+        "active_beta": {
+          "type": "string",
+          "id": 5
+        },
+        "installed": {
+          "type": "bool",
+          "id": 6
+        },
+        "bytes_downloaded": {
+          "type": "uint64",
+          "id": 7,
+          "options": {
+            "default": 0
+          }
+        },
+        "bytes_total": {
+          "type": "uint64",
+          "id": 8,
+          "options": {
+            "default": 0
+          }
+        },
+        "streaming_to_local_client": {
+          "type": "bool",
+          "id": 9
+        },
+        "is_available_on_current_platform": {
+          "type": "bool",
+          "id": 10
+        },
+        "is_invalid_os_type": {
+          "type": "bool",
+          "id": 11
+        },
+        "playtime_left": {
+          "type": "uint32",
+          "id": 12
+        }
+      }
+    },
+    "CAppOverview": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "display_name": {
+          "type": "string",
+          "id": 2
+        },
+        "visible_in_game_list": {
+          "type": "bool",
+          "id": 4
+        },
+        "sort_as": {
+          "type": "string",
+          "id": 6
+        },
+        "app_type": {
+          "type": ".EProtoAppType",
+          "id": 7,
+          "options": {
+            "default": "k_EAppTypeInvalid"
+          }
+        },
+        "mru_index": {
+          "type": "uint32",
+          "id": 13
+        },
+        "rt_recent_activity_time": {
+          "type": "uint32",
+          "id": 14,
+          "options": {
+            "default": 0
+          }
+        },
+        "minutes_playtime_forever": {
+          "type": "uint32",
+          "id": 16,
+          "options": {
+            "default": 0
+          }
+        },
+        "minutes_playtime_last_two_weeks": {
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "default": 0
+          }
+        },
+        "rt_last_time_played": {
+          "type": "uint32",
+          "id": 18,
+          "options": {
+            "default": 0
+          }
+        },
+        "store_tag": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 19,
+          "options": {
+            "packed": false
+          }
+        },
+        "association": {
+          "rule": "repeated",
+          "type": ".CAppOverview_AppAssociation",
+          "id": 20
+        },
+        "store_category": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 23,
+          "options": {
+            "packed": false
+          }
+        },
+        "rt_original_release_date": {
+          "type": "uint32",
+          "id": 25,
+          "options": {
+            "default": 0
+          }
+        },
+        "rt_steam_release_date": {
+          "type": "uint32",
+          "id": 26,
+          "options": {
+            "default": 0
+          }
+        },
+        "icon_hash": {
+          "type": "string",
+          "id": 27
+        },
+        "logo_hash": {
+          "type": "string",
+          "id": 30
+        },
+        "controller_support": {
+          "type": ".EAppControllerSupportLevel",
+          "id": 31,
+          "options": {
+            "default": "k_EAppControllerSupportLevelNone"
+          }
+        },
+        "vr_supported": {
+          "type": "bool",
+          "id": 32
+        },
+        "metacritic_score": {
+          "type": "uint32",
+          "id": 36
+        },
+        "size_on_disk": {
+          "type": "uint64",
+          "id": 37
+        },
+        "third_party_mod": {
+          "type": "bool",
+          "id": 38
+        },
+        "icon_data": {
+          "type": "string",
+          "id": 39
+        },
+        "icon_data_format": {
+          "type": "string",
+          "id": 40
+        },
+        "gameid": {
+          "type": "string",
+          "id": 41
+        },
+        "library_capsule_filename": {
+          "type": "string",
+          "id": 42
+        },
+        "per_client_data": {
+          "rule": "repeated",
+          "type": ".CAppOverview_PerClientData",
+          "id": 43
+        },
+        "most_available_clientid": {
+          "type": "uint64",
+          "id": 44
+        },
+        "selected_clientid": {
+          "type": "uint64",
+          "id": 45
+        },
+        "rt_store_asset_mtime": {
+          "type": "uint32",
+          "id": 46
+        },
+        "rt_custom_image_mtime": {
+          "type": "uint32",
+          "id": 47
+        },
+        "optional_parent_app_id": {
+          "type": "uint32",
+          "id": 48
+        },
+        "owner_account_id": {
+          "type": "uint32",
+          "id": 49
+        },
+        "compat_mapping_enabled": {
+          "type": "bool",
+          "id": 50
+        },
+        "compat_mapping_priority": {
+          "type": "uint32",
+          "id": 51
+        },
+        "compat_mapping_tool_name": {
+          "type": "string",
+          "id": 52
+        },
+        "review_score_with_bombs": {
+          "type": "uint32",
+          "id": 53
+        },
+        "review_percentage_with_bombs": {
+          "type": "uint32",
+          "id": 54
+        },
+        "review_score_without_bombs": {
+          "type": "uint32",
+          "id": 55
+        },
+        "review_percentage_without_bombs": {
+          "type": "uint32",
+          "id": 56
+        },
+        "library_id": {
+          "type": "string",
+          "id": 57
+        },
+        "vr_only": {
+          "type": "bool",
+          "id": 58
+        },
+        "mastersub_appid": {
+          "type": "uint32",
+          "id": 59
+        },
+        "mastersub_includedwith_logo": {
+          "type": "string",
+          "id": 60
+        },
+        "compat_allowlist_setting": {
+          "type": "uint32",
+          "id": 61,
+          "options": {
+            "default": 0
+          }
+        },
+        "site_license_site_name": {
+          "type": "string",
+          "id": 62
+        },
+        "shortcut_override_appid": {
+          "type": "uint32",
+          "id": 63
+        }
+      }
+    },
+    "CAppOverview_Change": {
+      "fields": {
+        "app_overview": {
+          "rule": "repeated",
+          "type": ".CAppOverview",
+          "id": 1
+        },
+        "removed_appid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CAppBootstrapData": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 2
+        },
+        "user_tag": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CLibraryBootstrapData": {
+      "fields": {
+        "app_data": {
+          "rule": "repeated",
+          "type": ".CAppBootstrapData",
+          "id": 1
+        }
+      }
+    }
+  }
+}

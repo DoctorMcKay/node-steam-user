@@ -1,0 +1,2825 @@
+{
+  "options": {
+    "cc_generic_services": false,
+    "optimize_for": "SPEED"
+  },
+  "nested": {
+    "EBroadcastWatchLocation": {
+      "values": {
+        "k_EBroadcastWatchLocation_Invalid": 0,
+        "k_EBroadcastWatchLocation_SteamTV_Tab": 1,
+        "k_EBroadcastWatchLocation_SteamTV_WatchParty": 2,
+        "k_EBroadcastWatchLocation_Chat_Tab": 3,
+        "k_EBroadcastWatchLocation_Chat_WatchParty": 4,
+        "k_EBroadcastWatchLocation_CommunityPage": 5,
+        "k_EBroadcastWatchLocation_StoreAppPage": 6,
+        "k_EBroadcastWatchLocation_InGame": 7,
+        "k_EBroadcastWatchLocation_BigPicture": 8,
+        "k_EBroadcastWatchLocation_SalesPage": 9,
+        "k_EBroadcastWatchLocation_CuratorPage": 10,
+        "k_EBroadcastWatchLocation_DeveloperPage": 11,
+        "k_EBroadcastWatchLocation_Chat_Friends": 12,
+        "k_EBroadcastWatchLocation_SteamTV_Web": 13
+      }
+    },
+    "EBroadcastChatPermission": {
+      "values": {
+        "k_EBroadcastChatPermissionPublic": 0,
+        "k_EBroadcastChatPermissionOwnsApp": 1
+      }
+    },
+    "CBroadcast_BeginBroadcastSession_Request": {
+      "fields": {
+        "permission": {
+          "type": "int32",
+          "id": 1
+        },
+        "gameid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "client_instance_id": {
+          "type": "uint64",
+          "id": 3
+        },
+        "title": {
+          "type": "string",
+          "id": 4
+        },
+        "cellid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "rtmp_token": {
+          "type": "uint64",
+          "id": 6
+        },
+        "thumbnail_upload": {
+          "type": "bool",
+          "id": 7
+        },
+        "client_beta": {
+          "type": "string",
+          "id": 8
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "allow_webrtc": {
+          "type": "bool",
+          "id": 10
+        }
+      }
+    },
+    "CBroadcast_BeginBroadcastSession_Response": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "thumbnail_upload_address": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "Http address to upload the thumbnail data."
+          }
+        },
+        "thumbnail_upload_token": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "token to authorize as broadcaster to upload content to the relay."
+          }
+        },
+        "thumbnail_interval_seconds": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "how many seconds between thumbnails"
+          }
+        },
+        "heartbeat_interval_seconds": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "how many seconds between session heartbeats"
+          }
+        }
+      }
+    },
+    "CBroadcast_EndBroadcastSession_Request": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_EndBroadcastSession_Response": {
+      "fields": {}
+    },
+    "CBroadcast_StartBroadcastUpload_Request": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "cellid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "as_rtmp": {
+          "type": "bool",
+          "id": 3
+        },
+        "delay_seconds": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtmp_token": {
+          "type": "uint64",
+          "id": 5,
+          "options": {
+            "default": 0,
+            "(description)": "Only set during RTMP uploads; secret key from the user."
+          }
+        },
+        "upload_ip_address": {
+          "type": "uint32",
+          "id": 6
+        },
+        "is_replay": {
+          "type": "bool",
+          "id": 7
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CBroadcast_StartBroadcastUpload_Response": {
+      "fields": {
+        "upload_token": {
+          "type": "string",
+          "id": 1
+        },
+        "upload_address": {
+          "type": "string",
+          "id": 2
+        },
+        "broadcast_upload_id": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "enable_replay": {
+          "type": "bool",
+          "id": 6
+        },
+        "http_address": {
+          "type": "string",
+          "id": 7
+        }
+      }
+    },
+    "CBroadcast_NotifyBroadcastUploadStop_Notification": {
+      "fields": {
+        "broadcast_upload_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "upload_result": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_WatchBroadcast_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "broadcaster steamID."
+          }
+        },
+        "existing_broadcast_id": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "broadcast session ID (optional, rejoin if specified)."
+          }
+        },
+        "viewer_token": {
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "(description)": "viewer token received from last WatchRequest call, from browser storage."
+          }
+        },
+        "client_cell": {
+          "type": "uint32",
+          "id": 5
+        },
+        "watch_location": {
+          "type": ".EBroadcastWatchLocation",
+          "id": 6,
+          "options": {
+            "default": "k_EBroadcastWatchLocation_Invalid"
+          }
+        },
+        "is_webrtc": {
+          "type": "bool",
+          "id": 7
+        }
+      }
+    },
+    "CBroadcast_WatchBroadcast_Response": {
+      "fields": {
+        "response": {
+          "type": ".CBroadcast_WatchBroadcast_Response.EWatchResponse",
+          "id": 1,
+          "options": {
+            "default": "k_EWatchResponseReady"
+          }
+        },
+        "mpd_url": {
+          "type": "string",
+          "id": 2
+        },
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "uint64",
+          "id": 4
+        },
+        "title": {
+          "type": "string",
+          "id": 5
+        },
+        "num_viewers": {
+          "type": "uint32",
+          "id": 6
+        },
+        "permission": {
+          "type": "int32",
+          "id": 7
+        },
+        "is_rtmp": {
+          "type": "bool",
+          "id": 8
+        },
+        "seconds_delay": {
+          "type": "int32",
+          "id": 9
+        },
+        "viewer_token": {
+          "type": "fixed64",
+          "id": 10
+        },
+        "hls_m3u8_master_url": {
+          "type": "string",
+          "id": 11
+        },
+        "heartbeat_interval": {
+          "type": "int32",
+          "id": 12
+        },
+        "thumbnail_url": {
+          "type": "string",
+          "id": 13
+        },
+        "is_webrtc": {
+          "type": "bool",
+          "id": 14
+        },
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 15
+        },
+        "webrtc_offer_sdp": {
+          "type": "string",
+          "id": 16
+        },
+        "webrtc_turn_server": {
+          "type": "string",
+          "id": 17
+        },
+        "is_replay": {
+          "type": "bool",
+          "id": 18
+        },
+        "duration": {
+          "type": "int32",
+          "id": 19
+        },
+        "cdn_auth_url_parameters": {
+          "type": "string",
+          "id": 20
+        }
+      },
+      "nested": {
+        "EWatchResponse": {
+          "values": {
+            "k_EWatchResponseReady": 1,
+            "k_EWatchResponseNotAvailable": 2,
+            "k_EWatchResponseWaitingForApproval": 3,
+            "k_EWatchResponseWaitingForStart": 4,
+            "k_EWatchResponseInvalidSession": 5,
+            "k_EWatchResponseTooManyBroadcasts": 6,
+            "k_EWatchResponseWaitingForReconnect": 7,
+            "k_EWatchResponseSystemNotSupported": 8,
+            "k_EWatchResponseUserRestricted": 9,
+            "k_EWatchResponseClientOutOfDate": 10,
+            "k_EWatchResponsePoorUploadQuality": 11,
+            "k_EWatchResponseMissingSubscription": 12
+          }
+        }
+      }
+    },
+    "CBroadcast_HeartbeatBroadcast_Notification": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "broadcaster steamID."
+          }
+        },
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "broadcast session ID."
+          }
+        },
+        "viewer_token": {
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "(description)": "viewer token received from last WatchRequest call, from browser storage."
+          }
+        },
+        "representation": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "video stream representation watching"
+          }
+        }
+      }
+    },
+    "CBroadcast_StopWatchingBroadcast_Notification": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "broadcaster steamID."
+          }
+        },
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "broadcast session ID."
+          }
+        },
+        "viewer_token": {
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "(description)": "viewer token received from last WatchRequest call, from browser storage."
+          }
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastStatus_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "broadcaster steamID."
+          }
+        },
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "broadcast session ID to proof that user is allowed to see details."
+          }
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastStatus_Response": {
+      "fields": {
+        "gameid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        },
+        "num_viewers": {
+          "type": "uint32",
+          "id": 3
+        },
+        "permission": {
+          "type": "int32",
+          "id": 4
+        },
+        "is_rtmp": {
+          "type": "bool",
+          "id": 5
+        },
+        "seconds_delay": {
+          "type": "int32",
+          "id": 6
+        },
+        "is_publisher": {
+          "type": "bool",
+          "id": 7
+        },
+        "thumbnail_url": {
+          "type": "string",
+          "id": 8
+        },
+        "update_interval": {
+          "type": "int32",
+          "id": 9
+        },
+        "is_uploading": {
+          "type": "bool",
+          "id": 10
+        },
+        "duration": {
+          "type": "uint32",
+          "id": 11
+        },
+        "is_replay": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_capturing_vod": {
+          "type": "bool",
+          "id": 13
+        },
+        "is_store_whitelisted": {
+          "type": "bool",
+          "id": 14
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastThumbnail_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastThumbnail_Response": {
+      "fields": {
+        "thumbnail_url": {
+          "type": "string",
+          "id": 1
+        },
+        "update_interval": {
+          "type": "int32",
+          "id": 2
+        },
+        "num_viewers": {
+          "type": "int32",
+          "id": 3
+        },
+        "duration": {
+          "type": "int32",
+          "id": 4
+        }
+      }
+    },
+    "CBroadcast_InviteToBroadcast_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "approval_response": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_InviteToBroadcast_Response": {
+      "fields": {
+        "success": {
+          "type": "bool",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_SendBroadcastStateToServer_Request": {
+      "fields": {
+        "permission": {
+          "type": "int32",
+          "id": 1
+        },
+        "gameid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "title": {
+          "type": "string",
+          "id": 3
+        },
+        "game_data_config": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CBroadcast_SendBroadcastStateToServer_Response": {
+      "fields": {}
+    },
+    "CBroadcast_NotifyBroadcastSessionHeartbeat_Notification": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastChatInfo_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "client_ip": {
+          "type": "uint32",
+          "id": 3
+        },
+        "client_cell": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastChatInfo_Response": {
+      "fields": {
+        "chat_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "view_url_template": {
+          "type": "string",
+          "id": 3
+        },
+        "flair_group_ids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CBroadcast_PostChatMessage_Request": {
+      "fields": {
+        "chat_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "message": {
+          "type": "string",
+          "id": 2
+        },
+        "instance_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "language": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "default": 0,
+            "(description)": "ELanguage of the user posting the message, default is english"
+          }
+        },
+        "country_code": {
+          "type": "string",
+          "id": 5,
+          "options": {
+            "(description)": "The two letter country code"
+          }
+        }
+      }
+    },
+    "CBroadcast_PostChatMessage_Response": {
+      "fields": {
+        "persona_name": {
+          "type": "string",
+          "id": 1
+        },
+        "in_game": {
+          "type": "bool",
+          "id": 2
+        },
+        "result": {
+          "type": "int32",
+          "id": 3
+        },
+        "cooldown_time_seconds": {
+          "type": "int32",
+          "id": 4
+        }
+      }
+    },
+    "CBroadcast_UpdateChatMessageFlair_Request": {
+      "fields": {
+        "chat_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "flair": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_UpdateChatMessageFlair_Response": {
+      "fields": {
+        "result": {
+          "type": "int32",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "flair": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_MuteBroadcastChatUser_Request": {
+      "fields": {
+        "chat_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "user_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "muted": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_MuteBroadcastChatUser_Response": {
+      "fields": {}
+    },
+    "CBroadcast_RemoveUserChatText_Request": {
+      "fields": {
+        "chat_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "user_steamid": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_RemoveUserChatText_Response": {
+      "fields": {}
+    },
+    "CBroadcast_GetBroadcastChatUserNames_Request": {
+      "fields": {
+        "chat_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "user_steamid": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastChatUserNames_Response": {
+      "fields": {
+        "persona_names": {
+          "rule": "repeated",
+          "type": ".CBroadcast_GetBroadcastChatUserNames_Response.PersonaName",
+          "id": 1
+        }
+      },
+      "nested": {
+        "PersonaName": {
+          "fields": {
+            "steam_id": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "persona": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CBroadcast_StartBuildClip_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "broadcast_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "first_segment": {
+          "type": "int32",
+          "id": 3
+        },
+        "num_segments": {
+          "type": "int32",
+          "id": 4
+        },
+        "clip_description": {
+          "type": "string",
+          "id": 5
+        }
+      }
+    },
+    "CBroadcast_StartBuildClip_Response": {
+      "fields": {
+        "broadcast_clip_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_GetBuildClipStatus_Request": {
+      "fields": {
+        "broadcast_clip_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_GetBuildClipStatus_Response": {
+      "fields": {}
+    },
+    "CBroadcast_SetClipDetails_Request": {
+      "fields": {
+        "broadcast_clip_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "Clip ID"
+          }
+        },
+        "start_time": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "(description)": "start time of the clip"
+          }
+        },
+        "end_time": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "end time of the clip"
+          }
+        },
+        "video_description": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CBroadcast_SetClipDetails_Response": {
+      "fields": {}
+    },
+    "CBroadcast_GetClipDetails_Request": {
+      "fields": {
+        "broadcast_clip_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "List of clip IDs we want details for"
+          }
+        }
+      }
+    },
+    "CBroadcast_GetClipDetails_Response": {
+      "fields": {
+        "broadcast_clip_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "broadcast clip ID"
+          }
+        },
+        "video_id": {
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "(description)": "matching unique video ID"
+          }
+        },
+        "channel_id": {
+          "type": "uint64",
+          "id": 3,
+          "options": {
+            "(description)": "Broadcast Channel ID"
+          }
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "App ID stream is tagged with"
+          }
+        },
+        "accountid_broadcaster": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "Account ID of broadcaster"
+          }
+        },
+        "accountid_clipmaker": {
+          "type": "uint32",
+          "id": 6,
+          "options": {
+            "(description)": "Account ID of clip-maker"
+          }
+        },
+        "video_description": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "Short name or description of this clip"
+          }
+        },
+        "start_time": {
+          "type": "uint32",
+          "id": 8,
+          "options": {
+            "(description)": "Wall time clip was broadcasted live"
+          }
+        },
+        "length_milliseconds": {
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "(description)": "length of video in MS"
+          }
+        },
+        "thumbnail_path": {
+          "type": "string",
+          "id": 10,
+          "options": {
+            "(description)": "Path for thumbnail URL"
+          }
+        }
+      }
+    },
+    "CBroadcast_SetRTMPInfo_Request": {
+      "fields": {
+        "broadcast_permission": {
+          "type": "int32",
+          "id": 1
+        },
+        "update_token": {
+          "type": "bool",
+          "id": 2
+        },
+        "broadcast_delay": {
+          "type": "int32",
+          "id": 3
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 4
+        },
+        "required_app_id": {
+          "type": "uint32",
+          "id": 5
+        },
+        "broadcast_chat_permission": {
+          "type": ".EBroadcastChatPermission",
+          "id": 6,
+          "options": {
+            "default": "k_EBroadcastChatPermissionPublic",
+            "(description)": "Who is permitted to send a chat message during broadcast"
+          }
+        },
+        "broadcast_buffer": {
+          "type": "int32",
+          "id": 7,
+          "options": {
+            "(description)": "Previous seconds we keep of the stream available"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 8,
+          "options": {
+            "(description)": "broadcaster steamID if not logged-in user"
+          }
+        },
+        "chat_rate_limit": {
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "(description)": "Seconds required between chat messages"
+          }
+        },
+        "enable_replay": {
+          "type": "bool",
+          "id": 10,
+          "options": {
+            "(description)": "Enable replay of last upload"
+          }
+        }
+      }
+    },
+    "CBroadcast_SetRTMPInfo_Response": {
+      "fields": {}
+    },
+    "CBroadcast_GetRTMPInfo_Request": {
+      "fields": {
+        "ip": {
+          "type": "uint32",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "broadcaster steamID if not logged-in user"
+          }
+        }
+      }
+    },
+    "CBroadcast_GetRTMPInfo_Response": {
+      "fields": {
+        "broadcast_permission": {
+          "type": "int32",
+          "id": 1
+        },
+        "rtmp_host": {
+          "type": "string",
+          "id": 2
+        },
+        "rtmp_token": {
+          "type": "string",
+          "id": 3
+        },
+        "broadcast_delay": {
+          "type": "int32",
+          "id": 4
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 5
+        },
+        "required_app_id": {
+          "type": "uint32",
+          "id": 6
+        },
+        "broadcast_chat_permission": {
+          "type": ".EBroadcastChatPermission",
+          "id": 7,
+          "options": {
+            "default": "k_EBroadcastChatPermissionPublic",
+            "(description)": "Who is permitted to send a chat message during broadcast"
+          }
+        },
+        "broadcast_buffer": {
+          "type": "int32",
+          "id": 8,
+          "options": {
+            "(description)": "Seconds we keep streams available"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 9,
+          "options": {
+            "(description)": "broadcaster steamID"
+          }
+        },
+        "chat_rate_limit": {
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "(description)": "Seconds required between chat messages"
+          }
+        },
+        "enable_replay": {
+          "type": "bool",
+          "id": 11,
+          "options": {
+            "(description)": "Enable replay of last upload"
+          }
+        }
+      }
+    },
+    "CBroadcast_WebRTCHaveTURNServer_Notification": {
+      "fields": {
+        "broadcast_session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "turn_server": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_WebRTCStartResult_Request": {
+      "fields": {
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "started": {
+          "type": "bool",
+          "id": 2
+        },
+        "offer": {
+          "type": "string",
+          "id": 3
+        },
+        "resolution_x": {
+          "type": "uint32",
+          "id": 4
+        },
+        "resolution_y": {
+          "type": "uint32",
+          "id": 5
+        },
+        "fps": {
+          "type": "uint32",
+          "id": 6
+        }
+      }
+    },
+    "CBroadcast_WebRTCStartResult_Response": {
+      "fields": {}
+    },
+    "CBroadcast_WebRTCStopped_Request": {
+      "fields": {
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_WebRTCStopped_Response": {
+      "fields": {}
+    },
+    "CBroadcast_WebRTCSetAnswer_Request": {
+      "fields": {
+        "broadcaster_steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "answer": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_WebRTCSetAnswer_Response": {
+      "fields": {}
+    },
+    "CBroadcast_WebRTCLookupTURNServer_Request": {
+      "fields": {
+        "cellid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_WebRTCLookupTURNServer_Response": {
+      "fields": {
+        "turn_server": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_WebRTC_Candidate": {
+      "fields": {
+        "sdp_mid": {
+          "type": "string",
+          "id": 1
+        },
+        "sdp_mline_index": {
+          "type": "int32",
+          "id": 2
+        },
+        "candidate": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_WebRTCAddHostCandidate_Request": {
+      "fields": {
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "candidate": {
+          "type": ".CBroadcast_WebRTC_Candidate",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_WebRTCAddHostCandidate_Response": {
+      "fields": {}
+    },
+    "CBroadcast_WebRTCAddViewerCandidate_Request": {
+      "fields": {
+        "broadcaster_steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "candidate": {
+          "type": ".CBroadcast_WebRTC_Candidate",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_WebRTCAddViewerCandidate_Response": {
+      "fields": {}
+    },
+    "CBroadcast_WebRTCGetHostCandidates_Request": {
+      "fields": {
+        "broadcaster_steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "candidate_generation": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_WebRTCGetHostCandidates_Response": {
+      "fields": {
+        "candidate_generation": {
+          "type": "uint32",
+          "id": 1
+        },
+        "candidates": {
+          "rule": "repeated",
+          "type": ".CBroadcast_WebRTC_Candidate",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastUploadStats_Request": {
+      "fields": {
+        "row_limit": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "default": 100,
+            "(description)": "How many at maximum to return."
+          }
+        },
+        "start_time": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 0,
+            "(description)": "Start time"
+          }
+        },
+        "upload_id": {
+          "type": "uint64",
+          "id": 3,
+          "options": {
+            "(description)": "Optional relay upload ID - not compatible with session_id"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 4,
+          "options": {
+            "(description)": "Optional the steamid whose stats you want, otherwise the user logged in - admin only"
+          }
+        },
+        "session_id": {
+          "type": "uint64",
+          "id": 5,
+          "options": {
+            "(description)": "Optional broadcast session ID - not compatiable with upload_id"
+          }
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastUploadStats_Response": {
+      "fields": {
+        "upload_stats": {
+          "rule": "repeated",
+          "type": ".CBroadcast_GetBroadcastUploadStats_Response.UploadStats",
+          "id": 1
+        }
+      },
+      "nested": {
+        "UploadStats": {
+          "fields": {
+            "upload_result": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": ""
+              }
+            },
+            "time_stopped": {
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "time broadcast upload stopped"
+              }
+            },
+            "seconds_uploaded": {
+              "type": "uint32",
+              "id": 3,
+              "options": {
+                "(description)": "seconds of vido uploaded"
+              }
+            },
+            "max_viewers": {
+              "type": "uint32",
+              "id": 4,
+              "options": {
+                "(description)": "max concurrent viewers"
+              }
+            },
+            "resolution_x": {
+              "type": "uint32",
+              "id": 5,
+              "options": {
+                "(description)": "horizontal resultion"
+              }
+            },
+            "resolution_y": {
+              "type": "uint32",
+              "id": 6,
+              "options": {
+                "(description)": "vertical resultion"
+              }
+            },
+            "avg_bandwidth": {
+              "type": "uint32",
+              "id": 7,
+              "options": {
+                "(description)": ""
+              }
+            },
+            "total_bytes": {
+              "type": "uint64",
+              "id": 8,
+              "options": {
+                "(description)": "total byte uploaded by broadcaster"
+              }
+            },
+            "app_id": {
+              "type": "uint32",
+              "id": 9,
+              "options": {
+                "(description)": "game broadcasted"
+              }
+            },
+            "total_unique_viewers": {
+              "type": "uint32",
+              "id": 10,
+              "options": {
+                "(description)": "total unique viewers seen"
+              }
+            },
+            "total_seconds_watched": {
+              "type": "uint64",
+              "id": 11,
+              "options": {
+                "(description)": "total number of seconds watched by all viewers"
+              }
+            },
+            "time_started": {
+              "type": "uint32",
+              "id": 12,
+              "options": {
+                "(description)": "time broadcast upload started"
+              }
+            },
+            "upload_id": {
+              "type": "uint64",
+              "id": 13,
+              "options": {
+                "(description)": "broadcast relay upload id"
+              }
+            },
+            "local_address": {
+              "type": "string",
+              "id": 14,
+              "options": {
+                "(description)": "upload to server address"
+              }
+            },
+            "remote_address": {
+              "type": "string",
+              "id": 15,
+              "options": {
+                "(description)": "upload from client address"
+              }
+            },
+            "frames_per_second": {
+              "type": "uint32",
+              "id": 16,
+              "options": {
+                "(description)": "frames per second"
+              }
+            },
+            "num_representations": {
+              "type": "uint32",
+              "id": 17,
+              "options": {
+                "(description)": "number of video represetations"
+              }
+            },
+            "app_name": {
+              "type": "string",
+              "id": 18,
+              "options": {
+                "(description)": "game name"
+              }
+            },
+            "is_replay": {
+              "type": "bool",
+              "id": 19,
+              "options": {
+                "(description)": "replay of previous recording"
+              }
+            },
+            "session_id": {
+              "type": "uint64",
+              "id": 20,
+              "options": {
+                "(description)": "broadcast session id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastViewerStats_Request": {
+      "fields": {
+        "upload_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "Get stats for this stream"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "Optional: The steamid of the broadcast whose details you are requesting."
+          }
+        }
+      }
+    },
+    "CBroadcast_GetBroadcastViewerStats_Response": {
+      "fields": {
+        "viewer_stats": {
+          "rule": "repeated",
+          "type": ".CBroadcast_GetBroadcastViewerStats_Response.ViewerStats",
+          "id": 1
+        },
+        "country_stats": {
+          "rule": "repeated",
+          "type": ".CBroadcast_GetBroadcastViewerStats_Response.CountryStats",
+          "id": 2
+        }
+      },
+      "nested": {
+        "ViewerStats": {
+          "fields": {
+            "time": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "time of record"
+              }
+            },
+            "num_viewers": {
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "current number of viewers"
+              }
+            }
+          }
+        },
+        "CountryStats": {
+          "fields": {
+            "country_code": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "(description)": "country code"
+              }
+            },
+            "num_viewers": {
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "number of viewers"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CBroadcast_BroadcastViewerState_Notification": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "state": {
+          "type": ".CBroadcast_BroadcastViewerState_Notification.EViewerState",
+          "id": 2,
+          "options": {
+            "default": "k_EViewerNeedsApproval"
+          }
+        }
+      },
+      "nested": {
+        "EViewerState": {
+          "values": {
+            "k_EViewerNeedsApproval": 1,
+            "k_EViewerWatching": 2,
+            "k_EViewerLeft": 3
+          }
+        }
+      }
+    },
+    "CBroadcast_WaitingBroadcastViewer_Notification": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_BroadcastUploadStarted_Notification": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "upload_token": {
+          "type": "string",
+          "id": 2
+        },
+        "upload_address": {
+          "type": "string",
+          "id": 3
+        },
+        "http_address": {
+          "type": "string",
+          "id": 4
+        },
+        "broadcast_upload_id": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "heartbeat_interval_seconds": {
+          "type": "uint32",
+          "id": 6,
+          "options": {
+            "(description)": "how many seconds between session heartbeats"
+          }
+        },
+        "is_rtmp": {
+          "type": "bool",
+          "id": 7
+        }
+      }
+    },
+    "CBroadcast_StopBroadcastUpload_Notification": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "broadcast_relay_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "upload_result": {
+          "type": "uint32",
+          "id": 3
+        },
+        "too_many_poor_uploads": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CBroadcast_SessionClosed_Notification": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_ViewerBroadcastInvite_Notification": {
+      "fields": {
+        "broadcaster_steamid": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_BroadcastStatus_Notification": {
+      "fields": {
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "num_viewers": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "CBroadcast_BroadcastChannelLive_Notification": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "broadcast_channel_name": {
+          "type": "string",
+          "id": 2
+        },
+        "broadcast_channel_avatar": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_SendThumbnailToRelay_Notification": {
+      "fields": {
+        "thumbnail_upload_token": {
+          "type": "string",
+          "id": 1
+        },
+        "thumbnail_broadcast_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "thumbnail_data": {
+          "type": "bytes",
+          "id": 3
+        },
+        "thumbnail_width": {
+          "type": "uint32",
+          "id": 4
+        },
+        "thumbnail_height": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CBroadcast_WebRTCNeedTURNServer_Notification": {
+      "fields": {
+        "broadcast_session_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CBroadcast_WebRTCStart_Notification": {
+      "fields": {
+        "broadcast_session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "viewer_steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "viewer_token": {
+          "type": "fixed64",
+          "id": 4
+        }
+      }
+    },
+    "CBroadcast_WebRTCSetAnswer_Notification": {
+      "fields": {
+        "broadcast_session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "answer": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CBroadcast_WebRTCAddViewerCandidate_Notification": {
+      "fields": {
+        "broadcast_session_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "webrtc_session_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "candidate": {
+          "type": ".CBroadcast_WebRTC_Candidate",
+          "id": 3
+        }
+      }
+    },
+    "Broadcast": {
+      "options": {
+        "(service_description)": "Methods for Steam broadcast operations"
+      },
+      "methods": {
+        "BeginBroadcastSession": {
+          "requestType": ".CBroadcast_BeginBroadcastSession_Request",
+          "responseType": ".CBroadcast_BeginBroadcastSession_Response",
+          "options": {
+            "(method_description)": "Request from client to directory to begin a broadcast session. No data being sent to relay; just available for broadcast."
+          }
+        },
+        "EndBroadcastSession": {
+          "requestType": ".CBroadcast_EndBroadcastSession_Request",
+          "responseType": ".CBroadcast_EndBroadcastSession_Response",
+          "options": {
+            "(method_description)": "Request from client to stop a broadcast session. Any uploads will terminate."
+          }
+        },
+        "StartBroadcastUpload": {
+          "requestType": ".CBroadcast_StartBroadcastUpload_Request",
+          "responseType": ".CBroadcast_StartBroadcastUpload_Response",
+          "options": {
+            "(method_description)": "Request from client to begin sending video for a broadcast."
+          }
+        },
+        "NotifyBroadcastUploadStop": {
+          "requestType": ".CBroadcast_NotifyBroadcastUploadStop_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Tells directory that client stopped uploading broadcast"
+          }
+        },
+        "WatchBroadcast": {
+          "requestType": ".CBroadcast_WatchBroadcast_Request",
+          "responseType": ".CBroadcast_WatchBroadcast_Response",
+          "options": {
+            "(method_description)": "Request from viewer to watch a broadcast"
+          }
+        },
+        "HeartbeatBroadcast": {
+          "requestType": ".CBroadcast_HeartbeatBroadcast_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notify directory that user is still watching."
+          }
+        },
+        "StopWatchingBroadcast": {
+          "requestType": ".CBroadcast_StopWatchingBroadcast_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Request to immediately stop watching a broadcast. Optional Method, if not called, viewer will time out."
+          }
+        },
+        "GetBroadcastStatus": {
+          "requestType": ".CBroadcast_GetBroadcastStatus_Request",
+          "responseType": ".CBroadcast_GetBroadcastStatus_Response",
+          "options": {
+            "(method_description)": "Request from viewer about broadcast details"
+          }
+        },
+        "GetBroadcastThumbnail": {
+          "requestType": ".CBroadcast_GetBroadcastThumbnail_Request",
+          "responseType": ".CBroadcast_GetBroadcastThumbnail_Response",
+          "options": {
+            "(method_description)": "Request thumbnail URL for broadcast"
+          }
+        },
+        "InviteToBroadcast": {
+          "requestType": ".CBroadcast_InviteToBroadcast_Request",
+          "responseType": ".CBroadcast_InviteToBroadcast_Response",
+          "options": {
+            "(method_description)": "Invites another steam user to watch the caller's broadcast"
+          }
+        },
+        "SendBroadcastStateToServer": {
+          "requestType": ".CBroadcast_SendBroadcastStateToServer_Request",
+          "responseType": ".CBroadcast_SendBroadcastStateToServer_Response",
+          "options": {
+            "(method_description)": "Sends users current broadcast state (permissions, game) to the server"
+          }
+        },
+        "NotifyBroadcastSessionHeartbeat": {
+          "requestType": ".CBroadcast_NotifyBroadcastSessionHeartbeat_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Tells directory broadcast session is still available"
+          }
+        },
+        "GetBroadcastChatInfo": {
+          "requestType": ".CBroadcast_GetBroadcastChatInfo_Request",
+          "responseType": ".CBroadcast_GetBroadcastChatInfo_Response",
+          "options": {
+            "(method_description)": "Gets chat room info for a broadcast"
+          }
+        },
+        "PostChatMessage": {
+          "requestType": ".CBroadcast_PostChatMessage_Request",
+          "responseType": ".CBroadcast_PostChatMessage_Response",
+          "options": {
+            "(method_description)": "Post chat message to specified chat room"
+          }
+        },
+        "UpdateChatMessageFlair": {
+          "requestType": ".CBroadcast_UpdateChatMessageFlair_Request",
+          "responseType": ".CBroadcast_UpdateChatMessageFlair_Response",
+          "options": {
+            "(method_description)": "Update chat message flair in the specified chat room"
+          }
+        },
+        "MuteBroadcastChatUser": {
+          "requestType": ".CBroadcast_MuteBroadcastChatUser_Request",
+          "responseType": ".CBroadcast_MuteBroadcastChatUser_Response",
+          "options": {
+            "(method_description)": "Mute a user in your broadcast chat"
+          }
+        },
+        "RemoveUserChatText": {
+          "requestType": ".CBroadcast_RemoveUserChatText_Request",
+          "responseType": ".CBroadcast_RemoveUserChatText_Response",
+          "options": {
+            "(method_description)": "Tell all viewers to remove user chat text"
+          }
+        },
+        "GetBroadcastChatUserNames": {
+          "requestType": ".CBroadcast_GetBroadcastChatUserNames_Request",
+          "responseType": ".CBroadcast_GetBroadcastChatUserNames_Response",
+          "options": {
+            "(method_description)": "Get names for list of users in chat"
+          }
+        },
+        "StartBuildClip": {
+          "requestType": ".CBroadcast_StartBuildClip_Request",
+          "responseType": ".CBroadcast_StartBuildClip_Response",
+          "options": {
+            "(method_description)": "Start building a broadcast clip"
+          }
+        },
+        "GetBuildClipStatus": {
+          "requestType": ".CBroadcast_GetBuildClipStatus_Request",
+          "responseType": ".CBroadcast_GetBuildClipStatus_Response",
+          "options": {
+            "(method_description)": "Start building a broadcast clip"
+          }
+        },
+        "SetClipDetails": {
+          "requestType": ".CBroadcast_SetClipDetails_Request",
+          "responseType": ".CBroadcast_SetClipDetails_Response",
+          "options": {
+            "(method_description)": "Updates a broadcast clip"
+          }
+        },
+        "GetClipDetails": {
+          "requestType": ".CBroadcast_GetClipDetails_Request",
+          "responseType": ".CBroadcast_GetClipDetails_Response",
+          "options": {
+            "(method_description)": "Get details for Broadcast Clips"
+          }
+        },
+        "SetRTMPInfo": {
+          "requestType": ".CBroadcast_SetRTMPInfo_Request",
+          "responseType": ".CBroadcast_SetRTMPInfo_Response",
+          "options": {
+            "(method_description)": "Sets RTMP broadcast info"
+          }
+        },
+        "GetRTMPInfo": {
+          "requestType": ".CBroadcast_GetRTMPInfo_Request",
+          "responseType": ".CBroadcast_GetRTMPInfo_Response",
+          "options": {
+            "(method_description)": "Gets RTMP broadcast info"
+          }
+        },
+        "NotifyWebRTCHaveTURNServer": {
+          "requestType": ".CBroadcast_WebRTCHaveTURNServer_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from client to server with the client's TURN server"
+          }
+        },
+        "WebRTCStartResult": {
+          "requestType": ".CBroadcast_WebRTCStartResult_Request",
+          "responseType": ".CBroadcast_WebRTCStartResult_Response",
+          "options": {
+            "(method_description)": "Notify the server that a WebRTC session has been created by the host"
+          }
+        },
+        "WebRTCStopped": {
+          "requestType": ".CBroadcast_WebRTCStopped_Request",
+          "responseType": ".CBroadcast_WebRTCStopped_Response",
+          "options": {
+            "(method_description)": "Notify the server that a WebRTC session has been stopped by the host"
+          }
+        },
+        "WebRTCSetAnswer": {
+          "requestType": ".CBroadcast_WebRTCSetAnswer_Request",
+          "responseType": ".CBroadcast_WebRTCSetAnswer_Response",
+          "options": {
+            "(method_description)": "Notify the server that a WebRTC session has been created by the viewer"
+          }
+        },
+        "WebRTCLookupTURNServer": {
+          "requestType": ".CBroadcast_WebRTCLookupTURNServer_Request",
+          "responseType": ".CBroadcast_WebRTCLookupTURNServer_Response",
+          "options": {
+            "(method_description)": "Lookup the best TURN server for this client"
+          }
+        },
+        "WebRTCAddHostCandidate": {
+          "requestType": ".CBroadcast_WebRTCAddHostCandidate_Request",
+          "responseType": ".CBroadcast_WebRTCAddHostCandidate_Response",
+          "options": {
+            "(method_description)": "Add an ICE candidate for the host side of a WebRTC session"
+          }
+        },
+        "WebRTCAddViewerCandidate": {
+          "requestType": ".CBroadcast_WebRTCAddViewerCandidate_Request",
+          "responseType": ".CBroadcast_WebRTCAddViewerCandidate_Response",
+          "options": {
+            "(method_description)": "Add an ICE candidate for the viewer side of a WebRTC session"
+          }
+        },
+        "WebRTCGetHostCandidates": {
+          "requestType": ".CBroadcast_WebRTCGetHostCandidates_Request",
+          "responseType": ".CBroadcast_WebRTCGetHostCandidates_Response",
+          "options": {
+            "(method_description)": "Get the ICE candidates for the host side of a WebRTC session"
+          }
+        },
+        "GetBroadcastUploadStats": {
+          "requestType": ".CBroadcast_GetBroadcastUploadStats_Request",
+          "responseType": ".CBroadcast_GetBroadcastUploadStats_Response",
+          "options": {
+            "(method_description)": "Gets broadcast upload stats for user"
+          }
+        },
+        "GetBroadcastViewerStats": {
+          "requestType": ".CBroadcast_GetBroadcastViewerStats_Request",
+          "responseType": ".CBroadcast_GetBroadcastViewerStats_Response",
+          "options": {
+            "(method_description)": "Gets viewer stats for given broadcast"
+          }
+        }
+      }
+    },
+    "BroadcastClient": {
+      "options": {
+        "(service_execution_site)": "k_EProtoExecutionSiteSteamClient"
+      },
+      "methods": {
+        "NotifyBroadcastViewerState": {
+          "requestType": ".CBroadcast_BroadcastViewerState_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client that a viewers state has changed"
+          }
+        },
+        "NotifyWaitingBroadcastViewer": {
+          "requestType": ".CBroadcast_WaitingBroadcastViewer_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client one or more users is waiting for user to start broadcast"
+          }
+        },
+        "NotifyBroadcastUploadStarted": {
+          "requestType": ".CBroadcast_BroadcastUploadStarted_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client with information about a broadcast"
+          }
+        },
+        "NotifyStopBroadcastUpload": {
+          "requestType": ".CBroadcast_StopBroadcastUpload_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client telling it to stop uploading when the last viewer has disconnected from their broadcast"
+          }
+        },
+        "NotifySessionClosed": {
+          "requestType": ".CBroadcast_SessionClosed_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client telling it a session has been closed unexpectedly by the directory"
+          }
+        },
+        "NotifyViewerBroadcastInvite": {
+          "requestType": ".CBroadcast_ViewerBroadcastInvite_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast"
+          }
+        },
+        "NotifyBroadcastStatus": {
+          "requestType": ".CBroadcast_BroadcastStatus_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client about current broadcast status"
+          }
+        },
+        "NotifyBroadcastChannelLive": {
+          "requestType": ".CBroadcast_BroadcastChannelLive_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client about current broadcast status"
+          }
+        },
+        "SendThumbnailToRelay": {
+          "requestType": ".CBroadcast_SendThumbnailToRelay_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Send thumbnails to relay"
+          }
+        },
+        "NotifyWebRTCNeedTURNServer": {
+          "requestType": ".CBroadcast_WebRTCNeedTURNServer_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client that it needs the client's TURN server"
+          }
+        },
+        "NotifyWebRTCStart": {
+          "requestType": ".CBroadcast_WebRTCStart_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client that it should start a WebRTC session"
+          }
+        },
+        "NotifyWebRTCSetAnswer": {
+          "requestType": ".CBroadcast_WebRTCSetAnswer_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client about the broadcast viewer WebRTC answer"
+          }
+        },
+        "NotifyWebRTCAddViewerCandidate": {
+          "requestType": ".CBroadcast_WebRTCAddViewerCandidate_Notification",
+          "responseType": ".NoResponse",
+          "options": {
+            "(method_description)": "Notification from server to client about a broadcast viewer WebRTC ICE candidate"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

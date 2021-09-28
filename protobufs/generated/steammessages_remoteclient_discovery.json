@@ -1,0 +1,562 @@
+{
+  "options": {
+    "optimize_for": "SPEED"
+  },
+  "nested": {
+    "ERemoteClientBroadcastMsg": {
+      "values": {
+        "k_ERemoteClientBroadcastMsgDiscovery": 0,
+        "k_ERemoteClientBroadcastMsgStatus": 1,
+        "k_ERemoteClientBroadcastMsgOffline": 2,
+        "k_ERemoteDeviceAuthorizationRequest": 3,
+        "k_ERemoteDeviceAuthorizationResponse": 4,
+        "k_ERemoteDeviceStreamingRequest": 5,
+        "k_ERemoteDeviceStreamingResponse": 6,
+        "k_ERemoteDeviceProofRequest": 7,
+        "k_ERemoteDeviceProofResponse": 8,
+        "k_ERemoteDeviceAuthorizationCancelRequest": 9,
+        "k_ERemoteDeviceStreamingCancelRequest": 10,
+        "k_ERemoteClientBroadcastMsgClientIDDeconflict": 11,
+        "k_ERemoteDeviceStreamTransportSignal": 12,
+        "k_ERemoteDeviceStreamingProgress": 13
+      }
+    },
+    "ERemoteClientService": {
+      "values": {
+        "k_ERemoteClientServiceNone": 0,
+        "k_ERemoteClientServiceRemoteControl": 1,
+        "k_ERemoteClientServiceGameStreaming": 2,
+        "k_ERemoteClientServiceSiteLicense": 4,
+        "k_ERemoteClientServiceContentCache": 8
+      }
+    },
+    "ERemoteDeviceAuthorizationResult": {
+      "values": {
+        "k_ERemoteDeviceAuthorizationSuccess": 0,
+        "k_ERemoteDeviceAuthorizationDenied": 1,
+        "k_ERemoteDeviceAuthorizationNotLoggedIn": 2,
+        "k_ERemoteDeviceAuthorizationOffline": 3,
+        "k_ERemoteDeviceAuthorizationBusy": 4,
+        "k_ERemoteDeviceAuthorizationInProgress": 5,
+        "k_ERemoteDeviceAuthorizationTimedOut": 6,
+        "k_ERemoteDeviceAuthorizationFailed": 7,
+        "k_ERemoteDeviceAuthorizationCanceled": 8
+      }
+    },
+    "EStreamDeviceFormFactor": {
+      "values": {
+        "k_EStreamDeviceFormFactorUnknown": 0,
+        "k_EStreamDeviceFormFactorPhone": 1,
+        "k_EStreamDeviceFormFactorTablet": 2,
+        "k_EStreamDeviceFormFactorComputer": 3,
+        "k_EStreamDeviceFormFactorTV": 4
+      }
+    },
+    "EStreamTransport": {
+      "values": {
+        "k_EStreamTransportNone": 0,
+        "k_EStreamTransportUDP": 1,
+        "k_EStreamTransportUDPRelay": 2,
+        "k_EStreamTransportWebRTC": 3,
+        "k_EStreamTransportSDR": 4,
+        "k_EStreamTransportUDP_SNS": 5,
+        "k_EStreamTransportUDPRelay_SNS": 6
+      }
+    },
+    "EStreamInterface": {
+      "values": {
+        "k_EStreamInterfaceDefault": 0,
+        "k_EStreamInterfaceRecentGames": 1,
+        "k_EStreamInterfaceBigPicture": 2,
+        "k_EStreamInterfaceDesktop": 3
+      }
+    },
+    "ERemoteDeviceStreamingResult": {
+      "values": {
+        "k_ERemoteDeviceStreamingSuccess": 0,
+        "k_ERemoteDeviceStreamingUnauthorized": 1,
+        "k_ERemoteDeviceStreamingScreenLocked": 2,
+        "k_ERemoteDeviceStreamingFailed": 3,
+        "k_ERemoteDeviceStreamingBusy": 4,
+        "k_ERemoteDeviceStreamingInProgress": 5,
+        "k_ERemoteDeviceStreamingCanceled": 6,
+        "k_ERemoteDeviceStreamingDriversNotInstalled": 7,
+        "k_ERemoteDeviceStreamingDisabled": 8,
+        "k_ERemoteDeviceStreamingBroadcastingActive": 9,
+        "k_ERemoteDeviceStreamingVRActive": 10,
+        "k_ERemoteDeviceStreamingPINRequired": 11,
+        "k_ERemoteDeviceStreamingTransportUnavailable": 12,
+        "k_ERemoteDeviceStreamingInvisible": 13,
+        "k_ERemoteDeviceStreamingGameLaunchFailed": 14
+      }
+    },
+    "CMsgRemoteClientBroadcastHeader": {
+      "fields": {
+        "client_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "msg_type": {
+          "type": ".ERemoteClientBroadcastMsg",
+          "id": 2,
+          "options": {
+            "default": "k_ERemoteClientBroadcastMsgDiscovery"
+          }
+        },
+        "instance_id": {
+          "type": "uint64",
+          "id": 3
+        },
+        "device_id": {
+          "type": "uint64",
+          "id": 4
+        },
+        "device_token": {
+          "type": "bytes",
+          "id": 5
+        }
+      }
+    },
+    "CMsgRemoteClientBroadcastStatus": {
+      "fields": {
+        "version": {
+          "type": "int32",
+          "id": 1
+        },
+        "min_version": {
+          "type": "int32",
+          "id": 2
+        },
+        "connect_port": {
+          "type": "uint32",
+          "id": 3
+        },
+        "hostname": {
+          "type": "string",
+          "id": 4
+        },
+        "enabled_services": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ostype": {
+          "type": "int32",
+          "id": 7,
+          "options": {
+            "default": 0
+          }
+        },
+        "is64bit": {
+          "type": "bool",
+          "id": 8
+        },
+        "users": {
+          "rule": "repeated",
+          "type": ".CMsgRemoteClientBroadcastStatus.User",
+          "id": 9
+        },
+        "euniverse": {
+          "type": "int32",
+          "id": 11
+        },
+        "timestamp": {
+          "type": "uint32",
+          "id": 12
+        },
+        "screen_locked": {
+          "type": "bool",
+          "id": 13
+        },
+        "games_running": {
+          "type": "bool",
+          "id": 14
+        },
+        "mac_addresses": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 15
+        },
+        "download_lan_peer_group": {
+          "type": "uint32",
+          "id": 16
+        },
+        "broadcasting_active": {
+          "type": "bool",
+          "id": 17
+        },
+        "vr_active": {
+          "type": "bool",
+          "id": 18
+        },
+        "content_cache_port": {
+          "type": "uint32",
+          "id": 19
+        },
+        "ip_addresses": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 20
+        },
+        "public_ip_address": {
+          "type": "string",
+          "id": 21
+        },
+        "remoteplay_active": {
+          "type": "bool",
+          "id": 22
+        }
+      },
+      "nested": {
+        "User": {
+          "fields": {
+            "steamid": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "auth_key_id": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgRemoteClientBroadcastDiscovery": {
+      "fields": {
+        "seq_num": {
+          "type": "uint32",
+          "id": 1
+        },
+        "client_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgRemoteClientBroadcastClientIDDeconflict": {
+      "fields": {
+        "client_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgRemoteDeviceAuthorizationRequest": {
+      "fields": {
+        "device_token": {
+          "rule": "required",
+          "type": "bytes",
+          "id": 1
+        },
+        "device_name": {
+          "type": "string",
+          "id": 2
+        },
+        "encrypted_request": {
+          "rule": "required",
+          "type": "bytes",
+          "id": 3
+        }
+      },
+      "nested": {
+        "CKeyEscrow_Ticket": {
+          "fields": {
+            "password": {
+              "type": "bytes",
+              "id": 1
+            },
+            "identifier": {
+              "type": "uint64",
+              "id": 2
+            },
+            "payload": {
+              "type": "bytes",
+              "id": 3
+            },
+            "timestamp": {
+              "type": "uint32",
+              "id": 4
+            },
+            "usage": {
+              "type": ".CMsgRemoteDeviceAuthorizationRequest.EKeyEscrowUsage",
+              "id": 5,
+              "options": {
+                "default": "k_EKeyEscrowUsageStreamingDevice"
+              }
+            },
+            "device_name": {
+              "type": "string",
+              "id": 6
+            },
+            "device_model": {
+              "type": "string",
+              "id": 7
+            },
+            "device_serial": {
+              "type": "string",
+              "id": 8
+            },
+            "device_provisioning_id": {
+              "type": "uint32",
+              "id": 9
+            }
+          }
+        },
+        "EKeyEscrowUsage": {
+          "values": {
+            "k_EKeyEscrowUsageStreamingDevice": 0
+          }
+        }
+      }
+    },
+    "CMsgRemoteDeviceAuthorizationCancelRequest": {
+      "fields": {}
+    },
+    "CMsgRemoteDeviceAuthorizationResponse": {
+      "fields": {
+        "result": {
+          "rule": "required",
+          "type": ".ERemoteDeviceAuthorizationResult",
+          "id": 1,
+          "options": {
+            "default": "k_ERemoteDeviceAuthorizationSuccess"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgRemoteDeviceStreamingRequest": {
+      "fields": {
+        "request_id": {
+          "rule": "required",
+          "type": "uint32",
+          "id": 1
+        },
+        "maximum_resolution_x": {
+          "type": "int32",
+          "id": 2
+        },
+        "maximum_resolution_y": {
+          "type": "int32",
+          "id": 3
+        },
+        "audio_channel_count": {
+          "type": "int32",
+          "id": 4,
+          "options": {
+            "default": 2
+          }
+        },
+        "device_version": {
+          "type": "string",
+          "id": 5
+        },
+        "stream_desktop": {
+          "type": "bool",
+          "id": 6
+        },
+        "device_token": {
+          "type": "bytes",
+          "id": 7
+        },
+        "pin": {
+          "type": "bytes",
+          "id": 8
+        },
+        "enable_video_streaming": {
+          "type": "bool",
+          "id": 9,
+          "options": {
+            "default": true
+          }
+        },
+        "enable_audio_streaming": {
+          "type": "bool",
+          "id": 10,
+          "options": {
+            "default": true
+          }
+        },
+        "enable_input_streaming": {
+          "type": "bool",
+          "id": 11,
+          "options": {
+            "default": true
+          }
+        },
+        "network_test": {
+          "type": "bool",
+          "id": 12
+        },
+        "client_id": {
+          "type": "uint64",
+          "id": 13
+        },
+        "supported_transport": {
+          "rule": "repeated",
+          "type": ".EStreamTransport",
+          "id": 14,
+          "options": {
+            "packed": false
+          }
+        },
+        "restricted": {
+          "type": "bool",
+          "id": 15
+        },
+        "form_factor": {
+          "type": ".EStreamDeviceFormFactor",
+          "id": 16,
+          "options": {
+            "default": "k_EStreamDeviceFormFactorUnknown"
+          }
+        },
+        "gamepad_count": {
+          "type": "int32",
+          "id": 17
+        },
+        "gamepads": {
+          "rule": "repeated",
+          "type": ".CMsgRemoteDeviceStreamingRequest.ReservedGamepad",
+          "id": 18
+        },
+        "gameid": {
+          "type": "uint64",
+          "id": 19
+        },
+        "stream_interface": {
+          "type": ".EStreamInterface",
+          "id": 20,
+          "options": {
+            "default": "k_EStreamInterfaceDefault"
+          }
+        }
+      },
+      "nested": {
+        "ReservedGamepad": {
+          "fields": {
+            "controller_type": {
+              "type": "uint32",
+              "id": 1
+            },
+            "controller_subtype": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgRemoteDeviceStreamingCancelRequest": {
+      "fields": {
+        "request_id": {
+          "rule": "required",
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgRemoteDeviceStreamingProgress": {
+      "fields": {
+        "request_id": {
+          "rule": "required",
+          "type": "uint32",
+          "id": 1
+        },
+        "progress": {
+          "type": "float",
+          "id": 2
+        }
+      }
+    },
+    "CMsgRemoteDeviceStreamingResponse": {
+      "fields": {
+        "request_id": {
+          "rule": "required",
+          "type": "uint32",
+          "id": 1
+        },
+        "result": {
+          "rule": "required",
+          "type": ".ERemoteDeviceStreamingResult",
+          "id": 2,
+          "options": {
+            "default": "k_ERemoteDeviceStreamingSuccess"
+          }
+        },
+        "port": {
+          "type": "uint32",
+          "id": 3
+        },
+        "encrypted_session_key": {
+          "type": "bytes",
+          "id": 4
+        },
+        "transport": {
+          "type": ".EStreamTransport",
+          "id": 6,
+          "options": {
+            "default": "k_EStreamTransportUDP"
+          }
+        },
+        "relay_server": {
+          "type": "string",
+          "id": 7
+        },
+        "cert": {
+          "type": "string",
+          "id": 8
+        }
+      }
+    },
+    "CMsgRemoteDeviceProofRequest": {
+      "fields": {
+        "challenge": {
+          "rule": "required",
+          "type": "bytes",
+          "id": 1
+        },
+        "request_id": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgRemoteDeviceProofResponse": {
+      "fields": {
+        "response": {
+          "rule": "required",
+          "type": "bytes",
+          "id": 1
+        },
+        "request_id": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgRemoteDeviceStreamTransportSignal": {
+      "fields": {
+        "token": {
+          "type": "bytes",
+          "id": 1
+        },
+        "payload": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    }
+  }
+}

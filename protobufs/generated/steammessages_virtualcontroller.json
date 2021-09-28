@@ -1,0 +1,386 @@
+{
+  "nested": {
+    "EInputMode": {
+      "values": {
+        "k_EInputModeUnknown": 0,
+        "k_EInputModeMouse": 1,
+        "k_EInputModeController": 2,
+        "k_EInputModeMouseAndController": 3
+      }
+    },
+    "EMouseMode": {
+      "values": {
+        "k_EMouseModeUnknown": 0,
+        "k_EMouseModeRelativeCursor": 1,
+        "k_EMouseModeAbsoluteCursor": 2,
+        "k_EMouseModeTouch": 3,
+        "k_EMouseModeRelative": 4
+      }
+    },
+    "EControllerElementType": {
+      "values": {
+        "k_EControllerElementTypeNone": -1,
+        "k_EControllerElementTypeThumb": 0,
+        "k_EControllerElementTypeButtonSteam": 1,
+        "k_EControllerElementTypeJoystickLeft": 2,
+        "k_EControllerElementTypeButtonJoystickLeft": 3,
+        "k_EControllerElementTypeJoystickRight": 4,
+        "k_EControllerElementTypeButtonJoystickRight": 5,
+        "k_EControllerElementTypeDPad": 6,
+        "k_EControllerElementTypeButtonA": 7,
+        "k_EControllerElementTypeButtonB": 8,
+        "k_EControllerElementTypeButtonX": 9,
+        "k_EControllerElementTypeButtonY": 10,
+        "k_EControllerElementTypeButtonSelect": 11,
+        "k_EControllerElementTypeButtonStart": 12,
+        "k_EControllerElementTypeButtonTriggerLeft": 13,
+        "k_EControllerElementTypeButtonTriggerRight": 14,
+        "k_EControllerElementTypeButtonBumperLeft": 15,
+        "k_EControllerElementTypeButtonBumperRight": 16,
+        "k_EControllerElementTypeButtonMacro0": 17,
+        "k_EControllerElementTypeButtonMacro1": 18,
+        "k_EControllerElementTypeButtonMacro2": 19,
+        "k_EControllerElementTypeButtonMacro3": 20,
+        "k_EControllerElementTypeButtonMacro4": 21,
+        "k_EControllerElementTypeButtonMacro5": 22,
+        "k_EControllerElementTypeButtonMacro6": 23,
+        "k_EControllerElementTypeButtonMacro7": 24,
+        "k_EControllerElementTypeTrackpadCenter": 25,
+        "k_EControllerElementTypeTrackpadLeft": 26,
+        "k_EControllerElementTypeTrackpadRight": 27,
+        "k_EControllerElementTypeKeyboard": 28,
+        "k_EControllerElementTypeMagnifyingGlass": 29,
+        "k_EControllerElementTypeButtonMacro1Finger": 30,
+        "k_EControllerElementTypeButtonMacro2Finger": 31,
+        "k_EControllerElementTypeRecordInput": 32,
+        "k_EControllerElementTypePlaybackInput": 33,
+        "k_EControllerElementTypePaste": 34,
+        "k_EControllerElementTypeMax": 35
+      }
+    },
+    "CVirtualControllerElement": {
+      "fields": {
+        "type": {
+          "type": ".EControllerElementType",
+          "id": 1,
+          "options": {
+            "default": "k_EControllerElementTypeNone"
+          }
+        },
+        "visible": {
+          "type": "bool",
+          "id": 2
+        },
+        "x_position": {
+          "type": "float",
+          "id": 3
+        },
+        "y_position": {
+          "type": "float",
+          "id": 4
+        },
+        "x_scale": {
+          "type": "float",
+          "id": 5,
+          "options": {
+            "default": 1
+          }
+        },
+        "y_scale": {
+          "type": "float",
+          "id": 6,
+          "options": {
+            "default": 1
+          }
+        }
+      }
+    },
+    "CVirtualControllerColor": {
+      "fields": {
+        "r": {
+          "type": "float",
+          "id": 1,
+          "options": {
+            "default": 1
+          }
+        },
+        "g": {
+          "type": "float",
+          "id": 2,
+          "options": {
+            "default": 1
+          }
+        },
+        "b": {
+          "type": "float",
+          "id": 3,
+          "options": {
+            "default": 1
+          }
+        },
+        "a": {
+          "type": "float",
+          "id": 4,
+          "options": {
+            "default": 1
+          }
+        }
+      }
+    },
+    "CVirtualControllerLayout": {
+      "fields": {
+        "layout_version": {
+          "type": "int32",
+          "id": 1
+        },
+        "actionset_id": {
+          "type": "int32",
+          "id": 2
+        },
+        "elements": {
+          "rule": "repeated",
+          "type": ".CVirtualControllerElement",
+          "id": 4
+        },
+        "color": {
+          "type": ".CVirtualControllerColor",
+          "id": 5
+        }
+      }
+    },
+    "CVirtualControllerLayouts": {
+      "fields": {
+        "layouts": {
+          "rule": "repeated",
+          "type": ".CVirtualControllerLayout",
+          "id": 1
+        },
+        "input_mode": {
+          "type": ".EInputMode",
+          "id": 2,
+          "options": {
+            "default": "k_EInputModeController"
+          }
+        },
+        "mouse_mode": {
+          "type": ".EMouseMode",
+          "id": 3,
+          "options": {
+            "default": "k_EMouseModeUnknown"
+          }
+        },
+        "trackpad_sensitivity": {
+          "type": "float",
+          "id": 4,
+          "options": {
+            "default": 1
+          }
+        },
+        "pinch_zoom_enabled": {
+          "type": "bool",
+          "id": 5,
+          "options": {
+            "default": false
+          }
+        },
+        "pinch_zoom_x": {
+          "type": "float",
+          "id": 6,
+          "options": {
+            "default": 0
+          }
+        },
+        "pinch_zoom_y": {
+          "type": "float",
+          "id": 7,
+          "options": {
+            "default": 0
+          }
+        },
+        "pinch_zoom_scale": {
+          "type": "float",
+          "id": 8,
+          "options": {
+            "default": 1
+          }
+        },
+        "shaken": {
+          "type": "bool",
+          "id": 9
+        },
+        "mouse_offscreen": {
+          "type": "bool",
+          "id": 10
+        }
+      }
+    },
+    "CVirtualControllerConfig": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "actionsets": {
+          "rule": "repeated",
+          "type": ".CVirtualControllerConfig.ActionSet",
+          "id": 2
+        },
+        "default_mouse_mode": {
+          "type": ".EMouseMode",
+          "id": 3,
+          "options": {
+            "default": "k_EMouseModeRelative"
+          }
+        }
+      },
+      "nested": {
+        "Control": {
+          "fields": {
+            "name": {
+              "type": "string",
+              "id": 1
+            },
+            "icon": {
+              "type": "string",
+              "id": 2
+            },
+            "input_source": {
+              "type": "int32",
+              "id": 3
+            },
+            "input_mode": {
+              "type": "int32",
+              "id": 4
+            },
+            "input_element": {
+              "type": "int32",
+              "id": 5
+            },
+            "output_gamepad": {
+              "type": "int32",
+              "id": 6
+            },
+            "output_keyboard": {
+              "type": "int32",
+              "id": 7
+            },
+            "output_mouse": {
+              "type": "int32",
+              "id": 8
+            },
+            "icon_foreground": {
+              "type": "string",
+              "id": 9
+            },
+            "icon_background": {
+              "type": "string",
+              "id": 10
+            },
+            "input_toggle": {
+              "type": "bool",
+              "id": 11
+            },
+            "input_activate_stick_or_trackpad": {
+              "type": "int32",
+              "id": 12
+            },
+            "activation_type": {
+              "type": "int32",
+              "id": 13
+            },
+            "long_press_ms": {
+              "type": "int32",
+              "id": 14
+            },
+            "double_press_ms": {
+              "type": "int32",
+              "id": 15
+            }
+          }
+        },
+        "ActionSet": {
+          "fields": {
+            "id": {
+              "type": "int32",
+              "id": 1
+            },
+            "parent_id": {
+              "type": "int32",
+              "id": 2
+            },
+            "name": {
+              "type": "string",
+              "id": 3
+            },
+            "controls": {
+              "rule": "repeated",
+              "type": ".CVirtualControllerConfig.Control",
+              "id": 4
+            }
+          }
+        }
+      }
+    },
+    "CVirtualControllerLayoutPackage": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "creator": {
+          "type": "uint64",
+          "id": 2
+        },
+        "initial_revision": {
+          "type": "uint32",
+          "id": 3
+        },
+        "saved_revision": {
+          "type": "uint32",
+          "id": 4
+        },
+        "config": {
+          "type": ".CVirtualControllerConfig",
+          "id": 5
+        },
+        "layouts": {
+          "type": ".CVirtualControllerLayouts",
+          "id": 6
+        }
+      }
+    },
+    "CVirtualControllerGlobalConfig": {
+      "fields": {
+        "feedback_enabled": {
+          "type": "bool",
+          "id": 1
+        },
+        "gyroscope_enabled": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "default": true
+          }
+        },
+        "auto_fade_enabled": {
+          "type": "bool",
+          "id": 3,
+          "options": {
+            "default": true
+          }
+        },
+        "rumble_enabled": {
+          "type": "bool",
+          "id": 4,
+          "options": {
+            "default": true
+          }
+        },
+        "shake_fade_enabled": {
+          "type": "bool",
+          "id": 5
+        }
+      }
+    }
+  }
+}

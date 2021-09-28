@@ -1,0 +1,200 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": true
+  },
+  "nested": {
+    "EClientNotificationType": {
+      "values": {
+        "k_EClientNotificationType_Invalid": 0,
+        "k_EClientNotificationType_DownloadCompleted": 1,
+        "k_EClientNotificationType_FriendInvite": 2,
+        "k_EClientNotificationType_FriendInGame": 3,
+        "k_EClientNotificationType_FriendOnline": 4,
+        "k_EClientNotificationType_Achievement": 5,
+        "k_EClientNotificationType_LowBattery": 6,
+        "k_EClientNotificationType_SystemUpdate": 7,
+        "k_EClientNotificationType_FriendMessage": 8,
+        "k_EClientNotificationType_GroupChatMessage": 9
+      }
+    },
+    "ESystemUpdateNotificationType": {
+      "values": {
+        "k_ESystemUpdateNotificationType_Invalid": 0,
+        "k_ESystemUpdateNotificationType_Available": 1,
+        "k_ESystemUpdateNotificationType_NeedsRestart": 2
+      }
+    },
+    "CClientNotificationDownloadCompleted": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationFriendInvite": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationFriendInGame": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "game_name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClientNotificationFriendOnline": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationAchievement": {
+      "fields": {
+        "achievement_id": {
+          "type": "string",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "name": {
+          "type": "string",
+          "id": 3
+        },
+        "description": {
+          "type": "string",
+          "id": 4
+        },
+        "image_url": {
+          "type": "string",
+          "id": 5
+        },
+        "achieved": {
+          "type": "bool",
+          "id": 6
+        },
+        "rtime_unlocked": {
+          "type": "uint32",
+          "id": 7
+        },
+        "min_progress": {
+          "type": "float",
+          "id": 8
+        },
+        "current_progress": {
+          "type": "float",
+          "id": 9
+        },
+        "max_progress": {
+          "type": "float",
+          "id": 10
+        },
+        "global_achieved_pct": {
+          "type": "float",
+          "id": 11
+        }
+      }
+    },
+    "CClientNotificationLowBattery": {
+      "fields": {
+        "pct_remaining": {
+          "type": "float",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationSystemUpdate": {
+      "fields": {
+        "type": {
+          "type": ".ESystemUpdateNotificationType",
+          "id": 1,
+          "options": {
+            "default": "k_ESystemUpdateNotificationType_Invalid"
+          }
+        }
+      }
+    },
+    "CClientNotificationFriendMessage": {
+      "fields": {
+        "tag": {
+          "type": "string",
+          "id": 1
+        },
+        "steamid": {
+          "type": "string",
+          "id": 2
+        },
+        "title": {
+          "type": "string",
+          "id": 3
+        },
+        "body": {
+          "type": "string",
+          "id": 4
+        },
+        "icon": {
+          "type": "string",
+          "id": 5
+        },
+        "notificationid": {
+          "type": "uint32",
+          "id": 6
+        }
+      }
+    },
+    "CClientNotificationGroupChatMessage": {
+      "fields": {
+        "tag": {
+          "type": "string",
+          "id": 1
+        },
+        "steamid_sender": {
+          "type": "string",
+          "id": 2
+        },
+        "chat_group_id": {
+          "type": "string",
+          "id": 3
+        },
+        "chat_id": {
+          "type": "string",
+          "id": 4
+        },
+        "title": {
+          "type": "string",
+          "id": 5
+        },
+        "body": {
+          "type": "string",
+          "id": 6
+        },
+        "rawbody": {
+          "type": "string",
+          "id": 7
+        },
+        "icon": {
+          "type": "string",
+          "id": 8
+        },
+        "notificationid": {
+          "type": "uint32",
+          "id": 9
+        }
+      }
+    }
+  }
+}

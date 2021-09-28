@@ -1,0 +1,5475 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "CChatRoom_CreateChatRoomGroup_Request": {
+      "fields": {
+        "steamid_partner": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steamid_invited": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "name": {
+          "type": "string",
+          "id": 3
+        },
+        "steamid_invitees": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 4,
+          "options": {
+            "packed": false
+          }
+        },
+        "watching_broadcast_accountid": {
+          "type": "uint32",
+          "id": 6
+        },
+        "watching_broadcast_channel_id": {
+          "type": "uint64",
+          "id": 7
+        }
+      }
+    },
+    "CChatRoom_CreateChatRoomGroup_Response": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "state": {
+          "type": ".CChatRoomGroupState",
+          "id": 2
+        },
+        "user_chat_state": {
+          "type": ".CUserChatRoomGroupState",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoomGroupState": {
+      "fields": {
+        "header_state": {
+          "type": ".CChatRoomGroupHeaderState",
+          "id": 1
+        },
+        "members": {
+          "rule": "repeated",
+          "type": ".CChatRoomMember",
+          "id": 2
+        },
+        "default_chat_id": {
+          "type": "uint64",
+          "id": 4
+        },
+        "chat_rooms": {
+          "rule": "repeated",
+          "type": ".CChatRoomState",
+          "id": 5
+        },
+        "kicked": {
+          "rule": "repeated",
+          "type": ".CChatRoomMember",
+          "id": 7
+        }
+      }
+    },
+    "CChatRoomGroupHeaderState": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_name": {
+          "type": "string",
+          "id": 2
+        },
+        "clanid": {
+          "type": "uint32",
+          "id": 13
+        },
+        "accountid_owner": {
+          "type": "uint32",
+          "id": 14
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 21
+        },
+        "tagline": {
+          "type": "string",
+          "id": 15
+        },
+        "avatar_sha": {
+          "type": "bytes",
+          "id": 16
+        },
+        "default_role_id": {
+          "type": "uint64",
+          "id": 17
+        },
+        "roles": {
+          "rule": "repeated",
+          "type": ".CChatRole",
+          "id": 18
+        },
+        "role_actions": {
+          "rule": "repeated",
+          "type": ".CChatRoleActions",
+          "id": 19
+        },
+        "watching_broadcast_accountid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "party_beacons": {
+          "rule": "repeated",
+          "type": ".CChatPartyBeacon",
+          "id": 22
+        },
+        "watching_broadcast_channel_id": {
+          "type": "uint64",
+          "id": 23
+        },
+        "active_minigame_id": {
+          "type": "uint64",
+          "id": 24
+        },
+        "avatar_ugc_url": {
+          "type": "string",
+          "id": 25
+        },
+        "disabled": {
+          "type": "bool",
+          "id": 26
+        }
+      }
+    },
+    "CChatRole": {
+      "fields": {
+        "role_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoomMember": {
+      "fields": {
+        "accountid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "state": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "rank": {
+          "type": "int32",
+          "id": 4,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "time_kick_expire": {
+          "type": "uint32",
+          "id": 6
+        },
+        "role_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 7,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CUserChatRoomGroupState": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "time_joined": {
+          "type": "uint32",
+          "id": 2
+        },
+        "user_chat_room_state": {
+          "rule": "repeated",
+          "type": ".CUserChatRoomState",
+          "id": 3
+        },
+        "desktop_notification_level": {
+          "type": "int32",
+          "id": 4,
+          "options": {
+            "default": 0,
+            "(description)": "enum"
+          }
+        },
+        "mobile_notification_level": {
+          "type": "int32",
+          "id": 5,
+          "options": {
+            "default": 0,
+            "(description)": "enum"
+          }
+        },
+        "time_last_group_ack": {
+          "type": "uint32",
+          "id": 6
+        },
+        "unread_indicator_muted": {
+          "type": "bool",
+          "id": 7,
+          "options": {
+            "default": false
+          }
+        }
+      }
+    },
+    "CUserChatRoomState": {
+      "fields": {
+        "chat_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "time_joined": {
+          "type": "uint32",
+          "id": 2
+        },
+        "time_last_ack": {
+          "type": "uint32",
+          "id": 3
+        },
+        "desktop_notification_level": {
+          "type": "int32",
+          "id": 4,
+          "options": {
+            "default": 0,
+            "(description)": "enum"
+          }
+        },
+        "mobile_notification_level": {
+          "type": "int32",
+          "id": 5,
+          "options": {
+            "default": 0,
+            "(description)": "enum"
+          }
+        },
+        "time_last_mention": {
+          "type": "uint32",
+          "id": 6
+        },
+        "unread_indicator_muted": {
+          "type": "bool",
+          "id": 7,
+          "options": {
+            "default": false
+          }
+        },
+        "time_first_unread": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CChatRoom_SaveChatRoomGroup_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_SaveChatRoomGroup_Response": {
+      "fields": {}
+    },
+    "CChatRoom_RenameChatRoomGroup_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_RenameChatRoomGroup_Response": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_SetChatRoomGroupTagline_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "tagline": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_SetChatRoomGroupTagline_Response": {
+      "fields": {}
+    },
+    "CChatRoom_SetChatRoomGroupAvatar_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "avatar_sha": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_SetChatRoomGroupAvatar_Response": {
+      "fields": {}
+    },
+    "CChatRoom_SetChatRoomGroupWatchingBroadcast_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "watching_broadcast_accountid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "watching_broadcast_channel_id": {
+          "type": "uint64",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_SetChatRoomGroupWatchingBroadcast_Response": {
+      "fields": {}
+    },
+    "CChatRoom_JoinMiniGameForChatRoomGroup_Response": {
+      "fields": {
+        "minigame_id": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_EndMiniGameForChatRoomGroup_Response": {
+      "fields": {}
+    },
+    "CChatRoom_MuteUser_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "expiration": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_MuteUser_Response": {
+      "fields": {}
+    },
+    "CChatRoom_KickUser_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "expiration": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_KickUser_Response": {
+      "fields": {}
+    },
+    "CChatRoom_SetUserBanState_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "ban_state": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_SetUserBanState_Response": {
+      "fields": {}
+    },
+    "CChatRoom_RevokeInvite_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_RevokeInvite_Response": {
+      "fields": {}
+    },
+    "CChatRoom_CreateRole_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_CreateRole_Response": {
+      "fields": {
+        "actions": {
+          "type": ".CChatRoleActions",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_GetRoles_Response": {
+      "fields": {
+        "roles": {
+          "rule": "repeated",
+          "type": ".CChatRole",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_RenameRole_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "role_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "name": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_RenameRole_Response": {
+      "fields": {}
+    },
+    "CChatRoom_ReorderRole_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "role_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_ReorderRole_Response": {
+      "fields": {}
+    },
+    "CChatRoom_DeleteRole_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "role_id": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_DeleteRole_Response": {
+      "fields": {}
+    },
+    "CChatRoom_GetRoleActions_Response": {
+      "fields": {
+        "actions": {
+          "rule": "repeated",
+          "type": ".CChatRoleActions",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_ReplaceRoleActions_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "role_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "actions": {
+          "type": ".CChatRoleActions",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_ReplaceRoleActions_Response": {
+      "fields": {}
+    },
+    "CChatRoom_AddRoleToUser_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "role_id": {
+          "type": "uint64",
+          "id": 3
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_AddRoleToUser_Response": {
+      "fields": {}
+    },
+    "CChatRoom_GetRolesForUser_Response": {
+      "fields": {
+        "role_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CChatRoom_DeleteRoleFromUser_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "role_id": {
+          "type": "uint64",
+          "id": 3
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_DeleteRoleFromUser_Response": {
+      "fields": {}
+    },
+    "CChatRoom_JoinChatRoomGroup_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "invite_code": {
+          "type": "string",
+          "id": 2
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_JoinChatRoomGroup_Response": {
+      "fields": {
+        "state": {
+          "type": ".CChatRoomGroupState",
+          "id": 1
+        },
+        "user_chat_state": {
+          "type": ".CUserChatRoomGroupState",
+          "id": 3
+        },
+        "join_chat_id": {
+          "type": "uint64",
+          "id": 4
+        },
+        "time_expire": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CChatRoom_InviteFriendToChatRoomGroup_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 3
+        },
+        "skip_friendsui_check": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_InviteFriendToChatRoomGroup_Response": {
+      "fields": {}
+    },
+    "CChatRoom_LeaveChatRoomGroup_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_LeaveChatRoomGroup_Response": {
+      "fields": {}
+    },
+    "CChatRoom_CreateChatRoom_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "allow_voice": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_CreateChatRoom_Response": {
+      "fields": {
+        "chat_room": {
+          "type": ".CChatRoomState",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_DeleteChatRoom_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_DeleteChatRoom_Response": {
+      "fields": {}
+    },
+    "CChatRoom_RenameChatRoom_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "name": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_RenameChatRoom_Response": {
+      "fields": {}
+    },
+    "CChatRoom_ReorderChatRoom_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "move_after_chat_id": {
+          "type": "uint64",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_ReorderChatRoom_Response": {
+      "fields": {}
+    },
+    "CChatRoom_SendChatMessage_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "message": {
+          "type": "string",
+          "id": 3
+        },
+        "echo_to_sender": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_SendChatMessage_Response": {
+      "fields": {
+        "modified_message": {
+          "type": "string",
+          "id": 1
+        },
+        "server_timestamp": {
+          "type": "uint32",
+          "id": 2
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 3
+        },
+        "message_without_bb_code": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_JoinVoiceChat_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_JoinVoiceChat_Response": {
+      "fields": {
+        "voice_chatid": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_LeaveVoiceChat_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_LeaveVoiceChat_Response": {
+      "fields": {}
+    },
+    "CChatRoom_GetMessageHistory_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "last_time": {
+          "type": "uint32",
+          "id": 3
+        },
+        "last_ordinal": {
+          "type": "uint32",
+          "id": 4
+        },
+        "start_time": {
+          "type": "uint32",
+          "id": 5
+        },
+        "start_ordinal": {
+          "type": "uint32",
+          "id": 6
+        },
+        "max_count": {
+          "type": "uint32",
+          "id": 7
+        }
+      }
+    },
+    "CChatRoom_GetMessageHistory_Response": {
+      "fields": {
+        "messages": {
+          "rule": "repeated",
+          "type": ".CChatRoom_GetMessageHistory_Response_ChatMessage",
+          "id": 1
+        },
+        "more_available": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_GetMessageHistory_Response_ChatMessage": {
+      "fields": {
+        "sender": {
+          "type": "uint32",
+          "id": 1
+        },
+        "server_timestamp": {
+          "type": "uint32",
+          "id": 2
+        },
+        "message": {
+          "type": "string",
+          "id": 3
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 4
+        },
+        "server_message": {
+          "type": ".ServerMessage",
+          "id": 5
+        },
+        "deleted": {
+          "type": "bool",
+          "id": 6
+        },
+        "reactions": {
+          "rule": "repeated",
+          "type": ".CChatRoom_GetMessageHistory_Response_ChatMessage_MessageReaction",
+          "id": 7
+        }
+      }
+    },
+    "ServerMessage": {
+      "fields": {
+        "message": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "string_param": {
+          "type": "string",
+          "id": 2
+        },
+        "accountid_param": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_GetMessageHistory_Response_ChatMessage_MessageReaction": {
+      "fields": {
+        "reaction_type": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "reaction": {
+          "type": "string",
+          "id": 2
+        },
+        "num_reactors": {
+          "type": "uint32",
+          "id": 3
+        },
+        "has_user_reacted": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_GetMyChatRoomGroups_Request": {
+      "fields": {}
+    },
+    "CChatRoom_GetMyChatRoomGroups_Response": {
+      "fields": {
+        "chat_room_groups": {
+          "rule": "repeated",
+          "type": ".CChatRoomSummaryPair",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoomSummaryPair": {
+      "fields": {
+        "user_chat_group_state": {
+          "type": ".CUserChatRoomGroupState",
+          "id": 1
+        },
+        "group_summary": {
+          "type": ".CChatRoom_GetChatRoomGroupSummary_Response",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_GetChatRoomGroupState_Response": {
+      "fields": {
+        "state": {
+          "type": ".CChatRoomGroupState",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_SetAppChatRoomGroupForceActive_Response": {
+      "fields": {
+        "result": {
+          "type": "uint32",
+          "id": 1
+        },
+        "accounts_in_channel": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CChatRoom_AckChatMessage_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "timestamp": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_CreateInviteLink_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "seconds_valid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_CreateInviteLink_Response": {
+      "fields": {
+        "invite_code": {
+          "type": "string",
+          "id": 1
+        },
+        "seconds_valid": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_GetInviteLinkInfo_Request": {
+      "fields": {
+        "invite_code": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_GetInviteLinkInfo_Response": {
+      "fields": {
+        "steamid_sender": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 4
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 6
+        },
+        "group_summary": {
+          "type": ".CChatRoom_GetChatRoomGroupSummary_Response",
+          "id": 8
+        },
+        "user_chat_group_state": {
+          "type": ".CUserChatRoomGroupState",
+          "id": 9
+        },
+        "time_kick_expire": {
+          "type": "uint32",
+          "id": 10
+        },
+        "banned": {
+          "type": "bool",
+          "id": 11
+        }
+      }
+    },
+    "CChatRoom_GetInviteInfo_Request": {
+      "fields": {
+        "steamid_invitee": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 3
+        },
+        "invite_code": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_GetInviteInfo_Response": {
+      "fields": {
+        "group_summary": {
+          "type": ".CChatRoom_GetChatRoomGroupSummary_Response",
+          "id": 1
+        },
+        "time_kick_expire": {
+          "type": "uint32",
+          "id": 2
+        },
+        "banned": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_GetInviteLinksForGroup_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_GetInviteLinksForGroup_Response": {
+      "fields": {
+        "invite_links": {
+          "rule": "repeated",
+          "type": ".CChatRoom_GetInviteLinksForGroup_Response_LinkInfo",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_GetInviteLinksForGroup_Response_LinkInfo": {
+      "fields": {
+        "invite_code": {
+          "type": "string",
+          "id": 1
+        },
+        "steamid_creator": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 3
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_GetBanList_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_GetBanList_Response": {
+      "fields": {
+        "bans": {
+          "rule": "repeated",
+          "type": ".CChatRoom_GetBanList_Response_BanInfo",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_GetBanList_Response_BanInfo": {
+      "fields": {
+        "accountid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "accountid_actor": {
+          "type": "uint32",
+          "id": 2
+        },
+        "time_banned": {
+          "type": "uint32",
+          "id": 3
+        },
+        "ban_reason": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_GetInviteList_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_GetInviteList_Response": {
+      "fields": {
+        "invites": {
+          "rule": "repeated",
+          "type": ".CChatRoomGroupInvite",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoomGroupInvite": {
+      "fields": {
+        "accountid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "accountid_actor": {
+          "type": "uint32",
+          "id": 2
+        },
+        "time_invited": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_DeleteInviteLink_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "invite_code": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_DeleteInviteLink_Response": {
+      "fields": {}
+    },
+    "CChatRoom_SetSessionActiveChatRoomGroups_Request": {
+      "fields": {
+        "chat_group_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        },
+        "chat_groups_data_requested": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        },
+        "virtualize_members_threshold": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_SetSessionActiveChatRoomGroups_Response": {
+      "fields": {
+        "chat_states": {
+          "rule": "repeated",
+          "type": ".CChatRoomGroupState",
+          "id": 1
+        },
+        "virtualize_members_chat_group_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CChatRoom_SetUserChatGroupPreferences_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_group_preferences": {
+          "type": ".CChatRoom_SetUserChatGroupPreferences_Request_ChatGroupPreferences",
+          "id": 2
+        },
+        "chat_room_preferences": {
+          "rule": "repeated",
+          "type": ".CChatRoom_SetUserChatGroupPreferences_Request_ChatRoomPreferences",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_SetUserChatGroupPreferences_Request_ChatGroupPreferences": {
+      "fields": {
+        "desktop_notification_level": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "mobile_notification_level": {
+          "type": "int32",
+          "id": 2,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "unread_indicator_muted": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_SetUserChatGroupPreferences_Request_ChatRoomPreferences": {
+      "fields": {
+        "chat_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "desktop_notification_level": {
+          "type": "int32",
+          "id": 2,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "mobile_notification_level": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "unread_indicator_muted": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_SetUserChatGroupPreferences_Response": {
+      "fields": {}
+    },
+    "CChatRoom_DeleteChatMessages_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "messages": {
+          "rule": "repeated",
+          "type": ".CChatRoom_DeleteChatMessages_Request_Message",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_DeleteChatMessages_Request_Message": {
+      "fields": {
+        "server_timestamp": {
+          "type": "uint32",
+          "id": 1
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_DeleteChatMessages_Response": {
+      "fields": {}
+    },
+    "CChatRoom_UpdateMemberListView_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "view_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "start": {
+          "type": "int32",
+          "id": 3
+        },
+        "end": {
+          "type": "int32",
+          "id": 4
+        },
+        "client_changenumber": {
+          "type": "int32",
+          "id": 5
+        },
+        "delete_view": {
+          "type": "bool",
+          "id": 6
+        },
+        "persona_subscribe_accountids": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 7,
+          "options": {
+            "packed": false
+          }
+        },
+        "persona_unsubscribe_accountids": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 8,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CChatRoom_SearchMembers_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "search_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "search_text": {
+          "type": "string",
+          "id": 3
+        },
+        "max_results": {
+          "type": "int32",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoom_SearchMembers_Response": {
+      "fields": {
+        "matching_members": {
+          "rule": "repeated",
+          "type": ".CChatRoom_SearchMembers_Response_MemberMatch",
+          "id": 1
+        },
+        "status_flags": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_SearchMembers_Response_MemberMatch": {
+      "fields": {
+        "accountid": {
+          "type": "int32",
+          "id": 1
+        },
+        "persona": {
+          "type": ".CMsgClientPersonaState_Friend",
+          "id": 2
+        }
+      }
+    },
+    "CChatRoom_UpdateMessageReaction_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "server_timestamp": {
+          "type": "uint32",
+          "id": 3
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 4
+        },
+        "reaction_type": {
+          "type": "int32",
+          "id": 5,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "reaction": {
+          "type": "string",
+          "id": 6
+        },
+        "is_add": {
+          "type": "bool",
+          "id": 7
+        }
+      }
+    },
+    "CChatRoom_UpdateMessageReaction_Response": {
+      "fields": {
+        "num_reactors": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_GetMessageReactionReactors_Request": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "server_timestamp": {
+          "type": "uint32",
+          "id": 3
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 4
+        },
+        "reaction_type": {
+          "type": "int32",
+          "id": 5,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "reaction": {
+          "type": "string",
+          "id": 6
+        },
+        "limit": {
+          "type": "uint32",
+          "id": 7
+        }
+      }
+    },
+    "CChatRoom_GetMessageReactionReactors_Response": {
+      "fields": {
+        "reactors": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CChatRoom_IncomingChatMessage_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "steamid_sender": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "message": {
+          "type": "string",
+          "id": 4
+        },
+        "timestamp": {
+          "type": "uint32",
+          "id": 5
+        },
+        "mentions": {
+          "type": ".CChatMentions",
+          "id": 6
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 7
+        },
+        "server_message": {
+          "type": ".ServerMessage",
+          "id": 8
+        },
+        "message_no_bbcode": {
+          "type": "string",
+          "id": 9
+        },
+        "chat_name": {
+          "type": "string",
+          "id": 10
+        }
+      }
+    },
+    "CChatMentions": {
+      "fields": {
+        "mention_all": {
+          "type": "bool",
+          "id": 1
+        },
+        "mention_here": {
+          "type": "bool",
+          "id": 2
+        },
+        "mention_accountids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CChatRoom_ChatMessageModified_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "messages": {
+          "rule": "repeated",
+          "type": ".CChatRoom_ChatMessageModified_Notification_ChatMessage",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_ChatMessageModified_Notification_ChatMessage": {
+      "fields": {
+        "server_timestamp": {
+          "type": "uint32",
+          "id": 1
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 2
+        },
+        "deleted": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_MemberStateChange_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "member": {
+          "type": ".CChatRoomMember",
+          "id": 2
+        },
+        "change": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "(description)": "enum"
+          }
+        }
+      }
+    },
+    "CChatRoom_ChatRoomHeaderState_Notification": {
+      "fields": {
+        "header_state": {
+          "type": ".CChatRoomGroupHeaderState",
+          "id": 1
+        }
+      }
+    },
+    "CChatRoom_ChatRoomGroupRoomsChange_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "default_chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "chat_rooms": {
+          "rule": "repeated",
+          "type": ".CChatRoomState",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification": {
+      "fields": {
+        "chat_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "ChatRoomClient_NotifyChatGroupUserStateChanged_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "user_chat_group_state": {
+          "type": ".CUserChatRoomGroupState",
+          "id": 2
+        },
+        "group_summary": {
+          "type": ".CChatRoom_GetChatRoomGroupSummary_Response",
+          "id": 3
+        },
+        "user_action": {
+          "type": "int32",
+          "id": 4,
+          "options": {
+            "(description)": "enum"
+          }
+        }
+      }
+    },
+    "ChatRoomClient_NotifyChatRoomDisconnect_Notification": {
+      "fields": {
+        "chat_group_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CChatRoomClient_MemberListViewUpdated_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "view_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "view": {
+          "type": ".CChatRoomMemberListView",
+          "id": 3
+        },
+        "members": {
+          "rule": "repeated",
+          "type": ".CChatRoomClient_MemberListViewUpdated_Notification_MemberListViewEntry",
+          "id": 4
+        },
+        "status_flags": {
+          "type": "uint32",
+          "id": 5
+        },
+        "member_summary": {
+          "type": ".CChatRoomMemberSummaryCounts",
+          "id": 6
+        },
+        "subscribed_personas": {
+          "rule": "repeated",
+          "type": ".CMsgClientPersonaState_Friend",
+          "id": 7
+        }
+      }
+    },
+    "CChatRoomMemberListView": {
+      "fields": {
+        "start": {
+          "type": "int32",
+          "id": 3
+        },
+        "end": {
+          "type": "int32",
+          "id": 4
+        },
+        "total_count": {
+          "type": "int32",
+          "id": 5
+        },
+        "client_changenumber": {
+          "type": "int32",
+          "id": 6
+        },
+        "server_changenumber": {
+          "type": "int32",
+          "id": 7
+        }
+      }
+    },
+    "CChatRoomClient_MemberListViewUpdated_Notification_MemberListViewEntry": {
+      "fields": {
+        "rank": {
+          "type": "int32",
+          "id": 1
+        },
+        "accountid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "persona": {
+          "type": ".CMsgClientPersonaState_Friend",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoomMemberSummaryCounts": {
+      "fields": {
+        "ingame": {
+          "type": "int32",
+          "id": 1
+        },
+        "online": {
+          "type": "int32",
+          "id": 2
+        },
+        "offline": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CChatRoom_MessageReaction_Notification": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_id": {
+          "type": "uint64",
+          "id": 2
+        },
+        "server_timestamp": {
+          "type": "uint32",
+          "id": 3
+        },
+        "ordinal": {
+          "type": "uint32",
+          "id": 4
+        },
+        "reactor": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "reaction_type": {
+          "type": "int32",
+          "id": 6,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "reaction": {
+          "type": "string",
+          "id": 7
+        },
+        "is_add": {
+          "type": "bool",
+          "id": 8
+        }
+      }
+    },
+    "ChatRoom": {
+      "methods": {
+        "CreateChatRoomGroup": {
+          "requestType": ".CChatRoom_CreateChatRoomGroup_Request",
+          "responseType": ".CChatRoom_CreateChatRoomGroup_Response"
+        },
+        "SaveChatRoomGroup": {
+          "requestType": ".CChatRoom_SaveChatRoomGroup_Request",
+          "responseType": ".CChatRoom_SaveChatRoomGroup_Response"
+        },
+        "RenameChatRoomGroup": {
+          "requestType": ".CChatRoom_RenameChatRoomGroup_Request",
+          "responseType": ".CChatRoom_RenameChatRoomGroup_Response"
+        },
+        "SetChatRoomGroupTagline": {
+          "requestType": ".CChatRoom_SetChatRoomGroupTagline_Request",
+          "responseType": ".CChatRoom_SetChatRoomGroupTagline_Response"
+        },
+        "SetChatRoomGroupAvatar": {
+          "requestType": ".CChatRoom_SetChatRoomGroupAvatar_Request",
+          "responseType": ".CChatRoom_SetChatRoomGroupAvatar_Response"
+        },
+        "SetChatRoomGroupWatchingBroadcast": {
+          "requestType": ".CChatRoom_SetChatRoomGroupWatchingBroadcast_Request",
+          "responseType": ".CChatRoom_SetChatRoomGroupWatchingBroadcast_Response"
+        },
+        "JoinMiniGameForChatRoomGroup": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_JoinMiniGameForChatRoomGroup_Response"
+        },
+        "EndMiniGameForChatRoomGroup": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_EndMiniGameForChatRoomGroup_Response"
+        },
+        "MuteUserInGroup": {
+          "requestType": ".CChatRoom_MuteUser_Request",
+          "responseType": ".CChatRoom_MuteUser_Response"
+        },
+        "KickUserFromGroup": {
+          "requestType": ".CChatRoom_KickUser_Request",
+          "responseType": ".CChatRoom_KickUser_Response"
+        },
+        "SetUserBanState": {
+          "requestType": ".CChatRoom_SetUserBanState_Request",
+          "responseType": ".CChatRoom_SetUserBanState_Response"
+        },
+        "RevokeInviteToGroup": {
+          "requestType": ".CChatRoom_RevokeInvite_Request",
+          "responseType": ".CChatRoom_RevokeInvite_Response"
+        },
+        "CreateRole": {
+          "requestType": ".CChatRoom_CreateRole_Request",
+          "responseType": ".CChatRoom_CreateRole_Response"
+        },
+        "GetRoles": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_GetRoles_Response"
+        },
+        "RenameRole": {
+          "requestType": ".CChatRoom_RenameRole_Request",
+          "responseType": ".CChatRoom_RenameRole_Response"
+        },
+        "ReorderRole": {
+          "requestType": ".CChatRoom_ReorderRole_Request",
+          "responseType": ".CChatRoom_ReorderRole_Response"
+        },
+        "DeleteRole": {
+          "requestType": ".CChatRoom_DeleteRole_Request",
+          "responseType": ".CChatRoom_DeleteRole_Response"
+        },
+        "GetRoleActions": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_GetRoleActions_Response"
+        },
+        "ReplaceRoleActions": {
+          "requestType": ".CChatRoom_ReplaceRoleActions_Request",
+          "responseType": ".CChatRoom_ReplaceRoleActions_Response"
+        },
+        "AddRoleToUser": {
+          "requestType": ".CChatRoom_AddRoleToUser_Request",
+          "responseType": ".CChatRoom_AddRoleToUser_Response"
+        },
+        "GetRolesForUser": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_GetRolesForUser_Response"
+        },
+        "DeleteRoleFromUser": {
+          "requestType": ".CChatRoom_DeleteRoleFromUser_Request",
+          "responseType": ".CChatRoom_DeleteRoleFromUser_Response"
+        },
+        "JoinChatRoomGroup": {
+          "requestType": ".CChatRoom_JoinChatRoomGroup_Request",
+          "responseType": ".CChatRoom_JoinChatRoomGroup_Response"
+        },
+        "InviteFriendToChatRoomGroup": {
+          "requestType": ".CChatRoom_InviteFriendToChatRoomGroup_Request",
+          "responseType": ".CChatRoom_InviteFriendToChatRoomGroup_Response"
+        },
+        "LeaveChatRoomGroup": {
+          "requestType": ".CChatRoom_LeaveChatRoomGroup_Request",
+          "responseType": ".CChatRoom_LeaveChatRoomGroup_Response"
+        },
+        "CreateChatRoom": {
+          "requestType": ".CChatRoom_CreateChatRoom_Request",
+          "responseType": ".CChatRoom_CreateChatRoom_Response"
+        },
+        "DeleteChatRoom": {
+          "requestType": ".CChatRoom_DeleteChatRoom_Request",
+          "responseType": ".CChatRoom_DeleteChatRoom_Response"
+        },
+        "RenameChatRoom": {
+          "requestType": ".CChatRoom_RenameChatRoom_Request",
+          "responseType": ".CChatRoom_RenameChatRoom_Response"
+        },
+        "ReorderChatRoom": {
+          "requestType": ".CChatRoom_ReorderChatRoom_Request",
+          "responseType": ".CChatRoom_ReorderChatRoom_Response"
+        },
+        "SendChatMessage": {
+          "requestType": ".CChatRoom_SendChatMessage_Request",
+          "responseType": ".CChatRoom_SendChatMessage_Response"
+        },
+        "JoinVoiceChat": {
+          "requestType": ".CChatRoom_JoinVoiceChat_Request",
+          "responseType": ".CChatRoom_JoinVoiceChat_Response"
+        },
+        "LeaveVoiceChat": {
+          "requestType": ".CChatRoom_LeaveVoiceChat_Request",
+          "responseType": ".CChatRoom_LeaveVoiceChat_Response"
+        },
+        "GetMessageHistory": {
+          "requestType": ".CChatRoom_GetMessageHistory_Request",
+          "responseType": ".CChatRoom_GetMessageHistory_Response"
+        },
+        "GetMyChatRoomGroups": {
+          "requestType": ".CChatRoom_GetMyChatRoomGroups_Request",
+          "responseType": ".CChatRoom_GetMyChatRoomGroups_Response"
+        },
+        "GetChatRoomGroupState": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_GetChatRoomGroupState_Response"
+        },
+        "GetChatRoomGroupSummary": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_GetChatRoomGroupSummary_Response"
+        },
+        "SetAppChatRoomGroupForceActive": {
+          "requestType": ".NotImplemented",
+          "responseType": ".CChatRoom_SetAppChatRoomGroupForceActive_Response"
+        },
+        "SetAppChatRoomGroupStopForceActive": {
+          "requestType": ".NotImplemented",
+          "responseType": ".NoResponse"
+        },
+        "AckChatMessage": {
+          "requestType": ".CChatRoom_AckChatMessage_Notification",
+          "responseType": ".NoResponse"
+        },
+        "CreateInviteLink": {
+          "requestType": ".CChatRoom_CreateInviteLink_Request",
+          "responseType": ".CChatRoom_CreateInviteLink_Response"
+        },
+        "GetInviteLinkInfo": {
+          "requestType": ".CChatRoom_GetInviteLinkInfo_Request",
+          "responseType": ".CChatRoom_GetInviteLinkInfo_Response"
+        },
+        "GetInviteInfo": {
+          "requestType": ".CChatRoom_GetInviteInfo_Request",
+          "responseType": ".CChatRoom_GetInviteInfo_Response"
+        },
+        "GetInviteLinksForGroup": {
+          "requestType": ".CChatRoom_GetInviteLinksForGroup_Request",
+          "responseType": ".CChatRoom_GetInviteLinksForGroup_Response"
+        },
+        "GetBanList": {
+          "requestType": ".CChatRoom_GetBanList_Request",
+          "responseType": ".CChatRoom_GetBanList_Response"
+        },
+        "GetInviteList": {
+          "requestType": ".CChatRoom_GetInviteList_Request",
+          "responseType": ".CChatRoom_GetInviteList_Response"
+        },
+        "DeleteInviteLink": {
+          "requestType": ".CChatRoom_DeleteInviteLink_Request",
+          "responseType": ".CChatRoom_DeleteInviteLink_Response"
+        },
+        "SetSessionActiveChatRoomGroups": {
+          "requestType": ".CChatRoom_SetSessionActiveChatRoomGroups_Request",
+          "responseType": ".CChatRoom_SetSessionActiveChatRoomGroups_Response"
+        },
+        "SetUserChatGroupPreferences": {
+          "requestType": ".CChatRoom_SetUserChatGroupPreferences_Request",
+          "responseType": ".CChatRoom_SetUserChatGroupPreferences_Response"
+        },
+        "DeleteChatMessages": {
+          "requestType": ".CChatRoom_DeleteChatMessages_Request",
+          "responseType": ".CChatRoom_DeleteChatMessages_Response"
+        },
+        "UpdateMemberListView": {
+          "requestType": ".CChatRoom_UpdateMemberListView_Notification",
+          "responseType": ".NoResponse"
+        },
+        "SearchMembers": {
+          "requestType": ".CChatRoom_SearchMembers_Request",
+          "responseType": ".CChatRoom_SearchMembers_Response"
+        },
+        "UpdateMessageReaction": {
+          "requestType": ".CChatRoom_UpdateMessageReaction_Request",
+          "responseType": ".CChatRoom_UpdateMessageReaction_Response"
+        },
+        "GetMessageReactionReactors": {
+          "requestType": ".CChatRoom_GetMessageReactionReactors_Request",
+          "responseType": ".CChatRoom_GetMessageReactionReactors_Response"
+        }
+      }
+    },
+    "ChatRoomClient": {
+      "methods": {
+        "NotifyIncomingChatMessage": {
+          "requestType": ".CChatRoom_IncomingChatMessage_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyChatMessageModified": {
+          "requestType": ".CChatRoom_ChatMessageModified_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyMemberStateChange": {
+          "requestType": ".CChatRoom_MemberStateChange_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyChatRoomHeaderStateChange": {
+          "requestType": ".CChatRoom_ChatRoomHeaderState_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyChatRoomGroupRoomsChange": {
+          "requestType": ".CChatRoom_ChatRoomGroupRoomsChange_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyShouldRejoinChatRoomVoiceChat": {
+          "requestType": ".CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyChatGroupUserStateChanged": {
+          "requestType": ".ChatRoomClient_NotifyChatGroupUserStateChanged_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyAckChatMessageEcho": {
+          "requestType": ".CChatRoom_AckChatMessage_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyChatRoomDisconnect": {
+          "requestType": ".ChatRoomClient_NotifyChatRoomDisconnect_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyMemberListViewUpdated": {
+          "requestType": ".CChatRoomClient_MemberListViewUpdated_Notification",
+          "responseType": ".NoResponse"
+        },
+        "NotifyMessageReaction": {
+          "requestType": ".CChatRoom_MessageReaction_Notification",
+          "responseType": ".NoResponse"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CChatPartyBeacon": {
+      "fields": {
+        "app_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "steamid_owner": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "beacon_id": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "game_metadata": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CChatRoleActions": {
+      "fields": {
+        "role_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "can_create_rename_delete_channel": {
+          "type": "bool",
+          "id": 2
+        },
+        "can_kick": {
+          "type": "bool",
+          "id": 3
+        },
+        "can_ban": {
+          "type": "bool",
+          "id": 4
+        },
+        "can_invite": {
+          "type": "bool",
+          "id": 5
+        },
+        "can_change_tagline_avatar_name": {
+          "type": "bool",
+          "id": 6
+        },
+        "can_chat": {
+          "type": "bool",
+          "id": 7
+        },
+        "can_view_history": {
+          "type": "bool",
+          "id": 8
+        },
+        "can_change_group_roles": {
+          "type": "bool",
+          "id": 9
+        },
+        "can_change_user_roles": {
+          "type": "bool",
+          "id": 10
+        },
+        "can_mention_all": {
+          "type": "bool",
+          "id": 11
+        },
+        "can_set_watching_broadcast": {
+          "type": "bool",
+          "id": 12
+        }
+      }
+    },
+    "CChatRoom_GetChatRoomGroupSummary_Response": {
+      "fields": {
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_group_name": {
+          "type": "string",
+          "id": 2
+        },
+        "active_member_count": {
+          "type": "uint32",
+          "id": 3
+        },
+        "active_voice_member_count": {
+          "type": "uint32",
+          "id": 4
+        },
+        "default_chat_id": {
+          "type": "uint64",
+          "id": 5
+        },
+        "chat_rooms": {
+          "rule": "repeated",
+          "type": ".CChatRoomState",
+          "id": 6
+        },
+        "clanid": {
+          "type": "uint32",
+          "id": 7
+        },
+        "chat_group_tagline": {
+          "type": "string",
+          "id": 8
+        },
+        "accountid_owner": {
+          "type": "uint32",
+          "id": 9
+        },
+        "top_members": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "chat_group_avatar_sha": {
+          "type": "bytes",
+          "id": 11
+        },
+        "rank": {
+          "type": "int32",
+          "id": 12,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "default_role_id": {
+          "type": "uint64",
+          "id": 13
+        },
+        "role_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 14,
+          "options": {
+            "packed": false
+          }
+        },
+        "role_actions": {
+          "rule": "repeated",
+          "type": ".CChatRoleActions",
+          "id": 15
+        },
+        "watching_broadcast_accountid": {
+          "type": "uint32",
+          "id": 16
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 17
+        },
+        "party_beacons": {
+          "rule": "repeated",
+          "type": ".CChatPartyBeacon",
+          "id": 18
+        },
+        "watching_broadcast_channel_id": {
+          "type": "uint64",
+          "id": 19
+        },
+        "active_minigame_id": {
+          "type": "uint64",
+          "id": 20
+        },
+        "avatar_ugc_url": {
+          "type": "string",
+          "id": 21
+        },
+        "disabled": {
+          "type": "bool",
+          "id": 22
+        }
+      }
+    },
+    "CChatRoomState": {
+      "fields": {
+        "chat_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "chat_name": {
+          "type": "string",
+          "id": 2
+        },
+        "voice_allowed": {
+          "type": "bool",
+          "id": 3
+        },
+        "members_in_voice": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "packed": false
+          }
+        },
+        "time_last_message": {
+          "type": "uint32",
+          "id": 5
+        },
+        "sort_order": {
+          "type": "uint32",
+          "id": 6
+        },
+        "last_message": {
+          "type": "string",
+          "id": 7
+        },
+        "accountid_last_message": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgAuthTicket": {
+      "fields": {
+        "estate": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "h_steam_pipe": {
+          "type": "uint32",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 7
+        }
+      }
+    },
+    "CMsgClientAccountInfo": {
+      "fields": {
+        "persona_name": {
+          "type": "string",
+          "id": 1
+        },
+        "ip_country": {
+          "type": "string",
+          "id": 2
+        },
+        "count_authed_computers": {
+          "type": "int32",
+          "id": 5
+        },
+        "account_flags": {
+          "type": "uint32",
+          "id": 7
+        },
+        "facebook_id": {
+          "type": "uint64",
+          "id": 8
+        },
+        "facebook_name": {
+          "type": "string",
+          "id": 9
+        },
+        "steamguard_notify_newmachines": {
+          "type": "bool",
+          "id": 14
+        },
+        "steamguard_machine_name_user_chosen": {
+          "type": "string",
+          "id": 15
+        },
+        "is_phone_verified": {
+          "type": "bool",
+          "id": 16
+        },
+        "two_factor_state": {
+          "type": "uint32",
+          "id": 17
+        },
+        "is_phone_identifying": {
+          "type": "bool",
+          "id": 18
+        },
+        "is_phone_needing_reverify": {
+          "type": "bool",
+          "id": 19
+        }
+      }
+    },
+    "CMsgClientAddFriendToGroup": {
+      "fields": {
+        "groupid": {
+          "type": "int32",
+          "id": 1
+        },
+        "steamiduser": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientAddFriendToGroupResponse": {
+      "fields": {
+        "eresult": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientAMGetPersonaNameHistory": {
+      "fields": {
+        "id_count": {
+          "type": "int32",
+          "id": 1
+        },
+        "Ids": {
+          "rule": "repeated",
+          "type": ".CMsgClientAMGetPersonaNameHistory_IdInstance",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientAMGetPersonaNameHistory_IdInstance": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientAMGetPersonaNameHistoryResponse": {
+      "fields": {
+        "responses": {
+          "rule": "repeated",
+          "type": ".CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance": {
+      "fields": {
+        "eresult": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "names": {
+          "rule": "repeated",
+          "type": ".CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance_NameInstance",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance_NameInstance": {
+      "fields": {
+        "name_since": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientChangeStatus": {
+      "fields": {
+        "persona_state": {
+          "type": "uint32",
+          "id": 1
+        },
+        "player_name": {
+          "type": "string",
+          "id": 2
+        },
+        "is_auto_generated_name": {
+          "type": "bool",
+          "id": 3
+        },
+        "high_priority": {
+          "type": "bool",
+          "id": 4
+        },
+        "persona_set_by_user": {
+          "type": "bool",
+          "id": 5
+        },
+        "persona_state_flags": {
+          "type": "uint32",
+          "id": 6,
+          "options": {
+            "default": 0
+          }
+        },
+        "need_persona_response": {
+          "type": "bool",
+          "id": 7
+        },
+        "is_client_idle": {
+          "type": "bool",
+          "id": 8
+        }
+      }
+    },
+    "CMsgClientClanState": {
+      "fields": {
+        "steamid_clan": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_account_flags": {
+          "type": "uint32",
+          "id": 3
+        },
+        "name_info": {
+          "type": ".CMsgClientClanState_NameInfo",
+          "id": 4
+        },
+        "user_counts": {
+          "type": ".CMsgClientClanState_UserCounts",
+          "id": 5
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CMsgClientClanState_Event",
+          "id": 6
+        },
+        "announcements": {
+          "rule": "repeated",
+          "type": ".CMsgClientClanState_Event",
+          "id": 7
+        },
+        "chat_room_private": {
+          "type": "bool",
+          "id": 8
+        }
+      }
+    },
+    "CMsgClientClanState_Event": {
+      "fields": {
+        "gid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "event_time": {
+          "type": "uint32",
+          "id": 2
+        },
+        "headline": {
+          "type": "string",
+          "id": 3
+        },
+        "game_id": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "just_posted": {
+          "type": "bool",
+          "id": 5
+        }
+      }
+    },
+    "CMsgClientClanState_NameInfo": {
+      "fields": {
+        "clan_name": {
+          "type": "string",
+          "id": 1
+        },
+        "sha_avatar": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientClanState_UserCounts": {
+      "fields": {
+        "members": {
+          "type": "uint32",
+          "id": 1
+        },
+        "online": {
+          "type": "uint32",
+          "id": 2
+        },
+        "chatting": {
+          "type": "uint32",
+          "id": 3
+        },
+        "in_game": {
+          "type": "uint32",
+          "id": 4
+        },
+        "chat_room_members": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgClientCreateFriendsGroup": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "groupname": {
+          "type": "string",
+          "id": 2
+        },
+        "steamid_friends": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgClientCreateFriendsGroupResponse": {
+      "fields": {
+        "eresult": {
+          "type": "uint32",
+          "id": 1
+        },
+        "groupid": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientDeleteFriendsGroup": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "groupid": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientDeleteFriendsGroupResponse": {
+      "fields": {
+        "eresult": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientEmoticonList": {
+      "fields": {
+        "emoticons": {
+          "rule": "repeated",
+          "type": ".CMsgClientEmoticonList_Emoticon",
+          "id": 1
+        },
+        "stickers": {
+          "rule": "repeated",
+          "type": ".CMsgClientEmoticonList_Sticker",
+          "id": 2
+        },
+        "effects": {
+          "rule": "repeated",
+          "type": ".CMsgClientEmoticonList_Effect",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientEmoticonList_Effect": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "count": {
+          "type": "int32",
+          "id": 2
+        },
+        "time_received": {
+          "type": "uint32",
+          "id": 3
+        },
+        "infinite_use": {
+          "type": "bool",
+          "id": 4
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgClientEmoticonList_Emoticon": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "count": {
+          "type": "int32",
+          "id": 2
+        },
+        "time_last_used": {
+          "type": "uint32",
+          "id": 3
+        },
+        "use_count": {
+          "type": "uint32",
+          "id": 4
+        },
+        "time_received": {
+          "type": "uint32",
+          "id": 5
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 6
+        }
+      }
+    },
+    "CMsgClientEmoticonList_Sticker": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "count": {
+          "type": "int32",
+          "id": 2
+        },
+        "time_received": {
+          "type": "uint32",
+          "id": 3
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 4
+        },
+        "time_last_used": {
+          "type": "uint32",
+          "id": 5
+        },
+        "use_count": {
+          "type": "uint32",
+          "id": 6
+        }
+      }
+    },
+    "CMsgClientGetClanActivityCounts": {
+      "fields": {
+        "steamid_clans": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgClientGetEmoticonList": {
+      "fields": {}
+    },
+    "CMsgClientHeartBeat": {
+      "fields": {
+        "send_reply": {
+          "type": "bool",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientInviteToGame": {
+      "fields": {
+        "steam_id_dest": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steam_id_src": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "connect_string": {
+          "type": "string",
+          "id": 3
+        },
+        "remote_play": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CMsgClientLoggedOff": {
+      "fields": {
+        "eresult": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        }
+      }
+    },
+    "CMsgClientLogon": {
+      "fields": {
+        "protocol_version": {
+          "type": "uint32",
+          "id": 1
+        },
+        "deprecated_obfustucated_private_ip": {
+          "type": "uint32",
+          "id": 2
+        },
+        "cell_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "last_session_id": {
+          "type": "uint32",
+          "id": 4
+        },
+        "client_package_version": {
+          "type": "uint32",
+          "id": 5
+        },
+        "client_language": {
+          "type": "string",
+          "id": 6
+        },
+        "client_os_type": {
+          "type": "uint32",
+          "id": 7
+        },
+        "should_remember_password": {
+          "type": "bool",
+          "id": 8,
+          "options": {
+            "default": false
+          }
+        },
+        "wine_version": {
+          "type": "string",
+          "id": 9
+        },
+        "deprecated_10": {
+          "type": "uint32",
+          "id": 10
+        },
+        "obfuscated_private_ip": {
+          "type": ".CMsgIPAddress",
+          "id": 11
+        },
+        "deprecated_public_ip": {
+          "type": "uint32",
+          "id": 20
+        },
+        "qos_level": {
+          "type": "uint32",
+          "id": 21
+        },
+        "client_supplied_steam_id": {
+          "type": "fixed64",
+          "id": 22
+        },
+        "public_ip": {
+          "type": ".CMsgIPAddress",
+          "id": 23
+        },
+        "machine_id": {
+          "type": "bytes",
+          "id": 30
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "ui_mode": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        },
+        "chat_mode": {
+          "type": "uint32",
+          "id": 33,
+          "options": {
+            "default": 0
+          }
+        },
+        "steam2_auth_ticket": {
+          "type": "bytes",
+          "id": 41
+        },
+        "email_address": {
+          "type": "string",
+          "id": 42
+        },
+        "rtime32_account_creation": {
+          "type": "fixed32",
+          "id": 43
+        },
+        "account_name": {
+          "type": "string",
+          "id": 50
+        },
+        "password": {
+          "type": "string",
+          "id": 51
+        },
+        "game_server_token": {
+          "type": "string",
+          "id": 52
+        },
+        "login_key": {
+          "type": "string",
+          "id": 60
+        },
+        "was_converted_deprecated_msg": {
+          "type": "bool",
+          "id": 70,
+          "options": {
+            "default": false
+          }
+        },
+        "anon_user_target_account_name": {
+          "type": "string",
+          "id": 80
+        },
+        "resolved_user_steam_id": {
+          "type": "fixed64",
+          "id": 81
+        },
+        "eresult_sentryfile": {
+          "type": "int32",
+          "id": 82
+        },
+        "sha_sentryfile": {
+          "type": "bytes",
+          "id": 83
+        },
+        "auth_code": {
+          "type": "string",
+          "id": 84
+        },
+        "otp_type": {
+          "type": "int32",
+          "id": 85
+        },
+        "otp_value": {
+          "type": "uint32",
+          "id": 86
+        },
+        "otp_identifier": {
+          "type": "string",
+          "id": 87
+        },
+        "steam2_ticket_request": {
+          "type": "bool",
+          "id": 88
+        },
+        "sony_psn_ticket": {
+          "type": "bytes",
+          "id": 90
+        },
+        "sony_psn_service_id": {
+          "type": "string",
+          "id": 91
+        },
+        "create_new_psn_linked_account_if_needed": {
+          "type": "bool",
+          "id": 92,
+          "options": {
+            "default": false
+          }
+        },
+        "sony_psn_name": {
+          "type": "string",
+          "id": 93
+        },
+        "game_server_app_id": {
+          "type": "int32",
+          "id": 94
+        },
+        "steamguard_dont_remember_computer": {
+          "type": "bool",
+          "id": 95
+        },
+        "machine_name": {
+          "type": "string",
+          "id": 96
+        },
+        "machine_name_userchosen": {
+          "type": "string",
+          "id": 97
+        },
+        "country_override": {
+          "type": "string",
+          "id": 98
+        },
+        "is_steam_box": {
+          "type": "bool",
+          "id": 99
+        },
+        "client_instance_id": {
+          "type": "uint64",
+          "id": 100
+        },
+        "two_factor_code": {
+          "type": "string",
+          "id": 101
+        },
+        "supports_rate_limit_response": {
+          "type": "bool",
+          "id": 102
+        },
+        "web_logon_nonce": {
+          "type": "string",
+          "id": 103
+        },
+        "priority_reason": {
+          "type": "int32",
+          "id": 104
+        },
+        "embedded_client_secret": {
+          "type": ".CMsgClientSecret",
+          "id": 105
+        },
+        "disable_partner_autogrants": {
+          "type": "bool",
+          "id": 106
+        }
+      }
+    },
+    "CMsgClientLogonResponse": {
+      "fields": {
+        "eresult": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        },
+        "out_of_game_heartbeat_seconds": {
+          "type": "int32",
+          "id": 2
+        },
+        "in_game_heartbeat_seconds": {
+          "type": "int32",
+          "id": 3
+        },
+        "deprecated_public_ip": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime32_server_time": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "account_flags": {
+          "type": "uint32",
+          "id": 6
+        },
+        "cell_id": {
+          "type": "uint32",
+          "id": 7
+        },
+        "email_domain": {
+          "type": "string",
+          "id": 8
+        },
+        "steam2_ticket": {
+          "type": "bytes",
+          "id": 9
+        },
+        "eresult_extended": {
+          "type": "int32",
+          "id": 10
+        },
+        "webapi_authenticate_user_nonce": {
+          "type": "string",
+          "id": 11
+        },
+        "cell_id_ping_threshold": {
+          "type": "uint32",
+          "id": 12
+        },
+        "deprecated_use_pics": {
+          "type": "bool",
+          "id": 13
+        },
+        "vanity_url": {
+          "type": "string",
+          "id": 14
+        },
+        "public_ip": {
+          "type": ".CMsgIPAddress",
+          "id": 15
+        },
+        "client_supplied_steamid": {
+          "type": "fixed64",
+          "id": 20
+        },
+        "ip_country_code": {
+          "type": "string",
+          "id": 21
+        },
+        "parental_settings": {
+          "type": "bytes",
+          "id": 22
+        },
+        "parental_setting_signature": {
+          "type": "bytes",
+          "id": 23
+        },
+        "count_loginfailures_to_migrate": {
+          "type": "int32",
+          "id": 24
+        },
+        "count_disconnects_to_migrate": {
+          "type": "int32",
+          "id": 25
+        },
+        "ogs_data_report_time_window": {
+          "type": "int32",
+          "id": 26
+        },
+        "client_instance_id": {
+          "type": "uint64",
+          "id": 27
+        },
+        "force_client_update_check": {
+          "type": "bool",
+          "id": 28
+        },
+        "agreement_session_url": {
+          "type": "string",
+          "id": 29
+        }
+      }
+    },
+    "CMsgClientManageFriendsGroup": {
+      "fields": {
+        "groupid": {
+          "type": "int32",
+          "id": 1
+        },
+        "groupname": {
+          "type": "string",
+          "id": 2
+        },
+        "steamid_friends_added": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "packed": false
+          }
+        },
+        "steamid_friends_removed": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 4,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgClientManageFriendsGroupResponse": {
+      "fields": {
+        "eresult": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientMMSInviteToLobby": {
+      "fields": {
+        "app_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "steam_id_lobby": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "steam_id_user_invited": {
+          "type": "fixed64",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientPersonaState": {
+      "fields": {
+        "status_flags": {
+          "type": "uint32",
+          "id": 1
+        },
+        "friends": {
+          "rule": "repeated",
+          "type": ".CMsgClientPersonaState_Friend",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientPersonaState_Friend": {
+      "fields": {
+        "friendid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "persona_state": {
+          "type": "uint32",
+          "id": 2
+        },
+        "game_played_app_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "game_server_ip": {
+          "type": "uint32",
+          "id": 4
+        },
+        "game_server_port": {
+          "type": "uint32",
+          "id": 5
+        },
+        "persona_state_flags": {
+          "type": "uint32",
+          "id": 6
+        },
+        "online_session_instances": {
+          "type": "uint32",
+          "id": 7
+        },
+        "persona_set_by_user": {
+          "type": "bool",
+          "id": 10
+        },
+        "player_name": {
+          "type": "string",
+          "id": 15
+        },
+        "query_port": {
+          "type": "uint32",
+          "id": 20
+        },
+        "steamid_source": {
+          "type": "fixed64",
+          "id": 25
+        },
+        "avatar_hash": {
+          "type": "bytes",
+          "id": 31
+        },
+        "last_logoff": {
+          "type": "uint32",
+          "id": 45
+        },
+        "last_logon": {
+          "type": "uint32",
+          "id": 46
+        },
+        "last_seen_online": {
+          "type": "uint32",
+          "id": 47
+        },
+        "clan_rank": {
+          "type": "uint32",
+          "id": 50
+        },
+        "game_name": {
+          "type": "string",
+          "id": 55
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 56
+        },
+        "game_data_blob": {
+          "type": "bytes",
+          "id": 60
+        },
+        "clan_data": {
+          "type": ".CMsgClientPersonaState_Friend_ClanData",
+          "id": 64
+        },
+        "clan_tag": {
+          "type": "string",
+          "id": 65
+        },
+        "rich_presence": {
+          "rule": "repeated",
+          "type": ".CMsgClientPersonaState_Friend_KV",
+          "id": 71
+        },
+        "broadcast_id": {
+          "type": "fixed64",
+          "id": 72
+        },
+        "game_lobby_id": {
+          "type": "fixed64",
+          "id": 73
+        },
+        "watching_broadcast_accountid": {
+          "type": "uint32",
+          "id": 74
+        },
+        "watching_broadcast_appid": {
+          "type": "uint32",
+          "id": 75
+        },
+        "watching_broadcast_viewers": {
+          "type": "uint32",
+          "id": 76
+        },
+        "watching_broadcast_title": {
+          "type": "string",
+          "id": 77
+        },
+        "is_community_banned": {
+          "type": "bool",
+          "id": 78
+        },
+        "player_name_pending_review": {
+          "type": "bool",
+          "id": 79
+        },
+        "avatar_pending_review": {
+          "type": "bool",
+          "id": 80
+        }
+      }
+    },
+    "CMsgClientPersonaState_Friend_ClanData": {
+      "fields": {
+        "ogg_app_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientPersonaState_Friend_KV": {
+      "fields": {
+        "key": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientRemoveFriendFromGroup": {
+      "fields": {
+        "groupid": {
+          "type": "int32",
+          "id": 1
+        },
+        "steamiduser": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientRemoveFriendFromGroupResponse": {
+      "fields": {
+        "eresult": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientRequestFriendData": {
+      "fields": {
+        "persona_state_requested": {
+          "type": "uint32",
+          "id": 1
+        },
+        "friends": {
+          "rule": "repeated",
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgClientSecret": {
+      "fields": {
+        "version": {
+          "type": "uint32",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "deviceid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "nonce": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "hmac": {
+          "type": "bytes",
+          "id": 5
+        }
+      }
+    },
+    "CMsgClientServersAvailable": {
+      "fields": {
+        "server_types_available": {
+          "rule": "repeated",
+          "type": ".CMsgClientServersAvailable_Server_Types_Available",
+          "id": 1
+        },
+        "server_type_for_auth_services": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientServersAvailable_Server_Types_Available": {
+      "fields": {
+        "server": {
+          "type": "uint32",
+          "id": 1
+        },
+        "changed": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientServerTimestampRequest": {
+      "fields": {
+        "client_request_timestamp": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientServerTimestampResponse": {
+      "fields": {
+        "client_request_timestamp": {
+          "type": "uint64",
+          "id": 1
+        },
+        "server_timestamp_ms": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgCREGetUserPublishedItemVoteDetails": {
+      "fields": {
+        "published_file_ids": {
+          "rule": "repeated",
+          "type": ".CMsgCREGetUserPublishedItemVoteDetails_PublishedFileId",
+          "id": 1
+        }
+      }
+    },
+    "CMsgCREGetUserPublishedItemVoteDetails_PublishedFileId": {
+      "fields": {
+        "published_file_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CMsgCREGetUserPublishedItemVoteDetailsResponse": {
+      "fields": {
+        "eresult": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        },
+        "user_item_vote_details": {
+          "rule": "repeated",
+          "type": ".CMsgCREGetUserPublishedItemVoteDetailsResponse_UserItemVoteDetail",
+          "id": 2
+        }
+      }
+    },
+    "CMsgCREGetUserPublishedItemVoteDetailsResponse_UserItemVoteDetail": {
+      "fields": {
+        "published_file_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "vote": {
+          "type": "int32",
+          "id": 2,
+          "options": {
+            "default": 0
+          }
+        }
+      }
+    },
+    "CMsgCREUpdateUserPublishedItemVote": {
+      "fields": {
+        "published_file_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "vote_up": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgCREUpdateUserPublishedItemVoteResponse": {
+      "fields": {
+        "eresult": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        }
+      }
+    },
+    "CMsgIPAddress": {
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgMulti": {
+      "fields": {
+        "size_unzipped": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message_body": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtoBufHeader": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_sessionid": {
+          "type": "int32",
+          "id": 2
+        },
+        "routing_appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "jobid_source": {
+          "type": "fixed64",
+          "id": 10,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "jobid_target": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "target_job_name": {
+          "type": "string",
+          "id": 12
+        },
+        "seq_num": {
+          "type": "int32",
+          "id": 24
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "default": 2
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "id": 14
+        },
+        "ip": {
+          "type": "uint32",
+          "id": 15
+        },
+        "ip_v6": {
+          "type": "bytes",
+          "id": 29
+        },
+        "auth_account_flags": {
+          "type": "uint32",
+          "id": 16
+        },
+        "token_source": {
+          "type": "uint32",
+          "id": 22
+        },
+        "admin_spoofing_user": {
+          "type": "bool",
+          "id": 23
+        },
+        "transport_error": {
+          "type": "int32",
+          "id": 17,
+          "options": {
+            "default": 1
+          }
+        },
+        "messageid": {
+          "type": "uint64",
+          "id": 18,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "publisher_group_id": {
+          "type": "uint32",
+          "id": 19
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "trace_tag": {
+          "type": "uint64",
+          "id": 21
+        },
+        "webapi_key_id": {
+          "type": "uint32",
+          "id": 25
+        },
+        "is_from_external_source": {
+          "type": "bool",
+          "id": 26
+        },
+        "forward_to_sysid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_sysid": {
+          "type": "uint32",
+          "id": 28
+        },
+        "wg_token": {
+          "type": "string",
+          "id": 30
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "realm": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        }
+      }
+    },
+    "CProductImpressionsFromClient_Notification": {
+      "fields": {
+        "impressions": {
+          "rule": "repeated",
+          "type": ".CProductImpressionsFromClient_Notification_Impression",
+          "id": 1
+        }
+      }
+    },
+    "CProductImpressionsFromClient_Notification_Impression": {
+      "fields": {
+        "type": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "num_impressions": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CStoreQueryFilters": {
+      "fields": {
+        "released_only": {
+          "type": "bool",
+          "id": 1
+        },
+        "coming_soon_only": {
+          "type": "bool",
+          "id": 2
+        },
+        "type_filters": {
+          "type": ".CStoreQueryFilters_TypeFilters",
+          "id": 3
+        },
+        "tagids_must_match": {
+          "rule": "repeated",
+          "type": ".CStoreQueryFilters_TagFilter",
+          "id": 10
+        },
+        "tagids_exclude": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 11,
+          "options": {
+            "packed": false
+          }
+        },
+        "content_descriptors_must_match": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 15,
+          "options": {
+            "(description)": "enum",
+            "packed": false
+          }
+        },
+        "content_descriptors_excluded": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 16,
+          "options": {
+            "(description)": "enum",
+            "packed": false
+          }
+        },
+        "regional_top_n_sellers": {
+          "type": "int32",
+          "id": 40
+        },
+        "global_top_n_sellers": {
+          "type": "int32",
+          "id": 41
+        },
+        "regional_long_term_top_n_sellers": {
+          "type": "int32",
+          "id": 42
+        },
+        "global_long_term_top_n_sellers": {
+          "type": "int32",
+          "id": 43
+        }
+      }
+    },
+    "CStoreQueryFilters_TagFilter": {
+      "fields": {
+        "tagids": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CStoreQueryFilters_TypeFilters": {
+      "fields": {
+        "include_apps": {
+          "type": "bool",
+          "id": 1
+        },
+        "include_packages": {
+          "type": "bool",
+          "id": 2
+        },
+        "include_bundles": {
+          "type": "bool",
+          "id": 3
+        },
+        "include_games": {
+          "type": "bool",
+          "id": 10
+        },
+        "include_demos": {
+          "type": "bool",
+          "id": 11
+        },
+        "include_mods": {
+          "type": "bool",
+          "id": 12
+        },
+        "include_dlc": {
+          "type": "bool",
+          "id": 13
+        },
+        "include_software": {
+          "type": "bool",
+          "id": 14
+        },
+        "include_video": {
+          "type": "bool",
+          "id": 15
+        },
+        "include_hardware": {
+          "type": "bool",
+          "id": 16
+        },
+        "include_series": {
+          "type": "bool",
+          "id": 17
+        },
+        "include_music": {
+          "type": "bool",
+          "id": 18
+        }
+      }
+    },
+    "LoyaltyRewardDefinition": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "defid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "type": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "community_item_class": {
+          "type": "int32",
+          "id": 4
+        },
+        "community_item_type": {
+          "type": "uint32",
+          "id": 5
+        },
+        "point_cost": {
+          "type": "int64",
+          "id": 6
+        },
+        "timestamp_created": {
+          "type": "uint32",
+          "id": 7
+        },
+        "timestamp_updated": {
+          "type": "uint32",
+          "id": 8
+        },
+        "timestamp_available": {
+          "type": "uint32",
+          "id": 9
+        },
+        "timestamp_available_end": {
+          "type": "uint32",
+          "id": 14
+        },
+        "quantity": {
+          "type": "int64",
+          "id": 10
+        },
+        "internal_description": {
+          "type": "string",
+          "id": 11
+        },
+        "active": {
+          "type": "bool",
+          "id": 12
+        },
+        "community_item_data": {
+          "type": ".LoyaltyRewardDefinition_CommunityItemData",
+          "id": 13
+        },
+        "bundle_defids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 15,
+          "options": {
+            "packed": false
+          }
+        },
+        "usable_duration": {
+          "type": "uint32",
+          "id": 16
+        },
+        "bundle_discount": {
+          "type": "uint32",
+          "id": 17
+        }
+      }
+    },
+    "LoyaltyRewardDefinition_BadgeData": {
+      "fields": {
+        "level": {
+          "type": "int32",
+          "id": 1
+        },
+        "image": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "LoyaltyRewardDefinition_CommunityItemData": {
+      "fields": {
+        "item_name": {
+          "type": "string",
+          "id": 1
+        },
+        "item_title": {
+          "type": "string",
+          "id": 2
+        },
+        "item_description": {
+          "type": "string",
+          "id": 3
+        },
+        "item_image_small": {
+          "type": "string",
+          "id": 4
+        },
+        "item_image_large": {
+          "type": "string",
+          "id": 5
+        },
+        "item_movie_webm": {
+          "type": "string",
+          "id": 6
+        },
+        "item_movie_mp4": {
+          "type": "string",
+          "id": 7
+        },
+        "item_movie_webm_small": {
+          "type": "string",
+          "id": 10
+        },
+        "item_movie_mp4_small": {
+          "type": "string",
+          "id": 11
+        },
+        "animated": {
+          "type": "bool",
+          "id": 8
+        },
+        "badge_data": {
+          "rule": "repeated",
+          "type": ".LoyaltyRewardDefinition_BadgeData",
+          "id": 9
+        },
+        "profile_theme_id": {
+          "type": "string",
+          "id": 12
+        }
+      }
+    },
+    "NotImplemented": {
+      "fields": {}
+    },
+    "StoreGameRating": {
+      "fields": {
+        "type": {
+          "type": "string",
+          "id": 1
+        },
+        "rating": {
+          "type": "string",
+          "id": 2
+        },
+        "descriptors": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 3
+        },
+        "interactive_elements": {
+          "type": "string",
+          "id": 4
+        },
+        "required_age": {
+          "type": "int32",
+          "id": 10
+        },
+        "use_age_gate": {
+          "type": "bool",
+          "id": 11
+        },
+        "image_url": {
+          "type": "string",
+          "id": 20
+        },
+        "image_target": {
+          "type": "string",
+          "id": 21
+        }
+      }
+    },
+    "StoreItem": {
+      "fields": {
+        "item_type": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "success": {
+          "type": "uint32",
+          "id": 3
+        },
+        "visible": {
+          "type": "bool",
+          "id": 4
+        },
+        "unvailable_for_country_restriction": {
+          "type": "bool",
+          "id": 5
+        },
+        "name": {
+          "type": "string",
+          "id": 6
+        },
+        "store_url_path": {
+          "type": "string",
+          "id": 7
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "type": {
+          "type": "int32",
+          "id": 10,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "included_types": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 11,
+          "options": {
+            "(description)": "enum",
+            "packed": false
+          }
+        },
+        "included_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 12,
+          "options": {
+            "packed": false
+          }
+        },
+        "is_free": {
+          "type": "bool",
+          "id": 13
+        },
+        "is_early_access": {
+          "type": "bool",
+          "id": 14
+        },
+        "related_items": {
+          "type": ".StoreItem_RelatedItems",
+          "id": 15
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 20,
+          "options": {
+            "(description)": "enum",
+            "packed": false
+          }
+        },
+        "tagids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 21,
+          "options": {
+            "packed": false
+          }
+        },
+        "categories": {
+          "type": ".StoreItem_Categories",
+          "id": 22
+        },
+        "reviews": {
+          "type": ".StoreItem_Reviews",
+          "id": 23
+        },
+        "basic_info": {
+          "type": ".StoreItem_BasicInfo",
+          "id": 24
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": ".StoreItem_Tag",
+          "id": 25
+        },
+        "assets": {
+          "type": ".StoreItem_Assets",
+          "id": 30
+        },
+        "release": {
+          "type": ".StoreItem_ReleaseInfo",
+          "id": 31
+        },
+        "platforms": {
+          "type": ".StoreItem_Platforms",
+          "id": 32
+        },
+        "game_rating": {
+          "type": ".StoreGameRating",
+          "id": 33
+        },
+        "best_purchase_option": {
+          "type": ".StoreItem_PurchaseOption",
+          "id": 40
+        },
+        "purchase_options": {
+          "rule": "repeated",
+          "type": ".StoreItem_PurchaseOption",
+          "id": 41
+        },
+        "accessories": {
+          "rule": "repeated",
+          "type": ".StoreItem_PurchaseOption",
+          "id": 42
+        },
+        "screenshots": {
+          "type": ".StoreItem_Screenshots",
+          "id": 50
+        },
+        "trailers": {
+          "type": ".StoreItem_Trailers",
+          "id": 51
+        }
+      }
+    },
+    "StoreItem_Assets": {
+      "fields": {
+        "asset_url_format": {
+          "type": "string",
+          "id": 1
+        },
+        "main_capsule": {
+          "type": "string",
+          "id": 2
+        },
+        "small_capsule": {
+          "type": "string",
+          "id": 3
+        },
+        "header": {
+          "type": "string",
+          "id": 4
+        },
+        "package_header": {
+          "type": "string",
+          "id": 5
+        },
+        "page_background": {
+          "type": "string",
+          "id": 6
+        },
+        "hero_capsule": {
+          "type": "string",
+          "id": 7
+        },
+        "hero_capsule_2x": {
+          "type": "string",
+          "id": 8
+        },
+        "library_capsule": {
+          "type": "string",
+          "id": 9
+        },
+        "library_capsule_2x": {
+          "type": "string",
+          "id": 10
+        },
+        "library_hero": {
+          "type": "string",
+          "id": 11
+        },
+        "library_hero_2x": {
+          "type": "string",
+          "id": 12
+        }
+      }
+    },
+    "StoreItem_BasicInfo": {
+      "fields": {
+        "short_description": {
+          "type": "string",
+          "id": 1
+        },
+        "publishers": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 2
+        },
+        "developers": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 3
+        },
+        "franchises": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "StoreItem_Categories": {
+      "fields": {
+        "supported_player_categoryids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        },
+        "feature_categoryids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "packed": false
+          }
+        },
+        "controller_categoryids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "StoreItem_Platforms": {
+      "fields": {
+        "windows": {
+          "type": "bool",
+          "id": 1
+        },
+        "mac": {
+          "type": "bool",
+          "id": 2
+        },
+        "linux": {
+          "type": "bool",
+          "id": 3
+        },
+        "vr_support": {
+          "type": ".StoreItem_Platforms_VRSupport",
+          "id": 10
+        }
+      }
+    },
+    "StoreItem_Platforms_VRSupport": {
+      "fields": {
+        "vrhmd": {
+          "type": "bool",
+          "id": 1
+        },
+        "vrhmd_only": {
+          "type": "bool",
+          "id": 2
+        },
+        "htc_vive": {
+          "type": "bool",
+          "id": 40
+        },
+        "oculus_rift": {
+          "type": "bool",
+          "id": 41
+        },
+        "windows_mr": {
+          "type": "bool",
+          "id": 42
+        },
+        "valve_index": {
+          "type": "bool",
+          "id": 43
+        }
+      }
+    },
+    "StoreItem_PurchaseOption": {
+      "fields": {
+        "packageid": {
+          "type": "int32",
+          "id": 1
+        },
+        "bundleid": {
+          "type": "int32",
+          "id": 2
+        },
+        "purchase_option_name": {
+          "type": "string",
+          "id": 3
+        },
+        "final_price_in_cents": {
+          "type": "int64",
+          "id": 5
+        },
+        "original_price_in_cents": {
+          "type": "int64",
+          "id": 6
+        },
+        "user_final_price_in_cents": {
+          "type": "int64",
+          "id": 7
+        },
+        "discount_pct": {
+          "type": "int32",
+          "id": 10
+        },
+        "user_discount_pct": {
+          "type": "int32",
+          "id": 11
+        },
+        "bundle_discount_pct": {
+          "type": "int32",
+          "id": 12
+        },
+        "active_discounts": {
+          "rule": "repeated",
+          "type": ".StoreItem_PurchaseOption_Discount",
+          "id": 20
+        },
+        "user_active_discounts": {
+          "rule": "repeated",
+          "type": ".StoreItem_PurchaseOption_Discount",
+          "id": 21
+        },
+        "inactive_discounts": {
+          "rule": "repeated",
+          "type": ".StoreItem_PurchaseOption_Discount",
+          "id": 22
+        },
+        "user_can_purchase": {
+          "type": "bool",
+          "id": 30
+        },
+        "user_can_purchase_as_gift": {
+          "type": "bool",
+          "id": 31
+        },
+        "is_commercial_license": {
+          "type": "bool",
+          "id": 40
+        }
+      }
+    },
+    "StoreItem_PurchaseOption_Discount": {
+      "fields": {
+        "discount_amount": {
+          "type": "int64",
+          "id": 1
+        },
+        "discount_description": {
+          "type": "string",
+          "id": 2
+        },
+        "discount_end_date": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "StoreItem_RelatedItems": {
+      "fields": {
+        "parent_appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "StoreItem_ReleaseInfo": {
+      "fields": {
+        "steam_release_date": {
+          "type": "uint32",
+          "id": 1
+        },
+        "original_release_date": {
+          "type": "uint32",
+          "id": 2
+        },
+        "original_steam_release_date": {
+          "type": "uint32",
+          "id": 3
+        },
+        "is_coming_soon": {
+          "type": "bool",
+          "id": 4
+        },
+        "is_preload": {
+          "type": "bool",
+          "id": 5
+        },
+        "custom_release_date_message": {
+          "type": "string",
+          "id": 6
+        },
+        "is_abridged_release_date": {
+          "type": "bool",
+          "id": 7
+        },
+        "is_early_access": {
+          "type": "bool",
+          "id": 10
+        },
+        "mac_release_date": {
+          "type": "uint32",
+          "id": 20
+        },
+        "linux_release_date": {
+          "type": "uint32",
+          "id": 21
+        }
+      }
+    },
+    "StoreItem_Reviews": {
+      "fields": {
+        "summary_filtered": {
+          "type": ".StoreItem_Reviews_StoreReviewSummary",
+          "id": 1
+        },
+        "summary_unfiltered": {
+          "type": ".StoreItem_Reviews_StoreReviewSummary",
+          "id": 2
+        }
+      }
+    },
+    "StoreItem_Reviews_StoreReviewSummary": {
+      "fields": {
+        "review_count": {
+          "type": "uint32",
+          "id": 1
+        },
+        "percent_positive": {
+          "type": "int32",
+          "id": 2
+        },
+        "review_score": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "(description)": "enum"
+          }
+        },
+        "review_score_label": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "StoreItem_Screenshots": {
+      "fields": {
+        "all_ages_screenshots": {
+          "rule": "repeated",
+          "type": ".StoreItem_Screenshots_Screenshot",
+          "id": 2
+        },
+        "mature_content_screenshots": {
+          "rule": "repeated",
+          "type": ".StoreItem_Screenshots_Screenshot",
+          "id": 3
+        }
+      }
+    },
+    "StoreItem_Screenshots_Screenshot": {
+      "fields": {
+        "filename": {
+          "type": "string",
+          "id": 1
+        },
+        "ordinal": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "StoreItem_Tag": {
+      "fields": {
+        "tagid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "weight": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "StoreItem_Trailers": {
+      "fields": {
+        "highlights": {
+          "rule": "repeated",
+          "type": ".StoreItem_Trailers_Trailer",
+          "id": 1
+        },
+        "other_trailers": {
+          "rule": "repeated",
+          "type": ".StoreItem_Trailers_Trailer",
+          "id": 2
+        }
+      }
+    },
+    "StoreItem_Trailers_Trailer": {
+      "fields": {
+        "trailer_name": {
+          "type": "string",
+          "id": 1
+        },
+        "trailer_url_format": {
+          "type": "string",
+          "id": 2
+        },
+        "trailer_480p": {
+          "rule": "repeated",
+          "type": ".StoreItem_Trailers_VideoSource",
+          "id": 3
+        },
+        "trailer_max": {
+          "rule": "repeated",
+          "type": ".StoreItem_Trailers_VideoSource",
+          "id": 4
+        },
+        "microtrailer": {
+          "rule": "repeated",
+          "type": ".StoreItem_Trailers_VideoSource",
+          "id": 5
+        },
+        "screenshot_medium": {
+          "type": "string",
+          "id": 10
+        },
+        "screenshot_full": {
+          "type": "string",
+          "id": 11
+        },
+        "trailer_base_id": {
+          "type": "int32",
+          "id": 12
+        }
+      }
+    },
+    "StoreItem_Trailers_VideoSource": {
+      "fields": {
+        "filename": {
+          "type": "string",
+          "id": 1
+        },
+        "type": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "StoreItemID": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "packageid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "bundleid": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    }
+  }
+}

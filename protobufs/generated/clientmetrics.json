@@ -1,0 +1,143 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "CClientMetrics_ClientBootstrap_RequestInfo": {
+      "fields": {
+        "original_hostname": {
+          "type": "string",
+          "id": 1
+        },
+        "actual_hostname": {
+          "type": "string",
+          "id": 2
+        },
+        "path": {
+          "type": "string",
+          "id": 3
+        },
+        "base_name": {
+          "type": "string",
+          "id": 4
+        },
+        "success": {
+          "type": "bool",
+          "id": 5
+        },
+        "status_code": {
+          "type": "uint32",
+          "id": 6
+        },
+        "address_of_request_url": {
+          "type": "string",
+          "id": 7
+        },
+        "response_time_ms": {
+          "type": "uint32",
+          "id": 8
+        },
+        "bytes_received": {
+          "type": "uint64",
+          "id": 9
+        },
+        "num_retries": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CClientMetrics_ClientBootstrap_Summary": {
+      "fields": {
+        "launcher_type": {
+          "type": "uint32",
+          "id": 1
+        },
+        "steam_realm": {
+          "type": "uint32",
+          "id": 2
+        },
+        "beta_name": {
+          "type": "string",
+          "id": 3
+        },
+        "download_completed": {
+          "type": "bool",
+          "id": 4
+        },
+        "total_time_ms": {
+          "type": "uint32",
+          "id": 6
+        },
+        "manifest_requests": {
+          "rule": "repeated",
+          "type": ".CClientMetrics_ClientBootstrap_RequestInfo",
+          "id": 7
+        },
+        "package_requests": {
+          "rule": "repeated",
+          "type": ".CClientMetrics_ClientBootstrap_RequestInfo",
+          "id": 8
+        }
+      }
+    },
+    "CClientMetrics_ContentDownloadResponse_Counts": {
+      "fields": {
+        "class_100": {
+          "type": "uint32",
+          "id": 1
+        },
+        "class_200": {
+          "type": "uint32",
+          "id": 2
+        },
+        "class_300": {
+          "type": "uint32",
+          "id": 3
+        },
+        "class_400": {
+          "type": "uint32",
+          "id": 4
+        },
+        "class_500": {
+          "type": "uint32",
+          "id": 5
+        },
+        "no_response": {
+          "type": "uint32",
+          "id": 6
+        },
+        "class_unknown": {
+          "type": "uint32",
+          "id": 7
+        }
+      }
+    },
+    "CClientMetrics_ContentDownloadResponse_HostCounts": {
+      "fields": {
+        "hostname": {
+          "type": "string",
+          "id": 1
+        },
+        "source_type": {
+          "type": "uint32",
+          "id": 2
+        },
+        "counts": {
+          "type": ".CClientMetrics_ContentDownloadResponse_Counts",
+          "id": 3
+        }
+      }
+    },
+    "CClientMetrics_ContentDownloadResponse_Hosts": {
+      "fields": {
+        "hosts": {
+          "rule": "repeated",
+          "type": ".CClientMetrics_ContentDownloadResponse_HostCounts",
+          "id": 1
+        }
+      }
+    }
+  }
+}

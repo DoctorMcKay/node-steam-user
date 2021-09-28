@@ -1,0 +1,2787 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false,
+    "(force_php_generation)": true
+  },
+  "nested": {
+    "CMsgClientRegisterAuthTicketWithCM": {
+      "fields": {
+        "protocol_version": {
+          "type": "uint32",
+          "id": 1
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 3
+        },
+        "client_instance_id": {
+          "type": "uint64",
+          "id": 4
+        }
+      }
+    },
+    "CMsgClientTicketAuthComplete": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "game_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "estate": {
+          "type": "uint32",
+          "id": 3
+        },
+        "eauth_session_response": {
+          "type": "uint32",
+          "id": 4
+        },
+        "DEPRECATED_ticket": {
+          "type": "bytes",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket_sequence": {
+          "type": "uint32",
+          "id": 7
+        },
+        "owner_steam_id": {
+          "type": "fixed64",
+          "id": 8
+        }
+      }
+    },
+    "CMsgClientCMList": {
+      "fields": {
+        "cm_addresses": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_ports": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_websocket_addresses": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 3
+        },
+        "percent_default_to_websocket": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgClientP2PConnectionInfo": {
+      "fields": {
+        "steam_id_dest": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steam_id_src": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "candidate": {
+          "type": "bytes",
+          "id": 4
+        },
+        "legacy_connection_id_src": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "rendezvous": {
+          "type": "bytes",
+          "id": 6
+        }
+      }
+    },
+    "CMsgClientP2PConnectionFailInfo": {
+      "fields": {
+        "steam_id_dest": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steam_id_src": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "ep2p_session_error": {
+          "type": "uint32",
+          "id": 4
+        },
+        "connection_id_dest": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "close_reason": {
+          "type": "uint32",
+          "id": 7
+        },
+        "close_message": {
+          "type": "string",
+          "id": 8
+        }
+      }
+    },
+    "CMsgClientNetworkingCertRequest": {
+      "fields": {
+        "key_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientNetworkingCertReply": {
+      "fields": {
+        "cert": {
+          "type": "bytes",
+          "id": 4
+        },
+        "ca_key_id": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "ca_signature": {
+          "type": "bytes",
+          "id": 6
+        }
+      }
+    },
+    "CMsgClientNetworkingMobileCertRequest": {
+      "fields": {
+        "app_id": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientNetworkingMobileCertReply": {
+      "fields": {
+        "encoded_cert": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientGetAppOwnershipTicket": {
+      "fields": {
+        "app_id": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientGetAppOwnershipTicketResponse": {
+      "fields": {
+        "eresult": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientSessionToken": {
+      "fields": {
+        "token": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientGameConnectTokens": {
+      "fields": {
+        "max_tokens_to_keep": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "default": 10
+          }
+        },
+        "tokens": {
+          "rule": "repeated",
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientGamesPlayed": {
+      "fields": {
+        "games_played": {
+          "rule": "repeated",
+          "type": ".CMsgClientGamesPlayed.GamePlayed",
+          "id": 1
+        },
+        "client_os_type": {
+          "type": "uint32",
+          "id": 2
+        },
+        "cloud_gaming_platform": {
+          "type": "uint32",
+          "id": 3
+        }
+      },
+      "nested": {
+        "GamePlayed": {
+          "fields": {
+            "steam_id_gs": {
+              "type": "uint64",
+              "id": 1
+            },
+            "game_id": {
+              "type": "fixed64",
+              "id": 2
+            },
+            "deprecated_game_ip_address": {
+              "type": "uint32",
+              "id": 3
+            },
+            "game_port": {
+              "type": "uint32",
+              "id": 4
+            },
+            "is_secure": {
+              "type": "bool",
+              "id": 5
+            },
+            "token": {
+              "type": "bytes",
+              "id": 6
+            },
+            "game_extra_info": {
+              "type": "string",
+              "id": 7
+            },
+            "game_data_blob": {
+              "type": "bytes",
+              "id": 8
+            },
+            "process_id": {
+              "type": "uint32",
+              "id": 9
+            },
+            "streaming_provider_id": {
+              "type": "uint32",
+              "id": 10
+            },
+            "game_flags": {
+              "type": "uint32",
+              "id": 11
+            },
+            "owner_id": {
+              "type": "uint32",
+              "id": 12
+            },
+            "vr_hmd_vendor": {
+              "type": "string",
+              "id": 13
+            },
+            "vr_hmd_model": {
+              "type": "string",
+              "id": 14
+            },
+            "launch_option_type": {
+              "type": "uint32",
+              "id": 15,
+              "options": {
+                "default": 0
+              }
+            },
+            "primary_controller_type": {
+              "type": "int32",
+              "id": 16,
+              "options": {
+                "default": -1
+              }
+            },
+            "primary_steam_controller_serial": {
+              "type": "string",
+              "id": 17
+            },
+            "total_steam_controller_count": {
+              "type": "uint32",
+              "id": 18,
+              "options": {
+                "default": 0
+              }
+            },
+            "total_non_steam_controller_count": {
+              "type": "uint32",
+              "id": 19,
+              "options": {
+                "default": 0
+              }
+            },
+            "controller_workshop_file_id": {
+              "type": "uint64",
+              "id": 20,
+              "options": {
+                "default": 0
+              }
+            },
+            "launch_source": {
+              "type": "uint32",
+              "id": 21,
+              "options": {
+                "default": 0
+              }
+            },
+            "vr_hmd_runtime": {
+              "type": "uint32",
+              "id": 22
+            },
+            "game_ip_address": {
+              "type": ".CMsgIPAddress",
+              "id": 23
+            },
+            "controller_connection_type": {
+              "type": "uint32",
+              "id": 24,
+              "options": {
+                "default": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "CMsgGSApprove": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "owner_steam_id": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGSDeny": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "edeny_reason": {
+          "type": "int32",
+          "id": 2
+        },
+        "deny_string": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CMsgGSKick": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "edeny_reason": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientAuthList": {
+      "fields": {
+        "tokens_left": {
+          "type": "uint32",
+          "id": 1
+        },
+        "last_request_seq": {
+          "type": "uint32",
+          "id": 2
+        },
+        "last_request_seq_from_server": {
+          "type": "uint32",
+          "id": 3
+        },
+        "tickets": {
+          "rule": "repeated",
+          "type": ".CMsgAuthTicket",
+          "id": 4
+        },
+        "app_ids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        },
+        "message_sequence": {
+          "type": "uint32",
+          "id": 6
+        }
+      }
+    },
+    "CMsgClientAuthListAck": {
+      "fields": {
+        "ticket_crc": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        },
+        "app_ids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        },
+        "message_sequence": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientLicenseList": {
+      "fields": {
+        "eresult": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        },
+        "licenses": {
+          "rule": "repeated",
+          "type": ".CMsgClientLicenseList.License",
+          "id": 2
+        }
+      },
+      "nested": {
+        "License": {
+          "fields": {
+            "package_id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "time_created": {
+              "type": "fixed32",
+              "id": 2
+            },
+            "time_next_process": {
+              "type": "fixed32",
+              "id": 3
+            },
+            "minute_limit": {
+              "type": "int32",
+              "id": 4
+            },
+            "minutes_used": {
+              "type": "int32",
+              "id": 5
+            },
+            "payment_method": {
+              "type": "uint32",
+              "id": 6
+            },
+            "flags": {
+              "type": "uint32",
+              "id": 7
+            },
+            "purchase_country_code": {
+              "type": "string",
+              "id": 8
+            },
+            "license_type": {
+              "type": "uint32",
+              "id": 9
+            },
+            "territory_code": {
+              "type": "int32",
+              "id": 10
+            },
+            "change_number": {
+              "type": "int32",
+              "id": 11
+            },
+            "owner_id": {
+              "type": "uint32",
+              "id": 12
+            },
+            "initial_period": {
+              "type": "uint32",
+              "id": 13
+            },
+            "initial_time_unit": {
+              "type": "uint32",
+              "id": 14
+            },
+            "renewal_period": {
+              "type": "uint32",
+              "id": 15
+            },
+            "renewal_time_unit": {
+              "type": "uint32",
+              "id": 16
+            },
+            "access_token": {
+              "type": "uint64",
+              "id": 17
+            },
+            "master_package_id": {
+              "type": "uint32",
+              "id": 18
+            }
+          }
+        }
+      }
+    },
+    "CMsgClientIsLimitedAccount": {
+      "fields": {
+        "bis_limited_account": {
+          "type": "bool",
+          "id": 1
+        },
+        "bis_community_banned": {
+          "type": "bool",
+          "id": 2
+        },
+        "bis_locked_account": {
+          "type": "bool",
+          "id": 3
+        },
+        "bis_limited_account_allowed_to_invite_friends": {
+          "type": "bool",
+          "id": 4
+        }
+      }
+    },
+    "CMsgClientRequestedClientStats": {
+      "fields": {
+        "stats_to_send": {
+          "rule": "repeated",
+          "type": ".CMsgClientRequestedClientStats.StatsToSend",
+          "id": 1
+        }
+      },
+      "nested": {
+        "StatsToSend": {
+          "fields": {
+            "client_stat": {
+              "type": "uint32",
+              "id": 1
+            },
+            "stat_aggregate_method": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgClientStat2": {
+      "fields": {
+        "stat_detail": {
+          "rule": "repeated",
+          "type": ".CMsgClientStat2.StatDetail",
+          "id": 1
+        }
+      },
+      "nested": {
+        "StatDetail": {
+          "fields": {
+            "client_stat": {
+              "type": "uint32",
+              "id": 1
+            },
+            "ll_value": {
+              "type": "int64",
+              "id": 2
+            },
+            "time_of_day": {
+              "type": "uint32",
+              "id": 3
+            },
+            "cell_id": {
+              "type": "uint32",
+              "id": 4
+            },
+            "depot_id": {
+              "type": "uint32",
+              "id": 5
+            },
+            "app_id": {
+              "type": "uint32",
+              "id": 6
+            }
+          }
+        }
+      }
+    },
+    "CMsgClientInviteToGame": {
+      "fields": {
+        "steam_id_dest": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steam_id_src": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "connect_string": {
+          "type": "string",
+          "id": 3
+        },
+        "remote_play": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CMsgClientChatInvite": {
+      "fields": {
+        "steam_id_invited": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steam_id_chat": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "steam_id_patron": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "chatroom_type": {
+          "type": "int32",
+          "id": 4
+        },
+        "steam_id_friend_chat": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "chat_name": {
+          "type": "string",
+          "id": 6
+        },
+        "game_id": {
+          "type": "fixed64",
+          "id": 7
+        }
+      }
+    },
+    "CMsgClientConnectionStats": {
+      "fields": {
+        "stats_logon": {
+          "type": ".CMsgClientConnectionStats.Stats_Logon",
+          "id": 1
+        },
+        "stats_vconn": {
+          "type": ".CMsgClientConnectionStats.Stats_VConn",
+          "id": 2
+        }
+      },
+      "nested": {
+        "Stats_Logon": {
+          "fields": {
+            "connect_attempts": {
+              "type": "int32",
+              "id": 1
+            },
+            "connect_successes": {
+              "type": "int32",
+              "id": 2
+            },
+            "connect_failures": {
+              "type": "int32",
+              "id": 3
+            },
+            "connections_dropped": {
+              "type": "int32",
+              "id": 4
+            },
+            "seconds_running": {
+              "type": "uint32",
+              "id": 5
+            },
+            "msec_tologonthistime": {
+              "type": "uint32",
+              "id": 6
+            },
+            "count_bad_cms": {
+              "type": "uint32",
+              "id": 7
+            }
+          }
+        },
+        "Stats_UDP": {
+          "fields": {
+            "pkts_sent": {
+              "type": "uint64",
+              "id": 1
+            },
+            "bytes_sent": {
+              "type": "uint64",
+              "id": 2
+            },
+            "pkts_recv": {
+              "type": "uint64",
+              "id": 3
+            },
+            "pkts_processed": {
+              "type": "uint64",
+              "id": 4
+            },
+            "bytes_recv": {
+              "type": "uint64",
+              "id": 5
+            }
+          }
+        },
+        "Stats_VConn": {
+          "fields": {
+            "connections_udp": {
+              "type": "uint32",
+              "id": 1
+            },
+            "connections_tcp": {
+              "type": "uint32",
+              "id": 2
+            },
+            "stats_udp": {
+              "type": ".CMsgClientConnectionStats.Stats_UDP",
+              "id": 3
+            },
+            "pkts_abandoned": {
+              "type": "uint64",
+              "id": 4
+            },
+            "conn_req_received": {
+              "type": "uint64",
+              "id": 5
+            },
+            "pkts_resent": {
+              "type": "uint64",
+              "id": 6
+            },
+            "msgs_sent": {
+              "type": "uint64",
+              "id": 7
+            },
+            "msgs_sent_failed": {
+              "type": "uint64",
+              "id": 8
+            },
+            "msgs_recv": {
+              "type": "uint64",
+              "id": 9
+            },
+            "datagrams_sent": {
+              "type": "uint64",
+              "id": 10
+            },
+            "datagrams_recv": {
+              "type": "uint64",
+              "id": 11
+            },
+            "bad_pkts_recv": {
+              "type": "uint64",
+              "id": 12
+            },
+            "unknown_conn_pkts_recv": {
+              "type": "uint64",
+              "id": 13
+            },
+            "missed_pkts_recv": {
+              "type": "uint64",
+              "id": 14
+            },
+            "dup_pkts_recv": {
+              "type": "uint64",
+              "id": 15
+            },
+            "failed_connect_challenges": {
+              "type": "uint64",
+              "id": 16
+            },
+            "micro_sec_avg_latency": {
+              "type": "uint32",
+              "id": 17
+            },
+            "micro_sec_min_latency": {
+              "type": "uint32",
+              "id": 18
+            },
+            "micro_sec_max_latency": {
+              "type": "uint32",
+              "id": 19
+            },
+            "mem_pool_msg_in_use": {
+              "type": "uint32",
+              "id": 20
+            }
+          }
+        }
+      }
+    },
+    "CMsgClientServersAvailable": {
+      "fields": {
+        "server_types_available": {
+          "rule": "repeated",
+          "type": ".CMsgClientServersAvailable.Server_Types_Available",
+          "id": 1
+        },
+        "server_type_for_auth_services": {
+          "type": "uint32",
+          "id": 2
+        }
+      },
+      "nested": {
+        "Server_Types_Available": {
+          "fields": {
+            "server": {
+              "type": "uint32",
+              "id": 1
+            },
+            "changed": {
+              "type": "bool",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgClientReportOverlayDetourFailure": {
+      "fields": {
+        "failure_strings": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientRequestEncryptedAppTicket": {
+      "fields": {
+        "app_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "userdata": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientRequestEncryptedAppTicketResponse": {
+      "fields": {
+        "app_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "encrypted_app_ticket": {
+          "type": ".EncryptedAppTicket",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientWalletInfoUpdate": {
+      "fields": {
+        "has_wallet": {
+          "type": "bool",
+          "id": 1
+        },
+        "balance": {
+          "type": "int32",
+          "id": 2
+        },
+        "currency": {
+          "type": "int32",
+          "id": 3
+        },
+        "balance_delayed": {
+          "type": "int32",
+          "id": 4
+        },
+        "balance64": {
+          "type": "int64",
+          "id": 5,
+          "options": {
+            "(php_output_always_number)": true
+          }
+        },
+        "balance64_delayed": {
+          "type": "int64",
+          "id": 6,
+          "options": {
+            "(php_output_always_number)": true
+          }
+        },
+        "realm": {
+          "type": "int32",
+          "id": 7
+        }
+      }
+    },
+    "CMsgClientAMGetClanOfficers": {
+      "fields": {
+        "steamid_clan": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClientAMGetClanOfficersResponse": {
+      "fields": {
+        "eresult": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid_clan": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "officer_count": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClientAMGetPersonaNameHistory": {
+      "fields": {
+        "id_count": {
+          "type": "int32",
+          "id": 1
+        },
+        "Ids": {
+          "rule": "repeated",
+          "type": ".CMsgClientAMGetPersonaNameHistory.IdInstance",
+          "id": 2
+        }
+      },
+      "nested": {
+        "IdInstance": {
+          "fields": {
+            "steamid": {
+              "type": "fixed64",
+              "id": 1
+            }
+          }
+        }
+      }
+    },
+    "CMsgClientAMGetPersonaNameHistoryResponse": {
+      "fields": {
+        "responses": {
+          "rule": "repeated",
+          "type": ".CMsgClientAMGetPersonaNameHistoryResponse.NameTableInstance",
+          "id": 2
+        }
+      },
+      "nested": {
+        "NameTableInstance": {
+          "fields": {
+            "eresult": {
+              "type": "int32",
+              "id": 1,
+              "options": {
+                "default": 2
+              }
+            },
+            "steamid": {
+              "type": "fixed64",
+              "id": 2
+            },
+            "names": {
+              "rule": "repeated",
+              "type": ".CMsgClientAMGetPersonaNameHistoryResponse.NameTableInstance.NameInstance",
+              "id": 3
+            }
+          },
+          "nested": {
+            "NameInstance": {
+              "fields": {
+                "name_since": {
+                  "type": "fixed32",
+                  "id": 1
+                },
+                "name": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CMsgClientDeregisterWithServer": {
+      "fields": {
+        "eservertype": {
+          "type": "uint32",
+          "id": 1
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientClanState": {
+      "fields": {
+        "steamid_clan": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_account_flags": {
+          "type": "uint32",
+          "id": 3
+        },
+        "name_info": {
+          "type": ".CMsgClientClanState.NameInfo",
+          "id": 4
+        },
+        "user_counts": {
+          "type": ".CMsgClientClanState.UserCounts",
+          "id": 5
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CMsgClientClanState.Event",
+          "id": 6
+        },
+        "announcements": {
+          "rule": "repeated",
+          "type": ".CMsgClientClanState.Event",
+          "id": 7
+        },
+        "chat_room_private": {
+          "type": "bool",
+          "id": 8
+        }
+      },
+      "nested": {
+        "NameInfo": {
+          "fields": {
+            "clan_name": {
+              "type": "string",
+              "id": 1
+            },
+            "sha_avatar": {
+              "type": "bytes",
+              "id": 2
+            }
+          }
+        },
+        "UserCounts": {
+          "fields": {
+            "members": {
+              "type": "uint32",
+              "id": 1
+            },
+            "online": {
+              "type": "uint32",
+              "id": 2
+            },
+            "chatting": {
+              "type": "uint32",
+              "id": 3
+            },
+            "in_game": {
+              "type": "uint32",
+              "id": 4
+            },
+            "chat_room_members": {
+              "type": "uint32",
+              "id": 5
+            }
+          }
+        },
+        "Event": {
+          "fields": {
+            "gid": {
+              "type": "fixed64",
+              "id": 1
+            },
+            "event_time": {
+              "type": "uint32",
+              "id": 2
+            },
+            "headline": {
+              "type": "string",
+              "id": 3
+            },
+            "game_id": {
+              "type": "fixed64",
+              "id": 4
+            },
+            "just_posted": {
+              "type": "bool",
+              "id": 5
+            }
+          }
+        }
+      }
+    },
+    "msgpool_soft_limit": {
+      "type": "int32",
+      "id": 50000,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 32
+      }
+    },
+    "msgpool_hard_limit": {
+      "type": "int32",
+      "id": 50001,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 384
+      }
+    },
+    "force_php_generation": {
+      "type": "bool",
+      "id": 50000,
+      "extend": ".google.protobuf.FileOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "php_output_always_number": {
+      "type": "bool",
+      "id": 50020,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EProtoClanEventType": {
+      "values": {
+        "k_EClanOtherEvent": 1,
+        "k_EClanGameEvent": 2,
+        "k_EClanPartyEvent": 3,
+        "k_EClanMeetingEvent": 4,
+        "k_EClanSpecialCauseEvent": 5,
+        "k_EClanMusicAndArtsEvent": 6,
+        "k_EClanSportsEvent": 7,
+        "k_EClanTripEvent": 8,
+        "k_EClanChatEvent": 9,
+        "k_EClanGameReleaseEvent": 10,
+        "k_EClanBroadcastEvent": 11,
+        "k_EClanSmallUpdateEvent": 12,
+        "k_EClanPreAnnounceMajorUpdateEvent": 13,
+        "k_EClanMajorUpdateEvent": 14,
+        "k_EClanDLCReleaseEvent": 15,
+        "k_EClanFutureReleaseEvent": 16,
+        "k_EClanESportTournamentStreamEvent": 17,
+        "k_EClanDevStreamEvent": 18,
+        "k_EClanFamousStreamEvent": 19,
+        "k_EClanGameSalesEvent": 20,
+        "k_EClanGameItemSalesEvent": 21,
+        "k_EClanInGameBonusXPEvent": 22,
+        "k_EClanInGameLootEvent": 23,
+        "k_EClanInGamePerksEvent": 24,
+        "k_EClanInGameChallengeEvent": 25,
+        "k_EClanInGameContestEvent": 26,
+        "k_EClanIRLEvent": 27,
+        "k_EClanNewsEvent": 28,
+        "k_EClanBetaReleaseEvent": 29,
+        "k_EClanInGameContentReleaseEvent": 30,
+        "k_EClanFreeTrial": 31,
+        "k_EClanSeasonRelease": 32,
+        "k_EClanSeasonUpdate": 33,
+        "k_EClanCrosspostEvent": 34,
+        "k_EClanInGameEventGeneral": 35
+      }
+    },
+    "PartnerEventNotificationType": {
+      "values": {
+        "k_EEventStart": 0,
+        "k_EEventBroadcastStart": 1,
+        "k_EEventMatchStart": 2,
+        "k_EEventPartnerMaxType": 3
+      }
+    },
+    "CMsgIPAddress": {
+      "oneofs": {
+        "ip": {
+          "oneof": [
+            "v4",
+            "v6"
+          ]
+        }
+      },
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgIPAddressBucket": {
+      "fields": {
+        "original_ip_address": {
+          "type": ".CMsgIPAddress",
+          "id": 1
+        },
+        "bucket": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtoBufHeader": {
+      "oneofs": {
+        "ip_addr": {
+          "oneof": [
+            "ip",
+            "ip_v6"
+          ]
+        }
+      },
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_sessionid": {
+          "type": "int32",
+          "id": 2
+        },
+        "routing_appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "jobid_source": {
+          "type": "fixed64",
+          "id": 10,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "jobid_target": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "target_job_name": {
+          "type": "string",
+          "id": 12
+        },
+        "seq_num": {
+          "type": "int32",
+          "id": 24
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "default": 2
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "id": 14
+        },
+        "auth_account_flags": {
+          "type": "uint32",
+          "id": 16
+        },
+        "token_source": {
+          "type": "uint32",
+          "id": 22
+        },
+        "admin_spoofing_user": {
+          "type": "bool",
+          "id": 23
+        },
+        "transport_error": {
+          "type": "int32",
+          "id": 17,
+          "options": {
+            "default": 1
+          }
+        },
+        "messageid": {
+          "type": "uint64",
+          "id": 18,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "publisher_group_id": {
+          "type": "uint32",
+          "id": 19
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "trace_tag": {
+          "type": "uint64",
+          "id": 21
+        },
+        "webapi_key_id": {
+          "type": "uint32",
+          "id": 25
+        },
+        "is_from_external_source": {
+          "type": "bool",
+          "id": 26
+        },
+        "forward_to_sysid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_sysid": {
+          "type": "uint32",
+          "id": 28
+        },
+        "wg_token": {
+          "type": "string",
+          "id": 30
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "realm": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        },
+        "ip": {
+          "type": "uint32",
+          "id": 15
+        },
+        "ip_v6": {
+          "type": "bytes",
+          "id": 29
+        }
+      }
+    },
+    "CMsgMulti": {
+      "fields": {
+        "size_unzipped": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message_body": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtobufWrapped": {
+      "fields": {
+        "message_body": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgAuthTicket": {
+      "fields": {
+        "estate": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "h_steam_pipe": {
+          "type": "uint32",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 7
+        }
+      }
+    },
+    "CCDDBAppDetailCommon": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "icon": {
+          "type": "string",
+          "id": 3
+        },
+        "logo": {
+          "type": "string",
+          "id": 4
+        },
+        "logo_small": {
+          "type": "string",
+          "id": 5
+        },
+        "tool": {
+          "type": "bool",
+          "id": 6
+        },
+        "demo": {
+          "type": "bool",
+          "id": 7
+        },
+        "media": {
+          "type": "bool",
+          "id": 8
+        },
+        "community_visible_stats": {
+          "type": "bool",
+          "id": 9
+        },
+        "friendly_name": {
+          "type": "string",
+          "id": 10
+        },
+        "propagation": {
+          "type": "string",
+          "id": 11
+        },
+        "has_adult_content": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_visible_in_steam_china": {
+          "type": "bool",
+          "id": 13
+        }
+      }
+    },
+    "CMsgAppRights": {
+      "fields": {
+        "edit_info": {
+          "type": "bool",
+          "id": 1
+        },
+        "publish": {
+          "type": "bool",
+          "id": 2
+        },
+        "view_error_data": {
+          "type": "bool",
+          "id": 3
+        },
+        "download": {
+          "type": "bool",
+          "id": 4
+        },
+        "upload_cdkeys": {
+          "type": "bool",
+          "id": 5
+        },
+        "generate_cdkeys": {
+          "type": "bool",
+          "id": 6
+        },
+        "view_financials": {
+          "type": "bool",
+          "id": 7
+        },
+        "manage_ceg": {
+          "type": "bool",
+          "id": 8
+        },
+        "manage_signing": {
+          "type": "bool",
+          "id": 9
+        },
+        "manage_cdkeys": {
+          "type": "bool",
+          "id": 10
+        },
+        "edit_marketing": {
+          "type": "bool",
+          "id": 11
+        },
+        "economy_support": {
+          "type": "bool",
+          "id": 12
+        },
+        "economy_support_supervisor": {
+          "type": "bool",
+          "id": 13
+        },
+        "manage_pricing": {
+          "type": "bool",
+          "id": 14
+        },
+        "broadcast_live": {
+          "type": "bool",
+          "id": 15
+        },
+        "view_marketing_traffic": {
+          "type": "bool",
+          "id": 16
+        },
+        "edit_store_display_content": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CCuratorPreferences": {
+      "fields": {
+        "supported_languages": {
+          "type": "uint32",
+          "id": 1
+        },
+        "platform_windows": {
+          "type": "bool",
+          "id": 2
+        },
+        "platform_mac": {
+          "type": "bool",
+          "id": 3
+        },
+        "platform_linux": {
+          "type": "bool",
+          "id": 4
+        },
+        "vr_content": {
+          "type": "bool",
+          "id": 5
+        },
+        "adult_content_violence": {
+          "type": "bool",
+          "id": 6
+        },
+        "adult_content_sex": {
+          "type": "bool",
+          "id": 7
+        },
+        "timestamp_updated": {
+          "type": "uint32",
+          "id": 8
+        },
+        "tagids_curated": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "packed": false
+          }
+        },
+        "tagids_filtered": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "website_title": {
+          "type": "string",
+          "id": 11
+        },
+        "website_url": {
+          "type": "string",
+          "id": 12
+        },
+        "discussion_url": {
+          "type": "string",
+          "id": 13
+        },
+        "show_broadcast": {
+          "type": "bool",
+          "id": 14
+        }
+      }
+    },
+    "CLocalizationToken": {
+      "fields": {
+        "language": {
+          "type": "uint32",
+          "id": 1
+        },
+        "localized_string": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClanEventUserNewsTuple": {
+      "fields": {
+        "clanid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "announcement_gid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "rtime_start": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime_end": {
+          "type": "uint32",
+          "id": 5
+        },
+        "priority_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "type": {
+          "type": "uint32",
+          "id": 7
+        },
+        "clamp_range_slot": {
+          "type": "uint32",
+          "id": 8
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CClanMatchEventByRange": {
+      "fields": {
+        "rtime_before": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rtime_after": {
+          "type": "uint32",
+          "id": 2
+        },
+        "qualified": {
+          "type": "uint32",
+          "id": 3
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CClanEventUserNewsTuple",
+          "id": 4
+        }
+      }
+    },
+    "CCommunity_ClanAnnouncementInfo": {
+      "fields": {
+        "gid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "clanid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "posterid": {
+          "type": "uint64",
+          "id": 3
+        },
+        "headline": {
+          "type": "string",
+          "id": 4
+        },
+        "posttime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "updatetime": {
+          "type": "uint32",
+          "id": 6
+        },
+        "body": {
+          "type": "string",
+          "id": 7
+        },
+        "commentcount": {
+          "type": "int32",
+          "id": 8
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 9
+        },
+        "language": {
+          "type": "int32",
+          "id": 10
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 11
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 13
+        },
+        "voteupcount": {
+          "type": "int32",
+          "id": 14
+        },
+        "votedowncount": {
+          "type": "int32",
+          "id": 15
+        }
+      }
+    },
+    "CClanEventData": {
+      "fields": {
+        "gid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "event_name": {
+          "type": "string",
+          "id": 3
+        },
+        "event_type": {
+          "type": ".EProtoClanEventType",
+          "id": 4,
+          "options": {
+            "default": "k_EClanOtherEvent"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "server_address": {
+          "type": "string",
+          "id": 6
+        },
+        "server_password": {
+          "type": "string",
+          "id": 7
+        },
+        "rtime32_start_time": {
+          "type": "uint32",
+          "id": 8
+        },
+        "rtime32_end_time": {
+          "type": "uint32",
+          "id": 9
+        },
+        "comment_count": {
+          "type": "int32",
+          "id": 10
+        },
+        "creator_steamid": {
+          "type": "fixed64",
+          "id": 11
+        },
+        "last_update_steamid": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_notes": {
+          "type": "string",
+          "id": 13
+        },
+        "jsondata": {
+          "type": "string",
+          "id": 14
+        },
+        "announcement_body": {
+          "type": ".CCommunity_ClanAnnouncementInfo",
+          "id": 15
+        },
+        "published": {
+          "type": "bool",
+          "id": 16
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 17
+        },
+        "rtime32_visibility_start": {
+          "type": "uint32",
+          "id": 18
+        },
+        "rtime32_visibility_end": {
+          "type": "uint32",
+          "id": 19
+        },
+        "broadcaster_accountid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "follower_count": {
+          "type": "uint32",
+          "id": 21
+        },
+        "ignore_count": {
+          "type": "uint32",
+          "id": 22
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 23
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 24
+        },
+        "news_post_gid": {
+          "type": "fixed64",
+          "id": 25
+        },
+        "rtime_mod_reviewed": {
+          "type": "uint32",
+          "id": 26
+        },
+        "featured_app_tagid": {
+          "type": "uint32",
+          "id": 27
+        },
+        "referenced_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 28,
+          "options": {
+            "packed": false
+          }
+        },
+        "build_id": {
+          "type": "uint32",
+          "id": 29
+        },
+        "build_branch": {
+          "type": "string",
+          "id": 30
+        }
+      }
+    },
+    "CBilling_Address": {
+      "fields": {
+        "first_name": {
+          "type": "string",
+          "id": 1
+        },
+        "last_name": {
+          "type": "string",
+          "id": 2
+        },
+        "address1": {
+          "type": "string",
+          "id": 3
+        },
+        "address2": {
+          "type": "string",
+          "id": 4
+        },
+        "city": {
+          "type": "string",
+          "id": 5
+        },
+        "us_state": {
+          "type": "string",
+          "id": 6
+        },
+        "country_code": {
+          "type": "string",
+          "id": 7
+        },
+        "postcode": {
+          "type": "string",
+          "id": 8
+        },
+        "zip_plus4": {
+          "type": "int32",
+          "id": 9
+        },
+        "phone": {
+          "type": "string",
+          "id": 10
+        }
+      }
+    },
+    "CPackageReservationStatus": {
+      "fields": {
+        "packageid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "reservation_state": {
+          "type": "int32",
+          "id": 2
+        },
+        "queue_position": {
+          "type": "int32",
+          "id": 3
+        },
+        "total_queue_size": {
+          "type": "int32",
+          "id": 4
+        },
+        "reservation_country_code": {
+          "type": "string",
+          "id": 5
+        },
+        "expired": {
+          "type": "bool",
+          "id": 6
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 7
+        },
+        "time_reserved": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "EncryptedAppTicket": {
+      "fields": {
+        "ticket_version_no": {
+          "type": "uint32",
+          "id": 1
+        },
+        "crc_encryptedticket": {
+          "type": "uint32",
+          "id": 2
+        },
+        "cb_encrypteduserdata": {
+          "type": "uint32",
+          "id": 3
+        },
+        "cb_encrypted_appownershipticket": {
+          "type": "uint32",
+          "id": 4
+        },
+        "encrypted_ticket": {
+          "type": "bytes",
+          "id": 5
+        }
+      }
+    }
+  }
+}

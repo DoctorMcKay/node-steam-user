@@ -1,0 +1,1320 @@
+{
+  "options": {
+    "cc_generic_services": false,
+    "optimize_for": "SPEED"
+  },
+  "nested": {
+    "EAuthTokenPlatformType": {
+      "values": {
+        "k_EAuthTokenPlatformType_Unknown": 0,
+        "k_EAuthTokenPlatformType_SteamClient": 1,
+        "k_EAuthTokenPlatformType_WebBrowser": 2,
+        "k_EAuthTokenPlatformType_MobileApp": 3
+      }
+    },
+    "EAuthSessionGuardType": {
+      "values": {
+        "k_EAuthSessionGuardType_Unknown": 0,
+        "k_EAuthSessionGuardType_None": 1,
+        "k_EAuthSessionGuardType_EmailCode": 2,
+        "k_EAuthSessionGuardType_DeviceCode": 3,
+        "k_EAuthSessionGuardType_DeviceConfirmation": 4,
+        "k_EAuthSessionGuardType_EmailConfirmation": 5
+      }
+    },
+    "CAuthentication_GetPasswordRSAPublicKey_Request": {
+      "fields": {
+        "account_name": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "user-provided account name to get an RSA key for"
+          }
+        }
+      }
+    },
+    "CAuthentication_GetPasswordRSAPublicKey_Response": {
+      "fields": {
+        "publickey_mod": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "the public key modulus"
+          }
+        },
+        "publickey_exp": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "the public key exponent"
+          }
+        },
+        "timestamp": {
+          "type": "uint64",
+          "id": 3,
+          "options": {
+            "(description)": "the timestamp the key was generated"
+          }
+        }
+      }
+    },
+    "CAuthentication_BeginAuthSessionViaQR_Request": {
+      "fields": {
+        "device_friendly_name": {
+          "type": "string",
+          "id": 1
+        },
+        "platform_type": {
+          "type": ".EAuthTokenPlatformType",
+          "id": 2,
+          "options": {
+            "default": "k_EAuthTokenPlatformType_Unknown"
+          }
+        }
+      }
+    },
+    "CAuthentication_AllowedConfirmation": {
+      "fields": {
+        "confirmation_type": {
+          "type": ".EAuthSessionGuardType",
+          "id": 1,
+          "options": {
+            "default": "k_EAuthSessionGuardType_Unknown",
+            "(description)": "authentication can proceed with this confirmation type"
+          }
+        },
+        "associated_message": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "message to be interpreted depending on the confirmation type. for email confirmation, this might be the redacted email address to which email was sent."
+          }
+        }
+      }
+    },
+    "CAuthentication_BeginAuthSessionViaQR_Response": {
+      "fields": {
+        "client_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "unique identifier of requestor, also used for routing, portion of QR code"
+          }
+        },
+        "challenge_url": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "URL based on client ID, which will be rendered as QR code"
+          }
+        },
+        "request_id": {
+          "type": "bytes",
+          "id": 3,
+          "options": {
+            "(description)": "unique request ID to be presented by requestor at poll time - must not be rendered in QR"
+          }
+        },
+        "interval": {
+          "type": "float",
+          "id": 4,
+          "options": {
+            "(description)": "refresh interval with which requestor should call PollAuthSessionStatus"
+          }
+        },
+        "allowed_confirmations": {
+          "rule": "repeated",
+          "type": ".CAuthentication_AllowedConfirmation",
+          "id": 5,
+          "options": {
+            "(description)": "the confirmation types that will be able to confirm the request"
+          }
+        },
+        "version": {
+          "type": "int32",
+          "id": 6,
+          "options": {
+            "(description)": "version of the QR data"
+          }
+        }
+      }
+    },
+    "CAuthentication_BeginAuthSessionViaCredentials_Request": {
+      "fields": {
+        "device_friendly_name": {
+          "type": "string",
+          "id": 1
+        },
+        "account_name": {
+          "type": "string",
+          "id": 2
+        },
+        "encrypted_password": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "password, RSA encrypted client side"
+          }
+        },
+        "encryption_timestamp": {
+          "type": "uint64",
+          "id": 4,
+          "options": {
+            "(description)": "timestamp to map to a key - STime"
+          }
+        },
+        "remember_login": {
+          "type": "bool",
+          "id": 5
+        },
+        "platform_type": {
+          "type": ".EAuthTokenPlatformType",
+          "id": 6,
+          "options": {
+            "default": "k_EAuthTokenPlatformType_Unknown"
+          }
+        }
+      }
+    },
+    "CAuthentication_BeginAuthSessionViaCredentials_Response": {
+      "fields": {
+        "client_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "unique identifier of requestor, also used for routing"
+          }
+        },
+        "request_id": {
+          "type": "bytes",
+          "id": 2,
+          "options": {
+            "(description)": "unique request ID to be presented by requestor at poll time - must not be transferred or displayed"
+          }
+        },
+        "interval": {
+          "type": "float",
+          "id": 3,
+          "options": {
+            "(description)": "refresh interval with which requestor should call PollAuthSessionStatus"
+          }
+        },
+        "allowed_confirmations": {
+          "rule": "repeated",
+          "type": ".CAuthentication_AllowedConfirmation",
+          "id": 4,
+          "options": {
+            "(description)": "the confirmation types that will be able to confirm the request"
+          }
+        },
+        "steamid": {
+          "type": "uint64",
+          "id": 5,
+          "options": {
+            "(description)": "steamid of the account logging in - will only be included if the credentials were correct"
+          }
+        }
+      }
+    },
+    "CAuthentication_PollAuthSessionStatus_Request": {
+      "fields": {
+        "client_id": {
+          "type": "uint64",
+          "id": 1
+        },
+        "request_id": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CAuthentication_PollAuthSessionStatus_Response": {
+      "fields": {
+        "new_client_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "if challenge is old, this is the new client id"
+          }
+        },
+        "new_challenge_url": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "if challenge is old, this is the new challenge ID to re-render for mobile confirmation"
+          }
+        },
+        "refresh_token": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "if login has been confirmed, this is the requestor's new refresh token"
+          }
+        },
+        "access_token": {
+          "type": "string",
+          "id": 4,
+          "options": {
+            "(description)": "if login has been confirmed, this is a new token subordinate to refresh_token"
+          }
+        }
+      }
+    },
+    "CAuthentication_GetAuthSessionInfo_Request": {
+      "fields": {
+        "client_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "client ID from scanned QR Code, used for routing"
+          }
+        }
+      }
+    },
+    "CAuthentication_GetAuthSessionInfo_Response": {
+      "fields": {
+        "ip": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "IP address of requestor"
+          }
+        },
+        "geoloc": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "geoloc info of requestor"
+          }
+        },
+        "city": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "city of requestor"
+          }
+        },
+        "state": {
+          "type": "string",
+          "id": 4,
+          "options": {
+            "(description)": "state of requestor"
+          }
+        },
+        "country": {
+          "type": "string",
+          "id": 5,
+          "options": {
+            "(description)": "country of requestor"
+          }
+        },
+        "platform_type": {
+          "type": ".EAuthTokenPlatformType",
+          "id": 6,
+          "options": {
+            "default": "k_EAuthTokenPlatformType_Unknown",
+            "(description)": "platform type of requestor"
+          }
+        },
+        "device_friendly_name": {
+          "type": "string",
+          "id": 7
+        }
+      }
+    },
+    "CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request": {
+      "fields": {
+        "version": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(description)": "version field"
+          }
+        },
+        "client_id": {
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "(description)": "pending client ID, from scanned QR Code"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "(description)": "user who wants to login"
+          }
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 4,
+          "options": {
+            "(description)": "HMAC digest over {version,client_id,steamid} via user's private key"
+          }
+        },
+        "confirm": {
+          "type": "bool",
+          "id": 5,
+          "options": {
+            "default": false,
+            "(description)": "Whether to confirm the login (true) or deny the login (false)"
+          }
+        }
+      }
+    },
+    "CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response": {
+      "fields": {}
+    },
+    "CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request": {
+      "fields": {
+        "client_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "pending client ID, from initialized session"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "user who wants to login"
+          }
+        },
+        "code": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "confirmation code"
+          }
+        },
+        "code_type": {
+          "type": ".EAuthSessionGuardType",
+          "id": 4,
+          "options": {
+            "default": "k_EAuthSessionGuardType_Unknown",
+            "(description)": "type of confirmation code"
+          }
+        }
+      }
+    },
+    "CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response": {
+      "fields": {}
+    },
+    "CCloudGaming_CreateNonce_Request": {
+      "fields": {
+        "platform": {
+          "type": "string",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CCloudGaming_CreateNonce_Response": {
+      "fields": {
+        "nonce": {
+          "type": "string",
+          "id": 1
+        },
+        "expiry": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CCloudGaming_GetTimeRemaining_Request": {
+      "fields": {
+        "platform": {
+          "type": "string",
+          "id": 1
+        },
+        "appid_list": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CCloudGaming_TimeRemaining": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "minutes_remaining": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CCloudGaming_GetTimeRemaining_Response": {
+      "fields": {
+        "entries": {
+          "rule": "repeated",
+          "type": ".CCloudGaming_TimeRemaining",
+          "id": 2
+        }
+      }
+    },
+    "Authentication": {
+      "options": {
+        "(service_description)": "Authentication Service"
+      },
+      "methods": {
+        "GetPasswordRSAPublicKey": {
+          "requestType": ".CAuthentication_GetPasswordRSAPublicKey_Request",
+          "responseType": ".CAuthentication_GetPasswordRSAPublicKey_Response",
+          "options": {
+            "(method_description)": "Fetches RSA public key to use to encrypt passwords for a given account name"
+          }
+        },
+        "BeginAuthSessionViaQR": {
+          "requestType": ".CAuthentication_BeginAuthSessionViaQR_Request",
+          "responseType": ".CAuthentication_BeginAuthSessionViaQR_Response",
+          "options": {
+            "(method_description)": "start authentication process"
+          }
+        },
+        "BeginAuthSessionViaCredentials": {
+          "requestType": ".CAuthentication_BeginAuthSessionViaCredentials_Request",
+          "responseType": ".CAuthentication_BeginAuthSessionViaCredentials_Response",
+          "options": {
+            "(method_description)": "start authentication process"
+          }
+        },
+        "PollAuthSessionStatus": {
+          "requestType": ".CAuthentication_PollAuthSessionStatus_Request",
+          "responseType": ".CAuthentication_PollAuthSessionStatus_Response",
+          "options": {
+            "(method_description)": "poll during authentication process"
+          }
+        },
+        "GetAuthSessionInfo": {
+          "requestType": ".CAuthentication_GetAuthSessionInfo_Request",
+          "responseType": ".CAuthentication_GetAuthSessionInfo_Response",
+          "options": {
+            "(method_description)": "get metadata of specific auth session"
+          }
+        },
+        "UpdateAuthSessionWithMobileConfirmation": {
+          "requestType": ".CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request",
+          "responseType": ".CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response",
+          "options": {
+            "(method_description)": "approve an authentication session via mobile 2fa"
+          }
+        },
+        "UpdateAuthSessionWithSteamGuardCode": {
+          "requestType": ".CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request",
+          "responseType": ".CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response",
+          "options": {
+            "(method_description)": "approve an authentication session via steam guard code"
+          }
+        }
+      }
+    },
+    "CloudGaming": {
+      "options": {
+        "(service_description)": "Methods for Steam cloud gaming operations"
+      },
+      "methods": {
+        "CreateNonce": {
+          "requestType": ".CCloudGaming_CreateNonce_Request",
+          "responseType": ".CCloudGaming_CreateNonce_Response",
+          "options": {
+            "(method_description)": "Create a nonce for a cloud gaming service session"
+          }
+        },
+        "GetTimeRemaining": {
+          "requestType": ".CCloudGaming_GetTimeRemaining_Request",
+          "responseType": ".CCloudGaming_GetTimeRemaining_Response",
+          "options": {
+            "(method_description)": "Get the amount of streaming time remaining for a set of apps"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

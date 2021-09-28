@@ -1,0 +1,312 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "CMsgSteamDatagramRelayAuthTicket": {
+      "fields": {
+        "time_expiry": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "authorized_client_identity_string": {
+          "type": "string",
+          "id": 14
+        },
+        "gameserver_identity_string": {
+          "type": "string",
+          "id": 15
+        },
+        "authorized_public_ip": {
+          "type": "fixed32",
+          "id": 3
+        },
+        "gameserver_address": {
+          "type": "bytes",
+          "id": 11
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 7
+        },
+        "virtual_port": {
+          "type": "uint32",
+          "id": 10
+        },
+        "extra_fields": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramRelayAuthTicket.ExtraField",
+          "id": 8
+        },
+        "legacy_authorized_steam_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "legacy_gameserver_steam_id": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "legacy_gameserver_net_id": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "legacy_gameserver_pop_id": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "legacy_authorized_client_identity_binary": {
+          "type": "bytes",
+          "id": 12
+        },
+        "legacy_gameserver_identity_binary": {
+          "type": "bytes",
+          "id": 13
+        }
+      },
+      "nested": {
+        "ExtraField": {
+          "fields": {
+            "name": {
+              "type": "string",
+              "id": 1
+            },
+            "string_value": {
+              "type": "string",
+              "id": 2
+            },
+            "int64_value": {
+              "type": "sint64",
+              "id": 3
+            },
+            "fixed64_value": {
+              "type": "fixed64",
+              "id": 5
+            }
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramSignedRelayAuthTicket": {
+      "fields": {
+        "reserved_do_not_use": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 3
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 4
+        },
+        "key_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "certs": {
+          "rule": "repeated",
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 5
+        }
+      }
+    },
+    "CMsgSteamDatagramCachedCredentialsForApp": {
+      "fields": {
+        "private_key": {
+          "type": "bytes",
+          "id": 1
+        },
+        "cert": {
+          "type": "bytes",
+          "id": 2
+        },
+        "relay_tickets": {
+          "rule": "repeated",
+          "type": "bytes",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSteamDatagramGameCoordinatorServerLogin": {
+      "fields": {
+        "time_generated": {
+          "type": "uint32",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "routing": {
+          "type": "bytes",
+          "id": 3
+        },
+        "appdata": {
+          "type": "bytes",
+          "id": 4
+        },
+        "legacy_identity_binary": {
+          "type": "bytes",
+          "id": 5
+        },
+        "identity_string": {
+          "type": "string",
+          "id": 6
+        },
+        "dummy_steam_id": {
+          "type": "fixed64",
+          "id": 99
+        }
+      }
+    },
+    "CMsgSteamDatagramSignedGameCoordinatorServerLogin": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 1
+        },
+        "login": {
+          "type": "bytes",
+          "id": 2
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSteamDatagramHostedServerAddressPlaintext": {
+      "fields": {
+        "ipv4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "ipv6": {
+          "type": "bytes",
+          "id": 2
+        },
+        "port": {
+          "type": "uint32",
+          "id": 3
+        },
+        "routing_secret": {
+          "type": "fixed64",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSteamNetworkingIdentityLegacyBinary": {
+      "fields": {
+        "steam_id": {
+          "type": "fixed64",
+          "id": 16
+        },
+        "xbox_pairwise_id": {
+          "type": "string",
+          "id": 17
+        },
+        "generic_bytes": {
+          "type": "bytes",
+          "id": 2
+        },
+        "generic_string": {
+          "type": "string",
+          "id": 3
+        },
+        "ipv6_and_port": {
+          "type": "bytes",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificate": {
+      "fields": {
+        "key_type": {
+          "type": ".CMsgSteamDatagramCertificate.EKeyType",
+          "id": 1,
+          "options": {
+            "default": "INVALID"
+          }
+        },
+        "key_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "legacy_steam_id": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "legacy_identity_binary": {
+          "type": ".CMsgSteamNetworkingIdentityLegacyBinary",
+          "id": 11
+        },
+        "identity_string": {
+          "type": "string",
+          "id": 12
+        },
+        "gameserver_datacenter_ids": {
+          "rule": "repeated",
+          "type": "fixed32",
+          "id": 5,
+          "options": {
+            "packed": false
+          }
+        },
+        "time_created": {
+          "type": "fixed32",
+          "id": 8
+        },
+        "time_expiry": {
+          "type": "fixed32",
+          "id": 9
+        },
+        "app_ids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        }
+      },
+      "nested": {
+        "EKeyType": {
+          "values": {
+            "INVALID": 0,
+            "ED25519": 1
+          }
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateSigned": {
+      "fields": {
+        "cert": {
+          "type": "bytes",
+          "id": 4
+        },
+        "ca_key_id": {
+          "type": "fixed64",
+          "id": 5
+        },
+        "ca_signature": {
+          "type": "bytes",
+          "id": 6
+        },
+        "private_key_data": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSteamDatagramCertificateRequest": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificate",
+          "id": 1
+        }
+      }
+    }
+  }
+}

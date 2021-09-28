@@ -1,0 +1,32 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "EncryptedAppTicket": {
+      "fields": {
+        "ticket_version_no": {
+          "type": "uint32",
+          "id": 1
+        },
+        "crc_encryptedticket": {
+          "type": "uint32",
+          "id": 2
+        },
+        "cb_encrypteduserdata": {
+          "type": "uint32",
+          "id": 3
+        },
+        "cb_encrypted_appownershipticket": {
+          "type": "uint32",
+          "id": 4
+        },
+        "encrypted_ticket": {
+          "type": "bytes",
+          "id": 5
+        }
+      }
+    }
+  }
+}

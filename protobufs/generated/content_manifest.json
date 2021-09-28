@@ -1,0 +1,190 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "EContentDeltaChunkDataLocation": {
+      "values": {
+        "k_EContentDeltaChunkDataLocationInProtobuf": 0,
+        "k_EContentDeltaChunkDataLocationAfterProtobuf": 1
+      }
+    },
+    "ContentManifestPayload": {
+      "fields": {
+        "mappings": {
+          "rule": "repeated",
+          "type": ".ContentManifestPayload.FileMapping",
+          "id": 1
+        }
+      },
+      "nested": {
+        "FileMapping": {
+          "fields": {
+            "filename": {
+              "type": "string",
+              "id": 1
+            },
+            "size": {
+              "type": "uint64",
+              "id": 2
+            },
+            "flags": {
+              "type": "uint32",
+              "id": 3
+            },
+            "sha_filename": {
+              "type": "bytes",
+              "id": 4
+            },
+            "sha_content": {
+              "type": "bytes",
+              "id": 5
+            },
+            "chunks": {
+              "rule": "repeated",
+              "type": ".ContentManifestPayload.FileMapping.ChunkData",
+              "id": 6
+            },
+            "linktarget": {
+              "type": "string",
+              "id": 7
+            }
+          },
+          "nested": {
+            "ChunkData": {
+              "fields": {
+                "sha": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "crc": {
+                  "type": "fixed32",
+                  "id": 2
+                },
+                "offset": {
+                  "type": "uint64",
+                  "id": 3
+                },
+                "cb_original": {
+                  "type": "uint32",
+                  "id": 4
+                },
+                "cb_compressed": {
+                  "type": "uint32",
+                  "id": 5
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ContentManifestMetadata": {
+      "fields": {
+        "depot_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "gid_manifest": {
+          "type": "uint64",
+          "id": 2
+        },
+        "creation_time": {
+          "type": "uint32",
+          "id": 3
+        },
+        "filenames_encrypted": {
+          "type": "bool",
+          "id": 4
+        },
+        "cb_disk_original": {
+          "type": "uint64",
+          "id": 5
+        },
+        "cb_disk_compressed": {
+          "type": "uint64",
+          "id": 6
+        },
+        "unique_chunks": {
+          "type": "uint32",
+          "id": 7
+        },
+        "crc_encrypted": {
+          "type": "uint32",
+          "id": 8
+        },
+        "crc_clear": {
+          "type": "uint32",
+          "id": 9
+        }
+      }
+    },
+    "ContentManifestSignature": {
+      "fields": {
+        "signature": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "ContentDeltaChunks": {
+      "fields": {
+        "depot_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "manifest_id_source": {
+          "type": "uint64",
+          "id": 2
+        },
+        "manifest_id_target": {
+          "type": "uint64",
+          "id": 3
+        },
+        "deltaChunks": {
+          "rule": "repeated",
+          "type": ".ContentDeltaChunks.DeltaChunk",
+          "id": 4
+        },
+        "chunk_data_location": {
+          "type": ".EContentDeltaChunkDataLocation",
+          "id": 5,
+          "options": {
+            "default": "k_EContentDeltaChunkDataLocationInProtobuf"
+          }
+        }
+      },
+      "nested": {
+        "DeltaChunk": {
+          "fields": {
+            "sha_source": {
+              "type": "bytes",
+              "id": 1
+            },
+            "sha_target": {
+              "type": "bytes",
+              "id": 2
+            },
+            "size_original": {
+              "type": "uint32",
+              "id": 3
+            },
+            "patch_method": {
+              "type": "uint32",
+              "id": 4
+            },
+            "chunk": {
+              "type": "bytes",
+              "id": 5
+            },
+            "size_delta": {
+              "type": "uint32",
+              "id": 6
+            }
+          }
+        }
+      }
+    }
+  }
+}

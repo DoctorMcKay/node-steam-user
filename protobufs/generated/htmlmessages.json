@@ -1,0 +1,2620 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": false
+  },
+  "nested": {
+    "EJSRegisterMethodType": {
+      "values": {
+        "k_EJSRegisterMethodType_Invalid": 0,
+        "k_EJSRegisterMethodType_Function": 1,
+        "k_EJSRegisterMethodType_Callback": 2,
+        "k_EJSRegisterMethodType_Promise": 3
+      }
+    },
+    "CMsgKeyUp": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "keyCode": {
+          "type": "uint32",
+          "id": 2
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 3
+        },
+        "nativeKeyCode": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgKeyDown": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "keyCode": {
+          "type": "uint32",
+          "id": 2
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 3
+        },
+        "is_system_key": {
+          "type": "bool",
+          "id": 4
+        },
+        "nativeKeyCode": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgKeyChar": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "unichar": {
+          "type": "uint32",
+          "id": 2
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 3
+        },
+        "keyCode": {
+          "type": "uint32",
+          "id": 4
+        },
+        "nativeKeyCode": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgMouseDown": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "mouse_button": {
+          "type": "uint32",
+          "id": 2
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgMouseUp": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "mouse_button": {
+          "type": "uint32",
+          "id": 2
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 3
+        },
+        "is_off_panel": {
+          "type": "bool",
+          "id": 4
+        },
+        "x": {
+          "type": "int32",
+          "id": 5
+        },
+        "y": {
+          "type": "int32",
+          "id": 6
+        }
+      }
+    },
+    "CMsgMouseDblClick": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "mouse_button": {
+          "type": "uint32",
+          "id": 2
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgMouseWheel": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "deltax": {
+          "type": "int32",
+          "id": 2
+        },
+        "deltay": {
+          "type": "int32",
+          "id": 3
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgMouseMove": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "int32",
+          "id": 2
+        },
+        "y": {
+          "type": "int32",
+          "id": 3
+        },
+        "modifiers": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgMouseLeave": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgBrowserCreate": {
+      "fields": {
+        "request_id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "useragent": {
+          "type": "string",
+          "id": 3
+        },
+        "user_css": {
+          "type": "string",
+          "id": 5
+        },
+        "native_dropdowns": {
+          "type": "bool",
+          "id": 6
+        },
+        "dpi_scaling": {
+          "type": "float",
+          "id": 7
+        },
+        "offscreen": {
+          "type": "bool",
+          "id": 8,
+          "options": {
+            "default": true
+          }
+        },
+        "initial_width": {
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "default": 0
+          }
+        },
+        "initial_height": {
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "default": 0
+          }
+        },
+        "window_icon": {
+          "type": "string",
+          "id": 11
+        },
+        "borderless": {
+          "type": "bool",
+          "id": 12,
+          "options": {
+            "default": false
+          }
+        },
+        "vroverlay_key": {
+          "type": "string",
+          "id": 13
+        },
+        "browser_type": {
+          "type": "uint32",
+          "id": 14,
+          "options": {
+            "default": 0
+          }
+        },
+        "initial_top": {
+          "type": "int32",
+          "id": 15,
+          "options": {
+            "default": -2147483648
+          }
+        },
+        "initial_left": {
+          "type": "int32",
+          "id": 16,
+          "options": {
+            "default": -2147483648
+          }
+        },
+        "only_allow_trusted_popups": {
+          "type": "bool",
+          "id": 17,
+          "options": {
+            "default": false
+          }
+        },
+        "initial_url": {
+          "type": "string",
+          "id": 18
+        },
+        "hwnd_parent": {
+          "type": "fixed64",
+          "id": 19
+        },
+        "creation_flags": {
+          "type": "uint32",
+          "id": 20,
+          "options": {
+            "default": 0
+          }
+        }
+      }
+    },
+    "CMsgBrowserCreateResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "request_id": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgBrowserRemove": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSetLocalFileRequestMapping": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "request_url": {
+          "type": "string",
+          "id": 2
+        },
+        "default_local_path": {
+          "type": "string",
+          "id": 3
+        },
+        "routes": {
+          "rule": "repeated",
+          "type": ".CMsgSetLocalFileRequestMapping.AdditionalRoute",
+          "id": 4
+        }
+      },
+      "nested": {
+        "AdditionalRoute": {
+          "fields": {
+            "relative_url": {
+              "type": "string",
+              "id": 1
+            },
+            "local_path": {
+              "type": "string",
+              "id": 2
+            },
+            "allowed_extensions": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
+    "CMsgBrowserErrorStrings": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        },
+        "header": {
+          "type": "string",
+          "id": 3
+        },
+        "cache_miss": {
+          "type": "string",
+          "id": 4
+        },
+        "bad_url": {
+          "type": "string",
+          "id": 5
+        },
+        "connection_problem": {
+          "type": "string",
+          "id": 6
+        },
+        "proxy_problem": {
+          "type": "string",
+          "id": 7
+        },
+        "unknown": {
+          "type": "string",
+          "id": 8
+        }
+      }
+    },
+    "CMsgBrowserSize": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "width": {
+          "type": "uint32",
+          "id": 2
+        },
+        "height": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgBrowserSetMinSize": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "width": {
+          "type": "uint32",
+          "id": 2
+        },
+        "height": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgBrowserPosition": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "int32",
+          "id": 2
+        },
+        "y": {
+          "type": "int32",
+          "id": 3
+        },
+        "x_local": {
+          "type": "int32",
+          "id": 4
+        },
+        "y_local": {
+          "type": "int32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgBrowserResized": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "int32",
+          "id": 2
+        },
+        "y": {
+          "type": "int32",
+          "id": 3
+        },
+        "width": {
+          "type": "uint32",
+          "id": 4
+        },
+        "height": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgPostURL": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "post": {
+          "type": "string",
+          "id": 3
+        },
+        "pageserial": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgAddHeader": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "key": {
+          "type": "string",
+          "id": 2
+        },
+        "value": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CMsgStopLoad": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgReload": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgGoForward": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgGoBack": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgWasHidden": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgBrowserViewSetVisible": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "visible": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClearHistory": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgClearAllBrowsingData": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgCopy": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgPaste": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgExecuteJavaScript": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "script": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetFocus": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "focus": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgHorizontalScrollBarSize": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgHorizontalScrollBarSizeResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "scroll_max": {
+          "type": "uint32",
+          "id": 6
+        },
+        "scroll": {
+          "type": "uint32",
+          "id": 7
+        },
+        "zoom": {
+          "type": "float",
+          "id": 8
+        },
+        "visible": {
+          "type": "bool",
+          "id": 9
+        },
+        "page_size": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CMsgVerticalScrollBarSize": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgVerticalScrollBarSizeResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "scroll_max": {
+          "type": "uint32",
+          "id": 6
+        },
+        "scroll": {
+          "type": "uint32",
+          "id": 7
+        },
+        "zoom": {
+          "type": "float",
+          "id": 8
+        },
+        "visible": {
+          "type": "bool",
+          "id": 9
+        },
+        "page_size": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CMsgFind": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "find": {
+          "type": "string",
+          "id": 2
+        },
+        "infind": {
+          "type": "bool",
+          "id": 3
+        },
+        "reverse": {
+          "type": "bool",
+          "id": 4,
+          "options": {
+            "default": false
+          }
+        }
+      }
+    },
+    "CMsgStopFind": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSetHorizontalScroll": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "scroll": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetVerticalScroll": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "scroll": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetZoomLevel": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "zoom": {
+          "type": "double",
+          "id": 2
+        }
+      }
+    },
+    "CMsgViewSource": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgBrowserReady": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "vr_overlay_key": {
+          "type": "string",
+          "id": 2
+        },
+        "hwnd_browser": {
+          "type": "fixed64",
+          "id": 3
+        }
+      }
+    },
+    "CMsgURLChanged": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "postData": {
+          "type": "string",
+          "id": 3
+        },
+        "bIsRedirect": {
+          "type": "bool",
+          "id": 4
+        },
+        "pagetitle": {
+          "type": "string",
+          "id": 5
+        },
+        "bNewNavigation": {
+          "type": "bool",
+          "id": 6
+        }
+      }
+    },
+    "CHTMLHeader": {
+      "fields": {
+        "key": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CHTMLPageSecurityInfo": {
+      "fields": {
+        "bIsSecure": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "default": false
+          }
+        },
+        "bHasCertError": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "default": false
+          }
+        },
+        "issuerName": {
+          "type": "string",
+          "id": 3
+        },
+        "certName": {
+          "type": "string",
+          "id": 4
+        },
+        "certExpiry": {
+          "type": "int32",
+          "id": 5,
+          "options": {
+            "default": 0
+          }
+        },
+        "nCertBits": {
+          "type": "int32",
+          "id": 6,
+          "options": {
+            "default": 0
+          }
+        },
+        "bIsEVCert": {
+          "type": "bool",
+          "id": 7,
+          "options": {
+            "default": false
+          }
+        }
+      }
+    },
+    "CMsgFinishedRequest": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "pageTitle": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CMsgLoadedRequest": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "pageTitle": {
+          "type": "string",
+          "id": 3
+        },
+        "headers": {
+          "rule": "repeated",
+          "type": ".CHTMLHeader",
+          "id": 5
+        }
+      }
+    },
+    "CMsgPageSecurity": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "security_info": {
+          "type": ".CHTMLPageSecurityInfo",
+          "id": 3
+        }
+      }
+    },
+    "CMsgStartRequest": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "target": {
+          "type": "string",
+          "id": 3
+        },
+        "postData": {
+          "type": "string",
+          "id": 4
+        },
+        "bIsRedirect": {
+          "type": "bool",
+          "id": 5
+        }
+      }
+    },
+    "CMsgStartRequestResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "bAllow": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgShowPopup": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgHidePopup": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSizePopup": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "int32",
+          "id": 2
+        },
+        "y": {
+          "type": "int32",
+          "id": 3
+        },
+        "wide": {
+          "type": "uint32",
+          "id": 4
+        },
+        "tall": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgOpenNewTab": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "bForeground": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CMsgPopupHTMLWindow": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "x": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "default": -2147483648
+          }
+        },
+        "y": {
+          "type": "int32",
+          "id": 4,
+          "options": {
+            "default": -2147483648
+          }
+        },
+        "wide": {
+          "type": "uint32",
+          "id": 5
+        },
+        "tall": {
+          "type": "uint32",
+          "id": 6
+        },
+        "popup_index": {
+          "type": "uint32",
+          "id": 7
+        },
+        "trusted_creator": {
+          "type": "bool",
+          "id": 8
+        }
+      }
+    },
+    "CMsgPopupHTMLWindowResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "bAllow": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetHTMLTitle": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgLoadingResource": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgStatusText": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "text": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetCursor": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "cursor": {
+          "type": "uint32",
+          "id": 2
+        },
+        "custom_data": {
+          "type": "bytes",
+          "id": 3
+        },
+        "wide": {
+          "type": "uint32",
+          "id": 4
+        },
+        "tall": {
+          "type": "uint32",
+          "id": 5
+        },
+        "xhotspot": {
+          "type": "uint32",
+          "id": 6
+        },
+        "yhotspot": {
+          "type": "uint32",
+          "id": 7
+        }
+      }
+    },
+    "CMsgFileLoadDialog": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        },
+        "initialFile": {
+          "type": "string",
+          "id": 3
+        },
+        "accept_types": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 4
+        },
+        "is_save": {
+          "type": "bool",
+          "id": 5
+        }
+      }
+    },
+    "CMsgFileLoadDialogResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "files": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgShowToolTip": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "text": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgUpdateToolTip": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "text": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgHideToolTip": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSearchResults": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "activeMatch": {
+          "type": "int32",
+          "id": 2
+        },
+        "results": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgClose": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSetSharedPaintBuffers": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "wide": {
+          "type": "uint32",
+          "id": 2
+        },
+        "tall": {
+          "type": "uint32",
+          "id": 3
+        },
+        "source_pid": {
+          "type": "uint64",
+          "id": 4
+        },
+        "source_handle": {
+          "type": "uint64",
+          "id": 5
+        },
+        "handle": {
+          "type": "uint64",
+          "id": 6
+        }
+      }
+    },
+    "CMsgAckSharedPaintBuffers": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgNeedsPaint": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "scrollx": {
+          "type": "uint32",
+          "id": 10
+        },
+        "scrolly": {
+          "type": "uint32",
+          "id": 11
+        },
+        "pagescale": {
+          "type": "float",
+          "id": 12
+        },
+        "pageserial": {
+          "type": "uint32",
+          "id": 15
+        },
+        "avg_frame_ms": {
+          "type": "uint32",
+          "id": 20
+        },
+        "stddev_sum_frame_ms": {
+          "type": "float",
+          "id": 21
+        },
+        "long_frame_ms": {
+          "type": "uint32",
+          "id": 22
+        }
+      }
+    },
+    "CMsgComboNeedsPaint": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rgba": {
+          "type": "uint64",
+          "id": 2
+        },
+        "combobox_wide": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "default": 0
+          }
+        },
+        "combobox_tall": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "default": 0
+          }
+        },
+        "shared_memory_handle": {
+          "type": "uint64",
+          "id": 5,
+          "options": {
+            "default": 0
+          }
+        },
+        "shared_memory_size": {
+          "type": "uint64",
+          "id": 7,
+          "options": {
+            "default": 0
+          }
+        }
+      }
+    },
+    "CMsgNeedsSharedTexturePaint": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "share_handle": {
+          "type": "uint32",
+          "id": 2
+        },
+        "width": {
+          "type": "uint32",
+          "id": 3
+        },
+        "height": {
+          "type": "uint32",
+          "id": 4
+        },
+        "scrollx": {
+          "type": "uint32",
+          "id": 5
+        },
+        "scrolly": {
+          "type": "uint32",
+          "id": 6
+        },
+        "pagescale": {
+          "type": "float",
+          "id": 7
+        },
+        "pageserial": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgGameOverlayTexturePaint": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "width": {
+          "type": "uint32",
+          "id": 3
+        },
+        "height": {
+          "type": "uint32",
+          "id": 4
+        },
+        "scrollx": {
+          "type": "uint32",
+          "id": 5
+        },
+        "scrolly": {
+          "type": "uint32",
+          "id": 6
+        },
+        "pagescale": {
+          "type": "float",
+          "id": 7
+        },
+        "pageserial": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgGetZoom": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgGetZoomResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "zoom": {
+          "type": "float",
+          "id": 2
+        }
+      }
+    },
+    "CMsgLinkAtPosition": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "uint32",
+          "id": 2
+        },
+        "y": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgLinkAtPositionResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "uint32",
+          "id": 2
+        },
+        "y": {
+          "type": "uint32",
+          "id": 3
+        },
+        "url": {
+          "type": "string",
+          "id": 4
+        },
+        "blivelink": {
+          "type": "bool",
+          "id": 5
+        },
+        "binput": {
+          "type": "bool",
+          "id": 6
+        }
+      }
+    },
+    "CMsgZoomToElementAtPosition": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "uint32",
+          "id": 2
+        },
+        "y": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgZoomToElementAtPositionResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "scale": {
+          "type": "float",
+          "id": 2
+        },
+        "duration": {
+          "type": "float",
+          "id": 3
+        }
+      }
+    },
+    "CMsgScalePageToValue": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "scale": {
+          "type": "float",
+          "id": 2
+        },
+        "x": {
+          "type": "float",
+          "id": 3
+        },
+        "y": {
+          "type": "float",
+          "id": 4
+        }
+      }
+    },
+    "CMsgForcePopupsToDirectHWND": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "force_direct_hwnd_popups": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgScalePageToValueResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "zoom": {
+          "type": "float",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSavePageToJPEG": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "filename": {
+          "type": "string",
+          "id": 3
+        },
+        "width": {
+          "type": "uint32",
+          "id": 4
+        },
+        "height": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgSavePageToJPEGResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "filename": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CMsgJSAlert": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgJSConfirm": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgJSDialogResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "result": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgCanGoBackAndForward": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "bgoback": {
+          "type": "bool",
+          "id": 2
+        },
+        "bgoforward": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CMsgOpenSteamURL": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "referrer": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSetCookie": {
+      "fields": {
+        "key": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        },
+        "path": {
+          "type": "string",
+          "id": 3
+        },
+        "host": {
+          "type": "string",
+          "id": 4
+        },
+        "expires": {
+          "type": "uint32",
+          "id": 5
+        },
+        "secure": {
+          "type": "bool",
+          "id": 6
+        },
+        "httponly": {
+          "type": "bool",
+          "id": 7
+        }
+      }
+    },
+    "CMsgSetTargetFrameRate": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "nTargetFrameRate": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgPauseRepaint": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgFullRepaint": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgRequestFullScreen": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgExitFullScreen": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgToggleFindInPageDialog": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSetPIDShuttingDown": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgDisableBackgroundThrottling": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgAckPIDShuttingDown": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgGetCookiesForURL": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CCookie": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        },
+        "domain": {
+          "type": "string",
+          "id": 3
+        },
+        "path": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CMsgGetCookiesForURLResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "cookies": {
+          "rule": "repeated",
+          "type": ".CCookie",
+          "id": 3
+        }
+      }
+    },
+    "CMsgNodeHasFocus": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "bInput": {
+          "type": "bool",
+          "id": 2
+        },
+        "name": {
+          "type": "string",
+          "id": 3
+        },
+        "elementtagname": {
+          "type": "string",
+          "id": 4
+        },
+        "searchbuttontext": {
+          "type": "string",
+          "id": 5
+        },
+        "bHasMultipleInputs": {
+          "type": "bool",
+          "id": 6
+        },
+        "input_type": {
+          "type": "string",
+          "id": 7
+        }
+      }
+    },
+    "CMsgZoomToFocusedElement": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgCloseFullScreenFlashIfOpen": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgPauseFullScreenFlashMovieIfOpen": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgFocusedNodeText": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgFocusedNodeTextResponse": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgBuildID": {
+      "fields": {
+        "build_id": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CMsgOpenDevTools": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgCloseDevTools": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgUnlockH264": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "unlock_code": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgScreenInformationChanged": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "override_width": {
+          "type": "uint32",
+          "id": 2
+        },
+        "override_height": {
+          "type": "uint32",
+          "id": 3
+        },
+        "monitor_left": {
+          "type": "uint32",
+          "id": 4
+        },
+        "monitor_top": {
+          "type": "uint32",
+          "id": 5
+        },
+        "monitor_right": {
+          "type": "uint32",
+          "id": 6
+        },
+        "monitor_bottom": {
+          "type": "uint32",
+          "id": 7
+        },
+        "usable_left": {
+          "type": "uint32",
+          "id": 8
+        },
+        "usable_top": {
+          "type": "uint32",
+          "id": 9
+        },
+        "usable_right": {
+          "type": "uint32",
+          "id": 10
+        },
+        "usable_bottom": {
+          "type": "uint32",
+          "id": 11
+        }
+      }
+    },
+    "CMsgClearAllCookies": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgScreenDPI": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "dpi_scaling": {
+          "type": "float",
+          "id": 2
+        }
+      }
+    },
+    "CMsgAuthedSteamDomains": {
+      "fields": {
+        "domains": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSteamAuthNeeded": {
+      "fields": {
+        "filler": {
+          "type": "bool",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSteamAuthCookiesSet": {
+      "fields": {
+        "success": {
+          "type": "bool",
+          "id": 1
+        }
+      }
+    },
+    "CMsgJSRegisterMethod": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "method_type": {
+          "type": ".EJSRegisterMethodType",
+          "id": 3,
+          "options": {
+            "default": "k_EJSRegisterMethodType_Invalid"
+          }
+        }
+      }
+    },
+    "CJSMethodArgument": {
+      "fields": {
+        "json_data": {
+          "type": "string",
+          "id": 1
+        },
+        "function_handle": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgJSValue": {
+      "fields": {
+        "bool_value": {
+          "type": "bool",
+          "id": 1
+        },
+        "int_value": {
+          "type": "int32",
+          "id": 2
+        },
+        "uint_value": {
+          "type": "uint32",
+          "id": 3
+        },
+        "double_value": {
+          "type": "double",
+          "id": 4
+        },
+        "string_value": {
+          "type": "string",
+          "id": 5
+        },
+        "function_handle": {
+          "type": "uint64",
+          "id": 6
+        },
+        "bytes_value": {
+          "type": "bytes",
+          "id": 12
+        },
+        "is_array": {
+          "type": "bool",
+          "id": 8
+        },
+        "array_values": {
+          "rule": "repeated",
+          "type": ".CMsgJSValue",
+          "id": 9
+        },
+        "is_object": {
+          "type": "bool",
+          "id": 10
+        },
+        "object_properties": {
+          "rule": "repeated",
+          "type": ".CMsgJSValue.JSObjectProperty",
+          "id": 11
+        }
+      },
+      "nested": {
+        "JSObjectProperty": {
+          "fields": {
+            "name": {
+              "type": "string",
+              "id": 1
+            },
+            "value": {
+              "type": ".CMsgJSValue",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgJSMethodCall": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "arguments": {
+          "rule": "repeated",
+          "type": ".CMsgJSValue",
+          "id": 3
+        }
+      }
+    },
+    "CMsgJSExecuteCallback": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "function_handle": {
+          "type": "uint64",
+          "id": 2
+        },
+        "arguments": {
+          "rule": "repeated",
+          "type": ".CMsgJSValue",
+          "id": 3
+        }
+      }
+    },
+    "CMsgJSReleaseCallback": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "function_handle": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgJSRaiseException": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "exception": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgLoadLocalization": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "localization_path": {
+          "type": "string",
+          "id": 2
+        },
+        "language": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CMsgJumpListLink": {
+      "fields": {
+        "display_name": {
+          "type": "string",
+          "id": 1
+        },
+        "url_link": {
+          "type": "string",
+          "id": 2
+        },
+        "icon_path": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "CMSgJumpListMRUApp": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "display_name": {
+          "type": "string",
+          "id": 2
+        },
+        "url_link": {
+          "type": "string",
+          "id": 3
+        },
+        "icon_path": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSetJumpList": {
+      "fields": {
+        "steam_path": {
+          "type": "string",
+          "id": 1
+        },
+        "mru_title": {
+          "type": "string",
+          "id": 2
+        },
+        "apps": {
+          "rule": "repeated",
+          "type": ".CMSgJumpListMRUApp",
+          "id": 3
+        },
+        "links": {
+          "rule": "repeated",
+          "type": ".CMsgJumpListLink",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSetGameOverlayTargetPIDs": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "target_pid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgGameOverlayTargetTextureID": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "target_pid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "texture_handle": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgDraggableRegionsChanged": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rects": {
+          "rule": "repeated",
+          "type": ".CMsgDraggableRegionsChanged.DraggableRects",
+          "id": 2
+        }
+      },
+      "nested": {
+        "DraggableRects": {
+          "fields": {
+            "x": {
+              "type": "int32",
+              "id": 1
+            },
+            "y": {
+              "type": "int32",
+              "id": 2
+            },
+            "width": {
+              "type": "int32",
+              "id": 3
+            },
+            "height": {
+              "type": "int32",
+              "id": 4
+            },
+            "draggable": {
+              "type": "bool",
+              "id": 5
+            }
+          }
+        }
+      }
+    },
+    "CMsgResizeGripChanged": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "width": {
+          "type": "int32",
+          "id": 2
+        },
+        "height": {
+          "type": "int32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSetWindowPosition": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "int32",
+          "id": 2
+        },
+        "y": {
+          "type": "int32",
+          "id": 3
+        },
+        "width": {
+          "type": "int32",
+          "id": 4
+        },
+        "height": {
+          "type": "int32",
+          "id": 5
+        },
+        "min_width": {
+          "type": "int32",
+          "id": 6
+        },
+        "min_height": {
+          "type": "int32",
+          "id": 7
+        }
+      }
+    },
+    "CMsgShowWindow": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgHideWindow": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgBringWindowToFront": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSetForegroundWindow": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgMaximizeRestoreWindow": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgMinimizeWindow": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgShowBrowserContextMenu": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "custom_commands": {
+          "rule": "repeated",
+          "type": ".CMsgShowBrowserContextMenu.ContextCommand",
+          "id": 2
+        }
+      },
+      "nested": {
+        "ContextCommand": {
+          "fields": {
+            "id": {
+              "type": "int32",
+              "id": 1
+            },
+            "label": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgHandleContextMenuCommand": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "command_id": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgTouchGesture": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "id": {
+          "type": "int32",
+          "id": 2
+        },
+        "gesture": {
+          "type": "uint32",
+          "id": 3
+        },
+        "x": {
+          "type": "double",
+          "id": 4
+        },
+        "y": {
+          "type": "double",
+          "id": 5
+        },
+        "width": {
+          "type": "double",
+          "id": 6
+        },
+        "height": {
+          "type": "double",
+          "id": 7
+        },
+        "tap_count": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgSetTouchGesturesToCancel": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "gestures": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgImeSetComposition": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "text": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgImeCommitText": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "text": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgImeCancelComposition": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgImeCompositionRangeChanged": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "uint32",
+          "id": 2
+        },
+        "y": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgInspectElement": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "x": {
+          "type": "uint32",
+          "id": 2
+        },
+        "y": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgDisableF5": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "disable": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CMsgStartDownload": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetTopWindow": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgBrowserViewPostMessageToParentRequest": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message": {
+          "type": "string",
+          "id": 2
+        },
+        "args": {
+          "type": "string",
+          "id": 3
+        },
+        "requesting_url": {
+          "type": "string",
+          "id": 4
+        }
+      }
+    }
+  }
+}
