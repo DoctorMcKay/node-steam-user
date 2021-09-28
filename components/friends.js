@@ -835,6 +835,40 @@ SteamUser.prototype.getUserOwnedApps = function(steamID, options, callback) {
 	});
 };
 
+/**
+ * Get a list of friends that play a specific app.
+ * @param {int} appID
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.getFriendsThatPlay = function(appID, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		let buf = ByteBuffer.allocate(8, ByteBuffer.LITTLE_ENDIAN);
+		buf.writeUint64(appID);
+		this._send(SteamUser.EMsg.ClientGetFriendsWhoPlayGame, buf.flip(), (body) => {
+			let eresult = body.readUint32();
+			let err = Helpers.eresultError(eresult);
+			if (err) {
+				return reject(err);
+			}
+
+			let steamIds = [];
+			let responseAppid = body.readUint64().toString();
+			let countFriends = body.readUint32().toString();
+
+			if (responseAppid != appID) {
+				return reject(new Error('AppID in response does not match request'));
+			}
+
+			for (let i = 0; i < countFriends; i++) {
+				steamIds.push(new SteamID(body.readUint64().toString()));
+			}
+
+			return resolve({friends: steamIds});
+		});
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {

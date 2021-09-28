@@ -1195,6 +1195,17 @@ Retrieves a user's list of owned apps. The user's games must not be private.
 *This is functionally identical to [IPlayerService/GetOwnedGames](https://steamapi.xpaw.me/#IPlayerService/GetOwnedGames)
 but with some minor data processing.*
 
+### getFriendsThatPlay(appID, callback)
+- `appID` - The ID of the app you want to check
+- `callback` - Called when the request completes.
+    - `err` - An `Error` object on failure, or `null` on success
+    - `response` - The response object
+        - `friends` - An array of `SteamID` objects
+
+**v4.20.0 or later is required to use this method**
+
+Retrieves a list of friends that have played or used an app.
+
 ### getOwnedProfileItems([options,] callback)
 - `options` - Optional. An object with zero or more of these properties:
     - `language` - A language to localize item data into. Defaults to `english`
