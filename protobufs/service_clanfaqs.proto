@@ -1,0 +1,169 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CClanFAQS_Create_Request {
+	optional uint64 steamid = 1;
+	optional string internal_name = 2;
+	optional string json_data = 3;
+}
+
+message CClanFAQS_Create_Response {
+	optional uint64 faq_id = 1;
+}
+
+message CClanFAQS_Delete_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+}
+
+message CClanFAQS_Delete_Response {
+}
+
+message CClanFAQS_UpdateInternalName_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+	optional string internal_name = 3;
+}
+
+message CClanFAQS_UpdateInternalName_Response {
+}
+
+message CClanFAQS_UpdateJsonData_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+	optional string json_data = 3;
+}
+
+message CClanFAQS_UpdateJsonData_Response {
+}
+
+message CClanFAQS_SetVisibility_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+	optional bool visible_in_global_realm = 3;
+	optional bool visible_in_china_realm = 4;
+}
+
+message CClanFAQS_SetVisibility_Response {
+}
+
+message CClanFAQS_UpdateDraft_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+	optional uint32 language = 3;
+	optional string content = 4;
+	optional string title = 5;
+}
+
+message CClanFAQS_UpdateDraft_Response {
+	optional fixed32 last_update_timestamp = 1;
+}
+
+message CClanFAQS_PublishDraft_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+	repeated uint32 language = 3;
+}
+
+message CClanFAQS_PublishDraft_Response {
+	optional fixed32 last_publish_timestamp = 1;
+}
+
+message CClanFAQS_PreviewDraft_Response {
+	optional .CClanFAQContent faq = 1;
+}
+
+message CClanFAQContent {
+	optional uint64 faq_id = 1;
+	optional uint32 language = 2;
+	optional uint64 version = 3;
+	optional string content = 4;
+	optional string title = 5;
+	optional fixed32 timestamp = 6;
+	optional uint64 author_account_id = 7;
+}
+
+message CClanFAQS_GetFAQ_Response {
+	optional .CClanFAQContent faq = 1;
+}
+
+message CClanFAQS_GetFAQVersion_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+	optional uint32 language = 3;
+	optional uint64 version = 4;
+}
+
+message CClanFAQS_GetFAQVersion_Response {
+	optional .CClanFAQContent faq = 1;
+}
+
+message CClanFAQS_GetAllDrafts_Request {
+	optional uint64 steamid = 1;
+	optional uint64 faq_id = 2;
+}
+
+message CClanFAQS_GetAllDrafts_Response {
+	optional .CClanFAQSummary summary = 1;
+	repeated .CClanFAQContent draft = 2;
+}
+
+message CClanFAQSummary {
+	optional uint64 faq_id = 1;
+	optional string internal_name = 2;
+	optional bool visible_in_global_realm = 3;
+	optional bool visible_in_china_realm = 4;
+	optional string json_data = 5;
+	repeated .CClanFAQSummary_CLanguageInfo per_language_info = 6;
+	optional string url_code = 7;
+}
+
+message CClanFAQSummary_CLanguageInfo {
+	optional uint32 language = 1;
+	optional fixed32 last_update_timestamp = 2;
+	optional fixed32 last_publish_timestamp = 3;
+}
+
+message CClanFAQS_GetAllFAQsForClan_Response {
+	repeated .CClanFAQSummary faq = 1;
+}
+
+message CClanFAQS_GetAllLatestVersionPublishedFAQS_Response {
+	repeated .CClanFAQContent faqs = 1;
+}
+
+message CClanFAQS_CheckFAQPermissions_Response {
+}
+
+message CClanFAQS_SearchFAQs_Response {
+	repeated .CClanFAQS_SearchFAQs_Response_CFAQSearchResult faqs = 1;
+	optional int32 num_total_results = 2;
+	optional string next_cursor = 3;
+}
+
+message CClanFAQS_SearchFAQs_Response_CFAQSearchResult {
+	optional uint64 articleid = 1;
+	optional string name = 2;
+	optional string content = 3;
+	optional uint32 clan_accountid = 4;
+	optional string url_code = 5;
+}
+
+service ClanFAQS {
+	rpc Create (.CClanFAQS_Create_Request) returns (.CClanFAQS_Create_Response);
+	rpc Delete (.CClanFAQS_Delete_Request) returns (.CClanFAQS_Delete_Response);
+	rpc UpdateInternalName (.CClanFAQS_UpdateInternalName_Request) returns (.CClanFAQS_UpdateInternalName_Response);
+	rpc UpdateJsonData (.CClanFAQS_UpdateJsonData_Request) returns (.CClanFAQS_UpdateJsonData_Response);
+	rpc SetVisibility (.CClanFAQS_SetVisibility_Request) returns (.CClanFAQS_SetVisibility_Response);
+	rpc UpdateDraft (.CClanFAQS_UpdateDraft_Request) returns (.CClanFAQS_UpdateDraft_Response);
+	rpc PublishDraft (.CClanFAQS_PublishDraft_Request) returns (.CClanFAQS_PublishDraft_Response);
+	rpc PreviewDraft (.NotImplemented) returns (.CClanFAQS_PreviewDraft_Response);
+	rpc GetFAQ (.NotImplemented) returns (.CClanFAQS_GetFAQ_Response);
+	rpc GetFAQVersion (.CClanFAQS_GetFAQVersion_Request) returns (.CClanFAQS_GetFAQVersion_Response);
+	rpc GetAllDrafts (.CClanFAQS_GetAllDrafts_Request) returns (.CClanFAQS_GetAllDrafts_Response);
+	rpc GetAllFAQsForClan (.NotImplemented) returns (.CClanFAQS_GetAllFAQsForClan_Response);
+	rpc GetAllLatestVersionPublishedFAQS (.NotImplemented) returns (.CClanFAQS_GetAllLatestVersionPublishedFAQS_Response);
+	rpc CheckFAQPermissions (.NotImplemented) returns (.CClanFAQS_CheckFAQPermissions_Response);
+	rpc SearchFAQs (.NotImplemented) returns (.CClanFAQS_SearchFAQs_Response);
+}
+

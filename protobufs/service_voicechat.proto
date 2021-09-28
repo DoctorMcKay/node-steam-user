@@ -1,0 +1,135 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CVoiceChat_UpdateVoiceChatWebRTCData_Request {
+	optional fixed64 voice_chatid = 1;
+	optional uint32 ip_webrtc_server = 2;
+	optional uint32 port_webrtc_server = 3;
+	optional uint32 ip_webrtc_client = 4;
+	optional uint32 port_webrtc_client = 5;
+	optional uint32 ssrc_my_sending_stream = 6;
+	optional string user_agent = 7;
+	optional bool has_audio_worklets_support = 8;
+}
+
+message CVoiceChat_UpdateVoiceChatWebRTCData_Response {
+	optional bool send_client_voice_logs = 1;
+}
+
+message CVoiceChat_UserVoiceStatus_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 user_steamid = 2;
+	optional bool user_muted_mic_locally = 3;
+	optional bool user_muted_output_locally = 4;
+	optional bool user_has_no_mic_for_session = 5;
+	optional int32 user_webaudio_sample_rate = 6;
+}
+
+message CVoiceChat_UploadClientVoiceChatLogs_Request {
+	optional fixed64 voice_chatid = 1;
+	optional string client_voice_logs_new_lines = 2;
+}
+
+message CVoiceChat_UploadClientVoiceChatLogs_Response {
+}
+
+message CVoiceChat_LeaveVoiceChat_Response {
+}
+
+message CVoiceChat_RequestOneOnOneChat_Request {
+	optional fixed64 steamid_partner = 1;
+}
+
+message CVoiceChat_RequestOneOnOneChat_Response {
+	optional fixed64 voice_chatid = 1;
+}
+
+message CVoiceChat_AnswerOneOnOneChat_Request {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 steamid_partner = 2;
+	optional bool accepted_request = 3;
+}
+
+message CVoiceChat_AnswerOneOnOneChat_Response {
+}
+
+message CVoiceChat_EndOneOnOneChat_Request {
+	optional fixed64 steamid_partner = 1;
+}
+
+message CVoiceChat_EndOneOnOneChat_Response {
+}
+
+message CVoiceChat_LeaveOneOnOneChat_Request {
+	optional fixed64 steamid_partner = 1;
+	optional fixed64 voice_chatid = 2;
+}
+
+message CVoiceChat_LeaveOneOnOneChat_Response {
+}
+
+message CVoiceChat_UserJoinedVoiceChat_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 user_steamid = 2;
+	optional uint64 chatid = 3;
+	optional fixed64 one_on_one_steamid_lower = 4;
+	optional fixed64 one_on_one_steamid_higher = 5;
+	optional uint64 chat_group_id = 6;
+	optional uint32 user_sessionid = 7;
+}
+
+message CVoiceChat_UserLeftVoiceChat_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 user_steamid = 2;
+	optional uint64 chatid = 3;
+	optional fixed64 one_on_one_steamid_lower = 4;
+	optional fixed64 one_on_one_steamid_higher = 5;
+	optional uint64 chat_group_id = 6;
+	optional uint32 user_sessionid = 7;
+}
+
+message CVoiceChat_VoiceChatEnded_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 one_on_one_steamid_lower = 2;
+	optional fixed64 one_on_one_steamid_higher = 3;
+	optional uint64 chatid = 4;
+	optional uint64 chat_group_id = 5;
+}
+
+message CVoiceChat_AllMembersStatus_Notification {
+	optional fixed64 voice_chatid = 1;
+	repeated .CVoiceChat_UserVoiceStatus_Notification users = 2;
+}
+
+message CVoiceChat_OneOnOneChatRequested_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 steamid_partner = 2;
+}
+
+message CVoiceChat_OneOnOneChatRequestResponse_Notification {
+	optional fixed64 voicechat_id = 1;
+	optional fixed64 steamid_partner = 2;
+	optional bool accepted_request = 3;
+}
+
+service VoiceChat {
+	rpc UpdateVoiceChatWebRTCData (.CVoiceChat_UpdateVoiceChatWebRTCData_Request) returns (.CVoiceChat_UpdateVoiceChatWebRTCData_Response);
+	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
+	rpc UploadClientVoiceChatLogs (.CVoiceChat_UploadClientVoiceChatLogs_Request) returns (.CVoiceChat_UploadClientVoiceChatLogs_Response);
+	rpc LeaveVoiceChat (.NotImplemented) returns (.CVoiceChat_LeaveVoiceChat_Response);
+	rpc RequestOneOnOneChat (.CVoiceChat_RequestOneOnOneChat_Request) returns (.CVoiceChat_RequestOneOnOneChat_Response);
+	rpc AnswerOneOnOneChat (.CVoiceChat_AnswerOneOnOneChat_Request) returns (.CVoiceChat_AnswerOneOnOneChat_Response);
+	rpc EndOneOnOneChat (.CVoiceChat_EndOneOnOneChat_Request) returns (.CVoiceChat_EndOneOnOneChat_Response);
+	rpc LeaveOneOnOneChat (.CVoiceChat_LeaveOneOnOneChat_Request) returns (.CVoiceChat_LeaveOneOnOneChat_Response);
+}
+
+service VoiceChatClient {
+	rpc NotifyUserJoinedVoiceChat (.CVoiceChat_UserJoinedVoiceChat_Notification) returns (.NoResponse);
+	rpc NotifyUserLeftVoiceChat (.CVoiceChat_UserLeftVoiceChat_Notification) returns (.NoResponse);
+	rpc NotifyVoiceChatEnded (.CVoiceChat_VoiceChatEnded_Notification) returns (.NoResponse);
+	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
+	rpc NotifyAllUsersVoiceStatus (.CVoiceChat_AllMembersStatus_Notification) returns (.NoResponse);
+	rpc NotifyOneOnOneChatRequested (.CVoiceChat_OneOnOneChatRequested_Notification) returns (.NoResponse);
+	rpc NotifyOneOnOneChatResponse (.CVoiceChat_OneOnOneChatRequestResponse_Notification) returns (.NoResponse);
+}
+

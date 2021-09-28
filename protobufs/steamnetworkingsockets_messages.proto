@@ -54,6 +54,9 @@ message CMsgSteamDatagramLinkLifetimeStats {
 	optional uint64 packets_recv_out_of_order = 9;
 	optional uint64 packets_recv_duplicate = 10;
 	optional uint64 packets_recv_lurch = 11;
+	repeated uint64 multipath_packets_recv_sequenced = 12;
+	repeated uint64 multipath_packets_recv_later = 13;
+	optional uint32 multipath_send_enabled = 14;
 	optional uint32 quality_histogram_100 = 21;
 	optional uint32 quality_histogram_99 = 22;
 	optional uint32 quality_histogram_97 = 23;
@@ -139,7 +142,9 @@ message CMsgSteamNetworkingP2PRendezvous {
 	message ConnectRequest {
 		optional .CMsgSteamDatagramSessionCryptInfoSigned crypt = 6;
 		optional .CMsgSteamDatagramCertificateSigned cert = 7;
-		optional uint32 virtual_port = 9;
+		optional uint32 to_virtual_port = 9;
+		optional uint32 from_virtual_port = 10;
+		optional string from_fakeip = 11;
 	}
 
 	message ConnectOK {
@@ -156,6 +161,12 @@ message CMsgSteamNetworkingP2PRendezvous {
 		optional .CMsgICERendezvous ice = 1;
 	}
 
+	message ApplicationMessage {
+		optional bytes data = 1;
+		optional uint64 msg_num = 2;
+		optional uint32 flags = 3;
+	}
+
 	optional string from_identity = 8;
 	optional fixed32 from_connection_id = 9;
 	optional string to_identity = 10;
@@ -163,12 +174,14 @@ message CMsgSteamNetworkingP2PRendezvous {
 	optional bytes sdr_routes = 2;
 	optional uint32 ack_peer_routes_revision = 3;
 	optional bool ice_enabled = 7;
+	optional bytes hosted_server_ticket = 14;
 	optional .CMsgSteamNetworkingP2PRendezvous.ConnectRequest connect_request = 4;
 	optional .CMsgSteamNetworkingP2PRendezvous.ConnectOK connect_ok = 5;
 	optional .CMsgSteamNetworkingP2PRendezvous.ConnectionClosed connection_closed = 6;
 	optional uint32 ack_reliable_msg = 11;
 	optional uint32 first_reliable_msg = 12;
 	repeated .CMsgSteamNetworkingP2PRendezvous.ReliableMessage reliable_messages = 13;
+	repeated .CMsgSteamNetworkingP2PRendezvous.ApplicationMessage application_messages = 15;
 }
 
 message CMsgSteamNetworkingICESessionSummary {
@@ -179,5 +192,12 @@ message CMsgSteamNetworkingICESessionSummary {
 	optional uint32 initial_ping = 4;
 	optional uint32 initial_score = 6;
 	optional uint32 negotiation_ms = 5;
+	optional uint32 best_route_kind = 16;
+	optional uint32 best_ping = 17;
+	optional uint32 best_score = 18;
+	optional uint32 best_time = 19;
 	optional uint32 selected_seconds = 12;
+	optional uint32 user_settings = 13;
+	optional uint32 ice_enable_var = 14;
+	optional uint32 local_candidate_types_allowed = 15;
 }

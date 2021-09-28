@@ -1,0 +1,405 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CPublishedFile_Subscribe_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint32 list_type = 2;
+	optional int32 appid = 3;
+	optional bool notify_client = 4;
+}
+
+message CPublishedFile_Subscribe_Response {
+}
+
+message CPublishedFile_Unsubscribe_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint32 list_type = 2;
+	optional int32 appid = 3;
+	optional bool notify_client = 4;
+}
+
+message CPublishedFile_Unsubscribe_Response {
+}
+
+message CPublishedFile_CanSubscribe_Response {
+	optional bool can_subscribe = 1;
+}
+
+message CPublishedFile_Publish_Response {
+	optional uint64 publishedfileid = 1;
+	optional string redirect_uri = 2;
+}
+
+message CPublishedFile_GetDetails_Request {
+	repeated fixed64 publishedfileids = 1;
+	optional bool includetags = 2;
+	optional bool includeadditionalpreviews = 3;
+	optional bool includechildren = 4;
+	optional bool includekvtags = 5;
+	optional bool includevotes = 6;
+	optional bool short_description = 8;
+	optional bool includeforsaledata = 10;
+	optional bool includemetadata = 11;
+	optional int32 language = 12 [default = 0];
+	optional uint32 return_playtime_stats = 13;
+	optional uint32 appid = 14;
+	optional bool strip_description_bbcode = 15;
+	optional int32 desired_revision = 16 [default = 0, (description) = "enum"];
+	optional bool includereactions = 17 [default = false];
+}
+
+message CPublishedFile_GetDetails_Response {
+	repeated .PublishedFileDetails publishedfiledetails = 1;
+}
+
+message PublishedFileDetails {
+	optional uint32 result = 1;
+	optional uint64 publishedfileid = 2;
+	optional fixed64 creator = 3;
+	optional uint32 creator_appid = 4;
+	optional uint32 consumer_appid = 5;
+	optional uint32 consumer_shortcutid = 6;
+	optional string filename = 7;
+	optional uint64 file_size = 8;
+	optional uint64 preview_file_size = 9;
+	optional string file_url = 10;
+	optional string preview_url = 11;
+	optional string youtubevideoid = 12;
+	optional string url = 13;
+	optional fixed64 hcontent_file = 14;
+	optional fixed64 hcontent_preview = 15;
+	optional string title = 16;
+	optional string file_description = 17;
+	optional string short_description = 18;
+	optional uint32 time_created = 19;
+	optional uint32 time_updated = 20;
+	optional uint32 visibility = 21;
+	optional uint32 flags = 22;
+	optional bool workshop_file = 23;
+	optional bool workshop_accepted = 24;
+	optional bool show_subscribe_all = 25;
+	optional int32 num_comments_developer = 26;
+	optional int32 num_comments_public = 27;
+	optional bool banned = 28;
+	optional string ban_reason = 29;
+	optional fixed64 banner = 30;
+	optional bool can_be_deleted = 31;
+	optional bool incompatible = 32;
+	optional string app_name = 33;
+	optional uint32 file_type = 34;
+	optional bool can_subscribe = 35;
+	optional uint32 subscriptions = 36;
+	optional uint32 favorited = 37;
+	optional uint32 followers = 38;
+	optional uint32 lifetime_subscriptions = 39;
+	optional uint32 lifetime_favorited = 40;
+	optional uint32 lifetime_followers = 41;
+	optional uint64 lifetime_playtime = 62;
+	optional uint64 lifetime_playtime_sessions = 63;
+	optional uint32 views = 42;
+	optional uint32 image_width = 43;
+	optional uint32 image_height = 44;
+	optional string image_url = 45;
+	optional bool spoiler_tag = 46;
+	optional uint32 shortcutid = 47;
+	optional string shortcutname = 48;
+	optional uint32 num_children = 49;
+	optional uint32 num_reports = 50;
+	repeated .PublishedFileDetails_Preview previews = 51;
+	repeated .PublishedFileDetails_Tag tags = 52;
+	repeated .PublishedFileDetails_Child children = 53;
+	repeated .PublishedFileDetails_KVTag kvtags = 54;
+	optional .PublishedFileDetails_VoteData vote_data = 55;
+	optional .PublishedFileDetails_PlaytimeStats playtime_stats = 64;
+	optional uint32 time_subscribed = 56;
+	optional .PublishedFileDetails_ForSaleData for_sale_data = 57;
+	optional string metadata = 58;
+	optional int32 language = 61 [default = 0];
+	optional bool maybe_inappropriate_sex = 65;
+	optional bool maybe_inappropriate_violence = 66;
+	optional uint64 revision_change_number = 67;
+	optional int32 revision = 68 [(description) = "enum"];
+	repeated int32 available_revisions = 69 [(description) = "enum"];
+	repeated .PublishedFileDetails_Reaction reactions = 70;
+	optional int32 ban_text_check_result = 71 [(description) = "enum"];
+}
+
+message PublishedFileDetails_Preview {
+	optional uint64 previewid = 1;
+	optional uint32 sortorder = 2;
+	optional string url = 3;
+	optional uint32 size = 4;
+	optional string filename = 5;
+	optional string youtubevideoid = 6;
+	optional uint32 preview_type = 7;
+	optional string external_reference = 8;
+}
+
+message PublishedFileDetails_Tag {
+	optional string tag = 1;
+	optional bool adminonly = 2;
+	optional string display_name = 3;
+}
+
+message PublishedFileDetails_Child {
+	optional uint64 publishedfileid = 1;
+	optional uint32 sortorder = 2;
+	optional uint32 file_type = 3;
+}
+
+message PublishedFileDetails_KVTag {
+	optional string key = 1;
+	optional string value = 2;
+}
+
+message PublishedFileDetails_VoteData {
+	optional float score = 1;
+	optional uint32 votes_up = 2;
+	optional uint32 votes_down = 3;
+}
+
+message PublishedFileDetails_PlaytimeStats {
+	optional uint64 playtime_seconds = 1;
+	optional uint64 num_sessions = 2;
+}
+
+message PublishedFileDetails_ForSaleData {
+	optional bool is_for_sale = 1;
+	optional uint32 price_category = 2;
+	optional int32 estatus = 3 [(description) = "enum"];
+	optional uint32 price_category_floor = 4;
+	optional bool price_is_pay_what_you_want = 5;
+	optional uint32 discount_percentage = 6;
+}
+
+message PublishedFileDetails_Reaction {
+	optional uint32 reactionid = 1;
+	optional uint32 count = 2;
+}
+
+message CPublishedFile_GetItemInfo_Response {
+	optional uint32 update_time = 1;
+	repeated .CPublishedFile_GetItemInfo_Response_WorkshopItemInfo workshop_items = 2;
+	repeated fixed64 private_items = 3;
+}
+
+message CPublishedFile_GetItemInfo_Response_WorkshopItemInfo {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+	optional fixed64 manifest_id = 3;
+	optional uint32 flags = 4;
+}
+
+message CPublishedFile_GetUserFiles_Response {
+	optional uint32 total = 1;
+	optional uint32 startindex = 2;
+	repeated .PublishedFileDetails publishedfiledetails = 3;
+	repeated .CPublishedFile_GetUserFiles_Response_App apps = 4;
+}
+
+message CPublishedFile_GetUserFiles_Response_App {
+	optional uint32 appid = 1;
+	optional string name = 2;
+	optional uint32 shortcutid = 3;
+	optional bool private = 4;
+}
+
+message CPublishedFile_AreFilesInSubscriptionList_Request {
+	optional uint32 appid = 1;
+	repeated fixed64 publishedfileids = 2;
+	optional uint32 listtype = 3;
+	optional uint32 filetype = 4;
+	optional uint32 workshopfiletype = 5;
+}
+
+message CPublishedFile_AreFilesInSubscriptionList_Response {
+	repeated .CPublishedFile_AreFilesInSubscriptionList_Response_InList files = 1;
+}
+
+message CPublishedFile_AreFilesInSubscriptionList_Response_InList {
+	optional fixed64 publishedfileid = 1;
+	optional bool inlist = 2;
+}
+
+message CPublishedFile_Update_Response {
+}
+
+message CPublishedFile_GetChangeHistoryEntry_Response {
+	optional string change_description = 1;
+	optional int32 language = 2;
+}
+
+message CPublishedFile_GetChangeHistory_Response {
+	repeated .CPublishedFile_GetChangeHistory_Response_ChangeLog changes = 1;
+	optional uint32 total = 2;
+}
+
+message CPublishedFile_GetChangeHistory_Response_ChangeLog {
+	optional uint32 timestamp = 1;
+	optional string change_description = 2;
+	optional int32 language = 3;
+}
+
+message CPublishedFile_RefreshVotingQueue_Response {
+}
+
+message CPublishedFile_QueryFiles_Request {
+	optional uint32 query_type = 1;
+	optional uint32 page = 2;
+	optional string cursor = 39;
+	optional uint32 numperpage = 3 [default = 1];
+	optional uint32 creator_appid = 4;
+	optional uint32 appid = 5;
+	repeated string requiredtags = 6;
+	repeated string excludedtags = 7;
+	optional bool match_all_tags = 8 [default = true];
+	repeated string required_flags = 9;
+	repeated string omitted_flags = 10;
+	optional string search_text = 11;
+	optional uint32 filetype = 12;
+	optional fixed64 child_publishedfileid = 13;
+	optional uint32 days = 14;
+	optional bool include_recent_votes_only = 15;
+	optional uint32 cache_max_age_seconds = 31 [default = 0];
+	optional int32 language = 33 [default = 0];
+	repeated .CPublishedFile_QueryFiles_Request_KVTag required_kv_tags = 34;
+	repeated .CPublishedFile_QueryFiles_Request_TagGroup taggroups = 42;
+	optional bool totalonly = 16;
+	optional bool ids_only = 35;
+	optional bool return_vote_data = 17;
+	optional bool return_tags = 18;
+	optional bool return_kv_tags = 19;
+	optional bool return_previews = 20;
+	optional bool return_children = 21;
+	optional bool return_short_description = 22;
+	optional bool return_for_sale_data = 30;
+	optional bool return_metadata = 32 [default = false];
+	optional uint32 return_playtime_stats = 36;
+	optional bool return_details = 37;
+	optional bool strip_description_bbcode = 38;
+	optional int32 desired_revision = 40 [default = 0, (description) = "enum"];
+	optional bool return_reactions = 43 [default = false];
+}
+
+message CPublishedFile_QueryFiles_Request_KVTag {
+	optional string key = 1;
+	optional string value = 2;
+}
+
+message CPublishedFile_QueryFiles_Request_TagGroup {
+	repeated string tags = 1;
+}
+
+message CPublishedFile_QueryFiles_Response {
+	optional uint32 total = 1;
+	repeated .PublishedFileDetails publishedfiledetails = 2;
+	optional string next_cursor = 3;
+}
+
+message CPublishedFile_AddAppRelationship_Response {
+}
+
+message CPublishedFile_RemoveAppRelationship_Response {
+}
+
+message CPublishedFile_GetAppRelationships_Response {
+	repeated .CPublishedFile_GetAppRelationships_Response_AppRelationship app_relationships = 3;
+}
+
+message CPublishedFile_GetAppRelationships_Response_AppRelationship {
+	optional uint32 appid = 1;
+	optional uint32 relationship = 2;
+}
+
+message CPublishedFile_StartPlaytimeTracking_Response {
+}
+
+message CPublishedFile_StopPlaytimeTracking_Response {
+}
+
+message CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response {
+}
+
+message CPublishedFile_SetPlaytimeForControllerConfigs_Response {
+}
+
+message CPublishedFile_AddChild_Response {
+}
+
+message CPublishedFile_RemoveChild_Response {
+}
+
+message CPublishedFile_GetUserVoteSummary_Request {
+	repeated fixed64 publishedfileids = 1;
+}
+
+message CPublishedFile_GetUserVoteSummary_Response {
+	repeated .CPublishedFile_GetUserVoteSummary_Response_VoteSummary summaries = 1;
+}
+
+message CPublishedFile_GetUserVoteSummary_Response_VoteSummary {
+	optional fixed64 publishedfileid = 1;
+	optional bool vote_for = 2;
+	optional bool vote_against = 3;
+	optional bool reported = 4;
+}
+
+message CPublishedFile_FileSubscribed_Notification {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+	optional fixed64 file_hcontent = 3;
+	optional uint32 file_size = 4;
+	optional uint32 rtime_subscribed = 5;
+	optional bool is_depot_content = 6;
+	optional uint32 rtime_updated = 7;
+	repeated .CPublishedFile_FileSubscribed_Notification_RevisionData revisions = 8;
+}
+
+message CPublishedFile_FileSubscribed_Notification_RevisionData {
+	optional int32 revision = 1 [(description) = "enum"];
+	optional fixed64 file_hcontent = 2;
+	optional uint32 rtime_updated = 3;
+}
+
+message CPublishedFile_FileUnsubscribed_Notification {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+}
+
+message CPublishedFile_FileDeleted_Client_Notification {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+}
+
+service PublishedFile {
+	rpc Subscribe (.CPublishedFile_Subscribe_Request) returns (.CPublishedFile_Subscribe_Response);
+	rpc Unsubscribe (.CPublishedFile_Unsubscribe_Request) returns (.CPublishedFile_Unsubscribe_Response);
+	rpc CanSubscribe (.NotImplemented) returns (.CPublishedFile_CanSubscribe_Response);
+	rpc Publish (.NotImplemented) returns (.CPublishedFile_Publish_Response);
+	rpc GetDetails (.CPublishedFile_GetDetails_Request) returns (.CPublishedFile_GetDetails_Response);
+	rpc GetItemInfo (.NotImplemented) returns (.CPublishedFile_GetItemInfo_Response);
+	rpc GetUserFiles (.NotImplemented) returns (.CPublishedFile_GetUserFiles_Response);
+	rpc AreFilesInSubscriptionList (.CPublishedFile_AreFilesInSubscriptionList_Request) returns (.CPublishedFile_AreFilesInSubscriptionList_Response);
+	rpc Update (.NotImplemented) returns (.CPublishedFile_Update_Response);
+	rpc GetChangeHistoryEntry (.NotImplemented) returns (.CPublishedFile_GetChangeHistoryEntry_Response);
+	rpc GetChangeHistory (.NotImplemented) returns (.CPublishedFile_GetChangeHistory_Response);
+	rpc RefreshVotingQueue (.NotImplemented) returns (.CPublishedFile_RefreshVotingQueue_Response);
+	rpc QueryFiles (.CPublishedFile_QueryFiles_Request) returns (.CPublishedFile_QueryFiles_Response);
+	rpc AddAppRelationship (.NotImplemented) returns (.CPublishedFile_AddAppRelationship_Response);
+	rpc RemoveAppRelationship (.NotImplemented) returns (.CPublishedFile_RemoveAppRelationship_Response);
+	rpc GetAppRelationships (.NotImplemented) returns (.CPublishedFile_GetAppRelationships_Response);
+	rpc StartPlaytimeTracking (.NotImplemented) returns (.CPublishedFile_StartPlaytimeTracking_Response);
+	rpc StopPlaytimeTracking (.NotImplemented) returns (.CPublishedFile_StopPlaytimeTracking_Response);
+	rpc StopPlaytimeTrackingForAllAppItems (.NotImplemented) returns (.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response);
+	rpc SetPlaytimeForControllerConfigs (.NotImplemented) returns (.CPublishedFile_SetPlaytimeForControllerConfigs_Response);
+	rpc AddChild (.NotImplemented) returns (.CPublishedFile_AddChild_Response);
+	rpc RemoveChild (.NotImplemented) returns (.CPublishedFile_RemoveChild_Response);
+	rpc GetUserVoteSummary (.CPublishedFile_GetUserVoteSummary_Request) returns (.CPublishedFile_GetUserVoteSummary_Response);
+}
+
+service PublishedFileClient {
+	rpc NotifyFileSubscribed (.CPublishedFile_FileSubscribed_Notification) returns (.NoResponse);
+	rpc NotifyFileUnsubscribed (.CPublishedFile_FileUnsubscribed_Notification) returns (.NoResponse);
+	rpc NotifyFileDeleted (.CPublishedFile_FileDeleted_Client_Notification) returns (.NoResponse);
+}
+

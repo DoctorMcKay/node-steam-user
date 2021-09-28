@@ -1,0 +1,67 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CUserNews_GetUserNews_Request {
+	optional uint32 count = 1;
+	optional uint32 starttime = 2;
+	optional uint32 endtime = 3;
+	optional string language = 4;
+	optional uint32 filterflags = 5;
+	optional uint32 filterappid = 6;
+}
+
+message CUserNews_GetUserNews_Response {
+	repeated .CUserNews_Event news = 1;
+	repeated .CUserNewsAchievementDisplayData achievement_display_data = 2;
+}
+
+message CUserNews_Event {
+	optional uint32 eventtype = 1;
+	optional uint32 eventtime = 2;
+	optional fixed64 steamid_actor = 3;
+	optional fixed64 steamid_target = 4;
+	optional fixed64 gameid = 5;
+	optional uint32 packageid = 6;
+	optional uint32 shortcutid = 7;
+	repeated string achievement_names = 8;
+	optional fixed64 clan_eventid = 9;
+	optional fixed64 clan_announcementid = 10;
+	optional fixed64 publishedfileid = 11;
+	optional uint32 event_last_mod_time = 12;
+}
+
+message CUserNewsAchievementDisplayData {
+	optional uint32 appid = 1;
+	repeated .CUserNewsAchievementDisplayData_CAchievement achievements = 2;
+}
+
+message CUserNewsAchievementDisplayData_CAchievement {
+	optional string name = 1;
+	optional string display_name = 2;
+	optional string display_description = 3;
+	optional string icon = 4;
+	optional float unlocked_pct = 5;
+	optional bool hidden = 6;
+}
+
+message CUserNews_GetAppDetailsSpotlight_Request {
+	optional uint32 appid = 1;
+}
+
+message CUserNews_GetAppDetailsSpotlight_Response {
+	repeated .CUserNews_GetAppDetailsSpotlight_Response_FeaturedEvent events = 1;
+}
+
+message CUserNews_GetAppDetailsSpotlight_Response_FeaturedEvent {
+	optional uint32 event_type = 1;
+	optional uint32 event_time = 2;
+	optional fixed64 clan_id = 3;
+	optional fixed64 clan_announcementid = 4;
+	optional uint32 appid = 5;
+	optional uint32 rtime32_last_modified = 6;
+}
+
+service UserNews {
+	rpc GetUserNews (.CUserNews_GetUserNews_Request) returns (.CUserNews_GetUserNews_Response);
+	rpc GetAppDetailsSpotlight (.CUserNews_GetAppDetailsSpotlight_Request) returns (.CUserNews_GetAppDetailsSpotlight_Response);
+}
+

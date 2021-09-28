@@ -1,0 +1,256 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CCommunity_GetApps_Request {
+	repeated int32 appids = 1;
+	optional uint32 language = 2;
+}
+
+message CCommunity_GetApps_Response {
+	repeated .CCDDBAppDetailCommon apps = 1;
+}
+
+message CCDDBAppDetailCommon {
+	optional uint32 appid = 1;
+	optional string name = 2;
+	optional string icon = 3;
+	optional string logo = 4;
+	optional string logo_small = 5;
+	optional bool tool = 6;
+	optional bool demo = 7;
+	optional bool media = 8;
+	optional bool community_visible_stats = 9;
+	optional string friendly_name = 10;
+	optional string propagation = 11;
+	optional bool has_adult_content = 12;
+	optional bool is_visible_in_steam_china = 13;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Request {
+	optional int32 appid = 1;
+	optional string language = 2;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Response {
+	optional int32 appid = 1;
+	repeated .CCommunity_GetAppRichPresenceLocalization_Response_TokenList token_lists = 2;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Response_TokenList {
+	optional string language = 1;
+	repeated .CCommunity_GetAppRichPresenceLocalization_Response_Token tokens = 2;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Response_Token {
+	optional string name = 1;
+	optional string value = 2;
+}
+
+message CCommunity_GetCommentThread_Response {
+	repeated .CCommunity_Comment comments = 1;
+	repeated .CCommunity_Comment deleted_comments = 2;
+	optional fixed64 steamid = 3;
+	optional fixed64 commentthreadid = 4;
+	optional int32 start = 5;
+	optional int32 count = 6;
+	optional int32 total_count = 7;
+	optional int32 upvotes = 8;
+	repeated uint32 upvoters = 9;
+	optional bool user_subscribed = 10;
+	optional bool user_upvoted = 11;
+	optional fixed64 answer_commentid = 12;
+	optional uint32 answer_actor = 13;
+	optional int32 answer_actor_rank = 14;
+	optional bool can_post = 15;
+	optional uint32 comment_thread_type = 16;
+	optional fixed64 gidfeature = 17;
+	optional fixed64 gidfeature2 = 18;
+}
+
+message CCommunity_Comment {
+	optional fixed64 gidcomment = 1;
+	optional fixed64 steamid = 2;
+	optional uint32 timestamp = 3;
+	optional string text = 4;
+	optional int32 upvotes = 5;
+	optional bool hidden = 6;
+	optional bool hidden_by_user = 7;
+	optional bool deleted = 8;
+	optional .CMsgIPAddress ipaddress = 9;
+	optional int32 total_hidden = 10;
+	optional bool upvoted_by_user = 11;
+	repeated .CCommunity_Comment_Reaction reactions = 12;
+	optional fixed64 gidparentcomment = 13;
+}
+
+message CCommunity_Comment_Reaction {
+	optional uint32 reactionid = 1;
+	optional uint32 count = 2;
+}
+
+message CCommunity_PostCommentToThread_Response {
+	optional fixed64 gidcomment = 1;
+	optional fixed64 commentthreadid = 2;
+	optional int32 count = 3;
+	optional int32 upvotes = 4;
+}
+
+message CCommunity_DeleteCommentFromThread_Response {
+}
+
+message CCommunity_RateCommentThread_Response {
+	optional uint64 gidcomment = 1;
+	optional uint64 commentthreadid = 2;
+	optional uint32 count = 3;
+	optional uint32 upvotes = 4;
+	optional bool has_upvoted = 5;
+}
+
+message CCommunity_GetCommentThreadRatings_Response {
+	optional uint64 commentthreadid = 1;
+	optional uint64 gidcomment = 2;
+	optional uint32 upvotes = 3;
+	optional bool has_upvoted = 4;
+	repeated uint32 upvoter_accountids = 5;
+}
+
+message CCommunity_RateClanAnnouncement_Request {
+	optional uint64 announcementid = 1;
+	optional bool vote_up = 2;
+	optional uint32 clan_accountid = 3;
+}
+
+message CCommunity_RateClanAnnouncement_Response {
+}
+
+message CCommunity_GetClanAnnouncementVoteForUser_Request {
+	optional uint64 announcementid = 1;
+}
+
+message CCommunity_GetClanAnnouncementVoteForUser_Response {
+	optional bool voted_up = 1;
+	optional bool voted_down = 2;
+}
+
+message CCommunity_GetAvatarHistory_Request {
+	optional fixed64 steamid = 1;
+	optional bool filter_user_uploaded_only = 2;
+}
+
+message CCommunity_GetAvatarHistory_Response {
+	repeated .CCommunity_GetAvatarHistory_Response_AvatarData avatars = 1;
+}
+
+message CCommunity_GetAvatarHistory_Response_AvatarData {
+	optional string avatar_sha1 = 1;
+	optional bool user_uploaded = 2;
+	optional uint32 timestamp = 3;
+}
+
+message CCommunity_GetUserPartnerEventNews_Response {
+	repeated .CClanMatchEventByRange results = 1;
+}
+
+message CClanMatchEventByRange {
+	optional uint32 rtime_before = 1;
+	optional uint32 rtime_after = 2;
+	optional uint32 qualified = 3;
+	repeated .CClanEventUserNewsTuple events = 4;
+}
+
+message CClanEventUserNewsTuple {
+	optional uint32 clanid = 1;
+	optional fixed64 event_gid = 2;
+	optional fixed64 announcement_gid = 3;
+	optional uint32 rtime_start = 4;
+	optional uint32 rtime_end = 5;
+	optional uint32 priority_score = 6;
+	optional uint32 type = 7;
+	optional uint32 clamp_range_slot = 8;
+	optional uint32 appid = 9;
+	optional uint32 rtime32_last_modified = 10;
+}
+
+message CCommunity_GetBestEventsForUser_Response {
+	repeated .CCommunity_PartnerEventResult results = 1;
+}
+
+message CCommunity_PartnerEventResult {
+	optional uint32 clanid = 1;
+	optional fixed64 event_gid = 2;
+	optional fixed64 announcement_gid = 3;
+	optional uint32 appid = 4;
+	optional bool possible_takeover = 5;
+	optional uint32 rtime32_last_modified = 6 [default = 0];
+	optional int32 user_app_priority = 7;
+}
+
+message CCommunity_MarkPartnerEventsForUser_Request {
+	repeated .CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking markings = 1;
+}
+
+message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking {
+	optional uint32 clanid = 1;
+	optional fixed64 event_gid = 2;
+	optional int32 display_location = 3 [(description) = "enum"];
+	optional bool mark_shown = 4;
+	optional bool mark_read = 5;
+}
+
+message CCommunity_MarkPartnerEventsForUser_Response {
+}
+
+message CCommunity_GetUserPartnerEventViewStatus_Response {
+	repeated .CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent events = 1;
+}
+
+message CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent {
+	optional fixed64 event_gid = 1;
+	optional uint32 last_shown_time = 2;
+	optional uint32 last_read_time = 3;
+	optional uint32 clan_account_id = 4;
+}
+
+message CCommunity_PartnerEventsShowMoreForApp_Response {
+}
+
+message CCommunity_PartnerEventsShowLessForApp_Response {
+}
+
+message CCommunity_ClearUserPartnerEventsAppPriorities_Response {
+}
+
+message CCommunity_GetUserPartnerEventsAppPriorities_Response {
+	repeated .CCommunity_PartnerEventsAppPriority priorities = 1;
+}
+
+message CCommunity_PartnerEventsAppPriority {
+	optional uint32 appid = 1;
+	optional int32 user_app_priority = 2;
+}
+
+message CCommunity_ClearSinglePartnerEventsAppPriority_Response {
+}
+
+service Community {
+	rpc GetApps (.CCommunity_GetApps_Request) returns (.CCommunity_GetApps_Response);
+	rpc GetAppRichPresenceLocalization (.CCommunity_GetAppRichPresenceLocalization_Request) returns (.CCommunity_GetAppRichPresenceLocalization_Response);
+	rpc GetCommentThread (.NotImplemented) returns (.CCommunity_GetCommentThread_Response);
+	rpc PostCommentToThread (.NotImplemented) returns (.CCommunity_PostCommentToThread_Response);
+	rpc DeleteCommentFromThread (.NotImplemented) returns (.CCommunity_DeleteCommentFromThread_Response);
+	rpc RateCommentThread (.NotImplemented) returns (.CCommunity_RateCommentThread_Response);
+	rpc GetCommentThreadRatings (.NotImplemented) returns (.CCommunity_GetCommentThreadRatings_Response);
+	rpc RateClanAnnouncement (.CCommunity_RateClanAnnouncement_Request) returns (.CCommunity_RateClanAnnouncement_Response);
+	rpc GetClanAnnouncementVoteForUser (.CCommunity_GetClanAnnouncementVoteForUser_Request) returns (.CCommunity_GetClanAnnouncementVoteForUser_Response);
+	rpc GetAvatarHistory (.CCommunity_GetAvatarHistory_Request) returns (.CCommunity_GetAvatarHistory_Response);
+	rpc GetUserPartnerEventNews (.NotImplemented) returns (.CCommunity_GetUserPartnerEventNews_Response);
+	rpc GetBestEventsForUser (.NotImplemented) returns (.CCommunity_GetBestEventsForUser_Response);
+	rpc MarkPartnerEventsForUser (.CCommunity_MarkPartnerEventsForUser_Request) returns (.CCommunity_MarkPartnerEventsForUser_Response);
+	rpc GetUserPartnerEventViewStatus (.NotImplemented) returns (.CCommunity_GetUserPartnerEventViewStatus_Response);
+	rpc PartnerEventsShowMoreForApp (.NotImplemented) returns (.CCommunity_PartnerEventsShowMoreForApp_Response);
+	rpc PartnerEventsShowLessForApp (.NotImplemented) returns (.CCommunity_PartnerEventsShowLessForApp_Response);
+	rpc ClearUserPartnerEventsAppPriorities (.NotImplemented) returns (.CCommunity_ClearUserPartnerEventsAppPriorities_Response);
+	rpc GetUserPartnerEventsAppPriorities (.NotImplemented) returns (.CCommunity_GetUserPartnerEventsAppPriorities_Response);
+	rpc ClearSinglePartnerEventsAppPriority (.NotImplemented) returns (.CCommunity_ClearSinglePartnerEventsAppPriority_Response);
+}
+

@@ -1,0 +1,81 @@
+option optimize_for = SPEED;
+option cc_generic_services = true;
+
+enum EClientNotificationType {
+	k_EClientNotificationType_Invalid = 0;
+	k_EClientNotificationType_DownloadCompleted = 1;
+	k_EClientNotificationType_FriendInvite = 2;
+	k_EClientNotificationType_FriendInGame = 3;
+	k_EClientNotificationType_FriendOnline = 4;
+	k_EClientNotificationType_Achievement = 5;
+	k_EClientNotificationType_LowBattery = 6;
+	k_EClientNotificationType_SystemUpdate = 7;
+	k_EClientNotificationType_FriendMessage = 8;
+	k_EClientNotificationType_GroupChatMessage = 9;
+}
+
+enum ESystemUpdateNotificationType {
+	k_ESystemUpdateNotificationType_Invalid = 0;
+	k_ESystemUpdateNotificationType_Available = 1;
+	k_ESystemUpdateNotificationType_NeedsRestart = 2;
+}
+
+message CClientNotificationDownloadCompleted {
+	optional uint32 appid = 1;
+}
+
+message CClientNotificationFriendInvite {
+	optional fixed64 steamid = 1;
+}
+
+message CClientNotificationFriendInGame {
+	optional fixed64 steamid = 1;
+	optional string game_name = 2;
+}
+
+message CClientNotificationFriendOnline {
+	optional fixed64 steamid = 1;
+}
+
+message CClientNotificationAchievement {
+	optional string achievement_id = 1;
+	optional uint32 appid = 2;
+	optional string name = 3;
+	optional string description = 4;
+	optional string image_url = 5;
+	optional bool achieved = 6;
+	optional uint32 rtime_unlocked = 7;
+	optional float min_progress = 8;
+	optional float current_progress = 9;
+	optional float max_progress = 10;
+	optional float global_achieved_pct = 11;
+}
+
+message CClientNotificationLowBattery {
+	optional float pct_remaining = 1;
+}
+
+message CClientNotificationSystemUpdate {
+	optional .ESystemUpdateNotificationType type = 1 [default = k_ESystemUpdateNotificationType_Invalid];
+}
+
+message CClientNotificationFriendMessage {
+	optional string tag = 1;
+	optional string steamid = 2;
+	optional string title = 3;
+	optional string body = 4;
+	optional string icon = 5;
+	optional uint32 notificationid = 6;
+}
+
+message CClientNotificationGroupChatMessage {
+	optional string tag = 1;
+	optional string steamid_sender = 2;
+	optional string chat_group_id = 3;
+	optional string chat_id = 4;
+	optional string title = 5;
+	optional string body = 6;
+	optional string rawbody = 7;
+	optional string icon = 8;
+	optional uint32 notificationid = 9;
+}

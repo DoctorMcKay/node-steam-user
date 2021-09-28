@@ -1,0 +1,66 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CQuest_GetCommunityInventory_Response {
+	repeated .CQuest_CommunityItem items = 1;
+}
+
+message CQuest_CommunityItem {
+	optional uint64 communityitemid = 1;
+	optional uint32 item_type = 2;
+	optional uint32 appid = 3;
+	optional uint32 owner = 4;
+	repeated .CQuest_CommunityItem_Attribute attributes = 5;
+	optional bool used = 6;
+	optional uint32 owner_origin = 7;
+	optional int64 amount = 8;
+}
+
+message CQuest_CommunityItem_Attribute {
+	optional uint32 attributeid = 1;
+	optional uint64 value = 2;
+}
+
+message CQuest_GetCommunityItemDefinitions_Response {
+	repeated .CQuest_GetCommunityItemDefinitions_Response_ItemDefinition item_definitions = 1;
+}
+
+message CQuest_GetCommunityItemDefinitions_Response_ItemDefinition {
+	optional uint32 item_type = 1;
+	optional uint32 appid = 2;
+	optional string item_name = 3;
+	optional string item_title = 4;
+	optional string item_description = 5;
+	optional string item_image_small = 6;
+	optional string item_image_large = 7;
+	optional string item_key_values = 8;
+	optional uint32 item_series = 9;
+	optional uint32 item_class = 10;
+	optional uint32 editor_accountid = 11;
+	optional bool active = 12;
+	optional string item_image_composed = 13;
+	optional string item_image_composed_foil = 14;
+	optional bool deleted = 15;
+	optional uint32 item_last_changed = 16;
+	optional uint64 broadcast_channel_id = 17;
+	optional string item_movie_webm = 18;
+	optional string item_movie_mp4 = 19;
+	optional string item_movie_webm_small = 20;
+	optional string item_movie_mp4_small = 21;
+}
+
+message CQuest_ActivateProfileModifierItem_Request {
+	optional uint32 appid = 1;
+	optional uint64 communityitemid = 2;
+	optional bool activate = 3;
+}
+
+message CQuest_ActivateProfileModifierItem_Response {
+}
+
+service Quest {
+	rpc GetCommunityInventory (.NotImplemented) returns (.CQuest_GetCommunityInventory_Response);
+	rpc GetCommunityItemDefinitions (.NotImplemented) returns (.CQuest_GetCommunityItemDefinitions_Response);
+	rpc ActivateProfileModifierItem (.CQuest_ActivateProfileModifierItem_Request) returns (.CQuest_ActivateProfileModifierItem_Response);
+}
+

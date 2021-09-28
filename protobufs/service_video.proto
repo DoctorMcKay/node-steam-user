@@ -1,0 +1,41 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CVideo_ClientGetVideoURL_Response {
+	optional uint64 video_id = 1;
+	optional string video_url = 2;
+}
+
+message CVideo_SetVideoBookmark_Notification {
+	repeated .VideoBookmark bookmarks = 1;
+}
+
+message VideoBookmark {
+	optional uint32 app_id = 1;
+	optional uint32 playback_position_in_seconds = 2;
+	optional uint64 video_track_id = 3;
+	optional uint64 audio_track_id = 4;
+	optional uint64 timedtext_track_id = 5;
+	optional uint32 last_modified = 6;
+	optional bool hide_from_watch_history = 7 [default = false];
+	optional bool hide_from_library = 8 [default = false];
+}
+
+message CVideo_GetVideoBookmarks_Response {
+	repeated .VideoBookmark bookmarks = 1;
+}
+
+message CVideo_UnlockedH264_Notification {
+	optional bytes encryption_key = 1;
+}
+
+service Video {
+	rpc ClientGetVideoURL (.NotImplemented) returns (.CVideo_ClientGetVideoURL_Response);
+	rpc SetVideoBookmark (.CVideo_SetVideoBookmark_Notification) returns (.NoResponse);
+	rpc GetVideoBookmarks (.NotImplemented) returns (.CVideo_GetVideoBookmarks_Response);
+}
+
+service VideoClient {
+	rpc NotifyUnlockedH264 (.CVideo_UnlockedH264_Notification) returns (.NoResponse);
+}
+

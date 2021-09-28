@@ -1,0 +1,50 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CWebRTCClient_InitiateWebRTCConnection_Request {
+	optional string sdp = 1;
+}
+
+message CWebRTCClient_InitiateWebRTCConnection_Response {
+	optional string remote_description = 1;
+}
+
+message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request {
+	optional uint32 ip_webrtc_server = 1;
+	optional uint32 port_webrtc_server = 2;
+	optional uint32 ip_webrtc_session_client = 3;
+	optional uint32 port_webrtc_session_client = 4;
+	optional uint64 remote_description_version = 5;
+}
+
+message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response {
+}
+
+message CWebRTC_WebRTCSessionConnected_Notification {
+	optional uint32 ssrc = 1;
+	optional uint32 client_ip = 2;
+	optional uint32 client_port = 3;
+	optional uint32 server_ip = 4;
+	optional uint32 server_port = 5;
+}
+
+message CWebRTC_WebRTCUpdateRemoteDescription_Notification {
+	optional string remote_description = 1;
+	optional uint64 remote_description_version = 2;
+	repeated .CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping ssrcs_to_accountids = 3;
+}
+
+message CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping {
+	optional uint32 ssrc = 1;
+	optional uint32 accountid = 2;
+}
+
+service WebRTCClient {
+	rpc InitiateWebRTCConnection (.CWebRTCClient_InitiateWebRTCConnection_Request) returns (.CWebRTCClient_InitiateWebRTCConnection_Response);
+	rpc AcknowledgeUpdatedRemoteDescription (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request) returns (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response);
+}
+
+service WebRTCClientNotifications {
+	rpc NotifyWebRTCSessionConnected (.CWebRTC_WebRTCSessionConnected_Notification) returns (.NoResponse);
+	rpc NotifyWebRTCUpdateRemoteDescription (.CWebRTC_WebRTCUpdateRemoteDescription_Notification) returns (.NoResponse);
+}
+

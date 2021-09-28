@@ -1,0 +1,70 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CFriendsList_GetCategories_Request {
+}
+
+message CFriendsList_GetCategories_Response {
+	repeated .CFriendsListCategory categories = 1;
+}
+
+message CFriendsListCategory {
+	optional uint32 groupid = 1;
+	optional string name = 2;
+	repeated uint32 accountid_members = 3;
+}
+
+message CFriendsList_GetFriendsList_Request {
+}
+
+message CFriendsList_GetFriendsList_Response {
+	optional .CMsgClientFriendsList friendslist = 1;
+}
+
+message CMsgClientFriendsList {
+	optional bool bincremental = 1;
+	repeated .CMsgClientFriendsList_Friend friends = 2;
+	optional uint32 max_friend_count = 3;
+	optional uint32 active_friend_count = 4;
+	optional bool friends_limit_hit = 5;
+}
+
+message CMsgClientFriendsList_Friend {
+	optional fixed64 ulfriendid = 1;
+	optional uint32 efriendrelationship = 2;
+}
+
+message CFriendsList_GetFavorites_Request {
+}
+
+message CFriendsList_GetFavorites_Response {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+message CFriendsListFavoriteEntry {
+	optional uint32 accountid = 1;
+	optional uint32 clanid = 2;
+	optional uint64 chat_group_id = 3;
+}
+
+message CFriendsList_SetFavorites_Request {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+message CFriendsList_SetFavorites_Response {
+}
+
+message CFriendsList_FavoritesChanged_Notification {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+service FriendsList {
+	rpc GetCategories (.CFriendsList_GetCategories_Request) returns (.CFriendsList_GetCategories_Response);
+	rpc GetFriendsList (.CFriendsList_GetFriendsList_Request) returns (.CFriendsList_GetFriendsList_Response);
+	rpc GetFavorites (.CFriendsList_GetFavorites_Request) returns (.CFriendsList_GetFavorites_Response);
+	rpc SetFavorites (.CFriendsList_SetFavorites_Request) returns (.CFriendsList_SetFavorites_Response);
+}
+
+service FriendsListClient {
+	rpc FavoritesChanged (.CFriendsList_FavoritesChanged_Notification) returns (.NoResponse);
+}
+

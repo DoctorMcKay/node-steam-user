@@ -1,0 +1,21 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CClanChatRooms_GetClanChatRoomInfo_Request {
+	optional fixed64 steamid = 1;
+	optional bool autocreate = 2 [default = true];
+}
+
+message CClanChatRooms_GetClanChatRoomInfo_Response {
+	optional .CChatRoom_GetChatRoomGroupSummary_Response chat_group_summary = 1;
+}
+
+message CClanChatRooms_SetClanChatRoomPrivate_Response {
+	optional bool chat_room_private = 1;
+}
+
+service ClanChatRooms {
+	rpc GetClanChatRoomInfo (.CClanChatRooms_GetClanChatRoomInfo_Request) returns (.CClanChatRooms_GetClanChatRoomInfo_Response);
+	rpc SetClanChatRoomPrivate (.NotImplemented) returns (.CClanChatRooms_SetClanChatRoomPrivate_Response);
+}
+

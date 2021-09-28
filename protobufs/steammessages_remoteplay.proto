@@ -99,6 +99,10 @@ enum EStreamControlMessage {
 	k_EStreamControlStopRequest = 129;
 	k_EStreamControlTouchActionSetLayerAdded = 130;
 	k_EStreamControlTouchActionSetLayerRemoved = 131;
+	k_EStreamControlRemotePlayTogetherGroupUpdate = 132;
+	k_EStreamControlSetInputTemporarilyDisabled = 133;
+	k_EStreamControlSetQualityOverride = 134;
+	k_EStreamControlSetBitrateOverride = 135;
 }
 
 enum EStreamVersion {
@@ -127,6 +131,7 @@ enum EStreamVideoCodec {
 }
 
 enum EStreamQualityPreference {
+	k_EStreamQualityAutomatic = -1;
 	k_EStreamQualityFast = 1;
 	k_EStreamQualityBalanced = 2;
 	k_EStreamQualityBeautiful = 3;
@@ -138,7 +143,7 @@ enum EStreamBitrate {
 }
 
 enum EStreamP2PScope {
-	k_EStreamP2PScopeUnknown = 0;
+	k_EStreamP2PScopeAutomatic = 0;
 	k_EStreamP2PScopeDisabled = 1;
 	k_EStreamP2PScopeOnlyMe = 2;
 	k_EStreamP2PScopeFriends = 3;
@@ -187,6 +192,7 @@ enum EStreamActivity {
 	k_EStreamActivityGame = 2;
 	k_EStreamActivityDesktop = 3;
 	k_EStreamActivitySecureDesktop = 4;
+	k_EStreamActivityMusic = 5;
 }
 
 enum EStreamDataMessage {
@@ -305,6 +311,7 @@ message CServerHandshakeMsg {
 message CAuthenticationRequestMsg {
 	optional bytes token = 1;
 	optional .EStreamVersion version = 2 [default = k_EStreamVersionNone];
+	optional uint64 steamid = 3;
 }
 
 message CAuthenticationResponseMsg {
@@ -368,7 +375,7 @@ message CStreamingClientConfig {
 	optional bool enable_microphone_streaming = 15 [default = false];
 	optional string controller_overlay_hotkey = 16;
 	optional bool enable_touch_controller = 17 [default = false];
-	optional .EStreamP2PScope p2p_scope = 18 [default = k_EStreamP2PScopeUnknown];
+	optional .EStreamP2PScope p2p_scope = 19 [default = k_EStreamP2PScopeAutomatic];
 }
 
 message CStreamingServerConfig {
@@ -653,6 +660,7 @@ message CSetActivityMsg {
 	optional .EStreamActivity activity = 1 [default = k_EStreamActivityIdle];
 	optional uint32 appid = 2;
 	optional uint64 gameid = 3;
+	optional string game_name = 4;
 }
 
 message CSystemSuspendMsg {
@@ -725,6 +733,36 @@ message CSetTouchIconDataMsg {
 	optional uint32 appid = 1;
 	optional string icon = 2;
 	optional bytes data = 3;
+}
+
+message CRemotePlayTogetherGroupUpdateMsg {
+	message Player {
+		optional uint32 accountid = 1;
+		optional uint32 guestid = 2;
+		optional bool keyboard_enabled = 3;
+		optional bool mouse_enabled = 4;
+		optional bool controller_enabled = 5;
+		repeated uint32 controller_slots = 6;
+		optional bytes avatar_hash = 7;
+	}
+
+	repeated .CRemotePlayTogetherGroupUpdateMsg.Player players = 1;
+	optional int32 player_index = 2;
+	optional string miniprofile_location = 3;
+	optional string game_name = 4;
+	optional string avatar_location = 5;
+}
+
+message CSetInputTemporarilyDisabledMsg {
+	optional bool disabled = 1;
+}
+
+message CSetQualityOverrideMsg {
+	optional int32 value = 1;
+}
+
+message CSetBitrateOverrideMsg {
+	optional int32 value = 1;
 }
 
 message CStreamDataLostMsg {

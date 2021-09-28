@@ -1,0 +1,12 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CChat_RequestFriendPersonaStates_Request {
+}
+
+message CChat_RequestFriendPersonaStates_Response {
+}
+
+service Chat {
+	rpc RequestFriendPersonaStates (.CChat_RequestFriendPersonaStates_Request) returns (.CChat_RequestFriendPersonaStates_Response);
+}
+

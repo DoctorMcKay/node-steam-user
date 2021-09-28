@@ -1,0 +1,12 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CFovasVideo_ClientGetOPFSettings_Response {
+	optional uint32 app_id = 1;
+	optional string opf_settings = 2;
+}
+
+service FovasVideo {
+	rpc ClientGetOPFSettings (.NotImplemented) returns (.CFovasVideo_ClientGetOPFSettings_Response);
+}
+

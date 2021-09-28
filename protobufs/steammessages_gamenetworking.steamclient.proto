@@ -1,0 +1,42 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CGameNetworking_AllocateFakeIP_Request {
+	optional uint32 app_id = 1;
+	optional uint32 num_fake_ports = 2;
+}
+
+message CGameNetworking_AllocateFakeIP_Response {
+	optional fixed32 fake_ip = 1;
+	repeated uint32 fake_ports = 2;
+	optional uint32 renew_seconds = 3;
+}
+
+message CGameNetworking_RenewFakeIP_Request {
+	optional uint32 app_id = 1;
+	optional fixed32 fake_ip = 2;
+	repeated uint32 fake_ports = 3;
+}
+
+message CGameNetworking_ReleaseFakeIP_Notification {
+	optional uint32 app_id = 1;
+	optional fixed32 fake_ip = 2;
+	repeated uint32 fake_ports = 3;
+}
+
+service GameNetworking {
+	option (service_description) = "Services that support P2P networking";
+
+	rpc AllocateFakeIP (.CGameNetworking_AllocateFakeIP_Request) returns (.CGameNetworking_AllocateFakeIP_Response) {
+		option (method_description) = "Client is asking to lease a FakeIP.";
+	}
+
+	rpc RenewFakeIP (.CGameNetworking_RenewFakeIP_Request) returns (.CGameNetworking_AllocateFakeIP_Response) {
+		option (method_description) = "Client is asking to reup a FakeIP lease.";
+	}
+
+	rpc NotifyReleaseFakeIP (.CGameNetworking_ReleaseFakeIP_Notification) returns (.NoResponse) {
+		option (method_description) = "Client informs server it is done with the FakeIP.";
+	}
+}

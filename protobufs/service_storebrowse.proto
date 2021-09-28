@@ -1,0 +1,51 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CStoreBrowse_GetItems_Request {
+	repeated .StoreItemID ids = 1;
+	optional .StoreBrowseContext context = 2;
+	optional .StoreBrowseItemDataRequest data_request = 3;
+}
+
+message StoreBrowseContext {
+	optional string language = 1;
+	optional int32 elanguage = 2;
+	optional string country_code = 3;
+	optional int32 steam_realm = 4;
+}
+
+message StoreBrowseItemDataRequest {
+	optional bool include_assets = 1;
+	optional bool include_release = 2;
+	optional bool include_platforms = 3;
+	optional bool include_all_purchase_options = 4;
+	optional bool include_screenshots = 5;
+	optional bool include_trailers = 6;
+	optional bool include_ratings = 7;
+	optional int32 include_tag_count = 8;
+	optional bool include_reviews = 9;
+	optional bool include_basic_info = 10;
+}
+
+message CStoreBrowse_GetItems_Response {
+	repeated .StoreItem store_items = 1;
+}
+
+message CStoreBrowse_GetStoreCategories_Response {
+	repeated .CStoreBrowse_GetStoreCategories_Response_Category categories = 1;
+}
+
+message CStoreBrowse_GetStoreCategories_Response_Category {
+	optional uint32 categoryid = 1;
+	optional int32 type = 2 [(description) = "enum"];
+	optional string internal_name = 3;
+	optional string display_name = 4;
+	optional string image_url = 5;
+	optional bool show_in_search = 6;
+}
+
+service StoreBrowse {
+	rpc GetItems (.CStoreBrowse_GetItems_Request) returns (.CStoreBrowse_GetItems_Response);
+	rpc GetStoreCategories (.NotImplemented) returns (.CStoreBrowse_GetStoreCategories_Response);
+}
+

@@ -1,4 +1,5 @@
 import "steammessages_unified_base.steamclient.proto";
+import "clientmetrics.proto";
 
 option cc_generic_services = true;
 
@@ -72,6 +73,68 @@ message CClientMetrics_ReportClientError_Notification {
 	repeated .CClientMetrics_ReportClientError_Notification.Error errors = 3;
 }
 
+message CClientMetrics_ClientBootstrap_Notification {
+	optional .CClientMetrics_ClientBootstrap_Summary summary = 1;
+}
+
+message CClientMetrics_DownloadRates_Notification {
+	message StatsInfo {
+		optional uint32 source_type = 1;
+		optional uint32 source_id = 2;
+		optional uint64 bytes = 3;
+		optional string host_name = 4;
+		optional uint64 microseconds = 5;
+		optional bool used_ipv6 = 6;
+		optional bool proxied = 7;
+	}
+
+	optional uint32 cell_id = 1;
+	repeated .CClientMetrics_DownloadRates_Notification.StatsInfo stats = 2;
+	optional uint32 throttling_kbps = 3;
+}
+
+message CClientMetrics_ContentValidation_Notification {
+	optional int32 validation_result = 1;
+	optional uint32 app_id = 2;
+	optional bool staged_files = 3;
+	optional bool user_initiated = 4;
+	optional bool early_out = 5;
+	optional uint32 chunks_scanned = 6;
+	optional uint32 chunks_corrupt = 7;
+	optional uint64 bytes_scanned = 8;
+	optional uint64 chunk_bytes_corrupt = 9;
+	optional uint64 total_file_size_corrupt = 10;
+}
+
+message CClientMetrics_CloudAppSyncStats_Notification {
+	optional uint32 app_id = 1;
+	optional uint32 platform_type = 2;
+	optional bool preload = 3;
+	optional bool blocking_app_launch = 4;
+	optional uint32 files_uploaded = 5;
+	optional uint32 files_downloaded = 6;
+	optional uint32 files_deleted = 7;
+	optional uint64 bytes_uploaded = 8;
+	optional uint64 bytes_downloaded = 9;
+	optional uint64 microsec_total = 10;
+	optional uint64 microsec_init_caches = 11;
+	optional uint64 microsec_validate_state = 12;
+	optional uint64 microsec_ac_launch = 13;
+	optional uint64 microsec_ac_prep_user_files = 14;
+	optional uint64 microsec_ac_exit = 15;
+	optional uint64 microsec_build_sync_list = 16;
+	optional uint64 microsec_delete_files = 17;
+	optional uint64 microsec_download_files = 18;
+	optional uint64 microsec_upload_files = 19;
+	optional uint32 hardware_type = 20;
+	optional uint32 files_managed = 21;
+}
+
+message CClientMetrics_ContentDownloadResponse_Counts_Notification {
+	optional uint32 cell_id = 1;
+	optional .CClientMetrics_ContentDownloadResponse_Hosts data = 2;
+}
+
 service ClientMetrics {
 	option (service_description) = "A service for client-reported metrics";
 
@@ -79,4 +142,9 @@ service ClientMetrics {
 	rpc ClientIPv6ConnectivityReport (.CClientMetrics_IPv6Connectivity_Notification) returns (.NoResponse);
 	rpc SteamPipeWorkStatsReport (.CClientMetrics_SteamPipeWorkStats_Notification) returns (.NoResponse);
 	rpc ReportClientError (.CClientMetrics_ReportClientError_Notification) returns (.NoResponse);
+	rpc ClientBootstrapReport (.CClientMetrics_ClientBootstrap_Notification) returns (.NoResponse);
+	rpc ClientDownloadRatesReport (.CClientMetrics_DownloadRates_Notification) returns (.NoResponse);
+	rpc ClientContentValidationReport (.CClientMetrics_ContentValidation_Notification) returns (.NoResponse);
+	rpc ClientCloudAppSyncStats (.CClientMetrics_CloudAppSyncStats_Notification) returns (.NoResponse);
+	rpc ClientDownloadResponseCodeCounts (.CClientMetrics_ContentDownloadResponse_Counts_Notification) returns (.NoResponse);
 }

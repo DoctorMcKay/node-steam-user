@@ -1,0 +1,107 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CChatUsability_ClientUsabilityMetrics_Notification {
+	optional uint32 metrics_run_id = 1;
+	optional uint32 client_build = 2;
+	optional uint32 metrics_version = 3;
+	optional bool in_web = 4;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification_Settings settings = 10;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification_VoiceSettings voice_settings = 11;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification_UIState ui_state = 12;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification_Metrics metrics = 13;
+}
+
+message CChatUsability_ClientUsabilityMetrics_Notification_Settings {
+	optional bool notifications_show_ingame = 1;
+	optional bool notifications_show_online = 2;
+	optional bool notifications_show_message = 3;
+	optional bool notifications_events_and_announcements = 4;
+	optional bool sounds_play_ingame = 5;
+	optional bool sounds_play_online = 6;
+	optional bool sounds_play_message = 7;
+	optional bool sounds_events_and_announcements = 8;
+	optional bool always_new_chat_window = 9;
+	optional bool force_alphabetic_friend_sorting = 10;
+	optional int32 chat_flash_mode = 11;
+	optional bool remember_open_chats = 12;
+	optional bool compact_quick_access = 13;
+	optional bool compact_friends_list = 14;
+	optional bool notifications_show_chat_room_notification = 15;
+	optional bool sounds_play_chat_room_notification = 16;
+	optional bool hide_offline_friends_in_tag_groups = 17;
+	optional bool hide_categorized_friends = 18;
+	optional bool categorize_in_game_friends_by_game = 19;
+	optional int32 chat_font_size = 20;
+	optional bool use24hour_clock = 21;
+	optional bool do_not_disturb_mode = 22;
+	optional bool disable_embed_inlining = 23;
+	optional bool sign_into_friends = 24;
+	optional bool animated_avatars = 25;
+}
+
+message CChatUsability_ClientUsabilityMetrics_Notification_VoiceSettings {
+	optional float voice_input_gain = 1;
+	optional float voice_output_gain = 2;
+	optional int32 noise_gate_level = 3;
+	optional bool voice_use_echo_cancellation = 4;
+	optional bool voice_use_noise_cancellation = 5;
+	optional bool voice_use_auto_gain_control = 6;
+	optional bool selected_non_default_mic = 7;
+	optional bool selected_non_default_output = 8;
+	optional bool push_to_talk_enabled = 9;
+	optional bool push_to_mute_enabled = 10;
+	optional bool play_ptt_sounds = 11;
+}
+
+message CChatUsability_ClientUsabilityMetrics_Notification_UIState {
+	optional int32 friends_list_height = 1;
+	optional int32 friends_list_width = 2;
+	optional bool friends_list_docked = 3;
+	optional bool friends_list_collapsed = 4;
+	optional int32 friends_list_group_chats_height = 5;
+	optional bool friends_list_visible = 6;
+	optional int32 chat_popups_opened = 7;
+	optional int32 group_chat_tabs_opened = 8;
+	optional int32 friend_chat_tabs_opened = 9;
+	optional int32 chat_window_width = 10;
+	optional int32 chat_window_height = 11;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification_UIState_CategoryCollapseState category_collapse = 12;
+	optional int32 group_chat_left_col_collapsed = 13;
+	optional int32 group_chat_right_col_collapsed = 14;
+	optional bool in_one_on_one_voice_chat = 15;
+	optional bool in_group_voice_chat = 16;
+}
+
+message CChatUsability_ClientUsabilityMetrics_Notification_UIState_CategoryCollapseState {
+	optional bool in_game_collapsed = 1;
+	optional bool online_collapsed = 2;
+	optional bool offline_collapsed = 3;
+	optional int32 game_groups_collapsed = 4;
+	optional int32 categories_collapsed = 5;
+}
+
+message CChatUsability_ClientUsabilityMetrics_Notification_Metrics {
+	optional int32 friends_count = 1;
+	optional int32 friends_category_count = 2;
+	optional int32 friends_categorized_count = 3;
+	optional int32 friends_online_count = 4;
+	optional int32 friends_in_game_count = 5;
+	optional int32 friends_in_game_singleton_count = 6;
+	optional int32 game_group_count = 7;
+	optional int32 friends_favorite_count = 8;
+	optional int32 group_chat_count = 9;
+	optional int32 group_chat_favorite_count = 10;
+}
+
+message CChatUsability_RequestClientUsabilityMetrics_Notification {
+	optional uint32 metrics_run_id = 1;
+}
+
+service ChatUsability {
+	rpc NotifyClientUsabilityMetrics (.CChatUsability_ClientUsabilityMetrics_Notification) returns (.NoResponse);
+}
+
+service ChatUsabilityClient {
+	rpc NotifyRequestClientUsabilityMetrics (.CChatUsability_RequestClientUsabilityMetrics_Notification) returns (.NoResponse);
+}
+

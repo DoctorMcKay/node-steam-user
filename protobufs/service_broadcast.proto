@@ -1,0 +1,385 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CBroadcast_BeginBroadcastSession_Response {
+	optional fixed64 broadcast_id = 1;
+	optional string thumbnail_upload_address = 2;
+	optional string thumbnail_upload_token = 3;
+	optional uint32 thumbnail_interval_seconds = 4;
+	optional uint32 heartbeat_interval_seconds = 5;
+}
+
+message CBroadcast_EndBroadcastSession_Response {
+}
+
+message CBroadcast_StartBroadcastUpload_Response {
+	optional string upload_token = 1;
+	optional string upload_address = 2;
+	optional fixed64 broadcast_upload_id = 3;
+	optional bool enable_replay = 6;
+	optional string http_address = 7;
+}
+
+message CBroadcast_WatchBroadcast_Response {
+	optional int32 response = 1 [(description) = "enum"];
+	optional string mpd_url = 2;
+	optional fixed64 broadcast_id = 3;
+	optional uint64 gameid = 4;
+	optional string title = 5;
+	optional uint32 num_viewers = 6;
+	optional int32 permission = 7;
+	optional bool is_rtmp = 8;
+	optional int32 seconds_delay = 9;
+	optional fixed64 viewer_token = 10;
+	optional string hls_m3u8_master_url = 11;
+	optional int32 heartbeat_interval = 12;
+	optional string thumbnail_url = 13;
+	optional bool is_webrtc = 14;
+	optional fixed64 webrtc_session_id = 15;
+	optional string webrtc_offer_sdp = 16;
+	optional string webrtc_turn_server = 17;
+	optional bool is_replay = 18;
+	optional int32 duration = 19;
+	optional string cdn_auth_url_parameters = 20;
+}
+
+message CBroadcast_GetBroadcastStatus_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 broadcast_id = 2;
+}
+
+message CBroadcast_GetBroadcastStatus_Response {
+	optional uint64 gameid = 1;
+	optional string title = 2;
+	optional uint32 num_viewers = 3;
+	optional int32 permission = 4;
+	optional bool is_rtmp = 5;
+	optional int32 seconds_delay = 6;
+	optional bool is_publisher = 7;
+	optional string thumbnail_url = 8;
+	optional int32 update_interval = 9;
+	optional bool is_uploading = 10;
+	optional uint32 duration = 11;
+	optional bool is_replay = 12;
+	optional bool is_capturing_vod = 13;
+	optional bool is_store_whitelisted = 14;
+}
+
+message CBroadcast_GetBroadcastThumbnail_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 broadcast_id = 2;
+}
+
+message CBroadcast_GetBroadcastThumbnail_Response {
+	optional string thumbnail_url = 1;
+	optional int32 update_interval = 2;
+	optional int32 num_viewers = 3;
+	optional int32 duration = 4;
+}
+
+message CBroadcast_InviteToBroadcast_Response {
+	optional bool success = 1;
+}
+
+message CBroadcast_SendBroadcastStateToServer_Response {
+}
+
+message CBroadcast_GetBroadcastChatInfo_Response {
+	optional fixed64 chat_id = 1;
+	optional string view_url_template = 3;
+	repeated uint32 flair_group_ids = 4;
+}
+
+message CBroadcast_PostChatMessage_Request {
+	optional fixed64 chat_id = 1;
+	optional string message = 2;
+	optional uint32 instance_id = 3;
+	optional uint32 language = 4 [default = 0];
+	optional string country_code = 5;
+}
+
+message CBroadcast_PostChatMessage_Response {
+	optional string persona_name = 1;
+	optional bool in_game = 2;
+	optional int32 result = 3;
+	optional int32 cooldown_time_seconds = 4;
+}
+
+message CBroadcast_UpdateChatMessageFlair_Request {
+	optional fixed64 chat_id = 1;
+	optional string flair = 2;
+}
+
+message CBroadcast_UpdateChatMessageFlair_Response {
+	optional int32 result = 1;
+	optional fixed64 chat_id = 2;
+	optional string flair = 3;
+}
+
+message CBroadcast_MuteBroadcastChatUser_Request {
+	optional fixed64 chat_id = 1;
+	optional fixed64 user_steamid = 2;
+	optional bool muted = 3;
+}
+
+message CBroadcast_MuteBroadcastChatUser_Response {
+}
+
+message CBroadcast_RemoveUserChatText_Request {
+	optional fixed64 chat_id = 1;
+	optional fixed64 user_steamid = 2;
+}
+
+message CBroadcast_RemoveUserChatText_Response {
+}
+
+message CBroadcast_GetBroadcastChatUserNames_Response {
+	repeated .CBroadcast_GetBroadcastChatUserNames_Response_PersonaName persona_names = 1;
+}
+
+message CBroadcast_GetBroadcastChatUserNames_Response_PersonaName {
+	optional fixed64 steam_id = 1;
+	optional string persona = 2;
+}
+
+message CBroadcast_StartBuildClip_Response {
+	optional fixed64 broadcast_clip_id = 1;
+}
+
+message CBroadcast_GetBuildClipStatus_Response {
+}
+
+message CBroadcast_SetClipDetails_Response {
+}
+
+message CBroadcast_GetClipDetails_Response {
+	optional uint64 broadcast_clip_id = 1;
+	optional uint64 video_id = 2;
+	optional uint64 channel_id = 3;
+	optional uint32 app_id = 4;
+	optional uint32 accountid_broadcaster = 5;
+	optional uint32 accountid_clipmaker = 6;
+	optional string video_description = 7;
+	optional uint32 start_time = 8;
+	optional uint32 length_milliseconds = 9;
+	optional string thumbnail_path = 10;
+}
+
+message CBroadcast_SetRTMPInfo_Response {
+}
+
+message CBroadcast_GetRTMPInfo_Response {
+	optional int32 broadcast_permission = 1;
+	optional string rtmp_host = 2;
+	optional string rtmp_token = 3;
+	optional int32 broadcast_delay = 4;
+	optional uint32 app_id = 5;
+	optional uint32 required_app_id = 6;
+	optional int32 broadcast_chat_permission = 7 [(description) = "enum"];
+	optional int32 broadcast_buffer = 8;
+	optional fixed64 steamid = 9;
+	optional uint32 chat_rate_limit = 10;
+	optional bool enable_replay = 11;
+}
+
+message CBroadcast_WebRTCStartResult_Response {
+}
+
+message CBroadcast_WebRTCStopped_Response {
+}
+
+message CBroadcast_WebRTCSetAnswer_Response {
+}
+
+message CBroadcast_WebRTCLookupTURNServer_Response {
+	optional string turn_server = 1;
+}
+
+message CBroadcast_WebRTCAddHostCandidate_Response {
+}
+
+message CBroadcast_WebRTCAddViewerCandidate_Response {
+}
+
+message CBroadcast_WebRTCGetHostCandidates_Response {
+	optional uint32 candidate_generation = 1;
+	repeated .CBroadcast_WebRTC_Candidate candidates = 2;
+}
+
+message CBroadcast_WebRTC_Candidate {
+	optional string sdp_mid = 1;
+	optional int32 sdp_mline_index = 2;
+	optional string candidate = 3;
+}
+
+message CBroadcast_GetBroadcastUploadStats_Response {
+	repeated .CBroadcast_GetBroadcastUploadStats_Response_UploadStats upload_stats = 1;
+}
+
+message CBroadcast_GetBroadcastUploadStats_Response_UploadStats {
+	optional uint32 upload_result = 1;
+	optional uint32 time_stopped = 2;
+	optional uint32 seconds_uploaded = 3;
+	optional uint32 max_viewers = 4;
+	optional uint32 resolution_x = 5;
+	optional uint32 resolution_y = 6;
+	optional uint32 avg_bandwidth = 7;
+	optional uint64 total_bytes = 8;
+	optional uint32 app_id = 9;
+	optional uint32 total_unique_viewers = 10;
+	optional uint64 total_seconds_watched = 11;
+	optional uint32 time_started = 12;
+	optional uint64 upload_id = 13;
+	optional string local_address = 14;
+	optional string remote_address = 15;
+	optional uint32 frames_per_second = 16;
+	optional uint32 num_representations = 17;
+	optional string app_name = 18;
+	optional bool is_replay = 19;
+	optional uint64 session_id = 20;
+}
+
+message CBroadcast_GetBroadcastViewerStats_Response {
+	repeated .CBroadcast_GetBroadcastViewerStats_Response_ViewerStats viewer_stats = 1;
+	repeated .CBroadcast_GetBroadcastViewerStats_Response_CountryStats country_stats = 2;
+}
+
+message CBroadcast_GetBroadcastViewerStats_Response_ViewerStats {
+	optional uint32 time = 1;
+	optional uint32 num_viewers = 2;
+}
+
+message CBroadcast_GetBroadcastViewerStats_Response_CountryStats {
+	optional string country_code = 1;
+	optional uint32 num_viewers = 2;
+}
+
+message CBroadcast_BroadcastViewerState_Notification {
+	optional fixed64 steamid = 1;
+	optional int32 state = 2 [(description) = "enum"];
+}
+
+message CBroadcast_WaitingBroadcastViewer_Notification {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_BroadcastUploadStarted_Notification {
+	optional fixed64 broadcast_id = 1;
+	optional string upload_token = 2;
+	optional string upload_address = 3;
+	optional string http_address = 4;
+	optional fixed64 broadcast_upload_id = 5;
+	optional uint32 heartbeat_interval_seconds = 6;
+	optional bool is_rtmp = 7;
+}
+
+message CBroadcast_StopBroadcastUpload_Notification {
+	optional fixed64 broadcast_id = 1;
+	optional fixed64 broadcast_relay_id = 2;
+	optional uint32 upload_result = 3;
+	optional bool too_many_poor_uploads = 4;
+}
+
+message CBroadcast_SessionClosed_Notification {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_ViewerBroadcastInvite_Notification {
+	optional fixed64 broadcaster_steamid = 1;
+}
+
+message CBroadcast_BroadcastStatus_Notification {
+	optional fixed64 broadcast_id = 1;
+	optional int32 num_viewers = 2;
+}
+
+message CBroadcast_BroadcastChannelLive_Notification {
+	optional fixed64 broadcast_channel_id = 1;
+	optional string broadcast_channel_name = 2;
+	optional string broadcast_channel_avatar = 3;
+}
+
+message CBroadcast_SendThumbnailToRelay_Notification {
+	optional string thumbnail_upload_token = 1;
+	optional fixed64 thumbnail_broadcast_session_id = 2;
+	optional bytes thumbnail_data = 3;
+	optional uint32 thumbnail_width = 4;
+	optional uint32 thumbnail_height = 5;
+}
+
+message CBroadcast_WebRTCNeedTURNServer_Notification {
+	optional fixed64 broadcast_session_id = 1;
+}
+
+message CBroadcast_WebRTCStart_Notification {
+	optional fixed64 broadcast_session_id = 1;
+	optional fixed64 webrtc_session_id = 2;
+	optional fixed64 viewer_steamid = 3;
+	optional fixed64 viewer_token = 4;
+}
+
+message CBroadcast_WebRTCSetAnswer_Notification {
+	optional fixed64 broadcast_session_id = 1;
+	optional fixed64 webrtc_session_id = 2;
+	optional string answer = 3;
+}
+
+message CBroadcast_WebRTCAddViewerCandidate_Notification {
+	optional fixed64 broadcast_session_id = 1;
+	optional fixed64 webrtc_session_id = 2;
+	optional .CBroadcast_WebRTC_Candidate candidate = 3;
+}
+
+service Broadcast {
+	rpc BeginBroadcastSession (.NotImplemented) returns (.CBroadcast_BeginBroadcastSession_Response);
+	rpc EndBroadcastSession (.NotImplemented) returns (.CBroadcast_EndBroadcastSession_Response);
+	rpc StartBroadcastUpload (.NotImplemented) returns (.CBroadcast_StartBroadcastUpload_Response);
+	rpc NotifyBroadcastUploadStop (.NotImplemented) returns (.NoResponse);
+	rpc WatchBroadcast (.NotImplemented) returns (.CBroadcast_WatchBroadcast_Response);
+	rpc HeartbeatBroadcast (.NotImplemented) returns (.NoResponse);
+	rpc StopWatchingBroadcast (.NotImplemented) returns (.NoResponse);
+	rpc GetBroadcastStatus (.CBroadcast_GetBroadcastStatus_Request) returns (.CBroadcast_GetBroadcastStatus_Response);
+	rpc GetBroadcastThumbnail (.CBroadcast_GetBroadcastThumbnail_Request) returns (.CBroadcast_GetBroadcastThumbnail_Response);
+	rpc InviteToBroadcast (.NotImplemented) returns (.CBroadcast_InviteToBroadcast_Response);
+	rpc SendBroadcastStateToServer (.NotImplemented) returns (.CBroadcast_SendBroadcastStateToServer_Response);
+	rpc NotifyBroadcastSessionHeartbeat (.NotImplemented) returns (.NoResponse);
+	rpc GetBroadcastChatInfo (.NotImplemented) returns (.CBroadcast_GetBroadcastChatInfo_Response);
+	rpc PostChatMessage (.CBroadcast_PostChatMessage_Request) returns (.CBroadcast_PostChatMessage_Response);
+	rpc UpdateChatMessageFlair (.CBroadcast_UpdateChatMessageFlair_Request) returns (.CBroadcast_UpdateChatMessageFlair_Response);
+	rpc MuteBroadcastChatUser (.CBroadcast_MuteBroadcastChatUser_Request) returns (.CBroadcast_MuteBroadcastChatUser_Response);
+	rpc RemoveUserChatText (.CBroadcast_RemoveUserChatText_Request) returns (.CBroadcast_RemoveUserChatText_Response);
+	rpc GetBroadcastChatUserNames (.NotImplemented) returns (.CBroadcast_GetBroadcastChatUserNames_Response);
+	rpc StartBuildClip (.NotImplemented) returns (.CBroadcast_StartBuildClip_Response);
+	rpc GetBuildClipStatus (.NotImplemented) returns (.CBroadcast_GetBuildClipStatus_Response);
+	rpc SetClipDetails (.NotImplemented) returns (.CBroadcast_SetClipDetails_Response);
+	rpc GetClipDetails (.NotImplemented) returns (.CBroadcast_GetClipDetails_Response);
+	rpc SetRTMPInfo (.NotImplemented) returns (.CBroadcast_SetRTMPInfo_Response);
+	rpc GetRTMPInfo (.NotImplemented) returns (.CBroadcast_GetRTMPInfo_Response);
+	rpc NotifyWebRTCHaveTURNServer (.NotImplemented) returns (.NoResponse);
+	rpc WebRTCStartResult (.NotImplemented) returns (.CBroadcast_WebRTCStartResult_Response);
+	rpc WebRTCStopped (.NotImplemented) returns (.CBroadcast_WebRTCStopped_Response);
+	rpc WebRTCSetAnswer (.NotImplemented) returns (.CBroadcast_WebRTCSetAnswer_Response);
+	rpc WebRTCLookupTURNServer (.NotImplemented) returns (.CBroadcast_WebRTCLookupTURNServer_Response);
+	rpc WebRTCAddHostCandidate (.NotImplemented) returns (.CBroadcast_WebRTCAddHostCandidate_Response);
+	rpc WebRTCAddViewerCandidate (.NotImplemented) returns (.CBroadcast_WebRTCAddViewerCandidate_Response);
+	rpc WebRTCGetHostCandidates (.NotImplemented) returns (.CBroadcast_WebRTCGetHostCandidates_Response);
+	rpc GetBroadcastUploadStats (.NotImplemented) returns (.CBroadcast_GetBroadcastUploadStats_Response);
+	rpc GetBroadcastViewerStats (.NotImplemented) returns (.CBroadcast_GetBroadcastViewerStats_Response);
+}
+
+service BroadcastClient {
+	rpc NotifyBroadcastViewerState (.CBroadcast_BroadcastViewerState_Notification) returns (.NoResponse);
+	rpc NotifyWaitingBroadcastViewer (.CBroadcast_WaitingBroadcastViewer_Notification) returns (.NoResponse);
+	rpc NotifyBroadcastUploadStarted (.CBroadcast_BroadcastUploadStarted_Notification) returns (.NoResponse);
+	rpc NotifyStopBroadcastUpload (.CBroadcast_StopBroadcastUpload_Notification) returns (.NoResponse);
+	rpc NotifySessionClosed (.CBroadcast_SessionClosed_Notification) returns (.NoResponse);
+	rpc NotifyViewerBroadcastInvite (.CBroadcast_ViewerBroadcastInvite_Notification) returns (.NoResponse);
+	rpc NotifyBroadcastStatus (.CBroadcast_BroadcastStatus_Notification) returns (.NoResponse);
+	rpc NotifyBroadcastChannelLive (.CBroadcast_BroadcastChannelLive_Notification) returns (.NoResponse);
+	rpc SendThumbnailToRelay (.CBroadcast_SendThumbnailToRelay_Notification) returns (.NoResponse);
+	rpc NotifyWebRTCNeedTURNServer (.CBroadcast_WebRTCNeedTURNServer_Notification) returns (.NoResponse);
+	rpc NotifyWebRTCStart (.CBroadcast_WebRTCStart_Notification) returns (.NoResponse);
+	rpc NotifyWebRTCSetAnswer (.CBroadcast_WebRTCSetAnswer_Notification) returns (.NoResponse);
+	rpc NotifyWebRTCAddViewerCandidate (.CBroadcast_WebRTCAddViewerCandidate_Notification) returns (.NoResponse);
+}
+

@@ -49,6 +49,14 @@ service RemoteClient {
 	rpc SendRemotePlayTogetherPacket (.CRemotePlayTogether_Notification) returns (.NoResponse) {
 		option (method_description) = "Send a Remote Play Together packet to a Steam client";
 	}
+
+	rpc CreateRemotePlayTogetherInvitation (.CRemoteClient_CreateRemotePlayTogetherInvitation_Request) returns (.CRemoteClient_CreateRemotePlayTogetherInvitation_Response) {
+		option (method_description) = "Create a Remote Play Together invitation";
+	}
+
+	rpc DeleteRemotePlayTogetherInvitation (.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request) returns (.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response) {
+		option (method_description) = "Delete a Remote Play Together invitation";
+	}
 }
 
 service RemoteClientSteamClient {

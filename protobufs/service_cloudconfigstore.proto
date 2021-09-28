@@ -1,0 +1,50 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CCloudConfigStore_Download_Request {
+	repeated .CCloudConfigStore_NamespaceVersion versions = 1;
+}
+
+message CCloudConfigStore_NamespaceVersion {
+	optional uint32 enamespace = 1;
+	optional uint64 version = 2;
+}
+
+message CCloudConfigStore_Download_Response {
+	repeated .CCloudConfigStore_NamespaceData data = 1;
+}
+
+message CCloudConfigStore_NamespaceData {
+	optional uint32 enamespace = 1;
+	optional uint64 version = 2;
+	repeated .CCloudConfigStore_Entry entries = 3;
+}
+
+message CCloudConfigStore_Entry {
+	optional string key = 1;
+	optional bool is_deleted = 2;
+	optional string value = 3;
+	optional fixed32 timestamp = 4;
+	optional uint64 version = 5;
+}
+
+message CCloudConfigStore_Upload_Request {
+	repeated .CCloudConfigStore_NamespaceData data = 1;
+}
+
+message CCloudConfigStore_Upload_Response {
+	repeated .CCloudConfigStore_NamespaceVersion versions = 1;
+}
+
+message CCloudConfigStore_Change_Notification {
+	repeated .CCloudConfigStore_NamespaceVersion versions = 2;
+}
+
+service CloudConfigStore {
+	rpc Download (.CCloudConfigStore_Download_Request) returns (.CCloudConfigStore_Download_Response);
+	rpc Upload (.CCloudConfigStore_Upload_Request) returns (.CCloudConfigStore_Upload_Response);
+}
+
+service CloudConfigStoreClient {
+	rpc NotifyChange (.CCloudConfigStore_Change_Notification) returns (.NoResponse);
+}
+

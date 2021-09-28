@@ -1,0 +1,77 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CUserAccount_GetAvailableValveDiscountPromotions_Request {
+	optional string country_code = 1;
+}
+
+message CUserAccount_GetAvailableValveDiscountPromotions_Response {
+	repeated .CUserAccount_GetAvailableValveDiscountPromotions_Response_ValveDiscountPromotionDetails promotions = 1;
+}
+
+message CUserAccount_GetAvailableValveDiscountPromotions_Response_ValveDiscountPromotionDetails {
+	optional uint32 promotionid = 1;
+	optional string promotion_description = 2;
+	optional int64 minimum_cart_amount = 3;
+	optional int64 minimum_cart_amount_for_display = 4;
+	optional int64 discount_amount = 5;
+	optional int32 currency_code = 6;
+	optional int32 available_use_count = 7;
+	optional int32 promotional_discount_type = 8;
+	optional int32 loyalty_reward_id = 9;
+	optional string localized_name_token = 10;
+	optional int32 max_use_count = 11;
+}
+
+message CUserAccount_GetAccountLinkStatus_Response {
+	optional uint32 pwid = 1;
+	optional uint32 identity_verification = 2;
+	optional bool performed_age_verification = 3;
+}
+
+message CUserAccount_CancelLicenseForApp_Request {
+	optional uint32 appid = 1;
+}
+
+message CUserAccount_CancelLicenseForApp_Response {
+}
+
+message CUserAccount_CreateFriendInviteToken_Response {
+	optional string invite_token = 1;
+	optional uint64 invite_limit = 2;
+	optional uint64 invite_duration = 3;
+	optional fixed32 time_created = 4;
+	optional bool valid = 5;
+}
+
+message CUserAccount_GetFriendInviteTokens_Response {
+	repeated .CUserAccount_CreateFriendInviteToken_Response tokens = 1;
+}
+
+message CUserAccount_ViewFriendInviteToken_Response {
+	optional bool valid = 1;
+	optional uint64 steamid = 2;
+	optional uint64 invite_duration = 3;
+}
+
+message CUserAccount_RedeemFriendInviteToken_Response {
+}
+
+message CUserAccount_RevokeFriendInviteToken_Response {
+}
+
+message CUserAccount_RegisterCompatTool_Response {
+}
+
+service UserAccount {
+	rpc GetAvailableValveDiscountPromotions (.CUserAccount_GetAvailableValveDiscountPromotions_Request) returns (.CUserAccount_GetAvailableValveDiscountPromotions_Response);
+	rpc GetAccountLinkStatus (.NotImplemented) returns (.CUserAccount_GetAccountLinkStatus_Response);
+	rpc CancelLicenseForApp (.CUserAccount_CancelLicenseForApp_Request) returns (.CUserAccount_CancelLicenseForApp_Response);
+	rpc CreateFriendInviteToken (.NotImplemented) returns (.CUserAccount_CreateFriendInviteToken_Response);
+	rpc GetFriendInviteTokens (.NotImplemented) returns (.CUserAccount_GetFriendInviteTokens_Response);
+	rpc ViewFriendInviteToken (.NotImplemented) returns (.CUserAccount_ViewFriendInviteToken_Response);
+	rpc RedeemFriendInviteToken (.NotImplemented) returns (.CUserAccount_RedeemFriendInviteToken_Response);
+	rpc RevokeFriendInviteToken (.NotImplemented) returns (.CUserAccount_RevokeFriendInviteToken_Response);
+	rpc RegisterCompatTool (.NotImplemented) returns (.CUserAccount_RegisterCompatTool_Response);
+}
+

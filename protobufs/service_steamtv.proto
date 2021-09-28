@@ -1,0 +1,340 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CSteamTV_CreateBroadcastChannel_Response {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_GetBroadcastChannelID_Response {
+	optional fixed64 broadcast_channel_id = 1;
+	optional string unique_name = 2;
+	optional fixed64 steamid = 3;
+}
+
+message CSteamTV_SetBroadcastChannelProfile_Response {
+}
+
+message CSteamTV_GetBroadcastChannelProfile_Response {
+	optional string unique_name = 1;
+	optional fixed64 owner_steamid = 2;
+	optional string name = 3;
+	optional string language = 4;
+	optional string headline = 5;
+	optional string summary = 6;
+	optional string schedule = 7;
+	optional string rules = 8;
+	optional string panels = 9;
+	optional bool is_partnered = 10;
+}
+
+message CSteamTV_SetBroadcastChannelImage_Response {
+	optional string replace_image_hash = 1;
+}
+
+message CSteamTV_GetBroadcastChannelImages_Response {
+	repeated .CSteamTV_GetBroadcastChannelImages_Response_Images images = 1;
+}
+
+message CSteamTV_GetBroadcastChannelImages_Response_Images {
+	optional int32 image_type = 1 [(description) = "enum"];
+	optional string image_path = 2;
+	optional uint32 image_index = 3;
+}
+
+message CSteamTV_SetBroadcastChannelLinkRegions_Response {
+}
+
+message CSteamTV_GetBroadcastChannelLinks_Response {
+	repeated .CSteamTV_GetBroadcastChannelLinks_Response_Links links = 1;
+}
+
+message CSteamTV_GetBroadcastChannelLinks_Response_Links {
+	optional uint32 link_index = 1;
+	optional string url = 2;
+	optional string link_description = 3;
+	optional uint32 left = 4;
+	optional uint32 top = 5;
+	optional uint32 width = 6;
+	optional uint32 height = 7;
+}
+
+message CSteamTV_GetBroadcastChannelBroadcasters_Response {
+	repeated .CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster broadcasters = 1;
+}
+
+message CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster {
+	optional fixed64 steamid = 1;
+	optional string name = 2;
+	optional string rtmp_token = 3;
+}
+
+message CSteamTV_GetFollowedChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1;
+}
+
+message GetBroadcastChannelEntry {
+	optional fixed64 broadcast_channel_id = 1;
+	optional string unique_name = 2;
+	optional string name = 3;
+	optional uint32 appid = 4;
+	optional uint64 viewers = 5;
+	optional uint64 views = 6;
+	optional string thumbnail_url = 7;
+	optional uint64 followers = 8;
+	optional string headline = 9;
+	optional string avatar_url = 10;
+	optional fixed64 broadcaster_steamid = 11;
+	optional uint64 subscribers = 12;
+	optional string background_url = 13;
+	optional bool is_featured = 14;
+	optional bool is_disabled = 15;
+	optional bool is_live = 16;
+	optional string language = 17;
+	optional uint32 reports = 18;
+	optional bool is_partnered = 19;
+}
+
+message CSteamTV_GetSubscribedChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1;
+}
+
+message CSteamTV_GetBroadcastChannelStatus_Response {
+	optional bool is_live = 1;
+	optional bool is_disabled = 2;
+	optional uint32 appid = 3;
+	optional uint64 viewers = 4;
+	optional uint64 views = 5;
+	optional fixed64 broadcaster_steamid = 6;
+	optional string thumbnail_url = 7;
+	optional uint64 followers = 8;
+	optional uint64 subscribers = 9;
+	optional string unique_name = 10;
+	optional uint64 broadcast_session_id = 11;
+}
+
+message CSteamTV_FollowBroadcastChannel_Response {
+	optional bool is_followed = 1;
+}
+
+message CSteamTV_SubscribeBroadcastChannel_Response {
+	optional bool is_subscribed = 1;
+}
+
+message CSteamTV_GetBroadcastChannelClips_Response {
+	repeated .CSteamTV_BroadcastClipInfo clips = 1;
+	optional string thumbnail_host = 2;
+}
+
+message CSteamTV_BroadcastClipInfo {
+	optional uint64 broadcast_clip_id = 1;
+	optional uint64 channel_id = 2;
+	optional uint32 app_id = 3;
+	optional fixed64 broadcaster_steamid = 4;
+	optional fixed64 creator_steamid = 5;
+	optional string video_description = 6;
+	optional uint32 live_time = 7;
+	optional uint32 length_ms = 8;
+	optional string thumbnail_path = 9;
+}
+
+message CSteamTV_ReportBroadcastChannel_Response {
+}
+
+message CSteamTV_GetBroadcastChannelInteraction_Response {
+	optional bool is_followed = 1;
+	optional bool is_subscribed = 2;
+}
+
+message CSteamTV_GetGames_Response {
+	repeated .CSteamTV_Game results = 1;
+}
+
+message CSteamTV_Game {
+	optional uint32 appid = 1;
+	optional string name = 2;
+	optional string image = 3;
+	optional uint64 viewers = 4;
+	repeated .GetBroadcastChannelEntry channels = 5;
+	optional string release_date = 6;
+	optional string developer = 7;
+	optional string publisher = 8;
+}
+
+message CSteamTV_GetChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1;
+}
+
+message CSteamTV_AddChatBan_Request {
+	optional fixed64 broadcast_channel_id = 1;
+	optional fixed64 chatter_steamid = 2;
+	optional uint32 duration = 3;
+	optional bool permanent = 4;
+	optional bool undo = 5;
+}
+
+message CSteamTV_AddChatBan_Response {
+}
+
+message CSteamTV_GetChatBans_Response {
+	repeated .CSteamTV_ChatBan results = 1;
+}
+
+message CSteamTV_ChatBan {
+	optional fixed64 issuer_steamid = 1;
+	optional fixed64 chatter_steamid = 2;
+	optional string time_expires = 3;
+	optional bool permanent = 4;
+	optional string name = 5;
+}
+
+message CSteamTV_AddChatModerator_Request {
+	optional fixed64 broadcast_channel_id = 1;
+	optional fixed64 moderator_steamid = 2;
+	optional bool undo = 3;
+}
+
+message CSteamTV_AddChatModerator_Response {
+}
+
+message CSteamTV_GetChatModerators_Request {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_GetChatModerators_Response {
+	repeated .CSteamTV_ChatModerator results = 1;
+}
+
+message CSteamTV_ChatModerator {
+	optional fixed64 steamid = 1;
+	optional string name = 2;
+}
+
+message CSteamTV_AddWordBan_Response {
+}
+
+message CSteamTV_GetWordBans_Response {
+	repeated string results = 1;
+}
+
+message CSteamTV_JoinChat_Request {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_JoinChat_Response {
+	optional fixed64 chat_id = 1;
+	optional string view_url_template = 2;
+	repeated uint64 flair_group_ids = 3;
+}
+
+message CSteamTV_Search_Response {
+	repeated .GetBroadcastChannelEntry results = 1;
+}
+
+message CSteamTV_GetSteamTVUserSettings_Response {
+	optional bool stream_live_email = 1;
+	optional bool stream_live_notification = 2;
+}
+
+message CSteamTV_SetSteamTVUserSettings_Response {
+}
+
+message CSteamTV_GetMyBroadcastChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1;
+}
+
+message CSteamTV_GetHomePageContents_Response {
+	repeated .CSteamTV_HomePageContentRow rows = 1;
+}
+
+message CSteamTV_HomePageContentRow {
+	optional int32 template_type = 1 [(description) = "enum"];
+	optional .CSteamTV_HomePageTemplate_Takeover takeover = 2;
+	optional .CSteamTV_HomePageTemplate_SingleGame single_game = 3;
+	optional .CSteamTV_HomePageTemplate_GameList game_list = 4;
+	optional .CSteamTV_HomePageTemplate_QuickExplore quick_explore = 5;
+	optional .CSteamTV_HomePageTemplate_ConveyorBelt conveyor_belt = 6;
+	optional .CSteamTV_HomePageTemplate_WatchParty watch_party = 7;
+	optional .CSteamTV_HomePageTemplate_Developer developer = 8;
+	optional .CSteamTV_HomePageTemplate_Event event = 9;
+}
+
+message CSteamTV_HomePageTemplate_Takeover {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+}
+
+message CSteamTV_HomePageTemplate_SingleGame {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+	optional uint32 appid = 2;
+	optional string title = 3;
+}
+
+message CSteamTV_HomePageTemplate_GameList {
+	repeated .GameListEntry entries = 1;
+	optional string title = 2;
+}
+
+message GameListEntry {
+	optional uint32 appid = 1;
+	optional string game_name = 2;
+	optional .GetBroadcastChannelEntry broadcast = 3;
+}
+
+message CSteamTV_HomePageTemplate_QuickExplore {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+	optional string title = 2;
+}
+
+message CSteamTV_HomePageTemplate_ConveyorBelt {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+	optional string title = 2;
+}
+
+message CSteamTV_HomePageTemplate_WatchParty {
+	optional .GetBroadcastChannelEntry broadcast = 1;
+	optional string title = 2;
+	optional uint64 chat_group_id = 3;
+}
+
+message CSteamTV_HomePageTemplate_Developer {
+	optional .GetBroadcastChannelEntry broadcast = 1;
+	optional string title = 2;
+}
+
+message CSteamTV_HomePageTemplate_Event {
+	optional string title = 1;
+}
+
+service SteamTV {
+	rpc CreateBroadcastChannel (.NotImplemented) returns (.CSteamTV_CreateBroadcastChannel_Response);
+	rpc GetBroadcastChannelID (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelID_Response);
+	rpc SetBroadcastChannelProfile (.NotImplemented) returns (.CSteamTV_SetBroadcastChannelProfile_Response);
+	rpc GetBroadcastChannelProfile (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelProfile_Response);
+	rpc SetBroadcastChannelImage (.NotImplemented) returns (.CSteamTV_SetBroadcastChannelImage_Response);
+	rpc GetBroadcastChannelImages (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelImages_Response);
+	rpc SetBroadcastChannelLinkRegions (.NotImplemented) returns (.CSteamTV_SetBroadcastChannelLinkRegions_Response);
+	rpc GetBroadcastChannelLinks (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelLinks_Response);
+	rpc GetBroadcastChannelBroadcasters (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelBroadcasters_Response);
+	rpc GetFollowedChannels (.NotImplemented) returns (.CSteamTV_GetFollowedChannels_Response);
+	rpc GetSubscribedChannels (.NotImplemented) returns (.CSteamTV_GetSubscribedChannels_Response);
+	rpc GetBroadcastChannelStatus (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelStatus_Response);
+	rpc FollowBroadcastChannel (.NotImplemented) returns (.CSteamTV_FollowBroadcastChannel_Response);
+	rpc SubscribeBroadcastChannel (.NotImplemented) returns (.CSteamTV_SubscribeBroadcastChannel_Response);
+	rpc GetBroadcastChannelClips (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelClips_Response);
+	rpc ReportBroadcastChannel (.NotImplemented) returns (.CSteamTV_ReportBroadcastChannel_Response);
+	rpc GetBroadcastChannelInteraction (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelInteraction_Response);
+	rpc GetGames (.NotImplemented) returns (.CSteamTV_GetGames_Response);
+	rpc GetChannels (.NotImplemented) returns (.CSteamTV_GetChannels_Response);
+	rpc AddChatBan (.CSteamTV_AddChatBan_Request) returns (.CSteamTV_AddChatBan_Response);
+	rpc GetChatBans (.NotImplemented) returns (.CSteamTV_GetChatBans_Response);
+	rpc AddChatModerator (.CSteamTV_AddChatModerator_Request) returns (.CSteamTV_AddChatModerator_Response);
+	rpc GetChatModerators (.CSteamTV_GetChatModerators_Request) returns (.CSteamTV_GetChatModerators_Response);
+	rpc AddWordBan (.NotImplemented) returns (.CSteamTV_AddWordBan_Response);
+	rpc GetWordBans (.NotImplemented) returns (.CSteamTV_GetWordBans_Response);
+	rpc JoinChat (.CSteamTV_JoinChat_Request) returns (.CSteamTV_JoinChat_Response);
+	rpc Search (.NotImplemented) returns (.CSteamTV_Search_Response);
+	rpc GetSteamTVUserSettings (.NotImplemented) returns (.CSteamTV_GetSteamTVUserSettings_Response);
+	rpc SetSteamTVUserSettings (.NotImplemented) returns (.CSteamTV_SetSteamTVUserSettings_Response);
+	rpc GetMyBroadcastChannels (.NotImplemented) returns (.CSteamTV_GetMyBroadcastChannels_Response);
+	rpc GetHomePageContents (.NotImplemented) returns (.CSteamTV_GetHomePageContents_Response);
+}
+

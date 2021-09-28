@@ -33,6 +33,7 @@ message CHIDDeviceInfo {
 	optional uint32 session_id = 16;
 	optional uint32 eControllerType = 17 [default = 0];
 	optional bool is_xinput_device = 18 [default = false];
+	optional uint32 session_remote_play_together_appid = 19;
 }
 
 message CHIDDeviceInputReport {

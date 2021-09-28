@@ -1,0 +1,19 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CEmbeddedClient_AuthorizeDevice_Response {
+	optional uint32 result = 1;
+	optional .CEmbeddedClient_Token token = 2;
+}
+
+message CEmbeddedClient_Token {
+	optional fixed64 steamid = 1;
+	optional bytes client_token = 2;
+	optional uint32 expiry = 3;
+	optional uint32 deviceid = 4;
+}
+
+service EmbeddedClient {
+	rpc AuthorizeCurrentDevice (.NotImplemented) returns (.CEmbeddedClient_AuthorizeDevice_Response);
+}
+

@@ -1,0 +1,30 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CClan_RespondToClanInvite_Request {
+	optional fixed64 steamid = 1;
+	optional bool accept = 2;
+}
+
+message CClan_RespondToClanInvite_Response {
+}
+
+message CClan_GetPartnerEventsByBuildIDRange_Response {
+	repeated .CClan_GetPartnerEventsByBuildIDRange_Response_PatchNotesDesc matches = 1;
+	optional uint32 num_total_results = 2;
+	optional string next_cursor = 3;
+}
+
+message CClan_GetPartnerEventsByBuildIDRange_Response_PatchNotesDesc {
+	optional uint32 appid = 1;
+	optional uint32 build_id = 2;
+	optional string branch = 3;
+	optional fixed64 clan_event_gid = 4;
+	optional uint32 clan_account_id = 5;
+}
+
+service Clan {
+	rpc RespondToClanInvite (.CClan_RespondToClanInvite_Request) returns (.CClan_RespondToClanInvite_Response);
+	rpc GetPartnerEventsByBuildIDRange (.NotImplemented) returns (.CClan_GetPartnerEventsByBuildIDRange_Response);
+}
+

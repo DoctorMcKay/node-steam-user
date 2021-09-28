@@ -1,0 +1,69 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CAuction_PlaceBid_Response {
+}
+
+message CAuction_CancelBid_Response {
+	optional int64 amount_returned = 1;
+}
+
+message CAuction_GetBidsForUser_Response {
+	repeated .CAuction_Bid bids = 1;
+}
+
+message CAuction_Bid {
+	optional uint32 accountid = 1;
+	optional uint64 auctiondescriptionid = 2;
+	optional int32 state = 3 [(description) = "enum"];
+	optional uint32 time_created = 4;
+	optional uint32 time_updated = 5;
+	optional int64 amount_bid = 6;
+	optional int64 amount_paid = 7;
+	optional int64 auctionbidid = 8;
+}
+
+message CAuction_GetBidsForItem_Response {
+	optional .CAuction_Item item = 1;
+	optional int32 count_total = 2;
+	optional int32 current_user_position = 3;
+	repeated .CAuction_Bid winning_bids = 4;
+}
+
+message CAuction_Item {
+	optional uint64 auctiondescriptionid = 1;
+	optional uint32 time_start = 2;
+	optional uint32 time_end = 3;
+	optional int64 amount_total = 5;
+	optional int64 amount_remaining = 6;
+	optional int64 highest_amount = 7;
+	optional uint32 highest_bidder_accountid = 8;
+	optional uint32 community_item_appid = 9;
+	optional uint32 community_item_type = 10;
+	optional uint32 store_appid = 11;
+	repeated uint32 store_packageids = 12;
+	optional int64 reserve_price = 13;
+}
+
+message CAuction_GetUserBidForItem_Response {
+	optional .CAuction_Bid bid = 1;
+}
+
+message CAuction_GetItemDetails_Response {
+	optional .CAuction_Item item = 1;
+}
+
+message CAuction_GetAllItems_Response {
+	repeated .CAuction_Item items = 1;
+}
+
+service Auction {
+	rpc PlaceBid (.NotImplemented) returns (.CAuction_PlaceBid_Response);
+	rpc CancelBid (.NotImplemented) returns (.CAuction_CancelBid_Response);
+	rpc GetBidsForUser (.NotImplemented) returns (.CAuction_GetBidsForUser_Response);
+	rpc GetBidsForItem (.NotImplemented) returns (.CAuction_GetBidsForItem_Response);
+	rpc GetUserBidForItem (.NotImplemented) returns (.CAuction_GetUserBidForItem_Response);
+	rpc GetItemDetails (.NotImplemented) returns (.CAuction_GetItemDetails_Response);
+	rpc GetAllItems (.NotImplemented) returns (.CAuction_GetAllItems_Response);
+}
+

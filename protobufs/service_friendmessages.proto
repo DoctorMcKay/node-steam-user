@@ -1,0 +1,131 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CFriendMessages_GetRecentMessages_Request {
+	optional fixed64 steamid1 = 1;
+	optional fixed64 steamid2 = 2;
+	optional uint32 count = 3;
+	optional bool most_recent_conversation = 4;
+	optional fixed32 rtime32_start_time = 5;
+	optional bool bbcode_format = 6;
+	optional uint32 start_ordinal = 7;
+	optional uint32 time_last = 8;
+	optional uint32 ordinal_last = 9;
+}
+
+message CFriendMessages_GetRecentMessages_Response {
+	repeated .CFriendMessages_GetRecentMessages_Response_FriendMessage messages = 1;
+	optional bool more_available = 4;
+}
+
+message CFriendMessages_GetRecentMessages_Response_FriendMessage {
+	optional uint32 accountid = 1;
+	optional uint32 timestamp = 2;
+	optional string message = 3;
+	optional uint32 ordinal = 4;
+	repeated .CFriendMessages_GetRecentMessages_Response_FriendMessage_MessageReaction reactions = 5;
+}
+
+message CFriendMessages_GetRecentMessages_Response_FriendMessage_MessageReaction {
+	optional int32 reaction_type = 1 [(description) = "enum"];
+	optional string reaction = 2;
+	repeated uint32 reactors = 3;
+}
+
+message CFriendsMessages_GetActiveMessageSessions_Request {
+	optional uint32 lastmessage_since = 1;
+	optional bool only_sessions_with_messages = 2;
+}
+
+message CFriendsMessages_GetActiveMessageSessions_Response {
+	repeated .CFriendsMessages_GetActiveMessageSessions_Response_FriendMessageSession message_sessions = 1;
+	optional uint32 timestamp = 2;
+}
+
+message CFriendsMessages_GetActiveMessageSessions_Response_FriendMessageSession {
+	optional uint32 accountid_friend = 1;
+	optional uint32 last_message = 2;
+	optional uint32 last_view = 3;
+	optional uint32 unread_message_count = 4;
+}
+
+message CFriendMessages_SendMessage_Request {
+	optional fixed64 steamid = 1;
+	optional int32 chat_entry_type = 2;
+	optional string message = 3;
+	optional bool contains_bbcode = 4;
+	optional bool echo_to_sender = 5;
+	optional bool low_priority = 6;
+	optional string client_message_id = 8;
+}
+
+message CFriendMessages_SendMessage_Response {
+	optional string modified_message = 1;
+	optional uint32 server_timestamp = 2;
+	optional uint32 ordinal = 3;
+	optional string message_without_bb_code = 4;
+}
+
+message CFriendMessages_AckMessage_Notification {
+	optional fixed64 steamid_partner = 1;
+	optional uint32 timestamp = 2;
+}
+
+message CFriendMessages_IsInFriendsUIBeta_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CFriendMessages_IsInFriendsUIBeta_Response {
+	optional bool online_in_friendsui = 1;
+	optional bool has_used_friendsui = 2;
+}
+
+message CFriendMessages_UpdateMessageReaction_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 server_timestamp = 2;
+	optional uint32 ordinal = 3;
+	optional int32 reaction_type = 4 [(description) = "enum"];
+	optional string reaction = 5;
+	optional bool is_add = 6;
+}
+
+message CFriendMessages_UpdateMessageReaction_Response {
+	repeated uint32 reactors = 1;
+}
+
+message CFriendMessages_IncomingMessage_Notification {
+	optional fixed64 steamid_friend = 1;
+	optional int32 chat_entry_type = 2;
+	optional bool from_limited_account = 3;
+	optional string message = 4;
+	optional fixed32 rtime32_server_timestamp = 5;
+	optional uint32 ordinal = 6;
+	optional bool local_echo = 7;
+	optional string message_no_bbcode = 8;
+	optional bool low_priority = 9;
+}
+
+message CFriendMessages_MessageReaction_Notification {
+	optional fixed64 steamid_friend = 1;
+	optional uint32 server_timestamp = 2;
+	optional uint32 ordinal = 3;
+	optional fixed64 reactor = 4;
+	optional int32 reaction_type = 5 [(description) = "enum"];
+	optional string reaction = 6;
+	optional bool is_add = 7;
+}
+
+service FriendMessages {
+	rpc GetRecentMessages (.CFriendMessages_GetRecentMessages_Request) returns (.CFriendMessages_GetRecentMessages_Response);
+	rpc GetActiveMessageSessions (.CFriendsMessages_GetActiveMessageSessions_Request) returns (.CFriendsMessages_GetActiveMessageSessions_Response);
+	rpc SendMessage (.CFriendMessages_SendMessage_Request) returns (.CFriendMessages_SendMessage_Response);
+	rpc AckMessage (.CFriendMessages_AckMessage_Notification) returns (.NoResponse);
+	rpc IsInFriendsUIBeta (.CFriendMessages_IsInFriendsUIBeta_Request) returns (.CFriendMessages_IsInFriendsUIBeta_Response);
+	rpc UpdateMessageReaction (.CFriendMessages_UpdateMessageReaction_Request) returns (.CFriendMessages_UpdateMessageReaction_Response);
+}
+
+service FriendMessagesClient {
+	rpc IncomingMessage (.CFriendMessages_IncomingMessage_Notification) returns (.NoResponse);
+	rpc NotifyAckMessageEcho (.CFriendMessages_AckMessage_Notification) returns (.NoResponse);
+	rpc MessageReaction (.CFriendMessages_MessageReaction_Notification) returns (.NoResponse);
+}
+

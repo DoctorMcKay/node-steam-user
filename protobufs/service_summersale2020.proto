@@ -1,0 +1,29 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CSummerSale2020_ClaimItem_Response {
+	optional string item_name = 1;
+	optional string item_title = 2;
+	optional string item_description = 3;
+	optional string item_image_small = 4;
+	optional string item_image_large = 5;
+	optional bool animated = 6;
+	optional uint64 communityitemid = 7;
+}
+
+message CSummerSale2020_CanClaimItem_Response {
+	optional bool can_claim = 1;
+	optional string item_name = 2;
+	optional string item_title = 3;
+	optional string item_description = 4;
+	optional string item_image_small = 5;
+	optional string item_image_large = 6;
+	optional bool animated = 7;
+	optional uint64 communityitemid = 8;
+}
+
+service SummerSale2020 {
+	rpc ClaimItem (.NotImplemented) returns (.CSummerSale2020_ClaimItem_Response);
+	rpc CanClaimItem (.NotImplemented) returns (.CSummerSale2020_CanClaimItem_Response);
+}
+

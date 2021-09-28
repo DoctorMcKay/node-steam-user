@@ -88,6 +88,7 @@ message CMsgBrowserCreate {
 	optional bool only_allow_trusted_popups = 17 [default = false];
 	optional string initial_url = 18;
 	optional fixed64 hwnd_parent = 19;
+	optional uint32 creation_flags = 20 [default = 0];
 }
 
 message CMsgBrowserCreateResponse {
@@ -183,6 +184,11 @@ message CMsgGoBack {
 message CMsgWasHidden {
 	optional uint32 browser_handle = 1;
 	optional bool hidden = 2;
+}
+
+message CMsgBrowserViewSetVisible {
+	optional uint32 browser_handle = 1;
+	optional bool visible = 2;
 }
 
 message CMsgClearHistory {
@@ -448,6 +454,9 @@ message CMsgNeedsPaint {
 	optional uint32 scrolly = 11;
 	optional float pagescale = 12;
 	optional uint32 pageserial = 15;
+	optional uint32 avg_frame_ms = 20;
+	optional float stddev_sum_frame_ms = 21;
+	optional uint32 long_frame_ms = 22;
 }
 
 message CMsgComboNeedsPaint {
@@ -745,6 +754,7 @@ message CMsgJSValue {
 	optional double double_value = 4;
 	optional string string_value = 5;
 	optional uint64 function_handle = 6;
+	optional bytes bytes_value = 12;
 	optional bool is_array = 8;
 	repeated .CMsgJSValue array_values = 9;
 	optional bool is_object = 10;
@@ -864,7 +874,34 @@ message CMsgMinimizeWindow {
 }
 
 message CMsgShowBrowserContextMenu {
+	message ContextCommand {
+		optional int32 id = 1;
+		optional string label = 2;
+	}
+
 	optional uint32 browser_handle = 1;
+	repeated .CMsgShowBrowserContextMenu.ContextCommand custom_commands = 2;
+}
+
+message CMsgHandleContextMenuCommand {
+	optional uint32 browser_handle = 1;
+	optional int32 command_id = 2;
+}
+
+message CMsgTouchGesture {
+	optional uint32 browser_handle = 1;
+	optional int32 id = 2;
+	optional uint32 gesture = 3;
+	optional double x = 4;
+	optional double y = 5;
+	optional double width = 6;
+	optional double height = 7;
+	optional uint32 tap_count = 8;
+}
+
+message CMsgSetTouchGesturesToCancel {
+	optional uint32 browser_handle = 1;
+	repeated uint32 gestures = 2;
 }
 
 message CMsgImeSetComposition {
@@ -901,4 +938,15 @@ message CMsgDisableF5 {
 message CMsgStartDownload {
 	optional uint32 browser_handle = 1;
 	optional string url = 2;
+}
+
+message CMsgSetTopWindow {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgBrowserViewPostMessageToParentRequest {
+	optional uint32 browser_handle = 1;
+	optional string message = 2;
+	optional string args = 3;
+	optional string requesting_url = 4;
 }

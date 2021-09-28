@@ -9,6 +9,8 @@ message CTimedTrial_GetTimeRemaining_Request {
 message CTimedTrial_GetTimeRemaining_Response {
 	optional uint32 seconds_played = 1;
 	optional uint32 seconds_allowed = 2;
+	optional uint32 packageid = 3;
+	optional uint32 mastersub_appid = 4;
 }
 
 message CTimedTrial_RecordPlaytime_Request {

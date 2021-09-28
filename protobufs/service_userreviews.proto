@@ -1,0 +1,83 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CUserReviews_Update_Request {
+	optional uint64 recommendationid = 1;
+	optional string review_text = 2;
+	optional bool voted_up = 3;
+	optional bool is_public = 4;
+	optional string language = 5;
+	optional bool is_in_early_access = 6;
+	optional bool received_compensation = 7;
+	optional bool comments_disabled = 8;
+}
+
+message CUserReviews_Update_Response {
+}
+
+message CUserReviews_GetIndividualRecommendations_Request {
+	repeated .CUserReviews_GetIndividualRecommendations_Request_RecommendationRequest requests = 1;
+}
+
+message CUserReviews_GetIndividualRecommendations_Request_RecommendationRequest {
+	optional uint64 steamid = 1;
+	optional uint32 appid = 2;
+}
+
+message CUserReviews_GetIndividualRecommendations_Response {
+	repeated .RecommendationDetails recommendations = 1;
+}
+
+message RecommendationDetails {
+	optional uint64 recommendationid = 1;
+	optional uint64 steamid = 2;
+	optional uint32 appid = 3;
+	optional string review = 4;
+	optional uint32 time_created = 5;
+	optional uint32 time_updated = 6;
+	optional uint32 votes_up = 7;
+	optional uint32 votes_down = 8;
+	optional float vote_score = 9;
+	optional string language = 10;
+	optional uint32 comment_count = 11;
+	optional bool voted_up = 12;
+	optional bool is_public = 13;
+	optional bool moderator_hidden = 14;
+	optional int32 flagged_by_developer = 15 [(description) = "enum"];
+	optional uint32 report_score = 16;
+	optional uint64 steamid_moderator = 17;
+	optional uint64 steamid_developer = 18;
+	optional uint64 steamid_dev_responder = 19;
+	optional string developer_response = 20;
+	optional uint32 time_developer_responded = 21;
+	optional bool developer_flag_cleared = 22;
+	optional bool written_during_early_access = 23;
+	optional uint32 votes_funny = 24;
+	optional bool received_compensation = 25;
+	optional bool unverified_purchase = 26;
+	optional int32 review_quality = 27 [(description) = "enum"];
+	optional float weighted_vote_score = 28;
+	optional string moderation_note = 29;
+	optional int32 payment_method = 30;
+	optional int32 playtime_2weeks = 31;
+	optional int32 playtime_forever = 32;
+	optional int32 last_playtime = 33;
+	optional bool comments_disabled = 34;
+	optional int32 playtime_at_review = 35;
+	optional bool approved_for_china = 36;
+	optional int32 ban_check_result = 37 [(description) = "enum"];
+	optional bool refunded = 38;
+	optional int32 account_score_spend = 39;
+	repeated .CUserReviews_Recommendation_LoyaltyReaction reactions = 40;
+	optional string ipaddress = 41;
+}
+
+message CUserReviews_Recommendation_LoyaltyReaction {
+	optional uint32 reaction_type = 1;
+	optional uint32 count = 2;
+}
+
+service UserReviews {
+	rpc Update (.CUserReviews_Update_Request) returns (.CUserReviews_Update_Response);
+	rpc GetIndividualRecommendations (.CUserReviews_GetIndividualRecommendations_Request) returns (.CUserReviews_GetIndividualRecommendations_Response);
+}
+

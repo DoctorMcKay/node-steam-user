@@ -29,9 +29,10 @@ message CMsgSteamDatagramRelayAuthTicket {
 
 message CMsgSteamDatagramSignedRelayAuthTicket {
 	optional fixed64 reserved_do_not_use = 1;
-	optional fixed64 key_id = 2;
 	optional bytes ticket = 3;
 	optional bytes signature = 4;
+	optional fixed64 key_id = 2;
+	repeated .CMsgSteamDatagramCertificateSigned certs = 5;
 }
 
 message CMsgSteamDatagramCachedCredentialsForApp {

@@ -1,0 +1,80 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CStore_GetMostPopularTags_Response {
+	repeated .CStore_GetMostPopularTags_Response_Tag tags = 1;
+}
+
+message CStore_GetMostPopularTags_Response_Tag {
+	optional uint32 tagid = 1;
+	optional string name = 2;
+}
+
+message CStore_GetLocalizedNameForTags_Response {
+	repeated .CStore_GetLocalizedNameForTags_Response_Tag tags = 1;
+}
+
+message CStore_GetLocalizedNameForTags_Response_Tag {
+	optional uint32 tagid = 1;
+	optional string english_name = 2;
+	optional string name = 3;
+}
+
+message CStore_GetStorePreferences_Request {
+}
+
+message CStore_GetStorePreferences_Response {
+	optional .CStore_UserPreferences preferences = 1;
+	optional .CStore_UserTagPreferences tag_preferences = 2;
+	optional .CStore_UserContentDescriptorPreferences content_descriptor_preferences = 3;
+}
+
+message CStore_UserPreferences {
+	optional uint32 primary_language = 1;
+	optional uint32 secondary_languages = 2;
+	optional bool platform_windows = 3;
+	optional bool platform_mac = 4;
+	optional bool platform_linux = 5;
+	optional bool hide_adult_content_violence = 6;
+	optional bool hide_adult_content_sex = 7;
+	optional uint32 timestamp_updated = 8;
+	optional bool hide_store_broadcast = 9;
+	optional int32 review_score_preference = 10 [(description) = "enum"];
+	optional int32 timestamp_content_descriptor_preferences_updated = 11;
+}
+
+message CStore_UserTagPreferences {
+	repeated .CStore_UserTagPreferences_Tag tags_to_exclude = 1;
+}
+
+message CStore_UserTagPreferences_Tag {
+	optional uint32 tagid = 1;
+	optional string name = 2;
+	optional uint32 timestamp_added = 3;
+}
+
+message CStore_UserContentDescriptorPreferences {
+	repeated .CStore_UserContentDescriptorPreferences_ContentDescriptor content_descriptors_to_exclude = 1;
+}
+
+message CStore_UserContentDescriptorPreferences_ContentDescriptor {
+	optional uint32 content_descriptorid = 1;
+	optional uint32 timestamp_added = 2;
+}
+
+message CStore_StorePreferencesChanged_Notification {
+	optional .CStore_UserPreferences preferences = 1;
+	optional .CStore_UserTagPreferences tag_preferences = 2;
+	optional .CStore_UserContentDescriptorPreferences content_descriptor_preferences = 3;
+}
+
+service Store {
+	rpc GetMostPopularTags (.NotImplemented) returns (.CStore_GetMostPopularTags_Response);
+	rpc GetLocalizedNameForTags (.NotImplemented) returns (.CStore_GetLocalizedNameForTags_Response);
+	rpc GetStorePreferences (.CStore_GetStorePreferences_Request) returns (.CStore_GetStorePreferences_Response);
+}
+
+service StoreClient {
+	rpc NotifyStorePreferencesChanged (.CStore_StorePreferencesChanged_Notification) returns (.NoResponse);
+}
+

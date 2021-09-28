@@ -1,0 +1,102 @@
+import "steammessages_unified_base.steamclient.proto";
+import "common.proto";
+
+message CNews_ConvertHTMLToBBCode_Response {
+	optional string converted_content = 1;
+	optional bool found_html = 2;
+}
+
+message CNews_PreviewPartnerEvents_Request {
+	optional string rss_url = 1;
+	optional uint32 lang = 2;
+}
+
+message CNews_PreviewPartnerEvents_Response {
+	optional string rss_url = 1;
+	repeated .CNewsPartnerEventPreview results = 2;
+	optional string error_msg = 3;
+}
+
+message CNewsPartnerEventPreview {
+	optional string rss_message = 1;
+	optional string unique_id = 2;
+	optional string title = 3;
+	optional string desc = 4;
+	optional string jsondata = 5;
+	optional .CNewsFeedPostDef post = 6;
+	optional bool valid_post = 7;
+	optional string post_error_msg = 8;
+}
+
+message CNewsFeedPostDef {
+	optional fixed64 gid = 1;
+	optional fixed64 news_feed_gid = 2;
+	optional string title = 3;
+	optional string url = 4;
+	optional string author = 5;
+	optional uint32 rtime_date = 6;
+	optional string contents = 7;
+	optional bool commited = 8;
+	optional bool deleted = 9;
+	optional string tags = 10;
+	repeated uint32 appids = 11;
+	optional int32 recommendation_state = 12 [(description) = "enum"];
+	optional bool received_compensation = 13;
+	optional bool received_for_free = 14;
+	optional string blurb = 15;
+	optional string event_subtitle = 16;
+	optional string event_summary = 17;
+}
+
+message CNews_GetNewsFeedByRepublishClan_Response {
+	repeated .CNewsFeedDef feeds = 1;
+}
+
+message CNewsFeedDef {
+	optional fixed64 gid = 1;
+	optional string name = 2;
+	optional uint32 type = 3 [default = 0];
+	optional string url = 4;
+	repeated uint32 associated_apps = 5;
+	optional uint32 poll_interval = 6 [default = 300];
+	optional string kv_description = 7;
+	optional string kv_filter = 8;
+	optional uint32 publish_to_clan_account_id = 9;
+	optional uint32 language = 10;
+	optional uint32 last_error = 11;
+	optional uint32 last_update = 12;
+	optional uint32 last_checked = 13;
+}
+
+message CNews_PublishPartnerEvent_Request {
+	optional .CNewsFeedPostDef post = 1;
+	optional bool draft = 2;
+}
+
+message CNews_PublishPartnerEvent_Response {
+	optional fixed64 clan_event_gid = 1;
+	optional fixed64 news_post_gid = 2;
+}
+
+message CNews_GetBatchPublishedPartnerEvent_Request {
+	optional fixed64 news_feed_gid = 1;
+	optional uint32 start_index = 2 [default = 0];
+	optional uint32 amount = 3 [default = 100];
+}
+
+message CNews_GetBatchPublishedPartnerEvent_Response {
+	optional uint32 clan_account_id = 1;
+	optional fixed64 news_feed_gid = 2;
+	repeated fixed64 clan_event_gid = 3;
+	repeated fixed64 news_post_gid = 4;
+	repeated string news_url = 5;
+}
+
+service News {
+	rpc ConvertHTMLToBBCode (.NotImplemented) returns (.CNews_ConvertHTMLToBBCode_Response);
+	rpc PreviewPartnerEvents (.CNews_PreviewPartnerEvents_Request) returns (.CNews_PreviewPartnerEvents_Response);
+	rpc GetNewsFeedByRepublishClan (.NotImplemented) returns (.CNews_GetNewsFeedByRepublishClan_Response);
+	rpc PublishPartnerEvent (.CNews_PublishPartnerEvent_Request) returns (.CNews_PublishPartnerEvent_Response);
+	rpc GetBatchPublishedPartnerEvent (.CNews_GetBatchPublishedPartnerEvent_Request) returns (.CNews_GetBatchPublishedPartnerEvent_Response);
+}
+

@@ -1,0 +1,34 @@
+import "steammessages_unified_base.steamclient.proto";
+
+message CUserGameActivity_GetActivity_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional int32 count = 3;
+	optional uint32 starttime = 4;
+	optional uint32 endtime = 5;
+}
+
+message CUserGameActivity_GetActivity_Response {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	repeated .CUserGameActivity_Event events = 3;
+}
+
+message CUserGameActivity_Event {
+	optional uint32 timestamp = 2;
+	optional int32 event_type = 3 [(description) = "enum"];
+	optional uint32 event_sub_type = 4;
+	optional int64 data1 = 5;
+	optional int64 data2 = 6;
+	optional int64 data3 = 7;
+	optional int64 data4 = 8;
+	optional uint32 item_appid = 10;
+	optional uint64 item_contextid = 11;
+	optional uint64 item_assetid = 12;
+	optional bytes proto_data = 13;
+}
+
+service UserGameActivity {
+	rpc GetActivity (.CUserGameActivity_GetActivity_Request) returns (.CUserGameActivity_GetActivity_Response);
+}
+

@@ -80,6 +80,8 @@ message CMsgRemoteClientPingResponse {
 
 message CMsgRemoteClientAcceptEULA {
 	repeated uint32 app_id = 1;
+	repeated string eula_id = 2;
+	repeated uint32 eula_version = 3;
 }
 
 message CMsgRemoteClientGetControllerConfig {
