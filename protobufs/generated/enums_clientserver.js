@@ -19,7 +19,7 @@
     /**
      * EMsg enum.
      * @exports EMsg
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EMsgInvalid=0 k_EMsgInvalid value
      * @property {number} k_EMsgMulti=1 k_EMsgMulti value
      * @property {number} k_EMsgProtobufWrapped=2 k_EMsgProtobufWrapped value
@@ -84,6 +84,7 @@
      * @property {number} k_EMsgUpdateScheduledTaskEnableState_TEST=244 k_EMsgUpdateScheduledTaskEnableState_TEST value
      * @property {number} k_EMsgUpdateScheduledTaskEnableStateResponse_TEST=245 k_EMsgUpdateScheduledTaskEnableStateResponse_TEST value
      * @property {number} k_EMsgContentDescriptionDeltaUpdate=246 k_EMsgContentDescriptionDeltaUpdate value
+     * @property {number} k_EMsgGMShellAndServerAddressUpdates=247 k_EMsgGMShellAndServerAddressUpdates value
      * @property {number} k_EMsgBaseGM=300 k_EMsgBaseGM value
      * @property {number} k_EMsgHeartbeat=300 k_EMsgHeartbeat value
      * @property {number} k_EMsgShellFailed=301 k_EMsgShellFailed value
@@ -110,6 +111,7 @@
      * @property {number} k_EMsgGMTestNextBuildSchemaConversionResponse=335 k_EMsgGMTestNextBuildSchemaConversionResponse value
      * @property {number} k_EMsgExpectShellRestart=336 k_EMsgExpectShellRestart value
      * @property {number} k_EMsgHotFixProgress=337 k_EMsgHotFixProgress value
+     * @property {number} k_EMsgGMStatsForwardToAdminConnections=338 k_EMsgGMStatsForwardToAdminConnections value
      * @property {number} k_EMsgBaseAIS=400 k_EMsgBaseAIS value
      * @property {number} k_EMsgAISRequestContentDescription=402 k_EMsgAISRequestContentDescription value
      * @property {number} k_EMsgAISUpdateAppInfo=403 k_EMsgAISUpdateAppInfo value
@@ -185,8 +187,8 @@
      * @property {number} k_EMsgAMChatActionResult=579 k_EMsgAMChatActionResult value
      * @property {number} k_EMsgAMFindAccounts=580 k_EMsgAMFindAccounts value
      * @property {number} k_EMsgAMFindAccountsResponse=581 k_EMsgAMFindAccountsResponse value
-     * @property {number} k_EMsgAMRequestAccountData=582 k_EMsgAMRequestAccountData value
-     * @property {number} k_EMsgAMRequestAccountDataResponse=583 k_EMsgAMRequestAccountDataResponse value
+     * @property {number} k_EMsgAMIsAccountNameInUse=582 k_EMsgAMIsAccountNameInUse value
+     * @property {number} k_EMsgAMIsAccountNameInUseResponse=583 k_EMsgAMIsAccountNameInUseResponse value
      * @property {number} k_EMsgAMSetAccountFlags=584 k_EMsgAMSetAccountFlags value
      * @property {number} k_EMsgAMCreateClan=586 k_EMsgAMCreateClan value
      * @property {number} k_EMsgAMCreateClanResponse=587 k_EMsgAMCreateClanResponse value
@@ -565,6 +567,12 @@
      * @property {number} k_EMsgGCHAccountPhoneNumberChange=2236 k_EMsgGCHAccountPhoneNumberChange value
      * @property {number} k_EMsgGCHAccountTwoFactorChange=2237 k_EMsgGCHAccountTwoFactorChange value
      * @property {number} k_EMsgGCHInviteUserToLobby=2238 k_EMsgGCHInviteUserToLobby value
+     * @property {number} k_EMsgGCHUpdateMultipleSessions=2239 k_EMsgGCHUpdateMultipleSessions value
+     * @property {number} k_EMsgGCHMarkAppSessionsAuthoritative=2240 k_EMsgGCHMarkAppSessionsAuthoritative value
+     * @property {number} k_EMsgGCHRecurringSubscriptionStatusChange=2241 k_EMsgGCHRecurringSubscriptionStatusChange value
+     * @property {number} k_EMsgGCHAppCheersReceived=2242 k_EMsgGCHAppCheersReceived value
+     * @property {number} k_EMsgGCHAppCheersGetAllowedTypes=2243 k_EMsgGCHAppCheersGetAllowedTypes value
+     * @property {number} k_EMsgGCHAppCheersGetAllowedTypesResponse=2244 k_EMsgGCHAppCheersGetAllowedTypesResponse value
      * @property {number} k_EMsgBaseP2P=2500 k_EMsgBaseP2P value
      * @property {number} k_EMsgP2PIntroducerMessage=2502 k_EMsgP2PIntroducerMessage value
      * @property {number} k_EMsgBaseSM=2900 k_EMsgBaseSM value
@@ -748,8 +756,6 @@
      * @property {number} k_EMsgMarketingMessageUpdate=4216 k_EMsgMarketingMessageUpdate value
      * @property {number} k_EMsgChatServerRouteFriendMsg=4219 k_EMsgChatServerRouteFriendMsg value
      * @property {number} k_EMsgAMTicketAuthRequestOrResponse=4220 k_EMsgAMTicketAuthRequestOrResponse value
-     * @property {number} k_EMsgAMVerifyDepotManagementRights=4222 k_EMsgAMVerifyDepotManagementRights value
-     * @property {number} k_EMsgAMVerifyDepotManagementRightsResponse=4223 k_EMsgAMVerifyDepotManagementRightsResponse value
      * @property {number} k_EMsgAMAddFreeLicense=4224 k_EMsgAMAddFreeLicense value
      * @property {number} k_EMsgAMValidateEmailLink=4231 k_EMsgAMValidateEmailLink value
      * @property {number} k_EMsgAMValidateEmailLinkResponse=4232 k_EMsgAMValidateEmailLinkResponse value
@@ -908,8 +914,6 @@
      * @property {number} k_EMsgPSCreateShoppingCartResponse=5002 k_EMsgPSCreateShoppingCartResponse value
      * @property {number} k_EMsgPSIsValidShoppingCart=5003 k_EMsgPSIsValidShoppingCart value
      * @property {number} k_EMsgPSIsValidShoppingCartResponse=5004 k_EMsgPSIsValidShoppingCartResponse value
-     * @property {number} k_EMsgPSAddPackageToShoppingCart=5005 k_EMsgPSAddPackageToShoppingCart value
-     * @property {number} k_EMsgPSAddPackageToShoppingCartResponse=5006 k_EMsgPSAddPackageToShoppingCartResponse value
      * @property {number} k_EMsgPSRemoveLineItemFromShoppingCart=5007 k_EMsgPSRemoveLineItemFromShoppingCart value
      * @property {number} k_EMsgPSRemoveLineItemFromShoppingCartResponse=5008 k_EMsgPSRemoveLineItemFromShoppingCartResponse value
      * @property {number} k_EMsgPSGetShoppingCartContents=5009 k_EMsgPSGetShoppingCartContents value
@@ -1005,8 +1009,6 @@
      * @property {number} k_EMsgClientCheckAppBetaPasswordResponse=5451 k_EMsgClientCheckAppBetaPasswordResponse value
      * @property {number} k_EMsgClientToGC=5452 k_EMsgClientToGC value
      * @property {number} k_EMsgClientFromGC=5453 k_EMsgClientFromGC value
-     * @property {number} k_EMsgClientRequestChangeMail=5454 k_EMsgClientRequestChangeMail value
-     * @property {number} k_EMsgClientRequestChangeMailResponse=5455 k_EMsgClientRequestChangeMailResponse value
      * @property {number} k_EMsgClientEmailAddrInfo=5456 k_EMsgClientEmailAddrInfo value
      * @property {number} k_EMsgClientPasswordChange3=5457 k_EMsgClientPasswordChange3 value
      * @property {number} k_EMsgClientEmailChange3=5458 k_EMsgClientEmailChange3 value
@@ -1045,7 +1047,6 @@
      * @property {number} k_EMsgClientMicroTxnAuthRequest=5504 k_EMsgClientMicroTxnAuthRequest value
      * @property {number} k_EMsgClientMicroTxnAuthorize=5505 k_EMsgClientMicroTxnAuthorize value
      * @property {number} k_EMsgClientMicroTxnAuthorizeResponse=5506 k_EMsgClientMicroTxnAuthorizeResponse value
-     * @property {number} k_EMsgClientAppMinutesPlayedData=5507 k_EMsgClientAppMinutesPlayedData value
      * @property {number} k_EMsgClientGetMicroTxnInfo=5508 k_EMsgClientGetMicroTxnInfo value
      * @property {number} k_EMsgClientGetMicroTxnInfoResponse=5509 k_EMsgClientGetMicroTxnInfoResponse value
      * @property {number} k_EMsgClientMarketingMessageUpdate2=5510 k_EMsgClientMarketingMessageUpdate2 value
@@ -1112,7 +1113,6 @@
      * @property {number} k_EMsgClientItemAnnouncements=5576 k_EMsgClientItemAnnouncements value
      * @property {number} k_EMsgClientRequestItemAnnouncements=5577 k_EMsgClientRequestItemAnnouncements value
      * @property {number} k_EMsgClientFriendMsgEchoToSender=5578 k_EMsgClientFriendMsgEchoToSender value
-     * @property {number} k_EMsgClientOGSGameServerPingSample=5581 k_EMsgClientOGSGameServerPingSample value
      * @property {number} k_EMsgClientCommentNotifications=5582 k_EMsgClientCommentNotifications value
      * @property {number} k_EMsgClientRequestCommentNotifications=5583 k_EMsgClientRequestCommentNotifications value
      * @property {number} k_EMsgClientPersonaChangeResponse=5584 k_EMsgClientPersonaChangeResponse value
@@ -1260,10 +1260,6 @@
      * @property {number} k_EMsgClientUCMPublishFileResponse=7312 k_EMsgClientUCMPublishFileResponse value
      * @property {number} k_EMsgClientUCMDeletePublishedFile=7315 k_EMsgClientUCMDeletePublishedFile value
      * @property {number} k_EMsgClientUCMDeletePublishedFileResponse=7316 k_EMsgClientUCMDeletePublishedFileResponse value
-     * @property {number} k_EMsgClientUCMEnumerateUserPublishedFiles=7317 k_EMsgClientUCMEnumerateUserPublishedFiles value
-     * @property {number} k_EMsgClientUCMEnumerateUserPublishedFilesResponse=7318 k_EMsgClientUCMEnumerateUserPublishedFilesResponse value
-     * @property {number} k_EMsgClientUCMEnumerateUserSubscribedFiles=7321 k_EMsgClientUCMEnumerateUserSubscribedFiles value
-     * @property {number} k_EMsgClientUCMEnumerateUserSubscribedFilesResponse=7322 k_EMsgClientUCMEnumerateUserSubscribedFilesResponse value
      * @property {number} k_EMsgClientUCMUpdatePublishedFile=7325 k_EMsgClientUCMUpdatePublishedFile value
      * @property {number} k_EMsgClientUCMUpdatePublishedFileResponse=7326 k_EMsgClientUCMUpdatePublishedFileResponse value
      * @property {number} k_EMsgUCMUpdatePublishedFile=7327 k_EMsgUCMUpdatePublishedFile value
@@ -1287,8 +1283,6 @@
      * @property {number} k_EMsgUCMPublishedFileChildRemove=7355 k_EMsgUCMPublishedFileChildRemove value
      * @property {number} k_EMsgUCMPublishedFileChildRemoveResponse=7356 k_EMsgUCMPublishedFileChildRemoveResponse value
      * @property {number} k_EMsgUCMPublishedFileParentChanged=7359 k_EMsgUCMPublishedFileParentChanged value
-     * @property {number} k_EMsgClientUCMGetPublishedFilesForUser=7360 k_EMsgClientUCMGetPublishedFilesForUser value
-     * @property {number} k_EMsgClientUCMGetPublishedFilesForUserResponse=7361 k_EMsgClientUCMGetPublishedFilesForUserResponse value
      * @property {number} k_EMsgClientUCMSetUserPublishedFileAction=7364 k_EMsgClientUCMSetUserPublishedFileAction value
      * @property {number} k_EMsgClientUCMSetUserPublishedFileActionResponse=7365 k_EMsgClientUCMSetUserPublishedFileActionResponse value
      * @property {number} k_EMsgClientUCMEnumeratePublishedFilesByUserAction=7366 k_EMsgClientUCMEnumeratePublishedFilesByUserAction value
@@ -1302,8 +1296,6 @@
      * @property {number} k_EMsgClientUCMPublishedFileUpdated=7381 k_EMsgClientUCMPublishedFileUpdated value
      * @property {number} k_EMsgClientWorkshopItemChangesRequest=7382 k_EMsgClientWorkshopItemChangesRequest value
      * @property {number} k_EMsgClientWorkshopItemChangesResponse=7383 k_EMsgClientWorkshopItemChangesResponse value
-     * @property {number} k_EMsgClientWorkshopItemInfoRequest=7384 k_EMsgClientWorkshopItemInfoRequest value
-     * @property {number} k_EMsgClientWorkshopItemInfoResponse=7385 k_EMsgClientWorkshopItemInfoResponse value
      * @property {number} k_EMsgFSBase=7500 k_EMsgFSBase value
      * @property {number} k_EMsgClientRichPresenceUpload=7501 k_EMsgClientRichPresenceUpload value
      * @property {number} k_EMsgClientRichPresenceRequest=7502 k_EMsgClientRichPresenceRequest value
@@ -1398,7 +1390,6 @@
      * @property {number} k_EMsgCREUpdateUserPublishedItemVoteResponse=8508 k_EMsgCREUpdateUserPublishedItemVoteResponse value
      * @property {number} k_EMsgCREGetUserPublishedItemVoteDetails=8509 k_EMsgCREGetUserPublishedItemVoteDetails value
      * @property {number} k_EMsgCREGetUserPublishedItemVoteDetailsResponse=8510 k_EMsgCREGetUserPublishedItemVoteDetailsResponse value
-     * @property {number} k_EMsgCREPublishedFileVoteAdded=8513 k_EMsgCREPublishedFileVoteAdded value
      * @property {number} k_EMsgSecretsBase=8600 k_EMsgSecretsBase value
      * @property {number} k_EMsgSecretsRequestCredentialPair=8600 k_EMsgSecretsRequestCredentialPair value
      * @property {number} k_EMsgSecretsCredentialPairResponse=8601 k_EMsgSecretsCredentialPairResponse value
@@ -1585,6 +1576,7 @@
         values[valuesById[244] = "k_EMsgUpdateScheduledTaskEnableState_TEST"] = 244;
         values[valuesById[245] = "k_EMsgUpdateScheduledTaskEnableStateResponse_TEST"] = 245;
         values[valuesById[246] = "k_EMsgContentDescriptionDeltaUpdate"] = 246;
+        values[valuesById[247] = "k_EMsgGMShellAndServerAddressUpdates"] = 247;
         values[valuesById[300] = "k_EMsgBaseGM"] = 300;
         values["k_EMsgHeartbeat"] = 300;
         values[valuesById[301] = "k_EMsgShellFailed"] = 301;
@@ -1611,6 +1603,7 @@
         values[valuesById[335] = "k_EMsgGMTestNextBuildSchemaConversionResponse"] = 335;
         values[valuesById[336] = "k_EMsgExpectShellRestart"] = 336;
         values[valuesById[337] = "k_EMsgHotFixProgress"] = 337;
+        values[valuesById[338] = "k_EMsgGMStatsForwardToAdminConnections"] = 338;
         values[valuesById[400] = "k_EMsgBaseAIS"] = 400;
         values[valuesById[402] = "k_EMsgAISRequestContentDescription"] = 402;
         values[valuesById[403] = "k_EMsgAISUpdateAppInfo"] = 403;
@@ -1686,8 +1679,8 @@
         values[valuesById[579] = "k_EMsgAMChatActionResult"] = 579;
         values[valuesById[580] = "k_EMsgAMFindAccounts"] = 580;
         values[valuesById[581] = "k_EMsgAMFindAccountsResponse"] = 581;
-        values[valuesById[582] = "k_EMsgAMRequestAccountData"] = 582;
-        values[valuesById[583] = "k_EMsgAMRequestAccountDataResponse"] = 583;
+        values[valuesById[582] = "k_EMsgAMIsAccountNameInUse"] = 582;
+        values[valuesById[583] = "k_EMsgAMIsAccountNameInUseResponse"] = 583;
         values[valuesById[584] = "k_EMsgAMSetAccountFlags"] = 584;
         values[valuesById[586] = "k_EMsgAMCreateClan"] = 586;
         values[valuesById[587] = "k_EMsgAMCreateClanResponse"] = 587;
@@ -2066,6 +2059,12 @@
         values[valuesById[2236] = "k_EMsgGCHAccountPhoneNumberChange"] = 2236;
         values[valuesById[2237] = "k_EMsgGCHAccountTwoFactorChange"] = 2237;
         values[valuesById[2238] = "k_EMsgGCHInviteUserToLobby"] = 2238;
+        values[valuesById[2239] = "k_EMsgGCHUpdateMultipleSessions"] = 2239;
+        values[valuesById[2240] = "k_EMsgGCHMarkAppSessionsAuthoritative"] = 2240;
+        values[valuesById[2241] = "k_EMsgGCHRecurringSubscriptionStatusChange"] = 2241;
+        values[valuesById[2242] = "k_EMsgGCHAppCheersReceived"] = 2242;
+        values[valuesById[2243] = "k_EMsgGCHAppCheersGetAllowedTypes"] = 2243;
+        values[valuesById[2244] = "k_EMsgGCHAppCheersGetAllowedTypesResponse"] = 2244;
         values[valuesById[2500] = "k_EMsgBaseP2P"] = 2500;
         values[valuesById[2502] = "k_EMsgP2PIntroducerMessage"] = 2502;
         values[valuesById[2900] = "k_EMsgBaseSM"] = 2900;
@@ -2249,8 +2248,6 @@
         values[valuesById[4216] = "k_EMsgMarketingMessageUpdate"] = 4216;
         values[valuesById[4219] = "k_EMsgChatServerRouteFriendMsg"] = 4219;
         values[valuesById[4220] = "k_EMsgAMTicketAuthRequestOrResponse"] = 4220;
-        values[valuesById[4222] = "k_EMsgAMVerifyDepotManagementRights"] = 4222;
-        values[valuesById[4223] = "k_EMsgAMVerifyDepotManagementRightsResponse"] = 4223;
         values[valuesById[4224] = "k_EMsgAMAddFreeLicense"] = 4224;
         values[valuesById[4231] = "k_EMsgAMValidateEmailLink"] = 4231;
         values[valuesById[4232] = "k_EMsgAMValidateEmailLinkResponse"] = 4232;
@@ -2409,8 +2406,6 @@
         values[valuesById[5002] = "k_EMsgPSCreateShoppingCartResponse"] = 5002;
         values[valuesById[5003] = "k_EMsgPSIsValidShoppingCart"] = 5003;
         values[valuesById[5004] = "k_EMsgPSIsValidShoppingCartResponse"] = 5004;
-        values[valuesById[5005] = "k_EMsgPSAddPackageToShoppingCart"] = 5005;
-        values[valuesById[5006] = "k_EMsgPSAddPackageToShoppingCartResponse"] = 5006;
         values[valuesById[5007] = "k_EMsgPSRemoveLineItemFromShoppingCart"] = 5007;
         values[valuesById[5008] = "k_EMsgPSRemoveLineItemFromShoppingCartResponse"] = 5008;
         values[valuesById[5009] = "k_EMsgPSGetShoppingCartContents"] = 5009;
@@ -2506,8 +2501,6 @@
         values[valuesById[5451] = "k_EMsgClientCheckAppBetaPasswordResponse"] = 5451;
         values[valuesById[5452] = "k_EMsgClientToGC"] = 5452;
         values[valuesById[5453] = "k_EMsgClientFromGC"] = 5453;
-        values[valuesById[5454] = "k_EMsgClientRequestChangeMail"] = 5454;
-        values[valuesById[5455] = "k_EMsgClientRequestChangeMailResponse"] = 5455;
         values[valuesById[5456] = "k_EMsgClientEmailAddrInfo"] = 5456;
         values[valuesById[5457] = "k_EMsgClientPasswordChange3"] = 5457;
         values[valuesById[5458] = "k_EMsgClientEmailChange3"] = 5458;
@@ -2546,7 +2539,6 @@
         values[valuesById[5504] = "k_EMsgClientMicroTxnAuthRequest"] = 5504;
         values[valuesById[5505] = "k_EMsgClientMicroTxnAuthorize"] = 5505;
         values[valuesById[5506] = "k_EMsgClientMicroTxnAuthorizeResponse"] = 5506;
-        values[valuesById[5507] = "k_EMsgClientAppMinutesPlayedData"] = 5507;
         values[valuesById[5508] = "k_EMsgClientGetMicroTxnInfo"] = 5508;
         values[valuesById[5509] = "k_EMsgClientGetMicroTxnInfoResponse"] = 5509;
         values[valuesById[5510] = "k_EMsgClientMarketingMessageUpdate2"] = 5510;
@@ -2613,7 +2605,6 @@
         values[valuesById[5576] = "k_EMsgClientItemAnnouncements"] = 5576;
         values[valuesById[5577] = "k_EMsgClientRequestItemAnnouncements"] = 5577;
         values[valuesById[5578] = "k_EMsgClientFriendMsgEchoToSender"] = 5578;
-        values[valuesById[5581] = "k_EMsgClientOGSGameServerPingSample"] = 5581;
         values[valuesById[5582] = "k_EMsgClientCommentNotifications"] = 5582;
         values[valuesById[5583] = "k_EMsgClientRequestCommentNotifications"] = 5583;
         values[valuesById[5584] = "k_EMsgClientPersonaChangeResponse"] = 5584;
@@ -2761,10 +2752,6 @@
         values[valuesById[7312] = "k_EMsgClientUCMPublishFileResponse"] = 7312;
         values[valuesById[7315] = "k_EMsgClientUCMDeletePublishedFile"] = 7315;
         values[valuesById[7316] = "k_EMsgClientUCMDeletePublishedFileResponse"] = 7316;
-        values[valuesById[7317] = "k_EMsgClientUCMEnumerateUserPublishedFiles"] = 7317;
-        values[valuesById[7318] = "k_EMsgClientUCMEnumerateUserPublishedFilesResponse"] = 7318;
-        values[valuesById[7321] = "k_EMsgClientUCMEnumerateUserSubscribedFiles"] = 7321;
-        values[valuesById[7322] = "k_EMsgClientUCMEnumerateUserSubscribedFilesResponse"] = 7322;
         values[valuesById[7325] = "k_EMsgClientUCMUpdatePublishedFile"] = 7325;
         values[valuesById[7326] = "k_EMsgClientUCMUpdatePublishedFileResponse"] = 7326;
         values[valuesById[7327] = "k_EMsgUCMUpdatePublishedFile"] = 7327;
@@ -2788,8 +2775,6 @@
         values[valuesById[7355] = "k_EMsgUCMPublishedFileChildRemove"] = 7355;
         values[valuesById[7356] = "k_EMsgUCMPublishedFileChildRemoveResponse"] = 7356;
         values[valuesById[7359] = "k_EMsgUCMPublishedFileParentChanged"] = 7359;
-        values[valuesById[7360] = "k_EMsgClientUCMGetPublishedFilesForUser"] = 7360;
-        values[valuesById[7361] = "k_EMsgClientUCMGetPublishedFilesForUserResponse"] = 7361;
         values[valuesById[7364] = "k_EMsgClientUCMSetUserPublishedFileAction"] = 7364;
         values[valuesById[7365] = "k_EMsgClientUCMSetUserPublishedFileActionResponse"] = 7365;
         values[valuesById[7366] = "k_EMsgClientUCMEnumeratePublishedFilesByUserAction"] = 7366;
@@ -2803,8 +2788,6 @@
         values[valuesById[7381] = "k_EMsgClientUCMPublishedFileUpdated"] = 7381;
         values[valuesById[7382] = "k_EMsgClientWorkshopItemChangesRequest"] = 7382;
         values[valuesById[7383] = "k_EMsgClientWorkshopItemChangesResponse"] = 7383;
-        values[valuesById[7384] = "k_EMsgClientWorkshopItemInfoRequest"] = 7384;
-        values[valuesById[7385] = "k_EMsgClientWorkshopItemInfoResponse"] = 7385;
         values[valuesById[7500] = "k_EMsgFSBase"] = 7500;
         values[valuesById[7501] = "k_EMsgClientRichPresenceUpload"] = 7501;
         values[valuesById[7502] = "k_EMsgClientRichPresenceRequest"] = 7502;
@@ -2899,7 +2882,6 @@
         values[valuesById[8508] = "k_EMsgCREUpdateUserPublishedItemVoteResponse"] = 8508;
         values[valuesById[8509] = "k_EMsgCREGetUserPublishedItemVoteDetails"] = 8509;
         values[valuesById[8510] = "k_EMsgCREGetUserPublishedItemVoteDetailsResponse"] = 8510;
-        values[valuesById[8513] = "k_EMsgCREPublishedFileVoteAdded"] = 8513;
         values[valuesById[8600] = "k_EMsgSecretsBase"] = 8600;
         values["k_EMsgSecretsRequestCredentialPair"] = 8600;
         values[valuesById[8601] = "k_EMsgSecretsCredentialPairResponse"] = 8601;
@@ -3025,7 +3007,7 @@
     /**
      * EClientPersonaStateFlag enum.
      * @exports EClientPersonaStateFlag
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EClientPersonaStateFlagStatus=1 k_EClientPersonaStateFlagStatus value
      * @property {number} k_EClientPersonaStateFlagPlayerName=2 k_EClientPersonaStateFlagPlayerName value
      * @property {number} k_EClientPersonaStateFlagQueryPort=4 k_EClientPersonaStateFlagQueryPort value
@@ -3063,7 +3045,7 @@
     /**
      * EMsgClanAccountFlags enum.
      * @exports EMsgClanAccountFlags
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EMsgClanAccountFlagPublic=1 k_EMsgClanAccountFlagPublic value
      * @property {number} k_EMsgClanAccountFlagLarge=2 k_EMsgClanAccountFlagLarge value
      * @property {number} k_EMsgClanAccountFlagLocked=4 k_EMsgClanAccountFlagLocked value
@@ -3083,7 +3065,7 @@
     /**
      * ESteamReviewScore enum.
      * @exports ESteamReviewScore
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_ESteamReviewScore_OverwhelminglyPositive=9 k_ESteamReviewScore_OverwhelminglyPositive value
      * @property {number} k_ESteamReviewScore_VeryPositive=8 k_ESteamReviewScore_VeryPositive value
      * @property {number} k_ESteamReviewScore_Positive=7 k_ESteamReviewScore_Positive value

@@ -16,6 +16,3961 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    /**
+     * EAuthTokenPlatformType enum.
+     * @exports EAuthTokenPlatformType
+     * @enum {string}
+     * @property {number} k_EAuthTokenPlatformType_Unknown=0 k_EAuthTokenPlatformType_Unknown value
+     * @property {number} k_EAuthTokenPlatformType_SteamClient=1 k_EAuthTokenPlatformType_SteamClient value
+     * @property {number} k_EAuthTokenPlatformType_WebBrowser=2 k_EAuthTokenPlatformType_WebBrowser value
+     * @property {number} k_EAuthTokenPlatformType_MobileApp=3 k_EAuthTokenPlatformType_MobileApp value
+     */
+    $root.EAuthTokenPlatformType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EAuthTokenPlatformType_Unknown"] = 0;
+        values[valuesById[1] = "k_EAuthTokenPlatformType_SteamClient"] = 1;
+        values[valuesById[2] = "k_EAuthTokenPlatformType_WebBrowser"] = 2;
+        values[valuesById[3] = "k_EAuthTokenPlatformType_MobileApp"] = 3;
+        return values;
+    })();
+    
+    /**
+     * EAuthSessionGuardType enum.
+     * @exports EAuthSessionGuardType
+     * @enum {string}
+     * @property {number} k_EAuthSessionGuardType_Unknown=0 k_EAuthSessionGuardType_Unknown value
+     * @property {number} k_EAuthSessionGuardType_None=1 k_EAuthSessionGuardType_None value
+     * @property {number} k_EAuthSessionGuardType_EmailCode=2 k_EAuthSessionGuardType_EmailCode value
+     * @property {number} k_EAuthSessionGuardType_DeviceCode=3 k_EAuthSessionGuardType_DeviceCode value
+     * @property {number} k_EAuthSessionGuardType_DeviceConfirmation=4 k_EAuthSessionGuardType_DeviceConfirmation value
+     * @property {number} k_EAuthSessionGuardType_EmailConfirmation=5 k_EAuthSessionGuardType_EmailConfirmation value
+     */
+    $root.EAuthSessionGuardType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EAuthSessionGuardType_Unknown"] = 0;
+        values[valuesById[1] = "k_EAuthSessionGuardType_None"] = 1;
+        values[valuesById[2] = "k_EAuthSessionGuardType_EmailCode"] = 2;
+        values[valuesById[3] = "k_EAuthSessionGuardType_DeviceCode"] = 3;
+        values[valuesById[4] = "k_EAuthSessionGuardType_DeviceConfirmation"] = 4;
+        values[valuesById[5] = "k_EAuthSessionGuardType_EmailConfirmation"] = 5;
+        return values;
+    })();
+    
+    $root.CAuthentication_GetPasswordRSAPublicKey_Request = (function() {
+    
+        /**
+         * Properties of a CAuthentication_GetPasswordRSAPublicKey_Request.
+         * @exports ICAuthentication_GetPasswordRSAPublicKey_Request
+         * @interface ICAuthentication_GetPasswordRSAPublicKey_Request
+         * @property {string|null} [account_name] CAuthentication_GetPasswordRSAPublicKey_Request account_name
+         */
+    
+        /**
+         * Constructs a new CAuthentication_GetPasswordRSAPublicKey_Request.
+         * @exports CAuthentication_GetPasswordRSAPublicKey_Request
+         * @classdesc Represents a CAuthentication_GetPasswordRSAPublicKey_Request.
+         * @implements ICAuthentication_GetPasswordRSAPublicKey_Request
+         * @constructor
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Request=} [properties] Properties to set
+         */
+        function CAuthentication_GetPasswordRSAPublicKey_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_GetPasswordRSAPublicKey_Request account_name.
+         * @member {string} account_name
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @instance
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.prototype.account_name = "";
+    
+        /**
+         * Creates a new CAuthentication_GetPasswordRSAPublicKey_Request instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Request=} [properties] Properties to set
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Request} CAuthentication_GetPasswordRSAPublicKey_Request instance
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.create = function create(properties) {
+            return new CAuthentication_GetPasswordRSAPublicKey_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetPasswordRSAPublicKey_Request message. Does not implicitly {@link CAuthentication_GetPasswordRSAPublicKey_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Request} message CAuthentication_GetPasswordRSAPublicKey_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.account_name != null && message.hasOwnProperty("account_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.account_name);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetPasswordRSAPublicKey_Request message, length delimited. Does not implicitly {@link CAuthentication_GetPasswordRSAPublicKey_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Request} message CAuthentication_GetPasswordRSAPublicKey_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetPasswordRSAPublicKey_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Request} CAuthentication_GetPasswordRSAPublicKey_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_GetPasswordRSAPublicKey_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.account_name = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetPasswordRSAPublicKey_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Request} CAuthentication_GetPasswordRSAPublicKey_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_GetPasswordRSAPublicKey_Request message.
+         * @function verify
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.account_name != null && message.hasOwnProperty("account_name"))
+                if (!$util.isString(message.account_name))
+                    return "account_name: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_GetPasswordRSAPublicKey_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Request} CAuthentication_GetPasswordRSAPublicKey_Request
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_GetPasswordRSAPublicKey_Request)
+                return object;
+            var message = new $root.CAuthentication_GetPasswordRSAPublicKey_Request();
+            if (object.account_name != null)
+                message.account_name = String(object.account_name);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_GetPasswordRSAPublicKey_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @static
+         * @param {CAuthentication_GetPasswordRSAPublicKey_Request} message CAuthentication_GetPasswordRSAPublicKey_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.account_name = "";
+            if (message.account_name != null && message.hasOwnProperty("account_name"))
+                object.account_name = message.account_name;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_GetPasswordRSAPublicKey_Request to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_GetPasswordRSAPublicKey_Request;
+    })();
+    
+    $root.CAuthentication_GetPasswordRSAPublicKey_Response = (function() {
+    
+        /**
+         * Properties of a CAuthentication_GetPasswordRSAPublicKey_Response.
+         * @exports ICAuthentication_GetPasswordRSAPublicKey_Response
+         * @interface ICAuthentication_GetPasswordRSAPublicKey_Response
+         * @property {string|null} [publickey_mod] CAuthentication_GetPasswordRSAPublicKey_Response publickey_mod
+         * @property {string|null} [publickey_exp] CAuthentication_GetPasswordRSAPublicKey_Response publickey_exp
+         * @property {number|Long|null} [timestamp] CAuthentication_GetPasswordRSAPublicKey_Response timestamp
+         */
+    
+        /**
+         * Constructs a new CAuthentication_GetPasswordRSAPublicKey_Response.
+         * @exports CAuthentication_GetPasswordRSAPublicKey_Response
+         * @classdesc Represents a CAuthentication_GetPasswordRSAPublicKey_Response.
+         * @implements ICAuthentication_GetPasswordRSAPublicKey_Response
+         * @constructor
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Response=} [properties] Properties to set
+         */
+        function CAuthentication_GetPasswordRSAPublicKey_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_GetPasswordRSAPublicKey_Response publickey_mod.
+         * @member {string} publickey_mod
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @instance
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.prototype.publickey_mod = "";
+    
+        /**
+         * CAuthentication_GetPasswordRSAPublicKey_Response publickey_exp.
+         * @member {string} publickey_exp
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @instance
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.prototype.publickey_exp = "";
+    
+        /**
+         * CAuthentication_GetPasswordRSAPublicKey_Response timestamp.
+         * @member {number|Long} timestamp
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @instance
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CAuthentication_GetPasswordRSAPublicKey_Response instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Response=} [properties] Properties to set
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Response} CAuthentication_GetPasswordRSAPublicKey_Response instance
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.create = function create(properties) {
+            return new CAuthentication_GetPasswordRSAPublicKey_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetPasswordRSAPublicKey_Response message. Does not implicitly {@link CAuthentication_GetPasswordRSAPublicKey_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Response} message CAuthentication_GetPasswordRSAPublicKey_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.publickey_mod != null && message.hasOwnProperty("publickey_mod"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.publickey_mod);
+            if (message.publickey_exp != null && message.hasOwnProperty("publickey_exp"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.publickey_exp);
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.timestamp);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetPasswordRSAPublicKey_Response message, length delimited. Does not implicitly {@link CAuthentication_GetPasswordRSAPublicKey_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Response} message CAuthentication_GetPasswordRSAPublicKey_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetPasswordRSAPublicKey_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Response} CAuthentication_GetPasswordRSAPublicKey_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_GetPasswordRSAPublicKey_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.publickey_mod = reader.string();
+                    break;
+                case 2:
+                    message.publickey_exp = reader.string();
+                    break;
+                case 3:
+                    message.timestamp = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetPasswordRSAPublicKey_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Response} CAuthentication_GetPasswordRSAPublicKey_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_GetPasswordRSAPublicKey_Response message.
+         * @function verify
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.publickey_mod != null && message.hasOwnProperty("publickey_mod"))
+                if (!$util.isString(message.publickey_mod))
+                    return "publickey_mod: string expected";
+            if (message.publickey_exp != null && message.hasOwnProperty("publickey_exp"))
+                if (!$util.isString(message.publickey_exp))
+                    return "publickey_exp: string expected";
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
+                    return "timestamp: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_GetPasswordRSAPublicKey_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_GetPasswordRSAPublicKey_Response} CAuthentication_GetPasswordRSAPublicKey_Response
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_GetPasswordRSAPublicKey_Response)
+                return object;
+            var message = new $root.CAuthentication_GetPasswordRSAPublicKey_Response();
+            if (object.publickey_mod != null)
+                message.publickey_mod = String(object.publickey_mod);
+            if (object.publickey_exp != null)
+                message.publickey_exp = String(object.publickey_exp);
+            if (object.timestamp != null)
+                if ($util.Long)
+                    (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = true;
+                else if (typeof object.timestamp === "string")
+                    message.timestamp = parseInt(object.timestamp, 10);
+                else if (typeof object.timestamp === "number")
+                    message.timestamp = object.timestamp;
+                else if (typeof object.timestamp === "object")
+                    message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_GetPasswordRSAPublicKey_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @static
+         * @param {CAuthentication_GetPasswordRSAPublicKey_Response} message CAuthentication_GetPasswordRSAPublicKey_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.publickey_mod = "";
+                object.publickey_exp = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.timestamp = options.longs === String ? "0" : 0;
+            }
+            if (message.publickey_mod != null && message.hasOwnProperty("publickey_mod"))
+                object.publickey_mod = message.publickey_mod;
+            if (message.publickey_exp != null && message.hasOwnProperty("publickey_exp"))
+                object.publickey_exp = message.publickey_exp;
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (typeof message.timestamp === "number")
+                    object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
+                else
+                    object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber(true) : message.timestamp;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_GetPasswordRSAPublicKey_Response to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_GetPasswordRSAPublicKey_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_GetPasswordRSAPublicKey_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_GetPasswordRSAPublicKey_Response;
+    })();
+    
+    $root.CAuthentication_BeginAuthSessionViaQR_Request = (function() {
+    
+        /**
+         * Properties of a CAuthentication_BeginAuthSessionViaQR_Request.
+         * @exports ICAuthentication_BeginAuthSessionViaQR_Request
+         * @interface ICAuthentication_BeginAuthSessionViaQR_Request
+         * @property {string|null} [device_friendly_name] CAuthentication_BeginAuthSessionViaQR_Request device_friendly_name
+         * @property {EAuthTokenPlatformType|null} [platform_type] CAuthentication_BeginAuthSessionViaQR_Request platform_type
+         */
+    
+        /**
+         * Constructs a new CAuthentication_BeginAuthSessionViaQR_Request.
+         * @exports CAuthentication_BeginAuthSessionViaQR_Request
+         * @classdesc Represents a CAuthentication_BeginAuthSessionViaQR_Request.
+         * @implements ICAuthentication_BeginAuthSessionViaQR_Request
+         * @constructor
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Request=} [properties] Properties to set
+         */
+        function CAuthentication_BeginAuthSessionViaQR_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Request device_friendly_name.
+         * @member {string} device_friendly_name
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.prototype.device_friendly_name = "";
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Request platform_type.
+         * @member {EAuthTokenPlatformType} platform_type
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.prototype.platform_type = 0;
+    
+        /**
+         * Creates a new CAuthentication_BeginAuthSessionViaQR_Request instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Request=} [properties] Properties to set
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Request} CAuthentication_BeginAuthSessionViaQR_Request instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.create = function create(properties) {
+            return new CAuthentication_BeginAuthSessionViaQR_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaQR_Request message. Does not implicitly {@link CAuthentication_BeginAuthSessionViaQR_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Request} message CAuthentication_BeginAuthSessionViaQR_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.device_friendly_name);
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.platform_type);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaQR_Request message, length delimited. Does not implicitly {@link CAuthentication_BeginAuthSessionViaQR_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Request} message CAuthentication_BeginAuthSessionViaQR_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaQR_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Request} CAuthentication_BeginAuthSessionViaQR_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_BeginAuthSessionViaQR_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.device_friendly_name = reader.string();
+                    break;
+                case 2:
+                    message.platform_type = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaQR_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Request} CAuthentication_BeginAuthSessionViaQR_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_BeginAuthSessionViaQR_Request message.
+         * @function verify
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                if (!$util.isString(message.device_friendly_name))
+                    return "device_friendly_name: string expected";
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                switch (message.platform_type) {
+                default:
+                    return "platform_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_BeginAuthSessionViaQR_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Request} CAuthentication_BeginAuthSessionViaQR_Request
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_BeginAuthSessionViaQR_Request)
+                return object;
+            var message = new $root.CAuthentication_BeginAuthSessionViaQR_Request();
+            if (object.device_friendly_name != null)
+                message.device_friendly_name = String(object.device_friendly_name);
+            switch (object.platform_type) {
+            case "k_EAuthTokenPlatformType_Unknown":
+            case 0:
+                message.platform_type = 0;
+                break;
+            case "k_EAuthTokenPlatformType_SteamClient":
+            case 1:
+                message.platform_type = 1;
+                break;
+            case "k_EAuthTokenPlatformType_WebBrowser":
+            case 2:
+                message.platform_type = 2;
+                break;
+            case "k_EAuthTokenPlatformType_MobileApp":
+            case 3:
+                message.platform_type = 3;
+                break;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_BeginAuthSessionViaQR_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @static
+         * @param {CAuthentication_BeginAuthSessionViaQR_Request} message CAuthentication_BeginAuthSessionViaQR_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.device_friendly_name = "";
+                object.platform_type = options.enums === String ? "k_EAuthTokenPlatformType_Unknown" : 0;
+            }
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                object.device_friendly_name = message.device_friendly_name;
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                object.platform_type = options.enums === String ? $root.EAuthTokenPlatformType[message.platform_type] : message.platform_type;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_BeginAuthSessionViaQR_Request to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_BeginAuthSessionViaQR_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_BeginAuthSessionViaQR_Request;
+    })();
+    
+    $root.CAuthentication_AllowedConfirmation = (function() {
+    
+        /**
+         * Properties of a CAuthentication_AllowedConfirmation.
+         * @exports ICAuthentication_AllowedConfirmation
+         * @interface ICAuthentication_AllowedConfirmation
+         * @property {EAuthSessionGuardType|null} [confirmation_type] CAuthentication_AllowedConfirmation confirmation_type
+         * @property {string|null} [associated_message] CAuthentication_AllowedConfirmation associated_message
+         */
+    
+        /**
+         * Constructs a new CAuthentication_AllowedConfirmation.
+         * @exports CAuthentication_AllowedConfirmation
+         * @classdesc Represents a CAuthentication_AllowedConfirmation.
+         * @implements ICAuthentication_AllowedConfirmation
+         * @constructor
+         * @param {ICAuthentication_AllowedConfirmation=} [properties] Properties to set
+         */
+        function CAuthentication_AllowedConfirmation(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_AllowedConfirmation confirmation_type.
+         * @member {EAuthSessionGuardType} confirmation_type
+         * @memberof CAuthentication_AllowedConfirmation
+         * @instance
+         */
+        CAuthentication_AllowedConfirmation.prototype.confirmation_type = 0;
+    
+        /**
+         * CAuthentication_AllowedConfirmation associated_message.
+         * @member {string} associated_message
+         * @memberof CAuthentication_AllowedConfirmation
+         * @instance
+         */
+        CAuthentication_AllowedConfirmation.prototype.associated_message = "";
+    
+        /**
+         * Creates a new CAuthentication_AllowedConfirmation instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {ICAuthentication_AllowedConfirmation=} [properties] Properties to set
+         * @returns {CAuthentication_AllowedConfirmation} CAuthentication_AllowedConfirmation instance
+         */
+        CAuthentication_AllowedConfirmation.create = function create(properties) {
+            return new CAuthentication_AllowedConfirmation(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_AllowedConfirmation message. Does not implicitly {@link CAuthentication_AllowedConfirmation.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {ICAuthentication_AllowedConfirmation} message CAuthentication_AllowedConfirmation message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_AllowedConfirmation.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.confirmation_type != null && message.hasOwnProperty("confirmation_type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.confirmation_type);
+            if (message.associated_message != null && message.hasOwnProperty("associated_message"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.associated_message);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_AllowedConfirmation message, length delimited. Does not implicitly {@link CAuthentication_AllowedConfirmation.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {ICAuthentication_AllowedConfirmation} message CAuthentication_AllowedConfirmation message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_AllowedConfirmation.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_AllowedConfirmation message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_AllowedConfirmation} CAuthentication_AllowedConfirmation
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_AllowedConfirmation.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_AllowedConfirmation();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.confirmation_type = reader.int32();
+                    break;
+                case 2:
+                    message.associated_message = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_AllowedConfirmation message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_AllowedConfirmation} CAuthentication_AllowedConfirmation
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_AllowedConfirmation.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_AllowedConfirmation message.
+         * @function verify
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_AllowedConfirmation.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.confirmation_type != null && message.hasOwnProperty("confirmation_type"))
+                switch (message.confirmation_type) {
+                default:
+                    return "confirmation_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
+            if (message.associated_message != null && message.hasOwnProperty("associated_message"))
+                if (!$util.isString(message.associated_message))
+                    return "associated_message: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_AllowedConfirmation message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_AllowedConfirmation} CAuthentication_AllowedConfirmation
+         */
+        CAuthentication_AllowedConfirmation.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_AllowedConfirmation)
+                return object;
+            var message = new $root.CAuthentication_AllowedConfirmation();
+            switch (object.confirmation_type) {
+            case "k_EAuthSessionGuardType_Unknown":
+            case 0:
+                message.confirmation_type = 0;
+                break;
+            case "k_EAuthSessionGuardType_None":
+            case 1:
+                message.confirmation_type = 1;
+                break;
+            case "k_EAuthSessionGuardType_EmailCode":
+            case 2:
+                message.confirmation_type = 2;
+                break;
+            case "k_EAuthSessionGuardType_DeviceCode":
+            case 3:
+                message.confirmation_type = 3;
+                break;
+            case "k_EAuthSessionGuardType_DeviceConfirmation":
+            case 4:
+                message.confirmation_type = 4;
+                break;
+            case "k_EAuthSessionGuardType_EmailConfirmation":
+            case 5:
+                message.confirmation_type = 5;
+                break;
+            }
+            if (object.associated_message != null)
+                message.associated_message = String(object.associated_message);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_AllowedConfirmation message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_AllowedConfirmation
+         * @static
+         * @param {CAuthentication_AllowedConfirmation} message CAuthentication_AllowedConfirmation
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_AllowedConfirmation.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.confirmation_type = options.enums === String ? "k_EAuthSessionGuardType_Unknown" : 0;
+                object.associated_message = "";
+            }
+            if (message.confirmation_type != null && message.hasOwnProperty("confirmation_type"))
+                object.confirmation_type = options.enums === String ? $root.EAuthSessionGuardType[message.confirmation_type] : message.confirmation_type;
+            if (message.associated_message != null && message.hasOwnProperty("associated_message"))
+                object.associated_message = message.associated_message;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_AllowedConfirmation to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_AllowedConfirmation
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_AllowedConfirmation.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_AllowedConfirmation;
+    })();
+    
+    $root.CAuthentication_BeginAuthSessionViaQR_Response = (function() {
+    
+        /**
+         * Properties of a CAuthentication_BeginAuthSessionViaQR_Response.
+         * @exports ICAuthentication_BeginAuthSessionViaQR_Response
+         * @interface ICAuthentication_BeginAuthSessionViaQR_Response
+         * @property {number|Long|null} [client_id] CAuthentication_BeginAuthSessionViaQR_Response client_id
+         * @property {string|null} [challenge_url] CAuthentication_BeginAuthSessionViaQR_Response challenge_url
+         * @property {Uint8Array|null} [request_id] CAuthentication_BeginAuthSessionViaQR_Response request_id
+         * @property {number|null} [interval] CAuthentication_BeginAuthSessionViaQR_Response interval
+         * @property {Array.<ICAuthentication_AllowedConfirmation>|null} [allowed_confirmations] CAuthentication_BeginAuthSessionViaQR_Response allowed_confirmations
+         * @property {number|null} [version] CAuthentication_BeginAuthSessionViaQR_Response version
+         */
+    
+        /**
+         * Constructs a new CAuthentication_BeginAuthSessionViaQR_Response.
+         * @exports CAuthentication_BeginAuthSessionViaQR_Response
+         * @classdesc Represents a CAuthentication_BeginAuthSessionViaQR_Response.
+         * @implements ICAuthentication_BeginAuthSessionViaQR_Response
+         * @constructor
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Response=} [properties] Properties to set
+         */
+        function CAuthentication_BeginAuthSessionViaQR_Response(properties) {
+            this.allowed_confirmations = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Response client_id.
+         * @member {number|Long} client_id
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.prototype.client_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Response challenge_url.
+         * @member {string} challenge_url
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.prototype.challenge_url = "";
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Response request_id.
+         * @member {Uint8Array} request_id
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.prototype.request_id = $util.newBuffer([]);
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Response interval.
+         * @member {number} interval
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.prototype.interval = 0;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Response allowed_confirmations.
+         * @member {Array.<ICAuthentication_AllowedConfirmation>} allowed_confirmations
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.prototype.allowed_confirmations = $util.emptyArray;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaQR_Response version.
+         * @member {number} version
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.prototype.version = 0;
+    
+        /**
+         * Creates a new CAuthentication_BeginAuthSessionViaQR_Response instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Response=} [properties] Properties to set
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Response} CAuthentication_BeginAuthSessionViaQR_Response instance
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.create = function create(properties) {
+            return new CAuthentication_BeginAuthSessionViaQR_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaQR_Response message. Does not implicitly {@link CAuthentication_BeginAuthSessionViaQR_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Response} message CAuthentication_BeginAuthSessionViaQR_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.client_id);
+            if (message.challenge_url != null && message.hasOwnProperty("challenge_url"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.challenge_url);
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.request_id);
+            if (message.interval != null && message.hasOwnProperty("interval"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.interval);
+            if (message.allowed_confirmations != null && message.allowed_confirmations.length)
+                for (var i = 0; i < message.allowed_confirmations.length; ++i)
+                    $root.CAuthentication_AllowedConfirmation.encode(message.allowed_confirmations[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.version != null && message.hasOwnProperty("version"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.version);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaQR_Response message, length delimited. Does not implicitly {@link CAuthentication_BeginAuthSessionViaQR_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Response} message CAuthentication_BeginAuthSessionViaQR_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaQR_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Response} CAuthentication_BeginAuthSessionViaQR_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_BeginAuthSessionViaQR_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.client_id = reader.uint64();
+                    break;
+                case 2:
+                    message.challenge_url = reader.string();
+                    break;
+                case 3:
+                    message.request_id = reader.bytes();
+                    break;
+                case 4:
+                    message.interval = reader.float();
+                    break;
+                case 5:
+                    if (!(message.allowed_confirmations && message.allowed_confirmations.length))
+                        message.allowed_confirmations = [];
+                    message.allowed_confirmations.push($root.CAuthentication_AllowedConfirmation.decode(reader, reader.uint32()));
+                    break;
+                case 6:
+                    message.version = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaQR_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Response} CAuthentication_BeginAuthSessionViaQR_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_BeginAuthSessionViaQR_Response message.
+         * @function verify
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (!$util.isInteger(message.client_id) && !(message.client_id && $util.isInteger(message.client_id.low) && $util.isInteger(message.client_id.high)))
+                    return "client_id: integer|Long expected";
+            if (message.challenge_url != null && message.hasOwnProperty("challenge_url"))
+                if (!$util.isString(message.challenge_url))
+                    return "challenge_url: string expected";
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                if (!(message.request_id && typeof message.request_id.length === "number" || $util.isString(message.request_id)))
+                    return "request_id: buffer expected";
+            if (message.interval != null && message.hasOwnProperty("interval"))
+                if (typeof message.interval !== "number")
+                    return "interval: number expected";
+            if (message.allowed_confirmations != null && message.hasOwnProperty("allowed_confirmations")) {
+                if (!Array.isArray(message.allowed_confirmations))
+                    return "allowed_confirmations: array expected";
+                for (var i = 0; i < message.allowed_confirmations.length; ++i) {
+                    var error = $root.CAuthentication_AllowedConfirmation.verify(message.allowed_confirmations[i]);
+                    if (error)
+                        return "allowed_confirmations." + error;
+                }
+            }
+            if (message.version != null && message.hasOwnProperty("version"))
+                if (!$util.isInteger(message.version))
+                    return "version: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_BeginAuthSessionViaQR_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_BeginAuthSessionViaQR_Response} CAuthentication_BeginAuthSessionViaQR_Response
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_BeginAuthSessionViaQR_Response)
+                return object;
+            var message = new $root.CAuthentication_BeginAuthSessionViaQR_Response();
+            if (object.client_id != null)
+                if ($util.Long)
+                    (message.client_id = $util.Long.fromValue(object.client_id)).unsigned = true;
+                else if (typeof object.client_id === "string")
+                    message.client_id = parseInt(object.client_id, 10);
+                else if (typeof object.client_id === "number")
+                    message.client_id = object.client_id;
+                else if (typeof object.client_id === "object")
+                    message.client_id = new $util.LongBits(object.client_id.low >>> 0, object.client_id.high >>> 0).toNumber(true);
+            if (object.challenge_url != null)
+                message.challenge_url = String(object.challenge_url);
+            if (object.request_id != null)
+                if (typeof object.request_id === "string")
+                    $util.base64.decode(object.request_id, message.request_id = $util.newBuffer($util.base64.length(object.request_id)), 0);
+                else if (object.request_id.length)
+                    message.request_id = object.request_id;
+            if (object.interval != null)
+                message.interval = Number(object.interval);
+            if (object.allowed_confirmations) {
+                if (!Array.isArray(object.allowed_confirmations))
+                    throw TypeError(".CAuthentication_BeginAuthSessionViaQR_Response.allowed_confirmations: array expected");
+                message.allowed_confirmations = [];
+                for (var i = 0; i < object.allowed_confirmations.length; ++i) {
+                    if (typeof object.allowed_confirmations[i] !== "object")
+                        throw TypeError(".CAuthentication_BeginAuthSessionViaQR_Response.allowed_confirmations: object expected");
+                    message.allowed_confirmations[i] = $root.CAuthentication_AllowedConfirmation.fromObject(object.allowed_confirmations[i]);
+                }
+            }
+            if (object.version != null)
+                message.version = object.version | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_BeginAuthSessionViaQR_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @static
+         * @param {CAuthentication_BeginAuthSessionViaQR_Response} message CAuthentication_BeginAuthSessionViaQR_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.allowed_confirmations = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.client_id = options.longs === String ? "0" : 0;
+                object.challenge_url = "";
+                if (options.bytes === String)
+                    object.request_id = "";
+                else {
+                    object.request_id = [];
+                    if (options.bytes !== Array)
+                        object.request_id = $util.newBuffer(object.request_id);
+                }
+                object.interval = 0;
+                object.version = 0;
+            }
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (typeof message.client_id === "number")
+                    object.client_id = options.longs === String ? String(message.client_id) : message.client_id;
+                else
+                    object.client_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_id) : options.longs === Number ? new $util.LongBits(message.client_id.low >>> 0, message.client_id.high >>> 0).toNumber(true) : message.client_id;
+            if (message.challenge_url != null && message.hasOwnProperty("challenge_url"))
+                object.challenge_url = message.challenge_url;
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                object.request_id = options.bytes === String ? $util.base64.encode(message.request_id, 0, message.request_id.length) : options.bytes === Array ? Array.prototype.slice.call(message.request_id) : message.request_id;
+            if (message.interval != null && message.hasOwnProperty("interval"))
+                object.interval = options.json && !isFinite(message.interval) ? String(message.interval) : message.interval;
+            if (message.allowed_confirmations && message.allowed_confirmations.length) {
+                object.allowed_confirmations = [];
+                for (var j = 0; j < message.allowed_confirmations.length; ++j)
+                    object.allowed_confirmations[j] = $root.CAuthentication_AllowedConfirmation.toObject(message.allowed_confirmations[j], options);
+            }
+            if (message.version != null && message.hasOwnProperty("version"))
+                object.version = message.version;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_BeginAuthSessionViaQR_Response to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_BeginAuthSessionViaQR_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_BeginAuthSessionViaQR_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_BeginAuthSessionViaQR_Response;
+    })();
+    
+    $root.CAuthentication_BeginAuthSessionViaCredentials_Request = (function() {
+    
+        /**
+         * Properties of a CAuthentication_BeginAuthSessionViaCredentials_Request.
+         * @exports ICAuthentication_BeginAuthSessionViaCredentials_Request
+         * @interface ICAuthentication_BeginAuthSessionViaCredentials_Request
+         * @property {string|null} [device_friendly_name] CAuthentication_BeginAuthSessionViaCredentials_Request device_friendly_name
+         * @property {string|null} [account_name] CAuthentication_BeginAuthSessionViaCredentials_Request account_name
+         * @property {string|null} [encrypted_password] CAuthentication_BeginAuthSessionViaCredentials_Request encrypted_password
+         * @property {number|Long|null} [encryption_timestamp] CAuthentication_BeginAuthSessionViaCredentials_Request encryption_timestamp
+         * @property {boolean|null} [remember_login] CAuthentication_BeginAuthSessionViaCredentials_Request remember_login
+         * @property {EAuthTokenPlatformType|null} [platform_type] CAuthentication_BeginAuthSessionViaCredentials_Request platform_type
+         */
+    
+        /**
+         * Constructs a new CAuthentication_BeginAuthSessionViaCredentials_Request.
+         * @exports CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @classdesc Represents a CAuthentication_BeginAuthSessionViaCredentials_Request.
+         * @implements ICAuthentication_BeginAuthSessionViaCredentials_Request
+         * @constructor
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Request=} [properties] Properties to set
+         */
+        function CAuthentication_BeginAuthSessionViaCredentials_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Request device_friendly_name.
+         * @member {string} device_friendly_name
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.prototype.device_friendly_name = "";
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Request account_name.
+         * @member {string} account_name
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.prototype.account_name = "";
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Request encrypted_password.
+         * @member {string} encrypted_password
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.prototype.encrypted_password = "";
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Request encryption_timestamp.
+         * @member {number|Long} encryption_timestamp
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.prototype.encryption_timestamp = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Request remember_login.
+         * @member {boolean} remember_login
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.prototype.remember_login = false;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Request platform_type.
+         * @member {EAuthTokenPlatformType} platform_type
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.prototype.platform_type = 0;
+    
+        /**
+         * Creates a new CAuthentication_BeginAuthSessionViaCredentials_Request instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Request=} [properties] Properties to set
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Request} CAuthentication_BeginAuthSessionViaCredentials_Request instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.create = function create(properties) {
+            return new CAuthentication_BeginAuthSessionViaCredentials_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaCredentials_Request message. Does not implicitly {@link CAuthentication_BeginAuthSessionViaCredentials_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Request} message CAuthentication_BeginAuthSessionViaCredentials_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.device_friendly_name);
+            if (message.account_name != null && message.hasOwnProperty("account_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.account_name);
+            if (message.encrypted_password != null && message.hasOwnProperty("encrypted_password"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.encrypted_password);
+            if (message.encryption_timestamp != null && message.hasOwnProperty("encryption_timestamp"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.encryption_timestamp);
+            if (message.remember_login != null && message.hasOwnProperty("remember_login"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.remember_login);
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.platform_type);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaCredentials_Request message, length delimited. Does not implicitly {@link CAuthentication_BeginAuthSessionViaCredentials_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Request} message CAuthentication_BeginAuthSessionViaCredentials_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaCredentials_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Request} CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_BeginAuthSessionViaCredentials_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.device_friendly_name = reader.string();
+                    break;
+                case 2:
+                    message.account_name = reader.string();
+                    break;
+                case 3:
+                    message.encrypted_password = reader.string();
+                    break;
+                case 4:
+                    message.encryption_timestamp = reader.uint64();
+                    break;
+                case 5:
+                    message.remember_login = reader.bool();
+                    break;
+                case 6:
+                    message.platform_type = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaCredentials_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Request} CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_BeginAuthSessionViaCredentials_Request message.
+         * @function verify
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                if (!$util.isString(message.device_friendly_name))
+                    return "device_friendly_name: string expected";
+            if (message.account_name != null && message.hasOwnProperty("account_name"))
+                if (!$util.isString(message.account_name))
+                    return "account_name: string expected";
+            if (message.encrypted_password != null && message.hasOwnProperty("encrypted_password"))
+                if (!$util.isString(message.encrypted_password))
+                    return "encrypted_password: string expected";
+            if (message.encryption_timestamp != null && message.hasOwnProperty("encryption_timestamp"))
+                if (!$util.isInteger(message.encryption_timestamp) && !(message.encryption_timestamp && $util.isInteger(message.encryption_timestamp.low) && $util.isInteger(message.encryption_timestamp.high)))
+                    return "encryption_timestamp: integer|Long expected";
+            if (message.remember_login != null && message.hasOwnProperty("remember_login"))
+                if (typeof message.remember_login !== "boolean")
+                    return "remember_login: boolean expected";
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                switch (message.platform_type) {
+                default:
+                    return "platform_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_BeginAuthSessionViaCredentials_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Request} CAuthentication_BeginAuthSessionViaCredentials_Request
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_BeginAuthSessionViaCredentials_Request)
+                return object;
+            var message = new $root.CAuthentication_BeginAuthSessionViaCredentials_Request();
+            if (object.device_friendly_name != null)
+                message.device_friendly_name = String(object.device_friendly_name);
+            if (object.account_name != null)
+                message.account_name = String(object.account_name);
+            if (object.encrypted_password != null)
+                message.encrypted_password = String(object.encrypted_password);
+            if (object.encryption_timestamp != null)
+                if ($util.Long)
+                    (message.encryption_timestamp = $util.Long.fromValue(object.encryption_timestamp)).unsigned = true;
+                else if (typeof object.encryption_timestamp === "string")
+                    message.encryption_timestamp = parseInt(object.encryption_timestamp, 10);
+                else if (typeof object.encryption_timestamp === "number")
+                    message.encryption_timestamp = object.encryption_timestamp;
+                else if (typeof object.encryption_timestamp === "object")
+                    message.encryption_timestamp = new $util.LongBits(object.encryption_timestamp.low >>> 0, object.encryption_timestamp.high >>> 0).toNumber(true);
+            if (object.remember_login != null)
+                message.remember_login = Boolean(object.remember_login);
+            switch (object.platform_type) {
+            case "k_EAuthTokenPlatformType_Unknown":
+            case 0:
+                message.platform_type = 0;
+                break;
+            case "k_EAuthTokenPlatformType_SteamClient":
+            case 1:
+                message.platform_type = 1;
+                break;
+            case "k_EAuthTokenPlatformType_WebBrowser":
+            case 2:
+                message.platform_type = 2;
+                break;
+            case "k_EAuthTokenPlatformType_MobileApp":
+            case 3:
+                message.platform_type = 3;
+                break;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_BeginAuthSessionViaCredentials_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @static
+         * @param {CAuthentication_BeginAuthSessionViaCredentials_Request} message CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.device_friendly_name = "";
+                object.account_name = "";
+                object.encrypted_password = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.encryption_timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.encryption_timestamp = options.longs === String ? "0" : 0;
+                object.remember_login = false;
+                object.platform_type = options.enums === String ? "k_EAuthTokenPlatformType_Unknown" : 0;
+            }
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                object.device_friendly_name = message.device_friendly_name;
+            if (message.account_name != null && message.hasOwnProperty("account_name"))
+                object.account_name = message.account_name;
+            if (message.encrypted_password != null && message.hasOwnProperty("encrypted_password"))
+                object.encrypted_password = message.encrypted_password;
+            if (message.encryption_timestamp != null && message.hasOwnProperty("encryption_timestamp"))
+                if (typeof message.encryption_timestamp === "number")
+                    object.encryption_timestamp = options.longs === String ? String(message.encryption_timestamp) : message.encryption_timestamp;
+                else
+                    object.encryption_timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.encryption_timestamp) : options.longs === Number ? new $util.LongBits(message.encryption_timestamp.low >>> 0, message.encryption_timestamp.high >>> 0).toNumber(true) : message.encryption_timestamp;
+            if (message.remember_login != null && message.hasOwnProperty("remember_login"))
+                object.remember_login = message.remember_login;
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                object.platform_type = options.enums === String ? $root.EAuthTokenPlatformType[message.platform_type] : message.platform_type;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_BeginAuthSessionViaCredentials_Request to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_BeginAuthSessionViaCredentials_Request;
+    })();
+    
+    $root.CAuthentication_BeginAuthSessionViaCredentials_Response = (function() {
+    
+        /**
+         * Properties of a CAuthentication_BeginAuthSessionViaCredentials_Response.
+         * @exports ICAuthentication_BeginAuthSessionViaCredentials_Response
+         * @interface ICAuthentication_BeginAuthSessionViaCredentials_Response
+         * @property {number|Long|null} [client_id] CAuthentication_BeginAuthSessionViaCredentials_Response client_id
+         * @property {Uint8Array|null} [request_id] CAuthentication_BeginAuthSessionViaCredentials_Response request_id
+         * @property {number|null} [interval] CAuthentication_BeginAuthSessionViaCredentials_Response interval
+         * @property {Array.<ICAuthentication_AllowedConfirmation>|null} [allowed_confirmations] CAuthentication_BeginAuthSessionViaCredentials_Response allowed_confirmations
+         * @property {number|Long|null} [steamid] CAuthentication_BeginAuthSessionViaCredentials_Response steamid
+         */
+    
+        /**
+         * Constructs a new CAuthentication_BeginAuthSessionViaCredentials_Response.
+         * @exports CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @classdesc Represents a CAuthentication_BeginAuthSessionViaCredentials_Response.
+         * @implements ICAuthentication_BeginAuthSessionViaCredentials_Response
+         * @constructor
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Response=} [properties] Properties to set
+         */
+        function CAuthentication_BeginAuthSessionViaCredentials_Response(properties) {
+            this.allowed_confirmations = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Response client_id.
+         * @member {number|Long} client_id
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.prototype.client_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Response request_id.
+         * @member {Uint8Array} request_id
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.prototype.request_id = $util.newBuffer([]);
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Response interval.
+         * @member {number} interval
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.prototype.interval = 0;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Response allowed_confirmations.
+         * @member {Array.<ICAuthentication_AllowedConfirmation>} allowed_confirmations
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.prototype.allowed_confirmations = $util.emptyArray;
+    
+        /**
+         * CAuthentication_BeginAuthSessionViaCredentials_Response steamid.
+         * @member {number|Long} steamid
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CAuthentication_BeginAuthSessionViaCredentials_Response instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Response=} [properties] Properties to set
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Response} CAuthentication_BeginAuthSessionViaCredentials_Response instance
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.create = function create(properties) {
+            return new CAuthentication_BeginAuthSessionViaCredentials_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaCredentials_Response message. Does not implicitly {@link CAuthentication_BeginAuthSessionViaCredentials_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Response} message CAuthentication_BeginAuthSessionViaCredentials_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.client_id);
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.request_id);
+            if (message.interval != null && message.hasOwnProperty("interval"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.interval);
+            if (message.allowed_confirmations != null && message.allowed_confirmations.length)
+                for (var i = 0; i < message.allowed_confirmations.length; ++i)
+                    $root.CAuthentication_AllowedConfirmation.encode(message.allowed_confirmations[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.steamid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_BeginAuthSessionViaCredentials_Response message, length delimited. Does not implicitly {@link CAuthentication_BeginAuthSessionViaCredentials_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Response} message CAuthentication_BeginAuthSessionViaCredentials_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaCredentials_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Response} CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_BeginAuthSessionViaCredentials_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.client_id = reader.uint64();
+                    break;
+                case 2:
+                    message.request_id = reader.bytes();
+                    break;
+                case 3:
+                    message.interval = reader.float();
+                    break;
+                case 4:
+                    if (!(message.allowed_confirmations && message.allowed_confirmations.length))
+                        message.allowed_confirmations = [];
+                    message.allowed_confirmations.push($root.CAuthentication_AllowedConfirmation.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    message.steamid = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_BeginAuthSessionViaCredentials_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Response} CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_BeginAuthSessionViaCredentials_Response message.
+         * @function verify
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (!$util.isInteger(message.client_id) && !(message.client_id && $util.isInteger(message.client_id.low) && $util.isInteger(message.client_id.high)))
+                    return "client_id: integer|Long expected";
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                if (!(message.request_id && typeof message.request_id.length === "number" || $util.isString(message.request_id)))
+                    return "request_id: buffer expected";
+            if (message.interval != null && message.hasOwnProperty("interval"))
+                if (typeof message.interval !== "number")
+                    return "interval: number expected";
+            if (message.allowed_confirmations != null && message.hasOwnProperty("allowed_confirmations")) {
+                if (!Array.isArray(message.allowed_confirmations))
+                    return "allowed_confirmations: array expected";
+                for (var i = 0; i < message.allowed_confirmations.length; ++i) {
+                    var error = $root.CAuthentication_AllowedConfirmation.verify(message.allowed_confirmations[i]);
+                    if (error)
+                        return "allowed_confirmations." + error;
+                }
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_BeginAuthSessionViaCredentials_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_BeginAuthSessionViaCredentials_Response} CAuthentication_BeginAuthSessionViaCredentials_Response
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_BeginAuthSessionViaCredentials_Response)
+                return object;
+            var message = new $root.CAuthentication_BeginAuthSessionViaCredentials_Response();
+            if (object.client_id != null)
+                if ($util.Long)
+                    (message.client_id = $util.Long.fromValue(object.client_id)).unsigned = true;
+                else if (typeof object.client_id === "string")
+                    message.client_id = parseInt(object.client_id, 10);
+                else if (typeof object.client_id === "number")
+                    message.client_id = object.client_id;
+                else if (typeof object.client_id === "object")
+                    message.client_id = new $util.LongBits(object.client_id.low >>> 0, object.client_id.high >>> 0).toNumber(true);
+            if (object.request_id != null)
+                if (typeof object.request_id === "string")
+                    $util.base64.decode(object.request_id, message.request_id = $util.newBuffer($util.base64.length(object.request_id)), 0);
+                else if (object.request_id.length)
+                    message.request_id = object.request_id;
+            if (object.interval != null)
+                message.interval = Number(object.interval);
+            if (object.allowed_confirmations) {
+                if (!Array.isArray(object.allowed_confirmations))
+                    throw TypeError(".CAuthentication_BeginAuthSessionViaCredentials_Response.allowed_confirmations: array expected");
+                message.allowed_confirmations = [];
+                for (var i = 0; i < object.allowed_confirmations.length; ++i) {
+                    if (typeof object.allowed_confirmations[i] !== "object")
+                        throw TypeError(".CAuthentication_BeginAuthSessionViaCredentials_Response.allowed_confirmations: object expected");
+                    message.allowed_confirmations[i] = $root.CAuthentication_AllowedConfirmation.fromObject(object.allowed_confirmations[i]);
+                }
+            }
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_BeginAuthSessionViaCredentials_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @static
+         * @param {CAuthentication_BeginAuthSessionViaCredentials_Response} message CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.allowed_confirmations = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.client_id = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.request_id = "";
+                else {
+                    object.request_id = [];
+                    if (options.bytes !== Array)
+                        object.request_id = $util.newBuffer(object.request_id);
+                }
+                object.interval = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+            }
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (typeof message.client_id === "number")
+                    object.client_id = options.longs === String ? String(message.client_id) : message.client_id;
+                else
+                    object.client_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_id) : options.longs === Number ? new $util.LongBits(message.client_id.low >>> 0, message.client_id.high >>> 0).toNumber(true) : message.client_id;
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                object.request_id = options.bytes === String ? $util.base64.encode(message.request_id, 0, message.request_id.length) : options.bytes === Array ? Array.prototype.slice.call(message.request_id) : message.request_id;
+            if (message.interval != null && message.hasOwnProperty("interval"))
+                object.interval = options.json && !isFinite(message.interval) ? String(message.interval) : message.interval;
+            if (message.allowed_confirmations && message.allowed_confirmations.length) {
+                object.allowed_confirmations = [];
+                for (var j = 0; j < message.allowed_confirmations.length; ++j)
+                    object.allowed_confirmations[j] = $root.CAuthentication_AllowedConfirmation.toObject(message.allowed_confirmations[j], options);
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_BeginAuthSessionViaCredentials_Response to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_BeginAuthSessionViaCredentials_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_BeginAuthSessionViaCredentials_Response;
+    })();
+    
+    $root.CAuthentication_PollAuthSessionStatus_Request = (function() {
+    
+        /**
+         * Properties of a CAuthentication_PollAuthSessionStatus_Request.
+         * @exports ICAuthentication_PollAuthSessionStatus_Request
+         * @interface ICAuthentication_PollAuthSessionStatus_Request
+         * @property {number|Long|null} [client_id] CAuthentication_PollAuthSessionStatus_Request client_id
+         * @property {Uint8Array|null} [request_id] CAuthentication_PollAuthSessionStatus_Request request_id
+         */
+    
+        /**
+         * Constructs a new CAuthentication_PollAuthSessionStatus_Request.
+         * @exports CAuthentication_PollAuthSessionStatus_Request
+         * @classdesc Represents a CAuthentication_PollAuthSessionStatus_Request.
+         * @implements ICAuthentication_PollAuthSessionStatus_Request
+         * @constructor
+         * @param {ICAuthentication_PollAuthSessionStatus_Request=} [properties] Properties to set
+         */
+        function CAuthentication_PollAuthSessionStatus_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_PollAuthSessionStatus_Request client_id.
+         * @member {number|Long} client_id
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @instance
+         */
+        CAuthentication_PollAuthSessionStatus_Request.prototype.client_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAuthentication_PollAuthSessionStatus_Request request_id.
+         * @member {Uint8Array} request_id
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @instance
+         */
+        CAuthentication_PollAuthSessionStatus_Request.prototype.request_id = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CAuthentication_PollAuthSessionStatus_Request instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {ICAuthentication_PollAuthSessionStatus_Request=} [properties] Properties to set
+         * @returns {CAuthentication_PollAuthSessionStatus_Request} CAuthentication_PollAuthSessionStatus_Request instance
+         */
+        CAuthentication_PollAuthSessionStatus_Request.create = function create(properties) {
+            return new CAuthentication_PollAuthSessionStatus_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_PollAuthSessionStatus_Request message. Does not implicitly {@link CAuthentication_PollAuthSessionStatus_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {ICAuthentication_PollAuthSessionStatus_Request} message CAuthentication_PollAuthSessionStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_PollAuthSessionStatus_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.client_id);
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.request_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_PollAuthSessionStatus_Request message, length delimited. Does not implicitly {@link CAuthentication_PollAuthSessionStatus_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {ICAuthentication_PollAuthSessionStatus_Request} message CAuthentication_PollAuthSessionStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_PollAuthSessionStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_PollAuthSessionStatus_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_PollAuthSessionStatus_Request} CAuthentication_PollAuthSessionStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_PollAuthSessionStatus_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_PollAuthSessionStatus_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.client_id = reader.uint64();
+                    break;
+                case 2:
+                    message.request_id = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_PollAuthSessionStatus_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_PollAuthSessionStatus_Request} CAuthentication_PollAuthSessionStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_PollAuthSessionStatus_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_PollAuthSessionStatus_Request message.
+         * @function verify
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_PollAuthSessionStatus_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (!$util.isInteger(message.client_id) && !(message.client_id && $util.isInteger(message.client_id.low) && $util.isInteger(message.client_id.high)))
+                    return "client_id: integer|Long expected";
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                if (!(message.request_id && typeof message.request_id.length === "number" || $util.isString(message.request_id)))
+                    return "request_id: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_PollAuthSessionStatus_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_PollAuthSessionStatus_Request} CAuthentication_PollAuthSessionStatus_Request
+         */
+        CAuthentication_PollAuthSessionStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_PollAuthSessionStatus_Request)
+                return object;
+            var message = new $root.CAuthentication_PollAuthSessionStatus_Request();
+            if (object.client_id != null)
+                if ($util.Long)
+                    (message.client_id = $util.Long.fromValue(object.client_id)).unsigned = true;
+                else if (typeof object.client_id === "string")
+                    message.client_id = parseInt(object.client_id, 10);
+                else if (typeof object.client_id === "number")
+                    message.client_id = object.client_id;
+                else if (typeof object.client_id === "object")
+                    message.client_id = new $util.LongBits(object.client_id.low >>> 0, object.client_id.high >>> 0).toNumber(true);
+            if (object.request_id != null)
+                if (typeof object.request_id === "string")
+                    $util.base64.decode(object.request_id, message.request_id = $util.newBuffer($util.base64.length(object.request_id)), 0);
+                else if (object.request_id.length)
+                    message.request_id = object.request_id;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_PollAuthSessionStatus_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @static
+         * @param {CAuthentication_PollAuthSessionStatus_Request} message CAuthentication_PollAuthSessionStatus_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_PollAuthSessionStatus_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.client_id = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.request_id = "";
+                else {
+                    object.request_id = [];
+                    if (options.bytes !== Array)
+                        object.request_id = $util.newBuffer(object.request_id);
+                }
+            }
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (typeof message.client_id === "number")
+                    object.client_id = options.longs === String ? String(message.client_id) : message.client_id;
+                else
+                    object.client_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_id) : options.longs === Number ? new $util.LongBits(message.client_id.low >>> 0, message.client_id.high >>> 0).toNumber(true) : message.client_id;
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
+                object.request_id = options.bytes === String ? $util.base64.encode(message.request_id, 0, message.request_id.length) : options.bytes === Array ? Array.prototype.slice.call(message.request_id) : message.request_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_PollAuthSessionStatus_Request to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_PollAuthSessionStatus_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_PollAuthSessionStatus_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_PollAuthSessionStatus_Request;
+    })();
+    
+    $root.CAuthentication_PollAuthSessionStatus_Response = (function() {
+    
+        /**
+         * Properties of a CAuthentication_PollAuthSessionStatus_Response.
+         * @exports ICAuthentication_PollAuthSessionStatus_Response
+         * @interface ICAuthentication_PollAuthSessionStatus_Response
+         * @property {number|Long|null} [new_client_id] CAuthentication_PollAuthSessionStatus_Response new_client_id
+         * @property {string|null} [new_challenge_url] CAuthentication_PollAuthSessionStatus_Response new_challenge_url
+         * @property {string|null} [refresh_token] CAuthentication_PollAuthSessionStatus_Response refresh_token
+         * @property {string|null} [access_token] CAuthentication_PollAuthSessionStatus_Response access_token
+         */
+    
+        /**
+         * Constructs a new CAuthentication_PollAuthSessionStatus_Response.
+         * @exports CAuthentication_PollAuthSessionStatus_Response
+         * @classdesc Represents a CAuthentication_PollAuthSessionStatus_Response.
+         * @implements ICAuthentication_PollAuthSessionStatus_Response
+         * @constructor
+         * @param {ICAuthentication_PollAuthSessionStatus_Response=} [properties] Properties to set
+         */
+        function CAuthentication_PollAuthSessionStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_PollAuthSessionStatus_Response new_client_id.
+         * @member {number|Long} new_client_id
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @instance
+         */
+        CAuthentication_PollAuthSessionStatus_Response.prototype.new_client_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAuthentication_PollAuthSessionStatus_Response new_challenge_url.
+         * @member {string} new_challenge_url
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @instance
+         */
+        CAuthentication_PollAuthSessionStatus_Response.prototype.new_challenge_url = "";
+    
+        /**
+         * CAuthentication_PollAuthSessionStatus_Response refresh_token.
+         * @member {string} refresh_token
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @instance
+         */
+        CAuthentication_PollAuthSessionStatus_Response.prototype.refresh_token = "";
+    
+        /**
+         * CAuthentication_PollAuthSessionStatus_Response access_token.
+         * @member {string} access_token
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @instance
+         */
+        CAuthentication_PollAuthSessionStatus_Response.prototype.access_token = "";
+    
+        /**
+         * Creates a new CAuthentication_PollAuthSessionStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {ICAuthentication_PollAuthSessionStatus_Response=} [properties] Properties to set
+         * @returns {CAuthentication_PollAuthSessionStatus_Response} CAuthentication_PollAuthSessionStatus_Response instance
+         */
+        CAuthentication_PollAuthSessionStatus_Response.create = function create(properties) {
+            return new CAuthentication_PollAuthSessionStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_PollAuthSessionStatus_Response message. Does not implicitly {@link CAuthentication_PollAuthSessionStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {ICAuthentication_PollAuthSessionStatus_Response} message CAuthentication_PollAuthSessionStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_PollAuthSessionStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.new_client_id != null && message.hasOwnProperty("new_client_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.new_client_id);
+            if (message.new_challenge_url != null && message.hasOwnProperty("new_challenge_url"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.new_challenge_url);
+            if (message.refresh_token != null && message.hasOwnProperty("refresh_token"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.refresh_token);
+            if (message.access_token != null && message.hasOwnProperty("access_token"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.access_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_PollAuthSessionStatus_Response message, length delimited. Does not implicitly {@link CAuthentication_PollAuthSessionStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {ICAuthentication_PollAuthSessionStatus_Response} message CAuthentication_PollAuthSessionStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_PollAuthSessionStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_PollAuthSessionStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_PollAuthSessionStatus_Response} CAuthentication_PollAuthSessionStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_PollAuthSessionStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_PollAuthSessionStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.new_client_id = reader.uint64();
+                    break;
+                case 2:
+                    message.new_challenge_url = reader.string();
+                    break;
+                case 3:
+                    message.refresh_token = reader.string();
+                    break;
+                case 4:
+                    message.access_token = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_PollAuthSessionStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_PollAuthSessionStatus_Response} CAuthentication_PollAuthSessionStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_PollAuthSessionStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_PollAuthSessionStatus_Response message.
+         * @function verify
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_PollAuthSessionStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.new_client_id != null && message.hasOwnProperty("new_client_id"))
+                if (!$util.isInteger(message.new_client_id) && !(message.new_client_id && $util.isInteger(message.new_client_id.low) && $util.isInteger(message.new_client_id.high)))
+                    return "new_client_id: integer|Long expected";
+            if (message.new_challenge_url != null && message.hasOwnProperty("new_challenge_url"))
+                if (!$util.isString(message.new_challenge_url))
+                    return "new_challenge_url: string expected";
+            if (message.refresh_token != null && message.hasOwnProperty("refresh_token"))
+                if (!$util.isString(message.refresh_token))
+                    return "refresh_token: string expected";
+            if (message.access_token != null && message.hasOwnProperty("access_token"))
+                if (!$util.isString(message.access_token))
+                    return "access_token: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_PollAuthSessionStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_PollAuthSessionStatus_Response} CAuthentication_PollAuthSessionStatus_Response
+         */
+        CAuthentication_PollAuthSessionStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_PollAuthSessionStatus_Response)
+                return object;
+            var message = new $root.CAuthentication_PollAuthSessionStatus_Response();
+            if (object.new_client_id != null)
+                if ($util.Long)
+                    (message.new_client_id = $util.Long.fromValue(object.new_client_id)).unsigned = true;
+                else if (typeof object.new_client_id === "string")
+                    message.new_client_id = parseInt(object.new_client_id, 10);
+                else if (typeof object.new_client_id === "number")
+                    message.new_client_id = object.new_client_id;
+                else if (typeof object.new_client_id === "object")
+                    message.new_client_id = new $util.LongBits(object.new_client_id.low >>> 0, object.new_client_id.high >>> 0).toNumber(true);
+            if (object.new_challenge_url != null)
+                message.new_challenge_url = String(object.new_challenge_url);
+            if (object.refresh_token != null)
+                message.refresh_token = String(object.refresh_token);
+            if (object.access_token != null)
+                message.access_token = String(object.access_token);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_PollAuthSessionStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @static
+         * @param {CAuthentication_PollAuthSessionStatus_Response} message CAuthentication_PollAuthSessionStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_PollAuthSessionStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.new_client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.new_client_id = options.longs === String ? "0" : 0;
+                object.new_challenge_url = "";
+                object.refresh_token = "";
+                object.access_token = "";
+            }
+            if (message.new_client_id != null && message.hasOwnProperty("new_client_id"))
+                if (typeof message.new_client_id === "number")
+                    object.new_client_id = options.longs === String ? String(message.new_client_id) : message.new_client_id;
+                else
+                    object.new_client_id = options.longs === String ? $util.Long.prototype.toString.call(message.new_client_id) : options.longs === Number ? new $util.LongBits(message.new_client_id.low >>> 0, message.new_client_id.high >>> 0).toNumber(true) : message.new_client_id;
+            if (message.new_challenge_url != null && message.hasOwnProperty("new_challenge_url"))
+                object.new_challenge_url = message.new_challenge_url;
+            if (message.refresh_token != null && message.hasOwnProperty("refresh_token"))
+                object.refresh_token = message.refresh_token;
+            if (message.access_token != null && message.hasOwnProperty("access_token"))
+                object.access_token = message.access_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_PollAuthSessionStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_PollAuthSessionStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_PollAuthSessionStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_PollAuthSessionStatus_Response;
+    })();
+    
+    $root.CAuthentication_GetAuthSessionInfo_Request = (function() {
+    
+        /**
+         * Properties of a CAuthentication_GetAuthSessionInfo_Request.
+         * @exports ICAuthentication_GetAuthSessionInfo_Request
+         * @interface ICAuthentication_GetAuthSessionInfo_Request
+         * @property {number|Long|null} [client_id] CAuthentication_GetAuthSessionInfo_Request client_id
+         */
+    
+        /**
+         * Constructs a new CAuthentication_GetAuthSessionInfo_Request.
+         * @exports CAuthentication_GetAuthSessionInfo_Request
+         * @classdesc Represents a CAuthentication_GetAuthSessionInfo_Request.
+         * @implements ICAuthentication_GetAuthSessionInfo_Request
+         * @constructor
+         * @param {ICAuthentication_GetAuthSessionInfo_Request=} [properties] Properties to set
+         */
+        function CAuthentication_GetAuthSessionInfo_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Request client_id.
+         * @member {number|Long} client_id
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Request.prototype.client_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CAuthentication_GetAuthSessionInfo_Request instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {ICAuthentication_GetAuthSessionInfo_Request=} [properties] Properties to set
+         * @returns {CAuthentication_GetAuthSessionInfo_Request} CAuthentication_GetAuthSessionInfo_Request instance
+         */
+        CAuthentication_GetAuthSessionInfo_Request.create = function create(properties) {
+            return new CAuthentication_GetAuthSessionInfo_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetAuthSessionInfo_Request message. Does not implicitly {@link CAuthentication_GetAuthSessionInfo_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {ICAuthentication_GetAuthSessionInfo_Request} message CAuthentication_GetAuthSessionInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetAuthSessionInfo_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.client_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetAuthSessionInfo_Request message, length delimited. Does not implicitly {@link CAuthentication_GetAuthSessionInfo_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {ICAuthentication_GetAuthSessionInfo_Request} message CAuthentication_GetAuthSessionInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetAuthSessionInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetAuthSessionInfo_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_GetAuthSessionInfo_Request} CAuthentication_GetAuthSessionInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetAuthSessionInfo_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_GetAuthSessionInfo_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.client_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetAuthSessionInfo_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_GetAuthSessionInfo_Request} CAuthentication_GetAuthSessionInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetAuthSessionInfo_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_GetAuthSessionInfo_Request message.
+         * @function verify
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_GetAuthSessionInfo_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (!$util.isInteger(message.client_id) && !(message.client_id && $util.isInteger(message.client_id.low) && $util.isInteger(message.client_id.high)))
+                    return "client_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_GetAuthSessionInfo_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_GetAuthSessionInfo_Request} CAuthentication_GetAuthSessionInfo_Request
+         */
+        CAuthentication_GetAuthSessionInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_GetAuthSessionInfo_Request)
+                return object;
+            var message = new $root.CAuthentication_GetAuthSessionInfo_Request();
+            if (object.client_id != null)
+                if ($util.Long)
+                    (message.client_id = $util.Long.fromValue(object.client_id)).unsigned = true;
+                else if (typeof object.client_id === "string")
+                    message.client_id = parseInt(object.client_id, 10);
+                else if (typeof object.client_id === "number")
+                    message.client_id = object.client_id;
+                else if (typeof object.client_id === "object")
+                    message.client_id = new $util.LongBits(object.client_id.low >>> 0, object.client_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_GetAuthSessionInfo_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @static
+         * @param {CAuthentication_GetAuthSessionInfo_Request} message CAuthentication_GetAuthSessionInfo_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_GetAuthSessionInfo_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.client_id = options.longs === String ? "0" : 0;
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (typeof message.client_id === "number")
+                    object.client_id = options.longs === String ? String(message.client_id) : message.client_id;
+                else
+                    object.client_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_id) : options.longs === Number ? new $util.LongBits(message.client_id.low >>> 0, message.client_id.high >>> 0).toNumber(true) : message.client_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_GetAuthSessionInfo_Request to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_GetAuthSessionInfo_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_GetAuthSessionInfo_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_GetAuthSessionInfo_Request;
+    })();
+    
+    $root.CAuthentication_GetAuthSessionInfo_Response = (function() {
+    
+        /**
+         * Properties of a CAuthentication_GetAuthSessionInfo_Response.
+         * @exports ICAuthentication_GetAuthSessionInfo_Response
+         * @interface ICAuthentication_GetAuthSessionInfo_Response
+         * @property {string|null} [ip] CAuthentication_GetAuthSessionInfo_Response ip
+         * @property {string|null} [geoloc] CAuthentication_GetAuthSessionInfo_Response geoloc
+         * @property {string|null} [city] CAuthentication_GetAuthSessionInfo_Response city
+         * @property {string|null} [state] CAuthentication_GetAuthSessionInfo_Response state
+         * @property {string|null} [country] CAuthentication_GetAuthSessionInfo_Response country
+         * @property {EAuthTokenPlatformType|null} [platform_type] CAuthentication_GetAuthSessionInfo_Response platform_type
+         * @property {string|null} [device_friendly_name] CAuthentication_GetAuthSessionInfo_Response device_friendly_name
+         */
+    
+        /**
+         * Constructs a new CAuthentication_GetAuthSessionInfo_Response.
+         * @exports CAuthentication_GetAuthSessionInfo_Response
+         * @classdesc Represents a CAuthentication_GetAuthSessionInfo_Response.
+         * @implements ICAuthentication_GetAuthSessionInfo_Response
+         * @constructor
+         * @param {ICAuthentication_GetAuthSessionInfo_Response=} [properties] Properties to set
+         */
+        function CAuthentication_GetAuthSessionInfo_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Response ip.
+         * @member {string} ip
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.ip = "";
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Response geoloc.
+         * @member {string} geoloc
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.geoloc = "";
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Response city.
+         * @member {string} city
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.city = "";
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Response state.
+         * @member {string} state
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.state = "";
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Response country.
+         * @member {string} country
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.country = "";
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Response platform_type.
+         * @member {EAuthTokenPlatformType} platform_type
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.platform_type = 0;
+    
+        /**
+         * CAuthentication_GetAuthSessionInfo_Response device_friendly_name.
+         * @member {string} device_friendly_name
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.device_friendly_name = "";
+    
+        /**
+         * Creates a new CAuthentication_GetAuthSessionInfo_Response instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {ICAuthentication_GetAuthSessionInfo_Response=} [properties] Properties to set
+         * @returns {CAuthentication_GetAuthSessionInfo_Response} CAuthentication_GetAuthSessionInfo_Response instance
+         */
+        CAuthentication_GetAuthSessionInfo_Response.create = function create(properties) {
+            return new CAuthentication_GetAuthSessionInfo_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetAuthSessionInfo_Response message. Does not implicitly {@link CAuthentication_GetAuthSessionInfo_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {ICAuthentication_GetAuthSessionInfo_Response} message CAuthentication_GetAuthSessionInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetAuthSessionInfo_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ip);
+            if (message.geoloc != null && message.hasOwnProperty("geoloc"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.geoloc);
+            if (message.city != null && message.hasOwnProperty("city"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.city);
+            if (message.state != null && message.hasOwnProperty("state"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.state);
+            if (message.country != null && message.hasOwnProperty("country"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.country);
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.platform_type);
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.device_friendly_name);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_GetAuthSessionInfo_Response message, length delimited. Does not implicitly {@link CAuthentication_GetAuthSessionInfo_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {ICAuthentication_GetAuthSessionInfo_Response} message CAuthentication_GetAuthSessionInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_GetAuthSessionInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetAuthSessionInfo_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_GetAuthSessionInfo_Response} CAuthentication_GetAuthSessionInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetAuthSessionInfo_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_GetAuthSessionInfo_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ip = reader.string();
+                    break;
+                case 2:
+                    message.geoloc = reader.string();
+                    break;
+                case 3:
+                    message.city = reader.string();
+                    break;
+                case 4:
+                    message.state = reader.string();
+                    break;
+                case 5:
+                    message.country = reader.string();
+                    break;
+                case 6:
+                    message.platform_type = reader.int32();
+                    break;
+                case 7:
+                    message.device_friendly_name = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_GetAuthSessionInfo_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_GetAuthSessionInfo_Response} CAuthentication_GetAuthSessionInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_GetAuthSessionInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_GetAuthSessionInfo_Response message.
+         * @function verify
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_GetAuthSessionInfo_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                if (!$util.isString(message.ip))
+                    return "ip: string expected";
+            if (message.geoloc != null && message.hasOwnProperty("geoloc"))
+                if (!$util.isString(message.geoloc))
+                    return "geoloc: string expected";
+            if (message.city != null && message.hasOwnProperty("city"))
+                if (!$util.isString(message.city))
+                    return "city: string expected";
+            if (message.state != null && message.hasOwnProperty("state"))
+                if (!$util.isString(message.state))
+                    return "state: string expected";
+            if (message.country != null && message.hasOwnProperty("country"))
+                if (!$util.isString(message.country))
+                    return "country: string expected";
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                switch (message.platform_type) {
+                default:
+                    return "platform_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                if (!$util.isString(message.device_friendly_name))
+                    return "device_friendly_name: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_GetAuthSessionInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_GetAuthSessionInfo_Response} CAuthentication_GetAuthSessionInfo_Response
+         */
+        CAuthentication_GetAuthSessionInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_GetAuthSessionInfo_Response)
+                return object;
+            var message = new $root.CAuthentication_GetAuthSessionInfo_Response();
+            if (object.ip != null)
+                message.ip = String(object.ip);
+            if (object.geoloc != null)
+                message.geoloc = String(object.geoloc);
+            if (object.city != null)
+                message.city = String(object.city);
+            if (object.state != null)
+                message.state = String(object.state);
+            if (object.country != null)
+                message.country = String(object.country);
+            switch (object.platform_type) {
+            case "k_EAuthTokenPlatformType_Unknown":
+            case 0:
+                message.platform_type = 0;
+                break;
+            case "k_EAuthTokenPlatformType_SteamClient":
+            case 1:
+                message.platform_type = 1;
+                break;
+            case "k_EAuthTokenPlatformType_WebBrowser":
+            case 2:
+                message.platform_type = 2;
+                break;
+            case "k_EAuthTokenPlatformType_MobileApp":
+            case 3:
+                message.platform_type = 3;
+                break;
+            }
+            if (object.device_friendly_name != null)
+                message.device_friendly_name = String(object.device_friendly_name);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_GetAuthSessionInfo_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @static
+         * @param {CAuthentication_GetAuthSessionInfo_Response} message CAuthentication_GetAuthSessionInfo_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_GetAuthSessionInfo_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.ip = "";
+                object.geoloc = "";
+                object.city = "";
+                object.state = "";
+                object.country = "";
+                object.platform_type = options.enums === String ? "k_EAuthTokenPlatformType_Unknown" : 0;
+                object.device_friendly_name = "";
+            }
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                object.ip = message.ip;
+            if (message.geoloc != null && message.hasOwnProperty("geoloc"))
+                object.geoloc = message.geoloc;
+            if (message.city != null && message.hasOwnProperty("city"))
+                object.city = message.city;
+            if (message.state != null && message.hasOwnProperty("state"))
+                object.state = message.state;
+            if (message.country != null && message.hasOwnProperty("country"))
+                object.country = message.country;
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                object.platform_type = options.enums === String ? $root.EAuthTokenPlatformType[message.platform_type] : message.platform_type;
+            if (message.device_friendly_name != null && message.hasOwnProperty("device_friendly_name"))
+                object.device_friendly_name = message.device_friendly_name;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_GetAuthSessionInfo_Response to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_GetAuthSessionInfo_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_GetAuthSessionInfo_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_GetAuthSessionInfo_Response;
+    })();
+    
+    $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request = (function() {
+    
+        /**
+         * Properties of a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.
+         * @exports ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @interface ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @property {number|null} [version] CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request version
+         * @property {number|Long|null} [client_id] CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request client_id
+         * @property {number|Long|null} [steamid] CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request steamid
+         * @property {Uint8Array|null} [signature] CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request signature
+         * @property {boolean|null} [confirm] CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request confirm
+         */
+    
+        /**
+         * Constructs a new CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.
+         * @exports CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @classdesc Represents a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.
+         * @implements ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @constructor
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request=} [properties] Properties to set
+         */
+        function CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request version.
+         * @member {number} version
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.prototype.version = 0;
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request client_id.
+         * @member {number|Long} client_id
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.prototype.client_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request signature.
+         * @member {Uint8Array} signature
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.prototype.signature = $util.newBuffer([]);
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request confirm.
+         * @member {boolean} confirm
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.prototype.confirm = false;
+    
+        /**
+         * Creates a new CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request=} [properties] Properties to set
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request instance
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.create = function create(properties) {
+            return new CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.version != null && message.hasOwnProperty("version"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.version);
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.client_id);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.steamid);
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.signature);
+            if (message.confirm != null && message.hasOwnProperty("confirm"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.confirm);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message, length delimited. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.version = reader.int32();
+                    break;
+                case 2:
+                    message.client_id = reader.uint64();
+                    break;
+                case 3:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 4:
+                    message.signature = reader.bytes();
+                    break;
+                case 5:
+                    message.confirm = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message.
+         * @function verify
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.version != null && message.hasOwnProperty("version"))
+                if (!$util.isInteger(message.version))
+                    return "version: integer expected";
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (!$util.isInteger(message.client_id) && !(message.client_id && $util.isInteger(message.client_id.low) && $util.isInteger(message.client_id.high)))
+                    return "client_id: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
+                    return "signature: buffer expected";
+            if (message.confirm != null && message.hasOwnProperty("confirm"))
+                if (typeof message.confirm !== "boolean")
+                    return "confirm: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request)
+                return object;
+            var message = new $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request();
+            if (object.version != null)
+                message.version = object.version | 0;
+            if (object.client_id != null)
+                if ($util.Long)
+                    (message.client_id = $util.Long.fromValue(object.client_id)).unsigned = true;
+                else if (typeof object.client_id === "string")
+                    message.client_id = parseInt(object.client_id, 10);
+                else if (typeof object.client_id === "number")
+                    message.client_id = object.client_id;
+                else if (typeof object.client_id === "object")
+                    message.client_id = new $util.LongBits(object.client_id.low >>> 0, object.client_id.high >>> 0).toNumber(true);
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.signature != null)
+                if (typeof object.signature === "string")
+                    $util.base64.decode(object.signature, message.signature = $util.newBuffer($util.base64.length(object.signature)), 0);
+                else if (object.signature.length)
+                    message.signature = object.signature;
+            if (object.confirm != null)
+                message.confirm = Boolean(object.confirm);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @static
+         * @param {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.version = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.client_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.signature = "";
+                else {
+                    object.signature = [];
+                    if (options.bytes !== Array)
+                        object.signature = $util.newBuffer(object.signature);
+                }
+                object.confirm = false;
+            }
+            if (message.version != null && message.hasOwnProperty("version"))
+                object.version = message.version;
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (typeof message.client_id === "number")
+                    object.client_id = options.longs === String ? String(message.client_id) : message.client_id;
+                else
+                    object.client_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_id) : options.longs === Number ? new $util.LongBits(message.client_id.low >>> 0, message.client_id.high >>> 0).toNumber(true) : message.client_id;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
+            if (message.confirm != null && message.hasOwnProperty("confirm"))
+                object.confirm = message.confirm;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request;
+    })();
+    
+    $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response = (function() {
+    
+        /**
+         * Properties of a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.
+         * @exports ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @interface ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         */
+    
+        /**
+         * Constructs a new CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.
+         * @exports CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @classdesc Represents a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.
+         * @implements ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @constructor
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Response=} [properties] Properties to set
+         */
+        function CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Response=} [properties] Properties to set
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response instance
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.create = function create(properties) {
+            return new CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message, length delimited. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message.
+         * @function verify
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response)
+                return object;
+            return new $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @static
+         * @param {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response;
+    })();
+    
+    $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request = (function() {
+    
+        /**
+         * Properties of a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.
+         * @exports ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @interface ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @property {number|Long|null} [client_id] CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request client_id
+         * @property {number|Long|null} [steamid] CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request steamid
+         * @property {string|null} [code] CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request code
+         * @property {EAuthSessionGuardType|null} [code_type] CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request code_type
+         */
+    
+        /**
+         * Constructs a new CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.
+         * @exports CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @classdesc Represents a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.
+         * @implements ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @constructor
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request=} [properties] Properties to set
+         */
+        function CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request client_id.
+         * @member {number|Long} client_id
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.prototype.client_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request code.
+         * @member {string} code
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.prototype.code = "";
+    
+        /**
+         * CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request code_type.
+         * @member {EAuthSessionGuardType} code_type
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @instance
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.prototype.code_type = 0;
+    
+        /**
+         * Creates a new CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request=} [properties] Properties to set
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request instance
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.create = function create(properties) {
+            return new CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.client_id);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.code);
+            if (message.code_type != null && message.hasOwnProperty("code_type"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.code_type);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message, length delimited. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.client_id = reader.uint64();
+                    break;
+                case 2:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 3:
+                    message.code = reader.string();
+                    break;
+                case 4:
+                    message.code_type = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message.
+         * @function verify
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (!$util.isInteger(message.client_id) && !(message.client_id && $util.isInteger(message.client_id.low) && $util.isInteger(message.client_id.high)))
+                    return "client_id: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isString(message.code))
+                    return "code: string expected";
+            if (message.code_type != null && message.hasOwnProperty("code_type"))
+                switch (message.code_type) {
+                default:
+                    return "code_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request)
+                return object;
+            var message = new $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request();
+            if (object.client_id != null)
+                if ($util.Long)
+                    (message.client_id = $util.Long.fromValue(object.client_id)).unsigned = true;
+                else if (typeof object.client_id === "string")
+                    message.client_id = parseInt(object.client_id, 10);
+                else if (typeof object.client_id === "number")
+                    message.client_id = object.client_id;
+                else if (typeof object.client_id === "object")
+                    message.client_id = new $util.LongBits(object.client_id.low >>> 0, object.client_id.high >>> 0).toNumber(true);
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.code != null)
+                message.code = String(object.code);
+            switch (object.code_type) {
+            case "k_EAuthSessionGuardType_Unknown":
+            case 0:
+                message.code_type = 0;
+                break;
+            case "k_EAuthSessionGuardType_None":
+            case 1:
+                message.code_type = 1;
+                break;
+            case "k_EAuthSessionGuardType_EmailCode":
+            case 2:
+                message.code_type = 2;
+                break;
+            case "k_EAuthSessionGuardType_DeviceCode":
+            case 3:
+                message.code_type = 3;
+                break;
+            case "k_EAuthSessionGuardType_DeviceConfirmation":
+            case 4:
+                message.code_type = 4;
+                break;
+            case "k_EAuthSessionGuardType_EmailConfirmation":
+            case 5:
+                message.code_type = 5;
+                break;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @static
+         * @param {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.client_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.code = "";
+                object.code_type = options.enums === String ? "k_EAuthSessionGuardType_Unknown" : 0;
+            }
+            if (message.client_id != null && message.hasOwnProperty("client_id"))
+                if (typeof message.client_id === "number")
+                    object.client_id = options.longs === String ? String(message.client_id) : message.client_id;
+                else
+                    object.client_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_id) : options.longs === Number ? new $util.LongBits(message.client_id.low >>> 0, message.client_id.high >>> 0).toNumber(true) : message.client_id;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.code_type != null && message.hasOwnProperty("code_type"))
+                object.code_type = options.enums === String ? $root.EAuthSessionGuardType[message.code_type] : message.code_type;
+            return object;
+        };
+    
+        /**
+         * Converts this CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request;
+    })();
+    
+    $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response = (function() {
+    
+        /**
+         * Properties of a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.
+         * @exports ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @interface ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         */
+    
+        /**
+         * Constructs a new CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.
+         * @exports CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @classdesc Represents a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.
+         * @implements ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @constructor
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Response=} [properties] Properties to set
+         */
+        function CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response instance using the specified properties.
+         * @function create
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Response=} [properties] Properties to set
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response instance
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.create = function create(properties) {
+            return new CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message, length delimited. Does not implicitly {@link CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message.
+         * @function verify
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response)
+                return object;
+            return new $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @static
+         * @param {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response to JSON.
+         * @function toJSON
+         * @memberof CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response;
+    })();
+    
     $root.CCloudGaming_CreateNonce_Request = (function() {
     
         /**
@@ -24,7 +3979,6 @@
          * @interface ICCloudGaming_CreateNonce_Request
          * @property {string|null} [platform] CCloudGaming_CreateNonce_Request platform
          * @property {number|null} [appid] CCloudGaming_CreateNonce_Request appid
-         * @property {boolean|null} [request_trial] CCloudGaming_CreateNonce_Request request_trial
          */
     
         /**
@@ -59,14 +4013,6 @@
         CCloudGaming_CreateNonce_Request.prototype.appid = 0;
     
         /**
-         * CCloudGaming_CreateNonce_Request request_trial.
-         * @member {boolean} request_trial
-         * @memberof CCloudGaming_CreateNonce_Request
-         * @instance
-         */
-        CCloudGaming_CreateNonce_Request.prototype.request_trial = false;
-    
-        /**
          * Creates a new CCloudGaming_CreateNonce_Request instance using the specified properties.
          * @function create
          * @memberof CCloudGaming_CreateNonce_Request
@@ -90,12 +4036,10 @@
         CCloudGaming_CreateNonce_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.platform != null && Object.hasOwnProperty.call(message, "platform"))
+            if (message.platform != null && message.hasOwnProperty("platform"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.platform);
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
-            if (message.request_trial != null && Object.hasOwnProperty.call(message, "request_trial"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.request_trial);
             return writer;
         };
     
@@ -135,9 +4079,6 @@
                     break;
                 case 2:
                     message.appid = reader.uint32();
-                    break;
-                case 3:
-                    message.request_trial = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -180,9 +4121,6 @@
             if (message.appid != null && message.hasOwnProperty("appid"))
                 if (!$util.isInteger(message.appid))
                     return "appid: integer expected";
-            if (message.request_trial != null && message.hasOwnProperty("request_trial"))
-                if (typeof message.request_trial !== "boolean")
-                    return "request_trial: boolean expected";
             return null;
         };
     
@@ -202,8 +4140,6 @@
                 message.platform = String(object.platform);
             if (object.appid != null)
                 message.appid = object.appid >>> 0;
-            if (object.request_trial != null)
-                message.request_trial = Boolean(object.request_trial);
             return message;
         };
     
@@ -223,14 +4159,11 @@
             if (options.defaults) {
                 object.platform = "";
                 object.appid = 0;
-                object.request_trial = false;
             }
             if (message.platform != null && message.hasOwnProperty("platform"))
                 object.platform = message.platform;
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
-            if (message.request_trial != null && message.hasOwnProperty("request_trial"))
-                object.request_trial = message.request_trial;
             return object;
         };
     
@@ -313,9 +4246,9 @@
         CCloudGaming_CreateNonce_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.nonce);
-            if (message.expiry != null && Object.hasOwnProperty.call(message, "expiry"))
+            if (message.expiry != null && message.hasOwnProperty("expiry"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.expiry);
             return writer;
         };
@@ -524,7 +4457,7 @@
         CCloudGaming_GetTimeRemaining_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.platform != null && Object.hasOwnProperty.call(message, "platform"))
+            if (message.platform != null && message.hasOwnProperty("platform"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.platform);
             if (message.appid_list != null && message.appid_list.length)
                 for (var i = 0; i < message.appid_list.length; ++i)
@@ -754,9 +4687,9 @@
         CCloudGaming_TimeRemaining.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.minutes_remaining != null && Object.hasOwnProperty.call(message, "minutes_remaining"))
+            if (message.minutes_remaining != null && message.hasOwnProperty("minutes_remaining"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.minutes_remaining);
             return writer;
         };
@@ -1107,6 +5040,272 @@
         return CCloudGaming_GetTimeRemaining_Response;
     })();
     
+    $root.Authentication = (function() {
+    
+        /**
+         * Constructs a new Authentication service.
+         * @exports Authentication
+         * @classdesc Represents an Authentication
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function Authentication(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (Authentication.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Authentication;
+    
+        /**
+         * Creates new Authentication service using the specified rpc implementation.
+         * @function create
+         * @memberof Authentication
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {Authentication} RPC service. Useful where requests and/or responses are streamed.
+         */
+        Authentication.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link Authentication#getPasswordRSAPublicKey}.
+         * @memberof Authentication
+         * @typedef GetPasswordRSAPublicKeyCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAuthentication_GetPasswordRSAPublicKey_Response} [response] CAuthentication_GetPasswordRSAPublicKey_Response
+         */
+    
+        /**
+         * Calls GetPasswordRSAPublicKey.
+         * @function getPasswordRSAPublicKey
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Request} request CAuthentication_GetPasswordRSAPublicKey_Request message or plain object
+         * @param {Authentication.GetPasswordRSAPublicKeyCallback} callback Node-style callback called with the error, if any, and CAuthentication_GetPasswordRSAPublicKey_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Authentication.prototype.getPasswordRSAPublicKey = function getPasswordRSAPublicKey(request, callback) {
+            return this.rpcCall(getPasswordRSAPublicKey, $root.CAuthentication_GetPasswordRSAPublicKey_Request, $root.CAuthentication_GetPasswordRSAPublicKey_Response, request, callback);
+        }, "name", { value: "GetPasswordRSAPublicKey" });
+    
+        /**
+         * Calls GetPasswordRSAPublicKey.
+         * @function getPasswordRSAPublicKey
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_GetPasswordRSAPublicKey_Request} request CAuthentication_GetPasswordRSAPublicKey_Request message or plain object
+         * @returns {Promise<CAuthentication_GetPasswordRSAPublicKey_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Authentication#beginAuthSessionViaQR}.
+         * @memberof Authentication
+         * @typedef BeginAuthSessionViaQRCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAuthentication_BeginAuthSessionViaQR_Response} [response] CAuthentication_BeginAuthSessionViaQR_Response
+         */
+    
+        /**
+         * Calls BeginAuthSessionViaQR.
+         * @function beginAuthSessionViaQR
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Request} request CAuthentication_BeginAuthSessionViaQR_Request message or plain object
+         * @param {Authentication.BeginAuthSessionViaQRCallback} callback Node-style callback called with the error, if any, and CAuthentication_BeginAuthSessionViaQR_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Authentication.prototype.beginAuthSessionViaQR = function beginAuthSessionViaQR(request, callback) {
+            return this.rpcCall(beginAuthSessionViaQR, $root.CAuthentication_BeginAuthSessionViaQR_Request, $root.CAuthentication_BeginAuthSessionViaQR_Response, request, callback);
+        }, "name", { value: "BeginAuthSessionViaQR" });
+    
+        /**
+         * Calls BeginAuthSessionViaQR.
+         * @function beginAuthSessionViaQR
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_BeginAuthSessionViaQR_Request} request CAuthentication_BeginAuthSessionViaQR_Request message or plain object
+         * @returns {Promise<CAuthentication_BeginAuthSessionViaQR_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Authentication#beginAuthSessionViaCredentials}.
+         * @memberof Authentication
+         * @typedef BeginAuthSessionViaCredentialsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAuthentication_BeginAuthSessionViaCredentials_Response} [response] CAuthentication_BeginAuthSessionViaCredentials_Response
+         */
+    
+        /**
+         * Calls BeginAuthSessionViaCredentials.
+         * @function beginAuthSessionViaCredentials
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Request} request CAuthentication_BeginAuthSessionViaCredentials_Request message or plain object
+         * @param {Authentication.BeginAuthSessionViaCredentialsCallback} callback Node-style callback called with the error, if any, and CAuthentication_BeginAuthSessionViaCredentials_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Authentication.prototype.beginAuthSessionViaCredentials = function beginAuthSessionViaCredentials(request, callback) {
+            return this.rpcCall(beginAuthSessionViaCredentials, $root.CAuthentication_BeginAuthSessionViaCredentials_Request, $root.CAuthentication_BeginAuthSessionViaCredentials_Response, request, callback);
+        }, "name", { value: "BeginAuthSessionViaCredentials" });
+    
+        /**
+         * Calls BeginAuthSessionViaCredentials.
+         * @function beginAuthSessionViaCredentials
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_BeginAuthSessionViaCredentials_Request} request CAuthentication_BeginAuthSessionViaCredentials_Request message or plain object
+         * @returns {Promise<CAuthentication_BeginAuthSessionViaCredentials_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Authentication#pollAuthSessionStatus}.
+         * @memberof Authentication
+         * @typedef PollAuthSessionStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAuthentication_PollAuthSessionStatus_Response} [response] CAuthentication_PollAuthSessionStatus_Response
+         */
+    
+        /**
+         * Calls PollAuthSessionStatus.
+         * @function pollAuthSessionStatus
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_PollAuthSessionStatus_Request} request CAuthentication_PollAuthSessionStatus_Request message or plain object
+         * @param {Authentication.PollAuthSessionStatusCallback} callback Node-style callback called with the error, if any, and CAuthentication_PollAuthSessionStatus_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Authentication.prototype.pollAuthSessionStatus = function pollAuthSessionStatus(request, callback) {
+            return this.rpcCall(pollAuthSessionStatus, $root.CAuthentication_PollAuthSessionStatus_Request, $root.CAuthentication_PollAuthSessionStatus_Response, request, callback);
+        }, "name", { value: "PollAuthSessionStatus" });
+    
+        /**
+         * Calls PollAuthSessionStatus.
+         * @function pollAuthSessionStatus
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_PollAuthSessionStatus_Request} request CAuthentication_PollAuthSessionStatus_Request message or plain object
+         * @returns {Promise<CAuthentication_PollAuthSessionStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Authentication#getAuthSessionInfo}.
+         * @memberof Authentication
+         * @typedef GetAuthSessionInfoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAuthentication_GetAuthSessionInfo_Response} [response] CAuthentication_GetAuthSessionInfo_Response
+         */
+    
+        /**
+         * Calls GetAuthSessionInfo.
+         * @function getAuthSessionInfo
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_GetAuthSessionInfo_Request} request CAuthentication_GetAuthSessionInfo_Request message or plain object
+         * @param {Authentication.GetAuthSessionInfoCallback} callback Node-style callback called with the error, if any, and CAuthentication_GetAuthSessionInfo_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Authentication.prototype.getAuthSessionInfo = function getAuthSessionInfo(request, callback) {
+            return this.rpcCall(getAuthSessionInfo, $root.CAuthentication_GetAuthSessionInfo_Request, $root.CAuthentication_GetAuthSessionInfo_Response, request, callback);
+        }, "name", { value: "GetAuthSessionInfo" });
+    
+        /**
+         * Calls GetAuthSessionInfo.
+         * @function getAuthSessionInfo
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_GetAuthSessionInfo_Request} request CAuthentication_GetAuthSessionInfo_Request message or plain object
+         * @returns {Promise<CAuthentication_GetAuthSessionInfo_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Authentication#updateAuthSessionWithMobileConfirmation}.
+         * @memberof Authentication
+         * @typedef UpdateAuthSessionWithMobileConfirmationCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response} [response] CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         */
+    
+        /**
+         * Calls UpdateAuthSessionWithMobileConfirmation.
+         * @function updateAuthSessionWithMobileConfirmation
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} request CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message or plain object
+         * @param {Authentication.UpdateAuthSessionWithMobileConfirmationCallback} callback Node-style callback called with the error, if any, and CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Authentication.prototype.updateAuthSessionWithMobileConfirmation = function updateAuthSessionWithMobileConfirmation(request, callback) {
+            return this.rpcCall(updateAuthSessionWithMobileConfirmation, $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request, $root.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response, request, callback);
+        }, "name", { value: "UpdateAuthSessionWithMobileConfirmation" });
+    
+        /**
+         * Calls UpdateAuthSessionWithMobileConfirmation.
+         * @function updateAuthSessionWithMobileConfirmation
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_UpdateAuthSessionWithMobileConfirmation_Request} request CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request message or plain object
+         * @returns {Promise<CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Authentication#updateAuthSessionWithSteamGuardCode}.
+         * @memberof Authentication
+         * @typedef UpdateAuthSessionWithSteamGuardCodeCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response} [response] CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         */
+    
+        /**
+         * Calls UpdateAuthSessionWithSteamGuardCode.
+         * @function updateAuthSessionWithSteamGuardCode
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} request CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message or plain object
+         * @param {Authentication.UpdateAuthSessionWithSteamGuardCodeCallback} callback Node-style callback called with the error, if any, and CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Authentication.prototype.updateAuthSessionWithSteamGuardCode = function updateAuthSessionWithSteamGuardCode(request, callback) {
+            return this.rpcCall(updateAuthSessionWithSteamGuardCode, $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request, $root.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response, request, callback);
+        }, "name", { value: "UpdateAuthSessionWithSteamGuardCode" });
+    
+        /**
+         * Calls UpdateAuthSessionWithSteamGuardCode.
+         * @function updateAuthSessionWithSteamGuardCode
+         * @memberof Authentication
+         * @instance
+         * @param {ICAuthentication_UpdateAuthSessionWithSteamGuardCode_Request} request CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request message or plain object
+         * @returns {Promise<CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response>} Promise
+         * @variation 2
+         */
+    
+        return Authentication;
+    })();
+    
     $root.CloudGaming = (function() {
     
         /**
@@ -1211,7 +5410,7 @@
     /**
      * EProtoExecutionSite enum.
      * @exports EProtoExecutionSite
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EProtoExecutionSiteUnknown=0 k_EProtoExecutionSiteUnknown value
      * @property {number} k_EProtoExecutionSiteSteamClient=2 k_EProtoExecutionSiteSteamClient value
      */
@@ -1625,6 +5824,7 @@
                  * @property {Array.<google.protobuf.IFieldDescriptorProto>|null} [extension] FileDescriptorProto extension
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [source_code_info] FileDescriptorProto source_code_info
+                 * @property {string|null} [syntax] FileDescriptorProto syntax
                  */
     
                 /**
@@ -1738,6 +5938,14 @@
                 FileDescriptorProto.prototype.source_code_info = null;
     
                 /**
+                 * FileDescriptorProto syntax.
+                 * @member {string} syntax
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.syntax = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -1761,9 +5969,9 @@
                 FileDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
+                    if (message["package"] != null && message.hasOwnProperty("package"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message["package"]);
                     if (message.dependency != null && message.dependency.length)
                         for (var i = 0; i < message.dependency.length; ++i)
@@ -1780,9 +5988,9 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.source_code_info != null && Object.hasOwnProperty.call(message, "source_code_info"))
+                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info"))
                         $root.google.protobuf.SourceCodeInfo.encode(message.source_code_info, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     if (message.public_dependency != null && message.public_dependency.length)
                         for (var i = 0; i < message.public_dependency.length; ++i)
@@ -1790,6 +5998,8 @@
                     if (message.weak_dependency != null && message.weak_dependency.length)
                         for (var i = 0; i < message.weak_dependency.length; ++i)
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weak_dependency[i]);
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     return writer;
                 };
     
@@ -1880,6 +6090,9 @@
                             break;
                         case 9:
                             message.source_code_info = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                            break;
+                        case 12:
+                            message.syntax = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1989,6 +6202,9 @@
                         if (error)
                             return "source_code_info." + error;
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        if (!$util.isString(message.syntax))
+                            return "syntax: string expected";
                     return null;
                 };
     
@@ -2079,6 +6295,8 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.source_code_info: object expected");
                         message.source_code_info = $root.google.protobuf.SourceCodeInfo.fromObject(object.source_code_info);
                     }
+                    if (object.syntax != null)
+                        message.syntax = String(object.syntax);
                     return message;
                 };
     
@@ -2109,6 +6327,7 @@
                         object["package"] = "";
                         object.options = null;
                         object.source_code_info = null;
+                        object.syntax = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -2153,6 +6372,8 @@
                         for (var j = 0; j < message.weak_dependency.length; ++j)
                             object.weak_dependency[j] = message.weak_dependency[j];
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        object.syntax = message.syntax;
                     return object;
                 };
     
@@ -2184,6 +6405,8 @@
                  * @property {Array.<google.protobuf.DescriptorProto.IExtensionRange>|null} [extension_range] DescriptorProto extension_range
                  * @property {Array.<google.protobuf.IOneofDescriptorProto>|null} [oneof_decl] DescriptorProto oneof_decl
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
+                 * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reserved_range] DescriptorProto reserved_range
+                 * @property {Array.<string>|null} [reserved_name] DescriptorProto reserved_name
                  */
     
                 /**
@@ -2201,6 +6424,8 @@
                     this.enum_type = [];
                     this.extension_range = [];
                     this.oneof_decl = [];
+                    this.reserved_range = [];
+                    this.reserved_name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -2272,6 +6497,22 @@
                 DescriptorProto.prototype.options = null;
     
                 /**
+                 * DescriptorProto reserved_range.
+                 * @member {Array.<google.protobuf.DescriptorProto.IReservedRange>} reserved_range
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_range = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto reserved_name.
+                 * @member {Array.<string>} reserved_name
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_name = $util.emptyArray;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -2295,7 +6536,7 @@
                 DescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.field != null && message.field.length)
                         for (var i = 0; i < message.field.length; ++i)
@@ -2312,11 +6553,17 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.oneof_decl != null && message.oneof_decl.length)
                         for (var i = 0; i < message.oneof_decl.length; ++i)
                             $root.google.protobuf.OneofDescriptorProto.encode(message.oneof_decl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.reserved_range != null && message.reserved_range.length)
+                        for (var i = 0; i < message.reserved_range.length; ++i)
+                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reserved_range[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.reserved_name != null && message.reserved_name.length)
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.reserved_name[i]);
                     return writer;
                 };
     
@@ -2386,6 +6633,16 @@
                             break;
                         case 7:
                             message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                            break;
+                        case 9:
+                            if (!(message.reserved_range && message.reserved_range.length))
+                                message.reserved_range = [];
+                            message.reserved_range.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                            break;
+                        case 10:
+                            if (!(message.reserved_name && message.reserved_name.length))
+                                message.reserved_name = [];
+                            message.reserved_name.push(reader.string());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -2484,6 +6741,22 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.reserved_range != null && message.hasOwnProperty("reserved_range")) {
+                        if (!Array.isArray(message.reserved_range))
+                            return "reserved_range: array expected";
+                        for (var i = 0; i < message.reserved_range.length; ++i) {
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reserved_range[i]);
+                            if (error)
+                                return "reserved_range." + error;
+                        }
+                    }
+                    if (message.reserved_name != null && message.hasOwnProperty("reserved_name")) {
+                        if (!Array.isArray(message.reserved_name))
+                            return "reserved_name: array expected";
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            if (!$util.isString(message.reserved_name[i]))
+                                return "reserved_name: string[] expected";
+                    }
                     return null;
                 };
     
@@ -2566,6 +6839,23 @@
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
                     }
+                    if (object.reserved_range) {
+                        if (!Array.isArray(object.reserved_range))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_range: array expected");
+                        message.reserved_range = [];
+                        for (var i = 0; i < object.reserved_range.length; ++i) {
+                            if (typeof object.reserved_range[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.reserved_range: object expected");
+                            message.reserved_range[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reserved_range[i]);
+                        }
+                    }
+                    if (object.reserved_name) {
+                        if (!Array.isArray(object.reserved_name))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_name: array expected");
+                        message.reserved_name = [];
+                        for (var i = 0; i < object.reserved_name.length; ++i)
+                            message.reserved_name[i] = String(object.reserved_name[i]);
+                    }
                     return message;
                 };
     
@@ -2589,6 +6879,8 @@
                         object.extension_range = [];
                         object.extension = [];
                         object.oneof_decl = [];
+                        object.reserved_range = [];
+                        object.reserved_name = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -2627,6 +6919,16 @@
                         object.oneof_decl = [];
                         for (var j = 0; j < message.oneof_decl.length; ++j)
                             object.oneof_decl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneof_decl[j], options);
+                    }
+                    if (message.reserved_range && message.reserved_range.length) {
+                        object.reserved_range = [];
+                        for (var j = 0; j < message.reserved_range.length; ++j)
+                            object.reserved_range[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reserved_range[j], options);
+                    }
+                    if (message.reserved_name && message.reserved_name.length) {
+                        object.reserved_name = [];
+                        for (var j = 0; j < message.reserved_name.length; ++j)
+                            object.reserved_name[j] = message.reserved_name[j];
                     }
                     return object;
                 };
@@ -2707,9 +7009,9 @@
                     ExtensionRange.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
+                        if (message.start != null && message.hasOwnProperty("start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
-                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
+                        if (message.end != null && message.hasOwnProperty("end"))
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
                         return writer;
                     };
@@ -2852,6 +7154,216 @@
                     return ExtensionRange;
                 })();
     
+                DescriptorProto.ReservedRange = (function() {
+    
+                    /**
+                     * Properties of a ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @interface IReservedRange
+                     * @property {number|null} [start] ReservedRange start
+                     * @property {number|null} [end] ReservedRange end
+                     */
+    
+                    /**
+                     * Constructs a new ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @classdesc Represents a ReservedRange.
+                     * @implements IReservedRange
+                     * @constructor
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     */
+                    function ReservedRange(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReservedRange start.
+                     * @member {number} start
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.start = 0;
+    
+                    /**
+                     * ReservedRange end.
+                     * @member {number} end
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.end = 0;
+    
+                    /**
+                     * Creates a new ReservedRange instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange instance
+                     */
+                    ReservedRange.create = function create(properties) {
+                        return new ReservedRange(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.start = reader.int32();
+                                break;
+                            case 2:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReservedRange message.
+                     * @function verify
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReservedRange.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            if (!$util.isInteger(message.start))
+                                return "start: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReservedRange message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     */
+                    ReservedRange.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
+                            return object;
+                        var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        if (object.start != null)
+                            message.start = object.start | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.ReservedRange} message ReservedRange
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReservedRange.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.start = 0;
+                            object.end = 0;
+                        }
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            object.start = message.start;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReservedRange to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReservedRange.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ReservedRange;
+                })();
+    
                 return DescriptorProto;
             })();
     
@@ -2869,6 +7381,7 @@
                  * @property {string|null} [extendee] FieldDescriptorProto extendee
                  * @property {string|null} [default_value] FieldDescriptorProto default_value
                  * @property {number|null} [oneof_index] FieldDescriptorProto oneof_index
+                 * @property {string|null} [json_name] FieldDescriptorProto json_name
                  * @property {google.protobuf.IFieldOptions|null} [options] FieldDescriptorProto options
                  */
     
@@ -2952,6 +7465,14 @@
                 FieldDescriptorProto.prototype.oneof_index = 0;
     
                 /**
+                 * FieldDescriptorProto json_name.
+                 * @member {string} json_name
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.json_name = "";
+    
+                /**
                  * FieldDescriptorProto options.
                  * @member {google.protobuf.IFieldOptions|null|undefined} options
                  * @memberof google.protobuf.FieldDescriptorProto
@@ -2983,24 +7504,26 @@
                 FieldDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
+                    if (message.extendee != null && message.hasOwnProperty("extendee"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.extendee);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.number);
-                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                    if (message.label != null && message.hasOwnProperty("label"))
                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.label);
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    if (message.type != null && message.hasOwnProperty("type"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
-                    if (message.type_name != null && Object.hasOwnProperty.call(message, "type_name"))
+                    if (message.type_name != null && message.hasOwnProperty("type_name"))
                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.type_name);
-                    if (message.default_value != null && Object.hasOwnProperty.call(message, "default_value"))
+                    if (message.default_value != null && message.hasOwnProperty("default_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.default_value);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.oneof_index != null && Object.hasOwnProperty.call(message, "oneof_index"))
+                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneof_index);
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        writer.uint32(/* id 10, wireType 2 =*/82).string(message.json_name);
                     return writer;
                 };
     
@@ -3058,6 +7581,9 @@
                             break;
                         case 9:
                             message.oneof_index = reader.int32();
+                            break;
+                        case 10:
+                            message.json_name = reader.string();
                             break;
                         case 8:
                             message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
@@ -3148,6 +7674,9 @@
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         if (!$util.isInteger(message.oneof_index))
                             return "oneof_index: integer expected";
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        if (!$util.isString(message.json_name))
+                            return "json_name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
                         var error = $root.google.protobuf.FieldOptions.verify(message.options);
                         if (error)
@@ -3268,6 +7797,8 @@
                         message.default_value = String(object.default_value);
                     if (object.oneof_index != null)
                         message.oneof_index = object.oneof_index | 0;
+                    if (object.json_name != null)
+                        message.json_name = String(object.json_name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
@@ -3299,6 +7830,7 @@
                         object.default_value = "";
                         object.options = null;
                         object.oneof_index = 0;
+                        object.json_name = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -3318,6 +7850,8 @@
                         object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options);
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         object.oneof_index = message.oneof_index;
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        object.json_name = message.json_name;
                     return object;
                 };
     
@@ -3335,7 +7869,7 @@
                 /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} TYPE_DOUBLE=1 TYPE_DOUBLE value
                  * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
                  * @property {number} TYPE_INT64=3 TYPE_INT64 value
@@ -3381,7 +7915,7 @@
                 /**
                  * Label enum.
                  * @name google.protobuf.FieldDescriptorProto.Label
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
                  * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
@@ -3404,6 +7938,7 @@
                  * @memberof google.protobuf
                  * @interface IOneofDescriptorProto
                  * @property {string|null} [name] OneofDescriptorProto name
+                 * @property {google.protobuf.IOneofOptions|null} [options] OneofDescriptorProto options
                  */
     
                 /**
@@ -3430,6 +7965,14 @@
                 OneofDescriptorProto.prototype.name = "";
     
                 /**
+                 * OneofDescriptorProto options.
+                 * @member {google.protobuf.IOneofOptions|null|undefined} options
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @instance
+                 */
+                OneofDescriptorProto.prototype.options = null;
+    
+                /**
                  * Creates a new OneofDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.OneofDescriptorProto
@@ -3453,8 +7996,10 @@
                 OneofDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -3491,6 +8036,9 @@
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
+                            break;
+                        case 2:
+                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3530,6 +8078,11 @@
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
                     return null;
                 };
     
@@ -3547,6 +8100,11 @@
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                    }
                     return message;
                 };
     
@@ -3563,10 +8121,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.name = "";
+                        object.options = null;
+                    }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options);
                     return object;
                 };
     
@@ -3659,12 +8221,12 @@
                 EnumDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.value != null && message.value.length)
                         for (var i = 0; i < message.value.length; ++i)
                             $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -3917,11 +8479,11 @@
                 EnumValueDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -4155,12 +8717,12 @@
                 ServiceDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.method != null && message.method.length)
                         for (var i = 0; i < message.method.length; ++i)
                             $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -4349,6 +8911,8 @@
                  * @property {string|null} [input_type] MethodDescriptorProto input_type
                  * @property {string|null} [output_type] MethodDescriptorProto output_type
                  * @property {google.protobuf.IMethodOptions|null} [options] MethodDescriptorProto options
+                 * @property {boolean|null} [client_streaming] MethodDescriptorProto client_streaming
+                 * @property {boolean|null} [server_streaming] MethodDescriptorProto server_streaming
                  */
     
                 /**
@@ -4399,6 +8963,22 @@
                 MethodDescriptorProto.prototype.options = null;
     
                 /**
+                 * MethodDescriptorProto client_streaming.
+                 * @member {boolean} client_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.client_streaming = false;
+    
+                /**
+                 * MethodDescriptorProto server_streaming.
+                 * @member {boolean} server_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.server_streaming = false;
+    
+                /**
                  * Creates a new MethodDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodDescriptorProto
@@ -4422,14 +9002,18 @@
                 MethodDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.input_type != null && Object.hasOwnProperty.call(message, "input_type"))
+                    if (message.input_type != null && message.hasOwnProperty("input_type"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.input_type);
-                    if (message.output_type != null && Object.hasOwnProperty.call(message, "output_type"))
+                    if (message.output_type != null && message.hasOwnProperty("output_type"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.output_type);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.client_streaming);
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.server_streaming);
                     return writer;
                 };
     
@@ -4475,6 +9059,12 @@
                             break;
                         case 4:
                             message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.client_streaming = reader.bool();
+                            break;
+                        case 6:
+                            message.server_streaming = reader.bool();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -4525,6 +9115,12 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        if (typeof message.client_streaming !== "boolean")
+                            return "client_streaming: boolean expected";
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        if (typeof message.server_streaming !== "boolean")
+                            return "server_streaming: boolean expected";
                     return null;
                 };
     
@@ -4551,6 +9147,10 @@
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
                     }
+                    if (object.client_streaming != null)
+                        message.client_streaming = Boolean(object.client_streaming);
+                    if (object.server_streaming != null)
+                        message.server_streaming = Boolean(object.server_streaming);
                     return message;
                 };
     
@@ -4572,6 +9172,8 @@
                         object.input_type = "";
                         object.output_type = "";
                         object.options = null;
+                        object.client_streaming = false;
+                        object.server_streaming = false;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -4581,6 +9183,10 @@
                         object.output_type = message.output_type;
                     if (message.options != null && message.hasOwnProperty("options"))
                         object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options);
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        object.client_streaming = message.client_streaming;
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        object.server_streaming = message.server_streaming;
                     return object;
                 };
     
@@ -4615,6 +9221,9 @@
                  * @property {boolean|null} [java_generic_services] FileOptions java_generic_services
                  * @property {boolean|null} [py_generic_services] FileOptions py_generic_services
                  * @property {boolean|null} [deprecated] FileOptions deprecated
+                 * @property {boolean|null} [cc_enable_arenas] FileOptions cc_enable_arenas
+                 * @property {string|null} [objc_class_prefix] FileOptions objc_class_prefix
+                 * @property {string|null} [csharp_namespace] FileOptions csharp_namespace
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FileOptions uninterpreted_option
                  */
     
@@ -4723,6 +9332,30 @@
                 FileOptions.prototype.deprecated = false;
     
                 /**
+                 * FileOptions cc_enable_arenas.
+                 * @member {boolean} cc_enable_arenas
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.cc_enable_arenas = false;
+    
+                /**
+                 * FileOptions objc_class_prefix.
+                 * @member {string} objc_class_prefix
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.objc_class_prefix = "";
+    
+                /**
+                 * FileOptions csharp_namespace.
+                 * @member {string} csharp_namespace
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.csharp_namespace = "";
+    
+                /**
                  * FileOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.FileOptions
@@ -4754,28 +9387,34 @@
                 FileOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.java_package != null && Object.hasOwnProperty.call(message, "java_package"))
+                    if (message.java_package != null && message.hasOwnProperty("java_package"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.java_package);
-                    if (message.java_outer_classname != null && Object.hasOwnProperty.call(message, "java_outer_classname"))
+                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.java_outer_classname);
-                    if (message.optimize_for != null && Object.hasOwnProperty.call(message, "optimize_for"))
+                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.optimize_for);
-                    if (message.java_multiple_files != null && Object.hasOwnProperty.call(message, "java_multiple_files"))
+                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.java_multiple_files);
-                    if (message.go_package != null && Object.hasOwnProperty.call(message, "go_package"))
+                    if (message.go_package != null && message.hasOwnProperty("go_package"))
                         writer.uint32(/* id 11, wireType 2 =*/90).string(message.go_package);
-                    if (message.cc_generic_services != null && Object.hasOwnProperty.call(message, "cc_generic_services"))
+                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.cc_generic_services);
-                    if (message.java_generic_services != null && Object.hasOwnProperty.call(message, "java_generic_services"))
+                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
                         writer.uint32(/* id 17, wireType 0 =*/136).bool(message.java_generic_services);
-                    if (message.py_generic_services != null && Object.hasOwnProperty.call(message, "py_generic_services"))
+                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
                         writer.uint32(/* id 18, wireType 0 =*/144).bool(message.py_generic_services);
-                    if (message.java_generate_equals_and_hash != null && Object.hasOwnProperty.call(message, "java_generate_equals_and_hash"))
+                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
                         writer.uint32(/* id 20, wireType 0 =*/160).bool(message.java_generate_equals_and_hash);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 23, wireType 0 =*/184).bool(message.deprecated);
-                    if (message.java_string_check_utf8 != null && Object.hasOwnProperty.call(message, "java_string_check_utf8"))
+                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         writer.uint32(/* id 27, wireType 0 =*/216).bool(message.java_string_check_utf8);
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        writer.uint32(/* id 31, wireType 0 =*/248).bool(message.cc_enable_arenas);
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        writer.uint32(/* id 36, wireType 2 =*/290).string(message.objc_class_prefix);
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        writer.uint32(/* id 37, wireType 2 =*/298).string(message.csharp_namespace);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -4845,6 +9484,15 @@
                             break;
                         case 23:
                             message.deprecated = reader.bool();
+                            break;
+                        case 31:
+                            message.cc_enable_arenas = reader.bool();
+                            break;
+                        case 36:
+                            message.objc_class_prefix = reader.string();
+                            break;
+                        case 37:
+                            message.csharp_namespace = reader.string();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -4925,6 +9573,15 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        if (typeof message.cc_enable_arenas !== "boolean")
+                            return "cc_enable_arenas: boolean expected";
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        if (!$util.isString(message.objc_class_prefix))
+                            return "objc_class_prefix: string expected";
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        if (!$util.isString(message.csharp_namespace))
+                            return "csharp_namespace: string expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -4983,6 +9640,12 @@
                         message.py_generic_services = Boolean(object.py_generic_services);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.cc_enable_arenas != null)
+                        message.cc_enable_arenas = Boolean(object.cc_enable_arenas);
+                    if (object.objc_class_prefix != null)
+                        message.objc_class_prefix = String(object.objc_class_prefix);
+                    if (object.csharp_namespace != null)
+                        message.csharp_namespace = String(object.csharp_namespace);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.FileOptions.uninterpreted_option: array expected");
@@ -5023,6 +9686,9 @@
                         object.java_generate_equals_and_hash = false;
                         object.deprecated = false;
                         object.java_string_check_utf8 = false;
+                        object.cc_enable_arenas = false;
+                        object.objc_class_prefix = "";
+                        object.csharp_namespace = "";
                     }
                     if (message.java_package != null && message.hasOwnProperty("java_package"))
                         object.java_package = message.java_package;
@@ -5046,6 +9712,12 @@
                         object.deprecated = message.deprecated;
                     if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         object.java_string_check_utf8 = message.java_string_check_utf8;
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        object.cc_enable_arenas = message.cc_enable_arenas;
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        object.objc_class_prefix = message.objc_class_prefix;
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        object.csharp_namespace = message.csharp_namespace;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -5068,7 +9740,7 @@
                 /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} SPEED=1 SPEED value
                  * @property {number} CODE_SIZE=2 CODE_SIZE value
                  * @property {number} LITE_RUNTIME=3 LITE_RUNTIME value
@@ -5093,6 +9765,7 @@
                  * @property {boolean|null} [message_set_wire_format] MessageOptions message_set_wire_format
                  * @property {boolean|null} [no_standard_descriptor_accessor] MessageOptions no_standard_descriptor_accessor
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
+                 * @property {boolean|null} [map_entry] MessageOptions map_entry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] MessageOptions uninterpreted_option
                  */
     
@@ -5137,6 +9810,14 @@
                 MessageOptions.prototype.deprecated = false;
     
                 /**
+                 * MessageOptions map_entry.
+                 * @member {boolean} map_entry
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.map_entry = false;
+    
+                /**
                  * MessageOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.MessageOptions
@@ -5168,12 +9849,14 @@
                 MessageOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.message_set_wire_format != null && Object.hasOwnProperty.call(message, "message_set_wire_format"))
+                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.message_set_wire_format);
-                    if (message.no_standard_descriptor_accessor != null && Object.hasOwnProperty.call(message, "no_standard_descriptor_accessor"))
+                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.no_standard_descriptor_accessor);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).bool(message.map_entry);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -5219,6 +9902,9 @@
                             break;
                         case 3:
                             message.deprecated = reader.bool();
+                            break;
+                        case 7:
+                            message.map_entry = reader.bool();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -5269,6 +9955,9 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        if (typeof message.map_entry !== "boolean")
+                            return "map_entry: boolean expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -5299,6 +9988,8 @@
                         message.no_standard_descriptor_accessor = Boolean(object.no_standard_descriptor_accessor);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.map_entry != null)
+                        message.map_entry = Boolean(object.map_entry);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpreted_option: array expected");
@@ -5331,6 +10022,7 @@
                         object.message_set_wire_format = false;
                         object.no_standard_descriptor_accessor = false;
                         object.deprecated = false;
+                        object.map_entry = false;
                     }
                     if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         object.message_set_wire_format = message.message_set_wire_format;
@@ -5338,6 +10030,8 @@
                         object.no_standard_descriptor_accessor = message.no_standard_descriptor_accessor;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        object.map_entry = message.map_entry;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -5368,9 +10062,9 @@
                  * @interface IFieldOptions
                  * @property {google.protobuf.FieldOptions.CType|null} [ctype] FieldOptions ctype
                  * @property {boolean|null} [packed] FieldOptions packed
+                 * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
-                 * @property {string|null} [experimental_map_key] FieldOptions experimental_map_key
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FieldOptions uninterpreted_option
                  * @property {string|null} [".description"] FieldOptions .description
@@ -5409,6 +10103,14 @@
                 FieldOptions.prototype.packed = false;
     
                 /**
+                 * FieldOptions jstype.
+                 * @member {google.protobuf.FieldOptions.JSType} jstype
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.jstype = 0;
+    
+                /**
                  * FieldOptions lazy.
                  * @member {boolean} lazy
                  * @memberof google.protobuf.FieldOptions
@@ -5423,14 +10125,6 @@
                  * @instance
                  */
                 FieldOptions.prototype.deprecated = false;
-    
-                /**
-                 * FieldOptions experimental_map_key.
-                 * @member {string} experimental_map_key
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.experimental_map_key = "";
     
                 /**
                  * FieldOptions weak.
@@ -5480,22 +10174,22 @@
                 FieldOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
+                    if (message.ctype != null && message.hasOwnProperty("ctype"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
-                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
+                    if (message.packed != null && message.hasOwnProperty("packed"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.packed);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
-                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
+                    if (message.lazy != null && message.hasOwnProperty("lazy"))
                         writer.uint32(/* id 5, wireType 0 =*/40).bool(message.lazy);
-                    if (message.experimental_map_key != null && Object.hasOwnProperty.call(message, "experimental_map_key"))
-                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.experimental_map_key);
-                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
+                    if (message.weak != null && message.hasOwnProperty("weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".description"] != null && Object.hasOwnProperty.call(message, ".description"))
+                    if (message[".description"] != null && message.hasOwnProperty(".description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".description"]);
                     return writer;
                 };
@@ -5537,14 +10231,14 @@
                         case 2:
                             message.packed = reader.bool();
                             break;
+                        case 6:
+                            message.jstype = reader.int32();
+                            break;
                         case 5:
                             message.lazy = reader.bool();
                             break;
                         case 3:
                             message.deprecated = reader.bool();
-                            break;
-                        case 9:
-                            message.experimental_map_key = reader.string();
                             break;
                         case 10:
                             message.weak = reader.bool();
@@ -5604,15 +10298,21 @@
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         if (typeof message.packed !== "boolean")
                             return "packed: boolean expected";
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        switch (message.jstype) {
+                        default:
+                            return "jstype: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        if (!$util.isString(message.experimental_map_key))
-                            return "experimental_map_key: string expected";
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         if (typeof message.weak !== "boolean")
                             return "weak: boolean expected";
@@ -5659,12 +10359,24 @@
                     }
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
+                    switch (object.jstype) {
+                    case "JS_NORMAL":
+                    case 0:
+                        message.jstype = 0;
+                        break;
+                    case "JS_STRING":
+                    case 1:
+                        message.jstype = 1;
+                        break;
+                    case "JS_NUMBER":
+                    case 2:
+                        message.jstype = 2;
+                        break;
+                    }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
-                    if (object.experimental_map_key != null)
-                        message.experimental_map_key = String(object.experimental_map_key);
                     if (object.weak != null)
                         message.weak = Boolean(object.weak);
                     if (object.uninterpreted_option) {
@@ -5702,7 +10414,7 @@
                         object.packed = false;
                         object.deprecated = false;
                         object.lazy = false;
-                        object.experimental_map_key = "";
+                        object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
                         object[".description"] = "";
                     }
@@ -5714,8 +10426,8 @@
                         object.deprecated = message.deprecated;
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        object.experimental_map_key = message.experimental_map_key;
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
@@ -5742,7 +10454,7 @@
                 /**
                  * CType enum.
                  * @name google.protobuf.FieldOptions.CType
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} STRING=0 STRING value
                  * @property {number} CORD=1 CORD value
                  * @property {number} STRING_PIECE=2 STRING_PIECE value
@@ -5755,7 +10467,231 @@
                     return values;
                 })();
     
+                /**
+                 * JSType enum.
+                 * @name google.protobuf.FieldOptions.JSType
+                 * @enum {string}
+                 * @property {number} JS_NORMAL=0 JS_NORMAL value
+                 * @property {number} JS_STRING=1 JS_STRING value
+                 * @property {number} JS_NUMBER=2 JS_NUMBER value
+                 */
+                FieldOptions.JSType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JS_NORMAL"] = 0;
+                    values[valuesById[1] = "JS_STRING"] = 1;
+                    values[valuesById[2] = "JS_NUMBER"] = 2;
+                    return values;
+                })();
+    
                 return FieldOptions;
+            })();
+    
+            protobuf.OneofOptions = (function() {
+    
+                /**
+                 * Properties of an OneofOptions.
+                 * @memberof google.protobuf
+                 * @interface IOneofOptions
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] OneofOptions uninterpreted_option
+                 */
+    
+                /**
+                 * Constructs a new OneofOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an OneofOptions.
+                 * @implements IOneofOptions
+                 * @constructor
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 */
+                function OneofOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OneofOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * Creates a new OneofOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.OneofOptions} OneofOptions instance
+                 */
+                OneofOptions.create = function create(properties) {
+                    return new OneofOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message, length delimited. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OneofOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OneofOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an OneofOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 */
+                OneofOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.OneofOptions)
+                        return object;
+                    var message = new $root.google.protobuf.OneofOptions();
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.OneofOptions} message OneofOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OneofOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this OneofOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OneofOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return OneofOptions;
             })();
     
             protobuf.EnumOptions = (function() {
@@ -5842,14 +10778,14 @@
                 EnumOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.allow_alias != null && Object.hasOwnProperty.call(message, "allow_alias"))
+                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allow_alias);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_description"] != null && Object.hasOwnProperty.call(message, ".enum_description"))
+                    if (message[".enum_description"] != null && message.hasOwnProperty(".enum_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_description"]);
                     return writer;
                 };
@@ -6109,12 +11045,12 @@
                 EnumValueOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_value_description"] != null && Object.hasOwnProperty.call(message, ".enum_value_description"))
+                    if (message[".enum_value_description"] != null && message.hasOwnProperty(".enum_value_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_value_description"]);
                     return writer;
                 };
@@ -6372,14 +11308,14 @@
                 ServiceOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".service_description"] != null && Object.hasOwnProperty.call(message, ".service_description"))
+                    if (message[".service_description"] != null && message.hasOwnProperty(".service_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".service_description"]);
-                    if (message[".service_execution_site"] != null && Object.hasOwnProperty.call(message, ".service_execution_site"))
+                    if (message[".service_execution_site"] != null && message.hasOwnProperty(".service_execution_site"))
                         writer.uint32(/* id 50008, wireType 0 =*/400064).int32(message[".service_execution_site"]);
                     return writer;
                 };
@@ -6652,12 +11588,12 @@
                 MethodOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".method_description"] != null && Object.hasOwnProperty.call(message, ".method_description"))
+                    if (message[".method_description"] != null && message.hasOwnProperty(".method_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".method_description"]);
                     return writer;
                 };
@@ -6945,17 +11881,17 @@
                     if (message.name != null && message.name.length)
                         for (var i = 0; i < message.name.length; ++i)
                             $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.identifier_value != null && Object.hasOwnProperty.call(message, "identifier_value"))
+                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifier_value);
-                    if (message.positive_int_value != null && Object.hasOwnProperty.call(message, "positive_int_value"))
+                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
                         writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.positive_int_value);
-                    if (message.negative_int_value != null && Object.hasOwnProperty.call(message, "negative_int_value"))
+                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int64(message.negative_int_value);
-                    if (message.double_value != null && Object.hasOwnProperty.call(message, "double_value"))
+                    if (message.double_value != null && message.hasOwnProperty("double_value"))
                         writer.uint32(/* id 6, wireType 1 =*/49).double(message.double_value);
-                    if (message.string_value != null && Object.hasOwnProperty.call(message, "string_value"))
+                    if (message.string_value != null && message.hasOwnProperty("string_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.string_value);
-                    if (message.aggregate_value != null && Object.hasOwnProperty.call(message, "aggregate_value"))
+                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.aggregate_value);
                     return writer;
                 };
@@ -7635,6 +12571,7 @@
                      * @property {Array.<number>|null} [span] Location span
                      * @property {string|null} [leading_comments] Location leading_comments
                      * @property {string|null} [trailing_comments] Location trailing_comments
+                     * @property {Array.<string>|null} [leading_detached_comments] Location leading_detached_comments
                      */
     
                     /**
@@ -7648,6 +12585,7 @@
                     function Location(properties) {
                         this.path = [];
                         this.span = [];
+                        this.leading_detached_comments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -7687,6 +12625,14 @@
                     Location.prototype.trailing_comments = "";
     
                     /**
+                     * Location leading_detached_comments.
+                     * @member {Array.<string>} leading_detached_comments
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.leading_detached_comments = $util.emptyArray;
+    
+                    /**
                      * Creates a new Location instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.SourceCodeInfo.Location
@@ -7722,10 +12668,13 @@
                                 writer.int32(message.span[i]);
                             writer.ldelim();
                         }
-                        if (message.leading_comments != null && Object.hasOwnProperty.call(message, "leading_comments"))
+                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.leading_comments);
-                        if (message.trailing_comments != null && Object.hasOwnProperty.call(message, "trailing_comments"))
+                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.trailing_comments);
+                        if (message.leading_detached_comments != null && message.leading_detached_comments.length)
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.leading_detached_comments[i]);
                         return writer;
                     };
     
@@ -7786,6 +12735,11 @@
                             case 4:
                                 message.trailing_comments = reader.string();
                                 break;
+                            case 6:
+                                if (!(message.leading_detached_comments && message.leading_detached_comments.length))
+                                    message.leading_detached_comments = [];
+                                message.leading_detached_comments.push(reader.string());
+                                break;
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -7841,6 +12795,13 @@
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             if (!$util.isString(message.trailing_comments))
                                 return "trailing_comments: string expected";
+                        if (message.leading_detached_comments != null && message.hasOwnProperty("leading_detached_comments")) {
+                            if (!Array.isArray(message.leading_detached_comments))
+                                return "leading_detached_comments: array expected";
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                if (!$util.isString(message.leading_detached_comments[i]))
+                                    return "leading_detached_comments: string[] expected";
+                        }
                         return null;
                     };
     
@@ -7874,6 +12835,13 @@
                             message.leading_comments = String(object.leading_comments);
                         if (object.trailing_comments != null)
                             message.trailing_comments = String(object.trailing_comments);
+                        if (object.leading_detached_comments) {
+                            if (!Array.isArray(object.leading_detached_comments))
+                                throw TypeError(".google.protobuf.SourceCodeInfo.Location.leading_detached_comments: array expected");
+                            message.leading_detached_comments = [];
+                            for (var i = 0; i < object.leading_detached_comments.length; ++i)
+                                message.leading_detached_comments[i] = String(object.leading_detached_comments[i]);
+                        }
                         return message;
                     };
     
@@ -7893,6 +12861,7 @@
                         if (options.arrays || options.defaults) {
                             object.path = [];
                             object.span = [];
+                            object.leading_detached_comments = [];
                         }
                         if (options.defaults) {
                             object.leading_comments = "";
@@ -7912,6 +12881,11 @@
                             object.leading_comments = message.leading_comments;
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             object.trailing_comments = message.trailing_comments;
+                        if (message.leading_detached_comments && message.leading_detached_comments.length) {
+                            object.leading_detached_comments = [];
+                            for (var j = 0; j < message.leading_detached_comments.length; ++j)
+                                object.leading_detached_comments[j] = message.leading_detached_comments[j];
+                        }
                         return object;
                     };
     
@@ -7930,6 +12904,493 @@
                 })();
     
                 return SourceCodeInfo;
+            })();
+    
+            protobuf.GeneratedCodeInfo = (function() {
+    
+                /**
+                 * Properties of a GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @interface IGeneratedCodeInfo
+                 * @property {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>|null} [annotation] GeneratedCodeInfo annotation
+                 */
+    
+                /**
+                 * Constructs a new GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a GeneratedCodeInfo.
+                 * @implements IGeneratedCodeInfo
+                 * @constructor
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 */
+                function GeneratedCodeInfo(properties) {
+                    this.annotation = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GeneratedCodeInfo annotation.
+                 * @member {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>} annotation
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 */
+                GeneratedCodeInfo.prototype.annotation = $util.emptyArray;
+    
+                /**
+                 * Creates a new GeneratedCodeInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo instance
+                 */
+                GeneratedCodeInfo.create = function create(properties) {
+                    return new GeneratedCodeInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.annotation != null && message.annotation.length)
+                        for (var i = 0; i < message.annotation.length; ++i)
+                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.annotation && message.annotation.length))
+                                message.annotation = [];
+                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GeneratedCodeInfo message.
+                 * @function verify
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GeneratedCodeInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.annotation != null && message.hasOwnProperty("annotation")) {
+                        if (!Array.isArray(message.annotation))
+                            return "annotation: array expected";
+                        for (var i = 0; i < message.annotation.length; ++i) {
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            if (error)
+                                return "annotation." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a GeneratedCodeInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 */
+                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
+                        return object;
+                    var message = new $root.google.protobuf.GeneratedCodeInfo();
+                    if (object.annotation) {
+                        if (!Array.isArray(object.annotation))
+                            throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: array expected");
+                        message.annotation = [];
+                        for (var i = 0; i < object.annotation.length; ++i) {
+                            if (typeof object.annotation[i] !== "object")
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.GeneratedCodeInfo} message GeneratedCodeInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GeneratedCodeInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.annotation = [];
+                    if (message.annotation && message.annotation.length) {
+                        object.annotation = [];
+                        for (var j = 0; j < message.annotation.length; ++j)
+                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this GeneratedCodeInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GeneratedCodeInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                GeneratedCodeInfo.Annotation = (function() {
+    
+                    /**
+                     * Properties of an Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @interface IAnnotation
+                     * @property {Array.<number>|null} [path] Annotation path
+                     * @property {string|null} [source_file] Annotation source_file
+                     * @property {number|null} [begin] Annotation begin
+                     * @property {number|null} [end] Annotation end
+                     */
+    
+                    /**
+                     * Constructs a new Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @classdesc Represents an Annotation.
+                     * @implements IAnnotation
+                     * @constructor
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     */
+                    function Annotation(properties) {
+                        this.path = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Annotation path.
+                     * @member {Array.<number>} path
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.path = $util.emptyArray;
+    
+                    /**
+                     * Annotation source_file.
+                     * @member {string} source_file
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.source_file = "";
+    
+                    /**
+                     * Annotation begin.
+                     * @member {number} begin
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.begin = 0;
+    
+                    /**
+                     * Annotation end.
+                     * @member {number} end
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.end = 0;
+    
+                    /**
+                     * Creates a new Annotation instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation instance
+                     */
+                    Annotation.create = function create(properties) {
+                        return new Annotation(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.path != null && message.path.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.path.length; ++i)
+                                writer.int32(message.path[i]);
+                            writer.ldelim();
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.source_file);
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.path && message.path.length))
+                                    message.path = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.path.push(reader.int32());
+                                } else
+                                    message.path.push(reader.int32());
+                                break;
+                            case 2:
+                                message.source_file = reader.string();
+                                break;
+                            case 3:
+                                message.begin = reader.int32();
+                                break;
+                            case 4:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Annotation message.
+                     * @function verify
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Annotation.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.path != null && message.hasOwnProperty("path")) {
+                            if (!Array.isArray(message.path))
+                                return "path: array expected";
+                            for (var i = 0; i < message.path.length; ++i)
+                                if (!$util.isInteger(message.path[i]))
+                                    return "path: integer[] expected";
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            if (!$util.isString(message.source_file))
+                                return "source_file: string expected";
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            if (!$util.isInteger(message.begin))
+                                return "begin: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Annotation message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     */
+                    Annotation.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
+                            return object;
+                        var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        if (object.path) {
+                            if (!Array.isArray(object.path))
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.Annotation.path: array expected");
+                            message.path = [];
+                            for (var i = 0; i < object.path.length; ++i)
+                                message.path[i] = object.path[i] | 0;
+                        }
+                        if (object.source_file != null)
+                            message.source_file = String(object.source_file);
+                        if (object.begin != null)
+                            message.begin = object.begin | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Annotation message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.Annotation} message Annotation
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Annotation.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.path = [];
+                        if (options.defaults) {
+                            object.source_file = "";
+                            object.begin = 0;
+                            object.end = 0;
+                        }
+                        if (message.path && message.path.length) {
+                            object.path = [];
+                            for (var j = 0; j < message.path.length; ++j)
+                                object.path[j] = message.path[j];
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            object.source_file = message.source_file;
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            object.begin = message.begin;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Annotation to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Annotation.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Annotation;
+                })();
+    
+                return GeneratedCodeInfo;
             })();
     
             return protobuf;

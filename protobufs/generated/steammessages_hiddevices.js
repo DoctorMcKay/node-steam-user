@@ -19,7 +19,7 @@
     /**
      * EHIDDeviceLocation enum.
      * @exports EHIDDeviceLocation
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EDeviceLocationLocal=0 k_EDeviceLocationLocal value
      * @property {number} k_EDeviceLocationRemote=2 k_EDeviceLocationRemote value
      * @property {number} k_EDeviceLocationAny=3 k_EDeviceLocationAny value
@@ -35,7 +35,7 @@
     /**
      * EHIDDeviceDisconnectMethod enum.
      * @exports EHIDDeviceDisconnectMethod
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EDeviceDisconnectMethodUnknown=0 k_EDeviceDisconnectMethodUnknown value
      * @property {number} k_EDeviceDisconnectMethodBluetooth=1 k_EDeviceDisconnectMethodBluetooth value
      * @property {number} k_EDeviceDisconnectMethodFeatureReport=2 k_EDeviceDisconnectMethodFeatureReport value
@@ -74,6 +74,7 @@
          * @property {number|null} [session_id] CHIDDeviceInfo session_id
          * @property {number|null} [eControllerType] CHIDDeviceInfo eControllerType
          * @property {boolean|null} [is_xinput_device] CHIDDeviceInfo is_xinput_device
+         * @property {number|null} [session_remote_play_together_appid] CHIDDeviceInfo session_remote_play_together_appid
          */
     
         /**
@@ -236,6 +237,14 @@
         CHIDDeviceInfo.prototype.is_xinput_device = false;
     
         /**
+         * CHIDDeviceInfo session_remote_play_together_appid.
+         * @member {number} session_remote_play_together_appid
+         * @memberof CHIDDeviceInfo
+         * @instance
+         */
+        CHIDDeviceInfo.prototype.session_remote_play_together_appid = 0;
+    
+        /**
          * Creates a new CHIDDeviceInfo instance using the specified properties.
          * @function create
          * @memberof CHIDDeviceInfo
@@ -259,42 +268,44 @@
         CHIDDeviceInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+            if (message.location != null && message.hasOwnProperty("location"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.location);
-            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+            if (message.path != null && message.hasOwnProperty("path"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.path);
-            if (message.vendor_id != null && Object.hasOwnProperty.call(message, "vendor_id"))
+            if (message.vendor_id != null && message.hasOwnProperty("vendor_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.vendor_id);
-            if (message.product_id != null && Object.hasOwnProperty.call(message, "product_id"))
+            if (message.product_id != null && message.hasOwnProperty("product_id"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.product_id);
-            if (message.serial_number != null && Object.hasOwnProperty.call(message, "serial_number"))
+            if (message.serial_number != null && message.hasOwnProperty("serial_number"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.serial_number);
-            if (message.release_number != null && Object.hasOwnProperty.call(message, "release_number"))
+            if (message.release_number != null && message.hasOwnProperty("release_number"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.release_number);
-            if (message.manufacturer_string != null && Object.hasOwnProperty.call(message, "manufacturer_string"))
+            if (message.manufacturer_string != null && message.hasOwnProperty("manufacturer_string"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.manufacturer_string);
-            if (message.product_string != null && Object.hasOwnProperty.call(message, "product_string"))
+            if (message.product_string != null && message.hasOwnProperty("product_string"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.product_string);
-            if (message.usage_page != null && Object.hasOwnProperty.call(message, "usage_page"))
+            if (message.usage_page != null && message.hasOwnProperty("usage_page"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.usage_page);
-            if (message.usage != null && Object.hasOwnProperty.call(message, "usage"))
+            if (message.usage != null && message.hasOwnProperty("usage"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.usage);
-            if (message.interface_number != null && Object.hasOwnProperty.call(message, "interface_number"))
+            if (message.interface_number != null && message.hasOwnProperty("interface_number"))
                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.interface_number);
-            if (message.ostype != null && Object.hasOwnProperty.call(message, "ostype"))
+            if (message.ostype != null && message.hasOwnProperty("ostype"))
                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.ostype);
-            if (message.is_generic_gamepad != null && Object.hasOwnProperty.call(message, "is_generic_gamepad"))
+            if (message.is_generic_gamepad != null && message.hasOwnProperty("is_generic_gamepad"))
                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.is_generic_gamepad);
-            if (message.is_generic_joystick != null && Object.hasOwnProperty.call(message, "is_generic_joystick"))
+            if (message.is_generic_joystick != null && message.hasOwnProperty("is_generic_joystick"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.is_generic_joystick);
-            if (message.caps_bits != null && Object.hasOwnProperty.call(message, "caps_bits"))
+            if (message.caps_bits != null && message.hasOwnProperty("caps_bits"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.caps_bits);
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.session_id);
-            if (message.eControllerType != null && Object.hasOwnProperty.call(message, "eControllerType"))
+            if (message.eControllerType != null && message.hasOwnProperty("eControllerType"))
                 writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.eControllerType);
-            if (message.is_xinput_device != null && Object.hasOwnProperty.call(message, "is_xinput_device"))
+            if (message.is_xinput_device != null && message.hasOwnProperty("is_xinput_device"))
                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.is_xinput_device);
+            if (message.session_remote_play_together_appid != null && message.hasOwnProperty("session_remote_play_together_appid"))
+                writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.session_remote_play_together_appid);
             return writer;
         };
     
@@ -382,6 +393,9 @@
                     break;
                 case 18:
                     message.is_xinput_device = reader.bool();
+                    break;
+                case 19:
+                    message.session_remote_play_together_appid = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -478,6 +492,9 @@
             if (message.is_xinput_device != null && message.hasOwnProperty("is_xinput_device"))
                 if (typeof message.is_xinput_device !== "boolean")
                     return "is_xinput_device: boolean expected";
+            if (message.session_remote_play_together_appid != null && message.hasOwnProperty("session_remote_play_together_appid"))
+                if (!$util.isInteger(message.session_remote_play_together_appid))
+                    return "session_remote_play_together_appid: integer expected";
             return null;
         };
     
@@ -541,6 +558,8 @@
                 message.eControllerType = object.eControllerType >>> 0;
             if (object.is_xinput_device != null)
                 message.is_xinput_device = Boolean(object.is_xinput_device);
+            if (object.session_remote_play_together_appid != null)
+                message.session_remote_play_together_appid = object.session_remote_play_together_appid >>> 0;
             return message;
         };
     
@@ -576,6 +595,7 @@
                 object.session_id = 0;
                 object.eControllerType = 0;
                 object.is_xinput_device = false;
+                object.session_remote_play_together_appid = 0;
             }
             if (message.location != null && message.hasOwnProperty("location"))
                 object.location = options.enums === String ? $root.EHIDDeviceLocation[message.location] : message.location;
@@ -613,6 +633,8 @@
                 object.eControllerType = message.eControllerType;
             if (message.is_xinput_device != null && message.hasOwnProperty("is_xinput_device"))
                 object.is_xinput_device = message.is_xinput_device;
+            if (message.session_remote_play_together_appid != null && message.hasOwnProperty("session_remote_play_together_appid"))
+                object.session_remote_play_together_appid = message.session_remote_play_together_appid;
             return object;
         };
     
@@ -713,13 +735,13 @@
         CHIDDeviceInputReport.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.full_report != null && Object.hasOwnProperty.call(message, "full_report"))
+            if (message.full_report != null && message.hasOwnProperty("full_report"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.full_report);
-            if (message.delta_report != null && Object.hasOwnProperty.call(message, "delta_report"))
+            if (message.delta_report != null && message.hasOwnProperty("delta_report"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.delta_report);
-            if (message.delta_report_size != null && Object.hasOwnProperty.call(message, "delta_report_size"))
+            if (message.delta_report_size != null && message.hasOwnProperty("delta_report_size"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.delta_report_size);
-            if (message.delta_report_crc != null && Object.hasOwnProperty.call(message, "delta_report_crc"))
+            if (message.delta_report_crc != null && message.hasOwnProperty("delta_report_crc"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.delta_report_crc);
             return writer;
         };
@@ -1080,31 +1102,31 @@
         CHIDMessageToRemote.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.request_id != null && Object.hasOwnProperty.call(message, "request_id"))
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.request_id);
-            if (message.device_open != null && Object.hasOwnProperty.call(message, "device_open"))
+            if (message.device_open != null && message.hasOwnProperty("device_open"))
                 $root.CHIDMessageToRemote.DeviceOpen.encode(message.device_open, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.device_close != null && Object.hasOwnProperty.call(message, "device_close"))
+            if (message.device_close != null && message.hasOwnProperty("device_close"))
                 $root.CHIDMessageToRemote.DeviceClose.encode(message.device_close, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.device_write != null && Object.hasOwnProperty.call(message, "device_write"))
+            if (message.device_write != null && message.hasOwnProperty("device_write"))
                 $root.CHIDMessageToRemote.DeviceWrite.encode(message.device_write, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.device_read != null && Object.hasOwnProperty.call(message, "device_read"))
+            if (message.device_read != null && message.hasOwnProperty("device_read"))
                 $root.CHIDMessageToRemote.DeviceRead.encode(message.device_read, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.device_send_feature_report != null && Object.hasOwnProperty.call(message, "device_send_feature_report"))
+            if (message.device_send_feature_report != null && message.hasOwnProperty("device_send_feature_report"))
                 $root.CHIDMessageToRemote.DeviceSendFeatureReport.encode(message.device_send_feature_report, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.device_get_feature_report != null && Object.hasOwnProperty.call(message, "device_get_feature_report"))
+            if (message.device_get_feature_report != null && message.hasOwnProperty("device_get_feature_report"))
                 $root.CHIDMessageToRemote.DeviceGetFeatureReport.encode(message.device_get_feature_report, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.device_get_vendor_string != null && Object.hasOwnProperty.call(message, "device_get_vendor_string"))
+            if (message.device_get_vendor_string != null && message.hasOwnProperty("device_get_vendor_string"))
                 $root.CHIDMessageToRemote.DeviceGetVendorString.encode(message.device_get_vendor_string, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-            if (message.device_get_product_string != null && Object.hasOwnProperty.call(message, "device_get_product_string"))
+            if (message.device_get_product_string != null && message.hasOwnProperty("device_get_product_string"))
                 $root.CHIDMessageToRemote.DeviceGetProductString.encode(message.device_get_product_string, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-            if (message.device_get_serial_number_string != null && Object.hasOwnProperty.call(message, "device_get_serial_number_string"))
+            if (message.device_get_serial_number_string != null && message.hasOwnProperty("device_get_serial_number_string"))
                 $root.CHIDMessageToRemote.DeviceGetSerialNumberString.encode(message.device_get_serial_number_string, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-            if (message.device_start_input_reports != null && Object.hasOwnProperty.call(message, "device_start_input_reports"))
+            if (message.device_start_input_reports != null && message.hasOwnProperty("device_start_input_reports"))
                 $root.CHIDMessageToRemote.DeviceStartInputReports.encode(message.device_start_input_reports, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-            if (message.device_request_full_report != null && Object.hasOwnProperty.call(message, "device_request_full_report"))
+            if (message.device_request_full_report != null && message.hasOwnProperty("device_request_full_report"))
                 $root.CHIDMessageToRemote.DeviceRequestFullReport.encode(message.device_request_full_report, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-            if (message.device_disconnect != null && Object.hasOwnProperty.call(message, "device_disconnect"))
+            if (message.device_disconnect != null && message.hasOwnProperty("device_disconnect"))
                 $root.CHIDMessageToRemote.DeviceDisconnect.encode(message.device_disconnect, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             return writer;
         };
@@ -1563,7 +1585,7 @@
             DeviceOpen.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.info != null && Object.hasOwnProperty.call(message, "info"))
+                if (message.info != null && message.hasOwnProperty("info"))
                     $root.CHIDDeviceInfo.encode(message.info, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                 return writer;
             };
@@ -1755,7 +1777,7 @@
             DeviceClose.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
                 return writer;
             };
@@ -1951,9 +1973,9 @@
             DeviceWrite.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
-                if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                if (message.data != null && message.hasOwnProperty("data"))
                     writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
                 return writer;
             };
@@ -2179,11 +2201,11 @@
             DeviceRead.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
-                if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                if (message.length != null && message.hasOwnProperty("length"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.length);
-                if (message.timeout_ms != null && Object.hasOwnProperty.call(message, "timeout_ms"))
+                if (message.timeout_ms != null && message.hasOwnProperty("timeout_ms"))
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.timeout_ms);
                 return writer;
             };
@@ -2402,9 +2424,9 @@
             DeviceSendFeatureReport.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
-                if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                if (message.data != null && message.hasOwnProperty("data"))
                     writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
                 return writer;
             };
@@ -2630,11 +2652,11 @@
             DeviceGetFeatureReport.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
-                if (message.report_number != null && Object.hasOwnProperty.call(message, "report_number"))
+                if (message.report_number != null && message.hasOwnProperty("report_number"))
                     writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.report_number);
-                if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                if (message.length != null && message.hasOwnProperty("length"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.length);
                 return writer;
             };
@@ -2853,7 +2875,7 @@
             DeviceGetVendorString.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
                 return writer;
             };
@@ -3040,7 +3062,7 @@
             DeviceGetProductString.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
                 return writer;
             };
@@ -3227,7 +3249,7 @@
             DeviceGetSerialNumberString.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
                 return writer;
             };
@@ -3423,9 +3445,9 @@
             DeviceStartInputReports.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
-                if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                if (message.length != null && message.hasOwnProperty("length"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.length);
                 return writer;
             };
@@ -3624,7 +3646,7 @@
             DeviceRequestFullReport.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
                 return writer;
             };
@@ -3829,11 +3851,11 @@
             DeviceDisconnect.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
-                if (message.disconnectMethod != null && Object.hasOwnProperty.call(message, "disconnectMethod"))
+                if (message.disconnectMethod != null && message.hasOwnProperty("disconnectMethod"))
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.disconnectMethod);
-                if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                if (message.data != null && message.hasOwnProperty("data"))
                     writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.data);
                 return writer;
             };
@@ -4128,15 +4150,15 @@
         CHIDMessageFromRemote.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.update_device_list != null && Object.hasOwnProperty.call(message, "update_device_list"))
+            if (message.update_device_list != null && message.hasOwnProperty("update_device_list"))
                 $root.CHIDMessageFromRemote.UpdateDeviceList.encode(message.update_device_list, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+            if (message.response != null && message.hasOwnProperty("response"))
                 $root.CHIDMessageFromRemote.RequestResponse.encode(message.response, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.reports != null && Object.hasOwnProperty.call(message, "reports"))
+            if (message.reports != null && message.hasOwnProperty("reports"))
                 $root.CHIDMessageFromRemote.DeviceInputReports.encode(message.reports, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.close_device != null && Object.hasOwnProperty.call(message, "close_device"))
+            if (message.close_device != null && message.hasOwnProperty("close_device"))
                 $root.CHIDMessageFromRemote.CloseDevice.encode(message.close_device, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.close_all_devices != null && Object.hasOwnProperty.call(message, "close_all_devices"))
+            if (message.close_all_devices != null && message.hasOwnProperty("close_all_devices"))
                 $root.CHIDMessageFromRemote.CloseAllDevices.encode(message.close_all_devices, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
@@ -4648,11 +4670,11 @@
             RequestResponse.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.request_id != null && Object.hasOwnProperty.call(message, "request_id"))
+                if (message.request_id != null && message.hasOwnProperty("request_id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.request_id);
-                if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                if (message.result != null && message.hasOwnProperty("result"))
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.result);
-                if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                if (message.data != null && message.hasOwnProperty("data"))
                     writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.data);
                 return writer;
             };
@@ -5086,7 +5108,7 @@
                 DeviceInputReport.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                    if (message.device != null && message.hasOwnProperty("device"))
                         writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
                     if (message.reports != null && message.reports.length)
                         for (var i = 0; i < message.reports.length; ++i)
@@ -5310,7 +5332,7 @@
             CloseDevice.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.device != null && Object.hasOwnProperty.call(message, "device"))
+                if (message.device != null && message.hasOwnProperty("device"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.device);
                 return writer;
             };

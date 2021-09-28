@@ -15,6 +15,12 @@ if (!FS.existsSync(GENERATED_DIR)) {
 	FS.mkdirSync(GENERATED_DIR);
 }
 
+// First we want to delete the contents of the generated dir
+FS.readdirSync(GENERATED_DIR).forEach((filename) => {
+	console.log(`Delete ${filename}`);
+	FS.unlinkSync(Path.join(GENERATED_DIR, filename));
+});
+
 FS.readdirSync(__dirname + '/../protobufs').forEach((filename) => {
 	if (!filename.match(/\.proto$/)) {
 		return;

@@ -19,7 +19,7 @@
     /**
      * ESteamDatagramMsgID enum.
      * @exports ESteamDatagramMsgID
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_ESteamDatagramMsg_Invalid=0 k_ESteamDatagramMsg_Invalid value
      * @property {number} k_ESteamDatagramMsg_RouterPingRequest=1 k_ESteamDatagramMsg_RouterPingRequest value
      * @property {number} k_ESteamDatagramMsg_RouterPingReply=2 k_ESteamDatagramMsg_RouterPingReply value
@@ -51,6 +51,8 @@
      * @property {number} k_ESteamDatagramMsg_P2PBadRoute=28 k_ESteamDatagramMsg_P2PBadRoute value
      * @property {number} k_ESteamDatagramMsg_GameserverPingReply=29 k_ESteamDatagramMsg_GameserverPingReply value
      * @property {number} k_ESteamDatagramMsg_GameserverRegistration=30 k_ESteamDatagramMsg_GameserverRegistration value
+     * @property {number} k_ESteamDatagramMsg_SetSecondaryAddressRequest=31 k_ESteamDatagramMsg_SetSecondaryAddressRequest value
+     * @property {number} k_ESteamDatagramMsg_SetSecondaryAddressResult=32 k_ESteamDatagramMsg_SetSecondaryAddressResult value
      */
     $root.ESteamDatagramMsgID = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -85,6 +87,8 @@
         values[valuesById[28] = "k_ESteamDatagramMsg_P2PBadRoute"] = 28;
         values[valuesById[29] = "k_ESteamDatagramMsg_GameserverPingReply"] = 29;
         values[valuesById[30] = "k_ESteamDatagramMsg_GameserverRegistration"] = 30;
+        values[valuesById[31] = "k_ESteamDatagramMsg_SetSecondaryAddressRequest"] = 31;
+        values[valuesById[32] = "k_ESteamDatagramMsg_SetSecondaryAddressResult"] = 32;
         return values;
     })();
     
@@ -97,13 +101,18 @@
          * @property {number|null} [client_timestamp] CMsgSteamDatagramRouterPingReply client_timestamp
          * @property {Array.<number>|null} [latency_datacenter_ids] CMsgSteamDatagramRouterPingReply latency_datacenter_ids
          * @property {Array.<number>|null} [latency_ping_ms] CMsgSteamDatagramRouterPingReply latency_ping_ms
+         * @property {Array.<number>|null} [latency_datacenter_ids_p2p] CMsgSteamDatagramRouterPingReply latency_datacenter_ids_p2p
+         * @property {Array.<number>|null} [latency_ping_ms_p2p] CMsgSteamDatagramRouterPingReply latency_ping_ms_p2p
          * @property {number|null} [your_public_ip] CMsgSteamDatagramRouterPingReply your_public_ip
+         * @property {number|null} [your_public_port] CMsgSteamDatagramRouterPingReply your_public_port
          * @property {number|null} [server_time] CMsgSteamDatagramRouterPingReply server_time
          * @property {number|Long|null} [challenge] CMsgSteamDatagramRouterPingReply challenge
          * @property {number|null} [seconds_until_shutdown] CMsgSteamDatagramRouterPingReply seconds_until_shutdown
          * @property {number|null} [client_cookie] CMsgSteamDatagramRouterPingReply client_cookie
          * @property {number|null} [scoring_penalty_relay_cluster] CMsgSteamDatagramRouterPingReply scoring_penalty_relay_cluster
+         * @property {number|null} [flags] CMsgSteamDatagramRouterPingReply flags
          * @property {Array.<CMsgSteamDatagramRouterPingReply.IRouteException>|null} [route_exceptions] CMsgSteamDatagramRouterPingReply route_exceptions
+         * @property {Array.<CMsgSteamDatagramRouterPingReply.IAltAddress>|null} [alt_addresses] CMsgSteamDatagramRouterPingReply alt_addresses
          */
     
         /**
@@ -117,7 +126,10 @@
         function CMsgSteamDatagramRouterPingReply(properties) {
             this.latency_datacenter_ids = [];
             this.latency_ping_ms = [];
+            this.latency_datacenter_ids_p2p = [];
+            this.latency_ping_ms_p2p = [];
             this.route_exceptions = [];
+            this.alt_addresses = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -149,12 +161,36 @@
         CMsgSteamDatagramRouterPingReply.prototype.latency_ping_ms = $util.emptyArray;
     
         /**
+         * CMsgSteamDatagramRouterPingReply latency_datacenter_ids_p2p.
+         * @member {Array.<number>} latency_datacenter_ids_p2p
+         * @memberof CMsgSteamDatagramRouterPingReply
+         * @instance
+         */
+        CMsgSteamDatagramRouterPingReply.prototype.latency_datacenter_ids_p2p = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramRouterPingReply latency_ping_ms_p2p.
+         * @member {Array.<number>} latency_ping_ms_p2p
+         * @memberof CMsgSteamDatagramRouterPingReply
+         * @instance
+         */
+        CMsgSteamDatagramRouterPingReply.prototype.latency_ping_ms_p2p = $util.emptyArray;
+    
+        /**
          * CMsgSteamDatagramRouterPingReply your_public_ip.
          * @member {number} your_public_ip
          * @memberof CMsgSteamDatagramRouterPingReply
          * @instance
          */
         CMsgSteamDatagramRouterPingReply.prototype.your_public_ip = 0;
+    
+        /**
+         * CMsgSteamDatagramRouterPingReply your_public_port.
+         * @member {number} your_public_port
+         * @memberof CMsgSteamDatagramRouterPingReply
+         * @instance
+         */
+        CMsgSteamDatagramRouterPingReply.prototype.your_public_port = 0;
     
         /**
          * CMsgSteamDatagramRouterPingReply server_time.
@@ -197,12 +233,28 @@
         CMsgSteamDatagramRouterPingReply.prototype.scoring_penalty_relay_cluster = 0;
     
         /**
+         * CMsgSteamDatagramRouterPingReply flags.
+         * @member {number} flags
+         * @memberof CMsgSteamDatagramRouterPingReply
+         * @instance
+         */
+        CMsgSteamDatagramRouterPingReply.prototype.flags = 0;
+    
+        /**
          * CMsgSteamDatagramRouterPingReply route_exceptions.
          * @member {Array.<CMsgSteamDatagramRouterPingReply.IRouteException>} route_exceptions
          * @memberof CMsgSteamDatagramRouterPingReply
          * @instance
          */
         CMsgSteamDatagramRouterPingReply.prototype.route_exceptions = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramRouterPingReply alt_addresses.
+         * @member {Array.<CMsgSteamDatagramRouterPingReply.IAltAddress>} alt_addresses
+         * @memberof CMsgSteamDatagramRouterPingReply
+         * @instance
+         */
+        CMsgSteamDatagramRouterPingReply.prototype.alt_addresses = $util.emptyArray;
     
         /**
          * Creates a new CMsgSteamDatagramRouterPingReply instance using the specified properties.
@@ -228,7 +280,7 @@
         CMsgSteamDatagramRouterPingReply.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.client_timestamp != null && Object.hasOwnProperty.call(message, "client_timestamp"))
+            if (message.client_timestamp != null && message.hasOwnProperty("client_timestamp"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.client_timestamp);
             if (message.latency_datacenter_ids != null && message.latency_datacenter_ids.length) {
                 writer.uint32(/* id 2, wireType 2 =*/18).fork();
@@ -242,21 +294,40 @@
                     writer.uint32(message.latency_ping_ms[i]);
                 writer.ldelim();
             }
-            if (message.your_public_ip != null && Object.hasOwnProperty.call(message, "your_public_ip"))
+            if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
                 writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.your_public_ip);
-            if (message.server_time != null && Object.hasOwnProperty.call(message, "server_time"))
+            if (message.server_time != null && message.hasOwnProperty("server_time"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.server_time);
-            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+            if (message.challenge != null && message.hasOwnProperty("challenge"))
                 writer.uint32(/* id 6, wireType 1 =*/49).fixed64(message.challenge);
-            if (message.seconds_until_shutdown != null && Object.hasOwnProperty.call(message, "seconds_until_shutdown"))
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.seconds_until_shutdown);
-            if (message.client_cookie != null && Object.hasOwnProperty.call(message, "client_cookie"))
+            if (message.client_cookie != null && message.hasOwnProperty("client_cookie"))
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.client_cookie);
-            if (message.scoring_penalty_relay_cluster != null && Object.hasOwnProperty.call(message, "scoring_penalty_relay_cluster"))
+            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.scoring_penalty_relay_cluster);
             if (message.route_exceptions != null && message.route_exceptions.length)
                 for (var i = 0; i < message.route_exceptions.length; ++i)
                     $root.CMsgSteamDatagramRouterPingReply.RouteException.encode(message.route_exceptions[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                writer.uint32(/* id 11, wireType 5 =*/93).fixed32(message.your_public_port);
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.flags);
+            if (message.alt_addresses != null && message.alt_addresses.length)
+                for (var i = 0; i < message.alt_addresses.length; ++i)
+                    $root.CMsgSteamDatagramRouterPingReply.AltAddress.encode(message.alt_addresses[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.latency_datacenter_ids_p2p != null && message.latency_datacenter_ids_p2p.length) {
+                writer.uint32(/* id 14, wireType 2 =*/114).fork();
+                for (var i = 0; i < message.latency_datacenter_ids_p2p.length; ++i)
+                    writer.fixed32(message.latency_datacenter_ids_p2p[i]);
+                writer.ldelim();
+            }
+            if (message.latency_ping_ms_p2p != null && message.latency_ping_ms_p2p.length) {
+                writer.uint32(/* id 15, wireType 2 =*/122).fork();
+                for (var i = 0; i < message.latency_ping_ms_p2p.length; ++i)
+                    writer.uint32(message.latency_ping_ms_p2p[i]);
+                writer.ldelim();
+            }
             return writer;
         };
     
@@ -314,8 +385,31 @@
                     } else
                         message.latency_ping_ms.push(reader.uint32());
                     break;
+                case 14:
+                    if (!(message.latency_datacenter_ids_p2p && message.latency_datacenter_ids_p2p.length))
+                        message.latency_datacenter_ids_p2p = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.latency_datacenter_ids_p2p.push(reader.fixed32());
+                    } else
+                        message.latency_datacenter_ids_p2p.push(reader.fixed32());
+                    break;
+                case 15:
+                    if (!(message.latency_ping_ms_p2p && message.latency_ping_ms_p2p.length))
+                        message.latency_ping_ms_p2p = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.latency_ping_ms_p2p.push(reader.uint32());
+                    } else
+                        message.latency_ping_ms_p2p.push(reader.uint32());
+                    break;
                 case 4:
                     message.your_public_ip = reader.fixed32();
+                    break;
+                case 11:
+                    message.your_public_port = reader.fixed32();
                     break;
                 case 5:
                     message.server_time = reader.fixed32();
@@ -332,10 +426,18 @@
                 case 9:
                     message.scoring_penalty_relay_cluster = reader.uint32();
                     break;
+                case 12:
+                    message.flags = reader.uint32();
+                    break;
                 case 10:
                     if (!(message.route_exceptions && message.route_exceptions.length))
                         message.route_exceptions = [];
                     message.route_exceptions.push($root.CMsgSteamDatagramRouterPingReply.RouteException.decode(reader, reader.uint32()));
+                    break;
+                case 13:
+                    if (!(message.alt_addresses && message.alt_addresses.length))
+                        message.alt_addresses = [];
+                    message.alt_addresses.push($root.CMsgSteamDatagramRouterPingReply.AltAddress.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -389,9 +491,26 @@
                     if (!$util.isInteger(message.latency_ping_ms[i]))
                         return "latency_ping_ms: integer[] expected";
             }
+            if (message.latency_datacenter_ids_p2p != null && message.hasOwnProperty("latency_datacenter_ids_p2p")) {
+                if (!Array.isArray(message.latency_datacenter_ids_p2p))
+                    return "latency_datacenter_ids_p2p: array expected";
+                for (var i = 0; i < message.latency_datacenter_ids_p2p.length; ++i)
+                    if (!$util.isInteger(message.latency_datacenter_ids_p2p[i]))
+                        return "latency_datacenter_ids_p2p: integer[] expected";
+            }
+            if (message.latency_ping_ms_p2p != null && message.hasOwnProperty("latency_ping_ms_p2p")) {
+                if (!Array.isArray(message.latency_ping_ms_p2p))
+                    return "latency_ping_ms_p2p: array expected";
+                for (var i = 0; i < message.latency_ping_ms_p2p.length; ++i)
+                    if (!$util.isInteger(message.latency_ping_ms_p2p[i]))
+                        return "latency_ping_ms_p2p: integer[] expected";
+            }
             if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
                 if (!$util.isInteger(message.your_public_ip))
                     return "your_public_ip: integer expected";
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                if (!$util.isInteger(message.your_public_port))
+                    return "your_public_port: integer expected";
             if (message.server_time != null && message.hasOwnProperty("server_time"))
                 if (!$util.isInteger(message.server_time))
                     return "server_time: integer expected";
@@ -407,6 +526,9 @@
             if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
                 if (!$util.isInteger(message.scoring_penalty_relay_cluster))
                     return "scoring_penalty_relay_cluster: integer expected";
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                if (!$util.isInteger(message.flags))
+                    return "flags: integer expected";
             if (message.route_exceptions != null && message.hasOwnProperty("route_exceptions")) {
                 if (!Array.isArray(message.route_exceptions))
                     return "route_exceptions: array expected";
@@ -414,6 +536,15 @@
                     var error = $root.CMsgSteamDatagramRouterPingReply.RouteException.verify(message.route_exceptions[i]);
                     if (error)
                         return "route_exceptions." + error;
+                }
+            }
+            if (message.alt_addresses != null && message.hasOwnProperty("alt_addresses")) {
+                if (!Array.isArray(message.alt_addresses))
+                    return "alt_addresses: array expected";
+                for (var i = 0; i < message.alt_addresses.length; ++i) {
+                    var error = $root.CMsgSteamDatagramRouterPingReply.AltAddress.verify(message.alt_addresses[i]);
+                    if (error)
+                        return "alt_addresses." + error;
                 }
             }
             return null;
@@ -447,8 +578,24 @@
                 for (var i = 0; i < object.latency_ping_ms.length; ++i)
                     message.latency_ping_ms[i] = object.latency_ping_ms[i] >>> 0;
             }
+            if (object.latency_datacenter_ids_p2p) {
+                if (!Array.isArray(object.latency_datacenter_ids_p2p))
+                    throw TypeError(".CMsgSteamDatagramRouterPingReply.latency_datacenter_ids_p2p: array expected");
+                message.latency_datacenter_ids_p2p = [];
+                for (var i = 0; i < object.latency_datacenter_ids_p2p.length; ++i)
+                    message.latency_datacenter_ids_p2p[i] = object.latency_datacenter_ids_p2p[i] >>> 0;
+            }
+            if (object.latency_ping_ms_p2p) {
+                if (!Array.isArray(object.latency_ping_ms_p2p))
+                    throw TypeError(".CMsgSteamDatagramRouterPingReply.latency_ping_ms_p2p: array expected");
+                message.latency_ping_ms_p2p = [];
+                for (var i = 0; i < object.latency_ping_ms_p2p.length; ++i)
+                    message.latency_ping_ms_p2p[i] = object.latency_ping_ms_p2p[i] >>> 0;
+            }
             if (object.your_public_ip != null)
                 message.your_public_ip = object.your_public_ip >>> 0;
+            if (object.your_public_port != null)
+                message.your_public_port = object.your_public_port >>> 0;
             if (object.server_time != null)
                 message.server_time = object.server_time >>> 0;
             if (object.challenge != null)
@@ -466,6 +613,8 @@
                 message.client_cookie = object.client_cookie >>> 0;
             if (object.scoring_penalty_relay_cluster != null)
                 message.scoring_penalty_relay_cluster = object.scoring_penalty_relay_cluster >>> 0;
+            if (object.flags != null)
+                message.flags = object.flags >>> 0;
             if (object.route_exceptions) {
                 if (!Array.isArray(object.route_exceptions))
                     throw TypeError(".CMsgSteamDatagramRouterPingReply.route_exceptions: array expected");
@@ -474,6 +623,16 @@
                     if (typeof object.route_exceptions[i] !== "object")
                         throw TypeError(".CMsgSteamDatagramRouterPingReply.route_exceptions: object expected");
                     message.route_exceptions[i] = $root.CMsgSteamDatagramRouterPingReply.RouteException.fromObject(object.route_exceptions[i]);
+                }
+            }
+            if (object.alt_addresses) {
+                if (!Array.isArray(object.alt_addresses))
+                    throw TypeError(".CMsgSteamDatagramRouterPingReply.alt_addresses: array expected");
+                message.alt_addresses = [];
+                for (var i = 0; i < object.alt_addresses.length; ++i) {
+                    if (typeof object.alt_addresses[i] !== "object")
+                        throw TypeError(".CMsgSteamDatagramRouterPingReply.alt_addresses: object expected");
+                    message.alt_addresses[i] = $root.CMsgSteamDatagramRouterPingReply.AltAddress.fromObject(object.alt_addresses[i]);
                 }
             }
             return message;
@@ -496,6 +655,9 @@
                 object.latency_datacenter_ids = [];
                 object.latency_ping_ms = [];
                 object.route_exceptions = [];
+                object.alt_addresses = [];
+                object.latency_datacenter_ids_p2p = [];
+                object.latency_ping_ms_p2p = [];
             }
             if (options.defaults) {
                 object.client_timestamp = 0;
@@ -509,6 +671,8 @@
                 object.seconds_until_shutdown = 0;
                 object.client_cookie = 0;
                 object.scoring_penalty_relay_cluster = 0;
+                object.your_public_port = 0;
+                object.flags = 0;
             }
             if (message.client_timestamp != null && message.hasOwnProperty("client_timestamp"))
                 object.client_timestamp = message.client_timestamp;
@@ -541,6 +705,25 @@
                 object.route_exceptions = [];
                 for (var j = 0; j < message.route_exceptions.length; ++j)
                     object.route_exceptions[j] = $root.CMsgSteamDatagramRouterPingReply.RouteException.toObject(message.route_exceptions[j], options);
+            }
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                object.your_public_port = message.your_public_port;
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                object.flags = message.flags;
+            if (message.alt_addresses && message.alt_addresses.length) {
+                object.alt_addresses = [];
+                for (var j = 0; j < message.alt_addresses.length; ++j)
+                    object.alt_addresses[j] = $root.CMsgSteamDatagramRouterPingReply.AltAddress.toObject(message.alt_addresses[j], options);
+            }
+            if (message.latency_datacenter_ids_p2p && message.latency_datacenter_ids_p2p.length) {
+                object.latency_datacenter_ids_p2p = [];
+                for (var j = 0; j < message.latency_datacenter_ids_p2p.length; ++j)
+                    object.latency_datacenter_ids_p2p[j] = message.latency_datacenter_ids_p2p[j];
+            }
+            if (message.latency_ping_ms_p2p && message.latency_ping_ms_p2p.length) {
+                object.latency_ping_ms_p2p = [];
+                for (var j = 0; j < message.latency_ping_ms_p2p.length; ++j)
+                    object.latency_ping_ms_p2p[j] = message.latency_ping_ms_p2p[j];
             }
             return object;
         };
@@ -630,11 +813,11 @@
             RouteException.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.data_center_id != null && Object.hasOwnProperty.call(message, "data_center_id"))
+                if (message.data_center_id != null && message.hasOwnProperty("data_center_id"))
                     writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.data_center_id);
-                if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+                if (message.flags != null && message.hasOwnProperty("flags"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.flags);
-                if (message.penalty != null && Object.hasOwnProperty.call(message, "penalty"))
+                if (message.penalty != null && message.hasOwnProperty("penalty"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.penalty);
                 return writer;
             };
@@ -788,6 +971,323 @@
             return RouteException;
         })();
     
+        CMsgSteamDatagramRouterPingReply.AltAddress = (function() {
+    
+            /**
+             * Properties of an AltAddress.
+             * @memberof CMsgSteamDatagramRouterPingReply
+             * @interface IAltAddress
+             * @property {number|null} [ipv4] AltAddress ipv4
+             * @property {number|null} [port] AltAddress port
+             * @property {number|null} [penalty] AltAddress penalty
+             * @property {CMsgSteamDatagramRouterPingReply.AltAddress.Protocol|null} [protocol] AltAddress protocol
+             * @property {string|null} [id] AltAddress id
+             */
+    
+            /**
+             * Constructs a new AltAddress.
+             * @memberof CMsgSteamDatagramRouterPingReply
+             * @classdesc Represents an AltAddress.
+             * @implements IAltAddress
+             * @constructor
+             * @param {CMsgSteamDatagramRouterPingReply.IAltAddress=} [properties] Properties to set
+             */
+            function AltAddress(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * AltAddress ipv4.
+             * @member {number} ipv4
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @instance
+             */
+            AltAddress.prototype.ipv4 = 0;
+    
+            /**
+             * AltAddress port.
+             * @member {number} port
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @instance
+             */
+            AltAddress.prototype.port = 0;
+    
+            /**
+             * AltAddress penalty.
+             * @member {number} penalty
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @instance
+             */
+            AltAddress.prototype.penalty = 0;
+    
+            /**
+             * AltAddress protocol.
+             * @member {CMsgSteamDatagramRouterPingReply.AltAddress.Protocol} protocol
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @instance
+             */
+            AltAddress.prototype.protocol = 0;
+    
+            /**
+             * AltAddress id.
+             * @member {string} id
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @instance
+             */
+            AltAddress.prototype.id = "";
+    
+            /**
+             * Creates a new AltAddress instance using the specified properties.
+             * @function create
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {CMsgSteamDatagramRouterPingReply.IAltAddress=} [properties] Properties to set
+             * @returns {CMsgSteamDatagramRouterPingReply.AltAddress} AltAddress instance
+             */
+            AltAddress.create = function create(properties) {
+                return new AltAddress(properties);
+            };
+    
+            /**
+             * Encodes the specified AltAddress message. Does not implicitly {@link CMsgSteamDatagramRouterPingReply.AltAddress.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {CMsgSteamDatagramRouterPingReply.IAltAddress} message AltAddress message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AltAddress.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
+                    writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.ipv4);
+                if (message.port != null && message.hasOwnProperty("port"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.port);
+                if (message.penalty != null && message.hasOwnProperty("penalty"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.penalty);
+                if (message.protocol != null && message.hasOwnProperty("protocol"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.protocol);
+                if (message.id != null && message.hasOwnProperty("id"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.id);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified AltAddress message, length delimited. Does not implicitly {@link CMsgSteamDatagramRouterPingReply.AltAddress.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {CMsgSteamDatagramRouterPingReply.IAltAddress} message AltAddress message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AltAddress.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an AltAddress message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgSteamDatagramRouterPingReply.AltAddress} AltAddress
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AltAddress.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramRouterPingReply.AltAddress();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.ipv4 = reader.fixed32();
+                        break;
+                    case 2:
+                        message.port = reader.uint32();
+                        break;
+                    case 3:
+                        message.penalty = reader.uint32();
+                        break;
+                    case 4:
+                        message.protocol = reader.int32();
+                        break;
+                    case 5:
+                        message.id = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an AltAddress message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgSteamDatagramRouterPingReply.AltAddress} AltAddress
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AltAddress.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an AltAddress message.
+             * @function verify
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AltAddress.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
+                    if (!$util.isInteger(message.ipv4))
+                        return "ipv4: integer expected";
+                if (message.port != null && message.hasOwnProperty("port"))
+                    if (!$util.isInteger(message.port))
+                        return "port: integer expected";
+                if (message.penalty != null && message.hasOwnProperty("penalty"))
+                    if (!$util.isInteger(message.penalty))
+                        return "penalty: integer expected";
+                if (message.protocol != null && message.hasOwnProperty("protocol"))
+                    switch (message.protocol) {
+                    default:
+                        return "protocol: enum value expected";
+                    case 0:
+                    case 1:
+                        break;
+                    }
+                if (message.id != null && message.hasOwnProperty("id"))
+                    if (!$util.isString(message.id))
+                        return "id: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates an AltAddress message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgSteamDatagramRouterPingReply.AltAddress} AltAddress
+             */
+            AltAddress.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamDatagramRouterPingReply.AltAddress)
+                    return object;
+                var message = new $root.CMsgSteamDatagramRouterPingReply.AltAddress();
+                if (object.ipv4 != null)
+                    message.ipv4 = object.ipv4 >>> 0;
+                if (object.port != null)
+                    message.port = object.port >>> 0;
+                if (object.penalty != null)
+                    message.penalty = object.penalty >>> 0;
+                switch (object.protocol) {
+                case "DefaultProtocol":
+                case 0:
+                    message.protocol = 0;
+                    break;
+                case "NetworkNext":
+                case 1:
+                    message.protocol = 1;
+                    break;
+                }
+                if (object.id != null)
+                    message.id = String(object.id);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an AltAddress message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @static
+             * @param {CMsgSteamDatagramRouterPingReply.AltAddress} message AltAddress
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AltAddress.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.ipv4 = 0;
+                    object.port = 0;
+                    object.penalty = 0;
+                    object.protocol = options.enums === String ? "DefaultProtocol" : 0;
+                    object.id = "";
+                }
+                if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
+                    object.ipv4 = message.ipv4;
+                if (message.port != null && message.hasOwnProperty("port"))
+                    object.port = message.port;
+                if (message.penalty != null && message.hasOwnProperty("penalty"))
+                    object.penalty = message.penalty;
+                if (message.protocol != null && message.hasOwnProperty("protocol"))
+                    object.protocol = options.enums === String ? $root.CMsgSteamDatagramRouterPingReply.AltAddress.Protocol[message.protocol] : message.protocol;
+                if (message.id != null && message.hasOwnProperty("id"))
+                    object.id = message.id;
+                return object;
+            };
+    
+            /**
+             * Converts this AltAddress to JSON.
+             * @function toJSON
+             * @memberof CMsgSteamDatagramRouterPingReply.AltAddress
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AltAddress.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            /**
+             * Protocol enum.
+             * @name CMsgSteamDatagramRouterPingReply.AltAddress.Protocol
+             * @enum {string}
+             * @property {number} DefaultProtocol=0 DefaultProtocol value
+             * @property {number} NetworkNext=1 NetworkNext value
+             */
+            AltAddress.Protocol = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "DefaultProtocol"] = 0;
+                values[valuesById[1] = "NetworkNext"] = 1;
+                return values;
+            })();
+    
+            return AltAddress;
+        })();
+    
+        /**
+         * Flags enum.
+         * @name CMsgSteamDatagramRouterPingReply.Flags
+         * @enum {string}
+         * @property {number} FLAG_MAYBE_MORE_DATA_CENTERS=1 FLAG_MAYBE_MORE_DATA_CENTERS value
+         * @property {number} FLAG_MAYBE_MORE_ALT_ADDRESSES=2 FLAG_MAYBE_MORE_ALT_ADDRESSES value
+         */
+        CMsgSteamDatagramRouterPingReply.Flags = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[1] = "FLAG_MAYBE_MORE_DATA_CENTERS"] = 1;
+            values[valuesById[2] = "FLAG_MAYBE_MORE_ALT_ADDRESSES"] = 2;
+            return values;
+        })();
+    
         return CMsgSteamDatagramRouterPingReply;
     })();
     
@@ -798,6 +1298,7 @@
          * @exports ICMsgSteamDatagramGameserverPingRequest
          * @interface ICMsgSteamDatagramGameserverPingRequest
          * @property {number|null} [your_public_ip] CMsgSteamDatagramGameserverPingRequest your_public_ip
+         * @property {number|null} [your_public_port] CMsgSteamDatagramGameserverPingRequest your_public_port
          * @property {number|null} [server_time] CMsgSteamDatagramGameserverPingRequest server_time
          * @property {number|Long|null} [challenge] CMsgSteamDatagramGameserverPingRequest challenge
          * @property {number|null} [router_timestamp] CMsgSteamDatagramGameserverPingRequest router_timestamp
@@ -825,6 +1326,14 @@
          * @instance
          */
         CMsgSteamDatagramGameserverPingRequest.prototype.your_public_ip = 0;
+    
+        /**
+         * CMsgSteamDatagramGameserverPingRequest your_public_port.
+         * @member {number} your_public_port
+         * @memberof CMsgSteamDatagramGameserverPingRequest
+         * @instance
+         */
+        CMsgSteamDatagramGameserverPingRequest.prototype.your_public_port = 0;
     
         /**
          * CMsgSteamDatagramGameserverPingRequest server_time.
@@ -874,14 +1383,16 @@
         CMsgSteamDatagramGameserverPingRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.your_public_ip != null && Object.hasOwnProperty.call(message, "your_public_ip"))
+            if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.your_public_ip);
-            if (message.server_time != null && Object.hasOwnProperty.call(message, "server_time"))
+            if (message.server_time != null && message.hasOwnProperty("server_time"))
                 writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.server_time);
-            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+            if (message.challenge != null && message.hasOwnProperty("challenge"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.challenge);
-            if (message.router_timestamp != null && Object.hasOwnProperty.call(message, "router_timestamp"))
+            if (message.router_timestamp != null && message.hasOwnProperty("router_timestamp"))
                 writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.router_timestamp);
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.your_public_port);
             return writer;
         };
     
@@ -918,6 +1429,9 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.your_public_ip = reader.fixed32();
+                    break;
+                case 5:
+                    message.your_public_port = reader.fixed32();
                     break;
                 case 2:
                     message.server_time = reader.fixed32();
@@ -966,6 +1480,9 @@
             if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
                 if (!$util.isInteger(message.your_public_ip))
                     return "your_public_ip: integer expected";
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                if (!$util.isInteger(message.your_public_port))
+                    return "your_public_port: integer expected";
             if (message.server_time != null && message.hasOwnProperty("server_time"))
                 if (!$util.isInteger(message.server_time))
                     return "server_time: integer expected";
@@ -992,6 +1509,8 @@
             var message = new $root.CMsgSteamDatagramGameserverPingRequest();
             if (object.your_public_ip != null)
                 message.your_public_ip = object.your_public_ip >>> 0;
+            if (object.your_public_port != null)
+                message.your_public_port = object.your_public_port >>> 0;
             if (object.server_time != null)
                 message.server_time = object.server_time >>> 0;
             if (object.challenge != null)
@@ -1030,6 +1549,7 @@
                 } else
                     object.challenge = options.longs === String ? "0" : 0;
                 object.router_timestamp = 0;
+                object.your_public_port = 0;
             }
             if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
                 object.your_public_ip = message.your_public_ip;
@@ -1042,6 +1562,8 @@
                     object.challenge = options.longs === String ? $util.Long.prototype.toString.call(message.challenge) : options.longs === Number ? new $util.LongBits(message.challenge.low >>> 0, message.challenge.high >>> 0).toNumber() : message.challenge;
             if (message.router_timestamp != null && message.hasOwnProperty("router_timestamp"))
                 object.router_timestamp = message.router_timestamp;
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                object.your_public_port = message.your_public_port;
             return object;
         };
     
@@ -1124,9 +1646,9 @@
         CMsgSteamDatagramLegacyGameserverPingReply.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.router_timestamp != null && Object.hasOwnProperty.call(message, "router_timestamp"))
+            if (message.router_timestamp != null && message.hasOwnProperty("router_timestamp"))
                 writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.router_timestamp);
-            if (message.dummy_pad != null && Object.hasOwnProperty.call(message, "dummy_pad"))
+            if (message.dummy_pad != null && message.hasOwnProperty("dummy_pad"))
                 writer.uint32(/* id 99, wireType 1 =*/793).fixed64(message.dummy_pad);
             return writer;
         };
@@ -1357,11 +1879,11 @@
         CMsgSteamDatagramGameserverPingReply.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.signed_data != null && Object.hasOwnProperty.call(message, "signed_data"))
+            if (message.signed_data != null && message.hasOwnProperty("signed_data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.signed_data);
-            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+            if (message.signature != null && message.hasOwnProperty("signature"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.signature);
             return writer;
         };
@@ -1627,15 +2149,15 @@
             SignedData.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.challenge_time != null && Object.hasOwnProperty.call(message, "challenge_time"))
+                if (message.challenge_time != null && message.hasOwnProperty("challenge_time"))
                     writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.challenge_time);
-                if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+                if (message.challenge != null && message.hasOwnProperty("challenge"))
                     writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.challenge);
-                if (message.router_timestamp != null && Object.hasOwnProperty.call(message, "router_timestamp"))
+                if (message.router_timestamp != null && message.hasOwnProperty("router_timestamp"))
                     writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.router_timestamp);
-                if (message.data_center_id != null && Object.hasOwnProperty.call(message, "data_center_id"))
+                if (message.data_center_id != null && message.hasOwnProperty("data_center_id"))
                     writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.data_center_id);
-                if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+                if (message.appid != null && message.hasOwnProperty("appid"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.appid);
                 return writer;
             };
@@ -1836,6 +2358,7 @@
          * @interface ICMsgSteamDatagramNoSessionRelayToClient
          * @property {number|null} [connection_id] CMsgSteamDatagramNoSessionRelayToClient connection_id
          * @property {number|null} [your_public_ip] CMsgSteamDatagramNoSessionRelayToClient your_public_ip
+         * @property {number|null} [your_public_port] CMsgSteamDatagramNoSessionRelayToClient your_public_port
          * @property {number|null} [server_time] CMsgSteamDatagramNoSessionRelayToClient server_time
          * @property {number|Long|null} [challenge] CMsgSteamDatagramNoSessionRelayToClient challenge
          * @property {number|null} [seconds_until_shutdown] CMsgSteamDatagramNoSessionRelayToClient seconds_until_shutdown
@@ -1871,6 +2394,14 @@
          * @instance
          */
         CMsgSteamDatagramNoSessionRelayToClient.prototype.your_public_ip = 0;
+    
+        /**
+         * CMsgSteamDatagramNoSessionRelayToClient your_public_port.
+         * @member {number} your_public_port
+         * @memberof CMsgSteamDatagramNoSessionRelayToClient
+         * @instance
+         */
+        CMsgSteamDatagramNoSessionRelayToClient.prototype.your_public_port = 0;
     
         /**
          * CMsgSteamDatagramNoSessionRelayToClient server_time.
@@ -1920,15 +2451,17 @@
         CMsgSteamDatagramNoSessionRelayToClient.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.your_public_ip != null && Object.hasOwnProperty.call(message, "your_public_ip"))
+            if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
                 writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.your_public_ip);
-            if (message.server_time != null && Object.hasOwnProperty.call(message, "server_time"))
+            if (message.server_time != null && message.hasOwnProperty("server_time"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.server_time);
-            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+            if (message.challenge != null && message.hasOwnProperty("challenge"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.challenge);
-            if (message.seconds_until_shutdown != null && Object.hasOwnProperty.call(message, "seconds_until_shutdown"))
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.seconds_until_shutdown);
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                writer.uint32(/* id 6, wireType 5 =*/53).fixed32(message.your_public_port);
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.connection_id);
             return writer;
         };
@@ -1969,6 +2502,9 @@
                     break;
                 case 2:
                     message.your_public_ip = reader.fixed32();
+                    break;
+                case 6:
+                    message.your_public_port = reader.fixed32();
                     break;
                 case 3:
                     message.server_time = reader.fixed32();
@@ -2020,6 +2556,9 @@
             if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
                 if (!$util.isInteger(message.your_public_ip))
                     return "your_public_ip: integer expected";
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                if (!$util.isInteger(message.your_public_port))
+                    return "your_public_port: integer expected";
             if (message.server_time != null && message.hasOwnProperty("server_time"))
                 if (!$util.isInteger(message.server_time))
                     return "server_time: integer expected";
@@ -2048,6 +2587,8 @@
                 message.connection_id = object.connection_id >>> 0;
             if (object.your_public_ip != null)
                 message.your_public_ip = object.your_public_ip >>> 0;
+            if (object.your_public_port != null)
+                message.your_public_port = object.your_public_port >>> 0;
             if (object.server_time != null)
                 message.server_time = object.server_time >>> 0;
             if (object.challenge != null)
@@ -2086,6 +2627,7 @@
                 } else
                     object.challenge = options.longs === String ? "0" : 0;
                 object.seconds_until_shutdown = 0;
+                object.your_public_port = 0;
                 object.connection_id = 0;
             }
             if (message.your_public_ip != null && message.hasOwnProperty("your_public_ip"))
@@ -2099,6 +2641,8 @@
                     object.challenge = options.longs === String ? $util.Long.prototype.toString.call(message.challenge) : options.longs === Number ? new $util.LongBits(message.challenge.low >>> 0, message.challenge.high >>> 0).toNumber() : message.challenge;
             if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
                 object.seconds_until_shutdown = message.seconds_until_shutdown;
+            if (message.your_public_port != null && message.hasOwnProperty("your_public_port"))
+                object.your_public_port = message.your_public_port;
             if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 object.connection_id = message.connection_id;
             return object;
@@ -2201,13 +2745,13 @@
         CMsgSteamDatagramNoSessionRelayToPeer.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.legacy_relay_session_id != null && Object.hasOwnProperty.call(message, "legacy_relay_session_id"))
+            if (message.legacy_relay_session_id != null && message.hasOwnProperty("legacy_relay_session_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.legacy_relay_session_id);
-            if (message.from_relay_session_id != null && Object.hasOwnProperty.call(message, "from_relay_session_id"))
+            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
                 writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.from_relay_session_id);
-            if (message.from_connection_id != null && Object.hasOwnProperty.call(message, "from_connection_id"))
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
                 writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.from_connection_id);
-            if (message.kludge_pad != null && Object.hasOwnProperty.call(message, "kludge_pad"))
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
                 writer.uint32(/* id 99, wireType 1 =*/793).fixed64(message.kludge_pad);
             return writer;
         };
@@ -2442,7 +2986,7 @@
         CMsgSteamDatagramClientPingSampleRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
             return writer;
         };
@@ -2580,8 +3124,9 @@
          * @exports ICMsgSteamDatagramClientPingSampleReply
          * @interface ICMsgSteamDatagramClientPingSampleReply
          * @property {number|null} [connection_id] CMsgSteamDatagramClientPingSampleReply connection_id
-         * @property {Array.<CMsgSteamDatagramClientPingSampleReply.IRoutingCluster>|null} [routing_clusters] CMsgSteamDatagramClientPingSampleReply routing_clusters
-         * @property {Array.<CMsgSteamDatagramClientPingSampleReply.IDataCenter>|null} [data_centers] CMsgSteamDatagramClientPingSampleReply data_centers
+         * @property {boolean|null} [override_active] CMsgSteamDatagramClientPingSampleReply override_active
+         * @property {Array.<CMsgSteamDatagramClientPingSampleReply.IPOP>|null} [pops] CMsgSteamDatagramClientPingSampleReply pops
+         * @property {Array.<CMsgSteamDatagramClientPingSampleReply.ILegacyDataCenter>|null} [legacy_data_centers] CMsgSteamDatagramClientPingSampleReply legacy_data_centers
          */
     
         /**
@@ -2593,8 +3138,8 @@
          * @param {ICMsgSteamDatagramClientPingSampleReply=} [properties] Properties to set
          */
         function CMsgSteamDatagramClientPingSampleReply(properties) {
-            this.routing_clusters = [];
-            this.data_centers = [];
+            this.pops = [];
+            this.legacy_data_centers = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -2610,20 +3155,28 @@
         CMsgSteamDatagramClientPingSampleReply.prototype.connection_id = 0;
     
         /**
-         * CMsgSteamDatagramClientPingSampleReply routing_clusters.
-         * @member {Array.<CMsgSteamDatagramClientPingSampleReply.IRoutingCluster>} routing_clusters
+         * CMsgSteamDatagramClientPingSampleReply override_active.
+         * @member {boolean} override_active
          * @memberof CMsgSteamDatagramClientPingSampleReply
          * @instance
          */
-        CMsgSteamDatagramClientPingSampleReply.prototype.routing_clusters = $util.emptyArray;
+        CMsgSteamDatagramClientPingSampleReply.prototype.override_active = false;
     
         /**
-         * CMsgSteamDatagramClientPingSampleReply data_centers.
-         * @member {Array.<CMsgSteamDatagramClientPingSampleReply.IDataCenter>} data_centers
+         * CMsgSteamDatagramClientPingSampleReply pops.
+         * @member {Array.<CMsgSteamDatagramClientPingSampleReply.IPOP>} pops
          * @memberof CMsgSteamDatagramClientPingSampleReply
          * @instance
          */
-        CMsgSteamDatagramClientPingSampleReply.prototype.data_centers = $util.emptyArray;
+        CMsgSteamDatagramClientPingSampleReply.prototype.pops = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramClientPingSampleReply legacy_data_centers.
+         * @member {Array.<CMsgSteamDatagramClientPingSampleReply.ILegacyDataCenter>} legacy_data_centers
+         * @memberof CMsgSteamDatagramClientPingSampleReply
+         * @instance
+         */
+        CMsgSteamDatagramClientPingSampleReply.prototype.legacy_data_centers = $util.emptyArray;
     
         /**
          * Creates a new CMsgSteamDatagramClientPingSampleReply instance using the specified properties.
@@ -2649,14 +3202,16 @@
         CMsgSteamDatagramClientPingSampleReply.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.routing_clusters != null && message.routing_clusters.length)
-                for (var i = 0; i < message.routing_clusters.length; ++i)
-                    $root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster.encode(message.routing_clusters[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.data_centers != null && message.data_centers.length)
-                for (var i = 0; i < message.data_centers.length; ++i)
-                    $root.CMsgSteamDatagramClientPingSampleReply.DataCenter.encode(message.data_centers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.pops != null && message.pops.length)
+                for (var i = 0; i < message.pops.length; ++i)
+                    $root.CMsgSteamDatagramClientPingSampleReply.POP.encode(message.pops[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.legacy_data_centers != null && message.legacy_data_centers.length)
+                for (var i = 0; i < message.legacy_data_centers.length; ++i)
+                    $root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter.encode(message.legacy_data_centers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.override_active != null && message.hasOwnProperty("override_active"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.override_active);
             return writer;
         };
     
@@ -2694,15 +3249,18 @@
                 case 1:
                     message.connection_id = reader.fixed32();
                     break;
+                case 4:
+                    message.override_active = reader.bool();
+                    break;
                 case 2:
-                    if (!(message.routing_clusters && message.routing_clusters.length))
-                        message.routing_clusters = [];
-                    message.routing_clusters.push($root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster.decode(reader, reader.uint32()));
+                    if (!(message.pops && message.pops.length))
+                        message.pops = [];
+                    message.pops.push($root.CMsgSteamDatagramClientPingSampleReply.POP.decode(reader, reader.uint32()));
                     break;
                 case 3:
-                    if (!(message.data_centers && message.data_centers.length))
-                        message.data_centers = [];
-                    message.data_centers.push($root.CMsgSteamDatagramClientPingSampleReply.DataCenter.decode(reader, reader.uint32()));
+                    if (!(message.legacy_data_centers && message.legacy_data_centers.length))
+                        message.legacy_data_centers = [];
+                    message.legacy_data_centers.push($root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2742,22 +3300,25 @@
             if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 if (!$util.isInteger(message.connection_id))
                     return "connection_id: integer expected";
-            if (message.routing_clusters != null && message.hasOwnProperty("routing_clusters")) {
-                if (!Array.isArray(message.routing_clusters))
-                    return "routing_clusters: array expected";
-                for (var i = 0; i < message.routing_clusters.length; ++i) {
-                    var error = $root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster.verify(message.routing_clusters[i]);
+            if (message.override_active != null && message.hasOwnProperty("override_active"))
+                if (typeof message.override_active !== "boolean")
+                    return "override_active: boolean expected";
+            if (message.pops != null && message.hasOwnProperty("pops")) {
+                if (!Array.isArray(message.pops))
+                    return "pops: array expected";
+                for (var i = 0; i < message.pops.length; ++i) {
+                    var error = $root.CMsgSteamDatagramClientPingSampleReply.POP.verify(message.pops[i]);
                     if (error)
-                        return "routing_clusters." + error;
+                        return "pops." + error;
                 }
             }
-            if (message.data_centers != null && message.hasOwnProperty("data_centers")) {
-                if (!Array.isArray(message.data_centers))
-                    return "data_centers: array expected";
-                for (var i = 0; i < message.data_centers.length; ++i) {
-                    var error = $root.CMsgSteamDatagramClientPingSampleReply.DataCenter.verify(message.data_centers[i]);
+            if (message.legacy_data_centers != null && message.hasOwnProperty("legacy_data_centers")) {
+                if (!Array.isArray(message.legacy_data_centers))
+                    return "legacy_data_centers: array expected";
+                for (var i = 0; i < message.legacy_data_centers.length; ++i) {
+                    var error = $root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter.verify(message.legacy_data_centers[i]);
                     if (error)
-                        return "data_centers." + error;
+                        return "legacy_data_centers." + error;
                 }
             }
             return null;
@@ -2777,24 +3338,26 @@
             var message = new $root.CMsgSteamDatagramClientPingSampleReply();
             if (object.connection_id != null)
                 message.connection_id = object.connection_id >>> 0;
-            if (object.routing_clusters) {
-                if (!Array.isArray(object.routing_clusters))
-                    throw TypeError(".CMsgSteamDatagramClientPingSampleReply.routing_clusters: array expected");
-                message.routing_clusters = [];
-                for (var i = 0; i < object.routing_clusters.length; ++i) {
-                    if (typeof object.routing_clusters[i] !== "object")
-                        throw TypeError(".CMsgSteamDatagramClientPingSampleReply.routing_clusters: object expected");
-                    message.routing_clusters[i] = $root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster.fromObject(object.routing_clusters[i]);
+            if (object.override_active != null)
+                message.override_active = Boolean(object.override_active);
+            if (object.pops) {
+                if (!Array.isArray(object.pops))
+                    throw TypeError(".CMsgSteamDatagramClientPingSampleReply.pops: array expected");
+                message.pops = [];
+                for (var i = 0; i < object.pops.length; ++i) {
+                    if (typeof object.pops[i] !== "object")
+                        throw TypeError(".CMsgSteamDatagramClientPingSampleReply.pops: object expected");
+                    message.pops[i] = $root.CMsgSteamDatagramClientPingSampleReply.POP.fromObject(object.pops[i]);
                 }
             }
-            if (object.data_centers) {
-                if (!Array.isArray(object.data_centers))
-                    throw TypeError(".CMsgSteamDatagramClientPingSampleReply.data_centers: array expected");
-                message.data_centers = [];
-                for (var i = 0; i < object.data_centers.length; ++i) {
-                    if (typeof object.data_centers[i] !== "object")
-                        throw TypeError(".CMsgSteamDatagramClientPingSampleReply.data_centers: object expected");
-                    message.data_centers[i] = $root.CMsgSteamDatagramClientPingSampleReply.DataCenter.fromObject(object.data_centers[i]);
+            if (object.legacy_data_centers) {
+                if (!Array.isArray(object.legacy_data_centers))
+                    throw TypeError(".CMsgSteamDatagramClientPingSampleReply.legacy_data_centers: array expected");
+                message.legacy_data_centers = [];
+                for (var i = 0; i < object.legacy_data_centers.length; ++i) {
+                    if (typeof object.legacy_data_centers[i] !== "object")
+                        throw TypeError(".CMsgSteamDatagramClientPingSampleReply.legacy_data_centers: object expected");
+                    message.legacy_data_centers[i] = $root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter.fromObject(object.legacy_data_centers[i]);
                 }
             }
             return message;
@@ -2814,23 +3377,27 @@
                 options = {};
             var object = {};
             if (options.arrays || options.defaults) {
-                object.routing_clusters = [];
-                object.data_centers = [];
+                object.pops = [];
+                object.legacy_data_centers = [];
             }
-            if (options.defaults)
+            if (options.defaults) {
                 object.connection_id = 0;
+                object.override_active = false;
+            }
             if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 object.connection_id = message.connection_id;
-            if (message.routing_clusters && message.routing_clusters.length) {
-                object.routing_clusters = [];
-                for (var j = 0; j < message.routing_clusters.length; ++j)
-                    object.routing_clusters[j] = $root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster.toObject(message.routing_clusters[j], options);
+            if (message.pops && message.pops.length) {
+                object.pops = [];
+                for (var j = 0; j < message.pops.length; ++j)
+                    object.pops[j] = $root.CMsgSteamDatagramClientPingSampleReply.POP.toObject(message.pops[j], options);
             }
-            if (message.data_centers && message.data_centers.length) {
-                object.data_centers = [];
-                for (var j = 0; j < message.data_centers.length; ++j)
-                    object.data_centers[j] = $root.CMsgSteamDatagramClientPingSampleReply.DataCenter.toObject(message.data_centers[j], options);
+            if (message.legacy_data_centers && message.legacy_data_centers.length) {
+                object.legacy_data_centers = [];
+                for (var j = 0; j < message.legacy_data_centers.length; ++j)
+                    object.legacy_data_centers[j] = $root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter.toObject(message.legacy_data_centers[j], options);
             }
+            if (message.override_active != null && message.hasOwnProperty("override_active"))
+                object.override_active = message.override_active;
             return object;
         };
     
@@ -2845,26 +3412,40 @@
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        CMsgSteamDatagramClientPingSampleReply.RoutingCluster = (function() {
+        CMsgSteamDatagramClientPingSampleReply.POP = (function() {
     
             /**
-             * Properties of a RoutingCluster.
+             * Properties of a POP.
              * @memberof CMsgSteamDatagramClientPingSampleReply
-             * @interface IRoutingCluster
-             * @property {number|null} [id] RoutingCluster id
-             * @property {number|null} [front_ping_ms] RoutingCluster front_ping_ms
-             * @property {number|null} [e2e_ping_ms] RoutingCluster e2e_ping_ms
+             * @interface IPOP
+             * @property {number|null} [pop_id] POP pop_id
+             * @property {number|null} [default_front_ping_ms] POP default_front_ping_ms
+             * @property {number|null} [cluster_penalty] POP cluster_penalty
+             * @property {Array.<CMsgSteamDatagramClientPingSampleReply.POP.IAltAddress>|null} [alt_addresses] POP alt_addresses
+             * @property {number|null} [default_e2e_ping_ms] POP default_e2e_ping_ms
+             * @property {number|null} [default_e2e_score] POP default_e2e_score
+             * @property {number|null} [p2p_via_peer_relay_pop_id] POP p2p_via_peer_relay_pop_id
+             * @property {number|null} [best_dc_ping_ms] POP best_dc_ping_ms
+             * @property {number|null} [best_dc_score] POP best_dc_score
+             * @property {number|null} [best_dc_via_relay_pop_id] POP best_dc_via_relay_pop_id
+             * @property {number|null} [default_dc_ping_ms] POP default_dc_ping_ms
+             * @property {number|null} [default_dc_score] POP default_dc_score
+             * @property {number|null} [default_dc_via_relay_pop_id] POP default_dc_via_relay_pop_id
+             * @property {number|null} [test_dc_ping_ms] POP test_dc_ping_ms
+             * @property {number|null} [test_dc_score] POP test_dc_score
+             * @property {number|null} [test_dc_via_relay_pop_id] POP test_dc_via_relay_pop_id
              */
     
             /**
-             * Constructs a new RoutingCluster.
+             * Constructs a new POP.
              * @memberof CMsgSteamDatagramClientPingSampleReply
-             * @classdesc Represents a RoutingCluster.
-             * @implements IRoutingCluster
+             * @classdesc Represents a POP.
+             * @implements IPOP
              * @constructor
-             * @param {CMsgSteamDatagramClientPingSampleReply.IRoutingCluster=} [properties] Properties to set
+             * @param {CMsgSteamDatagramClientPingSampleReply.IPOP=} [properties] Properties to set
              */
-            function RoutingCluster(properties) {
+            function POP(properties) {
+                this.alt_addresses = [];
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -2872,101 +3453,273 @@
             }
     
             /**
-             * RoutingCluster id.
-             * @member {number} id
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * POP pop_id.
+             * @member {number} pop_id
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @instance
              */
-            RoutingCluster.prototype.id = 0;
+            POP.prototype.pop_id = 0;
     
             /**
-             * RoutingCluster front_ping_ms.
-             * @member {number} front_ping_ms
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * POP default_front_ping_ms.
+             * @member {number} default_front_ping_ms
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @instance
              */
-            RoutingCluster.prototype.front_ping_ms = 0;
+            POP.prototype.default_front_ping_ms = 0;
     
             /**
-             * RoutingCluster e2e_ping_ms.
-             * @member {number} e2e_ping_ms
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * POP cluster_penalty.
+             * @member {number} cluster_penalty
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @instance
              */
-            RoutingCluster.prototype.e2e_ping_ms = 0;
+            POP.prototype.cluster_penalty = 0;
     
             /**
-             * Creates a new RoutingCluster instance using the specified properties.
+             * POP alt_addresses.
+             * @member {Array.<CMsgSteamDatagramClientPingSampleReply.POP.IAltAddress>} alt_addresses
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.alt_addresses = $util.emptyArray;
+    
+            /**
+             * POP default_e2e_ping_ms.
+             * @member {number} default_e2e_ping_ms
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.default_e2e_ping_ms = 0;
+    
+            /**
+             * POP default_e2e_score.
+             * @member {number} default_e2e_score
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.default_e2e_score = 0;
+    
+            /**
+             * POP p2p_via_peer_relay_pop_id.
+             * @member {number} p2p_via_peer_relay_pop_id
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.p2p_via_peer_relay_pop_id = 0;
+    
+            /**
+             * POP best_dc_ping_ms.
+             * @member {number} best_dc_ping_ms
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.best_dc_ping_ms = 0;
+    
+            /**
+             * POP best_dc_score.
+             * @member {number} best_dc_score
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.best_dc_score = 0;
+    
+            /**
+             * POP best_dc_via_relay_pop_id.
+             * @member {number} best_dc_via_relay_pop_id
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.best_dc_via_relay_pop_id = 0;
+    
+            /**
+             * POP default_dc_ping_ms.
+             * @member {number} default_dc_ping_ms
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.default_dc_ping_ms = 0;
+    
+            /**
+             * POP default_dc_score.
+             * @member {number} default_dc_score
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.default_dc_score = 0;
+    
+            /**
+             * POP default_dc_via_relay_pop_id.
+             * @member {number} default_dc_via_relay_pop_id
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.default_dc_via_relay_pop_id = 0;
+    
+            /**
+             * POP test_dc_ping_ms.
+             * @member {number} test_dc_ping_ms
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.test_dc_ping_ms = 0;
+    
+            /**
+             * POP test_dc_score.
+             * @member {number} test_dc_score
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.test_dc_score = 0;
+    
+            /**
+             * POP test_dc_via_relay_pop_id.
+             * @member {number} test_dc_via_relay_pop_id
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+             * @instance
+             */
+            POP.prototype.test_dc_via_relay_pop_id = 0;
+    
+            /**
+             * Creates a new POP instance using the specified properties.
              * @function create
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.IRoutingCluster=} [properties] Properties to set
-             * @returns {CMsgSteamDatagramClientPingSampleReply.RoutingCluster} RoutingCluster instance
+             * @param {CMsgSteamDatagramClientPingSampleReply.IPOP=} [properties] Properties to set
+             * @returns {CMsgSteamDatagramClientPingSampleReply.POP} POP instance
              */
-            RoutingCluster.create = function create(properties) {
-                return new RoutingCluster(properties);
+            POP.create = function create(properties) {
+                return new POP(properties);
             };
     
             /**
-             * Encodes the specified RoutingCluster message. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.RoutingCluster.verify|verify} messages.
+             * Encodes the specified POP message. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.POP.verify|verify} messages.
              * @function encode
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.IRoutingCluster} message RoutingCluster message or plain object to encode
+             * @param {CMsgSteamDatagramClientPingSampleReply.IPOP} message POP message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            RoutingCluster.encode = function encode(message, writer) {
+            POP.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                    writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.id);
-                if (message.front_ping_ms != null && Object.hasOwnProperty.call(message, "front_ping_ms"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.front_ping_ms);
-                if (message.e2e_ping_ms != null && Object.hasOwnProperty.call(message, "e2e_ping_ms"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.e2e_ping_ms);
+                if (message.pop_id != null && message.hasOwnProperty("pop_id"))
+                    writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.pop_id);
+                if (message.default_front_ping_ms != null && message.hasOwnProperty("default_front_ping_ms"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.default_front_ping_ms);
+                if (message.default_e2e_ping_ms != null && message.hasOwnProperty("default_e2e_ping_ms"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.default_e2e_ping_ms);
+                if (message.cluster_penalty != null && message.hasOwnProperty("cluster_penalty"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.cluster_penalty);
+                if (message.default_e2e_score != null && message.hasOwnProperty("default_e2e_score"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.default_e2e_score);
+                if (message.p2p_via_peer_relay_pop_id != null && message.hasOwnProperty("p2p_via_peer_relay_pop_id"))
+                    writer.uint32(/* id 6, wireType 5 =*/53).fixed32(message.p2p_via_peer_relay_pop_id);
+                if (message.alt_addresses != null && message.alt_addresses.length)
+                    for (var i = 0; i < message.alt_addresses.length; ++i)
+                        $root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress.encode(message.alt_addresses[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                if (message.best_dc_ping_ms != null && message.hasOwnProperty("best_dc_ping_ms"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.best_dc_ping_ms);
+                if (message.best_dc_score != null && message.hasOwnProperty("best_dc_score"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.best_dc_score);
+                if (message.best_dc_via_relay_pop_id != null && message.hasOwnProperty("best_dc_via_relay_pop_id"))
+                    writer.uint32(/* id 11, wireType 5 =*/93).fixed32(message.best_dc_via_relay_pop_id);
+                if (message.default_dc_ping_ms != null && message.hasOwnProperty("default_dc_ping_ms"))
+                    writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.default_dc_ping_ms);
+                if (message.default_dc_score != null && message.hasOwnProperty("default_dc_score"))
+                    writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.default_dc_score);
+                if (message.default_dc_via_relay_pop_id != null && message.hasOwnProperty("default_dc_via_relay_pop_id"))
+                    writer.uint32(/* id 14, wireType 5 =*/117).fixed32(message.default_dc_via_relay_pop_id);
+                if (message.test_dc_ping_ms != null && message.hasOwnProperty("test_dc_ping_ms"))
+                    writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.test_dc_ping_ms);
+                if (message.test_dc_score != null && message.hasOwnProperty("test_dc_score"))
+                    writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.test_dc_score);
+                if (message.test_dc_via_relay_pop_id != null && message.hasOwnProperty("test_dc_via_relay_pop_id"))
+                    writer.uint32(/* id 17, wireType 5 =*/141).fixed32(message.test_dc_via_relay_pop_id);
                 return writer;
             };
     
             /**
-             * Encodes the specified RoutingCluster message, length delimited. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.RoutingCluster.verify|verify} messages.
+             * Encodes the specified POP message, length delimited. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.POP.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.IRoutingCluster} message RoutingCluster message or plain object to encode
+             * @param {CMsgSteamDatagramClientPingSampleReply.IPOP} message POP message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            RoutingCluster.encodeDelimited = function encodeDelimited(message, writer) {
+            POP.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
     
             /**
-             * Decodes a RoutingCluster message from the specified reader or buffer.
+             * Decodes a POP message from the specified reader or buffer.
              * @function decode
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {CMsgSteamDatagramClientPingSampleReply.RoutingCluster} RoutingCluster
+             * @returns {CMsgSteamDatagramClientPingSampleReply.POP} POP
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            RoutingCluster.decode = function decode(reader, length) {
+            POP.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramClientPingSampleReply.POP();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
-                        message.id = reader.fixed32();
+                        message.pop_id = reader.fixed32();
                         break;
                     case 2:
-                        message.front_ping_ms = reader.uint32();
+                        message.default_front_ping_ms = reader.uint32();
+                        break;
+                    case 4:
+                        message.cluster_penalty = reader.uint32();
+                        break;
+                    case 7:
+                        if (!(message.alt_addresses && message.alt_addresses.length))
+                            message.alt_addresses = [];
+                        message.alt_addresses.push($root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress.decode(reader, reader.uint32()));
                         break;
                     case 3:
-                        message.e2e_ping_ms = reader.uint32();
+                        message.default_e2e_ping_ms = reader.uint32();
+                        break;
+                    case 5:
+                        message.default_e2e_score = reader.uint32();
+                        break;
+                    case 6:
+                        message.p2p_via_peer_relay_pop_id = reader.fixed32();
+                        break;
+                    case 9:
+                        message.best_dc_ping_ms = reader.uint32();
+                        break;
+                    case 10:
+                        message.best_dc_score = reader.uint32();
+                        break;
+                    case 11:
+                        message.best_dc_via_relay_pop_id = reader.fixed32();
+                        break;
+                    case 12:
+                        message.default_dc_ping_ms = reader.uint32();
+                        break;
+                    case 13:
+                        message.default_dc_score = reader.uint32();
+                        break;
+                    case 14:
+                        message.default_dc_via_relay_pop_id = reader.fixed32();
+                        break;
+                    case 15:
+                        message.test_dc_ping_ms = reader.uint32();
+                        break;
+                    case 16:
+                        message.test_dc_score = reader.uint32();
+                        break;
+                    case 17:
+                        message.test_dc_via_relay_pop_id = reader.fixed32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -2977,126 +3730,480 @@
             };
     
             /**
-             * Decodes a RoutingCluster message from the specified reader or buffer, length delimited.
+             * Decodes a POP message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CMsgSteamDatagramClientPingSampleReply.RoutingCluster} RoutingCluster
+             * @returns {CMsgSteamDatagramClientPingSampleReply.POP} POP
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            RoutingCluster.decodeDelimited = function decodeDelimited(reader) {
+            POP.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
     
             /**
-             * Verifies a RoutingCluster message.
+             * Verifies a POP message.
              * @function verify
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            RoutingCluster.verify = function verify(message) {
+            POP.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.id != null && message.hasOwnProperty("id"))
-                    if (!$util.isInteger(message.id))
-                        return "id: integer expected";
-                if (message.front_ping_ms != null && message.hasOwnProperty("front_ping_ms"))
-                    if (!$util.isInteger(message.front_ping_ms))
-                        return "front_ping_ms: integer expected";
-                if (message.e2e_ping_ms != null && message.hasOwnProperty("e2e_ping_ms"))
-                    if (!$util.isInteger(message.e2e_ping_ms))
-                        return "e2e_ping_ms: integer expected";
+                if (message.pop_id != null && message.hasOwnProperty("pop_id"))
+                    if (!$util.isInteger(message.pop_id))
+                        return "pop_id: integer expected";
+                if (message.default_front_ping_ms != null && message.hasOwnProperty("default_front_ping_ms"))
+                    if (!$util.isInteger(message.default_front_ping_ms))
+                        return "default_front_ping_ms: integer expected";
+                if (message.cluster_penalty != null && message.hasOwnProperty("cluster_penalty"))
+                    if (!$util.isInteger(message.cluster_penalty))
+                        return "cluster_penalty: integer expected";
+                if (message.alt_addresses != null && message.hasOwnProperty("alt_addresses")) {
+                    if (!Array.isArray(message.alt_addresses))
+                        return "alt_addresses: array expected";
+                    for (var i = 0; i < message.alt_addresses.length; ++i) {
+                        var error = $root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress.verify(message.alt_addresses[i]);
+                        if (error)
+                            return "alt_addresses." + error;
+                    }
+                }
+                if (message.default_e2e_ping_ms != null && message.hasOwnProperty("default_e2e_ping_ms"))
+                    if (!$util.isInteger(message.default_e2e_ping_ms))
+                        return "default_e2e_ping_ms: integer expected";
+                if (message.default_e2e_score != null && message.hasOwnProperty("default_e2e_score"))
+                    if (!$util.isInteger(message.default_e2e_score))
+                        return "default_e2e_score: integer expected";
+                if (message.p2p_via_peer_relay_pop_id != null && message.hasOwnProperty("p2p_via_peer_relay_pop_id"))
+                    if (!$util.isInteger(message.p2p_via_peer_relay_pop_id))
+                        return "p2p_via_peer_relay_pop_id: integer expected";
+                if (message.best_dc_ping_ms != null && message.hasOwnProperty("best_dc_ping_ms"))
+                    if (!$util.isInteger(message.best_dc_ping_ms))
+                        return "best_dc_ping_ms: integer expected";
+                if (message.best_dc_score != null && message.hasOwnProperty("best_dc_score"))
+                    if (!$util.isInteger(message.best_dc_score))
+                        return "best_dc_score: integer expected";
+                if (message.best_dc_via_relay_pop_id != null && message.hasOwnProperty("best_dc_via_relay_pop_id"))
+                    if (!$util.isInteger(message.best_dc_via_relay_pop_id))
+                        return "best_dc_via_relay_pop_id: integer expected";
+                if (message.default_dc_ping_ms != null && message.hasOwnProperty("default_dc_ping_ms"))
+                    if (!$util.isInteger(message.default_dc_ping_ms))
+                        return "default_dc_ping_ms: integer expected";
+                if (message.default_dc_score != null && message.hasOwnProperty("default_dc_score"))
+                    if (!$util.isInteger(message.default_dc_score))
+                        return "default_dc_score: integer expected";
+                if (message.default_dc_via_relay_pop_id != null && message.hasOwnProperty("default_dc_via_relay_pop_id"))
+                    if (!$util.isInteger(message.default_dc_via_relay_pop_id))
+                        return "default_dc_via_relay_pop_id: integer expected";
+                if (message.test_dc_ping_ms != null && message.hasOwnProperty("test_dc_ping_ms"))
+                    if (!$util.isInteger(message.test_dc_ping_ms))
+                        return "test_dc_ping_ms: integer expected";
+                if (message.test_dc_score != null && message.hasOwnProperty("test_dc_score"))
+                    if (!$util.isInteger(message.test_dc_score))
+                        return "test_dc_score: integer expected";
+                if (message.test_dc_via_relay_pop_id != null && message.hasOwnProperty("test_dc_via_relay_pop_id"))
+                    if (!$util.isInteger(message.test_dc_via_relay_pop_id))
+                        return "test_dc_via_relay_pop_id: integer expected";
                 return null;
             };
     
             /**
-             * Creates a RoutingCluster message from a plain object. Also converts values to their respective internal types.
+             * Creates a POP message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {CMsgSteamDatagramClientPingSampleReply.RoutingCluster} RoutingCluster
+             * @returns {CMsgSteamDatagramClientPingSampleReply.POP} POP
              */
-            RoutingCluster.fromObject = function fromObject(object) {
-                if (object instanceof $root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster)
+            POP.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamDatagramClientPingSampleReply.POP)
                     return object;
-                var message = new $root.CMsgSteamDatagramClientPingSampleReply.RoutingCluster();
-                if (object.id != null)
-                    message.id = object.id >>> 0;
-                if (object.front_ping_ms != null)
-                    message.front_ping_ms = object.front_ping_ms >>> 0;
-                if (object.e2e_ping_ms != null)
-                    message.e2e_ping_ms = object.e2e_ping_ms >>> 0;
+                var message = new $root.CMsgSteamDatagramClientPingSampleReply.POP();
+                if (object.pop_id != null)
+                    message.pop_id = object.pop_id >>> 0;
+                if (object.default_front_ping_ms != null)
+                    message.default_front_ping_ms = object.default_front_ping_ms >>> 0;
+                if (object.cluster_penalty != null)
+                    message.cluster_penalty = object.cluster_penalty >>> 0;
+                if (object.alt_addresses) {
+                    if (!Array.isArray(object.alt_addresses))
+                        throw TypeError(".CMsgSteamDatagramClientPingSampleReply.POP.alt_addresses: array expected");
+                    message.alt_addresses = [];
+                    for (var i = 0; i < object.alt_addresses.length; ++i) {
+                        if (typeof object.alt_addresses[i] !== "object")
+                            throw TypeError(".CMsgSteamDatagramClientPingSampleReply.POP.alt_addresses: object expected");
+                        message.alt_addresses[i] = $root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress.fromObject(object.alt_addresses[i]);
+                    }
+                }
+                if (object.default_e2e_ping_ms != null)
+                    message.default_e2e_ping_ms = object.default_e2e_ping_ms >>> 0;
+                if (object.default_e2e_score != null)
+                    message.default_e2e_score = object.default_e2e_score >>> 0;
+                if (object.p2p_via_peer_relay_pop_id != null)
+                    message.p2p_via_peer_relay_pop_id = object.p2p_via_peer_relay_pop_id >>> 0;
+                if (object.best_dc_ping_ms != null)
+                    message.best_dc_ping_ms = object.best_dc_ping_ms >>> 0;
+                if (object.best_dc_score != null)
+                    message.best_dc_score = object.best_dc_score >>> 0;
+                if (object.best_dc_via_relay_pop_id != null)
+                    message.best_dc_via_relay_pop_id = object.best_dc_via_relay_pop_id >>> 0;
+                if (object.default_dc_ping_ms != null)
+                    message.default_dc_ping_ms = object.default_dc_ping_ms >>> 0;
+                if (object.default_dc_score != null)
+                    message.default_dc_score = object.default_dc_score >>> 0;
+                if (object.default_dc_via_relay_pop_id != null)
+                    message.default_dc_via_relay_pop_id = object.default_dc_via_relay_pop_id >>> 0;
+                if (object.test_dc_ping_ms != null)
+                    message.test_dc_ping_ms = object.test_dc_ping_ms >>> 0;
+                if (object.test_dc_score != null)
+                    message.test_dc_score = object.test_dc_score >>> 0;
+                if (object.test_dc_via_relay_pop_id != null)
+                    message.test_dc_via_relay_pop_id = object.test_dc_via_relay_pop_id >>> 0;
                 return message;
             };
     
             /**
-             * Creates a plain object from a RoutingCluster message. Also converts values to other types if specified.
+             * Creates a plain object from a POP message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.RoutingCluster} message RoutingCluster
+             * @param {CMsgSteamDatagramClientPingSampleReply.POP} message POP
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            RoutingCluster.toObject = function toObject(message, options) {
+            POP.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
+                if (options.arrays || options.defaults)
+                    object.alt_addresses = [];
                 if (options.defaults) {
-                    object.id = 0;
-                    object.front_ping_ms = 0;
-                    object.e2e_ping_ms = 0;
+                    object.pop_id = 0;
+                    object.default_front_ping_ms = 0;
+                    object.default_e2e_ping_ms = 0;
+                    object.cluster_penalty = 0;
+                    object.default_e2e_score = 0;
+                    object.p2p_via_peer_relay_pop_id = 0;
+                    object.best_dc_ping_ms = 0;
+                    object.best_dc_score = 0;
+                    object.best_dc_via_relay_pop_id = 0;
+                    object.default_dc_ping_ms = 0;
+                    object.default_dc_score = 0;
+                    object.default_dc_via_relay_pop_id = 0;
+                    object.test_dc_ping_ms = 0;
+                    object.test_dc_score = 0;
+                    object.test_dc_via_relay_pop_id = 0;
                 }
-                if (message.id != null && message.hasOwnProperty("id"))
-                    object.id = message.id;
-                if (message.front_ping_ms != null && message.hasOwnProperty("front_ping_ms"))
-                    object.front_ping_ms = message.front_ping_ms;
-                if (message.e2e_ping_ms != null && message.hasOwnProperty("e2e_ping_ms"))
-                    object.e2e_ping_ms = message.e2e_ping_ms;
+                if (message.pop_id != null && message.hasOwnProperty("pop_id"))
+                    object.pop_id = message.pop_id;
+                if (message.default_front_ping_ms != null && message.hasOwnProperty("default_front_ping_ms"))
+                    object.default_front_ping_ms = message.default_front_ping_ms;
+                if (message.default_e2e_ping_ms != null && message.hasOwnProperty("default_e2e_ping_ms"))
+                    object.default_e2e_ping_ms = message.default_e2e_ping_ms;
+                if (message.cluster_penalty != null && message.hasOwnProperty("cluster_penalty"))
+                    object.cluster_penalty = message.cluster_penalty;
+                if (message.default_e2e_score != null && message.hasOwnProperty("default_e2e_score"))
+                    object.default_e2e_score = message.default_e2e_score;
+                if (message.p2p_via_peer_relay_pop_id != null && message.hasOwnProperty("p2p_via_peer_relay_pop_id"))
+                    object.p2p_via_peer_relay_pop_id = message.p2p_via_peer_relay_pop_id;
+                if (message.alt_addresses && message.alt_addresses.length) {
+                    object.alt_addresses = [];
+                    for (var j = 0; j < message.alt_addresses.length; ++j)
+                        object.alt_addresses[j] = $root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress.toObject(message.alt_addresses[j], options);
+                }
+                if (message.best_dc_ping_ms != null && message.hasOwnProperty("best_dc_ping_ms"))
+                    object.best_dc_ping_ms = message.best_dc_ping_ms;
+                if (message.best_dc_score != null && message.hasOwnProperty("best_dc_score"))
+                    object.best_dc_score = message.best_dc_score;
+                if (message.best_dc_via_relay_pop_id != null && message.hasOwnProperty("best_dc_via_relay_pop_id"))
+                    object.best_dc_via_relay_pop_id = message.best_dc_via_relay_pop_id;
+                if (message.default_dc_ping_ms != null && message.hasOwnProperty("default_dc_ping_ms"))
+                    object.default_dc_ping_ms = message.default_dc_ping_ms;
+                if (message.default_dc_score != null && message.hasOwnProperty("default_dc_score"))
+                    object.default_dc_score = message.default_dc_score;
+                if (message.default_dc_via_relay_pop_id != null && message.hasOwnProperty("default_dc_via_relay_pop_id"))
+                    object.default_dc_via_relay_pop_id = message.default_dc_via_relay_pop_id;
+                if (message.test_dc_ping_ms != null && message.hasOwnProperty("test_dc_ping_ms"))
+                    object.test_dc_ping_ms = message.test_dc_ping_ms;
+                if (message.test_dc_score != null && message.hasOwnProperty("test_dc_score"))
+                    object.test_dc_score = message.test_dc_score;
+                if (message.test_dc_via_relay_pop_id != null && message.hasOwnProperty("test_dc_via_relay_pop_id"))
+                    object.test_dc_via_relay_pop_id = message.test_dc_via_relay_pop_id;
                 return object;
             };
     
             /**
-             * Converts this RoutingCluster to JSON.
+             * Converts this POP to JSON.
              * @function toJSON
-             * @memberof CMsgSteamDatagramClientPingSampleReply.RoutingCluster
+             * @memberof CMsgSteamDatagramClientPingSampleReply.POP
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            RoutingCluster.prototype.toJSON = function toJSON() {
+            POP.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
     
-            return RoutingCluster;
+            POP.AltAddress = (function() {
+    
+                /**
+                 * Properties of an AltAddress.
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+                 * @interface IAltAddress
+                 * @property {string|null} [id] AltAddress id
+                 * @property {number|null} [front_ping_ms] AltAddress front_ping_ms
+                 * @property {number|null} [penalty] AltAddress penalty
+                 */
+    
+                /**
+                 * Constructs a new AltAddress.
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP
+                 * @classdesc Represents an AltAddress.
+                 * @implements IAltAddress
+                 * @constructor
+                 * @param {CMsgSteamDatagramClientPingSampleReply.POP.IAltAddress=} [properties] Properties to set
+                 */
+                function AltAddress(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * AltAddress id.
+                 * @member {string} id
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @instance
+                 */
+                AltAddress.prototype.id = "";
+    
+                /**
+                 * AltAddress front_ping_ms.
+                 * @member {number} front_ping_ms
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @instance
+                 */
+                AltAddress.prototype.front_ping_ms = 0;
+    
+                /**
+                 * AltAddress penalty.
+                 * @member {number} penalty
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @instance
+                 */
+                AltAddress.prototype.penalty = 0;
+    
+                /**
+                 * Creates a new AltAddress instance using the specified properties.
+                 * @function create
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {CMsgSteamDatagramClientPingSampleReply.POP.IAltAddress=} [properties] Properties to set
+                 * @returns {CMsgSteamDatagramClientPingSampleReply.POP.AltAddress} AltAddress instance
+                 */
+                AltAddress.create = function create(properties) {
+                    return new AltAddress(properties);
+                };
+    
+                /**
+                 * Encodes the specified AltAddress message. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.POP.AltAddress.verify|verify} messages.
+                 * @function encode
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {CMsgSteamDatagramClientPingSampleReply.POP.IAltAddress} message AltAddress message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                AltAddress.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.front_ping_ms != null && message.hasOwnProperty("front_ping_ms"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.front_ping_ms);
+                    if (message.penalty != null && message.hasOwnProperty("penalty"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.penalty);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified AltAddress message, length delimited. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.POP.AltAddress.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {CMsgSteamDatagramClientPingSampleReply.POP.IAltAddress} message AltAddress message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                AltAddress.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an AltAddress message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {CMsgSteamDatagramClientPingSampleReply.POP.AltAddress} AltAddress
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                AltAddress.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.front_ping_ms = reader.uint32();
+                            break;
+                        case 3:
+                            message.penalty = reader.uint32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an AltAddress message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {CMsgSteamDatagramClientPingSampleReply.POP.AltAddress} AltAddress
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                AltAddress.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an AltAddress message.
+                 * @function verify
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                AltAddress.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.front_ping_ms != null && message.hasOwnProperty("front_ping_ms"))
+                        if (!$util.isInteger(message.front_ping_ms))
+                            return "front_ping_ms: integer expected";
+                    if (message.penalty != null && message.hasOwnProperty("penalty"))
+                        if (!$util.isInteger(message.penalty))
+                            return "penalty: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an AltAddress message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {CMsgSteamDatagramClientPingSampleReply.POP.AltAddress} AltAddress
+                 */
+                AltAddress.fromObject = function fromObject(object) {
+                    if (object instanceof $root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress)
+                        return object;
+                    var message = new $root.CMsgSteamDatagramClientPingSampleReply.POP.AltAddress();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.front_ping_ms != null)
+                        message.front_ping_ms = object.front_ping_ms >>> 0;
+                    if (object.penalty != null)
+                        message.penalty = object.penalty >>> 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an AltAddress message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @static
+                 * @param {CMsgSteamDatagramClientPingSampleReply.POP.AltAddress} message AltAddress
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                AltAddress.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.front_ping_ms = 0;
+                        object.penalty = 0;
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.front_ping_ms != null && message.hasOwnProperty("front_ping_ms"))
+                        object.front_ping_ms = message.front_ping_ms;
+                    if (message.penalty != null && message.hasOwnProperty("penalty"))
+                        object.penalty = message.penalty;
+                    return object;
+                };
+    
+                /**
+                 * Converts this AltAddress to JSON.
+                 * @function toJSON
+                 * @memberof CMsgSteamDatagramClientPingSampleReply.POP.AltAddress
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                AltAddress.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return AltAddress;
+            })();
+    
+            return POP;
         })();
     
-        CMsgSteamDatagramClientPingSampleReply.DataCenter = (function() {
+        CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter = (function() {
     
             /**
-             * Properties of a DataCenter.
+             * Properties of a LegacyDataCenter.
              * @memberof CMsgSteamDatagramClientPingSampleReply
-             * @interface IDataCenter
-             * @property {number|null} [data_center_id] DataCenter data_center_id
-             * @property {number|null} [via_relay_id] DataCenter via_relay_id
-             * @property {number|null} [e2e_ping_ms] DataCenter e2e_ping_ms
+             * @interface ILegacyDataCenter
+             * @property {number|null} [data_center_id] LegacyDataCenter data_center_id
+             * @property {number|null} [best_dc_via_relay_pop_id] LegacyDataCenter best_dc_via_relay_pop_id
+             * @property {number|null} [best_dc_ping_ms] LegacyDataCenter best_dc_ping_ms
              */
     
             /**
-             * Constructs a new DataCenter.
+             * Constructs a new LegacyDataCenter.
              * @memberof CMsgSteamDatagramClientPingSampleReply
-             * @classdesc Represents a DataCenter.
-             * @implements IDataCenter
+             * @classdesc Represents a LegacyDataCenter.
+             * @implements ILegacyDataCenter
              * @constructor
-             * @param {CMsgSteamDatagramClientPingSampleReply.IDataCenter=} [properties] Properties to set
+             * @param {CMsgSteamDatagramClientPingSampleReply.ILegacyDataCenter=} [properties] Properties to set
              */
-            function DataCenter(properties) {
+            function LegacyDataCenter(properties) {
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -3104,90 +4211,90 @@
             }
     
             /**
-             * DataCenter data_center_id.
+             * LegacyDataCenter data_center_id.
              * @member {number} data_center_id
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @instance
              */
-            DataCenter.prototype.data_center_id = 0;
+            LegacyDataCenter.prototype.data_center_id = 0;
     
             /**
-             * DataCenter via_relay_id.
-             * @member {number} via_relay_id
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * LegacyDataCenter best_dc_via_relay_pop_id.
+             * @member {number} best_dc_via_relay_pop_id
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @instance
              */
-            DataCenter.prototype.via_relay_id = 0;
+            LegacyDataCenter.prototype.best_dc_via_relay_pop_id = 0;
     
             /**
-             * DataCenter e2e_ping_ms.
-             * @member {number} e2e_ping_ms
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * LegacyDataCenter best_dc_ping_ms.
+             * @member {number} best_dc_ping_ms
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @instance
              */
-            DataCenter.prototype.e2e_ping_ms = 0;
+            LegacyDataCenter.prototype.best_dc_ping_ms = 0;
     
             /**
-             * Creates a new DataCenter instance using the specified properties.
+             * Creates a new LegacyDataCenter instance using the specified properties.
              * @function create
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.IDataCenter=} [properties] Properties to set
-             * @returns {CMsgSteamDatagramClientPingSampleReply.DataCenter} DataCenter instance
+             * @param {CMsgSteamDatagramClientPingSampleReply.ILegacyDataCenter=} [properties] Properties to set
+             * @returns {CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter} LegacyDataCenter instance
              */
-            DataCenter.create = function create(properties) {
-                return new DataCenter(properties);
+            LegacyDataCenter.create = function create(properties) {
+                return new LegacyDataCenter(properties);
             };
     
             /**
-             * Encodes the specified DataCenter message. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.DataCenter.verify|verify} messages.
+             * Encodes the specified LegacyDataCenter message. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter.verify|verify} messages.
              * @function encode
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.IDataCenter} message DataCenter message or plain object to encode
+             * @param {CMsgSteamDatagramClientPingSampleReply.ILegacyDataCenter} message LegacyDataCenter message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            DataCenter.encode = function encode(message, writer) {
+            LegacyDataCenter.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.data_center_id != null && Object.hasOwnProperty.call(message, "data_center_id"))
+                if (message.data_center_id != null && message.hasOwnProperty("data_center_id"))
                     writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.data_center_id);
-                if (message.via_relay_id != null && Object.hasOwnProperty.call(message, "via_relay_id"))
-                    writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.via_relay_id);
-                if (message.e2e_ping_ms != null && Object.hasOwnProperty.call(message, "e2e_ping_ms"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.e2e_ping_ms);
+                if (message.best_dc_via_relay_pop_id != null && message.hasOwnProperty("best_dc_via_relay_pop_id"))
+                    writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.best_dc_via_relay_pop_id);
+                if (message.best_dc_ping_ms != null && message.hasOwnProperty("best_dc_ping_ms"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.best_dc_ping_ms);
                 return writer;
             };
     
             /**
-             * Encodes the specified DataCenter message, length delimited. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.DataCenter.verify|verify} messages.
+             * Encodes the specified LegacyDataCenter message, length delimited. Does not implicitly {@link CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.IDataCenter} message DataCenter message or plain object to encode
+             * @param {CMsgSteamDatagramClientPingSampleReply.ILegacyDataCenter} message LegacyDataCenter message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            DataCenter.encodeDelimited = function encodeDelimited(message, writer) {
+            LegacyDataCenter.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
     
             /**
-             * Decodes a DataCenter message from the specified reader or buffer.
+             * Decodes a LegacyDataCenter message from the specified reader or buffer.
              * @function decode
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {CMsgSteamDatagramClientPingSampleReply.DataCenter} DataCenter
+             * @returns {CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter} LegacyDataCenter
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            DataCenter.decode = function decode(reader, length) {
+            LegacyDataCenter.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramClientPingSampleReply.DataCenter();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -3195,10 +4302,10 @@
                         message.data_center_id = reader.fixed32();
                         break;
                     case 2:
-                        message.via_relay_id = reader.fixed32();
+                        message.best_dc_via_relay_pop_id = reader.fixed32();
                         break;
                     case 3:
-                        message.e2e_ping_ms = reader.uint32();
+                        message.best_dc_ping_ms = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -3209,104 +4316,104 @@
             };
     
             /**
-             * Decodes a DataCenter message from the specified reader or buffer, length delimited.
+             * Decodes a LegacyDataCenter message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CMsgSteamDatagramClientPingSampleReply.DataCenter} DataCenter
+             * @returns {CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter} LegacyDataCenter
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            DataCenter.decodeDelimited = function decodeDelimited(reader) {
+            LegacyDataCenter.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
     
             /**
-             * Verifies a DataCenter message.
+             * Verifies a LegacyDataCenter message.
              * @function verify
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            DataCenter.verify = function verify(message) {
+            LegacyDataCenter.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.data_center_id != null && message.hasOwnProperty("data_center_id"))
                     if (!$util.isInteger(message.data_center_id))
                         return "data_center_id: integer expected";
-                if (message.via_relay_id != null && message.hasOwnProperty("via_relay_id"))
-                    if (!$util.isInteger(message.via_relay_id))
-                        return "via_relay_id: integer expected";
-                if (message.e2e_ping_ms != null && message.hasOwnProperty("e2e_ping_ms"))
-                    if (!$util.isInteger(message.e2e_ping_ms))
-                        return "e2e_ping_ms: integer expected";
+                if (message.best_dc_via_relay_pop_id != null && message.hasOwnProperty("best_dc_via_relay_pop_id"))
+                    if (!$util.isInteger(message.best_dc_via_relay_pop_id))
+                        return "best_dc_via_relay_pop_id: integer expected";
+                if (message.best_dc_ping_ms != null && message.hasOwnProperty("best_dc_ping_ms"))
+                    if (!$util.isInteger(message.best_dc_ping_ms))
+                        return "best_dc_ping_ms: integer expected";
                 return null;
             };
     
             /**
-             * Creates a DataCenter message from a plain object. Also converts values to their respective internal types.
+             * Creates a LegacyDataCenter message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {CMsgSteamDatagramClientPingSampleReply.DataCenter} DataCenter
+             * @returns {CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter} LegacyDataCenter
              */
-            DataCenter.fromObject = function fromObject(object) {
-                if (object instanceof $root.CMsgSteamDatagramClientPingSampleReply.DataCenter)
+            LegacyDataCenter.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter)
                     return object;
-                var message = new $root.CMsgSteamDatagramClientPingSampleReply.DataCenter();
+                var message = new $root.CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter();
                 if (object.data_center_id != null)
                     message.data_center_id = object.data_center_id >>> 0;
-                if (object.via_relay_id != null)
-                    message.via_relay_id = object.via_relay_id >>> 0;
-                if (object.e2e_ping_ms != null)
-                    message.e2e_ping_ms = object.e2e_ping_ms >>> 0;
+                if (object.best_dc_via_relay_pop_id != null)
+                    message.best_dc_via_relay_pop_id = object.best_dc_via_relay_pop_id >>> 0;
+                if (object.best_dc_ping_ms != null)
+                    message.best_dc_ping_ms = object.best_dc_ping_ms >>> 0;
                 return message;
             };
     
             /**
-             * Creates a plain object from a DataCenter message. Also converts values to other types if specified.
+             * Creates a plain object from a LegacyDataCenter message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @static
-             * @param {CMsgSteamDatagramClientPingSampleReply.DataCenter} message DataCenter
+             * @param {CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter} message LegacyDataCenter
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            DataCenter.toObject = function toObject(message, options) {
+            LegacyDataCenter.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
                 if (options.defaults) {
                     object.data_center_id = 0;
-                    object.via_relay_id = 0;
-                    object.e2e_ping_ms = 0;
+                    object.best_dc_via_relay_pop_id = 0;
+                    object.best_dc_ping_ms = 0;
                 }
                 if (message.data_center_id != null && message.hasOwnProperty("data_center_id"))
                     object.data_center_id = message.data_center_id;
-                if (message.via_relay_id != null && message.hasOwnProperty("via_relay_id"))
-                    object.via_relay_id = message.via_relay_id;
-                if (message.e2e_ping_ms != null && message.hasOwnProperty("e2e_ping_ms"))
-                    object.e2e_ping_ms = message.e2e_ping_ms;
+                if (message.best_dc_via_relay_pop_id != null && message.hasOwnProperty("best_dc_via_relay_pop_id"))
+                    object.best_dc_via_relay_pop_id = message.best_dc_via_relay_pop_id;
+                if (message.best_dc_ping_ms != null && message.hasOwnProperty("best_dc_ping_ms"))
+                    object.best_dc_ping_ms = message.best_dc_ping_ms;
                 return object;
             };
     
             /**
-             * Converts this DataCenter to JSON.
+             * Converts this LegacyDataCenter to JSON.
              * @function toJSON
-             * @memberof CMsgSteamDatagramClientPingSampleReply.DataCenter
+             * @memberof CMsgSteamDatagramClientPingSampleReply.LegacyDataCenter
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            DataCenter.prototype.toJSON = function toJSON() {
+            LegacyDataCenter.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
     
-            return DataCenter;
+            return LegacyDataCenter;
         })();
     
         return CMsgSteamDatagramClientPingSampleReply;
@@ -3467,29 +4574,29 @@
         CMsgSteamDatagramClientSwitchedPrimary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.from_ip != null && Object.hasOwnProperty.call(message, "from_ip"))
+            if (message.from_ip != null && message.hasOwnProperty("from_ip"))
                 writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.from_ip);
-            if (message.from_port != null && Object.hasOwnProperty.call(message, "from_port"))
+            if (message.from_port != null && message.hasOwnProperty("from_port"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.from_port);
-            if (message.from_router_cluster != null && Object.hasOwnProperty.call(message, "from_router_cluster"))
+            if (message.from_router_cluster != null && message.hasOwnProperty("from_router_cluster"))
                 writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.from_router_cluster);
-            if (message.from_active_time != null && Object.hasOwnProperty.call(message, "from_active_time"))
+            if (message.from_active_time != null && message.hasOwnProperty("from_active_time"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.from_active_time);
-            if (message.from_active_packets_recv != null && Object.hasOwnProperty.call(message, "from_active_packets_recv"))
+            if (message.from_active_packets_recv != null && message.hasOwnProperty("from_active_packets_recv"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.from_active_packets_recv);
-            if (message.from_dropped_reason != null && Object.hasOwnProperty.call(message, "from_dropped_reason"))
+            if (message.from_dropped_reason != null && message.hasOwnProperty("from_dropped_reason"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.from_dropped_reason);
-            if (message.gap_ms != null && Object.hasOwnProperty.call(message, "gap_ms"))
+            if (message.gap_ms != null && message.hasOwnProperty("gap_ms"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.gap_ms);
-            if (message.from_quality_now != null && Object.hasOwnProperty.call(message, "from_quality_now"))
+            if (message.from_quality_now != null && message.hasOwnProperty("from_quality_now"))
                 $root.CMsgSteamDatagramClientSwitchedPrimary.RouterQuality.encode(message.from_quality_now, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-            if (message.to_quality_now != null && Object.hasOwnProperty.call(message, "to_quality_now"))
+            if (message.to_quality_now != null && message.hasOwnProperty("to_quality_now"))
                 $root.CMsgSteamDatagramClientSwitchedPrimary.RouterQuality.encode(message.to_quality_now, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-            if (message.from_quality_then != null && Object.hasOwnProperty.call(message, "from_quality_then"))
+            if (message.from_quality_then != null && message.hasOwnProperty("from_quality_then"))
                 $root.CMsgSteamDatagramClientSwitchedPrimary.RouterQuality.encode(message.from_quality_then, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-            if (message.to_quality_then != null && Object.hasOwnProperty.call(message, "to_quality_then"))
+            if (message.to_quality_then != null && message.hasOwnProperty("to_quality_then"))
                 $root.CMsgSteamDatagramClientSwitchedPrimary.RouterQuality.encode(message.to_quality_then, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             return writer;
         };
@@ -3842,13 +4949,13 @@
             RouterQuality.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                if (message.score != null && message.hasOwnProperty("score"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.score);
-                if (message.front_ping != null && Object.hasOwnProperty.call(message, "front_ping"))
+                if (message.front_ping != null && message.hasOwnProperty("front_ping"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.front_ping);
-                if (message.back_ping != null && Object.hasOwnProperty.call(message, "back_ping"))
+                if (message.back_ping != null && message.hasOwnProperty("back_ping"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.back_ping);
-                if (message.seconds_until_down != null && Object.hasOwnProperty.call(message, "seconds_until_down"))
+                if (message.seconds_until_down != null && message.hasOwnProperty("seconds_until_down"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.seconds_until_down);
                 return writer;
             };
@@ -4144,23 +5251,23 @@
         CMsgSteamDatagramConnectRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.gameserver_relay_session_id != null && Object.hasOwnProperty.call(message, "gameserver_relay_session_id"))
+            if (message.gameserver_relay_session_id != null && message.hasOwnProperty("gameserver_relay_session_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.gameserver_relay_session_id);
-            if (message.legacy_client_steam_id != null && Object.hasOwnProperty.call(message, "legacy_client_steam_id"))
+            if (message.legacy_client_steam_id != null && message.hasOwnProperty("legacy_client_steam_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.legacy_client_steam_id);
-            if (message.my_timestamp != null && Object.hasOwnProperty.call(message, "my_timestamp"))
+            if (message.my_timestamp != null && message.hasOwnProperty("my_timestamp"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.my_timestamp);
-            if (message.ping_est_ms != null && Object.hasOwnProperty.call(message, "ping_est_ms"))
+            if (message.ping_est_ms != null && message.hasOwnProperty("ping_est_ms"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.ping_est_ms);
-            if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+            if (message.crypt != null && message.hasOwnProperty("crypt"))
                 $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.virtual_port != null && Object.hasOwnProperty.call(message, "virtual_port"))
+            if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.virtual_port);
-            if (message.routing_secret != null && Object.hasOwnProperty.call(message, "routing_secret"))
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 writer.uint32(/* id 10, wireType 1 =*/81).fixed64(message.routing_secret);
             return writer;
         };
@@ -4542,19 +5649,19 @@
         CMsgSteamDatagramConnectOK.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.client_connection_id);
-            if (message.gameserver_relay_session_id != null && Object.hasOwnProperty.call(message, "gameserver_relay_session_id"))
+            if (message.gameserver_relay_session_id != null && message.hasOwnProperty("gameserver_relay_session_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.gameserver_relay_session_id);
-            if (message.your_timestamp != null && Object.hasOwnProperty.call(message, "your_timestamp"))
+            if (message.your_timestamp != null && message.hasOwnProperty("your_timestamp"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.your_timestamp);
-            if (message.delay_time_usec != null && Object.hasOwnProperty.call(message, "delay_time_usec"))
+            if (message.delay_time_usec != null && message.hasOwnProperty("delay_time_usec"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.delay_time_usec);
-            if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+            if (message.crypt != null && message.hasOwnProperty("crypt"))
                 $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.server_connection_id != null && Object.hasOwnProperty.call(message, "server_connection_id"))
+            if (message.server_connection_id != null && message.hasOwnProperty("server_connection_id"))
                 writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.server_connection_id);
             return writer;
         };
@@ -4788,6 +5895,13 @@
          * @property {number|null} [initial_score] CMsgSteamNetworkingP2PSDRRoutingSummary initial_score
          * @property {number|null} [initial_pop_local] CMsgSteamNetworkingP2PSDRRoutingSummary initial_pop_local
          * @property {number|null} [initial_pop_remote] CMsgSteamNetworkingP2PSDRRoutingSummary initial_pop_remote
+         * @property {number|null} [best_ping] CMsgSteamNetworkingP2PSDRRoutingSummary best_ping
+         * @property {number|null} [best_ping_front_local] CMsgSteamNetworkingP2PSDRRoutingSummary best_ping_front_local
+         * @property {number|null} [best_ping_front_remote] CMsgSteamNetworkingP2PSDRRoutingSummary best_ping_front_remote
+         * @property {number|null} [best_score] CMsgSteamNetworkingP2PSDRRoutingSummary best_score
+         * @property {number|null} [best_pop_local] CMsgSteamNetworkingP2PSDRRoutingSummary best_pop_local
+         * @property {number|null} [best_pop_remote] CMsgSteamNetworkingP2PSDRRoutingSummary best_pop_remote
+         * @property {number|null} [best_time] CMsgSteamNetworkingP2PSDRRoutingSummary best_time
          * @property {number|null} [negotiation_ms] CMsgSteamNetworkingP2PSDRRoutingSummary negotiation_ms
          * @property {number|null} [selected_seconds] CMsgSteamNetworkingP2PSDRRoutingSummary selected_seconds
          */
@@ -4856,6 +5970,62 @@
         CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.initial_pop_remote = 0;
     
         /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary best_ping.
+         * @member {number} best_ping
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.best_ping = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary best_ping_front_local.
+         * @member {number} best_ping_front_local
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.best_ping_front_local = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary best_ping_front_remote.
+         * @member {number} best_ping_front_remote
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.best_ping_front_remote = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary best_score.
+         * @member {number} best_score
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.best_score = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary best_pop_local.
+         * @member {number} best_pop_local
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.best_pop_local = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary best_pop_remote.
+         * @member {number} best_pop_remote
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.best_pop_remote = 0;
+    
+        /**
+         * CMsgSteamNetworkingP2PSDRRoutingSummary best_time.
+         * @member {number} best_time
+         * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
+         * @instance
+         */
+        CMsgSteamNetworkingP2PSDRRoutingSummary.prototype.best_time = 0;
+    
+        /**
          * CMsgSteamNetworkingP2PSDRRoutingSummary negotiation_ms.
          * @member {number} negotiation_ms
          * @memberof CMsgSteamNetworkingP2PSDRRoutingSummary
@@ -4895,22 +6065,36 @@
         CMsgSteamNetworkingP2PSDRRoutingSummary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.initial_ping != null && Object.hasOwnProperty.call(message, "initial_ping"))
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.initial_ping);
-            if (message.initial_ping_front_local != null && Object.hasOwnProperty.call(message, "initial_ping_front_local"))
+            if (message.initial_ping_front_local != null && message.hasOwnProperty("initial_ping_front_local"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.initial_ping_front_local);
-            if (message.initial_ping_front_remote != null && Object.hasOwnProperty.call(message, "initial_ping_front_remote"))
+            if (message.initial_ping_front_remote != null && message.hasOwnProperty("initial_ping_front_remote"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.initial_ping_front_remote);
-            if (message.initial_score != null && Object.hasOwnProperty.call(message, "initial_score"))
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.initial_score);
-            if (message.initial_pop_local != null && Object.hasOwnProperty.call(message, "initial_pop_local"))
+            if (message.initial_pop_local != null && message.hasOwnProperty("initial_pop_local"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.initial_pop_local);
-            if (message.initial_pop_remote != null && Object.hasOwnProperty.call(message, "initial_pop_remote"))
+            if (message.initial_pop_remote != null && message.hasOwnProperty("initial_pop_remote"))
                 writer.uint32(/* id 6, wireType 5 =*/53).fixed32(message.initial_pop_remote);
-            if (message.negotiation_ms != null && Object.hasOwnProperty.call(message, "negotiation_ms"))
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.negotiation_ms);
-            if (message.selected_seconds != null && Object.hasOwnProperty.call(message, "selected_seconds"))
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.selected_seconds);
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.best_ping);
+            if (message.best_ping_front_local != null && message.hasOwnProperty("best_ping_front_local"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.best_ping_front_local);
+            if (message.best_ping_front_remote != null && message.hasOwnProperty("best_ping_front_remote"))
+                writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.best_ping_front_remote);
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.best_score);
+            if (message.best_pop_local != null && message.hasOwnProperty("best_pop_local"))
+                writer.uint32(/* id 15, wireType 5 =*/125).fixed32(message.best_pop_local);
+            if (message.best_pop_remote != null && message.hasOwnProperty("best_pop_remote"))
+                writer.uint32(/* id 16, wireType 5 =*/133).fixed32(message.best_pop_remote);
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.best_time);
             return writer;
         };
     
@@ -4962,6 +6146,27 @@
                     break;
                 case 6:
                     message.initial_pop_remote = reader.fixed32();
+                    break;
+                case 11:
+                    message.best_ping = reader.uint32();
+                    break;
+                case 12:
+                    message.best_ping_front_local = reader.uint32();
+                    break;
+                case 13:
+                    message.best_ping_front_remote = reader.uint32();
+                    break;
+                case 14:
+                    message.best_score = reader.uint32();
+                    break;
+                case 15:
+                    message.best_pop_local = reader.fixed32();
+                    break;
+                case 16:
+                    message.best_pop_remote = reader.fixed32();
+                    break;
+                case 17:
+                    message.best_time = reader.uint32();
                     break;
                 case 7:
                     message.negotiation_ms = reader.uint32();
@@ -5022,6 +6227,27 @@
             if (message.initial_pop_remote != null && message.hasOwnProperty("initial_pop_remote"))
                 if (!$util.isInteger(message.initial_pop_remote))
                     return "initial_pop_remote: integer expected";
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                if (!$util.isInteger(message.best_ping))
+                    return "best_ping: integer expected";
+            if (message.best_ping_front_local != null && message.hasOwnProperty("best_ping_front_local"))
+                if (!$util.isInteger(message.best_ping_front_local))
+                    return "best_ping_front_local: integer expected";
+            if (message.best_ping_front_remote != null && message.hasOwnProperty("best_ping_front_remote"))
+                if (!$util.isInteger(message.best_ping_front_remote))
+                    return "best_ping_front_remote: integer expected";
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                if (!$util.isInteger(message.best_score))
+                    return "best_score: integer expected";
+            if (message.best_pop_local != null && message.hasOwnProperty("best_pop_local"))
+                if (!$util.isInteger(message.best_pop_local))
+                    return "best_pop_local: integer expected";
+            if (message.best_pop_remote != null && message.hasOwnProperty("best_pop_remote"))
+                if (!$util.isInteger(message.best_pop_remote))
+                    return "best_pop_remote: integer expected";
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                if (!$util.isInteger(message.best_time))
+                    return "best_time: integer expected";
             if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
                 if (!$util.isInteger(message.negotiation_ms))
                     return "negotiation_ms: integer expected";
@@ -5055,6 +6281,20 @@
                 message.initial_pop_local = object.initial_pop_local >>> 0;
             if (object.initial_pop_remote != null)
                 message.initial_pop_remote = object.initial_pop_remote >>> 0;
+            if (object.best_ping != null)
+                message.best_ping = object.best_ping >>> 0;
+            if (object.best_ping_front_local != null)
+                message.best_ping_front_local = object.best_ping_front_local >>> 0;
+            if (object.best_ping_front_remote != null)
+                message.best_ping_front_remote = object.best_ping_front_remote >>> 0;
+            if (object.best_score != null)
+                message.best_score = object.best_score >>> 0;
+            if (object.best_pop_local != null)
+                message.best_pop_local = object.best_pop_local >>> 0;
+            if (object.best_pop_remote != null)
+                message.best_pop_remote = object.best_pop_remote >>> 0;
+            if (object.best_time != null)
+                message.best_time = object.best_time >>> 0;
             if (object.negotiation_ms != null)
                 message.negotiation_ms = object.negotiation_ms >>> 0;
             if (object.selected_seconds != null)
@@ -5084,6 +6324,13 @@
                 object.initial_pop_remote = 0;
                 object.negotiation_ms = 0;
                 object.selected_seconds = 0;
+                object.best_ping = 0;
+                object.best_ping_front_local = 0;
+                object.best_ping_front_remote = 0;
+                object.best_score = 0;
+                object.best_pop_local = 0;
+                object.best_pop_remote = 0;
+                object.best_time = 0;
             }
             if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
                 object.initial_ping = message.initial_ping;
@@ -5101,6 +6348,20 @@
                 object.negotiation_ms = message.negotiation_ms;
             if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 object.selected_seconds = message.selected_seconds;
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                object.best_ping = message.best_ping;
+            if (message.best_ping_front_local != null && message.hasOwnProperty("best_ping_front_local"))
+                object.best_ping_front_local = message.best_ping_front_local;
+            if (message.best_ping_front_remote != null && message.hasOwnProperty("best_ping_front_remote"))
+                object.best_ping_front_remote = message.best_ping_front_remote;
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                object.best_score = message.best_score;
+            if (message.best_pop_local != null && message.hasOwnProperty("best_pop_local"))
+                object.best_pop_local = message.best_pop_local;
+            if (message.best_pop_remote != null && message.hasOwnProperty("best_pop_remote"))
+                object.best_pop_remote = message.best_pop_remote;
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                object.best_time = message.best_time;
             return object;
         };
     
@@ -5183,9 +6444,9 @@
         CMsgSteamDatagramP2PRoutingSummary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ice != null && Object.hasOwnProperty.call(message, "ice"))
+            if (message.ice != null && message.hasOwnProperty("ice"))
                 $root.CMsgSteamNetworkingICESessionSummary.encode(message.ice, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.sdr != null && Object.hasOwnProperty.call(message, "sdr"))
+            if (message.sdr != null && message.hasOwnProperty("sdr"))
                 $root.CMsgSteamNetworkingP2PSDRRoutingSummary.encode(message.sdr, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
@@ -5556,43 +6817,43 @@
         CMsgSteamDatagramConnectionClosed.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.legacy_gameserver_relay_session_id != null && Object.hasOwnProperty.call(message, "legacy_gameserver_relay_session_id"))
+            if (message.legacy_gameserver_relay_session_id != null && message.hasOwnProperty("legacy_gameserver_relay_session_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.legacy_gameserver_relay_session_id);
-            if (message.legacy_from_steam_id != null && Object.hasOwnProperty.call(message, "legacy_from_steam_id"))
+            if (message.legacy_from_steam_id != null && message.hasOwnProperty("legacy_from_steam_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.legacy_from_steam_id);
-            if (message.relay_mode != null && Object.hasOwnProperty.call(message, "relay_mode"))
+            if (message.relay_mode != null && message.hasOwnProperty("relay_mode"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.relay_mode);
-            if (message.debug != null && Object.hasOwnProperty.call(message, "debug"))
+            if (message.debug != null && message.hasOwnProperty("debug"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.debug);
-            if (message.reason_code != null && Object.hasOwnProperty.call(message, "reason_code"))
+            if (message.reason_code != null && message.hasOwnProperty("reason_code"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.reason_code);
-            if (message.to_connection_id != null && Object.hasOwnProperty.call(message, "to_connection_id"))
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.to_connection_id);
-            if (message.from_connection_id != null && Object.hasOwnProperty.call(message, "from_connection_id"))
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.from_connection_id);
-            if (message.to_relay_session_id != null && Object.hasOwnProperty.call(message, "to_relay_session_id"))
+            if (message.to_relay_session_id != null && message.hasOwnProperty("to_relay_session_id"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.to_relay_session_id);
-            if (message.from_relay_session_id != null && Object.hasOwnProperty.call(message, "from_relay_session_id"))
+            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
                 writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.from_relay_session_id);
-            if (message.forward_target_relay_routing_token != null && Object.hasOwnProperty.call(message, "forward_target_relay_routing_token"))
+            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
                 writer.uint32(/* id 11, wireType 2 =*/90).bytes(message.forward_target_relay_routing_token);
-            if (message.forward_target_revision != null && Object.hasOwnProperty.call(message, "forward_target_revision"))
+            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.forward_target_revision);
-            if (message.legacy_from_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_from_identity_binary"))
+            if (message.legacy_from_identity_binary != null && message.hasOwnProperty("legacy_from_identity_binary"))
                 $root.CMsgSteamNetworkingIdentityLegacyBinary.encode(message.legacy_from_identity_binary, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-            if (message.routing_secret != null && Object.hasOwnProperty.call(message, "routing_secret"))
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 writer.uint32(/* id 14, wireType 1 =*/113).fixed64(message.routing_secret);
-            if (message.from_identity_string != null && Object.hasOwnProperty.call(message, "from_identity_string"))
+            if (message.from_identity_string != null && message.hasOwnProperty("from_identity_string"))
                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.from_identity_string);
-            if (message.not_primary_session != null && Object.hasOwnProperty.call(message, "not_primary_session"))
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.not_primary_session);
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
-            if (message.not_primary_transport != null && Object.hasOwnProperty.call(message, "not_primary_transport"))
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.not_primary_transport);
-            if (message.p2p_routing_summary != null && Object.hasOwnProperty.call(message, "p2p_routing_summary"))
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
                 $root.CMsgSteamDatagramP2PRoutingSummary.encode(message.p2p_routing_summary, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
             return writer;
         };
@@ -5997,7 +7258,7 @@
         /**
          * ERelayMode enum.
          * @name CMsgSteamDatagramConnectionClosed.ERelayMode
-         * @enum {number}
+         * @enum {string}
          * @property {number} None=0 None value
          * @property {number} EndToEnd=1 EndToEnd value
          * @property {number} ClosedByPeer=2 ClosedByPeer value
@@ -6195,35 +7456,35 @@
         CMsgSteamDatagramNoConnection.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.legacy_gameserver_relay_session_id != null && Object.hasOwnProperty.call(message, "legacy_gameserver_relay_session_id"))
+            if (message.legacy_gameserver_relay_session_id != null && message.hasOwnProperty("legacy_gameserver_relay_session_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.legacy_gameserver_relay_session_id);
-            if (message.legacy_from_steam_id != null && Object.hasOwnProperty.call(message, "legacy_from_steam_id"))
+            if (message.legacy_from_steam_id != null && message.hasOwnProperty("legacy_from_steam_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.legacy_from_steam_id);
-            if (message.end_to_end != null && Object.hasOwnProperty.call(message, "end_to_end"))
+            if (message.end_to_end != null && message.hasOwnProperty("end_to_end"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.end_to_end);
-            if (message.to_connection_id != null && Object.hasOwnProperty.call(message, "to_connection_id"))
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.to_connection_id);
-            if (message.from_connection_id != null && Object.hasOwnProperty.call(message, "from_connection_id"))
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
                 writer.uint32(/* id 6, wireType 5 =*/53).fixed32(message.from_connection_id);
-            if (message.from_identity_string != null && Object.hasOwnProperty.call(message, "from_identity_string"))
+            if (message.from_identity_string != null && message.hasOwnProperty("from_identity_string"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.from_identity_string);
-            if (message.to_relay_session_id != null && Object.hasOwnProperty.call(message, "to_relay_session_id"))
+            if (message.to_relay_session_id != null && message.hasOwnProperty("to_relay_session_id"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.to_relay_session_id);
-            if (message.from_relay_session_id != null && Object.hasOwnProperty.call(message, "from_relay_session_id"))
+            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
                 writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.from_relay_session_id);
-            if (message.routing_secret != null && Object.hasOwnProperty.call(message, "routing_secret"))
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 writer.uint32(/* id 11, wireType 1 =*/89).fixed64(message.routing_secret);
-            if (message.not_primary_session != null && Object.hasOwnProperty.call(message, "not_primary_session"))
+            if (message.not_primary_session != null && message.hasOwnProperty("not_primary_session"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.not_primary_session);
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
-            if (message.not_primary_transport != null && Object.hasOwnProperty.call(message, "not_primary_transport"))
+            if (message.not_primary_transport != null && message.hasOwnProperty("not_primary_transport"))
                 writer.uint32(/* id 15, wireType 0 =*/120).bool(message.not_primary_transport);
-            if (message.p2p_routing_summary != null && Object.hasOwnProperty.call(message, "p2p_routing_summary"))
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
                 $root.CMsgSteamDatagramP2PRoutingSummary.encode(message.p2p_routing_summary, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
-            if (message.dummy_pad != null && Object.hasOwnProperty.call(message, "dummy_pad"))
+            if (message.dummy_pad != null && message.hasOwnProperty("dummy_pad"))
                 writer.uint32(/* id 1023, wireType 5 =*/8189).fixed32(message.dummy_pad);
             return writer;
         };
@@ -6565,6 +7826,8 @@
          * @property {number|null} [server_connection_id] CMsgSteamDatagramGameserverSessionRequest server_connection_id
          * @property {number|null} [network_config_version] CMsgSteamDatagramGameserverSessionRequest network_config_version
          * @property {number|null} [protocol_version] CMsgSteamDatagramGameserverSessionRequest protocol_version
+         * @property {string|null} [platform] CMsgSteamDatagramGameserverSessionRequest platform
+         * @property {string|null} [build] CMsgSteamDatagramGameserverSessionRequest build
          */
     
         /**
@@ -6639,6 +7902,22 @@
         CMsgSteamDatagramGameserverSessionRequest.prototype.protocol_version = 0;
     
         /**
+         * CMsgSteamDatagramGameserverSessionRequest platform.
+         * @member {string} platform
+         * @memberof CMsgSteamDatagramGameserverSessionRequest
+         * @instance
+         */
+        CMsgSteamDatagramGameserverSessionRequest.prototype.platform = "";
+    
+        /**
+         * CMsgSteamDatagramGameserverSessionRequest build.
+         * @member {string} build
+         * @memberof CMsgSteamDatagramGameserverSessionRequest
+         * @instance
+         */
+        CMsgSteamDatagramGameserverSessionRequest.prototype.build = "";
+    
+        /**
          * Creates a new CMsgSteamDatagramGameserverSessionRequest instance using the specified properties.
          * @function create
          * @memberof CMsgSteamDatagramGameserverSessionRequest
@@ -6662,20 +7941,24 @@
         CMsgSteamDatagramGameserverSessionRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
+            if (message.ticket != null && message.hasOwnProperty("ticket"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.ticket);
-            if (message.challenge_time != null && Object.hasOwnProperty.call(message, "challenge_time"))
+            if (message.challenge_time != null && message.hasOwnProperty("challenge_time"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.challenge_time);
-            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+            if (message.challenge != null && message.hasOwnProperty("challenge"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.challenge);
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.client_connection_id);
-            if (message.network_config_version != null && Object.hasOwnProperty.call(message, "network_config_version"))
+            if (message.network_config_version != null && message.hasOwnProperty("network_config_version"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.network_config_version);
-            if (message.protocol_version != null && Object.hasOwnProperty.call(message, "protocol_version"))
+            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.protocol_version);
-            if (message.server_connection_id != null && Object.hasOwnProperty.call(message, "server_connection_id"))
+            if (message.server_connection_id != null && message.hasOwnProperty("server_connection_id"))
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.server_connection_id);
+            if (message.platform != null && message.hasOwnProperty("platform"))
+                writer.uint32(/* id 9, wireType 2 =*/74).string(message.platform);
+            if (message.build != null && message.hasOwnProperty("build"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.build);
             return writer;
         };
     
@@ -6730,6 +8013,12 @@
                     break;
                 case 7:
                     message.protocol_version = reader.uint32();
+                    break;
+                case 9:
+                    message.platform = reader.string();
+                    break;
+                case 10:
+                    message.build = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6787,6 +8076,12 @@
             if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 if (!$util.isInteger(message.protocol_version))
                     return "protocol_version: integer expected";
+            if (message.platform != null && message.hasOwnProperty("platform"))
+                if (!$util.isString(message.platform))
+                    return "platform: string expected";
+            if (message.build != null && message.hasOwnProperty("build"))
+                if (!$util.isString(message.build))
+                    return "build: string expected";
             return null;
         };
     
@@ -6826,6 +8121,10 @@
                 message.network_config_version = object.network_config_version >>> 0;
             if (object.protocol_version != null)
                 message.protocol_version = object.protocol_version >>> 0;
+            if (object.platform != null)
+                message.platform = String(object.platform);
+            if (object.build != null)
+                message.build = String(object.build);
             return message;
         };
     
@@ -6860,6 +8159,8 @@
                 object.network_config_version = 0;
                 object.protocol_version = 0;
                 object.server_connection_id = 0;
+                object.platform = "";
+                object.build = "";
             }
             if (message.ticket != null && message.hasOwnProperty("ticket"))
                 object.ticket = options.bytes === String ? $util.base64.encode(message.ticket, 0, message.ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.ticket) : message.ticket;
@@ -6878,6 +8179,10 @@
                 object.protocol_version = message.protocol_version;
             if (message.server_connection_id != null && message.hasOwnProperty("server_connection_id"))
                 object.server_connection_id = message.server_connection_id;
+            if (message.platform != null && message.hasOwnProperty("platform"))
+                object.platform = message.platform;
+            if (message.build != null && message.hasOwnProperty("build"))
+                object.build = message.build;
             return object;
         };
     
@@ -6996,17 +8301,17 @@
         CMsgSteamDatagramGameserverSessionEstablished.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.gameserver_identity_string != null && Object.hasOwnProperty.call(message, "gameserver_identity_string"))
+            if (message.gameserver_identity_string != null && message.hasOwnProperty("gameserver_identity_string"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.gameserver_identity_string);
-            if (message.legacy_gameserver_steamid != null && Object.hasOwnProperty.call(message, "legacy_gameserver_steamid"))
+            if (message.legacy_gameserver_steamid != null && message.hasOwnProperty("legacy_gameserver_steamid"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.legacy_gameserver_steamid);
-            if (message.seconds_until_shutdown != null && Object.hasOwnProperty.call(message, "seconds_until_shutdown"))
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.seconds_until_shutdown);
-            if (message.seq_num_r2c != null && Object.hasOwnProperty.call(message, "seq_num_r2c"))
+            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.seq_num_r2c);
-            if (message.dummy_legacy_identity_binary != null && Object.hasOwnProperty.call(message, "dummy_legacy_identity_binary"))
+            if (message.dummy_legacy_identity_binary != null && message.hasOwnProperty("dummy_legacy_identity_binary"))
                 writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.dummy_legacy_identity_binary);
             return writer;
         };
@@ -7337,9 +8642,9 @@
         CMsgSteamDatagramConnectionStatsClientToRouter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.ack_relay != null && message.ack_relay.length)
                 for (var i = 0; i < message.ack_relay.length; ++i)
@@ -7347,13 +8652,13 @@
             if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
                 for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
                     writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+            if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.flags);
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.client_connection_id);
-            if (message.seq_num_c2r != null && Object.hasOwnProperty.call(message, "seq_num_c2r"))
+            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.seq_num_c2r);
-            if (message.seq_num_e2e != null && Object.hasOwnProperty.call(message, "seq_num_e2e"))
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.seq_num_e2e);
             return writer;
         };
@@ -7612,7 +8917,7 @@
         /**
          * Flags enum.
          * @name CMsgSteamDatagramConnectionStatsClientToRouter.Flags
-         * @enum {number}
+         * @enum {string}
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
@@ -7787,23 +9092,23 @@
         CMsgSteamDatagramConnectionStatsRouterToClient.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.seconds_until_shutdown != null && Object.hasOwnProperty.call(message, "seconds_until_shutdown"))
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.seconds_until_shutdown);
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.client_connection_id);
-            if (message.seq_num_r2c != null && Object.hasOwnProperty.call(message, "seq_num_r2c"))
+            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.seq_num_r2c);
-            if (message.seq_num_e2e != null && Object.hasOwnProperty.call(message, "seq_num_e2e"))
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.seq_num_e2e);
-            if (message.migrate_request_ip != null && Object.hasOwnProperty.call(message, "migrate_request_ip"))
+            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
                 writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.migrate_request_ip);
-            if (message.migrate_request_port != null && Object.hasOwnProperty.call(message, "migrate_request_port"))
+            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.migrate_request_port);
-            if (message.scoring_penalty_relay_cluster != null && Object.hasOwnProperty.call(message, "scoring_penalty_relay_cluster"))
+            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.scoring_penalty_relay_cluster);
             if (message.ack_relay != null && message.ack_relay.length)
                 for (var i = 0; i < message.ack_relay.length; ++i)
@@ -7811,7 +9116,7 @@
             if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
                 for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
                     writer.uint32(/* id 14, wireType 5 =*/117).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+            if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.flags);
             return writer;
         };
@@ -8114,7 +9419,7 @@
         /**
          * Flags enum.
          * @name CMsgSteamDatagramConnectionStatsRouterToClient.Flags
-         * @enum {number}
+         * @enum {string}
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
@@ -8296,19 +9601,19 @@
         CMsgSteamDatagramConnectionStatsRouterToServer.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.seq_num_r2s != null && Object.hasOwnProperty.call(message, "seq_num_r2s"))
+            if (message.seq_num_r2s != null && message.hasOwnProperty("seq_num_r2s"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.seq_num_r2s);
-            if (message.seq_num_e2e != null && Object.hasOwnProperty.call(message, "seq_num_e2e"))
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.seq_num_e2e);
-            if (message.legacy_client_steam_id != null && Object.hasOwnProperty.call(message, "legacy_client_steam_id"))
+            if (message.legacy_client_steam_id != null && message.hasOwnProperty("legacy_client_steam_id"))
                 writer.uint32(/* id 7, wireType 1 =*/57).fixed64(message.legacy_client_steam_id);
-            if (message.relay_session_id != null && Object.hasOwnProperty.call(message, "relay_session_id"))
+            if (message.relay_session_id != null && message.hasOwnProperty("relay_session_id"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.relay_session_id);
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.client_connection_id);
             if (message.ack_relay != null && message.ack_relay.length)
                 for (var i = 0; i < message.ack_relay.length; ++i)
@@ -8316,13 +9621,13 @@
             if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
                 for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
                     writer.uint32(/* id 11, wireType 5 =*/93).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+            if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.flags);
-            if (message.server_connection_id != null && Object.hasOwnProperty.call(message, "server_connection_id"))
+            if (message.server_connection_id != null && message.hasOwnProperty("server_connection_id"))
                 writer.uint32(/* id 13, wireType 5 =*/109).fixed32(message.server_connection_id);
-            if (message.routing_secret != null && Object.hasOwnProperty.call(message, "routing_secret"))
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 writer.uint32(/* id 14, wireType 1 =*/113).fixed64(message.routing_secret);
-            if (message.client_identity_string != null && Object.hasOwnProperty.call(message, "client_identity_string"))
+            if (message.client_identity_string != null && message.hasOwnProperty("client_identity_string"))
                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.client_identity_string);
             return writer;
         };
@@ -8664,7 +9969,7 @@
         /**
          * Flags enum.
          * @name CMsgSteamDatagramConnectionStatsRouterToServer.Flags
-         * @enum {number}
+         * @enum {string}
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
@@ -8819,17 +10124,17 @@
         CMsgSteamDatagramConnectionStatsServerToRouter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.seq_num_s2r != null && Object.hasOwnProperty.call(message, "seq_num_s2r"))
+            if (message.seq_num_s2r != null && message.hasOwnProperty("seq_num_s2r"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seq_num_s2r);
-            if (message.seq_num_e2e != null && Object.hasOwnProperty.call(message, "seq_num_e2e"))
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.seq_num_e2e);
-            if (message.relay_session_id != null && Object.hasOwnProperty.call(message, "relay_session_id"))
+            if (message.relay_session_id != null && message.hasOwnProperty("relay_session_id"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.relay_session_id);
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 7, wireType 5 =*/61).fixed32(message.client_connection_id);
             if (message.ack_relay != null && message.ack_relay.length)
                 for (var i = 0; i < message.ack_relay.length; ++i)
@@ -8837,9 +10142,9 @@
             if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
                 for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
                     writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+            if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.flags);
-            if (message.server_connection_id != null && Object.hasOwnProperty.call(message, "server_connection_id"))
+            if (message.server_connection_id != null && message.hasOwnProperty("server_connection_id"))
                 writer.uint32(/* id 11, wireType 5 =*/93).fixed32(message.server_connection_id);
             return writer;
         };
@@ -9120,7 +10425,7 @@
         /**
          * Flags enum.
          * @name CMsgSteamDatagramConnectionStatsServerToRouter.Flags
-         * @enum {number}
+         * @enum {string}
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
@@ -9150,7 +10455,9 @@
          * @property {number|null} [peer_connection_id] CMsgSteamDatagramP2PSessionRequestBody peer_connection_id
          * @property {number|null} [protocol_version] CMsgSteamDatagramP2PSessionRequestBody protocol_version
          * @property {number|null} [network_config_version] CMsgSteamDatagramP2PSessionRequestBody network_config_version
-         * @property {number|null} [public_ip] CMsgSteamDatagramP2PSessionRequestBody public_ip
+         * @property {number|null} [unused_public_ip] CMsgSteamDatagramP2PSessionRequestBody unused_public_ip
+         * @property {string|null} [platform] CMsgSteamDatagramP2PSessionRequestBody platform
+         * @property {string|null} [build] CMsgSteamDatagramP2PSessionRequestBody build
          */
     
         /**
@@ -9233,12 +10540,28 @@
         CMsgSteamDatagramP2PSessionRequestBody.prototype.network_config_version = 0;
     
         /**
-         * CMsgSteamDatagramP2PSessionRequestBody public_ip.
-         * @member {number} public_ip
+         * CMsgSteamDatagramP2PSessionRequestBody unused_public_ip.
+         * @member {number} unused_public_ip
          * @memberof CMsgSteamDatagramP2PSessionRequestBody
          * @instance
          */
-        CMsgSteamDatagramP2PSessionRequestBody.prototype.public_ip = 0;
+        CMsgSteamDatagramP2PSessionRequestBody.prototype.unused_public_ip = 0;
+    
+        /**
+         * CMsgSteamDatagramP2PSessionRequestBody platform.
+         * @member {string} platform
+         * @memberof CMsgSteamDatagramP2PSessionRequestBody
+         * @instance
+         */
+        CMsgSteamDatagramP2PSessionRequestBody.prototype.platform = "";
+    
+        /**
+         * CMsgSteamDatagramP2PSessionRequestBody build.
+         * @member {string} build
+         * @memberof CMsgSteamDatagramP2PSessionRequestBody
+         * @instance
+         */
+        CMsgSteamDatagramP2PSessionRequestBody.prototype.build = "";
     
         /**
          * Creates a new CMsgSteamDatagramP2PSessionRequestBody instance using the specified properties.
@@ -9264,24 +10587,28 @@
         CMsgSteamDatagramP2PSessionRequestBody.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.challenge_time != null && Object.hasOwnProperty.call(message, "challenge_time"))
+            if (message.challenge_time != null && message.hasOwnProperty("challenge_time"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.challenge_time);
-            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+            if (message.challenge != null && message.hasOwnProperty("challenge"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.challenge);
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.client_connection_id);
-            if (message.legacy_peer_steam_id != null && Object.hasOwnProperty.call(message, "legacy_peer_steam_id"))
+            if (message.legacy_peer_steam_id != null && message.hasOwnProperty("legacy_peer_steam_id"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_peer_steam_id);
-            if (message.peer_connection_id != null && Object.hasOwnProperty.call(message, "peer_connection_id"))
+            if (message.peer_connection_id != null && message.hasOwnProperty("peer_connection_id"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.peer_connection_id);
-            if (message.protocol_version != null && Object.hasOwnProperty.call(message, "protocol_version"))
+            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.protocol_version);
-            if (message.network_config_version != null && Object.hasOwnProperty.call(message, "network_config_version"))
+            if (message.network_config_version != null && message.hasOwnProperty("network_config_version"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.network_config_version);
-            if (message.public_ip != null && Object.hasOwnProperty.call(message, "public_ip"))
-                writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.public_ip);
-            if (message.peer_identity_string != null && Object.hasOwnProperty.call(message, "peer_identity_string"))
+            if (message.unused_public_ip != null && message.hasOwnProperty("unused_public_ip"))
+                writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.unused_public_ip);
+            if (message.peer_identity_string != null && message.hasOwnProperty("peer_identity_string"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.peer_identity_string);
+            if (message.platform != null && message.hasOwnProperty("platform"))
+                writer.uint32(/* id 12, wireType 2 =*/98).string(message.platform);
+            if (message.build != null && message.hasOwnProperty("build"))
+                writer.uint32(/* id 13, wireType 2 =*/106).string(message.build);
             return writer;
         };
     
@@ -9341,7 +10668,13 @@
                     message.network_config_version = reader.uint32();
                     break;
                 case 10:
-                    message.public_ip = reader.fixed32();
+                    message.unused_public_ip = reader.fixed32();
+                    break;
+                case 12:
+                    message.platform = reader.string();
+                    break;
+                case 13:
+                    message.build = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9402,9 +10735,15 @@
             if (message.network_config_version != null && message.hasOwnProperty("network_config_version"))
                 if (!$util.isInteger(message.network_config_version))
                     return "network_config_version: integer expected";
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                if (!$util.isInteger(message.public_ip))
-                    return "public_ip: integer expected";
+            if (message.unused_public_ip != null && message.hasOwnProperty("unused_public_ip"))
+                if (!$util.isInteger(message.unused_public_ip))
+                    return "unused_public_ip: integer expected";
+            if (message.platform != null && message.hasOwnProperty("platform"))
+                if (!$util.isString(message.platform))
+                    return "platform: string expected";
+            if (message.build != null && message.hasOwnProperty("build"))
+                if (!$util.isString(message.build))
+                    return "build: string expected";
             return null;
         };
     
@@ -9450,8 +10789,12 @@
                 message.protocol_version = object.protocol_version >>> 0;
             if (object.network_config_version != null)
                 message.network_config_version = object.network_config_version >>> 0;
-            if (object.public_ip != null)
-                message.public_ip = object.public_ip >>> 0;
+            if (object.unused_public_ip != null)
+                message.unused_public_ip = object.unused_public_ip >>> 0;
+            if (object.platform != null)
+                message.platform = String(object.platform);
+            if (object.build != null)
+                message.build = String(object.build);
             return message;
         };
     
@@ -9484,8 +10827,10 @@
                 object.peer_connection_id = 0;
                 object.protocol_version = 0;
                 object.network_config_version = 0;
-                object.public_ip = 0;
+                object.unused_public_ip = 0;
                 object.peer_identity_string = "";
+                object.platform = "";
+                object.build = "";
             }
             if (message.challenge_time != null && message.hasOwnProperty("challenge_time"))
                 object.challenge_time = message.challenge_time;
@@ -9507,10 +10852,14 @@
                 object.protocol_version = message.protocol_version;
             if (message.network_config_version != null && message.hasOwnProperty("network_config_version"))
                 object.network_config_version = message.network_config_version;
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                object.public_ip = message.public_ip;
+            if (message.unused_public_ip != null && message.hasOwnProperty("unused_public_ip"))
+                object.unused_public_ip = message.unused_public_ip;
             if (message.peer_identity_string != null && message.hasOwnProperty("peer_identity_string"))
                 object.peer_identity_string = message.peer_identity_string;
+            if (message.platform != null && message.hasOwnProperty("platform"))
+                object.platform = message.platform;
+            if (message.build != null && message.hasOwnProperty("build"))
+                object.build = message.build;
             return object;
         };
     
@@ -9602,11 +10951,11 @@
         CMsgSteamDatagramP2PSessionRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+            if (message.body != null && message.hasOwnProperty("body"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.body);
-            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+            if (message.signature != null && message.hasOwnProperty("signature"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.signature);
             return writer;
         };
@@ -9866,13 +11215,13 @@
         CMsgSteamDatagramP2PSessionEstablished.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.seconds_until_shutdown != null && Object.hasOwnProperty.call(message, "seconds_until_shutdown"))
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seconds_until_shutdown);
-            if (message.relay_routing_token != null && Object.hasOwnProperty.call(message, "relay_routing_token"))
+            if (message.relay_routing_token != null && message.hasOwnProperty("relay_routing_token"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.relay_routing_token);
-            if (message.seq_num_r2c != null && Object.hasOwnProperty.call(message, "seq_num_r2c"))
+            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.seq_num_r2c);
             return writer;
         };
@@ -10212,9 +11561,9 @@
         CMsgSteamDatagramConnectionStatsP2PClientToRouter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.ack_relay != null && message.ack_relay.length)
                 for (var i = 0; i < message.ack_relay.length; ++i)
@@ -10222,23 +11571,23 @@
             if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
                 for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
                     writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+            if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.flags);
-            if (message.forward_target_relay_routing_token != null && Object.hasOwnProperty.call(message, "forward_target_relay_routing_token"))
+            if (message.forward_target_relay_routing_token != null && message.hasOwnProperty("forward_target_relay_routing_token"))
                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.forward_target_relay_routing_token);
-            if (message.forward_target_revision != null && Object.hasOwnProperty.call(message, "forward_target_revision"))
+            if (message.forward_target_revision != null && message.hasOwnProperty("forward_target_revision"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.forward_target_revision);
-            if (message.routes != null && Object.hasOwnProperty.call(message, "routes"))
+            if (message.routes != null && message.hasOwnProperty("routes"))
                 writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.routes);
-            if (message.ack_peer_routes_revision != null && Object.hasOwnProperty.call(message, "ack_peer_routes_revision"))
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.ack_peer_routes_revision);
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 10, wireType 5 =*/85).fixed32(message.connection_id);
-            if (message.seq_num_c2r != null && Object.hasOwnProperty.call(message, "seq_num_c2r"))
+            if (message.seq_num_c2r != null && message.hasOwnProperty("seq_num_c2r"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.seq_num_c2r);
-            if (message.seq_num_e2e != null && Object.hasOwnProperty.call(message, "seq_num_e2e"))
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.seq_num_e2e);
-            if (message.p2p_routing_summary != null && Object.hasOwnProperty.call(message, "p2p_routing_summary"))
+            if (message.p2p_routing_summary != null && message.hasOwnProperty("p2p_routing_summary"))
                 $root.CMsgSteamDatagramP2PRoutingSummary.encode(message.p2p_routing_summary, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             return writer;
         };
@@ -10575,7 +11924,7 @@
         /**
          * Flags enum.
          * @name CMsgSteamDatagramConnectionStatsP2PClientToRouter.Flags
-         * @enum {number}
+         * @enum {string}
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
@@ -10779,17 +12128,17 @@
         CMsgSteamDatagramConnectionStatsP2PRouterToClient.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
+            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
+            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.seconds_until_shutdown != null && Object.hasOwnProperty.call(message, "seconds_until_shutdown"))
+            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seconds_until_shutdown);
-            if (message.migrate_request_ip != null && Object.hasOwnProperty.call(message, "migrate_request_ip"))
+            if (message.migrate_request_ip != null && message.hasOwnProperty("migrate_request_ip"))
                 writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.migrate_request_ip);
-            if (message.migrate_request_port != null && Object.hasOwnProperty.call(message, "migrate_request_port"))
+            if (message.migrate_request_port != null && message.hasOwnProperty("migrate_request_port"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.migrate_request_port);
-            if (message.scoring_penalty_relay_cluster != null && Object.hasOwnProperty.call(message, "scoring_penalty_relay_cluster"))
+            if (message.scoring_penalty_relay_cluster != null && message.hasOwnProperty("scoring_penalty_relay_cluster"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.scoring_penalty_relay_cluster);
             if (message.ack_relay != null && message.ack_relay.length)
                 for (var i = 0; i < message.ack_relay.length; ++i)
@@ -10797,19 +12146,19 @@
             if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
                 for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
                     writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+            if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.flags);
-            if (message.ack_forward_target_revision != null && Object.hasOwnProperty.call(message, "ack_forward_target_revision"))
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.ack_forward_target_revision);
-            if (message.routes != null && Object.hasOwnProperty.call(message, "routes"))
+            if (message.routes != null && message.hasOwnProperty("routes"))
                 writer.uint32(/* id 11, wireType 2 =*/90).bytes(message.routes);
-            if (message.ack_peer_routes_revision != null && Object.hasOwnProperty.call(message, "ack_peer_routes_revision"))
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.ack_peer_routes_revision);
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 13, wireType 5 =*/109).fixed32(message.connection_id);
-            if (message.seq_num_r2c != null && Object.hasOwnProperty.call(message, "seq_num_r2c"))
+            if (message.seq_num_r2c != null && message.hasOwnProperty("seq_num_r2c"))
                 writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.seq_num_r2c);
-            if (message.seq_num_e2e != null && Object.hasOwnProperty.call(message, "seq_num_e2e"))
+            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.seq_num_e2e);
             return writer;
         };
@@ -11154,7 +12503,7 @@
         /**
          * Flags enum.
          * @name CMsgSteamDatagramConnectionStatsP2PRouterToClient.Flags
-         * @enum {number}
+         * @enum {string}
          * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
@@ -11255,13 +12604,13 @@
         CMsgSteamDatagramP2PBadRouteRouterToClient.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.failed_relay_routing_token != null && Object.hasOwnProperty.call(message, "failed_relay_routing_token"))
+            if (message.failed_relay_routing_token != null && message.hasOwnProperty("failed_relay_routing_token"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.failed_relay_routing_token);
-            if (message.ack_forward_target_revision != null && Object.hasOwnProperty.call(message, "ack_forward_target_revision"))
+            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ack_forward_target_revision);
-            if (message.kludge_pad != null && Object.hasOwnProperty.call(message, "kludge_pad"))
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
                 writer.uint32(/* id 99, wireType 1 =*/793).fixed64(message.kludge_pad);
             return writer;
         };
@@ -11531,7 +12880,7 @@
             if (message.routes != null && message.routes.length)
                 for (var i = 0; i < message.routes.length; ++i)
                     $root.CMsgSteamDatagramP2PRoutes.Route.encode(message.routes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+            if (message.revision != null && message.hasOwnProperty("revision"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.revision);
             return writer;
         };
@@ -11804,13 +13153,13 @@
             RelayCluster.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.pop_id != null && Object.hasOwnProperty.call(message, "pop_id"))
+                if (message.pop_id != null && message.hasOwnProperty("pop_id"))
                     writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.pop_id);
-                if (message.ping_ms != null && Object.hasOwnProperty.call(message, "ping_ms"))
+                if (message.ping_ms != null && message.hasOwnProperty("ping_ms"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.ping_ms);
-                if (message.score_penalty != null && Object.hasOwnProperty.call(message, "score_penalty"))
+                if (message.score_penalty != null && message.hasOwnProperty("score_penalty"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.score_penalty);
-                if (message.session_relay_routing_token != null && Object.hasOwnProperty.call(message, "session_relay_routing_token"))
+                if (message.session_relay_routing_token != null && message.hasOwnProperty("session_relay_routing_token"))
                     writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.session_relay_routing_token);
                 return writer;
             };
@@ -11992,7 +13341,8 @@
              * @interface IRoute
              * @property {number|null} [my_pop_id] Route my_pop_id
              * @property {number|null} [your_pop_id] Route your_pop_id
-             * @property {number|null} [score] Route score
+             * @property {number|null} [legacy_score] Route legacy_score
+             * @property {number|null} [interior_score] Route interior_score
              */
     
             /**
@@ -12027,12 +13377,20 @@
             Route.prototype.your_pop_id = 0;
     
             /**
-             * Route score.
-             * @member {number} score
+             * Route legacy_score.
+             * @member {number} legacy_score
              * @memberof CMsgSteamDatagramP2PRoutes.Route
              * @instance
              */
-            Route.prototype.score = 0;
+            Route.prototype.legacy_score = 0;
+    
+            /**
+             * Route interior_score.
+             * @member {number} interior_score
+             * @memberof CMsgSteamDatagramP2PRoutes.Route
+             * @instance
+             */
+            Route.prototype.interior_score = 0;
     
             /**
              * Creates a new Route instance using the specified properties.
@@ -12058,12 +13416,14 @@
             Route.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.my_pop_id != null && Object.hasOwnProperty.call(message, "my_pop_id"))
+                if (message.my_pop_id != null && message.hasOwnProperty("my_pop_id"))
                     writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.my_pop_id);
-                if (message.your_pop_id != null && Object.hasOwnProperty.call(message, "your_pop_id"))
+                if (message.your_pop_id != null && message.hasOwnProperty("your_pop_id"))
                     writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.your_pop_id);
-                if (message.score != null && Object.hasOwnProperty.call(message, "score"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.score);
+                if (message.legacy_score != null && message.hasOwnProperty("legacy_score"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.legacy_score);
+                if (message.interior_score != null && message.hasOwnProperty("interior_score"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.interior_score);
                 return writer;
             };
     
@@ -12105,7 +13465,10 @@
                         message.your_pop_id = reader.fixed32();
                         break;
                     case 3:
-                        message.score = reader.uint32();
+                        message.legacy_score = reader.uint32();
+                        break;
+                    case 4:
+                        message.interior_score = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -12148,9 +13511,12 @@
                 if (message.your_pop_id != null && message.hasOwnProperty("your_pop_id"))
                     if (!$util.isInteger(message.your_pop_id))
                         return "your_pop_id: integer expected";
-                if (message.score != null && message.hasOwnProperty("score"))
-                    if (!$util.isInteger(message.score))
-                        return "score: integer expected";
+                if (message.legacy_score != null && message.hasOwnProperty("legacy_score"))
+                    if (!$util.isInteger(message.legacy_score))
+                        return "legacy_score: integer expected";
+                if (message.interior_score != null && message.hasOwnProperty("interior_score"))
+                    if (!$util.isInteger(message.interior_score))
+                        return "interior_score: integer expected";
                 return null;
             };
     
@@ -12170,8 +13536,10 @@
                     message.my_pop_id = object.my_pop_id >>> 0;
                 if (object.your_pop_id != null)
                     message.your_pop_id = object.your_pop_id >>> 0;
-                if (object.score != null)
-                    message.score = object.score >>> 0;
+                if (object.legacy_score != null)
+                    message.legacy_score = object.legacy_score >>> 0;
+                if (object.interior_score != null)
+                    message.interior_score = object.interior_score >>> 0;
                 return message;
             };
     
@@ -12191,14 +13559,17 @@
                 if (options.defaults) {
                     object.my_pop_id = 0;
                     object.your_pop_id = 0;
-                    object.score = 0;
+                    object.legacy_score = 0;
+                    object.interior_score = 0;
                 }
                 if (message.my_pop_id != null && message.hasOwnProperty("my_pop_id"))
                     object.my_pop_id = message.my_pop_id;
                 if (message.your_pop_id != null && message.hasOwnProperty("your_pop_id"))
                     object.your_pop_id = message.your_pop_id;
-                if (message.score != null && message.hasOwnProperty("score"))
-                    object.score = message.score;
+                if (message.legacy_score != null && message.hasOwnProperty("legacy_score"))
+                    object.legacy_score = message.legacy_score;
+                if (message.interior_score != null && message.hasOwnProperty("interior_score"))
+                    object.interior_score = message.interior_score;
                 return object;
             };
     
@@ -12219,25 +13590,29 @@
         return CMsgSteamDatagramP2PRoutes;
     })();
     
-    $root.CMsgSteamDatagramGameServerSample = (function() {
+    $root.CMsgSteamDatagramSetSecondaryAddressRequest = (function() {
     
         /**
-         * Properties of a CMsgSteamDatagramGameServerSample.
-         * @exports ICMsgSteamDatagramGameServerSample
-         * @interface ICMsgSteamDatagramGameServerSample
-         * @property {number|null} [ipv4] CMsgSteamDatagramGameServerSample ipv4
-         * @property {number|null} [port] CMsgSteamDatagramGameServerSample port
+         * Properties of a CMsgSteamDatagramSetSecondaryAddressRequest.
+         * @exports ICMsgSteamDatagramSetSecondaryAddressRequest
+         * @interface ICMsgSteamDatagramSetSecondaryAddressRequest
+         * @property {number|null} [client_main_ip] CMsgSteamDatagramSetSecondaryAddressRequest client_main_ip
+         * @property {number|null} [client_main_port] CMsgSteamDatagramSetSecondaryAddressRequest client_main_port
+         * @property {number|null} [client_connection_id] CMsgSteamDatagramSetSecondaryAddressRequest client_connection_id
+         * @property {string|null} [client_identity] CMsgSteamDatagramSetSecondaryAddressRequest client_identity
+         * @property {boolean|null} [request_send_duplication] CMsgSteamDatagramSetSecondaryAddressRequest request_send_duplication
+         * @property {Uint8Array|null} [kludge_pad] CMsgSteamDatagramSetSecondaryAddressRequest kludge_pad
          */
     
         /**
-         * Constructs a new CMsgSteamDatagramGameServerSample.
-         * @exports CMsgSteamDatagramGameServerSample
-         * @classdesc Represents a CMsgSteamDatagramGameServerSample.
-         * @implements ICMsgSteamDatagramGameServerSample
+         * Constructs a new CMsgSteamDatagramSetSecondaryAddressRequest.
+         * @exports CMsgSteamDatagramSetSecondaryAddressRequest
+         * @classdesc Represents a CMsgSteamDatagramSetSecondaryAddressRequest.
+         * @implements ICMsgSteamDatagramSetSecondaryAddressRequest
          * @constructor
-         * @param {ICMsgSteamDatagramGameServerSample=} [properties] Properties to set
+         * @param {ICMsgSteamDatagramSetSecondaryAddressRequest=} [properties] Properties to set
          */
-        function CMsgSteamDatagramGameServerSample(properties) {
+        function CMsgSteamDatagramSetSecondaryAddressRequest(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -12245,589 +13620,140 @@
         }
     
         /**
-         * CMsgSteamDatagramGameServerSample ipv4.
-         * @member {number} ipv4
-         * @memberof CMsgSteamDatagramGameServerSample
+         * CMsgSteamDatagramSetSecondaryAddressRequest client_main_ip.
+         * @member {number} client_main_ip
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @instance
          */
-        CMsgSteamDatagramGameServerSample.prototype.ipv4 = 0;
+        CMsgSteamDatagramSetSecondaryAddressRequest.prototype.client_main_ip = 0;
     
         /**
-         * CMsgSteamDatagramGameServerSample port.
-         * @member {number} port
-         * @memberof CMsgSteamDatagramGameServerSample
+         * CMsgSteamDatagramSetSecondaryAddressRequest client_main_port.
+         * @member {number} client_main_port
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @instance
          */
-        CMsgSteamDatagramGameServerSample.prototype.port = 0;
+        CMsgSteamDatagramSetSecondaryAddressRequest.prototype.client_main_port = 0;
     
         /**
-         * Creates a new CMsgSteamDatagramGameServerSample instance using the specified properties.
+         * CMsgSteamDatagramSetSecondaryAddressRequest client_connection_id.
+         * @member {number} client_connection_id
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
+         * @instance
+         */
+        CMsgSteamDatagramSetSecondaryAddressRequest.prototype.client_connection_id = 0;
+    
+        /**
+         * CMsgSteamDatagramSetSecondaryAddressRequest client_identity.
+         * @member {string} client_identity
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
+         * @instance
+         */
+        CMsgSteamDatagramSetSecondaryAddressRequest.prototype.client_identity = "";
+    
+        /**
+         * CMsgSteamDatagramSetSecondaryAddressRequest request_send_duplication.
+         * @member {boolean} request_send_duplication
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
+         * @instance
+         */
+        CMsgSteamDatagramSetSecondaryAddressRequest.prototype.request_send_duplication = false;
+    
+        /**
+         * CMsgSteamDatagramSetSecondaryAddressRequest kludge_pad.
+         * @member {Uint8Array} kludge_pad
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
+         * @instance
+         */
+        CMsgSteamDatagramSetSecondaryAddressRequest.prototype.kludge_pad = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CMsgSteamDatagramSetSecondaryAddressRequest instance using the specified properties.
          * @function create
-         * @memberof CMsgSteamDatagramGameServerSample
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
-         * @param {ICMsgSteamDatagramGameServerSample=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramGameServerSample} CMsgSteamDatagramGameServerSample instance
+         * @param {ICMsgSteamDatagramSetSecondaryAddressRequest=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramSetSecondaryAddressRequest} CMsgSteamDatagramSetSecondaryAddressRequest instance
          */
-        CMsgSteamDatagramGameServerSample.create = function create(properties) {
-            return new CMsgSteamDatagramGameServerSample(properties);
+        CMsgSteamDatagramSetSecondaryAddressRequest.create = function create(properties) {
+            return new CMsgSteamDatagramSetSecondaryAddressRequest(properties);
         };
     
         /**
-         * Encodes the specified CMsgSteamDatagramGameServerSample message. Does not implicitly {@link CMsgSteamDatagramGameServerSample.verify|verify} messages.
+         * Encodes the specified CMsgSteamDatagramSetSecondaryAddressRequest message. Does not implicitly {@link CMsgSteamDatagramSetSecondaryAddressRequest.verify|verify} messages.
          * @function encode
-         * @memberof CMsgSteamDatagramGameServerSample
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
-         * @param {ICMsgSteamDatagramGameServerSample} message CMsgSteamDatagramGameServerSample message or plain object to encode
+         * @param {ICMsgSteamDatagramSetSecondaryAddressRequest} message CMsgSteamDatagramSetSecondaryAddressRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgSteamDatagramGameServerSample.encode = function encode(message, writer) {
+        CMsgSteamDatagramSetSecondaryAddressRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ipv4 != null && Object.hasOwnProperty.call(message, "ipv4"))
-                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.ipv4);
-            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.port);
+            if (message.client_main_ip != null && message.hasOwnProperty("client_main_ip"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.client_main_ip);
+            if (message.client_main_port != null && message.hasOwnProperty("client_main_port"))
+                writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.client_main_port);
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
+                writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.client_connection_id);
+            if (message.client_identity != null && message.hasOwnProperty("client_identity"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.client_identity);
+            if (message.request_send_duplication != null && message.hasOwnProperty("request_send_duplication"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.request_send_duplication);
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
+                writer.uint32(/* id 99, wireType 2 =*/794).bytes(message.kludge_pad);
             return writer;
         };
     
         /**
-         * Encodes the specified CMsgSteamDatagramGameServerSample message, length delimited. Does not implicitly {@link CMsgSteamDatagramGameServerSample.verify|verify} messages.
+         * Encodes the specified CMsgSteamDatagramSetSecondaryAddressRequest message, length delimited. Does not implicitly {@link CMsgSteamDatagramSetSecondaryAddressRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CMsgSteamDatagramGameServerSample
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
-         * @param {ICMsgSteamDatagramGameServerSample} message CMsgSteamDatagramGameServerSample message or plain object to encode
+         * @param {ICMsgSteamDatagramSetSecondaryAddressRequest} message CMsgSteamDatagramSetSecondaryAddressRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgSteamDatagramGameServerSample.encodeDelimited = function encodeDelimited(message, writer) {
+        CMsgSteamDatagramSetSecondaryAddressRequest.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CMsgSteamDatagramGameServerSample message from the specified reader or buffer.
+         * Decodes a CMsgSteamDatagramSetSecondaryAddressRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof CMsgSteamDatagramGameServerSample
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramGameServerSample} CMsgSteamDatagramGameServerSample
+         * @returns {CMsgSteamDatagramSetSecondaryAddressRequest} CMsgSteamDatagramSetSecondaryAddressRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgSteamDatagramGameServerSample.decode = function decode(reader, length) {
+        CMsgSteamDatagramSetSecondaryAddressRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramGameServerSample();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramSetSecondaryAddressRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ipv4 = reader.fixed32();
+                    message.client_main_ip = reader.fixed32();
                     break;
                 case 2:
-                    message.port = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramGameServerSample message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramGameServerSample
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramGameServerSample} CMsgSteamDatagramGameServerSample
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramGameServerSample.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramGameServerSample message.
-         * @function verify
-         * @memberof CMsgSteamDatagramGameServerSample
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramGameServerSample.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
-                if (!$util.isInteger(message.ipv4))
-                    return "ipv4: integer expected";
-            if (message.port != null && message.hasOwnProperty("port"))
-                if (!$util.isInteger(message.port))
-                    return "port: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramGameServerSample message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramGameServerSample
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramGameServerSample} CMsgSteamDatagramGameServerSample
-         */
-        CMsgSteamDatagramGameServerSample.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramGameServerSample)
-                return object;
-            var message = new $root.CMsgSteamDatagramGameServerSample();
-            if (object.ipv4 != null)
-                message.ipv4 = object.ipv4 >>> 0;
-            if (object.port != null)
-                message.port = object.port >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramGameServerSample message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramGameServerSample
-         * @static
-         * @param {CMsgSteamDatagramGameServerSample} message CMsgSteamDatagramGameServerSample
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramGameServerSample.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.ipv4 = 0;
-                object.port = 0;
-            }
-            if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
-                object.ipv4 = message.ipv4;
-            if (message.port != null && message.hasOwnProperty("port"))
-                object.port = message.port;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramGameServerSample to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramGameServerSample
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramGameServerSample.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgSteamDatagramGameServerSample;
-    })();
-    
-    $root.CMsgSteamDatagramGameServerSampleDataCenter = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramGameServerSampleDataCenter.
-         * @exports ICMsgSteamDatagramGameServerSampleDataCenter
-         * @interface ICMsgSteamDatagramGameServerSampleDataCenter
-         * @property {number|null} [datacenter_id] CMsgSteamDatagramGameServerSampleDataCenter datacenter_id
-         * @property {Array.<ICMsgSteamDatagramGameServerSample>|null} [servers] CMsgSteamDatagramGameServerSampleDataCenter servers
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramGameServerSampleDataCenter.
-         * @exports CMsgSteamDatagramGameServerSampleDataCenter
-         * @classdesc Represents a CMsgSteamDatagramGameServerSampleDataCenter.
-         * @implements ICMsgSteamDatagramGameServerSampleDataCenter
-         * @constructor
-         * @param {ICMsgSteamDatagramGameServerSampleDataCenter=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramGameServerSampleDataCenter(properties) {
-            this.servers = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramGameServerSampleDataCenter datacenter_id.
-         * @member {number} datacenter_id
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @instance
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.prototype.datacenter_id = 0;
-    
-        /**
-         * CMsgSteamDatagramGameServerSampleDataCenter servers.
-         * @member {Array.<ICMsgSteamDatagramGameServerSample>} servers
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @instance
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.prototype.servers = $util.emptyArray;
-    
-        /**
-         * Creates a new CMsgSteamDatagramGameServerSampleDataCenter instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {ICMsgSteamDatagramGameServerSampleDataCenter=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramGameServerSampleDataCenter} CMsgSteamDatagramGameServerSampleDataCenter instance
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.create = function create(properties) {
-            return new CMsgSteamDatagramGameServerSampleDataCenter(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramGameServerSampleDataCenter message. Does not implicitly {@link CMsgSteamDatagramGameServerSampleDataCenter.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {ICMsgSteamDatagramGameServerSampleDataCenter} message CMsgSteamDatagramGameServerSampleDataCenter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.datacenter_id != null && Object.hasOwnProperty.call(message, "datacenter_id"))
-                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.datacenter_id);
-            if (message.servers != null && message.servers.length)
-                for (var i = 0; i < message.servers.length; ++i)
-                    $root.CMsgSteamDatagramGameServerSample.encode(message.servers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramGameServerSampleDataCenter message, length delimited. Does not implicitly {@link CMsgSteamDatagramGameServerSampleDataCenter.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {ICMsgSteamDatagramGameServerSampleDataCenter} message CMsgSteamDatagramGameServerSampleDataCenter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramGameServerSampleDataCenter message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramGameServerSampleDataCenter} CMsgSteamDatagramGameServerSampleDataCenter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramGameServerSampleDataCenter();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.datacenter_id = reader.fixed32();
+                    message.client_main_port = reader.fixed32();
                     break;
                 case 3:
-                    if (!(message.servers && message.servers.length))
-                        message.servers = [];
-                    message.servers.push($root.CMsgSteamDatagramGameServerSample.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramGameServerSampleDataCenter message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramGameServerSampleDataCenter} CMsgSteamDatagramGameServerSampleDataCenter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramGameServerSampleDataCenter message.
-         * @function verify
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.datacenter_id != null && message.hasOwnProperty("datacenter_id"))
-                if (!$util.isInteger(message.datacenter_id))
-                    return "datacenter_id: integer expected";
-            if (message.servers != null && message.hasOwnProperty("servers")) {
-                if (!Array.isArray(message.servers))
-                    return "servers: array expected";
-                for (var i = 0; i < message.servers.length; ++i) {
-                    var error = $root.CMsgSteamDatagramGameServerSample.verify(message.servers[i]);
-                    if (error)
-                        return "servers." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramGameServerSampleDataCenter message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramGameServerSampleDataCenter} CMsgSteamDatagramGameServerSampleDataCenter
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramGameServerSampleDataCenter)
-                return object;
-            var message = new $root.CMsgSteamDatagramGameServerSampleDataCenter();
-            if (object.datacenter_id != null)
-                message.datacenter_id = object.datacenter_id >>> 0;
-            if (object.servers) {
-                if (!Array.isArray(object.servers))
-                    throw TypeError(".CMsgSteamDatagramGameServerSampleDataCenter.servers: array expected");
-                message.servers = [];
-                for (var i = 0; i < object.servers.length; ++i) {
-                    if (typeof object.servers[i] !== "object")
-                        throw TypeError(".CMsgSteamDatagramGameServerSampleDataCenter.servers: object expected");
-                    message.servers[i] = $root.CMsgSteamDatagramGameServerSample.fromObject(object.servers[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramGameServerSampleDataCenter message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @static
-         * @param {CMsgSteamDatagramGameServerSampleDataCenter} message CMsgSteamDatagramGameServerSampleDataCenter
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.servers = [];
-            if (options.defaults)
-                object.datacenter_id = 0;
-            if (message.datacenter_id != null && message.hasOwnProperty("datacenter_id"))
-                object.datacenter_id = message.datacenter_id;
-            if (message.servers && message.servers.length) {
-                object.servers = [];
-                for (var j = 0; j < message.servers.length; ++j)
-                    object.servers[j] = $root.CMsgSteamDatagramGameServerSample.toObject(message.servers[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramGameServerSampleDataCenter to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramGameServerSampleDataCenter
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramGameServerSampleDataCenter.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgSteamDatagramGameServerSampleDataCenter;
-    })();
-    
-    $root.CMsgSteamDatagramRelayToRelayPing = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramRelayToRelayPing.
-         * @exports ICMsgSteamDatagramRelayToRelayPing
-         * @interface ICMsgSteamDatagramRelayToRelayPing
-         * @property {number|null} [request_timestamp] CMsgSteamDatagramRelayToRelayPing request_timestamp
-         * @property {number|null} [request_date] CMsgSteamDatagramRelayToRelayPing request_date
-         * @property {number|null} [my_pop_id] CMsgSteamDatagramRelayToRelayPing my_pop_id
-         * @property {number|null} [your_pop_id] CMsgSteamDatagramRelayToRelayPing your_pop_id
-         * @property {number|null} [checksum] CMsgSteamDatagramRelayToRelayPing checksum
-         * @property {Array.<ICMsgSteamDatagramGameServerSampleDataCenter>|null} [data_centers] CMsgSteamDatagramRelayToRelayPing data_centers
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramRelayToRelayPing.
-         * @exports CMsgSteamDatagramRelayToRelayPing
-         * @classdesc Represents a CMsgSteamDatagramRelayToRelayPing.
-         * @implements ICMsgSteamDatagramRelayToRelayPing
-         * @constructor
-         * @param {ICMsgSteamDatagramRelayToRelayPing=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramRelayToRelayPing(properties) {
-            this.data_centers = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramRelayToRelayPing request_timestamp.
-         * @member {number} request_timestamp
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @instance
-         */
-        CMsgSteamDatagramRelayToRelayPing.prototype.request_timestamp = 0;
-    
-        /**
-         * CMsgSteamDatagramRelayToRelayPing request_date.
-         * @member {number} request_date
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @instance
-         */
-        CMsgSteamDatagramRelayToRelayPing.prototype.request_date = 0;
-    
-        /**
-         * CMsgSteamDatagramRelayToRelayPing my_pop_id.
-         * @member {number} my_pop_id
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @instance
-         */
-        CMsgSteamDatagramRelayToRelayPing.prototype.my_pop_id = 0;
-    
-        /**
-         * CMsgSteamDatagramRelayToRelayPing your_pop_id.
-         * @member {number} your_pop_id
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @instance
-         */
-        CMsgSteamDatagramRelayToRelayPing.prototype.your_pop_id = 0;
-    
-        /**
-         * CMsgSteamDatagramRelayToRelayPing checksum.
-         * @member {number} checksum
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @instance
-         */
-        CMsgSteamDatagramRelayToRelayPing.prototype.checksum = 0;
-    
-        /**
-         * CMsgSteamDatagramRelayToRelayPing data_centers.
-         * @member {Array.<ICMsgSteamDatagramGameServerSampleDataCenter>} data_centers
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @instance
-         */
-        CMsgSteamDatagramRelayToRelayPing.prototype.data_centers = $util.emptyArray;
-    
-        /**
-         * Creates a new CMsgSteamDatagramRelayToRelayPing instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @static
-         * @param {ICMsgSteamDatagramRelayToRelayPing=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramRelayToRelayPing} CMsgSteamDatagramRelayToRelayPing instance
-         */
-        CMsgSteamDatagramRelayToRelayPing.create = function create(properties) {
-            return new CMsgSteamDatagramRelayToRelayPing(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramRelayToRelayPing message. Does not implicitly {@link CMsgSteamDatagramRelayToRelayPing.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @static
-         * @param {ICMsgSteamDatagramRelayToRelayPing} message CMsgSteamDatagramRelayToRelayPing message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramRelayToRelayPing.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.request_timestamp != null && Object.hasOwnProperty.call(message, "request_timestamp"))
-                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.request_timestamp);
-            if (message.request_date != null && Object.hasOwnProperty.call(message, "request_date"))
-                writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.request_date);
-            if (message.my_pop_id != null && Object.hasOwnProperty.call(message, "my_pop_id"))
-                writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.my_pop_id);
-            if (message.your_pop_id != null && Object.hasOwnProperty.call(message, "your_pop_id"))
-                writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.your_pop_id);
-            if (message.checksum != null && Object.hasOwnProperty.call(message, "checksum"))
-                writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.checksum);
-            if (message.data_centers != null && message.data_centers.length)
-                for (var i = 0; i < message.data_centers.length; ++i)
-                    $root.CMsgSteamDatagramGameServerSampleDataCenter.encode(message.data_centers[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramRelayToRelayPing message, length delimited. Does not implicitly {@link CMsgSteamDatagramRelayToRelayPing.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @static
-         * @param {ICMsgSteamDatagramRelayToRelayPing} message CMsgSteamDatagramRelayToRelayPing message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramRelayToRelayPing.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramRelayToRelayPing message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramRelayToRelayPing} CMsgSteamDatagramRelayToRelayPing
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramRelayToRelayPing.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramRelayToRelayPing();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.request_timestamp = reader.fixed32();
-                    break;
-                case 2:
-                    message.request_date = reader.fixed32();
-                    break;
-                case 3:
-                    message.my_pop_id = reader.fixed32();
+                    message.client_connection_id = reader.fixed32();
                     break;
                 case 4:
-                    message.your_pop_id = reader.fixed32();
+                    message.client_identity = reader.string();
                     break;
                 case 5:
-                    message.checksum = reader.fixed32();
+                    message.request_send_duplication = reader.bool();
                     break;
-                case 6:
-                    if (!(message.data_centers && message.data_centers.length))
-                        message.data_centers = [];
-                    message.data_centers.push($root.CMsgSteamDatagramGameServerSampleDataCenter.decode(reader, reader.uint32()));
+                case 99:
+                    message.kludge_pad = reader.bytes();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -12838,2026 +13764,347 @@
         };
     
         /**
-         * Decodes a CMsgSteamDatagramRelayToRelayPing message from the specified reader or buffer, length delimited.
+         * Decodes a CMsgSteamDatagramSetSecondaryAddressRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CMsgSteamDatagramRelayToRelayPing
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramRelayToRelayPing} CMsgSteamDatagramRelayToRelayPing
+         * @returns {CMsgSteamDatagramSetSecondaryAddressRequest} CMsgSteamDatagramSetSecondaryAddressRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgSteamDatagramRelayToRelayPing.decodeDelimited = function decodeDelimited(reader) {
+        CMsgSteamDatagramSetSecondaryAddressRequest.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CMsgSteamDatagramRelayToRelayPing message.
+         * Verifies a CMsgSteamDatagramSetSecondaryAddressRequest message.
          * @function verify
-         * @memberof CMsgSteamDatagramRelayToRelayPing
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CMsgSteamDatagramRelayToRelayPing.verify = function verify(message) {
+        CMsgSteamDatagramSetSecondaryAddressRequest.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.request_timestamp != null && message.hasOwnProperty("request_timestamp"))
-                if (!$util.isInteger(message.request_timestamp))
-                    return "request_timestamp: integer expected";
-            if (message.request_date != null && message.hasOwnProperty("request_date"))
-                if (!$util.isInteger(message.request_date))
-                    return "request_date: integer expected";
-            if (message.my_pop_id != null && message.hasOwnProperty("my_pop_id"))
-                if (!$util.isInteger(message.my_pop_id))
-                    return "my_pop_id: integer expected";
-            if (message.your_pop_id != null && message.hasOwnProperty("your_pop_id"))
-                if (!$util.isInteger(message.your_pop_id))
-                    return "your_pop_id: integer expected";
-            if (message.checksum != null && message.hasOwnProperty("checksum"))
-                if (!$util.isInteger(message.checksum))
-                    return "checksum: integer expected";
-            if (message.data_centers != null && message.hasOwnProperty("data_centers")) {
-                if (!Array.isArray(message.data_centers))
-                    return "data_centers: array expected";
-                for (var i = 0; i < message.data_centers.length; ++i) {
-                    var error = $root.CMsgSteamDatagramGameServerSampleDataCenter.verify(message.data_centers[i]);
-                    if (error)
-                        return "data_centers." + error;
-                }
-            }
+            if (message.client_main_ip != null && message.hasOwnProperty("client_main_ip"))
+                if (!$util.isInteger(message.client_main_ip))
+                    return "client_main_ip: integer expected";
+            if (message.client_main_port != null && message.hasOwnProperty("client_main_port"))
+                if (!$util.isInteger(message.client_main_port))
+                    return "client_main_port: integer expected";
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
+                if (!$util.isInteger(message.client_connection_id))
+                    return "client_connection_id: integer expected";
+            if (message.client_identity != null && message.hasOwnProperty("client_identity"))
+                if (!$util.isString(message.client_identity))
+                    return "client_identity: string expected";
+            if (message.request_send_duplication != null && message.hasOwnProperty("request_send_duplication"))
+                if (typeof message.request_send_duplication !== "boolean")
+                    return "request_send_duplication: boolean expected";
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
+                if (!(message.kludge_pad && typeof message.kludge_pad.length === "number" || $util.isString(message.kludge_pad)))
+                    return "kludge_pad: buffer expected";
             return null;
         };
     
         /**
-         * Creates a CMsgSteamDatagramRelayToRelayPing message from a plain object. Also converts values to their respective internal types.
+         * Creates a CMsgSteamDatagramSetSecondaryAddressRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CMsgSteamDatagramRelayToRelayPing
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramRelayToRelayPing} CMsgSteamDatagramRelayToRelayPing
+         * @returns {CMsgSteamDatagramSetSecondaryAddressRequest} CMsgSteamDatagramSetSecondaryAddressRequest
          */
-        CMsgSteamDatagramRelayToRelayPing.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramRelayToRelayPing)
+        CMsgSteamDatagramSetSecondaryAddressRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramSetSecondaryAddressRequest)
                 return object;
-            var message = new $root.CMsgSteamDatagramRelayToRelayPing();
-            if (object.request_timestamp != null)
-                message.request_timestamp = object.request_timestamp >>> 0;
-            if (object.request_date != null)
-                message.request_date = object.request_date >>> 0;
-            if (object.my_pop_id != null)
-                message.my_pop_id = object.my_pop_id >>> 0;
-            if (object.your_pop_id != null)
-                message.your_pop_id = object.your_pop_id >>> 0;
-            if (object.checksum != null)
-                message.checksum = object.checksum >>> 0;
-            if (object.data_centers) {
-                if (!Array.isArray(object.data_centers))
-                    throw TypeError(".CMsgSteamDatagramRelayToRelayPing.data_centers: array expected");
-                message.data_centers = [];
-                for (var i = 0; i < object.data_centers.length; ++i) {
-                    if (typeof object.data_centers[i] !== "object")
-                        throw TypeError(".CMsgSteamDatagramRelayToRelayPing.data_centers: object expected");
-                    message.data_centers[i] = $root.CMsgSteamDatagramGameServerSampleDataCenter.fromObject(object.data_centers[i]);
-                }
-            }
+            var message = new $root.CMsgSteamDatagramSetSecondaryAddressRequest();
+            if (object.client_main_ip != null)
+                message.client_main_ip = object.client_main_ip >>> 0;
+            if (object.client_main_port != null)
+                message.client_main_port = object.client_main_port >>> 0;
+            if (object.client_connection_id != null)
+                message.client_connection_id = object.client_connection_id >>> 0;
+            if (object.client_identity != null)
+                message.client_identity = String(object.client_identity);
+            if (object.request_send_duplication != null)
+                message.request_send_duplication = Boolean(object.request_send_duplication);
+            if (object.kludge_pad != null)
+                if (typeof object.kludge_pad === "string")
+                    $util.base64.decode(object.kludge_pad, message.kludge_pad = $util.newBuffer($util.base64.length(object.kludge_pad)), 0);
+                else if (object.kludge_pad.length)
+                    message.kludge_pad = object.kludge_pad;
             return message;
         };
     
         /**
-         * Creates a plain object from a CMsgSteamDatagramRelayToRelayPing message. Also converts values to other types if specified.
+         * Creates a plain object from a CMsgSteamDatagramSetSecondaryAddressRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CMsgSteamDatagramRelayToRelayPing
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @static
-         * @param {CMsgSteamDatagramRelayToRelayPing} message CMsgSteamDatagramRelayToRelayPing
+         * @param {CMsgSteamDatagramSetSecondaryAddressRequest} message CMsgSteamDatagramSetSecondaryAddressRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CMsgSteamDatagramRelayToRelayPing.toObject = function toObject(message, options) {
+        CMsgSteamDatagramSetSecondaryAddressRequest.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
-                object.data_centers = [];
             if (options.defaults) {
-                object.request_timestamp = 0;
-                object.request_date = 0;
-                object.my_pop_id = 0;
-                object.your_pop_id = 0;
-                object.checksum = 0;
-            }
-            if (message.request_timestamp != null && message.hasOwnProperty("request_timestamp"))
-                object.request_timestamp = message.request_timestamp;
-            if (message.request_date != null && message.hasOwnProperty("request_date"))
-                object.request_date = message.request_date;
-            if (message.my_pop_id != null && message.hasOwnProperty("my_pop_id"))
-                object.my_pop_id = message.my_pop_id;
-            if (message.your_pop_id != null && message.hasOwnProperty("your_pop_id"))
-                object.your_pop_id = message.your_pop_id;
-            if (message.checksum != null && message.hasOwnProperty("checksum"))
-                object.checksum = message.checksum;
-            if (message.data_centers && message.data_centers.length) {
-                object.data_centers = [];
-                for (var j = 0; j < message.data_centers.length; ++j)
-                    object.data_centers[j] = $root.CMsgSteamDatagramGameServerSampleDataCenter.toObject(message.data_centers[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramRelayToRelayPing to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramRelayToRelayPing
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramRelayToRelayPing.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgSteamDatagramRelayToRelayPing;
-    })();
-    
-    $root.CMsgSteamDatagramDataCenterState = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramDataCenterState.
-         * @exports ICMsgSteamDatagramDataCenterState
-         * @interface ICMsgSteamDatagramDataCenterState
-         * @property {Array.<CMsgSteamDatagramDataCenterState.IDataCenter>|null} [data_centers] CMsgSteamDatagramDataCenterState data_centers
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramDataCenterState.
-         * @exports CMsgSteamDatagramDataCenterState
-         * @classdesc Represents a CMsgSteamDatagramDataCenterState.
-         * @implements ICMsgSteamDatagramDataCenterState
-         * @constructor
-         * @param {ICMsgSteamDatagramDataCenterState=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramDataCenterState(properties) {
-            this.data_centers = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramDataCenterState data_centers.
-         * @member {Array.<CMsgSteamDatagramDataCenterState.IDataCenter>} data_centers
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @instance
-         */
-        CMsgSteamDatagramDataCenterState.prototype.data_centers = $util.emptyArray;
-    
-        /**
-         * Creates a new CMsgSteamDatagramDataCenterState instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {ICMsgSteamDatagramDataCenterState=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramDataCenterState} CMsgSteamDatagramDataCenterState instance
-         */
-        CMsgSteamDatagramDataCenterState.create = function create(properties) {
-            return new CMsgSteamDatagramDataCenterState(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramDataCenterState message. Does not implicitly {@link CMsgSteamDatagramDataCenterState.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {ICMsgSteamDatagramDataCenterState} message CMsgSteamDatagramDataCenterState message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramDataCenterState.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.data_centers != null && message.data_centers.length)
-                for (var i = 0; i < message.data_centers.length; ++i)
-                    $root.CMsgSteamDatagramDataCenterState.DataCenter.encode(message.data_centers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramDataCenterState message, length delimited. Does not implicitly {@link CMsgSteamDatagramDataCenterState.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {ICMsgSteamDatagramDataCenterState} message CMsgSteamDatagramDataCenterState message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramDataCenterState.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramDataCenterState message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramDataCenterState} CMsgSteamDatagramDataCenterState
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramDataCenterState.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramDataCenterState();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.data_centers && message.data_centers.length))
-                        message.data_centers = [];
-                    message.data_centers.push($root.CMsgSteamDatagramDataCenterState.DataCenter.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramDataCenterState message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramDataCenterState} CMsgSteamDatagramDataCenterState
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramDataCenterState.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramDataCenterState message.
-         * @function verify
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramDataCenterState.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.data_centers != null && message.hasOwnProperty("data_centers")) {
-                if (!Array.isArray(message.data_centers))
-                    return "data_centers: array expected";
-                for (var i = 0; i < message.data_centers.length; ++i) {
-                    var error = $root.CMsgSteamDatagramDataCenterState.DataCenter.verify(message.data_centers[i]);
-                    if (error)
-                        return "data_centers." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramDataCenterState message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramDataCenterState} CMsgSteamDatagramDataCenterState
-         */
-        CMsgSteamDatagramDataCenterState.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramDataCenterState)
-                return object;
-            var message = new $root.CMsgSteamDatagramDataCenterState();
-            if (object.data_centers) {
-                if (!Array.isArray(object.data_centers))
-                    throw TypeError(".CMsgSteamDatagramDataCenterState.data_centers: array expected");
-                message.data_centers = [];
-                for (var i = 0; i < object.data_centers.length; ++i) {
-                    if (typeof object.data_centers[i] !== "object")
-                        throw TypeError(".CMsgSteamDatagramDataCenterState.data_centers: object expected");
-                    message.data_centers[i] = $root.CMsgSteamDatagramDataCenterState.DataCenter.fromObject(object.data_centers[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramDataCenterState message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @static
-         * @param {CMsgSteamDatagramDataCenterState} message CMsgSteamDatagramDataCenterState
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramDataCenterState.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.data_centers = [];
-            if (message.data_centers && message.data_centers.length) {
-                object.data_centers = [];
-                for (var j = 0; j < message.data_centers.length; ++j)
-                    object.data_centers[j] = $root.CMsgSteamDatagramDataCenterState.DataCenter.toObject(message.data_centers[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramDataCenterState to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramDataCenterState
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramDataCenterState.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CMsgSteamDatagramDataCenterState.Server = (function() {
-    
-            /**
-             * Properties of a Server.
-             * @memberof CMsgSteamDatagramDataCenterState
-             * @interface IServer
-             * @property {string|null} [address] Server address
-             * @property {number|null} [ping_ms] Server ping_ms
-             */
-    
-            /**
-             * Constructs a new Server.
-             * @memberof CMsgSteamDatagramDataCenterState
-             * @classdesc Represents a Server.
-             * @implements IServer
-             * @constructor
-             * @param {CMsgSteamDatagramDataCenterState.IServer=} [properties] Properties to set
-             */
-            function Server(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * Server address.
-             * @member {string} address
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @instance
-             */
-            Server.prototype.address = "";
-    
-            /**
-             * Server ping_ms.
-             * @member {number} ping_ms
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @instance
-             */
-            Server.prototype.ping_ms = 0;
-    
-            /**
-             * Creates a new Server instance using the specified properties.
-             * @function create
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.IServer=} [properties] Properties to set
-             * @returns {CMsgSteamDatagramDataCenterState.Server} Server instance
-             */
-            Server.create = function create(properties) {
-                return new Server(properties);
-            };
-    
-            /**
-             * Encodes the specified Server message. Does not implicitly {@link CMsgSteamDatagramDataCenterState.Server.verify|verify} messages.
-             * @function encode
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.IServer} message Server message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Server.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.address != null && Object.hasOwnProperty.call(message, "address"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
-                if (message.ping_ms != null && Object.hasOwnProperty.call(message, "ping_ms"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.ping_ms);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified Server message, length delimited. Does not implicitly {@link CMsgSteamDatagramDataCenterState.Server.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.IServer} message Server message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Server.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a Server message from the specified reader or buffer.
-             * @function decode
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CMsgSteamDatagramDataCenterState.Server} Server
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Server.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramDataCenterState.Server();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.address = reader.string();
-                        break;
-                    case 2:
-                        message.ping_ms = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a Server message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CMsgSteamDatagramDataCenterState.Server} Server
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Server.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a Server message.
-             * @function verify
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Server.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.address != null && message.hasOwnProperty("address"))
-                    if (!$util.isString(message.address))
-                        return "address: string expected";
-                if (message.ping_ms != null && message.hasOwnProperty("ping_ms"))
-                    if (!$util.isInteger(message.ping_ms))
-                        return "ping_ms: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a Server message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CMsgSteamDatagramDataCenterState.Server} Server
-             */
-            Server.fromObject = function fromObject(object) {
-                if (object instanceof $root.CMsgSteamDatagramDataCenterState.Server)
-                    return object;
-                var message = new $root.CMsgSteamDatagramDataCenterState.Server();
-                if (object.address != null)
-                    message.address = String(object.address);
-                if (object.ping_ms != null)
-                    message.ping_ms = object.ping_ms >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a Server message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.Server} message Server
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Server.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.address = "";
-                    object.ping_ms = 0;
-                }
-                if (message.address != null && message.hasOwnProperty("address"))
-                    object.address = message.address;
-                if (message.ping_ms != null && message.hasOwnProperty("ping_ms"))
-                    object.ping_ms = message.ping_ms;
-                return object;
-            };
-    
-            /**
-             * Converts this Server to JSON.
-             * @function toJSON
-             * @memberof CMsgSteamDatagramDataCenterState.Server
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Server.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return Server;
-        })();
-    
-        CMsgSteamDatagramDataCenterState.DataCenter = (function() {
-    
-            /**
-             * Properties of a DataCenter.
-             * @memberof CMsgSteamDatagramDataCenterState
-             * @interface IDataCenter
-             * @property {string|null} [code] DataCenter code
-             * @property {Array.<CMsgSteamDatagramDataCenterState.IServer>|null} [server_sample] DataCenter server_sample
-             * @property {Array.<CMsgSteamDatagramDataCenterState.IServer>|null} [relay_sample] DataCenter relay_sample
-             */
-    
-            /**
-             * Constructs a new DataCenter.
-             * @memberof CMsgSteamDatagramDataCenterState
-             * @classdesc Represents a DataCenter.
-             * @implements IDataCenter
-             * @constructor
-             * @param {CMsgSteamDatagramDataCenterState.IDataCenter=} [properties] Properties to set
-             */
-            function DataCenter(properties) {
-                this.server_sample = [];
-                this.relay_sample = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * DataCenter code.
-             * @member {string} code
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @instance
-             */
-            DataCenter.prototype.code = "";
-    
-            /**
-             * DataCenter server_sample.
-             * @member {Array.<CMsgSteamDatagramDataCenterState.IServer>} server_sample
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @instance
-             */
-            DataCenter.prototype.server_sample = $util.emptyArray;
-    
-            /**
-             * DataCenter relay_sample.
-             * @member {Array.<CMsgSteamDatagramDataCenterState.IServer>} relay_sample
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @instance
-             */
-            DataCenter.prototype.relay_sample = $util.emptyArray;
-    
-            /**
-             * Creates a new DataCenter instance using the specified properties.
-             * @function create
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.IDataCenter=} [properties] Properties to set
-             * @returns {CMsgSteamDatagramDataCenterState.DataCenter} DataCenter instance
-             */
-            DataCenter.create = function create(properties) {
-                return new DataCenter(properties);
-            };
-    
-            /**
-             * Encodes the specified DataCenter message. Does not implicitly {@link CMsgSteamDatagramDataCenterState.DataCenter.verify|verify} messages.
-             * @function encode
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.IDataCenter} message DataCenter message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            DataCenter.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
-                if (message.server_sample != null && message.server_sample.length)
-                    for (var i = 0; i < message.server_sample.length; ++i)
-                        $root.CMsgSteamDatagramDataCenterState.Server.encode(message.server_sample[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                if (message.relay_sample != null && message.relay_sample.length)
-                    for (var i = 0; i < message.relay_sample.length; ++i)
-                        $root.CMsgSteamDatagramDataCenterState.Server.encode(message.relay_sample[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified DataCenter message, length delimited. Does not implicitly {@link CMsgSteamDatagramDataCenterState.DataCenter.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.IDataCenter} message DataCenter message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            DataCenter.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a DataCenter message from the specified reader or buffer.
-             * @function decode
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CMsgSteamDatagramDataCenterState.DataCenter} DataCenter
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            DataCenter.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramDataCenterState.DataCenter();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.string();
-                        break;
-                    case 2:
-                        if (!(message.server_sample && message.server_sample.length))
-                            message.server_sample = [];
-                        message.server_sample.push($root.CMsgSteamDatagramDataCenterState.Server.decode(reader, reader.uint32()));
-                        break;
-                    case 3:
-                        if (!(message.relay_sample && message.relay_sample.length))
-                            message.relay_sample = [];
-                        message.relay_sample.push($root.CMsgSteamDatagramDataCenterState.Server.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a DataCenter message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CMsgSteamDatagramDataCenterState.DataCenter} DataCenter
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            DataCenter.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a DataCenter message.
-             * @function verify
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            DataCenter.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.code != null && message.hasOwnProperty("code"))
-                    if (!$util.isString(message.code))
-                        return "code: string expected";
-                if (message.server_sample != null && message.hasOwnProperty("server_sample")) {
-                    if (!Array.isArray(message.server_sample))
-                        return "server_sample: array expected";
-                    for (var i = 0; i < message.server_sample.length; ++i) {
-                        var error = $root.CMsgSteamDatagramDataCenterState.Server.verify(message.server_sample[i]);
-                        if (error)
-                            return "server_sample." + error;
-                    }
-                }
-                if (message.relay_sample != null && message.hasOwnProperty("relay_sample")) {
-                    if (!Array.isArray(message.relay_sample))
-                        return "relay_sample: array expected";
-                    for (var i = 0; i < message.relay_sample.length; ++i) {
-                        var error = $root.CMsgSteamDatagramDataCenterState.Server.verify(message.relay_sample[i]);
-                        if (error)
-                            return "relay_sample." + error;
-                    }
-                }
-                return null;
-            };
-    
-            /**
-             * Creates a DataCenter message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CMsgSteamDatagramDataCenterState.DataCenter} DataCenter
-             */
-            DataCenter.fromObject = function fromObject(object) {
-                if (object instanceof $root.CMsgSteamDatagramDataCenterState.DataCenter)
-                    return object;
-                var message = new $root.CMsgSteamDatagramDataCenterState.DataCenter();
-                if (object.code != null)
-                    message.code = String(object.code);
-                if (object.server_sample) {
-                    if (!Array.isArray(object.server_sample))
-                        throw TypeError(".CMsgSteamDatagramDataCenterState.DataCenter.server_sample: array expected");
-                    message.server_sample = [];
-                    for (var i = 0; i < object.server_sample.length; ++i) {
-                        if (typeof object.server_sample[i] !== "object")
-                            throw TypeError(".CMsgSteamDatagramDataCenterState.DataCenter.server_sample: object expected");
-                        message.server_sample[i] = $root.CMsgSteamDatagramDataCenterState.Server.fromObject(object.server_sample[i]);
-                    }
-                }
-                if (object.relay_sample) {
-                    if (!Array.isArray(object.relay_sample))
-                        throw TypeError(".CMsgSteamDatagramDataCenterState.DataCenter.relay_sample: array expected");
-                    message.relay_sample = [];
-                    for (var i = 0; i < object.relay_sample.length; ++i) {
-                        if (typeof object.relay_sample[i] !== "object")
-                            throw TypeError(".CMsgSteamDatagramDataCenterState.DataCenter.relay_sample: object expected");
-                        message.relay_sample[i] = $root.CMsgSteamDatagramDataCenterState.Server.fromObject(object.relay_sample[i]);
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a DataCenter message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramDataCenterState.DataCenter} message DataCenter
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            DataCenter.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.arrays || options.defaults) {
-                    object.server_sample = [];
-                    object.relay_sample = [];
-                }
-                if (options.defaults)
-                    object.code = "";
-                if (message.code != null && message.hasOwnProperty("code"))
-                    object.code = message.code;
-                if (message.server_sample && message.server_sample.length) {
-                    object.server_sample = [];
-                    for (var j = 0; j < message.server_sample.length; ++j)
-                        object.server_sample[j] = $root.CMsgSteamDatagramDataCenterState.Server.toObject(message.server_sample[j], options);
-                }
-                if (message.relay_sample && message.relay_sample.length) {
-                    object.relay_sample = [];
-                    for (var j = 0; j < message.relay_sample.length; ++j)
-                        object.relay_sample[j] = $root.CMsgSteamDatagramDataCenterState.Server.toObject(message.relay_sample[j], options);
-                }
-                return object;
-            };
-    
-            /**
-             * Converts this DataCenter to JSON.
-             * @function toJSON
-             * @memberof CMsgSteamDatagramDataCenterState.DataCenter
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            DataCenter.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return DataCenter;
-        })();
-    
-        return CMsgSteamDatagramDataCenterState;
-    })();
-    
-    $root.CMsgSteamDatagramRouterHealth = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramRouterHealth.
-         * @exports ICMsgSteamDatagramRouterHealth
-         * @interface ICMsgSteamDatagramRouterHealth
-         * @property {number|null} [cpu_load] CMsgSteamDatagramRouterHealth cpu_load
-         * @property {number|null} [cpu_load_raw] CMsgSteamDatagramRouterHealth cpu_load_raw
-         * @property {number|null} [active_sessions] CMsgSteamDatagramRouterHealth active_sessions
-         * @property {number|null} [data_pkts_sec] CMsgSteamDatagramRouterHealth data_pkts_sec
-         * @property {number|null} [other_pkts_sec] CMsgSteamDatagramRouterHealth other_pkts_sec
-         * @property {number|null} [seconds_until_shutdown] CMsgSteamDatagramRouterHealth seconds_until_shutdown
-         * @property {number|null} [cpu_cost_per_user] CMsgSteamDatagramRouterHealth cpu_cost_per_user
-         * @property {number|null} [cpu_cost_per_packet] CMsgSteamDatagramRouterHealth cpu_cost_per_packet
-         * @property {Array.<CMsgSteamDatagramRouterHealth.IDataCenter>|null} [data_centers] CMsgSteamDatagramRouterHealth data_centers
-         * @property {number|Long|null} [magic] CMsgSteamDatagramRouterHealth magic
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramRouterHealth.
-         * @exports CMsgSteamDatagramRouterHealth
-         * @classdesc Represents a CMsgSteamDatagramRouterHealth.
-         * @implements ICMsgSteamDatagramRouterHealth
-         * @constructor
-         * @param {ICMsgSteamDatagramRouterHealth=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramRouterHealth(properties) {
-            this.data_centers = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramRouterHealth cpu_load.
-         * @member {number} cpu_load
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.cpu_load = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth cpu_load_raw.
-         * @member {number} cpu_load_raw
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.cpu_load_raw = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth active_sessions.
-         * @member {number} active_sessions
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.active_sessions = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth data_pkts_sec.
-         * @member {number} data_pkts_sec
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.data_pkts_sec = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth other_pkts_sec.
-         * @member {number} other_pkts_sec
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.other_pkts_sec = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth seconds_until_shutdown.
-         * @member {number} seconds_until_shutdown
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.seconds_until_shutdown = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth cpu_cost_per_user.
-         * @member {number} cpu_cost_per_user
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.cpu_cost_per_user = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth cpu_cost_per_packet.
-         * @member {number} cpu_cost_per_packet
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.cpu_cost_per_packet = 0;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth data_centers.
-         * @member {Array.<CMsgSteamDatagramRouterHealth.IDataCenter>} data_centers
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.data_centers = $util.emptyArray;
-    
-        /**
-         * CMsgSteamDatagramRouterHealth magic.
-         * @member {number|Long} magic
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         */
-        CMsgSteamDatagramRouterHealth.prototype.magic = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * Creates a new CMsgSteamDatagramRouterHealth instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {ICMsgSteamDatagramRouterHealth=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramRouterHealth} CMsgSteamDatagramRouterHealth instance
-         */
-        CMsgSteamDatagramRouterHealth.create = function create(properties) {
-            return new CMsgSteamDatagramRouterHealth(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramRouterHealth message. Does not implicitly {@link CMsgSteamDatagramRouterHealth.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {ICMsgSteamDatagramRouterHealth} message CMsgSteamDatagramRouterHealth message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramRouterHealth.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.cpu_load != null && Object.hasOwnProperty.call(message, "cpu_load"))
-                writer.uint32(/* id 1, wireType 5 =*/13).float(message.cpu_load);
-            if (message.active_sessions != null && Object.hasOwnProperty.call(message, "active_sessions"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.active_sessions);
-            if (message.data_pkts_sec != null && Object.hasOwnProperty.call(message, "data_pkts_sec"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.data_pkts_sec);
-            if (message.other_pkts_sec != null && Object.hasOwnProperty.call(message, "other_pkts_sec"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.other_pkts_sec);
-            if (message.seconds_until_shutdown != null && Object.hasOwnProperty.call(message, "seconds_until_shutdown"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.seconds_until_shutdown);
-            if (message.data_centers != null && message.data_centers.length)
-                for (var i = 0; i < message.data_centers.length; ++i)
-                    $root.CMsgSteamDatagramRouterHealth.DataCenter.encode(message.data_centers[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.magic != null && Object.hasOwnProperty.call(message, "magic"))
-                writer.uint32(/* id 7, wireType 1 =*/57).fixed64(message.magic);
-            if (message.cpu_cost_per_user != null && Object.hasOwnProperty.call(message, "cpu_cost_per_user"))
-                writer.uint32(/* id 8, wireType 5 =*/69).float(message.cpu_cost_per_user);
-            if (message.cpu_cost_per_packet != null && Object.hasOwnProperty.call(message, "cpu_cost_per_packet"))
-                writer.uint32(/* id 9, wireType 5 =*/77).float(message.cpu_cost_per_packet);
-            if (message.cpu_load_raw != null && Object.hasOwnProperty.call(message, "cpu_load_raw"))
-                writer.uint32(/* id 10, wireType 5 =*/85).float(message.cpu_load_raw);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramRouterHealth message, length delimited. Does not implicitly {@link CMsgSteamDatagramRouterHealth.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {ICMsgSteamDatagramRouterHealth} message CMsgSteamDatagramRouterHealth message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramRouterHealth.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramRouterHealth message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramRouterHealth} CMsgSteamDatagramRouterHealth
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramRouterHealth.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramRouterHealth();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.cpu_load = reader.float();
-                    break;
-                case 10:
-                    message.cpu_load_raw = reader.float();
-                    break;
-                case 2:
-                    message.active_sessions = reader.uint32();
-                    break;
-                case 3:
-                    message.data_pkts_sec = reader.uint32();
-                    break;
-                case 4:
-                    message.other_pkts_sec = reader.uint32();
-                    break;
-                case 5:
-                    message.seconds_until_shutdown = reader.uint32();
-                    break;
-                case 8:
-                    message.cpu_cost_per_user = reader.float();
-                    break;
-                case 9:
-                    message.cpu_cost_per_packet = reader.float();
-                    break;
-                case 6:
-                    if (!(message.data_centers && message.data_centers.length))
-                        message.data_centers = [];
-                    message.data_centers.push($root.CMsgSteamDatagramRouterHealth.DataCenter.decode(reader, reader.uint32()));
-                    break;
-                case 7:
-                    message.magic = reader.fixed64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramRouterHealth message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramRouterHealth} CMsgSteamDatagramRouterHealth
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramRouterHealth.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramRouterHealth message.
-         * @function verify
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramRouterHealth.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.cpu_load != null && message.hasOwnProperty("cpu_load"))
-                if (typeof message.cpu_load !== "number")
-                    return "cpu_load: number expected";
-            if (message.cpu_load_raw != null && message.hasOwnProperty("cpu_load_raw"))
-                if (typeof message.cpu_load_raw !== "number")
-                    return "cpu_load_raw: number expected";
-            if (message.active_sessions != null && message.hasOwnProperty("active_sessions"))
-                if (!$util.isInteger(message.active_sessions))
-                    return "active_sessions: integer expected";
-            if (message.data_pkts_sec != null && message.hasOwnProperty("data_pkts_sec"))
-                if (!$util.isInteger(message.data_pkts_sec))
-                    return "data_pkts_sec: integer expected";
-            if (message.other_pkts_sec != null && message.hasOwnProperty("other_pkts_sec"))
-                if (!$util.isInteger(message.other_pkts_sec))
-                    return "other_pkts_sec: integer expected";
-            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
-                if (!$util.isInteger(message.seconds_until_shutdown))
-                    return "seconds_until_shutdown: integer expected";
-            if (message.cpu_cost_per_user != null && message.hasOwnProperty("cpu_cost_per_user"))
-                if (typeof message.cpu_cost_per_user !== "number")
-                    return "cpu_cost_per_user: number expected";
-            if (message.cpu_cost_per_packet != null && message.hasOwnProperty("cpu_cost_per_packet"))
-                if (typeof message.cpu_cost_per_packet !== "number")
-                    return "cpu_cost_per_packet: number expected";
-            if (message.data_centers != null && message.hasOwnProperty("data_centers")) {
-                if (!Array.isArray(message.data_centers))
-                    return "data_centers: array expected";
-                for (var i = 0; i < message.data_centers.length; ++i) {
-                    var error = $root.CMsgSteamDatagramRouterHealth.DataCenter.verify(message.data_centers[i]);
-                    if (error)
-                        return "data_centers." + error;
-                }
-            }
-            if (message.magic != null && message.hasOwnProperty("magic"))
-                if (!$util.isInteger(message.magic) && !(message.magic && $util.isInteger(message.magic.low) && $util.isInteger(message.magic.high)))
-                    return "magic: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramRouterHealth message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramRouterHealth} CMsgSteamDatagramRouterHealth
-         */
-        CMsgSteamDatagramRouterHealth.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramRouterHealth)
-                return object;
-            var message = new $root.CMsgSteamDatagramRouterHealth();
-            if (object.cpu_load != null)
-                message.cpu_load = Number(object.cpu_load);
-            if (object.cpu_load_raw != null)
-                message.cpu_load_raw = Number(object.cpu_load_raw);
-            if (object.active_sessions != null)
-                message.active_sessions = object.active_sessions >>> 0;
-            if (object.data_pkts_sec != null)
-                message.data_pkts_sec = object.data_pkts_sec >>> 0;
-            if (object.other_pkts_sec != null)
-                message.other_pkts_sec = object.other_pkts_sec >>> 0;
-            if (object.seconds_until_shutdown != null)
-                message.seconds_until_shutdown = object.seconds_until_shutdown >>> 0;
-            if (object.cpu_cost_per_user != null)
-                message.cpu_cost_per_user = Number(object.cpu_cost_per_user);
-            if (object.cpu_cost_per_packet != null)
-                message.cpu_cost_per_packet = Number(object.cpu_cost_per_packet);
-            if (object.data_centers) {
-                if (!Array.isArray(object.data_centers))
-                    throw TypeError(".CMsgSteamDatagramRouterHealth.data_centers: array expected");
-                message.data_centers = [];
-                for (var i = 0; i < object.data_centers.length; ++i) {
-                    if (typeof object.data_centers[i] !== "object")
-                        throw TypeError(".CMsgSteamDatagramRouterHealth.data_centers: object expected");
-                    message.data_centers[i] = $root.CMsgSteamDatagramRouterHealth.DataCenter.fromObject(object.data_centers[i]);
-                }
-            }
-            if (object.magic != null)
-                if ($util.Long)
-                    (message.magic = $util.Long.fromValue(object.magic)).unsigned = false;
-                else if (typeof object.magic === "string")
-                    message.magic = parseInt(object.magic, 10);
-                else if (typeof object.magic === "number")
-                    message.magic = object.magic;
-                else if (typeof object.magic === "object")
-                    message.magic = new $util.LongBits(object.magic.low >>> 0, object.magic.high >>> 0).toNumber();
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramRouterHealth message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @static
-         * @param {CMsgSteamDatagramRouterHealth} message CMsgSteamDatagramRouterHealth
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramRouterHealth.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.data_centers = [];
-            if (options.defaults) {
-                object.cpu_load = 0;
-                object.active_sessions = 0;
-                object.data_pkts_sec = 0;
-                object.other_pkts_sec = 0;
-                object.seconds_until_shutdown = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.magic = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.magic = options.longs === String ? "0" : 0;
-                object.cpu_cost_per_user = 0;
-                object.cpu_cost_per_packet = 0;
-                object.cpu_load_raw = 0;
-            }
-            if (message.cpu_load != null && message.hasOwnProperty("cpu_load"))
-                object.cpu_load = options.json && !isFinite(message.cpu_load) ? String(message.cpu_load) : message.cpu_load;
-            if (message.active_sessions != null && message.hasOwnProperty("active_sessions"))
-                object.active_sessions = message.active_sessions;
-            if (message.data_pkts_sec != null && message.hasOwnProperty("data_pkts_sec"))
-                object.data_pkts_sec = message.data_pkts_sec;
-            if (message.other_pkts_sec != null && message.hasOwnProperty("other_pkts_sec"))
-                object.other_pkts_sec = message.other_pkts_sec;
-            if (message.seconds_until_shutdown != null && message.hasOwnProperty("seconds_until_shutdown"))
-                object.seconds_until_shutdown = message.seconds_until_shutdown;
-            if (message.data_centers && message.data_centers.length) {
-                object.data_centers = [];
-                for (var j = 0; j < message.data_centers.length; ++j)
-                    object.data_centers[j] = $root.CMsgSteamDatagramRouterHealth.DataCenter.toObject(message.data_centers[j], options);
-            }
-            if (message.magic != null && message.hasOwnProperty("magic"))
-                if (typeof message.magic === "number")
-                    object.magic = options.longs === String ? String(message.magic) : message.magic;
-                else
-                    object.magic = options.longs === String ? $util.Long.prototype.toString.call(message.magic) : options.longs === Number ? new $util.LongBits(message.magic.low >>> 0, message.magic.high >>> 0).toNumber() : message.magic;
-            if (message.cpu_cost_per_user != null && message.hasOwnProperty("cpu_cost_per_user"))
-                object.cpu_cost_per_user = options.json && !isFinite(message.cpu_cost_per_user) ? String(message.cpu_cost_per_user) : message.cpu_cost_per_user;
-            if (message.cpu_cost_per_packet != null && message.hasOwnProperty("cpu_cost_per_packet"))
-                object.cpu_cost_per_packet = options.json && !isFinite(message.cpu_cost_per_packet) ? String(message.cpu_cost_per_packet) : message.cpu_cost_per_packet;
-            if (message.cpu_load_raw != null && message.hasOwnProperty("cpu_load_raw"))
-                object.cpu_load_raw = options.json && !isFinite(message.cpu_load_raw) ? String(message.cpu_load_raw) : message.cpu_load_raw;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgSteamDatagramRouterHealth to JSON.
-         * @function toJSON
-         * @memberof CMsgSteamDatagramRouterHealth
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgSteamDatagramRouterHealth.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CMsgSteamDatagramRouterHealth.DataCenter = (function() {
-    
-            /**
-             * Properties of a DataCenter.
-             * @memberof CMsgSteamDatagramRouterHealth
-             * @interface IDataCenter
-             * @property {number|null} [datacenter_id] DataCenter datacenter_id
-             * @property {number|null} [state] DataCenter state
-             * @property {Array.<ICMsgSteamDatagramGameServerSample>|null} [servers] DataCenter servers
-             */
-    
-            /**
-             * Constructs a new DataCenter.
-             * @memberof CMsgSteamDatagramRouterHealth
-             * @classdesc Represents a DataCenter.
-             * @implements IDataCenter
-             * @constructor
-             * @param {CMsgSteamDatagramRouterHealth.IDataCenter=} [properties] Properties to set
-             */
-            function DataCenter(properties) {
-                this.servers = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * DataCenter datacenter_id.
-             * @member {number} datacenter_id
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @instance
-             */
-            DataCenter.prototype.datacenter_id = 0;
-    
-            /**
-             * DataCenter state.
-             * @member {number} state
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @instance
-             */
-            DataCenter.prototype.state = 0;
-    
-            /**
-             * DataCenter servers.
-             * @member {Array.<ICMsgSteamDatagramGameServerSample>} servers
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @instance
-             */
-            DataCenter.prototype.servers = $util.emptyArray;
-    
-            /**
-             * Creates a new DataCenter instance using the specified properties.
-             * @function create
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramRouterHealth.IDataCenter=} [properties] Properties to set
-             * @returns {CMsgSteamDatagramRouterHealth.DataCenter} DataCenter instance
-             */
-            DataCenter.create = function create(properties) {
-                return new DataCenter(properties);
-            };
-    
-            /**
-             * Encodes the specified DataCenter message. Does not implicitly {@link CMsgSteamDatagramRouterHealth.DataCenter.verify|verify} messages.
-             * @function encode
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramRouterHealth.IDataCenter} message DataCenter message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            DataCenter.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.datacenter_id != null && Object.hasOwnProperty.call(message, "datacenter_id"))
-                    writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.datacenter_id);
-                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.state);
-                if (message.servers != null && message.servers.length)
-                    for (var i = 0; i < message.servers.length; ++i)
-                        $root.CMsgSteamDatagramGameServerSample.encode(message.servers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified DataCenter message, length delimited. Does not implicitly {@link CMsgSteamDatagramRouterHealth.DataCenter.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramRouterHealth.IDataCenter} message DataCenter message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            DataCenter.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a DataCenter message from the specified reader or buffer.
-             * @function decode
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CMsgSteamDatagramRouterHealth.DataCenter} DataCenter
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            DataCenter.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramRouterHealth.DataCenter();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.datacenter_id = reader.fixed32();
-                        break;
-                    case 2:
-                        message.state = reader.uint32();
-                        break;
-                    case 3:
-                        if (!(message.servers && message.servers.length))
-                            message.servers = [];
-                        message.servers.push($root.CMsgSteamDatagramGameServerSample.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a DataCenter message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CMsgSteamDatagramRouterHealth.DataCenter} DataCenter
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            DataCenter.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a DataCenter message.
-             * @function verify
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            DataCenter.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.datacenter_id != null && message.hasOwnProperty("datacenter_id"))
-                    if (!$util.isInteger(message.datacenter_id))
-                        return "datacenter_id: integer expected";
-                if (message.state != null && message.hasOwnProperty("state"))
-                    if (!$util.isInteger(message.state))
-                        return "state: integer expected";
-                if (message.servers != null && message.hasOwnProperty("servers")) {
-                    if (!Array.isArray(message.servers))
-                        return "servers: array expected";
-                    for (var i = 0; i < message.servers.length; ++i) {
-                        var error = $root.CMsgSteamDatagramGameServerSample.verify(message.servers[i]);
-                        if (error)
-                            return "servers." + error;
-                    }
-                }
-                return null;
-            };
-    
-            /**
-             * Creates a DataCenter message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CMsgSteamDatagramRouterHealth.DataCenter} DataCenter
-             */
-            DataCenter.fromObject = function fromObject(object) {
-                if (object instanceof $root.CMsgSteamDatagramRouterHealth.DataCenter)
-                    return object;
-                var message = new $root.CMsgSteamDatagramRouterHealth.DataCenter();
-                if (object.datacenter_id != null)
-                    message.datacenter_id = object.datacenter_id >>> 0;
-                if (object.state != null)
-                    message.state = object.state >>> 0;
-                if (object.servers) {
-                    if (!Array.isArray(object.servers))
-                        throw TypeError(".CMsgSteamDatagramRouterHealth.DataCenter.servers: array expected");
-                    message.servers = [];
-                    for (var i = 0; i < object.servers.length; ++i) {
-                        if (typeof object.servers[i] !== "object")
-                            throw TypeError(".CMsgSteamDatagramRouterHealth.DataCenter.servers: object expected");
-                        message.servers[i] = $root.CMsgSteamDatagramGameServerSample.fromObject(object.servers[i]);
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a DataCenter message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @static
-             * @param {CMsgSteamDatagramRouterHealth.DataCenter} message DataCenter
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            DataCenter.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.arrays || options.defaults)
-                    object.servers = [];
-                if (options.defaults) {
-                    object.datacenter_id = 0;
-                    object.state = 0;
-                }
-                if (message.datacenter_id != null && message.hasOwnProperty("datacenter_id"))
-                    object.datacenter_id = message.datacenter_id;
-                if (message.state != null && message.hasOwnProperty("state"))
-                    object.state = message.state;
-                if (message.servers && message.servers.length) {
-                    object.servers = [];
-                    for (var j = 0; j < message.servers.length; ++j)
-                        object.servers[j] = $root.CMsgSteamDatagramGameServerSample.toObject(message.servers[j], options);
-                }
-                return object;
-            };
-    
-            /**
-             * Converts this DataCenter to JSON.
-             * @function toJSON
-             * @memberof CMsgSteamDatagramRouterHealth.DataCenter
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            DataCenter.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return DataCenter;
-        })();
-    
-        return CMsgSteamDatagramRouterHealth;
-    })();
-    
-    $root.CMsgSteamDatagramConnectionStatsP2PRouterToRouter = (function() {
-    
-        /**
-         * Properties of a CMsgSteamDatagramConnectionStatsP2PRouterToRouter.
-         * @exports ICMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @interface ICMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_relay] CMsgSteamDatagramConnectionStatsP2PRouterToRouter quality_relay
-         * @property {ICMsgSteamDatagramConnectionQuality|null} [quality_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToRouter quality_e2e
-         * @property {Array.<number>|null} [ack_relay] CMsgSteamDatagramConnectionStatsP2PRouterToRouter ack_relay
-         * @property {Array.<number>|null} [legacy_ack_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToRouter legacy_ack_e2e
-         * @property {number|null} [flags] CMsgSteamDatagramConnectionStatsP2PRouterToRouter flags
-         * @property {number|null} [ack_forward_target_revision] CMsgSteamDatagramConnectionStatsP2PRouterToRouter ack_forward_target_revision
-         * @property {Uint8Array|null} [routes] CMsgSteamDatagramConnectionStatsP2PRouterToRouter routes
-         * @property {number|null} [ack_peer_routes_revision] CMsgSteamDatagramConnectionStatsP2PRouterToRouter ack_peer_routes_revision
-         * @property {number|null} [seq_num_r2r] CMsgSteamDatagramConnectionStatsP2PRouterToRouter seq_num_r2r
-         * @property {number|null} [seq_num_e2e] CMsgSteamDatagramConnectionStatsP2PRouterToRouter seq_num_e2e
-         * @property {number|null} [from_relay_session_id] CMsgSteamDatagramConnectionStatsP2PRouterToRouter from_relay_session_id
-         * @property {number|null} [to_relay_session_id] CMsgSteamDatagramConnectionStatsP2PRouterToRouter to_relay_session_id
-         */
-    
-        /**
-         * Constructs a new CMsgSteamDatagramConnectionStatsP2PRouterToRouter.
-         * @exports CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @classdesc Represents a CMsgSteamDatagramConnectionStatsP2PRouterToRouter.
-         * @implements ICMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @constructor
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToRouter=} [properties] Properties to set
-         */
-        function CMsgSteamDatagramConnectionStatsP2PRouterToRouter(properties) {
-            this.ack_relay = [];
-            this.legacy_ack_e2e = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter quality_relay.
-         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_relay
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.quality_relay = null;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter quality_e2e.
-         * @member {ICMsgSteamDatagramConnectionQuality|null|undefined} quality_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.quality_e2e = null;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter ack_relay.
-         * @member {Array.<number>} ack_relay
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.ack_relay = $util.emptyArray;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter legacy_ack_e2e.
-         * @member {Array.<number>} legacy_ack_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.legacy_ack_e2e = $util.emptyArray;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter flags.
-         * @member {number} flags
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.flags = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter ack_forward_target_revision.
-         * @member {number} ack_forward_target_revision
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.ack_forward_target_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter routes.
-         * @member {Uint8Array} routes
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.routes = $util.newBuffer([]);
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter ack_peer_routes_revision.
-         * @member {number} ack_peer_routes_revision
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.ack_peer_routes_revision = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter seq_num_r2r.
-         * @member {number} seq_num_r2r
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.seq_num_r2r = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter seq_num_e2e.
-         * @member {number} seq_num_e2e
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.seq_num_e2e = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter from_relay_session_id.
-         * @member {number} from_relay_session_id
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.from_relay_session_id = 0;
-    
-        /**
-         * CMsgSteamDatagramConnectionStatsP2PRouterToRouter to_relay_session_id.
-         * @member {number} to_relay_session_id
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.to_relay_session_id = 0;
-    
-        /**
-         * Creates a new CMsgSteamDatagramConnectionStatsP2PRouterToRouter instance using the specified properties.
-         * @function create
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToRouter=} [properties] Properties to set
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToRouter} CMsgSteamDatagramConnectionStatsP2PRouterToRouter instance
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.create = function create(properties) {
-            return new CMsgSteamDatagramConnectionStatsP2PRouterToRouter(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PRouterToRouter message. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PRouterToRouter.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToRouter} message CMsgSteamDatagramConnectionStatsP2PRouterToRouter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.quality_relay != null && Object.hasOwnProperty.call(message, "quality_relay"))
-                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_relay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.quality_e2e != null && Object.hasOwnProperty.call(message, "quality_e2e"))
-                $root.CMsgSteamDatagramConnectionQuality.encode(message.quality_e2e, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.ack_relay != null && message.ack_relay.length)
-                for (var i = 0; i < message.ack_relay.length; ++i)
-                    writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.ack_relay[i]);
-            if (message.legacy_ack_e2e != null && message.legacy_ack_e2e.length)
-                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
-                    writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.legacy_ack_e2e[i]);
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.flags);
-            if (message.ack_forward_target_revision != null && Object.hasOwnProperty.call(message, "ack_forward_target_revision"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.ack_forward_target_revision);
-            if (message.routes != null && Object.hasOwnProperty.call(message, "routes"))
-                writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.routes);
-            if (message.ack_peer_routes_revision != null && Object.hasOwnProperty.call(message, "ack_peer_routes_revision"))
-                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.ack_peer_routes_revision);
-            if (message.from_relay_session_id != null && Object.hasOwnProperty.call(message, "from_relay_session_id"))
-                writer.uint32(/* id 22, wireType 5 =*/181).fixed32(message.from_relay_session_id);
-            if (message.to_relay_session_id != null && Object.hasOwnProperty.call(message, "to_relay_session_id"))
-                writer.uint32(/* id 25, wireType 5 =*/205).fixed32(message.to_relay_session_id);
-            if (message.seq_num_r2r != null && Object.hasOwnProperty.call(message, "seq_num_r2r"))
-                writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.seq_num_r2r);
-            if (message.seq_num_e2e != null && Object.hasOwnProperty.call(message, "seq_num_e2e"))
-                writer.uint32(/* id 27, wireType 0 =*/216).uint32(message.seq_num_e2e);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgSteamDatagramConnectionStatsP2PRouterToRouter message, length delimited. Does not implicitly {@link CMsgSteamDatagramConnectionStatsP2PRouterToRouter.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {ICMsgSteamDatagramConnectionStatsP2PRouterToRouter} message CMsgSteamDatagramConnectionStatsP2PRouterToRouter message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramConnectionStatsP2PRouterToRouter message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToRouter} CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramConnectionStatsP2PRouterToRouter();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    if (!(message.ack_relay && message.ack_relay.length))
-                        message.ack_relay = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.ack_relay.push(reader.fixed32());
-                    } else
-                        message.ack_relay.push(reader.fixed32());
-                    break;
-                case 4:
-                    if (!(message.legacy_ack_e2e && message.legacy_ack_e2e.length))
-                        message.legacy_ack_e2e = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.legacy_ack_e2e.push(reader.fixed32());
-                    } else
-                        message.legacy_ack_e2e.push(reader.fixed32());
-                    break;
-                case 5:
-                    message.flags = reader.uint32();
-                    break;
-                case 6:
-                    message.ack_forward_target_revision = reader.uint32();
-                    break;
-                case 7:
-                    message.routes = reader.bytes();
-                    break;
-                case 8:
-                    message.ack_peer_routes_revision = reader.uint32();
-                    break;
-                case 26:
-                    message.seq_num_r2r = reader.uint32();
-                    break;
-                case 27:
-                    message.seq_num_e2e = reader.uint32();
-                    break;
-                case 22:
-                    message.from_relay_session_id = reader.fixed32();
-                    break;
-                case 25:
-                    message.to_relay_session_id = reader.fixed32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgSteamDatagramConnectionStatsP2PRouterToRouter message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToRouter} CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgSteamDatagramConnectionStatsP2PRouterToRouter message.
-         * @function verify
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay")) {
-                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_relay);
-                if (error)
-                    return "quality_relay." + error;
-            }
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e")) {
-                var error = $root.CMsgSteamDatagramConnectionQuality.verify(message.quality_e2e);
-                if (error)
-                    return "quality_e2e." + error;
-            }
-            if (message.ack_relay != null && message.hasOwnProperty("ack_relay")) {
-                if (!Array.isArray(message.ack_relay))
-                    return "ack_relay: array expected";
-                for (var i = 0; i < message.ack_relay.length; ++i)
-                    if (!$util.isInteger(message.ack_relay[i]))
-                        return "ack_relay: integer[] expected";
-            }
-            if (message.legacy_ack_e2e != null && message.hasOwnProperty("legacy_ack_e2e")) {
-                if (!Array.isArray(message.legacy_ack_e2e))
-                    return "legacy_ack_e2e: array expected";
-                for (var i = 0; i < message.legacy_ack_e2e.length; ++i)
-                    if (!$util.isInteger(message.legacy_ack_e2e[i]))
-                        return "legacy_ack_e2e: integer[] expected";
-            }
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                if (!$util.isInteger(message.flags))
-                    return "flags: integer expected";
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                if (!$util.isInteger(message.ack_forward_target_revision))
-                    return "ack_forward_target_revision: integer expected";
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                if (!(message.routes && typeof message.routes.length === "number" || $util.isString(message.routes)))
-                    return "routes: buffer expected";
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                if (!$util.isInteger(message.ack_peer_routes_revision))
-                    return "ack_peer_routes_revision: integer expected";
-            if (message.seq_num_r2r != null && message.hasOwnProperty("seq_num_r2r"))
-                if (!$util.isInteger(message.seq_num_r2r))
-                    return "seq_num_r2r: integer expected";
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                if (!$util.isInteger(message.seq_num_e2e))
-                    return "seq_num_e2e: integer expected";
-            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
-                if (!$util.isInteger(message.from_relay_session_id))
-                    return "from_relay_session_id: integer expected";
-            if (message.to_relay_session_id != null && message.hasOwnProperty("to_relay_session_id"))
-                if (!$util.isInteger(message.to_relay_session_id))
-                    return "to_relay_session_id: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgSteamDatagramConnectionStatsP2PRouterToRouter message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgSteamDatagramConnectionStatsP2PRouterToRouter} CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgSteamDatagramConnectionStatsP2PRouterToRouter)
-                return object;
-            var message = new $root.CMsgSteamDatagramConnectionStatsP2PRouterToRouter();
-            if (object.quality_relay != null) {
-                if (typeof object.quality_relay !== "object")
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToRouter.quality_relay: object expected");
-                message.quality_relay = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_relay);
-            }
-            if (object.quality_e2e != null) {
-                if (typeof object.quality_e2e !== "object")
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToRouter.quality_e2e: object expected");
-                message.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.fromObject(object.quality_e2e);
-            }
-            if (object.ack_relay) {
-                if (!Array.isArray(object.ack_relay))
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToRouter.ack_relay: array expected");
-                message.ack_relay = [];
-                for (var i = 0; i < object.ack_relay.length; ++i)
-                    message.ack_relay[i] = object.ack_relay[i] >>> 0;
-            }
-            if (object.legacy_ack_e2e) {
-                if (!Array.isArray(object.legacy_ack_e2e))
-                    throw TypeError(".CMsgSteamDatagramConnectionStatsP2PRouterToRouter.legacy_ack_e2e: array expected");
-                message.legacy_ack_e2e = [];
-                for (var i = 0; i < object.legacy_ack_e2e.length; ++i)
-                    message.legacy_ack_e2e[i] = object.legacy_ack_e2e[i] >>> 0;
-            }
-            if (object.flags != null)
-                message.flags = object.flags >>> 0;
-            if (object.ack_forward_target_revision != null)
-                message.ack_forward_target_revision = object.ack_forward_target_revision >>> 0;
-            if (object.routes != null)
-                if (typeof object.routes === "string")
-                    $util.base64.decode(object.routes, message.routes = $util.newBuffer($util.base64.length(object.routes)), 0);
-                else if (object.routes.length)
-                    message.routes = object.routes;
-            if (object.ack_peer_routes_revision != null)
-                message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
-            if (object.seq_num_r2r != null)
-                message.seq_num_r2r = object.seq_num_r2r >>> 0;
-            if (object.seq_num_e2e != null)
-                message.seq_num_e2e = object.seq_num_e2e >>> 0;
-            if (object.from_relay_session_id != null)
-                message.from_relay_session_id = object.from_relay_session_id >>> 0;
-            if (object.to_relay_session_id != null)
-                message.to_relay_session_id = object.to_relay_session_id >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgSteamDatagramConnectionStatsP2PRouterToRouter message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @static
-         * @param {CMsgSteamDatagramConnectionStatsP2PRouterToRouter} message CMsgSteamDatagramConnectionStatsP2PRouterToRouter
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults) {
-                object.ack_relay = [];
-                object.legacy_ack_e2e = [];
-            }
-            if (options.defaults) {
-                object.quality_relay = null;
-                object.quality_e2e = null;
-                object.flags = 0;
-                object.ack_forward_target_revision = 0;
+                object.client_main_ip = 0;
+                object.client_main_port = 0;
+                object.client_connection_id = 0;
+                object.client_identity = "";
+                object.request_send_duplication = false;
                 if (options.bytes === String)
-                    object.routes = "";
+                    object.kludge_pad = "";
                 else {
-                    object.routes = [];
+                    object.kludge_pad = [];
                     if (options.bytes !== Array)
-                        object.routes = $util.newBuffer(object.routes);
+                        object.kludge_pad = $util.newBuffer(object.kludge_pad);
                 }
-                object.ack_peer_routes_revision = 0;
-                object.from_relay_session_id = 0;
-                object.to_relay_session_id = 0;
-                object.seq_num_r2r = 0;
-                object.seq_num_e2e = 0;
             }
-            if (message.quality_relay != null && message.hasOwnProperty("quality_relay"))
-                object.quality_relay = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_relay, options);
-            if (message.quality_e2e != null && message.hasOwnProperty("quality_e2e"))
-                object.quality_e2e = $root.CMsgSteamDatagramConnectionQuality.toObject(message.quality_e2e, options);
-            if (message.ack_relay && message.ack_relay.length) {
-                object.ack_relay = [];
-                for (var j = 0; j < message.ack_relay.length; ++j)
-                    object.ack_relay[j] = message.ack_relay[j];
-            }
-            if (message.legacy_ack_e2e && message.legacy_ack_e2e.length) {
-                object.legacy_ack_e2e = [];
-                for (var j = 0; j < message.legacy_ack_e2e.length; ++j)
-                    object.legacy_ack_e2e[j] = message.legacy_ack_e2e[j];
-            }
-            if (message.flags != null && message.hasOwnProperty("flags"))
-                object.flags = message.flags;
-            if (message.ack_forward_target_revision != null && message.hasOwnProperty("ack_forward_target_revision"))
-                object.ack_forward_target_revision = message.ack_forward_target_revision;
-            if (message.routes != null && message.hasOwnProperty("routes"))
-                object.routes = options.bytes === String ? $util.base64.encode(message.routes, 0, message.routes.length) : options.bytes === Array ? Array.prototype.slice.call(message.routes) : message.routes;
-            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
-                object.ack_peer_routes_revision = message.ack_peer_routes_revision;
-            if (message.from_relay_session_id != null && message.hasOwnProperty("from_relay_session_id"))
-                object.from_relay_session_id = message.from_relay_session_id;
-            if (message.to_relay_session_id != null && message.hasOwnProperty("to_relay_session_id"))
-                object.to_relay_session_id = message.to_relay_session_id;
-            if (message.seq_num_r2r != null && message.hasOwnProperty("seq_num_r2r"))
-                object.seq_num_r2r = message.seq_num_r2r;
-            if (message.seq_num_e2e != null && message.hasOwnProperty("seq_num_e2e"))
-                object.seq_num_e2e = message.seq_num_e2e;
+            if (message.client_main_ip != null && message.hasOwnProperty("client_main_ip"))
+                object.client_main_ip = message.client_main_ip;
+            if (message.client_main_port != null && message.hasOwnProperty("client_main_port"))
+                object.client_main_port = message.client_main_port;
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
+                object.client_connection_id = message.client_connection_id;
+            if (message.client_identity != null && message.hasOwnProperty("client_identity"))
+                object.client_identity = message.client_identity;
+            if (message.request_send_duplication != null && message.hasOwnProperty("request_send_duplication"))
+                object.request_send_duplication = message.request_send_duplication;
+            if (message.kludge_pad != null && message.hasOwnProperty("kludge_pad"))
+                object.kludge_pad = options.bytes === String ? $util.base64.encode(message.kludge_pad, 0, message.kludge_pad.length) : options.bytes === Array ? Array.prototype.slice.call(message.kludge_pad) : message.kludge_pad;
             return object;
         };
     
         /**
-         * Converts this CMsgSteamDatagramConnectionStatsP2PRouterToRouter to JSON.
+         * Converts this CMsgSteamDatagramSetSecondaryAddressRequest to JSON.
          * @function toJSON
-         * @memberof CMsgSteamDatagramConnectionStatsP2PRouterToRouter
+         * @memberof CMsgSteamDatagramSetSecondaryAddressRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.prototype.toJSON = function toJSON() {
+        CMsgSteamDatagramSetSecondaryAddressRequest.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        /**
-         * Flags enum.
-         * @name CMsgSteamDatagramConnectionStatsP2PRouterToRouter.Flags
-         * @enum {number}
-         * @property {number} ACK_REQUEST_RELAY=1 ACK_REQUEST_RELAY value
-         * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
-         * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
-         * @property {number} NOT_PRIMARY_TRANSPORT_E2E=16 NOT_PRIMARY_TRANSPORT_E2E value
-         */
-        CMsgSteamDatagramConnectionStatsP2PRouterToRouter.Flags = (function() {
-            var valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[1] = "ACK_REQUEST_RELAY"] = 1;
-            values[valuesById[2] = "ACK_REQUEST_E2E"] = 2;
-            values[valuesById[4] = "ACK_REQUEST_IMMEDIATE"] = 4;
-            values[valuesById[16] = "NOT_PRIMARY_TRANSPORT_E2E"] = 16;
-            return values;
-        })();
+        return CMsgSteamDatagramSetSecondaryAddressRequest;
+    })();
     
-        return CMsgSteamDatagramConnectionStatsP2PRouterToRouter;
+    $root.CMsgSteamDatagramSetSecondaryAddressResult = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramSetSecondaryAddressResult.
+         * @exports ICMsgSteamDatagramSetSecondaryAddressResult
+         * @interface ICMsgSteamDatagramSetSecondaryAddressResult
+         * @property {boolean|null} [success] CMsgSteamDatagramSetSecondaryAddressResult success
+         * @property {string|null} [message] CMsgSteamDatagramSetSecondaryAddressResult message
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramSetSecondaryAddressResult.
+         * @exports CMsgSteamDatagramSetSecondaryAddressResult
+         * @classdesc Represents a CMsgSteamDatagramSetSecondaryAddressResult.
+         * @implements ICMsgSteamDatagramSetSecondaryAddressResult
+         * @constructor
+         * @param {ICMsgSteamDatagramSetSecondaryAddressResult=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramSetSecondaryAddressResult(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramSetSecondaryAddressResult success.
+         * @member {boolean} success
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @instance
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.prototype.success = false;
+    
+        /**
+         * CMsgSteamDatagramSetSecondaryAddressResult message.
+         * @member {string} message
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @instance
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.prototype.message = "";
+    
+        /**
+         * Creates a new CMsgSteamDatagramSetSecondaryAddressResult instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {ICMsgSteamDatagramSetSecondaryAddressResult=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramSetSecondaryAddressResult} CMsgSteamDatagramSetSecondaryAddressResult instance
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.create = function create(properties) {
+            return new CMsgSteamDatagramSetSecondaryAddressResult(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramSetSecondaryAddressResult message. Does not implicitly {@link CMsgSteamDatagramSetSecondaryAddressResult.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {ICMsgSteamDatagramSetSecondaryAddressResult} message CMsgSteamDatagramSetSecondaryAddressResult message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.success != null && message.hasOwnProperty("success"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.success);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramSetSecondaryAddressResult message, length delimited. Does not implicitly {@link CMsgSteamDatagramSetSecondaryAddressResult.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {ICMsgSteamDatagramSetSecondaryAddressResult} message CMsgSteamDatagramSetSecondaryAddressResult message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramSetSecondaryAddressResult message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramSetSecondaryAddressResult} CMsgSteamDatagramSetSecondaryAddressResult
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramSetSecondaryAddressResult();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.success = reader.bool();
+                    break;
+                case 2:
+                    message.message = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramSetSecondaryAddressResult message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramSetSecondaryAddressResult} CMsgSteamDatagramSetSecondaryAddressResult
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramSetSecondaryAddressResult message.
+         * @function verify
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.success != null && message.hasOwnProperty("success"))
+                if (typeof message.success !== "boolean")
+                    return "success: boolean expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramSetSecondaryAddressResult message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramSetSecondaryAddressResult} CMsgSteamDatagramSetSecondaryAddressResult
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramSetSecondaryAddressResult)
+                return object;
+            var message = new $root.CMsgSteamDatagramSetSecondaryAddressResult();
+            if (object.success != null)
+                message.success = Boolean(object.success);
+            if (object.message != null)
+                message.message = String(object.message);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramSetSecondaryAddressResult message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @static
+         * @param {CMsgSteamDatagramSetSecondaryAddressResult} message CMsgSteamDatagramSetSecondaryAddressResult
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.success = false;
+                object.message = "";
+            }
+            if (message.success != null && message.hasOwnProperty("success"))
+                object.success = message.success;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramSetSecondaryAddressResult to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramSetSecondaryAddressResult
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramSetSecondaryAddressResult.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamDatagramSetSecondaryAddressResult;
     })();
     
     $root.CMsgSteamNetworkingIdentityLegacyBinary = (function() {
@@ -14952,15 +14199,15 @@
         CMsgSteamNetworkingIdentityLegacyBinary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.generic_bytes != null && Object.hasOwnProperty.call(message, "generic_bytes"))
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.generic_bytes);
-            if (message.generic_string != null && Object.hasOwnProperty.call(message, "generic_string"))
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.generic_string);
-            if (message.ipv6_and_port != null && Object.hasOwnProperty.call(message, "ipv6_and_port"))
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.ipv6_and_port);
-            if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                 writer.uint32(/* id 16, wireType 1 =*/129).fixed64(message.steam_id);
-            if (message.xbox_pairwise_id != null && Object.hasOwnProperty.call(message, "xbox_pairwise_id"))
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.xbox_pairwise_id);
             return writer;
         };
@@ -15298,25 +14545,25 @@
         CMsgSteamDatagramCertificate.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key_type != null && Object.hasOwnProperty.call(message, "key_type"))
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.key_type);
-            if (message.key_data != null && Object.hasOwnProperty.call(message, "key_data"))
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.key_data);
-            if (message.legacy_steam_id != null && Object.hasOwnProperty.call(message, "legacy_steam_id"))
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_steam_id);
             if (message.gameserver_datacenter_ids != null && message.gameserver_datacenter_ids.length)
                 for (var i = 0; i < message.gameserver_datacenter_ids.length; ++i)
                     writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.gameserver_datacenter_ids[i]);
-            if (message.time_created != null && Object.hasOwnProperty.call(message, "time_created"))
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.time_created);
-            if (message.time_expiry != null && Object.hasOwnProperty.call(message, "time_expiry"))
+            if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.time_expiry);
             if (message.app_ids != null && message.app_ids.length)
                 for (var i = 0; i < message.app_ids.length; ++i)
                     writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.app_ids[i]);
-            if (message.legacy_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_identity_binary"))
+            if (message.legacy_identity_binary != null && message.hasOwnProperty("legacy_identity_binary"))
                 $root.CMsgSteamNetworkingIdentityLegacyBinary.encode(message.legacy_identity_binary, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-            if (message.identity_string != null && Object.hasOwnProperty.call(message, "identity_string"))
+            if (message.identity_string != null && message.hasOwnProperty("identity_string"))
                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.identity_string);
             return writer;
         };
@@ -15617,7 +14864,7 @@
         /**
          * EKeyType enum.
          * @name CMsgSteamDatagramCertificate.EKeyType
-         * @enum {number}
+         * @enum {string}
          * @property {number} INVALID=0 INVALID value
          * @property {number} ED25519=1 ED25519 value
          */
@@ -15714,13 +14961,13 @@
         CMsgSteamDatagramCertificateSigned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.private_key_data != null && Object.hasOwnProperty.call(message, "private_key_data"))
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.private_key_data);
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.cert);
-            if (message.ca_key_id != null && Object.hasOwnProperty.call(message, "ca_key_id"))
+            if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.ca_key_id);
-            if (message.ca_signature != null && Object.hasOwnProperty.call(message, "ca_signature"))
+            if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.ca_signature);
             return writer;
         };
@@ -15982,7 +15229,7 @@
         CMsgSteamDatagramCertificateRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificate.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
@@ -16121,7 +15368,7 @@
     /**
      * ESteamNetworkingSocketsCipher enum.
      * @exports ESteamNetworkingSocketsCipher
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_ESteamNetworkingSocketsCipher_INVALID=0 k_ESteamNetworkingSocketsCipher_INVALID value
      * @property {number} k_ESteamNetworkingSocketsCipher_NULL=1 k_ESteamNetworkingSocketsCipher_NULL value
      * @property {number} k_ESteamNetworkingSocketsCipher_AES_256_GCM=2 k_ESteamNetworkingSocketsCipher_AES_256_GCM value
@@ -16227,13 +15474,13 @@
         CMsgSteamDatagramSessionCryptInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key_type != null && Object.hasOwnProperty.call(message, "key_type"))
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.key_type);
-            if (message.key_data != null && Object.hasOwnProperty.call(message, "key_data"))
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.key_data);
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.nonce);
-            if (message.protocol_version != null && Object.hasOwnProperty.call(message, "protocol_version"))
+            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.protocol_version);
             if (message.ciphers != null && message.ciphers.length)
                 for (var i = 0; i < message.ciphers.length; ++i)
@@ -16488,7 +15735,7 @@
         /**
          * EKeyType enum.
          * @name CMsgSteamDatagramSessionCryptInfo.EKeyType
-         * @enum {number}
+         * @enum {string}
          * @property {number} INVALID=0 INVALID value
          * @property {number} CURVE25519=1 CURVE25519 value
          */
@@ -16567,9 +15814,9 @@
         CMsgSteamDatagramSessionCryptInfoSigned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.info != null && Object.hasOwnProperty.call(message, "info"))
+            if (message.info != null && message.hasOwnProperty("info"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.info);
-            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+            if (message.signature != null && message.hasOwnProperty("signature"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.signature);
             return writer;
         };
@@ -16795,9 +16042,9 @@
         CMsgSteamDatagramDiagnostic.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+            if (message.severity != null && message.hasOwnProperty("severity"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.severity);
-            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+            if (message.text != null && message.hasOwnProperty("text"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             return writer;
         };
@@ -17059,21 +16306,21 @@
         CMsgSteamDatagramLinkInstantaneousStats.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.out_packets_per_sec_x10 != null && Object.hasOwnProperty.call(message, "out_packets_per_sec_x10"))
+            if (message.out_packets_per_sec_x10 != null && message.hasOwnProperty("out_packets_per_sec_x10"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.out_packets_per_sec_x10);
-            if (message.out_bytes_per_sec != null && Object.hasOwnProperty.call(message, "out_bytes_per_sec"))
+            if (message.out_bytes_per_sec != null && message.hasOwnProperty("out_bytes_per_sec"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.out_bytes_per_sec);
-            if (message.in_packets_per_sec_x10 != null && Object.hasOwnProperty.call(message, "in_packets_per_sec_x10"))
+            if (message.in_packets_per_sec_x10 != null && message.hasOwnProperty("in_packets_per_sec_x10"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.in_packets_per_sec_x10);
-            if (message.in_bytes_per_sec != null && Object.hasOwnProperty.call(message, "in_bytes_per_sec"))
+            if (message.in_bytes_per_sec != null && message.hasOwnProperty("in_bytes_per_sec"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.in_bytes_per_sec);
-            if (message.ping_ms != null && Object.hasOwnProperty.call(message, "ping_ms"))
+            if (message.ping_ms != null && message.hasOwnProperty("ping_ms"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.ping_ms);
-            if (message.packets_dropped_pct != null && Object.hasOwnProperty.call(message, "packets_dropped_pct"))
+            if (message.packets_dropped_pct != null && message.hasOwnProperty("packets_dropped_pct"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.packets_dropped_pct);
-            if (message.packets_weird_sequence_pct != null && Object.hasOwnProperty.call(message, "packets_weird_sequence_pct"))
+            if (message.packets_weird_sequence_pct != null && message.hasOwnProperty("packets_weird_sequence_pct"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.packets_weird_sequence_pct);
-            if (message.peak_jitter_usec != null && Object.hasOwnProperty.call(message, "peak_jitter_usec"))
+            if (message.peak_jitter_usec != null && message.hasOwnProperty("peak_jitter_usec"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.peak_jitter_usec);
             return writer;
         };
@@ -17298,6 +16545,9 @@
          * @property {number|Long|null} [packets_recv_out_of_order] CMsgSteamDatagramLinkLifetimeStats packets_recv_out_of_order
          * @property {number|Long|null} [packets_recv_duplicate] CMsgSteamDatagramLinkLifetimeStats packets_recv_duplicate
          * @property {number|Long|null} [packets_recv_lurch] CMsgSteamDatagramLinkLifetimeStats packets_recv_lurch
+         * @property {Array.<number|Long>|null} [multipath_packets_recv_sequenced] CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_sequenced
+         * @property {Array.<number|Long>|null} [multipath_packets_recv_later] CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_later
+         * @property {number|null} [multipath_send_enabled] CMsgSteamDatagramLinkLifetimeStats multipath_send_enabled
          * @property {number|null} [quality_histogram_100] CMsgSteamDatagramLinkLifetimeStats quality_histogram_100
          * @property {number|null} [quality_histogram_99] CMsgSteamDatagramLinkLifetimeStats quality_histogram_99
          * @property {number|null} [quality_histogram_97] CMsgSteamDatagramLinkLifetimeStats quality_histogram_97
@@ -17370,6 +16620,8 @@
          * @param {ICMsgSteamDatagramLinkLifetimeStats=} [properties] Properties to set
          */
         function CMsgSteamDatagramLinkLifetimeStats(properties) {
+            this.multipath_packets_recv_sequenced = [];
+            this.multipath_packets_recv_later = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -17455,6 +16707,30 @@
          * @instance
          */
         CMsgSteamDatagramLinkLifetimeStats.prototype.packets_recv_lurch = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_sequenced.
+         * @member {Array.<number|Long>} multipath_packets_recv_sequenced
+         * @memberof CMsgSteamDatagramLinkLifetimeStats
+         * @instance
+         */
+        CMsgSteamDatagramLinkLifetimeStats.prototype.multipath_packets_recv_sequenced = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_later.
+         * @member {Array.<number|Long>} multipath_packets_recv_later
+         * @memberof CMsgSteamDatagramLinkLifetimeStats
+         * @instance
+         */
+        CMsgSteamDatagramLinkLifetimeStats.prototype.multipath_packets_recv_later = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramLinkLifetimeStats multipath_send_enabled.
+         * @member {number} multipath_send_enabled
+         * @memberof CMsgSteamDatagramLinkLifetimeStats
+         * @instance
+         */
+        CMsgSteamDatagramLinkLifetimeStats.prototype.multipath_send_enabled = 0;
     
         /**
          * CMsgSteamDatagramLinkLifetimeStats quality_histogram_100.
@@ -17968,147 +17244,155 @@
         CMsgSteamDatagramLinkLifetimeStats.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connected_seconds != null && Object.hasOwnProperty.call(message, "connected_seconds"))
+            if (message.connected_seconds != null && message.hasOwnProperty("connected_seconds"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.connected_seconds);
-            if (message.packets_sent != null && Object.hasOwnProperty.call(message, "packets_sent"))
+            if (message.packets_sent != null && message.hasOwnProperty("packets_sent"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.packets_sent);
-            if (message.kb_sent != null && Object.hasOwnProperty.call(message, "kb_sent"))
+            if (message.kb_sent != null && message.hasOwnProperty("kb_sent"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.kb_sent);
-            if (message.packets_recv != null && Object.hasOwnProperty.call(message, "packets_recv"))
+            if (message.packets_recv != null && message.hasOwnProperty("packets_recv"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.packets_recv);
-            if (message.kb_recv != null && Object.hasOwnProperty.call(message, "kb_recv"))
+            if (message.kb_recv != null && message.hasOwnProperty("kb_recv"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.kb_recv);
-            if (message.packets_recv_sequenced != null && Object.hasOwnProperty.call(message, "packets_recv_sequenced"))
+            if (message.packets_recv_sequenced != null && message.hasOwnProperty("packets_recv_sequenced"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.packets_recv_sequenced);
-            if (message.packets_recv_dropped != null && Object.hasOwnProperty.call(message, "packets_recv_dropped"))
+            if (message.packets_recv_dropped != null && message.hasOwnProperty("packets_recv_dropped"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.packets_recv_dropped);
-            if (message.packets_recv_out_of_order != null && Object.hasOwnProperty.call(message, "packets_recv_out_of_order"))
+            if (message.packets_recv_out_of_order != null && message.hasOwnProperty("packets_recv_out_of_order"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.packets_recv_out_of_order);
-            if (message.packets_recv_duplicate != null && Object.hasOwnProperty.call(message, "packets_recv_duplicate"))
+            if (message.packets_recv_duplicate != null && message.hasOwnProperty("packets_recv_duplicate"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint64(message.packets_recv_duplicate);
-            if (message.packets_recv_lurch != null && Object.hasOwnProperty.call(message, "packets_recv_lurch"))
+            if (message.packets_recv_lurch != null && message.hasOwnProperty("packets_recv_lurch"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint64(message.packets_recv_lurch);
-            if (message.quality_histogram_100 != null && Object.hasOwnProperty.call(message, "quality_histogram_100"))
+            if (message.multipath_packets_recv_sequenced != null && message.multipath_packets_recv_sequenced.length)
+                for (var i = 0; i < message.multipath_packets_recv_sequenced.length; ++i)
+                    writer.uint32(/* id 12, wireType 0 =*/96).uint64(message.multipath_packets_recv_sequenced[i]);
+            if (message.multipath_packets_recv_later != null && message.multipath_packets_recv_later.length)
+                for (var i = 0; i < message.multipath_packets_recv_later.length; ++i)
+                    writer.uint32(/* id 13, wireType 0 =*/104).uint64(message.multipath_packets_recv_later[i]);
+            if (message.multipath_send_enabled != null && message.hasOwnProperty("multipath_send_enabled"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.multipath_send_enabled);
+            if (message.quality_histogram_100 != null && message.hasOwnProperty("quality_histogram_100"))
                 writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.quality_histogram_100);
-            if (message.quality_histogram_99 != null && Object.hasOwnProperty.call(message, "quality_histogram_99"))
+            if (message.quality_histogram_99 != null && message.hasOwnProperty("quality_histogram_99"))
                 writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.quality_histogram_99);
-            if (message.quality_histogram_97 != null && Object.hasOwnProperty.call(message, "quality_histogram_97"))
+            if (message.quality_histogram_97 != null && message.hasOwnProperty("quality_histogram_97"))
                 writer.uint32(/* id 23, wireType 0 =*/184).uint32(message.quality_histogram_97);
-            if (message.quality_histogram_95 != null && Object.hasOwnProperty.call(message, "quality_histogram_95"))
+            if (message.quality_histogram_95 != null && message.hasOwnProperty("quality_histogram_95"))
                 writer.uint32(/* id 24, wireType 0 =*/192).uint32(message.quality_histogram_95);
-            if (message.quality_histogram_90 != null && Object.hasOwnProperty.call(message, "quality_histogram_90"))
+            if (message.quality_histogram_90 != null && message.hasOwnProperty("quality_histogram_90"))
                 writer.uint32(/* id 25, wireType 0 =*/200).uint32(message.quality_histogram_90);
-            if (message.quality_histogram_75 != null && Object.hasOwnProperty.call(message, "quality_histogram_75"))
+            if (message.quality_histogram_75 != null && message.hasOwnProperty("quality_histogram_75"))
                 writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.quality_histogram_75);
-            if (message.quality_histogram_50 != null && Object.hasOwnProperty.call(message, "quality_histogram_50"))
+            if (message.quality_histogram_50 != null && message.hasOwnProperty("quality_histogram_50"))
                 writer.uint32(/* id 27, wireType 0 =*/216).uint32(message.quality_histogram_50);
-            if (message.quality_histogram_1 != null && Object.hasOwnProperty.call(message, "quality_histogram_1"))
+            if (message.quality_histogram_1 != null && message.hasOwnProperty("quality_histogram_1"))
                 writer.uint32(/* id 28, wireType 0 =*/224).uint32(message.quality_histogram_1);
-            if (message.quality_histogram_dead != null && Object.hasOwnProperty.call(message, "quality_histogram_dead"))
+            if (message.quality_histogram_dead != null && message.hasOwnProperty("quality_histogram_dead"))
                 writer.uint32(/* id 29, wireType 0 =*/232).uint32(message.quality_histogram_dead);
-            if (message.quality_ntile_2nd != null && Object.hasOwnProperty.call(message, "quality_ntile_2nd"))
+            if (message.quality_ntile_2nd != null && message.hasOwnProperty("quality_ntile_2nd"))
                 writer.uint32(/* id 30, wireType 0 =*/240).uint32(message.quality_ntile_2nd);
-            if (message.quality_ntile_5th != null && Object.hasOwnProperty.call(message, "quality_ntile_5th"))
+            if (message.quality_ntile_5th != null && message.hasOwnProperty("quality_ntile_5th"))
                 writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.quality_ntile_5th);
-            if (message.quality_ntile_25th != null && Object.hasOwnProperty.call(message, "quality_ntile_25th"))
+            if (message.quality_ntile_25th != null && message.hasOwnProperty("quality_ntile_25th"))
                 writer.uint32(/* id 32, wireType 0 =*/256).uint32(message.quality_ntile_25th);
-            if (message.quality_ntile_50th != null && Object.hasOwnProperty.call(message, "quality_ntile_50th"))
+            if (message.quality_ntile_50th != null && message.hasOwnProperty("quality_ntile_50th"))
                 writer.uint32(/* id 33, wireType 0 =*/264).uint32(message.quality_ntile_50th);
-            if (message.ping_histogram_25 != null && Object.hasOwnProperty.call(message, "ping_histogram_25"))
+            if (message.ping_histogram_25 != null && message.hasOwnProperty("ping_histogram_25"))
                 writer.uint32(/* id 41, wireType 0 =*/328).uint32(message.ping_histogram_25);
-            if (message.ping_histogram_50 != null && Object.hasOwnProperty.call(message, "ping_histogram_50"))
+            if (message.ping_histogram_50 != null && message.hasOwnProperty("ping_histogram_50"))
                 writer.uint32(/* id 42, wireType 0 =*/336).uint32(message.ping_histogram_50);
-            if (message.ping_histogram_75 != null && Object.hasOwnProperty.call(message, "ping_histogram_75"))
+            if (message.ping_histogram_75 != null && message.hasOwnProperty("ping_histogram_75"))
                 writer.uint32(/* id 43, wireType 0 =*/344).uint32(message.ping_histogram_75);
-            if (message.ping_histogram_100 != null && Object.hasOwnProperty.call(message, "ping_histogram_100"))
+            if (message.ping_histogram_100 != null && message.hasOwnProperty("ping_histogram_100"))
                 writer.uint32(/* id 44, wireType 0 =*/352).uint32(message.ping_histogram_100);
-            if (message.ping_histogram_125 != null && Object.hasOwnProperty.call(message, "ping_histogram_125"))
+            if (message.ping_histogram_125 != null && message.hasOwnProperty("ping_histogram_125"))
                 writer.uint32(/* id 45, wireType 0 =*/360).uint32(message.ping_histogram_125);
-            if (message.ping_histogram_150 != null && Object.hasOwnProperty.call(message, "ping_histogram_150"))
+            if (message.ping_histogram_150 != null && message.hasOwnProperty("ping_histogram_150"))
                 writer.uint32(/* id 46, wireType 0 =*/368).uint32(message.ping_histogram_150);
-            if (message.ping_histogram_200 != null && Object.hasOwnProperty.call(message, "ping_histogram_200"))
+            if (message.ping_histogram_200 != null && message.hasOwnProperty("ping_histogram_200"))
                 writer.uint32(/* id 47, wireType 0 =*/376).uint32(message.ping_histogram_200);
-            if (message.ping_histogram_300 != null && Object.hasOwnProperty.call(message, "ping_histogram_300"))
+            if (message.ping_histogram_300 != null && message.hasOwnProperty("ping_histogram_300"))
                 writer.uint32(/* id 48, wireType 0 =*/384).uint32(message.ping_histogram_300);
-            if (message.ping_histogram_max != null && Object.hasOwnProperty.call(message, "ping_histogram_max"))
+            if (message.ping_histogram_max != null && message.hasOwnProperty("ping_histogram_max"))
                 writer.uint32(/* id 49, wireType 0 =*/392).uint32(message.ping_histogram_max);
-            if (message.ping_ntile_5th != null && Object.hasOwnProperty.call(message, "ping_ntile_5th"))
+            if (message.ping_ntile_5th != null && message.hasOwnProperty("ping_ntile_5th"))
                 writer.uint32(/* id 50, wireType 0 =*/400).uint32(message.ping_ntile_5th);
-            if (message.ping_ntile_50th != null && Object.hasOwnProperty.call(message, "ping_ntile_50th"))
+            if (message.ping_ntile_50th != null && message.hasOwnProperty("ping_ntile_50th"))
                 writer.uint32(/* id 51, wireType 0 =*/408).uint32(message.ping_ntile_50th);
-            if (message.ping_ntile_75th != null && Object.hasOwnProperty.call(message, "ping_ntile_75th"))
+            if (message.ping_ntile_75th != null && message.hasOwnProperty("ping_ntile_75th"))
                 writer.uint32(/* id 52, wireType 0 =*/416).uint32(message.ping_ntile_75th);
-            if (message.ping_ntile_95th != null && Object.hasOwnProperty.call(message, "ping_ntile_95th"))
+            if (message.ping_ntile_95th != null && message.hasOwnProperty("ping_ntile_95th"))
                 writer.uint32(/* id 53, wireType 0 =*/424).uint32(message.ping_ntile_95th);
-            if (message.ping_ntile_98th != null && Object.hasOwnProperty.call(message, "ping_ntile_98th"))
+            if (message.ping_ntile_98th != null && message.hasOwnProperty("ping_ntile_98th"))
                 writer.uint32(/* id 54, wireType 0 =*/432).uint32(message.ping_ntile_98th);
-            if (message.jitter_histogram_negligible != null && Object.hasOwnProperty.call(message, "jitter_histogram_negligible"))
+            if (message.jitter_histogram_negligible != null && message.hasOwnProperty("jitter_histogram_negligible"))
                 writer.uint32(/* id 61, wireType 0 =*/488).uint32(message.jitter_histogram_negligible);
-            if (message.jitter_histogram_1 != null && Object.hasOwnProperty.call(message, "jitter_histogram_1"))
+            if (message.jitter_histogram_1 != null && message.hasOwnProperty("jitter_histogram_1"))
                 writer.uint32(/* id 62, wireType 0 =*/496).uint32(message.jitter_histogram_1);
-            if (message.jitter_histogram_2 != null && Object.hasOwnProperty.call(message, "jitter_histogram_2"))
+            if (message.jitter_histogram_2 != null && message.hasOwnProperty("jitter_histogram_2"))
                 writer.uint32(/* id 63, wireType 0 =*/504).uint32(message.jitter_histogram_2);
-            if (message.jitter_histogram_5 != null && Object.hasOwnProperty.call(message, "jitter_histogram_5"))
+            if (message.jitter_histogram_5 != null && message.hasOwnProperty("jitter_histogram_5"))
                 writer.uint32(/* id 64, wireType 0 =*/512).uint32(message.jitter_histogram_5);
-            if (message.jitter_histogram_10 != null && Object.hasOwnProperty.call(message, "jitter_histogram_10"))
+            if (message.jitter_histogram_10 != null && message.hasOwnProperty("jitter_histogram_10"))
                 writer.uint32(/* id 65, wireType 0 =*/520).uint32(message.jitter_histogram_10);
-            if (message.jitter_histogram_20 != null && Object.hasOwnProperty.call(message, "jitter_histogram_20"))
+            if (message.jitter_histogram_20 != null && message.hasOwnProperty("jitter_histogram_20"))
                 writer.uint32(/* id 66, wireType 0 =*/528).uint32(message.jitter_histogram_20);
-            if (message.txspeed_max != null && Object.hasOwnProperty.call(message, "txspeed_max"))
+            if (message.txspeed_max != null && message.hasOwnProperty("txspeed_max"))
                 writer.uint32(/* id 67, wireType 0 =*/536).uint32(message.txspeed_max);
-            if (message.txspeed_histogram_16 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_16"))
+            if (message.txspeed_histogram_16 != null && message.hasOwnProperty("txspeed_histogram_16"))
                 writer.uint32(/* id 68, wireType 0 =*/544).uint32(message.txspeed_histogram_16);
-            if (message.txspeed_histogram_32 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_32"))
+            if (message.txspeed_histogram_32 != null && message.hasOwnProperty("txspeed_histogram_32"))
                 writer.uint32(/* id 69, wireType 0 =*/552).uint32(message.txspeed_histogram_32);
-            if (message.txspeed_histogram_64 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_64"))
+            if (message.txspeed_histogram_64 != null && message.hasOwnProperty("txspeed_histogram_64"))
                 writer.uint32(/* id 70, wireType 0 =*/560).uint32(message.txspeed_histogram_64);
-            if (message.txspeed_histogram_128 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_128"))
+            if (message.txspeed_histogram_128 != null && message.hasOwnProperty("txspeed_histogram_128"))
                 writer.uint32(/* id 71, wireType 0 =*/568).uint32(message.txspeed_histogram_128);
-            if (message.txspeed_histogram_256 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_256"))
+            if (message.txspeed_histogram_256 != null && message.hasOwnProperty("txspeed_histogram_256"))
                 writer.uint32(/* id 72, wireType 0 =*/576).uint32(message.txspeed_histogram_256);
-            if (message.txspeed_histogram_512 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_512"))
+            if (message.txspeed_histogram_512 != null && message.hasOwnProperty("txspeed_histogram_512"))
                 writer.uint32(/* id 73, wireType 0 =*/584).uint32(message.txspeed_histogram_512);
-            if (message.txspeed_histogram_1024 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_1024"))
+            if (message.txspeed_histogram_1024 != null && message.hasOwnProperty("txspeed_histogram_1024"))
                 writer.uint32(/* id 74, wireType 0 =*/592).uint32(message.txspeed_histogram_1024);
-            if (message.txspeed_histogram_max != null && Object.hasOwnProperty.call(message, "txspeed_histogram_max"))
+            if (message.txspeed_histogram_max != null && message.hasOwnProperty("txspeed_histogram_max"))
                 writer.uint32(/* id 75, wireType 0 =*/600).uint32(message.txspeed_histogram_max);
-            if (message.txspeed_ntile_5th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_5th"))
+            if (message.txspeed_ntile_5th != null && message.hasOwnProperty("txspeed_ntile_5th"))
                 writer.uint32(/* id 76, wireType 0 =*/608).uint32(message.txspeed_ntile_5th);
-            if (message.txspeed_ntile_50th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_50th"))
+            if (message.txspeed_ntile_50th != null && message.hasOwnProperty("txspeed_ntile_50th"))
                 writer.uint32(/* id 77, wireType 0 =*/616).uint32(message.txspeed_ntile_50th);
-            if (message.txspeed_ntile_75th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_75th"))
+            if (message.txspeed_ntile_75th != null && message.hasOwnProperty("txspeed_ntile_75th"))
                 writer.uint32(/* id 78, wireType 0 =*/624).uint32(message.txspeed_ntile_75th);
-            if (message.txspeed_ntile_95th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_95th"))
+            if (message.txspeed_ntile_95th != null && message.hasOwnProperty("txspeed_ntile_95th"))
                 writer.uint32(/* id 79, wireType 0 =*/632).uint32(message.txspeed_ntile_95th);
-            if (message.txspeed_ntile_98th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_98th"))
+            if (message.txspeed_ntile_98th != null && message.hasOwnProperty("txspeed_ntile_98th"))
                 writer.uint32(/* id 80, wireType 0 =*/640).uint32(message.txspeed_ntile_98th);
-            if (message.rxspeed_max != null && Object.hasOwnProperty.call(message, "rxspeed_max"))
+            if (message.rxspeed_max != null && message.hasOwnProperty("rxspeed_max"))
                 writer.uint32(/* id 81, wireType 0 =*/648).uint32(message.rxspeed_max);
-            if (message.rxspeed_histogram_16 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_16"))
+            if (message.rxspeed_histogram_16 != null && message.hasOwnProperty("rxspeed_histogram_16"))
                 writer.uint32(/* id 82, wireType 0 =*/656).uint32(message.rxspeed_histogram_16);
-            if (message.rxspeed_histogram_32 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_32"))
+            if (message.rxspeed_histogram_32 != null && message.hasOwnProperty("rxspeed_histogram_32"))
                 writer.uint32(/* id 83, wireType 0 =*/664).uint32(message.rxspeed_histogram_32);
-            if (message.rxspeed_histogram_64 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_64"))
+            if (message.rxspeed_histogram_64 != null && message.hasOwnProperty("rxspeed_histogram_64"))
                 writer.uint32(/* id 84, wireType 0 =*/672).uint32(message.rxspeed_histogram_64);
-            if (message.rxspeed_histogram_128 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_128"))
+            if (message.rxspeed_histogram_128 != null && message.hasOwnProperty("rxspeed_histogram_128"))
                 writer.uint32(/* id 85, wireType 0 =*/680).uint32(message.rxspeed_histogram_128);
-            if (message.rxspeed_histogram_256 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_256"))
+            if (message.rxspeed_histogram_256 != null && message.hasOwnProperty("rxspeed_histogram_256"))
                 writer.uint32(/* id 86, wireType 0 =*/688).uint32(message.rxspeed_histogram_256);
-            if (message.rxspeed_histogram_512 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_512"))
+            if (message.rxspeed_histogram_512 != null && message.hasOwnProperty("rxspeed_histogram_512"))
                 writer.uint32(/* id 87, wireType 0 =*/696).uint32(message.rxspeed_histogram_512);
-            if (message.rxspeed_histogram_1024 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_1024"))
+            if (message.rxspeed_histogram_1024 != null && message.hasOwnProperty("rxspeed_histogram_1024"))
                 writer.uint32(/* id 88, wireType 0 =*/704).uint32(message.rxspeed_histogram_1024);
-            if (message.rxspeed_histogram_max != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_max"))
+            if (message.rxspeed_histogram_max != null && message.hasOwnProperty("rxspeed_histogram_max"))
                 writer.uint32(/* id 89, wireType 0 =*/712).uint32(message.rxspeed_histogram_max);
-            if (message.rxspeed_ntile_5th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_5th"))
+            if (message.rxspeed_ntile_5th != null && message.hasOwnProperty("rxspeed_ntile_5th"))
                 writer.uint32(/* id 90, wireType 0 =*/720).uint32(message.rxspeed_ntile_5th);
-            if (message.rxspeed_ntile_50th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_50th"))
+            if (message.rxspeed_ntile_50th != null && message.hasOwnProperty("rxspeed_ntile_50th"))
                 writer.uint32(/* id 91, wireType 0 =*/728).uint32(message.rxspeed_ntile_50th);
-            if (message.rxspeed_ntile_75th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_75th"))
+            if (message.rxspeed_ntile_75th != null && message.hasOwnProperty("rxspeed_ntile_75th"))
                 writer.uint32(/* id 92, wireType 0 =*/736).uint32(message.rxspeed_ntile_75th);
-            if (message.rxspeed_ntile_95th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_95th"))
+            if (message.rxspeed_ntile_95th != null && message.hasOwnProperty("rxspeed_ntile_95th"))
                 writer.uint32(/* id 93, wireType 0 =*/744).uint32(message.rxspeed_ntile_95th);
-            if (message.rxspeed_ntile_98th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_98th"))
+            if (message.rxspeed_ntile_98th != null && message.hasOwnProperty("rxspeed_ntile_98th"))
                 writer.uint32(/* id 94, wireType 0 =*/752).uint32(message.rxspeed_ntile_98th);
             return writer;
         };
@@ -18173,6 +17457,29 @@
                     break;
                 case 11:
                     message.packets_recv_lurch = reader.uint64();
+                    break;
+                case 12:
+                    if (!(message.multipath_packets_recv_sequenced && message.multipath_packets_recv_sequenced.length))
+                        message.multipath_packets_recv_sequenced = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.multipath_packets_recv_sequenced.push(reader.uint64());
+                    } else
+                        message.multipath_packets_recv_sequenced.push(reader.uint64());
+                    break;
+                case 13:
+                    if (!(message.multipath_packets_recv_later && message.multipath_packets_recv_later.length))
+                        message.multipath_packets_recv_later = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.multipath_packets_recv_later.push(reader.uint64());
+                    } else
+                        message.multipath_packets_recv_later.push(reader.uint64());
+                    break;
+                case 14:
+                    message.multipath_send_enabled = reader.uint32();
                     break;
                 case 21:
                     message.quality_histogram_100 = reader.uint32();
@@ -18422,6 +17729,23 @@
             if (message.packets_recv_lurch != null && message.hasOwnProperty("packets_recv_lurch"))
                 if (!$util.isInteger(message.packets_recv_lurch) && !(message.packets_recv_lurch && $util.isInteger(message.packets_recv_lurch.low) && $util.isInteger(message.packets_recv_lurch.high)))
                     return "packets_recv_lurch: integer|Long expected";
+            if (message.multipath_packets_recv_sequenced != null && message.hasOwnProperty("multipath_packets_recv_sequenced")) {
+                if (!Array.isArray(message.multipath_packets_recv_sequenced))
+                    return "multipath_packets_recv_sequenced: array expected";
+                for (var i = 0; i < message.multipath_packets_recv_sequenced.length; ++i)
+                    if (!$util.isInteger(message.multipath_packets_recv_sequenced[i]) && !(message.multipath_packets_recv_sequenced[i] && $util.isInteger(message.multipath_packets_recv_sequenced[i].low) && $util.isInteger(message.multipath_packets_recv_sequenced[i].high)))
+                        return "multipath_packets_recv_sequenced: integer|Long[] expected";
+            }
+            if (message.multipath_packets_recv_later != null && message.hasOwnProperty("multipath_packets_recv_later")) {
+                if (!Array.isArray(message.multipath_packets_recv_later))
+                    return "multipath_packets_recv_later: array expected";
+                for (var i = 0; i < message.multipath_packets_recv_later.length; ++i)
+                    if (!$util.isInteger(message.multipath_packets_recv_later[i]) && !(message.multipath_packets_recv_later[i] && $util.isInteger(message.multipath_packets_recv_later[i].low) && $util.isInteger(message.multipath_packets_recv_later[i].high)))
+                        return "multipath_packets_recv_later: integer|Long[] expected";
+            }
+            if (message.multipath_send_enabled != null && message.hasOwnProperty("multipath_send_enabled"))
+                if (!$util.isInteger(message.multipath_send_enabled))
+                    return "multipath_send_enabled: integer expected";
             if (message.quality_histogram_100 != null && message.hasOwnProperty("quality_histogram_100"))
                 if (!$util.isInteger(message.quality_histogram_100))
                     return "quality_histogram_100: integer expected";
@@ -18703,6 +18027,36 @@
                     message.packets_recv_lurch = object.packets_recv_lurch;
                 else if (typeof object.packets_recv_lurch === "object")
                     message.packets_recv_lurch = new $util.LongBits(object.packets_recv_lurch.low >>> 0, object.packets_recv_lurch.high >>> 0).toNumber(true);
+            if (object.multipath_packets_recv_sequenced) {
+                if (!Array.isArray(object.multipath_packets_recv_sequenced))
+                    throw TypeError(".CMsgSteamDatagramLinkLifetimeStats.multipath_packets_recv_sequenced: array expected");
+                message.multipath_packets_recv_sequenced = [];
+                for (var i = 0; i < object.multipath_packets_recv_sequenced.length; ++i)
+                    if ($util.Long)
+                        (message.multipath_packets_recv_sequenced[i] = $util.Long.fromValue(object.multipath_packets_recv_sequenced[i])).unsigned = true;
+                    else if (typeof object.multipath_packets_recv_sequenced[i] === "string")
+                        message.multipath_packets_recv_sequenced[i] = parseInt(object.multipath_packets_recv_sequenced[i], 10);
+                    else if (typeof object.multipath_packets_recv_sequenced[i] === "number")
+                        message.multipath_packets_recv_sequenced[i] = object.multipath_packets_recv_sequenced[i];
+                    else if (typeof object.multipath_packets_recv_sequenced[i] === "object")
+                        message.multipath_packets_recv_sequenced[i] = new $util.LongBits(object.multipath_packets_recv_sequenced[i].low >>> 0, object.multipath_packets_recv_sequenced[i].high >>> 0).toNumber(true);
+            }
+            if (object.multipath_packets_recv_later) {
+                if (!Array.isArray(object.multipath_packets_recv_later))
+                    throw TypeError(".CMsgSteamDatagramLinkLifetimeStats.multipath_packets_recv_later: array expected");
+                message.multipath_packets_recv_later = [];
+                for (var i = 0; i < object.multipath_packets_recv_later.length; ++i)
+                    if ($util.Long)
+                        (message.multipath_packets_recv_later[i] = $util.Long.fromValue(object.multipath_packets_recv_later[i])).unsigned = true;
+                    else if (typeof object.multipath_packets_recv_later[i] === "string")
+                        message.multipath_packets_recv_later[i] = parseInt(object.multipath_packets_recv_later[i], 10);
+                    else if (typeof object.multipath_packets_recv_later[i] === "number")
+                        message.multipath_packets_recv_later[i] = object.multipath_packets_recv_later[i];
+                    else if (typeof object.multipath_packets_recv_later[i] === "object")
+                        message.multipath_packets_recv_later[i] = new $util.LongBits(object.multipath_packets_recv_later[i].low >>> 0, object.multipath_packets_recv_later[i].high >>> 0).toNumber(true);
+            }
+            if (object.multipath_send_enabled != null)
+                message.multipath_send_enabled = object.multipath_send_enabled >>> 0;
             if (object.quality_histogram_100 != null)
                 message.quality_histogram_100 = object.quality_histogram_100 >>> 0;
             if (object.quality_histogram_99 != null)
@@ -18841,6 +18195,10 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults) {
+                object.multipath_packets_recv_sequenced = [];
+                object.multipath_packets_recv_later = [];
+            }
             if (options.defaults) {
                 object.connected_seconds = 0;
                 if ($util.Long) {
@@ -18888,6 +18246,7 @@
                     object.packets_recv_lurch = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.packets_recv_lurch = options.longs === String ? "0" : 0;
+                object.multipath_send_enabled = 0;
                 object.quality_histogram_100 = 0;
                 object.quality_histogram_99 = 0;
                 object.quality_histogram_97 = 0;
@@ -18997,6 +18356,24 @@
                     object.packets_recv_lurch = options.longs === String ? String(message.packets_recv_lurch) : message.packets_recv_lurch;
                 else
                     object.packets_recv_lurch = options.longs === String ? $util.Long.prototype.toString.call(message.packets_recv_lurch) : options.longs === Number ? new $util.LongBits(message.packets_recv_lurch.low >>> 0, message.packets_recv_lurch.high >>> 0).toNumber(true) : message.packets_recv_lurch;
+            if (message.multipath_packets_recv_sequenced && message.multipath_packets_recv_sequenced.length) {
+                object.multipath_packets_recv_sequenced = [];
+                for (var j = 0; j < message.multipath_packets_recv_sequenced.length; ++j)
+                    if (typeof message.multipath_packets_recv_sequenced[j] === "number")
+                        object.multipath_packets_recv_sequenced[j] = options.longs === String ? String(message.multipath_packets_recv_sequenced[j]) : message.multipath_packets_recv_sequenced[j];
+                    else
+                        object.multipath_packets_recv_sequenced[j] = options.longs === String ? $util.Long.prototype.toString.call(message.multipath_packets_recv_sequenced[j]) : options.longs === Number ? new $util.LongBits(message.multipath_packets_recv_sequenced[j].low >>> 0, message.multipath_packets_recv_sequenced[j].high >>> 0).toNumber(true) : message.multipath_packets_recv_sequenced[j];
+            }
+            if (message.multipath_packets_recv_later && message.multipath_packets_recv_later.length) {
+                object.multipath_packets_recv_later = [];
+                for (var j = 0; j < message.multipath_packets_recv_later.length; ++j)
+                    if (typeof message.multipath_packets_recv_later[j] === "number")
+                        object.multipath_packets_recv_later[j] = options.longs === String ? String(message.multipath_packets_recv_later[j]) : message.multipath_packets_recv_later[j];
+                    else
+                        object.multipath_packets_recv_later[j] = options.longs === String ? $util.Long.prototype.toString.call(message.multipath_packets_recv_later[j]) : options.longs === Number ? new $util.LongBits(message.multipath_packets_recv_later[j].low >>> 0, message.multipath_packets_recv_later[j].high >>> 0).toNumber(true) : message.multipath_packets_recv_later[j];
+            }
+            if (message.multipath_send_enabled != null && message.hasOwnProperty("multipath_send_enabled"))
+                object.multipath_send_enabled = message.multipath_send_enabled;
             if (message.quality_histogram_100 != null && message.hasOwnProperty("quality_histogram_100"))
                 object.quality_histogram_100 = message.quality_histogram_100;
             if (message.quality_histogram_99 != null && message.hasOwnProperty("quality_histogram_99"))
@@ -19201,9 +18578,9 @@
         CMsgSteamDatagramConnectionQuality.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.instantaneous != null && Object.hasOwnProperty.call(message, "instantaneous"))
+            if (message.instantaneous != null && message.hasOwnProperty("instantaneous"))
                 $root.CMsgSteamDatagramLinkInstantaneousStats.encode(message.instantaneous, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.lifetime != null && Object.hasOwnProperty.call(message, "lifetime"))
+            if (message.lifetime != null && message.hasOwnProperty("lifetime"))
                 $root.CMsgSteamDatagramLinkLifetimeStats.encode(message.lifetime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
@@ -19421,9 +18798,9 @@
         CMsgICERendezvous.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.add_candidate != null && Object.hasOwnProperty.call(message, "add_candidate"))
+            if (message.add_candidate != null && message.hasOwnProperty("add_candidate"))
                 $root.CMsgICERendezvous.Candidate.encode(message.add_candidate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.auth != null && Object.hasOwnProperty.call(message, "auth"))
+            if (message.auth != null && message.hasOwnProperty("auth"))
                 $root.CMsgICERendezvous.Auth.encode(message.auth, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
@@ -19629,7 +19006,7 @@
             Auth.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.pwd_frag != null && Object.hasOwnProperty.call(message, "pwd_frag"))
+                if (message.pwd_frag != null && message.hasOwnProperty("pwd_frag"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.pwd_frag);
                 return writer;
             };
@@ -19816,7 +19193,7 @@
             Candidate.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.candidate != null && Object.hasOwnProperty.call(message, "candidate"))
+                if (message.candidate != null && message.hasOwnProperty("candidate"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.candidate);
                 return writer;
             };
@@ -19963,12 +19340,14 @@
          * @property {Uint8Array|null} [sdr_routes] CMsgSteamNetworkingP2PRendezvous sdr_routes
          * @property {number|null} [ack_peer_routes_revision] CMsgSteamNetworkingP2PRendezvous ack_peer_routes_revision
          * @property {boolean|null} [ice_enabled] CMsgSteamNetworkingP2PRendezvous ice_enabled
+         * @property {Uint8Array|null} [hosted_server_ticket] CMsgSteamNetworkingP2PRendezvous hosted_server_ticket
          * @property {CMsgSteamNetworkingP2PRendezvous.IConnectRequest|null} [connect_request] CMsgSteamNetworkingP2PRendezvous connect_request
          * @property {CMsgSteamNetworkingP2PRendezvous.IConnectOK|null} [connect_ok] CMsgSteamNetworkingP2PRendezvous connect_ok
          * @property {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed|null} [connection_closed] CMsgSteamNetworkingP2PRendezvous connection_closed
          * @property {number|null} [ack_reliable_msg] CMsgSteamNetworkingP2PRendezvous ack_reliable_msg
          * @property {number|null} [first_reliable_msg] CMsgSteamNetworkingP2PRendezvous first_reliable_msg
          * @property {Array.<CMsgSteamNetworkingP2PRendezvous.IReliableMessage>|null} [reliable_messages] CMsgSteamNetworkingP2PRendezvous reliable_messages
+         * @property {Array.<CMsgSteamNetworkingP2PRendezvous.IApplicationMessage>|null} [application_messages] CMsgSteamNetworkingP2PRendezvous application_messages
          */
     
         /**
@@ -19981,6 +19360,7 @@
          */
         function CMsgSteamNetworkingP2PRendezvous(properties) {
             this.reliable_messages = [];
+            this.application_messages = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -20044,6 +19424,14 @@
         CMsgSteamNetworkingP2PRendezvous.prototype.ice_enabled = false;
     
         /**
+         * CMsgSteamNetworkingP2PRendezvous hosted_server_ticket.
+         * @member {Uint8Array} hosted_server_ticket
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.hosted_server_ticket = $util.newBuffer([]);
+    
+        /**
          * CMsgSteamNetworkingP2PRendezvous connect_request.
          * @member {CMsgSteamNetworkingP2PRendezvous.IConnectRequest|null|undefined} connect_request
          * @memberof CMsgSteamNetworkingP2PRendezvous
@@ -20092,6 +19480,14 @@
         CMsgSteamNetworkingP2PRendezvous.prototype.reliable_messages = $util.emptyArray;
     
         /**
+         * CMsgSteamNetworkingP2PRendezvous application_messages.
+         * @member {Array.<CMsgSteamNetworkingP2PRendezvous.IApplicationMessage>} application_messages
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.application_messages = $util.emptyArray;
+    
+        /**
          * Creates a new CMsgSteamNetworkingP2PRendezvous instance using the specified properties.
          * @function create
          * @memberof CMsgSteamNetworkingP2PRendezvous
@@ -20115,33 +19511,38 @@
         CMsgSteamNetworkingP2PRendezvous.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.to_connection_id != null && Object.hasOwnProperty.call(message, "to_connection_id"))
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.to_connection_id);
-            if (message.sdr_routes != null && Object.hasOwnProperty.call(message, "sdr_routes"))
+            if (message.sdr_routes != null && message.hasOwnProperty("sdr_routes"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.sdr_routes);
-            if (message.ack_peer_routes_revision != null && Object.hasOwnProperty.call(message, "ack_peer_routes_revision"))
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ack_peer_routes_revision);
-            if (message.connect_request != null && Object.hasOwnProperty.call(message, "connect_request"))
+            if (message.connect_request != null && message.hasOwnProperty("connect_request"))
                 $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.encode(message.connect_request, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.connect_ok != null && Object.hasOwnProperty.call(message, "connect_ok"))
+            if (message.connect_ok != null && message.hasOwnProperty("connect_ok"))
                 $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK.encode(message.connect_ok, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.connection_closed != null && Object.hasOwnProperty.call(message, "connection_closed"))
+            if (message.connection_closed != null && message.hasOwnProperty("connection_closed"))
                 $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.encode(message.connection_closed, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.ice_enabled != null && Object.hasOwnProperty.call(message, "ice_enabled"))
+            if (message.ice_enabled != null && message.hasOwnProperty("ice_enabled"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.ice_enabled);
-            if (message.from_identity != null && Object.hasOwnProperty.call(message, "from_identity"))
+            if (message.from_identity != null && message.hasOwnProperty("from_identity"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.from_identity);
-            if (message.from_connection_id != null && Object.hasOwnProperty.call(message, "from_connection_id"))
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.from_connection_id);
-            if (message.to_identity != null && Object.hasOwnProperty.call(message, "to_identity"))
+            if (message.to_identity != null && message.hasOwnProperty("to_identity"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.to_identity);
-            if (message.ack_reliable_msg != null && Object.hasOwnProperty.call(message, "ack_reliable_msg"))
+            if (message.ack_reliable_msg != null && message.hasOwnProperty("ack_reliable_msg"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.ack_reliable_msg);
-            if (message.first_reliable_msg != null && Object.hasOwnProperty.call(message, "first_reliable_msg"))
+            if (message.first_reliable_msg != null && message.hasOwnProperty("first_reliable_msg"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.first_reliable_msg);
             if (message.reliable_messages != null && message.reliable_messages.length)
                 for (var i = 0; i < message.reliable_messages.length; ++i)
                     $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.encode(message.reliable_messages[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.hosted_server_ticket != null && message.hasOwnProperty("hosted_server_ticket"))
+                writer.uint32(/* id 14, wireType 2 =*/114).bytes(message.hosted_server_ticket);
+            if (message.application_messages != null && message.application_messages.length)
+                for (var i = 0; i < message.application_messages.length; ++i)
+                    $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.encode(message.application_messages[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             return writer;
         };
     
@@ -20197,6 +19598,9 @@
                 case 7:
                     message.ice_enabled = reader.bool();
                     break;
+                case 14:
+                    message.hosted_server_ticket = reader.bytes();
+                    break;
                 case 4:
                     message.connect_request = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.decode(reader, reader.uint32());
                     break;
@@ -20216,6 +19620,11 @@
                     if (!(message.reliable_messages && message.reliable_messages.length))
                         message.reliable_messages = [];
                     message.reliable_messages.push($root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.decode(reader, reader.uint32()));
+                    break;
+                case 15:
+                    if (!(message.application_messages && message.application_messages.length))
+                        message.application_messages = [];
+                    message.application_messages.push($root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -20273,6 +19682,9 @@
             if (message.ice_enabled != null && message.hasOwnProperty("ice_enabled"))
                 if (typeof message.ice_enabled !== "boolean")
                     return "ice_enabled: boolean expected";
+            if (message.hosted_server_ticket != null && message.hasOwnProperty("hosted_server_ticket"))
+                if (!(message.hosted_server_ticket && typeof message.hosted_server_ticket.length === "number" || $util.isString(message.hosted_server_ticket)))
+                    return "hosted_server_ticket: buffer expected";
             if (message.connect_request != null && message.hasOwnProperty("connect_request")) {
                 var error = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.verify(message.connect_request);
                 if (error)
@@ -20301,6 +19713,15 @@
                     var error = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.verify(message.reliable_messages[i]);
                     if (error)
                         return "reliable_messages." + error;
+                }
+            }
+            if (message.application_messages != null && message.hasOwnProperty("application_messages")) {
+                if (!Array.isArray(message.application_messages))
+                    return "application_messages: array expected";
+                for (var i = 0; i < message.application_messages.length; ++i) {
+                    var error = $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.verify(message.application_messages[i]);
+                    if (error)
+                        return "application_messages." + error;
                 }
             }
             return null;
@@ -20335,6 +19756,11 @@
                 message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
             if (object.ice_enabled != null)
                 message.ice_enabled = Boolean(object.ice_enabled);
+            if (object.hosted_server_ticket != null)
+                if (typeof object.hosted_server_ticket === "string")
+                    $util.base64.decode(object.hosted_server_ticket, message.hosted_server_ticket = $util.newBuffer($util.base64.length(object.hosted_server_ticket)), 0);
+                else if (object.hosted_server_ticket.length)
+                    message.hosted_server_ticket = object.hosted_server_ticket;
             if (object.connect_request != null) {
                 if (typeof object.connect_request !== "object")
                     throw TypeError(".CMsgSteamNetworkingP2PRendezvous.connect_request: object expected");
@@ -20364,6 +19790,16 @@
                     message.reliable_messages[i] = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.fromObject(object.reliable_messages[i]);
                 }
             }
+            if (object.application_messages) {
+                if (!Array.isArray(object.application_messages))
+                    throw TypeError(".CMsgSteamNetworkingP2PRendezvous.application_messages: array expected");
+                message.application_messages = [];
+                for (var i = 0; i < object.application_messages.length; ++i) {
+                    if (typeof object.application_messages[i] !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.application_messages: object expected");
+                    message.application_messages[i] = $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.fromObject(object.application_messages[i]);
+                }
+            }
             return message;
         };
     
@@ -20380,8 +19816,10 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.reliable_messages = [];
+                object.application_messages = [];
+            }
             if (options.defaults) {
                 object.to_connection_id = 0;
                 if (options.bytes === String)
@@ -20401,6 +19839,13 @@
                 object.to_identity = "";
                 object.ack_reliable_msg = 0;
                 object.first_reliable_msg = 0;
+                if (options.bytes === String)
+                    object.hosted_server_ticket = "";
+                else {
+                    object.hosted_server_ticket = [];
+                    if (options.bytes !== Array)
+                        object.hosted_server_ticket = $util.newBuffer(object.hosted_server_ticket);
+                }
             }
             if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 object.to_connection_id = message.to_connection_id;
@@ -20431,6 +19876,13 @@
                 for (var j = 0; j < message.reliable_messages.length; ++j)
                     object.reliable_messages[j] = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.toObject(message.reliable_messages[j], options);
             }
+            if (message.hosted_server_ticket != null && message.hasOwnProperty("hosted_server_ticket"))
+                object.hosted_server_ticket = options.bytes === String ? $util.base64.encode(message.hosted_server_ticket, 0, message.hosted_server_ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.hosted_server_ticket) : message.hosted_server_ticket;
+            if (message.application_messages && message.application_messages.length) {
+                object.application_messages = [];
+                for (var j = 0; j < message.application_messages.length; ++j)
+                    object.application_messages[j] = $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.toObject(message.application_messages[j], options);
+            }
             return object;
         };
     
@@ -20453,7 +19905,9 @@
              * @interface IConnectRequest
              * @property {ICMsgSteamDatagramSessionCryptInfoSigned|null} [crypt] ConnectRequest crypt
              * @property {ICMsgSteamDatagramCertificateSigned|null} [cert] ConnectRequest cert
-             * @property {number|null} [virtual_port] ConnectRequest virtual_port
+             * @property {number|null} [to_virtual_port] ConnectRequest to_virtual_port
+             * @property {number|null} [from_virtual_port] ConnectRequest from_virtual_port
+             * @property {string|null} [from_fakeip] ConnectRequest from_fakeip
              */
     
             /**
@@ -20488,12 +19942,28 @@
             ConnectRequest.prototype.cert = null;
     
             /**
-             * ConnectRequest virtual_port.
-             * @member {number} virtual_port
+             * ConnectRequest to_virtual_port.
+             * @member {number} to_virtual_port
              * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
              * @instance
              */
-            ConnectRequest.prototype.virtual_port = 0;
+            ConnectRequest.prototype.to_virtual_port = 0;
+    
+            /**
+             * ConnectRequest from_virtual_port.
+             * @member {number} from_virtual_port
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             */
+            ConnectRequest.prototype.from_virtual_port = 0;
+    
+            /**
+             * ConnectRequest from_fakeip.
+             * @member {string} from_fakeip
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             */
+            ConnectRequest.prototype.from_fakeip = "";
     
             /**
              * Creates a new ConnectRequest instance using the specified properties.
@@ -20519,12 +19989,16 @@
             ConnectRequest.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
                     $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+                if (message.cert != null && message.hasOwnProperty("cert"))
                     $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                if (message.virtual_port != null && Object.hasOwnProperty.call(message, "virtual_port"))
-                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.virtual_port);
+                if (message.to_virtual_port != null && message.hasOwnProperty("to_virtual_port"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.to_virtual_port);
+                if (message.from_virtual_port != null && message.hasOwnProperty("from_virtual_port"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.from_virtual_port);
+                if (message.from_fakeip != null && message.hasOwnProperty("from_fakeip"))
+                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.from_fakeip);
                 return writer;
             };
     
@@ -20566,7 +20040,13 @@
                         message.cert = $root.CMsgSteamDatagramCertificateSigned.decode(reader, reader.uint32());
                         break;
                     case 9:
-                        message.virtual_port = reader.uint32();
+                        message.to_virtual_port = reader.uint32();
+                        break;
+                    case 10:
+                        message.from_virtual_port = reader.uint32();
+                        break;
+                    case 11:
+                        message.from_fakeip = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -20613,9 +20093,15 @@
                     if (error)
                         return "cert." + error;
                 }
-                if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
-                    if (!$util.isInteger(message.virtual_port))
-                        return "virtual_port: integer expected";
+                if (message.to_virtual_port != null && message.hasOwnProperty("to_virtual_port"))
+                    if (!$util.isInteger(message.to_virtual_port))
+                        return "to_virtual_port: integer expected";
+                if (message.from_virtual_port != null && message.hasOwnProperty("from_virtual_port"))
+                    if (!$util.isInteger(message.from_virtual_port))
+                        return "from_virtual_port: integer expected";
+                if (message.from_fakeip != null && message.hasOwnProperty("from_fakeip"))
+                    if (!$util.isString(message.from_fakeip))
+                        return "from_fakeip: string expected";
                 return null;
             };
     
@@ -20641,8 +20127,12 @@
                         throw TypeError(".CMsgSteamNetworkingP2PRendezvous.ConnectRequest.cert: object expected");
                     message.cert = $root.CMsgSteamDatagramCertificateSigned.fromObject(object.cert);
                 }
-                if (object.virtual_port != null)
-                    message.virtual_port = object.virtual_port >>> 0;
+                if (object.to_virtual_port != null)
+                    message.to_virtual_port = object.to_virtual_port >>> 0;
+                if (object.from_virtual_port != null)
+                    message.from_virtual_port = object.from_virtual_port >>> 0;
+                if (object.from_fakeip != null)
+                    message.from_fakeip = String(object.from_fakeip);
                 return message;
             };
     
@@ -20662,14 +20152,20 @@
                 if (options.defaults) {
                     object.crypt = null;
                     object.cert = null;
-                    object.virtual_port = 0;
+                    object.to_virtual_port = 0;
+                    object.from_virtual_port = 0;
+                    object.from_fakeip = "";
                 }
                 if (message.crypt != null && message.hasOwnProperty("crypt"))
                     object.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.toObject(message.crypt, options);
                 if (message.cert != null && message.hasOwnProperty("cert"))
                     object.cert = $root.CMsgSteamDatagramCertificateSigned.toObject(message.cert, options);
-                if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
-                    object.virtual_port = message.virtual_port;
+                if (message.to_virtual_port != null && message.hasOwnProperty("to_virtual_port"))
+                    object.to_virtual_port = message.to_virtual_port;
+                if (message.from_virtual_port != null && message.hasOwnProperty("from_virtual_port"))
+                    object.from_virtual_port = message.from_virtual_port;
+                if (message.from_fakeip != null && message.hasOwnProperty("from_fakeip"))
+                    object.from_fakeip = message.from_fakeip;
                 return object;
             };
     
@@ -20752,9 +20248,9 @@
             ConnectOK.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
                     $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+                if (message.cert != null && message.hasOwnProperty("cert"))
                     $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                 return writer;
             };
@@ -20972,9 +20468,9 @@
             ConnectionClosed.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.debug != null && Object.hasOwnProperty.call(message, "debug"))
+                if (message.debug != null && message.hasOwnProperty("debug"))
                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.debug);
-                if (message.reason_code != null && Object.hasOwnProperty.call(message, "reason_code"))
+                if (message.reason_code != null && message.hasOwnProperty("reason_code"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.reason_code);
                 return writer;
             };
@@ -21173,7 +20669,7 @@
             ReliableMessage.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.ice != null && Object.hasOwnProperty.call(message, "ice"))
+                if (message.ice != null && message.hasOwnProperty("ice"))
                     $root.CMsgICERendezvous.encode(message.ice, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                 return writer;
             };
@@ -21309,6 +20805,261 @@
             return ReliableMessage;
         })();
     
+        CMsgSteamNetworkingP2PRendezvous.ApplicationMessage = (function() {
+    
+            /**
+             * Properties of an ApplicationMessage.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @interface IApplicationMessage
+             * @property {Uint8Array|null} [data] ApplicationMessage data
+             * @property {number|Long|null} [msg_num] ApplicationMessage msg_num
+             * @property {number|null} [flags] ApplicationMessage flags
+             */
+    
+            /**
+             * Constructs a new ApplicationMessage.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @classdesc Represents an ApplicationMessage.
+             * @implements IApplicationMessage
+             * @constructor
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage=} [properties] Properties to set
+             */
+            function ApplicationMessage(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ApplicationMessage data.
+             * @member {Uint8Array} data
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             */
+            ApplicationMessage.prototype.data = $util.newBuffer([]);
+    
+            /**
+             * ApplicationMessage msg_num.
+             * @member {number|Long} msg_num
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             */
+            ApplicationMessage.prototype.msg_num = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * ApplicationMessage flags.
+             * @member {number} flags
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             */
+            ApplicationMessage.prototype.flags = 0;
+    
+            /**
+             * Creates a new ApplicationMessage instance using the specified properties.
+             * @function create
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage=} [properties] Properties to set
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage instance
+             */
+            ApplicationMessage.create = function create(properties) {
+                return new ApplicationMessage(properties);
+            };
+    
+            /**
+             * Encodes the specified ApplicationMessage message. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage} message ApplicationMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ApplicationMessage.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.data != null && message.hasOwnProperty("data"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.data);
+                if (message.msg_num != null && message.hasOwnProperty("msg_num"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.msg_num);
+                if (message.flags != null && message.hasOwnProperty("flags"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.flags);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ApplicationMessage message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage} message ApplicationMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ApplicationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an ApplicationMessage message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ApplicationMessage.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.data = reader.bytes();
+                        break;
+                    case 2:
+                        message.msg_num = reader.uint64();
+                        break;
+                    case 3:
+                        message.flags = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an ApplicationMessage message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ApplicationMessage.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an ApplicationMessage message.
+             * @function verify
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ApplicationMessage.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.data != null && message.hasOwnProperty("data"))
+                    if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                        return "data: buffer expected";
+                if (message.msg_num != null && message.hasOwnProperty("msg_num"))
+                    if (!$util.isInteger(message.msg_num) && !(message.msg_num && $util.isInteger(message.msg_num.low) && $util.isInteger(message.msg_num.high)))
+                        return "msg_num: integer|Long expected";
+                if (message.flags != null && message.hasOwnProperty("flags"))
+                    if (!$util.isInteger(message.flags))
+                        return "flags: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates an ApplicationMessage message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage
+             */
+            ApplicationMessage.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage)
+                    return object;
+                var message = new $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage();
+                if (object.data != null)
+                    if (typeof object.data === "string")
+                        $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                    else if (object.data.length)
+                        message.data = object.data;
+                if (object.msg_num != null)
+                    if ($util.Long)
+                        (message.msg_num = $util.Long.fromValue(object.msg_num)).unsigned = true;
+                    else if (typeof object.msg_num === "string")
+                        message.msg_num = parseInt(object.msg_num, 10);
+                    else if (typeof object.msg_num === "number")
+                        message.msg_num = object.msg_num;
+                    else if (typeof object.msg_num === "object")
+                        message.msg_num = new $util.LongBits(object.msg_num.low >>> 0, object.msg_num.high >>> 0).toNumber(true);
+                if (object.flags != null)
+                    message.flags = object.flags >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an ApplicationMessage message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} message ApplicationMessage
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ApplicationMessage.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if (options.bytes === String)
+                        object.data = "";
+                    else {
+                        object.data = [];
+                        if (options.bytes !== Array)
+                            object.data = $util.newBuffer(object.data);
+                    }
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.msg_num = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.msg_num = options.longs === String ? "0" : 0;
+                    object.flags = 0;
+                }
+                if (message.data != null && message.hasOwnProperty("data"))
+                    object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                if (message.msg_num != null && message.hasOwnProperty("msg_num"))
+                    if (typeof message.msg_num === "number")
+                        object.msg_num = options.longs === String ? String(message.msg_num) : message.msg_num;
+                    else
+                        object.msg_num = options.longs === String ? $util.Long.prototype.toString.call(message.msg_num) : options.longs === Number ? new $util.LongBits(message.msg_num.low >>> 0, message.msg_num.high >>> 0).toNumber(true) : message.msg_num;
+                if (message.flags != null && message.hasOwnProperty("flags"))
+                    object.flags = message.flags;
+                return object;
+            };
+    
+            /**
+             * Converts this ApplicationMessage to JSON.
+             * @function toJSON
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ApplicationMessage.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ApplicationMessage;
+        })();
+    
         return CMsgSteamNetworkingP2PRendezvous;
     })();
     
@@ -21325,7 +21076,14 @@
          * @property {number|null} [initial_ping] CMsgSteamNetworkingICESessionSummary initial_ping
          * @property {number|null} [initial_score] CMsgSteamNetworkingICESessionSummary initial_score
          * @property {number|null} [negotiation_ms] CMsgSteamNetworkingICESessionSummary negotiation_ms
+         * @property {number|null} [best_route_kind] CMsgSteamNetworkingICESessionSummary best_route_kind
+         * @property {number|null} [best_ping] CMsgSteamNetworkingICESessionSummary best_ping
+         * @property {number|null} [best_score] CMsgSteamNetworkingICESessionSummary best_score
+         * @property {number|null} [best_time] CMsgSteamNetworkingICESessionSummary best_time
          * @property {number|null} [selected_seconds] CMsgSteamNetworkingICESessionSummary selected_seconds
+         * @property {number|null} [user_settings] CMsgSteamNetworkingICESessionSummary user_settings
+         * @property {number|null} [ice_enable_var] CMsgSteamNetworkingICESessionSummary ice_enable_var
+         * @property {number|null} [local_candidate_types_allowed] CMsgSteamNetworkingICESessionSummary local_candidate_types_allowed
          */
     
         /**
@@ -21400,12 +21158,68 @@
         CMsgSteamNetworkingICESessionSummary.prototype.negotiation_ms = 0;
     
         /**
+         * CMsgSteamNetworkingICESessionSummary best_route_kind.
+         * @member {number} best_route_kind
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_route_kind = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary best_ping.
+         * @member {number} best_ping
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_ping = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary best_score.
+         * @member {number} best_score
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_score = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary best_time.
+         * @member {number} best_time
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_time = 0;
+    
+        /**
          * CMsgSteamNetworkingICESessionSummary selected_seconds.
          * @member {number} selected_seconds
          * @memberof CMsgSteamNetworkingICESessionSummary
          * @instance
          */
         CMsgSteamNetworkingICESessionSummary.prototype.selected_seconds = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary user_settings.
+         * @member {number} user_settings
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.user_settings = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary ice_enable_var.
+         * @member {number} ice_enable_var
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.ice_enable_var = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary local_candidate_types_allowed.
+         * @member {number} local_candidate_types_allowed
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.local_candidate_types_allowed = 0;
     
         /**
          * Creates a new CMsgSteamNetworkingICESessionSummary instance using the specified properties.
@@ -21431,22 +21245,36 @@
         CMsgSteamNetworkingICESessionSummary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.local_candidate_types != null && Object.hasOwnProperty.call(message, "local_candidate_types"))
+            if (message.local_candidate_types != null && message.hasOwnProperty("local_candidate_types"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.local_candidate_types);
-            if (message.remote_candidate_types != null && Object.hasOwnProperty.call(message, "remote_candidate_types"))
+            if (message.remote_candidate_types != null && message.hasOwnProperty("remote_candidate_types"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.remote_candidate_types);
-            if (message.initial_route_kind != null && Object.hasOwnProperty.call(message, "initial_route_kind"))
+            if (message.initial_route_kind != null && message.hasOwnProperty("initial_route_kind"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.initial_route_kind);
-            if (message.initial_ping != null && Object.hasOwnProperty.call(message, "initial_ping"))
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.initial_ping);
-            if (message.negotiation_ms != null && Object.hasOwnProperty.call(message, "negotiation_ms"))
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.negotiation_ms);
-            if (message.initial_score != null && Object.hasOwnProperty.call(message, "initial_score"))
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.initial_score);
-            if (message.failure_reason_code != null && Object.hasOwnProperty.call(message, "failure_reason_code"))
+            if (message.failure_reason_code != null && message.hasOwnProperty("failure_reason_code"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.failure_reason_code);
-            if (message.selected_seconds != null && Object.hasOwnProperty.call(message, "selected_seconds"))
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.selected_seconds);
+            if (message.user_settings != null && message.hasOwnProperty("user_settings"))
+                writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.user_settings);
+            if (message.ice_enable_var != null && message.hasOwnProperty("ice_enable_var"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.ice_enable_var);
+            if (message.local_candidate_types_allowed != null && message.hasOwnProperty("local_candidate_types_allowed"))
+                writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.local_candidate_types_allowed);
+            if (message.best_route_kind != null && message.hasOwnProperty("best_route_kind"))
+                writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.best_route_kind);
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.best_ping);
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                writer.uint32(/* id 18, wireType 0 =*/144).uint32(message.best_score);
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.best_time);
             return writer;
         };
     
@@ -21502,8 +21330,29 @@
                 case 5:
                     message.negotiation_ms = reader.uint32();
                     break;
+                case 16:
+                    message.best_route_kind = reader.uint32();
+                    break;
+                case 17:
+                    message.best_ping = reader.uint32();
+                    break;
+                case 18:
+                    message.best_score = reader.uint32();
+                    break;
+                case 19:
+                    message.best_time = reader.uint32();
+                    break;
                 case 12:
                     message.selected_seconds = reader.uint32();
+                    break;
+                case 13:
+                    message.user_settings = reader.uint32();
+                    break;
+                case 14:
+                    message.ice_enable_var = reader.uint32();
+                    break;
+                case 15:
+                    message.local_candidate_types_allowed = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -21561,9 +21410,30 @@
             if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
                 if (!$util.isInteger(message.negotiation_ms))
                     return "negotiation_ms: integer expected";
+            if (message.best_route_kind != null && message.hasOwnProperty("best_route_kind"))
+                if (!$util.isInteger(message.best_route_kind))
+                    return "best_route_kind: integer expected";
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                if (!$util.isInteger(message.best_ping))
+                    return "best_ping: integer expected";
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                if (!$util.isInteger(message.best_score))
+                    return "best_score: integer expected";
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                if (!$util.isInteger(message.best_time))
+                    return "best_time: integer expected";
             if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 if (!$util.isInteger(message.selected_seconds))
                     return "selected_seconds: integer expected";
+            if (message.user_settings != null && message.hasOwnProperty("user_settings"))
+                if (!$util.isInteger(message.user_settings))
+                    return "user_settings: integer expected";
+            if (message.ice_enable_var != null && message.hasOwnProperty("ice_enable_var"))
+                if (!$util.isInteger(message.ice_enable_var))
+                    return "ice_enable_var: integer expected";
+            if (message.local_candidate_types_allowed != null && message.hasOwnProperty("local_candidate_types_allowed"))
+                if (!$util.isInteger(message.local_candidate_types_allowed))
+                    return "local_candidate_types_allowed: integer expected";
             return null;
         };
     
@@ -21593,8 +21463,22 @@
                 message.initial_score = object.initial_score >>> 0;
             if (object.negotiation_ms != null)
                 message.negotiation_ms = object.negotiation_ms >>> 0;
+            if (object.best_route_kind != null)
+                message.best_route_kind = object.best_route_kind >>> 0;
+            if (object.best_ping != null)
+                message.best_ping = object.best_ping >>> 0;
+            if (object.best_score != null)
+                message.best_score = object.best_score >>> 0;
+            if (object.best_time != null)
+                message.best_time = object.best_time >>> 0;
             if (object.selected_seconds != null)
                 message.selected_seconds = object.selected_seconds >>> 0;
+            if (object.user_settings != null)
+                message.user_settings = object.user_settings >>> 0;
+            if (object.ice_enable_var != null)
+                message.ice_enable_var = object.ice_enable_var >>> 0;
+            if (object.local_candidate_types_allowed != null)
+                message.local_candidate_types_allowed = object.local_candidate_types_allowed >>> 0;
             return message;
         };
     
@@ -21620,6 +21504,13 @@
                 object.initial_score = 0;
                 object.failure_reason_code = 0;
                 object.selected_seconds = 0;
+                object.user_settings = 0;
+                object.ice_enable_var = 0;
+                object.local_candidate_types_allowed = 0;
+                object.best_route_kind = 0;
+                object.best_ping = 0;
+                object.best_score = 0;
+                object.best_time = 0;
             }
             if (message.local_candidate_types != null && message.hasOwnProperty("local_candidate_types"))
                 object.local_candidate_types = message.local_candidate_types;
@@ -21637,6 +21528,20 @@
                 object.failure_reason_code = message.failure_reason_code;
             if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 object.selected_seconds = message.selected_seconds;
+            if (message.user_settings != null && message.hasOwnProperty("user_settings"))
+                object.user_settings = message.user_settings;
+            if (message.ice_enable_var != null && message.hasOwnProperty("ice_enable_var"))
+                object.ice_enable_var = message.ice_enable_var;
+            if (message.local_candidate_types_allowed != null && message.hasOwnProperty("local_candidate_types_allowed"))
+                object.local_candidate_types_allowed = message.local_candidate_types_allowed;
+            if (message.best_route_kind != null && message.hasOwnProperty("best_route_kind"))
+                object.best_route_kind = message.best_route_kind;
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                object.best_ping = message.best_ping;
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                object.best_score = message.best_score;
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                object.best_time = message.best_time;
             return object;
         };
     

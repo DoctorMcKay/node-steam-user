@@ -19,7 +19,7 @@
     /**
      * EJSRegisterMethodType enum.
      * @exports EJSRegisterMethodType
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EJSRegisterMethodType_Invalid=0 k_EJSRegisterMethodType_Invalid value
      * @property {number} k_EJSRegisterMethodType_Function=1 k_EJSRegisterMethodType_Function value
      * @property {number} k_EJSRegisterMethodType_Callback=2 k_EJSRegisterMethodType_Callback value
@@ -117,13 +117,13 @@
         CMsgKeyUp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.keyCode != null && Object.hasOwnProperty.call(message, "keyCode"))
+            if (message.keyCode != null && message.hasOwnProperty("keyCode"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.keyCode);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
-            if (message.nativeKeyCode != null && Object.hasOwnProperty.call(message, "nativeKeyCode"))
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.nativeKeyCode);
             return writer;
         };
@@ -380,15 +380,15 @@
         CMsgKeyDown.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.keyCode != null && Object.hasOwnProperty.call(message, "keyCode"))
+            if (message.keyCode != null && message.hasOwnProperty("keyCode"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.keyCode);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
-            if (message.is_system_key != null && Object.hasOwnProperty.call(message, "is_system_key"))
+            if (message.is_system_key != null && message.hasOwnProperty("is_system_key"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.is_system_key);
-            if (message.nativeKeyCode != null && Object.hasOwnProperty.call(message, "nativeKeyCode"))
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.nativeKeyCode);
             return writer;
         };
@@ -656,15 +656,15 @@
         CMsgKeyChar.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.unichar != null && Object.hasOwnProperty.call(message, "unichar"))
+            if (message.unichar != null && message.hasOwnProperty("unichar"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.unichar);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
-            if (message.keyCode != null && Object.hasOwnProperty.call(message, "keyCode"))
+            if (message.keyCode != null && message.hasOwnProperty("keyCode"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.keyCode);
-            if (message.nativeKeyCode != null && Object.hasOwnProperty.call(message, "nativeKeyCode"))
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.nativeKeyCode);
             return writer;
         };
@@ -914,11 +914,11 @@
         CMsgMouseDown.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.mouse_button != null && Object.hasOwnProperty.call(message, "mouse_button"))
+            if (message.mouse_button != null && message.hasOwnProperty("mouse_button"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.mouse_button);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
             return writer;
         };
@@ -1173,17 +1173,17 @@
         CMsgMouseUp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.mouse_button != null && Object.hasOwnProperty.call(message, "mouse_button"))
+            if (message.mouse_button != null && message.hasOwnProperty("mouse_button"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.mouse_button);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
-            if (message.is_off_panel != null && Object.hasOwnProperty.call(message, "is_off_panel"))
+            if (message.is_off_panel != null && message.hasOwnProperty("is_off_panel"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.is_off_panel);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.y);
             return writer;
         };
@@ -1444,11 +1444,11 @@
         CMsgMouseDblClick.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.mouse_button != null && Object.hasOwnProperty.call(message, "mouse_button"))
+            if (message.mouse_button != null && message.hasOwnProperty("mouse_button"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.mouse_button);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
             return writer;
         };
@@ -1685,13 +1685,13 @@
         CMsgMouseWheel.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.deltax != null && Object.hasOwnProperty.call(message, "deltax"))
+            if (message.deltax != null && message.hasOwnProperty("deltax"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.deltax);
-            if (message.deltay != null && Object.hasOwnProperty.call(message, "deltay"))
+            if (message.deltay != null && message.hasOwnProperty("deltay"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deltay);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.modifiers);
             return writer;
         };
@@ -1939,13 +1939,13 @@
         CMsgMouseMove.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.y);
-            if (message.modifiers != null && Object.hasOwnProperty.call(message, "modifiers"))
+            if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.modifiers);
             return writer;
         };
@@ -2166,7 +2166,7 @@
         CMsgMouseLeave.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -2320,6 +2320,7 @@
          * @property {boolean|null} [only_allow_trusted_popups] CMsgBrowserCreate only_allow_trusted_popups
          * @property {string|null} [initial_url] CMsgBrowserCreate initial_url
          * @property {number|Long|null} [hwnd_parent] CMsgBrowserCreate hwnd_parent
+         * @property {number|null} [creation_flags] CMsgBrowserCreate creation_flags
          */
     
         /**
@@ -2474,6 +2475,14 @@
         CMsgBrowserCreate.prototype.hwnd_parent = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
+         * CMsgBrowserCreate creation_flags.
+         * @member {number} creation_flags
+         * @memberof CMsgBrowserCreate
+         * @instance
+         */
+        CMsgBrowserCreate.prototype.creation_flags = 0;
+    
+        /**
          * Creates a new CMsgBrowserCreate instance using the specified properties.
          * @function create
          * @memberof CMsgBrowserCreate
@@ -2497,40 +2506,42 @@
         CMsgBrowserCreate.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.request_id != null && Object.hasOwnProperty.call(message, "request_id"))
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.request_id);
-            if (message.useragent != null && Object.hasOwnProperty.call(message, "useragent"))
+            if (message.useragent != null && message.hasOwnProperty("useragent"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.useragent);
-            if (message.user_css != null && Object.hasOwnProperty.call(message, "user_css"))
+            if (message.user_css != null && message.hasOwnProperty("user_css"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.user_css);
-            if (message.native_dropdowns != null && Object.hasOwnProperty.call(message, "native_dropdowns"))
+            if (message.native_dropdowns != null && message.hasOwnProperty("native_dropdowns"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.native_dropdowns);
-            if (message.dpi_scaling != null && Object.hasOwnProperty.call(message, "dpi_scaling"))
+            if (message.dpi_scaling != null && message.hasOwnProperty("dpi_scaling"))
                 writer.uint32(/* id 7, wireType 5 =*/61).float(message.dpi_scaling);
-            if (message.offscreen != null && Object.hasOwnProperty.call(message, "offscreen"))
+            if (message.offscreen != null && message.hasOwnProperty("offscreen"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.offscreen);
-            if (message.initial_width != null && Object.hasOwnProperty.call(message, "initial_width"))
+            if (message.initial_width != null && message.hasOwnProperty("initial_width"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.initial_width);
-            if (message.initial_height != null && Object.hasOwnProperty.call(message, "initial_height"))
+            if (message.initial_height != null && message.hasOwnProperty("initial_height"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.initial_height);
-            if (message.window_icon != null && Object.hasOwnProperty.call(message, "window_icon"))
+            if (message.window_icon != null && message.hasOwnProperty("window_icon"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.window_icon);
-            if (message.borderless != null && Object.hasOwnProperty.call(message, "borderless"))
+            if (message.borderless != null && message.hasOwnProperty("borderless"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.borderless);
-            if (message.vroverlay_key != null && Object.hasOwnProperty.call(message, "vroverlay_key"))
+            if (message.vroverlay_key != null && message.hasOwnProperty("vroverlay_key"))
                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.vroverlay_key);
-            if (message.browser_type != null && Object.hasOwnProperty.call(message, "browser_type"))
+            if (message.browser_type != null && message.hasOwnProperty("browser_type"))
                 writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.browser_type);
-            if (message.initial_top != null && Object.hasOwnProperty.call(message, "initial_top"))
+            if (message.initial_top != null && message.hasOwnProperty("initial_top"))
                 writer.uint32(/* id 15, wireType 0 =*/120).int32(message.initial_top);
-            if (message.initial_left != null && Object.hasOwnProperty.call(message, "initial_left"))
+            if (message.initial_left != null && message.hasOwnProperty("initial_left"))
                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.initial_left);
-            if (message.only_allow_trusted_popups != null && Object.hasOwnProperty.call(message, "only_allow_trusted_popups"))
+            if (message.only_allow_trusted_popups != null && message.hasOwnProperty("only_allow_trusted_popups"))
                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.only_allow_trusted_popups);
-            if (message.initial_url != null && Object.hasOwnProperty.call(message, "initial_url"))
+            if (message.initial_url != null && message.hasOwnProperty("initial_url"))
                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.initial_url);
-            if (message.hwnd_parent != null && Object.hasOwnProperty.call(message, "hwnd_parent"))
+            if (message.hwnd_parent != null && message.hasOwnProperty("hwnd_parent"))
                 writer.uint32(/* id 19, wireType 1 =*/153).fixed64(message.hwnd_parent);
+            if (message.creation_flags != null && message.hasOwnProperty("creation_flags"))
+                writer.uint32(/* id 20, wireType 0 =*/160).uint32(message.creation_flags);
             return writer;
         };
     
@@ -2615,6 +2626,9 @@
                     break;
                 case 19:
                     message.hwnd_parent = reader.fixed64();
+                    break;
+                case 20:
+                    message.creation_flags = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2702,6 +2716,9 @@
             if (message.hwnd_parent != null && message.hasOwnProperty("hwnd_parent"))
                 if (!$util.isInteger(message.hwnd_parent) && !(message.hwnd_parent && $util.isInteger(message.hwnd_parent.low) && $util.isInteger(message.hwnd_parent.high)))
                     return "hwnd_parent: integer|Long expected";
+            if (message.creation_flags != null && message.hasOwnProperty("creation_flags"))
+                if (!$util.isInteger(message.creation_flags))
+                    return "creation_flags: integer expected";
             return null;
         };
     
@@ -2758,6 +2775,8 @@
                     message.hwnd_parent = object.hwnd_parent;
                 else if (typeof object.hwnd_parent === "object")
                     message.hwnd_parent = new $util.LongBits(object.hwnd_parent.low >>> 0, object.hwnd_parent.high >>> 0).toNumber();
+            if (object.creation_flags != null)
+                message.creation_flags = object.creation_flags >>> 0;
             return message;
         };
     
@@ -2796,6 +2815,7 @@
                     object.hwnd_parent = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.hwnd_parent = options.longs === String ? "0" : 0;
+                object.creation_flags = 0;
             }
             if (message.request_id != null && message.hasOwnProperty("request_id"))
                 object.request_id = message.request_id;
@@ -2834,6 +2854,8 @@
                     object.hwnd_parent = options.longs === String ? String(message.hwnd_parent) : message.hwnd_parent;
                 else
                     object.hwnd_parent = options.longs === String ? $util.Long.prototype.toString.call(message.hwnd_parent) : options.longs === Number ? new $util.LongBits(message.hwnd_parent.low >>> 0, message.hwnd_parent.high >>> 0).toNumber() : message.hwnd_parent;
+            if (message.creation_flags != null && message.hasOwnProperty("creation_flags"))
+                object.creation_flags = message.creation_flags;
             return object;
         };
     
@@ -2916,9 +2938,9 @@
         CMsgBrowserCreateResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.request_id != null && Object.hasOwnProperty.call(message, "request_id"))
+            if (message.request_id != null && message.hasOwnProperty("request_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.request_id);
             return writer;
         };
@@ -3117,7 +3139,7 @@
         CMsgBrowserRemove.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -3332,11 +3354,11 @@
         CMsgSetLocalFileRequestMapping.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.request_url != null && Object.hasOwnProperty.call(message, "request_url"))
+            if (message.request_url != null && message.hasOwnProperty("request_url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.request_url);
-            if (message.default_local_path != null && Object.hasOwnProperty.call(message, "default_local_path"))
+            if (message.default_local_path != null && message.hasOwnProperty("default_local_path"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.default_local_path);
             if (message.routes != null && message.routes.length)
                 for (var i = 0; i < message.routes.length; ++i)
@@ -3595,11 +3617,11 @@
             AdditionalRoute.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.relative_url != null && Object.hasOwnProperty.call(message, "relative_url"))
+                if (message.relative_url != null && message.hasOwnProperty("relative_url"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.relative_url);
-                if (message.local_path != null && Object.hasOwnProperty.call(message, "local_path"))
+                if (message.local_path != null && message.hasOwnProperty("local_path"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.local_path);
-                if (message.allowed_extensions != null && Object.hasOwnProperty.call(message, "allowed_extensions"))
+                if (message.allowed_extensions != null && message.hasOwnProperty("allowed_extensions"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.allowed_extensions);
                 return writer;
             };
@@ -3875,21 +3897,21 @@
         CMsgBrowserErrorStrings.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+            if (message.title != null && message.hasOwnProperty("title"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
-            if (message.header != null && Object.hasOwnProperty.call(message, "header"))
+            if (message.header != null && message.hasOwnProperty("header"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.header);
-            if (message.cache_miss != null && Object.hasOwnProperty.call(message, "cache_miss"))
+            if (message.cache_miss != null && message.hasOwnProperty("cache_miss"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.cache_miss);
-            if (message.bad_url != null && Object.hasOwnProperty.call(message, "bad_url"))
+            if (message.bad_url != null && message.hasOwnProperty("bad_url"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.bad_url);
-            if (message.connection_problem != null && Object.hasOwnProperty.call(message, "connection_problem"))
+            if (message.connection_problem != null && message.hasOwnProperty("connection_problem"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.connection_problem);
-            if (message.proxy_problem != null && Object.hasOwnProperty.call(message, "proxy_problem"))
+            if (message.proxy_problem != null && message.hasOwnProperty("proxy_problem"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.proxy_problem);
-            if (message.unknown != null && Object.hasOwnProperty.call(message, "unknown"))
+            if (message.unknown != null && message.hasOwnProperty("unknown"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.unknown);
             return writer;
         };
@@ -4172,11 +4194,11 @@
         CMsgBrowserSize.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.height);
             return writer;
         };
@@ -4404,11 +4426,11 @@
         CMsgBrowserSetMinSize.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.height);
             return writer;
         };
@@ -4654,15 +4676,15 @@
         CMsgBrowserPosition.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.y);
-            if (message.x_local != null && Object.hasOwnProperty.call(message, "x_local"))
+            if (message.x_local != null && message.hasOwnProperty("x_local"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.x_local);
-            if (message.y_local != null && Object.hasOwnProperty.call(message, "y_local"))
+            if (message.y_local != null && message.hasOwnProperty("y_local"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.y_local);
             return writer;
         };
@@ -4930,15 +4952,15 @@
         CMsgBrowserResized.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.y);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.height);
             return writer;
         };
@@ -5197,13 +5219,13 @@
         CMsgPostURL.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.post != null && Object.hasOwnProperty.call(message, "post"))
+            if (message.post != null && message.hasOwnProperty("post"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.post);
-            if (message.pageserial != null && Object.hasOwnProperty.call(message, "pageserial"))
+            if (message.pageserial != null && message.hasOwnProperty("pageserial"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.pageserial);
             return writer;
         };
@@ -5442,11 +5464,11 @@
         CMsgAddHeader.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+            if (message.key != null && message.hasOwnProperty("key"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.key);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+            if (message.value != null && message.hasOwnProperty("value"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.value);
             return writer;
         };
@@ -5656,7 +5678,7 @@
         CMsgStopLoad.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -5843,7 +5865,7 @@
         CMsgReload.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -6030,7 +6052,7 @@
         CMsgGoForward.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -6217,7 +6239,7 @@
         CMsgGoBack.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -6413,9 +6435,9 @@
         CMsgWasHidden.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.hidden != null && Object.hasOwnProperty.call(message, "hidden"))
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.hidden);
             return writer;
         };
@@ -6558,6 +6580,216 @@
         return CMsgWasHidden;
     })();
     
+    $root.CMsgBrowserViewSetVisible = (function() {
+    
+        /**
+         * Properties of a CMsgBrowserViewSetVisible.
+         * @exports ICMsgBrowserViewSetVisible
+         * @interface ICMsgBrowserViewSetVisible
+         * @property {number|null} [browser_handle] CMsgBrowserViewSetVisible browser_handle
+         * @property {boolean|null} [visible] CMsgBrowserViewSetVisible visible
+         */
+    
+        /**
+         * Constructs a new CMsgBrowserViewSetVisible.
+         * @exports CMsgBrowserViewSetVisible
+         * @classdesc Represents a CMsgBrowserViewSetVisible.
+         * @implements ICMsgBrowserViewSetVisible
+         * @constructor
+         * @param {ICMsgBrowserViewSetVisible=} [properties] Properties to set
+         */
+        function CMsgBrowserViewSetVisible(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgBrowserViewSetVisible browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgBrowserViewSetVisible
+         * @instance
+         */
+        CMsgBrowserViewSetVisible.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgBrowserViewSetVisible visible.
+         * @member {boolean} visible
+         * @memberof CMsgBrowserViewSetVisible
+         * @instance
+         */
+        CMsgBrowserViewSetVisible.prototype.visible = false;
+    
+        /**
+         * Creates a new CMsgBrowserViewSetVisible instance using the specified properties.
+         * @function create
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {ICMsgBrowserViewSetVisible=} [properties] Properties to set
+         * @returns {CMsgBrowserViewSetVisible} CMsgBrowserViewSetVisible instance
+         */
+        CMsgBrowserViewSetVisible.create = function create(properties) {
+            return new CMsgBrowserViewSetVisible(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgBrowserViewSetVisible message. Does not implicitly {@link CMsgBrowserViewSetVisible.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {ICMsgBrowserViewSetVisible} message CMsgBrowserViewSetVisible message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgBrowserViewSetVisible.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.visible != null && message.hasOwnProperty("visible"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.visible);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgBrowserViewSetVisible message, length delimited. Does not implicitly {@link CMsgBrowserViewSetVisible.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {ICMsgBrowserViewSetVisible} message CMsgBrowserViewSetVisible message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgBrowserViewSetVisible.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgBrowserViewSetVisible message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgBrowserViewSetVisible} CMsgBrowserViewSetVisible
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgBrowserViewSetVisible.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgBrowserViewSetVisible();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.visible = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgBrowserViewSetVisible message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgBrowserViewSetVisible} CMsgBrowserViewSetVisible
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgBrowserViewSetVisible.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgBrowserViewSetVisible message.
+         * @function verify
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgBrowserViewSetVisible.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.visible != null && message.hasOwnProperty("visible"))
+                if (typeof message.visible !== "boolean")
+                    return "visible: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgBrowserViewSetVisible message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgBrowserViewSetVisible} CMsgBrowserViewSetVisible
+         */
+        CMsgBrowserViewSetVisible.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgBrowserViewSetVisible)
+                return object;
+            var message = new $root.CMsgBrowserViewSetVisible();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.visible != null)
+                message.visible = Boolean(object.visible);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgBrowserViewSetVisible message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgBrowserViewSetVisible
+         * @static
+         * @param {CMsgBrowserViewSetVisible} message CMsgBrowserViewSetVisible
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgBrowserViewSetVisible.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.visible = false;
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.visible != null && message.hasOwnProperty("visible"))
+                object.visible = message.visible;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgBrowserViewSetVisible to JSON.
+         * @function toJSON
+         * @memberof CMsgBrowserViewSetVisible
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgBrowserViewSetVisible.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgBrowserViewSetVisible;
+    })();
+    
     $root.CMsgClearHistory = (function() {
     
         /**
@@ -6614,7 +6846,7 @@
         CMsgClearHistory.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -6801,7 +7033,7 @@
         CMsgClearAllBrowsingData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -6988,7 +7220,7 @@
         CMsgCopy.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -7175,7 +7407,7 @@
         CMsgPaste.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -7371,9 +7603,9 @@
         CMsgExecuteJavaScript.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.script != null && Object.hasOwnProperty.call(message, "script"))
+            if (message.script != null && message.hasOwnProperty("script"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.script);
             return writer;
         };
@@ -7581,9 +7813,9 @@
         CMsgSetFocus.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.focus != null && Object.hasOwnProperty.call(message, "focus"))
+            if (message.focus != null && message.hasOwnProperty("focus"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.focus);
             return writer;
         };
@@ -7782,7 +8014,7 @@
         CMsgHorizontalScrollBarSize.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -8014,17 +8246,17 @@
         CMsgHorizontalScrollBarSizeResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.scroll_max != null && Object.hasOwnProperty.call(message, "scroll_max"))
+            if (message.scroll_max != null && message.hasOwnProperty("scroll_max"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.scroll_max);
-            if (message.scroll != null && Object.hasOwnProperty.call(message, "scroll"))
+            if (message.scroll != null && message.hasOwnProperty("scroll"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.scroll);
-            if (message.zoom != null && Object.hasOwnProperty.call(message, "zoom"))
+            if (message.zoom != null && message.hasOwnProperty("zoom"))
                 writer.uint32(/* id 8, wireType 5 =*/69).float(message.zoom);
-            if (message.visible != null && Object.hasOwnProperty.call(message, "visible"))
+            if (message.visible != null && message.hasOwnProperty("visible"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.visible);
-            if (message.page_size != null && Object.hasOwnProperty.call(message, "page_size"))
+            if (message.page_size != null && message.hasOwnProperty("page_size"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.page_size);
             return writer;
         };
@@ -8267,7 +8499,7 @@
         CMsgVerticalScrollBarSize.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -8499,17 +8731,17 @@
         CMsgVerticalScrollBarSizeResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.scroll_max != null && Object.hasOwnProperty.call(message, "scroll_max"))
+            if (message.scroll_max != null && message.hasOwnProperty("scroll_max"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.scroll_max);
-            if (message.scroll != null && Object.hasOwnProperty.call(message, "scroll"))
+            if (message.scroll != null && message.hasOwnProperty("scroll"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.scroll);
-            if (message.zoom != null && Object.hasOwnProperty.call(message, "zoom"))
+            if (message.zoom != null && message.hasOwnProperty("zoom"))
                 writer.uint32(/* id 8, wireType 5 =*/69).float(message.zoom);
-            if (message.visible != null && Object.hasOwnProperty.call(message, "visible"))
+            if (message.visible != null && message.hasOwnProperty("visible"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.visible);
-            if (message.page_size != null && Object.hasOwnProperty.call(message, "page_size"))
+            if (message.page_size != null && message.hasOwnProperty("page_size"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.page_size);
             return writer;
         };
@@ -8779,13 +9011,13 @@
         CMsgFind.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.find != null && Object.hasOwnProperty.call(message, "find"))
+            if (message.find != null && message.hasOwnProperty("find"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.find);
-            if (message.infind != null && Object.hasOwnProperty.call(message, "infind"))
+            if (message.infind != null && message.hasOwnProperty("infind"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.infind);
-            if (message.reverse != null && Object.hasOwnProperty.call(message, "reverse"))
+            if (message.reverse != null && message.hasOwnProperty("reverse"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reverse);
             return writer;
         };
@@ -9006,7 +9238,7 @@
         CMsgStopFind.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -9202,9 +9434,9 @@
         CMsgSetHorizontalScroll.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.scroll != null && Object.hasOwnProperty.call(message, "scroll"))
+            if (message.scroll != null && message.hasOwnProperty("scroll"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.scroll);
             return writer;
         };
@@ -9412,9 +9644,9 @@
         CMsgSetVerticalScroll.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.scroll != null && Object.hasOwnProperty.call(message, "scroll"))
+            if (message.scroll != null && message.hasOwnProperty("scroll"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.scroll);
             return writer;
         };
@@ -9622,9 +9854,9 @@
         CMsgSetZoomLevel.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.zoom != null && Object.hasOwnProperty.call(message, "zoom"))
+            if (message.zoom != null && message.hasOwnProperty("zoom"))
                 writer.uint32(/* id 2, wireType 1 =*/17).double(message.zoom);
             return writer;
         };
@@ -9823,7 +10055,7 @@
         CMsgViewSource.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -10028,11 +10260,11 @@
         CMsgBrowserReady.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.vr_overlay_key != null && Object.hasOwnProperty.call(message, "vr_overlay_key"))
+            if (message.vr_overlay_key != null && message.hasOwnProperty("vr_overlay_key"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.vr_overlay_key);
-            if (message.hwnd_browser != null && Object.hasOwnProperty.call(message, "hwnd_browser"))
+            if (message.hwnd_browser != null && message.hasOwnProperty("hwnd_browser"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.hwnd_browser);
             return writer;
         };
@@ -10301,17 +10533,17 @@
         CMsgURLChanged.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.postData != null && Object.hasOwnProperty.call(message, "postData"))
+            if (message.postData != null && message.hasOwnProperty("postData"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.postData);
-            if (message.bIsRedirect != null && Object.hasOwnProperty.call(message, "bIsRedirect"))
+            if (message.bIsRedirect != null && message.hasOwnProperty("bIsRedirect"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.bIsRedirect);
-            if (message.pagetitle != null && Object.hasOwnProperty.call(message, "pagetitle"))
+            if (message.pagetitle != null && message.hasOwnProperty("pagetitle"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.pagetitle);
-            if (message.bNewNavigation != null && Object.hasOwnProperty.call(message, "bNewNavigation"))
+            if (message.bNewNavigation != null && message.hasOwnProperty("bNewNavigation"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.bNewNavigation);
             return writer;
         };
@@ -10563,9 +10795,9 @@
         CHTMLHeader.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+            if (message.key != null && message.hasOwnProperty("key"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+            if (message.value != null && message.hasOwnProperty("value"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
             return writer;
         };
@@ -10818,19 +11050,19 @@
         CHTMLPageSecurityInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.bIsSecure != null && Object.hasOwnProperty.call(message, "bIsSecure"))
+            if (message.bIsSecure != null && message.hasOwnProperty("bIsSecure"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.bIsSecure);
-            if (message.bHasCertError != null && Object.hasOwnProperty.call(message, "bHasCertError"))
+            if (message.bHasCertError != null && message.hasOwnProperty("bHasCertError"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.bHasCertError);
-            if (message.issuerName != null && Object.hasOwnProperty.call(message, "issuerName"))
+            if (message.issuerName != null && message.hasOwnProperty("issuerName"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.issuerName);
-            if (message.certName != null && Object.hasOwnProperty.call(message, "certName"))
+            if (message.certName != null && message.hasOwnProperty("certName"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.certName);
-            if (message.certExpiry != null && Object.hasOwnProperty.call(message, "certExpiry"))
+            if (message.certExpiry != null && message.hasOwnProperty("certExpiry"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.certExpiry);
-            if (message.nCertBits != null && Object.hasOwnProperty.call(message, "nCertBits"))
+            if (message.nCertBits != null && message.hasOwnProperty("nCertBits"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.nCertBits);
-            if (message.bIsEVCert != null && Object.hasOwnProperty.call(message, "bIsEVCert"))
+            if (message.bIsEVCert != null && message.hasOwnProperty("bIsEVCert"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.bIsEVCert);
             return writer;
         };
@@ -11102,11 +11334,11 @@
         CMsgFinishedRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.pageTitle != null && Object.hasOwnProperty.call(message, "pageTitle"))
+            if (message.pageTitle != null && message.hasOwnProperty("pageTitle"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageTitle);
             return writer;
         };
@@ -11344,11 +11576,11 @@
         CMsgLoadedRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.pageTitle != null && Object.hasOwnProperty.call(message, "pageTitle"))
+            if (message.pageTitle != null && message.hasOwnProperty("pageTitle"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageTitle);
             if (message.headers != null && message.headers.length)
                 for (var i = 0; i < message.headers.length; ++i)
@@ -11610,11 +11842,11 @@
         CMsgPageSecurity.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.security_info != null && Object.hasOwnProperty.call(message, "security_info"))
+            if (message.security_info != null && message.hasOwnProperty("security_info"))
                 $root.CHTMLPageSecurityInfo.encode(message.security_info, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
@@ -11865,15 +12097,15 @@
         CMsgStartRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+            if (message.target != null && message.hasOwnProperty("target"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
-            if (message.postData != null && Object.hasOwnProperty.call(message, "postData"))
+            if (message.postData != null && message.hasOwnProperty("postData"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.postData);
-            if (message.bIsRedirect != null && Object.hasOwnProperty.call(message, "bIsRedirect"))
+            if (message.bIsRedirect != null && message.hasOwnProperty("bIsRedirect"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.bIsRedirect);
             return writer;
         };
@@ -12114,9 +12346,9 @@
         CMsgStartRequestResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.bAllow != null && Object.hasOwnProperty.call(message, "bAllow"))
+            if (message.bAllow != null && message.hasOwnProperty("bAllow"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.bAllow);
             return writer;
         };
@@ -12315,7 +12547,7 @@
         CMsgShowPopup.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -12502,7 +12734,7 @@
         CMsgHidePopup.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -12725,15 +12957,15 @@
         CMsgSizePopup.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.y);
-            if (message.wide != null && Object.hasOwnProperty.call(message, "wide"))
+            if (message.wide != null && message.hasOwnProperty("wide"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.wide);
-            if (message.tall != null && Object.hasOwnProperty.call(message, "tall"))
+            if (message.tall != null && message.hasOwnProperty("tall"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.tall);
             return writer;
         };
@@ -12983,11 +13215,11 @@
         CMsgOpenNewTab.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.bForeground != null && Object.hasOwnProperty.call(message, "bForeground"))
+            if (message.bForeground != null && message.hasOwnProperty("bForeground"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.bForeground);
             return writer;
         };
@@ -13260,21 +13492,21 @@
         CMsgPopupHTMLWindow.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.y);
-            if (message.wide != null && Object.hasOwnProperty.call(message, "wide"))
+            if (message.wide != null && message.hasOwnProperty("wide"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.wide);
-            if (message.tall != null && Object.hasOwnProperty.call(message, "tall"))
+            if (message.tall != null && message.hasOwnProperty("tall"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.tall);
-            if (message.popup_index != null && Object.hasOwnProperty.call(message, "popup_index"))
+            if (message.popup_index != null && message.hasOwnProperty("popup_index"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.popup_index);
-            if (message.trusted_creator != null && Object.hasOwnProperty.call(message, "trusted_creator"))
+            if (message.trusted_creator != null && message.hasOwnProperty("trusted_creator"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.trusted_creator);
             return writer;
         };
@@ -13548,9 +13780,9 @@
         CMsgPopupHTMLWindowResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.bAllow != null && Object.hasOwnProperty.call(message, "bAllow"))
+            if (message.bAllow != null && message.hasOwnProperty("bAllow"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.bAllow);
             return writer;
         };
@@ -13758,9 +13990,9 @@
         CMsgSetHTMLTitle.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+            if (message.title != null && message.hasOwnProperty("title"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
             return writer;
         };
@@ -13968,9 +14200,9 @@
         CMsgLoadingResource.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
             return writer;
         };
@@ -14178,9 +14410,9 @@
         CMsgStatusText.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+            if (message.text != null && message.hasOwnProperty("text"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             return writer;
         };
@@ -14433,19 +14665,19 @@
         CMsgSetCursor.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.cursor != null && Object.hasOwnProperty.call(message, "cursor"))
+            if (message.cursor != null && message.hasOwnProperty("cursor"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.cursor);
-            if (message.custom_data != null && Object.hasOwnProperty.call(message, "custom_data"))
+            if (message.custom_data != null && message.hasOwnProperty("custom_data"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.custom_data);
-            if (message.wide != null && Object.hasOwnProperty.call(message, "wide"))
+            if (message.wide != null && message.hasOwnProperty("wide"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.wide);
-            if (message.tall != null && Object.hasOwnProperty.call(message, "tall"))
+            if (message.tall != null && message.hasOwnProperty("tall"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.tall);
-            if (message.xhotspot != null && Object.hasOwnProperty.call(message, "xhotspot"))
+            if (message.xhotspot != null && message.hasOwnProperty("xhotspot"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.xhotspot);
-            if (message.yhotspot != null && Object.hasOwnProperty.call(message, "yhotspot"))
+            if (message.yhotspot != null && message.hasOwnProperty("yhotspot"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.yhotspot);
             return writer;
         };
@@ -14745,16 +14977,16 @@
         CMsgFileLoadDialog.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+            if (message.title != null && message.hasOwnProperty("title"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
-            if (message.initialFile != null && Object.hasOwnProperty.call(message, "initialFile"))
+            if (message.initialFile != null && message.hasOwnProperty("initialFile"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.initialFile);
             if (message.accept_types != null && message.accept_types.length)
                 for (var i = 0; i < message.accept_types.length; ++i)
                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.accept_types[i]);
-            if (message.is_save != null && Object.hasOwnProperty.call(message, "is_save"))
+            if (message.is_save != null && message.hasOwnProperty("is_save"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.is_save);
             return writer;
         };
@@ -15011,7 +15243,7 @@
         CMsgFileLoadDialogResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             if (message.files != null && message.files.length)
                 for (var i = 0; i < message.files.length; ++i)
@@ -15236,9 +15468,9 @@
         CMsgShowToolTip.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+            if (message.text != null && message.hasOwnProperty("text"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             return writer;
         };
@@ -15446,9 +15678,9 @@
         CMsgUpdateToolTip.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+            if (message.text != null && message.hasOwnProperty("text"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             return writer;
         };
@@ -15647,7 +15879,7 @@
         CMsgHideToolTip.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -15852,11 +16084,11 @@
         CMsgSearchResults.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.activeMatch != null && Object.hasOwnProperty.call(message, "activeMatch"))
+            if (message.activeMatch != null && message.hasOwnProperty("activeMatch"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.activeMatch);
-            if (message.results != null && Object.hasOwnProperty.call(message, "results"))
+            if (message.results != null && message.hasOwnProperty("results"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.results);
             return writer;
         };
@@ -16066,7 +16298,7 @@
         CMsgClose.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -16298,17 +16530,17 @@
         CMsgSetSharedPaintBuffers.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.wide != null && Object.hasOwnProperty.call(message, "wide"))
+            if (message.wide != null && message.hasOwnProperty("wide"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.wide);
-            if (message.tall != null && Object.hasOwnProperty.call(message, "tall"))
+            if (message.tall != null && message.hasOwnProperty("tall"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.tall);
-            if (message.source_pid != null && Object.hasOwnProperty.call(message, "source_pid"))
+            if (message.source_pid != null && message.hasOwnProperty("source_pid"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.source_pid);
-            if (message.source_handle != null && Object.hasOwnProperty.call(message, "source_handle"))
+            if (message.source_handle != null && message.hasOwnProperty("source_handle"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.source_handle);
-            if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
+            if (message.handle != null && message.hasOwnProperty("handle"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.handle);
             return writer;
         };
@@ -16593,7 +16825,7 @@
         CMsgAckSharedPaintBuffers.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -16735,6 +16967,9 @@
          * @property {number|null} [scrolly] CMsgNeedsPaint scrolly
          * @property {number|null} [pagescale] CMsgNeedsPaint pagescale
          * @property {number|null} [pageserial] CMsgNeedsPaint pageserial
+         * @property {number|null} [avg_frame_ms] CMsgNeedsPaint avg_frame_ms
+         * @property {number|null} [stddev_sum_frame_ms] CMsgNeedsPaint stddev_sum_frame_ms
+         * @property {number|null} [long_frame_ms] CMsgNeedsPaint long_frame_ms
          */
     
         /**
@@ -16793,6 +17028,30 @@
         CMsgNeedsPaint.prototype.pageserial = 0;
     
         /**
+         * CMsgNeedsPaint avg_frame_ms.
+         * @member {number} avg_frame_ms
+         * @memberof CMsgNeedsPaint
+         * @instance
+         */
+        CMsgNeedsPaint.prototype.avg_frame_ms = 0;
+    
+        /**
+         * CMsgNeedsPaint stddev_sum_frame_ms.
+         * @member {number} stddev_sum_frame_ms
+         * @memberof CMsgNeedsPaint
+         * @instance
+         */
+        CMsgNeedsPaint.prototype.stddev_sum_frame_ms = 0;
+    
+        /**
+         * CMsgNeedsPaint long_frame_ms.
+         * @member {number} long_frame_ms
+         * @memberof CMsgNeedsPaint
+         * @instance
+         */
+        CMsgNeedsPaint.prototype.long_frame_ms = 0;
+    
+        /**
          * Creates a new CMsgNeedsPaint instance using the specified properties.
          * @function create
          * @memberof CMsgNeedsPaint
@@ -16816,16 +17075,22 @@
         CMsgNeedsPaint.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.scrollx != null && Object.hasOwnProperty.call(message, "scrollx"))
+            if (message.scrollx != null && message.hasOwnProperty("scrollx"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.scrollx);
-            if (message.scrolly != null && Object.hasOwnProperty.call(message, "scrolly"))
+            if (message.scrolly != null && message.hasOwnProperty("scrolly"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.scrolly);
-            if (message.pagescale != null && Object.hasOwnProperty.call(message, "pagescale"))
+            if (message.pagescale != null && message.hasOwnProperty("pagescale"))
                 writer.uint32(/* id 12, wireType 5 =*/101).float(message.pagescale);
-            if (message.pageserial != null && Object.hasOwnProperty.call(message, "pageserial"))
+            if (message.pageserial != null && message.hasOwnProperty("pageserial"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.pageserial);
+            if (message.avg_frame_ms != null && message.hasOwnProperty("avg_frame_ms"))
+                writer.uint32(/* id 20, wireType 0 =*/160).uint32(message.avg_frame_ms);
+            if (message.stddev_sum_frame_ms != null && message.hasOwnProperty("stddev_sum_frame_ms"))
+                writer.uint32(/* id 21, wireType 5 =*/173).float(message.stddev_sum_frame_ms);
+            if (message.long_frame_ms != null && message.hasOwnProperty("long_frame_ms"))
+                writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.long_frame_ms);
             return writer;
         };
     
@@ -16874,6 +17139,15 @@
                     break;
                 case 15:
                     message.pageserial = reader.uint32();
+                    break;
+                case 20:
+                    message.avg_frame_ms = reader.uint32();
+                    break;
+                case 21:
+                    message.stddev_sum_frame_ms = reader.float();
+                    break;
+                case 22:
+                    message.long_frame_ms = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -16925,6 +17199,15 @@
             if (message.pageserial != null && message.hasOwnProperty("pageserial"))
                 if (!$util.isInteger(message.pageserial))
                     return "pageserial: integer expected";
+            if (message.avg_frame_ms != null && message.hasOwnProperty("avg_frame_ms"))
+                if (!$util.isInteger(message.avg_frame_ms))
+                    return "avg_frame_ms: integer expected";
+            if (message.stddev_sum_frame_ms != null && message.hasOwnProperty("stddev_sum_frame_ms"))
+                if (typeof message.stddev_sum_frame_ms !== "number")
+                    return "stddev_sum_frame_ms: number expected";
+            if (message.long_frame_ms != null && message.hasOwnProperty("long_frame_ms"))
+                if (!$util.isInteger(message.long_frame_ms))
+                    return "long_frame_ms: integer expected";
             return null;
         };
     
@@ -16950,6 +17233,12 @@
                 message.pagescale = Number(object.pagescale);
             if (object.pageserial != null)
                 message.pageserial = object.pageserial >>> 0;
+            if (object.avg_frame_ms != null)
+                message.avg_frame_ms = object.avg_frame_ms >>> 0;
+            if (object.stddev_sum_frame_ms != null)
+                message.stddev_sum_frame_ms = Number(object.stddev_sum_frame_ms);
+            if (object.long_frame_ms != null)
+                message.long_frame_ms = object.long_frame_ms >>> 0;
             return message;
         };
     
@@ -16972,6 +17261,9 @@
                 object.scrolly = 0;
                 object.pagescale = 0;
                 object.pageserial = 0;
+                object.avg_frame_ms = 0;
+                object.stddev_sum_frame_ms = 0;
+                object.long_frame_ms = 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -16983,6 +17275,12 @@
                 object.pagescale = options.json && !isFinite(message.pagescale) ? String(message.pagescale) : message.pagescale;
             if (message.pageserial != null && message.hasOwnProperty("pageserial"))
                 object.pageserial = message.pageserial;
+            if (message.avg_frame_ms != null && message.hasOwnProperty("avg_frame_ms"))
+                object.avg_frame_ms = message.avg_frame_ms;
+            if (message.stddev_sum_frame_ms != null && message.hasOwnProperty("stddev_sum_frame_ms"))
+                object.stddev_sum_frame_ms = options.json && !isFinite(message.stddev_sum_frame_ms) ? String(message.stddev_sum_frame_ms) : message.stddev_sum_frame_ms;
+            if (message.long_frame_ms != null && message.hasOwnProperty("long_frame_ms"))
+                object.long_frame_ms = message.long_frame_ms;
             return object;
         };
     
@@ -17101,17 +17399,17 @@
         CMsgComboNeedsPaint.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.rgba != null && Object.hasOwnProperty.call(message, "rgba"))
+            if (message.rgba != null && message.hasOwnProperty("rgba"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.rgba);
-            if (message.combobox_wide != null && Object.hasOwnProperty.call(message, "combobox_wide"))
+            if (message.combobox_wide != null && message.hasOwnProperty("combobox_wide"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.combobox_wide);
-            if (message.combobox_tall != null && Object.hasOwnProperty.call(message, "combobox_tall"))
+            if (message.combobox_tall != null && message.hasOwnProperty("combobox_tall"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.combobox_tall);
-            if (message.shared_memory_handle != null && Object.hasOwnProperty.call(message, "shared_memory_handle"))
+            if (message.shared_memory_handle != null && message.hasOwnProperty("shared_memory_handle"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.shared_memory_handle);
-            if (message.shared_memory_size != null && Object.hasOwnProperty.call(message, "shared_memory_size"))
+            if (message.shared_memory_size != null && message.hasOwnProperty("shared_memory_size"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.shared_memory_size);
             return writer;
         };
@@ -17459,21 +17757,21 @@
         CMsgNeedsSharedTexturePaint.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.share_handle != null && Object.hasOwnProperty.call(message, "share_handle"))
+            if (message.share_handle != null && message.hasOwnProperty("share_handle"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.share_handle);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.height);
-            if (message.scrollx != null && Object.hasOwnProperty.call(message, "scrollx"))
+            if (message.scrollx != null && message.hasOwnProperty("scrollx"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.scrollx);
-            if (message.scrolly != null && Object.hasOwnProperty.call(message, "scrolly"))
+            if (message.scrolly != null && message.hasOwnProperty("scrolly"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.scrolly);
-            if (message.pagescale != null && Object.hasOwnProperty.call(message, "pagescale"))
+            if (message.pagescale != null && message.hasOwnProperty("pagescale"))
                 writer.uint32(/* id 7, wireType 5 =*/61).float(message.pagescale);
-            if (message.pageserial != null && Object.hasOwnProperty.call(message, "pageserial"))
+            if (message.pageserial != null && message.hasOwnProperty("pageserial"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.pageserial);
             return writer;
         };
@@ -17792,19 +18090,19 @@
         CMsgGameOverlayTexturePaint.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.height);
-            if (message.scrollx != null && Object.hasOwnProperty.call(message, "scrollx"))
+            if (message.scrollx != null && message.hasOwnProperty("scrollx"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.scrollx);
-            if (message.scrolly != null && Object.hasOwnProperty.call(message, "scrolly"))
+            if (message.scrolly != null && message.hasOwnProperty("scrolly"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.scrolly);
-            if (message.pagescale != null && Object.hasOwnProperty.call(message, "pagescale"))
+            if (message.pagescale != null && message.hasOwnProperty("pagescale"))
                 writer.uint32(/* id 7, wireType 5 =*/61).float(message.pagescale);
-            if (message.pageserial != null && Object.hasOwnProperty.call(message, "pageserial"))
+            if (message.pageserial != null && message.hasOwnProperty("pageserial"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.pageserial);
             return writer;
         };
@@ -18058,7 +18356,7 @@
         CMsgGetZoom.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -18254,9 +18552,9 @@
         CMsgGetZoomResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.zoom != null && Object.hasOwnProperty.call(message, "zoom"))
+            if (message.zoom != null && message.hasOwnProperty("zoom"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.zoom);
             return writer;
         };
@@ -18473,11 +18771,11 @@
         CMsgLinkAtPosition.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y);
             return writer;
         };
@@ -18732,17 +19030,17 @@
         CMsgLinkAtPositionResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.url);
-            if (message.blivelink != null && Object.hasOwnProperty.call(message, "blivelink"))
+            if (message.blivelink != null && message.hasOwnProperty("blivelink"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.blivelink);
-            if (message.binput != null && Object.hasOwnProperty.call(message, "binput"))
+            if (message.binput != null && message.hasOwnProperty("binput"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.binput);
             return writer;
         };
@@ -19003,11 +19301,11 @@
         CMsgZoomToElementAtPosition.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y);
             return writer;
         };
@@ -19235,11 +19533,11 @@
         CMsgZoomToElementAtPositionResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.scale != null && Object.hasOwnProperty.call(message, "scale"))
+            if (message.scale != null && message.hasOwnProperty("scale"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.scale);
-            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+            if (message.duration != null && message.hasOwnProperty("duration"))
                 writer.uint32(/* id 3, wireType 5 =*/29).float(message.duration);
             return writer;
         };
@@ -19476,13 +19774,13 @@
         CMsgScalePageToValue.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.scale != null && Object.hasOwnProperty.call(message, "scale"))
+            if (message.scale != null && message.hasOwnProperty("scale"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.scale);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 3, wireType 5 =*/29).float(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.y);
             return writer;
         };
@@ -19712,9 +20010,9 @@
         CMsgForcePopupsToDirectHWND.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.force_direct_hwnd_popups != null && Object.hasOwnProperty.call(message, "force_direct_hwnd_popups"))
+            if (message.force_direct_hwnd_popups != null && message.hasOwnProperty("force_direct_hwnd_popups"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force_direct_hwnd_popups);
             return writer;
         };
@@ -19922,9 +20220,9 @@
         CMsgScalePageToValueResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.zoom != null && Object.hasOwnProperty.call(message, "zoom"))
+            if (message.zoom != null && message.hasOwnProperty("zoom"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.zoom);
             return writer;
         };
@@ -20159,15 +20457,15 @@
         CMsgSavePageToJPEG.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
+            if (message.filename != null && message.hasOwnProperty("filename"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.filename);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.height);
             return writer;
         };
@@ -20417,11 +20715,11 @@
         CMsgSavePageToJPEGResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
+            if (message.filename != null && message.hasOwnProperty("filename"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.filename);
             return writer;
         };
@@ -20640,9 +20938,9 @@
         CMsgJSAlert.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+            if (message.message != null && message.hasOwnProperty("message"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
             return writer;
         };
@@ -20850,9 +21148,9 @@
         CMsgJSConfirm.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+            if (message.message != null && message.hasOwnProperty("message"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
             return writer;
         };
@@ -21060,9 +21358,9 @@
         CMsgJSDialogResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+            if (message.result != null && message.hasOwnProperty("result"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.result);
             return writer;
         };
@@ -21279,11 +21577,11 @@
         CMsgCanGoBackAndForward.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.bgoback != null && Object.hasOwnProperty.call(message, "bgoback"))
+            if (message.bgoback != null && message.hasOwnProperty("bgoback"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.bgoback);
-            if (message.bgoforward != null && Object.hasOwnProperty.call(message, "bgoforward"))
+            if (message.bgoforward != null && message.hasOwnProperty("bgoforward"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.bgoforward);
             return writer;
         };
@@ -21511,11 +21809,11 @@
         CMsgOpenSteamURL.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-            if (message.referrer != null && Object.hasOwnProperty.call(message, "referrer"))
+            if (message.referrer != null && message.hasOwnProperty("referrer"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.referrer);
             return writer;
         };
@@ -21779,19 +22077,19 @@
         CMsgSetCookie.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+            if (message.key != null && message.hasOwnProperty("key"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+            if (message.value != null && message.hasOwnProperty("value"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+            if (message.path != null && message.hasOwnProperty("path"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
-            if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+            if (message.host != null && message.hasOwnProperty("host"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.host);
-            if (message.expires != null && Object.hasOwnProperty.call(message, "expires"))
+            if (message.expires != null && message.hasOwnProperty("expires"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.expires);
-            if (message.secure != null && Object.hasOwnProperty.call(message, "secure"))
+            if (message.secure != null && message.hasOwnProperty("secure"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.secure);
-            if (message.httponly != null && Object.hasOwnProperty.call(message, "httponly"))
+            if (message.httponly != null && message.hasOwnProperty("httponly"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.httponly);
             return writer;
         };
@@ -22054,9 +22352,9 @@
         CMsgSetTargetFrameRate.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.nTargetFrameRate != null && Object.hasOwnProperty.call(message, "nTargetFrameRate"))
+            if (message.nTargetFrameRate != null && message.hasOwnProperty("nTargetFrameRate"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.nTargetFrameRate);
             return writer;
         };
@@ -22255,7 +22553,7 @@
         CMsgPauseRepaint.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -22442,7 +22740,7 @@
         CMsgFullRepaint.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -22629,7 +22927,7 @@
         CMsgRequestFullScreen.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -22816,7 +23114,7 @@
         CMsgExitFullScreen.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -23003,7 +23301,7 @@
         CMsgToggleFindInPageDialog.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -23190,7 +23488,7 @@
         CMsgSetPIDShuttingDown.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -23377,7 +23675,7 @@
         CMsgDisableBackgroundThrottling.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -23564,7 +23862,7 @@
         CMsgAckPIDShuttingDown.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -23760,9 +24058,9 @@
         CMsgGetCookiesForURL.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
             return writer;
         };
@@ -23988,13 +24286,13 @@
         CCookie.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+            if (message.name != null && message.hasOwnProperty("name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+            if (message.value != null && message.hasOwnProperty("value"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-            if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
+            if (message.domain != null && message.hasOwnProperty("domain"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.domain);
-            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+            if (message.path != null && message.hasOwnProperty("path"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.path);
             return writer;
         };
@@ -24234,9 +24532,9 @@
         CMsgGetCookiesForURLResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
             if (message.cookies != null && message.cookies.length)
                 for (var i = 0; i < message.cookies.length; ++i)
@@ -24523,19 +24821,19 @@
         CMsgNodeHasFocus.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.bInput != null && Object.hasOwnProperty.call(message, "bInput"))
+            if (message.bInput != null && message.hasOwnProperty("bInput"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.bInput);
-            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+            if (message.name != null && message.hasOwnProperty("name"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-            if (message.elementtagname != null && Object.hasOwnProperty.call(message, "elementtagname"))
+            if (message.elementtagname != null && message.hasOwnProperty("elementtagname"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.elementtagname);
-            if (message.searchbuttontext != null && Object.hasOwnProperty.call(message, "searchbuttontext"))
+            if (message.searchbuttontext != null && message.hasOwnProperty("searchbuttontext"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.searchbuttontext);
-            if (message.bHasMultipleInputs != null && Object.hasOwnProperty.call(message, "bHasMultipleInputs"))
+            if (message.bHasMultipleInputs != null && message.hasOwnProperty("bHasMultipleInputs"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.bHasMultipleInputs);
-            if (message.input_type != null && Object.hasOwnProperty.call(message, "input_type"))
+            if (message.input_type != null && message.hasOwnProperty("input_type"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.input_type);
             return writer;
         };
@@ -24789,7 +25087,7 @@
         CMsgZoomToFocusedElement.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -24976,7 +25274,7 @@
         CMsgCloseFullScreenFlashIfOpen.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -25163,7 +25461,7 @@
         CMsgPauseFullScreenFlashMovieIfOpen.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -25350,7 +25648,7 @@
         CMsgFocusedNodeText.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -25546,9 +25844,9 @@
         CMsgFocusedNodeTextResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+            if (message.value != null && message.hasOwnProperty("value"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
             return writer;
         };
@@ -25747,7 +26045,7 @@
         CMsgBuildID.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.build_id != null && Object.hasOwnProperty.call(message, "build_id"))
+            if (message.build_id != null && message.hasOwnProperty("build_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.build_id);
             return writer;
         };
@@ -25948,7 +26246,7 @@
         CMsgOpenDevTools.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -26135,7 +26433,7 @@
         CMsgCloseDevTools.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -26331,9 +26629,9 @@
         CMsgUnlockH264.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.unlock_code != null && Object.hasOwnProperty.call(message, "unlock_code"))
+            if (message.unlock_code != null && message.hasOwnProperty("unlock_code"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.unlock_code);
             return writer;
         };
@@ -26622,27 +26920,27 @@
         CMsgScreenInformationChanged.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.override_width != null && Object.hasOwnProperty.call(message, "override_width"))
+            if (message.override_width != null && message.hasOwnProperty("override_width"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.override_width);
-            if (message.override_height != null && Object.hasOwnProperty.call(message, "override_height"))
+            if (message.override_height != null && message.hasOwnProperty("override_height"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.override_height);
-            if (message.monitor_left != null && Object.hasOwnProperty.call(message, "monitor_left"))
+            if (message.monitor_left != null && message.hasOwnProperty("monitor_left"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.monitor_left);
-            if (message.monitor_top != null && Object.hasOwnProperty.call(message, "monitor_top"))
+            if (message.monitor_top != null && message.hasOwnProperty("monitor_top"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.monitor_top);
-            if (message.monitor_right != null && Object.hasOwnProperty.call(message, "monitor_right"))
+            if (message.monitor_right != null && message.hasOwnProperty("monitor_right"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.monitor_right);
-            if (message.monitor_bottom != null && Object.hasOwnProperty.call(message, "monitor_bottom"))
+            if (message.monitor_bottom != null && message.hasOwnProperty("monitor_bottom"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.monitor_bottom);
-            if (message.usable_left != null && Object.hasOwnProperty.call(message, "usable_left"))
+            if (message.usable_left != null && message.hasOwnProperty("usable_left"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.usable_left);
-            if (message.usable_top != null && Object.hasOwnProperty.call(message, "usable_top"))
+            if (message.usable_top != null && message.hasOwnProperty("usable_top"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.usable_top);
-            if (message.usable_right != null && Object.hasOwnProperty.call(message, "usable_right"))
+            if (message.usable_right != null && message.hasOwnProperty("usable_right"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.usable_right);
-            if (message.usable_bottom != null && Object.hasOwnProperty.call(message, "usable_bottom"))
+            if (message.usable_bottom != null && message.hasOwnProperty("usable_bottom"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.usable_bottom);
             return writer;
         };
@@ -26940,7 +27238,7 @@
         CMsgClearAllCookies.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -27136,9 +27434,9 @@
         CMsgScreenDPI.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.dpi_scaling != null && Object.hasOwnProperty.call(message, "dpi_scaling"))
+            if (message.dpi_scaling != null && message.hasOwnProperty("dpi_scaling"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.dpi_scaling);
             return writer;
         };
@@ -27540,7 +27838,7 @@
         CMsgSteamAuthNeeded.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.filler != null && Object.hasOwnProperty.call(message, "filler"))
+            if (message.filler != null && message.hasOwnProperty("filler"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.filler);
             return writer;
         };
@@ -27727,7 +28025,7 @@
         CMsgSteamAuthCookiesSet.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.success != null && Object.hasOwnProperty.call(message, "success"))
+            if (message.success != null && message.hasOwnProperty("success"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.success);
             return writer;
         };
@@ -27932,11 +28230,11 @@
         CMsgJSRegisterMethod.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+            if (message.name != null && message.hasOwnProperty("name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-            if (message.method_type != null && Object.hasOwnProperty.call(message, "method_type"))
+            if (message.method_type != null && message.hasOwnProperty("method_type"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.method_type);
             return writer;
         };
@@ -28178,9 +28476,9 @@
         CJSMethodArgument.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.json_data != null && Object.hasOwnProperty.call(message, "json_data"))
+            if (message.json_data != null && message.hasOwnProperty("json_data"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.json_data);
-            if (message.function_handle != null && Object.hasOwnProperty.call(message, "function_handle"))
+            if (message.function_handle != null && message.hasOwnProperty("function_handle"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.function_handle);
             return writer;
         };
@@ -28349,6 +28647,7 @@
          * @property {number|null} [double_value] CMsgJSValue double_value
          * @property {string|null} [string_value] CMsgJSValue string_value
          * @property {number|Long|null} [function_handle] CMsgJSValue function_handle
+         * @property {Uint8Array|null} [bytes_value] CMsgJSValue bytes_value
          * @property {boolean|null} [is_array] CMsgJSValue is_array
          * @property {Array.<ICMsgJSValue>|null} [array_values] CMsgJSValue array_values
          * @property {boolean|null} [is_object] CMsgJSValue is_object
@@ -28421,6 +28720,14 @@
         CMsgJSValue.prototype.function_handle = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
+         * CMsgJSValue bytes_value.
+         * @member {Uint8Array} bytes_value
+         * @memberof CMsgJSValue
+         * @instance
+         */
+        CMsgJSValue.prototype.bytes_value = $util.newBuffer([]);
+    
+        /**
          * CMsgJSValue is_array.
          * @member {boolean} is_array
          * @memberof CMsgJSValue
@@ -28476,28 +28783,30 @@
         CMsgJSValue.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.bool_value != null && Object.hasOwnProperty.call(message, "bool_value"))
+            if (message.bool_value != null && message.hasOwnProperty("bool_value"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.bool_value);
-            if (message.int_value != null && Object.hasOwnProperty.call(message, "int_value"))
+            if (message.int_value != null && message.hasOwnProperty("int_value"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.int_value);
-            if (message.uint_value != null && Object.hasOwnProperty.call(message, "uint_value"))
+            if (message.uint_value != null && message.hasOwnProperty("uint_value"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.uint_value);
-            if (message.double_value != null && Object.hasOwnProperty.call(message, "double_value"))
+            if (message.double_value != null && message.hasOwnProperty("double_value"))
                 writer.uint32(/* id 4, wireType 1 =*/33).double(message.double_value);
-            if (message.string_value != null && Object.hasOwnProperty.call(message, "string_value"))
+            if (message.string_value != null && message.hasOwnProperty("string_value"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.string_value);
-            if (message.function_handle != null && Object.hasOwnProperty.call(message, "function_handle"))
+            if (message.function_handle != null && message.hasOwnProperty("function_handle"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.function_handle);
-            if (message.is_array != null && Object.hasOwnProperty.call(message, "is_array"))
+            if (message.is_array != null && message.hasOwnProperty("is_array"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.is_array);
             if (message.array_values != null && message.array_values.length)
                 for (var i = 0; i < message.array_values.length; ++i)
                     $root.CMsgJSValue.encode(message.array_values[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-            if (message.is_object != null && Object.hasOwnProperty.call(message, "is_object"))
+            if (message.is_object != null && message.hasOwnProperty("is_object"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_object);
             if (message.object_properties != null && message.object_properties.length)
                 for (var i = 0; i < message.object_properties.length; ++i)
                     $root.CMsgJSValue.JSObjectProperty.encode(message.object_properties[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+            if (message.bytes_value != null && message.hasOwnProperty("bytes_value"))
+                writer.uint32(/* id 12, wireType 2 =*/98).bytes(message.bytes_value);
             return writer;
         };
     
@@ -28549,6 +28858,9 @@
                     break;
                 case 6:
                     message.function_handle = reader.uint64();
+                    break;
+                case 12:
+                    message.bytes_value = reader.bytes();
                     break;
                 case 8:
                     message.is_array = reader.bool();
@@ -28619,6 +28931,9 @@
             if (message.function_handle != null && message.hasOwnProperty("function_handle"))
                 if (!$util.isInteger(message.function_handle) && !(message.function_handle && $util.isInteger(message.function_handle.low) && $util.isInteger(message.function_handle.high)))
                     return "function_handle: integer|Long expected";
+            if (message.bytes_value != null && message.hasOwnProperty("bytes_value"))
+                if (!(message.bytes_value && typeof message.bytes_value.length === "number" || $util.isString(message.bytes_value)))
+                    return "bytes_value: buffer expected";
             if (message.is_array != null && message.hasOwnProperty("is_array"))
                 if (typeof message.is_array !== "boolean")
                     return "is_array: boolean expected";
@@ -28677,6 +28992,11 @@
                     message.function_handle = object.function_handle;
                 else if (typeof object.function_handle === "object")
                     message.function_handle = new $util.LongBits(object.function_handle.low >>> 0, object.function_handle.high >>> 0).toNumber(true);
+            if (object.bytes_value != null)
+                if (typeof object.bytes_value === "string")
+                    $util.base64.decode(object.bytes_value, message.bytes_value = $util.newBuffer($util.base64.length(object.bytes_value)), 0);
+                else if (object.bytes_value.length)
+                    message.bytes_value = object.bytes_value;
             if (object.is_array != null)
                 message.is_array = Boolean(object.is_array);
             if (object.array_values) {
@@ -28734,6 +29054,13 @@
                     object.function_handle = options.longs === String ? "0" : 0;
                 object.is_array = false;
                 object.is_object = false;
+                if (options.bytes === String)
+                    object.bytes_value = "";
+                else {
+                    object.bytes_value = [];
+                    if (options.bytes !== Array)
+                        object.bytes_value = $util.newBuffer(object.bytes_value);
+                }
             }
             if (message.bool_value != null && message.hasOwnProperty("bool_value"))
                 object.bool_value = message.bool_value;
@@ -28764,6 +29091,8 @@
                 for (var j = 0; j < message.object_properties.length; ++j)
                     object.object_properties[j] = $root.CMsgJSValue.JSObjectProperty.toObject(message.object_properties[j], options);
             }
+            if (message.bytes_value != null && message.hasOwnProperty("bytes_value"))
+                object.bytes_value = options.bytes === String ? $util.base64.encode(message.bytes_value, 0, message.bytes_value.length) : options.bytes === Array ? Array.prototype.slice.call(message.bytes_value) : message.bytes_value;
             return object;
         };
     
@@ -28843,9 +29172,9 @@
             JSObjectProperty.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                if (message.name != null && message.hasOwnProperty("name"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                if (message.value != null && message.hasOwnProperty("value"))
                     $root.CMsgJSValue.encode(message.value, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 return writer;
             };
@@ -29071,9 +29400,9 @@
         CMsgJSMethodCall.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+            if (message.name != null && message.hasOwnProperty("name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             if (message["arguments"] != null && message["arguments"].length)
                 for (var i = 0; i < message["arguments"].length; ++i)
@@ -29325,9 +29654,9 @@
         CMsgJSExecuteCallback.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.function_handle != null && Object.hasOwnProperty.call(message, "function_handle"))
+            if (message.function_handle != null && message.hasOwnProperty("function_handle"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.function_handle);
             if (message["arguments"] != null && message["arguments"].length)
                 for (var i = 0; i < message["arguments"].length; ++i)
@@ -29583,9 +29912,9 @@
         CMsgJSReleaseCallback.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.function_handle != null && Object.hasOwnProperty.call(message, "function_handle"))
+            if (message.function_handle != null && message.hasOwnProperty("function_handle"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.function_handle);
             return writer;
         };
@@ -29807,9 +30136,9 @@
         CMsgJSRaiseException.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.exception != null && Object.hasOwnProperty.call(message, "exception"))
+            if (message.exception != null && message.hasOwnProperty("exception"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.exception);
             return writer;
         };
@@ -30026,11 +30355,11 @@
         CMsgLoadLocalization.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.localization_path != null && Object.hasOwnProperty.call(message, "localization_path"))
+            if (message.localization_path != null && message.hasOwnProperty("localization_path"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.localization_path);
-            if (message.language != null && Object.hasOwnProperty.call(message, "language"))
+            if (message.language != null && message.hasOwnProperty("language"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.language);
             return writer;
         };
@@ -30258,11 +30587,11 @@
         CMsgJumpListLink.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.display_name != null && Object.hasOwnProperty.call(message, "display_name"))
+            if (message.display_name != null && message.hasOwnProperty("display_name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.display_name);
-            if (message.url_link != null && Object.hasOwnProperty.call(message, "url_link"))
+            if (message.url_link != null && message.hasOwnProperty("url_link"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url_link);
-            if (message.icon_path != null && Object.hasOwnProperty.call(message, "icon_path"))
+            if (message.icon_path != null && message.hasOwnProperty("icon_path"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.icon_path);
             return writer;
         };
@@ -30499,13 +30828,13 @@
         CMSgJumpListMRUApp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.display_name != null && Object.hasOwnProperty.call(message, "display_name"))
+            if (message.display_name != null && message.hasOwnProperty("display_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.display_name);
-            if (message.url_link != null && Object.hasOwnProperty.call(message, "url_link"))
+            if (message.url_link != null && message.hasOwnProperty("url_link"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.url_link);
-            if (message.icon_path != null && Object.hasOwnProperty.call(message, "icon_path"))
+            if (message.icon_path != null && message.hasOwnProperty("icon_path"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.icon_path);
             return writer;
         };
@@ -30755,9 +31084,9 @@
         CMsgSetJumpList.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steam_path != null && Object.hasOwnProperty.call(message, "steam_path"))
+            if (message.steam_path != null && message.hasOwnProperty("steam_path"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.steam_path);
-            if (message.mru_title != null && Object.hasOwnProperty.call(message, "mru_title"))
+            if (message.mru_title != null && message.hasOwnProperty("mru_title"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.mru_title);
             if (message.apps != null && message.apps.length)
                 for (var i = 0; i < message.apps.length; ++i)
@@ -31034,7 +31363,7 @@
         CMsgSetGameOverlayTargetPIDs.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             if (message.target_pid != null && message.target_pid.length)
                 for (var i = 0; i < message.target_pid.length; ++i)
@@ -31273,11 +31602,11 @@
         CMsgGameOverlayTargetTextureID.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.target_pid != null && Object.hasOwnProperty.call(message, "target_pid"))
+            if (message.target_pid != null && message.hasOwnProperty("target_pid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.target_pid);
-            if (message.texture_handle != null && Object.hasOwnProperty.call(message, "texture_handle"))
+            if (message.texture_handle != null && message.hasOwnProperty("texture_handle"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.texture_handle);
             return writer;
         };
@@ -31497,7 +31826,7 @@
         CMsgDraggableRegionsChanged.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             if (message.rects != null && message.rects.length)
                 for (var i = 0; i < message.rects.length; ++i)
@@ -31751,15 +32080,15 @@
             DraggableRects.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                if (message.x != null && message.hasOwnProperty("x"))
                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.x);
-                if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                if (message.y != null && message.hasOwnProperty("y"))
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.y);
-                if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                if (message.width != null && message.hasOwnProperty("width"))
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.width);
-                if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+                if (message.height != null && message.hasOwnProperty("height"))
                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.height);
-                if (message.draggable != null && Object.hasOwnProperty.call(message, "draggable"))
+                if (message.draggable != null && message.hasOwnProperty("draggable"))
                     writer.uint32(/* id 5, wireType 0 =*/40).bool(message.draggable);
                 return writer;
             };
@@ -32012,11 +32341,11 @@
         CMsgResizeGripChanged.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.height);
             return writer;
         };
@@ -32280,19 +32609,19 @@
         CMsgSetWindowPosition.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.y);
-            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+            if (message.width != null && message.hasOwnProperty("width"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.width);
-            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+            if (message.height != null && message.hasOwnProperty("height"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.height);
-            if (message.min_width != null && Object.hasOwnProperty.call(message, "min_width"))
+            if (message.min_width != null && message.hasOwnProperty("min_width"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.min_width);
-            if (message.min_height != null && Object.hasOwnProperty.call(message, "min_height"))
+            if (message.min_height != null && message.hasOwnProperty("min_height"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.min_height);
             return writer;
         };
@@ -32546,7 +32875,7 @@
         CMsgShowWindow.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -32733,7 +33062,7 @@
         CMsgHideWindow.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -32920,7 +33249,7 @@
         CMsgBringWindowToFront.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -33107,7 +33436,7 @@
         CMsgSetForegroundWindow.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -33294,7 +33623,7 @@
         CMsgMaximizeRestoreWindow.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -33481,7 +33810,7 @@
         CMsgMinimizeWindow.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -33619,6 +33948,7 @@
          * @exports ICMsgShowBrowserContextMenu
          * @interface ICMsgShowBrowserContextMenu
          * @property {number|null} [browser_handle] CMsgShowBrowserContextMenu browser_handle
+         * @property {Array.<CMsgShowBrowserContextMenu.IContextCommand>|null} [custom_commands] CMsgShowBrowserContextMenu custom_commands
          */
     
         /**
@@ -33630,6 +33960,7 @@
          * @param {ICMsgShowBrowserContextMenu=} [properties] Properties to set
          */
         function CMsgShowBrowserContextMenu(properties) {
+            this.custom_commands = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -33643,6 +33974,14 @@
          * @instance
          */
         CMsgShowBrowserContextMenu.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgShowBrowserContextMenu custom_commands.
+         * @member {Array.<CMsgShowBrowserContextMenu.IContextCommand>} custom_commands
+         * @memberof CMsgShowBrowserContextMenu
+         * @instance
+         */
+        CMsgShowBrowserContextMenu.prototype.custom_commands = $util.emptyArray;
     
         /**
          * Creates a new CMsgShowBrowserContextMenu instance using the specified properties.
@@ -33668,8 +34007,11 @@
         CMsgShowBrowserContextMenu.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.custom_commands != null && message.custom_commands.length)
+                for (var i = 0; i < message.custom_commands.length; ++i)
+                    $root.CMsgShowBrowserContextMenu.ContextCommand.encode(message.custom_commands[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
     
@@ -33706,6 +34048,11 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.custom_commands && message.custom_commands.length))
+                        message.custom_commands = [];
+                    message.custom_commands.push($root.CMsgShowBrowserContextMenu.ContextCommand.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -33745,6 +34092,15 @@
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 if (!$util.isInteger(message.browser_handle))
                     return "browser_handle: integer expected";
+            if (message.custom_commands != null && message.hasOwnProperty("custom_commands")) {
+                if (!Array.isArray(message.custom_commands))
+                    return "custom_commands: array expected";
+                for (var i = 0; i < message.custom_commands.length; ++i) {
+                    var error = $root.CMsgShowBrowserContextMenu.ContextCommand.verify(message.custom_commands[i]);
+                    if (error)
+                        return "custom_commands." + error;
+                }
+            }
             return null;
         };
     
@@ -33762,6 +34118,16 @@
             var message = new $root.CMsgShowBrowserContextMenu();
             if (object.browser_handle != null)
                 message.browser_handle = object.browser_handle >>> 0;
+            if (object.custom_commands) {
+                if (!Array.isArray(object.custom_commands))
+                    throw TypeError(".CMsgShowBrowserContextMenu.custom_commands: array expected");
+                message.custom_commands = [];
+                for (var i = 0; i < object.custom_commands.length; ++i) {
+                    if (typeof object.custom_commands[i] !== "object")
+                        throw TypeError(".CMsgShowBrowserContextMenu.custom_commands: object expected");
+                    message.custom_commands[i] = $root.CMsgShowBrowserContextMenu.ContextCommand.fromObject(object.custom_commands[i]);
+                }
+            }
             return message;
         };
     
@@ -33778,10 +34144,17 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.custom_commands = [];
             if (options.defaults)
                 object.browser_handle = 0;
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
+            if (message.custom_commands && message.custom_commands.length) {
+                object.custom_commands = [];
+                for (var j = 0; j < message.custom_commands.length; ++j)
+                    object.custom_commands[j] = $root.CMsgShowBrowserContextMenu.ContextCommand.toObject(message.custom_commands[j], options);
+            }
             return object;
         };
     
@@ -33796,7 +34169,1000 @@
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
+        CMsgShowBrowserContextMenu.ContextCommand = (function() {
+    
+            /**
+             * Properties of a ContextCommand.
+             * @memberof CMsgShowBrowserContextMenu
+             * @interface IContextCommand
+             * @property {number|null} [id] ContextCommand id
+             * @property {string|null} [label] ContextCommand label
+             */
+    
+            /**
+             * Constructs a new ContextCommand.
+             * @memberof CMsgShowBrowserContextMenu
+             * @classdesc Represents a ContextCommand.
+             * @implements IContextCommand
+             * @constructor
+             * @param {CMsgShowBrowserContextMenu.IContextCommand=} [properties] Properties to set
+             */
+            function ContextCommand(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ContextCommand id.
+             * @member {number} id
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @instance
+             */
+            ContextCommand.prototype.id = 0;
+    
+            /**
+             * ContextCommand label.
+             * @member {string} label
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @instance
+             */
+            ContextCommand.prototype.label = "";
+    
+            /**
+             * Creates a new ContextCommand instance using the specified properties.
+             * @function create
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {CMsgShowBrowserContextMenu.IContextCommand=} [properties] Properties to set
+             * @returns {CMsgShowBrowserContextMenu.ContextCommand} ContextCommand instance
+             */
+            ContextCommand.create = function create(properties) {
+                return new ContextCommand(properties);
+            };
+    
+            /**
+             * Encodes the specified ContextCommand message. Does not implicitly {@link CMsgShowBrowserContextMenu.ContextCommand.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {CMsgShowBrowserContextMenu.IContextCommand} message ContextCommand message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContextCommand.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.id != null && message.hasOwnProperty("id"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+                if (message.label != null && message.hasOwnProperty("label"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ContextCommand message, length delimited. Does not implicitly {@link CMsgShowBrowserContextMenu.ContextCommand.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {CMsgShowBrowserContextMenu.IContextCommand} message ContextCommand message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContextCommand.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ContextCommand message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgShowBrowserContextMenu.ContextCommand} ContextCommand
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ContextCommand.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgShowBrowserContextMenu.ContextCommand();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.label = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ContextCommand message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgShowBrowserContextMenu.ContextCommand} ContextCommand
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ContextCommand.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ContextCommand message.
+             * @function verify
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ContextCommand.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.id != null && message.hasOwnProperty("id"))
+                    if (!$util.isInteger(message.id))
+                        return "id: integer expected";
+                if (message.label != null && message.hasOwnProperty("label"))
+                    if (!$util.isString(message.label))
+                        return "label: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ContextCommand message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgShowBrowserContextMenu.ContextCommand} ContextCommand
+             */
+            ContextCommand.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgShowBrowserContextMenu.ContextCommand)
+                    return object;
+                var message = new $root.CMsgShowBrowserContextMenu.ContextCommand();
+                if (object.id != null)
+                    message.id = object.id | 0;
+                if (object.label != null)
+                    message.label = String(object.label);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ContextCommand message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @static
+             * @param {CMsgShowBrowserContextMenu.ContextCommand} message ContextCommand
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ContextCommand.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.id = 0;
+                    object.label = "";
+                }
+                if (message.id != null && message.hasOwnProperty("id"))
+                    object.id = message.id;
+                if (message.label != null && message.hasOwnProperty("label"))
+                    object.label = message.label;
+                return object;
+            };
+    
+            /**
+             * Converts this ContextCommand to JSON.
+             * @function toJSON
+             * @memberof CMsgShowBrowserContextMenu.ContextCommand
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ContextCommand.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ContextCommand;
+        })();
+    
         return CMsgShowBrowserContextMenu;
+    })();
+    
+    $root.CMsgHandleContextMenuCommand = (function() {
+    
+        /**
+         * Properties of a CMsgHandleContextMenuCommand.
+         * @exports ICMsgHandleContextMenuCommand
+         * @interface ICMsgHandleContextMenuCommand
+         * @property {number|null} [browser_handle] CMsgHandleContextMenuCommand browser_handle
+         * @property {number|null} [command_id] CMsgHandleContextMenuCommand command_id
+         */
+    
+        /**
+         * Constructs a new CMsgHandleContextMenuCommand.
+         * @exports CMsgHandleContextMenuCommand
+         * @classdesc Represents a CMsgHandleContextMenuCommand.
+         * @implements ICMsgHandleContextMenuCommand
+         * @constructor
+         * @param {ICMsgHandleContextMenuCommand=} [properties] Properties to set
+         */
+        function CMsgHandleContextMenuCommand(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgHandleContextMenuCommand browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgHandleContextMenuCommand
+         * @instance
+         */
+        CMsgHandleContextMenuCommand.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgHandleContextMenuCommand command_id.
+         * @member {number} command_id
+         * @memberof CMsgHandleContextMenuCommand
+         * @instance
+         */
+        CMsgHandleContextMenuCommand.prototype.command_id = 0;
+    
+        /**
+         * Creates a new CMsgHandleContextMenuCommand instance using the specified properties.
+         * @function create
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {ICMsgHandleContextMenuCommand=} [properties] Properties to set
+         * @returns {CMsgHandleContextMenuCommand} CMsgHandleContextMenuCommand instance
+         */
+        CMsgHandleContextMenuCommand.create = function create(properties) {
+            return new CMsgHandleContextMenuCommand(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgHandleContextMenuCommand message. Does not implicitly {@link CMsgHandleContextMenuCommand.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {ICMsgHandleContextMenuCommand} message CMsgHandleContextMenuCommand message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgHandleContextMenuCommand.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.command_id != null && message.hasOwnProperty("command_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.command_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgHandleContextMenuCommand message, length delimited. Does not implicitly {@link CMsgHandleContextMenuCommand.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {ICMsgHandleContextMenuCommand} message CMsgHandleContextMenuCommand message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgHandleContextMenuCommand.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgHandleContextMenuCommand message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgHandleContextMenuCommand} CMsgHandleContextMenuCommand
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgHandleContextMenuCommand.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgHandleContextMenuCommand();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.command_id = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgHandleContextMenuCommand message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgHandleContextMenuCommand} CMsgHandleContextMenuCommand
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgHandleContextMenuCommand.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgHandleContextMenuCommand message.
+         * @function verify
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgHandleContextMenuCommand.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.command_id != null && message.hasOwnProperty("command_id"))
+                if (!$util.isInteger(message.command_id))
+                    return "command_id: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgHandleContextMenuCommand message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgHandleContextMenuCommand} CMsgHandleContextMenuCommand
+         */
+        CMsgHandleContextMenuCommand.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgHandleContextMenuCommand)
+                return object;
+            var message = new $root.CMsgHandleContextMenuCommand();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.command_id != null)
+                message.command_id = object.command_id | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgHandleContextMenuCommand message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgHandleContextMenuCommand
+         * @static
+         * @param {CMsgHandleContextMenuCommand} message CMsgHandleContextMenuCommand
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgHandleContextMenuCommand.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.command_id = 0;
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.command_id != null && message.hasOwnProperty("command_id"))
+                object.command_id = message.command_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgHandleContextMenuCommand to JSON.
+         * @function toJSON
+         * @memberof CMsgHandleContextMenuCommand
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgHandleContextMenuCommand.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgHandleContextMenuCommand;
+    })();
+    
+    $root.CMsgTouchGesture = (function() {
+    
+        /**
+         * Properties of a CMsgTouchGesture.
+         * @exports ICMsgTouchGesture
+         * @interface ICMsgTouchGesture
+         * @property {number|null} [browser_handle] CMsgTouchGesture browser_handle
+         * @property {number|null} [id] CMsgTouchGesture id
+         * @property {number|null} [gesture] CMsgTouchGesture gesture
+         * @property {number|null} [x] CMsgTouchGesture x
+         * @property {number|null} [y] CMsgTouchGesture y
+         * @property {number|null} [width] CMsgTouchGesture width
+         * @property {number|null} [height] CMsgTouchGesture height
+         * @property {number|null} [tap_count] CMsgTouchGesture tap_count
+         */
+    
+        /**
+         * Constructs a new CMsgTouchGesture.
+         * @exports CMsgTouchGesture
+         * @classdesc Represents a CMsgTouchGesture.
+         * @implements ICMsgTouchGesture
+         * @constructor
+         * @param {ICMsgTouchGesture=} [properties] Properties to set
+         */
+        function CMsgTouchGesture(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgTouchGesture browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgTouchGesture id.
+         * @member {number} id
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.id = 0;
+    
+        /**
+         * CMsgTouchGesture gesture.
+         * @member {number} gesture
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.gesture = 0;
+    
+        /**
+         * CMsgTouchGesture x.
+         * @member {number} x
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.x = 0;
+    
+        /**
+         * CMsgTouchGesture y.
+         * @member {number} y
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.y = 0;
+    
+        /**
+         * CMsgTouchGesture width.
+         * @member {number} width
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.width = 0;
+    
+        /**
+         * CMsgTouchGesture height.
+         * @member {number} height
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.height = 0;
+    
+        /**
+         * CMsgTouchGesture tap_count.
+         * @member {number} tap_count
+         * @memberof CMsgTouchGesture
+         * @instance
+         */
+        CMsgTouchGesture.prototype.tap_count = 0;
+    
+        /**
+         * Creates a new CMsgTouchGesture instance using the specified properties.
+         * @function create
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {ICMsgTouchGesture=} [properties] Properties to set
+         * @returns {CMsgTouchGesture} CMsgTouchGesture instance
+         */
+        CMsgTouchGesture.create = function create(properties) {
+            return new CMsgTouchGesture(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgTouchGesture message. Does not implicitly {@link CMsgTouchGesture.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {ICMsgTouchGesture} message CMsgTouchGesture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgTouchGesture.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.id);
+            if (message.gesture != null && message.hasOwnProperty("gesture"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.gesture);
+            if (message.x != null && message.hasOwnProperty("x"))
+                writer.uint32(/* id 4, wireType 1 =*/33).double(message.x);
+            if (message.y != null && message.hasOwnProperty("y"))
+                writer.uint32(/* id 5, wireType 1 =*/41).double(message.y);
+            if (message.width != null && message.hasOwnProperty("width"))
+                writer.uint32(/* id 6, wireType 1 =*/49).double(message.width);
+            if (message.height != null && message.hasOwnProperty("height"))
+                writer.uint32(/* id 7, wireType 1 =*/57).double(message.height);
+            if (message.tap_count != null && message.hasOwnProperty("tap_count"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.tap_count);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgTouchGesture message, length delimited. Does not implicitly {@link CMsgTouchGesture.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {ICMsgTouchGesture} message CMsgTouchGesture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgTouchGesture.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgTouchGesture message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgTouchGesture} CMsgTouchGesture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgTouchGesture.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgTouchGesture();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.id = reader.int32();
+                    break;
+                case 3:
+                    message.gesture = reader.uint32();
+                    break;
+                case 4:
+                    message.x = reader.double();
+                    break;
+                case 5:
+                    message.y = reader.double();
+                    break;
+                case 6:
+                    message.width = reader.double();
+                    break;
+                case 7:
+                    message.height = reader.double();
+                    break;
+                case 8:
+                    message.tap_count = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgTouchGesture message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgTouchGesture} CMsgTouchGesture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgTouchGesture.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgTouchGesture message.
+         * @function verify
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgTouchGesture.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.gesture != null && message.hasOwnProperty("gesture"))
+                if (!$util.isInteger(message.gesture))
+                    return "gesture: integer expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            if (message.width != null && message.hasOwnProperty("width"))
+                if (typeof message.width !== "number")
+                    return "width: number expected";
+            if (message.height != null && message.hasOwnProperty("height"))
+                if (typeof message.height !== "number")
+                    return "height: number expected";
+            if (message.tap_count != null && message.hasOwnProperty("tap_count"))
+                if (!$util.isInteger(message.tap_count))
+                    return "tap_count: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgTouchGesture message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgTouchGesture} CMsgTouchGesture
+         */
+        CMsgTouchGesture.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgTouchGesture)
+                return object;
+            var message = new $root.CMsgTouchGesture();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.id != null)
+                message.id = object.id | 0;
+            if (object.gesture != null)
+                message.gesture = object.gesture >>> 0;
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            if (object.width != null)
+                message.width = Number(object.width);
+            if (object.height != null)
+                message.height = Number(object.height);
+            if (object.tap_count != null)
+                message.tap_count = object.tap_count >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgTouchGesture message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgTouchGesture
+         * @static
+         * @param {CMsgTouchGesture} message CMsgTouchGesture
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgTouchGesture.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.id = 0;
+                object.gesture = 0;
+                object.x = 0;
+                object.y = 0;
+                object.width = 0;
+                object.height = 0;
+                object.tap_count = 0;
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.gesture != null && message.hasOwnProperty("gesture"))
+                object.gesture = message.gesture;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            if (message.width != null && message.hasOwnProperty("width"))
+                object.width = options.json && !isFinite(message.width) ? String(message.width) : message.width;
+            if (message.height != null && message.hasOwnProperty("height"))
+                object.height = options.json && !isFinite(message.height) ? String(message.height) : message.height;
+            if (message.tap_count != null && message.hasOwnProperty("tap_count"))
+                object.tap_count = message.tap_count;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgTouchGesture to JSON.
+         * @function toJSON
+         * @memberof CMsgTouchGesture
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgTouchGesture.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgTouchGesture;
+    })();
+    
+    $root.CMsgSetTouchGesturesToCancel = (function() {
+    
+        /**
+         * Properties of a CMsgSetTouchGesturesToCancel.
+         * @exports ICMsgSetTouchGesturesToCancel
+         * @interface ICMsgSetTouchGesturesToCancel
+         * @property {number|null} [browser_handle] CMsgSetTouchGesturesToCancel browser_handle
+         * @property {Array.<number>|null} [gestures] CMsgSetTouchGesturesToCancel gestures
+         */
+    
+        /**
+         * Constructs a new CMsgSetTouchGesturesToCancel.
+         * @exports CMsgSetTouchGesturesToCancel
+         * @classdesc Represents a CMsgSetTouchGesturesToCancel.
+         * @implements ICMsgSetTouchGesturesToCancel
+         * @constructor
+         * @param {ICMsgSetTouchGesturesToCancel=} [properties] Properties to set
+         */
+        function CMsgSetTouchGesturesToCancel(properties) {
+            this.gestures = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSetTouchGesturesToCancel browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @instance
+         */
+        CMsgSetTouchGesturesToCancel.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgSetTouchGesturesToCancel gestures.
+         * @member {Array.<number>} gestures
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @instance
+         */
+        CMsgSetTouchGesturesToCancel.prototype.gestures = $util.emptyArray;
+    
+        /**
+         * Creates a new CMsgSetTouchGesturesToCancel instance using the specified properties.
+         * @function create
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {ICMsgSetTouchGesturesToCancel=} [properties] Properties to set
+         * @returns {CMsgSetTouchGesturesToCancel} CMsgSetTouchGesturesToCancel instance
+         */
+        CMsgSetTouchGesturesToCancel.create = function create(properties) {
+            return new CMsgSetTouchGesturesToCancel(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSetTouchGesturesToCancel message. Does not implicitly {@link CMsgSetTouchGesturesToCancel.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {ICMsgSetTouchGesturesToCancel} message CMsgSetTouchGesturesToCancel message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSetTouchGesturesToCancel.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.gestures != null && message.gestures.length)
+                for (var i = 0; i < message.gestures.length; ++i)
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.gestures[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSetTouchGesturesToCancel message, length delimited. Does not implicitly {@link CMsgSetTouchGesturesToCancel.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {ICMsgSetTouchGesturesToCancel} message CMsgSetTouchGesturesToCancel message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSetTouchGesturesToCancel.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSetTouchGesturesToCancel message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSetTouchGesturesToCancel} CMsgSetTouchGesturesToCancel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSetTouchGesturesToCancel.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSetTouchGesturesToCancel();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.gestures && message.gestures.length))
+                        message.gestures = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.gestures.push(reader.uint32());
+                    } else
+                        message.gestures.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSetTouchGesturesToCancel message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSetTouchGesturesToCancel} CMsgSetTouchGesturesToCancel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSetTouchGesturesToCancel.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSetTouchGesturesToCancel message.
+         * @function verify
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSetTouchGesturesToCancel.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.gestures != null && message.hasOwnProperty("gestures")) {
+                if (!Array.isArray(message.gestures))
+                    return "gestures: array expected";
+                for (var i = 0; i < message.gestures.length; ++i)
+                    if (!$util.isInteger(message.gestures[i]))
+                        return "gestures: integer[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSetTouchGesturesToCancel message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSetTouchGesturesToCancel} CMsgSetTouchGesturesToCancel
+         */
+        CMsgSetTouchGesturesToCancel.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSetTouchGesturesToCancel)
+                return object;
+            var message = new $root.CMsgSetTouchGesturesToCancel();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.gestures) {
+                if (!Array.isArray(object.gestures))
+                    throw TypeError(".CMsgSetTouchGesturesToCancel.gestures: array expected");
+                message.gestures = [];
+                for (var i = 0; i < object.gestures.length; ++i)
+                    message.gestures[i] = object.gestures[i] >>> 0;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSetTouchGesturesToCancel message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @static
+         * @param {CMsgSetTouchGesturesToCancel} message CMsgSetTouchGesturesToCancel
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSetTouchGesturesToCancel.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.gestures = [];
+            if (options.defaults)
+                object.browser_handle = 0;
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.gestures && message.gestures.length) {
+                object.gestures = [];
+                for (var j = 0; j < message.gestures.length; ++j)
+                    object.gestures[j] = message.gestures[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSetTouchGesturesToCancel to JSON.
+         * @function toJSON
+         * @memberof CMsgSetTouchGesturesToCancel
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSetTouchGesturesToCancel.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSetTouchGesturesToCancel;
     })();
     
     $root.CMsgImeSetComposition = (function() {
@@ -33864,9 +35230,9 @@
         CMsgImeSetComposition.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+            if (message.text != null && message.hasOwnProperty("text"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             return writer;
         };
@@ -34074,9 +35440,9 @@
         CMsgImeCommitText.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+            if (message.text != null && message.hasOwnProperty("text"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             return writer;
         };
@@ -34275,7 +35641,7 @@
         CMsgImeCancelComposition.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             return writer;
         };
@@ -34480,11 +35846,11 @@
         CMsgImeCompositionRangeChanged.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y);
             return writer;
         };
@@ -34712,11 +36078,11 @@
         CMsgInspectElement.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+            if (message.x != null && message.hasOwnProperty("x"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+            if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y);
             return writer;
         };
@@ -34935,9 +36301,9 @@
         CMsgDisableF5.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.disable != null && Object.hasOwnProperty.call(message, "disable"))
+            if (message.disable != null && message.hasOwnProperty("disable"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.disable);
             return writer;
         };
@@ -35145,9 +36511,9 @@
         CMsgStartDownload.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.browser_handle != null && Object.hasOwnProperty.call(message, "browser_handle"))
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            if (message.url != null && message.hasOwnProperty("url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
             return writer;
         };
@@ -35288,6 +36654,447 @@
         };
     
         return CMsgStartDownload;
+    })();
+    
+    $root.CMsgSetTopWindow = (function() {
+    
+        /**
+         * Properties of a CMsgSetTopWindow.
+         * @exports ICMsgSetTopWindow
+         * @interface ICMsgSetTopWindow
+         * @property {number|null} [browser_handle] CMsgSetTopWindow browser_handle
+         */
+    
+        /**
+         * Constructs a new CMsgSetTopWindow.
+         * @exports CMsgSetTopWindow
+         * @classdesc Represents a CMsgSetTopWindow.
+         * @implements ICMsgSetTopWindow
+         * @constructor
+         * @param {ICMsgSetTopWindow=} [properties] Properties to set
+         */
+        function CMsgSetTopWindow(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSetTopWindow browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgSetTopWindow
+         * @instance
+         */
+        CMsgSetTopWindow.prototype.browser_handle = 0;
+    
+        /**
+         * Creates a new CMsgSetTopWindow instance using the specified properties.
+         * @function create
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {ICMsgSetTopWindow=} [properties] Properties to set
+         * @returns {CMsgSetTopWindow} CMsgSetTopWindow instance
+         */
+        CMsgSetTopWindow.create = function create(properties) {
+            return new CMsgSetTopWindow(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSetTopWindow message. Does not implicitly {@link CMsgSetTopWindow.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {ICMsgSetTopWindow} message CMsgSetTopWindow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSetTopWindow.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSetTopWindow message, length delimited. Does not implicitly {@link CMsgSetTopWindow.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {ICMsgSetTopWindow} message CMsgSetTopWindow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSetTopWindow.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSetTopWindow message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSetTopWindow} CMsgSetTopWindow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSetTopWindow.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSetTopWindow();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSetTopWindow message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSetTopWindow} CMsgSetTopWindow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSetTopWindow.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSetTopWindow message.
+         * @function verify
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSetTopWindow.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSetTopWindow message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSetTopWindow} CMsgSetTopWindow
+         */
+        CMsgSetTopWindow.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSetTopWindow)
+                return object;
+            var message = new $root.CMsgSetTopWindow();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSetTopWindow message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSetTopWindow
+         * @static
+         * @param {CMsgSetTopWindow} message CMsgSetTopWindow
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSetTopWindow.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.browser_handle = 0;
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSetTopWindow to JSON.
+         * @function toJSON
+         * @memberof CMsgSetTopWindow
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSetTopWindow.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSetTopWindow;
+    })();
+    
+    $root.CMsgBrowserViewPostMessageToParentRequest = (function() {
+    
+        /**
+         * Properties of a CMsgBrowserViewPostMessageToParentRequest.
+         * @exports ICMsgBrowserViewPostMessageToParentRequest
+         * @interface ICMsgBrowserViewPostMessageToParentRequest
+         * @property {number|null} [browser_handle] CMsgBrowserViewPostMessageToParentRequest browser_handle
+         * @property {string|null} [message] CMsgBrowserViewPostMessageToParentRequest message
+         * @property {string|null} [args] CMsgBrowserViewPostMessageToParentRequest args
+         * @property {string|null} [requesting_url] CMsgBrowserViewPostMessageToParentRequest requesting_url
+         */
+    
+        /**
+         * Constructs a new CMsgBrowserViewPostMessageToParentRequest.
+         * @exports CMsgBrowserViewPostMessageToParentRequest
+         * @classdesc Represents a CMsgBrowserViewPostMessageToParentRequest.
+         * @implements ICMsgBrowserViewPostMessageToParentRequest
+         * @constructor
+         * @param {ICMsgBrowserViewPostMessageToParentRequest=} [properties] Properties to set
+         */
+        function CMsgBrowserViewPostMessageToParentRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgBrowserViewPostMessageToParentRequest browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @instance
+         */
+        CMsgBrowserViewPostMessageToParentRequest.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgBrowserViewPostMessageToParentRequest message.
+         * @member {string} message
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @instance
+         */
+        CMsgBrowserViewPostMessageToParentRequest.prototype.message = "";
+    
+        /**
+         * CMsgBrowserViewPostMessageToParentRequest args.
+         * @member {string} args
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @instance
+         */
+        CMsgBrowserViewPostMessageToParentRequest.prototype.args = "";
+    
+        /**
+         * CMsgBrowserViewPostMessageToParentRequest requesting_url.
+         * @member {string} requesting_url
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @instance
+         */
+        CMsgBrowserViewPostMessageToParentRequest.prototype.requesting_url = "";
+    
+        /**
+         * Creates a new CMsgBrowserViewPostMessageToParentRequest instance using the specified properties.
+         * @function create
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {ICMsgBrowserViewPostMessageToParentRequest=} [properties] Properties to set
+         * @returns {CMsgBrowserViewPostMessageToParentRequest} CMsgBrowserViewPostMessageToParentRequest instance
+         */
+        CMsgBrowserViewPostMessageToParentRequest.create = function create(properties) {
+            return new CMsgBrowserViewPostMessageToParentRequest(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgBrowserViewPostMessageToParentRequest message. Does not implicitly {@link CMsgBrowserViewPostMessageToParentRequest.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {ICMsgBrowserViewPostMessageToParentRequest} message CMsgBrowserViewPostMessageToParentRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgBrowserViewPostMessageToParentRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+            if (message.args != null && message.hasOwnProperty("args"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.args);
+            if (message.requesting_url != null && message.hasOwnProperty("requesting_url"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requesting_url);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgBrowserViewPostMessageToParentRequest message, length delimited. Does not implicitly {@link CMsgBrowserViewPostMessageToParentRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {ICMsgBrowserViewPostMessageToParentRequest} message CMsgBrowserViewPostMessageToParentRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgBrowserViewPostMessageToParentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgBrowserViewPostMessageToParentRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgBrowserViewPostMessageToParentRequest} CMsgBrowserViewPostMessageToParentRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgBrowserViewPostMessageToParentRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgBrowserViewPostMessageToParentRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.message = reader.string();
+                    break;
+                case 3:
+                    message.args = reader.string();
+                    break;
+                case 4:
+                    message.requesting_url = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgBrowserViewPostMessageToParentRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgBrowserViewPostMessageToParentRequest} CMsgBrowserViewPostMessageToParentRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgBrowserViewPostMessageToParentRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgBrowserViewPostMessageToParentRequest message.
+         * @function verify
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgBrowserViewPostMessageToParentRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.args != null && message.hasOwnProperty("args"))
+                if (!$util.isString(message.args))
+                    return "args: string expected";
+            if (message.requesting_url != null && message.hasOwnProperty("requesting_url"))
+                if (!$util.isString(message.requesting_url))
+                    return "requesting_url: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgBrowserViewPostMessageToParentRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgBrowserViewPostMessageToParentRequest} CMsgBrowserViewPostMessageToParentRequest
+         */
+        CMsgBrowserViewPostMessageToParentRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgBrowserViewPostMessageToParentRequest)
+                return object;
+            var message = new $root.CMsgBrowserViewPostMessageToParentRequest();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.args != null)
+                message.args = String(object.args);
+            if (object.requesting_url != null)
+                message.requesting_url = String(object.requesting_url);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgBrowserViewPostMessageToParentRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @static
+         * @param {CMsgBrowserViewPostMessageToParentRequest} message CMsgBrowserViewPostMessageToParentRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgBrowserViewPostMessageToParentRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.message = "";
+                object.args = "";
+                object.requesting_url = "";
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.args != null && message.hasOwnProperty("args"))
+                object.args = message.args;
+            if (message.requesting_url != null && message.hasOwnProperty("requesting_url"))
+                object.requesting_url = message.requesting_url;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgBrowserViewPostMessageToParentRequest to JSON.
+         * @function toJSON
+         * @memberof CMsgBrowserViewPostMessageToParentRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgBrowserViewPostMessageToParentRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgBrowserViewPostMessageToParentRequest;
     })();
 
     return $root;

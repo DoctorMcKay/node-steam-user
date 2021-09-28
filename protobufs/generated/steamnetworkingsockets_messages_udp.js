@@ -19,7 +19,7 @@
     /**
      * ESteamNetworkingUDPMsgID enum.
      * @exports ESteamNetworkingUDPMsgID
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_ESteamNetworkingUDPMsg_ChallengeRequest=32 k_ESteamNetworkingUDPMsg_ChallengeRequest value
      * @property {number} k_ESteamNetworkingUDPMsg_ChallengeReply=33 k_ESteamNetworkingUDPMsg_ChallengeReply value
      * @property {number} k_ESteamNetworkingUDPMsg_ConnectRequest=34 k_ESteamNetworkingUDPMsg_ConnectRequest value
@@ -112,11 +112,11 @@
         CMsgSteamSockets_UDP_ChallengeRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.my_timestamp != null && Object.hasOwnProperty.call(message, "my_timestamp"))
+            if (message.my_timestamp != null && message.hasOwnProperty("my_timestamp"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.my_timestamp);
-            if (message.protocol_version != null && Object.hasOwnProperty.call(message, "protocol_version"))
+            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.protocol_version);
             return writer;
         };
@@ -367,13 +367,13 @@
         CMsgSteamSockets_UDP_ChallengeReply.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connection_id != null && Object.hasOwnProperty.call(message, "connection_id"))
+            if (message.connection_id != null && message.hasOwnProperty("connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.connection_id);
-            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+            if (message.challenge != null && message.hasOwnProperty("challenge"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.challenge);
-            if (message.your_timestamp != null && Object.hasOwnProperty.call(message, "your_timestamp"))
+            if (message.your_timestamp != null && message.hasOwnProperty("your_timestamp"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.your_timestamp);
-            if (message.protocol_version != null && Object.hasOwnProperty.call(message, "protocol_version"))
+            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.protocol_version);
             return writer;
         };
@@ -703,25 +703,25 @@
         CMsgSteamSockets_UDP_ConnectRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.client_connection_id);
-            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+            if (message.challenge != null && message.hasOwnProperty("challenge"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.challenge);
-            if (message.legacy_client_steam_id != null && Object.hasOwnProperty.call(message, "legacy_client_steam_id"))
+            if (message.legacy_client_steam_id != null && message.hasOwnProperty("legacy_client_steam_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.legacy_client_steam_id);
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.my_timestamp != null && Object.hasOwnProperty.call(message, "my_timestamp"))
+            if (message.my_timestamp != null && message.hasOwnProperty("my_timestamp"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.my_timestamp);
-            if (message.ping_est_ms != null && Object.hasOwnProperty.call(message, "ping_est_ms"))
+            if (message.ping_est_ms != null && message.hasOwnProperty("ping_est_ms"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.ping_est_ms);
-            if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+            if (message.crypt != null && message.hasOwnProperty("crypt"))
                 $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.legacy_protocol_version != null && Object.hasOwnProperty.call(message, "legacy_protocol_version"))
+            if (message.legacy_protocol_version != null && message.hasOwnProperty("legacy_protocol_version"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.legacy_protocol_version);
-            if (message.legacy_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_identity_binary"))
+            if (message.legacy_identity_binary != null && message.hasOwnProperty("legacy_identity_binary"))
                 $root.CMsgSteamNetworkingIdentityLegacyBinary.encode(message.legacy_identity_binary, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-            if (message.identity_string != null && Object.hasOwnProperty.call(message, "identity_string"))
+            if (message.identity_string != null && message.hasOwnProperty("identity_string"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.identity_string);
             return writer;
         };
@@ -1137,23 +1137,23 @@
         CMsgSteamSockets_UDP_ConnectOK.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.client_connection_id != null && Object.hasOwnProperty.call(message, "client_connection_id"))
+            if (message.client_connection_id != null && message.hasOwnProperty("client_connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.client_connection_id);
-            if (message.legacy_server_steam_id != null && Object.hasOwnProperty.call(message, "legacy_server_steam_id"))
+            if (message.legacy_server_steam_id != null && message.hasOwnProperty("legacy_server_steam_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.legacy_server_steam_id);
-            if (message.your_timestamp != null && Object.hasOwnProperty.call(message, "your_timestamp"))
+            if (message.your_timestamp != null && message.hasOwnProperty("your_timestamp"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.your_timestamp);
-            if (message.delay_time_usec != null && Object.hasOwnProperty.call(message, "delay_time_usec"))
+            if (message.delay_time_usec != null && message.hasOwnProperty("delay_time_usec"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.delay_time_usec);
-            if (message.server_connection_id != null && Object.hasOwnProperty.call(message, "server_connection_id"))
+            if (message.server_connection_id != null && message.hasOwnProperty("server_connection_id"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.server_connection_id);
-            if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+            if (message.crypt != null && message.hasOwnProperty("crypt"))
                 $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-            if (message.legacy_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_identity_binary"))
+            if (message.legacy_identity_binary != null && message.hasOwnProperty("legacy_identity_binary"))
                 $root.CMsgSteamNetworkingIdentityLegacyBinary.encode(message.legacy_identity_binary, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-            if (message.identity_string != null && Object.hasOwnProperty.call(message, "identity_string"))
+            if (message.identity_string != null && message.hasOwnProperty("identity_string"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.identity_string);
             return writer;
         };
@@ -1499,13 +1499,13 @@
         CMsgSteamSockets_UDP_ConnectionClosed.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.debug != null && Object.hasOwnProperty.call(message, "debug"))
+            if (message.debug != null && message.hasOwnProperty("debug"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.debug);
-            if (message.reason_code != null && Object.hasOwnProperty.call(message, "reason_code"))
+            if (message.reason_code != null && message.hasOwnProperty("reason_code"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.reason_code);
-            if (message.to_connection_id != null && Object.hasOwnProperty.call(message, "to_connection_id"))
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.to_connection_id);
-            if (message.from_connection_id != null && Object.hasOwnProperty.call(message, "from_connection_id"))
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
                 writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.from_connection_id);
             return writer;
         };
@@ -1735,9 +1735,9 @@
         CMsgSteamSockets_UDP_NoConnection.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.from_connection_id != null && Object.hasOwnProperty.call(message, "from_connection_id"))
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
                 writer.uint32(/* id 2, wireType 5 =*/21).fixed32(message.from_connection_id);
-            if (message.to_connection_id != null && Object.hasOwnProperty.call(message, "to_connection_id"))
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.to_connection_id);
             return writer;
         };
@@ -1945,9 +1945,9 @@
         CMsgSteamSockets_UDP_Stats.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.stats != null && Object.hasOwnProperty.call(message, "stats"))
+            if (message.stats != null && message.hasOwnProperty("stats"))
                 $root.CMsgSteamDatagramConnectionQuality.encode(message.stats, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+            if (message.flags != null && message.hasOwnProperty("flags"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.flags);
             return writer;
         };
@@ -2095,7 +2095,7 @@
         /**
          * Flags enum.
          * @name CMsgSteamSockets_UDP_Stats.Flags
-         * @enum {number}
+         * @enum {string}
          * @property {number} ACK_REQUEST_E2E=2 ACK_REQUEST_E2E value
          * @property {number} ACK_REQUEST_IMMEDIATE=4 ACK_REQUEST_IMMEDIATE value
          * @property {number} NOT_PRIMARY_TRANSPORT_E2E=16 NOT_PRIMARY_TRANSPORT_E2E value
@@ -2203,15 +2203,15 @@
         CMsgSteamNetworkingIdentityLegacyBinary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.generic_bytes != null && Object.hasOwnProperty.call(message, "generic_bytes"))
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.generic_bytes);
-            if (message.generic_string != null && Object.hasOwnProperty.call(message, "generic_string"))
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.generic_string);
-            if (message.ipv6_and_port != null && Object.hasOwnProperty.call(message, "ipv6_and_port"))
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.ipv6_and_port);
-            if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                 writer.uint32(/* id 16, wireType 1 =*/129).fixed64(message.steam_id);
-            if (message.xbox_pairwise_id != null && Object.hasOwnProperty.call(message, "xbox_pairwise_id"))
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.xbox_pairwise_id);
             return writer;
         };
@@ -2549,25 +2549,25 @@
         CMsgSteamDatagramCertificate.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key_type != null && Object.hasOwnProperty.call(message, "key_type"))
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.key_type);
-            if (message.key_data != null && Object.hasOwnProperty.call(message, "key_data"))
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.key_data);
-            if (message.legacy_steam_id != null && Object.hasOwnProperty.call(message, "legacy_steam_id"))
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_steam_id);
             if (message.gameserver_datacenter_ids != null && message.gameserver_datacenter_ids.length)
                 for (var i = 0; i < message.gameserver_datacenter_ids.length; ++i)
                     writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.gameserver_datacenter_ids[i]);
-            if (message.time_created != null && Object.hasOwnProperty.call(message, "time_created"))
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.time_created);
-            if (message.time_expiry != null && Object.hasOwnProperty.call(message, "time_expiry"))
+            if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.time_expiry);
             if (message.app_ids != null && message.app_ids.length)
                 for (var i = 0; i < message.app_ids.length; ++i)
                     writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.app_ids[i]);
-            if (message.legacy_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_identity_binary"))
+            if (message.legacy_identity_binary != null && message.hasOwnProperty("legacy_identity_binary"))
                 $root.CMsgSteamNetworkingIdentityLegacyBinary.encode(message.legacy_identity_binary, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-            if (message.identity_string != null && Object.hasOwnProperty.call(message, "identity_string"))
+            if (message.identity_string != null && message.hasOwnProperty("identity_string"))
                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.identity_string);
             return writer;
         };
@@ -2868,7 +2868,7 @@
         /**
          * EKeyType enum.
          * @name CMsgSteamDatagramCertificate.EKeyType
-         * @enum {number}
+         * @enum {string}
          * @property {number} INVALID=0 INVALID value
          * @property {number} ED25519=1 ED25519 value
          */
@@ -2965,13 +2965,13 @@
         CMsgSteamDatagramCertificateSigned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.private_key_data != null && Object.hasOwnProperty.call(message, "private_key_data"))
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.private_key_data);
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.cert);
-            if (message.ca_key_id != null && Object.hasOwnProperty.call(message, "ca_key_id"))
+            if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.ca_key_id);
-            if (message.ca_signature != null && Object.hasOwnProperty.call(message, "ca_signature"))
+            if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.ca_signature);
             return writer;
         };
@@ -3233,7 +3233,7 @@
         CMsgSteamDatagramCertificateRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificate.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
@@ -3372,7 +3372,7 @@
     /**
      * ESteamNetworkingSocketsCipher enum.
      * @exports ESteamNetworkingSocketsCipher
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_ESteamNetworkingSocketsCipher_INVALID=0 k_ESteamNetworkingSocketsCipher_INVALID value
      * @property {number} k_ESteamNetworkingSocketsCipher_NULL=1 k_ESteamNetworkingSocketsCipher_NULL value
      * @property {number} k_ESteamNetworkingSocketsCipher_AES_256_GCM=2 k_ESteamNetworkingSocketsCipher_AES_256_GCM value
@@ -3478,13 +3478,13 @@
         CMsgSteamDatagramSessionCryptInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key_type != null && Object.hasOwnProperty.call(message, "key_type"))
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.key_type);
-            if (message.key_data != null && Object.hasOwnProperty.call(message, "key_data"))
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.key_data);
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.nonce);
-            if (message.protocol_version != null && Object.hasOwnProperty.call(message, "protocol_version"))
+            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.protocol_version);
             if (message.ciphers != null && message.ciphers.length)
                 for (var i = 0; i < message.ciphers.length; ++i)
@@ -3739,7 +3739,7 @@
         /**
          * EKeyType enum.
          * @name CMsgSteamDatagramSessionCryptInfo.EKeyType
-         * @enum {number}
+         * @enum {string}
          * @property {number} INVALID=0 INVALID value
          * @property {number} CURVE25519=1 CURVE25519 value
          */
@@ -3818,9 +3818,9 @@
         CMsgSteamDatagramSessionCryptInfoSigned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.info != null && Object.hasOwnProperty.call(message, "info"))
+            if (message.info != null && message.hasOwnProperty("info"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.info);
-            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+            if (message.signature != null && message.hasOwnProperty("signature"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.signature);
             return writer;
         };
@@ -4046,9 +4046,9 @@
         CMsgSteamDatagramDiagnostic.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+            if (message.severity != null && message.hasOwnProperty("severity"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.severity);
-            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+            if (message.text != null && message.hasOwnProperty("text"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
             return writer;
         };
@@ -4310,21 +4310,21 @@
         CMsgSteamDatagramLinkInstantaneousStats.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.out_packets_per_sec_x10 != null && Object.hasOwnProperty.call(message, "out_packets_per_sec_x10"))
+            if (message.out_packets_per_sec_x10 != null && message.hasOwnProperty("out_packets_per_sec_x10"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.out_packets_per_sec_x10);
-            if (message.out_bytes_per_sec != null && Object.hasOwnProperty.call(message, "out_bytes_per_sec"))
+            if (message.out_bytes_per_sec != null && message.hasOwnProperty("out_bytes_per_sec"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.out_bytes_per_sec);
-            if (message.in_packets_per_sec_x10 != null && Object.hasOwnProperty.call(message, "in_packets_per_sec_x10"))
+            if (message.in_packets_per_sec_x10 != null && message.hasOwnProperty("in_packets_per_sec_x10"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.in_packets_per_sec_x10);
-            if (message.in_bytes_per_sec != null && Object.hasOwnProperty.call(message, "in_bytes_per_sec"))
+            if (message.in_bytes_per_sec != null && message.hasOwnProperty("in_bytes_per_sec"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.in_bytes_per_sec);
-            if (message.ping_ms != null && Object.hasOwnProperty.call(message, "ping_ms"))
+            if (message.ping_ms != null && message.hasOwnProperty("ping_ms"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.ping_ms);
-            if (message.packets_dropped_pct != null && Object.hasOwnProperty.call(message, "packets_dropped_pct"))
+            if (message.packets_dropped_pct != null && message.hasOwnProperty("packets_dropped_pct"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.packets_dropped_pct);
-            if (message.packets_weird_sequence_pct != null && Object.hasOwnProperty.call(message, "packets_weird_sequence_pct"))
+            if (message.packets_weird_sequence_pct != null && message.hasOwnProperty("packets_weird_sequence_pct"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.packets_weird_sequence_pct);
-            if (message.peak_jitter_usec != null && Object.hasOwnProperty.call(message, "peak_jitter_usec"))
+            if (message.peak_jitter_usec != null && message.hasOwnProperty("peak_jitter_usec"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.peak_jitter_usec);
             return writer;
         };
@@ -4549,6 +4549,9 @@
          * @property {number|Long|null} [packets_recv_out_of_order] CMsgSteamDatagramLinkLifetimeStats packets_recv_out_of_order
          * @property {number|Long|null} [packets_recv_duplicate] CMsgSteamDatagramLinkLifetimeStats packets_recv_duplicate
          * @property {number|Long|null} [packets_recv_lurch] CMsgSteamDatagramLinkLifetimeStats packets_recv_lurch
+         * @property {Array.<number|Long>|null} [multipath_packets_recv_sequenced] CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_sequenced
+         * @property {Array.<number|Long>|null} [multipath_packets_recv_later] CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_later
+         * @property {number|null} [multipath_send_enabled] CMsgSteamDatagramLinkLifetimeStats multipath_send_enabled
          * @property {number|null} [quality_histogram_100] CMsgSteamDatagramLinkLifetimeStats quality_histogram_100
          * @property {number|null} [quality_histogram_99] CMsgSteamDatagramLinkLifetimeStats quality_histogram_99
          * @property {number|null} [quality_histogram_97] CMsgSteamDatagramLinkLifetimeStats quality_histogram_97
@@ -4621,6 +4624,8 @@
          * @param {ICMsgSteamDatagramLinkLifetimeStats=} [properties] Properties to set
          */
         function CMsgSteamDatagramLinkLifetimeStats(properties) {
+            this.multipath_packets_recv_sequenced = [];
+            this.multipath_packets_recv_later = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4706,6 +4711,30 @@
          * @instance
          */
         CMsgSteamDatagramLinkLifetimeStats.prototype.packets_recv_lurch = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_sequenced.
+         * @member {Array.<number|Long>} multipath_packets_recv_sequenced
+         * @memberof CMsgSteamDatagramLinkLifetimeStats
+         * @instance
+         */
+        CMsgSteamDatagramLinkLifetimeStats.prototype.multipath_packets_recv_sequenced = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramLinkLifetimeStats multipath_packets_recv_later.
+         * @member {Array.<number|Long>} multipath_packets_recv_later
+         * @memberof CMsgSteamDatagramLinkLifetimeStats
+         * @instance
+         */
+        CMsgSteamDatagramLinkLifetimeStats.prototype.multipath_packets_recv_later = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramLinkLifetimeStats multipath_send_enabled.
+         * @member {number} multipath_send_enabled
+         * @memberof CMsgSteamDatagramLinkLifetimeStats
+         * @instance
+         */
+        CMsgSteamDatagramLinkLifetimeStats.prototype.multipath_send_enabled = 0;
     
         /**
          * CMsgSteamDatagramLinkLifetimeStats quality_histogram_100.
@@ -5219,147 +5248,155 @@
         CMsgSteamDatagramLinkLifetimeStats.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.connected_seconds != null && Object.hasOwnProperty.call(message, "connected_seconds"))
+            if (message.connected_seconds != null && message.hasOwnProperty("connected_seconds"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.connected_seconds);
-            if (message.packets_sent != null && Object.hasOwnProperty.call(message, "packets_sent"))
+            if (message.packets_sent != null && message.hasOwnProperty("packets_sent"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.packets_sent);
-            if (message.kb_sent != null && Object.hasOwnProperty.call(message, "kb_sent"))
+            if (message.kb_sent != null && message.hasOwnProperty("kb_sent"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.kb_sent);
-            if (message.packets_recv != null && Object.hasOwnProperty.call(message, "packets_recv"))
+            if (message.packets_recv != null && message.hasOwnProperty("packets_recv"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.packets_recv);
-            if (message.kb_recv != null && Object.hasOwnProperty.call(message, "kb_recv"))
+            if (message.kb_recv != null && message.hasOwnProperty("kb_recv"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.kb_recv);
-            if (message.packets_recv_sequenced != null && Object.hasOwnProperty.call(message, "packets_recv_sequenced"))
+            if (message.packets_recv_sequenced != null && message.hasOwnProperty("packets_recv_sequenced"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.packets_recv_sequenced);
-            if (message.packets_recv_dropped != null && Object.hasOwnProperty.call(message, "packets_recv_dropped"))
+            if (message.packets_recv_dropped != null && message.hasOwnProperty("packets_recv_dropped"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.packets_recv_dropped);
-            if (message.packets_recv_out_of_order != null && Object.hasOwnProperty.call(message, "packets_recv_out_of_order"))
+            if (message.packets_recv_out_of_order != null && message.hasOwnProperty("packets_recv_out_of_order"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.packets_recv_out_of_order);
-            if (message.packets_recv_duplicate != null && Object.hasOwnProperty.call(message, "packets_recv_duplicate"))
+            if (message.packets_recv_duplicate != null && message.hasOwnProperty("packets_recv_duplicate"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint64(message.packets_recv_duplicate);
-            if (message.packets_recv_lurch != null && Object.hasOwnProperty.call(message, "packets_recv_lurch"))
+            if (message.packets_recv_lurch != null && message.hasOwnProperty("packets_recv_lurch"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint64(message.packets_recv_lurch);
-            if (message.quality_histogram_100 != null && Object.hasOwnProperty.call(message, "quality_histogram_100"))
+            if (message.multipath_packets_recv_sequenced != null && message.multipath_packets_recv_sequenced.length)
+                for (var i = 0; i < message.multipath_packets_recv_sequenced.length; ++i)
+                    writer.uint32(/* id 12, wireType 0 =*/96).uint64(message.multipath_packets_recv_sequenced[i]);
+            if (message.multipath_packets_recv_later != null && message.multipath_packets_recv_later.length)
+                for (var i = 0; i < message.multipath_packets_recv_later.length; ++i)
+                    writer.uint32(/* id 13, wireType 0 =*/104).uint64(message.multipath_packets_recv_later[i]);
+            if (message.multipath_send_enabled != null && message.hasOwnProperty("multipath_send_enabled"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.multipath_send_enabled);
+            if (message.quality_histogram_100 != null && message.hasOwnProperty("quality_histogram_100"))
                 writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.quality_histogram_100);
-            if (message.quality_histogram_99 != null && Object.hasOwnProperty.call(message, "quality_histogram_99"))
+            if (message.quality_histogram_99 != null && message.hasOwnProperty("quality_histogram_99"))
                 writer.uint32(/* id 22, wireType 0 =*/176).uint32(message.quality_histogram_99);
-            if (message.quality_histogram_97 != null && Object.hasOwnProperty.call(message, "quality_histogram_97"))
+            if (message.quality_histogram_97 != null && message.hasOwnProperty("quality_histogram_97"))
                 writer.uint32(/* id 23, wireType 0 =*/184).uint32(message.quality_histogram_97);
-            if (message.quality_histogram_95 != null && Object.hasOwnProperty.call(message, "quality_histogram_95"))
+            if (message.quality_histogram_95 != null && message.hasOwnProperty("quality_histogram_95"))
                 writer.uint32(/* id 24, wireType 0 =*/192).uint32(message.quality_histogram_95);
-            if (message.quality_histogram_90 != null && Object.hasOwnProperty.call(message, "quality_histogram_90"))
+            if (message.quality_histogram_90 != null && message.hasOwnProperty("quality_histogram_90"))
                 writer.uint32(/* id 25, wireType 0 =*/200).uint32(message.quality_histogram_90);
-            if (message.quality_histogram_75 != null && Object.hasOwnProperty.call(message, "quality_histogram_75"))
+            if (message.quality_histogram_75 != null && message.hasOwnProperty("quality_histogram_75"))
                 writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.quality_histogram_75);
-            if (message.quality_histogram_50 != null && Object.hasOwnProperty.call(message, "quality_histogram_50"))
+            if (message.quality_histogram_50 != null && message.hasOwnProperty("quality_histogram_50"))
                 writer.uint32(/* id 27, wireType 0 =*/216).uint32(message.quality_histogram_50);
-            if (message.quality_histogram_1 != null && Object.hasOwnProperty.call(message, "quality_histogram_1"))
+            if (message.quality_histogram_1 != null && message.hasOwnProperty("quality_histogram_1"))
                 writer.uint32(/* id 28, wireType 0 =*/224).uint32(message.quality_histogram_1);
-            if (message.quality_histogram_dead != null && Object.hasOwnProperty.call(message, "quality_histogram_dead"))
+            if (message.quality_histogram_dead != null && message.hasOwnProperty("quality_histogram_dead"))
                 writer.uint32(/* id 29, wireType 0 =*/232).uint32(message.quality_histogram_dead);
-            if (message.quality_ntile_2nd != null && Object.hasOwnProperty.call(message, "quality_ntile_2nd"))
+            if (message.quality_ntile_2nd != null && message.hasOwnProperty("quality_ntile_2nd"))
                 writer.uint32(/* id 30, wireType 0 =*/240).uint32(message.quality_ntile_2nd);
-            if (message.quality_ntile_5th != null && Object.hasOwnProperty.call(message, "quality_ntile_5th"))
+            if (message.quality_ntile_5th != null && message.hasOwnProperty("quality_ntile_5th"))
                 writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.quality_ntile_5th);
-            if (message.quality_ntile_25th != null && Object.hasOwnProperty.call(message, "quality_ntile_25th"))
+            if (message.quality_ntile_25th != null && message.hasOwnProperty("quality_ntile_25th"))
                 writer.uint32(/* id 32, wireType 0 =*/256).uint32(message.quality_ntile_25th);
-            if (message.quality_ntile_50th != null && Object.hasOwnProperty.call(message, "quality_ntile_50th"))
+            if (message.quality_ntile_50th != null && message.hasOwnProperty("quality_ntile_50th"))
                 writer.uint32(/* id 33, wireType 0 =*/264).uint32(message.quality_ntile_50th);
-            if (message.ping_histogram_25 != null && Object.hasOwnProperty.call(message, "ping_histogram_25"))
+            if (message.ping_histogram_25 != null && message.hasOwnProperty("ping_histogram_25"))
                 writer.uint32(/* id 41, wireType 0 =*/328).uint32(message.ping_histogram_25);
-            if (message.ping_histogram_50 != null && Object.hasOwnProperty.call(message, "ping_histogram_50"))
+            if (message.ping_histogram_50 != null && message.hasOwnProperty("ping_histogram_50"))
                 writer.uint32(/* id 42, wireType 0 =*/336).uint32(message.ping_histogram_50);
-            if (message.ping_histogram_75 != null && Object.hasOwnProperty.call(message, "ping_histogram_75"))
+            if (message.ping_histogram_75 != null && message.hasOwnProperty("ping_histogram_75"))
                 writer.uint32(/* id 43, wireType 0 =*/344).uint32(message.ping_histogram_75);
-            if (message.ping_histogram_100 != null && Object.hasOwnProperty.call(message, "ping_histogram_100"))
+            if (message.ping_histogram_100 != null && message.hasOwnProperty("ping_histogram_100"))
                 writer.uint32(/* id 44, wireType 0 =*/352).uint32(message.ping_histogram_100);
-            if (message.ping_histogram_125 != null && Object.hasOwnProperty.call(message, "ping_histogram_125"))
+            if (message.ping_histogram_125 != null && message.hasOwnProperty("ping_histogram_125"))
                 writer.uint32(/* id 45, wireType 0 =*/360).uint32(message.ping_histogram_125);
-            if (message.ping_histogram_150 != null && Object.hasOwnProperty.call(message, "ping_histogram_150"))
+            if (message.ping_histogram_150 != null && message.hasOwnProperty("ping_histogram_150"))
                 writer.uint32(/* id 46, wireType 0 =*/368).uint32(message.ping_histogram_150);
-            if (message.ping_histogram_200 != null && Object.hasOwnProperty.call(message, "ping_histogram_200"))
+            if (message.ping_histogram_200 != null && message.hasOwnProperty("ping_histogram_200"))
                 writer.uint32(/* id 47, wireType 0 =*/376).uint32(message.ping_histogram_200);
-            if (message.ping_histogram_300 != null && Object.hasOwnProperty.call(message, "ping_histogram_300"))
+            if (message.ping_histogram_300 != null && message.hasOwnProperty("ping_histogram_300"))
                 writer.uint32(/* id 48, wireType 0 =*/384).uint32(message.ping_histogram_300);
-            if (message.ping_histogram_max != null && Object.hasOwnProperty.call(message, "ping_histogram_max"))
+            if (message.ping_histogram_max != null && message.hasOwnProperty("ping_histogram_max"))
                 writer.uint32(/* id 49, wireType 0 =*/392).uint32(message.ping_histogram_max);
-            if (message.ping_ntile_5th != null && Object.hasOwnProperty.call(message, "ping_ntile_5th"))
+            if (message.ping_ntile_5th != null && message.hasOwnProperty("ping_ntile_5th"))
                 writer.uint32(/* id 50, wireType 0 =*/400).uint32(message.ping_ntile_5th);
-            if (message.ping_ntile_50th != null && Object.hasOwnProperty.call(message, "ping_ntile_50th"))
+            if (message.ping_ntile_50th != null && message.hasOwnProperty("ping_ntile_50th"))
                 writer.uint32(/* id 51, wireType 0 =*/408).uint32(message.ping_ntile_50th);
-            if (message.ping_ntile_75th != null && Object.hasOwnProperty.call(message, "ping_ntile_75th"))
+            if (message.ping_ntile_75th != null && message.hasOwnProperty("ping_ntile_75th"))
                 writer.uint32(/* id 52, wireType 0 =*/416).uint32(message.ping_ntile_75th);
-            if (message.ping_ntile_95th != null && Object.hasOwnProperty.call(message, "ping_ntile_95th"))
+            if (message.ping_ntile_95th != null && message.hasOwnProperty("ping_ntile_95th"))
                 writer.uint32(/* id 53, wireType 0 =*/424).uint32(message.ping_ntile_95th);
-            if (message.ping_ntile_98th != null && Object.hasOwnProperty.call(message, "ping_ntile_98th"))
+            if (message.ping_ntile_98th != null && message.hasOwnProperty("ping_ntile_98th"))
                 writer.uint32(/* id 54, wireType 0 =*/432).uint32(message.ping_ntile_98th);
-            if (message.jitter_histogram_negligible != null && Object.hasOwnProperty.call(message, "jitter_histogram_negligible"))
+            if (message.jitter_histogram_negligible != null && message.hasOwnProperty("jitter_histogram_negligible"))
                 writer.uint32(/* id 61, wireType 0 =*/488).uint32(message.jitter_histogram_negligible);
-            if (message.jitter_histogram_1 != null && Object.hasOwnProperty.call(message, "jitter_histogram_1"))
+            if (message.jitter_histogram_1 != null && message.hasOwnProperty("jitter_histogram_1"))
                 writer.uint32(/* id 62, wireType 0 =*/496).uint32(message.jitter_histogram_1);
-            if (message.jitter_histogram_2 != null && Object.hasOwnProperty.call(message, "jitter_histogram_2"))
+            if (message.jitter_histogram_2 != null && message.hasOwnProperty("jitter_histogram_2"))
                 writer.uint32(/* id 63, wireType 0 =*/504).uint32(message.jitter_histogram_2);
-            if (message.jitter_histogram_5 != null && Object.hasOwnProperty.call(message, "jitter_histogram_5"))
+            if (message.jitter_histogram_5 != null && message.hasOwnProperty("jitter_histogram_5"))
                 writer.uint32(/* id 64, wireType 0 =*/512).uint32(message.jitter_histogram_5);
-            if (message.jitter_histogram_10 != null && Object.hasOwnProperty.call(message, "jitter_histogram_10"))
+            if (message.jitter_histogram_10 != null && message.hasOwnProperty("jitter_histogram_10"))
                 writer.uint32(/* id 65, wireType 0 =*/520).uint32(message.jitter_histogram_10);
-            if (message.jitter_histogram_20 != null && Object.hasOwnProperty.call(message, "jitter_histogram_20"))
+            if (message.jitter_histogram_20 != null && message.hasOwnProperty("jitter_histogram_20"))
                 writer.uint32(/* id 66, wireType 0 =*/528).uint32(message.jitter_histogram_20);
-            if (message.txspeed_max != null && Object.hasOwnProperty.call(message, "txspeed_max"))
+            if (message.txspeed_max != null && message.hasOwnProperty("txspeed_max"))
                 writer.uint32(/* id 67, wireType 0 =*/536).uint32(message.txspeed_max);
-            if (message.txspeed_histogram_16 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_16"))
+            if (message.txspeed_histogram_16 != null && message.hasOwnProperty("txspeed_histogram_16"))
                 writer.uint32(/* id 68, wireType 0 =*/544).uint32(message.txspeed_histogram_16);
-            if (message.txspeed_histogram_32 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_32"))
+            if (message.txspeed_histogram_32 != null && message.hasOwnProperty("txspeed_histogram_32"))
                 writer.uint32(/* id 69, wireType 0 =*/552).uint32(message.txspeed_histogram_32);
-            if (message.txspeed_histogram_64 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_64"))
+            if (message.txspeed_histogram_64 != null && message.hasOwnProperty("txspeed_histogram_64"))
                 writer.uint32(/* id 70, wireType 0 =*/560).uint32(message.txspeed_histogram_64);
-            if (message.txspeed_histogram_128 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_128"))
+            if (message.txspeed_histogram_128 != null && message.hasOwnProperty("txspeed_histogram_128"))
                 writer.uint32(/* id 71, wireType 0 =*/568).uint32(message.txspeed_histogram_128);
-            if (message.txspeed_histogram_256 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_256"))
+            if (message.txspeed_histogram_256 != null && message.hasOwnProperty("txspeed_histogram_256"))
                 writer.uint32(/* id 72, wireType 0 =*/576).uint32(message.txspeed_histogram_256);
-            if (message.txspeed_histogram_512 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_512"))
+            if (message.txspeed_histogram_512 != null && message.hasOwnProperty("txspeed_histogram_512"))
                 writer.uint32(/* id 73, wireType 0 =*/584).uint32(message.txspeed_histogram_512);
-            if (message.txspeed_histogram_1024 != null && Object.hasOwnProperty.call(message, "txspeed_histogram_1024"))
+            if (message.txspeed_histogram_1024 != null && message.hasOwnProperty("txspeed_histogram_1024"))
                 writer.uint32(/* id 74, wireType 0 =*/592).uint32(message.txspeed_histogram_1024);
-            if (message.txspeed_histogram_max != null && Object.hasOwnProperty.call(message, "txspeed_histogram_max"))
+            if (message.txspeed_histogram_max != null && message.hasOwnProperty("txspeed_histogram_max"))
                 writer.uint32(/* id 75, wireType 0 =*/600).uint32(message.txspeed_histogram_max);
-            if (message.txspeed_ntile_5th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_5th"))
+            if (message.txspeed_ntile_5th != null && message.hasOwnProperty("txspeed_ntile_5th"))
                 writer.uint32(/* id 76, wireType 0 =*/608).uint32(message.txspeed_ntile_5th);
-            if (message.txspeed_ntile_50th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_50th"))
+            if (message.txspeed_ntile_50th != null && message.hasOwnProperty("txspeed_ntile_50th"))
                 writer.uint32(/* id 77, wireType 0 =*/616).uint32(message.txspeed_ntile_50th);
-            if (message.txspeed_ntile_75th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_75th"))
+            if (message.txspeed_ntile_75th != null && message.hasOwnProperty("txspeed_ntile_75th"))
                 writer.uint32(/* id 78, wireType 0 =*/624).uint32(message.txspeed_ntile_75th);
-            if (message.txspeed_ntile_95th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_95th"))
+            if (message.txspeed_ntile_95th != null && message.hasOwnProperty("txspeed_ntile_95th"))
                 writer.uint32(/* id 79, wireType 0 =*/632).uint32(message.txspeed_ntile_95th);
-            if (message.txspeed_ntile_98th != null && Object.hasOwnProperty.call(message, "txspeed_ntile_98th"))
+            if (message.txspeed_ntile_98th != null && message.hasOwnProperty("txspeed_ntile_98th"))
                 writer.uint32(/* id 80, wireType 0 =*/640).uint32(message.txspeed_ntile_98th);
-            if (message.rxspeed_max != null && Object.hasOwnProperty.call(message, "rxspeed_max"))
+            if (message.rxspeed_max != null && message.hasOwnProperty("rxspeed_max"))
                 writer.uint32(/* id 81, wireType 0 =*/648).uint32(message.rxspeed_max);
-            if (message.rxspeed_histogram_16 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_16"))
+            if (message.rxspeed_histogram_16 != null && message.hasOwnProperty("rxspeed_histogram_16"))
                 writer.uint32(/* id 82, wireType 0 =*/656).uint32(message.rxspeed_histogram_16);
-            if (message.rxspeed_histogram_32 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_32"))
+            if (message.rxspeed_histogram_32 != null && message.hasOwnProperty("rxspeed_histogram_32"))
                 writer.uint32(/* id 83, wireType 0 =*/664).uint32(message.rxspeed_histogram_32);
-            if (message.rxspeed_histogram_64 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_64"))
+            if (message.rxspeed_histogram_64 != null && message.hasOwnProperty("rxspeed_histogram_64"))
                 writer.uint32(/* id 84, wireType 0 =*/672).uint32(message.rxspeed_histogram_64);
-            if (message.rxspeed_histogram_128 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_128"))
+            if (message.rxspeed_histogram_128 != null && message.hasOwnProperty("rxspeed_histogram_128"))
                 writer.uint32(/* id 85, wireType 0 =*/680).uint32(message.rxspeed_histogram_128);
-            if (message.rxspeed_histogram_256 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_256"))
+            if (message.rxspeed_histogram_256 != null && message.hasOwnProperty("rxspeed_histogram_256"))
                 writer.uint32(/* id 86, wireType 0 =*/688).uint32(message.rxspeed_histogram_256);
-            if (message.rxspeed_histogram_512 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_512"))
+            if (message.rxspeed_histogram_512 != null && message.hasOwnProperty("rxspeed_histogram_512"))
                 writer.uint32(/* id 87, wireType 0 =*/696).uint32(message.rxspeed_histogram_512);
-            if (message.rxspeed_histogram_1024 != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_1024"))
+            if (message.rxspeed_histogram_1024 != null && message.hasOwnProperty("rxspeed_histogram_1024"))
                 writer.uint32(/* id 88, wireType 0 =*/704).uint32(message.rxspeed_histogram_1024);
-            if (message.rxspeed_histogram_max != null && Object.hasOwnProperty.call(message, "rxspeed_histogram_max"))
+            if (message.rxspeed_histogram_max != null && message.hasOwnProperty("rxspeed_histogram_max"))
                 writer.uint32(/* id 89, wireType 0 =*/712).uint32(message.rxspeed_histogram_max);
-            if (message.rxspeed_ntile_5th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_5th"))
+            if (message.rxspeed_ntile_5th != null && message.hasOwnProperty("rxspeed_ntile_5th"))
                 writer.uint32(/* id 90, wireType 0 =*/720).uint32(message.rxspeed_ntile_5th);
-            if (message.rxspeed_ntile_50th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_50th"))
+            if (message.rxspeed_ntile_50th != null && message.hasOwnProperty("rxspeed_ntile_50th"))
                 writer.uint32(/* id 91, wireType 0 =*/728).uint32(message.rxspeed_ntile_50th);
-            if (message.rxspeed_ntile_75th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_75th"))
+            if (message.rxspeed_ntile_75th != null && message.hasOwnProperty("rxspeed_ntile_75th"))
                 writer.uint32(/* id 92, wireType 0 =*/736).uint32(message.rxspeed_ntile_75th);
-            if (message.rxspeed_ntile_95th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_95th"))
+            if (message.rxspeed_ntile_95th != null && message.hasOwnProperty("rxspeed_ntile_95th"))
                 writer.uint32(/* id 93, wireType 0 =*/744).uint32(message.rxspeed_ntile_95th);
-            if (message.rxspeed_ntile_98th != null && Object.hasOwnProperty.call(message, "rxspeed_ntile_98th"))
+            if (message.rxspeed_ntile_98th != null && message.hasOwnProperty("rxspeed_ntile_98th"))
                 writer.uint32(/* id 94, wireType 0 =*/752).uint32(message.rxspeed_ntile_98th);
             return writer;
         };
@@ -5424,6 +5461,29 @@
                     break;
                 case 11:
                     message.packets_recv_lurch = reader.uint64();
+                    break;
+                case 12:
+                    if (!(message.multipath_packets_recv_sequenced && message.multipath_packets_recv_sequenced.length))
+                        message.multipath_packets_recv_sequenced = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.multipath_packets_recv_sequenced.push(reader.uint64());
+                    } else
+                        message.multipath_packets_recv_sequenced.push(reader.uint64());
+                    break;
+                case 13:
+                    if (!(message.multipath_packets_recv_later && message.multipath_packets_recv_later.length))
+                        message.multipath_packets_recv_later = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.multipath_packets_recv_later.push(reader.uint64());
+                    } else
+                        message.multipath_packets_recv_later.push(reader.uint64());
+                    break;
+                case 14:
+                    message.multipath_send_enabled = reader.uint32();
                     break;
                 case 21:
                     message.quality_histogram_100 = reader.uint32();
@@ -5673,6 +5733,23 @@
             if (message.packets_recv_lurch != null && message.hasOwnProperty("packets_recv_lurch"))
                 if (!$util.isInteger(message.packets_recv_lurch) && !(message.packets_recv_lurch && $util.isInteger(message.packets_recv_lurch.low) && $util.isInteger(message.packets_recv_lurch.high)))
                     return "packets_recv_lurch: integer|Long expected";
+            if (message.multipath_packets_recv_sequenced != null && message.hasOwnProperty("multipath_packets_recv_sequenced")) {
+                if (!Array.isArray(message.multipath_packets_recv_sequenced))
+                    return "multipath_packets_recv_sequenced: array expected";
+                for (var i = 0; i < message.multipath_packets_recv_sequenced.length; ++i)
+                    if (!$util.isInteger(message.multipath_packets_recv_sequenced[i]) && !(message.multipath_packets_recv_sequenced[i] && $util.isInteger(message.multipath_packets_recv_sequenced[i].low) && $util.isInteger(message.multipath_packets_recv_sequenced[i].high)))
+                        return "multipath_packets_recv_sequenced: integer|Long[] expected";
+            }
+            if (message.multipath_packets_recv_later != null && message.hasOwnProperty("multipath_packets_recv_later")) {
+                if (!Array.isArray(message.multipath_packets_recv_later))
+                    return "multipath_packets_recv_later: array expected";
+                for (var i = 0; i < message.multipath_packets_recv_later.length; ++i)
+                    if (!$util.isInteger(message.multipath_packets_recv_later[i]) && !(message.multipath_packets_recv_later[i] && $util.isInteger(message.multipath_packets_recv_later[i].low) && $util.isInteger(message.multipath_packets_recv_later[i].high)))
+                        return "multipath_packets_recv_later: integer|Long[] expected";
+            }
+            if (message.multipath_send_enabled != null && message.hasOwnProperty("multipath_send_enabled"))
+                if (!$util.isInteger(message.multipath_send_enabled))
+                    return "multipath_send_enabled: integer expected";
             if (message.quality_histogram_100 != null && message.hasOwnProperty("quality_histogram_100"))
                 if (!$util.isInteger(message.quality_histogram_100))
                     return "quality_histogram_100: integer expected";
@@ -5954,6 +6031,36 @@
                     message.packets_recv_lurch = object.packets_recv_lurch;
                 else if (typeof object.packets_recv_lurch === "object")
                     message.packets_recv_lurch = new $util.LongBits(object.packets_recv_lurch.low >>> 0, object.packets_recv_lurch.high >>> 0).toNumber(true);
+            if (object.multipath_packets_recv_sequenced) {
+                if (!Array.isArray(object.multipath_packets_recv_sequenced))
+                    throw TypeError(".CMsgSteamDatagramLinkLifetimeStats.multipath_packets_recv_sequenced: array expected");
+                message.multipath_packets_recv_sequenced = [];
+                for (var i = 0; i < object.multipath_packets_recv_sequenced.length; ++i)
+                    if ($util.Long)
+                        (message.multipath_packets_recv_sequenced[i] = $util.Long.fromValue(object.multipath_packets_recv_sequenced[i])).unsigned = true;
+                    else if (typeof object.multipath_packets_recv_sequenced[i] === "string")
+                        message.multipath_packets_recv_sequenced[i] = parseInt(object.multipath_packets_recv_sequenced[i], 10);
+                    else if (typeof object.multipath_packets_recv_sequenced[i] === "number")
+                        message.multipath_packets_recv_sequenced[i] = object.multipath_packets_recv_sequenced[i];
+                    else if (typeof object.multipath_packets_recv_sequenced[i] === "object")
+                        message.multipath_packets_recv_sequenced[i] = new $util.LongBits(object.multipath_packets_recv_sequenced[i].low >>> 0, object.multipath_packets_recv_sequenced[i].high >>> 0).toNumber(true);
+            }
+            if (object.multipath_packets_recv_later) {
+                if (!Array.isArray(object.multipath_packets_recv_later))
+                    throw TypeError(".CMsgSteamDatagramLinkLifetimeStats.multipath_packets_recv_later: array expected");
+                message.multipath_packets_recv_later = [];
+                for (var i = 0; i < object.multipath_packets_recv_later.length; ++i)
+                    if ($util.Long)
+                        (message.multipath_packets_recv_later[i] = $util.Long.fromValue(object.multipath_packets_recv_later[i])).unsigned = true;
+                    else if (typeof object.multipath_packets_recv_later[i] === "string")
+                        message.multipath_packets_recv_later[i] = parseInt(object.multipath_packets_recv_later[i], 10);
+                    else if (typeof object.multipath_packets_recv_later[i] === "number")
+                        message.multipath_packets_recv_later[i] = object.multipath_packets_recv_later[i];
+                    else if (typeof object.multipath_packets_recv_later[i] === "object")
+                        message.multipath_packets_recv_later[i] = new $util.LongBits(object.multipath_packets_recv_later[i].low >>> 0, object.multipath_packets_recv_later[i].high >>> 0).toNumber(true);
+            }
+            if (object.multipath_send_enabled != null)
+                message.multipath_send_enabled = object.multipath_send_enabled >>> 0;
             if (object.quality_histogram_100 != null)
                 message.quality_histogram_100 = object.quality_histogram_100 >>> 0;
             if (object.quality_histogram_99 != null)
@@ -6092,6 +6199,10 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults) {
+                object.multipath_packets_recv_sequenced = [];
+                object.multipath_packets_recv_later = [];
+            }
             if (options.defaults) {
                 object.connected_seconds = 0;
                 if ($util.Long) {
@@ -6139,6 +6250,7 @@
                     object.packets_recv_lurch = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.packets_recv_lurch = options.longs === String ? "0" : 0;
+                object.multipath_send_enabled = 0;
                 object.quality_histogram_100 = 0;
                 object.quality_histogram_99 = 0;
                 object.quality_histogram_97 = 0;
@@ -6248,6 +6360,24 @@
                     object.packets_recv_lurch = options.longs === String ? String(message.packets_recv_lurch) : message.packets_recv_lurch;
                 else
                     object.packets_recv_lurch = options.longs === String ? $util.Long.prototype.toString.call(message.packets_recv_lurch) : options.longs === Number ? new $util.LongBits(message.packets_recv_lurch.low >>> 0, message.packets_recv_lurch.high >>> 0).toNumber(true) : message.packets_recv_lurch;
+            if (message.multipath_packets_recv_sequenced && message.multipath_packets_recv_sequenced.length) {
+                object.multipath_packets_recv_sequenced = [];
+                for (var j = 0; j < message.multipath_packets_recv_sequenced.length; ++j)
+                    if (typeof message.multipath_packets_recv_sequenced[j] === "number")
+                        object.multipath_packets_recv_sequenced[j] = options.longs === String ? String(message.multipath_packets_recv_sequenced[j]) : message.multipath_packets_recv_sequenced[j];
+                    else
+                        object.multipath_packets_recv_sequenced[j] = options.longs === String ? $util.Long.prototype.toString.call(message.multipath_packets_recv_sequenced[j]) : options.longs === Number ? new $util.LongBits(message.multipath_packets_recv_sequenced[j].low >>> 0, message.multipath_packets_recv_sequenced[j].high >>> 0).toNumber(true) : message.multipath_packets_recv_sequenced[j];
+            }
+            if (message.multipath_packets_recv_later && message.multipath_packets_recv_later.length) {
+                object.multipath_packets_recv_later = [];
+                for (var j = 0; j < message.multipath_packets_recv_later.length; ++j)
+                    if (typeof message.multipath_packets_recv_later[j] === "number")
+                        object.multipath_packets_recv_later[j] = options.longs === String ? String(message.multipath_packets_recv_later[j]) : message.multipath_packets_recv_later[j];
+                    else
+                        object.multipath_packets_recv_later[j] = options.longs === String ? $util.Long.prototype.toString.call(message.multipath_packets_recv_later[j]) : options.longs === Number ? new $util.LongBits(message.multipath_packets_recv_later[j].low >>> 0, message.multipath_packets_recv_later[j].high >>> 0).toNumber(true) : message.multipath_packets_recv_later[j];
+            }
+            if (message.multipath_send_enabled != null && message.hasOwnProperty("multipath_send_enabled"))
+                object.multipath_send_enabled = message.multipath_send_enabled;
             if (message.quality_histogram_100 != null && message.hasOwnProperty("quality_histogram_100"))
                 object.quality_histogram_100 = message.quality_histogram_100;
             if (message.quality_histogram_99 != null && message.hasOwnProperty("quality_histogram_99"))
@@ -6452,9 +6582,9 @@
         CMsgSteamDatagramConnectionQuality.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.instantaneous != null && Object.hasOwnProperty.call(message, "instantaneous"))
+            if (message.instantaneous != null && message.hasOwnProperty("instantaneous"))
                 $root.CMsgSteamDatagramLinkInstantaneousStats.encode(message.instantaneous, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.lifetime != null && Object.hasOwnProperty.call(message, "lifetime"))
+            if (message.lifetime != null && message.hasOwnProperty("lifetime"))
                 $root.CMsgSteamDatagramLinkLifetimeStats.encode(message.lifetime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
@@ -6672,9 +6802,9 @@
         CMsgICERendezvous.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.add_candidate != null && Object.hasOwnProperty.call(message, "add_candidate"))
+            if (message.add_candidate != null && message.hasOwnProperty("add_candidate"))
                 $root.CMsgICERendezvous.Candidate.encode(message.add_candidate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.auth != null && Object.hasOwnProperty.call(message, "auth"))
+            if (message.auth != null && message.hasOwnProperty("auth"))
                 $root.CMsgICERendezvous.Auth.encode(message.auth, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
@@ -6880,7 +7010,7 @@
             Auth.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.pwd_frag != null && Object.hasOwnProperty.call(message, "pwd_frag"))
+                if (message.pwd_frag != null && message.hasOwnProperty("pwd_frag"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.pwd_frag);
                 return writer;
             };
@@ -7067,7 +7197,7 @@
             Candidate.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.candidate != null && Object.hasOwnProperty.call(message, "candidate"))
+                if (message.candidate != null && message.hasOwnProperty("candidate"))
                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.candidate);
                 return writer;
             };
@@ -7214,12 +7344,14 @@
          * @property {Uint8Array|null} [sdr_routes] CMsgSteamNetworkingP2PRendezvous sdr_routes
          * @property {number|null} [ack_peer_routes_revision] CMsgSteamNetworkingP2PRendezvous ack_peer_routes_revision
          * @property {boolean|null} [ice_enabled] CMsgSteamNetworkingP2PRendezvous ice_enabled
+         * @property {Uint8Array|null} [hosted_server_ticket] CMsgSteamNetworkingP2PRendezvous hosted_server_ticket
          * @property {CMsgSteamNetworkingP2PRendezvous.IConnectRequest|null} [connect_request] CMsgSteamNetworkingP2PRendezvous connect_request
          * @property {CMsgSteamNetworkingP2PRendezvous.IConnectOK|null} [connect_ok] CMsgSteamNetworkingP2PRendezvous connect_ok
          * @property {CMsgSteamNetworkingP2PRendezvous.IConnectionClosed|null} [connection_closed] CMsgSteamNetworkingP2PRendezvous connection_closed
          * @property {number|null} [ack_reliable_msg] CMsgSteamNetworkingP2PRendezvous ack_reliable_msg
          * @property {number|null} [first_reliable_msg] CMsgSteamNetworkingP2PRendezvous first_reliable_msg
          * @property {Array.<CMsgSteamNetworkingP2PRendezvous.IReliableMessage>|null} [reliable_messages] CMsgSteamNetworkingP2PRendezvous reliable_messages
+         * @property {Array.<CMsgSteamNetworkingP2PRendezvous.IApplicationMessage>|null} [application_messages] CMsgSteamNetworkingP2PRendezvous application_messages
          */
     
         /**
@@ -7232,6 +7364,7 @@
          */
         function CMsgSteamNetworkingP2PRendezvous(properties) {
             this.reliable_messages = [];
+            this.application_messages = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -7295,6 +7428,14 @@
         CMsgSteamNetworkingP2PRendezvous.prototype.ice_enabled = false;
     
         /**
+         * CMsgSteamNetworkingP2PRendezvous hosted_server_ticket.
+         * @member {Uint8Array} hosted_server_ticket
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.hosted_server_ticket = $util.newBuffer([]);
+    
+        /**
          * CMsgSteamNetworkingP2PRendezvous connect_request.
          * @member {CMsgSteamNetworkingP2PRendezvous.IConnectRequest|null|undefined} connect_request
          * @memberof CMsgSteamNetworkingP2PRendezvous
@@ -7343,6 +7484,14 @@
         CMsgSteamNetworkingP2PRendezvous.prototype.reliable_messages = $util.emptyArray;
     
         /**
+         * CMsgSteamNetworkingP2PRendezvous application_messages.
+         * @member {Array.<CMsgSteamNetworkingP2PRendezvous.IApplicationMessage>} application_messages
+         * @memberof CMsgSteamNetworkingP2PRendezvous
+         * @instance
+         */
+        CMsgSteamNetworkingP2PRendezvous.prototype.application_messages = $util.emptyArray;
+    
+        /**
          * Creates a new CMsgSteamNetworkingP2PRendezvous instance using the specified properties.
          * @function create
          * @memberof CMsgSteamNetworkingP2PRendezvous
@@ -7366,33 +7515,38 @@
         CMsgSteamNetworkingP2PRendezvous.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.to_connection_id != null && Object.hasOwnProperty.call(message, "to_connection_id"))
+            if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.to_connection_id);
-            if (message.sdr_routes != null && Object.hasOwnProperty.call(message, "sdr_routes"))
+            if (message.sdr_routes != null && message.hasOwnProperty("sdr_routes"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.sdr_routes);
-            if (message.ack_peer_routes_revision != null && Object.hasOwnProperty.call(message, "ack_peer_routes_revision"))
+            if (message.ack_peer_routes_revision != null && message.hasOwnProperty("ack_peer_routes_revision"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.ack_peer_routes_revision);
-            if (message.connect_request != null && Object.hasOwnProperty.call(message, "connect_request"))
+            if (message.connect_request != null && message.hasOwnProperty("connect_request"))
                 $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.encode(message.connect_request, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.connect_ok != null && Object.hasOwnProperty.call(message, "connect_ok"))
+            if (message.connect_ok != null && message.hasOwnProperty("connect_ok"))
                 $root.CMsgSteamNetworkingP2PRendezvous.ConnectOK.encode(message.connect_ok, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.connection_closed != null && Object.hasOwnProperty.call(message, "connection_closed"))
+            if (message.connection_closed != null && message.hasOwnProperty("connection_closed"))
                 $root.CMsgSteamNetworkingP2PRendezvous.ConnectionClosed.encode(message.connection_closed, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.ice_enabled != null && Object.hasOwnProperty.call(message, "ice_enabled"))
+            if (message.ice_enabled != null && message.hasOwnProperty("ice_enabled"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.ice_enabled);
-            if (message.from_identity != null && Object.hasOwnProperty.call(message, "from_identity"))
+            if (message.from_identity != null && message.hasOwnProperty("from_identity"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.from_identity);
-            if (message.from_connection_id != null && Object.hasOwnProperty.call(message, "from_connection_id"))
+            if (message.from_connection_id != null && message.hasOwnProperty("from_connection_id"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.from_connection_id);
-            if (message.to_identity != null && Object.hasOwnProperty.call(message, "to_identity"))
+            if (message.to_identity != null && message.hasOwnProperty("to_identity"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.to_identity);
-            if (message.ack_reliable_msg != null && Object.hasOwnProperty.call(message, "ack_reliable_msg"))
+            if (message.ack_reliable_msg != null && message.hasOwnProperty("ack_reliable_msg"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.ack_reliable_msg);
-            if (message.first_reliable_msg != null && Object.hasOwnProperty.call(message, "first_reliable_msg"))
+            if (message.first_reliable_msg != null && message.hasOwnProperty("first_reliable_msg"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.first_reliable_msg);
             if (message.reliable_messages != null && message.reliable_messages.length)
                 for (var i = 0; i < message.reliable_messages.length; ++i)
                     $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.encode(message.reliable_messages[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.hosted_server_ticket != null && message.hasOwnProperty("hosted_server_ticket"))
+                writer.uint32(/* id 14, wireType 2 =*/114).bytes(message.hosted_server_ticket);
+            if (message.application_messages != null && message.application_messages.length)
+                for (var i = 0; i < message.application_messages.length; ++i)
+                    $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.encode(message.application_messages[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             return writer;
         };
     
@@ -7448,6 +7602,9 @@
                 case 7:
                     message.ice_enabled = reader.bool();
                     break;
+                case 14:
+                    message.hosted_server_ticket = reader.bytes();
+                    break;
                 case 4:
                     message.connect_request = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.decode(reader, reader.uint32());
                     break;
@@ -7467,6 +7624,11 @@
                     if (!(message.reliable_messages && message.reliable_messages.length))
                         message.reliable_messages = [];
                     message.reliable_messages.push($root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.decode(reader, reader.uint32()));
+                    break;
+                case 15:
+                    if (!(message.application_messages && message.application_messages.length))
+                        message.application_messages = [];
+                    message.application_messages.push($root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7524,6 +7686,9 @@
             if (message.ice_enabled != null && message.hasOwnProperty("ice_enabled"))
                 if (typeof message.ice_enabled !== "boolean")
                     return "ice_enabled: boolean expected";
+            if (message.hosted_server_ticket != null && message.hasOwnProperty("hosted_server_ticket"))
+                if (!(message.hosted_server_ticket && typeof message.hosted_server_ticket.length === "number" || $util.isString(message.hosted_server_ticket)))
+                    return "hosted_server_ticket: buffer expected";
             if (message.connect_request != null && message.hasOwnProperty("connect_request")) {
                 var error = $root.CMsgSteamNetworkingP2PRendezvous.ConnectRequest.verify(message.connect_request);
                 if (error)
@@ -7552,6 +7717,15 @@
                     var error = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.verify(message.reliable_messages[i]);
                     if (error)
                         return "reliable_messages." + error;
+                }
+            }
+            if (message.application_messages != null && message.hasOwnProperty("application_messages")) {
+                if (!Array.isArray(message.application_messages))
+                    return "application_messages: array expected";
+                for (var i = 0; i < message.application_messages.length; ++i) {
+                    var error = $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.verify(message.application_messages[i]);
+                    if (error)
+                        return "application_messages." + error;
                 }
             }
             return null;
@@ -7586,6 +7760,11 @@
                 message.ack_peer_routes_revision = object.ack_peer_routes_revision >>> 0;
             if (object.ice_enabled != null)
                 message.ice_enabled = Boolean(object.ice_enabled);
+            if (object.hosted_server_ticket != null)
+                if (typeof object.hosted_server_ticket === "string")
+                    $util.base64.decode(object.hosted_server_ticket, message.hosted_server_ticket = $util.newBuffer($util.base64.length(object.hosted_server_ticket)), 0);
+                else if (object.hosted_server_ticket.length)
+                    message.hosted_server_ticket = object.hosted_server_ticket;
             if (object.connect_request != null) {
                 if (typeof object.connect_request !== "object")
                     throw TypeError(".CMsgSteamNetworkingP2PRendezvous.connect_request: object expected");
@@ -7615,6 +7794,16 @@
                     message.reliable_messages[i] = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.fromObject(object.reliable_messages[i]);
                 }
             }
+            if (object.application_messages) {
+                if (!Array.isArray(object.application_messages))
+                    throw TypeError(".CMsgSteamNetworkingP2PRendezvous.application_messages: array expected");
+                message.application_messages = [];
+                for (var i = 0; i < object.application_messages.length; ++i) {
+                    if (typeof object.application_messages[i] !== "object")
+                        throw TypeError(".CMsgSteamNetworkingP2PRendezvous.application_messages: object expected");
+                    message.application_messages[i] = $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.fromObject(object.application_messages[i]);
+                }
+            }
             return message;
         };
     
@@ -7631,8 +7820,10 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.reliable_messages = [];
+                object.application_messages = [];
+            }
             if (options.defaults) {
                 object.to_connection_id = 0;
                 if (options.bytes === String)
@@ -7652,6 +7843,13 @@
                 object.to_identity = "";
                 object.ack_reliable_msg = 0;
                 object.first_reliable_msg = 0;
+                if (options.bytes === String)
+                    object.hosted_server_ticket = "";
+                else {
+                    object.hosted_server_ticket = [];
+                    if (options.bytes !== Array)
+                        object.hosted_server_ticket = $util.newBuffer(object.hosted_server_ticket);
+                }
             }
             if (message.to_connection_id != null && message.hasOwnProperty("to_connection_id"))
                 object.to_connection_id = message.to_connection_id;
@@ -7682,6 +7880,13 @@
                 for (var j = 0; j < message.reliable_messages.length; ++j)
                     object.reliable_messages[j] = $root.CMsgSteamNetworkingP2PRendezvous.ReliableMessage.toObject(message.reliable_messages[j], options);
             }
+            if (message.hosted_server_ticket != null && message.hasOwnProperty("hosted_server_ticket"))
+                object.hosted_server_ticket = options.bytes === String ? $util.base64.encode(message.hosted_server_ticket, 0, message.hosted_server_ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.hosted_server_ticket) : message.hosted_server_ticket;
+            if (message.application_messages && message.application_messages.length) {
+                object.application_messages = [];
+                for (var j = 0; j < message.application_messages.length; ++j)
+                    object.application_messages[j] = $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.toObject(message.application_messages[j], options);
+            }
             return object;
         };
     
@@ -7704,7 +7909,9 @@
              * @interface IConnectRequest
              * @property {ICMsgSteamDatagramSessionCryptInfoSigned|null} [crypt] ConnectRequest crypt
              * @property {ICMsgSteamDatagramCertificateSigned|null} [cert] ConnectRequest cert
-             * @property {number|null} [virtual_port] ConnectRequest virtual_port
+             * @property {number|null} [to_virtual_port] ConnectRequest to_virtual_port
+             * @property {number|null} [from_virtual_port] ConnectRequest from_virtual_port
+             * @property {string|null} [from_fakeip] ConnectRequest from_fakeip
              */
     
             /**
@@ -7739,12 +7946,28 @@
             ConnectRequest.prototype.cert = null;
     
             /**
-             * ConnectRequest virtual_port.
-             * @member {number} virtual_port
+             * ConnectRequest to_virtual_port.
+             * @member {number} to_virtual_port
              * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
              * @instance
              */
-            ConnectRequest.prototype.virtual_port = 0;
+            ConnectRequest.prototype.to_virtual_port = 0;
+    
+            /**
+             * ConnectRequest from_virtual_port.
+             * @member {number} from_virtual_port
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             */
+            ConnectRequest.prototype.from_virtual_port = 0;
+    
+            /**
+             * ConnectRequest from_fakeip.
+             * @member {string} from_fakeip
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ConnectRequest
+             * @instance
+             */
+            ConnectRequest.prototype.from_fakeip = "";
     
             /**
              * Creates a new ConnectRequest instance using the specified properties.
@@ -7770,12 +7993,16 @@
             ConnectRequest.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
                     $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+                if (message.cert != null && message.hasOwnProperty("cert"))
                     $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                if (message.virtual_port != null && Object.hasOwnProperty.call(message, "virtual_port"))
-                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.virtual_port);
+                if (message.to_virtual_port != null && message.hasOwnProperty("to_virtual_port"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.to_virtual_port);
+                if (message.from_virtual_port != null && message.hasOwnProperty("from_virtual_port"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.from_virtual_port);
+                if (message.from_fakeip != null && message.hasOwnProperty("from_fakeip"))
+                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.from_fakeip);
                 return writer;
             };
     
@@ -7817,7 +8044,13 @@
                         message.cert = $root.CMsgSteamDatagramCertificateSigned.decode(reader, reader.uint32());
                         break;
                     case 9:
-                        message.virtual_port = reader.uint32();
+                        message.to_virtual_port = reader.uint32();
+                        break;
+                    case 10:
+                        message.from_virtual_port = reader.uint32();
+                        break;
+                    case 11:
+                        message.from_fakeip = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -7864,9 +8097,15 @@
                     if (error)
                         return "cert." + error;
                 }
-                if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
-                    if (!$util.isInteger(message.virtual_port))
-                        return "virtual_port: integer expected";
+                if (message.to_virtual_port != null && message.hasOwnProperty("to_virtual_port"))
+                    if (!$util.isInteger(message.to_virtual_port))
+                        return "to_virtual_port: integer expected";
+                if (message.from_virtual_port != null && message.hasOwnProperty("from_virtual_port"))
+                    if (!$util.isInteger(message.from_virtual_port))
+                        return "from_virtual_port: integer expected";
+                if (message.from_fakeip != null && message.hasOwnProperty("from_fakeip"))
+                    if (!$util.isString(message.from_fakeip))
+                        return "from_fakeip: string expected";
                 return null;
             };
     
@@ -7892,8 +8131,12 @@
                         throw TypeError(".CMsgSteamNetworkingP2PRendezvous.ConnectRequest.cert: object expected");
                     message.cert = $root.CMsgSteamDatagramCertificateSigned.fromObject(object.cert);
                 }
-                if (object.virtual_port != null)
-                    message.virtual_port = object.virtual_port >>> 0;
+                if (object.to_virtual_port != null)
+                    message.to_virtual_port = object.to_virtual_port >>> 0;
+                if (object.from_virtual_port != null)
+                    message.from_virtual_port = object.from_virtual_port >>> 0;
+                if (object.from_fakeip != null)
+                    message.from_fakeip = String(object.from_fakeip);
                 return message;
             };
     
@@ -7913,14 +8156,20 @@
                 if (options.defaults) {
                     object.crypt = null;
                     object.cert = null;
-                    object.virtual_port = 0;
+                    object.to_virtual_port = 0;
+                    object.from_virtual_port = 0;
+                    object.from_fakeip = "";
                 }
                 if (message.crypt != null && message.hasOwnProperty("crypt"))
                     object.crypt = $root.CMsgSteamDatagramSessionCryptInfoSigned.toObject(message.crypt, options);
                 if (message.cert != null && message.hasOwnProperty("cert"))
                     object.cert = $root.CMsgSteamDatagramCertificateSigned.toObject(message.cert, options);
-                if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
-                    object.virtual_port = message.virtual_port;
+                if (message.to_virtual_port != null && message.hasOwnProperty("to_virtual_port"))
+                    object.to_virtual_port = message.to_virtual_port;
+                if (message.from_virtual_port != null && message.hasOwnProperty("from_virtual_port"))
+                    object.from_virtual_port = message.from_virtual_port;
+                if (message.from_fakeip != null && message.hasOwnProperty("from_fakeip"))
+                    object.from_fakeip = message.from_fakeip;
                 return object;
             };
     
@@ -8003,9 +8252,9 @@
             ConnectOK.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.crypt != null && Object.hasOwnProperty.call(message, "crypt"))
+                if (message.crypt != null && message.hasOwnProperty("crypt"))
                     $root.CMsgSteamDatagramSessionCryptInfoSigned.encode(message.crypt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+                if (message.cert != null && message.hasOwnProperty("cert"))
                     $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                 return writer;
             };
@@ -8223,9 +8472,9 @@
             ConnectionClosed.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.debug != null && Object.hasOwnProperty.call(message, "debug"))
+                if (message.debug != null && message.hasOwnProperty("debug"))
                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.debug);
-                if (message.reason_code != null && Object.hasOwnProperty.call(message, "reason_code"))
+                if (message.reason_code != null && message.hasOwnProperty("reason_code"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.reason_code);
                 return writer;
             };
@@ -8424,7 +8673,7 @@
             ReliableMessage.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.ice != null && Object.hasOwnProperty.call(message, "ice"))
+                if (message.ice != null && message.hasOwnProperty("ice"))
                     $root.CMsgICERendezvous.encode(message.ice, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                 return writer;
             };
@@ -8560,6 +8809,261 @@
             return ReliableMessage;
         })();
     
+        CMsgSteamNetworkingP2PRendezvous.ApplicationMessage = (function() {
+    
+            /**
+             * Properties of an ApplicationMessage.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @interface IApplicationMessage
+             * @property {Uint8Array|null} [data] ApplicationMessage data
+             * @property {number|Long|null} [msg_num] ApplicationMessage msg_num
+             * @property {number|null} [flags] ApplicationMessage flags
+             */
+    
+            /**
+             * Constructs a new ApplicationMessage.
+             * @memberof CMsgSteamNetworkingP2PRendezvous
+             * @classdesc Represents an ApplicationMessage.
+             * @implements IApplicationMessage
+             * @constructor
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage=} [properties] Properties to set
+             */
+            function ApplicationMessage(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ApplicationMessage data.
+             * @member {Uint8Array} data
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             */
+            ApplicationMessage.prototype.data = $util.newBuffer([]);
+    
+            /**
+             * ApplicationMessage msg_num.
+             * @member {number|Long} msg_num
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             */
+            ApplicationMessage.prototype.msg_num = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * ApplicationMessage flags.
+             * @member {number} flags
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             */
+            ApplicationMessage.prototype.flags = 0;
+    
+            /**
+             * Creates a new ApplicationMessage instance using the specified properties.
+             * @function create
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage=} [properties] Properties to set
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage instance
+             */
+            ApplicationMessage.create = function create(properties) {
+                return new ApplicationMessage(properties);
+            };
+    
+            /**
+             * Encodes the specified ApplicationMessage message. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.verify|verify} messages.
+             * @function encode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage} message ApplicationMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ApplicationMessage.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.data != null && message.hasOwnProperty("data"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.data);
+                if (message.msg_num != null && message.hasOwnProperty("msg_num"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.msg_num);
+                if (message.flags != null && message.hasOwnProperty("flags"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.flags);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ApplicationMessage message, length delimited. Does not implicitly {@link CMsgSteamNetworkingP2PRendezvous.ApplicationMessage.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.IApplicationMessage} message ApplicationMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ApplicationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an ApplicationMessage message from the specified reader or buffer.
+             * @function decode
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ApplicationMessage.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.data = reader.bytes();
+                        break;
+                    case 2:
+                        message.msg_num = reader.uint64();
+                        break;
+                    case 3:
+                        message.flags = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an ApplicationMessage message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ApplicationMessage.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an ApplicationMessage message.
+             * @function verify
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ApplicationMessage.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.data != null && message.hasOwnProperty("data"))
+                    if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                        return "data: buffer expected";
+                if (message.msg_num != null && message.hasOwnProperty("msg_num"))
+                    if (!$util.isInteger(message.msg_num) && !(message.msg_num && $util.isInteger(message.msg_num.low) && $util.isInteger(message.msg_num.high)))
+                        return "msg_num: integer|Long expected";
+                if (message.flags != null && message.hasOwnProperty("flags"))
+                    if (!$util.isInteger(message.flags))
+                        return "flags: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates an ApplicationMessage message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} ApplicationMessage
+             */
+            ApplicationMessage.fromObject = function fromObject(object) {
+                if (object instanceof $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage)
+                    return object;
+                var message = new $root.CMsgSteamNetworkingP2PRendezvous.ApplicationMessage();
+                if (object.data != null)
+                    if (typeof object.data === "string")
+                        $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                    else if (object.data.length)
+                        message.data = object.data;
+                if (object.msg_num != null)
+                    if ($util.Long)
+                        (message.msg_num = $util.Long.fromValue(object.msg_num)).unsigned = true;
+                    else if (typeof object.msg_num === "string")
+                        message.msg_num = parseInt(object.msg_num, 10);
+                    else if (typeof object.msg_num === "number")
+                        message.msg_num = object.msg_num;
+                    else if (typeof object.msg_num === "object")
+                        message.msg_num = new $util.LongBits(object.msg_num.low >>> 0, object.msg_num.high >>> 0).toNumber(true);
+                if (object.flags != null)
+                    message.flags = object.flags >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an ApplicationMessage message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @static
+             * @param {CMsgSteamNetworkingP2PRendezvous.ApplicationMessage} message ApplicationMessage
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ApplicationMessage.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if (options.bytes === String)
+                        object.data = "";
+                    else {
+                        object.data = [];
+                        if (options.bytes !== Array)
+                            object.data = $util.newBuffer(object.data);
+                    }
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.msg_num = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.msg_num = options.longs === String ? "0" : 0;
+                    object.flags = 0;
+                }
+                if (message.data != null && message.hasOwnProperty("data"))
+                    object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                if (message.msg_num != null && message.hasOwnProperty("msg_num"))
+                    if (typeof message.msg_num === "number")
+                        object.msg_num = options.longs === String ? String(message.msg_num) : message.msg_num;
+                    else
+                        object.msg_num = options.longs === String ? $util.Long.prototype.toString.call(message.msg_num) : options.longs === Number ? new $util.LongBits(message.msg_num.low >>> 0, message.msg_num.high >>> 0).toNumber(true) : message.msg_num;
+                if (message.flags != null && message.hasOwnProperty("flags"))
+                    object.flags = message.flags;
+                return object;
+            };
+    
+            /**
+             * Converts this ApplicationMessage to JSON.
+             * @function toJSON
+             * @memberof CMsgSteamNetworkingP2PRendezvous.ApplicationMessage
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ApplicationMessage.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ApplicationMessage;
+        })();
+    
         return CMsgSteamNetworkingP2PRendezvous;
     })();
     
@@ -8576,7 +9080,14 @@
          * @property {number|null} [initial_ping] CMsgSteamNetworkingICESessionSummary initial_ping
          * @property {number|null} [initial_score] CMsgSteamNetworkingICESessionSummary initial_score
          * @property {number|null} [negotiation_ms] CMsgSteamNetworkingICESessionSummary negotiation_ms
+         * @property {number|null} [best_route_kind] CMsgSteamNetworkingICESessionSummary best_route_kind
+         * @property {number|null} [best_ping] CMsgSteamNetworkingICESessionSummary best_ping
+         * @property {number|null} [best_score] CMsgSteamNetworkingICESessionSummary best_score
+         * @property {number|null} [best_time] CMsgSteamNetworkingICESessionSummary best_time
          * @property {number|null} [selected_seconds] CMsgSteamNetworkingICESessionSummary selected_seconds
+         * @property {number|null} [user_settings] CMsgSteamNetworkingICESessionSummary user_settings
+         * @property {number|null} [ice_enable_var] CMsgSteamNetworkingICESessionSummary ice_enable_var
+         * @property {number|null} [local_candidate_types_allowed] CMsgSteamNetworkingICESessionSummary local_candidate_types_allowed
          */
     
         /**
@@ -8651,12 +9162,68 @@
         CMsgSteamNetworkingICESessionSummary.prototype.negotiation_ms = 0;
     
         /**
+         * CMsgSteamNetworkingICESessionSummary best_route_kind.
+         * @member {number} best_route_kind
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_route_kind = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary best_ping.
+         * @member {number} best_ping
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_ping = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary best_score.
+         * @member {number} best_score
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_score = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary best_time.
+         * @member {number} best_time
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.best_time = 0;
+    
+        /**
          * CMsgSteamNetworkingICESessionSummary selected_seconds.
          * @member {number} selected_seconds
          * @memberof CMsgSteamNetworkingICESessionSummary
          * @instance
          */
         CMsgSteamNetworkingICESessionSummary.prototype.selected_seconds = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary user_settings.
+         * @member {number} user_settings
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.user_settings = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary ice_enable_var.
+         * @member {number} ice_enable_var
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.ice_enable_var = 0;
+    
+        /**
+         * CMsgSteamNetworkingICESessionSummary local_candidate_types_allowed.
+         * @member {number} local_candidate_types_allowed
+         * @memberof CMsgSteamNetworkingICESessionSummary
+         * @instance
+         */
+        CMsgSteamNetworkingICESessionSummary.prototype.local_candidate_types_allowed = 0;
     
         /**
          * Creates a new CMsgSteamNetworkingICESessionSummary instance using the specified properties.
@@ -8682,22 +9249,36 @@
         CMsgSteamNetworkingICESessionSummary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.local_candidate_types != null && Object.hasOwnProperty.call(message, "local_candidate_types"))
+            if (message.local_candidate_types != null && message.hasOwnProperty("local_candidate_types"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.local_candidate_types);
-            if (message.remote_candidate_types != null && Object.hasOwnProperty.call(message, "remote_candidate_types"))
+            if (message.remote_candidate_types != null && message.hasOwnProperty("remote_candidate_types"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.remote_candidate_types);
-            if (message.initial_route_kind != null && Object.hasOwnProperty.call(message, "initial_route_kind"))
+            if (message.initial_route_kind != null && message.hasOwnProperty("initial_route_kind"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.initial_route_kind);
-            if (message.initial_ping != null && Object.hasOwnProperty.call(message, "initial_ping"))
+            if (message.initial_ping != null && message.hasOwnProperty("initial_ping"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.initial_ping);
-            if (message.negotiation_ms != null && Object.hasOwnProperty.call(message, "negotiation_ms"))
+            if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.negotiation_ms);
-            if (message.initial_score != null && Object.hasOwnProperty.call(message, "initial_score"))
+            if (message.initial_score != null && message.hasOwnProperty("initial_score"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.initial_score);
-            if (message.failure_reason_code != null && Object.hasOwnProperty.call(message, "failure_reason_code"))
+            if (message.failure_reason_code != null && message.hasOwnProperty("failure_reason_code"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.failure_reason_code);
-            if (message.selected_seconds != null && Object.hasOwnProperty.call(message, "selected_seconds"))
+            if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.selected_seconds);
+            if (message.user_settings != null && message.hasOwnProperty("user_settings"))
+                writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.user_settings);
+            if (message.ice_enable_var != null && message.hasOwnProperty("ice_enable_var"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.ice_enable_var);
+            if (message.local_candidate_types_allowed != null && message.hasOwnProperty("local_candidate_types_allowed"))
+                writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.local_candidate_types_allowed);
+            if (message.best_route_kind != null && message.hasOwnProperty("best_route_kind"))
+                writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.best_route_kind);
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.best_ping);
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                writer.uint32(/* id 18, wireType 0 =*/144).uint32(message.best_score);
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.best_time);
             return writer;
         };
     
@@ -8753,8 +9334,29 @@
                 case 5:
                     message.negotiation_ms = reader.uint32();
                     break;
+                case 16:
+                    message.best_route_kind = reader.uint32();
+                    break;
+                case 17:
+                    message.best_ping = reader.uint32();
+                    break;
+                case 18:
+                    message.best_score = reader.uint32();
+                    break;
+                case 19:
+                    message.best_time = reader.uint32();
+                    break;
                 case 12:
                     message.selected_seconds = reader.uint32();
+                    break;
+                case 13:
+                    message.user_settings = reader.uint32();
+                    break;
+                case 14:
+                    message.ice_enable_var = reader.uint32();
+                    break;
+                case 15:
+                    message.local_candidate_types_allowed = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8812,9 +9414,30 @@
             if (message.negotiation_ms != null && message.hasOwnProperty("negotiation_ms"))
                 if (!$util.isInteger(message.negotiation_ms))
                     return "negotiation_ms: integer expected";
+            if (message.best_route_kind != null && message.hasOwnProperty("best_route_kind"))
+                if (!$util.isInteger(message.best_route_kind))
+                    return "best_route_kind: integer expected";
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                if (!$util.isInteger(message.best_ping))
+                    return "best_ping: integer expected";
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                if (!$util.isInteger(message.best_score))
+                    return "best_score: integer expected";
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                if (!$util.isInteger(message.best_time))
+                    return "best_time: integer expected";
             if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 if (!$util.isInteger(message.selected_seconds))
                     return "selected_seconds: integer expected";
+            if (message.user_settings != null && message.hasOwnProperty("user_settings"))
+                if (!$util.isInteger(message.user_settings))
+                    return "user_settings: integer expected";
+            if (message.ice_enable_var != null && message.hasOwnProperty("ice_enable_var"))
+                if (!$util.isInteger(message.ice_enable_var))
+                    return "ice_enable_var: integer expected";
+            if (message.local_candidate_types_allowed != null && message.hasOwnProperty("local_candidate_types_allowed"))
+                if (!$util.isInteger(message.local_candidate_types_allowed))
+                    return "local_candidate_types_allowed: integer expected";
             return null;
         };
     
@@ -8844,8 +9467,22 @@
                 message.initial_score = object.initial_score >>> 0;
             if (object.negotiation_ms != null)
                 message.negotiation_ms = object.negotiation_ms >>> 0;
+            if (object.best_route_kind != null)
+                message.best_route_kind = object.best_route_kind >>> 0;
+            if (object.best_ping != null)
+                message.best_ping = object.best_ping >>> 0;
+            if (object.best_score != null)
+                message.best_score = object.best_score >>> 0;
+            if (object.best_time != null)
+                message.best_time = object.best_time >>> 0;
             if (object.selected_seconds != null)
                 message.selected_seconds = object.selected_seconds >>> 0;
+            if (object.user_settings != null)
+                message.user_settings = object.user_settings >>> 0;
+            if (object.ice_enable_var != null)
+                message.ice_enable_var = object.ice_enable_var >>> 0;
+            if (object.local_candidate_types_allowed != null)
+                message.local_candidate_types_allowed = object.local_candidate_types_allowed >>> 0;
             return message;
         };
     
@@ -8871,6 +9508,13 @@
                 object.initial_score = 0;
                 object.failure_reason_code = 0;
                 object.selected_seconds = 0;
+                object.user_settings = 0;
+                object.ice_enable_var = 0;
+                object.local_candidate_types_allowed = 0;
+                object.best_route_kind = 0;
+                object.best_ping = 0;
+                object.best_score = 0;
+                object.best_time = 0;
             }
             if (message.local_candidate_types != null && message.hasOwnProperty("local_candidate_types"))
                 object.local_candidate_types = message.local_candidate_types;
@@ -8888,6 +9532,20 @@
                 object.failure_reason_code = message.failure_reason_code;
             if (message.selected_seconds != null && message.hasOwnProperty("selected_seconds"))
                 object.selected_seconds = message.selected_seconds;
+            if (message.user_settings != null && message.hasOwnProperty("user_settings"))
+                object.user_settings = message.user_settings;
+            if (message.ice_enable_var != null && message.hasOwnProperty("ice_enable_var"))
+                object.ice_enable_var = message.ice_enable_var;
+            if (message.local_candidate_types_allowed != null && message.hasOwnProperty("local_candidate_types_allowed"))
+                object.local_candidate_types_allowed = message.local_candidate_types_allowed;
+            if (message.best_route_kind != null && message.hasOwnProperty("best_route_kind"))
+                object.best_route_kind = message.best_route_kind;
+            if (message.best_ping != null && message.hasOwnProperty("best_ping"))
+                object.best_ping = message.best_ping;
+            if (message.best_score != null && message.hasOwnProperty("best_score"))
+                object.best_score = message.best_score;
+            if (message.best_time != null && message.hasOwnProperty("best_time"))
+                object.best_time = message.best_time;
             return object;
         };
     

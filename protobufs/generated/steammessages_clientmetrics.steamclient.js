@@ -19,7 +19,7 @@
     /**
      * ESteamPipeWorkType enum.
      * @exports ESteamPipeWorkType
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_ESteamPipeClientWorkType_Invalid=0 k_ESteamPipeClientWorkType_Invalid value
      * @property {number} k_ESteamPipeClientWorkType_StageFromChunkStores=1 k_ESteamPipeClientWorkType_StageFromChunkStores value
      */
@@ -33,7 +33,7 @@
     /**
      * ESteamPipeOperationType enum.
      * @exports ESteamPipeOperationType
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_ESteamPipeOperationType_Invalid=0 k_ESteamPipeOperationType_Invalid value
      * @property {number} k_ESteamPipeOperationType_DecryptCPU=1 k_ESteamPipeOperationType_DecryptCPU value
      * @property {number} k_ESteamPipeOperationType_DiskRead=2 k_ESteamPipeOperationType_DiskRead value
@@ -113,9 +113,9 @@
         CClientMetrics_AppInterfaceCreation.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.raw_version != null && Object.hasOwnProperty.call(message, "raw_version"))
+            if (message.raw_version != null && message.hasOwnProperty("raw_version"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.raw_version);
-            if (message.requested_interface_type != null && Object.hasOwnProperty.call(message, "requested_interface_type"))
+            if (message.requested_interface_type != null && message.hasOwnProperty("requested_interface_type"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requested_interface_type);
             return writer;
         };
@@ -332,11 +332,11 @@
         CClientMetrics_AppInterfaceMethodCounts.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.interface_name != null && Object.hasOwnProperty.call(message, "interface_name"))
+            if (message.interface_name != null && message.hasOwnProperty("interface_name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.interface_name);
-            if (message.method_name != null && Object.hasOwnProperty.call(message, "method_name"))
+            if (message.method_name != null && message.hasOwnProperty("method_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.method_name);
-            if (message.call_count != null && Object.hasOwnProperty.call(message, "call_count"))
+            if (message.call_count != null && message.hasOwnProperty("call_count"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.call_count);
             return writer;
         };
@@ -575,7 +575,7 @@
         CClientMetrics_AppInterfaceStats_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.game_id != null && Object.hasOwnProperty.call(message, "game_id"))
+            if (message.game_id != null && message.hasOwnProperty("game_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.game_id);
             if (message.interfaces_created != null && message.interfaces_created.length)
                 for (var i = 0; i < message.interfaces_created.length; ++i)
@@ -583,7 +583,7 @@
             if (message.methods_called != null && message.methods_called.length)
                 for (var i = 0; i < message.methods_called.length; ++i)
                     $root.CClientMetrics_AppInterfaceMethodCounts.encode(message.methods_called[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.session_length_seconds != null && Object.hasOwnProperty.call(message, "session_length_seconds"))
+            if (message.session_length_seconds != null && message.hasOwnProperty("session_length_seconds"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.session_length_seconds);
             return writer;
         };
@@ -867,9 +867,9 @@
         CClientMetrics_IPv6Connectivity_Result.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.protocol_tested != null && Object.hasOwnProperty.call(message, "protocol_tested"))
+            if (message.protocol_tested != null && message.hasOwnProperty("protocol_tested"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.protocol_tested);
-            if (message.connectivity_state != null && Object.hasOwnProperty.call(message, "connectivity_state"))
+            if (message.connectivity_state != null && message.hasOwnProperty("connectivity_state"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.connectivity_state);
             return writer;
         };
@@ -1087,12 +1087,12 @@
         CClientMetrics_IPv6Connectivity_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cell_id != null && Object.hasOwnProperty.call(message, "cell_id"))
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cell_id);
             if (message.results != null && message.results.length)
                 for (var i = 0; i < message.results.length; ++i)
                     $root.CClientMetrics_IPv6Connectivity_Result.encode(message.results[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.private_ip_is_rfc6598 != null && Object.hasOwnProperty.call(message, "private_ip_is_rfc6598"))
+            if (message.private_ip_is_rfc6598 != null && message.hasOwnProperty("private_ip_is_rfc6598"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.private_ip_is_rfc6598);
             return writer;
         };
@@ -1376,19 +1376,19 @@
         CClientMetrics_SteamPipeWorkStats_Operation.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+            if (message.type != null && message.hasOwnProperty("type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-            if (message.num_ops != null && Object.hasOwnProperty.call(message, "num_ops"))
+            if (message.num_ops != null && message.hasOwnProperty("num_ops"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num_ops);
-            if (message.num_bytes != null && Object.hasOwnProperty.call(message, "num_bytes"))
+            if (message.num_bytes != null && message.hasOwnProperty("num_bytes"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.num_bytes);
-            if (message.busy_time_ms != null && Object.hasOwnProperty.call(message, "busy_time_ms"))
+            if (message.busy_time_ms != null && message.hasOwnProperty("busy_time_ms"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.busy_time_ms);
-            if (message.idle_time_ms != null && Object.hasOwnProperty.call(message, "idle_time_ms"))
+            if (message.idle_time_ms != null && message.hasOwnProperty("idle_time_ms"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.idle_time_ms);
-            if (message.sum_run_time_ms != null && Object.hasOwnProperty.call(message, "sum_run_time_ms"))
+            if (message.sum_run_time_ms != null && message.hasOwnProperty("sum_run_time_ms"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.sum_run_time_ms);
-            if (message.sum_wait_time_ms != null && Object.hasOwnProperty.call(message, "sum_wait_time_ms"))
+            if (message.sum_wait_time_ms != null && message.hasOwnProperty("sum_wait_time_ms"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.sum_wait_time_ms);
             return writer;
         };
@@ -1763,11 +1763,11 @@
         CClientMetrics_SteamPipeWorkStats_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.depotid != null && Object.hasOwnProperty.call(message, "depotid"))
+            if (message.depotid != null && message.hasOwnProperty("depotid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.depotid);
-            if (message.work_type != null && Object.hasOwnProperty.call(message, "work_type"))
+            if (message.work_type != null && message.hasOwnProperty("work_type"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.work_type);
             if (message.operations != null && message.operations.length)
                 for (var i = 0; i < message.operations.length; ++i)
@@ -2043,9 +2043,9 @@
         CClientMetrics_ReportClientError_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.product != null && Object.hasOwnProperty.call(message, "product"))
+            if (message.product != null && message.hasOwnProperty("product"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.product);
-            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+            if (message.version != null && message.hasOwnProperty("version"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
             if (message.errors != null && message.errors.length)
                 for (var i = 0; i < message.errors.length; ++i)
@@ -2293,11 +2293,11 @@
             Error.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.identifier != null && Object.hasOwnProperty.call(message, "identifier"))
+                if (message.identifier != null && message.hasOwnProperty("identifier"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.identifier);
-                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                if (message.message != null && message.hasOwnProperty("message"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                if (message.count != null && message.hasOwnProperty("count"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.count);
                 return writer;
             };
@@ -2452,6 +2452,2239 @@
         })();
     
         return CClientMetrics_ReportClientError_Notification;
+    })();
+    
+    $root.CClientMetrics_ClientBootstrap_Notification = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ClientBootstrap_Notification.
+         * @exports ICClientMetrics_ClientBootstrap_Notification
+         * @interface ICClientMetrics_ClientBootstrap_Notification
+         * @property {ICClientMetrics_ClientBootstrap_Summary|null} [summary] CClientMetrics_ClientBootstrap_Notification summary
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ClientBootstrap_Notification.
+         * @exports CClientMetrics_ClientBootstrap_Notification
+         * @classdesc Represents a CClientMetrics_ClientBootstrap_Notification.
+         * @implements ICClientMetrics_ClientBootstrap_Notification
+         * @constructor
+         * @param {ICClientMetrics_ClientBootstrap_Notification=} [properties] Properties to set
+         */
+        function CClientMetrics_ClientBootstrap_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Notification summary.
+         * @member {ICClientMetrics_ClientBootstrap_Summary|null|undefined} summary
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Notification.prototype.summary = null;
+    
+        /**
+         * Creates a new CClientMetrics_ClientBootstrap_Notification instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_Notification=} [properties] Properties to set
+         * @returns {CClientMetrics_ClientBootstrap_Notification} CClientMetrics_ClientBootstrap_Notification instance
+         */
+        CClientMetrics_ClientBootstrap_Notification.create = function create(properties) {
+            return new CClientMetrics_ClientBootstrap_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ClientBootstrap_Notification message. Does not implicitly {@link CClientMetrics_ClientBootstrap_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_Notification} message CClientMetrics_ClientBootstrap_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ClientBootstrap_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.summary != null && message.hasOwnProperty("summary"))
+                $root.CClientMetrics_ClientBootstrap_Summary.encode(message.summary, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ClientBootstrap_Notification message, length delimited. Does not implicitly {@link CClientMetrics_ClientBootstrap_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_Notification} message CClientMetrics_ClientBootstrap_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ClientBootstrap_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ClientBootstrap_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ClientBootstrap_Notification} CClientMetrics_ClientBootstrap_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ClientBootstrap_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ClientBootstrap_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.summary = $root.CClientMetrics_ClientBootstrap_Summary.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ClientBootstrap_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ClientBootstrap_Notification} CClientMetrics_ClientBootstrap_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ClientBootstrap_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ClientBootstrap_Notification message.
+         * @function verify
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ClientBootstrap_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.summary != null && message.hasOwnProperty("summary")) {
+                var error = $root.CClientMetrics_ClientBootstrap_Summary.verify(message.summary);
+                if (error)
+                    return "summary." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ClientBootstrap_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ClientBootstrap_Notification} CClientMetrics_ClientBootstrap_Notification
+         */
+        CClientMetrics_ClientBootstrap_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ClientBootstrap_Notification)
+                return object;
+            var message = new $root.CClientMetrics_ClientBootstrap_Notification();
+            if (object.summary != null) {
+                if (typeof object.summary !== "object")
+                    throw TypeError(".CClientMetrics_ClientBootstrap_Notification.summary: object expected");
+                message.summary = $root.CClientMetrics_ClientBootstrap_Summary.fromObject(object.summary);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ClientBootstrap_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @static
+         * @param {CClientMetrics_ClientBootstrap_Notification} message CClientMetrics_ClientBootstrap_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ClientBootstrap_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.summary = null;
+            if (message.summary != null && message.hasOwnProperty("summary"))
+                object.summary = $root.CClientMetrics_ClientBootstrap_Summary.toObject(message.summary, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ClientBootstrap_Notification to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ClientBootstrap_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ClientBootstrap_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ClientBootstrap_Notification;
+    })();
+    
+    $root.CClientMetrics_DownloadRates_Notification = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_DownloadRates_Notification.
+         * @exports ICClientMetrics_DownloadRates_Notification
+         * @interface ICClientMetrics_DownloadRates_Notification
+         * @property {number|null} [cell_id] CClientMetrics_DownloadRates_Notification cell_id
+         * @property {Array.<CClientMetrics_DownloadRates_Notification.IStatsInfo>|null} [stats] CClientMetrics_DownloadRates_Notification stats
+         * @property {number|null} [throttling_kbps] CClientMetrics_DownloadRates_Notification throttling_kbps
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_DownloadRates_Notification.
+         * @exports CClientMetrics_DownloadRates_Notification
+         * @classdesc Represents a CClientMetrics_DownloadRates_Notification.
+         * @implements ICClientMetrics_DownloadRates_Notification
+         * @constructor
+         * @param {ICClientMetrics_DownloadRates_Notification=} [properties] Properties to set
+         */
+        function CClientMetrics_DownloadRates_Notification(properties) {
+            this.stats = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_DownloadRates_Notification cell_id.
+         * @member {number} cell_id
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @instance
+         */
+        CClientMetrics_DownloadRates_Notification.prototype.cell_id = 0;
+    
+        /**
+         * CClientMetrics_DownloadRates_Notification stats.
+         * @member {Array.<CClientMetrics_DownloadRates_Notification.IStatsInfo>} stats
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @instance
+         */
+        CClientMetrics_DownloadRates_Notification.prototype.stats = $util.emptyArray;
+    
+        /**
+         * CClientMetrics_DownloadRates_Notification throttling_kbps.
+         * @member {number} throttling_kbps
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @instance
+         */
+        CClientMetrics_DownloadRates_Notification.prototype.throttling_kbps = 0;
+    
+        /**
+         * Creates a new CClientMetrics_DownloadRates_Notification instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {ICClientMetrics_DownloadRates_Notification=} [properties] Properties to set
+         * @returns {CClientMetrics_DownloadRates_Notification} CClientMetrics_DownloadRates_Notification instance
+         */
+        CClientMetrics_DownloadRates_Notification.create = function create(properties) {
+            return new CClientMetrics_DownloadRates_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_DownloadRates_Notification message. Does not implicitly {@link CClientMetrics_DownloadRates_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {ICClientMetrics_DownloadRates_Notification} message CClientMetrics_DownloadRates_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_DownloadRates_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cell_id);
+            if (message.stats != null && message.stats.length)
+                for (var i = 0; i < message.stats.length; ++i)
+                    $root.CClientMetrics_DownloadRates_Notification.StatsInfo.encode(message.stats[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.throttling_kbps != null && message.hasOwnProperty("throttling_kbps"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.throttling_kbps);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_DownloadRates_Notification message, length delimited. Does not implicitly {@link CClientMetrics_DownloadRates_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {ICClientMetrics_DownloadRates_Notification} message CClientMetrics_DownloadRates_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_DownloadRates_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_DownloadRates_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_DownloadRates_Notification} CClientMetrics_DownloadRates_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_DownloadRates_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_DownloadRates_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.cell_id = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.stats && message.stats.length))
+                        message.stats = [];
+                    message.stats.push($root.CClientMetrics_DownloadRates_Notification.StatsInfo.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    message.throttling_kbps = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_DownloadRates_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_DownloadRates_Notification} CClientMetrics_DownloadRates_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_DownloadRates_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_DownloadRates_Notification message.
+         * @function verify
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_DownloadRates_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                if (!$util.isInteger(message.cell_id))
+                    return "cell_id: integer expected";
+            if (message.stats != null && message.hasOwnProperty("stats")) {
+                if (!Array.isArray(message.stats))
+                    return "stats: array expected";
+                for (var i = 0; i < message.stats.length; ++i) {
+                    var error = $root.CClientMetrics_DownloadRates_Notification.StatsInfo.verify(message.stats[i]);
+                    if (error)
+                        return "stats." + error;
+                }
+            }
+            if (message.throttling_kbps != null && message.hasOwnProperty("throttling_kbps"))
+                if (!$util.isInteger(message.throttling_kbps))
+                    return "throttling_kbps: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_DownloadRates_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_DownloadRates_Notification} CClientMetrics_DownloadRates_Notification
+         */
+        CClientMetrics_DownloadRates_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_DownloadRates_Notification)
+                return object;
+            var message = new $root.CClientMetrics_DownloadRates_Notification();
+            if (object.cell_id != null)
+                message.cell_id = object.cell_id >>> 0;
+            if (object.stats) {
+                if (!Array.isArray(object.stats))
+                    throw TypeError(".CClientMetrics_DownloadRates_Notification.stats: array expected");
+                message.stats = [];
+                for (var i = 0; i < object.stats.length; ++i) {
+                    if (typeof object.stats[i] !== "object")
+                        throw TypeError(".CClientMetrics_DownloadRates_Notification.stats: object expected");
+                    message.stats[i] = $root.CClientMetrics_DownloadRates_Notification.StatsInfo.fromObject(object.stats[i]);
+                }
+            }
+            if (object.throttling_kbps != null)
+                message.throttling_kbps = object.throttling_kbps >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_DownloadRates_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @static
+         * @param {CClientMetrics_DownloadRates_Notification} message CClientMetrics_DownloadRates_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_DownloadRates_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.stats = [];
+            if (options.defaults) {
+                object.cell_id = 0;
+                object.throttling_kbps = 0;
+            }
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                object.cell_id = message.cell_id;
+            if (message.stats && message.stats.length) {
+                object.stats = [];
+                for (var j = 0; j < message.stats.length; ++j)
+                    object.stats[j] = $root.CClientMetrics_DownloadRates_Notification.StatsInfo.toObject(message.stats[j], options);
+            }
+            if (message.throttling_kbps != null && message.hasOwnProperty("throttling_kbps"))
+                object.throttling_kbps = message.throttling_kbps;
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_DownloadRates_Notification to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_DownloadRates_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_DownloadRates_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CClientMetrics_DownloadRates_Notification.StatsInfo = (function() {
+    
+            /**
+             * Properties of a StatsInfo.
+             * @memberof CClientMetrics_DownloadRates_Notification
+             * @interface IStatsInfo
+             * @property {number|null} [source_type] StatsInfo source_type
+             * @property {number|null} [source_id] StatsInfo source_id
+             * @property {number|Long|null} [bytes] StatsInfo bytes
+             * @property {string|null} [host_name] StatsInfo host_name
+             * @property {number|Long|null} [microseconds] StatsInfo microseconds
+             * @property {boolean|null} [used_ipv6] StatsInfo used_ipv6
+             * @property {boolean|null} [proxied] StatsInfo proxied
+             */
+    
+            /**
+             * Constructs a new StatsInfo.
+             * @memberof CClientMetrics_DownloadRates_Notification
+             * @classdesc Represents a StatsInfo.
+             * @implements IStatsInfo
+             * @constructor
+             * @param {CClientMetrics_DownloadRates_Notification.IStatsInfo=} [properties] Properties to set
+             */
+            function StatsInfo(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * StatsInfo source_type.
+             * @member {number} source_type
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             */
+            StatsInfo.prototype.source_type = 0;
+    
+            /**
+             * StatsInfo source_id.
+             * @member {number} source_id
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             */
+            StatsInfo.prototype.source_id = 0;
+    
+            /**
+             * StatsInfo bytes.
+             * @member {number|Long} bytes
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             */
+            StatsInfo.prototype.bytes = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * StatsInfo host_name.
+             * @member {string} host_name
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             */
+            StatsInfo.prototype.host_name = "";
+    
+            /**
+             * StatsInfo microseconds.
+             * @member {number|Long} microseconds
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             */
+            StatsInfo.prototype.microseconds = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * StatsInfo used_ipv6.
+             * @member {boolean} used_ipv6
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             */
+            StatsInfo.prototype.used_ipv6 = false;
+    
+            /**
+             * StatsInfo proxied.
+             * @member {boolean} proxied
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             */
+            StatsInfo.prototype.proxied = false;
+    
+            /**
+             * Creates a new StatsInfo instance using the specified properties.
+             * @function create
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {CClientMetrics_DownloadRates_Notification.IStatsInfo=} [properties] Properties to set
+             * @returns {CClientMetrics_DownloadRates_Notification.StatsInfo} StatsInfo instance
+             */
+            StatsInfo.create = function create(properties) {
+                return new StatsInfo(properties);
+            };
+    
+            /**
+             * Encodes the specified StatsInfo message. Does not implicitly {@link CClientMetrics_DownloadRates_Notification.StatsInfo.verify|verify} messages.
+             * @function encode
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {CClientMetrics_DownloadRates_Notification.IStatsInfo} message StatsInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            StatsInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.source_type != null && message.hasOwnProperty("source_type"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.source_type);
+                if (message.source_id != null && message.hasOwnProperty("source_id"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.source_id);
+                if (message.bytes != null && message.hasOwnProperty("bytes"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.bytes);
+                if (message.host_name != null && message.hasOwnProperty("host_name"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.host_name);
+                if (message.microseconds != null && message.hasOwnProperty("microseconds"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.microseconds);
+                if (message.used_ipv6 != null && message.hasOwnProperty("used_ipv6"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.used_ipv6);
+                if (message.proxied != null && message.hasOwnProperty("proxied"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.proxied);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified StatsInfo message, length delimited. Does not implicitly {@link CClientMetrics_DownloadRates_Notification.StatsInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {CClientMetrics_DownloadRates_Notification.IStatsInfo} message StatsInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            StatsInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a StatsInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CClientMetrics_DownloadRates_Notification.StatsInfo} StatsInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            StatsInfo.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_DownloadRates_Notification.StatsInfo();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.source_type = reader.uint32();
+                        break;
+                    case 2:
+                        message.source_id = reader.uint32();
+                        break;
+                    case 3:
+                        message.bytes = reader.uint64();
+                        break;
+                    case 4:
+                        message.host_name = reader.string();
+                        break;
+                    case 5:
+                        message.microseconds = reader.uint64();
+                        break;
+                    case 6:
+                        message.used_ipv6 = reader.bool();
+                        break;
+                    case 7:
+                        message.proxied = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a StatsInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CClientMetrics_DownloadRates_Notification.StatsInfo} StatsInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            StatsInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a StatsInfo message.
+             * @function verify
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            StatsInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.source_type != null && message.hasOwnProperty("source_type"))
+                    if (!$util.isInteger(message.source_type))
+                        return "source_type: integer expected";
+                if (message.source_id != null && message.hasOwnProperty("source_id"))
+                    if (!$util.isInteger(message.source_id))
+                        return "source_id: integer expected";
+                if (message.bytes != null && message.hasOwnProperty("bytes"))
+                    if (!$util.isInteger(message.bytes) && !(message.bytes && $util.isInteger(message.bytes.low) && $util.isInteger(message.bytes.high)))
+                        return "bytes: integer|Long expected";
+                if (message.host_name != null && message.hasOwnProperty("host_name"))
+                    if (!$util.isString(message.host_name))
+                        return "host_name: string expected";
+                if (message.microseconds != null && message.hasOwnProperty("microseconds"))
+                    if (!$util.isInteger(message.microseconds) && !(message.microseconds && $util.isInteger(message.microseconds.low) && $util.isInteger(message.microseconds.high)))
+                        return "microseconds: integer|Long expected";
+                if (message.used_ipv6 != null && message.hasOwnProperty("used_ipv6"))
+                    if (typeof message.used_ipv6 !== "boolean")
+                        return "used_ipv6: boolean expected";
+                if (message.proxied != null && message.hasOwnProperty("proxied"))
+                    if (typeof message.proxied !== "boolean")
+                        return "proxied: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates a StatsInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CClientMetrics_DownloadRates_Notification.StatsInfo} StatsInfo
+             */
+            StatsInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.CClientMetrics_DownloadRates_Notification.StatsInfo)
+                    return object;
+                var message = new $root.CClientMetrics_DownloadRates_Notification.StatsInfo();
+                if (object.source_type != null)
+                    message.source_type = object.source_type >>> 0;
+                if (object.source_id != null)
+                    message.source_id = object.source_id >>> 0;
+                if (object.bytes != null)
+                    if ($util.Long)
+                        (message.bytes = $util.Long.fromValue(object.bytes)).unsigned = true;
+                    else if (typeof object.bytes === "string")
+                        message.bytes = parseInt(object.bytes, 10);
+                    else if (typeof object.bytes === "number")
+                        message.bytes = object.bytes;
+                    else if (typeof object.bytes === "object")
+                        message.bytes = new $util.LongBits(object.bytes.low >>> 0, object.bytes.high >>> 0).toNumber(true);
+                if (object.host_name != null)
+                    message.host_name = String(object.host_name);
+                if (object.microseconds != null)
+                    if ($util.Long)
+                        (message.microseconds = $util.Long.fromValue(object.microseconds)).unsigned = true;
+                    else if (typeof object.microseconds === "string")
+                        message.microseconds = parseInt(object.microseconds, 10);
+                    else if (typeof object.microseconds === "number")
+                        message.microseconds = object.microseconds;
+                    else if (typeof object.microseconds === "object")
+                        message.microseconds = new $util.LongBits(object.microseconds.low >>> 0, object.microseconds.high >>> 0).toNumber(true);
+                if (object.used_ipv6 != null)
+                    message.used_ipv6 = Boolean(object.used_ipv6);
+                if (object.proxied != null)
+                    message.proxied = Boolean(object.proxied);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a StatsInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @static
+             * @param {CClientMetrics_DownloadRates_Notification.StatsInfo} message StatsInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            StatsInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.source_type = 0;
+                    object.source_id = 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.bytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.bytes = options.longs === String ? "0" : 0;
+                    object.host_name = "";
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.microseconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.microseconds = options.longs === String ? "0" : 0;
+                    object.used_ipv6 = false;
+                    object.proxied = false;
+                }
+                if (message.source_type != null && message.hasOwnProperty("source_type"))
+                    object.source_type = message.source_type;
+                if (message.source_id != null && message.hasOwnProperty("source_id"))
+                    object.source_id = message.source_id;
+                if (message.bytes != null && message.hasOwnProperty("bytes"))
+                    if (typeof message.bytes === "number")
+                        object.bytes = options.longs === String ? String(message.bytes) : message.bytes;
+                    else
+                        object.bytes = options.longs === String ? $util.Long.prototype.toString.call(message.bytes) : options.longs === Number ? new $util.LongBits(message.bytes.low >>> 0, message.bytes.high >>> 0).toNumber(true) : message.bytes;
+                if (message.host_name != null && message.hasOwnProperty("host_name"))
+                    object.host_name = message.host_name;
+                if (message.microseconds != null && message.hasOwnProperty("microseconds"))
+                    if (typeof message.microseconds === "number")
+                        object.microseconds = options.longs === String ? String(message.microseconds) : message.microseconds;
+                    else
+                        object.microseconds = options.longs === String ? $util.Long.prototype.toString.call(message.microseconds) : options.longs === Number ? new $util.LongBits(message.microseconds.low >>> 0, message.microseconds.high >>> 0).toNumber(true) : message.microseconds;
+                if (message.used_ipv6 != null && message.hasOwnProperty("used_ipv6"))
+                    object.used_ipv6 = message.used_ipv6;
+                if (message.proxied != null && message.hasOwnProperty("proxied"))
+                    object.proxied = message.proxied;
+                return object;
+            };
+    
+            /**
+             * Converts this StatsInfo to JSON.
+             * @function toJSON
+             * @memberof CClientMetrics_DownloadRates_Notification.StatsInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            StatsInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return StatsInfo;
+        })();
+    
+        return CClientMetrics_DownloadRates_Notification;
+    })();
+    
+    $root.CClientMetrics_ContentValidation_Notification = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ContentValidation_Notification.
+         * @exports ICClientMetrics_ContentValidation_Notification
+         * @interface ICClientMetrics_ContentValidation_Notification
+         * @property {number|null} [validation_result] CClientMetrics_ContentValidation_Notification validation_result
+         * @property {number|null} [app_id] CClientMetrics_ContentValidation_Notification app_id
+         * @property {boolean|null} [staged_files] CClientMetrics_ContentValidation_Notification staged_files
+         * @property {boolean|null} [user_initiated] CClientMetrics_ContentValidation_Notification user_initiated
+         * @property {boolean|null} [early_out] CClientMetrics_ContentValidation_Notification early_out
+         * @property {number|null} [chunks_scanned] CClientMetrics_ContentValidation_Notification chunks_scanned
+         * @property {number|null} [chunks_corrupt] CClientMetrics_ContentValidation_Notification chunks_corrupt
+         * @property {number|Long|null} [bytes_scanned] CClientMetrics_ContentValidation_Notification bytes_scanned
+         * @property {number|Long|null} [chunk_bytes_corrupt] CClientMetrics_ContentValidation_Notification chunk_bytes_corrupt
+         * @property {number|Long|null} [total_file_size_corrupt] CClientMetrics_ContentValidation_Notification total_file_size_corrupt
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ContentValidation_Notification.
+         * @exports CClientMetrics_ContentValidation_Notification
+         * @classdesc Represents a CClientMetrics_ContentValidation_Notification.
+         * @implements ICClientMetrics_ContentValidation_Notification
+         * @constructor
+         * @param {ICClientMetrics_ContentValidation_Notification=} [properties] Properties to set
+         */
+        function CClientMetrics_ContentValidation_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification validation_result.
+         * @member {number} validation_result
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.validation_result = 0;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification app_id.
+         * @member {number} app_id
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.app_id = 0;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification staged_files.
+         * @member {boolean} staged_files
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.staged_files = false;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification user_initiated.
+         * @member {boolean} user_initiated
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.user_initiated = false;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification early_out.
+         * @member {boolean} early_out
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.early_out = false;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification chunks_scanned.
+         * @member {number} chunks_scanned
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.chunks_scanned = 0;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification chunks_corrupt.
+         * @member {number} chunks_corrupt
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.chunks_corrupt = 0;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification bytes_scanned.
+         * @member {number|Long} bytes_scanned
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.bytes_scanned = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification chunk_bytes_corrupt.
+         * @member {number|Long} chunk_bytes_corrupt
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.chunk_bytes_corrupt = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_ContentValidation_Notification total_file_size_corrupt.
+         * @member {number|Long} total_file_size_corrupt
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.total_file_size_corrupt = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CClientMetrics_ContentValidation_Notification instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {ICClientMetrics_ContentValidation_Notification=} [properties] Properties to set
+         * @returns {CClientMetrics_ContentValidation_Notification} CClientMetrics_ContentValidation_Notification instance
+         */
+        CClientMetrics_ContentValidation_Notification.create = function create(properties) {
+            return new CClientMetrics_ContentValidation_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentValidation_Notification message. Does not implicitly {@link CClientMetrics_ContentValidation_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {ICClientMetrics_ContentValidation_Notification} message CClientMetrics_ContentValidation_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentValidation_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.validation_result != null && message.hasOwnProperty("validation_result"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.validation_result);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
+            if (message.staged_files != null && message.hasOwnProperty("staged_files"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.staged_files);
+            if (message.user_initiated != null && message.hasOwnProperty("user_initiated"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.user_initiated);
+            if (message.early_out != null && message.hasOwnProperty("early_out"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.early_out);
+            if (message.chunks_scanned != null && message.hasOwnProperty("chunks_scanned"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.chunks_scanned);
+            if (message.chunks_corrupt != null && message.hasOwnProperty("chunks_corrupt"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.chunks_corrupt);
+            if (message.bytes_scanned != null && message.hasOwnProperty("bytes_scanned"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.bytes_scanned);
+            if (message.chunk_bytes_corrupt != null && message.hasOwnProperty("chunk_bytes_corrupt"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.chunk_bytes_corrupt);
+            if (message.total_file_size_corrupt != null && message.hasOwnProperty("total_file_size_corrupt"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint64(message.total_file_size_corrupt);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentValidation_Notification message, length delimited. Does not implicitly {@link CClientMetrics_ContentValidation_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {ICClientMetrics_ContentValidation_Notification} message CClientMetrics_ContentValidation_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentValidation_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentValidation_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ContentValidation_Notification} CClientMetrics_ContentValidation_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentValidation_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ContentValidation_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.validation_result = reader.int32();
+                    break;
+                case 2:
+                    message.app_id = reader.uint32();
+                    break;
+                case 3:
+                    message.staged_files = reader.bool();
+                    break;
+                case 4:
+                    message.user_initiated = reader.bool();
+                    break;
+                case 5:
+                    message.early_out = reader.bool();
+                    break;
+                case 6:
+                    message.chunks_scanned = reader.uint32();
+                    break;
+                case 7:
+                    message.chunks_corrupt = reader.uint32();
+                    break;
+                case 8:
+                    message.bytes_scanned = reader.uint64();
+                    break;
+                case 9:
+                    message.chunk_bytes_corrupt = reader.uint64();
+                    break;
+                case 10:
+                    message.total_file_size_corrupt = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentValidation_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ContentValidation_Notification} CClientMetrics_ContentValidation_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentValidation_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ContentValidation_Notification message.
+         * @function verify
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ContentValidation_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.validation_result != null && message.hasOwnProperty("validation_result"))
+                if (!$util.isInteger(message.validation_result))
+                    return "validation_result: integer expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            if (message.staged_files != null && message.hasOwnProperty("staged_files"))
+                if (typeof message.staged_files !== "boolean")
+                    return "staged_files: boolean expected";
+            if (message.user_initiated != null && message.hasOwnProperty("user_initiated"))
+                if (typeof message.user_initiated !== "boolean")
+                    return "user_initiated: boolean expected";
+            if (message.early_out != null && message.hasOwnProperty("early_out"))
+                if (typeof message.early_out !== "boolean")
+                    return "early_out: boolean expected";
+            if (message.chunks_scanned != null && message.hasOwnProperty("chunks_scanned"))
+                if (!$util.isInteger(message.chunks_scanned))
+                    return "chunks_scanned: integer expected";
+            if (message.chunks_corrupt != null && message.hasOwnProperty("chunks_corrupt"))
+                if (!$util.isInteger(message.chunks_corrupt))
+                    return "chunks_corrupt: integer expected";
+            if (message.bytes_scanned != null && message.hasOwnProperty("bytes_scanned"))
+                if (!$util.isInteger(message.bytes_scanned) && !(message.bytes_scanned && $util.isInteger(message.bytes_scanned.low) && $util.isInteger(message.bytes_scanned.high)))
+                    return "bytes_scanned: integer|Long expected";
+            if (message.chunk_bytes_corrupt != null && message.hasOwnProperty("chunk_bytes_corrupt"))
+                if (!$util.isInteger(message.chunk_bytes_corrupt) && !(message.chunk_bytes_corrupt && $util.isInteger(message.chunk_bytes_corrupt.low) && $util.isInteger(message.chunk_bytes_corrupt.high)))
+                    return "chunk_bytes_corrupt: integer|Long expected";
+            if (message.total_file_size_corrupt != null && message.hasOwnProperty("total_file_size_corrupt"))
+                if (!$util.isInteger(message.total_file_size_corrupt) && !(message.total_file_size_corrupt && $util.isInteger(message.total_file_size_corrupt.low) && $util.isInteger(message.total_file_size_corrupt.high)))
+                    return "total_file_size_corrupt: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ContentValidation_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ContentValidation_Notification} CClientMetrics_ContentValidation_Notification
+         */
+        CClientMetrics_ContentValidation_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ContentValidation_Notification)
+                return object;
+            var message = new $root.CClientMetrics_ContentValidation_Notification();
+            if (object.validation_result != null)
+                message.validation_result = object.validation_result | 0;
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            if (object.staged_files != null)
+                message.staged_files = Boolean(object.staged_files);
+            if (object.user_initiated != null)
+                message.user_initiated = Boolean(object.user_initiated);
+            if (object.early_out != null)
+                message.early_out = Boolean(object.early_out);
+            if (object.chunks_scanned != null)
+                message.chunks_scanned = object.chunks_scanned >>> 0;
+            if (object.chunks_corrupt != null)
+                message.chunks_corrupt = object.chunks_corrupt >>> 0;
+            if (object.bytes_scanned != null)
+                if ($util.Long)
+                    (message.bytes_scanned = $util.Long.fromValue(object.bytes_scanned)).unsigned = true;
+                else if (typeof object.bytes_scanned === "string")
+                    message.bytes_scanned = parseInt(object.bytes_scanned, 10);
+                else if (typeof object.bytes_scanned === "number")
+                    message.bytes_scanned = object.bytes_scanned;
+                else if (typeof object.bytes_scanned === "object")
+                    message.bytes_scanned = new $util.LongBits(object.bytes_scanned.low >>> 0, object.bytes_scanned.high >>> 0).toNumber(true);
+            if (object.chunk_bytes_corrupt != null)
+                if ($util.Long)
+                    (message.chunk_bytes_corrupt = $util.Long.fromValue(object.chunk_bytes_corrupt)).unsigned = true;
+                else if (typeof object.chunk_bytes_corrupt === "string")
+                    message.chunk_bytes_corrupt = parseInt(object.chunk_bytes_corrupt, 10);
+                else if (typeof object.chunk_bytes_corrupt === "number")
+                    message.chunk_bytes_corrupt = object.chunk_bytes_corrupt;
+                else if (typeof object.chunk_bytes_corrupt === "object")
+                    message.chunk_bytes_corrupt = new $util.LongBits(object.chunk_bytes_corrupt.low >>> 0, object.chunk_bytes_corrupt.high >>> 0).toNumber(true);
+            if (object.total_file_size_corrupt != null)
+                if ($util.Long)
+                    (message.total_file_size_corrupt = $util.Long.fromValue(object.total_file_size_corrupt)).unsigned = true;
+                else if (typeof object.total_file_size_corrupt === "string")
+                    message.total_file_size_corrupt = parseInt(object.total_file_size_corrupt, 10);
+                else if (typeof object.total_file_size_corrupt === "number")
+                    message.total_file_size_corrupt = object.total_file_size_corrupt;
+                else if (typeof object.total_file_size_corrupt === "object")
+                    message.total_file_size_corrupt = new $util.LongBits(object.total_file_size_corrupt.low >>> 0, object.total_file_size_corrupt.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ContentValidation_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @static
+         * @param {CClientMetrics_ContentValidation_Notification} message CClientMetrics_ContentValidation_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ContentValidation_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.validation_result = 0;
+                object.app_id = 0;
+                object.staged_files = false;
+                object.user_initiated = false;
+                object.early_out = false;
+                object.chunks_scanned = 0;
+                object.chunks_corrupt = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bytes_scanned = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bytes_scanned = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.chunk_bytes_corrupt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chunk_bytes_corrupt = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.total_file_size_corrupt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.total_file_size_corrupt = options.longs === String ? "0" : 0;
+            }
+            if (message.validation_result != null && message.hasOwnProperty("validation_result"))
+                object.validation_result = message.validation_result;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            if (message.staged_files != null && message.hasOwnProperty("staged_files"))
+                object.staged_files = message.staged_files;
+            if (message.user_initiated != null && message.hasOwnProperty("user_initiated"))
+                object.user_initiated = message.user_initiated;
+            if (message.early_out != null && message.hasOwnProperty("early_out"))
+                object.early_out = message.early_out;
+            if (message.chunks_scanned != null && message.hasOwnProperty("chunks_scanned"))
+                object.chunks_scanned = message.chunks_scanned;
+            if (message.chunks_corrupt != null && message.hasOwnProperty("chunks_corrupt"))
+                object.chunks_corrupt = message.chunks_corrupt;
+            if (message.bytes_scanned != null && message.hasOwnProperty("bytes_scanned"))
+                if (typeof message.bytes_scanned === "number")
+                    object.bytes_scanned = options.longs === String ? String(message.bytes_scanned) : message.bytes_scanned;
+                else
+                    object.bytes_scanned = options.longs === String ? $util.Long.prototype.toString.call(message.bytes_scanned) : options.longs === Number ? new $util.LongBits(message.bytes_scanned.low >>> 0, message.bytes_scanned.high >>> 0).toNumber(true) : message.bytes_scanned;
+            if (message.chunk_bytes_corrupt != null && message.hasOwnProperty("chunk_bytes_corrupt"))
+                if (typeof message.chunk_bytes_corrupt === "number")
+                    object.chunk_bytes_corrupt = options.longs === String ? String(message.chunk_bytes_corrupt) : message.chunk_bytes_corrupt;
+                else
+                    object.chunk_bytes_corrupt = options.longs === String ? $util.Long.prototype.toString.call(message.chunk_bytes_corrupt) : options.longs === Number ? new $util.LongBits(message.chunk_bytes_corrupt.low >>> 0, message.chunk_bytes_corrupt.high >>> 0).toNumber(true) : message.chunk_bytes_corrupt;
+            if (message.total_file_size_corrupt != null && message.hasOwnProperty("total_file_size_corrupt"))
+                if (typeof message.total_file_size_corrupt === "number")
+                    object.total_file_size_corrupt = options.longs === String ? String(message.total_file_size_corrupt) : message.total_file_size_corrupt;
+                else
+                    object.total_file_size_corrupt = options.longs === String ? $util.Long.prototype.toString.call(message.total_file_size_corrupt) : options.longs === Number ? new $util.LongBits(message.total_file_size_corrupt.low >>> 0, message.total_file_size_corrupt.high >>> 0).toNumber(true) : message.total_file_size_corrupt;
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ContentValidation_Notification to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ContentValidation_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ContentValidation_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ContentValidation_Notification;
+    })();
+    
+    $root.CClientMetrics_CloudAppSyncStats_Notification = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_CloudAppSyncStats_Notification.
+         * @exports ICClientMetrics_CloudAppSyncStats_Notification
+         * @interface ICClientMetrics_CloudAppSyncStats_Notification
+         * @property {number|null} [app_id] CClientMetrics_CloudAppSyncStats_Notification app_id
+         * @property {number|null} [platform_type] CClientMetrics_CloudAppSyncStats_Notification platform_type
+         * @property {boolean|null} [preload] CClientMetrics_CloudAppSyncStats_Notification preload
+         * @property {boolean|null} [blocking_app_launch] CClientMetrics_CloudAppSyncStats_Notification blocking_app_launch
+         * @property {number|null} [files_uploaded] CClientMetrics_CloudAppSyncStats_Notification files_uploaded
+         * @property {number|null} [files_downloaded] CClientMetrics_CloudAppSyncStats_Notification files_downloaded
+         * @property {number|null} [files_deleted] CClientMetrics_CloudAppSyncStats_Notification files_deleted
+         * @property {number|Long|null} [bytes_uploaded] CClientMetrics_CloudAppSyncStats_Notification bytes_uploaded
+         * @property {number|Long|null} [bytes_downloaded] CClientMetrics_CloudAppSyncStats_Notification bytes_downloaded
+         * @property {number|Long|null} [microsec_total] CClientMetrics_CloudAppSyncStats_Notification microsec_total
+         * @property {number|Long|null} [microsec_init_caches] CClientMetrics_CloudAppSyncStats_Notification microsec_init_caches
+         * @property {number|Long|null} [microsec_validate_state] CClientMetrics_CloudAppSyncStats_Notification microsec_validate_state
+         * @property {number|Long|null} [microsec_ac_launch] CClientMetrics_CloudAppSyncStats_Notification microsec_ac_launch
+         * @property {number|Long|null} [microsec_ac_prep_user_files] CClientMetrics_CloudAppSyncStats_Notification microsec_ac_prep_user_files
+         * @property {number|Long|null} [microsec_ac_exit] CClientMetrics_CloudAppSyncStats_Notification microsec_ac_exit
+         * @property {number|Long|null} [microsec_build_sync_list] CClientMetrics_CloudAppSyncStats_Notification microsec_build_sync_list
+         * @property {number|Long|null} [microsec_delete_files] CClientMetrics_CloudAppSyncStats_Notification microsec_delete_files
+         * @property {number|Long|null} [microsec_download_files] CClientMetrics_CloudAppSyncStats_Notification microsec_download_files
+         * @property {number|Long|null} [microsec_upload_files] CClientMetrics_CloudAppSyncStats_Notification microsec_upload_files
+         * @property {number|null} [hardware_type] CClientMetrics_CloudAppSyncStats_Notification hardware_type
+         * @property {number|null} [files_managed] CClientMetrics_CloudAppSyncStats_Notification files_managed
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_CloudAppSyncStats_Notification.
+         * @exports CClientMetrics_CloudAppSyncStats_Notification
+         * @classdesc Represents a CClientMetrics_CloudAppSyncStats_Notification.
+         * @implements ICClientMetrics_CloudAppSyncStats_Notification
+         * @constructor
+         * @param {ICClientMetrics_CloudAppSyncStats_Notification=} [properties] Properties to set
+         */
+        function CClientMetrics_CloudAppSyncStats_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification app_id.
+         * @member {number} app_id
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.app_id = 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification platform_type.
+         * @member {number} platform_type
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.platform_type = 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification preload.
+         * @member {boolean} preload
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.preload = false;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification blocking_app_launch.
+         * @member {boolean} blocking_app_launch
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.blocking_app_launch = false;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification files_uploaded.
+         * @member {number} files_uploaded
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.files_uploaded = 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification files_downloaded.
+         * @member {number} files_downloaded
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.files_downloaded = 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification files_deleted.
+         * @member {number} files_deleted
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.files_deleted = 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification bytes_uploaded.
+         * @member {number|Long} bytes_uploaded
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.bytes_uploaded = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification bytes_downloaded.
+         * @member {number|Long} bytes_downloaded
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.bytes_downloaded = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_total.
+         * @member {number|Long} microsec_total
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_total = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_init_caches.
+         * @member {number|Long} microsec_init_caches
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_init_caches = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_validate_state.
+         * @member {number|Long} microsec_validate_state
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_validate_state = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_ac_launch.
+         * @member {number|Long} microsec_ac_launch
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_ac_launch = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_ac_prep_user_files.
+         * @member {number|Long} microsec_ac_prep_user_files
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_ac_prep_user_files = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_ac_exit.
+         * @member {number|Long} microsec_ac_exit
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_ac_exit = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_build_sync_list.
+         * @member {number|Long} microsec_build_sync_list
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_build_sync_list = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_delete_files.
+         * @member {number|Long} microsec_delete_files
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_delete_files = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_download_files.
+         * @member {number|Long} microsec_download_files
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_download_files = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification microsec_upload_files.
+         * @member {number|Long} microsec_upload_files
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.microsec_upload_files = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification hardware_type.
+         * @member {number} hardware_type
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.hardware_type = 0;
+    
+        /**
+         * CClientMetrics_CloudAppSyncStats_Notification files_managed.
+         * @member {number} files_managed
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.files_managed = 0;
+    
+        /**
+         * Creates a new CClientMetrics_CloudAppSyncStats_Notification instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {ICClientMetrics_CloudAppSyncStats_Notification=} [properties] Properties to set
+         * @returns {CClientMetrics_CloudAppSyncStats_Notification} CClientMetrics_CloudAppSyncStats_Notification instance
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.create = function create(properties) {
+            return new CClientMetrics_CloudAppSyncStats_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_CloudAppSyncStats_Notification message. Does not implicitly {@link CClientMetrics_CloudAppSyncStats_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {ICClientMetrics_CloudAppSyncStats_Notification} message CClientMetrics_CloudAppSyncStats_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.app_id);
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.platform_type);
+            if (message.preload != null && message.hasOwnProperty("preload"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.preload);
+            if (message.blocking_app_launch != null && message.hasOwnProperty("blocking_app_launch"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.blocking_app_launch);
+            if (message.files_uploaded != null && message.hasOwnProperty("files_uploaded"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.files_uploaded);
+            if (message.files_downloaded != null && message.hasOwnProperty("files_downloaded"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.files_downloaded);
+            if (message.files_deleted != null && message.hasOwnProperty("files_deleted"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.files_deleted);
+            if (message.bytes_uploaded != null && message.hasOwnProperty("bytes_uploaded"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.bytes_uploaded);
+            if (message.bytes_downloaded != null && message.hasOwnProperty("bytes_downloaded"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.bytes_downloaded);
+            if (message.microsec_total != null && message.hasOwnProperty("microsec_total"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint64(message.microsec_total);
+            if (message.microsec_init_caches != null && message.hasOwnProperty("microsec_init_caches"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint64(message.microsec_init_caches);
+            if (message.microsec_validate_state != null && message.hasOwnProperty("microsec_validate_state"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint64(message.microsec_validate_state);
+            if (message.microsec_ac_launch != null && message.hasOwnProperty("microsec_ac_launch"))
+                writer.uint32(/* id 13, wireType 0 =*/104).uint64(message.microsec_ac_launch);
+            if (message.microsec_ac_prep_user_files != null && message.hasOwnProperty("microsec_ac_prep_user_files"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint64(message.microsec_ac_prep_user_files);
+            if (message.microsec_ac_exit != null && message.hasOwnProperty("microsec_ac_exit"))
+                writer.uint32(/* id 15, wireType 0 =*/120).uint64(message.microsec_ac_exit);
+            if (message.microsec_build_sync_list != null && message.hasOwnProperty("microsec_build_sync_list"))
+                writer.uint32(/* id 16, wireType 0 =*/128).uint64(message.microsec_build_sync_list);
+            if (message.microsec_delete_files != null && message.hasOwnProperty("microsec_delete_files"))
+                writer.uint32(/* id 17, wireType 0 =*/136).uint64(message.microsec_delete_files);
+            if (message.microsec_download_files != null && message.hasOwnProperty("microsec_download_files"))
+                writer.uint32(/* id 18, wireType 0 =*/144).uint64(message.microsec_download_files);
+            if (message.microsec_upload_files != null && message.hasOwnProperty("microsec_upload_files"))
+                writer.uint32(/* id 19, wireType 0 =*/152).uint64(message.microsec_upload_files);
+            if (message.hardware_type != null && message.hasOwnProperty("hardware_type"))
+                writer.uint32(/* id 20, wireType 0 =*/160).uint32(message.hardware_type);
+            if (message.files_managed != null && message.hasOwnProperty("files_managed"))
+                writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.files_managed);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_CloudAppSyncStats_Notification message, length delimited. Does not implicitly {@link CClientMetrics_CloudAppSyncStats_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {ICClientMetrics_CloudAppSyncStats_Notification} message CClientMetrics_CloudAppSyncStats_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_CloudAppSyncStats_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_CloudAppSyncStats_Notification} CClientMetrics_CloudAppSyncStats_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_CloudAppSyncStats_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.app_id = reader.uint32();
+                    break;
+                case 2:
+                    message.platform_type = reader.uint32();
+                    break;
+                case 3:
+                    message.preload = reader.bool();
+                    break;
+                case 4:
+                    message.blocking_app_launch = reader.bool();
+                    break;
+                case 5:
+                    message.files_uploaded = reader.uint32();
+                    break;
+                case 6:
+                    message.files_downloaded = reader.uint32();
+                    break;
+                case 7:
+                    message.files_deleted = reader.uint32();
+                    break;
+                case 8:
+                    message.bytes_uploaded = reader.uint64();
+                    break;
+                case 9:
+                    message.bytes_downloaded = reader.uint64();
+                    break;
+                case 10:
+                    message.microsec_total = reader.uint64();
+                    break;
+                case 11:
+                    message.microsec_init_caches = reader.uint64();
+                    break;
+                case 12:
+                    message.microsec_validate_state = reader.uint64();
+                    break;
+                case 13:
+                    message.microsec_ac_launch = reader.uint64();
+                    break;
+                case 14:
+                    message.microsec_ac_prep_user_files = reader.uint64();
+                    break;
+                case 15:
+                    message.microsec_ac_exit = reader.uint64();
+                    break;
+                case 16:
+                    message.microsec_build_sync_list = reader.uint64();
+                    break;
+                case 17:
+                    message.microsec_delete_files = reader.uint64();
+                    break;
+                case 18:
+                    message.microsec_download_files = reader.uint64();
+                    break;
+                case 19:
+                    message.microsec_upload_files = reader.uint64();
+                    break;
+                case 20:
+                    message.hardware_type = reader.uint32();
+                    break;
+                case 21:
+                    message.files_managed = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_CloudAppSyncStats_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_CloudAppSyncStats_Notification} CClientMetrics_CloudAppSyncStats_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_CloudAppSyncStats_Notification message.
+         * @function verify
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                if (!$util.isInteger(message.platform_type))
+                    return "platform_type: integer expected";
+            if (message.preload != null && message.hasOwnProperty("preload"))
+                if (typeof message.preload !== "boolean")
+                    return "preload: boolean expected";
+            if (message.blocking_app_launch != null && message.hasOwnProperty("blocking_app_launch"))
+                if (typeof message.blocking_app_launch !== "boolean")
+                    return "blocking_app_launch: boolean expected";
+            if (message.files_uploaded != null && message.hasOwnProperty("files_uploaded"))
+                if (!$util.isInteger(message.files_uploaded))
+                    return "files_uploaded: integer expected";
+            if (message.files_downloaded != null && message.hasOwnProperty("files_downloaded"))
+                if (!$util.isInteger(message.files_downloaded))
+                    return "files_downloaded: integer expected";
+            if (message.files_deleted != null && message.hasOwnProperty("files_deleted"))
+                if (!$util.isInteger(message.files_deleted))
+                    return "files_deleted: integer expected";
+            if (message.bytes_uploaded != null && message.hasOwnProperty("bytes_uploaded"))
+                if (!$util.isInteger(message.bytes_uploaded) && !(message.bytes_uploaded && $util.isInteger(message.bytes_uploaded.low) && $util.isInteger(message.bytes_uploaded.high)))
+                    return "bytes_uploaded: integer|Long expected";
+            if (message.bytes_downloaded != null && message.hasOwnProperty("bytes_downloaded"))
+                if (!$util.isInteger(message.bytes_downloaded) && !(message.bytes_downloaded && $util.isInteger(message.bytes_downloaded.low) && $util.isInteger(message.bytes_downloaded.high)))
+                    return "bytes_downloaded: integer|Long expected";
+            if (message.microsec_total != null && message.hasOwnProperty("microsec_total"))
+                if (!$util.isInteger(message.microsec_total) && !(message.microsec_total && $util.isInteger(message.microsec_total.low) && $util.isInteger(message.microsec_total.high)))
+                    return "microsec_total: integer|Long expected";
+            if (message.microsec_init_caches != null && message.hasOwnProperty("microsec_init_caches"))
+                if (!$util.isInteger(message.microsec_init_caches) && !(message.microsec_init_caches && $util.isInteger(message.microsec_init_caches.low) && $util.isInteger(message.microsec_init_caches.high)))
+                    return "microsec_init_caches: integer|Long expected";
+            if (message.microsec_validate_state != null && message.hasOwnProperty("microsec_validate_state"))
+                if (!$util.isInteger(message.microsec_validate_state) && !(message.microsec_validate_state && $util.isInteger(message.microsec_validate_state.low) && $util.isInteger(message.microsec_validate_state.high)))
+                    return "microsec_validate_state: integer|Long expected";
+            if (message.microsec_ac_launch != null && message.hasOwnProperty("microsec_ac_launch"))
+                if (!$util.isInteger(message.microsec_ac_launch) && !(message.microsec_ac_launch && $util.isInteger(message.microsec_ac_launch.low) && $util.isInteger(message.microsec_ac_launch.high)))
+                    return "microsec_ac_launch: integer|Long expected";
+            if (message.microsec_ac_prep_user_files != null && message.hasOwnProperty("microsec_ac_prep_user_files"))
+                if (!$util.isInteger(message.microsec_ac_prep_user_files) && !(message.microsec_ac_prep_user_files && $util.isInteger(message.microsec_ac_prep_user_files.low) && $util.isInteger(message.microsec_ac_prep_user_files.high)))
+                    return "microsec_ac_prep_user_files: integer|Long expected";
+            if (message.microsec_ac_exit != null && message.hasOwnProperty("microsec_ac_exit"))
+                if (!$util.isInteger(message.microsec_ac_exit) && !(message.microsec_ac_exit && $util.isInteger(message.microsec_ac_exit.low) && $util.isInteger(message.microsec_ac_exit.high)))
+                    return "microsec_ac_exit: integer|Long expected";
+            if (message.microsec_build_sync_list != null && message.hasOwnProperty("microsec_build_sync_list"))
+                if (!$util.isInteger(message.microsec_build_sync_list) && !(message.microsec_build_sync_list && $util.isInteger(message.microsec_build_sync_list.low) && $util.isInteger(message.microsec_build_sync_list.high)))
+                    return "microsec_build_sync_list: integer|Long expected";
+            if (message.microsec_delete_files != null && message.hasOwnProperty("microsec_delete_files"))
+                if (!$util.isInteger(message.microsec_delete_files) && !(message.microsec_delete_files && $util.isInteger(message.microsec_delete_files.low) && $util.isInteger(message.microsec_delete_files.high)))
+                    return "microsec_delete_files: integer|Long expected";
+            if (message.microsec_download_files != null && message.hasOwnProperty("microsec_download_files"))
+                if (!$util.isInteger(message.microsec_download_files) && !(message.microsec_download_files && $util.isInteger(message.microsec_download_files.low) && $util.isInteger(message.microsec_download_files.high)))
+                    return "microsec_download_files: integer|Long expected";
+            if (message.microsec_upload_files != null && message.hasOwnProperty("microsec_upload_files"))
+                if (!$util.isInteger(message.microsec_upload_files) && !(message.microsec_upload_files && $util.isInteger(message.microsec_upload_files.low) && $util.isInteger(message.microsec_upload_files.high)))
+                    return "microsec_upload_files: integer|Long expected";
+            if (message.hardware_type != null && message.hasOwnProperty("hardware_type"))
+                if (!$util.isInteger(message.hardware_type))
+                    return "hardware_type: integer expected";
+            if (message.files_managed != null && message.hasOwnProperty("files_managed"))
+                if (!$util.isInteger(message.files_managed))
+                    return "files_managed: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_CloudAppSyncStats_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_CloudAppSyncStats_Notification} CClientMetrics_CloudAppSyncStats_Notification
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_CloudAppSyncStats_Notification)
+                return object;
+            var message = new $root.CClientMetrics_CloudAppSyncStats_Notification();
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            if (object.platform_type != null)
+                message.platform_type = object.platform_type >>> 0;
+            if (object.preload != null)
+                message.preload = Boolean(object.preload);
+            if (object.blocking_app_launch != null)
+                message.blocking_app_launch = Boolean(object.blocking_app_launch);
+            if (object.files_uploaded != null)
+                message.files_uploaded = object.files_uploaded >>> 0;
+            if (object.files_downloaded != null)
+                message.files_downloaded = object.files_downloaded >>> 0;
+            if (object.files_deleted != null)
+                message.files_deleted = object.files_deleted >>> 0;
+            if (object.bytes_uploaded != null)
+                if ($util.Long)
+                    (message.bytes_uploaded = $util.Long.fromValue(object.bytes_uploaded)).unsigned = true;
+                else if (typeof object.bytes_uploaded === "string")
+                    message.bytes_uploaded = parseInt(object.bytes_uploaded, 10);
+                else if (typeof object.bytes_uploaded === "number")
+                    message.bytes_uploaded = object.bytes_uploaded;
+                else if (typeof object.bytes_uploaded === "object")
+                    message.bytes_uploaded = new $util.LongBits(object.bytes_uploaded.low >>> 0, object.bytes_uploaded.high >>> 0).toNumber(true);
+            if (object.bytes_downloaded != null)
+                if ($util.Long)
+                    (message.bytes_downloaded = $util.Long.fromValue(object.bytes_downloaded)).unsigned = true;
+                else if (typeof object.bytes_downloaded === "string")
+                    message.bytes_downloaded = parseInt(object.bytes_downloaded, 10);
+                else if (typeof object.bytes_downloaded === "number")
+                    message.bytes_downloaded = object.bytes_downloaded;
+                else if (typeof object.bytes_downloaded === "object")
+                    message.bytes_downloaded = new $util.LongBits(object.bytes_downloaded.low >>> 0, object.bytes_downloaded.high >>> 0).toNumber(true);
+            if (object.microsec_total != null)
+                if ($util.Long)
+                    (message.microsec_total = $util.Long.fromValue(object.microsec_total)).unsigned = true;
+                else if (typeof object.microsec_total === "string")
+                    message.microsec_total = parseInt(object.microsec_total, 10);
+                else if (typeof object.microsec_total === "number")
+                    message.microsec_total = object.microsec_total;
+                else if (typeof object.microsec_total === "object")
+                    message.microsec_total = new $util.LongBits(object.microsec_total.low >>> 0, object.microsec_total.high >>> 0).toNumber(true);
+            if (object.microsec_init_caches != null)
+                if ($util.Long)
+                    (message.microsec_init_caches = $util.Long.fromValue(object.microsec_init_caches)).unsigned = true;
+                else if (typeof object.microsec_init_caches === "string")
+                    message.microsec_init_caches = parseInt(object.microsec_init_caches, 10);
+                else if (typeof object.microsec_init_caches === "number")
+                    message.microsec_init_caches = object.microsec_init_caches;
+                else if (typeof object.microsec_init_caches === "object")
+                    message.microsec_init_caches = new $util.LongBits(object.microsec_init_caches.low >>> 0, object.microsec_init_caches.high >>> 0).toNumber(true);
+            if (object.microsec_validate_state != null)
+                if ($util.Long)
+                    (message.microsec_validate_state = $util.Long.fromValue(object.microsec_validate_state)).unsigned = true;
+                else if (typeof object.microsec_validate_state === "string")
+                    message.microsec_validate_state = parseInt(object.microsec_validate_state, 10);
+                else if (typeof object.microsec_validate_state === "number")
+                    message.microsec_validate_state = object.microsec_validate_state;
+                else if (typeof object.microsec_validate_state === "object")
+                    message.microsec_validate_state = new $util.LongBits(object.microsec_validate_state.low >>> 0, object.microsec_validate_state.high >>> 0).toNumber(true);
+            if (object.microsec_ac_launch != null)
+                if ($util.Long)
+                    (message.microsec_ac_launch = $util.Long.fromValue(object.microsec_ac_launch)).unsigned = true;
+                else if (typeof object.microsec_ac_launch === "string")
+                    message.microsec_ac_launch = parseInt(object.microsec_ac_launch, 10);
+                else if (typeof object.microsec_ac_launch === "number")
+                    message.microsec_ac_launch = object.microsec_ac_launch;
+                else if (typeof object.microsec_ac_launch === "object")
+                    message.microsec_ac_launch = new $util.LongBits(object.microsec_ac_launch.low >>> 0, object.microsec_ac_launch.high >>> 0).toNumber(true);
+            if (object.microsec_ac_prep_user_files != null)
+                if ($util.Long)
+                    (message.microsec_ac_prep_user_files = $util.Long.fromValue(object.microsec_ac_prep_user_files)).unsigned = true;
+                else if (typeof object.microsec_ac_prep_user_files === "string")
+                    message.microsec_ac_prep_user_files = parseInt(object.microsec_ac_prep_user_files, 10);
+                else if (typeof object.microsec_ac_prep_user_files === "number")
+                    message.microsec_ac_prep_user_files = object.microsec_ac_prep_user_files;
+                else if (typeof object.microsec_ac_prep_user_files === "object")
+                    message.microsec_ac_prep_user_files = new $util.LongBits(object.microsec_ac_prep_user_files.low >>> 0, object.microsec_ac_prep_user_files.high >>> 0).toNumber(true);
+            if (object.microsec_ac_exit != null)
+                if ($util.Long)
+                    (message.microsec_ac_exit = $util.Long.fromValue(object.microsec_ac_exit)).unsigned = true;
+                else if (typeof object.microsec_ac_exit === "string")
+                    message.microsec_ac_exit = parseInt(object.microsec_ac_exit, 10);
+                else if (typeof object.microsec_ac_exit === "number")
+                    message.microsec_ac_exit = object.microsec_ac_exit;
+                else if (typeof object.microsec_ac_exit === "object")
+                    message.microsec_ac_exit = new $util.LongBits(object.microsec_ac_exit.low >>> 0, object.microsec_ac_exit.high >>> 0).toNumber(true);
+            if (object.microsec_build_sync_list != null)
+                if ($util.Long)
+                    (message.microsec_build_sync_list = $util.Long.fromValue(object.microsec_build_sync_list)).unsigned = true;
+                else if (typeof object.microsec_build_sync_list === "string")
+                    message.microsec_build_sync_list = parseInt(object.microsec_build_sync_list, 10);
+                else if (typeof object.microsec_build_sync_list === "number")
+                    message.microsec_build_sync_list = object.microsec_build_sync_list;
+                else if (typeof object.microsec_build_sync_list === "object")
+                    message.microsec_build_sync_list = new $util.LongBits(object.microsec_build_sync_list.low >>> 0, object.microsec_build_sync_list.high >>> 0).toNumber(true);
+            if (object.microsec_delete_files != null)
+                if ($util.Long)
+                    (message.microsec_delete_files = $util.Long.fromValue(object.microsec_delete_files)).unsigned = true;
+                else if (typeof object.microsec_delete_files === "string")
+                    message.microsec_delete_files = parseInt(object.microsec_delete_files, 10);
+                else if (typeof object.microsec_delete_files === "number")
+                    message.microsec_delete_files = object.microsec_delete_files;
+                else if (typeof object.microsec_delete_files === "object")
+                    message.microsec_delete_files = new $util.LongBits(object.microsec_delete_files.low >>> 0, object.microsec_delete_files.high >>> 0).toNumber(true);
+            if (object.microsec_download_files != null)
+                if ($util.Long)
+                    (message.microsec_download_files = $util.Long.fromValue(object.microsec_download_files)).unsigned = true;
+                else if (typeof object.microsec_download_files === "string")
+                    message.microsec_download_files = parseInt(object.microsec_download_files, 10);
+                else if (typeof object.microsec_download_files === "number")
+                    message.microsec_download_files = object.microsec_download_files;
+                else if (typeof object.microsec_download_files === "object")
+                    message.microsec_download_files = new $util.LongBits(object.microsec_download_files.low >>> 0, object.microsec_download_files.high >>> 0).toNumber(true);
+            if (object.microsec_upload_files != null)
+                if ($util.Long)
+                    (message.microsec_upload_files = $util.Long.fromValue(object.microsec_upload_files)).unsigned = true;
+                else if (typeof object.microsec_upload_files === "string")
+                    message.microsec_upload_files = parseInt(object.microsec_upload_files, 10);
+                else if (typeof object.microsec_upload_files === "number")
+                    message.microsec_upload_files = object.microsec_upload_files;
+                else if (typeof object.microsec_upload_files === "object")
+                    message.microsec_upload_files = new $util.LongBits(object.microsec_upload_files.low >>> 0, object.microsec_upload_files.high >>> 0).toNumber(true);
+            if (object.hardware_type != null)
+                message.hardware_type = object.hardware_type >>> 0;
+            if (object.files_managed != null)
+                message.files_managed = object.files_managed >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_CloudAppSyncStats_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @static
+         * @param {CClientMetrics_CloudAppSyncStats_Notification} message CClientMetrics_CloudAppSyncStats_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.app_id = 0;
+                object.platform_type = 0;
+                object.preload = false;
+                object.blocking_app_launch = false;
+                object.files_uploaded = 0;
+                object.files_downloaded = 0;
+                object.files_deleted = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bytes_uploaded = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bytes_uploaded = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bytes_downloaded = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bytes_downloaded = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_total = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_total = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_init_caches = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_init_caches = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_validate_state = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_validate_state = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_ac_launch = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_ac_launch = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_ac_prep_user_files = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_ac_prep_user_files = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_ac_exit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_ac_exit = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_build_sync_list = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_build_sync_list = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_delete_files = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_delete_files = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_download_files = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_download_files = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.microsec_upload_files = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.microsec_upload_files = options.longs === String ? "0" : 0;
+                object.hardware_type = 0;
+                object.files_managed = 0;
+            }
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            if (message.platform_type != null && message.hasOwnProperty("platform_type"))
+                object.platform_type = message.platform_type;
+            if (message.preload != null && message.hasOwnProperty("preload"))
+                object.preload = message.preload;
+            if (message.blocking_app_launch != null && message.hasOwnProperty("blocking_app_launch"))
+                object.blocking_app_launch = message.blocking_app_launch;
+            if (message.files_uploaded != null && message.hasOwnProperty("files_uploaded"))
+                object.files_uploaded = message.files_uploaded;
+            if (message.files_downloaded != null && message.hasOwnProperty("files_downloaded"))
+                object.files_downloaded = message.files_downloaded;
+            if (message.files_deleted != null && message.hasOwnProperty("files_deleted"))
+                object.files_deleted = message.files_deleted;
+            if (message.bytes_uploaded != null && message.hasOwnProperty("bytes_uploaded"))
+                if (typeof message.bytes_uploaded === "number")
+                    object.bytes_uploaded = options.longs === String ? String(message.bytes_uploaded) : message.bytes_uploaded;
+                else
+                    object.bytes_uploaded = options.longs === String ? $util.Long.prototype.toString.call(message.bytes_uploaded) : options.longs === Number ? new $util.LongBits(message.bytes_uploaded.low >>> 0, message.bytes_uploaded.high >>> 0).toNumber(true) : message.bytes_uploaded;
+            if (message.bytes_downloaded != null && message.hasOwnProperty("bytes_downloaded"))
+                if (typeof message.bytes_downloaded === "number")
+                    object.bytes_downloaded = options.longs === String ? String(message.bytes_downloaded) : message.bytes_downloaded;
+                else
+                    object.bytes_downloaded = options.longs === String ? $util.Long.prototype.toString.call(message.bytes_downloaded) : options.longs === Number ? new $util.LongBits(message.bytes_downloaded.low >>> 0, message.bytes_downloaded.high >>> 0).toNumber(true) : message.bytes_downloaded;
+            if (message.microsec_total != null && message.hasOwnProperty("microsec_total"))
+                if (typeof message.microsec_total === "number")
+                    object.microsec_total = options.longs === String ? String(message.microsec_total) : message.microsec_total;
+                else
+                    object.microsec_total = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_total) : options.longs === Number ? new $util.LongBits(message.microsec_total.low >>> 0, message.microsec_total.high >>> 0).toNumber(true) : message.microsec_total;
+            if (message.microsec_init_caches != null && message.hasOwnProperty("microsec_init_caches"))
+                if (typeof message.microsec_init_caches === "number")
+                    object.microsec_init_caches = options.longs === String ? String(message.microsec_init_caches) : message.microsec_init_caches;
+                else
+                    object.microsec_init_caches = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_init_caches) : options.longs === Number ? new $util.LongBits(message.microsec_init_caches.low >>> 0, message.microsec_init_caches.high >>> 0).toNumber(true) : message.microsec_init_caches;
+            if (message.microsec_validate_state != null && message.hasOwnProperty("microsec_validate_state"))
+                if (typeof message.microsec_validate_state === "number")
+                    object.microsec_validate_state = options.longs === String ? String(message.microsec_validate_state) : message.microsec_validate_state;
+                else
+                    object.microsec_validate_state = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_validate_state) : options.longs === Number ? new $util.LongBits(message.microsec_validate_state.low >>> 0, message.microsec_validate_state.high >>> 0).toNumber(true) : message.microsec_validate_state;
+            if (message.microsec_ac_launch != null && message.hasOwnProperty("microsec_ac_launch"))
+                if (typeof message.microsec_ac_launch === "number")
+                    object.microsec_ac_launch = options.longs === String ? String(message.microsec_ac_launch) : message.microsec_ac_launch;
+                else
+                    object.microsec_ac_launch = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_ac_launch) : options.longs === Number ? new $util.LongBits(message.microsec_ac_launch.low >>> 0, message.microsec_ac_launch.high >>> 0).toNumber(true) : message.microsec_ac_launch;
+            if (message.microsec_ac_prep_user_files != null && message.hasOwnProperty("microsec_ac_prep_user_files"))
+                if (typeof message.microsec_ac_prep_user_files === "number")
+                    object.microsec_ac_prep_user_files = options.longs === String ? String(message.microsec_ac_prep_user_files) : message.microsec_ac_prep_user_files;
+                else
+                    object.microsec_ac_prep_user_files = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_ac_prep_user_files) : options.longs === Number ? new $util.LongBits(message.microsec_ac_prep_user_files.low >>> 0, message.microsec_ac_prep_user_files.high >>> 0).toNumber(true) : message.microsec_ac_prep_user_files;
+            if (message.microsec_ac_exit != null && message.hasOwnProperty("microsec_ac_exit"))
+                if (typeof message.microsec_ac_exit === "number")
+                    object.microsec_ac_exit = options.longs === String ? String(message.microsec_ac_exit) : message.microsec_ac_exit;
+                else
+                    object.microsec_ac_exit = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_ac_exit) : options.longs === Number ? new $util.LongBits(message.microsec_ac_exit.low >>> 0, message.microsec_ac_exit.high >>> 0).toNumber(true) : message.microsec_ac_exit;
+            if (message.microsec_build_sync_list != null && message.hasOwnProperty("microsec_build_sync_list"))
+                if (typeof message.microsec_build_sync_list === "number")
+                    object.microsec_build_sync_list = options.longs === String ? String(message.microsec_build_sync_list) : message.microsec_build_sync_list;
+                else
+                    object.microsec_build_sync_list = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_build_sync_list) : options.longs === Number ? new $util.LongBits(message.microsec_build_sync_list.low >>> 0, message.microsec_build_sync_list.high >>> 0).toNumber(true) : message.microsec_build_sync_list;
+            if (message.microsec_delete_files != null && message.hasOwnProperty("microsec_delete_files"))
+                if (typeof message.microsec_delete_files === "number")
+                    object.microsec_delete_files = options.longs === String ? String(message.microsec_delete_files) : message.microsec_delete_files;
+                else
+                    object.microsec_delete_files = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_delete_files) : options.longs === Number ? new $util.LongBits(message.microsec_delete_files.low >>> 0, message.microsec_delete_files.high >>> 0).toNumber(true) : message.microsec_delete_files;
+            if (message.microsec_download_files != null && message.hasOwnProperty("microsec_download_files"))
+                if (typeof message.microsec_download_files === "number")
+                    object.microsec_download_files = options.longs === String ? String(message.microsec_download_files) : message.microsec_download_files;
+                else
+                    object.microsec_download_files = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_download_files) : options.longs === Number ? new $util.LongBits(message.microsec_download_files.low >>> 0, message.microsec_download_files.high >>> 0).toNumber(true) : message.microsec_download_files;
+            if (message.microsec_upload_files != null && message.hasOwnProperty("microsec_upload_files"))
+                if (typeof message.microsec_upload_files === "number")
+                    object.microsec_upload_files = options.longs === String ? String(message.microsec_upload_files) : message.microsec_upload_files;
+                else
+                    object.microsec_upload_files = options.longs === String ? $util.Long.prototype.toString.call(message.microsec_upload_files) : options.longs === Number ? new $util.LongBits(message.microsec_upload_files.low >>> 0, message.microsec_upload_files.high >>> 0).toNumber(true) : message.microsec_upload_files;
+            if (message.hardware_type != null && message.hasOwnProperty("hardware_type"))
+                object.hardware_type = message.hardware_type;
+            if (message.files_managed != null && message.hasOwnProperty("files_managed"))
+                object.files_managed = message.files_managed;
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_CloudAppSyncStats_Notification to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_CloudAppSyncStats_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_CloudAppSyncStats_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_CloudAppSyncStats_Notification;
+    })();
+    
+    $root.CClientMetrics_ContentDownloadResponse_Counts_Notification = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ContentDownloadResponse_Counts_Notification.
+         * @exports ICClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @interface ICClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @property {number|null} [cell_id] CClientMetrics_ContentDownloadResponse_Counts_Notification cell_id
+         * @property {ICClientMetrics_ContentDownloadResponse_Hosts|null} [data] CClientMetrics_ContentDownloadResponse_Counts_Notification data
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ContentDownloadResponse_Counts_Notification.
+         * @exports CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @classdesc Represents a CClientMetrics_ContentDownloadResponse_Counts_Notification.
+         * @implements ICClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @constructor
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts_Notification=} [properties] Properties to set
+         */
+        function CClientMetrics_ContentDownloadResponse_Counts_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts_Notification cell_id.
+         * @member {number} cell_id
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.prototype.cell_id = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts_Notification data.
+         * @member {ICClientMetrics_ContentDownloadResponse_Hosts|null|undefined} data
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.prototype.data = null;
+    
+        /**
+         * Creates a new CClientMetrics_ContentDownloadResponse_Counts_Notification instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts_Notification=} [properties] Properties to set
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts_Notification} CClientMetrics_ContentDownloadResponse_Counts_Notification instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.create = function create(properties) {
+            return new CClientMetrics_ContentDownloadResponse_Counts_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_Counts_Notification message. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_Counts_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts_Notification} message CClientMetrics_ContentDownloadResponse_Counts_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cell_id);
+            if (message.data != null && message.hasOwnProperty("data"))
+                $root.CClientMetrics_ContentDownloadResponse_Hosts.encode(message.data, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_Counts_Notification message, length delimited. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_Counts_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts_Notification} message CClientMetrics_ContentDownloadResponse_Counts_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_Counts_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts_Notification} CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ContentDownloadResponse_Counts_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.cell_id = reader.uint32();
+                    break;
+                case 2:
+                    message.data = $root.CClientMetrics_ContentDownloadResponse_Hosts.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_Counts_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts_Notification} CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ContentDownloadResponse_Counts_Notification message.
+         * @function verify
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                if (!$util.isInteger(message.cell_id))
+                    return "cell_id: integer expected";
+            if (message.data != null && message.hasOwnProperty("data")) {
+                var error = $root.CClientMetrics_ContentDownloadResponse_Hosts.verify(message.data);
+                if (error)
+                    return "data." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ContentDownloadResponse_Counts_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts_Notification} CClientMetrics_ContentDownloadResponse_Counts_Notification
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ContentDownloadResponse_Counts_Notification)
+                return object;
+            var message = new $root.CClientMetrics_ContentDownloadResponse_Counts_Notification();
+            if (object.cell_id != null)
+                message.cell_id = object.cell_id >>> 0;
+            if (object.data != null) {
+                if (typeof object.data !== "object")
+                    throw TypeError(".CClientMetrics_ContentDownloadResponse_Counts_Notification.data: object expected");
+                message.data = $root.CClientMetrics_ContentDownloadResponse_Hosts.fromObject(object.data);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ContentDownloadResponse_Counts_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @static
+         * @param {CClientMetrics_ContentDownloadResponse_Counts_Notification} message CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.cell_id = 0;
+                object.data = null;
+            }
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                object.cell_id = message.cell_id;
+            if (message.data != null && message.hasOwnProperty("data"))
+                object.data = $root.CClientMetrics_ContentDownloadResponse_Hosts.toObject(message.data, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ContentDownloadResponse_Counts_Notification to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ContentDownloadResponse_Counts_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ContentDownloadResponse_Counts_Notification;
     })();
     
     $root.ClientMetrics = (function() {
@@ -2618,13 +4851,178 @@
          * @variation 2
          */
     
+        /**
+         * Callback as used by {@link ClientMetrics#clientBootstrapReport}.
+         * @memberof ClientMetrics
+         * @typedef ClientBootstrapReportCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls ClientBootstrapReport.
+         * @function clientBootstrapReport
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_ClientBootstrap_Notification} request CClientMetrics_ClientBootstrap_Notification message or plain object
+         * @param {ClientMetrics.ClientBootstrapReportCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(ClientMetrics.prototype.clientBootstrapReport = function clientBootstrapReport(request, callback) {
+            return this.rpcCall(clientBootstrapReport, $root.CClientMetrics_ClientBootstrap_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "ClientBootstrapReport" });
+    
+        /**
+         * Calls ClientBootstrapReport.
+         * @function clientBootstrapReport
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_ClientBootstrap_Notification} request CClientMetrics_ClientBootstrap_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link ClientMetrics#clientDownloadRatesReport}.
+         * @memberof ClientMetrics
+         * @typedef ClientDownloadRatesReportCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls ClientDownloadRatesReport.
+         * @function clientDownloadRatesReport
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_DownloadRates_Notification} request CClientMetrics_DownloadRates_Notification message or plain object
+         * @param {ClientMetrics.ClientDownloadRatesReportCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(ClientMetrics.prototype.clientDownloadRatesReport = function clientDownloadRatesReport(request, callback) {
+            return this.rpcCall(clientDownloadRatesReport, $root.CClientMetrics_DownloadRates_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "ClientDownloadRatesReport" });
+    
+        /**
+         * Calls ClientDownloadRatesReport.
+         * @function clientDownloadRatesReport
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_DownloadRates_Notification} request CClientMetrics_DownloadRates_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link ClientMetrics#clientContentValidationReport}.
+         * @memberof ClientMetrics
+         * @typedef ClientContentValidationReportCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls ClientContentValidationReport.
+         * @function clientContentValidationReport
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_ContentValidation_Notification} request CClientMetrics_ContentValidation_Notification message or plain object
+         * @param {ClientMetrics.ClientContentValidationReportCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(ClientMetrics.prototype.clientContentValidationReport = function clientContentValidationReport(request, callback) {
+            return this.rpcCall(clientContentValidationReport, $root.CClientMetrics_ContentValidation_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "ClientContentValidationReport" });
+    
+        /**
+         * Calls ClientContentValidationReport.
+         * @function clientContentValidationReport
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_ContentValidation_Notification} request CClientMetrics_ContentValidation_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link ClientMetrics#clientCloudAppSyncStats}.
+         * @memberof ClientMetrics
+         * @typedef ClientCloudAppSyncStatsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls ClientCloudAppSyncStats.
+         * @function clientCloudAppSyncStats
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_CloudAppSyncStats_Notification} request CClientMetrics_CloudAppSyncStats_Notification message or plain object
+         * @param {ClientMetrics.ClientCloudAppSyncStatsCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(ClientMetrics.prototype.clientCloudAppSyncStats = function clientCloudAppSyncStats(request, callback) {
+            return this.rpcCall(clientCloudAppSyncStats, $root.CClientMetrics_CloudAppSyncStats_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "ClientCloudAppSyncStats" });
+    
+        /**
+         * Calls ClientCloudAppSyncStats.
+         * @function clientCloudAppSyncStats
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_CloudAppSyncStats_Notification} request CClientMetrics_CloudAppSyncStats_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link ClientMetrics#clientDownloadResponseCodeCounts}.
+         * @memberof ClientMetrics
+         * @typedef ClientDownloadResponseCodeCountsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls ClientDownloadResponseCodeCounts.
+         * @function clientDownloadResponseCodeCounts
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts_Notification} request CClientMetrics_ContentDownloadResponse_Counts_Notification message or plain object
+         * @param {ClientMetrics.ClientDownloadResponseCodeCountsCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(ClientMetrics.prototype.clientDownloadResponseCodeCounts = function clientDownloadResponseCodeCounts(request, callback) {
+            return this.rpcCall(clientDownloadResponseCodeCounts, $root.CClientMetrics_ContentDownloadResponse_Counts_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "ClientDownloadResponseCodeCounts" });
+    
+        /**
+         * Calls ClientDownloadResponseCodeCounts.
+         * @function clientDownloadResponseCodeCounts
+         * @memberof ClientMetrics
+         * @instance
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts_Notification} request CClientMetrics_ContentDownloadResponse_Counts_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
         return ClientMetrics;
     })();
     
     /**
      * EProtoExecutionSite enum.
      * @exports EProtoExecutionSite
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EProtoExecutionSiteUnknown=0 k_EProtoExecutionSiteUnknown value
      * @property {number} k_EProtoExecutionSiteSteamClient=2 k_EProtoExecutionSiteSteamClient value
      */
@@ -3038,6 +5436,7 @@
                  * @property {Array.<google.protobuf.IFieldDescriptorProto>|null} [extension] FileDescriptorProto extension
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [source_code_info] FileDescriptorProto source_code_info
+                 * @property {string|null} [syntax] FileDescriptorProto syntax
                  */
     
                 /**
@@ -3151,6 +5550,14 @@
                 FileDescriptorProto.prototype.source_code_info = null;
     
                 /**
+                 * FileDescriptorProto syntax.
+                 * @member {string} syntax
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.syntax = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -3174,9 +5581,9 @@
                 FileDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
+                    if (message["package"] != null && message.hasOwnProperty("package"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message["package"]);
                     if (message.dependency != null && message.dependency.length)
                         for (var i = 0; i < message.dependency.length; ++i)
@@ -3193,9 +5600,9 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.source_code_info != null && Object.hasOwnProperty.call(message, "source_code_info"))
+                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info"))
                         $root.google.protobuf.SourceCodeInfo.encode(message.source_code_info, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     if (message.public_dependency != null && message.public_dependency.length)
                         for (var i = 0; i < message.public_dependency.length; ++i)
@@ -3203,6 +5610,8 @@
                     if (message.weak_dependency != null && message.weak_dependency.length)
                         for (var i = 0; i < message.weak_dependency.length; ++i)
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weak_dependency[i]);
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     return writer;
                 };
     
@@ -3293,6 +5702,9 @@
                             break;
                         case 9:
                             message.source_code_info = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                            break;
+                        case 12:
+                            message.syntax = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3402,6 +5814,9 @@
                         if (error)
                             return "source_code_info." + error;
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        if (!$util.isString(message.syntax))
+                            return "syntax: string expected";
                     return null;
                 };
     
@@ -3492,6 +5907,8 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.source_code_info: object expected");
                         message.source_code_info = $root.google.protobuf.SourceCodeInfo.fromObject(object.source_code_info);
                     }
+                    if (object.syntax != null)
+                        message.syntax = String(object.syntax);
                     return message;
                 };
     
@@ -3522,6 +5939,7 @@
                         object["package"] = "";
                         object.options = null;
                         object.source_code_info = null;
+                        object.syntax = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -3566,6 +5984,8 @@
                         for (var j = 0; j < message.weak_dependency.length; ++j)
                             object.weak_dependency[j] = message.weak_dependency[j];
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        object.syntax = message.syntax;
                     return object;
                 };
     
@@ -3597,6 +6017,8 @@
                  * @property {Array.<google.protobuf.DescriptorProto.IExtensionRange>|null} [extension_range] DescriptorProto extension_range
                  * @property {Array.<google.protobuf.IOneofDescriptorProto>|null} [oneof_decl] DescriptorProto oneof_decl
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
+                 * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reserved_range] DescriptorProto reserved_range
+                 * @property {Array.<string>|null} [reserved_name] DescriptorProto reserved_name
                  */
     
                 /**
@@ -3614,6 +6036,8 @@
                     this.enum_type = [];
                     this.extension_range = [];
                     this.oneof_decl = [];
+                    this.reserved_range = [];
+                    this.reserved_name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -3685,6 +6109,22 @@
                 DescriptorProto.prototype.options = null;
     
                 /**
+                 * DescriptorProto reserved_range.
+                 * @member {Array.<google.protobuf.DescriptorProto.IReservedRange>} reserved_range
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_range = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto reserved_name.
+                 * @member {Array.<string>} reserved_name
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_name = $util.emptyArray;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -3708,7 +6148,7 @@
                 DescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.field != null && message.field.length)
                         for (var i = 0; i < message.field.length; ++i)
@@ -3725,11 +6165,17 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.oneof_decl != null && message.oneof_decl.length)
                         for (var i = 0; i < message.oneof_decl.length; ++i)
                             $root.google.protobuf.OneofDescriptorProto.encode(message.oneof_decl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.reserved_range != null && message.reserved_range.length)
+                        for (var i = 0; i < message.reserved_range.length; ++i)
+                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reserved_range[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.reserved_name != null && message.reserved_name.length)
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.reserved_name[i]);
                     return writer;
                 };
     
@@ -3799,6 +6245,16 @@
                             break;
                         case 7:
                             message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                            break;
+                        case 9:
+                            if (!(message.reserved_range && message.reserved_range.length))
+                                message.reserved_range = [];
+                            message.reserved_range.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                            break;
+                        case 10:
+                            if (!(message.reserved_name && message.reserved_name.length))
+                                message.reserved_name = [];
+                            message.reserved_name.push(reader.string());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3897,6 +6353,22 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.reserved_range != null && message.hasOwnProperty("reserved_range")) {
+                        if (!Array.isArray(message.reserved_range))
+                            return "reserved_range: array expected";
+                        for (var i = 0; i < message.reserved_range.length; ++i) {
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reserved_range[i]);
+                            if (error)
+                                return "reserved_range." + error;
+                        }
+                    }
+                    if (message.reserved_name != null && message.hasOwnProperty("reserved_name")) {
+                        if (!Array.isArray(message.reserved_name))
+                            return "reserved_name: array expected";
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            if (!$util.isString(message.reserved_name[i]))
+                                return "reserved_name: string[] expected";
+                    }
                     return null;
                 };
     
@@ -3979,6 +6451,23 @@
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
                     }
+                    if (object.reserved_range) {
+                        if (!Array.isArray(object.reserved_range))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_range: array expected");
+                        message.reserved_range = [];
+                        for (var i = 0; i < object.reserved_range.length; ++i) {
+                            if (typeof object.reserved_range[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.reserved_range: object expected");
+                            message.reserved_range[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reserved_range[i]);
+                        }
+                    }
+                    if (object.reserved_name) {
+                        if (!Array.isArray(object.reserved_name))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_name: array expected");
+                        message.reserved_name = [];
+                        for (var i = 0; i < object.reserved_name.length; ++i)
+                            message.reserved_name[i] = String(object.reserved_name[i]);
+                    }
                     return message;
                 };
     
@@ -4002,6 +6491,8 @@
                         object.extension_range = [];
                         object.extension = [];
                         object.oneof_decl = [];
+                        object.reserved_range = [];
+                        object.reserved_name = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -4040,6 +6531,16 @@
                         object.oneof_decl = [];
                         for (var j = 0; j < message.oneof_decl.length; ++j)
                             object.oneof_decl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneof_decl[j], options);
+                    }
+                    if (message.reserved_range && message.reserved_range.length) {
+                        object.reserved_range = [];
+                        for (var j = 0; j < message.reserved_range.length; ++j)
+                            object.reserved_range[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reserved_range[j], options);
+                    }
+                    if (message.reserved_name && message.reserved_name.length) {
+                        object.reserved_name = [];
+                        for (var j = 0; j < message.reserved_name.length; ++j)
+                            object.reserved_name[j] = message.reserved_name[j];
                     }
                     return object;
                 };
@@ -4120,9 +6621,9 @@
                     ExtensionRange.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
+                        if (message.start != null && message.hasOwnProperty("start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
-                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
+                        if (message.end != null && message.hasOwnProperty("end"))
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
                         return writer;
                     };
@@ -4265,6 +6766,216 @@
                     return ExtensionRange;
                 })();
     
+                DescriptorProto.ReservedRange = (function() {
+    
+                    /**
+                     * Properties of a ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @interface IReservedRange
+                     * @property {number|null} [start] ReservedRange start
+                     * @property {number|null} [end] ReservedRange end
+                     */
+    
+                    /**
+                     * Constructs a new ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @classdesc Represents a ReservedRange.
+                     * @implements IReservedRange
+                     * @constructor
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     */
+                    function ReservedRange(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReservedRange start.
+                     * @member {number} start
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.start = 0;
+    
+                    /**
+                     * ReservedRange end.
+                     * @member {number} end
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.end = 0;
+    
+                    /**
+                     * Creates a new ReservedRange instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange instance
+                     */
+                    ReservedRange.create = function create(properties) {
+                        return new ReservedRange(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.start = reader.int32();
+                                break;
+                            case 2:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReservedRange message.
+                     * @function verify
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReservedRange.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            if (!$util.isInteger(message.start))
+                                return "start: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReservedRange message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     */
+                    ReservedRange.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
+                            return object;
+                        var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        if (object.start != null)
+                            message.start = object.start | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.ReservedRange} message ReservedRange
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReservedRange.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.start = 0;
+                            object.end = 0;
+                        }
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            object.start = message.start;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReservedRange to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReservedRange.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ReservedRange;
+                })();
+    
                 return DescriptorProto;
             })();
     
@@ -4282,6 +6993,7 @@
                  * @property {string|null} [extendee] FieldDescriptorProto extendee
                  * @property {string|null} [default_value] FieldDescriptorProto default_value
                  * @property {number|null} [oneof_index] FieldDescriptorProto oneof_index
+                 * @property {string|null} [json_name] FieldDescriptorProto json_name
                  * @property {google.protobuf.IFieldOptions|null} [options] FieldDescriptorProto options
                  */
     
@@ -4365,6 +7077,14 @@
                 FieldDescriptorProto.prototype.oneof_index = 0;
     
                 /**
+                 * FieldDescriptorProto json_name.
+                 * @member {string} json_name
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.json_name = "";
+    
+                /**
                  * FieldDescriptorProto options.
                  * @member {google.protobuf.IFieldOptions|null|undefined} options
                  * @memberof google.protobuf.FieldDescriptorProto
@@ -4396,24 +7116,26 @@
                 FieldDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
+                    if (message.extendee != null && message.hasOwnProperty("extendee"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.extendee);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.number);
-                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                    if (message.label != null && message.hasOwnProperty("label"))
                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.label);
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    if (message.type != null && message.hasOwnProperty("type"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
-                    if (message.type_name != null && Object.hasOwnProperty.call(message, "type_name"))
+                    if (message.type_name != null && message.hasOwnProperty("type_name"))
                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.type_name);
-                    if (message.default_value != null && Object.hasOwnProperty.call(message, "default_value"))
+                    if (message.default_value != null && message.hasOwnProperty("default_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.default_value);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.oneof_index != null && Object.hasOwnProperty.call(message, "oneof_index"))
+                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneof_index);
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        writer.uint32(/* id 10, wireType 2 =*/82).string(message.json_name);
                     return writer;
                 };
     
@@ -4471,6 +7193,9 @@
                             break;
                         case 9:
                             message.oneof_index = reader.int32();
+                            break;
+                        case 10:
+                            message.json_name = reader.string();
                             break;
                         case 8:
                             message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
@@ -4561,6 +7286,9 @@
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         if (!$util.isInteger(message.oneof_index))
                             return "oneof_index: integer expected";
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        if (!$util.isString(message.json_name))
+                            return "json_name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
                         var error = $root.google.protobuf.FieldOptions.verify(message.options);
                         if (error)
@@ -4681,6 +7409,8 @@
                         message.default_value = String(object.default_value);
                     if (object.oneof_index != null)
                         message.oneof_index = object.oneof_index | 0;
+                    if (object.json_name != null)
+                        message.json_name = String(object.json_name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
@@ -4712,6 +7442,7 @@
                         object.default_value = "";
                         object.options = null;
                         object.oneof_index = 0;
+                        object.json_name = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -4731,6 +7462,8 @@
                         object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options);
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         object.oneof_index = message.oneof_index;
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        object.json_name = message.json_name;
                     return object;
                 };
     
@@ -4748,7 +7481,7 @@
                 /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} TYPE_DOUBLE=1 TYPE_DOUBLE value
                  * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
                  * @property {number} TYPE_INT64=3 TYPE_INT64 value
@@ -4794,7 +7527,7 @@
                 /**
                  * Label enum.
                  * @name google.protobuf.FieldDescriptorProto.Label
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
                  * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
@@ -4817,6 +7550,7 @@
                  * @memberof google.protobuf
                  * @interface IOneofDescriptorProto
                  * @property {string|null} [name] OneofDescriptorProto name
+                 * @property {google.protobuf.IOneofOptions|null} [options] OneofDescriptorProto options
                  */
     
                 /**
@@ -4843,6 +7577,14 @@
                 OneofDescriptorProto.prototype.name = "";
     
                 /**
+                 * OneofDescriptorProto options.
+                 * @member {google.protobuf.IOneofOptions|null|undefined} options
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @instance
+                 */
+                OneofDescriptorProto.prototype.options = null;
+    
+                /**
                  * Creates a new OneofDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.OneofDescriptorProto
@@ -4866,8 +7608,10 @@
                 OneofDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -4904,6 +7648,9 @@
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
+                            break;
+                        case 2:
+                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -4943,6 +7690,11 @@
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
                     return null;
                 };
     
@@ -4960,6 +7712,11 @@
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                    }
                     return message;
                 };
     
@@ -4976,10 +7733,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.name = "";
+                        object.options = null;
+                    }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options);
                     return object;
                 };
     
@@ -5072,12 +7833,12 @@
                 EnumDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.value != null && message.value.length)
                         for (var i = 0; i < message.value.length; ++i)
                             $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -5330,11 +8091,11 @@
                 EnumValueDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -5568,12 +8329,12 @@
                 ServiceDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.method != null && message.method.length)
                         for (var i = 0; i < message.method.length; ++i)
                             $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -5762,6 +8523,8 @@
                  * @property {string|null} [input_type] MethodDescriptorProto input_type
                  * @property {string|null} [output_type] MethodDescriptorProto output_type
                  * @property {google.protobuf.IMethodOptions|null} [options] MethodDescriptorProto options
+                 * @property {boolean|null} [client_streaming] MethodDescriptorProto client_streaming
+                 * @property {boolean|null} [server_streaming] MethodDescriptorProto server_streaming
                  */
     
                 /**
@@ -5812,6 +8575,22 @@
                 MethodDescriptorProto.prototype.options = null;
     
                 /**
+                 * MethodDescriptorProto client_streaming.
+                 * @member {boolean} client_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.client_streaming = false;
+    
+                /**
+                 * MethodDescriptorProto server_streaming.
+                 * @member {boolean} server_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.server_streaming = false;
+    
+                /**
                  * Creates a new MethodDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodDescriptorProto
@@ -5835,14 +8614,18 @@
                 MethodDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.input_type != null && Object.hasOwnProperty.call(message, "input_type"))
+                    if (message.input_type != null && message.hasOwnProperty("input_type"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.input_type);
-                    if (message.output_type != null && Object.hasOwnProperty.call(message, "output_type"))
+                    if (message.output_type != null && message.hasOwnProperty("output_type"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.output_type);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.client_streaming);
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.server_streaming);
                     return writer;
                 };
     
@@ -5888,6 +8671,12 @@
                             break;
                         case 4:
                             message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.client_streaming = reader.bool();
+                            break;
+                        case 6:
+                            message.server_streaming = reader.bool();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -5938,6 +8727,12 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        if (typeof message.client_streaming !== "boolean")
+                            return "client_streaming: boolean expected";
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        if (typeof message.server_streaming !== "boolean")
+                            return "server_streaming: boolean expected";
                     return null;
                 };
     
@@ -5964,6 +8759,10 @@
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
                     }
+                    if (object.client_streaming != null)
+                        message.client_streaming = Boolean(object.client_streaming);
+                    if (object.server_streaming != null)
+                        message.server_streaming = Boolean(object.server_streaming);
                     return message;
                 };
     
@@ -5985,6 +8784,8 @@
                         object.input_type = "";
                         object.output_type = "";
                         object.options = null;
+                        object.client_streaming = false;
+                        object.server_streaming = false;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -5994,6 +8795,10 @@
                         object.output_type = message.output_type;
                     if (message.options != null && message.hasOwnProperty("options"))
                         object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options);
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        object.client_streaming = message.client_streaming;
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        object.server_streaming = message.server_streaming;
                     return object;
                 };
     
@@ -6028,6 +8833,9 @@
                  * @property {boolean|null} [java_generic_services] FileOptions java_generic_services
                  * @property {boolean|null} [py_generic_services] FileOptions py_generic_services
                  * @property {boolean|null} [deprecated] FileOptions deprecated
+                 * @property {boolean|null} [cc_enable_arenas] FileOptions cc_enable_arenas
+                 * @property {string|null} [objc_class_prefix] FileOptions objc_class_prefix
+                 * @property {string|null} [csharp_namespace] FileOptions csharp_namespace
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FileOptions uninterpreted_option
                  */
     
@@ -6136,6 +8944,30 @@
                 FileOptions.prototype.deprecated = false;
     
                 /**
+                 * FileOptions cc_enable_arenas.
+                 * @member {boolean} cc_enable_arenas
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.cc_enable_arenas = false;
+    
+                /**
+                 * FileOptions objc_class_prefix.
+                 * @member {string} objc_class_prefix
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.objc_class_prefix = "";
+    
+                /**
+                 * FileOptions csharp_namespace.
+                 * @member {string} csharp_namespace
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.csharp_namespace = "";
+    
+                /**
                  * FileOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.FileOptions
@@ -6167,28 +8999,34 @@
                 FileOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.java_package != null && Object.hasOwnProperty.call(message, "java_package"))
+                    if (message.java_package != null && message.hasOwnProperty("java_package"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.java_package);
-                    if (message.java_outer_classname != null && Object.hasOwnProperty.call(message, "java_outer_classname"))
+                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.java_outer_classname);
-                    if (message.optimize_for != null && Object.hasOwnProperty.call(message, "optimize_for"))
+                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.optimize_for);
-                    if (message.java_multiple_files != null && Object.hasOwnProperty.call(message, "java_multiple_files"))
+                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.java_multiple_files);
-                    if (message.go_package != null && Object.hasOwnProperty.call(message, "go_package"))
+                    if (message.go_package != null && message.hasOwnProperty("go_package"))
                         writer.uint32(/* id 11, wireType 2 =*/90).string(message.go_package);
-                    if (message.cc_generic_services != null && Object.hasOwnProperty.call(message, "cc_generic_services"))
+                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.cc_generic_services);
-                    if (message.java_generic_services != null && Object.hasOwnProperty.call(message, "java_generic_services"))
+                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
                         writer.uint32(/* id 17, wireType 0 =*/136).bool(message.java_generic_services);
-                    if (message.py_generic_services != null && Object.hasOwnProperty.call(message, "py_generic_services"))
+                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
                         writer.uint32(/* id 18, wireType 0 =*/144).bool(message.py_generic_services);
-                    if (message.java_generate_equals_and_hash != null && Object.hasOwnProperty.call(message, "java_generate_equals_and_hash"))
+                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
                         writer.uint32(/* id 20, wireType 0 =*/160).bool(message.java_generate_equals_and_hash);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 23, wireType 0 =*/184).bool(message.deprecated);
-                    if (message.java_string_check_utf8 != null && Object.hasOwnProperty.call(message, "java_string_check_utf8"))
+                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         writer.uint32(/* id 27, wireType 0 =*/216).bool(message.java_string_check_utf8);
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        writer.uint32(/* id 31, wireType 0 =*/248).bool(message.cc_enable_arenas);
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        writer.uint32(/* id 36, wireType 2 =*/290).string(message.objc_class_prefix);
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        writer.uint32(/* id 37, wireType 2 =*/298).string(message.csharp_namespace);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -6258,6 +9096,15 @@
                             break;
                         case 23:
                             message.deprecated = reader.bool();
+                            break;
+                        case 31:
+                            message.cc_enable_arenas = reader.bool();
+                            break;
+                        case 36:
+                            message.objc_class_prefix = reader.string();
+                            break;
+                        case 37:
+                            message.csharp_namespace = reader.string();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -6338,6 +9185,15 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        if (typeof message.cc_enable_arenas !== "boolean")
+                            return "cc_enable_arenas: boolean expected";
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        if (!$util.isString(message.objc_class_prefix))
+                            return "objc_class_prefix: string expected";
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        if (!$util.isString(message.csharp_namespace))
+                            return "csharp_namespace: string expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -6396,6 +9252,12 @@
                         message.py_generic_services = Boolean(object.py_generic_services);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.cc_enable_arenas != null)
+                        message.cc_enable_arenas = Boolean(object.cc_enable_arenas);
+                    if (object.objc_class_prefix != null)
+                        message.objc_class_prefix = String(object.objc_class_prefix);
+                    if (object.csharp_namespace != null)
+                        message.csharp_namespace = String(object.csharp_namespace);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.FileOptions.uninterpreted_option: array expected");
@@ -6436,6 +9298,9 @@
                         object.java_generate_equals_and_hash = false;
                         object.deprecated = false;
                         object.java_string_check_utf8 = false;
+                        object.cc_enable_arenas = false;
+                        object.objc_class_prefix = "";
+                        object.csharp_namespace = "";
                     }
                     if (message.java_package != null && message.hasOwnProperty("java_package"))
                         object.java_package = message.java_package;
@@ -6459,6 +9324,12 @@
                         object.deprecated = message.deprecated;
                     if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         object.java_string_check_utf8 = message.java_string_check_utf8;
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        object.cc_enable_arenas = message.cc_enable_arenas;
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        object.objc_class_prefix = message.objc_class_prefix;
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        object.csharp_namespace = message.csharp_namespace;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -6481,7 +9352,7 @@
                 /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} SPEED=1 SPEED value
                  * @property {number} CODE_SIZE=2 CODE_SIZE value
                  * @property {number} LITE_RUNTIME=3 LITE_RUNTIME value
@@ -6506,6 +9377,7 @@
                  * @property {boolean|null} [message_set_wire_format] MessageOptions message_set_wire_format
                  * @property {boolean|null} [no_standard_descriptor_accessor] MessageOptions no_standard_descriptor_accessor
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
+                 * @property {boolean|null} [map_entry] MessageOptions map_entry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] MessageOptions uninterpreted_option
                  */
     
@@ -6550,6 +9422,14 @@
                 MessageOptions.prototype.deprecated = false;
     
                 /**
+                 * MessageOptions map_entry.
+                 * @member {boolean} map_entry
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.map_entry = false;
+    
+                /**
                  * MessageOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.MessageOptions
@@ -6581,12 +9461,14 @@
                 MessageOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.message_set_wire_format != null && Object.hasOwnProperty.call(message, "message_set_wire_format"))
+                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.message_set_wire_format);
-                    if (message.no_standard_descriptor_accessor != null && Object.hasOwnProperty.call(message, "no_standard_descriptor_accessor"))
+                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.no_standard_descriptor_accessor);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).bool(message.map_entry);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -6632,6 +9514,9 @@
                             break;
                         case 3:
                             message.deprecated = reader.bool();
+                            break;
+                        case 7:
+                            message.map_entry = reader.bool();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -6682,6 +9567,9 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        if (typeof message.map_entry !== "boolean")
+                            return "map_entry: boolean expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -6712,6 +9600,8 @@
                         message.no_standard_descriptor_accessor = Boolean(object.no_standard_descriptor_accessor);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.map_entry != null)
+                        message.map_entry = Boolean(object.map_entry);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpreted_option: array expected");
@@ -6744,6 +9634,7 @@
                         object.message_set_wire_format = false;
                         object.no_standard_descriptor_accessor = false;
                         object.deprecated = false;
+                        object.map_entry = false;
                     }
                     if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         object.message_set_wire_format = message.message_set_wire_format;
@@ -6751,6 +9642,8 @@
                         object.no_standard_descriptor_accessor = message.no_standard_descriptor_accessor;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        object.map_entry = message.map_entry;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -6781,9 +9674,9 @@
                  * @interface IFieldOptions
                  * @property {google.protobuf.FieldOptions.CType|null} [ctype] FieldOptions ctype
                  * @property {boolean|null} [packed] FieldOptions packed
+                 * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
-                 * @property {string|null} [experimental_map_key] FieldOptions experimental_map_key
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FieldOptions uninterpreted_option
                  * @property {string|null} [".description"] FieldOptions .description
@@ -6822,6 +9715,14 @@
                 FieldOptions.prototype.packed = false;
     
                 /**
+                 * FieldOptions jstype.
+                 * @member {google.protobuf.FieldOptions.JSType} jstype
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.jstype = 0;
+    
+                /**
                  * FieldOptions lazy.
                  * @member {boolean} lazy
                  * @memberof google.protobuf.FieldOptions
@@ -6836,14 +9737,6 @@
                  * @instance
                  */
                 FieldOptions.prototype.deprecated = false;
-    
-                /**
-                 * FieldOptions experimental_map_key.
-                 * @member {string} experimental_map_key
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.experimental_map_key = "";
     
                 /**
                  * FieldOptions weak.
@@ -6893,22 +9786,22 @@
                 FieldOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
+                    if (message.ctype != null && message.hasOwnProperty("ctype"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
-                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
+                    if (message.packed != null && message.hasOwnProperty("packed"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.packed);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
-                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
+                    if (message.lazy != null && message.hasOwnProperty("lazy"))
                         writer.uint32(/* id 5, wireType 0 =*/40).bool(message.lazy);
-                    if (message.experimental_map_key != null && Object.hasOwnProperty.call(message, "experimental_map_key"))
-                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.experimental_map_key);
-                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
+                    if (message.weak != null && message.hasOwnProperty("weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".description"] != null && Object.hasOwnProperty.call(message, ".description"))
+                    if (message[".description"] != null && message.hasOwnProperty(".description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".description"]);
                     return writer;
                 };
@@ -6950,14 +9843,14 @@
                         case 2:
                             message.packed = reader.bool();
                             break;
+                        case 6:
+                            message.jstype = reader.int32();
+                            break;
                         case 5:
                             message.lazy = reader.bool();
                             break;
                         case 3:
                             message.deprecated = reader.bool();
-                            break;
-                        case 9:
-                            message.experimental_map_key = reader.string();
                             break;
                         case 10:
                             message.weak = reader.bool();
@@ -7017,15 +9910,21 @@
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         if (typeof message.packed !== "boolean")
                             return "packed: boolean expected";
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        switch (message.jstype) {
+                        default:
+                            return "jstype: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        if (!$util.isString(message.experimental_map_key))
-                            return "experimental_map_key: string expected";
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         if (typeof message.weak !== "boolean")
                             return "weak: boolean expected";
@@ -7072,12 +9971,24 @@
                     }
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
+                    switch (object.jstype) {
+                    case "JS_NORMAL":
+                    case 0:
+                        message.jstype = 0;
+                        break;
+                    case "JS_STRING":
+                    case 1:
+                        message.jstype = 1;
+                        break;
+                    case "JS_NUMBER":
+                    case 2:
+                        message.jstype = 2;
+                        break;
+                    }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
-                    if (object.experimental_map_key != null)
-                        message.experimental_map_key = String(object.experimental_map_key);
                     if (object.weak != null)
                         message.weak = Boolean(object.weak);
                     if (object.uninterpreted_option) {
@@ -7115,7 +10026,7 @@
                         object.packed = false;
                         object.deprecated = false;
                         object.lazy = false;
-                        object.experimental_map_key = "";
+                        object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
                         object[".description"] = "";
                     }
@@ -7127,8 +10038,8 @@
                         object.deprecated = message.deprecated;
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        object.experimental_map_key = message.experimental_map_key;
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
@@ -7155,7 +10066,7 @@
                 /**
                  * CType enum.
                  * @name google.protobuf.FieldOptions.CType
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} STRING=0 STRING value
                  * @property {number} CORD=1 CORD value
                  * @property {number} STRING_PIECE=2 STRING_PIECE value
@@ -7168,7 +10079,231 @@
                     return values;
                 })();
     
+                /**
+                 * JSType enum.
+                 * @name google.protobuf.FieldOptions.JSType
+                 * @enum {string}
+                 * @property {number} JS_NORMAL=0 JS_NORMAL value
+                 * @property {number} JS_STRING=1 JS_STRING value
+                 * @property {number} JS_NUMBER=2 JS_NUMBER value
+                 */
+                FieldOptions.JSType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JS_NORMAL"] = 0;
+                    values[valuesById[1] = "JS_STRING"] = 1;
+                    values[valuesById[2] = "JS_NUMBER"] = 2;
+                    return values;
+                })();
+    
                 return FieldOptions;
+            })();
+    
+            protobuf.OneofOptions = (function() {
+    
+                /**
+                 * Properties of an OneofOptions.
+                 * @memberof google.protobuf
+                 * @interface IOneofOptions
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] OneofOptions uninterpreted_option
+                 */
+    
+                /**
+                 * Constructs a new OneofOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an OneofOptions.
+                 * @implements IOneofOptions
+                 * @constructor
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 */
+                function OneofOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OneofOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * Creates a new OneofOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.OneofOptions} OneofOptions instance
+                 */
+                OneofOptions.create = function create(properties) {
+                    return new OneofOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message, length delimited. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OneofOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OneofOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an OneofOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 */
+                OneofOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.OneofOptions)
+                        return object;
+                    var message = new $root.google.protobuf.OneofOptions();
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.OneofOptions} message OneofOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OneofOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this OneofOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OneofOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return OneofOptions;
             })();
     
             protobuf.EnumOptions = (function() {
@@ -7255,14 +10390,14 @@
                 EnumOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.allow_alias != null && Object.hasOwnProperty.call(message, "allow_alias"))
+                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allow_alias);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_description"] != null && Object.hasOwnProperty.call(message, ".enum_description"))
+                    if (message[".enum_description"] != null && message.hasOwnProperty(".enum_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_description"]);
                     return writer;
                 };
@@ -7522,12 +10657,12 @@
                 EnumValueOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_value_description"] != null && Object.hasOwnProperty.call(message, ".enum_value_description"))
+                    if (message[".enum_value_description"] != null && message.hasOwnProperty(".enum_value_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_value_description"]);
                     return writer;
                 };
@@ -7785,14 +10920,14 @@
                 ServiceOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".service_description"] != null && Object.hasOwnProperty.call(message, ".service_description"))
+                    if (message[".service_description"] != null && message.hasOwnProperty(".service_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".service_description"]);
-                    if (message[".service_execution_site"] != null && Object.hasOwnProperty.call(message, ".service_execution_site"))
+                    if (message[".service_execution_site"] != null && message.hasOwnProperty(".service_execution_site"))
                         writer.uint32(/* id 50008, wireType 0 =*/400064).int32(message[".service_execution_site"]);
                     return writer;
                 };
@@ -8065,12 +11200,12 @@
                 MethodOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".method_description"] != null && Object.hasOwnProperty.call(message, ".method_description"))
+                    if (message[".method_description"] != null && message.hasOwnProperty(".method_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".method_description"]);
                     return writer;
                 };
@@ -8358,17 +11493,17 @@
                     if (message.name != null && message.name.length)
                         for (var i = 0; i < message.name.length; ++i)
                             $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.identifier_value != null && Object.hasOwnProperty.call(message, "identifier_value"))
+                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifier_value);
-                    if (message.positive_int_value != null && Object.hasOwnProperty.call(message, "positive_int_value"))
+                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
                         writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.positive_int_value);
-                    if (message.negative_int_value != null && Object.hasOwnProperty.call(message, "negative_int_value"))
+                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int64(message.negative_int_value);
-                    if (message.double_value != null && Object.hasOwnProperty.call(message, "double_value"))
+                    if (message.double_value != null && message.hasOwnProperty("double_value"))
                         writer.uint32(/* id 6, wireType 1 =*/49).double(message.double_value);
-                    if (message.string_value != null && Object.hasOwnProperty.call(message, "string_value"))
+                    if (message.string_value != null && message.hasOwnProperty("string_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.string_value);
-                    if (message.aggregate_value != null && Object.hasOwnProperty.call(message, "aggregate_value"))
+                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.aggregate_value);
                     return writer;
                 };
@@ -9048,6 +12183,7 @@
                      * @property {Array.<number>|null} [span] Location span
                      * @property {string|null} [leading_comments] Location leading_comments
                      * @property {string|null} [trailing_comments] Location trailing_comments
+                     * @property {Array.<string>|null} [leading_detached_comments] Location leading_detached_comments
                      */
     
                     /**
@@ -9061,6 +12197,7 @@
                     function Location(properties) {
                         this.path = [];
                         this.span = [];
+                        this.leading_detached_comments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -9100,6 +12237,14 @@
                     Location.prototype.trailing_comments = "";
     
                     /**
+                     * Location leading_detached_comments.
+                     * @member {Array.<string>} leading_detached_comments
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.leading_detached_comments = $util.emptyArray;
+    
+                    /**
                      * Creates a new Location instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.SourceCodeInfo.Location
@@ -9135,10 +12280,13 @@
                                 writer.int32(message.span[i]);
                             writer.ldelim();
                         }
-                        if (message.leading_comments != null && Object.hasOwnProperty.call(message, "leading_comments"))
+                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.leading_comments);
-                        if (message.trailing_comments != null && Object.hasOwnProperty.call(message, "trailing_comments"))
+                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.trailing_comments);
+                        if (message.leading_detached_comments != null && message.leading_detached_comments.length)
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.leading_detached_comments[i]);
                         return writer;
                     };
     
@@ -9199,6 +12347,11 @@
                             case 4:
                                 message.trailing_comments = reader.string();
                                 break;
+                            case 6:
+                                if (!(message.leading_detached_comments && message.leading_detached_comments.length))
+                                    message.leading_detached_comments = [];
+                                message.leading_detached_comments.push(reader.string());
+                                break;
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -9254,6 +12407,13 @@
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             if (!$util.isString(message.trailing_comments))
                                 return "trailing_comments: string expected";
+                        if (message.leading_detached_comments != null && message.hasOwnProperty("leading_detached_comments")) {
+                            if (!Array.isArray(message.leading_detached_comments))
+                                return "leading_detached_comments: array expected";
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                if (!$util.isString(message.leading_detached_comments[i]))
+                                    return "leading_detached_comments: string[] expected";
+                        }
                         return null;
                     };
     
@@ -9287,6 +12447,13 @@
                             message.leading_comments = String(object.leading_comments);
                         if (object.trailing_comments != null)
                             message.trailing_comments = String(object.trailing_comments);
+                        if (object.leading_detached_comments) {
+                            if (!Array.isArray(object.leading_detached_comments))
+                                throw TypeError(".google.protobuf.SourceCodeInfo.Location.leading_detached_comments: array expected");
+                            message.leading_detached_comments = [];
+                            for (var i = 0; i < object.leading_detached_comments.length; ++i)
+                                message.leading_detached_comments[i] = String(object.leading_detached_comments[i]);
+                        }
                         return message;
                     };
     
@@ -9306,6 +12473,7 @@
                         if (options.arrays || options.defaults) {
                             object.path = [];
                             object.span = [];
+                            object.leading_detached_comments = [];
                         }
                         if (options.defaults) {
                             object.leading_comments = "";
@@ -9325,6 +12493,11 @@
                             object.leading_comments = message.leading_comments;
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             object.trailing_comments = message.trailing_comments;
+                        if (message.leading_detached_comments && message.leading_detached_comments.length) {
+                            object.leading_detached_comments = [];
+                            for (var j = 0; j < message.leading_detached_comments.length; ++j)
+                                object.leading_detached_comments[j] = message.leading_detached_comments[j];
+                        }
                         return object;
                     };
     
@@ -9345,10 +12518,2026 @@
                 return SourceCodeInfo;
             })();
     
+            protobuf.GeneratedCodeInfo = (function() {
+    
+                /**
+                 * Properties of a GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @interface IGeneratedCodeInfo
+                 * @property {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>|null} [annotation] GeneratedCodeInfo annotation
+                 */
+    
+                /**
+                 * Constructs a new GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a GeneratedCodeInfo.
+                 * @implements IGeneratedCodeInfo
+                 * @constructor
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 */
+                function GeneratedCodeInfo(properties) {
+                    this.annotation = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GeneratedCodeInfo annotation.
+                 * @member {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>} annotation
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 */
+                GeneratedCodeInfo.prototype.annotation = $util.emptyArray;
+    
+                /**
+                 * Creates a new GeneratedCodeInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo instance
+                 */
+                GeneratedCodeInfo.create = function create(properties) {
+                    return new GeneratedCodeInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.annotation != null && message.annotation.length)
+                        for (var i = 0; i < message.annotation.length; ++i)
+                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.annotation && message.annotation.length))
+                                message.annotation = [];
+                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GeneratedCodeInfo message.
+                 * @function verify
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GeneratedCodeInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.annotation != null && message.hasOwnProperty("annotation")) {
+                        if (!Array.isArray(message.annotation))
+                            return "annotation: array expected";
+                        for (var i = 0; i < message.annotation.length; ++i) {
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            if (error)
+                                return "annotation." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a GeneratedCodeInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 */
+                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
+                        return object;
+                    var message = new $root.google.protobuf.GeneratedCodeInfo();
+                    if (object.annotation) {
+                        if (!Array.isArray(object.annotation))
+                            throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: array expected");
+                        message.annotation = [];
+                        for (var i = 0; i < object.annotation.length; ++i) {
+                            if (typeof object.annotation[i] !== "object")
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.GeneratedCodeInfo} message GeneratedCodeInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GeneratedCodeInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.annotation = [];
+                    if (message.annotation && message.annotation.length) {
+                        object.annotation = [];
+                        for (var j = 0; j < message.annotation.length; ++j)
+                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this GeneratedCodeInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GeneratedCodeInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                GeneratedCodeInfo.Annotation = (function() {
+    
+                    /**
+                     * Properties of an Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @interface IAnnotation
+                     * @property {Array.<number>|null} [path] Annotation path
+                     * @property {string|null} [source_file] Annotation source_file
+                     * @property {number|null} [begin] Annotation begin
+                     * @property {number|null} [end] Annotation end
+                     */
+    
+                    /**
+                     * Constructs a new Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @classdesc Represents an Annotation.
+                     * @implements IAnnotation
+                     * @constructor
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     */
+                    function Annotation(properties) {
+                        this.path = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Annotation path.
+                     * @member {Array.<number>} path
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.path = $util.emptyArray;
+    
+                    /**
+                     * Annotation source_file.
+                     * @member {string} source_file
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.source_file = "";
+    
+                    /**
+                     * Annotation begin.
+                     * @member {number} begin
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.begin = 0;
+    
+                    /**
+                     * Annotation end.
+                     * @member {number} end
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.end = 0;
+    
+                    /**
+                     * Creates a new Annotation instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation instance
+                     */
+                    Annotation.create = function create(properties) {
+                        return new Annotation(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.path != null && message.path.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.path.length; ++i)
+                                writer.int32(message.path[i]);
+                            writer.ldelim();
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.source_file);
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.path && message.path.length))
+                                    message.path = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.path.push(reader.int32());
+                                } else
+                                    message.path.push(reader.int32());
+                                break;
+                            case 2:
+                                message.source_file = reader.string();
+                                break;
+                            case 3:
+                                message.begin = reader.int32();
+                                break;
+                            case 4:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Annotation message.
+                     * @function verify
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Annotation.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.path != null && message.hasOwnProperty("path")) {
+                            if (!Array.isArray(message.path))
+                                return "path: array expected";
+                            for (var i = 0; i < message.path.length; ++i)
+                                if (!$util.isInteger(message.path[i]))
+                                    return "path: integer[] expected";
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            if (!$util.isString(message.source_file))
+                                return "source_file: string expected";
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            if (!$util.isInteger(message.begin))
+                                return "begin: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Annotation message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     */
+                    Annotation.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
+                            return object;
+                        var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        if (object.path) {
+                            if (!Array.isArray(object.path))
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.Annotation.path: array expected");
+                            message.path = [];
+                            for (var i = 0; i < object.path.length; ++i)
+                                message.path[i] = object.path[i] | 0;
+                        }
+                        if (object.source_file != null)
+                            message.source_file = String(object.source_file);
+                        if (object.begin != null)
+                            message.begin = object.begin | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Annotation message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.Annotation} message Annotation
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Annotation.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.path = [];
+                        if (options.defaults) {
+                            object.source_file = "";
+                            object.begin = 0;
+                            object.end = 0;
+                        }
+                        if (message.path && message.path.length) {
+                            object.path = [];
+                            for (var j = 0; j < message.path.length; ++j)
+                                object.path[j] = message.path[j];
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            object.source_file = message.source_file;
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            object.begin = message.begin;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Annotation to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Annotation.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Annotation;
+                })();
+    
+                return GeneratedCodeInfo;
+            })();
+    
             return protobuf;
         })();
     
         return google;
+    })();
+    
+    $root.CClientMetrics_ClientBootstrap_RequestInfo = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ClientBootstrap_RequestInfo.
+         * @exports ICClientMetrics_ClientBootstrap_RequestInfo
+         * @interface ICClientMetrics_ClientBootstrap_RequestInfo
+         * @property {string|null} [original_hostname] CClientMetrics_ClientBootstrap_RequestInfo original_hostname
+         * @property {string|null} [actual_hostname] CClientMetrics_ClientBootstrap_RequestInfo actual_hostname
+         * @property {string|null} [path] CClientMetrics_ClientBootstrap_RequestInfo path
+         * @property {string|null} [base_name] CClientMetrics_ClientBootstrap_RequestInfo base_name
+         * @property {boolean|null} [success] CClientMetrics_ClientBootstrap_RequestInfo success
+         * @property {number|null} [status_code] CClientMetrics_ClientBootstrap_RequestInfo status_code
+         * @property {string|null} [address_of_request_url] CClientMetrics_ClientBootstrap_RequestInfo address_of_request_url
+         * @property {number|null} [response_time_ms] CClientMetrics_ClientBootstrap_RequestInfo response_time_ms
+         * @property {number|Long|null} [bytes_received] CClientMetrics_ClientBootstrap_RequestInfo bytes_received
+         * @property {number|null} [num_retries] CClientMetrics_ClientBootstrap_RequestInfo num_retries
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ClientBootstrap_RequestInfo.
+         * @exports CClientMetrics_ClientBootstrap_RequestInfo
+         * @classdesc Represents a CClientMetrics_ClientBootstrap_RequestInfo.
+         * @implements ICClientMetrics_ClientBootstrap_RequestInfo
+         * @constructor
+         * @param {ICClientMetrics_ClientBootstrap_RequestInfo=} [properties] Properties to set
+         */
+        function CClientMetrics_ClientBootstrap_RequestInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo original_hostname.
+         * @member {string} original_hostname
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.original_hostname = "";
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo actual_hostname.
+         * @member {string} actual_hostname
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.actual_hostname = "";
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo path.
+         * @member {string} path
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.path = "";
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo base_name.
+         * @member {string} base_name
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.base_name = "";
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo success.
+         * @member {boolean} success
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.success = false;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo status_code.
+         * @member {number} status_code
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.status_code = 0;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo address_of_request_url.
+         * @member {string} address_of_request_url
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.address_of_request_url = "";
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo response_time_ms.
+         * @member {number} response_time_ms
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.response_time_ms = 0;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo bytes_received.
+         * @member {number|Long} bytes_received
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.bytes_received = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_RequestInfo num_retries.
+         * @member {number} num_retries
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.num_retries = 0;
+    
+        /**
+         * Creates a new CClientMetrics_ClientBootstrap_RequestInfo instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_RequestInfo=} [properties] Properties to set
+         * @returns {CClientMetrics_ClientBootstrap_RequestInfo} CClientMetrics_ClientBootstrap_RequestInfo instance
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.create = function create(properties) {
+            return new CClientMetrics_ClientBootstrap_RequestInfo(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ClientBootstrap_RequestInfo message. Does not implicitly {@link CClientMetrics_ClientBootstrap_RequestInfo.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_RequestInfo} message CClientMetrics_ClientBootstrap_RequestInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.original_hostname != null && message.hasOwnProperty("original_hostname"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.original_hostname);
+            if (message.actual_hostname != null && message.hasOwnProperty("actual_hostname"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.actual_hostname);
+            if (message.path != null && message.hasOwnProperty("path"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
+            if (message.base_name != null && message.hasOwnProperty("base_name"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.base_name);
+            if (message.success != null && message.hasOwnProperty("success"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.success);
+            if (message.status_code != null && message.hasOwnProperty("status_code"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.status_code);
+            if (message.address_of_request_url != null && message.hasOwnProperty("address_of_request_url"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.address_of_request_url);
+            if (message.response_time_ms != null && message.hasOwnProperty("response_time_ms"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.response_time_ms);
+            if (message.bytes_received != null && message.hasOwnProperty("bytes_received"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.bytes_received);
+            if (message.num_retries != null && message.hasOwnProperty("num_retries"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.num_retries);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ClientBootstrap_RequestInfo message, length delimited. Does not implicitly {@link CClientMetrics_ClientBootstrap_RequestInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_RequestInfo} message CClientMetrics_ClientBootstrap_RequestInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ClientBootstrap_RequestInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ClientBootstrap_RequestInfo} CClientMetrics_ClientBootstrap_RequestInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ClientBootstrap_RequestInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.original_hostname = reader.string();
+                    break;
+                case 2:
+                    message.actual_hostname = reader.string();
+                    break;
+                case 3:
+                    message.path = reader.string();
+                    break;
+                case 4:
+                    message.base_name = reader.string();
+                    break;
+                case 5:
+                    message.success = reader.bool();
+                    break;
+                case 6:
+                    message.status_code = reader.uint32();
+                    break;
+                case 7:
+                    message.address_of_request_url = reader.string();
+                    break;
+                case 8:
+                    message.response_time_ms = reader.uint32();
+                    break;
+                case 9:
+                    message.bytes_received = reader.uint64();
+                    break;
+                case 10:
+                    message.num_retries = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ClientBootstrap_RequestInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ClientBootstrap_RequestInfo} CClientMetrics_ClientBootstrap_RequestInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ClientBootstrap_RequestInfo message.
+         * @function verify
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.original_hostname != null && message.hasOwnProperty("original_hostname"))
+                if (!$util.isString(message.original_hostname))
+                    return "original_hostname: string expected";
+            if (message.actual_hostname != null && message.hasOwnProperty("actual_hostname"))
+                if (!$util.isString(message.actual_hostname))
+                    return "actual_hostname: string expected";
+            if (message.path != null && message.hasOwnProperty("path"))
+                if (!$util.isString(message.path))
+                    return "path: string expected";
+            if (message.base_name != null && message.hasOwnProperty("base_name"))
+                if (!$util.isString(message.base_name))
+                    return "base_name: string expected";
+            if (message.success != null && message.hasOwnProperty("success"))
+                if (typeof message.success !== "boolean")
+                    return "success: boolean expected";
+            if (message.status_code != null && message.hasOwnProperty("status_code"))
+                if (!$util.isInteger(message.status_code))
+                    return "status_code: integer expected";
+            if (message.address_of_request_url != null && message.hasOwnProperty("address_of_request_url"))
+                if (!$util.isString(message.address_of_request_url))
+                    return "address_of_request_url: string expected";
+            if (message.response_time_ms != null && message.hasOwnProperty("response_time_ms"))
+                if (!$util.isInteger(message.response_time_ms))
+                    return "response_time_ms: integer expected";
+            if (message.bytes_received != null && message.hasOwnProperty("bytes_received"))
+                if (!$util.isInteger(message.bytes_received) && !(message.bytes_received && $util.isInteger(message.bytes_received.low) && $util.isInteger(message.bytes_received.high)))
+                    return "bytes_received: integer|Long expected";
+            if (message.num_retries != null && message.hasOwnProperty("num_retries"))
+                if (!$util.isInteger(message.num_retries))
+                    return "num_retries: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ClientBootstrap_RequestInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ClientBootstrap_RequestInfo} CClientMetrics_ClientBootstrap_RequestInfo
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ClientBootstrap_RequestInfo)
+                return object;
+            var message = new $root.CClientMetrics_ClientBootstrap_RequestInfo();
+            if (object.original_hostname != null)
+                message.original_hostname = String(object.original_hostname);
+            if (object.actual_hostname != null)
+                message.actual_hostname = String(object.actual_hostname);
+            if (object.path != null)
+                message.path = String(object.path);
+            if (object.base_name != null)
+                message.base_name = String(object.base_name);
+            if (object.success != null)
+                message.success = Boolean(object.success);
+            if (object.status_code != null)
+                message.status_code = object.status_code >>> 0;
+            if (object.address_of_request_url != null)
+                message.address_of_request_url = String(object.address_of_request_url);
+            if (object.response_time_ms != null)
+                message.response_time_ms = object.response_time_ms >>> 0;
+            if (object.bytes_received != null)
+                if ($util.Long)
+                    (message.bytes_received = $util.Long.fromValue(object.bytes_received)).unsigned = true;
+                else if (typeof object.bytes_received === "string")
+                    message.bytes_received = parseInt(object.bytes_received, 10);
+                else if (typeof object.bytes_received === "number")
+                    message.bytes_received = object.bytes_received;
+                else if (typeof object.bytes_received === "object")
+                    message.bytes_received = new $util.LongBits(object.bytes_received.low >>> 0, object.bytes_received.high >>> 0).toNumber(true);
+            if (object.num_retries != null)
+                message.num_retries = object.num_retries >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ClientBootstrap_RequestInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @static
+         * @param {CClientMetrics_ClientBootstrap_RequestInfo} message CClientMetrics_ClientBootstrap_RequestInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.original_hostname = "";
+                object.actual_hostname = "";
+                object.path = "";
+                object.base_name = "";
+                object.success = false;
+                object.status_code = 0;
+                object.address_of_request_url = "";
+                object.response_time_ms = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bytes_received = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bytes_received = options.longs === String ? "0" : 0;
+                object.num_retries = 0;
+            }
+            if (message.original_hostname != null && message.hasOwnProperty("original_hostname"))
+                object.original_hostname = message.original_hostname;
+            if (message.actual_hostname != null && message.hasOwnProperty("actual_hostname"))
+                object.actual_hostname = message.actual_hostname;
+            if (message.path != null && message.hasOwnProperty("path"))
+                object.path = message.path;
+            if (message.base_name != null && message.hasOwnProperty("base_name"))
+                object.base_name = message.base_name;
+            if (message.success != null && message.hasOwnProperty("success"))
+                object.success = message.success;
+            if (message.status_code != null && message.hasOwnProperty("status_code"))
+                object.status_code = message.status_code;
+            if (message.address_of_request_url != null && message.hasOwnProperty("address_of_request_url"))
+                object.address_of_request_url = message.address_of_request_url;
+            if (message.response_time_ms != null && message.hasOwnProperty("response_time_ms"))
+                object.response_time_ms = message.response_time_ms;
+            if (message.bytes_received != null && message.hasOwnProperty("bytes_received"))
+                if (typeof message.bytes_received === "number")
+                    object.bytes_received = options.longs === String ? String(message.bytes_received) : message.bytes_received;
+                else
+                    object.bytes_received = options.longs === String ? $util.Long.prototype.toString.call(message.bytes_received) : options.longs === Number ? new $util.LongBits(message.bytes_received.low >>> 0, message.bytes_received.high >>> 0).toNumber(true) : message.bytes_received;
+            if (message.num_retries != null && message.hasOwnProperty("num_retries"))
+                object.num_retries = message.num_retries;
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ClientBootstrap_RequestInfo to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ClientBootstrap_RequestInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ClientBootstrap_RequestInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ClientBootstrap_RequestInfo;
+    })();
+    
+    $root.CClientMetrics_ClientBootstrap_Summary = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ClientBootstrap_Summary.
+         * @exports ICClientMetrics_ClientBootstrap_Summary
+         * @interface ICClientMetrics_ClientBootstrap_Summary
+         * @property {number|null} [launcher_type] CClientMetrics_ClientBootstrap_Summary launcher_type
+         * @property {number|null} [steam_realm] CClientMetrics_ClientBootstrap_Summary steam_realm
+         * @property {string|null} [beta_name] CClientMetrics_ClientBootstrap_Summary beta_name
+         * @property {boolean|null} [download_completed] CClientMetrics_ClientBootstrap_Summary download_completed
+         * @property {number|null} [total_time_ms] CClientMetrics_ClientBootstrap_Summary total_time_ms
+         * @property {Array.<ICClientMetrics_ClientBootstrap_RequestInfo>|null} [manifest_requests] CClientMetrics_ClientBootstrap_Summary manifest_requests
+         * @property {Array.<ICClientMetrics_ClientBootstrap_RequestInfo>|null} [package_requests] CClientMetrics_ClientBootstrap_Summary package_requests
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ClientBootstrap_Summary.
+         * @exports CClientMetrics_ClientBootstrap_Summary
+         * @classdesc Represents a CClientMetrics_ClientBootstrap_Summary.
+         * @implements ICClientMetrics_ClientBootstrap_Summary
+         * @constructor
+         * @param {ICClientMetrics_ClientBootstrap_Summary=} [properties] Properties to set
+         */
+        function CClientMetrics_ClientBootstrap_Summary(properties) {
+            this.manifest_requests = [];
+            this.package_requests = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Summary launcher_type.
+         * @member {number} launcher_type
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.launcher_type = 0;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Summary steam_realm.
+         * @member {number} steam_realm
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.steam_realm = 0;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Summary beta_name.
+         * @member {string} beta_name
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.beta_name = "";
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Summary download_completed.
+         * @member {boolean} download_completed
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.download_completed = false;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Summary total_time_ms.
+         * @member {number} total_time_ms
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.total_time_ms = 0;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Summary manifest_requests.
+         * @member {Array.<ICClientMetrics_ClientBootstrap_RequestInfo>} manifest_requests
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.manifest_requests = $util.emptyArray;
+    
+        /**
+         * CClientMetrics_ClientBootstrap_Summary package_requests.
+         * @member {Array.<ICClientMetrics_ClientBootstrap_RequestInfo>} package_requests
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.package_requests = $util.emptyArray;
+    
+        /**
+         * Creates a new CClientMetrics_ClientBootstrap_Summary instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_Summary=} [properties] Properties to set
+         * @returns {CClientMetrics_ClientBootstrap_Summary} CClientMetrics_ClientBootstrap_Summary instance
+         */
+        CClientMetrics_ClientBootstrap_Summary.create = function create(properties) {
+            return new CClientMetrics_ClientBootstrap_Summary(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ClientBootstrap_Summary message. Does not implicitly {@link CClientMetrics_ClientBootstrap_Summary.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_Summary} message CClientMetrics_ClientBootstrap_Summary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ClientBootstrap_Summary.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.launcher_type);
+            if (message.steam_realm != null && message.hasOwnProperty("steam_realm"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.steam_realm);
+            if (message.beta_name != null && message.hasOwnProperty("beta_name"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.beta_name);
+            if (message.download_completed != null && message.hasOwnProperty("download_completed"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.download_completed);
+            if (message.total_time_ms != null && message.hasOwnProperty("total_time_ms"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.total_time_ms);
+            if (message.manifest_requests != null && message.manifest_requests.length)
+                for (var i = 0; i < message.manifest_requests.length; ++i)
+                    $root.CClientMetrics_ClientBootstrap_RequestInfo.encode(message.manifest_requests[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.package_requests != null && message.package_requests.length)
+                for (var i = 0; i < message.package_requests.length; ++i)
+                    $root.CClientMetrics_ClientBootstrap_RequestInfo.encode(message.package_requests[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ClientBootstrap_Summary message, length delimited. Does not implicitly {@link CClientMetrics_ClientBootstrap_Summary.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {ICClientMetrics_ClientBootstrap_Summary} message CClientMetrics_ClientBootstrap_Summary message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ClientBootstrap_Summary.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ClientBootstrap_Summary message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ClientBootstrap_Summary} CClientMetrics_ClientBootstrap_Summary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ClientBootstrap_Summary.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ClientBootstrap_Summary();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.launcher_type = reader.uint32();
+                    break;
+                case 2:
+                    message.steam_realm = reader.uint32();
+                    break;
+                case 3:
+                    message.beta_name = reader.string();
+                    break;
+                case 4:
+                    message.download_completed = reader.bool();
+                    break;
+                case 6:
+                    message.total_time_ms = reader.uint32();
+                    break;
+                case 7:
+                    if (!(message.manifest_requests && message.manifest_requests.length))
+                        message.manifest_requests = [];
+                    message.manifest_requests.push($root.CClientMetrics_ClientBootstrap_RequestInfo.decode(reader, reader.uint32()));
+                    break;
+                case 8:
+                    if (!(message.package_requests && message.package_requests.length))
+                        message.package_requests = [];
+                    message.package_requests.push($root.CClientMetrics_ClientBootstrap_RequestInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ClientBootstrap_Summary message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ClientBootstrap_Summary} CClientMetrics_ClientBootstrap_Summary
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ClientBootstrap_Summary.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ClientBootstrap_Summary message.
+         * @function verify
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ClientBootstrap_Summary.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                if (!$util.isInteger(message.launcher_type))
+                    return "launcher_type: integer expected";
+            if (message.steam_realm != null && message.hasOwnProperty("steam_realm"))
+                if (!$util.isInteger(message.steam_realm))
+                    return "steam_realm: integer expected";
+            if (message.beta_name != null && message.hasOwnProperty("beta_name"))
+                if (!$util.isString(message.beta_name))
+                    return "beta_name: string expected";
+            if (message.download_completed != null && message.hasOwnProperty("download_completed"))
+                if (typeof message.download_completed !== "boolean")
+                    return "download_completed: boolean expected";
+            if (message.total_time_ms != null && message.hasOwnProperty("total_time_ms"))
+                if (!$util.isInteger(message.total_time_ms))
+                    return "total_time_ms: integer expected";
+            if (message.manifest_requests != null && message.hasOwnProperty("manifest_requests")) {
+                if (!Array.isArray(message.manifest_requests))
+                    return "manifest_requests: array expected";
+                for (var i = 0; i < message.manifest_requests.length; ++i) {
+                    var error = $root.CClientMetrics_ClientBootstrap_RequestInfo.verify(message.manifest_requests[i]);
+                    if (error)
+                        return "manifest_requests." + error;
+                }
+            }
+            if (message.package_requests != null && message.hasOwnProperty("package_requests")) {
+                if (!Array.isArray(message.package_requests))
+                    return "package_requests: array expected";
+                for (var i = 0; i < message.package_requests.length; ++i) {
+                    var error = $root.CClientMetrics_ClientBootstrap_RequestInfo.verify(message.package_requests[i]);
+                    if (error)
+                        return "package_requests." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ClientBootstrap_Summary message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ClientBootstrap_Summary} CClientMetrics_ClientBootstrap_Summary
+         */
+        CClientMetrics_ClientBootstrap_Summary.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ClientBootstrap_Summary)
+                return object;
+            var message = new $root.CClientMetrics_ClientBootstrap_Summary();
+            if (object.launcher_type != null)
+                message.launcher_type = object.launcher_type >>> 0;
+            if (object.steam_realm != null)
+                message.steam_realm = object.steam_realm >>> 0;
+            if (object.beta_name != null)
+                message.beta_name = String(object.beta_name);
+            if (object.download_completed != null)
+                message.download_completed = Boolean(object.download_completed);
+            if (object.total_time_ms != null)
+                message.total_time_ms = object.total_time_ms >>> 0;
+            if (object.manifest_requests) {
+                if (!Array.isArray(object.manifest_requests))
+                    throw TypeError(".CClientMetrics_ClientBootstrap_Summary.manifest_requests: array expected");
+                message.manifest_requests = [];
+                for (var i = 0; i < object.manifest_requests.length; ++i) {
+                    if (typeof object.manifest_requests[i] !== "object")
+                        throw TypeError(".CClientMetrics_ClientBootstrap_Summary.manifest_requests: object expected");
+                    message.manifest_requests[i] = $root.CClientMetrics_ClientBootstrap_RequestInfo.fromObject(object.manifest_requests[i]);
+                }
+            }
+            if (object.package_requests) {
+                if (!Array.isArray(object.package_requests))
+                    throw TypeError(".CClientMetrics_ClientBootstrap_Summary.package_requests: array expected");
+                message.package_requests = [];
+                for (var i = 0; i < object.package_requests.length; ++i) {
+                    if (typeof object.package_requests[i] !== "object")
+                        throw TypeError(".CClientMetrics_ClientBootstrap_Summary.package_requests: object expected");
+                    message.package_requests[i] = $root.CClientMetrics_ClientBootstrap_RequestInfo.fromObject(object.package_requests[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ClientBootstrap_Summary message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @static
+         * @param {CClientMetrics_ClientBootstrap_Summary} message CClientMetrics_ClientBootstrap_Summary
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ClientBootstrap_Summary.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.manifest_requests = [];
+                object.package_requests = [];
+            }
+            if (options.defaults) {
+                object.launcher_type = 0;
+                object.steam_realm = 0;
+                object.beta_name = "";
+                object.download_completed = false;
+                object.total_time_ms = 0;
+            }
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                object.launcher_type = message.launcher_type;
+            if (message.steam_realm != null && message.hasOwnProperty("steam_realm"))
+                object.steam_realm = message.steam_realm;
+            if (message.beta_name != null && message.hasOwnProperty("beta_name"))
+                object.beta_name = message.beta_name;
+            if (message.download_completed != null && message.hasOwnProperty("download_completed"))
+                object.download_completed = message.download_completed;
+            if (message.total_time_ms != null && message.hasOwnProperty("total_time_ms"))
+                object.total_time_ms = message.total_time_ms;
+            if (message.manifest_requests && message.manifest_requests.length) {
+                object.manifest_requests = [];
+                for (var j = 0; j < message.manifest_requests.length; ++j)
+                    object.manifest_requests[j] = $root.CClientMetrics_ClientBootstrap_RequestInfo.toObject(message.manifest_requests[j], options);
+            }
+            if (message.package_requests && message.package_requests.length) {
+                object.package_requests = [];
+                for (var j = 0; j < message.package_requests.length; ++j)
+                    object.package_requests[j] = $root.CClientMetrics_ClientBootstrap_RequestInfo.toObject(message.package_requests[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ClientBootstrap_Summary to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ClientBootstrap_Summary
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ClientBootstrap_Summary.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ClientBootstrap_Summary;
+    })();
+    
+    $root.CClientMetrics_ContentDownloadResponse_Counts = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ContentDownloadResponse_Counts.
+         * @exports ICClientMetrics_ContentDownloadResponse_Counts
+         * @interface ICClientMetrics_ContentDownloadResponse_Counts
+         * @property {number|null} [class_100] CClientMetrics_ContentDownloadResponse_Counts class_100
+         * @property {number|null} [class_200] CClientMetrics_ContentDownloadResponse_Counts class_200
+         * @property {number|null} [class_300] CClientMetrics_ContentDownloadResponse_Counts class_300
+         * @property {number|null} [class_400] CClientMetrics_ContentDownloadResponse_Counts class_400
+         * @property {number|null} [class_500] CClientMetrics_ContentDownloadResponse_Counts class_500
+         * @property {number|null} [no_response] CClientMetrics_ContentDownloadResponse_Counts no_response
+         * @property {number|null} [class_unknown] CClientMetrics_ContentDownloadResponse_Counts class_unknown
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ContentDownloadResponse_Counts.
+         * @exports CClientMetrics_ContentDownloadResponse_Counts
+         * @classdesc Represents a CClientMetrics_ContentDownloadResponse_Counts.
+         * @implements ICClientMetrics_ContentDownloadResponse_Counts
+         * @constructor
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts=} [properties] Properties to set
+         */
+        function CClientMetrics_ContentDownloadResponse_Counts(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts class_100.
+         * @member {number} class_100
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.class_100 = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts class_200.
+         * @member {number} class_200
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.class_200 = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts class_300.
+         * @member {number} class_300
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.class_300 = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts class_400.
+         * @member {number} class_400
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.class_400 = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts class_500.
+         * @member {number} class_500
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.class_500 = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts no_response.
+         * @member {number} no_response
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.no_response = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Counts class_unknown.
+         * @member {number} class_unknown
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.class_unknown = 0;
+    
+        /**
+         * Creates a new CClientMetrics_ContentDownloadResponse_Counts instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts=} [properties] Properties to set
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts} CClientMetrics_ContentDownloadResponse_Counts instance
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.create = function create(properties) {
+            return new CClientMetrics_ContentDownloadResponse_Counts(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_Counts message. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_Counts.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts} message CClientMetrics_ContentDownloadResponse_Counts message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.class_100 != null && message.hasOwnProperty("class_100"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.class_100);
+            if (message.class_200 != null && message.hasOwnProperty("class_200"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.class_200);
+            if (message.class_300 != null && message.hasOwnProperty("class_300"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.class_300);
+            if (message.class_400 != null && message.hasOwnProperty("class_400"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.class_400);
+            if (message.class_500 != null && message.hasOwnProperty("class_500"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.class_500);
+            if (message.no_response != null && message.hasOwnProperty("no_response"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.no_response);
+            if (message.class_unknown != null && message.hasOwnProperty("class_unknown"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.class_unknown);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_Counts message, length delimited. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_Counts.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Counts} message CClientMetrics_ContentDownloadResponse_Counts message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_Counts message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts} CClientMetrics_ContentDownloadResponse_Counts
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ContentDownloadResponse_Counts();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.class_100 = reader.uint32();
+                    break;
+                case 2:
+                    message.class_200 = reader.uint32();
+                    break;
+                case 3:
+                    message.class_300 = reader.uint32();
+                    break;
+                case 4:
+                    message.class_400 = reader.uint32();
+                    break;
+                case 5:
+                    message.class_500 = reader.uint32();
+                    break;
+                case 6:
+                    message.no_response = reader.uint32();
+                    break;
+                case 7:
+                    message.class_unknown = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_Counts message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts} CClientMetrics_ContentDownloadResponse_Counts
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ContentDownloadResponse_Counts message.
+         * @function verify
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.class_100 != null && message.hasOwnProperty("class_100"))
+                if (!$util.isInteger(message.class_100))
+                    return "class_100: integer expected";
+            if (message.class_200 != null && message.hasOwnProperty("class_200"))
+                if (!$util.isInteger(message.class_200))
+                    return "class_200: integer expected";
+            if (message.class_300 != null && message.hasOwnProperty("class_300"))
+                if (!$util.isInteger(message.class_300))
+                    return "class_300: integer expected";
+            if (message.class_400 != null && message.hasOwnProperty("class_400"))
+                if (!$util.isInteger(message.class_400))
+                    return "class_400: integer expected";
+            if (message.class_500 != null && message.hasOwnProperty("class_500"))
+                if (!$util.isInteger(message.class_500))
+                    return "class_500: integer expected";
+            if (message.no_response != null && message.hasOwnProperty("no_response"))
+                if (!$util.isInteger(message.no_response))
+                    return "no_response: integer expected";
+            if (message.class_unknown != null && message.hasOwnProperty("class_unknown"))
+                if (!$util.isInteger(message.class_unknown))
+                    return "class_unknown: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ContentDownloadResponse_Counts message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ContentDownloadResponse_Counts} CClientMetrics_ContentDownloadResponse_Counts
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ContentDownloadResponse_Counts)
+                return object;
+            var message = new $root.CClientMetrics_ContentDownloadResponse_Counts();
+            if (object.class_100 != null)
+                message.class_100 = object.class_100 >>> 0;
+            if (object.class_200 != null)
+                message.class_200 = object.class_200 >>> 0;
+            if (object.class_300 != null)
+                message.class_300 = object.class_300 >>> 0;
+            if (object.class_400 != null)
+                message.class_400 = object.class_400 >>> 0;
+            if (object.class_500 != null)
+                message.class_500 = object.class_500 >>> 0;
+            if (object.no_response != null)
+                message.no_response = object.no_response >>> 0;
+            if (object.class_unknown != null)
+                message.class_unknown = object.class_unknown >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ContentDownloadResponse_Counts message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @static
+         * @param {CClientMetrics_ContentDownloadResponse_Counts} message CClientMetrics_ContentDownloadResponse_Counts
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.class_100 = 0;
+                object.class_200 = 0;
+                object.class_300 = 0;
+                object.class_400 = 0;
+                object.class_500 = 0;
+                object.no_response = 0;
+                object.class_unknown = 0;
+            }
+            if (message.class_100 != null && message.hasOwnProperty("class_100"))
+                object.class_100 = message.class_100;
+            if (message.class_200 != null && message.hasOwnProperty("class_200"))
+                object.class_200 = message.class_200;
+            if (message.class_300 != null && message.hasOwnProperty("class_300"))
+                object.class_300 = message.class_300;
+            if (message.class_400 != null && message.hasOwnProperty("class_400"))
+                object.class_400 = message.class_400;
+            if (message.class_500 != null && message.hasOwnProperty("class_500"))
+                object.class_500 = message.class_500;
+            if (message.no_response != null && message.hasOwnProperty("no_response"))
+                object.no_response = message.no_response;
+            if (message.class_unknown != null && message.hasOwnProperty("class_unknown"))
+                object.class_unknown = message.class_unknown;
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ContentDownloadResponse_Counts to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ContentDownloadResponse_Counts
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ContentDownloadResponse_Counts.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ContentDownloadResponse_Counts;
+    })();
+    
+    $root.CClientMetrics_ContentDownloadResponse_HostCounts = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ContentDownloadResponse_HostCounts.
+         * @exports ICClientMetrics_ContentDownloadResponse_HostCounts
+         * @interface ICClientMetrics_ContentDownloadResponse_HostCounts
+         * @property {string|null} [hostname] CClientMetrics_ContentDownloadResponse_HostCounts hostname
+         * @property {number|null} [source_type] CClientMetrics_ContentDownloadResponse_HostCounts source_type
+         * @property {ICClientMetrics_ContentDownloadResponse_Counts|null} [counts] CClientMetrics_ContentDownloadResponse_HostCounts counts
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ContentDownloadResponse_HostCounts.
+         * @exports CClientMetrics_ContentDownloadResponse_HostCounts
+         * @classdesc Represents a CClientMetrics_ContentDownloadResponse_HostCounts.
+         * @implements ICClientMetrics_ContentDownloadResponse_HostCounts
+         * @constructor
+         * @param {ICClientMetrics_ContentDownloadResponse_HostCounts=} [properties] Properties to set
+         */
+        function CClientMetrics_ContentDownloadResponse_HostCounts(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_HostCounts hostname.
+         * @member {string} hostname
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.prototype.hostname = "";
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_HostCounts source_type.
+         * @member {number} source_type
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.prototype.source_type = 0;
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_HostCounts counts.
+         * @member {ICClientMetrics_ContentDownloadResponse_Counts|null|undefined} counts
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.prototype.counts = null;
+    
+        /**
+         * Creates a new CClientMetrics_ContentDownloadResponse_HostCounts instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_HostCounts=} [properties] Properties to set
+         * @returns {CClientMetrics_ContentDownloadResponse_HostCounts} CClientMetrics_ContentDownloadResponse_HostCounts instance
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.create = function create(properties) {
+            return new CClientMetrics_ContentDownloadResponse_HostCounts(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_HostCounts message. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_HostCounts.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_HostCounts} message CClientMetrics_ContentDownloadResponse_HostCounts message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostname);
+            if (message.source_type != null && message.hasOwnProperty("source_type"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.source_type);
+            if (message.counts != null && message.hasOwnProperty("counts"))
+                $root.CClientMetrics_ContentDownloadResponse_Counts.encode(message.counts, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_HostCounts message, length delimited. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_HostCounts.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_HostCounts} message CClientMetrics_ContentDownloadResponse_HostCounts message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_HostCounts message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ContentDownloadResponse_HostCounts} CClientMetrics_ContentDownloadResponse_HostCounts
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ContentDownloadResponse_HostCounts();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.hostname = reader.string();
+                    break;
+                case 2:
+                    message.source_type = reader.uint32();
+                    break;
+                case 3:
+                    message.counts = $root.CClientMetrics_ContentDownloadResponse_Counts.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_HostCounts message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ContentDownloadResponse_HostCounts} CClientMetrics_ContentDownloadResponse_HostCounts
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ContentDownloadResponse_HostCounts message.
+         * @function verify
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                if (!$util.isString(message.hostname))
+                    return "hostname: string expected";
+            if (message.source_type != null && message.hasOwnProperty("source_type"))
+                if (!$util.isInteger(message.source_type))
+                    return "source_type: integer expected";
+            if (message.counts != null && message.hasOwnProperty("counts")) {
+                var error = $root.CClientMetrics_ContentDownloadResponse_Counts.verify(message.counts);
+                if (error)
+                    return "counts." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ContentDownloadResponse_HostCounts message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ContentDownloadResponse_HostCounts} CClientMetrics_ContentDownloadResponse_HostCounts
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ContentDownloadResponse_HostCounts)
+                return object;
+            var message = new $root.CClientMetrics_ContentDownloadResponse_HostCounts();
+            if (object.hostname != null)
+                message.hostname = String(object.hostname);
+            if (object.source_type != null)
+                message.source_type = object.source_type >>> 0;
+            if (object.counts != null) {
+                if (typeof object.counts !== "object")
+                    throw TypeError(".CClientMetrics_ContentDownloadResponse_HostCounts.counts: object expected");
+                message.counts = $root.CClientMetrics_ContentDownloadResponse_Counts.fromObject(object.counts);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ContentDownloadResponse_HostCounts message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @static
+         * @param {CClientMetrics_ContentDownloadResponse_HostCounts} message CClientMetrics_ContentDownloadResponse_HostCounts
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.hostname = "";
+                object.source_type = 0;
+                object.counts = null;
+            }
+            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                object.hostname = message.hostname;
+            if (message.source_type != null && message.hasOwnProperty("source_type"))
+                object.source_type = message.source_type;
+            if (message.counts != null && message.hasOwnProperty("counts"))
+                object.counts = $root.CClientMetrics_ContentDownloadResponse_Counts.toObject(message.counts, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ContentDownloadResponse_HostCounts to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ContentDownloadResponse_HostCounts
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ContentDownloadResponse_HostCounts.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ContentDownloadResponse_HostCounts;
+    })();
+    
+    $root.CClientMetrics_ContentDownloadResponse_Hosts = (function() {
+    
+        /**
+         * Properties of a CClientMetrics_ContentDownloadResponse_Hosts.
+         * @exports ICClientMetrics_ContentDownloadResponse_Hosts
+         * @interface ICClientMetrics_ContentDownloadResponse_Hosts
+         * @property {Array.<ICClientMetrics_ContentDownloadResponse_HostCounts>|null} [hosts] CClientMetrics_ContentDownloadResponse_Hosts hosts
+         */
+    
+        /**
+         * Constructs a new CClientMetrics_ContentDownloadResponse_Hosts.
+         * @exports CClientMetrics_ContentDownloadResponse_Hosts
+         * @classdesc Represents a CClientMetrics_ContentDownloadResponse_Hosts.
+         * @implements ICClientMetrics_ContentDownloadResponse_Hosts
+         * @constructor
+         * @param {ICClientMetrics_ContentDownloadResponse_Hosts=} [properties] Properties to set
+         */
+        function CClientMetrics_ContentDownloadResponse_Hosts(properties) {
+            this.hosts = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClientMetrics_ContentDownloadResponse_Hosts hosts.
+         * @member {Array.<ICClientMetrics_ContentDownloadResponse_HostCounts>} hosts
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @instance
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.prototype.hosts = $util.emptyArray;
+    
+        /**
+         * Creates a new CClientMetrics_ContentDownloadResponse_Hosts instance using the specified properties.
+         * @function create
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Hosts=} [properties] Properties to set
+         * @returns {CClientMetrics_ContentDownloadResponse_Hosts} CClientMetrics_ContentDownloadResponse_Hosts instance
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.create = function create(properties) {
+            return new CClientMetrics_ContentDownloadResponse_Hosts(properties);
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_Hosts message. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_Hosts.verify|verify} messages.
+         * @function encode
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Hosts} message CClientMetrics_ContentDownloadResponse_Hosts message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.hosts != null && message.hosts.length)
+                for (var i = 0; i < message.hosts.length; ++i)
+                    $root.CClientMetrics_ContentDownloadResponse_HostCounts.encode(message.hosts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClientMetrics_ContentDownloadResponse_Hosts message, length delimited. Does not implicitly {@link CClientMetrics_ContentDownloadResponse_Hosts.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {ICClientMetrics_ContentDownloadResponse_Hosts} message CClientMetrics_ContentDownloadResponse_Hosts message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_Hosts message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClientMetrics_ContentDownloadResponse_Hosts} CClientMetrics_ContentDownloadResponse_Hosts
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClientMetrics_ContentDownloadResponse_Hosts();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.hosts && message.hosts.length))
+                        message.hosts = [];
+                    message.hosts.push($root.CClientMetrics_ContentDownloadResponse_HostCounts.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClientMetrics_ContentDownloadResponse_Hosts message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClientMetrics_ContentDownloadResponse_Hosts} CClientMetrics_ContentDownloadResponse_Hosts
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClientMetrics_ContentDownloadResponse_Hosts message.
+         * @function verify
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.hosts != null && message.hasOwnProperty("hosts")) {
+                if (!Array.isArray(message.hosts))
+                    return "hosts: array expected";
+                for (var i = 0; i < message.hosts.length; ++i) {
+                    var error = $root.CClientMetrics_ContentDownloadResponse_HostCounts.verify(message.hosts[i]);
+                    if (error)
+                        return "hosts." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CClientMetrics_ContentDownloadResponse_Hosts message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClientMetrics_ContentDownloadResponse_Hosts} CClientMetrics_ContentDownloadResponse_Hosts
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClientMetrics_ContentDownloadResponse_Hosts)
+                return object;
+            var message = new $root.CClientMetrics_ContentDownloadResponse_Hosts();
+            if (object.hosts) {
+                if (!Array.isArray(object.hosts))
+                    throw TypeError(".CClientMetrics_ContentDownloadResponse_Hosts.hosts: array expected");
+                message.hosts = [];
+                for (var i = 0; i < object.hosts.length; ++i) {
+                    if (typeof object.hosts[i] !== "object")
+                        throw TypeError(".CClientMetrics_ContentDownloadResponse_Hosts.hosts: object expected");
+                    message.hosts[i] = $root.CClientMetrics_ContentDownloadResponse_HostCounts.fromObject(object.hosts[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClientMetrics_ContentDownloadResponse_Hosts message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @static
+         * @param {CClientMetrics_ContentDownloadResponse_Hosts} message CClientMetrics_ContentDownloadResponse_Hosts
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.hosts = [];
+            if (message.hosts && message.hosts.length) {
+                object.hosts = [];
+                for (var j = 0; j < message.hosts.length; ++j)
+                    object.hosts[j] = $root.CClientMetrics_ContentDownloadResponse_HostCounts.toObject(message.hosts[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CClientMetrics_ContentDownloadResponse_Hosts to JSON.
+         * @function toJSON
+         * @memberof CClientMetrics_ContentDownloadResponse_Hosts
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClientMetrics_ContentDownloadResponse_Hosts.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClientMetrics_ContentDownloadResponse_Hosts;
     })();
 
     return $root;

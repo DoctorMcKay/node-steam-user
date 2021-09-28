@@ -19,7 +19,7 @@
     /**
      * EBroadcastWatchLocation enum.
      * @exports EBroadcastWatchLocation
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EBroadcastWatchLocation_Invalid=0 k_EBroadcastWatchLocation_Invalid value
      * @property {number} k_EBroadcastWatchLocation_SteamTV_Tab=1 k_EBroadcastWatchLocation_SteamTV_Tab value
      * @property {number} k_EBroadcastWatchLocation_SteamTV_WatchParty=2 k_EBroadcastWatchLocation_SteamTV_WatchParty value
@@ -57,7 +57,7 @@
     /**
      * EBroadcastChatPermission enum.
      * @exports EBroadcastChatPermission
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EBroadcastChatPermissionPublic=0 k_EBroadcastChatPermissionPublic value
      * @property {number} k_EBroadcastChatPermissionOwnsApp=1 k_EBroadcastChatPermissionOwnsApp value
      */
@@ -83,6 +83,7 @@
          * @property {boolean|null} [thumbnail_upload] CBroadcast_BeginBroadcastSession_Request thumbnail_upload
          * @property {string|null} [client_beta] CBroadcast_BeginBroadcastSession_Request client_beta
          * @property {number|null} [sysid] CBroadcast_BeginBroadcastSession_Request sysid
+         * @property {boolean|null} [allow_webrtc] CBroadcast_BeginBroadcastSession_Request allow_webrtc
          */
     
         /**
@@ -173,6 +174,14 @@
         CBroadcast_BeginBroadcastSession_Request.prototype.sysid = 0;
     
         /**
+         * CBroadcast_BeginBroadcastSession_Request allow_webrtc.
+         * @member {boolean} allow_webrtc
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.allow_webrtc = false;
+    
+        /**
          * Creates a new CBroadcast_BeginBroadcastSession_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_BeginBroadcastSession_Request
@@ -196,24 +205,26 @@
         CBroadcast_BeginBroadcastSession_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.permission != null && Object.hasOwnProperty.call(message, "permission"))
+            if (message.permission != null && message.hasOwnProperty("permission"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.permission);
-            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.gameid);
-            if (message.client_instance_id != null && Object.hasOwnProperty.call(message, "client_instance_id"))
+            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.client_instance_id);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+            if (message.title != null && message.hasOwnProperty("title"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.title);
-            if (message.cellid != null && Object.hasOwnProperty.call(message, "cellid"))
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.cellid);
-            if (message.rtmp_token != null && Object.hasOwnProperty.call(message, "rtmp_token"))
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.rtmp_token);
-            if (message.thumbnail_upload != null && Object.hasOwnProperty.call(message, "thumbnail_upload"))
+            if (message.thumbnail_upload != null && message.hasOwnProperty("thumbnail_upload"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.thumbnail_upload);
-            if (message.client_beta != null && Object.hasOwnProperty.call(message, "client_beta"))
+            if (message.client_beta != null && message.hasOwnProperty("client_beta"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.client_beta);
-            if (message.sysid != null && Object.hasOwnProperty.call(message, "sysid"))
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.sysid);
+            if (message.allow_webrtc != null && message.hasOwnProperty("allow_webrtc"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.allow_webrtc);
             return writer;
         };
     
@@ -274,6 +285,9 @@
                     break;
                 case 9:
                     message.sysid = reader.uint32();
+                    break;
+                case 10:
+                    message.allow_webrtc = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -337,6 +351,9 @@
             if (message.sysid != null && message.hasOwnProperty("sysid"))
                 if (!$util.isInteger(message.sysid))
                     return "sysid: integer expected";
+            if (message.allow_webrtc != null && message.hasOwnProperty("allow_webrtc"))
+                if (typeof message.allow_webrtc !== "boolean")
+                    return "allow_webrtc: boolean expected";
             return null;
         };
     
@@ -391,6 +408,8 @@
                 message.client_beta = String(object.client_beta);
             if (object.sysid != null)
                 message.sysid = object.sysid >>> 0;
+            if (object.allow_webrtc != null)
+                message.allow_webrtc = Boolean(object.allow_webrtc);
             return message;
         };
     
@@ -429,6 +448,7 @@
                 object.thumbnail_upload = false;
                 object.client_beta = "";
                 object.sysid = 0;
+                object.allow_webrtc = false;
             }
             if (message.permission != null && message.hasOwnProperty("permission"))
                 object.permission = message.permission;
@@ -457,6 +477,8 @@
                 object.client_beta = message.client_beta;
             if (message.sysid != null && message.hasOwnProperty("sysid"))
                 object.sysid = message.sysid;
+            if (message.allow_webrtc != null && message.hasOwnProperty("allow_webrtc"))
+                object.allow_webrtc = message.allow_webrtc;
             return object;
         };
     
@@ -566,15 +588,15 @@
         CBroadcast_BeginBroadcastSession_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
-            if (message.thumbnail_upload_address != null && Object.hasOwnProperty.call(message, "thumbnail_upload_address"))
+            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.thumbnail_upload_address);
-            if (message.thumbnail_upload_token != null && Object.hasOwnProperty.call(message, "thumbnail_upload_token"))
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.thumbnail_upload_token);
-            if (message.thumbnail_interval_seconds != null && Object.hasOwnProperty.call(message, "thumbnail_interval_seconds"))
+            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.thumbnail_interval_seconds);
-            if (message.heartbeat_interval_seconds != null && Object.hasOwnProperty.call(message, "heartbeat_interval_seconds"))
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.heartbeat_interval_seconds);
             return writer;
         };
@@ -820,7 +842,7 @@
         CBroadcast_EndBroadcastSession_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
             return writer;
         };
@@ -1244,21 +1266,21 @@
         CBroadcast_StartBroadcastUpload_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
-            if (message.cellid != null && Object.hasOwnProperty.call(message, "cellid"))
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.cellid);
-            if (message.as_rtmp != null && Object.hasOwnProperty.call(message, "as_rtmp"))
+            if (message.as_rtmp != null && message.hasOwnProperty("as_rtmp"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.as_rtmp);
-            if (message.delay_seconds != null && Object.hasOwnProperty.call(message, "delay_seconds"))
+            if (message.delay_seconds != null && message.hasOwnProperty("delay_seconds"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.delay_seconds);
-            if (message.rtmp_token != null && Object.hasOwnProperty.call(message, "rtmp_token"))
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.rtmp_token);
-            if (message.upload_ip_address != null && Object.hasOwnProperty.call(message, "upload_ip_address"))
+            if (message.upload_ip_address != null && message.hasOwnProperty("upload_ip_address"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.upload_ip_address);
-            if (message.is_replay != null && Object.hasOwnProperty.call(message, "is_replay"))
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_replay);
-            if (message.sysid != null && Object.hasOwnProperty.call(message, "sysid"))
+            if (message.sysid != null && message.hasOwnProperty("sysid"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.sysid);
             return writer;
         };
@@ -1587,15 +1609,15 @@
         CBroadcast_StartBroadcastUpload_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.upload_token != null && Object.hasOwnProperty.call(message, "upload_token"))
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.upload_token);
-            if (message.upload_address != null && Object.hasOwnProperty.call(message, "upload_address"))
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.upload_address);
-            if (message.broadcast_upload_id != null && Object.hasOwnProperty.call(message, "broadcast_upload_id"))
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.broadcast_upload_id);
-            if (message.enable_replay != null && Object.hasOwnProperty.call(message, "enable_replay"))
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enable_replay);
-            if (message.http_address != null && Object.hasOwnProperty.call(message, "http_address"))
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.http_address);
             return writer;
         };
@@ -1850,9 +1872,9 @@
         CBroadcast_NotifyBroadcastUploadStop_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_upload_id != null && Object.hasOwnProperty.call(message, "broadcast_upload_id"))
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_upload_id);
-            if (message.upload_result != null && Object.hasOwnProperty.call(message, "upload_result"))
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.upload_result);
             return writer;
         };
@@ -2018,7 +2040,6 @@
          * @property {number|Long|null} [steamid] CBroadcast_WatchBroadcast_Request steamid
          * @property {number|Long|null} [existing_broadcast_id] CBroadcast_WatchBroadcast_Request existing_broadcast_id
          * @property {number|Long|null} [viewer_token] CBroadcast_WatchBroadcast_Request viewer_token
-         * @property {number|null} [client_ip] CBroadcast_WatchBroadcast_Request client_ip
          * @property {number|null} [client_cell] CBroadcast_WatchBroadcast_Request client_cell
          * @property {EBroadcastWatchLocation|null} [watch_location] CBroadcast_WatchBroadcast_Request watch_location
          * @property {boolean|null} [is_webrtc] CBroadcast_WatchBroadcast_Request is_webrtc
@@ -2062,14 +2083,6 @@
          * @instance
          */
         CBroadcast_WatchBroadcast_Request.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * CBroadcast_WatchBroadcast_Request client_ip.
-         * @member {number} client_ip
-         * @memberof CBroadcast_WatchBroadcast_Request
-         * @instance
-         */
-        CBroadcast_WatchBroadcast_Request.prototype.client_ip = 0;
     
         /**
          * CBroadcast_WatchBroadcast_Request client_cell.
@@ -2119,19 +2132,17 @@
         CBroadcast_WatchBroadcast_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.existing_broadcast_id != null && Object.hasOwnProperty.call(message, "existing_broadcast_id"))
+            if (message.existing_broadcast_id != null && message.hasOwnProperty("existing_broadcast_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.existing_broadcast_id);
-            if (message.viewer_token != null && Object.hasOwnProperty.call(message, "viewer_token"))
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
-            if (message.client_ip != null && Object.hasOwnProperty.call(message, "client_ip"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.client_ip);
-            if (message.client_cell != null && Object.hasOwnProperty.call(message, "client_cell"))
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.client_cell);
-            if (message.watch_location != null && Object.hasOwnProperty.call(message, "watch_location"))
+            if (message.watch_location != null && message.hasOwnProperty("watch_location"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.watch_location);
-            if (message.is_webrtc != null && Object.hasOwnProperty.call(message, "is_webrtc"))
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_webrtc);
             return writer;
         };
@@ -2175,9 +2186,6 @@
                     break;
                 case 3:
                     message.viewer_token = reader.fixed64();
-                    break;
-                case 4:
-                    message.client_ip = reader.uint32();
                     break;
                 case 5:
                     message.client_cell = reader.uint32();
@@ -2232,9 +2240,6 @@
             if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
                 if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
                     return "viewer_token: integer|Long expected";
-            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
-                if (!$util.isInteger(message.client_ip))
-                    return "client_ip: integer expected";
             if (message.client_cell != null && message.hasOwnProperty("client_cell"))
                 if (!$util.isInteger(message.client_cell))
                     return "client_cell: integer expected";
@@ -2303,8 +2308,6 @@
                     message.viewer_token = object.viewer_token;
                 else if (typeof object.viewer_token === "object")
                     message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
-            if (object.client_ip != null)
-                message.client_ip = object.client_ip >>> 0;
             if (object.client_cell != null)
                 message.client_cell = object.client_cell >>> 0;
             switch (object.watch_location) {
@@ -2399,7 +2402,6 @@
                     object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.viewer_token = options.longs === String ? "0" : 0;
-                object.client_ip = 0;
                 object.client_cell = 0;
                 object.watch_location = options.enums === String ? "k_EBroadcastWatchLocation_Invalid" : 0;
                 object.is_webrtc = false;
@@ -2419,8 +2421,6 @@
                     object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
                 else
                     object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
-            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
-                object.client_ip = message.client_ip;
             if (message.client_cell != null && message.hasOwnProperty("client_cell"))
                 object.client_cell = message.client_cell;
             if (message.watch_location != null && message.hasOwnProperty("watch_location"))
@@ -2469,6 +2469,7 @@
          * @property {string|null} [webrtc_turn_server] CBroadcast_WatchBroadcast_Response webrtc_turn_server
          * @property {boolean|null} [is_replay] CBroadcast_WatchBroadcast_Response is_replay
          * @property {number|null} [duration] CBroadcast_WatchBroadcast_Response duration
+         * @property {string|null} [cdn_auth_url_parameters] CBroadcast_WatchBroadcast_Response cdn_auth_url_parameters
          */
     
         /**
@@ -2639,6 +2640,14 @@
         CBroadcast_WatchBroadcast_Response.prototype.duration = 0;
     
         /**
+         * CBroadcast_WatchBroadcast_Response cdn_auth_url_parameters.
+         * @member {string} cdn_auth_url_parameters
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.cdn_auth_url_parameters = "";
+    
+        /**
          * Creates a new CBroadcast_WatchBroadcast_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_WatchBroadcast_Response
@@ -2662,44 +2671,46 @@
         CBroadcast_WatchBroadcast_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+            if (message.response != null && message.hasOwnProperty("response"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.response);
-            if (message.mpd_url != null && Object.hasOwnProperty.call(message, "mpd_url"))
+            if (message.mpd_url != null && message.hasOwnProperty("mpd_url"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.mpd_url);
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.broadcast_id);
-            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.gameid);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+            if (message.title != null && message.hasOwnProperty("title"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
-            if (message.num_viewers != null && Object.hasOwnProperty.call(message, "num_viewers"))
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.num_viewers);
-            if (message.permission != null && Object.hasOwnProperty.call(message, "permission"))
+            if (message.permission != null && message.hasOwnProperty("permission"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.permission);
-            if (message.is_rtmp != null && Object.hasOwnProperty.call(message, "is_rtmp"))
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.is_rtmp);
-            if (message.seconds_delay != null && Object.hasOwnProperty.call(message, "seconds_delay"))
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.seconds_delay);
-            if (message.viewer_token != null && Object.hasOwnProperty.call(message, "viewer_token"))
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
                 writer.uint32(/* id 10, wireType 1 =*/81).fixed64(message.viewer_token);
-            if (message.hls_m3u8_master_url != null && Object.hasOwnProperty.call(message, "hls_m3u8_master_url"))
+            if (message.hls_m3u8_master_url != null && message.hasOwnProperty("hls_m3u8_master_url"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.hls_m3u8_master_url);
-            if (message.heartbeat_interval != null && Object.hasOwnProperty.call(message, "heartbeat_interval"))
+            if (message.heartbeat_interval != null && message.hasOwnProperty("heartbeat_interval"))
                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.heartbeat_interval);
-            if (message.thumbnail_url != null && Object.hasOwnProperty.call(message, "thumbnail_url"))
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.thumbnail_url);
-            if (message.is_webrtc != null && Object.hasOwnProperty.call(message, "is_webrtc"))
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.is_webrtc);
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 15, wireType 1 =*/121).fixed64(message.webrtc_session_id);
-            if (message.webrtc_offer_sdp != null && Object.hasOwnProperty.call(message, "webrtc_offer_sdp"))
+            if (message.webrtc_offer_sdp != null && message.hasOwnProperty("webrtc_offer_sdp"))
                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.webrtc_offer_sdp);
-            if (message.webrtc_turn_server != null && Object.hasOwnProperty.call(message, "webrtc_turn_server"))
+            if (message.webrtc_turn_server != null && message.hasOwnProperty("webrtc_turn_server"))
                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.webrtc_turn_server);
-            if (message.is_replay != null && Object.hasOwnProperty.call(message, "is_replay"))
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.is_replay);
-            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+            if (message.duration != null && message.hasOwnProperty("duration"))
                 writer.uint32(/* id 19, wireType 0 =*/152).int32(message.duration);
+            if (message.cdn_auth_url_parameters != null && message.hasOwnProperty("cdn_auth_url_parameters"))
+                writer.uint32(/* id 20, wireType 2 =*/162).string(message.cdn_auth_url_parameters);
             return writer;
         };
     
@@ -2790,6 +2801,9 @@
                     break;
                 case 19:
                     message.duration = reader.int32();
+                    break;
+                case 20:
+                    message.cdn_auth_url_parameters = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2898,6 +2912,9 @@
             if (message.duration != null && message.hasOwnProperty("duration"))
                 if (!$util.isInteger(message.duration))
                     return "duration: integer expected";
+            if (message.cdn_auth_url_parameters != null && message.hasOwnProperty("cdn_auth_url_parameters"))
+                if (!$util.isString(message.cdn_auth_url_parameters))
+                    return "cdn_auth_url_parameters: string expected";
             return null;
         };
     
@@ -3027,6 +3044,8 @@
                 message.is_replay = Boolean(object.is_replay);
             if (object.duration != null)
                 message.duration = object.duration | 0;
+            if (object.cdn_auth_url_parameters != null)
+                message.cdn_auth_url_parameters = String(object.cdn_auth_url_parameters);
             return message;
         };
     
@@ -3079,6 +3098,7 @@
                 object.webrtc_turn_server = "";
                 object.is_replay = false;
                 object.duration = 0;
+                object.cdn_auth_url_parameters = "";
             }
             if (message.response != null && message.hasOwnProperty("response"))
                 object.response = options.enums === String ? $root.CBroadcast_WatchBroadcast_Response.EWatchResponse[message.response] : message.response;
@@ -3130,6 +3150,8 @@
                 object.is_replay = message.is_replay;
             if (message.duration != null && message.hasOwnProperty("duration"))
                 object.duration = message.duration;
+            if (message.cdn_auth_url_parameters != null && message.hasOwnProperty("cdn_auth_url_parameters"))
+                object.cdn_auth_url_parameters = message.cdn_auth_url_parameters;
             return object;
         };
     
@@ -3147,7 +3169,7 @@
         /**
          * EWatchResponse enum.
          * @name CBroadcast_WatchBroadcast_Response.EWatchResponse
-         * @enum {number}
+         * @enum {string}
          * @property {number} k_EWatchResponseReady=1 k_EWatchResponseReady value
          * @property {number} k_EWatchResponseNotAvailable=2 k_EWatchResponseNotAvailable value
          * @property {number} k_EWatchResponseWaitingForApproval=3 k_EWatchResponseWaitingForApproval value
@@ -3264,13 +3286,13 @@
         CBroadcast_HeartbeatBroadcast_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
-            if (message.viewer_token != null && Object.hasOwnProperty.call(message, "viewer_token"))
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
-            if (message.representation != null && Object.hasOwnProperty.call(message, "representation"))
+            if (message.representation != null && message.hasOwnProperty("representation"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.representation);
             return writer;
         };
@@ -3551,11 +3573,11 @@
         CBroadcast_StopWatchingBroadcast_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
-            if (message.viewer_token != null && Object.hasOwnProperty.call(message, "viewer_token"))
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
             return writer;
         };
@@ -3816,9 +3838,9 @@
         CBroadcast_GetBroadcastStatus_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
             return writer;
         };
@@ -4162,33 +4184,33 @@
         CBroadcast_GetBroadcastStatus_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.gameid);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+            if (message.title != null && message.hasOwnProperty("title"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
-            if (message.num_viewers != null && Object.hasOwnProperty.call(message, "num_viewers"))
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.num_viewers);
-            if (message.permission != null && Object.hasOwnProperty.call(message, "permission"))
+            if (message.permission != null && message.hasOwnProperty("permission"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.permission);
-            if (message.is_rtmp != null && Object.hasOwnProperty.call(message, "is_rtmp"))
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.is_rtmp);
-            if (message.seconds_delay != null && Object.hasOwnProperty.call(message, "seconds_delay"))
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.seconds_delay);
-            if (message.is_publisher != null && Object.hasOwnProperty.call(message, "is_publisher"))
+            if (message.is_publisher != null && message.hasOwnProperty("is_publisher"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_publisher);
-            if (message.thumbnail_url != null && Object.hasOwnProperty.call(message, "thumbnail_url"))
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.thumbnail_url);
-            if (message.update_interval != null && Object.hasOwnProperty.call(message, "update_interval"))
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.update_interval);
-            if (message.is_uploading != null && Object.hasOwnProperty.call(message, "is_uploading"))
+            if (message.is_uploading != null && message.hasOwnProperty("is_uploading"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_uploading);
-            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+            if (message.duration != null && message.hasOwnProperty("duration"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.duration);
-            if (message.is_replay != null && Object.hasOwnProperty.call(message, "is_replay"))
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.is_replay);
-            if (message.is_capturing_vod != null && Object.hasOwnProperty.call(message, "is_capturing_vod"))
+            if (message.is_capturing_vod != null && message.hasOwnProperty("is_capturing_vod"))
                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.is_capturing_vod);
-            if (message.is_store_whitelisted != null && Object.hasOwnProperty.call(message, "is_store_whitelisted"))
+            if (message.is_store_whitelisted != null && message.hasOwnProperty("is_store_whitelisted"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.is_store_whitelisted);
             return writer;
         };
@@ -4542,9 +4564,9 @@
         CBroadcast_GetBroadcastThumbnail_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
             return writer;
         };
@@ -4798,13 +4820,13 @@
         CBroadcast_GetBroadcastThumbnail_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.thumbnail_url != null && Object.hasOwnProperty.call(message, "thumbnail_url"))
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.thumbnail_url);
-            if (message.update_interval != null && Object.hasOwnProperty.call(message, "update_interval"))
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.update_interval);
-            if (message.num_viewers != null && Object.hasOwnProperty.call(message, "num_viewers"))
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.num_viewers);
-            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+            if (message.duration != null && message.hasOwnProperty("duration"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.duration);
             return writer;
         };
@@ -5034,9 +5056,9 @@
         CBroadcast_InviteToBroadcast_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.approval_response != null && Object.hasOwnProperty.call(message, "approval_response"))
+            if (message.approval_response != null && message.hasOwnProperty("approval_response"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.approval_response);
             return writer;
         };
@@ -5249,7 +5271,7 @@
         CBroadcast_InviteToBroadcast_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.success != null && Object.hasOwnProperty.call(message, "success"))
+            if (message.success != null && message.hasOwnProperty("success"))
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.success);
             return writer;
         };
@@ -5463,13 +5485,13 @@
         CBroadcast_SendBroadcastStateToServer_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.permission != null && Object.hasOwnProperty.call(message, "permission"))
+            if (message.permission != null && message.hasOwnProperty("permission"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.permission);
-            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.gameid);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+            if (message.title != null && message.hasOwnProperty("title"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
-            if (message.game_data_config != null && Object.hasOwnProperty.call(message, "game_data_config"))
+            if (message.game_data_config != null && message.hasOwnProperty("game_data_config"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.game_data_config);
             return writer;
         };
@@ -5864,7 +5886,7 @@
         CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
             return writer;
         };
@@ -6092,13 +6114,13 @@
         CBroadcast_GetBroadcastChatInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
-            if (message.client_ip != null && Object.hasOwnProperty.call(message, "client_ip"))
+            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.client_ip);
-            if (message.client_cell != null && Object.hasOwnProperty.call(message, "client_cell"))
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.client_cell);
             return writer;
         };
@@ -6366,9 +6388,9 @@
         CBroadcast_GetBroadcastChatInfo_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.chat_id != null && Object.hasOwnProperty.call(message, "chat_id"))
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
-            if (message.view_url_template != null && Object.hasOwnProperty.call(message, "view_url_template"))
+            if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.view_url_template);
             if (message.flair_group_ids != null && message.flair_group_ids.length)
                 for (var i = 0; i < message.flair_group_ids.length; ++i)
@@ -6651,15 +6673,15 @@
         CBroadcast_PostChatMessage_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.chat_id != null && Object.hasOwnProperty.call(message, "chat_id"))
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
-            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+            if (message.message != null && message.hasOwnProperty("message"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-            if (message.instance_id != null && Object.hasOwnProperty.call(message, "instance_id"))
+            if (message.instance_id != null && message.hasOwnProperty("instance_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.instance_id);
-            if (message.language != null && Object.hasOwnProperty.call(message, "language"))
+            if (message.language != null && message.hasOwnProperty("language"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.language);
-            if (message.country_code != null && Object.hasOwnProperty.call(message, "country_code"))
+            if (message.country_code != null && message.hasOwnProperty("country_code"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.country_code);
             return writer;
         };
@@ -6932,13 +6954,13 @@
         CBroadcast_PostChatMessage_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.persona_name != null && Object.hasOwnProperty.call(message, "persona_name"))
+            if (message.persona_name != null && message.hasOwnProperty("persona_name"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.persona_name);
-            if (message.in_game != null && Object.hasOwnProperty.call(message, "in_game"))
+            if (message.in_game != null && message.hasOwnProperty("in_game"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.in_game);
-            if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+            if (message.result != null && message.hasOwnProperty("result"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.result);
-            if (message.cooldown_time_seconds != null && Object.hasOwnProperty.call(message, "cooldown_time_seconds"))
+            if (message.cooldown_time_seconds != null && message.hasOwnProperty("cooldown_time_seconds"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cooldown_time_seconds);
             return writer;
         };
@@ -7168,9 +7190,9 @@
         CBroadcast_UpdateChatMessageFlair_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.chat_id != null && Object.hasOwnProperty.call(message, "chat_id"))
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
-            if (message.flair != null && Object.hasOwnProperty.call(message, "flair"))
+            if (message.flair != null && message.hasOwnProperty("flair"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.flair);
             return writer;
         };
@@ -7401,11 +7423,11 @@
         CBroadcast_UpdateChatMessageFlair_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+            if (message.result != null && message.hasOwnProperty("result"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.result);
-            if (message.chat_id != null && Object.hasOwnProperty.call(message, "chat_id"))
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.chat_id);
-            if (message.flair != null && Object.hasOwnProperty.call(message, "flair"))
+            if (message.flair != null && message.hasOwnProperty("flair"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.flair);
             return writer;
         };
@@ -7647,11 +7669,11 @@
         CBroadcast_MuteBroadcastChatUser_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.chat_id != null && Object.hasOwnProperty.call(message, "chat_id"))
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
-            if (message.user_steamid != null && Object.hasOwnProperty.call(message, "user_steamid"))
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.user_steamid);
-            if (message.muted != null && Object.hasOwnProperty.call(message, "muted"))
+            if (message.muted != null && message.hasOwnProperty("muted"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.muted);
             return writer;
         };
@@ -8058,9 +8080,9 @@
         CBroadcast_RemoveUserChatText_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.chat_id != null && Object.hasOwnProperty.call(message, "chat_id"))
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
-            if (message.user_steamid != null && Object.hasOwnProperty.call(message, "user_steamid"))
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.user_steamid);
             return writer;
         };
@@ -8457,7 +8479,7 @@
         CBroadcast_GetBroadcastChatUserNames_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.chat_id != null && Object.hasOwnProperty.call(message, "chat_id"))
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
             if (message.user_steamid != null && message.user_steamid.length)
                 for (var i = 0; i < message.user_steamid.length; ++i)
@@ -8916,9 +8938,9 @@
             PersonaName.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
+                if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id);
-                if (message.persona != null && Object.hasOwnProperty.call(message, "persona"))
+                if (message.persona != null && message.hasOwnProperty("persona"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.persona);
                 return writer;
             };
@@ -9170,15 +9192,15 @@
         CBroadcast_StartBuildClip_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.broadcast_session_id != null && Object.hasOwnProperty.call(message, "broadcast_session_id"))
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_session_id);
-            if (message.first_segment != null && Object.hasOwnProperty.call(message, "first_segment"))
+            if (message.first_segment != null && message.hasOwnProperty("first_segment"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.first_segment);
-            if (message.num_segments != null && Object.hasOwnProperty.call(message, "num_segments"))
+            if (message.num_segments != null && message.hasOwnProperty("num_segments"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.num_segments);
-            if (message.clip_description != null && Object.hasOwnProperty.call(message, "clip_description"))
+            if (message.clip_description != null && message.hasOwnProperty("clip_description"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.clip_description);
             return writer;
         };
@@ -9438,7 +9460,7 @@
         CBroadcast_StartBuildClip_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_clip_id != null && Object.hasOwnProperty.call(message, "broadcast_clip_id"))
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_clip_id);
             return writer;
         };
@@ -9639,7 +9661,7 @@
         CBroadcast_GetBuildClipStatus_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_clip_id != null && Object.hasOwnProperty.call(message, "broadcast_clip_id"))
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_clip_id);
             return writer;
         };
@@ -10027,13 +10049,13 @@
         CBroadcast_SetClipDetails_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_clip_id != null && Object.hasOwnProperty.call(message, "broadcast_clip_id"))
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.broadcast_clip_id);
-            if (message.start_time != null && Object.hasOwnProperty.call(message, "start_time"))
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_time);
-            if (message.end_time != null && Object.hasOwnProperty.call(message, "end_time"))
+            if (message.end_time != null && message.hasOwnProperty("end_time"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.end_time);
-            if (message.video_description != null && Object.hasOwnProperty.call(message, "video_description"))
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.video_description);
             return writer;
         };
@@ -10428,7 +10450,7 @@
         CBroadcast_GetClipDetails_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_clip_id != null && Object.hasOwnProperty.call(message, "broadcast_clip_id"))
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.broadcast_clip_id);
             return writer;
         };
@@ -10710,25 +10732,25 @@
         CBroadcast_GetClipDetails_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_clip_id != null && Object.hasOwnProperty.call(message, "broadcast_clip_id"))
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.broadcast_clip_id);
-            if (message.video_id != null && Object.hasOwnProperty.call(message, "video_id"))
+            if (message.video_id != null && message.hasOwnProperty("video_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.video_id);
-            if (message.channel_id != null && Object.hasOwnProperty.call(message, "channel_id"))
+            if (message.channel_id != null && message.hasOwnProperty("channel_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.channel_id);
-            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.app_id);
-            if (message.accountid_broadcaster != null && Object.hasOwnProperty.call(message, "accountid_broadcaster"))
+            if (message.accountid_broadcaster != null && message.hasOwnProperty("accountid_broadcaster"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.accountid_broadcaster);
-            if (message.accountid_clipmaker != null && Object.hasOwnProperty.call(message, "accountid_clipmaker"))
+            if (message.accountid_clipmaker != null && message.hasOwnProperty("accountid_clipmaker"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.accountid_clipmaker);
-            if (message.video_description != null && Object.hasOwnProperty.call(message, "video_description"))
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.video_description);
-            if (message.start_time != null && Object.hasOwnProperty.call(message, "start_time"))
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.start_time);
-            if (message.length_milliseconds != null && Object.hasOwnProperty.call(message, "length_milliseconds"))
+            if (message.length_milliseconds != null && message.hasOwnProperty("length_milliseconds"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.length_milliseconds);
-            if (message.thumbnail_path != null && Object.hasOwnProperty.call(message, "thumbnail_path"))
+            if (message.thumbnail_path != null && message.hasOwnProperty("thumbnail_path"))
                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.thumbnail_path);
             return writer;
         };
@@ -11138,25 +11160,25 @@
         CBroadcast_SetRTMPInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_permission != null && Object.hasOwnProperty.call(message, "broadcast_permission"))
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.broadcast_permission);
-            if (message.update_token != null && Object.hasOwnProperty.call(message, "update_token"))
+            if (message.update_token != null && message.hasOwnProperty("update_token"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.update_token);
-            if (message.broadcast_delay != null && Object.hasOwnProperty.call(message, "broadcast_delay"))
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.broadcast_delay);
-            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.app_id);
-            if (message.required_app_id != null && Object.hasOwnProperty.call(message, "required_app_id"))
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.required_app_id);
-            if (message.broadcast_chat_permission != null && Object.hasOwnProperty.call(message, "broadcast_chat_permission"))
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.broadcast_chat_permission);
-            if (message.broadcast_buffer != null && Object.hasOwnProperty.call(message, "broadcast_buffer"))
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.broadcast_buffer);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 8, wireType 1 =*/65).fixed64(message.steamid);
-            if (message.chat_rate_limit != null && Object.hasOwnProperty.call(message, "chat_rate_limit"))
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.chat_rate_limit);
-            if (message.enable_replay != null && Object.hasOwnProperty.call(message, "enable_replay"))
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enable_replay);
             return writer;
         };
@@ -11639,9 +11661,9 @@
         CBroadcast_GetRTMPInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ip != null && Object.hasOwnProperty.call(message, "ip"))
+            if (message.ip != null && message.hasOwnProperty("ip"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.ip);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
             return writer;
         };
@@ -11944,27 +11966,27 @@
         CBroadcast_GetRTMPInfo_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_permission != null && Object.hasOwnProperty.call(message, "broadcast_permission"))
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.broadcast_permission);
-            if (message.rtmp_host != null && Object.hasOwnProperty.call(message, "rtmp_host"))
+            if (message.rtmp_host != null && message.hasOwnProperty("rtmp_host"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.rtmp_host);
-            if (message.rtmp_token != null && Object.hasOwnProperty.call(message, "rtmp_token"))
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.rtmp_token);
-            if (message.broadcast_delay != null && Object.hasOwnProperty.call(message, "broadcast_delay"))
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.broadcast_delay);
-            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.app_id);
-            if (message.required_app_id != null && Object.hasOwnProperty.call(message, "required_app_id"))
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.required_app_id);
-            if (message.broadcast_chat_permission != null && Object.hasOwnProperty.call(message, "broadcast_chat_permission"))
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.broadcast_chat_permission);
-            if (message.broadcast_buffer != null && Object.hasOwnProperty.call(message, "broadcast_buffer"))
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.broadcast_buffer);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 9, wireType 1 =*/73).fixed64(message.steamid);
-            if (message.chat_rate_limit != null && Object.hasOwnProperty.call(message, "chat_rate_limit"))
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.chat_rate_limit);
-            if (message.enable_replay != null && Object.hasOwnProperty.call(message, "enable_replay"))
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.enable_replay);
             return writer;
         };
@@ -12298,9 +12320,9 @@
         CBroadcast_WebRTCHaveTURNServer_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_session_id != null && Object.hasOwnProperty.call(message, "broadcast_session_id"))
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
-            if (message.turn_server != null && Object.hasOwnProperty.call(message, "turn_server"))
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.turn_server);
             return writer;
         };
@@ -12558,17 +12580,17 @@
         CBroadcast_WebRTCStartResult_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.webrtc_session_id);
-            if (message.started != null && Object.hasOwnProperty.call(message, "started"))
+            if (message.started != null && message.hasOwnProperty("started"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.started);
-            if (message.offer != null && Object.hasOwnProperty.call(message, "offer"))
+            if (message.offer != null && message.hasOwnProperty("offer"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.offer);
-            if (message.resolution_x != null && Object.hasOwnProperty.call(message, "resolution_x"))
+            if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.resolution_x);
-            if (message.resolution_y != null && Object.hasOwnProperty.call(message, "resolution_y"))
+            if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.resolution_y);
-            if (message.fps != null && Object.hasOwnProperty.call(message, "fps"))
+            if (message.fps != null && message.hasOwnProperty("fps"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.fps);
             return writer;
         };
@@ -12985,7 +13007,7 @@
         CBroadcast_WebRTCStopped_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.webrtc_session_id);
             return writer;
         };
@@ -13364,11 +13386,11 @@
         CBroadcast_WebRTCSetAnswer_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcaster_steamid != null && Object.hasOwnProperty.call(message, "broadcaster_steamid"))
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
-            if (message.answer != null && Object.hasOwnProperty.call(message, "answer"))
+            if (message.answer != null && message.hasOwnProperty("answer"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.answer);
             return writer;
         };
@@ -13766,7 +13788,7 @@
         CBroadcast_WebRTCLookupTURNServer_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cellid != null && Object.hasOwnProperty.call(message, "cellid"))
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
             return writer;
         };
@@ -13953,7 +13975,7 @@
         CBroadcast_WebRTCLookupTURNServer_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.turn_server != null && Object.hasOwnProperty.call(message, "turn_server"))
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.turn_server);
             return writer;
         };
@@ -14158,11 +14180,11 @@
         CBroadcast_WebRTC_Candidate.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.sdp_mid != null && Object.hasOwnProperty.call(message, "sdp_mid"))
+            if (message.sdp_mid != null && message.hasOwnProperty("sdp_mid"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.sdp_mid);
-            if (message.sdp_mline_index != null && Object.hasOwnProperty.call(message, "sdp_mline_index"))
+            if (message.sdp_mline_index != null && message.hasOwnProperty("sdp_mline_index"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sdp_mline_index);
-            if (message.candidate != null && Object.hasOwnProperty.call(message, "candidate"))
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.candidate);
             return writer;
         };
@@ -14381,9 +14403,9 @@
         CBroadcast_WebRTCAddHostCandidate_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.webrtc_session_id);
-            if (message.candidate != null && Object.hasOwnProperty.call(message, "candidate"))
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
                 $root.CBroadcast_WebRTC_Candidate.encode(message.candidate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
@@ -14779,11 +14801,11 @@
         CBroadcast_WebRTCAddViewerCandidate_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcaster_steamid != null && Object.hasOwnProperty.call(message, "broadcaster_steamid"))
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
-            if (message.candidate != null && Object.hasOwnProperty.call(message, "candidate"))
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
                 $root.CBroadcast_WebRTC_Candidate.encode(message.candidate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
@@ -15204,11 +15226,11 @@
         CBroadcast_WebRTCGetHostCandidates_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcaster_steamid != null && Object.hasOwnProperty.call(message, "broadcaster_steamid"))
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
-            if (message.candidate_generation != null && Object.hasOwnProperty.call(message, "candidate_generation"))
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.candidate_generation);
             return writer;
         };
@@ -15456,7 +15478,7 @@
         CBroadcast_WebRTCGetHostCandidates_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.candidate_generation != null && Object.hasOwnProperty.call(message, "candidate_generation"))
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.candidate_generation);
             if (message.candidates != null && message.candidates.length)
                 for (var i = 0; i < message.candidates.length; ++i)
@@ -15713,15 +15735,15 @@
         CBroadcast_GetBroadcastUploadStats_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.row_limit != null && Object.hasOwnProperty.call(message, "row_limit"))
+            if (message.row_limit != null && message.hasOwnProperty("row_limit"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.row_limit);
-            if (message.start_time != null && Object.hasOwnProperty.call(message, "start_time"))
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_time);
-            if (message.upload_id != null && Object.hasOwnProperty.call(message, "upload_id"))
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.upload_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.steamid);
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.session_id);
             return writer;
         };
@@ -16371,45 +16393,45 @@
             UploadStats.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.upload_result != null && Object.hasOwnProperty.call(message, "upload_result"))
+                if (message.upload_result != null && message.hasOwnProperty("upload_result"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.upload_result);
-                if (message.time_stopped != null && Object.hasOwnProperty.call(message, "time_stopped"))
+                if (message.time_stopped != null && message.hasOwnProperty("time_stopped"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.time_stopped);
-                if (message.seconds_uploaded != null && Object.hasOwnProperty.call(message, "seconds_uploaded"))
+                if (message.seconds_uploaded != null && message.hasOwnProperty("seconds_uploaded"))
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seconds_uploaded);
-                if (message.max_viewers != null && Object.hasOwnProperty.call(message, "max_viewers"))
+                if (message.max_viewers != null && message.hasOwnProperty("max_viewers"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.max_viewers);
-                if (message.resolution_x != null && Object.hasOwnProperty.call(message, "resolution_x"))
+                if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
                     writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.resolution_x);
-                if (message.resolution_y != null && Object.hasOwnProperty.call(message, "resolution_y"))
+                if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
                     writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.resolution_y);
-                if (message.avg_bandwidth != null && Object.hasOwnProperty.call(message, "avg_bandwidth"))
+                if (message.avg_bandwidth != null && message.hasOwnProperty("avg_bandwidth"))
                     writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.avg_bandwidth);
-                if (message.total_bytes != null && Object.hasOwnProperty.call(message, "total_bytes"))
+                if (message.total_bytes != null && message.hasOwnProperty("total_bytes"))
                     writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.total_bytes);
-                if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
+                if (message.app_id != null && message.hasOwnProperty("app_id"))
                     writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.app_id);
-                if (message.total_unique_viewers != null && Object.hasOwnProperty.call(message, "total_unique_viewers"))
+                if (message.total_unique_viewers != null && message.hasOwnProperty("total_unique_viewers"))
                     writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.total_unique_viewers);
-                if (message.total_seconds_watched != null && Object.hasOwnProperty.call(message, "total_seconds_watched"))
+                if (message.total_seconds_watched != null && message.hasOwnProperty("total_seconds_watched"))
                     writer.uint32(/* id 11, wireType 0 =*/88).uint64(message.total_seconds_watched);
-                if (message.time_started != null && Object.hasOwnProperty.call(message, "time_started"))
+                if (message.time_started != null && message.hasOwnProperty("time_started"))
                     writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.time_started);
-                if (message.upload_id != null && Object.hasOwnProperty.call(message, "upload_id"))
+                if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                     writer.uint32(/* id 13, wireType 0 =*/104).uint64(message.upload_id);
-                if (message.local_address != null && Object.hasOwnProperty.call(message, "local_address"))
+                if (message.local_address != null && message.hasOwnProperty("local_address"))
                     writer.uint32(/* id 14, wireType 2 =*/114).string(message.local_address);
-                if (message.remote_address != null && Object.hasOwnProperty.call(message, "remote_address"))
+                if (message.remote_address != null && message.hasOwnProperty("remote_address"))
                     writer.uint32(/* id 15, wireType 2 =*/122).string(message.remote_address);
-                if (message.frames_per_second != null && Object.hasOwnProperty.call(message, "frames_per_second"))
+                if (message.frames_per_second != null && message.hasOwnProperty("frames_per_second"))
                     writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.frames_per_second);
-                if (message.num_representations != null && Object.hasOwnProperty.call(message, "num_representations"))
+                if (message.num_representations != null && message.hasOwnProperty("num_representations"))
                     writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.num_representations);
-                if (message.app_name != null && Object.hasOwnProperty.call(message, "app_name"))
+                if (message.app_name != null && message.hasOwnProperty("app_name"))
                     writer.uint32(/* id 18, wireType 2 =*/146).string(message.app_name);
-                if (message.is_replay != null && Object.hasOwnProperty.call(message, "is_replay"))
+                if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                     writer.uint32(/* id 19, wireType 0 =*/152).bool(message.is_replay);
-                if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+                if (message.session_id != null && message.hasOwnProperty("session_id"))
                     writer.uint32(/* id 20, wireType 0 =*/160).uint64(message.session_id);
                 return writer;
             };
@@ -16874,9 +16896,9 @@
         CBroadcast_GetBroadcastViewerStats_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.upload_id != null && Object.hasOwnProperty.call(message, "upload_id"))
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.upload_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
             return writer;
         };
@@ -17361,9 +17383,9 @@
             ViewerStats.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                if (message.time != null && message.hasOwnProperty("time"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.time);
-                if (message.num_viewers != null && Object.hasOwnProperty.call(message, "num_viewers"))
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num_viewers);
                 return writer;
             };
@@ -17571,9 +17593,9 @@
             CountryStats.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.country_code != null && Object.hasOwnProperty.call(message, "country_code"))
+                if (message.country_code != null && message.hasOwnProperty("country_code"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.country_code);
-                if (message.num_viewers != null && Object.hasOwnProperty.call(message, "num_viewers"))
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                     writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num_viewers);
                 return writer;
             };
@@ -17784,9 +17806,9 @@
         CBroadcast_BroadcastViewerState_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+            if (message.state != null && message.hasOwnProperty("state"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
             return writer;
         };
@@ -17961,7 +17983,7 @@
         /**
          * EViewerState enum.
          * @name CBroadcast_BroadcastViewerState_Notification.EViewerState
-         * @enum {number}
+         * @enum {string}
          * @property {number} k_EViewerNeedsApproval=1 k_EViewerNeedsApproval value
          * @property {number} k_EViewerWatching=2 k_EViewerWatching value
          * @property {number} k_EViewerLeft=3 k_EViewerLeft value
@@ -18033,7 +18055,7 @@
         CBroadcast_WaitingBroadcastViewer_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
             return writer;
         };
@@ -18288,19 +18310,19 @@
         CBroadcast_BroadcastUploadStarted_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
-            if (message.upload_token != null && Object.hasOwnProperty.call(message, "upload_token"))
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.upload_token);
-            if (message.upload_address != null && Object.hasOwnProperty.call(message, "upload_address"))
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.upload_address);
-            if (message.http_address != null && Object.hasOwnProperty.call(message, "http_address"))
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.http_address);
-            if (message.broadcast_upload_id != null && Object.hasOwnProperty.call(message, "broadcast_upload_id"))
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.broadcast_upload_id);
-            if (message.heartbeat_interval_seconds != null && Object.hasOwnProperty.call(message, "heartbeat_interval_seconds"))
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.heartbeat_interval_seconds);
-            if (message.is_rtmp != null && Object.hasOwnProperty.call(message, "is_rtmp"))
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_rtmp);
             return writer;
         };
@@ -18609,13 +18631,13 @@
         CBroadcast_StopBroadcastUpload_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
-            if (message.broadcast_relay_id != null && Object.hasOwnProperty.call(message, "broadcast_relay_id"))
+            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_relay_id);
-            if (message.upload_result != null && Object.hasOwnProperty.call(message, "upload_result"))
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.upload_result);
-            if (message.too_many_poor_uploads != null && Object.hasOwnProperty.call(message, "too_many_poor_uploads"))
+            if (message.too_many_poor_uploads != null && message.hasOwnProperty("too_many_poor_uploads"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.too_many_poor_uploads);
             return writer;
         };
@@ -18864,7 +18886,7 @@
         CBroadcast_SessionClosed_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
             return writer;
         };
@@ -19065,7 +19087,7 @@
         CBroadcast_ViewerBroadcastInvite_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcaster_steamid != null && Object.hasOwnProperty.call(message, "broadcaster_steamid"))
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
             return writer;
         };
@@ -19275,9 +19297,9 @@
         CBroadcast_BroadcastStatus_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_id != null && Object.hasOwnProperty.call(message, "broadcast_id"))
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
-            if (message.num_viewers != null && Object.hasOwnProperty.call(message, "num_viewers"))
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.num_viewers);
             return writer;
         };
@@ -19508,11 +19530,11 @@
         CBroadcast_BroadcastChannelLive_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_channel_id != null && Object.hasOwnProperty.call(message, "broadcast_channel_id"))
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
-            if (message.broadcast_channel_name != null && Object.hasOwnProperty.call(message, "broadcast_channel_name"))
+            if (message.broadcast_channel_name != null && message.hasOwnProperty("broadcast_channel_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.broadcast_channel_name);
-            if (message.broadcast_channel_avatar != null && Object.hasOwnProperty.call(message, "broadcast_channel_avatar"))
+            if (message.broadcast_channel_avatar != null && message.hasOwnProperty("broadcast_channel_avatar"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.broadcast_channel_avatar);
             return writer;
         };
@@ -19772,15 +19794,15 @@
         CBroadcast_SendThumbnailToRelay_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.thumbnail_upload_token != null && Object.hasOwnProperty.call(message, "thumbnail_upload_token"))
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.thumbnail_upload_token);
-            if (message.thumbnail_broadcast_session_id != null && Object.hasOwnProperty.call(message, "thumbnail_broadcast_session_id"))
+            if (message.thumbnail_broadcast_session_id != null && message.hasOwnProperty("thumbnail_broadcast_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.thumbnail_broadcast_session_id);
-            if (message.thumbnail_data != null && Object.hasOwnProperty.call(message, "thumbnail_data"))
+            if (message.thumbnail_data != null && message.hasOwnProperty("thumbnail_data"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.thumbnail_data);
-            if (message.thumbnail_width != null && Object.hasOwnProperty.call(message, "thumbnail_width"))
+            if (message.thumbnail_width != null && message.hasOwnProperty("thumbnail_width"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.thumbnail_width);
-            if (message.thumbnail_height != null && Object.hasOwnProperty.call(message, "thumbnail_height"))
+            if (message.thumbnail_height != null && message.hasOwnProperty("thumbnail_height"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.thumbnail_height);
             return writer;
         };
@@ -20035,7 +20057,7 @@
         CBroadcast_WebRTCNeedTURNServer_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_session_id != null && Object.hasOwnProperty.call(message, "broadcast_session_id"))
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
             return writer;
         };
@@ -20263,13 +20285,13 @@
         CBroadcast_WebRTCStart_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_session_id != null && Object.hasOwnProperty.call(message, "broadcast_session_id"))
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
-            if (message.viewer_steamid != null && Object.hasOwnProperty.call(message, "viewer_steamid"))
+            if (message.viewer_steamid != null && message.hasOwnProperty("viewer_steamid"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_steamid);
-            if (message.viewer_token != null && Object.hasOwnProperty.call(message, "viewer_token"))
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.viewer_token);
             return writer;
         };
@@ -20564,11 +20586,11 @@
         CBroadcast_WebRTCSetAnswer_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_session_id != null && Object.hasOwnProperty.call(message, "broadcast_session_id"))
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
-            if (message.answer != null && Object.hasOwnProperty.call(message, "answer"))
+            if (message.answer != null && message.hasOwnProperty("answer"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.answer);
             return writer;
         };
@@ -20824,11 +20846,11 @@
         CBroadcast_WebRTCAddViewerCandidate_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_session_id != null && Object.hasOwnProperty.call(message, "broadcast_session_id"))
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
-            if (message.webrtc_session_id != null && Object.hasOwnProperty.call(message, "webrtc_session_id"))
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
-            if (message.candidate != null && Object.hasOwnProperty.call(message, "candidate"))
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
                 $root.CBroadcast_WebRTC_Candidate.encode(message.candidate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
@@ -22639,7 +22661,7 @@
     /**
      * EProtoExecutionSite enum.
      * @exports EProtoExecutionSite
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EProtoExecutionSiteUnknown=0 k_EProtoExecutionSiteUnknown value
      * @property {number} k_EProtoExecutionSiteSteamClient=2 k_EProtoExecutionSiteSteamClient value
      */
@@ -23053,6 +23075,7 @@
                  * @property {Array.<google.protobuf.IFieldDescriptorProto>|null} [extension] FileDescriptorProto extension
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [source_code_info] FileDescriptorProto source_code_info
+                 * @property {string|null} [syntax] FileDescriptorProto syntax
                  */
     
                 /**
@@ -23166,6 +23189,14 @@
                 FileDescriptorProto.prototype.source_code_info = null;
     
                 /**
+                 * FileDescriptorProto syntax.
+                 * @member {string} syntax
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.syntax = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -23189,9 +23220,9 @@
                 FileDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
+                    if (message["package"] != null && message.hasOwnProperty("package"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message["package"]);
                     if (message.dependency != null && message.dependency.length)
                         for (var i = 0; i < message.dependency.length; ++i)
@@ -23208,9 +23239,9 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.source_code_info != null && Object.hasOwnProperty.call(message, "source_code_info"))
+                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info"))
                         $root.google.protobuf.SourceCodeInfo.encode(message.source_code_info, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     if (message.public_dependency != null && message.public_dependency.length)
                         for (var i = 0; i < message.public_dependency.length; ++i)
@@ -23218,6 +23249,8 @@
                     if (message.weak_dependency != null && message.weak_dependency.length)
                         for (var i = 0; i < message.weak_dependency.length; ++i)
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weak_dependency[i]);
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     return writer;
                 };
     
@@ -23308,6 +23341,9 @@
                             break;
                         case 9:
                             message.source_code_info = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                            break;
+                        case 12:
+                            message.syntax = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -23417,6 +23453,9 @@
                         if (error)
                             return "source_code_info." + error;
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        if (!$util.isString(message.syntax))
+                            return "syntax: string expected";
                     return null;
                 };
     
@@ -23507,6 +23546,8 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.source_code_info: object expected");
                         message.source_code_info = $root.google.protobuf.SourceCodeInfo.fromObject(object.source_code_info);
                     }
+                    if (object.syntax != null)
+                        message.syntax = String(object.syntax);
                     return message;
                 };
     
@@ -23537,6 +23578,7 @@
                         object["package"] = "";
                         object.options = null;
                         object.source_code_info = null;
+                        object.syntax = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -23581,6 +23623,8 @@
                         for (var j = 0; j < message.weak_dependency.length; ++j)
                             object.weak_dependency[j] = message.weak_dependency[j];
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        object.syntax = message.syntax;
                     return object;
                 };
     
@@ -23612,6 +23656,8 @@
                  * @property {Array.<google.protobuf.DescriptorProto.IExtensionRange>|null} [extension_range] DescriptorProto extension_range
                  * @property {Array.<google.protobuf.IOneofDescriptorProto>|null} [oneof_decl] DescriptorProto oneof_decl
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
+                 * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reserved_range] DescriptorProto reserved_range
+                 * @property {Array.<string>|null} [reserved_name] DescriptorProto reserved_name
                  */
     
                 /**
@@ -23629,6 +23675,8 @@
                     this.enum_type = [];
                     this.extension_range = [];
                     this.oneof_decl = [];
+                    this.reserved_range = [];
+                    this.reserved_name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -23700,6 +23748,22 @@
                 DescriptorProto.prototype.options = null;
     
                 /**
+                 * DescriptorProto reserved_range.
+                 * @member {Array.<google.protobuf.DescriptorProto.IReservedRange>} reserved_range
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_range = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto reserved_name.
+                 * @member {Array.<string>} reserved_name
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_name = $util.emptyArray;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -23723,7 +23787,7 @@
                 DescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.field != null && message.field.length)
                         for (var i = 0; i < message.field.length; ++i)
@@ -23740,11 +23804,17 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.oneof_decl != null && message.oneof_decl.length)
                         for (var i = 0; i < message.oneof_decl.length; ++i)
                             $root.google.protobuf.OneofDescriptorProto.encode(message.oneof_decl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.reserved_range != null && message.reserved_range.length)
+                        for (var i = 0; i < message.reserved_range.length; ++i)
+                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reserved_range[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.reserved_name != null && message.reserved_name.length)
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.reserved_name[i]);
                     return writer;
                 };
     
@@ -23814,6 +23884,16 @@
                             break;
                         case 7:
                             message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                            break;
+                        case 9:
+                            if (!(message.reserved_range && message.reserved_range.length))
+                                message.reserved_range = [];
+                            message.reserved_range.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                            break;
+                        case 10:
+                            if (!(message.reserved_name && message.reserved_name.length))
+                                message.reserved_name = [];
+                            message.reserved_name.push(reader.string());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -23912,6 +23992,22 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.reserved_range != null && message.hasOwnProperty("reserved_range")) {
+                        if (!Array.isArray(message.reserved_range))
+                            return "reserved_range: array expected";
+                        for (var i = 0; i < message.reserved_range.length; ++i) {
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reserved_range[i]);
+                            if (error)
+                                return "reserved_range." + error;
+                        }
+                    }
+                    if (message.reserved_name != null && message.hasOwnProperty("reserved_name")) {
+                        if (!Array.isArray(message.reserved_name))
+                            return "reserved_name: array expected";
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            if (!$util.isString(message.reserved_name[i]))
+                                return "reserved_name: string[] expected";
+                    }
                     return null;
                 };
     
@@ -23994,6 +24090,23 @@
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
                     }
+                    if (object.reserved_range) {
+                        if (!Array.isArray(object.reserved_range))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_range: array expected");
+                        message.reserved_range = [];
+                        for (var i = 0; i < object.reserved_range.length; ++i) {
+                            if (typeof object.reserved_range[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.reserved_range: object expected");
+                            message.reserved_range[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reserved_range[i]);
+                        }
+                    }
+                    if (object.reserved_name) {
+                        if (!Array.isArray(object.reserved_name))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_name: array expected");
+                        message.reserved_name = [];
+                        for (var i = 0; i < object.reserved_name.length; ++i)
+                            message.reserved_name[i] = String(object.reserved_name[i]);
+                    }
                     return message;
                 };
     
@@ -24017,6 +24130,8 @@
                         object.extension_range = [];
                         object.extension = [];
                         object.oneof_decl = [];
+                        object.reserved_range = [];
+                        object.reserved_name = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -24055,6 +24170,16 @@
                         object.oneof_decl = [];
                         for (var j = 0; j < message.oneof_decl.length; ++j)
                             object.oneof_decl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneof_decl[j], options);
+                    }
+                    if (message.reserved_range && message.reserved_range.length) {
+                        object.reserved_range = [];
+                        for (var j = 0; j < message.reserved_range.length; ++j)
+                            object.reserved_range[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reserved_range[j], options);
+                    }
+                    if (message.reserved_name && message.reserved_name.length) {
+                        object.reserved_name = [];
+                        for (var j = 0; j < message.reserved_name.length; ++j)
+                            object.reserved_name[j] = message.reserved_name[j];
                     }
                     return object;
                 };
@@ -24135,9 +24260,9 @@
                     ExtensionRange.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
+                        if (message.start != null && message.hasOwnProperty("start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
-                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
+                        if (message.end != null && message.hasOwnProperty("end"))
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
                         return writer;
                     };
@@ -24280,6 +24405,216 @@
                     return ExtensionRange;
                 })();
     
+                DescriptorProto.ReservedRange = (function() {
+    
+                    /**
+                     * Properties of a ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @interface IReservedRange
+                     * @property {number|null} [start] ReservedRange start
+                     * @property {number|null} [end] ReservedRange end
+                     */
+    
+                    /**
+                     * Constructs a new ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @classdesc Represents a ReservedRange.
+                     * @implements IReservedRange
+                     * @constructor
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     */
+                    function ReservedRange(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReservedRange start.
+                     * @member {number} start
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.start = 0;
+    
+                    /**
+                     * ReservedRange end.
+                     * @member {number} end
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.end = 0;
+    
+                    /**
+                     * Creates a new ReservedRange instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange instance
+                     */
+                    ReservedRange.create = function create(properties) {
+                        return new ReservedRange(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.start = reader.int32();
+                                break;
+                            case 2:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReservedRange message.
+                     * @function verify
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReservedRange.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            if (!$util.isInteger(message.start))
+                                return "start: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReservedRange message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     */
+                    ReservedRange.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
+                            return object;
+                        var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        if (object.start != null)
+                            message.start = object.start | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.ReservedRange} message ReservedRange
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReservedRange.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.start = 0;
+                            object.end = 0;
+                        }
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            object.start = message.start;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReservedRange to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReservedRange.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ReservedRange;
+                })();
+    
                 return DescriptorProto;
             })();
     
@@ -24297,6 +24632,7 @@
                  * @property {string|null} [extendee] FieldDescriptorProto extendee
                  * @property {string|null} [default_value] FieldDescriptorProto default_value
                  * @property {number|null} [oneof_index] FieldDescriptorProto oneof_index
+                 * @property {string|null} [json_name] FieldDescriptorProto json_name
                  * @property {google.protobuf.IFieldOptions|null} [options] FieldDescriptorProto options
                  */
     
@@ -24380,6 +24716,14 @@
                 FieldDescriptorProto.prototype.oneof_index = 0;
     
                 /**
+                 * FieldDescriptorProto json_name.
+                 * @member {string} json_name
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.json_name = "";
+    
+                /**
                  * FieldDescriptorProto options.
                  * @member {google.protobuf.IFieldOptions|null|undefined} options
                  * @memberof google.protobuf.FieldDescriptorProto
@@ -24411,24 +24755,26 @@
                 FieldDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
+                    if (message.extendee != null && message.hasOwnProperty("extendee"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.extendee);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.number);
-                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                    if (message.label != null && message.hasOwnProperty("label"))
                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.label);
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    if (message.type != null && message.hasOwnProperty("type"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
-                    if (message.type_name != null && Object.hasOwnProperty.call(message, "type_name"))
+                    if (message.type_name != null && message.hasOwnProperty("type_name"))
                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.type_name);
-                    if (message.default_value != null && Object.hasOwnProperty.call(message, "default_value"))
+                    if (message.default_value != null && message.hasOwnProperty("default_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.default_value);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.oneof_index != null && Object.hasOwnProperty.call(message, "oneof_index"))
+                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneof_index);
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        writer.uint32(/* id 10, wireType 2 =*/82).string(message.json_name);
                     return writer;
                 };
     
@@ -24486,6 +24832,9 @@
                             break;
                         case 9:
                             message.oneof_index = reader.int32();
+                            break;
+                        case 10:
+                            message.json_name = reader.string();
                             break;
                         case 8:
                             message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
@@ -24576,6 +24925,9 @@
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         if (!$util.isInteger(message.oneof_index))
                             return "oneof_index: integer expected";
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        if (!$util.isString(message.json_name))
+                            return "json_name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
                         var error = $root.google.protobuf.FieldOptions.verify(message.options);
                         if (error)
@@ -24696,6 +25048,8 @@
                         message.default_value = String(object.default_value);
                     if (object.oneof_index != null)
                         message.oneof_index = object.oneof_index | 0;
+                    if (object.json_name != null)
+                        message.json_name = String(object.json_name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
@@ -24727,6 +25081,7 @@
                         object.default_value = "";
                         object.options = null;
                         object.oneof_index = 0;
+                        object.json_name = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -24746,6 +25101,8 @@
                         object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options);
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         object.oneof_index = message.oneof_index;
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        object.json_name = message.json_name;
                     return object;
                 };
     
@@ -24763,7 +25120,7 @@
                 /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} TYPE_DOUBLE=1 TYPE_DOUBLE value
                  * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
                  * @property {number} TYPE_INT64=3 TYPE_INT64 value
@@ -24809,7 +25166,7 @@
                 /**
                  * Label enum.
                  * @name google.protobuf.FieldDescriptorProto.Label
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
                  * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
@@ -24832,6 +25189,7 @@
                  * @memberof google.protobuf
                  * @interface IOneofDescriptorProto
                  * @property {string|null} [name] OneofDescriptorProto name
+                 * @property {google.protobuf.IOneofOptions|null} [options] OneofDescriptorProto options
                  */
     
                 /**
@@ -24858,6 +25216,14 @@
                 OneofDescriptorProto.prototype.name = "";
     
                 /**
+                 * OneofDescriptorProto options.
+                 * @member {google.protobuf.IOneofOptions|null|undefined} options
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @instance
+                 */
+                OneofDescriptorProto.prototype.options = null;
+    
+                /**
                  * Creates a new OneofDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.OneofDescriptorProto
@@ -24881,8 +25247,10 @@
                 OneofDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -24919,6 +25287,9 @@
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
+                            break;
+                        case 2:
+                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -24958,6 +25329,11 @@
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
                     return null;
                 };
     
@@ -24975,6 +25351,11 @@
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                    }
                     return message;
                 };
     
@@ -24991,10 +25372,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.name = "";
+                        object.options = null;
+                    }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options);
                     return object;
                 };
     
@@ -25087,12 +25472,12 @@
                 EnumDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.value != null && message.value.length)
                         for (var i = 0; i < message.value.length; ++i)
                             $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -25345,11 +25730,11 @@
                 EnumValueDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -25583,12 +25968,12 @@
                 ServiceDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.method != null && message.method.length)
                         for (var i = 0; i < message.method.length; ++i)
                             $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -25777,6 +26162,8 @@
                  * @property {string|null} [input_type] MethodDescriptorProto input_type
                  * @property {string|null} [output_type] MethodDescriptorProto output_type
                  * @property {google.protobuf.IMethodOptions|null} [options] MethodDescriptorProto options
+                 * @property {boolean|null} [client_streaming] MethodDescriptorProto client_streaming
+                 * @property {boolean|null} [server_streaming] MethodDescriptorProto server_streaming
                  */
     
                 /**
@@ -25827,6 +26214,22 @@
                 MethodDescriptorProto.prototype.options = null;
     
                 /**
+                 * MethodDescriptorProto client_streaming.
+                 * @member {boolean} client_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.client_streaming = false;
+    
+                /**
+                 * MethodDescriptorProto server_streaming.
+                 * @member {boolean} server_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.server_streaming = false;
+    
+                /**
                  * Creates a new MethodDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodDescriptorProto
@@ -25850,14 +26253,18 @@
                 MethodDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.input_type != null && Object.hasOwnProperty.call(message, "input_type"))
+                    if (message.input_type != null && message.hasOwnProperty("input_type"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.input_type);
-                    if (message.output_type != null && Object.hasOwnProperty.call(message, "output_type"))
+                    if (message.output_type != null && message.hasOwnProperty("output_type"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.output_type);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.client_streaming);
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.server_streaming);
                     return writer;
                 };
     
@@ -25903,6 +26310,12 @@
                             break;
                         case 4:
                             message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.client_streaming = reader.bool();
+                            break;
+                        case 6:
+                            message.server_streaming = reader.bool();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -25953,6 +26366,12 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        if (typeof message.client_streaming !== "boolean")
+                            return "client_streaming: boolean expected";
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        if (typeof message.server_streaming !== "boolean")
+                            return "server_streaming: boolean expected";
                     return null;
                 };
     
@@ -25979,6 +26398,10 @@
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
                     }
+                    if (object.client_streaming != null)
+                        message.client_streaming = Boolean(object.client_streaming);
+                    if (object.server_streaming != null)
+                        message.server_streaming = Boolean(object.server_streaming);
                     return message;
                 };
     
@@ -26000,6 +26423,8 @@
                         object.input_type = "";
                         object.output_type = "";
                         object.options = null;
+                        object.client_streaming = false;
+                        object.server_streaming = false;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -26009,6 +26434,10 @@
                         object.output_type = message.output_type;
                     if (message.options != null && message.hasOwnProperty("options"))
                         object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options);
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        object.client_streaming = message.client_streaming;
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        object.server_streaming = message.server_streaming;
                     return object;
                 };
     
@@ -26043,6 +26472,9 @@
                  * @property {boolean|null} [java_generic_services] FileOptions java_generic_services
                  * @property {boolean|null} [py_generic_services] FileOptions py_generic_services
                  * @property {boolean|null} [deprecated] FileOptions deprecated
+                 * @property {boolean|null} [cc_enable_arenas] FileOptions cc_enable_arenas
+                 * @property {string|null} [objc_class_prefix] FileOptions objc_class_prefix
+                 * @property {string|null} [csharp_namespace] FileOptions csharp_namespace
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FileOptions uninterpreted_option
                  */
     
@@ -26151,6 +26583,30 @@
                 FileOptions.prototype.deprecated = false;
     
                 /**
+                 * FileOptions cc_enable_arenas.
+                 * @member {boolean} cc_enable_arenas
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.cc_enable_arenas = false;
+    
+                /**
+                 * FileOptions objc_class_prefix.
+                 * @member {string} objc_class_prefix
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.objc_class_prefix = "";
+    
+                /**
+                 * FileOptions csharp_namespace.
+                 * @member {string} csharp_namespace
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.csharp_namespace = "";
+    
+                /**
                  * FileOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.FileOptions
@@ -26182,28 +26638,34 @@
                 FileOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.java_package != null && Object.hasOwnProperty.call(message, "java_package"))
+                    if (message.java_package != null && message.hasOwnProperty("java_package"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.java_package);
-                    if (message.java_outer_classname != null && Object.hasOwnProperty.call(message, "java_outer_classname"))
+                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.java_outer_classname);
-                    if (message.optimize_for != null && Object.hasOwnProperty.call(message, "optimize_for"))
+                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.optimize_for);
-                    if (message.java_multiple_files != null && Object.hasOwnProperty.call(message, "java_multiple_files"))
+                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.java_multiple_files);
-                    if (message.go_package != null && Object.hasOwnProperty.call(message, "go_package"))
+                    if (message.go_package != null && message.hasOwnProperty("go_package"))
                         writer.uint32(/* id 11, wireType 2 =*/90).string(message.go_package);
-                    if (message.cc_generic_services != null && Object.hasOwnProperty.call(message, "cc_generic_services"))
+                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.cc_generic_services);
-                    if (message.java_generic_services != null && Object.hasOwnProperty.call(message, "java_generic_services"))
+                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
                         writer.uint32(/* id 17, wireType 0 =*/136).bool(message.java_generic_services);
-                    if (message.py_generic_services != null && Object.hasOwnProperty.call(message, "py_generic_services"))
+                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
                         writer.uint32(/* id 18, wireType 0 =*/144).bool(message.py_generic_services);
-                    if (message.java_generate_equals_and_hash != null && Object.hasOwnProperty.call(message, "java_generate_equals_and_hash"))
+                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
                         writer.uint32(/* id 20, wireType 0 =*/160).bool(message.java_generate_equals_and_hash);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 23, wireType 0 =*/184).bool(message.deprecated);
-                    if (message.java_string_check_utf8 != null && Object.hasOwnProperty.call(message, "java_string_check_utf8"))
+                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         writer.uint32(/* id 27, wireType 0 =*/216).bool(message.java_string_check_utf8);
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        writer.uint32(/* id 31, wireType 0 =*/248).bool(message.cc_enable_arenas);
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        writer.uint32(/* id 36, wireType 2 =*/290).string(message.objc_class_prefix);
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        writer.uint32(/* id 37, wireType 2 =*/298).string(message.csharp_namespace);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -26273,6 +26735,15 @@
                             break;
                         case 23:
                             message.deprecated = reader.bool();
+                            break;
+                        case 31:
+                            message.cc_enable_arenas = reader.bool();
+                            break;
+                        case 36:
+                            message.objc_class_prefix = reader.string();
+                            break;
+                        case 37:
+                            message.csharp_namespace = reader.string();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -26353,6 +26824,15 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        if (typeof message.cc_enable_arenas !== "boolean")
+                            return "cc_enable_arenas: boolean expected";
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        if (!$util.isString(message.objc_class_prefix))
+                            return "objc_class_prefix: string expected";
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        if (!$util.isString(message.csharp_namespace))
+                            return "csharp_namespace: string expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -26411,6 +26891,12 @@
                         message.py_generic_services = Boolean(object.py_generic_services);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.cc_enable_arenas != null)
+                        message.cc_enable_arenas = Boolean(object.cc_enable_arenas);
+                    if (object.objc_class_prefix != null)
+                        message.objc_class_prefix = String(object.objc_class_prefix);
+                    if (object.csharp_namespace != null)
+                        message.csharp_namespace = String(object.csharp_namespace);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.FileOptions.uninterpreted_option: array expected");
@@ -26451,6 +26937,9 @@
                         object.java_generate_equals_and_hash = false;
                         object.deprecated = false;
                         object.java_string_check_utf8 = false;
+                        object.cc_enable_arenas = false;
+                        object.objc_class_prefix = "";
+                        object.csharp_namespace = "";
                     }
                     if (message.java_package != null && message.hasOwnProperty("java_package"))
                         object.java_package = message.java_package;
@@ -26474,6 +26963,12 @@
                         object.deprecated = message.deprecated;
                     if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         object.java_string_check_utf8 = message.java_string_check_utf8;
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        object.cc_enable_arenas = message.cc_enable_arenas;
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        object.objc_class_prefix = message.objc_class_prefix;
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        object.csharp_namespace = message.csharp_namespace;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -26496,7 +26991,7 @@
                 /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} SPEED=1 SPEED value
                  * @property {number} CODE_SIZE=2 CODE_SIZE value
                  * @property {number} LITE_RUNTIME=3 LITE_RUNTIME value
@@ -26521,6 +27016,7 @@
                  * @property {boolean|null} [message_set_wire_format] MessageOptions message_set_wire_format
                  * @property {boolean|null} [no_standard_descriptor_accessor] MessageOptions no_standard_descriptor_accessor
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
+                 * @property {boolean|null} [map_entry] MessageOptions map_entry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] MessageOptions uninterpreted_option
                  */
     
@@ -26565,6 +27061,14 @@
                 MessageOptions.prototype.deprecated = false;
     
                 /**
+                 * MessageOptions map_entry.
+                 * @member {boolean} map_entry
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.map_entry = false;
+    
+                /**
                  * MessageOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.MessageOptions
@@ -26596,12 +27100,14 @@
                 MessageOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.message_set_wire_format != null && Object.hasOwnProperty.call(message, "message_set_wire_format"))
+                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.message_set_wire_format);
-                    if (message.no_standard_descriptor_accessor != null && Object.hasOwnProperty.call(message, "no_standard_descriptor_accessor"))
+                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.no_standard_descriptor_accessor);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).bool(message.map_entry);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -26647,6 +27153,9 @@
                             break;
                         case 3:
                             message.deprecated = reader.bool();
+                            break;
+                        case 7:
+                            message.map_entry = reader.bool();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -26697,6 +27206,9 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        if (typeof message.map_entry !== "boolean")
+                            return "map_entry: boolean expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -26727,6 +27239,8 @@
                         message.no_standard_descriptor_accessor = Boolean(object.no_standard_descriptor_accessor);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.map_entry != null)
+                        message.map_entry = Boolean(object.map_entry);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpreted_option: array expected");
@@ -26759,6 +27273,7 @@
                         object.message_set_wire_format = false;
                         object.no_standard_descriptor_accessor = false;
                         object.deprecated = false;
+                        object.map_entry = false;
                     }
                     if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         object.message_set_wire_format = message.message_set_wire_format;
@@ -26766,6 +27281,8 @@
                         object.no_standard_descriptor_accessor = message.no_standard_descriptor_accessor;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        object.map_entry = message.map_entry;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -26796,9 +27313,9 @@
                  * @interface IFieldOptions
                  * @property {google.protobuf.FieldOptions.CType|null} [ctype] FieldOptions ctype
                  * @property {boolean|null} [packed] FieldOptions packed
+                 * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
-                 * @property {string|null} [experimental_map_key] FieldOptions experimental_map_key
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FieldOptions uninterpreted_option
                  * @property {string|null} [".description"] FieldOptions .description
@@ -26837,6 +27354,14 @@
                 FieldOptions.prototype.packed = false;
     
                 /**
+                 * FieldOptions jstype.
+                 * @member {google.protobuf.FieldOptions.JSType} jstype
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.jstype = 0;
+    
+                /**
                  * FieldOptions lazy.
                  * @member {boolean} lazy
                  * @memberof google.protobuf.FieldOptions
@@ -26851,14 +27376,6 @@
                  * @instance
                  */
                 FieldOptions.prototype.deprecated = false;
-    
-                /**
-                 * FieldOptions experimental_map_key.
-                 * @member {string} experimental_map_key
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.experimental_map_key = "";
     
                 /**
                  * FieldOptions weak.
@@ -26908,22 +27425,22 @@
                 FieldOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
+                    if (message.ctype != null && message.hasOwnProperty("ctype"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
-                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
+                    if (message.packed != null && message.hasOwnProperty("packed"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.packed);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
-                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
+                    if (message.lazy != null && message.hasOwnProperty("lazy"))
                         writer.uint32(/* id 5, wireType 0 =*/40).bool(message.lazy);
-                    if (message.experimental_map_key != null && Object.hasOwnProperty.call(message, "experimental_map_key"))
-                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.experimental_map_key);
-                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
+                    if (message.weak != null && message.hasOwnProperty("weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".description"] != null && Object.hasOwnProperty.call(message, ".description"))
+                    if (message[".description"] != null && message.hasOwnProperty(".description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".description"]);
                     return writer;
                 };
@@ -26965,14 +27482,14 @@
                         case 2:
                             message.packed = reader.bool();
                             break;
+                        case 6:
+                            message.jstype = reader.int32();
+                            break;
                         case 5:
                             message.lazy = reader.bool();
                             break;
                         case 3:
                             message.deprecated = reader.bool();
-                            break;
-                        case 9:
-                            message.experimental_map_key = reader.string();
                             break;
                         case 10:
                             message.weak = reader.bool();
@@ -27032,15 +27549,21 @@
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         if (typeof message.packed !== "boolean")
                             return "packed: boolean expected";
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        switch (message.jstype) {
+                        default:
+                            return "jstype: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        if (!$util.isString(message.experimental_map_key))
-                            return "experimental_map_key: string expected";
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         if (typeof message.weak !== "boolean")
                             return "weak: boolean expected";
@@ -27087,12 +27610,24 @@
                     }
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
+                    switch (object.jstype) {
+                    case "JS_NORMAL":
+                    case 0:
+                        message.jstype = 0;
+                        break;
+                    case "JS_STRING":
+                    case 1:
+                        message.jstype = 1;
+                        break;
+                    case "JS_NUMBER":
+                    case 2:
+                        message.jstype = 2;
+                        break;
+                    }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
-                    if (object.experimental_map_key != null)
-                        message.experimental_map_key = String(object.experimental_map_key);
                     if (object.weak != null)
                         message.weak = Boolean(object.weak);
                     if (object.uninterpreted_option) {
@@ -27130,7 +27665,7 @@
                         object.packed = false;
                         object.deprecated = false;
                         object.lazy = false;
-                        object.experimental_map_key = "";
+                        object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
                         object[".description"] = "";
                     }
@@ -27142,8 +27677,8 @@
                         object.deprecated = message.deprecated;
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        object.experimental_map_key = message.experimental_map_key;
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
@@ -27170,7 +27705,7 @@
                 /**
                  * CType enum.
                  * @name google.protobuf.FieldOptions.CType
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} STRING=0 STRING value
                  * @property {number} CORD=1 CORD value
                  * @property {number} STRING_PIECE=2 STRING_PIECE value
@@ -27183,7 +27718,231 @@
                     return values;
                 })();
     
+                /**
+                 * JSType enum.
+                 * @name google.protobuf.FieldOptions.JSType
+                 * @enum {string}
+                 * @property {number} JS_NORMAL=0 JS_NORMAL value
+                 * @property {number} JS_STRING=1 JS_STRING value
+                 * @property {number} JS_NUMBER=2 JS_NUMBER value
+                 */
+                FieldOptions.JSType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JS_NORMAL"] = 0;
+                    values[valuesById[1] = "JS_STRING"] = 1;
+                    values[valuesById[2] = "JS_NUMBER"] = 2;
+                    return values;
+                })();
+    
                 return FieldOptions;
+            })();
+    
+            protobuf.OneofOptions = (function() {
+    
+                /**
+                 * Properties of an OneofOptions.
+                 * @memberof google.protobuf
+                 * @interface IOneofOptions
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] OneofOptions uninterpreted_option
+                 */
+    
+                /**
+                 * Constructs a new OneofOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an OneofOptions.
+                 * @implements IOneofOptions
+                 * @constructor
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 */
+                function OneofOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OneofOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * Creates a new OneofOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.OneofOptions} OneofOptions instance
+                 */
+                OneofOptions.create = function create(properties) {
+                    return new OneofOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message, length delimited. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OneofOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OneofOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an OneofOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 */
+                OneofOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.OneofOptions)
+                        return object;
+                    var message = new $root.google.protobuf.OneofOptions();
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.OneofOptions} message OneofOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OneofOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this OneofOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OneofOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return OneofOptions;
             })();
     
             protobuf.EnumOptions = (function() {
@@ -27270,14 +28029,14 @@
                 EnumOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.allow_alias != null && Object.hasOwnProperty.call(message, "allow_alias"))
+                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allow_alias);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_description"] != null && Object.hasOwnProperty.call(message, ".enum_description"))
+                    if (message[".enum_description"] != null && message.hasOwnProperty(".enum_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_description"]);
                     return writer;
                 };
@@ -27537,12 +28296,12 @@
                 EnumValueOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_value_description"] != null && Object.hasOwnProperty.call(message, ".enum_value_description"))
+                    if (message[".enum_value_description"] != null && message.hasOwnProperty(".enum_value_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_value_description"]);
                     return writer;
                 };
@@ -27800,14 +28559,14 @@
                 ServiceOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".service_description"] != null && Object.hasOwnProperty.call(message, ".service_description"))
+                    if (message[".service_description"] != null && message.hasOwnProperty(".service_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".service_description"]);
-                    if (message[".service_execution_site"] != null && Object.hasOwnProperty.call(message, ".service_execution_site"))
+                    if (message[".service_execution_site"] != null && message.hasOwnProperty(".service_execution_site"))
                         writer.uint32(/* id 50008, wireType 0 =*/400064).int32(message[".service_execution_site"]);
                     return writer;
                 };
@@ -28080,12 +28839,12 @@
                 MethodOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".method_description"] != null && Object.hasOwnProperty.call(message, ".method_description"))
+                    if (message[".method_description"] != null && message.hasOwnProperty(".method_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".method_description"]);
                     return writer;
                 };
@@ -28373,17 +29132,17 @@
                     if (message.name != null && message.name.length)
                         for (var i = 0; i < message.name.length; ++i)
                             $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.identifier_value != null && Object.hasOwnProperty.call(message, "identifier_value"))
+                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifier_value);
-                    if (message.positive_int_value != null && Object.hasOwnProperty.call(message, "positive_int_value"))
+                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
                         writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.positive_int_value);
-                    if (message.negative_int_value != null && Object.hasOwnProperty.call(message, "negative_int_value"))
+                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int64(message.negative_int_value);
-                    if (message.double_value != null && Object.hasOwnProperty.call(message, "double_value"))
+                    if (message.double_value != null && message.hasOwnProperty("double_value"))
                         writer.uint32(/* id 6, wireType 1 =*/49).double(message.double_value);
-                    if (message.string_value != null && Object.hasOwnProperty.call(message, "string_value"))
+                    if (message.string_value != null && message.hasOwnProperty("string_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.string_value);
-                    if (message.aggregate_value != null && Object.hasOwnProperty.call(message, "aggregate_value"))
+                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.aggregate_value);
                     return writer;
                 };
@@ -29063,6 +29822,7 @@
                      * @property {Array.<number>|null} [span] Location span
                      * @property {string|null} [leading_comments] Location leading_comments
                      * @property {string|null} [trailing_comments] Location trailing_comments
+                     * @property {Array.<string>|null} [leading_detached_comments] Location leading_detached_comments
                      */
     
                     /**
@@ -29076,6 +29836,7 @@
                     function Location(properties) {
                         this.path = [];
                         this.span = [];
+                        this.leading_detached_comments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -29115,6 +29876,14 @@
                     Location.prototype.trailing_comments = "";
     
                     /**
+                     * Location leading_detached_comments.
+                     * @member {Array.<string>} leading_detached_comments
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.leading_detached_comments = $util.emptyArray;
+    
+                    /**
                      * Creates a new Location instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.SourceCodeInfo.Location
@@ -29150,10 +29919,13 @@
                                 writer.int32(message.span[i]);
                             writer.ldelim();
                         }
-                        if (message.leading_comments != null && Object.hasOwnProperty.call(message, "leading_comments"))
+                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.leading_comments);
-                        if (message.trailing_comments != null && Object.hasOwnProperty.call(message, "trailing_comments"))
+                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.trailing_comments);
+                        if (message.leading_detached_comments != null && message.leading_detached_comments.length)
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.leading_detached_comments[i]);
                         return writer;
                     };
     
@@ -29214,6 +29986,11 @@
                             case 4:
                                 message.trailing_comments = reader.string();
                                 break;
+                            case 6:
+                                if (!(message.leading_detached_comments && message.leading_detached_comments.length))
+                                    message.leading_detached_comments = [];
+                                message.leading_detached_comments.push(reader.string());
+                                break;
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -29269,6 +30046,13 @@
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             if (!$util.isString(message.trailing_comments))
                                 return "trailing_comments: string expected";
+                        if (message.leading_detached_comments != null && message.hasOwnProperty("leading_detached_comments")) {
+                            if (!Array.isArray(message.leading_detached_comments))
+                                return "leading_detached_comments: array expected";
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                if (!$util.isString(message.leading_detached_comments[i]))
+                                    return "leading_detached_comments: string[] expected";
+                        }
                         return null;
                     };
     
@@ -29302,6 +30086,13 @@
                             message.leading_comments = String(object.leading_comments);
                         if (object.trailing_comments != null)
                             message.trailing_comments = String(object.trailing_comments);
+                        if (object.leading_detached_comments) {
+                            if (!Array.isArray(object.leading_detached_comments))
+                                throw TypeError(".google.protobuf.SourceCodeInfo.Location.leading_detached_comments: array expected");
+                            message.leading_detached_comments = [];
+                            for (var i = 0; i < object.leading_detached_comments.length; ++i)
+                                message.leading_detached_comments[i] = String(object.leading_detached_comments[i]);
+                        }
                         return message;
                     };
     
@@ -29321,6 +30112,7 @@
                         if (options.arrays || options.defaults) {
                             object.path = [];
                             object.span = [];
+                            object.leading_detached_comments = [];
                         }
                         if (options.defaults) {
                             object.leading_comments = "";
@@ -29340,6 +30132,11 @@
                             object.leading_comments = message.leading_comments;
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             object.trailing_comments = message.trailing_comments;
+                        if (message.leading_detached_comments && message.leading_detached_comments.length) {
+                            object.leading_detached_comments = [];
+                            for (var j = 0; j < message.leading_detached_comments.length; ++j)
+                                object.leading_detached_comments[j] = message.leading_detached_comments[j];
+                        }
                         return object;
                     };
     
@@ -29358,6 +30155,493 @@
                 })();
     
                 return SourceCodeInfo;
+            })();
+    
+            protobuf.GeneratedCodeInfo = (function() {
+    
+                /**
+                 * Properties of a GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @interface IGeneratedCodeInfo
+                 * @property {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>|null} [annotation] GeneratedCodeInfo annotation
+                 */
+    
+                /**
+                 * Constructs a new GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a GeneratedCodeInfo.
+                 * @implements IGeneratedCodeInfo
+                 * @constructor
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 */
+                function GeneratedCodeInfo(properties) {
+                    this.annotation = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GeneratedCodeInfo annotation.
+                 * @member {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>} annotation
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 */
+                GeneratedCodeInfo.prototype.annotation = $util.emptyArray;
+    
+                /**
+                 * Creates a new GeneratedCodeInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo instance
+                 */
+                GeneratedCodeInfo.create = function create(properties) {
+                    return new GeneratedCodeInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.annotation != null && message.annotation.length)
+                        for (var i = 0; i < message.annotation.length; ++i)
+                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.annotation && message.annotation.length))
+                                message.annotation = [];
+                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GeneratedCodeInfo message.
+                 * @function verify
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GeneratedCodeInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.annotation != null && message.hasOwnProperty("annotation")) {
+                        if (!Array.isArray(message.annotation))
+                            return "annotation: array expected";
+                        for (var i = 0; i < message.annotation.length; ++i) {
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            if (error)
+                                return "annotation." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a GeneratedCodeInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 */
+                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
+                        return object;
+                    var message = new $root.google.protobuf.GeneratedCodeInfo();
+                    if (object.annotation) {
+                        if (!Array.isArray(object.annotation))
+                            throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: array expected");
+                        message.annotation = [];
+                        for (var i = 0; i < object.annotation.length; ++i) {
+                            if (typeof object.annotation[i] !== "object")
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.GeneratedCodeInfo} message GeneratedCodeInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GeneratedCodeInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.annotation = [];
+                    if (message.annotation && message.annotation.length) {
+                        object.annotation = [];
+                        for (var j = 0; j < message.annotation.length; ++j)
+                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this GeneratedCodeInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GeneratedCodeInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                GeneratedCodeInfo.Annotation = (function() {
+    
+                    /**
+                     * Properties of an Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @interface IAnnotation
+                     * @property {Array.<number>|null} [path] Annotation path
+                     * @property {string|null} [source_file] Annotation source_file
+                     * @property {number|null} [begin] Annotation begin
+                     * @property {number|null} [end] Annotation end
+                     */
+    
+                    /**
+                     * Constructs a new Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @classdesc Represents an Annotation.
+                     * @implements IAnnotation
+                     * @constructor
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     */
+                    function Annotation(properties) {
+                        this.path = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Annotation path.
+                     * @member {Array.<number>} path
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.path = $util.emptyArray;
+    
+                    /**
+                     * Annotation source_file.
+                     * @member {string} source_file
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.source_file = "";
+    
+                    /**
+                     * Annotation begin.
+                     * @member {number} begin
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.begin = 0;
+    
+                    /**
+                     * Annotation end.
+                     * @member {number} end
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.end = 0;
+    
+                    /**
+                     * Creates a new Annotation instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation instance
+                     */
+                    Annotation.create = function create(properties) {
+                        return new Annotation(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.path != null && message.path.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.path.length; ++i)
+                                writer.int32(message.path[i]);
+                            writer.ldelim();
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.source_file);
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.path && message.path.length))
+                                    message.path = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.path.push(reader.int32());
+                                } else
+                                    message.path.push(reader.int32());
+                                break;
+                            case 2:
+                                message.source_file = reader.string();
+                                break;
+                            case 3:
+                                message.begin = reader.int32();
+                                break;
+                            case 4:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Annotation message.
+                     * @function verify
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Annotation.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.path != null && message.hasOwnProperty("path")) {
+                            if (!Array.isArray(message.path))
+                                return "path: array expected";
+                            for (var i = 0; i < message.path.length; ++i)
+                                if (!$util.isInteger(message.path[i]))
+                                    return "path: integer[] expected";
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            if (!$util.isString(message.source_file))
+                                return "source_file: string expected";
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            if (!$util.isInteger(message.begin))
+                                return "begin: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Annotation message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     */
+                    Annotation.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
+                            return object;
+                        var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        if (object.path) {
+                            if (!Array.isArray(object.path))
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.Annotation.path: array expected");
+                            message.path = [];
+                            for (var i = 0; i < object.path.length; ++i)
+                                message.path[i] = object.path[i] | 0;
+                        }
+                        if (object.source_file != null)
+                            message.source_file = String(object.source_file);
+                        if (object.begin != null)
+                            message.begin = object.begin | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Annotation message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.Annotation} message Annotation
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Annotation.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.path = [];
+                        if (options.defaults) {
+                            object.source_file = "";
+                            object.begin = 0;
+                            object.end = 0;
+                        }
+                        if (message.path && message.path.length) {
+                            object.path = [];
+                            for (var j = 0; j < message.path.length; ++j)
+                                object.path[j] = message.path[j];
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            object.source_file = message.source_file;
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            object.begin = message.begin;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Annotation to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Annotation.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Annotation;
+                })();
+    
+                return GeneratedCodeInfo;
             })();
     
             return protobuf;

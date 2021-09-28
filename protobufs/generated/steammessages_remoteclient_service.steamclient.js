@@ -411,6 +411,72 @@
          * @variation 2
          */
     
+        /**
+         * Callback as used by {@link RemoteClient#createRemotePlayTogetherInvitation}.
+         * @memberof RemoteClient
+         * @typedef CreateRemotePlayTogetherInvitationCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} [response] CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         */
+    
+        /**
+         * Calls CreateRemotePlayTogetherInvitation.
+         * @function createRemotePlayTogetherInvitation
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request} request CRemoteClient_CreateRemotePlayTogetherInvitation_Request message or plain object
+         * @param {RemoteClient.CreateRemotePlayTogetherInvitationCallback} callback Node-style callback called with the error, if any, and CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClient.prototype.createRemotePlayTogetherInvitation = function createRemotePlayTogetherInvitation(request, callback) {
+            return this.rpcCall(createRemotePlayTogetherInvitation, $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request, $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response, request, callback);
+        }, "name", { value: "CreateRemotePlayTogetherInvitation" });
+    
+        /**
+         * Calls CreateRemotePlayTogetherInvitation.
+         * @function createRemotePlayTogetherInvitation
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request} request CRemoteClient_CreateRemotePlayTogetherInvitation_Request message or plain object
+         * @returns {Promise<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClient#deleteRemotePlayTogetherInvitation}.
+         * @memberof RemoteClient
+         * @typedef DeleteRemotePlayTogetherInvitationCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} [response] CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         */
+    
+        /**
+         * Calls DeleteRemotePlayTogetherInvitation.
+         * @function deleteRemotePlayTogetherInvitation
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request} request CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message or plain object
+         * @param {RemoteClient.DeleteRemotePlayTogetherInvitationCallback} callback Node-style callback called with the error, if any, and CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClient.prototype.deleteRemotePlayTogetherInvitation = function deleteRemotePlayTogetherInvitation(request, callback) {
+            return this.rpcCall(deleteRemotePlayTogetherInvitation, $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response, request, callback);
+        }, "name", { value: "DeleteRemotePlayTogetherInvitation" });
+    
+        /**
+         * Calls DeleteRemotePlayTogetherInvitation.
+         * @function deleteRemotePlayTogetherInvitation
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request} request CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message or plain object
+         * @returns {Promise<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>} Promise
+         * @variation 2
+         */
+    
         return RemoteClient;
     })();
     
@@ -650,7 +716,7 @@
     /**
      * EProtoExecutionSite enum.
      * @exports EProtoExecutionSite
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EProtoExecutionSiteUnknown=0 k_EProtoExecutionSiteUnknown value
      * @property {number} k_EProtoExecutionSiteSteamClient=2 k_EProtoExecutionSiteSteamClient value
      */
@@ -1064,6 +1130,7 @@
                  * @property {Array.<google.protobuf.IFieldDescriptorProto>|null} [extension] FileDescriptorProto extension
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [source_code_info] FileDescriptorProto source_code_info
+                 * @property {string|null} [syntax] FileDescriptorProto syntax
                  */
     
                 /**
@@ -1177,6 +1244,14 @@
                 FileDescriptorProto.prototype.source_code_info = null;
     
                 /**
+                 * FileDescriptorProto syntax.
+                 * @member {string} syntax
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.syntax = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -1200,9 +1275,9 @@
                 FileDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
+                    if (message["package"] != null && message.hasOwnProperty("package"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message["package"]);
                     if (message.dependency != null && message.dependency.length)
                         for (var i = 0; i < message.dependency.length; ++i)
@@ -1219,9 +1294,9 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.source_code_info != null && Object.hasOwnProperty.call(message, "source_code_info"))
+                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info"))
                         $root.google.protobuf.SourceCodeInfo.encode(message.source_code_info, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     if (message.public_dependency != null && message.public_dependency.length)
                         for (var i = 0; i < message.public_dependency.length; ++i)
@@ -1229,6 +1304,8 @@
                     if (message.weak_dependency != null && message.weak_dependency.length)
                         for (var i = 0; i < message.weak_dependency.length; ++i)
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weak_dependency[i]);
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     return writer;
                 };
     
@@ -1319,6 +1396,9 @@
                             break;
                         case 9:
                             message.source_code_info = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                            break;
+                        case 12:
+                            message.syntax = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1428,6 +1508,9 @@
                         if (error)
                             return "source_code_info." + error;
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        if (!$util.isString(message.syntax))
+                            return "syntax: string expected";
                     return null;
                 };
     
@@ -1518,6 +1601,8 @@
                             throw TypeError(".google.protobuf.FileDescriptorProto.source_code_info: object expected");
                         message.source_code_info = $root.google.protobuf.SourceCodeInfo.fromObject(object.source_code_info);
                     }
+                    if (object.syntax != null)
+                        message.syntax = String(object.syntax);
                     return message;
                 };
     
@@ -1548,6 +1633,7 @@
                         object["package"] = "";
                         object.options = null;
                         object.source_code_info = null;
+                        object.syntax = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -1592,6 +1678,8 @@
                         for (var j = 0; j < message.weak_dependency.length; ++j)
                             object.weak_dependency[j] = message.weak_dependency[j];
                     }
+                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                        object.syntax = message.syntax;
                     return object;
                 };
     
@@ -1623,6 +1711,8 @@
                  * @property {Array.<google.protobuf.DescriptorProto.IExtensionRange>|null} [extension_range] DescriptorProto extension_range
                  * @property {Array.<google.protobuf.IOneofDescriptorProto>|null} [oneof_decl] DescriptorProto oneof_decl
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
+                 * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reserved_range] DescriptorProto reserved_range
+                 * @property {Array.<string>|null} [reserved_name] DescriptorProto reserved_name
                  */
     
                 /**
@@ -1640,6 +1730,8 @@
                     this.enum_type = [];
                     this.extension_range = [];
                     this.oneof_decl = [];
+                    this.reserved_range = [];
+                    this.reserved_name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -1711,6 +1803,22 @@
                 DescriptorProto.prototype.options = null;
     
                 /**
+                 * DescriptorProto reserved_range.
+                 * @member {Array.<google.protobuf.DescriptorProto.IReservedRange>} reserved_range
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_range = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto reserved_name.
+                 * @member {Array.<string>} reserved_name
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.reserved_name = $util.emptyArray;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -1734,7 +1842,7 @@
                 DescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.field != null && message.field.length)
                         for (var i = 0; i < message.field.length; ++i)
@@ -1751,11 +1859,17 @@
                     if (message.extension != null && message.extension.length)
                         for (var i = 0; i < message.extension.length; ++i)
                             $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.oneof_decl != null && message.oneof_decl.length)
                         for (var i = 0; i < message.oneof_decl.length; ++i)
                             $root.google.protobuf.OneofDescriptorProto.encode(message.oneof_decl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.reserved_range != null && message.reserved_range.length)
+                        for (var i = 0; i < message.reserved_range.length; ++i)
+                            $root.google.protobuf.DescriptorProto.ReservedRange.encode(message.reserved_range[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.reserved_name != null && message.reserved_name.length)
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.reserved_name[i]);
                     return writer;
                 };
     
@@ -1825,6 +1939,16 @@
                             break;
                         case 7:
                             message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                            break;
+                        case 9:
+                            if (!(message.reserved_range && message.reserved_range.length))
+                                message.reserved_range = [];
+                            message.reserved_range.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                            break;
+                        case 10:
+                            if (!(message.reserved_name && message.reserved_name.length))
+                                message.reserved_name = [];
+                            message.reserved_name.push(reader.string());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1923,6 +2047,22 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.reserved_range != null && message.hasOwnProperty("reserved_range")) {
+                        if (!Array.isArray(message.reserved_range))
+                            return "reserved_range: array expected";
+                        for (var i = 0; i < message.reserved_range.length; ++i) {
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reserved_range[i]);
+                            if (error)
+                                return "reserved_range." + error;
+                        }
+                    }
+                    if (message.reserved_name != null && message.hasOwnProperty("reserved_name")) {
+                        if (!Array.isArray(message.reserved_name))
+                            return "reserved_name: array expected";
+                        for (var i = 0; i < message.reserved_name.length; ++i)
+                            if (!$util.isString(message.reserved_name[i]))
+                                return "reserved_name: string[] expected";
+                    }
                     return null;
                 };
     
@@ -2005,6 +2145,23 @@
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
                     }
+                    if (object.reserved_range) {
+                        if (!Array.isArray(object.reserved_range))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_range: array expected");
+                        message.reserved_range = [];
+                        for (var i = 0; i < object.reserved_range.length; ++i) {
+                            if (typeof object.reserved_range[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.reserved_range: object expected");
+                            message.reserved_range[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reserved_range[i]);
+                        }
+                    }
+                    if (object.reserved_name) {
+                        if (!Array.isArray(object.reserved_name))
+                            throw TypeError(".google.protobuf.DescriptorProto.reserved_name: array expected");
+                        message.reserved_name = [];
+                        for (var i = 0; i < object.reserved_name.length; ++i)
+                            message.reserved_name[i] = String(object.reserved_name[i]);
+                    }
                     return message;
                 };
     
@@ -2028,6 +2185,8 @@
                         object.extension_range = [];
                         object.extension = [];
                         object.oneof_decl = [];
+                        object.reserved_range = [];
+                        object.reserved_name = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -2066,6 +2225,16 @@
                         object.oneof_decl = [];
                         for (var j = 0; j < message.oneof_decl.length; ++j)
                             object.oneof_decl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneof_decl[j], options);
+                    }
+                    if (message.reserved_range && message.reserved_range.length) {
+                        object.reserved_range = [];
+                        for (var j = 0; j < message.reserved_range.length; ++j)
+                            object.reserved_range[j] = $root.google.protobuf.DescriptorProto.ReservedRange.toObject(message.reserved_range[j], options);
+                    }
+                    if (message.reserved_name && message.reserved_name.length) {
+                        object.reserved_name = [];
+                        for (var j = 0; j < message.reserved_name.length; ++j)
+                            object.reserved_name[j] = message.reserved_name[j];
                     }
                     return object;
                 };
@@ -2146,9 +2315,9 @@
                     ExtensionRange.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
+                        if (message.start != null && message.hasOwnProperty("start"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
-                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
+                        if (message.end != null && message.hasOwnProperty("end"))
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
                         return writer;
                     };
@@ -2291,6 +2460,216 @@
                     return ExtensionRange;
                 })();
     
+                DescriptorProto.ReservedRange = (function() {
+    
+                    /**
+                     * Properties of a ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @interface IReservedRange
+                     * @property {number|null} [start] ReservedRange start
+                     * @property {number|null} [end] ReservedRange end
+                     */
+    
+                    /**
+                     * Constructs a new ReservedRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @classdesc Represents a ReservedRange.
+                     * @implements IReservedRange
+                     * @constructor
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     */
+                    function ReservedRange(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReservedRange start.
+                     * @member {number} start
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.start = 0;
+    
+                    /**
+                     * ReservedRange end.
+                     * @member {number} end
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     */
+                    ReservedRange.prototype.end = 0;
+    
+                    /**
+                     * Creates a new ReservedRange instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange instance
+                     */
+                    ReservedRange.create = function create(properties) {
+                        return new ReservedRange(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReservedRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IReservedRange} message ReservedRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.start = reader.int32();
+                                break;
+                            case 2:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReservedRange message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReservedRange.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReservedRange message.
+                     * @function verify
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReservedRange.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            if (!$util.isInteger(message.start))
+                                return "start: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReservedRange message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
+                     */
+                    ReservedRange.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
+                            return object;
+                        var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        if (object.start != null)
+                            message.start = object.start | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.ReservedRange} message ReservedRange
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReservedRange.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.start = 0;
+                            object.end = 0;
+                        }
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            object.start = message.start;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReservedRange to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReservedRange.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ReservedRange;
+                })();
+    
                 return DescriptorProto;
             })();
     
@@ -2308,6 +2687,7 @@
                  * @property {string|null} [extendee] FieldDescriptorProto extendee
                  * @property {string|null} [default_value] FieldDescriptorProto default_value
                  * @property {number|null} [oneof_index] FieldDescriptorProto oneof_index
+                 * @property {string|null} [json_name] FieldDescriptorProto json_name
                  * @property {google.protobuf.IFieldOptions|null} [options] FieldDescriptorProto options
                  */
     
@@ -2391,6 +2771,14 @@
                 FieldDescriptorProto.prototype.oneof_index = 0;
     
                 /**
+                 * FieldDescriptorProto json_name.
+                 * @member {string} json_name
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.json_name = "";
+    
+                /**
                  * FieldDescriptorProto options.
                  * @member {google.protobuf.IFieldOptions|null|undefined} options
                  * @memberof google.protobuf.FieldDescriptorProto
@@ -2422,24 +2810,26 @@
                 FieldDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
+                    if (message.extendee != null && message.hasOwnProperty("extendee"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.extendee);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.number);
-                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                    if (message.label != null && message.hasOwnProperty("label"))
                         writer.uint32(/* id 4, wireType 0 =*/32).int32(message.label);
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    if (message.type != null && message.hasOwnProperty("type"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
-                    if (message.type_name != null && Object.hasOwnProperty.call(message, "type_name"))
+                    if (message.type_name != null && message.hasOwnProperty("type_name"))
                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.type_name);
-                    if (message.default_value != null && Object.hasOwnProperty.call(message, "default_value"))
+                    if (message.default_value != null && message.hasOwnProperty("default_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.default_value);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.oneof_index != null && Object.hasOwnProperty.call(message, "oneof_index"))
+                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneof_index);
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        writer.uint32(/* id 10, wireType 2 =*/82).string(message.json_name);
                     return writer;
                 };
     
@@ -2497,6 +2887,9 @@
                             break;
                         case 9:
                             message.oneof_index = reader.int32();
+                            break;
+                        case 10:
+                            message.json_name = reader.string();
                             break;
                         case 8:
                             message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
@@ -2587,6 +2980,9 @@
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         if (!$util.isInteger(message.oneof_index))
                             return "oneof_index: integer expected";
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        if (!$util.isString(message.json_name))
+                            return "json_name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
                         var error = $root.google.protobuf.FieldOptions.verify(message.options);
                         if (error)
@@ -2707,6 +3103,8 @@
                         message.default_value = String(object.default_value);
                     if (object.oneof_index != null)
                         message.oneof_index = object.oneof_index | 0;
+                    if (object.json_name != null)
+                        message.json_name = String(object.json_name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
@@ -2738,6 +3136,7 @@
                         object.default_value = "";
                         object.options = null;
                         object.oneof_index = 0;
+                        object.json_name = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -2757,6 +3156,8 @@
                         object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options);
                     if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
                         object.oneof_index = message.oneof_index;
+                    if (message.json_name != null && message.hasOwnProperty("json_name"))
+                        object.json_name = message.json_name;
                     return object;
                 };
     
@@ -2774,7 +3175,7 @@
                 /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} TYPE_DOUBLE=1 TYPE_DOUBLE value
                  * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
                  * @property {number} TYPE_INT64=3 TYPE_INT64 value
@@ -2820,7 +3221,7 @@
                 /**
                  * Label enum.
                  * @name google.protobuf.FieldDescriptorProto.Label
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
                  * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
@@ -2843,6 +3244,7 @@
                  * @memberof google.protobuf
                  * @interface IOneofDescriptorProto
                  * @property {string|null} [name] OneofDescriptorProto name
+                 * @property {google.protobuf.IOneofOptions|null} [options] OneofDescriptorProto options
                  */
     
                 /**
@@ -2869,6 +3271,14 @@
                 OneofDescriptorProto.prototype.name = "";
     
                 /**
+                 * OneofDescriptorProto options.
+                 * @member {google.protobuf.IOneofOptions|null|undefined} options
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @instance
+                 */
+                OneofDescriptorProto.prototype.options = null;
+    
+                /**
                  * Creates a new OneofDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.OneofDescriptorProto
@@ -2892,8 +3302,10 @@
                 OneofDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.OneofOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -2930,6 +3342,9 @@
                         switch (tag >>> 3) {
                         case 1:
                             message.name = reader.string();
+                            break;
+                        case 2:
+                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -2969,6 +3384,11 @@
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
                     return null;
                 };
     
@@ -2986,6 +3406,11 @@
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                    }
                     return message;
                 };
     
@@ -3002,10 +3427,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.name = "";
+                        object.options = null;
+                    }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options);
                     return object;
                 };
     
@@ -3098,12 +3527,12 @@
                 EnumDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.value != null && message.value.length)
                         for (var i = 0; i < message.value.length; ++i)
                             $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -3356,11 +3785,11 @@
                 EnumValueDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                    if (message.number != null && message.hasOwnProperty("number"))
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -3594,12 +4023,12 @@
                 ServiceDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                     if (message.method != null && message.method.length)
                         for (var i = 0; i < message.method.length; ++i)
                             $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
@@ -3788,6 +4217,8 @@
                  * @property {string|null} [input_type] MethodDescriptorProto input_type
                  * @property {string|null} [output_type] MethodDescriptorProto output_type
                  * @property {google.protobuf.IMethodOptions|null} [options] MethodDescriptorProto options
+                 * @property {boolean|null} [client_streaming] MethodDescriptorProto client_streaming
+                 * @property {boolean|null} [server_streaming] MethodDescriptorProto server_streaming
                  */
     
                 /**
@@ -3838,6 +4269,22 @@
                 MethodDescriptorProto.prototype.options = null;
     
                 /**
+                 * MethodDescriptorProto client_streaming.
+                 * @member {boolean} client_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.client_streaming = false;
+    
+                /**
+                 * MethodDescriptorProto server_streaming.
+                 * @member {boolean} server_streaming
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.server_streaming = false;
+    
+                /**
                  * Creates a new MethodDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodDescriptorProto
@@ -3861,14 +4308,18 @@
                 MethodDescriptorProto.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (message.name != null && message.hasOwnProperty("name"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.input_type != null && Object.hasOwnProperty.call(message, "input_type"))
+                    if (message.input_type != null && message.hasOwnProperty("input_type"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.input_type);
-                    if (message.output_type != null && Object.hasOwnProperty.call(message, "output_type"))
+                    if (message.output_type != null && message.hasOwnProperty("output_type"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.output_type);
-                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                    if (message.options != null && message.hasOwnProperty("options"))
                         $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.client_streaming);
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.server_streaming);
                     return writer;
                 };
     
@@ -3914,6 +4365,12 @@
                             break;
                         case 4:
                             message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.client_streaming = reader.bool();
+                            break;
+                        case 6:
+                            message.server_streaming = reader.bool();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -3964,6 +4421,12 @@
                         if (error)
                             return "options." + error;
                     }
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        if (typeof message.client_streaming !== "boolean")
+                            return "client_streaming: boolean expected";
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        if (typeof message.server_streaming !== "boolean")
+                            return "server_streaming: boolean expected";
                     return null;
                 };
     
@@ -3990,6 +4453,10 @@
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
                         message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
                     }
+                    if (object.client_streaming != null)
+                        message.client_streaming = Boolean(object.client_streaming);
+                    if (object.server_streaming != null)
+                        message.server_streaming = Boolean(object.server_streaming);
                     return message;
                 };
     
@@ -4011,6 +4478,8 @@
                         object.input_type = "";
                         object.output_type = "";
                         object.options = null;
+                        object.client_streaming = false;
+                        object.server_streaming = false;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -4020,6 +4489,10 @@
                         object.output_type = message.output_type;
                     if (message.options != null && message.hasOwnProperty("options"))
                         object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options);
+                    if (message.client_streaming != null && message.hasOwnProperty("client_streaming"))
+                        object.client_streaming = message.client_streaming;
+                    if (message.server_streaming != null && message.hasOwnProperty("server_streaming"))
+                        object.server_streaming = message.server_streaming;
                     return object;
                 };
     
@@ -4054,6 +4527,9 @@
                  * @property {boolean|null} [java_generic_services] FileOptions java_generic_services
                  * @property {boolean|null} [py_generic_services] FileOptions py_generic_services
                  * @property {boolean|null} [deprecated] FileOptions deprecated
+                 * @property {boolean|null} [cc_enable_arenas] FileOptions cc_enable_arenas
+                 * @property {string|null} [objc_class_prefix] FileOptions objc_class_prefix
+                 * @property {string|null} [csharp_namespace] FileOptions csharp_namespace
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FileOptions uninterpreted_option
                  */
     
@@ -4162,6 +4638,30 @@
                 FileOptions.prototype.deprecated = false;
     
                 /**
+                 * FileOptions cc_enable_arenas.
+                 * @member {boolean} cc_enable_arenas
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.cc_enable_arenas = false;
+    
+                /**
+                 * FileOptions objc_class_prefix.
+                 * @member {string} objc_class_prefix
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.objc_class_prefix = "";
+    
+                /**
+                 * FileOptions csharp_namespace.
+                 * @member {string} csharp_namespace
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.csharp_namespace = "";
+    
+                /**
                  * FileOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.FileOptions
@@ -4193,28 +4693,34 @@
                 FileOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.java_package != null && Object.hasOwnProperty.call(message, "java_package"))
+                    if (message.java_package != null && message.hasOwnProperty("java_package"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.java_package);
-                    if (message.java_outer_classname != null && Object.hasOwnProperty.call(message, "java_outer_classname"))
+                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.java_outer_classname);
-                    if (message.optimize_for != null && Object.hasOwnProperty.call(message, "optimize_for"))
+                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.optimize_for);
-                    if (message.java_multiple_files != null && Object.hasOwnProperty.call(message, "java_multiple_files"))
+                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.java_multiple_files);
-                    if (message.go_package != null && Object.hasOwnProperty.call(message, "go_package"))
+                    if (message.go_package != null && message.hasOwnProperty("go_package"))
                         writer.uint32(/* id 11, wireType 2 =*/90).string(message.go_package);
-                    if (message.cc_generic_services != null && Object.hasOwnProperty.call(message, "cc_generic_services"))
+                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.cc_generic_services);
-                    if (message.java_generic_services != null && Object.hasOwnProperty.call(message, "java_generic_services"))
+                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
                         writer.uint32(/* id 17, wireType 0 =*/136).bool(message.java_generic_services);
-                    if (message.py_generic_services != null && Object.hasOwnProperty.call(message, "py_generic_services"))
+                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
                         writer.uint32(/* id 18, wireType 0 =*/144).bool(message.py_generic_services);
-                    if (message.java_generate_equals_and_hash != null && Object.hasOwnProperty.call(message, "java_generate_equals_and_hash"))
+                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
                         writer.uint32(/* id 20, wireType 0 =*/160).bool(message.java_generate_equals_and_hash);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 23, wireType 0 =*/184).bool(message.deprecated);
-                    if (message.java_string_check_utf8 != null && Object.hasOwnProperty.call(message, "java_string_check_utf8"))
+                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         writer.uint32(/* id 27, wireType 0 =*/216).bool(message.java_string_check_utf8);
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        writer.uint32(/* id 31, wireType 0 =*/248).bool(message.cc_enable_arenas);
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        writer.uint32(/* id 36, wireType 2 =*/290).string(message.objc_class_prefix);
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        writer.uint32(/* id 37, wireType 2 =*/298).string(message.csharp_namespace);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -4284,6 +4790,15 @@
                             break;
                         case 23:
                             message.deprecated = reader.bool();
+                            break;
+                        case 31:
+                            message.cc_enable_arenas = reader.bool();
+                            break;
+                        case 36:
+                            message.objc_class_prefix = reader.string();
+                            break;
+                        case 37:
+                            message.csharp_namespace = reader.string();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -4364,6 +4879,15 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        if (typeof message.cc_enable_arenas !== "boolean")
+                            return "cc_enable_arenas: boolean expected";
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        if (!$util.isString(message.objc_class_prefix))
+                            return "objc_class_prefix: string expected";
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        if (!$util.isString(message.csharp_namespace))
+                            return "csharp_namespace: string expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -4422,6 +4946,12 @@
                         message.py_generic_services = Boolean(object.py_generic_services);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.cc_enable_arenas != null)
+                        message.cc_enable_arenas = Boolean(object.cc_enable_arenas);
+                    if (object.objc_class_prefix != null)
+                        message.objc_class_prefix = String(object.objc_class_prefix);
+                    if (object.csharp_namespace != null)
+                        message.csharp_namespace = String(object.csharp_namespace);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.FileOptions.uninterpreted_option: array expected");
@@ -4462,6 +4992,9 @@
                         object.java_generate_equals_and_hash = false;
                         object.deprecated = false;
                         object.java_string_check_utf8 = false;
+                        object.cc_enable_arenas = false;
+                        object.objc_class_prefix = "";
+                        object.csharp_namespace = "";
                     }
                     if (message.java_package != null && message.hasOwnProperty("java_package"))
                         object.java_package = message.java_package;
@@ -4485,6 +5018,12 @@
                         object.deprecated = message.deprecated;
                     if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
                         object.java_string_check_utf8 = message.java_string_check_utf8;
+                    if (message.cc_enable_arenas != null && message.hasOwnProperty("cc_enable_arenas"))
+                        object.cc_enable_arenas = message.cc_enable_arenas;
+                    if (message.objc_class_prefix != null && message.hasOwnProperty("objc_class_prefix"))
+                        object.objc_class_prefix = message.objc_class_prefix;
+                    if (message.csharp_namespace != null && message.hasOwnProperty("csharp_namespace"))
+                        object.csharp_namespace = message.csharp_namespace;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -4507,7 +5046,7 @@
                 /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} SPEED=1 SPEED value
                  * @property {number} CODE_SIZE=2 CODE_SIZE value
                  * @property {number} LITE_RUNTIME=3 LITE_RUNTIME value
@@ -4532,6 +5071,7 @@
                  * @property {boolean|null} [message_set_wire_format] MessageOptions message_set_wire_format
                  * @property {boolean|null} [no_standard_descriptor_accessor] MessageOptions no_standard_descriptor_accessor
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
+                 * @property {boolean|null} [map_entry] MessageOptions map_entry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] MessageOptions uninterpreted_option
                  */
     
@@ -4576,6 +5116,14 @@
                 MessageOptions.prototype.deprecated = false;
     
                 /**
+                 * MessageOptions map_entry.
+                 * @member {boolean} map_entry
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.map_entry = false;
+    
+                /**
                  * MessageOptions uninterpreted_option.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
                  * @memberof google.protobuf.MessageOptions
@@ -4607,12 +5155,14 @@
                 MessageOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.message_set_wire_format != null && Object.hasOwnProperty.call(message, "message_set_wire_format"))
+                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.message_set_wire_format);
-                    if (message.no_standard_descriptor_accessor != null && Object.hasOwnProperty.call(message, "no_standard_descriptor_accessor"))
+                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.no_standard_descriptor_accessor);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).bool(message.map_entry);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -4658,6 +5208,9 @@
                             break;
                         case 3:
                             message.deprecated = reader.bool();
+                            break;
+                        case 7:
+                            message.map_entry = reader.bool();
                             break;
                         case 999:
                             if (!(message.uninterpreted_option && message.uninterpreted_option.length))
@@ -4708,6 +5261,9 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        if (typeof message.map_entry !== "boolean")
+                            return "map_entry: boolean expected";
                     if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
                         if (!Array.isArray(message.uninterpreted_option))
                             return "uninterpreted_option: array expected";
@@ -4738,6 +5294,8 @@
                         message.no_standard_descriptor_accessor = Boolean(object.no_standard_descriptor_accessor);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.map_entry != null)
+                        message.map_entry = Boolean(object.map_entry);
                     if (object.uninterpreted_option) {
                         if (!Array.isArray(object.uninterpreted_option))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpreted_option: array expected");
@@ -4770,6 +5328,7 @@
                         object.message_set_wire_format = false;
                         object.no_standard_descriptor_accessor = false;
                         object.deprecated = false;
+                        object.map_entry = false;
                     }
                     if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
                         object.message_set_wire_format = message.message_set_wire_format;
@@ -4777,6 +5336,8 @@
                         object.no_standard_descriptor_accessor = message.no_standard_descriptor_accessor;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.map_entry != null && message.hasOwnProperty("map_entry"))
+                        object.map_entry = message.map_entry;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
                         object.uninterpreted_option = [];
                         for (var j = 0; j < message.uninterpreted_option.length; ++j)
@@ -4807,9 +5368,9 @@
                  * @interface IFieldOptions
                  * @property {google.protobuf.FieldOptions.CType|null} [ctype] FieldOptions ctype
                  * @property {boolean|null} [packed] FieldOptions packed
+                 * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
-                 * @property {string|null} [experimental_map_key] FieldOptions experimental_map_key
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FieldOptions uninterpreted_option
                  * @property {string|null} [".description"] FieldOptions .description
@@ -4848,6 +5409,14 @@
                 FieldOptions.prototype.packed = false;
     
                 /**
+                 * FieldOptions jstype.
+                 * @member {google.protobuf.FieldOptions.JSType} jstype
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.jstype = 0;
+    
+                /**
                  * FieldOptions lazy.
                  * @member {boolean} lazy
                  * @memberof google.protobuf.FieldOptions
@@ -4862,14 +5431,6 @@
                  * @instance
                  */
                 FieldOptions.prototype.deprecated = false;
-    
-                /**
-                 * FieldOptions experimental_map_key.
-                 * @member {string} experimental_map_key
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.experimental_map_key = "";
     
                 /**
                  * FieldOptions weak.
@@ -4919,22 +5480,22 @@
                 FieldOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
+                    if (message.ctype != null && message.hasOwnProperty("ctype"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
-                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
+                    if (message.packed != null && message.hasOwnProperty("packed"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.packed);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
-                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
+                    if (message.lazy != null && message.hasOwnProperty("lazy"))
                         writer.uint32(/* id 5, wireType 0 =*/40).bool(message.lazy);
-                    if (message.experimental_map_key != null && Object.hasOwnProperty.call(message, "experimental_map_key"))
-                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.experimental_map_key);
-                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
+                    if (message.weak != null && message.hasOwnProperty("weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".description"] != null && Object.hasOwnProperty.call(message, ".description"))
+                    if (message[".description"] != null && message.hasOwnProperty(".description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".description"]);
                     return writer;
                 };
@@ -4976,14 +5537,14 @@
                         case 2:
                             message.packed = reader.bool();
                             break;
+                        case 6:
+                            message.jstype = reader.int32();
+                            break;
                         case 5:
                             message.lazy = reader.bool();
                             break;
                         case 3:
                             message.deprecated = reader.bool();
-                            break;
-                        case 9:
-                            message.experimental_map_key = reader.string();
                             break;
                         case 10:
                             message.weak = reader.bool();
@@ -5043,15 +5604,21 @@
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         if (typeof message.packed !== "boolean")
                             return "packed: boolean expected";
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        switch (message.jstype) {
+                        default:
+                            return "jstype: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        if (!$util.isString(message.experimental_map_key))
-                            return "experimental_map_key: string expected";
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         if (typeof message.weak !== "boolean")
                             return "weak: boolean expected";
@@ -5098,12 +5665,24 @@
                     }
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
+                    switch (object.jstype) {
+                    case "JS_NORMAL":
+                    case 0:
+                        message.jstype = 0;
+                        break;
+                    case "JS_STRING":
+                    case 1:
+                        message.jstype = 1;
+                        break;
+                    case "JS_NUMBER":
+                    case 2:
+                        message.jstype = 2;
+                        break;
+                    }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
-                    if (object.experimental_map_key != null)
-                        message.experimental_map_key = String(object.experimental_map_key);
                     if (object.weak != null)
                         message.weak = Boolean(object.weak);
                     if (object.uninterpreted_option) {
@@ -5141,7 +5720,7 @@
                         object.packed = false;
                         object.deprecated = false;
                         object.lazy = false;
-                        object.experimental_map_key = "";
+                        object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
                         object[".description"] = "";
                     }
@@ -5153,8 +5732,8 @@
                         object.deprecated = message.deprecated;
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
-                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
-                        object.experimental_map_key = message.experimental_map_key;
+                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.uninterpreted_option && message.uninterpreted_option.length) {
@@ -5181,7 +5760,7 @@
                 /**
                  * CType enum.
                  * @name google.protobuf.FieldOptions.CType
-                 * @enum {number}
+                 * @enum {string}
                  * @property {number} STRING=0 STRING value
                  * @property {number} CORD=1 CORD value
                  * @property {number} STRING_PIECE=2 STRING_PIECE value
@@ -5194,7 +5773,231 @@
                     return values;
                 })();
     
+                /**
+                 * JSType enum.
+                 * @name google.protobuf.FieldOptions.JSType
+                 * @enum {string}
+                 * @property {number} JS_NORMAL=0 JS_NORMAL value
+                 * @property {number} JS_STRING=1 JS_STRING value
+                 * @property {number} JS_NUMBER=2 JS_NUMBER value
+                 */
+                FieldOptions.JSType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JS_NORMAL"] = 0;
+                    values[valuesById[1] = "JS_STRING"] = 1;
+                    values[valuesById[2] = "JS_NUMBER"] = 2;
+                    return values;
+                })();
+    
                 return FieldOptions;
+            })();
+    
+            protobuf.OneofOptions = (function() {
+    
+                /**
+                 * Properties of an OneofOptions.
+                 * @memberof google.protobuf
+                 * @interface IOneofOptions
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] OneofOptions uninterpreted_option
+                 */
+    
+                /**
+                 * Constructs a new OneofOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an OneofOptions.
+                 * @implements IOneofOptions
+                 * @constructor
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 */
+                function OneofOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OneofOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * Creates a new OneofOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.OneofOptions} OneofOptions instance
+                 */
+                OneofOptions.create = function create(properties) {
+                    return new OneofOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OneofOptions message, length delimited. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.IOneofOptions} message OneofOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OneofOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OneofOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OneofOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an OneofOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.OneofOptions} OneofOptions
+                 */
+                OneofOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.OneofOptions)
+                        return object;
+                    var message = new $root.google.protobuf.OneofOptions();
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.OneofOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {google.protobuf.OneofOptions} message OneofOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OneofOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this OneofOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OneofOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return OneofOptions;
             })();
     
             protobuf.EnumOptions = (function() {
@@ -5281,14 +6084,14 @@
                 EnumOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.allow_alias != null && Object.hasOwnProperty.call(message, "allow_alias"))
+                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allow_alias);
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_description"] != null && Object.hasOwnProperty.call(message, ".enum_description"))
+                    if (message[".enum_description"] != null && message.hasOwnProperty(".enum_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_description"]);
                     return writer;
                 };
@@ -5548,12 +6351,12 @@
                 EnumValueOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".enum_value_description"] != null && Object.hasOwnProperty.call(message, ".enum_value_description"))
+                    if (message[".enum_value_description"] != null && message.hasOwnProperty(".enum_value_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_value_description"]);
                     return writer;
                 };
@@ -5811,14 +6614,14 @@
                 ServiceOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".service_description"] != null && Object.hasOwnProperty.call(message, ".service_description"))
+                    if (message[".service_description"] != null && message.hasOwnProperty(".service_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".service_description"]);
-                    if (message[".service_execution_site"] != null && Object.hasOwnProperty.call(message, ".service_execution_site"))
+                    if (message[".service_execution_site"] != null && message.hasOwnProperty(".service_execution_site"))
                         writer.uint32(/* id 50008, wireType 0 =*/400064).int32(message[".service_execution_site"]);
                     return writer;
                 };
@@ -6091,12 +6894,12 @@
                 MethodOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.uninterpreted_option != null && message.uninterpreted_option.length)
                         for (var i = 0; i < message.uninterpreted_option.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".method_description"] != null && Object.hasOwnProperty.call(message, ".method_description"))
+                    if (message[".method_description"] != null && message.hasOwnProperty(".method_description"))
                         writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".method_description"]);
                     return writer;
                 };
@@ -6384,17 +7187,17 @@
                     if (message.name != null && message.name.length)
                         for (var i = 0; i < message.name.length; ++i)
                             $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.identifier_value != null && Object.hasOwnProperty.call(message, "identifier_value"))
+                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifier_value);
-                    if (message.positive_int_value != null && Object.hasOwnProperty.call(message, "positive_int_value"))
+                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
                         writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.positive_int_value);
-                    if (message.negative_int_value != null && Object.hasOwnProperty.call(message, "negative_int_value"))
+                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
                         writer.uint32(/* id 5, wireType 0 =*/40).int64(message.negative_int_value);
-                    if (message.double_value != null && Object.hasOwnProperty.call(message, "double_value"))
+                    if (message.double_value != null && message.hasOwnProperty("double_value"))
                         writer.uint32(/* id 6, wireType 1 =*/49).double(message.double_value);
-                    if (message.string_value != null && Object.hasOwnProperty.call(message, "string_value"))
+                    if (message.string_value != null && message.hasOwnProperty("string_value"))
                         writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.string_value);
-                    if (message.aggregate_value != null && Object.hasOwnProperty.call(message, "aggregate_value"))
+                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.aggregate_value);
                     return writer;
                 };
@@ -7074,6 +7877,7 @@
                      * @property {Array.<number>|null} [span] Location span
                      * @property {string|null} [leading_comments] Location leading_comments
                      * @property {string|null} [trailing_comments] Location trailing_comments
+                     * @property {Array.<string>|null} [leading_detached_comments] Location leading_detached_comments
                      */
     
                     /**
@@ -7087,6 +7891,7 @@
                     function Location(properties) {
                         this.path = [];
                         this.span = [];
+                        this.leading_detached_comments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -7126,6 +7931,14 @@
                     Location.prototype.trailing_comments = "";
     
                     /**
+                     * Location leading_detached_comments.
+                     * @member {Array.<string>} leading_detached_comments
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.leading_detached_comments = $util.emptyArray;
+    
+                    /**
                      * Creates a new Location instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.SourceCodeInfo.Location
@@ -7161,10 +7974,13 @@
                                 writer.int32(message.span[i]);
                             writer.ldelim();
                         }
-                        if (message.leading_comments != null && Object.hasOwnProperty.call(message, "leading_comments"))
+                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.leading_comments);
-                        if (message.trailing_comments != null && Object.hasOwnProperty.call(message, "trailing_comments"))
+                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.trailing_comments);
+                        if (message.leading_detached_comments != null && message.leading_detached_comments.length)
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.leading_detached_comments[i]);
                         return writer;
                     };
     
@@ -7225,6 +8041,11 @@
                             case 4:
                                 message.trailing_comments = reader.string();
                                 break;
+                            case 6:
+                                if (!(message.leading_detached_comments && message.leading_detached_comments.length))
+                                    message.leading_detached_comments = [];
+                                message.leading_detached_comments.push(reader.string());
+                                break;
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -7280,6 +8101,13 @@
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             if (!$util.isString(message.trailing_comments))
                                 return "trailing_comments: string expected";
+                        if (message.leading_detached_comments != null && message.hasOwnProperty("leading_detached_comments")) {
+                            if (!Array.isArray(message.leading_detached_comments))
+                                return "leading_detached_comments: array expected";
+                            for (var i = 0; i < message.leading_detached_comments.length; ++i)
+                                if (!$util.isString(message.leading_detached_comments[i]))
+                                    return "leading_detached_comments: string[] expected";
+                        }
                         return null;
                     };
     
@@ -7313,6 +8141,13 @@
                             message.leading_comments = String(object.leading_comments);
                         if (object.trailing_comments != null)
                             message.trailing_comments = String(object.trailing_comments);
+                        if (object.leading_detached_comments) {
+                            if (!Array.isArray(object.leading_detached_comments))
+                                throw TypeError(".google.protobuf.SourceCodeInfo.Location.leading_detached_comments: array expected");
+                            message.leading_detached_comments = [];
+                            for (var i = 0; i < object.leading_detached_comments.length; ++i)
+                                message.leading_detached_comments[i] = String(object.leading_detached_comments[i]);
+                        }
                         return message;
                     };
     
@@ -7332,6 +8167,7 @@
                         if (options.arrays || options.defaults) {
                             object.path = [];
                             object.span = [];
+                            object.leading_detached_comments = [];
                         }
                         if (options.defaults) {
                             object.leading_comments = "";
@@ -7351,6 +8187,11 @@
                             object.leading_comments = message.leading_comments;
                         if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
                             object.trailing_comments = message.trailing_comments;
+                        if (message.leading_detached_comments && message.leading_detached_comments.length) {
+                            object.leading_detached_comments = [];
+                            for (var j = 0; j < message.leading_detached_comments.length; ++j)
+                                object.leading_detached_comments[j] = message.leading_detached_comments[j];
+                        }
                         return object;
                     };
     
@@ -7369,6 +8210,493 @@
                 })();
     
                 return SourceCodeInfo;
+            })();
+    
+            protobuf.GeneratedCodeInfo = (function() {
+    
+                /**
+                 * Properties of a GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @interface IGeneratedCodeInfo
+                 * @property {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>|null} [annotation] GeneratedCodeInfo annotation
+                 */
+    
+                /**
+                 * Constructs a new GeneratedCodeInfo.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a GeneratedCodeInfo.
+                 * @implements IGeneratedCodeInfo
+                 * @constructor
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 */
+                function GeneratedCodeInfo(properties) {
+                    this.annotation = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GeneratedCodeInfo annotation.
+                 * @member {Array.<google.protobuf.GeneratedCodeInfo.IAnnotation>} annotation
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 */
+                GeneratedCodeInfo.prototype.annotation = $util.emptyArray;
+    
+                /**
+                 * Creates a new GeneratedCodeInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo instance
+                 */
+                GeneratedCodeInfo.create = function create(properties) {
+                    return new GeneratedCodeInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.annotation != null && message.annotation.length)
+                        for (var i = 0; i < message.annotation.length; ++i)
+                            $root.google.protobuf.GeneratedCodeInfo.Annotation.encode(message.annotation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GeneratedCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.IGeneratedCodeInfo} message GeneratedCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.annotation && message.annotation.length))
+                                message.annotation = [];
+                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GeneratedCodeInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GeneratedCodeInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GeneratedCodeInfo message.
+                 * @function verify
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GeneratedCodeInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.annotation != null && message.hasOwnProperty("annotation")) {
+                        if (!Array.isArray(message.annotation))
+                            return "annotation: array expected";
+                        for (var i = 0; i < message.annotation.length; ++i) {
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            if (error)
+                                return "annotation." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a GeneratedCodeInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
+                 */
+                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
+                        return object;
+                    var message = new $root.google.protobuf.GeneratedCodeInfo();
+                    if (object.annotation) {
+                        if (!Array.isArray(object.annotation))
+                            throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: array expected");
+                        message.annotation = [];
+                        for (var i = 0; i < object.annotation.length; ++i) {
+                            if (typeof object.annotation[i] !== "object")
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {google.protobuf.GeneratedCodeInfo} message GeneratedCodeInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GeneratedCodeInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.annotation = [];
+                    if (message.annotation && message.annotation.length) {
+                        object.annotation = [];
+                        for (var j = 0; j < message.annotation.length; ++j)
+                            object.annotation[j] = $root.google.protobuf.GeneratedCodeInfo.Annotation.toObject(message.annotation[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this GeneratedCodeInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GeneratedCodeInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                GeneratedCodeInfo.Annotation = (function() {
+    
+                    /**
+                     * Properties of an Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @interface IAnnotation
+                     * @property {Array.<number>|null} [path] Annotation path
+                     * @property {string|null} [source_file] Annotation source_file
+                     * @property {number|null} [begin] Annotation begin
+                     * @property {number|null} [end] Annotation end
+                     */
+    
+                    /**
+                     * Constructs a new Annotation.
+                     * @memberof google.protobuf.GeneratedCodeInfo
+                     * @classdesc Represents an Annotation.
+                     * @implements IAnnotation
+                     * @constructor
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     */
+                    function Annotation(properties) {
+                        this.path = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Annotation path.
+                     * @member {Array.<number>} path
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.path = $util.emptyArray;
+    
+                    /**
+                     * Annotation source_file.
+                     * @member {string} source_file
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.source_file = "";
+    
+                    /**
+                     * Annotation begin.
+                     * @member {number} begin
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.begin = 0;
+    
+                    /**
+                     * Annotation end.
+                     * @member {number} end
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.end = 0;
+    
+                    /**
+                     * Creates a new Annotation instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation instance
+                     */
+                    Annotation.create = function create(properties) {
+                        return new Annotation(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.path != null && message.path.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.path.length; ++i)
+                                writer.int32(message.path[i]);
+                            writer.ldelim();
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.source_file);
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Annotation message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.IAnnotation} message Annotation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Annotation.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.path && message.path.length))
+                                    message.path = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.path.push(reader.int32());
+                                } else
+                                    message.path.push(reader.int32());
+                                break;
+                            case 2:
+                                message.source_file = reader.string();
+                                break;
+                            case 3:
+                                message.begin = reader.int32();
+                                break;
+                            case 4:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Annotation message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Annotation.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Annotation message.
+                     * @function verify
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Annotation.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.path != null && message.hasOwnProperty("path")) {
+                            if (!Array.isArray(message.path))
+                                return "path: array expected";
+                            for (var i = 0; i < message.path.length; ++i)
+                                if (!$util.isInteger(message.path[i]))
+                                    return "path: integer[] expected";
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            if (!$util.isString(message.source_file))
+                                return "source_file: string expected";
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            if (!$util.isInteger(message.begin))
+                                return "begin: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Annotation message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
+                     */
+                    Annotation.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
+                            return object;
+                        var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        if (object.path) {
+                            if (!Array.isArray(object.path))
+                                throw TypeError(".google.protobuf.GeneratedCodeInfo.Annotation.path: array expected");
+                            message.path = [];
+                            for (var i = 0; i < object.path.length; ++i)
+                                message.path[i] = object.path[i] | 0;
+                        }
+                        if (object.source_file != null)
+                            message.source_file = String(object.source_file);
+                        if (object.begin != null)
+                            message.begin = object.begin | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Annotation message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {google.protobuf.GeneratedCodeInfo.Annotation} message Annotation
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Annotation.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.path = [];
+                        if (options.defaults) {
+                            object.source_file = "";
+                            object.begin = 0;
+                            object.end = 0;
+                        }
+                        if (message.path && message.path.length) {
+                            object.path = [];
+                            for (var j = 0; j < message.path.length; ++j)
+                                object.path[j] = message.path[j];
+                        }
+                        if (message.source_file != null && message.hasOwnProperty("source_file"))
+                            object.source_file = message.source_file;
+                        if (message.begin != null && message.hasOwnProperty("begin"))
+                            object.begin = message.begin;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Annotation to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Annotation.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Annotation;
+                })();
+    
+                return GeneratedCodeInfo;
             })();
     
             return protobuf;
@@ -7602,9 +8930,9 @@
         CRemoteClient_CreateSession_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.euniverse != null && Object.hasOwnProperty.call(message, "euniverse"))
+            if (message.euniverse != null && message.hasOwnProperty("euniverse"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.euniverse);
             return writer;
         };
@@ -7817,7 +9145,7 @@
         CRemoteClient_StartPairing_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
             return writer;
         };
@@ -8018,7 +9346,7 @@
         CRemoteClient_StartPairing_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.pin != null && Object.hasOwnProperty.call(message, "pin"))
+            if (message.pin != null && message.hasOwnProperty("pin"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.pin);
             return writer;
         };
@@ -8223,11 +9551,11 @@
         CRemoteClient_SetPairingInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.device_id != null && Object.hasOwnProperty.call(message, "device_id"))
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.device_id);
-            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+            if (message.request != null && message.hasOwnProperty("request"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.request);
             return writer;
         };
@@ -8634,7 +9962,7 @@
         CRemoteClient_GetPairingInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.pin != null && Object.hasOwnProperty.call(message, "pin"))
+            if (message.pin != null && message.hasOwnProperty("pin"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.pin);
             return writer;
         };
@@ -8839,11 +10167,11 @@
         CRemoteClient_GetPairingInfo_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.device_id != null && Object.hasOwnProperty.call(message, "device_id"))
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.device_id);
-            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+            if (message.request != null && message.hasOwnProperty("request"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.request);
             return writer;
         };
@@ -9090,7 +10418,7 @@
         CRemoteClient_CancelPairing_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
             return writer;
         };
@@ -9469,11 +10797,11 @@
         CRemoteClient_RegisterStatusUpdate_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
-            if (message.device_id != null && Object.hasOwnProperty.call(message, "device_id"))
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.device_id);
             return writer;
         };
@@ -9734,9 +11062,9 @@
         CRemoteClient_UnregisterStatusUpdate_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
             return writer;
         };
@@ -9963,7 +11291,7 @@
         CRemoteClient_Online_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
             return writer;
         };
@@ -10182,11 +11510,11 @@
         CRemoteClient_RemotePacket_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
-            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+            if (message.payload != null && message.hasOwnProperty("payload"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.payload);
             return writer;
         };
@@ -10442,9 +11770,9 @@
         CRemoteClient_ReplyPacket_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+            if (message.payload != null && message.hasOwnProperty("payload"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.payload);
             return writer;
         };
@@ -10666,7 +11994,7 @@
         CRemoteClient_GetReplies_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
             return writer;
         };
@@ -11082,9 +12410,9 @@
         CRemoteClient_AllocateTURNServer_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cellid != null && Object.hasOwnProperty.call(message, "cellid"))
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
-            if (message.credentials != null && Object.hasOwnProperty.call(message, "credentials"))
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.credentials);
             return writer;
         };
@@ -11283,7 +12611,7 @@
         CRemoteClient_AllocateTURNServer_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.turn_server != null && Object.hasOwnProperty.call(message, "turn_server"))
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.turn_server);
             return writer;
         };
@@ -11479,9 +12807,9 @@
         CRemoteClient_AllocateRelayServer_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cellid != null && Object.hasOwnProperty.call(message, "cellid"))
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
-            if (message.credentials != null && Object.hasOwnProperty.call(message, "credentials"))
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.credentials);
             return writer;
         };
@@ -11680,7 +13008,7 @@
         CRemoteClient_AllocateRelayServer_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.relay_server != null && Object.hasOwnProperty.call(message, "relay_server"))
+            if (message.relay_server != null && message.hasOwnProperty("relay_server"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.relay_server);
             return writer;
         };
@@ -11867,7 +13195,7 @@
         CRemoteClient_AllocateSDR_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
             return writer;
         };
@@ -12232,11 +13560,11 @@
         CRemoteClient_SteamBroadcast_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.clientid != null && Object.hasOwnProperty.call(message, "clientid"))
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.clientid);
-            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+            if (message.payload != null && message.hasOwnProperty("payload"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.payload);
             return writer;
         };
@@ -12519,15 +13847,15 @@
         CRemoteClient_SteamToSteam_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.src_clientid != null && Object.hasOwnProperty.call(message, "src_clientid"))
+            if (message.src_clientid != null && message.hasOwnProperty("src_clientid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.src_clientid);
-            if (message.dst_clientid != null && Object.hasOwnProperty.call(message, "dst_clientid"))
+            if (message.dst_clientid != null && message.hasOwnProperty("dst_clientid"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.dst_clientid);
-            if (message.secretid != null && Object.hasOwnProperty.call(message, "secretid"))
+            if (message.secretid != null && message.hasOwnProperty("secretid"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.secretid);
-            if (message.encrypted_payload != null && Object.hasOwnProperty.call(message, "encrypted_payload"))
+            if (message.encrypted_payload != null && message.hasOwnProperty("encrypted_payload"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.encrypted_payload);
             return writer;
         };
@@ -12764,6 +14092,8 @@
          * @property {number|null} [client_account_id] CRemotePlay_SessionStarted_Request client_account_id
          * @property {number|null} [appid] CRemotePlay_SessionStarted_Request appid
          * @property {number|null} [device_form_factor] CRemotePlay_SessionStarted_Request device_form_factor
+         * @property {boolean|null} [remote_play_together] CRemotePlay_SessionStarted_Request remote_play_together
+         * @property {boolean|null} [guest_session] CRemotePlay_SessionStarted_Request guest_session
          */
     
         /**
@@ -12814,6 +14144,22 @@
         CRemotePlay_SessionStarted_Request.prototype.device_form_factor = 0;
     
         /**
+         * CRemotePlay_SessionStarted_Request remote_play_together.
+         * @member {boolean} remote_play_together
+         * @memberof CRemotePlay_SessionStarted_Request
+         * @instance
+         */
+        CRemotePlay_SessionStarted_Request.prototype.remote_play_together = false;
+    
+        /**
+         * CRemotePlay_SessionStarted_Request guest_session.
+         * @member {boolean} guest_session
+         * @memberof CRemotePlay_SessionStarted_Request
+         * @instance
+         */
+        CRemotePlay_SessionStarted_Request.prototype.guest_session = false;
+    
+        /**
          * Creates a new CRemotePlay_SessionStarted_Request instance using the specified properties.
          * @function create
          * @memberof CRemotePlay_SessionStarted_Request
@@ -12837,14 +14183,18 @@
         CRemotePlay_SessionStarted_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.host_account_id != null && Object.hasOwnProperty.call(message, "host_account_id"))
+            if (message.host_account_id != null && message.hasOwnProperty("host_account_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.host_account_id);
-            if (message.client_account_id != null && Object.hasOwnProperty.call(message, "client_account_id"))
+            if (message.client_account_id != null && message.hasOwnProperty("client_account_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.client_account_id);
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.appid);
-            if (message.device_form_factor != null && Object.hasOwnProperty.call(message, "device_form_factor"))
+            if (message.device_form_factor != null && message.hasOwnProperty("device_form_factor"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.device_form_factor);
+            if (message.remote_play_together != null && message.hasOwnProperty("remote_play_together"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.remote_play_together);
+            if (message.guest_session != null && message.hasOwnProperty("guest_session"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.guest_session);
             return writer;
         };
     
@@ -12890,6 +14240,12 @@
                     break;
                 case 4:
                     message.device_form_factor = reader.int32();
+                    break;
+                case 5:
+                    message.remote_play_together = reader.bool();
+                    break;
+                case 6:
+                    message.guest_session = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -12938,6 +14294,12 @@
             if (message.device_form_factor != null && message.hasOwnProperty("device_form_factor"))
                 if (!$util.isInteger(message.device_form_factor))
                     return "device_form_factor: integer expected";
+            if (message.remote_play_together != null && message.hasOwnProperty("remote_play_together"))
+                if (typeof message.remote_play_together !== "boolean")
+                    return "remote_play_together: boolean expected";
+            if (message.guest_session != null && message.hasOwnProperty("guest_session"))
+                if (typeof message.guest_session !== "boolean")
+                    return "guest_session: boolean expected";
             return null;
         };
     
@@ -12961,6 +14323,10 @@
                 message.appid = object.appid >>> 0;
             if (object.device_form_factor != null)
                 message.device_form_factor = object.device_form_factor | 0;
+            if (object.remote_play_together != null)
+                message.remote_play_together = Boolean(object.remote_play_together);
+            if (object.guest_session != null)
+                message.guest_session = Boolean(object.guest_session);
             return message;
         };
     
@@ -12982,6 +14348,8 @@
                 object.client_account_id = 0;
                 object.appid = 0;
                 object.device_form_factor = 0;
+                object.remote_play_together = false;
+                object.guest_session = false;
             }
             if (message.host_account_id != null && message.hasOwnProperty("host_account_id"))
                 object.host_account_id = message.host_account_id;
@@ -12991,6 +14359,10 @@
                 object.appid = message.appid;
             if (message.device_form_factor != null && message.hasOwnProperty("device_form_factor"))
                 object.device_form_factor = message.device_form_factor;
+            if (message.remote_play_together != null && message.hasOwnProperty("remote_play_together"))
+                object.remote_play_together = message.remote_play_together;
+            if (message.guest_session != null && message.hasOwnProperty("guest_session"))
+                object.guest_session = message.guest_session;
             return object;
         };
     
@@ -13064,7 +14436,7 @@
         CRemotePlay_SessionStarted_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.record_id != null && Object.hasOwnProperty.call(message, "record_id"))
+            if (message.record_id != null && message.hasOwnProperty("record_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.record_id);
             return writer;
         };
@@ -13292,13 +14664,13 @@
         CRemotePlay_SessionStopped_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.record_id != null && Object.hasOwnProperty.call(message, "record_id"))
+            if (message.record_id != null && message.hasOwnProperty("record_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.record_id);
-            if (message.used_x264 != null && Object.hasOwnProperty.call(message, "used_x264"))
+            if (message.used_x264 != null && message.hasOwnProperty("used_x264"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.used_x264);
-            if (message.used_h264 != null && Object.hasOwnProperty.call(message, "used_h264"))
+            if (message.used_h264 != null && message.hasOwnProperty("used_h264"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.used_h264);
-            if (message.used_hevc != null && Object.hasOwnProperty.call(message, "used_hevc"))
+            if (message.used_hevc != null && message.hasOwnProperty("used_hevc"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.used_hevc);
             return writer;
         };
@@ -13556,9 +14928,9 @@
         CRemotePlayTogether_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.group_updated != null && Object.hasOwnProperty.call(message, "group_updated"))
+            if (message.group_updated != null && message.hasOwnProperty("group_updated"))
                 $root.CRemotePlayTogether_Notification.GroupUpdated.encode(message.group_updated, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
@@ -13722,25 +15094,29 @@
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        CRemotePlayTogether_Notification.ControllerSlots = (function() {
+        CRemotePlayTogether_Notification.Player = (function() {
     
             /**
-             * Properties of a ControllerSlots.
+             * Properties of a Player.
              * @memberof CRemotePlayTogether_Notification
-             * @interface IControllerSlots
-             * @property {number|null} [slotid] ControllerSlots slotid
-             * @property {number|Long|null} [steamid] ControllerSlots steamid
+             * @interface IPlayer
+             * @property {number|Long|null} [steamid] Player steamid
+             * @property {number|null} [guestid] Player guestid
+             * @property {Uint8Array|null} [avatar_hash] Player avatar_hash
+             * @property {boolean|null} [keyboard_enabled] Player keyboard_enabled
+             * @property {boolean|null} [mouse_enabled] Player mouse_enabled
+             * @property {boolean|null} [controller_enabled] Player controller_enabled
              */
     
             /**
-             * Constructs a new ControllerSlots.
+             * Constructs a new Player.
              * @memberof CRemotePlayTogether_Notification
-             * @classdesc Represents a ControllerSlots.
-             * @implements IControllerSlots
+             * @classdesc Represents a Player.
+             * @implements IPlayer
              * @constructor
-             * @param {CRemotePlayTogether_Notification.IControllerSlots=} [properties] Properties to set
+             * @param {CRemotePlayTogether_Notification.IPlayer=} [properties] Properties to set
              */
-            function ControllerSlots(properties) {
+            function Player(properties) {
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -13748,80 +15124,397 @@
             }
     
             /**
-             * ControllerSlots slotid.
-             * @member {number} slotid
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
-             * @instance
-             */
-            ControllerSlots.prototype.slotid = 0;
-    
-            /**
-             * ControllerSlots steamid.
+             * Player steamid.
              * @member {number|Long} steamid
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.Player
              * @instance
              */
-            ControllerSlots.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Player.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
-             * Creates a new ControllerSlots instance using the specified properties.
-             * @function create
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
-             * @static
-             * @param {CRemotePlayTogether_Notification.IControllerSlots=} [properties] Properties to set
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots instance
+             * Player guestid.
+             * @member {number} guestid
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
              */
-            ControllerSlots.create = function create(properties) {
-                return new ControllerSlots(properties);
+            Player.prototype.guestid = 0;
+    
+            /**
+             * Player avatar_hash.
+             * @member {Uint8Array} avatar_hash
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.avatar_hash = $util.newBuffer([]);
+    
+            /**
+             * Player keyboard_enabled.
+             * @member {boolean} keyboard_enabled
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.keyboard_enabled = false;
+    
+            /**
+             * Player mouse_enabled.
+             * @member {boolean} mouse_enabled
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.mouse_enabled = false;
+    
+            /**
+             * Player controller_enabled.
+             * @member {boolean} controller_enabled
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.controller_enabled = false;
+    
+            /**
+             * Creates a new Player instance using the specified properties.
+             * @function create
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {CRemotePlayTogether_Notification.IPlayer=} [properties] Properties to set
+             * @returns {CRemotePlayTogether_Notification.Player} Player instance
+             */
+            Player.create = function create(properties) {
+                return new Player(properties);
             };
     
             /**
-             * Encodes the specified ControllerSlots message. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlots.verify|verify} messages.
+             * Encodes the specified Player message. Does not implicitly {@link CRemotePlayTogether_Notification.Player.verify|verify} messages.
              * @function encode
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.Player
              * @static
-             * @param {CRemotePlayTogether_Notification.IControllerSlots} message ControllerSlots message or plain object to encode
+             * @param {CRemotePlayTogether_Notification.IPlayer} message Player message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            ControllerSlots.encode = function encode(message, writer) {
+            Player.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.slotid != null && Object.hasOwnProperty.call(message, "slotid"))
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+                if (message.guestid != null && message.hasOwnProperty("guestid"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.guestid);
+                if (message.avatar_hash != null && message.hasOwnProperty("avatar_hash"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.avatar_hash);
+                if (message.keyboard_enabled != null && message.hasOwnProperty("keyboard_enabled"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.keyboard_enabled);
+                if (message.mouse_enabled != null && message.hasOwnProperty("mouse_enabled"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.mouse_enabled);
+                if (message.controller_enabled != null && message.hasOwnProperty("controller_enabled"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.controller_enabled);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Player message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.Player.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {CRemotePlayTogether_Notification.IPlayer} message Player message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Player.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Player message from the specified reader or buffer.
+             * @function decode
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CRemotePlayTogether_Notification.Player} Player
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Player.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.Player();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.steamid = reader.fixed64();
+                        break;
+                    case 2:
+                        message.guestid = reader.uint32();
+                        break;
+                    case 3:
+                        message.avatar_hash = reader.bytes();
+                        break;
+                    case 4:
+                        message.keyboard_enabled = reader.bool();
+                        break;
+                    case 5:
+                        message.mouse_enabled = reader.bool();
+                        break;
+                    case 6:
+                        message.controller_enabled = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Player message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CRemotePlayTogether_Notification.Player} Player
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Player.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Player message.
+             * @function verify
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Player.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                        return "steamid: integer|Long expected";
+                if (message.guestid != null && message.hasOwnProperty("guestid"))
+                    if (!$util.isInteger(message.guestid))
+                        return "guestid: integer expected";
+                if (message.avatar_hash != null && message.hasOwnProperty("avatar_hash"))
+                    if (!(message.avatar_hash && typeof message.avatar_hash.length === "number" || $util.isString(message.avatar_hash)))
+                        return "avatar_hash: buffer expected";
+                if (message.keyboard_enabled != null && message.hasOwnProperty("keyboard_enabled"))
+                    if (typeof message.keyboard_enabled !== "boolean")
+                        return "keyboard_enabled: boolean expected";
+                if (message.mouse_enabled != null && message.hasOwnProperty("mouse_enabled"))
+                    if (typeof message.mouse_enabled !== "boolean")
+                        return "mouse_enabled: boolean expected";
+                if (message.controller_enabled != null && message.hasOwnProperty("controller_enabled"))
+                    if (typeof message.controller_enabled !== "boolean")
+                        return "controller_enabled: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Player message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CRemotePlayTogether_Notification.Player} Player
+             */
+            Player.fromObject = function fromObject(object) {
+                if (object instanceof $root.CRemotePlayTogether_Notification.Player)
+                    return object;
+                var message = new $root.CRemotePlayTogether_Notification.Player();
+                if (object.steamid != null)
+                    if ($util.Long)
+                        (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                    else if (typeof object.steamid === "string")
+                        message.steamid = parseInt(object.steamid, 10);
+                    else if (typeof object.steamid === "number")
+                        message.steamid = object.steamid;
+                    else if (typeof object.steamid === "object")
+                        message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+                if (object.guestid != null)
+                    message.guestid = object.guestid >>> 0;
+                if (object.avatar_hash != null)
+                    if (typeof object.avatar_hash === "string")
+                        $util.base64.decode(object.avatar_hash, message.avatar_hash = $util.newBuffer($util.base64.length(object.avatar_hash)), 0);
+                    else if (object.avatar_hash.length)
+                        message.avatar_hash = object.avatar_hash;
+                if (object.keyboard_enabled != null)
+                    message.keyboard_enabled = Boolean(object.keyboard_enabled);
+                if (object.mouse_enabled != null)
+                    message.mouse_enabled = Boolean(object.mouse_enabled);
+                if (object.controller_enabled != null)
+                    message.controller_enabled = Boolean(object.controller_enabled);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Player message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {CRemotePlayTogether_Notification.Player} message Player
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Player.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steamid = options.longs === String ? "0" : 0;
+                    object.guestid = 0;
+                    if (options.bytes === String)
+                        object.avatar_hash = "";
+                    else {
+                        object.avatar_hash = [];
+                        if (options.bytes !== Array)
+                            object.avatar_hash = $util.newBuffer(object.avatar_hash);
+                    }
+                    object.keyboard_enabled = false;
+                    object.mouse_enabled = false;
+                    object.controller_enabled = false;
+                }
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (typeof message.steamid === "number")
+                        object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                    else
+                        object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+                if (message.guestid != null && message.hasOwnProperty("guestid"))
+                    object.guestid = message.guestid;
+                if (message.avatar_hash != null && message.hasOwnProperty("avatar_hash"))
+                    object.avatar_hash = options.bytes === String ? $util.base64.encode(message.avatar_hash, 0, message.avatar_hash.length) : options.bytes === Array ? Array.prototype.slice.call(message.avatar_hash) : message.avatar_hash;
+                if (message.keyboard_enabled != null && message.hasOwnProperty("keyboard_enabled"))
+                    object.keyboard_enabled = message.keyboard_enabled;
+                if (message.mouse_enabled != null && message.hasOwnProperty("mouse_enabled"))
+                    object.mouse_enabled = message.mouse_enabled;
+                if (message.controller_enabled != null && message.hasOwnProperty("controller_enabled"))
+                    object.controller_enabled = message.controller_enabled;
+                return object;
+            };
+    
+            /**
+             * Converts this Player to JSON.
+             * @function toJSON
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Player.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Player;
+        })();
+    
+        CRemotePlayTogether_Notification.ControllerSlot_obsolete = (function() {
+    
+            /**
+             * Properties of a ControllerSlot_obsolete.
+             * @memberof CRemotePlayTogether_Notification
+             * @interface IControllerSlot_obsolete
+             * @property {number|null} [slotid] ControllerSlot_obsolete slotid
+             * @property {number|Long|null} [steamid] ControllerSlot_obsolete steamid
+             */
+    
+            /**
+             * Constructs a new ControllerSlot_obsolete.
+             * @memberof CRemotePlayTogether_Notification
+             * @classdesc Represents a ControllerSlot_obsolete.
+             * @implements IControllerSlot_obsolete
+             * @constructor
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete=} [properties] Properties to set
+             */
+            function ControllerSlot_obsolete(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ControllerSlot_obsolete slotid.
+             * @member {number} slotid
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @instance
+             */
+            ControllerSlot_obsolete.prototype.slotid = 0;
+    
+            /**
+             * ControllerSlot_obsolete steamid.
+             * @member {number|Long} steamid
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @instance
+             */
+            ControllerSlot_obsolete.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * Creates a new ControllerSlot_obsolete instance using the specified properties.
+             * @function create
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete=} [properties] Properties to set
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete instance
+             */
+            ControllerSlot_obsolete.create = function create(properties) {
+                return new ControllerSlot_obsolete(properties);
+            };
+    
+            /**
+             * Encodes the specified ControllerSlot_obsolete message. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot_obsolete.verify|verify} messages.
+             * @function encode
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete} message ControllerSlot_obsolete message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ControllerSlot_obsolete.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.slotid);
-                if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
                     writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
                 return writer;
             };
     
             /**
-             * Encodes the specified ControllerSlots message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlots.verify|verify} messages.
+             * Encodes the specified ControllerSlot_obsolete message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot_obsolete.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
-             * @param {CRemotePlayTogether_Notification.IControllerSlots} message ControllerSlots message or plain object to encode
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete} message ControllerSlot_obsolete message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            ControllerSlots.encodeDelimited = function encodeDelimited(message, writer) {
+            ControllerSlot_obsolete.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
     
             /**
-             * Decodes a ControllerSlots message from the specified reader or buffer.
+             * Decodes a ControllerSlot_obsolete message from the specified reader or buffer.
              * @function decode
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ControllerSlots.decode = function decode(reader, length) {
+            ControllerSlot_obsolete.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.ControllerSlots();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -13840,30 +15533,30 @@
             };
     
             /**
-             * Decodes a ControllerSlots message from the specified reader or buffer, length delimited.
+             * Decodes a ControllerSlot_obsolete message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ControllerSlots.decodeDelimited = function decodeDelimited(reader) {
+            ControllerSlot_obsolete.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
     
             /**
-             * Verifies a ControllerSlots message.
+             * Verifies a ControllerSlot_obsolete message.
              * @function verify
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            ControllerSlots.verify = function verify(message) {
+            ControllerSlot_obsolete.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.slotid != null && message.hasOwnProperty("slotid"))
@@ -13876,17 +15569,17 @@
             };
     
             /**
-             * Creates a ControllerSlots message from a plain object. Also converts values to their respective internal types.
+             * Creates a ControllerSlot_obsolete message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete
              */
-            ControllerSlots.fromObject = function fromObject(object) {
-                if (object instanceof $root.CRemotePlayTogether_Notification.ControllerSlots)
+            ControllerSlot_obsolete.fromObject = function fromObject(object) {
+                if (object instanceof $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete)
                     return object;
-                var message = new $root.CRemotePlayTogether_Notification.ControllerSlots();
+                var message = new $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete();
                 if (object.slotid != null)
                     message.slotid = object.slotid >>> 0;
                 if (object.steamid != null)
@@ -13902,15 +15595,15 @@
             };
     
             /**
-             * Creates a plain object from a ControllerSlots message. Also converts values to other types if specified.
+             * Creates a plain object from a ControllerSlot_obsolete message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
-             * @param {CRemotePlayTogether_Notification.ControllerSlots} message ControllerSlots
+             * @param {CRemotePlayTogether_Notification.ControllerSlot_obsolete} message ControllerSlot_obsolete
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            ControllerSlots.toObject = function toObject(message, options) {
+            ControllerSlot_obsolete.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -13933,17 +15626,232 @@
             };
     
             /**
-             * Converts this ControllerSlots to JSON.
+             * Converts this ControllerSlot_obsolete to JSON.
              * @function toJSON
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            ControllerSlots.prototype.toJSON = function toJSON() {
+            ControllerSlot_obsolete.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
     
-            return ControllerSlots;
+            return ControllerSlot_obsolete;
+        })();
+    
+        CRemotePlayTogether_Notification.ControllerSlot = (function() {
+    
+            /**
+             * Properties of a ControllerSlot.
+             * @memberof CRemotePlayTogether_Notification
+             * @interface IControllerSlot
+             * @property {number|null} [slotid] ControllerSlot slotid
+             * @property {CRemotePlayTogether_Notification.IPlayer|null} [player] ControllerSlot player
+             */
+    
+            /**
+             * Constructs a new ControllerSlot.
+             * @memberof CRemotePlayTogether_Notification
+             * @classdesc Represents a ControllerSlot.
+             * @implements IControllerSlot
+             * @constructor
+             * @param {CRemotePlayTogether_Notification.IControllerSlot=} [properties] Properties to set
+             */
+            function ControllerSlot(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ControllerSlot slotid.
+             * @member {number} slotid
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @instance
+             */
+            ControllerSlot.prototype.slotid = 0;
+    
+            /**
+             * ControllerSlot player.
+             * @member {CRemotePlayTogether_Notification.IPlayer|null|undefined} player
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @instance
+             */
+            ControllerSlot.prototype.player = null;
+    
+            /**
+             * Creates a new ControllerSlot instance using the specified properties.
+             * @function create
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot=} [properties] Properties to set
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot instance
+             */
+            ControllerSlot.create = function create(properties) {
+                return new ControllerSlot(properties);
+            };
+    
+            /**
+             * Encodes the specified ControllerSlot message. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot.verify|verify} messages.
+             * @function encode
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot} message ControllerSlot message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ControllerSlot.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.slotid);
+                if (message.player != null && message.hasOwnProperty("player"))
+                    $root.CRemotePlayTogether_Notification.Player.encode(message.player, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ControllerSlot message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot} message ControllerSlot message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ControllerSlot.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ControllerSlot message from the specified reader or buffer.
+             * @function decode
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ControllerSlot.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.ControllerSlot();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.slotid = reader.uint32();
+                        break;
+                    case 2:
+                        message.player = $root.CRemotePlayTogether_Notification.Player.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ControllerSlot message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ControllerSlot.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ControllerSlot message.
+             * @function verify
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ControllerSlot.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
+                    if (!$util.isInteger(message.slotid))
+                        return "slotid: integer expected";
+                if (message.player != null && message.hasOwnProperty("player")) {
+                    var error = $root.CRemotePlayTogether_Notification.Player.verify(message.player);
+                    if (error)
+                        return "player." + error;
+                }
+                return null;
+            };
+    
+            /**
+             * Creates a ControllerSlot message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot
+             */
+            ControllerSlot.fromObject = function fromObject(object) {
+                if (object instanceof $root.CRemotePlayTogether_Notification.ControllerSlot)
+                    return object;
+                var message = new $root.CRemotePlayTogether_Notification.ControllerSlot();
+                if (object.slotid != null)
+                    message.slotid = object.slotid >>> 0;
+                if (object.player != null) {
+                    if (typeof object.player !== "object")
+                        throw TypeError(".CRemotePlayTogether_Notification.ControllerSlot.player: object expected");
+                    message.player = $root.CRemotePlayTogether_Notification.Player.fromObject(object.player);
+                }
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ControllerSlot message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.ControllerSlot} message ControllerSlot
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ControllerSlot.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.slotid = 0;
+                    object.player = null;
+                }
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
+                    object.slotid = message.slotid;
+                if (message.player != null && message.hasOwnProperty("player"))
+                    object.player = $root.CRemotePlayTogether_Notification.Player.toObject(message.player, options);
+                return object;
+            };
+    
+            /**
+             * Converts this ControllerSlot to JSON.
+             * @function toJSON
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ControllerSlot.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ControllerSlot;
         })();
     
         CRemotePlayTogether_Notification.GroupUpdated = (function() {
@@ -13954,9 +15862,12 @@
              * @interface IGroupUpdated
              * @property {number|Long|null} [host_steamid] GroupUpdated host_steamid
              * @property {number|Long|null} [host_clientid] GroupUpdated host_clientid
-             * @property {Array.<number|Long>|null} [players] GroupUpdated players
+             * @property {Array.<number|Long>|null} [players_obsolete] GroupUpdated players_obsolete
              * @property {number|Long|null} [host_gameid] GroupUpdated host_gameid
-             * @property {Array.<CRemotePlayTogether_Notification.IControllerSlots>|null} [controller_slots] GroupUpdated controller_slots
+             * @property {Array.<CRemotePlayTogether_Notification.IControllerSlot_obsolete>|null} [controller_slots_obsolete] GroupUpdated controller_slots_obsolete
+             * @property {boolean|null} [has_new_players] GroupUpdated has_new_players
+             * @property {Array.<CRemotePlayTogether_Notification.IPlayer>|null} [player_slots] GroupUpdated player_slots
+             * @property {Array.<CRemotePlayTogether_Notification.IControllerSlot>|null} [controller_slots] GroupUpdated controller_slots
              */
     
             /**
@@ -13968,7 +15879,9 @@
              * @param {CRemotePlayTogether_Notification.IGroupUpdated=} [properties] Properties to set
              */
             function GroupUpdated(properties) {
-                this.players = [];
+                this.players_obsolete = [];
+                this.controller_slots_obsolete = [];
+                this.player_slots = [];
                 this.controller_slots = [];
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -13993,12 +15906,12 @@
             GroupUpdated.prototype.host_clientid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
-             * GroupUpdated players.
-             * @member {Array.<number|Long>} players
+             * GroupUpdated players_obsolete.
+             * @member {Array.<number|Long>} players_obsolete
              * @memberof CRemotePlayTogether_Notification.GroupUpdated
              * @instance
              */
-            GroupUpdated.prototype.players = $util.emptyArray;
+            GroupUpdated.prototype.players_obsolete = $util.emptyArray;
     
             /**
              * GroupUpdated host_gameid.
@@ -14009,8 +15922,32 @@
             GroupUpdated.prototype.host_gameid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
+             * GroupUpdated controller_slots_obsolete.
+             * @member {Array.<CRemotePlayTogether_Notification.IControllerSlot_obsolete>} controller_slots_obsolete
+             * @memberof CRemotePlayTogether_Notification.GroupUpdated
+             * @instance
+             */
+            GroupUpdated.prototype.controller_slots_obsolete = $util.emptyArray;
+    
+            /**
+             * GroupUpdated has_new_players.
+             * @member {boolean} has_new_players
+             * @memberof CRemotePlayTogether_Notification.GroupUpdated
+             * @instance
+             */
+            GroupUpdated.prototype.has_new_players = false;
+    
+            /**
+             * GroupUpdated player_slots.
+             * @member {Array.<CRemotePlayTogether_Notification.IPlayer>} player_slots
+             * @memberof CRemotePlayTogether_Notification.GroupUpdated
+             * @instance
+             */
+            GroupUpdated.prototype.player_slots = $util.emptyArray;
+    
+            /**
              * GroupUpdated controller_slots.
-             * @member {Array.<CRemotePlayTogether_Notification.IControllerSlots>} controller_slots
+             * @member {Array.<CRemotePlayTogether_Notification.IControllerSlot>} controller_slots
              * @memberof CRemotePlayTogether_Notification.GroupUpdated
              * @instance
              */
@@ -14040,18 +15977,26 @@
             GroupUpdated.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.host_steamid != null && Object.hasOwnProperty.call(message, "host_steamid"))
+                if (message.host_steamid != null && message.hasOwnProperty("host_steamid"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.host_steamid);
-                if (message.host_clientid != null && Object.hasOwnProperty.call(message, "host_clientid"))
+                if (message.host_clientid != null && message.hasOwnProperty("host_clientid"))
                     writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.host_clientid);
-                if (message.players != null && message.players.length)
-                    for (var i = 0; i < message.players.length; ++i)
-                        writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.players[i]);
-                if (message.host_gameid != null && Object.hasOwnProperty.call(message, "host_gameid"))
+                if (message.players_obsolete != null && message.players_obsolete.length)
+                    for (var i = 0; i < message.players_obsolete.length; ++i)
+                        writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.players_obsolete[i]);
+                if (message.host_gameid != null && message.hasOwnProperty("host_gameid"))
                     writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.host_gameid);
+                if (message.controller_slots_obsolete != null && message.controller_slots_obsolete.length)
+                    for (var i = 0; i < message.controller_slots_obsolete.length; ++i)
+                        $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.encode(message.controller_slots_obsolete[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                if (message.has_new_players != null && message.hasOwnProperty("has_new_players"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.has_new_players);
+                if (message.player_slots != null && message.player_slots.length)
+                    for (var i = 0; i < message.player_slots.length; ++i)
+                        $root.CRemotePlayTogether_Notification.Player.encode(message.player_slots[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                 if (message.controller_slots != null && message.controller_slots.length)
                     for (var i = 0; i < message.controller_slots.length; ++i)
-                        $root.CRemotePlayTogether_Notification.ControllerSlots.encode(message.controller_slots[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        $root.CRemotePlayTogether_Notification.ControllerSlot.encode(message.controller_slots[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                 return writer;
             };
     
@@ -14093,22 +16038,35 @@
                         message.host_clientid = reader.fixed64();
                         break;
                     case 3:
-                        if (!(message.players && message.players.length))
-                            message.players = [];
+                        if (!(message.players_obsolete && message.players_obsolete.length))
+                            message.players_obsolete = [];
                         if ((tag & 7) === 2) {
                             var end2 = reader.uint32() + reader.pos;
                             while (reader.pos < end2)
-                                message.players.push(reader.fixed64());
+                                message.players_obsolete.push(reader.fixed64());
                         } else
-                            message.players.push(reader.fixed64());
+                            message.players_obsolete.push(reader.fixed64());
                         break;
                     case 4:
                         message.host_gameid = reader.fixed64();
                         break;
                     case 5:
+                        if (!(message.controller_slots_obsolete && message.controller_slots_obsolete.length))
+                            message.controller_slots_obsolete = [];
+                        message.controller_slots_obsolete.push($root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.decode(reader, reader.uint32()));
+                        break;
+                    case 6:
+                        message.has_new_players = reader.bool();
+                        break;
+                    case 7:
+                        if (!(message.player_slots && message.player_slots.length))
+                            message.player_slots = [];
+                        message.player_slots.push($root.CRemotePlayTogether_Notification.Player.decode(reader, reader.uint32()));
+                        break;
+                    case 8:
                         if (!(message.controller_slots && message.controller_slots.length))
                             message.controller_slots = [];
-                        message.controller_slots.push($root.CRemotePlayTogether_Notification.ControllerSlots.decode(reader, reader.uint32()));
+                        message.controller_slots.push($root.CRemotePlayTogether_Notification.ControllerSlot.decode(reader, reader.uint32()));
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -14151,21 +16109,42 @@
                 if (message.host_clientid != null && message.hasOwnProperty("host_clientid"))
                     if (!$util.isInteger(message.host_clientid) && !(message.host_clientid && $util.isInteger(message.host_clientid.low) && $util.isInteger(message.host_clientid.high)))
                         return "host_clientid: integer|Long expected";
-                if (message.players != null && message.hasOwnProperty("players")) {
-                    if (!Array.isArray(message.players))
-                        return "players: array expected";
-                    for (var i = 0; i < message.players.length; ++i)
-                        if (!$util.isInteger(message.players[i]) && !(message.players[i] && $util.isInteger(message.players[i].low) && $util.isInteger(message.players[i].high)))
-                            return "players: integer|Long[] expected";
+                if (message.players_obsolete != null && message.hasOwnProperty("players_obsolete")) {
+                    if (!Array.isArray(message.players_obsolete))
+                        return "players_obsolete: array expected";
+                    for (var i = 0; i < message.players_obsolete.length; ++i)
+                        if (!$util.isInteger(message.players_obsolete[i]) && !(message.players_obsolete[i] && $util.isInteger(message.players_obsolete[i].low) && $util.isInteger(message.players_obsolete[i].high)))
+                            return "players_obsolete: integer|Long[] expected";
                 }
                 if (message.host_gameid != null && message.hasOwnProperty("host_gameid"))
                     if (!$util.isInteger(message.host_gameid) && !(message.host_gameid && $util.isInteger(message.host_gameid.low) && $util.isInteger(message.host_gameid.high)))
                         return "host_gameid: integer|Long expected";
+                if (message.controller_slots_obsolete != null && message.hasOwnProperty("controller_slots_obsolete")) {
+                    if (!Array.isArray(message.controller_slots_obsolete))
+                        return "controller_slots_obsolete: array expected";
+                    for (var i = 0; i < message.controller_slots_obsolete.length; ++i) {
+                        var error = $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.verify(message.controller_slots_obsolete[i]);
+                        if (error)
+                            return "controller_slots_obsolete." + error;
+                    }
+                }
+                if (message.has_new_players != null && message.hasOwnProperty("has_new_players"))
+                    if (typeof message.has_new_players !== "boolean")
+                        return "has_new_players: boolean expected";
+                if (message.player_slots != null && message.hasOwnProperty("player_slots")) {
+                    if (!Array.isArray(message.player_slots))
+                        return "player_slots: array expected";
+                    for (var i = 0; i < message.player_slots.length; ++i) {
+                        var error = $root.CRemotePlayTogether_Notification.Player.verify(message.player_slots[i]);
+                        if (error)
+                            return "player_slots." + error;
+                    }
+                }
                 if (message.controller_slots != null && message.hasOwnProperty("controller_slots")) {
                     if (!Array.isArray(message.controller_slots))
                         return "controller_slots: array expected";
                     for (var i = 0; i < message.controller_slots.length; ++i) {
-                        var error = $root.CRemotePlayTogether_Notification.ControllerSlots.verify(message.controller_slots[i]);
+                        var error = $root.CRemotePlayTogether_Notification.ControllerSlot.verify(message.controller_slots[i]);
                         if (error)
                             return "controller_slots." + error;
                     }
@@ -14203,19 +16182,19 @@
                         message.host_clientid = object.host_clientid;
                     else if (typeof object.host_clientid === "object")
                         message.host_clientid = new $util.LongBits(object.host_clientid.low >>> 0, object.host_clientid.high >>> 0).toNumber();
-                if (object.players) {
-                    if (!Array.isArray(object.players))
-                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.players: array expected");
-                    message.players = [];
-                    for (var i = 0; i < object.players.length; ++i)
+                if (object.players_obsolete) {
+                    if (!Array.isArray(object.players_obsolete))
+                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.players_obsolete: array expected");
+                    message.players_obsolete = [];
+                    for (var i = 0; i < object.players_obsolete.length; ++i)
                         if ($util.Long)
-                            (message.players[i] = $util.Long.fromValue(object.players[i])).unsigned = false;
-                        else if (typeof object.players[i] === "string")
-                            message.players[i] = parseInt(object.players[i], 10);
-                        else if (typeof object.players[i] === "number")
-                            message.players[i] = object.players[i];
-                        else if (typeof object.players[i] === "object")
-                            message.players[i] = new $util.LongBits(object.players[i].low >>> 0, object.players[i].high >>> 0).toNumber();
+                            (message.players_obsolete[i] = $util.Long.fromValue(object.players_obsolete[i])).unsigned = false;
+                        else if (typeof object.players_obsolete[i] === "string")
+                            message.players_obsolete[i] = parseInt(object.players_obsolete[i], 10);
+                        else if (typeof object.players_obsolete[i] === "number")
+                            message.players_obsolete[i] = object.players_obsolete[i];
+                        else if (typeof object.players_obsolete[i] === "object")
+                            message.players_obsolete[i] = new $util.LongBits(object.players_obsolete[i].low >>> 0, object.players_obsolete[i].high >>> 0).toNumber();
                 }
                 if (object.host_gameid != null)
                     if ($util.Long)
@@ -14226,6 +16205,28 @@
                         message.host_gameid = object.host_gameid;
                     else if (typeof object.host_gameid === "object")
                         message.host_gameid = new $util.LongBits(object.host_gameid.low >>> 0, object.host_gameid.high >>> 0).toNumber();
+                if (object.controller_slots_obsolete) {
+                    if (!Array.isArray(object.controller_slots_obsolete))
+                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots_obsolete: array expected");
+                    message.controller_slots_obsolete = [];
+                    for (var i = 0; i < object.controller_slots_obsolete.length; ++i) {
+                        if (typeof object.controller_slots_obsolete[i] !== "object")
+                            throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots_obsolete: object expected");
+                        message.controller_slots_obsolete[i] = $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.fromObject(object.controller_slots_obsolete[i]);
+                    }
+                }
+                if (object.has_new_players != null)
+                    message.has_new_players = Boolean(object.has_new_players);
+                if (object.player_slots) {
+                    if (!Array.isArray(object.player_slots))
+                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.player_slots: array expected");
+                    message.player_slots = [];
+                    for (var i = 0; i < object.player_slots.length; ++i) {
+                        if (typeof object.player_slots[i] !== "object")
+                            throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.player_slots: object expected");
+                        message.player_slots[i] = $root.CRemotePlayTogether_Notification.Player.fromObject(object.player_slots[i]);
+                    }
+                }
                 if (object.controller_slots) {
                     if (!Array.isArray(object.controller_slots))
                         throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots: array expected");
@@ -14233,7 +16234,7 @@
                     for (var i = 0; i < object.controller_slots.length; ++i) {
                         if (typeof object.controller_slots[i] !== "object")
                             throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots: object expected");
-                        message.controller_slots[i] = $root.CRemotePlayTogether_Notification.ControllerSlots.fromObject(object.controller_slots[i]);
+                        message.controller_slots[i] = $root.CRemotePlayTogether_Notification.ControllerSlot.fromObject(object.controller_slots[i]);
                     }
                 }
                 return message;
@@ -14253,7 +16254,9 @@
                     options = {};
                 var object = {};
                 if (options.arrays || options.defaults) {
-                    object.players = [];
+                    object.players_obsolete = [];
+                    object.controller_slots_obsolete = [];
+                    object.player_slots = [];
                     object.controller_slots = [];
                 }
                 if (options.defaults) {
@@ -14272,6 +16275,7 @@
                         object.host_gameid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.host_gameid = options.longs === String ? "0" : 0;
+                    object.has_new_players = false;
                 }
                 if (message.host_steamid != null && message.hasOwnProperty("host_steamid"))
                     if (typeof message.host_steamid === "number")
@@ -14283,23 +16287,35 @@
                         object.host_clientid = options.longs === String ? String(message.host_clientid) : message.host_clientid;
                     else
                         object.host_clientid = options.longs === String ? $util.Long.prototype.toString.call(message.host_clientid) : options.longs === Number ? new $util.LongBits(message.host_clientid.low >>> 0, message.host_clientid.high >>> 0).toNumber() : message.host_clientid;
-                if (message.players && message.players.length) {
-                    object.players = [];
-                    for (var j = 0; j < message.players.length; ++j)
-                        if (typeof message.players[j] === "number")
-                            object.players[j] = options.longs === String ? String(message.players[j]) : message.players[j];
+                if (message.players_obsolete && message.players_obsolete.length) {
+                    object.players_obsolete = [];
+                    for (var j = 0; j < message.players_obsolete.length; ++j)
+                        if (typeof message.players_obsolete[j] === "number")
+                            object.players_obsolete[j] = options.longs === String ? String(message.players_obsolete[j]) : message.players_obsolete[j];
                         else
-                            object.players[j] = options.longs === String ? $util.Long.prototype.toString.call(message.players[j]) : options.longs === Number ? new $util.LongBits(message.players[j].low >>> 0, message.players[j].high >>> 0).toNumber() : message.players[j];
+                            object.players_obsolete[j] = options.longs === String ? $util.Long.prototype.toString.call(message.players_obsolete[j]) : options.longs === Number ? new $util.LongBits(message.players_obsolete[j].low >>> 0, message.players_obsolete[j].high >>> 0).toNumber() : message.players_obsolete[j];
                 }
                 if (message.host_gameid != null && message.hasOwnProperty("host_gameid"))
                     if (typeof message.host_gameid === "number")
                         object.host_gameid = options.longs === String ? String(message.host_gameid) : message.host_gameid;
                     else
                         object.host_gameid = options.longs === String ? $util.Long.prototype.toString.call(message.host_gameid) : options.longs === Number ? new $util.LongBits(message.host_gameid.low >>> 0, message.host_gameid.high >>> 0).toNumber() : message.host_gameid;
+                if (message.controller_slots_obsolete && message.controller_slots_obsolete.length) {
+                    object.controller_slots_obsolete = [];
+                    for (var j = 0; j < message.controller_slots_obsolete.length; ++j)
+                        object.controller_slots_obsolete[j] = $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.toObject(message.controller_slots_obsolete[j], options);
+                }
+                if (message.has_new_players != null && message.hasOwnProperty("has_new_players"))
+                    object.has_new_players = message.has_new_players;
+                if (message.player_slots && message.player_slots.length) {
+                    object.player_slots = [];
+                    for (var j = 0; j < message.player_slots.length; ++j)
+                        object.player_slots[j] = $root.CRemotePlayTogether_Notification.Player.toObject(message.player_slots[j], options);
+                }
                 if (message.controller_slots && message.controller_slots.length) {
                     object.controller_slots = [];
                     for (var j = 0; j < message.controller_slots.length; ++j)
-                        object.controller_slots[j] = $root.CRemotePlayTogether_Notification.ControllerSlots.toObject(message.controller_slots[j], options);
+                        object.controller_slots[j] = $root.CRemotePlayTogether_Notification.ControllerSlot.toObject(message.controller_slots[j], options);
                 }
                 return object;
             };
@@ -14319,6 +16335,1124 @@
         })();
     
         return CRemotePlayTogether_Notification;
+    })();
+    
+    $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_CreateRemotePlayTogetherInvitation_Request.
+         * @exports ICRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @interface ICRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @property {number|null} [appid] CRemoteClient_CreateRemotePlayTogetherInvitation_Request appid
+         * @property {string|null} [launch_parameters] CRemoteClient_CreateRemotePlayTogetherInvitation_Request launch_parameters
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_CreateRemotePlayTogetherInvitation_Request.
+         * @exports CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @classdesc Represents a CRemoteClient_CreateRemotePlayTogetherInvitation_Request.
+         * @implements ICRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @constructor
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_CreateRemotePlayTogetherInvitation_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_CreateRemotePlayTogetherInvitation_Request appid.
+         * @member {number} appid
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.prototype.appid = 0;
+    
+        /**
+         * CRemoteClient_CreateRemotePlayTogetherInvitation_Request launch_parameters.
+         * @member {string} launch_parameters
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.prototype.launch_parameters = "";
+    
+        /**
+         * Creates a new CRemoteClient_CreateRemotePlayTogetherInvitation_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.create = function create(properties) {
+            return new CRemoteClient_CreateRemotePlayTogetherInvitation_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Request message. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request} message CRemoteClient_CreateRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.launch_parameters != null && message.hasOwnProperty("launch_parameters"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.launch_parameters);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Request message, length delimited. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request} message CRemoteClient_CreateRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.launch_parameters = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message.
+         * @function verify
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.launch_parameters != null && message.hasOwnProperty("launch_parameters"))
+                if (!$util.isString(message.launch_parameters))
+                    return "launch_parameters: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request)
+                return object;
+            var message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.launch_parameters != null)
+                message.launch_parameters = String(object.launch_parameters);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} message CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.launch_parameters = "";
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.launch_parameters != null && message.hasOwnProperty("launch_parameters"))
+                object.launch_parameters = message.launch_parameters;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_CreateRemotePlayTogetherInvitation_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_CreateRemotePlayTogetherInvitation_Request;
+    })();
+    
+    $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_CreateRemotePlayTogetherInvitation_Response.
+         * @exports ICRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @interface ICRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @property {string|null} [invitation_code] CRemoteClient_CreateRemotePlayTogetherInvitation_Response invitation_code
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_CreateRemotePlayTogetherInvitation_Response.
+         * @exports CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @classdesc Represents a CRemoteClient_CreateRemotePlayTogetherInvitation_Response.
+         * @implements ICRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @constructor
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_CreateRemotePlayTogetherInvitation_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_CreateRemotePlayTogetherInvitation_Response invitation_code.
+         * @member {string} invitation_code
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.prototype.invitation_code = "";
+    
+        /**
+         * Creates a new CRemoteClient_CreateRemotePlayTogetherInvitation_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.create = function create(properties) {
+            return new CRemoteClient_CreateRemotePlayTogetherInvitation_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Response message. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response} message CRemoteClient_CreateRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_code);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Response message, length delimited. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response} message CRemoteClient_CreateRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message.
+         * @function verify
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                if (!$util.isString(message.invitation_code))
+                    return "invitation_code: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response)
+                return object;
+            var message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response();
+            if (object.invitation_code != null)
+                message.invitation_code = String(object.invitation_code);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} message CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_code = "";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                object.invitation_code = message.invitation_code;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_CreateRemotePlayTogetherInvitation_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_CreateRemotePlayTogetherInvitation_Response;
+    })();
+    
+    $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.
+         * @exports ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @interface ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @property {string|null} [invitation_code] CRemoteClient_DeleteRemotePlayTogetherInvitation_Request invitation_code
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.
+         * @exports CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @classdesc Represents a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.
+         * @implements ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @constructor
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_DeleteRemotePlayTogetherInvitation_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_DeleteRemotePlayTogetherInvitation_Request invitation_code.
+         * @member {string} invitation_code
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.prototype.invitation_code = "";
+    
+        /**
+         * Creates a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request instance
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.create = function create(properties) {
+            return new CRemoteClient_DeleteRemotePlayTogetherInvitation_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_code);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message, length delimited. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message.
+         * @function verify
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                if (!$util.isString(message.invitation_code))
+                    return "invitation_code: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request)
+                return object;
+            var message = new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request();
+            if (object.invitation_code != null)
+                message.invitation_code = String(object.invitation_code);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_code = "";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                object.invitation_code = message.invitation_code;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_DeleteRemotePlayTogetherInvitation_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_DeleteRemotePlayTogetherInvitation_Request;
+    })();
+    
+    $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.
+         * @exports ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @interface ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.
+         * @exports CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @classdesc Represents a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.
+         * @implements ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @constructor
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_DeleteRemotePlayTogetherInvitation_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response instance
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.create = function create(properties) {
+            return new CRemoteClient_DeleteRemotePlayTogetherInvitation_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message, length delimited. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message.
+         * @function verify
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response)
+                return object;
+            return new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CRemoteClient_DeleteRemotePlayTogetherInvitation_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_DeleteRemotePlayTogetherInvitation_Response;
+    })();
+    
+    $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_LookupRemotePlayTogetherInvitation_Request.
+         * @exports ICRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @interface ICRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @property {string|null} [invitation_code] CRemoteClient_LookupRemotePlayTogetherInvitation_Request invitation_code
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_LookupRemotePlayTogetherInvitation_Request.
+         * @exports CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @classdesc Represents a CRemoteClient_LookupRemotePlayTogetherInvitation_Request.
+         * @implements ICRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @constructor
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_LookupRemotePlayTogetherInvitation_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_LookupRemotePlayTogetherInvitation_Request invitation_code.
+         * @member {string} invitation_code
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.prototype.invitation_code = "";
+    
+        /**
+         * Creates a new CRemoteClient_LookupRemotePlayTogetherInvitation_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.create = function create(properties) {
+            return new CRemoteClient_LookupRemotePlayTogetherInvitation_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Request message. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request} message CRemoteClient_LookupRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_code);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Request message, length delimited. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request} message CRemoteClient_LookupRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message.
+         * @function verify
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                if (!$util.isString(message.invitation_code))
+                    return "invitation_code: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request)
+                return object;
+            var message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request();
+            if (object.invitation_code != null)
+                message.invitation_code = String(object.invitation_code);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} message CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_code = "";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                object.invitation_code = message.invitation_code;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_LookupRemotePlayTogetherInvitation_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_LookupRemotePlayTogetherInvitation_Request;
+    })();
+    
+    $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_LookupRemotePlayTogetherInvitation_Response.
+         * @exports ICRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @interface ICRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @property {string|null} [invitation_url] CRemoteClient_LookupRemotePlayTogetherInvitation_Response invitation_url
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_LookupRemotePlayTogetherInvitation_Response.
+         * @exports CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @classdesc Represents a CRemoteClient_LookupRemotePlayTogetherInvitation_Response.
+         * @implements ICRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @constructor
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_LookupRemotePlayTogetherInvitation_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_LookupRemotePlayTogetherInvitation_Response invitation_url.
+         * @member {string} invitation_url
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.prototype.invitation_url = "";
+    
+        /**
+         * Creates a new CRemoteClient_LookupRemotePlayTogetherInvitation_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.create = function create(properties) {
+            return new CRemoteClient_LookupRemotePlayTogetherInvitation_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Response message. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response} message CRemoteClient_LookupRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_url != null && message.hasOwnProperty("invitation_url"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_url);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Response message, length delimited. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response} message CRemoteClient_LookupRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_url = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message.
+         * @function verify
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_url != null && message.hasOwnProperty("invitation_url"))
+                if (!$util.isString(message.invitation_url))
+                    return "invitation_url: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response)
+                return object;
+            var message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response();
+            if (object.invitation_url != null)
+                message.invitation_url = String(object.invitation_url);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} message CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_url = "";
+            if (message.invitation_url != null && message.hasOwnProperty("invitation_url"))
+                object.invitation_url = message.invitation_url;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_LookupRemotePlayTogetherInvitation_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_LookupRemotePlayTogetherInvitation_Response;
     })();
 
     return $root;

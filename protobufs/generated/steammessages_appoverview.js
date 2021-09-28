@@ -19,7 +19,7 @@
     /**
      * EDisplayStatus enum.
      * @exports EDisplayStatus
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EDisplayStatusInvalid=0 k_EDisplayStatusInvalid value
      * @property {number} k_EDisplayStatusLaunching=1 k_EDisplayStatusLaunching value
      * @property {number} k_EDisplayStatusUninstalling=2 k_EDisplayStatusUninstalling value
@@ -51,6 +51,8 @@
      * @property {number} k_EDisplayStatusAvailToBorrow=29 k_EDisplayStatusAvailToBorrow value
      * @property {number} k_EDisplayStatusAvailGuestPass=30 k_EDisplayStatusAvailGuestPass value
      * @property {number} k_EDisplayStatusPurchase=31 k_EDisplayStatusPurchase value
+     * @property {number} k_EDisplayStatusUnavailable=32 k_EDisplayStatusUnavailable value
+     * @property {number} k_EDisplayStatusNotLaunchable=33 k_EDisplayStatusNotLaunchable value
      */
     $root.EDisplayStatus = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -85,13 +87,15 @@
         values[valuesById[29] = "k_EDisplayStatusAvailToBorrow"] = 29;
         values[valuesById[30] = "k_EDisplayStatusAvailGuestPass"] = 30;
         values[valuesById[31] = "k_EDisplayStatusPurchase"] = 31;
+        values[valuesById[32] = "k_EDisplayStatusUnavailable"] = 32;
+        values[valuesById[33] = "k_EDisplayStatusNotLaunchable"] = 33;
         return values;
     })();
     
     /**
      * EProtoAppType enum.
      * @exports EProtoAppType
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EAppTypeInvalid=0 k_EAppTypeInvalid value
      * @property {number} k_EAppTypeGame=1 k_EAppTypeGame value
      * @property {number} k_EAppTypeApplication=2 k_EAppTypeApplication value
@@ -141,7 +145,7 @@
     /**
      * EAppAssociationType enum.
      * @exports EAppAssociationType
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EAppAssociationTypeInvalid=0 k_EAppAssociationTypeInvalid value
      * @property {number} k_EAppAssociationTypePublisher=1 k_EAppAssociationTypePublisher value
      * @property {number} k_EAppAssociationTypeDeveloper=2 k_EAppAssociationTypeDeveloper value
@@ -159,7 +163,7 @@
     /**
      * EAppControllerSupportLevel enum.
      * @exports EAppControllerSupportLevel
-     * @enum {number}
+     * @enum {string}
      * @property {number} k_EAppControllerSupportLevelNone=0 k_EAppControllerSupportLevelNone value
      * @property {number} k_EAppControllerSupportLevelPartial=1 k_EAppControllerSupportLevelPartial value
      * @property {number} k_EAppControllerSupportLevelFull=2 k_EAppControllerSupportLevelFull value
@@ -237,9 +241,9 @@
         CAppOverview_AppAssociation.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+            if (message.type != null && message.hasOwnProperty("type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+            if (message.name != null && message.hasOwnProperty("name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             return writer;
         };
@@ -560,29 +564,29 @@
         CAppOverview_PerClientData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.clientid != null && Object.hasOwnProperty.call(message, "clientid"))
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.clientid);
-            if (message.client_name != null && Object.hasOwnProperty.call(message, "client_name"))
+            if (message.client_name != null && message.hasOwnProperty("client_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.client_name);
-            if (message.display_status != null && Object.hasOwnProperty.call(message, "display_status"))
+            if (message.display_status != null && message.hasOwnProperty("display_status"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.display_status);
-            if (message.status_percentage != null && Object.hasOwnProperty.call(message, "status_percentage"))
+            if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.status_percentage);
-            if (message.active_beta != null && Object.hasOwnProperty.call(message, "active_beta"))
+            if (message.active_beta != null && message.hasOwnProperty("active_beta"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.active_beta);
-            if (message.installed != null && Object.hasOwnProperty.call(message, "installed"))
+            if (message.installed != null && message.hasOwnProperty("installed"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.installed);
-            if (message.bytes_downloaded != null && Object.hasOwnProperty.call(message, "bytes_downloaded"))
+            if (message.bytes_downloaded != null && message.hasOwnProperty("bytes_downloaded"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.bytes_downloaded);
-            if (message.bytes_total != null && Object.hasOwnProperty.call(message, "bytes_total"))
+            if (message.bytes_total != null && message.hasOwnProperty("bytes_total"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.bytes_total);
-            if (message.streaming_to_local_client != null && Object.hasOwnProperty.call(message, "streaming_to_local_client"))
+            if (message.streaming_to_local_client != null && message.hasOwnProperty("streaming_to_local_client"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.streaming_to_local_client);
-            if (message.is_available_on_current_platform != null && Object.hasOwnProperty.call(message, "is_available_on_current_platform"))
+            if (message.is_available_on_current_platform != null && message.hasOwnProperty("is_available_on_current_platform"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_available_on_current_platform);
-            if (message.is_invalid_os_type != null && Object.hasOwnProperty.call(message, "is_invalid_os_type"))
+            if (message.is_invalid_os_type != null && message.hasOwnProperty("is_invalid_os_type"))
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.is_invalid_os_type);
-            if (message.playtime_left != null && Object.hasOwnProperty.call(message, "playtime_left"))
+            if (message.playtime_left != null && message.hasOwnProperty("playtime_left"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.playtime_left);
             return writer;
         };
@@ -730,6 +734,8 @@
                 case 29:
                 case 30:
                 case 31:
+                case 32:
+                case 33:
                     break;
                 }
             if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
@@ -910,6 +916,14 @@
             case 31:
                 message.display_status = 31;
                 break;
+            case "k_EDisplayStatusUnavailable":
+            case 32:
+                message.display_status = 32;
+                break;
+            case "k_EDisplayStatusNotLaunchable":
+            case 33:
+                message.display_status = 33;
+                break;
             }
             if (object.status_percentage != null)
                 message.status_percentage = object.status_percentage >>> 0;
@@ -1082,6 +1096,12 @@
          * @property {number|null} [review_score_without_bombs] CAppOverview review_score_without_bombs
          * @property {number|null} [review_percentage_without_bombs] CAppOverview review_percentage_without_bombs
          * @property {string|null} [library_id] CAppOverview library_id
+         * @property {boolean|null} [vr_only] CAppOverview vr_only
+         * @property {number|null} [mastersub_appid] CAppOverview mastersub_appid
+         * @property {string|null} [mastersub_includedwith_logo] CAppOverview mastersub_includedwith_logo
+         * @property {number|null} [compat_allowlist_setting] CAppOverview compat_allowlist_setting
+         * @property {string|null} [site_license_site_name] CAppOverview site_license_site_name
+         * @property {number|null} [shortcut_override_appid] CAppOverview shortcut_override_appid
          */
     
         /**
@@ -1432,6 +1452,54 @@
         CAppOverview.prototype.library_id = "";
     
         /**
+         * CAppOverview vr_only.
+         * @member {boolean} vr_only
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.vr_only = false;
+    
+        /**
+         * CAppOverview mastersub_appid.
+         * @member {number} mastersub_appid
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.mastersub_appid = 0;
+    
+        /**
+         * CAppOverview mastersub_includedwith_logo.
+         * @member {string} mastersub_includedwith_logo
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.mastersub_includedwith_logo = "";
+    
+        /**
+         * CAppOverview compat_allowlist_setting.
+         * @member {number} compat_allowlist_setting
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.compat_allowlist_setting = 0;
+    
+        /**
+         * CAppOverview site_license_site_name.
+         * @member {string} site_license_site_name
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.site_license_site_name = "";
+    
+        /**
+         * CAppOverview shortcut_override_appid.
+         * @member {number} shortcut_override_appid
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.shortcut_override_appid = 0;
+    
+        /**
          * Creates a new CAppOverview instance using the specified properties.
          * @function create
          * @memberof CAppOverview
@@ -1455,25 +1523,25 @@
         CAppOverview.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.display_name != null && Object.hasOwnProperty.call(message, "display_name"))
+            if (message.display_name != null && message.hasOwnProperty("display_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.display_name);
-            if (message.visible_in_game_list != null && Object.hasOwnProperty.call(message, "visible_in_game_list"))
+            if (message.visible_in_game_list != null && message.hasOwnProperty("visible_in_game_list"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.visible_in_game_list);
-            if (message.sort_as != null && Object.hasOwnProperty.call(message, "sort_as"))
+            if (message.sort_as != null && message.hasOwnProperty("sort_as"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.sort_as);
-            if (message.app_type != null && Object.hasOwnProperty.call(message, "app_type"))
+            if (message.app_type != null && message.hasOwnProperty("app_type"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.app_type);
-            if (message.mru_index != null && Object.hasOwnProperty.call(message, "mru_index"))
+            if (message.mru_index != null && message.hasOwnProperty("mru_index"))
                 writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.mru_index);
-            if (message.rt_recent_activity_time != null && Object.hasOwnProperty.call(message, "rt_recent_activity_time"))
+            if (message.rt_recent_activity_time != null && message.hasOwnProperty("rt_recent_activity_time"))
                 writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.rt_recent_activity_time);
-            if (message.minutes_playtime_forever != null && Object.hasOwnProperty.call(message, "minutes_playtime_forever"))
+            if (message.minutes_playtime_forever != null && message.hasOwnProperty("minutes_playtime_forever"))
                 writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.minutes_playtime_forever);
-            if (message.minutes_playtime_last_two_weeks != null && Object.hasOwnProperty.call(message, "minutes_playtime_last_two_weeks"))
+            if (message.minutes_playtime_last_two_weeks != null && message.hasOwnProperty("minutes_playtime_last_two_weeks"))
                 writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.minutes_playtime_last_two_weeks);
-            if (message.rt_last_time_played != null && Object.hasOwnProperty.call(message, "rt_last_time_played"))
+            if (message.rt_last_time_played != null && message.hasOwnProperty("rt_last_time_played"))
                 writer.uint32(/* id 18, wireType 0 =*/144).uint32(message.rt_last_time_played);
             if (message.store_tag != null && message.store_tag.length)
                 for (var i = 0; i < message.store_tag.length; ++i)
@@ -1484,63 +1552,75 @@
             if (message.store_category != null && message.store_category.length)
                 for (var i = 0; i < message.store_category.length; ++i)
                     writer.uint32(/* id 23, wireType 0 =*/184).uint32(message.store_category[i]);
-            if (message.rt_original_release_date != null && Object.hasOwnProperty.call(message, "rt_original_release_date"))
+            if (message.rt_original_release_date != null && message.hasOwnProperty("rt_original_release_date"))
                 writer.uint32(/* id 25, wireType 0 =*/200).uint32(message.rt_original_release_date);
-            if (message.rt_steam_release_date != null && Object.hasOwnProperty.call(message, "rt_steam_release_date"))
+            if (message.rt_steam_release_date != null && message.hasOwnProperty("rt_steam_release_date"))
                 writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.rt_steam_release_date);
-            if (message.icon_hash != null && Object.hasOwnProperty.call(message, "icon_hash"))
+            if (message.icon_hash != null && message.hasOwnProperty("icon_hash"))
                 writer.uint32(/* id 27, wireType 2 =*/218).string(message.icon_hash);
-            if (message.logo_hash != null && Object.hasOwnProperty.call(message, "logo_hash"))
+            if (message.logo_hash != null && message.hasOwnProperty("logo_hash"))
                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.logo_hash);
-            if (message.controller_support != null && Object.hasOwnProperty.call(message, "controller_support"))
+            if (message.controller_support != null && message.hasOwnProperty("controller_support"))
                 writer.uint32(/* id 31, wireType 0 =*/248).int32(message.controller_support);
-            if (message.vr_supported != null && Object.hasOwnProperty.call(message, "vr_supported"))
+            if (message.vr_supported != null && message.hasOwnProperty("vr_supported"))
                 writer.uint32(/* id 32, wireType 0 =*/256).bool(message.vr_supported);
-            if (message.metacritic_score != null && Object.hasOwnProperty.call(message, "metacritic_score"))
+            if (message.metacritic_score != null && message.hasOwnProperty("metacritic_score"))
                 writer.uint32(/* id 36, wireType 0 =*/288).uint32(message.metacritic_score);
-            if (message.size_on_disk != null && Object.hasOwnProperty.call(message, "size_on_disk"))
+            if (message.size_on_disk != null && message.hasOwnProperty("size_on_disk"))
                 writer.uint32(/* id 37, wireType 0 =*/296).uint64(message.size_on_disk);
-            if (message.third_party_mod != null && Object.hasOwnProperty.call(message, "third_party_mod"))
+            if (message.third_party_mod != null && message.hasOwnProperty("third_party_mod"))
                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.third_party_mod);
-            if (message.icon_data != null && Object.hasOwnProperty.call(message, "icon_data"))
+            if (message.icon_data != null && message.hasOwnProperty("icon_data"))
                 writer.uint32(/* id 39, wireType 2 =*/314).string(message.icon_data);
-            if (message.icon_data_format != null && Object.hasOwnProperty.call(message, "icon_data_format"))
+            if (message.icon_data_format != null && message.hasOwnProperty("icon_data_format"))
                 writer.uint32(/* id 40, wireType 2 =*/322).string(message.icon_data_format);
-            if (message.gameid != null && Object.hasOwnProperty.call(message, "gameid"))
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
                 writer.uint32(/* id 41, wireType 2 =*/330).string(message.gameid);
-            if (message.library_capsule_filename != null && Object.hasOwnProperty.call(message, "library_capsule_filename"))
+            if (message.library_capsule_filename != null && message.hasOwnProperty("library_capsule_filename"))
                 writer.uint32(/* id 42, wireType 2 =*/338).string(message.library_capsule_filename);
             if (message.per_client_data != null && message.per_client_data.length)
                 for (var i = 0; i < message.per_client_data.length; ++i)
                     $root.CAppOverview_PerClientData.encode(message.per_client_data[i], writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
-            if (message.most_available_clientid != null && Object.hasOwnProperty.call(message, "most_available_clientid"))
+            if (message.most_available_clientid != null && message.hasOwnProperty("most_available_clientid"))
                 writer.uint32(/* id 44, wireType 0 =*/352).uint64(message.most_available_clientid);
-            if (message.selected_clientid != null && Object.hasOwnProperty.call(message, "selected_clientid"))
+            if (message.selected_clientid != null && message.hasOwnProperty("selected_clientid"))
                 writer.uint32(/* id 45, wireType 0 =*/360).uint64(message.selected_clientid);
-            if (message.rt_store_asset_mtime != null && Object.hasOwnProperty.call(message, "rt_store_asset_mtime"))
+            if (message.rt_store_asset_mtime != null && message.hasOwnProperty("rt_store_asset_mtime"))
                 writer.uint32(/* id 46, wireType 0 =*/368).uint32(message.rt_store_asset_mtime);
-            if (message.rt_custom_image_mtime != null && Object.hasOwnProperty.call(message, "rt_custom_image_mtime"))
+            if (message.rt_custom_image_mtime != null && message.hasOwnProperty("rt_custom_image_mtime"))
                 writer.uint32(/* id 47, wireType 0 =*/376).uint32(message.rt_custom_image_mtime);
-            if (message.optional_parent_app_id != null && Object.hasOwnProperty.call(message, "optional_parent_app_id"))
+            if (message.optional_parent_app_id != null && message.hasOwnProperty("optional_parent_app_id"))
                 writer.uint32(/* id 48, wireType 0 =*/384).uint32(message.optional_parent_app_id);
-            if (message.owner_account_id != null && Object.hasOwnProperty.call(message, "owner_account_id"))
+            if (message.owner_account_id != null && message.hasOwnProperty("owner_account_id"))
                 writer.uint32(/* id 49, wireType 0 =*/392).uint32(message.owner_account_id);
-            if (message.compat_mapping_enabled != null && Object.hasOwnProperty.call(message, "compat_mapping_enabled"))
+            if (message.compat_mapping_enabled != null && message.hasOwnProperty("compat_mapping_enabled"))
                 writer.uint32(/* id 50, wireType 0 =*/400).bool(message.compat_mapping_enabled);
-            if (message.compat_mapping_priority != null && Object.hasOwnProperty.call(message, "compat_mapping_priority"))
+            if (message.compat_mapping_priority != null && message.hasOwnProperty("compat_mapping_priority"))
                 writer.uint32(/* id 51, wireType 0 =*/408).uint32(message.compat_mapping_priority);
-            if (message.compat_mapping_tool_name != null && Object.hasOwnProperty.call(message, "compat_mapping_tool_name"))
+            if (message.compat_mapping_tool_name != null && message.hasOwnProperty("compat_mapping_tool_name"))
                 writer.uint32(/* id 52, wireType 2 =*/418).string(message.compat_mapping_tool_name);
-            if (message.review_score_with_bombs != null && Object.hasOwnProperty.call(message, "review_score_with_bombs"))
+            if (message.review_score_with_bombs != null && message.hasOwnProperty("review_score_with_bombs"))
                 writer.uint32(/* id 53, wireType 0 =*/424).uint32(message.review_score_with_bombs);
-            if (message.review_percentage_with_bombs != null && Object.hasOwnProperty.call(message, "review_percentage_with_bombs"))
+            if (message.review_percentage_with_bombs != null && message.hasOwnProperty("review_percentage_with_bombs"))
                 writer.uint32(/* id 54, wireType 0 =*/432).uint32(message.review_percentage_with_bombs);
-            if (message.review_score_without_bombs != null && Object.hasOwnProperty.call(message, "review_score_without_bombs"))
+            if (message.review_score_without_bombs != null && message.hasOwnProperty("review_score_without_bombs"))
                 writer.uint32(/* id 55, wireType 0 =*/440).uint32(message.review_score_without_bombs);
-            if (message.review_percentage_without_bombs != null && Object.hasOwnProperty.call(message, "review_percentage_without_bombs"))
+            if (message.review_percentage_without_bombs != null && message.hasOwnProperty("review_percentage_without_bombs"))
                 writer.uint32(/* id 56, wireType 0 =*/448).uint32(message.review_percentage_without_bombs);
-            if (message.library_id != null && Object.hasOwnProperty.call(message, "library_id"))
+            if (message.library_id != null && message.hasOwnProperty("library_id"))
                 writer.uint32(/* id 57, wireType 2 =*/458).string(message.library_id);
+            if (message.vr_only != null && message.hasOwnProperty("vr_only"))
+                writer.uint32(/* id 58, wireType 0 =*/464).bool(message.vr_only);
+            if (message.mastersub_appid != null && message.hasOwnProperty("mastersub_appid"))
+                writer.uint32(/* id 59, wireType 0 =*/472).uint32(message.mastersub_appid);
+            if (message.mastersub_includedwith_logo != null && message.hasOwnProperty("mastersub_includedwith_logo"))
+                writer.uint32(/* id 60, wireType 2 =*/482).string(message.mastersub_includedwith_logo);
+            if (message.compat_allowlist_setting != null && message.hasOwnProperty("compat_allowlist_setting"))
+                writer.uint32(/* id 61, wireType 0 =*/488).uint32(message.compat_allowlist_setting);
+            if (message.site_license_site_name != null && message.hasOwnProperty("site_license_site_name"))
+                writer.uint32(/* id 62, wireType 2 =*/498).string(message.site_license_site_name);
+            if (message.shortcut_override_appid != null && message.hasOwnProperty("shortcut_override_appid"))
+                writer.uint32(/* id 63, wireType 0 =*/504).uint32(message.shortcut_override_appid);
             return writer;
         };
     
@@ -1715,6 +1795,24 @@
                     break;
                 case 57:
                     message.library_id = reader.string();
+                    break;
+                case 58:
+                    message.vr_only = reader.bool();
+                    break;
+                case 59:
+                    message.mastersub_appid = reader.uint32();
+                    break;
+                case 60:
+                    message.mastersub_includedwith_logo = reader.string();
+                    break;
+                case 61:
+                    message.compat_allowlist_setting = reader.uint32();
+                    break;
+                case 62:
+                    message.site_license_site_name = reader.string();
+                    break;
+                case 63:
+                    message.shortcut_override_appid = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1923,6 +2021,24 @@
             if (message.library_id != null && message.hasOwnProperty("library_id"))
                 if (!$util.isString(message.library_id))
                     return "library_id: string expected";
+            if (message.vr_only != null && message.hasOwnProperty("vr_only"))
+                if (typeof message.vr_only !== "boolean")
+                    return "vr_only: boolean expected";
+            if (message.mastersub_appid != null && message.hasOwnProperty("mastersub_appid"))
+                if (!$util.isInteger(message.mastersub_appid))
+                    return "mastersub_appid: integer expected";
+            if (message.mastersub_includedwith_logo != null && message.hasOwnProperty("mastersub_includedwith_logo"))
+                if (!$util.isString(message.mastersub_includedwith_logo))
+                    return "mastersub_includedwith_logo: string expected";
+            if (message.compat_allowlist_setting != null && message.hasOwnProperty("compat_allowlist_setting"))
+                if (!$util.isInteger(message.compat_allowlist_setting))
+                    return "compat_allowlist_setting: integer expected";
+            if (message.site_license_site_name != null && message.hasOwnProperty("site_license_site_name"))
+                if (!$util.isString(message.site_license_site_name))
+                    return "site_license_site_name: string expected";
+            if (message.shortcut_override_appid != null && message.hasOwnProperty("shortcut_override_appid"))
+                if (!$util.isInteger(message.shortcut_override_appid))
+                    return "shortcut_override_appid: integer expected";
             return null;
         };
     
@@ -2159,6 +2275,18 @@
                 message.review_percentage_without_bombs = object.review_percentage_without_bombs >>> 0;
             if (object.library_id != null)
                 message.library_id = String(object.library_id);
+            if (object.vr_only != null)
+                message.vr_only = Boolean(object.vr_only);
+            if (object.mastersub_appid != null)
+                message.mastersub_appid = object.mastersub_appid >>> 0;
+            if (object.mastersub_includedwith_logo != null)
+                message.mastersub_includedwith_logo = String(object.mastersub_includedwith_logo);
+            if (object.compat_allowlist_setting != null)
+                message.compat_allowlist_setting = object.compat_allowlist_setting >>> 0;
+            if (object.site_license_site_name != null)
+                message.site_license_site_name = String(object.site_license_site_name);
+            if (object.shortcut_override_appid != null)
+                message.shortcut_override_appid = object.shortcut_override_appid >>> 0;
             return message;
         };
     
@@ -2231,6 +2359,12 @@
                 object.review_score_without_bombs = 0;
                 object.review_percentage_without_bombs = 0;
                 object.library_id = "";
+                object.vr_only = false;
+                object.mastersub_appid = 0;
+                object.mastersub_includedwith_logo = "";
+                object.compat_allowlist_setting = 0;
+                object.site_license_site_name = "";
+                object.shortcut_override_appid = 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -2335,6 +2469,18 @@
                 object.review_percentage_without_bombs = message.review_percentage_without_bombs;
             if (message.library_id != null && message.hasOwnProperty("library_id"))
                 object.library_id = message.library_id;
+            if (message.vr_only != null && message.hasOwnProperty("vr_only"))
+                object.vr_only = message.vr_only;
+            if (message.mastersub_appid != null && message.hasOwnProperty("mastersub_appid"))
+                object.mastersub_appid = message.mastersub_appid;
+            if (message.mastersub_includedwith_logo != null && message.hasOwnProperty("mastersub_includedwith_logo"))
+                object.mastersub_includedwith_logo = message.mastersub_includedwith_logo;
+            if (message.compat_allowlist_setting != null && message.hasOwnProperty("compat_allowlist_setting"))
+                object.compat_allowlist_setting = message.compat_allowlist_setting;
+            if (message.site_license_site_name != null && message.hasOwnProperty("site_license_site_name"))
+                object.site_license_site_name = message.site_license_site_name;
+            if (message.shortcut_override_appid != null && message.hasOwnProperty("shortcut_override_appid"))
+                object.shortcut_override_appid = message.shortcut_override_appid;
             return object;
         };
     
@@ -2679,9 +2825,9 @@
         CAppBootstrapData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.hidden != null && Object.hasOwnProperty.call(message, "hidden"))
+            if (message.hidden != null && message.hasOwnProperty("hidden"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.hidden);
             if (message.user_tag != null && message.user_tag.length)
                 for (var i = 0; i < message.user_tag.length; ++i)

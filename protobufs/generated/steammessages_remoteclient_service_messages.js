@@ -241,9 +241,9 @@
         CRemoteClient_CreateSession_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.euniverse != null && Object.hasOwnProperty.call(message, "euniverse"))
+            if (message.euniverse != null && message.hasOwnProperty("euniverse"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.euniverse);
             return writer;
         };
@@ -456,7 +456,7 @@
         CRemoteClient_StartPairing_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
             return writer;
         };
@@ -657,7 +657,7 @@
         CRemoteClient_StartPairing_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.pin != null && Object.hasOwnProperty.call(message, "pin"))
+            if (message.pin != null && message.hasOwnProperty("pin"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.pin);
             return writer;
         };
@@ -862,11 +862,11 @@
         CRemoteClient_SetPairingInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.device_id != null && Object.hasOwnProperty.call(message, "device_id"))
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.device_id);
-            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+            if (message.request != null && message.hasOwnProperty("request"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.request);
             return writer;
         };
@@ -1273,7 +1273,7 @@
         CRemoteClient_GetPairingInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.pin != null && Object.hasOwnProperty.call(message, "pin"))
+            if (message.pin != null && message.hasOwnProperty("pin"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.pin);
             return writer;
         };
@@ -1478,11 +1478,11 @@
         CRemoteClient_GetPairingInfo_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.device_id != null && Object.hasOwnProperty.call(message, "device_id"))
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.device_id);
-            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+            if (message.request != null && message.hasOwnProperty("request"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.request);
             return writer;
         };
@@ -1729,7 +1729,7 @@
         CRemoteClient_CancelPairing_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
             return writer;
         };
@@ -2108,11 +2108,11 @@
         CRemoteClient_RegisterStatusUpdate_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
-            if (message.device_id != null && Object.hasOwnProperty.call(message, "device_id"))
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.device_id);
             return writer;
         };
@@ -2373,9 +2373,9 @@
         CRemoteClient_UnregisterStatusUpdate_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
             return writer;
         };
@@ -2602,7 +2602,7 @@
         CRemoteClient_Online_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
             return writer;
         };
@@ -2821,11 +2821,11 @@
         CRemoteClient_RemotePacket_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
-            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+            if (message.payload != null && message.hasOwnProperty("payload"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.payload);
             return writer;
         };
@@ -3081,9 +3081,9 @@
         CRemoteClient_ReplyPacket_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
-            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+            if (message.payload != null && message.hasOwnProperty("payload"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.payload);
             return writer;
         };
@@ -3305,7 +3305,7 @@
         CRemoteClient_GetReplies_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.session_id != null && Object.hasOwnProperty.call(message, "session_id"))
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
             return writer;
         };
@@ -3721,9 +3721,9 @@
         CRemoteClient_AllocateTURNServer_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cellid != null && Object.hasOwnProperty.call(message, "cellid"))
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
-            if (message.credentials != null && Object.hasOwnProperty.call(message, "credentials"))
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.credentials);
             return writer;
         };
@@ -3922,7 +3922,7 @@
         CRemoteClient_AllocateTURNServer_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.turn_server != null && Object.hasOwnProperty.call(message, "turn_server"))
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.turn_server);
             return writer;
         };
@@ -4118,9 +4118,9 @@
         CRemoteClient_AllocateRelayServer_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cellid != null && Object.hasOwnProperty.call(message, "cellid"))
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
-            if (message.credentials != null && Object.hasOwnProperty.call(message, "credentials"))
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.credentials);
             return writer;
         };
@@ -4319,7 +4319,7 @@
         CRemoteClient_AllocateRelayServer_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.relay_server != null && Object.hasOwnProperty.call(message, "relay_server"))
+            if (message.relay_server != null && message.hasOwnProperty("relay_server"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.relay_server);
             return writer;
         };
@@ -4506,7 +4506,7 @@
         CRemoteClient_AllocateSDR_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
             return writer;
         };
@@ -4871,11 +4871,11 @@
         CRemoteClient_SteamBroadcast_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.clientid != null && Object.hasOwnProperty.call(message, "clientid"))
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.clientid);
-            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+            if (message.payload != null && message.hasOwnProperty("payload"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.payload);
             return writer;
         };
@@ -5158,15 +5158,15 @@
         CRemoteClient_SteamToSteam_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.src_clientid != null && Object.hasOwnProperty.call(message, "src_clientid"))
+            if (message.src_clientid != null && message.hasOwnProperty("src_clientid"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.src_clientid);
-            if (message.dst_clientid != null && Object.hasOwnProperty.call(message, "dst_clientid"))
+            if (message.dst_clientid != null && message.hasOwnProperty("dst_clientid"))
                 writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.dst_clientid);
-            if (message.secretid != null && Object.hasOwnProperty.call(message, "secretid"))
+            if (message.secretid != null && message.hasOwnProperty("secretid"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.secretid);
-            if (message.encrypted_payload != null && Object.hasOwnProperty.call(message, "encrypted_payload"))
+            if (message.encrypted_payload != null && message.hasOwnProperty("encrypted_payload"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.encrypted_payload);
             return writer;
         };
@@ -5403,6 +5403,8 @@
          * @property {number|null} [client_account_id] CRemotePlay_SessionStarted_Request client_account_id
          * @property {number|null} [appid] CRemotePlay_SessionStarted_Request appid
          * @property {number|null} [device_form_factor] CRemotePlay_SessionStarted_Request device_form_factor
+         * @property {boolean|null} [remote_play_together] CRemotePlay_SessionStarted_Request remote_play_together
+         * @property {boolean|null} [guest_session] CRemotePlay_SessionStarted_Request guest_session
          */
     
         /**
@@ -5453,6 +5455,22 @@
         CRemotePlay_SessionStarted_Request.prototype.device_form_factor = 0;
     
         /**
+         * CRemotePlay_SessionStarted_Request remote_play_together.
+         * @member {boolean} remote_play_together
+         * @memberof CRemotePlay_SessionStarted_Request
+         * @instance
+         */
+        CRemotePlay_SessionStarted_Request.prototype.remote_play_together = false;
+    
+        /**
+         * CRemotePlay_SessionStarted_Request guest_session.
+         * @member {boolean} guest_session
+         * @memberof CRemotePlay_SessionStarted_Request
+         * @instance
+         */
+        CRemotePlay_SessionStarted_Request.prototype.guest_session = false;
+    
+        /**
          * Creates a new CRemotePlay_SessionStarted_Request instance using the specified properties.
          * @function create
          * @memberof CRemotePlay_SessionStarted_Request
@@ -5476,14 +5494,18 @@
         CRemotePlay_SessionStarted_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.host_account_id != null && Object.hasOwnProperty.call(message, "host_account_id"))
+            if (message.host_account_id != null && message.hasOwnProperty("host_account_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.host_account_id);
-            if (message.client_account_id != null && Object.hasOwnProperty.call(message, "client_account_id"))
+            if (message.client_account_id != null && message.hasOwnProperty("client_account_id"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.client_account_id);
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.appid);
-            if (message.device_form_factor != null && Object.hasOwnProperty.call(message, "device_form_factor"))
+            if (message.device_form_factor != null && message.hasOwnProperty("device_form_factor"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.device_form_factor);
+            if (message.remote_play_together != null && message.hasOwnProperty("remote_play_together"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.remote_play_together);
+            if (message.guest_session != null && message.hasOwnProperty("guest_session"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.guest_session);
             return writer;
         };
     
@@ -5529,6 +5551,12 @@
                     break;
                 case 4:
                     message.device_form_factor = reader.int32();
+                    break;
+                case 5:
+                    message.remote_play_together = reader.bool();
+                    break;
+                case 6:
+                    message.guest_session = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5577,6 +5605,12 @@
             if (message.device_form_factor != null && message.hasOwnProperty("device_form_factor"))
                 if (!$util.isInteger(message.device_form_factor))
                     return "device_form_factor: integer expected";
+            if (message.remote_play_together != null && message.hasOwnProperty("remote_play_together"))
+                if (typeof message.remote_play_together !== "boolean")
+                    return "remote_play_together: boolean expected";
+            if (message.guest_session != null && message.hasOwnProperty("guest_session"))
+                if (typeof message.guest_session !== "boolean")
+                    return "guest_session: boolean expected";
             return null;
         };
     
@@ -5600,6 +5634,10 @@
                 message.appid = object.appid >>> 0;
             if (object.device_form_factor != null)
                 message.device_form_factor = object.device_form_factor | 0;
+            if (object.remote_play_together != null)
+                message.remote_play_together = Boolean(object.remote_play_together);
+            if (object.guest_session != null)
+                message.guest_session = Boolean(object.guest_session);
             return message;
         };
     
@@ -5621,6 +5659,8 @@
                 object.client_account_id = 0;
                 object.appid = 0;
                 object.device_form_factor = 0;
+                object.remote_play_together = false;
+                object.guest_session = false;
             }
             if (message.host_account_id != null && message.hasOwnProperty("host_account_id"))
                 object.host_account_id = message.host_account_id;
@@ -5630,6 +5670,10 @@
                 object.appid = message.appid;
             if (message.device_form_factor != null && message.hasOwnProperty("device_form_factor"))
                 object.device_form_factor = message.device_form_factor;
+            if (message.remote_play_together != null && message.hasOwnProperty("remote_play_together"))
+                object.remote_play_together = message.remote_play_together;
+            if (message.guest_session != null && message.hasOwnProperty("guest_session"))
+                object.guest_session = message.guest_session;
             return object;
         };
     
@@ -5703,7 +5747,7 @@
         CRemotePlay_SessionStarted_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.record_id != null && Object.hasOwnProperty.call(message, "record_id"))
+            if (message.record_id != null && message.hasOwnProperty("record_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.record_id);
             return writer;
         };
@@ -5931,13 +5975,13 @@
         CRemotePlay_SessionStopped_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.record_id != null && Object.hasOwnProperty.call(message, "record_id"))
+            if (message.record_id != null && message.hasOwnProperty("record_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.record_id);
-            if (message.used_x264 != null && Object.hasOwnProperty.call(message, "used_x264"))
+            if (message.used_x264 != null && message.hasOwnProperty("used_x264"))
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.used_x264);
-            if (message.used_h264 != null && Object.hasOwnProperty.call(message, "used_h264"))
+            if (message.used_h264 != null && message.hasOwnProperty("used_h264"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.used_h264);
-            if (message.used_hevc != null && Object.hasOwnProperty.call(message, "used_hevc"))
+            if (message.used_hevc != null && message.hasOwnProperty("used_hevc"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.used_hevc);
             return writer;
         };
@@ -6195,9 +6239,9 @@
         CRemotePlayTogether_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
-            if (message.group_updated != null && Object.hasOwnProperty.call(message, "group_updated"))
+            if (message.group_updated != null && message.hasOwnProperty("group_updated"))
                 $root.CRemotePlayTogether_Notification.GroupUpdated.encode(message.group_updated, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
@@ -6361,25 +6405,29 @@
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        CRemotePlayTogether_Notification.ControllerSlots = (function() {
+        CRemotePlayTogether_Notification.Player = (function() {
     
             /**
-             * Properties of a ControllerSlots.
+             * Properties of a Player.
              * @memberof CRemotePlayTogether_Notification
-             * @interface IControllerSlots
-             * @property {number|null} [slotid] ControllerSlots slotid
-             * @property {number|Long|null} [steamid] ControllerSlots steamid
+             * @interface IPlayer
+             * @property {number|Long|null} [steamid] Player steamid
+             * @property {number|null} [guestid] Player guestid
+             * @property {Uint8Array|null} [avatar_hash] Player avatar_hash
+             * @property {boolean|null} [keyboard_enabled] Player keyboard_enabled
+             * @property {boolean|null} [mouse_enabled] Player mouse_enabled
+             * @property {boolean|null} [controller_enabled] Player controller_enabled
              */
     
             /**
-             * Constructs a new ControllerSlots.
+             * Constructs a new Player.
              * @memberof CRemotePlayTogether_Notification
-             * @classdesc Represents a ControllerSlots.
-             * @implements IControllerSlots
+             * @classdesc Represents a Player.
+             * @implements IPlayer
              * @constructor
-             * @param {CRemotePlayTogether_Notification.IControllerSlots=} [properties] Properties to set
+             * @param {CRemotePlayTogether_Notification.IPlayer=} [properties] Properties to set
              */
-            function ControllerSlots(properties) {
+            function Player(properties) {
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -6387,80 +6435,397 @@
             }
     
             /**
-             * ControllerSlots slotid.
-             * @member {number} slotid
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
-             * @instance
-             */
-            ControllerSlots.prototype.slotid = 0;
-    
-            /**
-             * ControllerSlots steamid.
+             * Player steamid.
              * @member {number|Long} steamid
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.Player
              * @instance
              */
-            ControllerSlots.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Player.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
-             * Creates a new ControllerSlots instance using the specified properties.
-             * @function create
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
-             * @static
-             * @param {CRemotePlayTogether_Notification.IControllerSlots=} [properties] Properties to set
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots instance
+             * Player guestid.
+             * @member {number} guestid
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
              */
-            ControllerSlots.create = function create(properties) {
-                return new ControllerSlots(properties);
+            Player.prototype.guestid = 0;
+    
+            /**
+             * Player avatar_hash.
+             * @member {Uint8Array} avatar_hash
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.avatar_hash = $util.newBuffer([]);
+    
+            /**
+             * Player keyboard_enabled.
+             * @member {boolean} keyboard_enabled
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.keyboard_enabled = false;
+    
+            /**
+             * Player mouse_enabled.
+             * @member {boolean} mouse_enabled
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.mouse_enabled = false;
+    
+            /**
+             * Player controller_enabled.
+             * @member {boolean} controller_enabled
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             */
+            Player.prototype.controller_enabled = false;
+    
+            /**
+             * Creates a new Player instance using the specified properties.
+             * @function create
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {CRemotePlayTogether_Notification.IPlayer=} [properties] Properties to set
+             * @returns {CRemotePlayTogether_Notification.Player} Player instance
+             */
+            Player.create = function create(properties) {
+                return new Player(properties);
             };
     
             /**
-             * Encodes the specified ControllerSlots message. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlots.verify|verify} messages.
+             * Encodes the specified Player message. Does not implicitly {@link CRemotePlayTogether_Notification.Player.verify|verify} messages.
              * @function encode
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.Player
              * @static
-             * @param {CRemotePlayTogether_Notification.IControllerSlots} message ControllerSlots message or plain object to encode
+             * @param {CRemotePlayTogether_Notification.IPlayer} message Player message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            ControllerSlots.encode = function encode(message, writer) {
+            Player.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.slotid != null && Object.hasOwnProperty.call(message, "slotid"))
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+                if (message.guestid != null && message.hasOwnProperty("guestid"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.guestid);
+                if (message.avatar_hash != null && message.hasOwnProperty("avatar_hash"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.avatar_hash);
+                if (message.keyboard_enabled != null && message.hasOwnProperty("keyboard_enabled"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.keyboard_enabled);
+                if (message.mouse_enabled != null && message.hasOwnProperty("mouse_enabled"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.mouse_enabled);
+                if (message.controller_enabled != null && message.hasOwnProperty("controller_enabled"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.controller_enabled);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Player message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.Player.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {CRemotePlayTogether_Notification.IPlayer} message Player message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Player.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Player message from the specified reader or buffer.
+             * @function decode
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CRemotePlayTogether_Notification.Player} Player
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Player.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.Player();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.steamid = reader.fixed64();
+                        break;
+                    case 2:
+                        message.guestid = reader.uint32();
+                        break;
+                    case 3:
+                        message.avatar_hash = reader.bytes();
+                        break;
+                    case 4:
+                        message.keyboard_enabled = reader.bool();
+                        break;
+                    case 5:
+                        message.mouse_enabled = reader.bool();
+                        break;
+                    case 6:
+                        message.controller_enabled = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Player message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CRemotePlayTogether_Notification.Player} Player
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Player.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Player message.
+             * @function verify
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Player.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                        return "steamid: integer|Long expected";
+                if (message.guestid != null && message.hasOwnProperty("guestid"))
+                    if (!$util.isInteger(message.guestid))
+                        return "guestid: integer expected";
+                if (message.avatar_hash != null && message.hasOwnProperty("avatar_hash"))
+                    if (!(message.avatar_hash && typeof message.avatar_hash.length === "number" || $util.isString(message.avatar_hash)))
+                        return "avatar_hash: buffer expected";
+                if (message.keyboard_enabled != null && message.hasOwnProperty("keyboard_enabled"))
+                    if (typeof message.keyboard_enabled !== "boolean")
+                        return "keyboard_enabled: boolean expected";
+                if (message.mouse_enabled != null && message.hasOwnProperty("mouse_enabled"))
+                    if (typeof message.mouse_enabled !== "boolean")
+                        return "mouse_enabled: boolean expected";
+                if (message.controller_enabled != null && message.hasOwnProperty("controller_enabled"))
+                    if (typeof message.controller_enabled !== "boolean")
+                        return "controller_enabled: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Player message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CRemotePlayTogether_Notification.Player} Player
+             */
+            Player.fromObject = function fromObject(object) {
+                if (object instanceof $root.CRemotePlayTogether_Notification.Player)
+                    return object;
+                var message = new $root.CRemotePlayTogether_Notification.Player();
+                if (object.steamid != null)
+                    if ($util.Long)
+                        (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                    else if (typeof object.steamid === "string")
+                        message.steamid = parseInt(object.steamid, 10);
+                    else if (typeof object.steamid === "number")
+                        message.steamid = object.steamid;
+                    else if (typeof object.steamid === "object")
+                        message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+                if (object.guestid != null)
+                    message.guestid = object.guestid >>> 0;
+                if (object.avatar_hash != null)
+                    if (typeof object.avatar_hash === "string")
+                        $util.base64.decode(object.avatar_hash, message.avatar_hash = $util.newBuffer($util.base64.length(object.avatar_hash)), 0);
+                    else if (object.avatar_hash.length)
+                        message.avatar_hash = object.avatar_hash;
+                if (object.keyboard_enabled != null)
+                    message.keyboard_enabled = Boolean(object.keyboard_enabled);
+                if (object.mouse_enabled != null)
+                    message.mouse_enabled = Boolean(object.mouse_enabled);
+                if (object.controller_enabled != null)
+                    message.controller_enabled = Boolean(object.controller_enabled);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Player message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @static
+             * @param {CRemotePlayTogether_Notification.Player} message Player
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Player.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steamid = options.longs === String ? "0" : 0;
+                    object.guestid = 0;
+                    if (options.bytes === String)
+                        object.avatar_hash = "";
+                    else {
+                        object.avatar_hash = [];
+                        if (options.bytes !== Array)
+                            object.avatar_hash = $util.newBuffer(object.avatar_hash);
+                    }
+                    object.keyboard_enabled = false;
+                    object.mouse_enabled = false;
+                    object.controller_enabled = false;
+                }
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (typeof message.steamid === "number")
+                        object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                    else
+                        object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+                if (message.guestid != null && message.hasOwnProperty("guestid"))
+                    object.guestid = message.guestid;
+                if (message.avatar_hash != null && message.hasOwnProperty("avatar_hash"))
+                    object.avatar_hash = options.bytes === String ? $util.base64.encode(message.avatar_hash, 0, message.avatar_hash.length) : options.bytes === Array ? Array.prototype.slice.call(message.avatar_hash) : message.avatar_hash;
+                if (message.keyboard_enabled != null && message.hasOwnProperty("keyboard_enabled"))
+                    object.keyboard_enabled = message.keyboard_enabled;
+                if (message.mouse_enabled != null && message.hasOwnProperty("mouse_enabled"))
+                    object.mouse_enabled = message.mouse_enabled;
+                if (message.controller_enabled != null && message.hasOwnProperty("controller_enabled"))
+                    object.controller_enabled = message.controller_enabled;
+                return object;
+            };
+    
+            /**
+             * Converts this Player to JSON.
+             * @function toJSON
+             * @memberof CRemotePlayTogether_Notification.Player
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Player.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Player;
+        })();
+    
+        CRemotePlayTogether_Notification.ControllerSlot_obsolete = (function() {
+    
+            /**
+             * Properties of a ControllerSlot_obsolete.
+             * @memberof CRemotePlayTogether_Notification
+             * @interface IControllerSlot_obsolete
+             * @property {number|null} [slotid] ControllerSlot_obsolete slotid
+             * @property {number|Long|null} [steamid] ControllerSlot_obsolete steamid
+             */
+    
+            /**
+             * Constructs a new ControllerSlot_obsolete.
+             * @memberof CRemotePlayTogether_Notification
+             * @classdesc Represents a ControllerSlot_obsolete.
+             * @implements IControllerSlot_obsolete
+             * @constructor
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete=} [properties] Properties to set
+             */
+            function ControllerSlot_obsolete(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ControllerSlot_obsolete slotid.
+             * @member {number} slotid
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @instance
+             */
+            ControllerSlot_obsolete.prototype.slotid = 0;
+    
+            /**
+             * ControllerSlot_obsolete steamid.
+             * @member {number|Long} steamid
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @instance
+             */
+            ControllerSlot_obsolete.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * Creates a new ControllerSlot_obsolete instance using the specified properties.
+             * @function create
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete=} [properties] Properties to set
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete instance
+             */
+            ControllerSlot_obsolete.create = function create(properties) {
+                return new ControllerSlot_obsolete(properties);
+            };
+    
+            /**
+             * Encodes the specified ControllerSlot_obsolete message. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot_obsolete.verify|verify} messages.
+             * @function encode
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete} message ControllerSlot_obsolete message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ControllerSlot_obsolete.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.slotid);
-                if (message.steamid != null && Object.hasOwnProperty.call(message, "steamid"))
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
                     writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
                 return writer;
             };
     
             /**
-             * Encodes the specified ControllerSlots message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlots.verify|verify} messages.
+             * Encodes the specified ControllerSlot_obsolete message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot_obsolete.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
-             * @param {CRemotePlayTogether_Notification.IControllerSlots} message ControllerSlots message or plain object to encode
+             * @param {CRemotePlayTogether_Notification.IControllerSlot_obsolete} message ControllerSlot_obsolete message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            ControllerSlots.encodeDelimited = function encodeDelimited(message, writer) {
+            ControllerSlot_obsolete.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
     
             /**
-             * Decodes a ControllerSlots message from the specified reader or buffer.
+             * Decodes a ControllerSlot_obsolete message from the specified reader or buffer.
              * @function decode
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ControllerSlots.decode = function decode(reader, length) {
+            ControllerSlot_obsolete.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.ControllerSlots();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -6479,30 +6844,30 @@
             };
     
             /**
-             * Decodes a ControllerSlots message from the specified reader or buffer, length delimited.
+             * Decodes a ControllerSlot_obsolete message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ControllerSlots.decodeDelimited = function decodeDelimited(reader) {
+            ControllerSlot_obsolete.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
     
             /**
-             * Verifies a ControllerSlots message.
+             * Verifies a ControllerSlot_obsolete message.
              * @function verify
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            ControllerSlots.verify = function verify(message) {
+            ControllerSlot_obsolete.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.slotid != null && message.hasOwnProperty("slotid"))
@@ -6515,17 +6880,17 @@
             };
     
             /**
-             * Creates a ControllerSlots message from a plain object. Also converts values to their respective internal types.
+             * Creates a ControllerSlot_obsolete message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {CRemotePlayTogether_Notification.ControllerSlots} ControllerSlots
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot_obsolete} ControllerSlot_obsolete
              */
-            ControllerSlots.fromObject = function fromObject(object) {
-                if (object instanceof $root.CRemotePlayTogether_Notification.ControllerSlots)
+            ControllerSlot_obsolete.fromObject = function fromObject(object) {
+                if (object instanceof $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete)
                     return object;
-                var message = new $root.CRemotePlayTogether_Notification.ControllerSlots();
+                var message = new $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete();
                 if (object.slotid != null)
                     message.slotid = object.slotid >>> 0;
                 if (object.steamid != null)
@@ -6541,15 +6906,15 @@
             };
     
             /**
-             * Creates a plain object from a ControllerSlots message. Also converts values to other types if specified.
+             * Creates a plain object from a ControllerSlot_obsolete message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @static
-             * @param {CRemotePlayTogether_Notification.ControllerSlots} message ControllerSlots
+             * @param {CRemotePlayTogether_Notification.ControllerSlot_obsolete} message ControllerSlot_obsolete
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            ControllerSlots.toObject = function toObject(message, options) {
+            ControllerSlot_obsolete.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -6572,17 +6937,232 @@
             };
     
             /**
-             * Converts this ControllerSlots to JSON.
+             * Converts this ControllerSlot_obsolete to JSON.
              * @function toJSON
-             * @memberof CRemotePlayTogether_Notification.ControllerSlots
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot_obsolete
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            ControllerSlots.prototype.toJSON = function toJSON() {
+            ControllerSlot_obsolete.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
     
-            return ControllerSlots;
+            return ControllerSlot_obsolete;
+        })();
+    
+        CRemotePlayTogether_Notification.ControllerSlot = (function() {
+    
+            /**
+             * Properties of a ControllerSlot.
+             * @memberof CRemotePlayTogether_Notification
+             * @interface IControllerSlot
+             * @property {number|null} [slotid] ControllerSlot slotid
+             * @property {CRemotePlayTogether_Notification.IPlayer|null} [player] ControllerSlot player
+             */
+    
+            /**
+             * Constructs a new ControllerSlot.
+             * @memberof CRemotePlayTogether_Notification
+             * @classdesc Represents a ControllerSlot.
+             * @implements IControllerSlot
+             * @constructor
+             * @param {CRemotePlayTogether_Notification.IControllerSlot=} [properties] Properties to set
+             */
+            function ControllerSlot(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ControllerSlot slotid.
+             * @member {number} slotid
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @instance
+             */
+            ControllerSlot.prototype.slotid = 0;
+    
+            /**
+             * ControllerSlot player.
+             * @member {CRemotePlayTogether_Notification.IPlayer|null|undefined} player
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @instance
+             */
+            ControllerSlot.prototype.player = null;
+    
+            /**
+             * Creates a new ControllerSlot instance using the specified properties.
+             * @function create
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot=} [properties] Properties to set
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot instance
+             */
+            ControllerSlot.create = function create(properties) {
+                return new ControllerSlot(properties);
+            };
+    
+            /**
+             * Encodes the specified ControllerSlot message. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot.verify|verify} messages.
+             * @function encode
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot} message ControllerSlot message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ControllerSlot.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.slotid);
+                if (message.player != null && message.hasOwnProperty("player"))
+                    $root.CRemotePlayTogether_Notification.Player.encode(message.player, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ControllerSlot message, length delimited. Does not implicitly {@link CRemotePlayTogether_Notification.ControllerSlot.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.IControllerSlot} message ControllerSlot message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ControllerSlot.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ControllerSlot message from the specified reader or buffer.
+             * @function decode
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ControllerSlot.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemotePlayTogether_Notification.ControllerSlot();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.slotid = reader.uint32();
+                        break;
+                    case 2:
+                        message.player = $root.CRemotePlayTogether_Notification.Player.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ControllerSlot message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ControllerSlot.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ControllerSlot message.
+             * @function verify
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ControllerSlot.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
+                    if (!$util.isInteger(message.slotid))
+                        return "slotid: integer expected";
+                if (message.player != null && message.hasOwnProperty("player")) {
+                    var error = $root.CRemotePlayTogether_Notification.Player.verify(message.player);
+                    if (error)
+                        return "player." + error;
+                }
+                return null;
+            };
+    
+            /**
+             * Creates a ControllerSlot message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CRemotePlayTogether_Notification.ControllerSlot} ControllerSlot
+             */
+            ControllerSlot.fromObject = function fromObject(object) {
+                if (object instanceof $root.CRemotePlayTogether_Notification.ControllerSlot)
+                    return object;
+                var message = new $root.CRemotePlayTogether_Notification.ControllerSlot();
+                if (object.slotid != null)
+                    message.slotid = object.slotid >>> 0;
+                if (object.player != null) {
+                    if (typeof object.player !== "object")
+                        throw TypeError(".CRemotePlayTogether_Notification.ControllerSlot.player: object expected");
+                    message.player = $root.CRemotePlayTogether_Notification.Player.fromObject(object.player);
+                }
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ControllerSlot message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @static
+             * @param {CRemotePlayTogether_Notification.ControllerSlot} message ControllerSlot
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ControllerSlot.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.slotid = 0;
+                    object.player = null;
+                }
+                if (message.slotid != null && message.hasOwnProperty("slotid"))
+                    object.slotid = message.slotid;
+                if (message.player != null && message.hasOwnProperty("player"))
+                    object.player = $root.CRemotePlayTogether_Notification.Player.toObject(message.player, options);
+                return object;
+            };
+    
+            /**
+             * Converts this ControllerSlot to JSON.
+             * @function toJSON
+             * @memberof CRemotePlayTogether_Notification.ControllerSlot
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ControllerSlot.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ControllerSlot;
         })();
     
         CRemotePlayTogether_Notification.GroupUpdated = (function() {
@@ -6593,9 +7173,12 @@
              * @interface IGroupUpdated
              * @property {number|Long|null} [host_steamid] GroupUpdated host_steamid
              * @property {number|Long|null} [host_clientid] GroupUpdated host_clientid
-             * @property {Array.<number|Long>|null} [players] GroupUpdated players
+             * @property {Array.<number|Long>|null} [players_obsolete] GroupUpdated players_obsolete
              * @property {number|Long|null} [host_gameid] GroupUpdated host_gameid
-             * @property {Array.<CRemotePlayTogether_Notification.IControllerSlots>|null} [controller_slots] GroupUpdated controller_slots
+             * @property {Array.<CRemotePlayTogether_Notification.IControllerSlot_obsolete>|null} [controller_slots_obsolete] GroupUpdated controller_slots_obsolete
+             * @property {boolean|null} [has_new_players] GroupUpdated has_new_players
+             * @property {Array.<CRemotePlayTogether_Notification.IPlayer>|null} [player_slots] GroupUpdated player_slots
+             * @property {Array.<CRemotePlayTogether_Notification.IControllerSlot>|null} [controller_slots] GroupUpdated controller_slots
              */
     
             /**
@@ -6607,7 +7190,9 @@
              * @param {CRemotePlayTogether_Notification.IGroupUpdated=} [properties] Properties to set
              */
             function GroupUpdated(properties) {
-                this.players = [];
+                this.players_obsolete = [];
+                this.controller_slots_obsolete = [];
+                this.player_slots = [];
                 this.controller_slots = [];
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -6632,12 +7217,12 @@
             GroupUpdated.prototype.host_clientid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
-             * GroupUpdated players.
-             * @member {Array.<number|Long>} players
+             * GroupUpdated players_obsolete.
+             * @member {Array.<number|Long>} players_obsolete
              * @memberof CRemotePlayTogether_Notification.GroupUpdated
              * @instance
              */
-            GroupUpdated.prototype.players = $util.emptyArray;
+            GroupUpdated.prototype.players_obsolete = $util.emptyArray;
     
             /**
              * GroupUpdated host_gameid.
@@ -6648,8 +7233,32 @@
             GroupUpdated.prototype.host_gameid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
+             * GroupUpdated controller_slots_obsolete.
+             * @member {Array.<CRemotePlayTogether_Notification.IControllerSlot_obsolete>} controller_slots_obsolete
+             * @memberof CRemotePlayTogether_Notification.GroupUpdated
+             * @instance
+             */
+            GroupUpdated.prototype.controller_slots_obsolete = $util.emptyArray;
+    
+            /**
+             * GroupUpdated has_new_players.
+             * @member {boolean} has_new_players
+             * @memberof CRemotePlayTogether_Notification.GroupUpdated
+             * @instance
+             */
+            GroupUpdated.prototype.has_new_players = false;
+    
+            /**
+             * GroupUpdated player_slots.
+             * @member {Array.<CRemotePlayTogether_Notification.IPlayer>} player_slots
+             * @memberof CRemotePlayTogether_Notification.GroupUpdated
+             * @instance
+             */
+            GroupUpdated.prototype.player_slots = $util.emptyArray;
+    
+            /**
              * GroupUpdated controller_slots.
-             * @member {Array.<CRemotePlayTogether_Notification.IControllerSlots>} controller_slots
+             * @member {Array.<CRemotePlayTogether_Notification.IControllerSlot>} controller_slots
              * @memberof CRemotePlayTogether_Notification.GroupUpdated
              * @instance
              */
@@ -6679,18 +7288,26 @@
             GroupUpdated.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.host_steamid != null && Object.hasOwnProperty.call(message, "host_steamid"))
+                if (message.host_steamid != null && message.hasOwnProperty("host_steamid"))
                     writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.host_steamid);
-                if (message.host_clientid != null && Object.hasOwnProperty.call(message, "host_clientid"))
+                if (message.host_clientid != null && message.hasOwnProperty("host_clientid"))
                     writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.host_clientid);
-                if (message.players != null && message.players.length)
-                    for (var i = 0; i < message.players.length; ++i)
-                        writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.players[i]);
-                if (message.host_gameid != null && Object.hasOwnProperty.call(message, "host_gameid"))
+                if (message.players_obsolete != null && message.players_obsolete.length)
+                    for (var i = 0; i < message.players_obsolete.length; ++i)
+                        writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.players_obsolete[i]);
+                if (message.host_gameid != null && message.hasOwnProperty("host_gameid"))
                     writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.host_gameid);
+                if (message.controller_slots_obsolete != null && message.controller_slots_obsolete.length)
+                    for (var i = 0; i < message.controller_slots_obsolete.length; ++i)
+                        $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.encode(message.controller_slots_obsolete[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                if (message.has_new_players != null && message.hasOwnProperty("has_new_players"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.has_new_players);
+                if (message.player_slots != null && message.player_slots.length)
+                    for (var i = 0; i < message.player_slots.length; ++i)
+                        $root.CRemotePlayTogether_Notification.Player.encode(message.player_slots[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                 if (message.controller_slots != null && message.controller_slots.length)
                     for (var i = 0; i < message.controller_slots.length; ++i)
-                        $root.CRemotePlayTogether_Notification.ControllerSlots.encode(message.controller_slots[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        $root.CRemotePlayTogether_Notification.ControllerSlot.encode(message.controller_slots[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                 return writer;
             };
     
@@ -6732,22 +7349,35 @@
                         message.host_clientid = reader.fixed64();
                         break;
                     case 3:
-                        if (!(message.players && message.players.length))
-                            message.players = [];
+                        if (!(message.players_obsolete && message.players_obsolete.length))
+                            message.players_obsolete = [];
                         if ((tag & 7) === 2) {
                             var end2 = reader.uint32() + reader.pos;
                             while (reader.pos < end2)
-                                message.players.push(reader.fixed64());
+                                message.players_obsolete.push(reader.fixed64());
                         } else
-                            message.players.push(reader.fixed64());
+                            message.players_obsolete.push(reader.fixed64());
                         break;
                     case 4:
                         message.host_gameid = reader.fixed64();
                         break;
                     case 5:
+                        if (!(message.controller_slots_obsolete && message.controller_slots_obsolete.length))
+                            message.controller_slots_obsolete = [];
+                        message.controller_slots_obsolete.push($root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.decode(reader, reader.uint32()));
+                        break;
+                    case 6:
+                        message.has_new_players = reader.bool();
+                        break;
+                    case 7:
+                        if (!(message.player_slots && message.player_slots.length))
+                            message.player_slots = [];
+                        message.player_slots.push($root.CRemotePlayTogether_Notification.Player.decode(reader, reader.uint32()));
+                        break;
+                    case 8:
                         if (!(message.controller_slots && message.controller_slots.length))
                             message.controller_slots = [];
-                        message.controller_slots.push($root.CRemotePlayTogether_Notification.ControllerSlots.decode(reader, reader.uint32()));
+                        message.controller_slots.push($root.CRemotePlayTogether_Notification.ControllerSlot.decode(reader, reader.uint32()));
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -6790,21 +7420,42 @@
                 if (message.host_clientid != null && message.hasOwnProperty("host_clientid"))
                     if (!$util.isInteger(message.host_clientid) && !(message.host_clientid && $util.isInteger(message.host_clientid.low) && $util.isInteger(message.host_clientid.high)))
                         return "host_clientid: integer|Long expected";
-                if (message.players != null && message.hasOwnProperty("players")) {
-                    if (!Array.isArray(message.players))
-                        return "players: array expected";
-                    for (var i = 0; i < message.players.length; ++i)
-                        if (!$util.isInteger(message.players[i]) && !(message.players[i] && $util.isInteger(message.players[i].low) && $util.isInteger(message.players[i].high)))
-                            return "players: integer|Long[] expected";
+                if (message.players_obsolete != null && message.hasOwnProperty("players_obsolete")) {
+                    if (!Array.isArray(message.players_obsolete))
+                        return "players_obsolete: array expected";
+                    for (var i = 0; i < message.players_obsolete.length; ++i)
+                        if (!$util.isInteger(message.players_obsolete[i]) && !(message.players_obsolete[i] && $util.isInteger(message.players_obsolete[i].low) && $util.isInteger(message.players_obsolete[i].high)))
+                            return "players_obsolete: integer|Long[] expected";
                 }
                 if (message.host_gameid != null && message.hasOwnProperty("host_gameid"))
                     if (!$util.isInteger(message.host_gameid) && !(message.host_gameid && $util.isInteger(message.host_gameid.low) && $util.isInteger(message.host_gameid.high)))
                         return "host_gameid: integer|Long expected";
+                if (message.controller_slots_obsolete != null && message.hasOwnProperty("controller_slots_obsolete")) {
+                    if (!Array.isArray(message.controller_slots_obsolete))
+                        return "controller_slots_obsolete: array expected";
+                    for (var i = 0; i < message.controller_slots_obsolete.length; ++i) {
+                        var error = $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.verify(message.controller_slots_obsolete[i]);
+                        if (error)
+                            return "controller_slots_obsolete." + error;
+                    }
+                }
+                if (message.has_new_players != null && message.hasOwnProperty("has_new_players"))
+                    if (typeof message.has_new_players !== "boolean")
+                        return "has_new_players: boolean expected";
+                if (message.player_slots != null && message.hasOwnProperty("player_slots")) {
+                    if (!Array.isArray(message.player_slots))
+                        return "player_slots: array expected";
+                    for (var i = 0; i < message.player_slots.length; ++i) {
+                        var error = $root.CRemotePlayTogether_Notification.Player.verify(message.player_slots[i]);
+                        if (error)
+                            return "player_slots." + error;
+                    }
+                }
                 if (message.controller_slots != null && message.hasOwnProperty("controller_slots")) {
                     if (!Array.isArray(message.controller_slots))
                         return "controller_slots: array expected";
                     for (var i = 0; i < message.controller_slots.length; ++i) {
-                        var error = $root.CRemotePlayTogether_Notification.ControllerSlots.verify(message.controller_slots[i]);
+                        var error = $root.CRemotePlayTogether_Notification.ControllerSlot.verify(message.controller_slots[i]);
                         if (error)
                             return "controller_slots." + error;
                     }
@@ -6842,19 +7493,19 @@
                         message.host_clientid = object.host_clientid;
                     else if (typeof object.host_clientid === "object")
                         message.host_clientid = new $util.LongBits(object.host_clientid.low >>> 0, object.host_clientid.high >>> 0).toNumber();
-                if (object.players) {
-                    if (!Array.isArray(object.players))
-                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.players: array expected");
-                    message.players = [];
-                    for (var i = 0; i < object.players.length; ++i)
+                if (object.players_obsolete) {
+                    if (!Array.isArray(object.players_obsolete))
+                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.players_obsolete: array expected");
+                    message.players_obsolete = [];
+                    for (var i = 0; i < object.players_obsolete.length; ++i)
                         if ($util.Long)
-                            (message.players[i] = $util.Long.fromValue(object.players[i])).unsigned = false;
-                        else if (typeof object.players[i] === "string")
-                            message.players[i] = parseInt(object.players[i], 10);
-                        else if (typeof object.players[i] === "number")
-                            message.players[i] = object.players[i];
-                        else if (typeof object.players[i] === "object")
-                            message.players[i] = new $util.LongBits(object.players[i].low >>> 0, object.players[i].high >>> 0).toNumber();
+                            (message.players_obsolete[i] = $util.Long.fromValue(object.players_obsolete[i])).unsigned = false;
+                        else if (typeof object.players_obsolete[i] === "string")
+                            message.players_obsolete[i] = parseInt(object.players_obsolete[i], 10);
+                        else if (typeof object.players_obsolete[i] === "number")
+                            message.players_obsolete[i] = object.players_obsolete[i];
+                        else if (typeof object.players_obsolete[i] === "object")
+                            message.players_obsolete[i] = new $util.LongBits(object.players_obsolete[i].low >>> 0, object.players_obsolete[i].high >>> 0).toNumber();
                 }
                 if (object.host_gameid != null)
                     if ($util.Long)
@@ -6865,6 +7516,28 @@
                         message.host_gameid = object.host_gameid;
                     else if (typeof object.host_gameid === "object")
                         message.host_gameid = new $util.LongBits(object.host_gameid.low >>> 0, object.host_gameid.high >>> 0).toNumber();
+                if (object.controller_slots_obsolete) {
+                    if (!Array.isArray(object.controller_slots_obsolete))
+                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots_obsolete: array expected");
+                    message.controller_slots_obsolete = [];
+                    for (var i = 0; i < object.controller_slots_obsolete.length; ++i) {
+                        if (typeof object.controller_slots_obsolete[i] !== "object")
+                            throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots_obsolete: object expected");
+                        message.controller_slots_obsolete[i] = $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.fromObject(object.controller_slots_obsolete[i]);
+                    }
+                }
+                if (object.has_new_players != null)
+                    message.has_new_players = Boolean(object.has_new_players);
+                if (object.player_slots) {
+                    if (!Array.isArray(object.player_slots))
+                        throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.player_slots: array expected");
+                    message.player_slots = [];
+                    for (var i = 0; i < object.player_slots.length; ++i) {
+                        if (typeof object.player_slots[i] !== "object")
+                            throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.player_slots: object expected");
+                        message.player_slots[i] = $root.CRemotePlayTogether_Notification.Player.fromObject(object.player_slots[i]);
+                    }
+                }
                 if (object.controller_slots) {
                     if (!Array.isArray(object.controller_slots))
                         throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots: array expected");
@@ -6872,7 +7545,7 @@
                     for (var i = 0; i < object.controller_slots.length; ++i) {
                         if (typeof object.controller_slots[i] !== "object")
                             throw TypeError(".CRemotePlayTogether_Notification.GroupUpdated.controller_slots: object expected");
-                        message.controller_slots[i] = $root.CRemotePlayTogether_Notification.ControllerSlots.fromObject(object.controller_slots[i]);
+                        message.controller_slots[i] = $root.CRemotePlayTogether_Notification.ControllerSlot.fromObject(object.controller_slots[i]);
                     }
                 }
                 return message;
@@ -6892,7 +7565,9 @@
                     options = {};
                 var object = {};
                 if (options.arrays || options.defaults) {
-                    object.players = [];
+                    object.players_obsolete = [];
+                    object.controller_slots_obsolete = [];
+                    object.player_slots = [];
                     object.controller_slots = [];
                 }
                 if (options.defaults) {
@@ -6911,6 +7586,7 @@
                         object.host_gameid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.host_gameid = options.longs === String ? "0" : 0;
+                    object.has_new_players = false;
                 }
                 if (message.host_steamid != null && message.hasOwnProperty("host_steamid"))
                     if (typeof message.host_steamid === "number")
@@ -6922,23 +7598,35 @@
                         object.host_clientid = options.longs === String ? String(message.host_clientid) : message.host_clientid;
                     else
                         object.host_clientid = options.longs === String ? $util.Long.prototype.toString.call(message.host_clientid) : options.longs === Number ? new $util.LongBits(message.host_clientid.low >>> 0, message.host_clientid.high >>> 0).toNumber() : message.host_clientid;
-                if (message.players && message.players.length) {
-                    object.players = [];
-                    for (var j = 0; j < message.players.length; ++j)
-                        if (typeof message.players[j] === "number")
-                            object.players[j] = options.longs === String ? String(message.players[j]) : message.players[j];
+                if (message.players_obsolete && message.players_obsolete.length) {
+                    object.players_obsolete = [];
+                    for (var j = 0; j < message.players_obsolete.length; ++j)
+                        if (typeof message.players_obsolete[j] === "number")
+                            object.players_obsolete[j] = options.longs === String ? String(message.players_obsolete[j]) : message.players_obsolete[j];
                         else
-                            object.players[j] = options.longs === String ? $util.Long.prototype.toString.call(message.players[j]) : options.longs === Number ? new $util.LongBits(message.players[j].low >>> 0, message.players[j].high >>> 0).toNumber() : message.players[j];
+                            object.players_obsolete[j] = options.longs === String ? $util.Long.prototype.toString.call(message.players_obsolete[j]) : options.longs === Number ? new $util.LongBits(message.players_obsolete[j].low >>> 0, message.players_obsolete[j].high >>> 0).toNumber() : message.players_obsolete[j];
                 }
                 if (message.host_gameid != null && message.hasOwnProperty("host_gameid"))
                     if (typeof message.host_gameid === "number")
                         object.host_gameid = options.longs === String ? String(message.host_gameid) : message.host_gameid;
                     else
                         object.host_gameid = options.longs === String ? $util.Long.prototype.toString.call(message.host_gameid) : options.longs === Number ? new $util.LongBits(message.host_gameid.low >>> 0, message.host_gameid.high >>> 0).toNumber() : message.host_gameid;
+                if (message.controller_slots_obsolete && message.controller_slots_obsolete.length) {
+                    object.controller_slots_obsolete = [];
+                    for (var j = 0; j < message.controller_slots_obsolete.length; ++j)
+                        object.controller_slots_obsolete[j] = $root.CRemotePlayTogether_Notification.ControllerSlot_obsolete.toObject(message.controller_slots_obsolete[j], options);
+                }
+                if (message.has_new_players != null && message.hasOwnProperty("has_new_players"))
+                    object.has_new_players = message.has_new_players;
+                if (message.player_slots && message.player_slots.length) {
+                    object.player_slots = [];
+                    for (var j = 0; j < message.player_slots.length; ++j)
+                        object.player_slots[j] = $root.CRemotePlayTogether_Notification.Player.toObject(message.player_slots[j], options);
+                }
                 if (message.controller_slots && message.controller_slots.length) {
                     object.controller_slots = [];
                     for (var j = 0; j < message.controller_slots.length; ++j)
-                        object.controller_slots[j] = $root.CRemotePlayTogether_Notification.ControllerSlots.toObject(message.controller_slots[j], options);
+                        object.controller_slots[j] = $root.CRemotePlayTogether_Notification.ControllerSlot.toObject(message.controller_slots[j], options);
                 }
                 return object;
             };
@@ -6958,6 +7646,1124 @@
         })();
     
         return CRemotePlayTogether_Notification;
+    })();
+    
+    $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_CreateRemotePlayTogetherInvitation_Request.
+         * @exports ICRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @interface ICRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @property {number|null} [appid] CRemoteClient_CreateRemotePlayTogetherInvitation_Request appid
+         * @property {string|null} [launch_parameters] CRemoteClient_CreateRemotePlayTogetherInvitation_Request launch_parameters
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_CreateRemotePlayTogetherInvitation_Request.
+         * @exports CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @classdesc Represents a CRemoteClient_CreateRemotePlayTogetherInvitation_Request.
+         * @implements ICRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @constructor
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_CreateRemotePlayTogetherInvitation_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_CreateRemotePlayTogetherInvitation_Request appid.
+         * @member {number} appid
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.prototype.appid = 0;
+    
+        /**
+         * CRemoteClient_CreateRemotePlayTogetherInvitation_Request launch_parameters.
+         * @member {string} launch_parameters
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.prototype.launch_parameters = "";
+    
+        /**
+         * Creates a new CRemoteClient_CreateRemotePlayTogetherInvitation_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.create = function create(properties) {
+            return new CRemoteClient_CreateRemotePlayTogetherInvitation_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Request message. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request} message CRemoteClient_CreateRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.launch_parameters != null && message.hasOwnProperty("launch_parameters"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.launch_parameters);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Request message, length delimited. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Request} message CRemoteClient_CreateRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.launch_parameters = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message.
+         * @function verify
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.launch_parameters != null && message.hasOwnProperty("launch_parameters"))
+                if (!$util.isString(message.launch_parameters))
+                    return "launch_parameters: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request)
+                return object;
+            var message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.launch_parameters != null)
+                message.launch_parameters = String(object.launch_parameters);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_CreateRemotePlayTogetherInvitation_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {CRemoteClient_CreateRemotePlayTogetherInvitation_Request} message CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.launch_parameters = "";
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.launch_parameters != null && message.hasOwnProperty("launch_parameters"))
+                object.launch_parameters = message.launch_parameters;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_CreateRemotePlayTogetherInvitation_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_CreateRemotePlayTogetherInvitation_Request;
+    })();
+    
+    $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_CreateRemotePlayTogetherInvitation_Response.
+         * @exports ICRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @interface ICRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @property {string|null} [invitation_code] CRemoteClient_CreateRemotePlayTogetherInvitation_Response invitation_code
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_CreateRemotePlayTogetherInvitation_Response.
+         * @exports CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @classdesc Represents a CRemoteClient_CreateRemotePlayTogetherInvitation_Response.
+         * @implements ICRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @constructor
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_CreateRemotePlayTogetherInvitation_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_CreateRemotePlayTogetherInvitation_Response invitation_code.
+         * @member {string} invitation_code
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.prototype.invitation_code = "";
+    
+        /**
+         * Creates a new CRemoteClient_CreateRemotePlayTogetherInvitation_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response instance
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.create = function create(properties) {
+            return new CRemoteClient_CreateRemotePlayTogetherInvitation_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Response message. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response} message CRemoteClient_CreateRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_code);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_CreateRemotePlayTogetherInvitation_Response message, length delimited. Does not implicitly {@link CRemoteClient_CreateRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_CreateRemotePlayTogetherInvitation_Response} message CRemoteClient_CreateRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message.
+         * @function verify
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                if (!$util.isString(message.invitation_code))
+                    return "invitation_code: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response)
+                return object;
+            var message = new $root.CRemoteClient_CreateRemotePlayTogetherInvitation_Response();
+            if (object.invitation_code != null)
+                message.invitation_code = String(object.invitation_code);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_CreateRemotePlayTogetherInvitation_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {CRemoteClient_CreateRemotePlayTogetherInvitation_Response} message CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_code = "";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                object.invitation_code = message.invitation_code;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_CreateRemotePlayTogetherInvitation_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_CreateRemotePlayTogetherInvitation_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_CreateRemotePlayTogetherInvitation_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_CreateRemotePlayTogetherInvitation_Response;
+    })();
+    
+    $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.
+         * @exports ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @interface ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @property {string|null} [invitation_code] CRemoteClient_DeleteRemotePlayTogetherInvitation_Request invitation_code
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.
+         * @exports CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @classdesc Represents a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.
+         * @implements ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @constructor
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_DeleteRemotePlayTogetherInvitation_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_DeleteRemotePlayTogetherInvitation_Request invitation_code.
+         * @member {string} invitation_code
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.prototype.invitation_code = "";
+    
+        /**
+         * Creates a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request instance
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.create = function create(properties) {
+            return new CRemoteClient_DeleteRemotePlayTogetherInvitation_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_code);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message, length delimited. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Request} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message.
+         * @function verify
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                if (!$util.isString(message.invitation_code))
+                    return "invitation_code: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request)
+                return object;
+            var message = new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request();
+            if (object.invitation_code != null)
+                message.invitation_code = String(object.invitation_code);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_DeleteRemotePlayTogetherInvitation_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {CRemoteClient_DeleteRemotePlayTogetherInvitation_Request} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_code = "";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                object.invitation_code = message.invitation_code;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_DeleteRemotePlayTogetherInvitation_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_DeleteRemotePlayTogetherInvitation_Request;
+    })();
+    
+    $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.
+         * @exports ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @interface ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.
+         * @exports CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @classdesc Represents a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.
+         * @implements ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @constructor
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_DeleteRemotePlayTogetherInvitation_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CRemoteClient_DeleteRemotePlayTogetherInvitation_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response instance
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.create = function create(properties) {
+            return new CRemoteClient_DeleteRemotePlayTogetherInvitation_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message, length delimited. Does not implicitly {@link CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_DeleteRemotePlayTogetherInvitation_Response} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message.
+         * @function verify
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response)
+                return object;
+            return new $root.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_DeleteRemotePlayTogetherInvitation_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {CRemoteClient_DeleteRemotePlayTogetherInvitation_Response} message CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CRemoteClient_DeleteRemotePlayTogetherInvitation_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_DeleteRemotePlayTogetherInvitation_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_DeleteRemotePlayTogetherInvitation_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_DeleteRemotePlayTogetherInvitation_Response;
+    })();
+    
+    $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_LookupRemotePlayTogetherInvitation_Request.
+         * @exports ICRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @interface ICRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @property {string|null} [invitation_code] CRemoteClient_LookupRemotePlayTogetherInvitation_Request invitation_code
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_LookupRemotePlayTogetherInvitation_Request.
+         * @exports CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @classdesc Represents a CRemoteClient_LookupRemotePlayTogetherInvitation_Request.
+         * @implements ICRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @constructor
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_LookupRemotePlayTogetherInvitation_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_LookupRemotePlayTogetherInvitation_Request invitation_code.
+         * @member {string} invitation_code
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.prototype.invitation_code = "";
+    
+        /**
+         * Creates a new CRemoteClient_LookupRemotePlayTogetherInvitation_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.create = function create(properties) {
+            return new CRemoteClient_LookupRemotePlayTogetherInvitation_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Request message. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request} message CRemoteClient_LookupRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_code);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Request message, length delimited. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Request} message CRemoteClient_LookupRemotePlayTogetherInvitation_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message.
+         * @function verify
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                if (!$util.isString(message.invitation_code))
+                    return "invitation_code: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request)
+                return object;
+            var message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Request();
+            if (object.invitation_code != null)
+                message.invitation_code = String(object.invitation_code);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_LookupRemotePlayTogetherInvitation_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @static
+         * @param {CRemoteClient_LookupRemotePlayTogetherInvitation_Request} message CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_code = "";
+            if (message.invitation_code != null && message.hasOwnProperty("invitation_code"))
+                object.invitation_code = message.invitation_code;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_LookupRemotePlayTogetherInvitation_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_LookupRemotePlayTogetherInvitation_Request;
+    })();
+    
+    $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_LookupRemotePlayTogetherInvitation_Response.
+         * @exports ICRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @interface ICRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @property {string|null} [invitation_url] CRemoteClient_LookupRemotePlayTogetherInvitation_Response invitation_url
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_LookupRemotePlayTogetherInvitation_Response.
+         * @exports CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @classdesc Represents a CRemoteClient_LookupRemotePlayTogetherInvitation_Response.
+         * @implements ICRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @constructor
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_LookupRemotePlayTogetherInvitation_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_LookupRemotePlayTogetherInvitation_Response invitation_url.
+         * @member {string} invitation_url
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.prototype.invitation_url = "";
+    
+        /**
+         * Creates a new CRemoteClient_LookupRemotePlayTogetherInvitation_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response instance
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.create = function create(properties) {
+            return new CRemoteClient_LookupRemotePlayTogetherInvitation_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Response message. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response} message CRemoteClient_LookupRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invitation_url != null && message.hasOwnProperty("invitation_url"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invitation_url);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_LookupRemotePlayTogetherInvitation_Response message, length delimited. Does not implicitly {@link CRemoteClient_LookupRemotePlayTogetherInvitation_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {ICRemoteClient_LookupRemotePlayTogetherInvitation_Response} message CRemoteClient_LookupRemotePlayTogetherInvitation_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invitation_url = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message.
+         * @function verify
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invitation_url != null && message.hasOwnProperty("invitation_url"))
+                if (!$util.isString(message.invitation_url))
+                    return "invitation_url: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response)
+                return object;
+            var message = new $root.CRemoteClient_LookupRemotePlayTogetherInvitation_Response();
+            if (object.invitation_url != null)
+                message.invitation_url = String(object.invitation_url);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_LookupRemotePlayTogetherInvitation_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @static
+         * @param {CRemoteClient_LookupRemotePlayTogetherInvitation_Response} message CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invitation_url = "";
+            if (message.invitation_url != null && message.hasOwnProperty("invitation_url"))
+                object.invitation_url = message.invitation_url;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_LookupRemotePlayTogetherInvitation_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_LookupRemotePlayTogetherInvitation_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_LookupRemotePlayTogetherInvitation_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_LookupRemotePlayTogetherInvitation_Response;
     })();
 
     return $root;

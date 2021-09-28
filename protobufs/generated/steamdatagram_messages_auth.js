@@ -190,34 +190,34 @@
         CMsgSteamDatagramRelayAuthTicket.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.time_expiry != null && Object.hasOwnProperty.call(message, "time_expiry"))
+            if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.time_expiry);
-            if (message.legacy_authorized_steam_id != null && Object.hasOwnProperty.call(message, "legacy_authorized_steam_id"))
+            if (message.legacy_authorized_steam_id != null && message.hasOwnProperty("legacy_authorized_steam_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.legacy_authorized_steam_id);
-            if (message.authorized_public_ip != null && Object.hasOwnProperty.call(message, "authorized_public_ip"))
+            if (message.authorized_public_ip != null && message.hasOwnProperty("authorized_public_ip"))
                 writer.uint32(/* id 3, wireType 5 =*/29).fixed32(message.authorized_public_ip);
-            if (message.legacy_gameserver_steam_id != null && Object.hasOwnProperty.call(message, "legacy_gameserver_steam_id"))
+            if (message.legacy_gameserver_steam_id != null && message.hasOwnProperty("legacy_gameserver_steam_id"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_gameserver_steam_id);
-            if (message.legacy_gameserver_net_id != null && Object.hasOwnProperty.call(message, "legacy_gameserver_net_id"))
+            if (message.legacy_gameserver_net_id != null && message.hasOwnProperty("legacy_gameserver_net_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.legacy_gameserver_net_id);
-            if (message.app_id != null && Object.hasOwnProperty.call(message, "app_id"))
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.app_id);
             if (message.extra_fields != null && message.extra_fields.length)
                 for (var i = 0; i < message.extra_fields.length; ++i)
                     $root.CMsgSteamDatagramRelayAuthTicket.ExtraField.encode(message.extra_fields[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-            if (message.legacy_gameserver_pop_id != null && Object.hasOwnProperty.call(message, "legacy_gameserver_pop_id"))
+            if (message.legacy_gameserver_pop_id != null && message.hasOwnProperty("legacy_gameserver_pop_id"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.legacy_gameserver_pop_id);
-            if (message.virtual_port != null && Object.hasOwnProperty.call(message, "virtual_port"))
+            if (message.virtual_port != null && message.hasOwnProperty("virtual_port"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.virtual_port);
-            if (message.gameserver_address != null && Object.hasOwnProperty.call(message, "gameserver_address"))
+            if (message.gameserver_address != null && message.hasOwnProperty("gameserver_address"))
                 writer.uint32(/* id 11, wireType 2 =*/90).bytes(message.gameserver_address);
-            if (message.legacy_authorized_client_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_authorized_client_identity_binary"))
+            if (message.legacy_authorized_client_identity_binary != null && message.hasOwnProperty("legacy_authorized_client_identity_binary"))
                 writer.uint32(/* id 12, wireType 2 =*/98).bytes(message.legacy_authorized_client_identity_binary);
-            if (message.legacy_gameserver_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_gameserver_identity_binary"))
+            if (message.legacy_gameserver_identity_binary != null && message.hasOwnProperty("legacy_gameserver_identity_binary"))
                 writer.uint32(/* id 13, wireType 2 =*/106).bytes(message.legacy_gameserver_identity_binary);
-            if (message.authorized_client_identity_string != null && Object.hasOwnProperty.call(message, "authorized_client_identity_string"))
+            if (message.authorized_client_identity_string != null && message.hasOwnProperty("authorized_client_identity_string"))
                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.authorized_client_identity_string);
-            if (message.gameserver_identity_string != null && Object.hasOwnProperty.call(message, "gameserver_identity_string"))
+            if (message.gameserver_identity_string != null && message.hasOwnProperty("gameserver_identity_string"))
                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.gameserver_identity_string);
             return writer;
         };
@@ -661,13 +661,13 @@
             ExtraField.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                if (message.name != null && message.hasOwnProperty("name"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                if (message.string_value != null && Object.hasOwnProperty.call(message, "string_value"))
+                if (message.string_value != null && message.hasOwnProperty("string_value"))
                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.string_value);
-                if (message.int64_value != null && Object.hasOwnProperty.call(message, "int64_value"))
+                if (message.int64_value != null && message.hasOwnProperty("int64_value"))
                     writer.uint32(/* id 3, wireType 0 =*/24).sint64(message.int64_value);
-                if (message.fixed64_value != null && Object.hasOwnProperty.call(message, "fixed64_value"))
+                if (message.fixed64_value != null && message.hasOwnProperty("fixed64_value"))
                     writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.fixed64_value);
                 return writer;
             };
@@ -870,9 +870,10 @@
          * @exports ICMsgSteamDatagramSignedRelayAuthTicket
          * @interface ICMsgSteamDatagramSignedRelayAuthTicket
          * @property {number|Long|null} [reserved_do_not_use] CMsgSteamDatagramSignedRelayAuthTicket reserved_do_not_use
-         * @property {number|Long|null} [key_id] CMsgSteamDatagramSignedRelayAuthTicket key_id
          * @property {Uint8Array|null} [ticket] CMsgSteamDatagramSignedRelayAuthTicket ticket
          * @property {Uint8Array|null} [signature] CMsgSteamDatagramSignedRelayAuthTicket signature
+         * @property {number|Long|null} [key_id] CMsgSteamDatagramSignedRelayAuthTicket key_id
+         * @property {Array.<ICMsgSteamDatagramCertificateSigned>|null} [certs] CMsgSteamDatagramSignedRelayAuthTicket certs
          */
     
         /**
@@ -884,6 +885,7 @@
          * @param {ICMsgSteamDatagramSignedRelayAuthTicket=} [properties] Properties to set
          */
         function CMsgSteamDatagramSignedRelayAuthTicket(properties) {
+            this.certs = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -897,14 +899,6 @@
          * @instance
          */
         CMsgSteamDatagramSignedRelayAuthTicket.prototype.reserved_do_not_use = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * CMsgSteamDatagramSignedRelayAuthTicket key_id.
-         * @member {number|Long} key_id
-         * @memberof CMsgSteamDatagramSignedRelayAuthTicket
-         * @instance
-         */
-        CMsgSteamDatagramSignedRelayAuthTicket.prototype.key_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
          * CMsgSteamDatagramSignedRelayAuthTicket ticket.
@@ -921,6 +915,22 @@
          * @instance
          */
         CMsgSteamDatagramSignedRelayAuthTicket.prototype.signature = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramSignedRelayAuthTicket key_id.
+         * @member {number|Long} key_id
+         * @memberof CMsgSteamDatagramSignedRelayAuthTicket
+         * @instance
+         */
+        CMsgSteamDatagramSignedRelayAuthTicket.prototype.key_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamDatagramSignedRelayAuthTicket certs.
+         * @member {Array.<ICMsgSteamDatagramCertificateSigned>} certs
+         * @memberof CMsgSteamDatagramSignedRelayAuthTicket
+         * @instance
+         */
+        CMsgSteamDatagramSignedRelayAuthTicket.prototype.certs = $util.emptyArray;
     
         /**
          * Creates a new CMsgSteamDatagramSignedRelayAuthTicket instance using the specified properties.
@@ -946,14 +956,17 @@
         CMsgSteamDatagramSignedRelayAuthTicket.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.reserved_do_not_use != null && Object.hasOwnProperty.call(message, "reserved_do_not_use"))
+            if (message.reserved_do_not_use != null && message.hasOwnProperty("reserved_do_not_use"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.reserved_do_not_use);
-            if (message.key_id != null && Object.hasOwnProperty.call(message, "key_id"))
+            if (message.key_id != null && message.hasOwnProperty("key_id"))
                 writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.key_id);
-            if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
+            if (message.ticket != null && message.hasOwnProperty("ticket"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.ticket);
-            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+            if (message.signature != null && message.hasOwnProperty("signature"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.signature);
+            if (message.certs != null && message.certs.length)
+                for (var i = 0; i < message.certs.length; ++i)
+                    $root.CMsgSteamDatagramCertificateSigned.encode(message.certs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
     
@@ -991,14 +1004,19 @@
                 case 1:
                     message.reserved_do_not_use = reader.fixed64();
                     break;
-                case 2:
-                    message.key_id = reader.fixed64();
-                    break;
                 case 3:
                     message.ticket = reader.bytes();
                     break;
                 case 4:
                     message.signature = reader.bytes();
+                    break;
+                case 2:
+                    message.key_id = reader.fixed64();
+                    break;
+                case 5:
+                    if (!(message.certs && message.certs.length))
+                        message.certs = [];
+                    message.certs.push($root.CMsgSteamDatagramCertificateSigned.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1038,15 +1056,24 @@
             if (message.reserved_do_not_use != null && message.hasOwnProperty("reserved_do_not_use"))
                 if (!$util.isInteger(message.reserved_do_not_use) && !(message.reserved_do_not_use && $util.isInteger(message.reserved_do_not_use.low) && $util.isInteger(message.reserved_do_not_use.high)))
                     return "reserved_do_not_use: integer|Long expected";
-            if (message.key_id != null && message.hasOwnProperty("key_id"))
-                if (!$util.isInteger(message.key_id) && !(message.key_id && $util.isInteger(message.key_id.low) && $util.isInteger(message.key_id.high)))
-                    return "key_id: integer|Long expected";
             if (message.ticket != null && message.hasOwnProperty("ticket"))
                 if (!(message.ticket && typeof message.ticket.length === "number" || $util.isString(message.ticket)))
                     return "ticket: buffer expected";
             if (message.signature != null && message.hasOwnProperty("signature"))
                 if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
                     return "signature: buffer expected";
+            if (message.key_id != null && message.hasOwnProperty("key_id"))
+                if (!$util.isInteger(message.key_id) && !(message.key_id && $util.isInteger(message.key_id.low) && $util.isInteger(message.key_id.high)))
+                    return "key_id: integer|Long expected";
+            if (message.certs != null && message.hasOwnProperty("certs")) {
+                if (!Array.isArray(message.certs))
+                    return "certs: array expected";
+                for (var i = 0; i < message.certs.length; ++i) {
+                    var error = $root.CMsgSteamDatagramCertificateSigned.verify(message.certs[i]);
+                    if (error)
+                        return "certs." + error;
+                }
+            }
             return null;
         };
     
@@ -1071,15 +1098,6 @@
                     message.reserved_do_not_use = object.reserved_do_not_use;
                 else if (typeof object.reserved_do_not_use === "object")
                     message.reserved_do_not_use = new $util.LongBits(object.reserved_do_not_use.low >>> 0, object.reserved_do_not_use.high >>> 0).toNumber();
-            if (object.key_id != null)
-                if ($util.Long)
-                    (message.key_id = $util.Long.fromValue(object.key_id)).unsigned = false;
-                else if (typeof object.key_id === "string")
-                    message.key_id = parseInt(object.key_id, 10);
-                else if (typeof object.key_id === "number")
-                    message.key_id = object.key_id;
-                else if (typeof object.key_id === "object")
-                    message.key_id = new $util.LongBits(object.key_id.low >>> 0, object.key_id.high >>> 0).toNumber();
             if (object.ticket != null)
                 if (typeof object.ticket === "string")
                     $util.base64.decode(object.ticket, message.ticket = $util.newBuffer($util.base64.length(object.ticket)), 0);
@@ -1090,6 +1108,25 @@
                     $util.base64.decode(object.signature, message.signature = $util.newBuffer($util.base64.length(object.signature)), 0);
                 else if (object.signature.length)
                     message.signature = object.signature;
+            if (object.key_id != null)
+                if ($util.Long)
+                    (message.key_id = $util.Long.fromValue(object.key_id)).unsigned = false;
+                else if (typeof object.key_id === "string")
+                    message.key_id = parseInt(object.key_id, 10);
+                else if (typeof object.key_id === "number")
+                    message.key_id = object.key_id;
+                else if (typeof object.key_id === "object")
+                    message.key_id = new $util.LongBits(object.key_id.low >>> 0, object.key_id.high >>> 0).toNumber();
+            if (object.certs) {
+                if (!Array.isArray(object.certs))
+                    throw TypeError(".CMsgSteamDatagramSignedRelayAuthTicket.certs: array expected");
+                message.certs = [];
+                for (var i = 0; i < object.certs.length; ++i) {
+                    if (typeof object.certs[i] !== "object")
+                        throw TypeError(".CMsgSteamDatagramSignedRelayAuthTicket.certs: object expected");
+                    message.certs[i] = $root.CMsgSteamDatagramCertificateSigned.fromObject(object.certs[i]);
+                }
+            }
             return message;
         };
     
@@ -1106,6 +1143,8 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.certs = [];
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -1146,6 +1185,11 @@
                 object.ticket = options.bytes === String ? $util.base64.encode(message.ticket, 0, message.ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.ticket) : message.ticket;
             if (message.signature != null && message.hasOwnProperty("signature"))
                 object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
+            if (message.certs && message.certs.length) {
+                object.certs = [];
+                for (var j = 0; j < message.certs.length; ++j)
+                    object.certs[j] = $root.CMsgSteamDatagramCertificateSigned.toObject(message.certs[j], options);
+            }
             return object;
         };
     
@@ -1238,9 +1282,9 @@
         CMsgSteamDatagramCachedCredentialsForApp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.private_key != null && Object.hasOwnProperty.call(message, "private_key"))
+            if (message.private_key != null && message.hasOwnProperty("private_key"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.private_key);
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.cert);
             if (message.relay_tickets != null && message.relay_tickets.length)
                 for (var i = 0; i < message.relay_tickets.length; ++i)
@@ -1543,19 +1587,19 @@
         CMsgSteamDatagramGameCoordinatorServerLogin.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.time_generated != null && Object.hasOwnProperty.call(message, "time_generated"))
+            if (message.time_generated != null && message.hasOwnProperty("time_generated"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.time_generated);
-            if (message.appid != null && Object.hasOwnProperty.call(message, "appid"))
+            if (message.appid != null && message.hasOwnProperty("appid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
-            if (message.routing != null && Object.hasOwnProperty.call(message, "routing"))
+            if (message.routing != null && message.hasOwnProperty("routing"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.routing);
-            if (message.appdata != null && Object.hasOwnProperty.call(message, "appdata"))
+            if (message.appdata != null && message.hasOwnProperty("appdata"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.appdata);
-            if (message.legacy_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_identity_binary"))
+            if (message.legacy_identity_binary != null && message.hasOwnProperty("legacy_identity_binary"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.legacy_identity_binary);
-            if (message.identity_string != null && Object.hasOwnProperty.call(message, "identity_string"))
+            if (message.identity_string != null && message.hasOwnProperty("identity_string"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.identity_string);
-            if (message.dummy_steam_id != null && Object.hasOwnProperty.call(message, "dummy_steam_id"))
+            if (message.dummy_steam_id != null && message.hasOwnProperty("dummy_steam_id"))
                 writer.uint32(/* id 99, wireType 1 =*/793).fixed64(message.dummy_steam_id);
             return writer;
         };
@@ -1868,11 +1912,11 @@
         CMsgSteamDatagramSignedGameCoordinatorServerLogin.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.login != null && Object.hasOwnProperty.call(message, "login"))
+            if (message.login != null && message.hasOwnProperty("login"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.login);
-            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+            if (message.signature != null && message.hasOwnProperty("signature"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.signature);
             return writer;
         };
@@ -2132,13 +2176,13 @@
         CMsgSteamDatagramHostedServerAddressPlaintext.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ipv4 != null && Object.hasOwnProperty.call(message, "ipv4"))
+            if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
                 writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.ipv4);
-            if (message.ipv6 != null && Object.hasOwnProperty.call(message, "ipv6"))
+            if (message.ipv6 != null && message.hasOwnProperty("ipv6"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.ipv6);
-            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+            if (message.port != null && message.hasOwnProperty("port"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.port);
-            if (message.routing_secret != null && Object.hasOwnProperty.call(message, "routing_secret"))
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.routing_secret);
             return writer;
         };
@@ -2418,15 +2462,15 @@
         CMsgSteamNetworkingIdentityLegacyBinary.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.generic_bytes != null && Object.hasOwnProperty.call(message, "generic_bytes"))
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.generic_bytes);
-            if (message.generic_string != null && Object.hasOwnProperty.call(message, "generic_string"))
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.generic_string);
-            if (message.ipv6_and_port != null && Object.hasOwnProperty.call(message, "ipv6_and_port"))
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.ipv6_and_port);
-            if (message.steam_id != null && Object.hasOwnProperty.call(message, "steam_id"))
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
                 writer.uint32(/* id 16, wireType 1 =*/129).fixed64(message.steam_id);
-            if (message.xbox_pairwise_id != null && Object.hasOwnProperty.call(message, "xbox_pairwise_id"))
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.xbox_pairwise_id);
             return writer;
         };
@@ -2764,25 +2808,25 @@
         CMsgSteamDatagramCertificate.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.key_type != null && Object.hasOwnProperty.call(message, "key_type"))
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.key_type);
-            if (message.key_data != null && Object.hasOwnProperty.call(message, "key_data"))
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.key_data);
-            if (message.legacy_steam_id != null && Object.hasOwnProperty.call(message, "legacy_steam_id"))
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_steam_id);
             if (message.gameserver_datacenter_ids != null && message.gameserver_datacenter_ids.length)
                 for (var i = 0; i < message.gameserver_datacenter_ids.length; ++i)
                     writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.gameserver_datacenter_ids[i]);
-            if (message.time_created != null && Object.hasOwnProperty.call(message, "time_created"))
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.time_created);
-            if (message.time_expiry != null && Object.hasOwnProperty.call(message, "time_expiry"))
+            if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.time_expiry);
             if (message.app_ids != null && message.app_ids.length)
                 for (var i = 0; i < message.app_ids.length; ++i)
                     writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.app_ids[i]);
-            if (message.legacy_identity_binary != null && Object.hasOwnProperty.call(message, "legacy_identity_binary"))
+            if (message.legacy_identity_binary != null && message.hasOwnProperty("legacy_identity_binary"))
                 $root.CMsgSteamNetworkingIdentityLegacyBinary.encode(message.legacy_identity_binary, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-            if (message.identity_string != null && Object.hasOwnProperty.call(message, "identity_string"))
+            if (message.identity_string != null && message.hasOwnProperty("identity_string"))
                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.identity_string);
             return writer;
         };
@@ -3083,7 +3127,7 @@
         /**
          * EKeyType enum.
          * @name CMsgSteamDatagramCertificate.EKeyType
-         * @enum {number}
+         * @enum {string}
          * @property {number} INVALID=0 INVALID value
          * @property {number} ED25519=1 ED25519 value
          */
@@ -3180,13 +3224,13 @@
         CMsgSteamDatagramCertificateSigned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.private_key_data != null && Object.hasOwnProperty.call(message, "private_key_data"))
+            if (message.private_key_data != null && message.hasOwnProperty("private_key_data"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.private_key_data);
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.cert);
-            if (message.ca_key_id != null && Object.hasOwnProperty.call(message, "ca_key_id"))
+            if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.ca_key_id);
-            if (message.ca_signature != null && Object.hasOwnProperty.call(message, "ca_signature"))
+            if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
                 writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.ca_signature);
             return writer;
         };
@@ -3448,7 +3492,7 @@
         CMsgSteamDatagramCertificateRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+            if (message.cert != null && message.hasOwnProperty("cert"))
                 $root.CMsgSteamDatagramCertificate.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
