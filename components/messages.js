@@ -311,6 +311,26 @@ protobufs['DeviceAuth.RemoveAuthorizedBorrowers#1_Response'] = Schema.CDeviceAut
 protobufs['DeviceAuth.GetAuthorizedBorrowers#1_Request'] = Schema.CDeviceAuth_GetAuthorizedBorrowers_Request;
 protobufs['DeviceAuth.GetAuthorizedBorrowers#1_Response'] = Schema.CDeviceAuth_GetAuthorizedBorrowers_Response;
 
+// Make sure that every protobuf we used actually exists
+let hadMissingProtobuf = false;
+for (let i in protobufs) {
+	if (typeof protobufs[i] != 'undefined') {
+		continue;
+	}
+
+	// The protobuf doesn't exist
+	if (i.match(/^\d+$/)) {
+		i = EMsg[i] || i;
+	}
+
+	console.error(`Protobuf for message ${i} does not exist!`);
+	hadMissingProtobuf = true;
+}
+
+if (hadMissingProtobuf) {
+	throw new Error('One or more protobuf schemas are missing');
+}
+
 /**
  * Encode a protobuf.
  * @param {object} proto - The protobuf class
