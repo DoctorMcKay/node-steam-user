@@ -307,6 +307,8 @@ protobufs['DeviceAuth.RemoveAuthorizedBorrowers#1_Request'] = Schema.CDeviceAuth
 protobufs['DeviceAuth.RemoveAuthorizedBorrowers#1_Response'] = Schema.CDeviceAuth_RemoveAuthorizedBorrowers_Response;
 protobufs['DeviceAuth.GetAuthorizedBorrowers#1_Request'] = Schema.CDeviceAuth_GetAuthorizedBorrowers_Request;
 protobufs['DeviceAuth.GetAuthorizedBorrowers#1_Response'] = Schema.CDeviceAuth_GetAuthorizedBorrowers_Response;
+protobufs['ContentServerDirectory.GetManifestRequestCode#1_Request'] = Schema.CContentServerDirectory_GetManifestRequestCode_Request;
+protobufs['ContentServerDirectory.GetManifestRequestCode#1_Response'] = Schema.CContentServerDirectory_GetManifestRequestCode_Response;
 
 // Make sure that every protobuf we used actually exists
 let hadMissingProtobuf = false;

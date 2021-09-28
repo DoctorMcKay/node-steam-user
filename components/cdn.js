@@ -166,12 +166,24 @@ SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callbac
  * @param {int} appID
  * @param {int} depotID
  * @param {string} manifestID
+ * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
+ * @param {string} [branchPassword]
  * @param {function} [callback]
  * @return Promise
  */
-SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback) {
+SteamUser.prototype.getManifest = function(appID, depotID, manifestID, branchName, branchPassword, callback) {
+	if (typeof branchName == 'function') {
+		callback = branchName;
+		branchName = null;
+	}
+
+	if (typeof branchPassword == 'function') {
+		callback = branchPassword;
+		branchPassword = null;
+	}
+
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['manifest'], callback, async (resolve, reject) => {
-		let manifest = ContentManifest.parse((await this.getRawManifest(appID, depotID, manifestID)).manifest);
+		let manifest = ContentManifest.parse((await this.getRawManifest(appID, depotID, manifestID, branchName, branchPassword)).manifest);
 
 		if (!manifest.filenames_encrypted) {
 			return resolve({manifest});
@@ -187,9 +199,21 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
  * @param {int} appID
  * @param {int} depotID
  * @param {string} manifestID
+ * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
+ * @param {string} [branchPassword]
  * @param {function} [callback]
  */
-SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callback) {
+SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, branchName, branchPassword, callback) {
+	if (typeof branchName == 'function') {
+		callback = branchName;
+		branchName = null;
+	}
+
+	if (typeof branchPassword == 'function') {
+		callback = branchPassword;
+		branchPassword = null;
+	}
+
 	return StdLib.Promises.callbackPromise(['manifest'], callback, async (resolve, reject) => {
 		let {servers} = await this.getContentServers(appID);
 		let server = servers[Math.floor(Math.random() * servers.length)];
@@ -197,7 +221,15 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 		let vhost = server.vhost || server.Host;
 		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
-		download(`${urlBase}/depot/${depotID}/manifest/${manifestID}/5${token}`, vhost, async (err, res) => {
+		let manifestRequestCode = '';
+		if (branchName) {
+			let {requestCode} = await this.getManifestRequestCode(appID, depotID, manifestID, branchName, branchPassword);
+			manifestRequestCode = `/${requestCode}`;
+		}
+
+		let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}${token}`;
+		this.emit('debug', `Downloading manifest from ${manifestUrl} (${vhost})`);
+		download(manifestUrl, vhost, async (err, res) => {
 			if (err) {
 				return reject(err);
 			}
@@ -212,6 +244,39 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 			} catch (ex) {
 				return reject(ex);
 			}
+		});
+	});
+};
+
+/**
+ * Gets a manifest request code
+ * @param {int} appID
+ * @param {int} depotID
+ * @param {string} manifestID
+ * @param {string} branchName
+ * @param {string} [branchPassword]
+ * @param {function} [callback]
+ */
+SteamUser.prototype.getManifestRequestCode = function(appID, depotID, manifestID, branchName, branchPassword, callback) {
+	if (typeof branchPassword == 'function') {
+		callback = branchPassword;
+		branchPassword = null;
+	}
+
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		this._sendUnified('ContentServerDirectory.GetManifestRequestCode#1', {
+			app_id: appID,
+			depot_id: depotID,
+			manifest_id: manifestID,
+			app_branch: branchName,
+			branch_password_hash: branchPassword // TODO figure out how this is "hashed"
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve({requestCode: body.manifest_request_code});
 		});
 	});
 };
