@@ -13,9 +13,12 @@ const FRIEND_CODE_REPLACEMENTS = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'm', '
  * @returns {SteamID}
  */
 exports.steamID = function(input) {
+	if (!input) {
+		return;
+	}
+
 	if (typeof input !== 'string') {
-		let keys = Object.keys(input);
-		if (keys.indexOf('universe') != -1 && keys.indexOf('type') != -1 && keys.indexOf('instance') != -1 && keys.indexOf('accountid') != -1 && keys.indexOf('isValid') != -1) {
+		if (input instanceof SteamID) {
 			return input; // Looks like it's already a SteamID
 		}
 
