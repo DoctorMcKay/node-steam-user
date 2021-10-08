@@ -84,7 +84,7 @@ SteamUser.prototype.kickPlayingSession = function(callback) {
 			} else if (blocked) {
 				return reject(new Error('Cannot kick other session'));
 			} else {
-				return resolve();
+				return resolve(null, playingApp);
 			}
 		});
 	});
