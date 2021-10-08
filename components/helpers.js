@@ -18,7 +18,8 @@ exports.steamID = function(input) {
 	}
 
 	if (typeof input !== 'string') {
-		if (input instanceof SteamID) {
+		let keys = Object.keys(input);
+		if (keys.every(key => ['universe', 'type', 'instance', 'accountid'].includes(key))) {
 			return input; // Looks like it's already a SteamID
 		}
 
