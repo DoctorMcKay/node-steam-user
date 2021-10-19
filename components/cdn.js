@@ -219,7 +219,6 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, branch
 		let server = servers[Math.floor(Math.random() * servers.length)];
 		let urlBase = (server.https_support == 'mandatory' ? 'https://' : 'http://') + server.Host;
 		let vhost = server.vhost || server.Host;
-		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
 		let manifestRequestCode = '';
 		if (branchName) {
@@ -227,7 +226,7 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, branch
 			manifestRequestCode = `/${requestCode}`;
 		}
 
-		let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}${token}`;
+		let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}`;
 		this.emit('debug', `Downloading manifest from ${manifestUrl} (${vhost})`);
 		download(manifestUrl, vhost, async (err, res) => {
 			if (err) {
@@ -307,9 +306,8 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 		let urlBase = (contentServer.https_support == 'mandatory' ? 'https://' : 'http://') + contentServer.Host;
 		let vhost = contentServer.vhost || contentServer.Host;
 		let {key} = await this.getDepotDecryptionKey(appID, depotID);
-		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
-		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}${token}`, vhost, async (err, res) => {
+		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}`, vhost, async (err, res) => {
 			if (err) {
 				return reject(err);
 			}
