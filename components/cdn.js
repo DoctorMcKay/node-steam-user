@@ -131,37 +131,6 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 };
 
 /**
- * Get an auth token for a particular CDN server.
- * @param {int} appID
- * @param {int} depotID
- * @param {string} hostname - The hostname of the CDN server for which we want a token
- * @param {function} [callback]
- * @return Promise
- */
-SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['token', 'expires'], callback, (resolve, reject) => {
-		if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
-			return resolve(this._contentServerTokens[depotID + '_' + hostname]);
-		}
-
-		this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {
-			app_id: appID,
-			depot_id: depotID,
-			host_name: hostname
-		}, (body) => {
-			if (body.eresult != SteamUser.EResult.OK) {
-				return reject(Helpers.eresultError(body.eresult));
-			}
-
-			return resolve(this._contentServerTokens[depotID + '_' + hostname] = {
-				token: body.token,
-				expires: new Date(body.expiration_time * 1000)
-			});
-		});
-	});
-};
-
-/**
  * Download a depot content manifest.
  * @param {int} appID
  * @param {int} depotID
@@ -219,7 +188,6 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, branch
 		let server = servers[Math.floor(Math.random() * servers.length)];
 		let urlBase = (server.https_support == 'mandatory' ? 'https://' : 'http://') + server.Host;
 		let vhost = server.vhost || server.Host;
-		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
 		let manifestRequestCode = '';
 		if (branchName) {
@@ -227,7 +195,7 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, branch
 			manifestRequestCode = `/${requestCode}`;
 		}
 
-		let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}${token}`;
+		let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}`;
 		this.emit('debug', `Downloading manifest from ${manifestUrl} (${vhost})`);
 		download(manifestUrl, vhost, async (err, res) => {
 			if (err) {
@@ -307,9 +275,8 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 		let urlBase = (contentServer.https_support == 'mandatory' ? 'https://' : 'http://') + contentServer.Host;
 		let vhost = contentServer.vhost || contentServer.Host;
 		let {key} = await this.getDepotDecryptionKey(appID, depotID);
-		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
 
-		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}${token}`, vhost, async (err, res) => {
+		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}`, vhost, async (err, res) => {
 			if (err) {
 				return reject(err);
 			}
