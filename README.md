@@ -2025,27 +2025,33 @@ Emitted when a group posts a new announcement.
 
 ### friendRelationship
 - `sid` - A `SteamID` object for the user whose relationship with us just changed
-- `relationship` - A value from `EFriendRelationship`
+- `relationship` - A value from [`EFriendRelationship`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EFriendRelationship.js)
+- `previousRelationship` - Your previous relationship with this user. This is also a value from [`EFriendRelationship`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EFriendRelationship.js)
 
-**v1.9.0 or later is required to use this event**
+**v1.9.0 or later is required to use this event. v4.21.0 or later is required to use `previousRelationship`**
 
 *This is an [ID event](#id-events).*
 
-Emitted when our relationship with a particular user changes. For example, `EFriendRelationship.RequestRecipient` means that we got invited as a friend, `EFriendRelationship.None` means that we got unfriended.
+Emitted when our relationship with a particular user changes. For example, `EFriendRelationship.RequestRecipient` means
+that we got invited as a friend, and `EFriendRelationship.None` means that we got unfriended.
 
-The [`myFriends`](#myfriends) property isn't yet updated when this is emitted, so you can compare to the old value to see what changed.
+The [`myFriends`](#myfriends) property isn't yet updated when this is emitted, so you can compare to the old value to
+see what changed.
 
 ### groupRelationship
 - `sid` - A `SteamID` object for the group whose relationship with us just changed
-- `relationship` - A value from `EClanRelationship`
+- `relationship` - A value from [`EClanRelationship`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EClanRelationship.js)
+- `previousRelationship` - Your previous relationship with this group. 
+  This is also a value from [`EClanRelationship`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EClanRelationship.js)
 
-**v1.9.0 or later is required to use this event**
+**v1.9.0 or later is required to use this event. v4.21.0 or later is required to use `previousRelationship`**
 
 *This is an [ID event](#id-events).*
 
 Emitted when our relationship with a particular Steam group changes.
 
-The [`myGroups`](#mygroups) property isn't yet updated when this is emitted, so you can compare to the old value to see what changed.
+The [`myGroups`](#mygroups) property isn't yet updated when this is emitted, so you can compare to the old value to
+see what changed.
 
 ### friendsList
 

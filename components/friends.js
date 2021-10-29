@@ -1006,17 +1006,24 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, functi
 			 */
 
 			/**
-			 * Emitted when a relationship with a Steam user changes. The relationship in myFriendsis updated after this is emitted.
+			 * Emitted when a relationship with a Steam user changes. The relationship in myFriends is updated after this is emitted.
 			 *
 			 * @event SteamUser#friendRelationship
 			 * @param {SteamID} steamID - The SteamID of the group
 			 * @param {EFriendRelationship} relationship - Your new relationship with the user
 			 */
 
-			// This isn't an initial download of the friends list, something changed
-			this._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
+			// This isn't an initial download of the friends list; something changed
+
+			let previousRelationship = this[key][sid.getSteamID64()];
+			if (typeof previousRelationship == 'undefined') {
+				previousRelationship = SteamUser.EFriendRelationship.None;
+			}
+
+			this._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship, previousRelationship);
 		}
 
+		// EFriendRelationship.None and EClanRelationship.None are both 0.
 		if (relationship.efriendrelationship == SteamUser.EFriendRelationship.None) {
 			delete this[key][sid.getSteamID64()];
 		} else {
