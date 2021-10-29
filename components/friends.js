@@ -1020,7 +1020,14 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, functi
 				previousRelationship = SteamUser.EFriendRelationship.None;
 			}
 
-			this._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship, previousRelationship);
+			if (relationship.efriendrelationship != previousRelationship) {
+				this._emitIdEvent(
+					key == 'myGroups' ? 'groupRelationship' : 'friendRelationship',
+					sid,
+					relationship.efriendrelationship,
+					previousRelationship
+				);
+			}
 		}
 
 		// EFriendRelationship.None and EClanRelationship.None are both 0.
