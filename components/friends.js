@@ -739,14 +739,14 @@ SteamUser.prototype.uploadRichPresence = function(appid, richPresence) {
  * @return Promise
  */
 SteamUser.prototype.requestRichPresence = function(appid, steamIDs, language, callback) {
+	if (typeof language == 'function') {
+		callback = language;
+		language = null;
+	}
+
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		if (!Array.isArray(steamIDs)) {
 			steamIDs = [steamIDs];
-		}
-
-		if (typeof language == 'function') {
-			callback = language;
-			language = null;
 		}
 
 		this._send({
