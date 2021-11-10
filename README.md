@@ -2028,7 +2028,7 @@ Emitted when a group posts a new announcement.
 - `relationship` - A value from [`EFriendRelationship`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EFriendRelationship.js)
 - `previousRelationship` - Your previous relationship with this user. This is also a value from [`EFriendRelationship`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EFriendRelationship.js)
 
-**v1.9.0 or later is required to use this event. v4.21.0 or later is required to use `previousRelationship`**
+**v1.9.0 or later is required to use this event. v4.20.2 or later is required to use `previousRelationship`**
 
 *This is an [ID event](#id-events).*
 
@@ -2044,7 +2044,7 @@ see what changed.
 - `previousRelationship` - Your previous relationship with this group. 
   This is also a value from [`EClanRelationship`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EClanRelationship.js)
 
-**v1.9.0 or later is required to use this event. v4.21.0 or later is required to use `previousRelationship`**
+**v1.9.0 or later is required to use this event. v4.20.2 or later is required to use `previousRelationship`**
 
 *This is an [ID event](#id-events).*
 
