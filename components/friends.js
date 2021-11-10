@@ -749,15 +749,6 @@ SteamUser.prototype.requestRichPresence = function(appid, steamIDs, language, ca
 	}
 
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
-		if (!Array.isArray(steamIDs)) {
-			steamIDs = [steamIDs];
-		}
-
-		if (typeof language == 'function') {
-			callback = language;
-			language = null;
-		}
-
 		this._send({
 			// Header
 			msg: SteamUser.EMsg.ClientRichPresenceRequest,
@@ -1214,6 +1205,10 @@ SteamUser.prototype._getRPLocalizedString = function(appid, tokens, language) {
 		let localizationTokens;
 		try {
 			localizationTokens = (await this.getAppRichPresenceLocalization(appid, language || this.options.language)).tokens;
+			// Normalize all localization tokens to lowercase
+			for (let i in localizationTokens) {
+				localizationTokens[i.toLowerCase()] = localizationTokens[i];
+			}
 		} catch (ex) {
 			// Oh well
 			return reject(ex);
@@ -1221,8 +1216,8 @@ SteamUser.prototype._getRPLocalizedString = function(appid, tokens, language) {
 
 		let rpTokens = JSON.parse(JSON.stringify(tokens)); // So we don't modify the original objects
 		for (let i in rpTokens) {
-			if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i]]) {
-				rpTokens[i] = localizationTokens[rpTokens[i]];
+			if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i].toLowerCase()]) {
+				rpTokens[i] = localizationTokens[rpTokens[i].toLowerCase()];
 			}
 		}
 
@@ -1237,8 +1232,8 @@ SteamUser.prototype._getRPLocalizedString = function(appid, tokens, language) {
 
 			(newRpString.match(/{#[^}]+}/g) || []).forEach((token) => {
 				token = token.substring(1, token.length - 1);
-				if (localizationTokens[token]) {
-					newRpString = newRpString.replace(new RegExp('{' + token + '}', 'gi'), localizationTokens[token]);
+				if (localizationTokens[token.toLowerCase()]) {
+					newRpString = newRpString.replace(new RegExp('{' + token + '}', 'gi'), localizationTokens[token.toLowerCase()]);
 				}
 			});
 
