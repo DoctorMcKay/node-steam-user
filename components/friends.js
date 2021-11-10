@@ -283,9 +283,9 @@ SteamUser.prototype.redeemQuickInviteLink = function(link, callback) {
 SteamUser.prototype.getPersonas = function(steamids, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['personas'], callback, true, (resolve, reject) => {
 		const Flags = SteamUser.EClientPersonaStateFlag;
-		let flags = Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
-			Flags.Metadata | Flags.LastSeen | Flags.ClanInfo | Flags.GameExtraInfo | Flags.GameDataBlob |
-			Flags.ClanTag | Flags.Facebook;
+		let flags = Flags.Status | Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
+			Flags.Metadata | Flags.LastSeen | Flags.UserClanRank | Flags.GameExtraInfo | Flags.GameDataBlob |
+			Flags.ClanData | Flags.Facebook | Flags.RichPresence | Flags.Broadcast | Flags.Watching;
 
 		let ids = steamids.map((id) => {
 			if (typeof id === 'string') {
