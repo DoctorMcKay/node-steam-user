@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/steam-user.iml" filepath="$PROJECT_DIR$/.idea/steam-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../steam-user wiki/.idea/steam-user wiki.iml" filepath="$PROJECT_DIR$/../steam-user wiki/.idea/steam-user wiki.iml" />
     </modules>
   </component>
 </project>

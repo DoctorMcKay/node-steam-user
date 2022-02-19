@@ -89,12 +89,102 @@ function SteamChatRoomClient(user) {
 		this.chat.emit('chatMessagesModified', body);
 	});
 
+	this.user._handlerManager.add('ChatRoomClient.NotifyChatGroupUserStateChanged#1', function(body) {
+		processChatGroupState(body.user_chat_group_state);
+		processChatGroupSummary(body.group_summary);
+		this.chat.emit('chatRoomGroupSelfStateChange', body);
+	});
+
+	this.user._handlerManager.add('ChatRoomClient.NotifyMemberStateChange#1', function(body) {
+		preProcessObject(body);
+		this.chat.emit('chatRoomGroupMemberStateChange', body);
+	});
+
+	this.user._handlerManager.add('ChatRoomClient.NotifyChatRoomHeaderStateChange#1', function(body) {
+		preProcessObject(body);
+		body.chat_group_id = body.header_state.chat_group_id;
+		this.chat.emit('chatRoomGroupHeaderStateChange', body);
+	});
+
 	this.user._handlerManager.add('ChatRoomClient.NotifyChatRoomGroupRoomsChange#1', function(body) {
 		body = preProcessObject(body);
 		body.chat_rooms.map(room => processChatRoomState(room, true));
 		this.chat.emit('chatRoomGroupRoomsChange', body);
 	});
 }
+
+/**
+ * Creates a new chat room group and invites people to join it.
+ * @param {SteamID[]|string[]|string} [inviteeSteamIds=[]]
+ * @param {string} [name=''] - If omitted, this creates an "ad-hoc" group chat. If named, this creates a saved chat room group.
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.createGroup = function(inviteeSteamIds, name, callback) {
+	// Is inviteeSteamIds a single valid steamid? If so, turn it into an array
+	if (typeof inviteeSteamIds == 'string' || (typeof inviteeSteamIds == 'object' && inviteeSteamIds !== null)) {
+		try {
+			Helpers.steamID(inviteeSteamIds); // throws if not valid steamid
+			inviteeSteamIds = [inviteeSteamIds];
+		} catch (ex) {}
+	}
+
+	if (typeof inviteeSteamIds == 'function') {
+		callback = inviteeSteamIds;
+		inviteeSteamIds = [];
+		name = '';
+	}
+
+	if (typeof inviteeSteamIds == 'string') {
+		name = inviteeSteamIds;
+		inviteeSteamIds = [];
+	}
+
+	if (typeof name == 'function') {
+		callback = name;
+		name = '';
+	}
+
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		this.user._sendUnified('ChatRoom.CreateChatRoomGroup#1', {
+			name: name || '',
+			steamid_invitees: (inviteeSteamIds || []).map(Helpers.steamID).map(sid => sid.toString())
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			processChatGroupState(body.state);
+			processUserChatGroupState(body.user_chat_state);
+
+			resolve(body);
+		});
+	});
+};
+
+/**
+ * Saves an unnamed "ad-hoc" group chat and converts it into a full-fledged chat room group.
+ * @param {int} groupId
+ * @param {string} name
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.saveGroup = function(groupId, name, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		this.user._sendUnified('ChatRoom.SaveChatRoomGroup#1', {
+			chat_group_id: groupId,
+			name
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve();
+		});
+	});
+};
 
 /**
  * Get a list of the chat room groups you're in.
@@ -264,6 +354,27 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
 			body.state = processChatGroupState(body.state, true);
 			body.user_chat_state = processUserChatGroupState(body.user_chat_state, true);
 			resolve(body);
+		});
+	});
+};
+
+/**
+ * Leave a chat room group
+ * @param {int} groupId
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.leaveGroup = function(groupId, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		this.user._sendUnified('ChatRoom.LeaveChatRoomGroup#1', {
+			chat_group_id: groupId
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve();
 		});
 	});
 };
@@ -868,6 +979,32 @@ SteamChatRoomClient.prototype.setGroupUserBanState = function(groupId, userSteam
 	});
 };
 
+/**
+ * Add or remove a role to a group user, provided you have the appropriate permissions.
+ * @param {int} groupId
+ * @param {SteamID|string} userSteamId
+ * @param {int} roleId
+ * @param {boolean} roleState
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.setGroupUserRoleState = function(groupId, userSteamId, roleId, roleState, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		this.user._sendUnified(roleState ? 'ChatRoom.AddRoleToUser#1' : 'ChatRoom.DeleteRoleFromUser#1', {
+			chat_group_id: groupId,
+			role_id: roleId,
+			steamid: Helpers.steamID(userSteamId).toString()
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve();
+		});
+	});
+};
+
 
 
 
@@ -897,6 +1034,10 @@ function processChatRoomSummaryPair(summaryPair, preProcessed) {
  * @returns {object}
  */
 function processChatGroupSummary(groupSummary, preProcessed) {
+	if (groupSummary === null) {
+		return groupSummary;
+	}
+
 	if (!preProcessed) {
 		groupSummary = preProcessObject(groupSummary);
 	}
@@ -909,11 +1050,15 @@ function processChatGroupSummary(groupSummary, preProcessed) {
 }
 
 function processChatGroupState(state, preProcessed) {
+	if (state === null) {
+		return state;
+	}
+
 	if (!preProcessed) {
 		state = preProcessObject(state);
 	}
 
-	state.chat_rooms = state.chat_rooms.map(v => processChatRoomState(v, true));
+	state.chat_rooms = (state.chat_rooms || []).map(v => processChatRoomState(v, true));
 	return state;
 }
 
