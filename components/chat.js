@@ -313,7 +313,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatInvite, functio
 	 * @param {SteamID} inviterID - The SteamID of the user who invited us to the room
 	 * @param {SteamID} chatID - The SteamID of the chat room to which we were invited
 	 * @param {string} chatName - The name of the chat room to which we were invited
-	 * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat ({@link SteamChatRoomClient#}
+	 * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat ({@link SteamChatRoomClient#event:chatRoomGroupSelfStateChange})
 	 */
 
 	let inviterID = new SteamID(body.steam_id_patron.toString());
