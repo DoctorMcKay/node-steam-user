@@ -272,7 +272,7 @@ function processProtobufEnums() {
 		processed = processed.concat(valuesToAdd);
 		processed.sort(sortEnum);
 
-		let enumFile = GENERATED_FILE_HEADER + `/**\n * @enum ${enumName}\n * @readonly\n */\nconst ${enumName} = {\n`;
+		let enumFile = GENERATED_FILE_HEADER + `/**\n * @enum\n * @readonly\n */\nconst ${enumName} = {\n`;
 		enumFile += processed.map(v => `\t"${v.name}": ${v.value},` + (v.comment ? ` // ${v.comment}` : '')).join("\n");
 		enumFile += "\n\n\t// Value-to-name mapping for convenience\n";
 		enumFile += processed.filter(v => v.comment !== 'obsolete').map(v => `\t"${v.value}": "${v.name}",`).join("\n");
