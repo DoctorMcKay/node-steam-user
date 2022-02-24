@@ -661,9 +661,10 @@ Retrieves your account's privacy settings. You can't change your privacy state u
 - `callback` - Optional. A function to be called once Steam receives and responds to this request.
     - `err` - An `Error` object on failure, or `null` on success
 	- `response` - The response object
-	    - `playingApp` - This is the AppID of the game that is being played elsewhere
+	    - `playingApp` - This is the AppID of the game that was being played elsewhere
 
-**v3.21.0 or later is required to use this method**
+**v3.21.0 or later is required to use this method**  
+**v4.22.0 or later is required to read `playingApp` in the callback**
 
 If this account is being used to play a game on another logon session, calling this method will kick that other session
 off of Steam entirely (it will get an `error` event if the other session is using node-steam-user).
