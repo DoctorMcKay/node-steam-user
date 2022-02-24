@@ -729,6 +729,14 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 		packageFilter = filter;
 	} else if (typeof filter === 'object') {
 		// Possible options: {F=1,S=1,E=1}, {F=1,S=0,E=1}, {F=0,S=1,E=1}, {F=0,S=0,E=1}, {F=1,S=1,E=0}, {F=1,S=0,E=0}
+
+		const freeLicenseBillingTypes = [
+			SteamUser.EBillingType.NoCost,
+			SteamUser.EBillingType.GuestPass,
+			SteamUser.EBillingType.FreeOnDemand,
+			SteamUser.EBillingType.FreeCommercialLicense
+		];
+
 		packageFilter = (license) => {
 
 			// If expired, filter it out, regardless of the filter options
@@ -751,23 +759,21 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 			let pkg = this.picsCache.packages[id].packageinfo;
 
 			// If exclude all free (sub 0 is covered by NoCost)
-			if (filter.excludeFree) {
-				switch (pkg.billingtype) {
-					case SteamUser.EBillingType.NoCost:
-					case SteamUser.EBillingType.GuestPass: // count guest pass as free
-					case SteamUser.EBillingType.FreeOnDemand:
-					case SteamUser.EBillingType.FreeCommercialLicense:
-						return false;
-				}
+			if (filter.excludeFree && freeLicenseBillingTypes.includes(pkg.billingtype)) {
+				return false;
 			}
 
 			// If exclude all expiring licenses (not free promotions, which are yours to keep permanently)
-			if (filter.excludeExpiring) {
-				switch (true) {
-					case pkg.billingtype === SteamUser.EBillingType.GuestPass: // count guest pass as temporary
-					case pkg.extended && pkg.extended.expirytime && !pkg.extended.freepromotion:
-						return false; // return false, since this license is temporary (but not expired, as expired has been filtered out already)
-				}
+			// noinspection RedundantIfStatementJS
+			if (
+				filter.excludeExpiring &&
+				(
+					pkg.billingtype == SteamUser.EBillingType.GuestPass ||
+					(pkg.extended && pkg.extended.expirytime && !pkg.extended.freepromotion)
+				)
+			) {
+				// return false, since this license is temporary (but not expired, as expired has been filtered out already)
+				return false;
 			}
 
 			return true;
