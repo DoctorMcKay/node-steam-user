@@ -10,6 +10,7 @@ let g_ProcessPersonaSemaphore = new StdLib.Concurrency.Semaphore();
 
 /**
  * Set your persona online state and optionally name.
+ * @memberOf SteamUser
  * @param {EPersonaState} state - Your new online state
  * @param {string} [name] - Optional. Set a new profile name.
  */
@@ -872,7 +873,12 @@ SteamUser.prototype.getFriendsThatPlay = function(appID, callback) {
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {
-	body.friends.forEach((user) => {
+	body.friends.forEach((u) => {
+		/**
+		 * @type {Proto_CMsgClientPersonaState_Friend}
+		 */
+		let user = u;
+
 		let sid = new SteamID(user.friendid.toString());
 		let sid64 = sid.getSteamID64();
 		delete user.friendid;
@@ -900,7 +906,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, funct
 			 *
 			 * @event SteamUser#user
 			 * @param {SteamID} steamID - The SteamID of the user
-			 * @param {Object} user - An object containing the user's persona info
+			 * @param {UserPersona} user - An object containing the user's persona info
 			 */
 
 			this._emitIdEvent('user', sid, processedUser);
@@ -936,12 +942,22 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientClanState, function
 	}
 
 	/**
+	 * @typedef {object} GroupPersona
+	 * @property {number} clan_account_flags
+	 * @property {{clan_name: string, sha_avatar: Buffer}} name_info
+	 * @property {{members: number, online: number, chatting: number, in_game: number, chat_room_members: number}} user_counts
+	 * @property {{gid: string, event_time: number, headline: string, game_id: string, just_posted: boolean}[]} events
+	 * @property {{gid: string, event_time: number, headline: string, game_id: string, just_posted: boolean}[]} announcements
+	 * @property {boolean} chat_room_private
+	 */
+
+	/**
 	 * Emitted when we receive info about a Steam group.
 	 * You can also listen for group#steamid64 to get info only for a specific group.
 	 *
 	 * @event SteamUser#group
 	 * @param {SteamID} steamID - The SteamID of the group
-	 * @param {Object} user - An object containing the group's info
+	 * @param {GroupPersona} group - An object containing the group's info
 	 */
 
 	this._emitIdEvent('group', sid, body);
@@ -1126,6 +1142,49 @@ SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChange
 	}
 });
 
+/**
+ * @typedef {object} UserPersona
+ * @property {EPersonaState} persona_state
+ * @property {number|null} game_played_app_id
+ * @property {number|null} game_server_ip
+ * @property {number|null} game_server_port
+ * @property {number} persona_state_flags
+ * @property {number} online_session_instances
+ * @property {boolean} persona_set_by_user
+ * @property {string} player_name
+ * @property {number|null} query_port
+ * @property {number} steamid_source
+ * @property {Buffer} avatar_hash
+ * @property {string} avatar_url_icon
+ * @property {string} avatar_url_medium
+ * @property {string} avatar_url_full
+ * @property {Date} last_logoff
+ * @property {Date} last_logon
+ * @property {Date} last_seen_online
+ * @property {EClanRank} clank_rank
+ * @property {string|null} game_name
+ * @property {number|null} gameid
+ * @property {Buffer} game_data_blob
+ * @property {Proto_CMsgClientPersonaState_Friend_ClanData} clan_data
+ * @property {string} clan_tag
+ * @property {Proto_CMsgClientPersonaState_Friend_KV} rich_presence
+ * @property {string} [rich_presence_string]
+ * @property {number|null} broadcast_id
+ * @property {number|null} game_lobby_id
+ * @property {number|null} watching_broadcast_accountid
+ * @property {number|null} watching_broadcast_appid
+ * @property {number|null} watching_broadcast_viewers
+ * @property {string|null} watching_broadcast_title
+ * @property {boolean} is_community_banned
+ * @property {boolean} player_name_pending_review
+ * @property {boolean} avatar_pending_review
+ */
+
+/**
+ * @param {SteamUser} steamUser
+ * @param {object} user
+ * @returns {Promise<UserPersona>}
+ */
 
 function processUser(steamUser, user) {
 	return new Promise((resolve) => {

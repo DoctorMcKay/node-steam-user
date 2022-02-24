@@ -7,6 +7,31 @@ const SteamChatRoomClient = require('./components/chatroom.js');
 
 const DefaultOptions = require('./resources/default_options.js');
 
+/**
+ * @param {object} options
+ * @class SteamUser
+ * @extends EventEmitter
+ * @property {SteamID|null} steamID
+ * @property {SteamChatRoomClient} chat
+ * @property {object} options
+ * @property {string|null} publicIP
+ * @property {number|null} cellID
+ * @property {string|null} vanityURL
+ * @property {{name: string, country: string, authedMachines: number, flags: number, facebookID?: string, facebookName?: string}|null} accountInfo
+ * @property {{address: string, validated: boolean}|null} emailInfo
+ * @property {{limited: boolean, communityBanned: boolean, locked: boolean, canInviteFriends: boolean}|null} limitations
+ * @property {{numBans: number, appids: number[]}|null} vac
+ * @property {{hasWallet: boolean, currency: ECurrencyCode, balance: number}|null} wallet
+ * @property {Proto_CMsgClientLicenseList_License[]|null} licenses
+ * @property {{gid: string, packageid: string, TimeCreated: Date, TimeExpiration: Date, TimeSent: Date, TimeAcked: Date, TimeRedeemed: Date|null, RecipientAddress: string, SenderAddress: string, SenderName: string}[]|null} gifts
+ * @property {Object<string, UserPersona>} users
+ * @property {Object<string, GroupPersona>} groups
+ * @property {Object<string, EFriendRelationship>|null} myFriends
+ * @property {Object<string, EClanRelationship>|null} myGroups
+ * @property {Object<string, {name: string, members: SteamID[]}>|null} myFriendGroups
+ * @property {Object<string, string>|null} myNicknames
+ * @property {{changenumber: number, apps: object, packages: object}} picsCache
+ */
 class SteamUser extends EventEmitter {
 	constructor(options) {
 		super();

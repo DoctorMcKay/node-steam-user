@@ -15,6 +15,115 @@ Util.inherits(SteamChatRoomClient, EventEmitter);
 module.exports = SteamChatRoomClient;
 
 /**
+ * @typedef {object} BBCodeNode
+ * @property {string} tag
+ * @property {object} attrs
+ * @property {(string|BBCodeNode)[]} content
+ */
+
+/**
+ * @typedef {object} ChatRoomGroupState
+ * @property {ChatRoomMember[]} members
+ * @property {ChatRoomState[]} chat_rooms
+ * @property {ChatRoomMember[]} kicked
+ * @property {string} default_chat_id
+ * @property {ChatRoomGroupHeaderState} header_state
+ */
+
+/**
+ * @typedef {object} UserChatRoomGroupState
+ * @property {string} chat_group_id
+ * @property {Date} time_joined
+ * @property {UserChatRoomState[]} user_chat_room_state
+ * @property {EChatRoomNotificationLevel} desktop_notification_level
+ * @property {EChatRoomNotificationLevel} mobile_notification_level
+ * @property {Date|null} time_last_group_ack
+ * @property {boolean} unread_indicator_muted
+ */
+
+/**
+ * @typedef {object} UserChatRoomState
+ * @property {string} chat_id
+ * @property {Date} time_joined
+ * @property {Date|null} time_last_ack
+ * @property {EChatRoomNotificationLevel} desktop_notification_level
+ * @property {EChatRoomNotificationLevel} mobile_notification_level
+ * @property {Date|null} time_last_mention
+ * @property {boolean} unread_indicator_muted
+ * @property {Date} time_first_unread
+ */
+
+/**
+ * @typedef {object} ChatRoomGroupSummary
+ * @property {ChatRoomState[]} chat_rooms
+ * @property {SteamID[]} top_members
+ * @property {string} chat_group_id
+ * @property {string} chat_group_name
+ * @property {number} active_member_count
+ * @property {number} active_voice_member_count
+ * @property {string} default_chat_id
+ * @property {string} chat_group_tagline
+ * @property {number|null} appid
+ * @property {SteamID} steamid_owner
+ * @property {SteamID|null} watching_broadcast_steamid
+ * @property {Buffer|null} chat_group_avatar_sha
+ * @property {string|null} chat_group_avatar_url
+ */
+
+/**
+ * @typedef {object} ChatRoomState
+ * @property {string} chat_id
+ * @property {string} chat_name
+ * @property {boolean} voice_allowed
+ * @property {SteamID[]} members_in_voice
+ * @property {Date} time_last_message
+ * @property {number} sort_order
+ * @property {string} last_message
+ * @property {SteamID} steamid_last_message
+ */
+
+/**
+ * @typedef {object} ChatRoomMember
+ * @property {SteamID} steamid
+ * @property {EChatRoomJoinState} state
+ * @property {EChatRoomGroupRank} rank
+ * @property {Date|null} time_kick_expire
+ * @property {string[]} role_ids
+ */
+
+/**
+ * @typedef {object} ChatRoomGroupHeaderState
+ * @property {string} chat_group_id
+ * @property {string} chat_name
+ * @property {SteamID|null} clanid
+ * @property {SteamID} steamid_owner
+ * @property {number|null} appid
+ * @property {string} tagline
+ * @property {Buffer|null} avatar_sha
+ * @property {string|null} avatar_url
+ * @property {string} default_role_id
+ * @property {{role_id: string, name: string, ordinal: number}[]} roles
+ * @property {ChatRoleActions[]} role_actions
+ * @property {SteamID|null} watching_broadcast_steamid
+ */
+
+/**
+ * @typedef {object} ChatRoleActions
+ * @property {string} role_id
+ * @property {boolean} can_create_rename_delete_channel
+ * @property {boolean} can_kick
+ * @property {boolean} can_ban
+ * @property {boolean} can_invite
+ * @property {boolean} can_change_tagline_avatar_name
+ * @property {boolean} can_chat
+ * @property {boolean} can_view_history
+ * @property {boolean} can_change_group_roles
+ * @property {boolean} can_change_user_roles
+ * @property {boolean} can_mention_all
+ * @property {boolean} can_set_watching_broadcast
+ */
+
+/**
  * @param {SteamUser} user
  * @constructor
  * @extends EventEmitter
@@ -55,6 +164,45 @@ function SteamChatRoomClient(user) {
 			eventName += 'Echo';
 		}
 
+		/**
+		 * @typedef {object} IncomingFriendMessage
+		 * @property {SteamID} steamid_friend
+		 * @property {EChatEntryType} chat_entry_type
+		 * @property {boolean} from_limited_account
+		 * @property {string} message
+		 * @property {string} message_no_bbcode
+		 * @property {(string|BBCodeNode)[]} message_bbcode_parsed
+		 * @property {Date} server_timestamp
+		 * @property {number} ordinal
+		 * @property {boolean} local_echo
+		 * @property {boolean} low_priority
+		 */
+
+		/**
+		 * @event SteamChatRoomClient#friendMessage
+		 * @type {IncomingFriendMessage}
+		 */
+		/**
+		 * @event SteamChatRoomClient#friendMessageEcho
+		 * @type {IncomingFriendMessage}
+		 */
+		/**
+		 * @event SteamChatRoomClient#friendTyping
+		 * @type {IncomingFriendMessage}
+		 */
+		/**
+		 * @event SteamChatRoomClient#friendTypingEcho
+		 * @type {IncomingFriendMessage}
+		 */
+		/**
+		 * @event SteamChatRoomClient#friendLeftConversation
+		 * @type {IncomingFriendMessage}
+		 */
+		/**
+		 * @event SteamChatRoomClient#friendLeftConversationEcho
+		 * @type {IncomingFriendMessage}
+		 */
+
 		this.chat.emit(eventName, body);
 
 		// backwards compatibility
@@ -76,6 +224,21 @@ function SteamChatRoomClient(user) {
 			body.mentions = processChatMentions(body.mentions);
 		}
 
+		/**
+		 * @event SteamChatRoomClient#chatMessage
+		 * @type {object}
+		 * @property {string} chat_group_id
+		 * @property {string} chat_id
+		 * @property {SteamID} steamid_sender
+		 * @property {string} message
+		 * @property {string} message_no_bbcode
+		 * @property {Date} server_timestamp
+		 * @property {number} ordinal
+		 * @property {{mention_all: boolean, mention_here: boolean, mention_steamids: SteamID[]}|null} mentions
+		 * @property {{message: EChatRoomServerMessage, string_param?: string, steamid_param?: SteamID}|null} server_message
+		 * @property {string} chat_name
+		 */
+
 		this.chat.emit('chatMessage', body);
 	});
 
@@ -86,29 +249,73 @@ function SteamChatRoomClient(user) {
 			return msg;
 		});
 
+		/**
+		 * @event SteamChatRoomClient#chatMessagesModified
+		 * @type {object}
+		 * @property {string} chat_group_id
+		 * @property {string} chat_id
+		 * @property {{server_timestamp: Date, ordinal: number, deleted: boolean}[]} messages
+		 */
+
 		this.chat.emit('chatMessagesModified', body);
 	});
 
 	this.user._handlerManager.add('ChatRoomClient.NotifyChatGroupUserStateChanged#1', function(body) {
 		processChatGroupState(body.user_chat_group_state);
 		processChatGroupSummary(body.group_summary);
+
+		/**
+		 * @event SteamChatRoomClient#chatRoomGroupSelfStateChange
+		 * @type {object}
+		 * @property {string} chat_group_id
+		 * @property {EChatRoomMemberStateChange} user_action
+		 * @property {UserChatRoomGroupState} user_chat_group_state
+		 * @property {ChatRoomGroupSummary} group_summary
+		 */
+
 		this.chat.emit('chatRoomGroupSelfStateChange', body);
 	});
 
 	this.user._handlerManager.add('ChatRoomClient.NotifyMemberStateChange#1', function(body) {
 		preProcessObject(body);
+
+		/**
+		 * @event SteamChatRoomClient#chatRoomGroupMemberStateChange
+		 * @type {object}
+		 * @property {string} chat_group_id
+		 * @property {ChatRoomMember} member
+		 * @property {EChatRoomMemberStateChange} change
+		 */
+
 		this.chat.emit('chatRoomGroupMemberStateChange', body);
 	});
 
 	this.user._handlerManager.add('ChatRoomClient.NotifyChatRoomHeaderStateChange#1', function(body) {
 		preProcessObject(body);
 		body.chat_group_id = body.header_state.chat_group_id;
+
+		/**
+		 * @event SteamChatRoomClient#chatRoomGroupHeaderStateChange
+		 * @type {object}
+		 * @property {string} chat_group_id
+		 * @property {ChatRoomGroupHeaderState} header_state
+		 */
+
 		this.chat.emit('chatRoomGroupHeaderStateChange', body);
 	});
 
 	this.user._handlerManager.add('ChatRoomClient.NotifyChatRoomGroupRoomsChange#1', function(body) {
 		body = preProcessObject(body);
 		body.chat_rooms.map(room => processChatRoomState(room, true));
+
+		/**
+		 * @event SteamChatRoomClient#chatRoomGroupRoomsChange
+		 * @type {object}
+		 * @property {string} chat_group_id
+		 * @property {string} default_chat_id
+		 * @property {ChatRoomState[]} chat_rooms
+		 */
+
 		this.chat.emit('chatRoomGroupRoomsChange', body);
 	});
 }
@@ -118,7 +325,7 @@ function SteamChatRoomClient(user) {
  * @param {SteamID[]|string[]|string} [inviteeSteamIds=[]]
  * @param {string} [name=''] - If omitted, this creates an "ad-hoc" group chat. If named, this creates a saved chat room group.
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{chat_group_id: string, state: ChatRoomGroupState, user_chat_state: UserChatRoomGroupState}>}
  */
 SteamChatRoomClient.prototype.createGroup = function(inviteeSteamIds, name, callback) {
 	// Is inviteeSteamIds a single valid steamid? If so, turn it into an array
@@ -189,7 +396,7 @@ SteamChatRoomClient.prototype.saveGroup = function(groupId, name, callback) {
 /**
  * Get a list of the chat room groups you're in.
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{chat_room_groups: Object<string, {group_summary: ChatRoomGroupSummary, group_state: UserChatRoomGroupState}>}>}
  */
 SteamChatRoomClient.prototype.getGroups = function(callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
@@ -212,11 +419,11 @@ SteamChatRoomClient.prototype.getGroups = function(callback) {
 };
 
 /**
- * Set which groups are actively being chatted in by this session. It's unclear what effect this has on the chatting
- * experience, other than retrieving chat room group states.
+ * Set which groups are actively being chatted in by this session. Only active group chats will receive some events,
+ * like {@link SteamChatRoomClient#event:chatRoomGroupMemberStateChange}
  * @param {int[]|string[]|int|string} groupIDs - Array of group IDs you want data for
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{chat_room_groups: Object<string, ChatRoomGroupState>}>}
  */
 SteamChatRoomClient.prototype.setSessionActiveGroups = function(groupIDs, callback) {
 	if (!Array.isArray(groupIDs)) {
@@ -247,7 +454,7 @@ SteamChatRoomClient.prototype.setSessionActiveGroups = function(groupIDs, callba
  * Get details from a chat group invite link.
  * @param {string} linkUrl
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{invite_code: string, steamid_sender: SteamID, time_expires: Date|null, group_summary: ChatRoomGroupSummary, time_kick_expire: Date|null, banned: boolean}>}
  */
 SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
@@ -286,7 +493,7 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
  * Get the chat room group info for a clan (Steam group). Allows you to join a group chat.
  * @param {SteamID|string} clanSteamID - The group's SteamID or a string that can parse into one
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{chat_group_summary: ChatRoomGroupSummary}>}
  */
 SteamChatRoomClient.prototype.getClanChatGroupInfo = function(clanSteamID, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
@@ -326,7 +533,7 @@ SteamChatRoomClient.prototype.getClanChatGroupInfo = function(clanSteamID, callb
  * @param {int|string} groupId - The group's ID
  * @param {string} [inviteCode] - An invite code to join this chat. Not necessary for public Steam groups.
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{state: ChatRoomGroupState, user_chat_state: UserChatRoomGroupState}>}
  */
 SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback) {
 	if (typeof inviteCode === 'function') {
@@ -407,7 +614,7 @@ SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, cal
  * @param {int} groupId
  * @param {{secondsValid?: int, voiceChatId?: int}} [options]
  * @param {function} [callback]
- * @returns {Promise<{invite_code: string, invite_url: string, seconds_valid: int}>}
+ * @returns {Promise<{invite_code: string, invite_url: string, seconds_valid: number}>}
  */
 SteamChatRoomClient.prototype.createInviteLink = function(groupId, options, callback) {
 	if (typeof options == 'function') {
@@ -498,7 +705,7 @@ SteamChatRoomClient.prototype.deleteInviteLink = function(linkUrl, callback) {
  * @param {string} message
  * @param {{[chatEntryType], [containsBbCode]}} [options]
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{modified_message: string, server_timestamp: Date, ordinal: number}>}
  */
 SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, options, callback) {
 	if (typeof options === 'function') {
@@ -557,7 +764,7 @@ SteamChatRoomClient.prototype.sendFriendTyping = function(steamId, callback) {
  * @param {int|string} chatId
  * @param {string} message
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{modified_message: string, server_timestamp: Date, ordinal: number}>}
  */
 SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, message, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
@@ -629,7 +836,7 @@ SteamChatRoomClient.prototype.getActiveFriendMessageSessions = function(options,
  * @param {SteamID|string} friendSteamId
  * @param {{maxCount?: int, wantBbcode?: boolean, startTime?: Date|int, startOrdinal?: int, lastTime?: Date|int, lastOrdinal?: int}} [options]
  * @param {function} [callback]
- * @returns {Promise<{messages: {sender: SteamID, server_timestamp: Date, ordinal: int, message: string, message_bbcode_parsed: null|Array}[], more_available: boolean}>}
+ * @returns {Promise<{messages: {sender: SteamID, server_timestamp: Date, ordinal: int, message: string, message_bbcode_parsed: null|Array<(BBCodeNode|string)>}[], more_available: boolean}>}
  */
 SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, options, callback) {
 	if (typeof options == 'function') {
@@ -699,7 +906,7 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
  * @param {int|string} chatId
  * @param {{[maxCount], [lastTime], [lastOrdinal], [startTime], [startOrdinal]}} [options]
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{messages: {sender: SteamID, server_timestamp: Date, ordinal: number, message: string, server_message?: {message: EChatRoomServerMessage, string_param?: string, steamid_param?: SteamID}, deleted: boolean}[], more_available: boolean}>}
  */
 SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, options, callback) {
 	if (typeof options === 'function') {
@@ -831,7 +1038,7 @@ SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, mes
  * @param {string} name - The name of your new channel
  * @param {{isVoiceRoom?: boolean}} [options] - Options for your new room
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{chat_room: ChatRoomState}>}
  */
 SteamChatRoomClient.prototype.createChatRoom = function(groupId, name, options, callback) {
 	if (typeof options == 'function') {
@@ -935,7 +1142,7 @@ SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, exp
  * Get the ban list for a chat room group, provided you have the appropriate permissions.
  * @param {int|string} groupId
  * @param {function} [callback]
- * @returns {Promise}
+ * @returns {Promise<{bans: {steamid: SteamID, steamid_actor: SteamID, time_banned: Date, ban_reason: string}[]}>}
  */
 SteamChatRoomClient.prototype.getGroupBanList = function(groupId, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
@@ -1014,7 +1221,7 @@ SteamChatRoomClient.prototype.setGroupUserRoleState = function(groupId, userStea
  * Process a chat room summary pair.
  * @param {object} summaryPair
  * @param {boolean} [preProcessed=false]
- * @returns {object}
+ * @returns {{group_state: ChatRoomGroupState, group_summary: ChatRoomGroupSummary}}
  */
 function processChatRoomSummaryPair(summaryPair, preProcessed) {
 	if (!preProcessed) {
@@ -1031,7 +1238,7 @@ function processChatRoomSummaryPair(summaryPair, preProcessed) {
  * Process a chat group summary.
  * @param {object} groupSummary
  * @param {boolean} [preProcessed=false]
- * @returns {object}
+ * @returns {ChatRoomGroupSummary}
  */
 function processChatGroupSummary(groupSummary, preProcessed) {
 	if (groupSummary === null) {
@@ -1049,6 +1256,11 @@ function processChatGroupSummary(groupSummary, preProcessed) {
 	return groupSummary;
 }
 
+/**
+ * @param {object} state
+ * @param {boolean} [preProcessed=false]
+ * @returns {ChatRoomGroupState}
+ */
 function processChatGroupState(state, preProcessed) {
 	if (state === null) {
 		return state;
@@ -1062,6 +1274,11 @@ function processChatGroupState(state, preProcessed) {
 	return state;
 }
 
+/**
+ * @param {object} state
+ * @param {boolean} [preProcessed=false]
+ * @returns {UserChatRoomGroupState}
+ */
 function processUserChatGroupState(state, preProcessed) {
 	if (!preProcessed) {
 		state = preProcessObject(state);
@@ -1072,6 +1289,11 @@ function processUserChatGroupState(state, preProcessed) {
 	return state;
 }
 
+/**
+ * @param {object} state
+ * @param {boolean} [preProcessed=false]
+ * @returns {UserChatRoomState}
+ */
 function processUserChatRoomState(state, preProcessed) {
 	if (!preProcessed) {
 		state = preProcessObject(state);
@@ -1096,6 +1318,10 @@ function processChatRoomState(state, preProcessed) {
 	return state;
 }
 
+/**
+ * @param {object} mentions
+ * @returns {{mention_all: boolean, mention_here: boolean, mention_steamids: SteamID[]}}
+ */
 function processChatMentions(mentions) {
 	if (!mentions) {
 		return mentions;
@@ -1179,6 +1405,10 @@ function convertDateToUnix(date) {
 	}
 }
 
+/**
+ * @param {string} str
+ * @returns {(string|BBCodeNode)[]}
+ */
 function parseBbCode(str) {
 	if (typeof str != 'string') {
 		// Don't try to process non-string values, e.g. null

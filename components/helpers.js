@@ -11,6 +11,7 @@ const FRIEND_CODE_REPLACEMENTS = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'm', '
  * If the input isn't already a SteamID object, converts it into one and returns it
  * @param input
  * @returns {SteamID}
+ * @private
  */
 exports.steamID = function(input) {
 	if (!input) {
@@ -32,6 +33,7 @@ exports.steamID = function(input) {
 /**
  * @param {SteamID} steamID
  * @returns {string}
+ * @private
  */
 exports.createFriendCode = function(steamID) {
 	let acctIdHex = steamID.accountid.toString(16);
@@ -49,6 +51,7 @@ exports.createFriendCode = function(steamID) {
 /**
  * @param {string} friendCode
  * @returns {SteamID}
+ * @private
  */
 exports.parseFriendCode = function(friendCode) {
 	friendCode = friendCode.replace(/-/g, '');
@@ -65,6 +68,7 @@ exports.parseFriendCode = function(friendCode) {
 /**
  * Get an machine ID for internal use (not sent to Steam)
  * @returns {string}
+ * @private
  */
 exports.getInternalMachineID = function() {
 	// Build our machine ID off of hostname, memory, and CPU data
@@ -84,6 +88,7 @@ exports.getInternalMachineID = function() {
  * Get an Error object for a particular EResult
  * @param {int|EResult|object} eresult - Either an EResult value, or an object that contains an eresult property. If undefined or is an object without an eresult property, will assume "Fail".
  * @returns {null|Error}
+ * @private
  */
 exports.eresultError = function(eresult) {
 	if (typeof eresult == 'undefined') {
@@ -104,6 +109,7 @@ exports.eresultError = function(eresult) {
 
 /**
  * @return {EOSType}
+ * @private
  */
 exports.getOsType = function() {
 	switch (OS.platform()) {
@@ -205,11 +211,23 @@ exports.getOsType = function() {
 	}
 };
 
+/**
+ * @param {object} arr
+ * @returns {Array}
+ * @private
+ */
 exports.fixVdfArray = function(arr) {
 	arr.length = Object.keys(arr).length;
 	return Array.prototype.slice.call(arr);
 };
 
+/**
+ * @param {number} timeoutMilliseconds
+ * @param {EventEmitter} emitter
+ * @param {string} event
+ * @param {function} handler
+ * @private
+ */
 exports.onceTimeout = function(timeoutMilliseconds, emitter, event, handler) {
 	let timeout;
 	let internalHandler = function() {

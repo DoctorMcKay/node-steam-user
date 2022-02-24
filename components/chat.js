@@ -299,6 +299,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSGetFriendMessageH
 	 * @param {Date} messages[].timestamp - The time when the message was sent
 	 * @param {string} messages[].message - The message that was sent
 	 * @param {bool} messages[].unread - true if it was an unread offline message, false if just a history message
+	 * @deprecated Use {@link SteamChatRoomClient#getFriendMessageHistory} instead
 	 */
 
 	this._emitIdEvent('chatHistory', new SteamID(body.steamid.toString()), body.success, body.messages || []);
@@ -312,6 +313,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatInvite, functio
 	 * @param {SteamID} inviterID - The SteamID of the user who invited us to the room
 	 * @param {SteamID} chatID - The SteamID of the chat room to which we were invited
 	 * @param {string} chatName - The name of the chat room to which we were invited
+	 * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat ({@link SteamChatRoomClient#}
 	 */
 
 	let inviterID = new SteamID(body.steam_id_patron.toString());
@@ -341,6 +343,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCreateChatResponse,
 	 * @param {SteamID} friendID - The SteamID of the friend with whom we created a room
 	 * @param {EResult} eresult - The result of the creation request
 	 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
+	 * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
 	 */
 
 	if (eresult != SteamUser.EResult.OK) {
@@ -391,6 +394,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatEnter, function
 	 * @event SteamUser#chatEnter
 	 * @param {SteamID} chatID - The SteamID of the chat room we entered
 	 * @param {EChatRoomEnterResponse} response - The result of the enter request
+	 * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
 	 */
 
 	this._emitIdEvent('chatEnter', chatID, response);
