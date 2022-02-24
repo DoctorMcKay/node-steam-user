@@ -1,0 +1,58 @@
+/**
+ * @enum EProfileCustomizationType
+ * @readonly
+ */
+const EProfileCustomizationType = {
+	"Invalid": 0,
+	"RareAchievementShowcase": 1,
+	"GameCollector": 2,
+	"ItemShowcase": 3,
+	"TradeShowcase": 4,
+	"Badges": 5,
+	"FavoriteGame": 6,
+	"ScreenshotShowcase": 7,
+	"CustomText": 8,
+	"FavoriteGroup": 9,
+	"Recommendation": 10,
+	"WorkshopItem": 11,
+	"MyWorkshop": 12,
+	"ArtworkShowcase": 13,
+	"VideoShowcase": 14,
+	"Guides": 15,
+	"MyGuides": 16,
+	"Achievements": 17,
+	"Greenlight": 18,
+	"MyGreenlight": 19,
+	"Salien": 20,
+	"LoyaltyRewardReactions": 21,
+	"SingleArtworkShowcase": 22,
+	"AchievementsCompletionist": 23,
+
+	// Value-to-name mapping for convenience
+	"0": "Invalid",
+	"1": "RareAchievementShowcase",
+	"2": "GameCollector",
+	"3": "ItemShowcase",
+	"4": "TradeShowcase",
+	"5": "Badges",
+	"6": "FavoriteGame",
+	"7": "ScreenshotShowcase",
+	"8": "CustomText",
+	"9": "FavoriteGroup",
+	"10": "Recommendation",
+	"11": "WorkshopItem",
+	"12": "MyWorkshop",
+	"13": "ArtworkShowcase",
+	"14": "VideoShowcase",
+	"15": "Guides",
+	"16": "MyGuides",
+	"17": "Achievements",
+	"18": "Greenlight",
+	"19": "MyGreenlight",
+	"20": "Salien",
+	"21": "LoyaltyRewardReactions",
+	"22": "SingleArtworkShowcase",
+	"23": "AchievementsCompletionist",
+};
+
+module.exports = EProfileCustomizationType;

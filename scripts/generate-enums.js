@@ -27,7 +27,8 @@ const ENUMS_WITH_DIFFERENT_PREFIXES_FROM_THEIR_NAMES = {
 	"EStreamStatsMessage": "k_EStreamStats",
 	"EChatRoomNotificationLevel": "k_EChatroomNotificationLevel",
 	"EPublishedFileQueryType": "k_PublishedFileQueryType_",
-	"EProtoAppType": "k_EAppType"
+	"EProtoAppType": "k_EAppType",
+	"EBluetoothDeviceType": "k_BluetoothDeviceType_"
 };
 
 const ENUMS_WITH_SOMETIMES_DIFFERENT_PREFIXES = {
