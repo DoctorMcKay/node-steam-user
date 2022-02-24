@@ -700,7 +700,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 		filter = this.options.ownershipFilter;
 	}
 
-	// Support for the old syntax and behavior (<= v4.19.12)
+	// Support for the old syntax and behavior (<= v4.22.0)
 	if (!filter) {
 		// Slight deviation of old behavior: don't return expired licenses
 		return this._returnPackages(packages);
