@@ -25,7 +25,9 @@ const ENUMS_WITH_DIFFERENT_PREFIXES_FROM_THEIR_NAMES = {
 	"EStreamMouseWheelDirection": "k_EStreamMouseWheel",
 	"EStreamQualityPreference": "k_EStreamQuality",
 	"EStreamStatsMessage": "k_EStreamStats",
-	"EChatRoomNotificationLevel": "k_EChatroomNotificationLevel"
+	"EChatRoomNotificationLevel": "k_EChatroomNotificationLevel",
+	"EPublishedFileQueryType": "k_PublishedFileQueryType_",
+	"EProtoAppType": "k_EAppType"
 };
 
 const ENUMS_WITH_SOMETIMES_DIFFERENT_PREFIXES = {
@@ -118,7 +120,7 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 						currentEnum.values = currentEnum.values.concat(valuesToAdd);
 						currentEnum.values.sort(sortEnum);
 
-						let file = GENERATED_FILE_HEADER + "/**\n * @enum " + currentEnum.name + "\n */\nmodule.exports = {\n";
+						let file = GENERATED_FILE_HEADER + `/**\n * @enum\n * @readonly\n */\nconst ${currentEnum.name} = {\n`;
 
 						currentEnum.values.forEach(function(val) {
 							file += "\t\"" + val.name + "\": " + val.value + "," + (val.comment ? " // " + val.comment.trim() : "") + "\n";
@@ -140,7 +142,7 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 							file += "\t\"" + val.value + "\": \"" + val.name + "\",\n";
 						});
 
-						file += "};\n";
+						file += `};\n\nmodule.exports = ${currentEnum.name};\n`;
 
 						if (currentEnum.dynamicValues.length > 0) {
 							file += "\n";
@@ -269,11 +271,11 @@ function processProtobufEnums() {
 		processed = processed.concat(valuesToAdd);
 		processed.sort(sortEnum);
 
-		let enumFile = `/**\n  * @enum ${enumName}\n  */\nmodule.exports = {\n`;
+		let enumFile = GENERATED_FILE_HEADER + `/**\n * @enum ${enumName}\n * @readonly\n */\nconst ${enumName} = {\n`;
 		enumFile += processed.map(v => `\t"${v.name}": ${v.value},` + (v.comment ? ` // ${v.comment}` : '')).join("\n");
 		enumFile += "\n\n\t// Value-to-name mapping for convenience\n";
 		enumFile += processed.filter(v => v.comment !== 'obsolete').map(v => `\t"${v.value}": "${v.name}",`).join("\n");
-		enumFile += "\n};\n";
+		enumFile += `\n};\n\nmodule.exports = ${enumName};\n`;
 		FS.writeFileSync(`${__dirname}/../enums/${enumName}.js`, enumFile);
 
 		g_EnumNames[enumName] = true;
