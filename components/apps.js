@@ -8,12 +8,29 @@ const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 const PICSRequestType = {
-	"User": 0,
-	"Changelist": 1,
-	"Licenses": 2,
-	"PackageContents": 3,
-	"AddToCache": 4
+	User: 0,
+	Changelist: 1,
+	Licenses: 2,
+	PackageContents: 3,
+	AddToCache: 4
 };
+
+/**
+ * @typedef PackageFilter
+ * @type {object}
+ * @property {boolean} [excludeFree=false]
+ * @property {boolean} [excludeShared=false]
+ * @property {boolean} [excludeExpiring=false]
+ */
+
+/**
+ * @callback PackageFilterFunction
+ * @property {Proto_CMsgClientLicenseList_License} packageDetails
+ * @property {number} [idx]
+ * @property {Proto_CMsgClientLicenseList_License[]} [allPackages]
+ * @returns {boolean}
+ */
+
 
 /**
  * Tell Steam that you're "playing" zero or more games.
@@ -561,7 +578,7 @@ SteamUser.prototype._getLicenseInfo = async function() {
 /**
  * Get list of appids this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
- * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
+ * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {int[]}
  */
 SteamUser.prototype.getOwnedApps = function(filter) {
@@ -599,7 +616,7 @@ SteamUser.prototype.getOwnedApps = function(filter) {
  * Check if this account owns an app. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} appid
- * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
+ * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {boolean}
  */
 SteamUser.prototype.ownsApp = function(appid, filter) {
@@ -609,7 +626,7 @@ SteamUser.prototype.ownsApp = function(appid, filter) {
 /**
  * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
- * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
+ * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {int[]}
  */
 SteamUser.prototype.getOwnedDepots = function(filter) {
@@ -647,7 +664,7 @@ SteamUser.prototype.getOwnedDepots = function(filter) {
  * Check if this account owns a depot. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} depotid
- * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
+ * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {boolean}
  */
 SteamUser.prototype.ownsDepot = function(depotid, filter) {
@@ -669,7 +686,7 @@ SteamUser.prototype.getOwnedLicenses = function() {
 /**
  * Returns an array of package IDs this account owns (different from owned licenses). The filter only
  * works, if enablePicsCache option is enabled and appOwnershipCached event has been emitted.
- * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
+ * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {int[]}
  */
 SteamUser.prototype.getOwnedPackages = function(filter) {
@@ -791,7 +808,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
  * Note: The reason why ELicenseFlags.Expired licenses are not filtered out from the beginning of getOwnedPackages(),
  * 		 is so people who provide a filter function as argument can choose to keep them included.
  * @param {object[]} packages - this.licenses
- * @param {function} packageFilter - A filter function
+ * @param {PackageFilterFunction} packageFilter - A filter function
  * @private
  */
  SteamUser.prototype._returnPackages = function(packages, packageFilter) {
@@ -807,7 +824,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
  * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int|string} packageid
- * @param {object|function} filter - Options for what counts for ownership, or a custom filter function
+ * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {boolean}
  */
 SteamUser.prototype.ownsPackage = function(packageid, filter) {
