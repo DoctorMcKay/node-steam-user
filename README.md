@@ -660,6 +660,8 @@ Retrieves your account's privacy settings. You can't change your privacy state u
 ### kickPlayingSession([callback])
 - `callback` - Optional. A function to be called once Steam receives and responds to this request.
     - `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+	    - `playingApp` - This is the AppID of the game that is being played elsewhere
 
 **v3.21.0 or later is required to use this method**
 
