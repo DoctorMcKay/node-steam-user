@@ -89,8 +89,8 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 
 /**
  * Kick any other session logged into your account which is playing a game from Steam.
- * @param {function} [callback] - Single err parameter
- * @return Promise
+ * @param {function} [callback]
+ * @returns {Promise<{playingApp: number}>}
  */
 SteamUser.prototype.kickPlayingSession = function(callback) {
 	return StdLib.Promises.callbackPromise([], callback, true, (resolve, reject) => {
@@ -110,17 +110,17 @@ SteamUser.prototype.kickPlayingSession = function(callback) {
 /**
  * Get count of people playing a Steam app. Use appid 0 to get number of people connected to Steam.
  * @param {int} appid
- * @param {function} [callback] - Args (eresult, player count)
- * @return Promise
+ * @param {function} [callback]
+ * @returns {Promise<{playerCount: number}>}
  */
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['playerCount'], callback, (resolve, reject) => {
-		this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, (body) => {
+		this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {appid}, (body) => {
 			let err = Helpers.eresultError(body.eresult);
 			if (err) {
 				reject(err);
 			} else {
-				resolve({"playerCount": body.player_count});
+				resolve({playerCount: body.player_count});
 			}
 		});
 	});
@@ -129,21 +129,21 @@ SteamUser.prototype.getPlayerCount = function(appid, callback) {
 /**
  * Get a list of apps or packages which have changed since a particular changenumber.
  * @param {int} sinceChangenumber - Changenumber to get changes since. Use 0 to get the latest changenumber, but nothing else
- * @param {function} [callback] - Args (current changenumber, array of appids that changed, array of packageids that changed)
- * @return Promise
+ * @param {function} [callback]
+ * @returns {Promise<{currentChangeNumber: number, appChanges: number[], packageChanges: number[]}>}
  */
 SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
 	let args = ['currentChangeNumber', 'appChanges', 'packageChanges'];
 	return StdLib.Promises.timeoutCallbackPromise(10000, args, callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientPICSChangesSinceRequest, {
-			"since_change_number": sinceChangenumber,
-			"send_app_info_changes": true,
-			"send_package_info_changes": true
+			since_change_number: sinceChangenumber,
+			send_app_info_changes: true,
+			send_package_info_changes: true
 		}, (body) => {
 			resolve({
-				"currentChangeNumber": body.current_change_number,
-				"appChanges": body.app_changes,
-				"packageChanges": body.package_changes
+				currentChangeNumber: body.current_change_number,
+				appChanges: body.app_changes,
+				packageChanges: body.package_changes
 			});
 		});
 	});
@@ -154,9 +154,9 @@ SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
  * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
  * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
  * @param {boolean} [inclTokens=false] - If true, automatically retrieve access tokens if needed
- * @param {function} [callback] - Args (array of app data, array of package data, array of appids that don't exist, array of packageids that don't exist)
+ * @param {function} [callback]
  * @param {int} [requestType] - Don't touch
- * @return Promise
+ * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, unknownApps: number[], unknownPackages: number[]}>}
  */
 SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callback, requestType) {
 	// Adds support for the previous syntax
@@ -174,10 +174,10 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		let appids = [];
 		let packageids = [];
 		let response = {
-			"apps": {},
-			"packages": {},
-			"unknownApps": [],
-			"unknownPackages": []
+			apps: {},
+			packages: {},
+			unknownApps: [],
+			unknownPackages: []
 		};
 
 		apps = apps.map((app) => {
@@ -186,7 +186,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 				return app;
 			} else {
 				appids.push(app);
-				return {"appid": app};
+				return {appid: app};
 			}
 		});
 
@@ -196,7 +196,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 				return pkg;
 			} else {
 				packageids.push(pkg);
-				return {"packageid": pkg};
+				return {packageid: pkg};
 			}
 		});
 
@@ -211,10 +211,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			});
 		}
 
-		this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {
-			"apps": apps,
-			"packages": packages
-		}, async (body) => {
+		this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {apps, packages}, async (body) => {
 			// If we're using the PICS cache, then add the items in this response to it
 			if (this.options.enablePicsCache) {
 				let cache = this.picsCache;
@@ -223,9 +220,9 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 				(body.apps || []).forEach((app) => {
 					let data = {
-						"changenumber": app.change_number,
-						"missingToken": !!app.missing_token,
-						"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+						changenumber: app.change_number,
+						missingToken: !!app.missing_token,
+						appinfo: VDF.parse(app.buffer.toString('utf8')).appinfo
 					};
 
 					if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
@@ -240,9 +237,9 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 				(body.packages || []).forEach((pkg) => {
 					let data = {
-						"changenumber": pkg.change_number,
-						"missingToken": !!pkg.missing_token,
-						"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
+						changenumber: pkg.change_number,
+						missingToken: !!pkg.missing_token,
+						packageinfo: pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
 					};
 
 					if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
@@ -377,14 +374,14 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
  * @param {int[]} apps - Array of appids
  * @param {int[]} packages - Array of packageids
  * @param {function} [callback] - First arg is an object of (appid => access token), second is the same for packages, third is array of appids for which tokens are denied, fourth is the same for packages
- * @return Promise
+ * @returns {Promise<{appTokens: Object<string, string>, packageTokens: Object<string, string>, appDeniedTokens: number[], packageDeniedTokens: number[]}>}
  */
 SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 	let args = ['appTokens', 'packageTokens', 'appDeniedTokens', 'packageDeniedTokens'];
 	return StdLib.Promises.timeoutCallbackPromise(10000, args, callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientPICSAccessTokenRequest, {
-			"packageids": packages,
-			"appids": apps
+			packageids: packages,
+			appids: apps
 		}, (body) => {
 			let appTokens = {};
 			let packageTokens = {};
@@ -400,8 +397,8 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 			resolve({
 				appTokens,
 				packageTokens,
-				"appDeniedTokens": body.app_denied_tokens || [],
-				"packageDeniedTokens": body.package_denied_tokens || []
+				appDeniedTokens: body.app_denied_tokens || [],
+				packageDeniedTokens: body.package_denied_tokens || []
 			});
 		});
 	});
@@ -579,7 +576,7 @@ SteamUser.prototype._getLicenseInfo = async function() {
  * Get list of appids this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
- * @returns {int[]}
+ * @returns {number[]}
  */
 SteamUser.prototype.getOwnedApps = function(filter) {
 	this._ensurePicsCache();
@@ -627,7 +624,7 @@ SteamUser.prototype.ownsApp = function(appid, filter) {
  * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
- * @returns {int[]}
+ * @returns {number[]}
  */
 SteamUser.prototype.getOwnedDepots = function(filter) {
 	this._ensurePicsCache();
@@ -673,7 +670,7 @@ SteamUser.prototype.ownsDepot = function(depotid, filter) {
 
 /**
  * Returns an array of licenses this account owns.
- * @returns {int[]}
+ * @returns {Proto_CMsgClientLicenseList_License[]}
  */
 SteamUser.prototype.getOwnedLicenses = function() {
 	if (!this.licenses) {
@@ -687,7 +684,7 @@ SteamUser.prototype.getOwnedLicenses = function() {
  * Returns an array of package IDs this account owns (different from owned licenses). The filter only
  * works, if enablePicsCache option is enabled and appOwnershipCached event has been emitted.
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
- * @returns {int[]}
+ * @returns {number[]}
  */
 SteamUser.prototype.getOwnedPackages = function(filter) {
 	// We're anonymous
@@ -807,7 +804,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 /**
  * Note: The reason why ELicenseFlags.Expired licenses are not filtered out from the beginning of getOwnedPackages(),
  * 		 is so people who provide a filter function as argument can choose to keep them included.
- * @param {object[]} packages - this.licenses
+ * @param {Proto_CMsgClientLicenseList_License[]} packages - this.licenses
  * @param {PackageFilterFunction} packageFilter - A filter function
  * @private
  */
@@ -815,9 +812,9 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 	// If no packageFilter is provided, only keep non-expired licenses
 	packageFilter = packageFilter || (license => !(license.flags & SteamUser.ELicenseFlags.Expired));
 	packages = packages.filter(packageFilter);
-	packages = packages.map(license => license.package_id);
-	packages.sort(sortNumeric);
-	return packages;
+	let packageIds = packages.map(license => license.package_id);
+	packageIds.sort(sortNumeric);
+	return packageIds;
 };
 
 /**
@@ -845,7 +842,7 @@ function sortNumeric(a, b) {
  * Redeem a product code on this account.
  * @param {string} key
  * @param {function} [callback] - Args (eresult value, SteamUser.EPurchaseResult value, object of (packageid => package names)
- * @return Promise
+ * @returns {Promise<{purchaseResultDetails: EPurchaseResult, packageList: Object<string, string>}>}
  */
 SteamUser.prototype.redeemKey = function(key, callback) {
 	return StdLib.Promises.timeoutCallbackPromise(90000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
@@ -867,7 +864,7 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 				reject(err);
 			} else {
 				resolve({
-					"purchaseResultDetails": body.purchase_result_details,
+					purchaseResultDetails: body.purchase_result_details,
 					packageList
 				});
 			}
@@ -879,7 +876,7 @@ SteamUser.prototype.redeemKey = function(key, callback) {
  * Request licenses for one or more free-on-demand apps.
  * @param {int[]} appIDs
  * @param {function} [callback] - Args (err, array of granted packageids, array of granted appids)
- * @return Promise
+ * @returns {Promise<{grantedPackageIds: number[], grantedAppIds: number[]}>}
  */
 SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
 	if (!Array.isArray(appIDs)) {
@@ -887,13 +884,13 @@ SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
 	}
 
 	return StdLib.Promises.timeoutCallbackPromise(10000, ['grantedPackageIds', 'grantedAppIds'], callback, (resolve, reject) => {
-		this._send(SteamUser.EMsg.ClientRequestFreeLicense, {"appids": appIDs}, (body) => {
+		this._send(SteamUser.EMsg.ClientRequestFreeLicense, {appids: appIDs}, (body) => {
 			if (body.eresult != SteamUser.EResult.OK) {
 				reject(Helpers.eresultError(body.eresult));
 			} else {
 				resolve({
-					"grantedPackageIds": body.granted_packageids,
-					"grantedAppIds": body.granted_appids
+					grantedPackageIds: body.granted_packageids,
+					grantedAppIds: body.granted_appids
 				})
 			}
 		});
@@ -915,5 +912,5 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLicenseList, functi
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPlayingSessionState, function(body) {
 	this._playingBlocked = body.playing_blocked;
 	this.emit('playingState', body.playing_blocked, body.playing_app);
-	this.playingState = {"blocked": body.playing_blocked, "appid": body.playing_app};
+	this.playingState = {blocked: body.playing_blocked, appid: body.playing_app};
 });
