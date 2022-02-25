@@ -566,6 +566,17 @@ SteamUser.prototype._getLicenseInfo = async function() {
 	try {
 		await this.getProductInfo(appids, [], true, undefined, PICSRequestType.PackageContents);
         this.picsCache.ownershipModified = Date.now();
+
+		/**
+		 * @event SteamUser#appOwnershipCached
+		 * @deprecated Use {@link SteamUser#event:ownershipCached} instead
+		 */
+
+		/**
+		 * Emitted when ownership status of packages and apps is loaded and cached.
+		 * @event SteamUser#ownershipCached
+		 */
+
 		this.emit('appOwnershipCached'); // legacy event name
 		this.emit('ownershipCached');
 	} catch (ex) {
