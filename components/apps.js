@@ -727,7 +727,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 
 		// No PICS cache needed: {F=0,S=1,E=0}, {F=0,S=0,E=0}
 		if (!filter.excludeFree && !filter.excludeExpiring) {
-			if (filter.exludeShared) {
+			if (filter.excludeShared) {
 				packages = packages.filter(license => license.owner_id == this.steamID.accountid);
 			}
 			return this._returnPackages(packages);
