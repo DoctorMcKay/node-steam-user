@@ -200,6 +200,17 @@ Added in 3.3.0.
 
 Defaults to `60000`. Minimum value `1000`, although you're recommended to not go below 10 seconds or so.
 
+### ownershipFilter
+
+Specify a custom app/package ownership filter object or function to be applied to all calls to `getOwned*()` and `owns*()`
+where a filter is not specified in the method invocation.
+
+See [`getOwnedApps`](#getownedappsfilter) for usage details.
+
+Added in 4.22.0.
+
+Defaults to a filter that excludes expired licenses only.
+
 ### additionalHeaders
 
 Set this to an object where keys are header names and values are header values, and those headers will be included
@@ -805,68 +816,103 @@ If you have the PICS cache enabled and the risk of getting stale data is accepta
 
 Access tokens are global. That is, everyone who has access to an app receives the same token. Tokens do not seem to expire.
 
-### getOwnedApps([excludeSharedLicenses])
-- `excludeSharedLicenses` - Pass `true` to exclude apps that are owned via a shared license, and not directly on this account (default `false`)
+### getOwnedApps([filter])
+- `filter` - Either a filter object or a filter function.
+    - Filter objects should have these properties (all default to false):
+        - `excludeFree` - Pass `true` to exclude free (no cost/guest pass/free on demand/free commercial license) licenses
+        - `excludeShared` - Pass `true` to exclude licenses acquired via family sharing
+        - `excludeExpiring` Pass `true` to exclude licenses that have an expiration date (e.g. free weekends) but are not yet expired
+    - Filter functions should accept the same arguments as [Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) and should return true to pass a license or false to exclude it. 
 
 **v3.3.0 or later is required to use this method**  
-**v4.7.0 or later is required to use `excludeSharedLicenses`**
+**v4.7.0 or later is required to use `excludeSharedLicenses`**  
+**v4.22.0 or later is required to use `filter`**
 
-Returns an array of AppIDs which your account owns. This cannot be safely called until `appOwnershipCached` is emitted.
+Returns an array of AppIDs which your account owns. This cannot be safely called until `ownershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### ownsApp(appid[, excludeSharedLicenses])
+If `filter` is a boolean, it is interpreted as `excludeShared` for backward compatibility. For example,
+`getOwnedApps(true)` is the same as `getOwnedApps({excludeShared: true})`.
+This usage is deprecated and will be removed in a future release.
+
+Omitting the `filter` argument is the same as passing `{excludeFree: false, excludeShared: false, excludeExpiring: false}`
+(which is also the same as passing an empty object).
+
+If you pass a function to `filter`, it will be called for each license in your account. The `element` argument will be
+an object of type [Proto_CMsgClientLicenseList_License](https://github.com/DoctorMcKay/node-steam-user/blob/09527f79919b582b68928e029b4995cdf6990602/protobufs/generated/_types.js#L9755-L9775).
+Please note that when you specify a custom filter function, expired licenses (e.g. past free weekends) will be sent to
+your filter function as candidates for inclusion, but these licenses are filtered out in all other cases. You can determine
+if a license is expired by checking `if (license.flags & SteamUser.ELicenseFlags.Expired)`.
+
+The output of this function will contain all AppIDs that are present in at least one license that was not filtered out.
+For example, if you previously activated a free on demand package for Spacewar but later activated a retail CD key for
+the same, it will be included if you pass `{excludeFree: true}` as your filter since you own it both via a free package
+and via a paid package.
+
+### ownsApp(appid[, filter])
 - `appid` - A numeric AppID
-- `excludeSharedLicenses` - Pass `true` to exclude apps that are owned via a shared license, and not directly on this account (default `false`)
+- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
 
 **v3.3.0 or later is required to use this method**  
-**v4.7.0 or later is required to use `excludeSharedLicenses`**
+**v4.7.0 or later is required to use `excludeSharedLicenses`**  
+**v4.22.0 or later is required to use `filter`**
 
 Returns `true` if your account owns the specified AppID, or `false` if not. This cannot be safely called until
-`appOwnershipCached` is emitted.
+`ownershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### getOwnedDepots([excludeSharedLicenses])
-- `excludeSharedLicenses` - Pass `true` to exclude depots that are owned via a shared license, and not directly on this account (default `false`)
+### getOwnedDepots([filter])
+- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
 
 **v3.3.0 or later is required to use this method**  
-**v4.7.0 or later is required to use `excludeSharedLicenses`**
+**v4.7.0 or later is required to use `excludeSharedLicenses`**  
+**v4.22.0 or later is required to use `filter`**
 
-Returns an array of depot IDs which your account owns. This cannot be safely called until `appOwnershipCached` is emitted.
+Returns an array of depot IDs which your account owns. This cannot be safely called until `ownershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### ownsDepot(depotid[, excludeSharedLicenses])
+### ownsDepot(depotid[, filter])
 - `depotid` - A numeric depot ID
-- `excludeSharedLicenses` - Pass `true` to exclude depots that are owned via a shared license, and not directly on this account (default `false`)
+- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
 
 **v3.3.0 or later is required to use this method**  
-**v4.7.0 or later is required to use `excludeSharedLicenses`**
+**v4.7.0 or later is required to use `excludeSharedLicenses`**  
+**v4.22.0 or later is required to use `filter`**
 
 Returns `true` if your account owns the specified depot, or `false` if not. This cannot be safely called until
-`appOwnershipCached` is emitted.
+`ownershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### getOwnedPackages([excludeSharedLicenses])
-- `excludeSharedLicenses` - Pass `true` to exclude packages that are owned via a shared license, and not directly on this account (default `false`)
+### getOwnedPackages([filter])
+- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
 
 **v3.3.0 or later is required to use this method**  
-**v4.7.0 or later is required to use `excludeSharedLicenses`**
+**v4.7.0 or later is required to use `excludeSharedLicenses`**  
+**v4.22.0 or later is required to use `filter`**
 
-Returns an array of package IDs which your account owns. If you logged in anonymously, this can be safely called
-immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
+Returns an array of package IDs which your account owns.
 
-### ownsPackage(packageid[, excludeSharedLicenses])
+The point at which this method can be called depends on the following:
+
+- If you are logged on anonymously, this can be called immediately following the `loggedOn` event
+- If you are using no filters, or if you're using the `excludeShared` filter and no other filters, this can be called immediately following the `licenses` event
+- If you are using a custom filter function or if you're using the `excludeFree` and/or `excludeExpiring` filters, this can be called immediately following the `ownershipCached` event (which means `enablePicsCache` must be true)
+
+### ownsPackage(packageid[, filter])
 - `packageid` - A numeric package ID
-- `excludeSharedLicenses` - Pass `true` to exclude packages that are owned via a shared license, and not directly on this account (default `false`)
+- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
 
 **v3.3.0 or later is required to use this method**  
-**v4.7.0 or later is required to use `excludeSharedLicenses`**
+**v4.7.0 or later is required to use `excludeSharedLicenses`**  
+**v4.22.0 or later is required to use `filter`**
 
-Returns `true` if your account owns the specified package ID, or `false` if not. If you logged in anonymously, this can
-be safely called immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
+Returns `true` if your account owns the specified package ID, or `false` if not.
+
+The same timing requirements apply to this method as apply to [`getOwnedPackages`](#getownedpackagesfilter).
 
 ### getStoreTagNames(language, tagIDs, callback)
 - `language` - The language you want tag names in, e.g. "english" or "spanish"
@@ -1865,7 +1911,7 @@ Only **outstanding** gifts show up here. Gifts that you stored in your inventory
 
 The structure of the objects in the array is defined in the documentation for the [`gifts`](#gifts) property.
 
-### appOwnershipCached
+### ownershipCached
 
 **v3.3.0 or later is required to use this event**
 
@@ -1873,6 +1919,9 @@ Emitted once we have all data required in order to determine app ownership. You 
 `ownsApp`, `getOwnedDepots`, and `ownsDepot`.
 
 This is only emitted if `enablePicsCache` is `true`.
+
+*This event was renamed from `appOwnershipCached` in v4.22.1. It can still be used by the old name, although such usage
+is deprecated and will be removed in a future release.*
 
 ### changelist
 - `changenumber` - The changenumber of the changelist we just received
