@@ -671,8 +671,9 @@ SteamUser.prototype.ownsDepot = function(depotid, filter) {
 /**
  * Returns an array of licenses this account owns.
  * @returns {Proto_CMsgClientLicenseList_License[]}
+ * @private
  */
-SteamUser.prototype.getOwnedLicenses = function() {
+SteamUser.prototype._getOwnedLicenses = function() {
 	if (!this.licenses) {
 		throw new Error("We don't have our license list yet.");
 	}
@@ -693,7 +694,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 	}
 
 	// We're an individual user
-	let packages = this.getOwnedLicenses();
+	let packages = this._getOwnedLicenses();
 
 	// If passed filter argument is empty, and global ownership filter is set, use it
 	if (!filter && this.options.ownershipFilter) {
