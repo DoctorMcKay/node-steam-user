@@ -523,7 +523,7 @@ SteamUser.prototype._addAppToCache = function(appid) {
 };
 
 /**
- * Throws error if enablePicsCache option is not enabled or appOwnershipCached event has not been emitted.
+ * Throws error if enablePicsCache option is not enabled or ownershipCached event has not been emitted.
  * @private
  */
 SteamUser.prototype._ensurePicsCache = function() {
@@ -566,14 +566,15 @@ SteamUser.prototype._getLicenseInfo = async function() {
 	try {
 		await this.getProductInfo(appids, [], true, undefined, PICSRequestType.PackageContents);
         this.picsCache.ownershipModified = Date.now();
-		this.emit('appOwnershipCached');
+		this.emit('appOwnershipCached'); // legacy event name
+		this.emit('ownershipCached');
 	} catch (ex) {
 		this.emit('debug', `Error retrieving app info for licenses: ${ex.message}`);
 	}
 };
 
 /**
- * Get list of appids this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * Get list of appids this account owns. Only works if enablePicsCache option is enabled and ownershipCached event
  * has been emitted.
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {number[]}
@@ -610,7 +611,7 @@ SteamUser.prototype.getOwnedApps = function(filter) {
 };
 
 /**
- * Check if this account owns an app. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * Check if this account owns an app. Only works if enablePicsCache option is enabled and ownershipCached event
  * has been emitted.
  * @param {int} appid
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
@@ -621,7 +622,7 @@ SteamUser.prototype.ownsApp = function(appid, filter) {
 };
 
 /**
- * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and ownershipCached event
  * has been emitted.
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {number[]}
@@ -658,7 +659,7 @@ SteamUser.prototype.getOwnedDepots = function(filter) {
 };
 
 /**
- * Check if this account owns a depot. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * Check if this account owns a depot. Only works if enablePicsCache option is enabled and ownershipCached event
  * has been emitted.
  * @param {int} depotid
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
@@ -683,7 +684,7 @@ SteamUser.prototype._getOwnedLicenses = function() {
 
 /**
  * Returns an array of package IDs this account owns (different from owned licenses). The filter only
- * works, if enablePicsCache option is enabled and appOwnershipCached event has been emitted.
+ * works, if enablePicsCache option is enabled and ownershipCached event has been emitted.
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
  * @returns {number[]}
  */
@@ -819,7 +820,7 @@ SteamUser.prototype.getOwnedPackages = function(filter) {
 };
 
 /**
- * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * Check if this account owns a package. Only works if enablePicsCache option is enabled and ownershipCached event
  * has been emitted.
  * @param {int|string} packageid
  * @param {PackageFilter|PackageFilterFunction} filter - Options for what counts for ownership, or a custom filter function
