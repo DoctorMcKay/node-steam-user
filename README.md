@@ -839,7 +839,7 @@ Omitting the `filter` argument is the same as passing `{excludeFree: false, excl
 (which is also the same as passing an empty object).
 
 If you pass a function to `filter`, it will be called for each license in your account. The `element` argument will be
-an object of type [Proto_CMsgClientLicenseList_License](https://github.com/DoctorMcKay/node-steam-user/blob/09527f79919b582b68928e029b4995cdf6990602/protobufs/generated/_types.js#L9755-L9775).
+an object of type [Proto_CMsgClientLicenseList_License](https://github.com/DoctorMcKay/node-steam-user/blob/9312326c34fed69a2ea6c4102ed25e3073f0516d/protobufs/generated/_types.js#L9755-L9775).
 Please note that when you specify a custom filter function, expired licenses (e.g. past free weekends) will be sent to
 your filter function as candidates for inclusion, but these licenses are filtered out in all other cases. You can determine
 if a license is expired by checking `if (license.flags & SteamUser.ELicenseFlags.Expired)`.
