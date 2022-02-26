@@ -111,6 +111,7 @@ class SteamUser extends EventEmitter {
 		this._playingAppIds = [];
 
 		this._gcTokens = []; // game connect tokens
+		this._activeAuthTickets = [];
 		this._connectTime = 0;
 		this._connectionCount = 0;
 		this._authSeqMe = 0;

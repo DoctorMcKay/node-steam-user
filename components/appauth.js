@@ -80,6 +80,7 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 				}
 
 				let gcToken = this._gcTokens.splice(0, 1)[0];
+				this.emit('debug', `Using GC token ${gcToken.toString('hex')}. We now have ${this._gcTokens.length} tokens left.`);
 				let buffer = ByteBuffer.allocate(4 + gcToken.length + 4 + 24 + 4 + ticket.length, ByteBuffer.LITTLE_ENDIAN);
 				buffer.writeUint32(gcToken.length);
 				buffer.append(gcToken);
@@ -96,8 +97,8 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 				buffer = buffer.flip().toBuffer();
 
 				// We need to activate our ticket
-				this.validateAuthTickets(appid, buffer, () => {
-					resolve({"appTicket": buffer});
+				this.activateAuthTickets(appid, buffer, () => {
+					resolve({appTicket: buffer});
 				});
 			};
 
@@ -145,23 +146,12 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 	});
 };
 
-// TODO: Does this list need to include all the tickets we consider active and valid, regardless of who we are?
-// TODO make this internal and only expose an interface for adding/removing tickets
-SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
-	if (!(tickets instanceof Array)) {
+SteamUser.prototype.activateAuthTickets = function(appid, tickets, callback) {
+	if (!Array.isArray(tickets)) {
 		tickets = [tickets];
 	}
 
-	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
-		let obj = {
-			"tokens_left": (this._gcTokens ? this._gcTokens.length : 0),
-			"last_request_seq": this._authSeqMe,
-			"last_request_seq_from_server": this._authSeqThem,
-			"tickets": [],
-			"app_ids": [],
-			"message_sequence": ++this._authSeqMe
-		};
-
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve, reject) => {
 		tickets.forEach((ticket, idx) => {
 			let authTicket = null;
 
@@ -174,7 +164,7 @@ SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
 			} else {
 				ticket = SteamUser.parseAppTicket(ticket);
 				if (!ticket) {
-					return reject(new Error("Ticket " + idx + " is invalid"));
+					return reject(new Error(`Ticket ${idx} is invalid`));
 				}
 
 				authTicket = ticket.authTicket;
@@ -189,37 +179,93 @@ SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
 
 			let isOurTicket = (sid == this.steamID.getSteamID64());
 
-			obj.tickets.push({
-				"estate": isOurTicket ? 0 : 1,
-				"steamid": isOurTicket ? 0 : sid,
-				"gameid": appid,
-				"h_steam_pipe": this._hSteamPipe,
-				"ticket_crc": StdLib.Hashing.crc32(authTicket),
-				"ticket": authTicket
-			});
+			// If we already have an active ticket for this appid/steamid combo, remove it
+			let existingTicketIdx = this._activeAuthTickets.findIndex(tkt => tkt.steamid == (isOurTicket ? 0 : sid) && tkt.gameid == appid);
+			if (existingTicketIdx != -1) {
+				this.emit('debug', `Canceling existing ticket ${existingTicketIdx} for ${appid}/${isOurTicket ? 'self' : sid}`);
+				this._activeAuthTickets.splice(existingTicketIdx, 1);
+			}
 
-			obj.app_ids.push(appid);
+			this._activeAuthTickets.push({
+				estate: isOurTicket ? 0 : 1,
+				steamid: isOurTicket ? 0 : sid,
+				gameid: appid,
+				h_steam_pipe: this._hSteamPipe,
+				ticket_crc: StdLib.Hashing.crc32(authTicket),
+				ticket: authTicket
+			});
 		});
 
-		if (tickets.length == 0) {
-			obj.app_ids.push(appid); // canceling tickets for this app
+		await this._sendAuthList();
+		resolve();
+	});
+};
+
+SteamUser.prototype.cancelAuthTickets = function(appid, ticketOwnerSteamIds, callback) {
+	if (typeof ticketOwnerSteamIds == 'function') {
+		callback = ticketOwnerSteamIds;
+		ticketOwnerSteamIds = null;
+	}
+
+	if (!Array.isArray(ticketOwnerSteamIds)) {
+		ticketOwnerSteamIds = [ticketOwnerSteamIds];
+	}
+
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve) => {
+		let canceledTicketCount = 0;
+		ticketOwnerSteamIds.forEach((sid) => {
+			if (!sid) {
+				// any falsy steamids should be treated as our own
+				sid = this.steamID;
+			}
+
+			sid = Helpers.steamID(sid);
+			sid = sid.accountid == this.steamID.accountid ? 0 : sid.getSteamID64();
+
+			let ticketToCancel = this._activeAuthTickets.findIndex(tkt => tkt.gameid == appid && tkt.steamid == sid);
+			if (ticketToCancel != -1) {
+				this._activeAuthTickets.splice(ticketToCancel, 1);
+				canceledTicketCount++;
+			}
+		});
+
+		await this._sendAuthList(appid);
+		resolve({canceledTicketCount});
+	});
+};
+
+SteamUser.prototype.cancelAllAuthTickets = function(appid, callback) {
+	let steamids = this._activeAuthTickets.filter(tkt => tkt.gameid == appid).map(tkt => tkt.steamid);
+	return this.cancelAuthTickets(appid, steamids, callback);
+};
+
+SteamUser.prototype._sendAuthList = function(forceAppId) {
+	return StdLib.Promises.timeoutPromise(10000, (resolve) => {
+		let uniqueAppIds = this._activeAuthTickets.map(tkt => tkt.gameid).filter((appid, idx, arr) => arr.indexOf(appid) == idx);
+		if (forceAppId && !uniqueAppIds.includes(forceAppId)) {
+			uniqueAppIds.push(forceAppId);
 		}
 
-		this._send(SteamUser.EMsg.ClientAuthList, obj, (body) => {
+		this.emit('debug', `Sending auth list with ${this._activeAuthTickets.length} active tickets`);
+
+		this._send(SteamUser.EMsg.ClientAuthList, {
+			tokens_left: this._gcTokens ? this._gcTokens.length : 0,
+			last_request_seq: this._authSeqMe,
+			last_request_seq_from_server: this._authSeqThem,
+			tickets: this._activeAuthTickets,
+			app_ids: uniqueAppIds,
+			message_sequence: ++this._authSeqMe
+		}, (body) => {
 			this._authSeqThem = body.message_sequence;
 			resolve();
 		});
 	});
 };
 
-SteamUser.prototype.cancelAuthTicket = function(appid, callback) {
-	return this.validateAuthTickets(appid, [], callback);
-};
-
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientGameConnectTokens, function(body) {
-	this.emit('debug', "Received " + body.tokens.length + " game connect tokens");
+	this.emit('debug', `Received ${body.tokens.length} game connect tokens. Had ${this._gcTokens.length} tokens.`);
 	body.tokens.forEach((token) => {
 		this._gcTokens.push(token);
 	});
@@ -228,21 +274,32 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientGameConnectTokens, 
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientTicketAuthComplete, function(body) {
-	let eventBody = {
-		"steamID": new SteamID(body.steam_id.toString()),
-		"appOwnerSteamID": body.owner_steam_id.toString() == "0" ? null : new SteamID(body.owner_steam_id.toString()),
-		"appID": parseInt(body.game_id.toString(), 10),
-		"ticketCrc": body.ticket_crc,
-		"state": body.estate,
-		"authSessionResponse": body.eauth_session_response
-	};
-
-	let eventName = "authTicketValidation";
-	if (eventBody.steamID.type == 0) {
-		// this appears to happen when it's our own ticket?
-		eventName = "authTicketStatus";
-		eventBody.steamID = this.steamID;
+	// First find the ticket in our local cache that matches this crc
+	let idx = this._activeAuthTickets.findIndex(tkt => tkt.ticket_crc == body.ticket_crc);
+	if (idx == -1) {
+		this.emit('debug', `Cannot find CRC ${body.ticket_crc} for ticket from user ${body.steam_id} with state ${body.eauth_session_response}`);
+		return;
 	}
 
-	this.emit(eventName, eventBody);
+	let cacheTicket = this._activeAuthTickets[idx];
+
+	// If the auth session response is anything besides OK, we need to remove the ticket from our auth list
+	if (body.eauth_session_response != SteamUser.EAuthSessionResponse.OK) {
+		this._activeAuthTickets.splice(idx, 1);
+		this.emit('debug', `Removed canceled ticket ${body.ticket_crc} with state ${body.eauth_session_response}. Now have ${this._activeAuthTickets.length} active tickets.`);
+	}
+
+	// Update the cached ticket's state
+	cacheTicket.estate = body.estate;
+
+	let eventBody = {
+		steamID: new SteamID(body.steam_id.toString()), // if our own ticket, this is the steamid that just validated it
+		appOwnerSteamID: body.owner_steam_id.toString() == '0' ? null : new SteamID(body.owner_steam_id.toString()),
+		appID: parseInt(body.game_id.toString(), 10),
+		ticketCrc: body.ticket_crc,
+		state: body.estate,
+		authSessionResponse: body.eauth_session_response
+	};
+
+	this.emit(cacheTicket.steamid == 0 ? 'authTicketStatus' : 'authTicketValidation', eventBody);
 });
