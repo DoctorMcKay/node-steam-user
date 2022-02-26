@@ -202,13 +202,48 @@ Defaults to `60000`. Minimum value `1000`, although you're recommended to not go
 ### ownershipFilter
 
 Specify a custom app/package ownership filter object or function to be applied to all calls to `getOwned*()` and `owns*()`
-where a filter is not specified in the method invocation.
-
-See [`getOwnedApps`](#getownedappsfilter) for usage details.
+where a filter is not specified in the method invocation. If you specify a `filter` when you call `getOwned*()` or `owns*()`,
+then that filter is applied and the global `ownershipFilter` is ignored.
 
 Added in 4.22.0.
 
 Defaults to a filter that excludes expired licenses only.
+
+This filter can be either an object or a function:
+
+#### Filter Object
+
+A filter object should contain zero or more of these properties:
+
+- `excludeFree` - Pass `true` to exclude free licenses (no cost/guest pass/free on demand/free commercial license)
+- `excludeShared` - Pass `true` to exclude licenses acquired via [family sharing](https://store.steampowered.com/promotion/familysharing)
+- `excludeExpiring` - Pass `true` to exclude licenses that have an expiration date (e.g. free weekends) but are not yet expired
+
+Any omitted properties are assumed to be `false`. If you don't specify an ownership filter, an empty object is assumed.
+
+#### Filter Function
+
+You can also provide your own custom filter function. This function will be called for each license owned by your account,
+and should return `true` to include a license or `false` to exclude it. This function should have the same arguments
+as the callback you'd pass to [Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
+
+The `element` argument will be an object of type
+[Proto_CMsgClientLicenseList_License](https://github.com/DoctorMcKay/node-steam-user/blob/9312326c34fed69a2ea6c4102ed25e3073f0516d/protobufs/generated/_types.js#L9755-L9775)
+(same as the [`licenses`](#licenses) property).
+
+Please note that when you specify a custom filter function, expired licenses (e.g. past free weekends) will be sent to
+your filter function as candidates for inclusion, but these licenses are filtered out in all other cases. You can determine
+if a license is expired by checking `if (license.flags & SteamUser.ELicenseFlags.Expired)`.
+
+Example usage:
+
+```js
+user.setOption('ownershipFilter', (license) => {
+	// only passes licenses that were acquired at least a year ago
+	let time = Math.floor(Date.now() / 1000);
+	return time - license.time_created >= 60 * 60 * 24 * 365;
+});
+```
 
 ### additionalHeaders
 
@@ -816,12 +851,7 @@ If you have the PICS cache enabled and the risk of getting stale data is accepta
 Access tokens are global. That is, everyone who has access to an app receives the same token. Tokens do not seem to expire.
 
 ### getOwnedApps([filter])
-- `filter` - Either a filter object or a filter function.
-    - Filter objects should have these properties (all default to false):
-        - `excludeFree` - Pass `true` to exclude free (no cost/guest pass/free on demand/free commercial license) licenses
-        - `excludeShared` - Pass `true` to exclude licenses acquired via family sharing
-        - `excludeExpiring` Pass `true` to exclude licenses that have an expiration date (e.g. free weekends) but are not yet expired
-    - Filter functions should accept the same arguments as [Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) and should return true to pass a license or false to exclude it. 
+- `filter` - A filter object or function (see [`ownershipFilter`](#ownershipfilter))
 
 **v3.3.0 or later is required to use this method**  
 **v4.7.0 or later is required to use `excludeSharedLicenses`**  
@@ -835,15 +865,6 @@ If `filter` is a boolean, it is interpreted as `excludeShared` for backward comp
 `getOwnedApps(true)` is the same as `getOwnedApps({excludeShared: true})`.
 This usage is deprecated and will be removed in a future release.
 
-Omitting the `filter` argument is the same as passing `{excludeFree: false, excludeShared: false, excludeExpiring: false}`
-(which is also the same as passing an empty object).
-
-If you pass a function to `filter`, it will be called for each license in your account. The `element` argument will be
-an object of type [Proto_CMsgClientLicenseList_License](https://github.com/DoctorMcKay/node-steam-user/blob/9312326c34fed69a2ea6c4102ed25e3073f0516d/protobufs/generated/_types.js#L9755-L9775).
-Please note that when you specify a custom filter function, expired licenses (e.g. past free weekends) will be sent to
-your filter function as candidates for inclusion, but these licenses are filtered out in all other cases. You can determine
-if a license is expired by checking `if (license.flags & SteamUser.ELicenseFlags.Expired)`.
-
 The output of this function will contain all AppIDs that are present in at least one license that was not filtered out.
 For example, if you previously activated a free on demand package for Spacewar but later activated a retail CD key for
 the same, it will be included if you pass `{excludeFree: true}` as your filter since you own it both via a free package
@@ -851,7 +872,7 @@ and via a paid package.
 
 ### ownsApp(appid[, filter])
 - `appid` - A numeric AppID
-- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
+- `filter` - A filter object or function (see [`ownershipFilter`](#ownershipfilter))
 
 **v3.3.0 or later is required to use this method**  
 **v4.7.0 or later is required to use `excludeSharedLicenses`**  
@@ -862,8 +883,14 @@ Returns `true` if your account owns the specified AppID, or `false` if not. This
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
+If `filter` is a boolean, it is interpreted as `excludeShared` for backward compatibility. For example,
+`ownsApp(730, true)` is the same as `ownsApp(730, {excludeShared: true})`.
+This usage is deprecated and will be removed in a future release.
+
+The output of this function will be true if the provided AppID is present in at least one license that was not filtered out.
+
 ### getOwnedDepots([filter])
-- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
+- `filter` - A filter object or function (see [`ownershipFilter`](#ownershipfilter))
 
 **v3.3.0 or later is required to use this method**  
 **v4.7.0 or later is required to use `excludeSharedLicenses`**  
@@ -873,9 +900,15 @@ Returns an array of depot IDs which your account owns. This cannot be safely cal
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
+If `filter` is a boolean, it is interpreted as `excludeShared` for backward compatibility. For example,
+`getOwnedDepots(true)` is the same as `getOwnedDepots({excludeShared: true})`.
+This usage is deprecated and will be removed in a future release.
+
+The output of this function will contain all depot IDs that are present in at least one license that was not filtered out.
+
 ### ownsDepot(depotid[, filter])
 - `depotid` - A numeric depot ID
-- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
+- `filter` - A filter object or function (see [`ownershipFilter`](#ownershipfilter))
 
 **v3.3.0 or later is required to use this method**  
 **v4.7.0 or later is required to use `excludeSharedLicenses`**  
@@ -886,14 +919,26 @@ Returns `true` if your account owns the specified depot, or `false` if not. This
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
+If `filter` is a boolean, it is interpreted as `excludeShared` for backward compatibility. For example,
+`ownsDepot(731, true)` is the same as `ownsDepot(731, {excludeShared: true})`.
+This usage is deprecated and will be removed in a future release.
+
+The output of this function will be true if the provided depot ID is present in at least one license that was not filtered out.
+
 ### getOwnedPackages([filter])
-- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
+- `filter` - A filter object or function (see [`ownershipFilter`](#ownershipfilter))
 
 **v3.3.0 or later is required to use this method**  
 **v4.7.0 or later is required to use `excludeSharedLicenses`**  
 **v4.22.0 or later is required to use `filter`**
 
 Returns an array of package IDs which your account owns.
+
+If `filter` is a boolean, it is interpreted as `excludeShared` for backward compatibility. For example,
+`getOwnedPackages(true)` is the same as `getOwnedPackages({excludeShared: true})`.
+This usage is deprecated and will be removed in a future release.
+
+The output of this function will contain all package IDs for which you have at least one license that was not filtered out.
 
 The point at which this method can be called depends on the following:
 
@@ -903,7 +948,7 @@ The point at which this method can be called depends on the following:
 
 ### ownsPackage(packageid[, filter])
 - `packageid` - A numeric package ID
-- `filter` - A filter object or function (see [`getOwnedApps`](#getownedappsfilter))
+- `filter` - A filter object or function (see [`ownershipFilter`](#ownershipfilter))
 
 **v3.3.0 or later is required to use this method**  
 **v4.7.0 or later is required to use `excludeSharedLicenses`**  
@@ -911,7 +956,14 @@ The point at which this method can be called depends on the following:
 
 Returns `true` if your account owns the specified package ID, or `false` if not.
 
+The output of this function will be true if your account has at least one license for the provided package ID that wasn't
+filtered out.
+
 The same timing requirements apply to this method as apply to [`getOwnedPackages`](#getownedpackagesfilter).
+
+If `filter` is a boolean, it is interpreted as `excludeShared` for backward compatibility. For example,
+`ownsPackage(16018, true)` is the same as `ownsPackage(16018, {excludeShared: true})`.
+This usage is deprecated and will be removed in a future release.
 
 ### getStoreTagNames(language, tagIDs, callback)
 - `language` - The language you want tag names in, e.g. "english" or "spanish"
@@ -1912,7 +1964,8 @@ The structure of the objects in the array is defined in the documentation for th
 
 ### ownershipCached
 
-**v3.3.0 or later is required to use this event**
+**v3.3.0 or later is required to use this event under the name `appOwnershipCached`**  
+**v4.22.1 or later is required to use this event under the name `ownershipCached`**
 
 Emitted once we have all data required in order to determine app ownership. You can now safely call `getOwnedApps`,
 `ownsApp`, `getOwnedDepots`, and `ownsDepot`.
