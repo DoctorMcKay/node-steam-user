@@ -62,7 +62,7 @@ SteamUser.parseEncryptedAppTicket = AppTicket.parseEncryptedAppTicket;
  */
 SteamUser.parseAppTicket = AppTicket.parseAppTicket;
 
-SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
+SteamUser.prototype.createAuthSessionTicket = function(appid, callback) {
 	return StdLib.Promises.callbackPromise(['appTicket'], callback, (resolve, reject) => {
 		// For an auth session ticket we need the following:
 		// 1. Length-prefixed GCTOKEN
@@ -74,7 +74,7 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 				return reject(err);
 			}
 
-			let buildToken = (err) => {
+			let buildToken = async (err) => {
 				if (err) {
 					return reject(err);
 				}
@@ -97,9 +97,8 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 				buffer = buffer.flip().toBuffer();
 
 				// We need to activate our ticket
-				this.activateAuthTickets(appid, buffer, () => {
-					resolve({appTicket: buffer});
-				});
+				await this.activateAuthSessionTickets(appid, buffer);
+				resolve({appTicket: buffer});
 			};
 
 			// Do we have any GC tokens?
@@ -121,12 +120,12 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 			let parsed = SteamUser.parseAppTicket(file);
 			// Only return the saved ticket if it has a valid signature, expires more than 6 hours from now, and has the same external IP as we have right now.
 			if (parsed && parsed.isValid && parsed.ownershipTicketExpires - Date.now() >= (1000 * 60 * 60 * 6) && parsed.ownershipTicketExternalIP == this.publicIP) {
-				return resolve({"appOwnershipTicket": file});
+				return resolve({appOwnershipTicket: file});
 			}
 		}
 
 		// No saved ticket, we'll have to get a new one
-		this._send(SteamUser.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, async (body) => {
+		this._send(SteamUser.EMsg.ClientGetAppOwnershipTicket, {app_id: appid}, async (body) => {
 			let err = Helpers.eresultError(body.eresult);
 			if (err) {
 				return reject(err);
@@ -141,59 +140,68 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 				await this._saveFile(filename, ticket);
 			}
 
-			resolve({"appOwnershipTicket": ticket});
+			resolve({appOwnershipTicket: ticket});
 		});
 	});
 };
 
-SteamUser.prototype.activateAuthTickets = function(appid, tickets, callback) {
+SteamUser.prototype.activateAuthSessionTickets = function(appid, tickets, callback) {
 	if (!Array.isArray(tickets)) {
 		tickets = [tickets];
 	}
 
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve, reject) => {
 		tickets.forEach((ticket, idx) => {
-			let authTicket = null;
-
-			if (ticket instanceof Buffer && ticket.length == 52) {
-				authTicket = ticket;
+			if (ticket instanceof Buffer) {
+				ticket = SteamUser.parseAppTicket(ticket);
 			}
 
-			if (ticket.authTicket) {
-				authTicket = ticket.authTicket;
-			} else {
-				ticket = SteamUser.parseAppTicket(ticket);
-				if (!ticket) {
-					return reject(new Error(`Ticket ${idx} is invalid`));
+			if (!ticket || !ticket.isValid || !Buffer.isBuffer(ticket.authTicket)) {
+				let invalidReason = 'is invalid';
+				if (ticket.isExpired) {
+					invalidReason = 'is expired';
+				}
+				if (!ticket.hasValidSignature) {
+					invalidReason = ticket.signature ? 'has an invalid signature' : 'has no signature';
 				}
 
-				authTicket = ticket.authTicket;
+				return reject(new Error(`Ticket ${idx} ${invalidReason}`));
 			}
 
-			let sid = new SteamID();
-			sid.universe = this.steamID.universe;
-			sid.type = SteamID.Type.INDIVIDUAL;
-			sid.instance = SteamID.Instance.DESKTOP;
-			sid.accountid = authTicket.readUInt32LE(12);
-			sid = sid.getSteamID64();
+			// Make sure this is for the game we expect
+			if (ticket.appID != appid) {
+				return reject(new Error(`Ticket ${idx} is for the wrong app: ${ticket.appID}`));
+			}
+
+			let sid = ticket.steamID.getSteamID64();
 
 			let isOurTicket = (sid == this.steamID.getSteamID64());
-
-			// If we already have an active ticket for this appid/steamid combo, remove it
-			let existingTicketIdx = this._activeAuthTickets.findIndex(tkt => tkt.steamid == (isOurTicket ? 0 : sid) && tkt.gameid == appid);
-			if (existingTicketIdx != -1) {
-				this.emit('debug', `Canceling existing ticket ${existingTicketIdx} for ${appid}/${isOurTicket ? 'self' : sid}`);
-				this._activeAuthTickets.splice(existingTicketIdx, 1);
-			}
-
-			this._activeAuthTickets.push({
+			let thisTicket = {
 				estate: isOurTicket ? 0 : 1,
 				steamid: isOurTicket ? 0 : sid,
-				gameid: appid,
+				gameid: ticket.appID,
 				h_steam_pipe: this._hSteamPipe,
-				ticket_crc: StdLib.Hashing.crc32(authTicket),
-				ticket: authTicket
-			});
+				ticket_crc: StdLib.Hashing.crc32(ticket.authTicket),
+				ticket: ticket.authTicket
+			};
+
+			// Check if this ticket is already active
+			if (this._activeAuthTickets.find(tkt => tkt.steamid == thisTicket.steamid && tkt.ticket_crc == thisTicket.ticket_crc)) {
+				this.emit('debug', `Not attempting to activate already active ticket ${thisTicket.ticket_crc} for ${appid}/${isOurTicket ? 'self' : sid}`);
+				return;
+			}
+
+			// If we already have an active ticket for this appid/steamid combo, remove it, but not if it's our own
+			if (!isOurTicket) {
+				let existingTicketIdx = this._activeAuthTickets.findIndex(tkt => tkt.steamid == thisTicket.steamid && tkt.gameid == thisTicket.gameid);
+				if (existingTicketIdx != -1) {
+					let existingTicket = this._activeAuthTickets[existingTicketIdx];
+					this.emit('debug', `Canceling existing ticket ${existingTicket.ticket_crc} for ${existingTicket.gameid}/${existingTicket.steamid}`);
+					this._activeAuthTickets.splice(existingTicketIdx, 1);
+				}
+			}
+
+			this._activeAuthTickets.push(thisTicket);
 		});
 
 		await this._sendAuthList();
@@ -201,42 +209,105 @@ SteamUser.prototype.activateAuthTickets = function(appid, tickets, callback) {
 	});
 };
 
-SteamUser.prototype.cancelAuthTickets = function(appid, ticketOwnerSteamIds, callback) {
-	if (typeof ticketOwnerSteamIds == 'function') {
-		callback = ticketOwnerSteamIds;
-		ticketOwnerSteamIds = null;
+/**
+ * Cancel your own auth session tickets. Once canceled, every client that activated your ticket will receive a
+ * notification that your ticket has been canceled. If you are still in-game, they will probably kick you.
+ * @param {number} appid
+ * @param {string[]|string|null} [gcTokens=null] - The gcToken from the specific ticket(s) you want to cancel. Omit or pass null to cancel all active tickets.
+ * @param {function} callback
+ * @returns {Promise}
+ */
+SteamUser.prototype.cancelAuthSessionTickets = function(appid, gcTokens, callback) {
+	if (typeof gcTokens == 'function') {
+		callback = gcTokens;
+		gcTokens = null;
 	}
 
-	if (!Array.isArray(ticketOwnerSteamIds)) {
-		ticketOwnerSteamIds = [ticketOwnerSteamIds];
+	if (typeof gcTokens == 'string') {
+		gcTokens = [gcTokens];
 	}
 
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve) => {
-		let canceledTicketCount = 0;
-		ticketOwnerSteamIds.forEach((sid) => {
-			if (!sid) {
-				// any falsy steamids should be treated as our own
-				sid = this.steamID;
-			}
+		let matchingTickets = this._activeAuthTickets.filter(tkt => tkt.steamid == 0 && tkt.gameid == appid);
+		if (gcTokens) {
+			matchingTickets = matchingTickets.filter((tkt) => {
+				let authTicket = ByteBuffer.wrap(tkt.ticket, ByteBuffer.LITTLE_ENDIAN);
+				authTicket.skip(4);
+				let gcToken = authTicket.readUint64();
+				return gcTokens.includes(gcToken);
+			});
+		}
 
-			sid = Helpers.steamID(sid);
-			sid = sid.accountid == this.steamID.accountid ? 0 : sid.getSteamID64();
-
-			let ticketToCancel = this._activeAuthTickets.findIndex(tkt => tkt.gameid == appid && tkt.steamid == sid);
-			if (ticketToCancel != -1) {
-				this._activeAuthTickets.splice(ticketToCancel, 1);
-				canceledTicketCount++;
+		this.emit('debug', `Got ${matchingTickets.length} matching tickets to cancel`);
+		let canceledTicketCount = matchingTickets.length;
+		while (matchingTickets.length > 0) {
+			let ticket = matchingTickets.splice(0, 1)[0];
+			let idx = this._activeAuthTickets.indexOf(ticket);
+			if (idx != -1) {
+				this._activeAuthTickets.splice(idx, 1);
 			}
-		});
+		}
 
 		await this._sendAuthList(appid);
 		resolve({canceledTicketCount});
 	});
 };
 
-SteamUser.prototype.cancelAllAuthTickets = function(appid, callback) {
-	let steamids = this._activeAuthTickets.filter(tkt => tkt.gameid == appid).map(tkt => tkt.steamid);
-	return this.cancelAuthTickets(appid, steamids, callback);
+/**
+ * Ends our auth sessions with other users. Once ended, we will no longer receive notifications when users' auth session
+ * tickets are canceled or otherwise invalidated. If we've already been notified that a ticket was canceled or invalidated,
+ * the session was already automatically ended.
+ * @param {number} appid
+ * @param {null|string|string[]|SteamID|SteamID[]} steamIDs - SteamID objects or strings that can parse into SteamIDs. Null or omit to cancel all auth sessions for the app.
+ * @param {function} callback
+ * @returns {Promise}
+ */
+SteamUser.prototype.endAuthSessions = function(appid, steamIDs, callback) {
+	if (typeof steamIDs == 'function') {
+		callback = steamIDs;
+		steamIDs = null;
+	}
+
+	if (steamIDs && !Array.isArray(steamIDs)) {
+		steamIDs = [steamIDs];
+	}
+
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve) => {
+		let matchingTickets = this._activeAuthTickets.filter(tkt => tkt.gameid == appid && tkt.steamid != 0);
+		if (steamIDs) {
+			steamIDs = steamIDs.map(Helpers.steamID).map(sid => sid.getSteamID64());
+			matchingTickets = matchingTickets.filter(tkt => steamIDs.includes(tkt.steamid.getSteamID64()));
+		}
+
+		this.emit('debug', `Got ${matchingTickets.length} matching tickets to end auth sessions for`);
+		let canceledTicketCount = matchingTickets.length;
+		while (matchingTickets.length > 0) {
+			let ticket = matchingTickets.splice(0, 1)[0];
+			let idx = this._activeAuthTickets.indexOf(ticket);
+			if (idx != -1) {
+				this._activeAuthTickets.splice(idx, 1);
+			}
+		}
+
+		await this._sendAuthList(appid);
+		resolve({canceledTicketCount});
+	});
+};
+
+SteamUser.prototype.getActiveAuthTickets = function() {
+	return this._activeAuthTickets.map((ticket) => {
+		let authTicket = ByteBuffer.wrap(ticket.ticket, ByteBuffer.LITTLE_ENDIAN);
+		authTicket.skip(4);
+		let gcToken = authTicket.readUint64();
+
+		return {
+			appID: ticket.gameid,
+			steamID: ticket.steamid == 0 ? this.steamID : Helpers.steamID(ticket.steamid),
+			ticketCrc: ticket.ticket_crc,
+			gcToken,
+			validated: ticket.estate > 1
+		};
+	});
 };
 
 SteamUser.prototype._sendAuthList = function(forceAppId) {
@@ -292,11 +363,17 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientTicketAuthComplete,
 	// Update the cached ticket's state
 	cacheTicket.estate = body.estate;
 
+	// Get the GC token
+	let authTicket = ByteBuffer.wrap(cacheTicket.ticket, ByteBuffer.LITTLE_ENDIAN);
+	authTicket.skip(4);
+	let ticketGcToken = authTicket.readUint64();
+
 	let eventBody = {
 		steamID: new SteamID(body.steam_id.toString()), // if our own ticket, this is the steamid that just validated it
 		appOwnerSteamID: body.owner_steam_id.toString() == '0' ? null : new SteamID(body.owner_steam_id.toString()),
 		appID: parseInt(body.game_id.toString(), 10),
 		ticketCrc: body.ticket_crc,
+		ticketGcToken,
 		state: body.estate,
 		authSessionResponse: body.eauth_session_response
 	};
