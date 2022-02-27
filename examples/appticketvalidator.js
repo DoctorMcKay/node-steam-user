@@ -51,7 +51,7 @@ g_SteamClient.on('loggedOn', () => {
 
 g_SteamClient.on('authTicketValidation', (details) => {
 	console.log(`[Steam] Validation result for ticket ${details.ticketGcToken} from ${details.steamID.steam3()}: ${SteamUser.EAuthSessionResponse[details.authSessionResponse]}`);
-	console.log(`[Steam] There are now ${g_SteamClient.getActiveAuthTickets().filter(tkt => tkt.steamID.accountid != g_SteamClient.steamID.accountid && tkt.validated).length} other validated players in game`);
+	console.log(`[Steam] There are now ${g_SteamClient.getActiveAuthSessionTickets().filter(tkt => tkt.steamID.accountid != g_SteamClient.steamID.accountid && tkt.validated).length} other validated players in game`);
 });
 
 g_SteamClient.on('authTicketStatus', (details) => {

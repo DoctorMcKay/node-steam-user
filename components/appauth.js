@@ -17,7 +17,7 @@ const SteamUser = require('../index.js');
  * @param {function} [callback] - First argument is "err", second is the ticket as a Buffer (on success)
  * @return {Promise}
  */
-SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) {
+SteamUser.prototype.createEncryptedAppTicket = function(appid, userData, callback) {
 	if (typeof userData === 'function') {
 		callback = userData;
 		userData = Buffer.alloc(0);
@@ -40,7 +40,7 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
 			}
 
 			resolve({
-				"encryptedAppTicket": Messages.encodeProto(Schema.EncryptedAppTicket, body.encrypted_app_ticket)
+				encryptedAppTicket: Messages.encodeProto(Schema.EncryptedAppTicket, body.encrypted_app_ticket)
 			});
 		});
 	});
@@ -98,7 +98,7 @@ SteamUser.prototype.createAuthSessionTicket = function(appid, callback) {
 
 				// We need to activate our ticket
 				await this.activateAuthSessionTickets(appid, buffer);
-				resolve({appTicket: buffer});
+				resolve({sessionTicket: buffer});
 			};
 
 			// Do we have any GC tokens?
@@ -294,7 +294,7 @@ SteamUser.prototype.endAuthSessions = function(appid, steamIDs, callback) {
 	});
 };
 
-SteamUser.prototype.getActiveAuthTickets = function() {
+SteamUser.prototype.getActiveAuthSessionTickets = function() {
 	return this._activeAuthTickets.map((ticket) => {
 		let authTicket = ByteBuffer.wrap(ticket.ticket, ByteBuffer.LITTLE_ENDIAN);
 		authTicket.skip(4);
