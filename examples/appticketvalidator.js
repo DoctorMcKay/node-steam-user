@@ -63,7 +63,7 @@ function onIpcReady() {
 	sendIpcMessage({type: 'whosThere'});
 }
 
-function processMessage(data) {
+async function processMessage(data) {
 	let msg = JSON.parse(data);
 	switch (msg.type) {
 		case 'whosThere':
@@ -88,15 +88,14 @@ function processMessage(data) {
 				break;
 			}
 
-			g_SteamClient.createAuthSessionTicket(TEST_APPID, (err, ticket) => {
-				if (err) {
-					console.log(`[Steam] Failed to create my own auth ticket: ${err.message}`);
-				} else {
-					let parsedTicket = AppTicket.parseAppTicket(ticket);
-					console.log(`[Steam] Created and activated my own auth ticket ${parsedTicket.gcToken} for ${msg.from}`);
-					sendIpcMessage({type: 'authTicket', ticket: ticket.toString('base64'), from: g_SteamClient.steamID.steam3(), to: msg.from});
-				}
-			});
+			try {
+				let {sessionTicket} = await g_SteamClient.createAuthSessionTicket(TEST_APPID);
+				let parsedTicket = AppTicket.parseAppTicket(sessionTicket);
+				console.log(`[Steam] Created and activated my own auth ticket ${parsedTicket.gcToken} for ${msg.from}`);
+				sendIpcMessage({type: 'authTicket', ticket: sessionTicket.toString('base64'), from: g_SteamClient.steamID.steam3(), to: msg.from});
+			} catch (err) {
+				console.log(`[Steam] Failed to create my own auth ticket: ${err.message}`);
+			}
 			break;
 
 		case 'authTicket':
@@ -122,13 +121,12 @@ function processMessage(data) {
 
 			console.log(`[Steam] Auth ticket ${parsedTicket.gcToken} from ${msg.from} passed pre-validation. Licenses: ${parsedTicket.licenses.join(', ')}. DLC: ${parsedTicket.dlc.length == 0 ? 'none' : parsedTicket.dlc.join(', ')}.`);
 
-			g_SteamClient.activateAuthSessionTickets(TEST_APPID, ticket, (err) => {
-				if (err) {
-					console.log(`[Steam] Auth ticket from ${msg.from} failed activation: ${err.message}`);
-				} else {
-					console.log(`[Steam] Auth ticket from ${msg.from} activated OK`);
-				}
-			});
+			try {
+				await g_SteamClient.activateAuthSessionTickets(TEST_APPID, [ticket]);
+				console.log(`[Steam] Auth ticket from ${msg.from} activated OK`);
+			} catch (err) {
+				console.log(`[Steam] Auth ticket from ${msg.from} failed activation: ${err.message}`);
+			}
 			break;
 	}
 }
