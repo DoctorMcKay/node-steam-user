@@ -8,8 +8,6 @@ class HandlerManager {
 	}
 
 	add(msg, handler) {
-		this.checkMsgForLegacyHandlers(msg);
-
 		if (!this._handlers[msg]) {
 			this._handlers[msg] = [];
 		}

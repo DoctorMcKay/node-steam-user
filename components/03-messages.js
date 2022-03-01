@@ -1,12 +1,13 @@
 const ByteBuffer = require('bytebuffer');
 const SteamID = require('steamid');
-const SteamUser = require('../index.js');
 const Zlib = require('zlib');
+
+const SteamUserConnection = require('./02-connection.js');
 
 const Schema = require('../protobufs/generated/_load.js');
 
-const EMsg = SteamUser.EMsg;
-const EResult = SteamUser.EResult;
+const EMsg = require('../enums/EMsg.js');
+const EResult = require('../enums/EResult.js');
 
 const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
@@ -330,388 +331,399 @@ if (hadMissingProtobuf) {
 	throw new Error('One or more protobuf schemas are missing');
 }
 
-/**
- * Encode a protobuf.
- * @param {object} proto - The protobuf class
- * @param {object} data - The data to serialize
- * @returns {Buffer}
- */
-exports.encodeProto = function(proto, data) {
-	return proto.encode(data).finish();
-};
-
-/**
- * Decode a protobuf.
- * @param {object} proto - The protobuf class
- * @param {Buffer|ByteBuffer} encoded - The data to decode
- * @returns {object}
- */
-exports.decodeProto = function(proto, encoded) {
-	if (ByteBuffer.isByteBuffer(encoded)) {
-		encoded = encoded.toBuffer();
+class SteamUserMessages extends SteamUserConnection {
+	/**
+	 * Encode a protobuf.
+	 * @param {object} proto - The protobuf class
+	 * @param {object} data - The data to serialize
+	 * @returns {Buffer}
+	 * @protected
+	 */
+	static _encodeProto(proto, data) {
+		return proto.encode(data).finish();
 	}
 
-	let decoded = proto.decode(encoded);
-	let objNoDefaults = proto.toObject(decoded, {"longs": String});
-	let objWithDefaults = proto.toObject(decoded, {"defaults": true, "longs": String});
-	return replaceDefaults(objNoDefaults, objWithDefaults);
-
-	function replaceDefaults(noDefaults, withDefaults) {
-		if (Array.isArray(withDefaults)) {
-			return withDefaults.map((val, idx) => replaceDefaults(noDefaults[idx], val));
+	/**
+	 * Decode a protobuf.
+	 * @param {object} proto - The protobuf class
+	 * @param {Buffer|ByteBuffer} encoded - The data to decode
+	 * @returns {object}
+	 * @protected
+	 */
+	static _decodeProto(proto, encoded) {
+		if (ByteBuffer.isByteBuffer(encoded)) {
+			encoded = encoded.toBuffer();
 		}
 
-		for (let i in withDefaults) {
-			if (!withDefaults.hasOwnProperty(i)) {
-				continue;
+		let decoded = proto.decode(encoded);
+		let objNoDefaults = proto.toObject(decoded, {"longs": String});
+		let objWithDefaults = proto.toObject(decoded, {"defaults": true, "longs": String});
+		return replaceDefaults(objNoDefaults, objWithDefaults);
+
+		function replaceDefaults(noDefaults, withDefaults) {
+			if (Array.isArray(withDefaults)) {
+				return withDefaults.map((val, idx) => replaceDefaults(noDefaults[idx], val));
 			}
 
-			if (withDefaults[i] && typeof withDefaults[i] === 'object' && !Buffer.isBuffer(withDefaults[i])) {
-				// Covers both object and array cases, both of which will work
-				// Won't replace empty arrays, but that's desired behavior
-				withDefaults[i] = replaceDefaults(noDefaults[i], withDefaults[i]);
-			} else if (typeof noDefaults[i] === 'undefined' && isReplaceableDefaultValue(withDefaults[i])) {
-				withDefaults[i] = null;
+			for (let i in withDefaults) {
+				if (!withDefaults.hasOwnProperty(i)) {
+					continue;
+				}
+
+				if (withDefaults[i] && typeof withDefaults[i] === 'object' && !Buffer.isBuffer(withDefaults[i])) {
+					// Covers both object and array cases, both of which will work
+					// Won't replace empty arrays, but that's desired behavior
+					withDefaults[i] = replaceDefaults(noDefaults[i], withDefaults[i]);
+				} else if (typeof noDefaults[i] === 'undefined' && isReplaceableDefaultValue(withDefaults[i])) {
+					withDefaults[i] = null;
+				}
+			}
+
+			return withDefaults;
+		}
+
+		function isReplaceableDefaultValue(val) {
+			if (Buffer.isBuffer(val) && val.length == 0) {
+				// empty buffer is replaceable
+				return true;
+			}
+
+			if (Array.isArray(val)) {
+				// empty array is not replaceable (empty repeated fields)
+				return false;
+			}
+
+			if (val === '0') {
+				// Zero as a string is replaceable (64-bit integer)
+				return true;
+			}
+
+			// Anything falsy is true
+			return !val;
+		}
+	}
+
+	/**
+	 * @param {int|object} emsgOrHeader
+	 * @param {object|Buffer|ByteBuffer} body
+	 * @param {function} [callback]
+	 * @protected
+	 */
+	_send(emsgOrHeader, body, callback) {
+		// header fields: msg, proto, sourceJobID, targetJobID
+		let header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
+		let emsg = header.msg;
+
+		let canWeSend = this.steamID || (this._tempSteamID && [EMsg.ChannelEncryptResponse, EMsg.ClientLogon].includes(emsg));
+		if (!canWeSend) {
+			// We're disconnected, drop it
+			this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
+			return;
+		}
+
+		const Proto = protobufs[emsg];
+		if (Proto) {
+			header.proto = header.proto || {};
+			body = SteamUserMessages._encodeProto(Proto, body);
+		} else if (ByteBuffer.isByteBuffer(body)) {
+			body = body.toBuffer();
+		}
+
+		let jobIdSource = null;
+		if (callback) {
+			jobIdSource = ++this._currentJobID;
+			this._jobs[jobIdSource] = callback;
+
+			// Clean up old job callbacks after 2 minutes
+			this._jobCleanupTimers.push(setTimeout(() => delete this._jobs[jobIdSource], 1000 * 60 * 2));
+		}
+
+		let emsgName = EMsg[emsg] || emsg;
+		if (emsg == EMsg.ServiceMethodCallFromClient && header.proto && header.proto.target_job_name) {
+			emsgName = header.proto.target_job_name;
+		}
+
+		this.emit(VERBOSE_EMSG_LIST.includes(emsg) ? 'debug-verbose' : 'debug', 'Sending message: ' + emsgName);
+
+		// Make the header
+		let hdrBuf;
+		if (header.msg == EMsg.ChannelEncryptResponse) {
+			// since we're setting up the encrypted channel, we use this very minimal header
+			hdrBuf = ByteBuffer.allocate(4 + 8 + 8, ByteBuffer.LITTLE_ENDIAN);
+			hdrBuf.writeUint32(header.msg);
+			hdrBuf.writeUint64(header.targetJobID || JOBID_NONE);
+			hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
+		} else if (header.proto) {
+			// if we have a protobuf header, use that
+			header.proto.client_sessionid = this._sessionID || 0;
+			header.proto.steamid = (this.steamID || this._tempSteamID).getSteamID64();
+			header.proto.jobid_source = jobIdSource || header.proto.jobid_source || header.sourceJobID || JOBID_NONE;
+			header.proto.jobid_target = header.proto.jobid_target || header.targetJobID || JOBID_NONE;
+			let hdrProtoBuf = SteamUserMessages._encodeProto(Schema.CMsgProtoBufHeader, header.proto);
+			hdrBuf = ByteBuffer.allocate(4 + 4 + hdrProtoBuf.length, ByteBuffer.LITTLE_ENDIAN);
+			hdrBuf.writeUint32(header.msg | PROTO_MASK);
+			hdrBuf.writeUint32(hdrProtoBuf.length);
+			hdrBuf.append(hdrProtoBuf);
+		} else {
+			// this is the standard non-protobuf extended header
+			hdrBuf = ByteBuffer.allocate(4 + 1 + 2 + 8 + 8 + 1 + 8 + 4, ByteBuffer.LITTLE_ENDIAN);
+			hdrBuf.writeUint32(header.msg);
+			hdrBuf.writeByte(36);
+			hdrBuf.writeUint16(2);
+			hdrBuf.writeUint64(header.targetJobID || JOBID_NONE);
+			hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
+			hdrBuf.writeByte(239);
+			hdrBuf.writeUint64((this.steamID || this._tempSteamID).getSteamID64());
+			hdrBuf.writeUint32(this._sessionID || 0);
+		}
+
+		let outputBuffer = Buffer.concat([hdrBuf.flip().toBuffer(), body]);
+		this.emit('debug-traffic-outgoing', outputBuffer, header.msg);
+		this._connection.send(outputBuffer);
+	}
+
+	/**
+	 * Handles a raw binary netmessage by parsing the header and routing it appropriately
+	 * @param {Buffer|string} buffer
+	 * @param {BaseConnection} [conn]
+	 * @param {string} [multiId]
+	 * @protected
+	 */
+	_handleNetMessage(buffer, conn, multiId) {
+		if (conn && conn != this._connection) {
+			let ghostConnId = conn.connectionType[0] + conn.connectionId;
+			let expectedConnId = this._connection ? (this._connection.connectionType[0] + this._connection.connectionId) : 'NO CONNECTION';
+			this.emit('debug', `Received net message from ghost connection ${ghostConnId} (expected ${expectedConnId})`);
+			return;
+		}
+
+		if (this._useMessageQueue && !multiId) {
+			// Multi sub-messages skip the queue because we need messages contained in a decoded multi to be processed first
+			this._incomingMessageQueue.push(arguments);
+			this.emit('debug', `Enqueued incoming message; queue size is now ${this._incomingMessageQueue.length}`);
+			return;
+		}
+
+		if (buffer === '__CLOSE__') {
+			// This is an enqueued connection closure
+			this._handleConnectionClose(conn);
+			return;
+		}
+
+		let buf = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
+
+		let rawEMsg = buf.readUint32();
+		let eMsg = rawEMsg & ~PROTO_MASK;
+		let isProtobuf = !!(rawEMsg & PROTO_MASK);
+
+		this.emit('debug-traffic-incoming', buffer, eMsg);
+
+		let header = {"msg": eMsg};
+		if ([EMsg.ChannelEncryptRequest, EMsg.ChannelEncryptResult].includes(eMsg)) {
+			// for encryption setup, we just have a very small header with two fields
+			header.targetJobID = buf.readUint64().toString();
+			header.sourceJobID = buf.readUint64().toString();
+		} else if (isProtobuf) {
+			// decode the protobuf header
+			let headerLength = buf.readUint32();
+			header.proto = SteamUserMessages._decodeProto(Schema.CMsgProtoBufHeader, buf.slice(buf.offset, buf.offset + headerLength));
+			buf.skip(headerLength);
+
+			header.targetJobID = header.proto.jobid_target && header.proto.jobid_target.toString();
+			header.sourceJobID = header.proto.jobid_source && header.proto.jobid_source.toString();
+			header.steamID = header.proto.steamid && header.proto.steamid.toString();
+			header.sessionID = header.proto.client_sessionid;
+		} else {
+			// decode the extended header
+			buf.skip(3); // 1 byte for header size (fixed at 36), 2 bytes for header version (fixed at 2)
+			header.targetJobID = buf.readUint64().toString();
+			header.sourceJobID = buf.readUint64().toString();
+			buf.skip(1); // 1 byte for header canary (fixed at 239)
+			header.steamID = buf.readUint64().toString();
+			header.sessionID = buf.readUint32();
+		}
+
+		let sessionID = (header.proto && header.proto.client_sessionid) || header.sessionID;
+		let steamID = (header.proto && header.proto.steamid) || header.steamID;
+		let ourCurrentSteamID = this.steamID ? this.steamID.toString() : null;
+		if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != ourCurrentSteamID)) {
+			// TODO if we get a new sessionid, should we check if it matches a previously-closed session? probably not necessary...
+			this._sessionID = sessionID;
+			this.steamID = new SteamID(steamID.toString());
+			delete this._tempSteamID;
+		}
+
+		this._handleMessage(header, buf.slice(), conn, multiId);
+	}
+
+	/**
+	 * Handles and routes a parsed message
+	 * @param {object} header
+	 * @param {ByteBuffer} bodyBuf
+	 * @param {BaseConnection} [conn]
+	 * @param {string} [multiId]
+	 * @protected
+	 */
+	_handleMessage(header, bodyBuf, conn, multiId) {
+		// Is this a multi? If yes, short-circuit and just process it now.
+		if (header.msg == EMsg.Multi) {
+			this._processMulti(header, SteamUserMessages._decodeProto(protobufs[EMsg.Multi], bodyBuf), conn);
+			return;
+		}
+
+		let msgName = EMsg[header.msg] || header.msg;
+		let handlerName = header.msg;
+
+		let debugPrefix = multiId ? `[${multiId}] ` : (conn ? `[${conn.connectionType[0]}${conn.connectionId}] ` : '');
+
+		let isServiceMethodMsg = [EMsg.ServiceMethod, EMsg.ServiceMethodResponse].includes(header.msg);
+		if (isServiceMethodMsg) {
+			if (header.proto && header.proto.target_job_name) {
+				handlerName = msgName = header.proto.target_job_name;
+				if (header.msg == EMsg.ServiceMethodResponse) {
+					handlerName += '_Response';
+					msgName += '_Response';
+				}
+			} else {
+				this.emit('debug', debugPrefix + 'Got ' + (header.msg == EMsg.ServiceMethod ? 'ServiceMethod' : 'ServiceMethodResponse') + ' without target_job_name');
+				return;
 			}
 		}
 
-		return withDefaults;
-	}
-
-	function isReplaceableDefaultValue(val) {
-		if (Buffer.isBuffer(val) && val.length == 0) {
-			// empty buffer is replaceable
-			return true;
+		if (!isServiceMethodMsg && header.proto && header.proto.target_job_name) {
+			this.emit('debug', debugPrefix + 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
 		}
 
-		if (Array.isArray(val)) {
-			// empty array is not replaceable (empty repeated fields)
-			return false;
+		if (!this._handlerManager.hasHandler(handlerName) && !this._jobs[header.targetJobID]) {
+			this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', debugPrefix + 'Unhandled message: ' + msgName);
+			return;
 		}
 
-		if (val === '0') {
-			// Zero as a string is replaceable (64-bit integer)
-			return true;
+		let body = bodyBuf;
+		if (protobufs[handlerName]) {
+			body = SteamUserMessages._decodeProto(protobufs[handlerName], bodyBuf);
 		}
 
-		// Anything falsy is true
-		return !val;
-	}
-};
+		let handledMessageDebugMsg = debugPrefix + 'Handled message: ' + msgName;
+		if (header.msg == EMsg.ClientLogOnResponse) {
+			handledMessageDebugMsg += ` (${EResult[body.eresult] || body.eresult})`;
+		}
+		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', handledMessageDebugMsg);
 
-/**
- * @param {int|object} emsgOrHeader
- * @param {object|Buffer|ByteBuffer} body
- * @param {function} [callback]
- * @private
- */
-SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
-	// header fields: msg, proto, sourceJobID, targetJobID
-	let header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
-	let emsg = header.msg;
+		let cb = null;
+		if (header.sourceJobID != JOBID_NONE) {
+			// this message expects a response. make a callback we can pass to the end-user.
+			cb = (emsgOrHeader, body) => {
+				// once invoked the callback should set the jobid_target
+				let responseHeader = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
+				let emsg = responseHeader.msg;
 
-	let canWeSend = this.steamID || (this._tempSteamID && [EMsg.ChannelEncryptResponse, EMsg.ClientLogon].includes(emsg));
-	if (!canWeSend) {
-		// We're disconnected, drop it
-		this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
-		return;
-	}
+				if (protobufs[emsg]) {
+					responseHeader.proto = {"jobid_target": header.sourceJobID};
+				} else {
+					responseHeader.targetJobID = header.sourceJobID;
+				}
 
-	const Proto = protobufs[emsg];
-	if (Proto) {
-		header.proto = header.proto || {};
-		body = exports.encodeProto(Proto, body);
-	} else if (ByteBuffer.isByteBuffer(body)) {
-		body = body.toBuffer();
-	}
+				this._send(responseHeader, body);
+			}
+		}
 
-	let jobIdSource = null;
-	if (callback) {
-		jobIdSource = ++this._currentJobID;
-		this._jobs[jobIdSource] = callback;
-
-		// Clean up old job callbacks after 2 minutes
-		this._jobCleanupTimers.push(setTimeout(() => delete this._jobs[jobIdSource], 1000 * 60 * 2));
+		if (this._jobs[header.targetJobID]) {
+			// this is a response to something, so invoke the appropriate callback
+			this._jobs[header.targetJobID].call(this, body, header, cb);
+		} else {
+			this._handlerManager.emit(this, handlerName, body, header, cb);
+		}
 	}
 
-	let emsgName = EMsg[emsg] || emsg;
-	if (emsg == EMsg.ServiceMethodCallFromClient && header.proto && header.proto.target_job_name) {
-		emsgName = header.proto.target_job_name;
-	}
+	/**
+	 * @param {object} header
+	 * @param {object} body
+	 * @param {object} conn
+	 * @returns {Promise<void>}
+	 * @protected
+	 */
+	async _processMulti(header, body, conn) {
+		let multiId = conn.connectionType[0] + conn.connectionId + '#' + (++this._multiCount);
+		this.emit('debug-verbose', `=== Processing ${body.size_unzipped ? 'gzipped multi msg' : 'multi msg'} ${multiId} (${body.message_body.length} bytes) ===`);
 
-	this.emit(VERBOSE_EMSG_LIST.includes(emsg) ? 'debug-verbose' : 'debug', 'Sending message: ' + emsgName);
+		let payload = body.message_body;
 
-	// Make the header
-	let hdrBuf;
-	if (header.msg == EMsg.ChannelEncryptResponse) {
-		// since we're setting up the encrypted channel, we use this very minimal header
-		hdrBuf = ByteBuffer.allocate(4 + 8 + 8, ByteBuffer.LITTLE_ENDIAN);
-		hdrBuf.writeUint32(header.msg);
-		hdrBuf.writeUint64(header.targetJobID || JOBID_NONE);
-		hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
-	} else if (header.proto) {
-		// if we have a protobuf header, use that
-		header.proto.client_sessionid = this._sessionID || 0;
-		header.proto.steamid = (this.steamID || this._tempSteamID).getSteamID64();
-		header.proto.jobid_source = jobIdSource || header.proto.jobid_source || header.sourceJobID || JOBID_NONE;
-		header.proto.jobid_target = header.proto.jobid_target || header.targetJobID || JOBID_NONE;
-		let hdrProtoBuf = exports.encodeProto(Schema.CMsgProtoBufHeader, header.proto);
-		hdrBuf = ByteBuffer.allocate(4 + 4 + hdrProtoBuf.length, ByteBuffer.LITTLE_ENDIAN);
-		hdrBuf.writeUint32(header.msg | PROTO_MASK);
-		hdrBuf.writeUint32(hdrProtoBuf.length);
-		hdrBuf.append(hdrProtoBuf);
-	} else {
-		// this is the standard non-protobuf extended header
-		hdrBuf = ByteBuffer.allocate(4 + 1 + 2 + 8 + 8 + 1 + 8 + 4, ByteBuffer.LITTLE_ENDIAN);
-		hdrBuf.writeUint32(header.msg);
-		hdrBuf.writeByte(36);
-		hdrBuf.writeUint16(2);
-		hdrBuf.writeUint64(header.targetJobID || JOBID_NONE);
-		hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
-		hdrBuf.writeByte(239);
-		hdrBuf.writeUint64((this.steamID || this._tempSteamID).getSteamID64());
-		hdrBuf.writeUint32(this._sessionID || 0);
-	}
+		// Enable the message queue while we're unzipping the message (or waiting until the next event loop cycle).
+		// This prevents any messages from getting processed out of order.
+		this._useMessageQueue = true;
 
-	let outputBuffer = Buffer.concat([hdrBuf.flip().toBuffer(), body]);
-	this.emit('debug-traffic-outgoing', outputBuffer, header.msg);
-	this._connection.send(outputBuffer);
-};
+		if (body.size_unzipped) {
+			try {
+				payload = await new Promise((resolve, reject) => {
+					Zlib.gunzip(payload, (err, unzipped) => {
+						if (err) {
+							return reject(err);
+						}
 
-/**
- * Handles a raw binary netmessage by parsing the header and routing it appropriately
- * @param {Buffer|string} buffer
- * @param {BaseConnection} [conn]
- * @param {string} [multiId]
- * @private
- */
-SteamUser.prototype._handleNetMessage = function(buffer, conn, multiId) {
-	if (conn && conn != this._connection) {
-		let ghostConnId = conn.connectionType[0] + conn.connectionId;
-		let expectedConnId = this._connection ? (this._connection.connectionType[0] + this._connection.connectionId) : 'NO CONNECTION';
-		this.emit('debug', `Received net message from ghost connection ${ghostConnId} (expected ${expectedConnId})`);
-		return;
-	}
-
-	if (this._useMessageQueue && !multiId) {
-		// Multi sub-messages skip the queue because we need messages contained in a decoded multi to be processed first
-		this._incomingMessageQueue.push(arguments);
-		this.emit('debug', `Enqueued incoming message; queue size is now ${this._incomingMessageQueue.length}`);
-		return;
-	}
-
-	if (buffer === '__CLOSE__') {
-		// This is an enqueued connection closure
-		this._handleConnectionClose(conn);
-		return;
-	}
-
-	let buf = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
-
-	let rawEMsg = buf.readUint32();
-	let eMsg = rawEMsg & ~PROTO_MASK;
-	let isProtobuf = !!(rawEMsg & PROTO_MASK);
-
-	this.emit('debug-traffic-incoming', buffer, eMsg);
-
-	let header = {"msg": eMsg};
-	if ([EMsg.ChannelEncryptRequest, EMsg.ChannelEncryptResult].includes(eMsg)) {
-		// for encryption setup, we just have a very small header with two fields
-		header.targetJobID = buf.readUint64().toString();
-		header.sourceJobID = buf.readUint64().toString();
-	} else if (isProtobuf) {
-		// decode the protobuf header
-		let headerLength = buf.readUint32();
-		header.proto = exports.decodeProto(Schema.CMsgProtoBufHeader, buf.slice(buf.offset, buf.offset + headerLength));
-		buf.skip(headerLength);
-
-		header.targetJobID = header.proto.jobid_target && header.proto.jobid_target.toString();
-		header.sourceJobID = header.proto.jobid_source && header.proto.jobid_source.toString();
-		header.steamID = header.proto.steamid && header.proto.steamid.toString();
-		header.sessionID = header.proto.client_sessionid;
-	} else {
-		// decode the extended header
-		buf.skip(3); // 1 byte for header size (fixed at 36), 2 bytes for header version (fixed at 2)
-		header.targetJobID = buf.readUint64().toString();
-		header.sourceJobID = buf.readUint64().toString();
-		buf.skip(1); // 1 byte for header canary (fixed at 239)
-		header.steamID = buf.readUint64().toString();
-		header.sessionID = buf.readUint32();
-	}
-
-	let sessionID = (header.proto && header.proto.client_sessionid) || header.sessionID;
-	let steamID = (header.proto && header.proto.steamid) || header.steamID;
-	let ourCurrentSteamID = this.steamID ? this.steamID.toString() : null;
-	if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != ourCurrentSteamID)) {
-		// TODO if we get a new sessionid, should we check if it matches a previously-closed session? probably not necessary...
-		this._sessionID = sessionID;
-		this.steamID = new SteamID(steamID.toString());
-		delete this._tempSteamID;
-	}
-
-	this._handleMessage(header, buf.slice(), conn, multiId);
-};
-
-/**
- * Handles and routes a parsed message
- * @param {object} header
- * @param {ByteBuffer} bodyBuf
- * @param {BaseConnection} [conn]
- * @param {string} [multiId]
- * @private
- */
-SteamUser.prototype._handleMessage = function(header, bodyBuf, conn, multiId) {
-	// Is this a multi? If yes, short-circuit and just process it now.
-	if (header.msg == EMsg.Multi) {
-		this._processMulti(header, exports.decodeProto(protobufs[EMsg.Multi], bodyBuf), conn);
-		return;
-	}
-
-	let msgName = EMsg[header.msg] || header.msg;
-	let handlerName = header.msg;
-
-	let debugPrefix = multiId ? `[${multiId}] ` : (conn ? `[${conn.connectionType[0]}${conn.connectionId}] ` : '');
-
-	let isServiceMethodMsg = [EMsg.ServiceMethod, EMsg.ServiceMethodResponse].includes(header.msg);
-	if (isServiceMethodMsg) {
-		if (header.proto && header.proto.target_job_name) {
-			handlerName = msgName = header.proto.target_job_name;
-			if (header.msg == EMsg.ServiceMethodResponse) {
-				handlerName += '_Response';
-				msgName += '_Response';
+						resolve(unzipped);
+					});
+				});
+			} catch (ex) {
+				this.emit('error', ex);
+				this._disconnect(true);
+				return;
 			}
 		} else {
-			this.emit('debug', debugPrefix + 'Got ' + (header.msg == EMsg.ServiceMethod ? 'ServiceMethod' : 'ServiceMethodResponse') + ' without target_job_name');
+			// Await a setImmediate promise to guarantee that multi msg processing always takes at least one iteration of the event loop.
+			// This avoids message queue processing shenanigans. Waiting until the next iteration of the event loop enables
+			// _handleNetMessage at the end of this method to return immediately, which will thus exit the clear-queue loop
+			// because the queue got re-enabled. Prevents the queue from being cleared in multiple places at once.
+			await new Promise(resolve => setImmediate(resolve));
+		}
+
+		if (!this._connection || this._connection != conn) {
+			this.emit('debug', `=== Bailing out on processing multi msg ${multiId} because our connection is ${!this._connection ? 'lost' : 'different'}! ===`);
 			return;
+		}
+
+		while (payload.length && (this.steamID || this._tempSteamID)) {
+			let subSize = payload.readUInt32LE(0);
+			this._handleNetMessage(payload.slice(4, 4 + subSize), conn, multiId);
+			payload = payload.slice(4 + subSize);
+		}
+
+		this.emit('debug-verbose', `=== Finished processing multi msg ${multiId}; now clearing queue of size ${this._incomingMessageQueue.length} ===`);
+
+		// Go ahead and process anything in the queue now. First disable the message queue. We don't need to worry about
+		// newly-received messages sneaking in ahead of the queue being cleared, since message processing is synchronous.
+		// If we encounter another multi msg, the message queue will get re-enabled.
+		this._useMessageQueue = false;
+
+		// Continue to pop items from the message queue until it's empty, or it gets re-enabled. If the message queue gets
+		// re-enabled, immediately stop popping items from it to avoid stuff getting out of order.
+		while (this._incomingMessageQueue.length > 0 && !this._useMessageQueue) {
+			this._handleNetMessage.apply(this, this._incomingMessageQueue.shift());
+		}
+
+		if (this._incomingMessageQueue.length > 0) {
+			this.emit('debug-verbose', `[${multiId}] Message queue processing ended early with ${this._incomingMessageQueue.length} elements remaining`);
 		}
 	}
 
-	if (!isServiceMethodMsg && header.proto && header.proto.target_job_name) {
-		this.emit('debug', debugPrefix + 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
-	}
-
-	if (!this._handlerManager.hasHandler(handlerName) && !this._jobs[header.targetJobID]) {
-		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', debugPrefix + 'Unhandled message: ' + msgName);
-		return;
-	}
-
-	let body = bodyBuf;
-	if (protobufs[handlerName]) {
-		body = exports.decodeProto(protobufs[handlerName], bodyBuf);
-	}
-
-	let handledMessageDebugMsg = debugPrefix + 'Handled message: ' + msgName;
-	if (header.msg == EMsg.ClientLogOnResponse) {
-		handledMessageDebugMsg += ` (${EResult[body.eresult] || body.eresult})`;
-	}
-	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', handledMessageDebugMsg);
-
-	let cb = null;
-	if (header.sourceJobID != JOBID_NONE) {
-		// this message expects a response. make a callback we can pass to the end-user.
-		cb = (emsgOrHeader, body) => {
-			// once invoked the callback should set the jobid_target
-			let responseHeader = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
-			let emsg = responseHeader.msg;
-
-			if (protobufs[emsg]) {
-				responseHeader.proto = {"jobid_target": header.sourceJobID};
-			} else {
-				responseHeader.targetJobID = header.sourceJobID;
+	/**
+	 * Send a unified message.
+	 * @param {string} methodName - In format Interface.Method#Version, e.g. Foo.DoThing#1
+	 * @param {object} methodData
+	 * @param {function} [callback]
+	 * @protected
+	 */
+	_sendUnified(methodName, methodData, callback) {
+		let Proto = protobufs[methodName + (callback ? '_Request' : '')];
+		let header = {
+			"msg": EMsg.ServiceMethodCallFromClient,
+			"proto": {
+				"target_job_name": methodName
 			}
+		};
 
-			this._send(responseHeader, body);
-		}
+		this._send(header, SteamUserMessages._encodeProto(Proto, methodData), callback);
 	}
+}
 
-	if (this._jobs[header.targetJobID]) {
-		// this is a response to something, so invoke the appropriate callback
-		this._jobs[header.targetJobID].call(this, body, header, cb);
-	} else {
-		this._handlerManager.emit(this, handlerName, body, header, cb);
-	}
-};
-
-SteamUser.prototype._processMulti = async function(header, body, conn) {
-	let multiId = conn.connectionType[0] + conn.connectionId + '#' + (++this._multiCount);
-	this.emit('debug-verbose', `=== Processing ${body.size_unzipped ? 'gzipped multi msg' : 'multi msg'} ${multiId} (${body.message_body.length} bytes) ===`);
-
-	let payload = body.message_body;
-
-	// Enable the message queue while we're unzipping the message (or waiting until the next event loop cycle).
-	// This prevents any messages from getting processed out of order.
-	this._useMessageQueue = true;
-
-	if (body.size_unzipped) {
-		try {
-			payload = await new Promise((resolve, reject) => {
-				Zlib.gunzip(payload, (err, unzipped) => {
-					if (err) {
-						return reject(err);
-					}
-
-					resolve(unzipped);
-				});
-			});
-		} catch (ex) {
-			this.emit('error', ex);
-			this._disconnect(true);
-			return;
-		}
-	} else {
-		// Await a setImmediate promise to guarantee that multi msg processing always takes at least one iteration of the event loop.
-		// This avoids message queue processing shenanigans. Waiting until the next iteration of the event loop enables
-		// _handleNetMessage at the end of this method to return immediately, which will thus exit the clear-queue loop
-		// because the queue got re-enabled. Prevents the queue from being cleared in multiple places at once.
-		await new Promise(resolve => setImmediate(resolve));
-	}
-
-	if (!this._connection || this._connection != conn) {
-		this.emit('debug', `=== Bailing out on processing multi msg ${multiId} because our connection is ${!this._connection ? 'lost' : 'different'}! ===`);
-		return;
-	}
-
-	while (payload.length && (this.steamID || this._tempSteamID)) {
-		let subSize = payload.readUInt32LE(0);
-		this._handleNetMessage(payload.slice(4, 4 + subSize), conn, multiId);
-		payload = payload.slice(4 + subSize);
-	}
-
-	this.emit('debug-verbose', `=== Finished processing multi msg ${multiId}; now clearing queue of size ${this._incomingMessageQueue.length} ===`);
-
-	// Go ahead and process anything in the queue now. First disable the message queue. We don't need to worry about
-	// newly-received messages sneaking in ahead of the queue being cleared, since message processing is synchronous.
-	// If we encounter another multi msg, the message queue will get re-enabled.
-	this._useMessageQueue = false;
-
-	// Continue to pop items from the message queue until it's empty, or it gets re-enabled. If the message queue gets
-	// re-enabled, immediately stop popping items from it to avoid stuff getting out of order.
-	while (this._incomingMessageQueue.length > 0 && !this._useMessageQueue) {
-		this._handleNetMessage.apply(this, this._incomingMessageQueue.shift());
-	}
-
-	if (this._incomingMessageQueue.length > 0) {
-		this.emit('debug-verbose', `[${multiId}] Message queue processing ended early with ${this._incomingMessageQueue.length} elements remaining`);
-	}
-};
-
-// Unified messages
-
-/**
- * Send a unified message.
- * @param {string} methodName - In format Interface.Method#Version, e.g. Foo.DoThing#1
- * @param {object} methodData
- * @param {function} [callback]
- * @private
- */
-SteamUser.prototype._sendUnified = function(methodName, methodData, callback) {
-	let Proto = protobufs[methodName + (callback ? '_Request' : '')];
-	let header = {
-		"msg": EMsg.ServiceMethodCallFromClient,
-		"proto": {
-			"target_job_name": methodName
-		}
-	};
-
-	this._send(header, exports.encodeProto(Proto, methodData), callback);
-};
+module.exports = SteamUserMessages;

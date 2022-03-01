@@ -197,34 +197,16 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 
 			if (--remainingFiles == 0) {
 				// All done
-				console.log("Finished downloading and parsing enums");
+				console.log('Finished downloading and parsing enums');
 				g_EnumNames = Object.keys(g_EnumNames);
 				g_EnumNames.sort();
 
-				let internalLoader = GENERATED_FILE_HEADER + "const Enums = {\n";
-				internalLoader += g_EnumNames.map(name => `\t${name}: require('../enums/${name}.js'),`).join("\n");
-				internalLoader += '\n};\n\nmodule.exports = Enums;\n';
+				let loader = GENERATED_FILE_HEADER + `const SteamUserBase = require('./00-base.js');\n\nclass SteamUserEnums extends SteamUserBase {\n`;
+				loader += g_EnumNames.map(name => `\tstatic ${name} = require('../enums/${name}.js');`).join('\n');
+				loader += '\n}\n\nmodule.exports = SteamUserEnums;\n';
 
-				FS.writeFileSync(__dirname + '/../resources/enums.js', internalLoader);
-
-				let externalLoader = GENERATED_FILE_HEADER.replace('/* eslint-disable */\n', '').replace(/\n$/, '');
-				externalLoader += g_EnumNames.map(name => `SteamUser.${name} = require('./enums/${name}.js');`).join('\n');
-
-				let indexJsContents = FS.readFileSync(Path.join(__dirname, '..', 'index.js')).toString('utf8');
-				let startBoundary = '// ----- BEGIN AUTO ENUMS -----\n';
-				let endBoundary = '\n// ----- END AUTO ENUMS -----';
-
-				let startBoundaryPosition = indexJsContents.indexOf(startBoundary);
-				let endBoundaryPosition = indexJsContents.indexOf(endBoundary);
-				if (startBoundaryPosition == -1 || endBoundaryPosition == -1) {
-					console.error('Unable to find start or end boundary in index.js');
-					return;
-				}
-
-				let firstHalfOfFile = indexJsContents.substring(0, startBoundaryPosition + startBoundary.length);
-				let secondHalfOfFile = indexJsContents.substring(endBoundaryPosition);
-
-				FS.writeFileSync(Path.join(__dirname, '..', 'index.js'), firstHalfOfFile + externalLoader + secondHalfOfFile);
+				FS.writeFileSync(__dirname + '/../components/01-enums.js', loader);
+				console.log('Wrote loader');
 			}
 		});
 	});

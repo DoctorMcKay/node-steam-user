@@ -1,8 +1,7 @@
 const ByteBuffer = require('bytebuffer');
-const Crypto = require('crypto');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 
-const Messages = require('./messages.js');
+const SteamUserMessages = require('./03-messages.js');
 const Schema = require('../protobufs/generated/_load.js');
 
 const PROTOBUF_PAYLOAD_MAGIC = 0x71F617D0;
@@ -26,13 +25,13 @@ exports.parse = function(buffer) {
 		switch (magic) {
 			case PROTOBUF_PAYLOAD_MAGIC:
 				length = buffer.readUint32();
-				manifest.files = Messages.decodeProto(Schema.ContentManifestPayload, buffer.slice(buffer.offset, buffer.offset + length)).mappings;
+				manifest.files = SteamUserMessages._decodeProto(Schema.ContentManifestPayload, buffer.slice(buffer.offset, buffer.offset + length)).mappings;
 				buffer.skip(length);
 				break;
 
 			case PROTOBUF_METADATA_MAGIC:
 				length = buffer.readUint32();
-				meta = Messages.decodeProto(Schema.ContentManifestMetadata, buffer.slice(buffer.offset, buffer.offset + length));
+				meta = SteamUserMessages._decodeProto(Schema.ContentManifestMetadata, buffer.slice(buffer.offset, buffer.offset + length));
 				buffer.skip(length);
 				break;
 
@@ -47,11 +46,10 @@ exports.parse = function(buffer) {
 				break;
 
 			case STEAM3_MANIFEST_MAGIC:
-				throw new Error("Received unexpected Steam3 manifest; not yet implemented");
-				break;
+				throw new Error('Received unexpected Steam3 manifest; not yet implemented');
 
 			default:
-				throw new Error("Unknown magic value " + magic.toString(16) + " at offset " + buffer.offset - 4);
+				throw new Error(`Unknown magic value ${magic.toString(16)} at offset ${buffer.offset - 4}`);
 		}
 	}
 

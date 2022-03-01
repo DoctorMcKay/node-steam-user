@@ -3,7 +3,6 @@ const StdLib = require('@doctormckay/stdlib');
 const WS13 = require('websocket13');
 
 const BaseConnection = require('./base.js');
-const SteamUser = require('../../index.js');
 
 let g_BootstrapSemaphore = new StdLib.Concurrency.Semaphore();
 let g_LastWebsocketPing = 0;

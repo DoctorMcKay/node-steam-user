@@ -1,22 +1,34 @@
 const StdLib = require('@doctormckay/stdlib');
 
-const SteamUser = require('../index.js');
+const EMsg = require('../enums/EMsg.js');
 
-SteamUser.prototype.setSentry = function(sentry) {
-	this._sentry = sentry;
-};
+const SteamUserBase = require('./00-base.js');
+const SteamUserPublishedFiles = require('./pubfiles.js');
 
-SteamUser.prototype._getSentryFilename = function() {
-	if (this.options.singleSentryfile) {
-		return 'sentry.bin';
-	} else {
-		return 'sentry.' + this._logOnDetails.account_name + '.bin';
+class SteamUserSentry extends SteamUserPublishedFiles {
+	/**
+	 * @param {Buffer} sentry
+	 */
+	setSentry = function(sentry) {
+		this._sentry = sentry;
 	}
-};
+
+	/**
+	 * @returns {string}
+	 * @protected
+	 */
+	_getSentryFilename() {
+		if (this.options.singleSentryfile) {
+			return 'sentry.bin';
+		} else {
+			return `sentry.${this._logOnDetails.account_name}.bin`;
+		}
+	}
+}
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUpdateMachineAuth, async function(body, hdr, callback) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientUpdateMachineAuth, async function(body, hdr, callback) {
 	// TODO: Handle partial updates
 
 	this.emit('debug', 'Got new sentry file');
@@ -25,7 +37,9 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUpdateMachineAuth, 
 
 	// Accept the sentry
 
-	callback(SteamUser.EMsg.ClientUpdateMachineAuthResponse, {
-		"sha_file": StdLib.Hashing.sha1(body.bytes, 'buffer')
+	callback(EMsg.ClientUpdateMachineAuthResponse, {
+		sha_file: StdLib.Hashing.sha1(body.bytes, 'buffer')
 	});
 });
+
+module.exports = SteamUserSentry;

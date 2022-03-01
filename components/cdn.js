@@ -4,540 +4,552 @@ const FS = require('fs');
 const LZMA = require('lzma');
 const StdLib = require('@doctormckay/stdlib');
 const SteamCrypto = require('@doctormckay/steam-crypto');
-const VDF = require('vdf');
 
 const Helpers = require('./helpers.js');
 const ContentManifest = require('./content_manifest.js');
-const SteamUser = require('../index.js');
+
+const EDepotFileFlag = require('../enums/EDepotFileFlag.js');
+const EMsg = require('../enums/EMsg.js');
+const EResult = require('../enums/EResult.js');
+
+const SteamUserApps = require('./apps.js');
 
 const VZIP_HEADER = 0x5A56;
 const VZIP_FOOTER = 0x767A;
 
-/**
- * Get the list of currently-available content servers.
- * @param {int} [appid] - If you know the appid you want to download, pass it here as some content servers only provide content for specific games
- * @param {function} [callback]
- * @return Promise
- */
-SteamUser.prototype.getContentServers = function(appid, callback) {
-	if (typeof appid == 'function') {
-		callback = appid;
-		appid = null;
-	}
-
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, async (resolve, reject) => {
-		let res;
-		if (this._contentServerCache && this._contentServerCache.timestamp && Date.now() - this._contentServerCache.timestamp < (1000 * 60 * 60)) {
-			// Cache for 1 hour
-			res = this._contentServerCache.response;
-		} else {
-			res = await this._apiRequest('GET', 'IContentServerDirectoryService', 'GetServersForSteamPipe', 1, {cell_id: this.cellID || 0});
+class SteamUserCDN extends SteamUserApps {
+	/**
+	 * Get the list of currently-available content servers.
+	 * @param {int} [appid] - If you know the appid you want to download, pass it here as some content servers only provide content for specific games
+	 * @param {function} [callback]
+	 * @return Promise
+	 */
+	getContentServers(appid, callback) {
+		if (typeof appid == 'function') {
+			callback = appid;
+			appid = null;
 		}
 
-		if (!res || !res.response || !res.response.servers) {
-			return reject(new Error('Malformed response'));
-		}
-
-		this._contentServerCache = {
-			timestamp: Date.now(),
-			response: res
-		};
-
-		let servers = [];
-
-		for (let serverKey in res.response.servers) {
-			let server = res.response.servers[serverKey];
-			if (server.allowed_app_ids && appid && !server.allowed_app_ids.includes(appid)) {
-				continue;
+		return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, async (resolve, reject) => {
+			let res;
+			if (this._contentServerCache && this._contentServerCache.timestamp && Date.now() - this._contentServerCache.timestamp < (1000 * 60 * 60)) {
+				// Cache for 1 hour
+				res = this._contentServerCache.response;
+			} else {
+				res = await this._apiRequest('GET', 'IContentServerDirectoryService', 'GetServersForSteamPipe', 1, {cell_id: this.cellID || 0});
 			}
 
-			if (server.type == 'CDN' || server.type == 'SteamCache') {
-				servers.push(server);
+			if (!res || !res.response || !res.response.servers) {
+				return reject(new Error('Malformed response'));
 			}
-		}
 
-		if (servers.length == 0) {
-			return reject(new Error('No content servers available'));
-		}
-
-		servers = servers.map((srv) => {
-			let processedSrv = {
-				type: srv.type,
-				sourceid: srv.source_id,
-				cell: srv.cell_id,
-				load: srv.load,
-				preferred_server: srv.preferred_server,
-				weightedload: srv.weighted_load,
-				NumEntriesInClientList: srv.num_entries_in_client_list,
-				Host: srv.host,
-				vhost: srv.vhost,
-				https_support: srv.https_support,
-				usetokenauth: '1'
+			this._contentServerCache = {
+				timestamp: Date.now(),
+				response: res
 			};
 
-			if (srv.allowed_app_ids) {
-				processedSrv.allowed_app_ids = srv.allowed_app_ids;
+			let servers = [];
+
+			for (let serverKey in res.response.servers) {
+				let server = res.response.servers[serverKey];
+				if (server.allowed_app_ids && appid && !server.allowed_app_ids.includes(appid)) {
+					continue;
+				}
+
+				if (server.type == 'CDN' || server.type == 'SteamCache') {
+					servers.push(server);
+				}
 			}
 
-			return processedSrv;
+			if (servers.length == 0) {
+				return reject(new Error('No content servers available'));
+			}
+
+			servers = servers.map((srv) => {
+				let processedSrv = {
+					type: srv.type,
+					sourceid: srv.source_id,
+					cell: srv.cell_id,
+					load: srv.load,
+					preferred_server: srv.preferred_server,
+					weightedload: srv.weighted_load,
+					NumEntriesInClientList: srv.num_entries_in_client_list,
+					Host: srv.host,
+					vhost: srv.vhost,
+					https_support: srv.https_support,
+					usetokenauth: '1'
+				};
+
+				if (srv.allowed_app_ids) {
+					processedSrv.allowed_app_ids = srv.allowed_app_ids;
+				}
+
+				return processedSrv;
+			});
+
+			if (servers.length == 0) {
+				delete this._contentServerCache;
+				return reject(new Error('No servers found'));
+			}
+
+			// Return a copy of the array, not the original
+			return resolve({servers: JSON.parse(JSON.stringify(servers))});
 		});
+	}
 
-		if (servers.length == 0) {
-			delete this._contentServerCache;
-			return reject(new Error('No servers found'));
-		}
+	/**
+	 * Request the decryption key for a particular depot.
+	 * @param {int} appID
+	 * @param {int} depotID
+	 * @param {function} [callback]
+	 * @return Promise
+	 */
+	getDepotDecryptionKey(appID, depotID, callback) {
+		appID = parseInt(appID, 10);
+		depotID = parseInt(depotID, 10);
 
-		// Return a copy of the array, not the original
-		return resolve({servers: JSON.parse(JSON.stringify(servers))});
-	});
-};
-
-/**
- * Request the decryption key for a particular depot.
- * @param {int} appID
- * @param {int} depotID
- * @param {function} [callback]
- * @return Promise
- */
-SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
-	appID = parseInt(appID, 10);
-	depotID = parseInt(depotID, 10);
-
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['key'], callback, async (resolve, reject) => {
-		// Check if it's cached locally
-		let filename = `depot_key_${appID}_${depotID}.bin`;
-		let file = await this._readFile(filename);
-		if (file && file.length > 4 && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
-			return resolve({"key": file.slice(4)});
-		}
-
-		this._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, async (body) => {
-			if (body.eresult != SteamUser.EResult.OK) {
-				return reject(Helpers.eresultError(body.eresult));
+		return StdLib.Promises.timeoutCallbackPromise(10000, ['key'], callback, async (resolve, reject) => {
+			// Check if it's cached locally
+			let filename = `depot_key_${appID}_${depotID}.bin`;
+			let file = await this._readFile(filename);
+			if (file && file.length > 4 && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
+				return resolve({"key": file.slice(4)});
 			}
 
-			if (body.depot_id != depotID) {
-				return reject(new Error("Did not receive decryption key for correct depot"));
-			}
+			this._send(EMsg.ClientGetDepotDecryptionKey, {
+				"depot_id": depotID,
+				"app_id": appID
+			}, async (body) => {
+				if (body.eresult != EResult.OK) {
+					return reject(Helpers.eresultError(body.eresult));
+				}
 
-			let key = body.depot_encryption_key;
-			file = Buffer.concat([Buffer.alloc(4), key]);
-			file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
+				if (body.depot_id != depotID) {
+					return reject(new Error("Did not receive decryption key for correct depot"));
+				}
 
-			await this._saveFile(filename, file);
-			return resolve({key});
-		});
-	});
-};
+				let key = body.depot_encryption_key;
+				file = Buffer.concat([Buffer.alloc(4), key]);
+				file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
 
-/**
- * Get an auth token for a particular CDN server.
- * @param {int} appID
- * @param {int} depotID
- * @param {string} hostname - The hostname of the CDN server for which we want a token
- * @param {function} [callback]
- * @return Promise
- */
-SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['token', 'expires'], callback, (resolve, reject) => {
-		if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
-			return resolve(this._contentServerTokens[depotID + '_' + hostname]);
-		}
-
-		this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {
-			app_id: appID,
-			depot_id: depotID,
-			host_name: hostname
-		}, (body) => {
-			if (body.eresult != SteamUser.EResult.OK) {
-				return reject(Helpers.eresultError(body.eresult));
-			}
-
-			return resolve(this._contentServerTokens[depotID + '_' + hostname] = {
-				token: body.token,
-				expires: new Date(body.expiration_time * 1000)
+				await this._saveFile(filename, file);
+				return resolve({key});
 			});
 		});
-	});
-};
-
-/**
- * Download a depot content manifest.
- * @param {int} appID
- * @param {int} depotID
- * @param {string} manifestID
- * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
- * @param {string} [branchPassword]
- * @param {function} [callback]
- * @return Promise
- */
-SteamUser.prototype.getManifest = function(appID, depotID, manifestID, branchName, branchPassword, callback) {
-	if (typeof branchName == 'function') {
-		callback = branchName;
-		branchName = null;
 	}
 
-	if (typeof branchPassword == 'function') {
-		callback = branchPassword;
-		branchPassword = null;
-	}
-
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['manifest'], callback, async (resolve, reject) => {
-		let manifest = ContentManifest.parse((await this.getRawManifest(appID, depotID, manifestID, branchName, branchPassword)).manifest);
-
-		if (!manifest.filenames_encrypted) {
-			return resolve({manifest});
-		}
-
-		ContentManifest.decryptFilenames(manifest, (await this.getDepotDecryptionKey(appID, depotID)).key);
-		return resolve({manifest});
-	});
-};
-
-/**
- * Download and decompress a manifest, but don't parse it into a JavaScript object.
- * @param {int} appID
- * @param {int} depotID
- * @param {string} manifestID
- * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
- * @param {string} [branchPassword]
- * @param {function} [callback]
- */
-SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, branchName, branchPassword, callback) {
-	if (typeof branchName == 'function') {
-		callback = branchName;
-		branchName = null;
-	}
-
-	if (typeof branchPassword == 'function') {
-		callback = branchPassword;
-		branchPassword = null;
-	}
-
-	return StdLib.Promises.callbackPromise(['manifest'], callback, async (resolve, reject) => {
-		let {servers} = await this.getContentServers(appID);
-		let server = servers[Math.floor(Math.random() * servers.length)];
-		let urlBase = (server.https_support == 'mandatory' ? 'https://' : 'http://') + server.Host;
-		let vhost = server.vhost || server.Host;
-		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
-
-		let manifestRequestCode = '';
-		if (branchName) {
-			let {requestCode} = await this.getManifestRequestCode(appID, depotID, manifestID, branchName, branchPassword);
-			manifestRequestCode = `/${requestCode}`;
-		}
-
-		let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}${token}`;
-		this.emit('debug', `Downloading manifest from ${manifestUrl} (${vhost})`);
-		download(manifestUrl, vhost, async (err, res) => {
-			if (err) {
-				return reject(err);
+	/**
+	 * Get an auth token for a particular CDN server.
+	 * @param {int} appID
+	 * @param {int} depotID
+	 * @param {string} hostname - The hostname of the CDN server for which we want a token
+	 * @param {function} [callback]
+	 * @return Promise
+	 */
+	getCDNAuthToken(appID, depotID, hostname, callback) {
+		return StdLib.Promises.timeoutCallbackPromise(10000, ['token', 'expires'], callback, (resolve, reject) => {
+			if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
+				return resolve(this._contentServerTokens[depotID + '_' + hostname]);
 			}
 
-			if (res.type != 'complete') {
-				return;
-			}
-
-			try {
-				let manifest = await unzip(res.data);
-				return resolve({manifest});
-			} catch (ex) {
-				return reject(ex);
-			}
-		});
-	});
-};
-
-/**
- * Gets a manifest request code
- * @param {int} appID
- * @param {int} depotID
- * @param {string} manifestID
- * @param {string} branchName
- * @param {string} [branchPassword]
- * @param {function} [callback]
- */
-SteamUser.prototype.getManifestRequestCode = function(appID, depotID, manifestID, branchName, branchPassword, callback) {
-	if (typeof branchPassword == 'function') {
-		callback = branchPassword;
-		branchPassword = null;
-	}
-
-	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
-		this._sendUnified('ContentServerDirectory.GetManifestRequestCode#1', {
-			app_id: appID,
-			depot_id: depotID,
-			manifest_id: manifestID,
-			app_branch: branchName,
-			branch_password_hash: branchPassword // TODO figure out how this is "hashed"
-		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto);
-			if (err) {
-				return reject(err);
-			}
-
-			resolve({requestCode: body.manifest_request_code});
-		});
-	});
-};
-
-/**
- * Download a chunk from a content server.
- * @param {int} appID - The AppID to which this chunk belongs
- * @param {int} depotID - The depot ID to which this chunk belongs
- * @param {string} chunkSha1 - This chunk's SHA1 hash (aka its ID)
- * @param {object} [contentServer] - If not provided, one will be chosen randomly. Should be an object identical to those output by getContentServers
- * @param {function} [callback] - First argument is Error/null, second is a Buffer containing the chunk's data
- * @return Promise
- */
-SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentServer, callback) {
-	if (typeof contentServer === 'function') {
-		callback = contentServer;
-		contentServer = null;
-	}
-
-	chunkSha1 = chunkSha1.toLowerCase();
-
-	return StdLib.Promises.callbackPromise(['chunk'], callback, async (resolve, reject) => {
-		if (!contentServer) {
-			let {servers} = await this.getContentServers(appID);
-			contentServer = servers[Math.floor(Math.random() * servers.length)];
-		}
-
-		let urlBase = (contentServer.https_support == 'mandatory' ? 'https://' : 'http://') + contentServer.Host;
-		let vhost = contentServer.vhost || contentServer.Host;
-		let {key} = await this.getDepotDecryptionKey(appID, depotID);
-		let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
-
-		download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}${token}`, vhost, async (err, res) => {
-			if (err) {
-				return reject(err);
-			}
-
-			if (res.type != 'complete') {
-				return;
-			}
-
-			try {
-				let result = await unzip(SteamCrypto.symmetricDecrypt(res.data, key));
-				if (StdLib.Hashing.sha1(result) != chunkSha1) {
-					return reject(new Error('Checksum mismatch'));
+			this._send(EMsg.ClientGetCDNAuthToken, {
+				app_id: appID,
+				depot_id: depotID,
+				host_name: hostname
+			}, (body) => {
+				if (body.eresult != EResult.OK) {
+					return reject(Helpers.eresultError(body.eresult));
 				}
-				return resolve({chunk: result});
-			} catch (ex) {
-				return reject(ex);
-			}
-		});
-	});
-};
 
-/**
- * Download a specific file from a depot.
- * @param {int} appID - The AppID which owns the file you want
- * @param {int} depotID - The depot ID which contains the file you want
- * @param {object} fileManifest - An object from the "files" array of a downloaded and parsed manifest
- * @param {string} [outputFilePath] - If provided, downloads the file to this location on the disk. If not, downloads the file into memory and sends it back in the callback.
- * @param {function} [callback]
- * @returns {Promise}
- */
-SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, outputFilePath, callback) {
-	if (typeof outputFilePath === 'function') {
-		callback = outputFilePath;
-		outputFilePath = null;
+				return resolve(this._contentServerTokens[depotID + '_' + hostname] = {
+					token: body.token,
+					expires: new Date(body.expiration_time * 1000)
+				});
+			});
+		});
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, async (resolve, reject) => {
-		if (fileManifest.flags & SteamUser.EDepotFileFlag.Directory) {
-			return reject(new Error("Attempted to download a directory " + fileManifest.filename));
+	/**
+	 * Download a depot content manifest.
+	 * @param {int} appID
+	 * @param {int} depotID
+	 * @param {string} manifestID
+	 * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
+	 * @param {string} [branchPassword]
+	 * @param {function} [callback]
+	 * @return Promise
+	 */
+	getManifest(appID, depotID, manifestID, branchName, branchPassword, callback) {
+		if (typeof branchName == 'function') {
+			callback = branchName;
+			branchName = null;
 		}
 
-		let numWorkers = 4;
-
-		fileManifest.size = parseInt(fileManifest.size, 10);
-		let bytesDownloaded = 0;
-
-		let {servers: availableServers} = await this.getContentServers(appID);
-		let servers = [];
-		let serversInUse = [];
-		let currentServerIdx = 0;
-		let downloadBuffer;
-		let outputFd;
-		let killed = false;
-
-		// Choose some content servers
-		for (let i = 0; i < numWorkers; i++) {
-			assignServer(i);
-			serversInUse.push(false);
+		if (typeof branchPassword == 'function') {
+			callback = branchPassword;
+			branchPassword = null;
 		}
 
-		if (outputFilePath) {
-			await new Promise((resolve, reject) => {
-				FS.open(outputFilePath, "w", (err, fd) => {
-					if (err) {
-						return reject(err);
+		return StdLib.Promises.timeoutCallbackPromise(10000, ['manifest'], callback, async (resolve, reject) => {
+			let manifest = ContentManifest.parse((await this.getRawManifest(appID, depotID, manifestID, branchName, branchPassword)).manifest);
+
+			if (!manifest.filenames_encrypted) {
+				return resolve({manifest});
+			}
+
+			ContentManifest.decryptFilenames(manifest, (await this.getDepotDecryptionKey(appID, depotID)).key);
+			return resolve({manifest});
+		});
+	}
+
+	/**
+	 * Download and decompress a manifest, but don't parse it into a JavaScript object.
+	 * @param {int} appID
+	 * @param {int} depotID
+	 * @param {string} manifestID
+	 * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
+	 * @param {string} [branchPassword]
+	 * @param {function} [callback]
+	 */
+	getRawManifest(appID, depotID, manifestID, branchName, branchPassword, callback) {
+		if (typeof branchName == 'function') {
+			callback = branchName;
+			branchName = null;
+		}
+
+		if (typeof branchPassword == 'function') {
+			callback = branchPassword;
+			branchPassword = null;
+		}
+
+		return StdLib.Promises.callbackPromise(['manifest'], callback, async (resolve, reject) => {
+			let {servers} = await this.getContentServers(appID);
+			let server = servers[Math.floor(Math.random() * servers.length)];
+			let urlBase = (server.https_support == 'mandatory' ? 'https://' : 'http://') + server.Host;
+			let vhost = server.vhost || server.Host;
+			let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
+
+			let manifestRequestCode = '';
+			if (branchName) {
+				let {requestCode} = await this.getManifestRequestCode(appID, depotID, manifestID, branchName, branchPassword);
+				manifestRequestCode = `/${requestCode}`;
+			}
+
+			let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}${token}`;
+			this.emit('debug', `Downloading manifest from ${manifestUrl} (${vhost})`);
+			download(manifestUrl, vhost, async (err, res) => {
+				if (err) {
+					return reject(err);
+				}
+
+				if (res.type != 'complete') {
+					return;
+				}
+
+				try {
+					let manifest = await unzip(res.data);
+					return resolve({manifest});
+				} catch (ex) {
+					return reject(ex);
+				}
+			});
+		});
+	}
+
+	/**
+	 * Gets a manifest request code
+	 * @param {int} appID
+	 * @param {int} depotID
+	 * @param {string} manifestID
+	 * @param {string} branchName
+	 * @param {string} [branchPassword]
+	 * @param {function} [callback]
+	 */
+	getManifestRequestCode(appID, depotID, manifestID, branchName, branchPassword, callback) {
+		if (typeof branchPassword == 'function') {
+			callback = branchPassword;
+			branchPassword = null;
+		}
+
+		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+			this._sendUnified('ContentServerDirectory.GetManifestRequestCode#1', {
+				app_id: appID,
+				depot_id: depotID,
+				manifest_id: manifestID,
+				app_branch: branchName,
+				branch_password_hash: branchPassword // TODO figure out how this is "hashed"
+			}, (body, hdr) => {
+				let err = Helpers.eresultError(hdr.proto);
+				if (err) {
+					return reject(err);
+				}
+
+				resolve({requestCode: body.manifest_request_code});
+			});
+		});
+	}
+
+	/**
+	 * Download a chunk from a content server.
+	 * @param {int} appID - The AppID to which this chunk belongs
+	 * @param {int} depotID - The depot ID to which this chunk belongs
+	 * @param {string} chunkSha1 - This chunk's SHA1 hash (aka its ID)
+	 * @param {object} [contentServer] - If not provided, one will be chosen randomly. Should be an object identical to those output by getContentServers
+	 * @param {function} [callback] - First argument is Error/null, second is a Buffer containing the chunk's data
+	 * @return Promise
+	 */
+	downloadChunk(appID, depotID, chunkSha1, contentServer, callback) {
+		if (typeof contentServer === 'function') {
+			callback = contentServer;
+			contentServer = null;
+		}
+
+		chunkSha1 = chunkSha1.toLowerCase();
+
+		return StdLib.Promises.callbackPromise(['chunk'], callback, async (resolve, reject) => {
+			if (!contentServer) {
+				let {servers} = await this.getContentServers(appID);
+				contentServer = servers[Math.floor(Math.random() * servers.length)];
+			}
+
+			let urlBase = (contentServer.https_support == 'mandatory' ? 'https://' : 'http://') + contentServer.Host;
+			let vhost = contentServer.vhost || contentServer.Host;
+			let {key} = await this.getDepotDecryptionKey(appID, depotID);
+			let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
+
+			download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}${token}`, vhost, async (err, res) => {
+				if (err) {
+					return reject(err);
+				}
+
+				if (res.type != 'complete') {
+					return;
+				}
+
+				try {
+					let result = await unzip(SteamCrypto.symmetricDecrypt(res.data, key));
+					if (StdLib.Hashing.sha1(result) != chunkSha1) {
+						return reject(new Error('Checksum mismatch'));
 					}
+					return resolve({chunk: result});
+				} catch (ex) {
+					return reject(ex);
+				}
+			});
+		});
+	}
 
-					outputFd = fd;
-					FS.ftruncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
+	/**
+	 * Download a specific file from a depot.
+	 * @param {int} appID - The AppID which owns the file you want
+	 * @param {int} depotID - The depot ID which contains the file you want
+	 * @param {object} fileManifest - An object from the "files" array of a downloaded and parsed manifest
+	 * @param {string} [outputFilePath] - If provided, downloads the file to this location on the disk. If not, downloads the file into memory and sends it back in the callback.
+	 * @param {function} [callback]
+	 * @returns {Promise}
+	 */
+	downloadFile(appID, depotID, fileManifest, outputFilePath, callback) {
+		if (typeof outputFilePath === 'function') {
+			callback = outputFilePath;
+			outputFilePath = null;
+		}
+
+		return StdLib.Promises.callbackPromise(null, callback, async (resolve, reject) => {
+			if (fileManifest.flags & EDepotFileFlag.Directory) {
+				return reject(new Error(`Attempted to download a directory ${fileManifest.filename}`));
+			}
+
+			let numWorkers = 4;
+
+			fileManifest.size = parseInt(fileManifest.size, 10);
+			let bytesDownloaded = 0;
+
+			let {servers: availableServers} = await this.getContentServers(appID);
+			let servers = [];
+			let serversInUse = [];
+			let currentServerIdx = 0;
+			let downloadBuffer;
+			let outputFd;
+			let killed = false;
+
+			// Choose some content servers
+			for (let i = 0; i < numWorkers; i++) {
+				assignServer(i);
+				serversInUse.push(false);
+			}
+
+			if (outputFilePath) {
+				await new Promise((resolve, reject) => {
+					FS.open(outputFilePath, 'w', (err, fd) => {
 						if (err) {
-							FS.closeSync(outputFd);
 							return reject(err);
 						}
 
-						return resolve();
+						outputFd = fd;
+						FS.ftruncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
+							if (err) {
+								FS.closeSync(outputFd);
+								return reject(err);
+							}
+
+							return resolve();
+						});
 					});
 				});
-			});
-		} else {
-			downloadBuffer = Buffer.alloc(parseInt(fileManifest.size, 10));
-		}
-
-		let self = this;
-		let queue = new StdLib.DataStructures.AsyncQueue(function dlChunk(chunk, cb) {
-			let serverIdx;
-
-			while (true) {
-				// Find the next available download slot
-				if (serversInUse[currentServerIdx]) {
-					incrementCurrentServerIdx();
-				} else {
-					serverIdx = currentServerIdx;
-					serversInUse[serverIdx] = true;
-					break;
-				}
+			} else {
+				downloadBuffer = Buffer.alloc(parseInt(fileManifest.size, 10));
 			}
 
-			self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
-				serversInUse[serverIdx] = false;
+			let self = this;
+			let queue = new StdLib.DataStructures.AsyncQueue(function dlChunk(chunk, cb) {
+				let serverIdx;
 
-				if (killed) {
-					return;
+				while (true) {
+					// Find the next available download slot
+					if (serversInUse[currentServerIdx]) {
+						incrementCurrentServerIdx();
+					} else {
+						serverIdx = currentServerIdx;
+						serversInUse[serverIdx] = true;
+						break;
+					}
 				}
 
-				if (err) {
-					// Error downloading chunk
-					if ((chunk.retries && chunk.retries >= 5) || availableServers.length == 0) {
-						// This chunk hasn't been retired the max times yet, and we have servers left.
-						reject(err);
-						queue.kill();
-						killed = true;
-					} else {
-						chunk.retries = chunk.retries || 0;
-						chunk.retries++;
-						assignServer(serverIdx);
-						dlChunk(chunk, cb);
+				self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
+					serversInUse[serverIdx] = false;
+
+					if (killed) {
+						return;
 					}
 
-					return;
-				}
-
-				bytesDownloaded += data.length;
-				if (typeof callback === 'function') {
-					callback(null, {
-						"type": "progress",
-						bytesDownloaded,
-						"totalSizeBytes": fileManifest.size
-					});
-				}
-
-				// Chunk downloaded successfully
-				if (outputFilePath) {
-					FS.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), (err) => {
-						if (err) {
+					if (err) {
+						// Error downloading chunk
+						if ((chunk.retries && chunk.retries >= 5) || availableServers.length == 0) {
+							// This chunk hasn't been retired the max times yet, and we have servers left.
 							reject(err);
 							queue.kill();
 							killed = true;
 						} else {
-							cb();
+							chunk.retries = chunk.retries || 0;
+							chunk.retries++;
+							assignServer(serverIdx);
+							dlChunk(chunk, cb);
 						}
-					});
-				} else {
-					data.copy(downloadBuffer, parseInt(chunk.offset, 10));
-					cb();
-				}
-			});
-		}, numWorkers);
 
-		fileManifest.chunks.forEach((chunk) => {
-			queue.push(JSON.parse(JSON.stringify(chunk)));
-		});
-
-		queue.drain = () => {
-			// Verify hash
-			let hash;
-			if (outputFilePath) {
-				FS.close(outputFd, (err) => {
-					if (err) {
-						return reject(err);
+						return;
 					}
 
-					// File closed. Now re-open it so we can hash it!
-					hash = require('crypto').createHash('sha1');
-					FS.createReadStream(outputFilePath).pipe(hash);
-					hash.on('readable', () => {
-						if (!hash.read) {
-							return; // already done
-						}
+					bytesDownloaded += data.length;
+					if (typeof callback === 'function') {
+						callback(null, {
+							type: 'progress',
+							bytesDownloaded,
+							totalSizeBytes: fileManifest.size
+						});
+					}
 
-						hash = hash.read();
-						if (hash.toString('hex') != fileManifest.sha_content) {
-							return reject(new Error("File checksum mismatch"));
-						} else {
-							resolve({
-								"type": "complete"
-							});
-						}
-					});
+					// Chunk downloaded successfully
+					if (outputFilePath) {
+						FS.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), (err) => {
+							if (err) {
+								reject(err);
+								queue.kill();
+								killed = true;
+							} else {
+								cb();
+							}
+						});
+					} else {
+						data.copy(downloadBuffer, parseInt(chunk.offset, 10));
+						cb();
+					}
 				});
-			} else {
-				hash = require('crypto').createHash('sha1');
-				hash.update(downloadBuffer);
-				if (hash.digest('hex') != fileManifest.sha_content) {
-					return reject(new Error("File checksum mismatch"));
-				}
+			}, numWorkers);
 
-				return resolve({
-					"type": "complete",
-					"file": downloadBuffer
-				});
-			}
-		};
-
-		function assignServer(idx) {
-			servers[idx] = availableServers.splice(Math.floor(Math.random() * availableServers.length), 1)[0];
-		}
-
-		function incrementCurrentServerIdx() {
-			if (++currentServerIdx >= servers.length) {
-				currentServerIdx = 0;
-			}
-		}
-	});
-};
-
-/**
- * Request decryption keys for a beta branch of an app from its beta password.
- * @param {int} appID
- * @param {string} password
- * @param {function} [callback] - First arg is Error|null, second is an object mapping branch names to their decryption keys
- * @return Promise
- */
-SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['keys'], callback, (resolve, reject) => {
-		this._send(SteamUser.EMsg.ClientCheckAppBetaPassword, {"app_id": appID, "betapassword": password}, (body) => {
-			if (body.eresult != SteamUser.EResult.OK) {
-				return reject(Helpers.eresultError(body.eresult));
-			}
-
-			let branches = {};
-			(body.betapasswords || []).forEach((beta) => {
-				branches[beta.betaname] = Buffer.from(beta.betapassword, 'hex');
+			fileManifest.chunks.forEach((chunk) => {
+				queue.push(JSON.parse(JSON.stringify(chunk)));
 			});
 
-			return resolve({"keys": branches});
+			queue.drain = () => {
+				// Verify hash
+				let hash;
+				if (outputFilePath) {
+					FS.close(outputFd, (err) => {
+						if (err) {
+							return reject(err);
+						}
+
+						// File closed. Now re-open it so we can hash it!
+						hash = require('crypto').createHash('sha1');
+						FS.createReadStream(outputFilePath).pipe(hash);
+						hash.on('readable', () => {
+							if (!hash.read) {
+								return; // already done
+							}
+
+							hash = hash.read();
+							if (hash.toString('hex') != fileManifest.sha_content) {
+								return reject(new Error('File checksum mismatch'));
+							} else {
+								resolve({
+									type: 'complete'
+								});
+							}
+						});
+					});
+				} else {
+					hash = require('crypto').createHash('sha1');
+					hash.update(downloadBuffer);
+					if (hash.digest('hex') != fileManifest.sha_content) {
+						return reject(new Error('File checksum mismatch'));
+					}
+
+					return resolve({
+						type: 'complete',
+						file: downloadBuffer
+					});
+				}
+			};
+
+			function assignServer(idx) {
+				servers[idx] = availableServers.splice(Math.floor(Math.random() * availableServers.length), 1)[0];
+			}
+
+			function incrementCurrentServerIdx() {
+				if (++currentServerIdx >= servers.length) {
+					currentServerIdx = 0;
+				}
+			}
 		});
-	});
-};
+	}
+
+	/**
+	 * Request decryption keys for a beta branch of an app from its beta password.
+	 * @param {int} appID
+	 * @param {string} password
+	 * @param {function} [callback] - First arg is Error|null, second is an object mapping branch names to their decryption keys
+	 * @return Promise
+	 */
+	getAppBetaDecryptionKeys(appID, password, callback) {
+		return StdLib.Promises.timeoutCallbackPromise(10000, ['keys'], callback, (resolve, reject) => {
+			this._send(EMsg.ClientCheckAppBetaPassword, {
+				app_id: appID,
+				betapassword: password
+			}, (body) => {
+				if (body.eresult != EResult.OK) {
+					return reject(Helpers.eresultError(body.eresult));
+				}
+
+				let branches = {};
+				(body.betapasswords || []).forEach((beta) => {
+					branches[beta.betaname] = Buffer.from(beta.betapassword, 'hex');
+				});
+
+				return resolve({"keys": branches});
+			});
+		});
+	}
+}
 
 // Private functions
 function download(url, hostHeader, destinationFilename, callback) {
@@ -549,11 +561,11 @@ function download(url, hostHeader, destinationFilename, callback) {
 	let options = require('url').parse(url);
 	options.method = "GET";
 	options.headers = {
-		"Host": hostHeader,
-		"Accept": "text/html,*/*;q=0.9",
-		"Accept-Encoding": "gzip,identity,*;q=0",
-		"Accept-Charset": "ISO-8859-1,utf-8,*;q=0.7",
-		"User-Agent": "Valve/Steam HTTP Client 1.0"
+		Host: hostHeader,
+		Accept: 'text/html,*/*;q=0.9',
+		'Accept-Encoding': 'gzip,identity,*;q=0',
+		'Accept-Charset': 'ISO-8859-1,utf-8,*;q=0.7',
+		'User-Agent': 'Valve/Steam HTTP Client 1.0'
 	};
 
 	let module = options.protocol.replace(':', '');
@@ -660,3 +672,5 @@ function unzip(data) {
 		}
 	});
 }
+
+module.exports = SteamUserCDN;

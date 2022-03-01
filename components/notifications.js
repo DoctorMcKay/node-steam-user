@@ -1,29 +1,37 @@
 const SteamID = require('steamid');
 
-const SteamUser = require('../index.js');
+const EMsg = require('../enums/EMsg.js');
+
+const SteamUserBase = require('./00-base.js');
+const SteamUserGameServers = require('./gameservers.js');
 
 const NOTIFICATION_TYPES = {
-	"1": "tradeOffers",
-	"3": "communityMessages"
+	'1': 'tradeOffers',
+	'3': 'communityMessages'
 };
 
-SteamUser.prototype._requestNotifications = function() {
-	this._send(SteamUser.EMsg.ClientRequestItemAnnouncements, {});
-	this._send(SteamUser.EMsg.ClientRequestCommentNotifications, {});
-	this._send(SteamUser.EMsg.ClientFSRequestOfflineMessageCount, {});
-};
+class SteamUserNotifications extends SteamUserGameServers {
+	/**
+	 * @protected
+	 */
+	_requestNotifications() {
+		this._send(EMsg.ClientRequestItemAnnouncements, {});
+		this._send(EMsg.ClientRequestCommentNotifications, {});
+		this._send(EMsg.ClientFSRequestOfflineMessageCount, {});
+	}
+}
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientItemAnnouncements, function(body) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientItemAnnouncements, function(body) {
 	this.emit('newItems', body.count_new_items);
 });
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCommentNotifications, function(body) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientCommentNotifications, function(body) {
 	this.emit('newComments', body.count_new_comments, body.count_new_comments_owner, body.count_new_comments_subscriptions);
 });
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUserNotifications, function(body) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientUserNotifications, function(body) {
 	// convert the notifications array into an object for easy reference
 	let notifications = {};
 	(body.notifications || []).forEach((notif) => {
@@ -63,7 +71,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUserNotifications, 
 	}
 });
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSOfflineMessageNotification, function(body) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientFSOfflineMessageNotification, function(body) {
 	this.emit('offlineMessages', body.offline_messages, (body.friends_with_offline_messages || []).map((accountid) => {
 		let sid = new SteamID();
 		sid.universe = this.steamID.universe;
@@ -74,7 +82,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSOfflineMessageNot
 	}));
 });
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientMarketingMessageUpdate2, function(body) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientMarketingMessageUpdate2, function(body) {
 	let time = body.readUint32();
 	let count = body.readUint32();
 
@@ -84,11 +92,13 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientMarketingMessageUpd
 		body.readUint32(); // Length of this submessage
 
 		messages.push({
-			"id": body.readUint64().toString(),
-			"url": body.readCString(),
-			"flags": body.readUint32()
+			id: body.readUint64().toString(),
+			url: body.readCString(),
+			flags: body.readUint32()
 		});
 	}
 
 	this.emit('marketingMessages', new Date(time * 1000), messages);
 });
+
+module.exports = SteamUserNotifications;
