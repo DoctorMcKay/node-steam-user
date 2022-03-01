@@ -14,7 +14,7 @@ const SteamUserBase = require('./components/00-base.js');
  * @extends EventEmitter
  * @property {SteamID|null} steamID
  * @property {SteamChatRoomClient} chat
- * @property {object} options
+ * @property {OptionsObject} options
  * @property {string|null} publicIP
  * @property {number|null} cellID
  * @property {string|null} vanityURL
@@ -34,6 +34,9 @@ const SteamUserBase = require('./components/00-base.js');
  * @property {{changenumber: number, apps: object, packages: object}} picsCache
  */
 class SteamUser extends SteamUserTwoFactor {
+	/**
+	 * @param {OptionsObject} [options={}]
+	 */
 	constructor(options) {
 		super();
 
@@ -152,7 +155,7 @@ class SteamUser extends SteamUserTwoFactor {
 
 	/**
 	 * Set one or more configuration options
-	 * @param {object} options
+	 * @param {OptionsObject} options
 	 */
 	setOptions(options) {
 		for (let i in options) {

@@ -303,6 +303,15 @@ Added in 4.6.0.
 
 Defaults to `false`.
 
+### saveAppTickets
+
+If true, then calls to [`getAppOwnershipTicket`](https://github.com/DoctorMcKay/node-steam-user/wiki/Steam-App-Auth#getappownershipticketappid-callback)
+will save ownership tickets to disk and will return cached tickets unless they are expired.
+
+Added in 3.5.0.
+
+Defaults to `true`.
+
 # Properties [^](#contents)
 
 ### steamID

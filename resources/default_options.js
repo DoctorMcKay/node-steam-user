@@ -1,11 +1,28 @@
 const EConnectionProtocol = require('./EConnectionProtocol.js');
 const EMachineIDType = require('./EMachineIDType.js');
 
+/**
+ * @typedef {object} OptionsObject
+ * @property {string|null} [dataDirectory]
+ * @property {boolean} [autoRelogin=true]
+ * @property {boolean} [singleSentryfile=false]
+ * @property {EMachineIDType} [machineIdType]
+ * @property {string[]} [machineIdFormat]
+ * @property {boolean} [enablePicsCache=false]
+ * @property {boolean} [picsCacheAll=false]
+ * @property {number} [changelistUpdateInterval=60000]
+ * @property {PackageFilter|PackageFilterFunction|null} [ownershipFilter=null]
+ * @property {object} [additionalHeaders={}}
+ * @property {string|null} [localAddress=null]
+ * @property {number|null} [localPort=null]
+ * @property {string|null} [httpProxy=null]
+ * @property {EConnectionProtocol} [protocol]
+ * @property {string} [language='english']
+ * @property {boolean} [webCompatibilityMode=false]
+ * @property {boolean} [saveAppTickets=true]
+ */
+
 module.exports = {
-	protocol: EConnectionProtocol.Auto,
-	httpProxy: null,
-	localAddress: null,
-	localPort: null,
 	autoRelogin: true,
 	singleSentryfile: false,
 	machineIdType: EMachineIDType.AccountNameGenerated,
@@ -13,8 +30,12 @@ module.exports = {
 	enablePicsCache: false,
 	picsCacheAll: false,
 	changelistUpdateInterval: 60000,
-	saveAppTickets: true,
 	additionalHeaders: {},
+	localAddress: null,
+	localPort: null,
+	httpProxy: null,
+	protocol: EConnectionProtocol.Auto,
 	language: 'english',
-	webCompatibilityMode: false
+	webCompatibilityMode: false,
+	saveAppTickets: true
 };
