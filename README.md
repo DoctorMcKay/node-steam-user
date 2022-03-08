@@ -1741,7 +1741,7 @@ license(s).
 (i.e. "free to keep for a limited time") cannot be requested using this method. You can request such licenses using
 the steamstore module's [addFreeLicense](https://github.com/DoctorMcKay/node-steamstore#addfreelicensesubid-callback) method.
 
-### getEncryptedAppTicket(appid[, userData], callback)
+### createEncryptedAppTicket(appid[, userData], callback)
 - `appid` - The Steam AppID of the app for which you want a ticket
 - `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.
 - `callback` - Called when the request completes
