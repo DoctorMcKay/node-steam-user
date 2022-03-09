@@ -13,6 +13,8 @@ const EResult = require('../enums/EResult.js');
 const SteamUserBase = require('./00-base.js');
 const SteamUserAppAuth = require('./appauth.js');
 
+const ANONYMOUS_DEDICATED_SERVER_COMP = 17906;
+
 const PICSRequestType = {
 	User: 0,
 	Changelist: 1,
@@ -210,7 +212,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			if (inclTokens) {
 				packages.filter(pkg => !pkg.access_token).forEach((pkg) => {
 					// Check if we have a license for this package which includes a token
-					let license = this.licenses.find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
+					let license = (this.licenses || []).find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
 					if (license) {
 						this.emit('debug', `Using token "${license.access_token}" from license for package ${pkg.packageid}`);
 						pkg.access_token = license.access_token;
@@ -560,8 +562,10 @@ class SteamUserApps extends SteamUserAppAuth {
 			return;
 		}
 
-		// Get all owned lisense id's
-		let packageids = this.licenses.map(license => license.package_id);
+		// Get all owned license id's
+		let packageids = this.steamID.type == SteamID.Type.ANON_USER
+			? [ANONYMOUS_DEDICATED_SERVER_COMP]
+			: this.licenses.map(license => license.package_id);
 		let result;
 
 		try {
@@ -702,8 +706,12 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * @protected
 	 */
 	_getOwnedLicenses() {
+		if (this.steamID.type == SteamID.Type.ANON_USER) {
+			throw new Error('Anonymous user accounts cannot own licenses');
+		}
+
 		if (!this.licenses) {
-			throw new Error("We don't have our license list yet.");
+			throw new Error('We don\'t have our license list yet.');
 		}
 
 		return this.licenses;
@@ -718,7 +726,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	getOwnedPackages(filter) {
 		// We're anonymous
 		if (this.steamID.type == SteamID.Type.ANON_USER) {
-			return [17906];
+			return [ANONYMOUS_DEDICATED_SERVER_COMP];
 		}
 
 		// We're an individual user
