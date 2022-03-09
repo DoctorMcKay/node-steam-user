@@ -916,6 +916,12 @@ class SteamUserApps extends SteamUserAppAuth {
 		});
 	}
 
+	/**
+	 * Gets your legacy CD key for a game in your library which uses CD keys
+	 * @param {number} appid
+	 * @param {function} [callback]
+	 * @returns {Promise<{key: string}>}
+	 */
 	getLegacyGameKey(appid, callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 			let request = Buffer.alloc(4);
