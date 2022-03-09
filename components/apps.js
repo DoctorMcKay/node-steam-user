@@ -915,6 +915,40 @@ class SteamUserApps extends SteamUserAppAuth {
 			});
 		});
 	}
+
+	getLegacyGameKey(appid, callback) {
+		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+			let request = Buffer.alloc(4);
+			request.writeUInt32LE(appid);
+			this._send(EMsg.ClientGetLegacyGameKey, request, (body) => {
+				let responseAppId = body.readUint32();
+				if (responseAppId != appid) {
+					// Is this even possible?
+					return reject(new Error(`Received response for wrong appid ${responseAppId}`));
+				}
+
+				let eresult = body.readUint32();
+				let err = Helpers.eresultError(eresult);
+				if (err) {
+					return reject(err);
+				}
+
+				let keyLength = body.readUint32();
+				if (keyLength == 0) {
+					// Unsure if this is possible
+					return reject(new Error('No key returned'));
+				}
+
+				let key = body.readCString();
+				if (key.length != keyLength - 1) {
+					// keyLength includes the null terminator
+					return reject(new Error(`Incorrect key length: expected ${keyLength - 1} but got ${key.length}`));
+				}
+
+				return resolve({key});
+			});
+		});
+	}
 }
 
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientLicenseList, function(body) {
