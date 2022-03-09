@@ -156,6 +156,30 @@ class SteamUserApps extends SteamUserAppAuth {
 		});
 	}
 
+	_saveProductInfo({ apps, packages }) {
+		let toSave = [];
+
+		for (let appid in apps) {
+			if (apps[appid].missingToken) {
+				continue;
+			}
+			let filename = `app_info_${appid}.json`;
+			let content = JSON.stringify(apps[appid]);
+			toSave.push({filename, content});
+		}
+
+		for (let packageid in packages) {
+			if (packages[packageid].missingToken) {
+				continue;
+			}
+			let filename = `package_info_${packageid}.json`;
+			let content = JSON.stringify(packages[packageid]);
+			toSave.push({filename, content});
+		}
+		
+		return Promise.all(toSave.map(({filename, content}) => this._saveFile(filename, content)));
+	}
+
 	/**
 	 * Get info about some apps and/or packages from Steam.
 	 * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
@@ -313,6 +337,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				// appids and packageids contain the list of IDs that we're still waiting on data for
 				if (appids.length === 0 && packageids.length === 0) {
 					if (!inclTokens) {
+						this._saveProductInfo(response);
 						return resolve(response);
 					}
 
@@ -334,6 +359,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 					if (tokenlessAppids.length == 0 && tokenlessPackages.length == 0) {
 						// No tokens needed
+						this._saveProductInfo(response);
 						return resolve(response);
 					}
 
@@ -374,6 +400,7 @@ class SteamUserApps extends SteamUserAppAuth {
 							}
 						}
 
+						this._saveProductInfo(response);
 						resolve(response);
 					} catch (ex) {
 						return reject(ex);

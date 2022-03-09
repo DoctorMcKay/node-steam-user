@@ -179,6 +179,16 @@ Added in 3.3.0.
 
 Defaults to `false`.
 
+### savePicsCache
+
+If `enablePicsCache` is enabled, save product info to disk. (TODO: Improve description)
+
+Added in 4.24.0
+
+Defaults to `false`.
+
+**Warning:** This will significantly increase the storage space that is needed!
+
 ### picsCacheAll
 
 If `picsCacheAll` is enabled, `enablePicsCache` is enabled, and `changelistUpdateInterval` is nonzero, then apps and
