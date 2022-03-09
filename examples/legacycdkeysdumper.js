@@ -50,8 +50,9 @@ client.on("ownershipCached", async () => {
     fs.writeFileSync("legacy_keys.json", JSON.stringify(keys, null, 4));
     console.log("Done! Logging off...");
     client.logOff();
-    process.exit();
 });
+
+client.on("disconnected", () => process.exit(0));
 
 client.logOn({
     accountName: "username", // your steam username
