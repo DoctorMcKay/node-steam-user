@@ -13,6 +13,9 @@ const EResult = require('../enums/EResult.js');
 const SteamUserBase = require('./00-base.js');
 const SteamUserAppAuth = require('./appauth.js');
 
+// This package is implicitly owned by anonymous users. They don't receive a license list, and should instead just
+// automatically assume that they own package 17906 (and no others, including 0).
+// https://steamdb.info/sub/17906/
 const ANONYMOUS_DEDICATED_SERVER_COMP = 17906;
 
 const PICSRequestType = {
