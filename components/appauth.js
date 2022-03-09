@@ -53,6 +53,18 @@ class SteamUserAppAuth extends SteamUserAccount {
 	}
 
 	/**
+	 * Request an encrypted appticket for a particular app. The app must be set up on the Steam backend for encrypted apptickets.
+	 * @param {int} appid - The Steam AppID of the app you want a ticket for
+	 * @param {Buffer} [userData] - If the app expects some "user data", provide it here
+	 * @param {function} [callback] - First argument is "err", second is the ticket as a Buffer (on success)
+	 * @return {Promise}
+	 * @deprecated Use createEncryptedAppTicket instead
+	 */
+	getEncryptedAppTicket(appid, userData, callback) {
+		return this.createEncryptedAppTicket(appid, userData, callback);
+	}
+
+	/**
 	 *
 	 * @param {Buffer} ticket - The raw encrypted appticket
 	 * @param {Buffer|string} encryptionKey - The app's encryption key, either raw hex or a Buffer
