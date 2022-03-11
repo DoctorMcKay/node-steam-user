@@ -9,6 +9,7 @@ const EMachineIDType = require('./EMachineIDType.js');
  * @property {EMachineIDType} [machineIdType]
  * @property {string[]} [machineIdFormat]
  * @property {boolean} [enablePicsCache=false]
+ * @property {boolean} [savePicsCache=false]
  * @property {boolean} [picsCacheAll=false]
  * @property {number} [changelistUpdateInterval=60000]
  * @property {PackageFilter|PackageFilterFunction|null} [ownershipFilter=null]
