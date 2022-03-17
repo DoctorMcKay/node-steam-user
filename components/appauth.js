@@ -85,7 +85,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 	}
 
 	createAuthSessionTicket(appid, callback) {
-		return StdLib.Promises.callbackPromise(['appTicket'], callback, (resolve, reject) => {
+		return StdLib.Promises.callbackPromise(['sessionTicket'], callback, (resolve, reject) => {
 			// For an auth session ticket we need the following:
 			// 1. Length-prefixed GCTOKEN
 			// 2. Length-prefixed SESSIONHEADER
