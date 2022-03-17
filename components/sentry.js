@@ -9,7 +9,7 @@ class SteamUserSentry extends SteamUserPublishedFiles {
 	/**
 	 * @param {Buffer} sentry
 	 */
-	setSentry = function(sentry) {
+	setSentry(sentry) {
 		this._sentry = sentry;
 	}
 

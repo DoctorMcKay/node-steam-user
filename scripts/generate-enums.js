@@ -201,9 +201,9 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 				g_EnumNames = Object.keys(g_EnumNames);
 				g_EnumNames.sort();
 
-				let loader = GENERATED_FILE_HEADER + `const SteamUserBase = require('./00-base.js');\n\nclass SteamUserEnums extends SteamUserBase {\n`;
-				loader += g_EnumNames.map(name => `\tstatic ${name} = require('../enums/${name}.js');`).join('\n');
-				loader += '\n}\n\nmodule.exports = SteamUserEnums;\n';
+				let loader = GENERATED_FILE_HEADER + `const SteamUserBase = require('./00-base.js');\n\nclass SteamUserEnums extends SteamUserBase {\n}\n\n`;
+				loader += g_EnumNames.map(name => `SteamUserEnums.${name} = require('../enums/${name}.js');`).join('\n');
+				loader += '\n\nmodule.exports = SteamUserEnums;\n';
 
 				FS.writeFileSync(__dirname + '/../components/01-enums.js', loader);
 				console.log('Wrote loader');

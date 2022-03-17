@@ -19,7 +19,7 @@ class SteamUserGameCoordinator extends SteamUserFriends {
 	 * @param {Buffer|ByteBuffer} payload
 	 * @param {function} [callback] - If this is a job-based message, pass a function here to get the response
 	 */
-	sendToGC = function(appid, msgType, protoBufHeader, payload, callback) {
+	sendToGC(appid, msgType, protoBufHeader, payload, callback) {
 		let sourceJobId = JOBID_NONE;
 		if (typeof callback === 'function') {
 			sourceJobId = ++this._currentGCJobID;
