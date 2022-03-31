@@ -70,7 +70,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientFromGC, function(body) {
 		// This is a protobuf message
 		let headerLength = body.payload.readInt32LE(4);
 		let protoHeader = SteamUserGameCoordinator._decodeProto(Schema.CMsgProtoBufHeader, body.payload.slice(8, 8 + headerLength));
-		targetJobID = protoHeader.job_id_target || JOBID_NONE;
+		targetJobID = protoHeader.jobid_target || JOBID_NONE;
 		payload = body.payload.slice(8 + headerLength);
 	} else {
 		let header = ByteBuffer.wrap(body.payload.slice(0, 18));
