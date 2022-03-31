@@ -34,7 +34,7 @@ class SteamUserGameCoordinator extends SteamUserFriends {
 		let header;
 		if (protoBufHeader) {
 			msgType = (msgType | PROTO_MASK) >>> 0;
-			protoBufHeader.job_id_source = sourceJobId;
+			protoBufHeader.jobid_source = sourceJobId;
 			let protoHeader = SteamUserGameCoordinator._encodeProto(Schema.CMsgProtoBufHeader, protoBufHeader);
 			header = Buffer.alloc(8);
 			header.writeUInt32LE(msgType, 0);
