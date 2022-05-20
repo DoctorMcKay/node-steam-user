@@ -137,7 +137,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * Get a list of apps or packages which have changed since a particular changenumber.
 	 * @param {int} sinceChangenumber - Changenumber to get changes since. Use 0 to get the latest changenumber, but nothing else
 	 * @param {function} [callback]
-	 * @returns {Promise<{currentChangeNumber: number, appChanges: number[], packageChanges: number[]}>}
+	 * @returns {Promise<{currentChangeNumber: number, appChanges: object[], packageChanges: object[]}>}
 	 */
 	getProductChanges(sinceChangenumber, callback) {
 		let args = ['currentChangeNumber', 'appChanges', 'packageChanges'];
