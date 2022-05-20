@@ -518,6 +518,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			}
 
 			cache.changenumber = currentChangeNumber;
+			this._saveFile('changenumber.txt', currentChangeNumber);
 			this._resetChangelistUpdateTimer();
 			return;
 		}
@@ -535,6 +536,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 		let {appTokens, packageTokens} = result;
 		cache.changenumber = currentChangeNumber;
+		this._saveFile('changenumber.txt', currentChangeNumber);
 		this._resetChangelistUpdateTimer();
 
 		let index = -1;
@@ -957,9 +959,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLicenseList, function(bod
 	this.licenses = body.licenses;
 
 	// Request info for our licenses
-	if (this.options.enablePicsCache) {
-		this._getLicenseInfo();
-	}
+	this._getLicenseInfo();
 });
 
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientPlayingSessionState, function(body) {
