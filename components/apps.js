@@ -156,6 +156,10 @@ class SteamUserApps extends SteamUserAppAuth {
 		});
 	}
 
+	/**
+	 * @param {apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>} - Response from getProductInfo
+	 * @protected
+	 */
 	_saveProductInfo({ apps, packages }) {
 		let toSave = [];
 
