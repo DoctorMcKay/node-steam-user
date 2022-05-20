@@ -161,6 +161,10 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * @protected
 	 */
 	_saveProductInfo({ apps, packages }) {
+		if (!this.options.savePicsCache) {
+			return Promise.resolve([]);
+		}
+
 		let toSave = [];
 
 		for (let appid in apps) {
