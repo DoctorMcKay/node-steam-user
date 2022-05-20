@@ -86,6 +86,11 @@ class SteamUser extends SteamUserTwoFactor {
 
 		if (this.options.dataDirectory) {
 			this.storage = new FileManager(this.options.dataDirectory);
+			this._readFile('changenumber.txt').then((changenumber) => {
+				if (changenumber && isFinite(changenumber)) {
+					this.picsCache.changenumber = parseInt(changenumber, 10);
+				}
+			});
 		}
 
 		if (this.options.picsCacheAll && this.options.savePicsCache) {
