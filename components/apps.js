@@ -189,6 +189,87 @@ class SteamUserApps extends SteamUserAppAuth {
 	}
 
 	/**
+	 * Get cached product info.
+	 * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
+	 * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
+	 * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, unknownApps: number[], unknownPackages: number[]}>}
+	 * @protected
+	 */
+	async _getProductInfo(apps, packages) {
+		let response = {
+			apps: {},
+			packages: {},
+			unknownApps: [],
+			unknownPackages: []
+		};
+
+		// With pics cache disabled, we cannot assure cache is up to date.
+		if (!this.options.enablePicsCache) {
+			return response;
+		}
+
+		// From this point, we can assume pics cache is up to date (via changelist updates).
+		let appids = apps.map(app => typeof app === 'object' ? app.appid : app);
+		let packageids = packages.map(pkg => typeof pkg === 'object' ? pkg.packageid : pkg);
+		for (let appid of appids) {
+			if (this.picsCache.apps[appid]) {
+				response.apps[appid] = this.picsCache.apps[appid];
+			} else {
+				response.unknownApps.push(appid);
+			}
+		}
+		for (let packageid of packageids) {
+			if (this.picsCache.packages[packageid]) {
+				response.packages[packageid] = this.picsCache.packages[packageid];
+			} else {
+				response.unknownPackages.push(packageid);
+			}
+		}
+
+		// If everything was already in memory cache, we're done.
+		if (response.unknownApps.length === 0 && response.unknownPackages.length === 0) {
+			return response;
+		}
+
+		// Otherwise, we try loading the missing apps & packages from disk.
+		appids = response.unknownApps;
+		packageids = response.unknownPackages;
+		response.unknownApps = [];
+		response.unknownPackages = [];
+		let appFiles = {};
+		let packageFiles = {};
+		for (let appid of appids) {
+			let filename = `app_info_${appid}.json`;
+			appFiles[filename] = appid;
+		}
+		for (let packageid of packageids) {
+			let filename = `package_info_${packageid}.json`;
+			packageFiles[filename] = packageid;
+		}
+		let files = await this._loadFiles(Object.keys(appFiles).concat(Object.keys(packageFiles)));
+		for (let file of files) {
+			let {filename, error, content} = file;
+			let appid = appFiles[filename];
+			let packageid = packageFiles[filename];
+			if (appid) {
+				if (error) {
+					response.unknownApps.push(appid);
+				} else {
+					response.apps[appid] = JSON.parse(content);
+				}
+			} else if (packageid) {
+				if (error) {
+					response.unknownPackages.push(packageid);
+				} else {
+					response.packages[packageid] = JSON.parse(content);
+				}
+			}
+		}
+
+		return response;
+	}
+
+	/**
 	 * Get info about some apps and/or packages from Steam.
 	 * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
 	 * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
@@ -205,8 +286,8 @@ class SteamUserApps extends SteamUserAppAuth {
 			inclTokens = false;
 		}
 
-		// This one actually can take a while, so allow it to go as long as 60 minutes
-		return StdLib.Promises.timeoutCallbackPromise(3600000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
+		// This one actually can take a while, so allow it to go as long as 120 minutes
+		return StdLib.Promises.timeoutCallbackPromise(7200000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, async (resolve, reject) => {
 			requestType = requestType || PICSRequestType.User;
 
 			// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
@@ -218,8 +299,25 @@ class SteamUserApps extends SteamUserAppAuth {
 				unknownApps: [],
 				unknownPackages: []
 			};
+			let cached = response; // Same format as response, but with cached data
 
-			apps = apps.map((app) => {
+			// Changelist requests always require fresh product info
+			if (this.options.enablePicsCache && requestType !== PICSRequestType.Changelist) {
+				cached = await this._getCachedProductInfo(apps, packages);
+				// If we already have all the info, we can return it immediately
+				if (cached.unknownApps.length === 0 && cached.unknownPackages.length === 0) {
+					return resolve(cached);
+				}
+			}
+
+			// Filter out any apps we already have cached
+			apps = apps.filter((app) => {
+				if (typeof app === 'object') {
+					return cached.unknownApps.includes(app.appid);
+				} else {
+					return cached.unknownApps.includes(app);
+				}
+			}).map((app) => {
 				if (typeof app === 'object') {
 					appids.push(app.appid);
 					return app;
@@ -229,7 +327,14 @@ class SteamUserApps extends SteamUserAppAuth {
 				}
 			});
 
-			packages = packages.map((pkg) => {
+			// Filter out any packages we already have cached
+			packages = packages.filter((pkg) => {
+				if (typeof pkg === 'object') {
+					return cached.unknownPackages.includes(pkg.packageid);
+				} else {
+					return cached.unknownPackages.includes(pkg);
+				}
+			}).map((pkg) => {
 				if (typeof pkg === 'object') {
 					packageids.push(pkg.packageid);
 					return pkg;
@@ -346,7 +451,13 @@ class SteamUserApps extends SteamUserAppAuth {
 				if (appids.length === 0 && packageids.length === 0) {
 					if (!inclTokens) {
 						this._saveProductInfo(response);
-						return resolve(response);
+						let combined = {
+							apps: Object.assign({}, response.apps, cached.apps),
+							packages: Object.assign({}, response.packages, cached.packages),
+							unknownApps: response.unknownApps,
+							unknownPackages: response.unknownPackages
+						}
+						return resolve(combined);
 					}
 
 					// We want tokens
@@ -368,7 +479,13 @@ class SteamUserApps extends SteamUserAppAuth {
 					if (tokenlessAppids.length == 0 && tokenlessPackages.length == 0) {
 						// No tokens needed
 						this._saveProductInfo(response);
-						return resolve(response);
+						let combined = {
+							apps: Object.assign(cached.apps, response.apps),
+							packages: Object.assign(cached.packages, response.packages),
+							unknownApps: response.unknownApps,
+							unknownPackages: response.unknownPackages
+						}
+						return resolve(combined);
 					}
 
 					try {
@@ -409,7 +526,13 @@ class SteamUserApps extends SteamUserAppAuth {
 						}
 
 						this._saveProductInfo(response);
-						resolve(response);
+						let combined = {
+							apps: Object.assign(cached.apps, response.apps),
+							packages: Object.assign(cached.packages, response.packages),
+							unknownApps: response.unknownApps,
+							unknownPackages: response.unknownPackages
+						}
+						resolve(combined);
 					} catch (ex) {
 						return reject(ex);
 					}
