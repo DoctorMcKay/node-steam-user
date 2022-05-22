@@ -312,7 +312,12 @@ class SteamUserApps extends SteamUserAppAuth {
 				unknownApps: [],
 				unknownPackages: []
 			};
-			let cached = response; // Same format as response, but with cached data
+			let cached = {
+				apps: {},
+				packages: {},
+				notCachedApps: [],
+				notCachedPackages: []
+			};
 
 			// Changelist requests always require fresh product info
 			if (this.options.enablePicsCache && requestType !== PICSRequestType.Changelist) {
