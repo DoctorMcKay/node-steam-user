@@ -29,7 +29,7 @@
 		"appdirectory": "^0.1.0",
 		"binarykvparser": "^2.2.0",
 		"bytebuffer": "^5.0.0",
-		"file-manager": "^2.0.0",
+		"file-manager": "^2.0.1",
 		"lzma": "^2.3.2",
 		"protobufjs": "^6.8.8",
 		"steam-appticket": "^1.0.1",
