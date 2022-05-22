@@ -158,6 +158,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 	/**
 	 * @param {apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>} - Response from getProductInfo
+	 * @returns {Promise}
 	 * @protected
 	 */
 	_saveProductInfo({ apps, packages }) {
@@ -165,15 +166,16 @@ class SteamUserApps extends SteamUserAppAuth {
 			return Promise.resolve([]);
 		}
 
-		let toSave = [];
+		let toSave = {};
 
 		for (let appid in apps) {
-			if (apps[appid].missingToken) {
+			// Public only apps are weird...
+			if (apps[appid].missingToken && !apps[appid].appinfo.public_only) {
 				continue;
 			}
 			let filename = `app_info_${appid}.json`;
-			let content = JSON.stringify(apps[appid]);
-			toSave.push({filename, content});
+			let contents = JSON.stringify(apps[appid]);
+			toSave[filename] = contents;
 		}
 
 		for (let packageid in packages) {
@@ -181,29 +183,29 @@ class SteamUserApps extends SteamUserAppAuth {
 				continue;
 			}
 			let filename = `package_info_${packageid}.json`;
-			let content = JSON.stringify(packages[packageid]);
-			toSave.push({filename, content});
+			let contents = JSON.stringify(packages[packageid]);
+			toSave[filename] = contents;
 		}
 		
-		return Promise.all(toSave.map(({filename, content}) => this._saveFile(filename, content)));
+		return this._saveFiles(toSave);
 	}
 
 	/**
 	 * Get cached product info.
 	 * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
 	 * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
-	 * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, unknownApps: number[], unknownPackages: number[]}>}
+	 * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, notCachedApps: number[], notCachedPackages: number[]}>}
 	 * @protected
 	 */
-	async _getProductInfo(apps, packages) {
+	async _getCachedProductInfo(apps, packages) {
 		let response = {
 			apps: {},
 			packages: {},
-			unknownApps: [],
-			unknownPackages: []
+			notCachedApps: [],
+			notCachedPackages: []
 		};
 
-		// With pics cache disabled, we cannot assure cache is up to date.
+		// With pics cache disabled, we cannot assure pics cache is up to date.
 		if (!this.options.enablePicsCache) {
 			return response;
 		}
@@ -215,27 +217,32 @@ class SteamUserApps extends SteamUserAppAuth {
 			if (this.picsCache.apps[appid]) {
 				response.apps[appid] = this.picsCache.apps[appid];
 			} else {
-				response.unknownApps.push(appid);
+				response.notCachedApps.push(appid);
 			}
 		}
 		for (let packageid of packageids) {
 			if (this.picsCache.packages[packageid]) {
 				response.packages[packageid] = this.picsCache.packages[packageid];
 			} else {
-				response.unknownPackages.push(packageid);
+				response.notCachedPackages.push(packageid);
 			}
 		}
 
 		// If everything was already in memory cache, we're done.
-		if (response.unknownApps.length === 0 && response.unknownPackages.length === 0) {
+		if (response.notCachedApps.length === 0 && response.notCachedPackages.length === 0) {
+			return response;
+		}
+
+		// If pics cache is not being saved to disk, we're done.
+		if (!this.options.savePicsCache) {
 			return response;
 		}
 
 		// Otherwise, we try loading the missing apps & packages from disk.
-		appids = response.unknownApps;
-		packageids = response.unknownPackages;
-		response.unknownApps = [];
-		response.unknownPackages = [];
+		appids = response.notCachedApps;
+		packageids = response.notCachedPackages;
+		response.notCachedApps = [];
+		response.notCachedPackages = [];
 		let appFiles = {};
 		let packageFiles = {};
 		for (let appid of appids) {
@@ -246,22 +253,28 @@ class SteamUserApps extends SteamUserAppAuth {
 			let filename = `package_info_${packageid}.json`;
 			packageFiles[filename] = packageid;
 		}
-		let files = await this._loadFiles(Object.keys(appFiles).concat(Object.keys(packageFiles)));
+		let files = await this._readFiles(Object.keys(appFiles).concat(Object.keys(packageFiles)));
 		for (let file of files) {
-			let {filename, error, content} = file;
+			let {filename, error, contents} = file;
+			if (Buffer.isBuffer(contents)) {
+				contents = contents.toString('utf8');
+			}
 			let appid = appFiles[filename];
 			let packageid = packageFiles[filename];
+			
 			if (appid) {
-				if (error) {
-					response.unknownApps.push(appid);
+				if (error || !contents) {
+					response.notCachedApps.push(appid);
 				} else {
-					response.apps[appid] = JSON.parse(content);
+					this.picsCache.apps[appid] = JSON.parse(contents);
+					response.apps[appid] = this.picsCache.apps[appid];
 				}
 			} else if (packageid) {
-				if (error) {
-					response.unknownPackages.push(packageid);
+				if (error || !contents) {
+					response.notCachedPackages.push(packageid);
 				} else {
-					response.packages[packageid] = JSON.parse(content);
+					this.picsCache.packages[packageid] = JSON.parse(contents);
+					response.packages[packageid] = this.picsCache.packages[packageid];
 				}
 			}
 		}
@@ -305,7 +318,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			if (this.options.enablePicsCache && requestType !== PICSRequestType.Changelist) {
 				cached = await this._getCachedProductInfo(apps, packages);
 				// If we already have all the info, we can return it immediately
-				if (cached.unknownApps.length === 0 && cached.unknownPackages.length === 0) {
+				if (cached.notCachedApps.length === 0 && cached.notCachedPackages.length === 0) {
 					return resolve(cached);
 				}
 			}
@@ -313,9 +326,9 @@ class SteamUserApps extends SteamUserAppAuth {
 			// Filter out any apps we already have cached
 			apps = apps.filter((app) => {
 				if (typeof app === 'object') {
-					return cached.unknownApps.includes(app.appid);
+					return cached.notCachedApps.includes(app.appid);
 				} else {
-					return cached.unknownApps.includes(app);
+					return cached.notCachedApps.includes(app);
 				}
 			}).map((app) => {
 				if (typeof app === 'object') {
@@ -330,9 +343,9 @@ class SteamUserApps extends SteamUserAppAuth {
 			// Filter out any packages we already have cached
 			packages = packages.filter((pkg) => {
 				if (typeof pkg === 'object') {
-					return cached.unknownPackages.includes(pkg.packageid);
+					return cached.notCachedPackages.includes(pkg.packageid);
 				} else {
-					return cached.unknownPackages.includes(pkg);
+					return cached.notCachedPackages.includes(pkg);
 				}
 			}).map((pkg) => {
 				if (typeof pkg === 'object') {
@@ -452,8 +465,8 @@ class SteamUserApps extends SteamUserAppAuth {
 					if (!inclTokens) {
 						this._saveProductInfo(response);
 						let combined = {
-							apps: Object.assign({}, response.apps, cached.apps),
-							packages: Object.assign({}, response.packages, cached.packages),
+							apps: Object.assign(cached.apps, response.apps),
+							packages: Object.assign(cached.packages, response.packages),
 							unknownApps: response.unknownApps,
 							unknownPackages: response.unknownPackages
 						}
@@ -641,7 +654,9 @@ class SteamUserApps extends SteamUserAppAuth {
 			}
 
 			cache.changenumber = currentChangeNumber;
-			this._saveFile('changenumber.txt', currentChangeNumber);
+			if (this.options.savePicsCache) {
+				this._saveFile('changenumber.txt', currentChangeNumber);
+			}
 			this._resetChangelistUpdateTimer();
 			return;
 		}
@@ -659,7 +674,9 @@ class SteamUserApps extends SteamUserAppAuth {
 
 		let {appTokens, packageTokens} = result;
 		cache.changenumber = currentChangeNumber;
-		this._saveFile('changenumber.txt', currentChangeNumber);
+		if (this.options.savePicsCache) {
+			this._saveFile('changenumber.txt', currentChangeNumber);
+		}
 		this._resetChangelistUpdateTimer();
 
 		let index = -1;
@@ -694,7 +711,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			return;
 		}
 
-		this.getProductInfo([appid], [], false, null, PICSRequestType.AddToCache).catch(() => {
+		this.getProductInfo([appid], [], true, null, PICSRequestType.AddToCache).catch(() => {
 		});
 	}
 

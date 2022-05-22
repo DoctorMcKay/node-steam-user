@@ -43,6 +43,7 @@
 		"wtfnode": "^0.8.4"
 	},
 	"scripts": {
+		"basicbot": "node examples/basicbot.js",
 		"prepublishOnly": "node scripts/prepublish.js",
 		"generate-enums": "node scripts/generate-enums.js",
 		"generate-protos": "node scripts/generate-protos.js"
