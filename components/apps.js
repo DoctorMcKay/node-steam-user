@@ -290,8 +290,9 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * @param {function} [callback]
 	 * @param {int} [requestType] - Don't touch
 	 * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, unknownApps: number[], unknownPackages: number[]}>}
+	 * @protected
 	 */
-	getProductInfo(apps, packages, inclTokens, callback, requestType) {
+	async _getProductInfo(apps, packages, inclTokens, callback, requestType) {
 		// Adds support for the previous syntax
 		if (typeof inclTokens !== 'boolean' && typeof inclTokens === 'function') {
 			requestType = callback;
@@ -299,263 +300,306 @@ class SteamUserApps extends SteamUserAppAuth {
 			inclTokens = false;
 		}
 
-		// This one actually can take a while, so allow it to go as long as 120 minutes
-		return StdLib.Promises.timeoutCallbackPromise(7200000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, async (resolve, reject) => {
-			requestType = requestType || PICSRequestType.User;
+		requestType = requestType || PICSRequestType.User;
 
-			// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
-			let appids = [];
-			let packageids = [];
-			let response = {
-				apps: {},
-				packages: {},
-				unknownApps: [],
-				unknownPackages: []
-			};
-			let cached = {
-				apps: {},
-				packages: {},
-				notCachedApps: [],
-				notCachedPackages: []
-			};
+		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
+		let appids = [];
+		let packageids = [];
+		let response = {
+			apps: {},
+			packages: {},
+			unknownApps: [],
+			unknownPackages: []
+		};
+		let cached = {
+			apps: {},
+			packages: {},
+			notCachedApps: [],
+			notCachedPackages: []
+		};
 
-			// Changelist requests always require fresh product info
-			if (this.options.enablePicsCache && requestType !== PICSRequestType.Changelist) {
-				cached = await this._getCachedProductInfo(apps, packages);
-				// If we already have all the info, we can return it immediately
-				if (cached.notCachedApps.length === 0 && cached.notCachedPackages.length === 0) {
-					return resolve(cached);
-				}
+		// Changelist requests always require fresh product info
+		if (this.options.enablePicsCache && requestType !== PICSRequestType.Changelist) {
+			cached = await this._getCachedProductInfo(apps, packages);
+			// If we already have all the info, we can return it immediately
+			if (cached.notCachedApps.length === 0 && cached.notCachedPackages.length === 0) {
+				response.apps = cached.apps;
+				response.packages = cached.packages;
+				return response;
 			}
+		}
 
-			// Filter out any apps we already have cached
-			apps = apps.filter((app) => {
-				if (typeof app === 'object') {
-					return cached.notCachedApps.includes(app.appid);
-				} else {
-					return cached.notCachedApps.includes(app);
-				}
-			}).map((app) => {
-				if (typeof app === 'object') {
-					appids.push(app.appid);
-					return app;
-				} else {
-					appids.push(app);
-					return {appid: app};
+		// Filter out any apps we already have cached
+		apps = apps.filter((app) => {
+			if (typeof app === 'object') {
+				return cached.notCachedApps.includes(app.appid);
+			} else {
+				return cached.notCachedApps.includes(app);
+			}
+		}).map((app) => {
+			if (typeof app === 'object') {
+				appids.push(app.appid);
+				return app;
+			} else {
+				appids.push(app);
+				return {appid: app};
+			}
+		});
+
+		// Filter out any packages we already have cached
+		packages = packages.filter((pkg) => {
+			if (typeof pkg === 'object') {
+				return cached.notCachedPackages.includes(pkg.packageid);
+			} else {
+				return cached.notCachedPackages.includes(pkg);
+			}
+		}).map((pkg) => {
+			if (typeof pkg === 'object') {
+				packageids.push(pkg.packageid);
+				return pkg;
+			} else {
+				packageids.push(pkg);
+				return {packageid: pkg};
+			}
+		});
+
+		if (inclTokens) {
+			packages.filter(pkg => !pkg.access_token).forEach((pkg) => {
+				// Check if we have a license for this package which includes a token
+				let license = this.licenses.find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
+				if (license) {
+					this.emit('debug', `Using token "${license.access_token}" from license for package ${pkg.packageid}`);
+					pkg.access_token = license.access_token;
 				}
 			});
+		}
 
-			// Filter out any packages we already have cached
-			packages = packages.filter((pkg) => {
-				if (typeof pkg === 'object') {
-					return cached.notCachedPackages.includes(pkg.packageid);
-				} else {
-					return cached.notCachedPackages.includes(pkg);
-				}
-			}).map((pkg) => {
-				if (typeof pkg === 'object') {
-					packageids.push(pkg.packageid);
-					return pkg;
-				} else {
-					packageids.push(pkg);
-					return {packageid: pkg};
-				}
-			});
-
-			if (inclTokens) {
-				packages.filter(pkg => !pkg.access_token).forEach((pkg) => {
-					// Check if we have a license for this package which includes a token
-					let license = this.licenses.find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
-					if (license) {
-						this.emit('debug', `Using token "${license.access_token}" from license for package ${pkg.packageid}`);
-						pkg.access_token = license.access_token;
-					}
-				});
-			}
-
-			this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages}, async (body) => {
-				// If we're using the PICS cache, then add the items in this response to it
-				if (this.options.enablePicsCache) {
-					let cache = this.picsCache;
-					cache.apps = cache.apps || {};
-					cache.packages = cache.packages || {};
-
-					(body.apps || []).forEach((app) => {
-						let data = {
-							changenumber: app.change_number,
-							missingToken: !!app.missing_token,
-							appinfo: VDF.parse(app.buffer.toString('utf8')).appinfo
-						};
-
-						if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
-							// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
-							this.emit('appUpdate', app.appid, data);
-						}
-
-						cache.apps[app.appid] = data;
-
-						app._parsedData = data;
-					});
-
-					(body.packages || []).forEach((pkg) => {
-						let data = {
-							changenumber: pkg.change_number,
-							missingToken: !!pkg.missing_token,
-							packageinfo: pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
-						};
-
-						if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
-							this.emit('packageUpdate', pkg.packageid, data);
-						}
-
-						cache.packages[pkg.packageid] = data;
-
-						pkg._parsedData = data;
-
-						// Request info for all the apps in this package, if this request didn't originate from the license list
-						if (requestType != PICSRequestType.Licenses) {
-							let appids = (pkg.packageinfo || {}).appids || [];
-							this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {
-							});
-						}
-					});
-				}
-
-				(body.unknown_appids || []).forEach((appid) => {
-					response.unknownApps.push(appid);
-					let index = appids.indexOf(appid);
-					if (index != -1) {
-						appids.splice(index, 1);
-					}
-				});
-
-				(body.unknown_packageids || []).forEach((packageid) => {
-					response.unknownPackages.push(packageid);
-					let index = packageids.indexOf(packageid);
-					if (index != -1) {
-						packageids.splice(index, 1);
-					}
-				});
+		this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages}, async (body) => {
+			// If we're using the PICS cache, then add the items in this response to it
+			if (this.options.enablePicsCache) {
+				let cache = this.picsCache;
+				cache.apps = cache.apps || {};
+				cache.packages = cache.packages || {};
 
 				(body.apps || []).forEach((app) => {
-					// _parsedData will be populated if we have the PICS cache enabled.
-					// If we don't, we need to parse the data here.
-					response.apps[app.appid] = app._parsedData || {
-						"changenumber": app.change_number,
-						"missingToken": !!app.missing_token,
-						"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+					let data = {
+						changenumber: app.change_number,
+						missingToken: !!app.missing_token,
+						appinfo: VDF.parse(app.buffer.toString('utf8')).appinfo
 					};
 
-					let index = appids.indexOf(app.appid);
-					if (index != -1) {
-						appids.splice(index, 1);
+					if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
+						// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
+						this.emit('appUpdate', app.appid, data);
 					}
+
+					cache.apps[app.appid] = data;
+
+					app._parsedData = data;
 				});
 
 				(body.packages || []).forEach((pkg) => {
-					response.packages[pkg.packageid] = pkg._parsedData || {
-						"changenumber": pkg.change_number,
-						"missingToken": !!pkg.missing_token,
-						"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
+					let data = {
+						changenumber: pkg.change_number,
+						missingToken: !!pkg.missing_token,
+						packageinfo: pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
 					};
 
-					let index = packageids.indexOf(pkg.packageid);
-					if (index != -1) {
-						packageids.splice(index, 1);
+					if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
+						this.emit('packageUpdate', pkg.packageid, data);
+					}
+
+					cache.packages[pkg.packageid] = data;
+
+					pkg._parsedData = data;
+
+					// Request info for all the apps in this package, if this request didn't originate from the license list
+					if (requestType != PICSRequestType.Licenses) {
+						let appids = (pkg.packageinfo || {}).appids || [];
+						this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {
+						});
 					}
 				});
+			}
 
-				// appids and packageids contain the list of IDs that we're still waiting on data for
-				if (appids.length === 0 && packageids.length === 0) {
-					if (!inclTokens) {
-						this._saveProductInfo(response);
-						let combined = {
-							apps: Object.assign(cached.apps, response.apps),
-							packages: Object.assign(cached.packages, response.packages),
-							unknownApps: response.unknownApps,
-							unknownPackages: response.unknownPackages
-						}
-						return resolve(combined);
-					}
-
-					// We want tokens
-					let tokenlessAppids = [];
-					let tokenlessPackages = [];
-
-					for (let appid in response.apps) {
-						if (response.apps[appid].missingToken) {
-							tokenlessAppids.push(parseInt(appid, 10));
-						}
-					}
-
-					for (let packageid in response.packages) {
-						if (response.packages[packageid].missingToken) {
-							tokenlessPackages.push(parseInt(packageid, 10));
-						}
-					}
-
-					if (tokenlessAppids.length == 0 && tokenlessPackages.length == 0) {
-						// No tokens needed
-						this._saveProductInfo(response);
-						let combined = {
-							apps: Object.assign(cached.apps, response.apps),
-							packages: Object.assign(cached.packages, response.packages),
-							unknownApps: response.unknownApps,
-							unknownPackages: response.unknownPackages
-						}
-						return resolve(combined);
-					}
-
-					try {
-						let {
-							appTokens,
-							packageTokens
-						} = await this.getProductAccessToken(tokenlessAppids, tokenlessPackages);
-						let tokenApps = [];
-						let tokenPackages = [];
-
-						for (let appid in appTokens) {
-							tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
-						}
-
-						for (let packageid in packageTokens) {
-							tokenPackages.push({
-								packageid: parseInt(packageid, 10),
-								access_token: packageTokens[packageid]
-							})
-						}
-
-						// Now we have the tokens. Request the data.
-						let {apps, packages} = await this.getProductInfo(tokenApps, tokenPackages, false);
-						for (let appid in apps) {
-							response.apps[appid] = apps[appid];
-							let index = response.unknownApps.indexOf(parseInt(appid, 10));
-							if (index != -1) {
-								response.unknownApps.splice(index, 1);
-							}
-						}
-
-						for (let packageid in packages) {
-							response.packages[packageid] = packages[packageid];
-							let index = response.unknownPackages.indexOf(parseInt(packageid, 10));
-							if (index != -1) {
-								response.unknownPackages.splice(index, 1);
-							}
-						}
-
-						this._saveProductInfo(response);
-						let combined = {
-							apps: Object.assign(cached.apps, response.apps),
-							packages: Object.assign(cached.packages, response.packages),
-							unknownApps: response.unknownApps,
-							unknownPackages: response.unknownPackages
-						}
-						resolve(combined);
-					} catch (ex) {
-						return reject(ex);
-					}
+			(body.unknown_appids || []).forEach((appid) => {
+				response.unknownApps.push(appid);
+				let index = appids.indexOf(appid);
+				if (index != -1) {
+					appids.splice(index, 1);
 				}
 			});
+
+			(body.unknown_packageids || []).forEach((packageid) => {
+				response.unknownPackages.push(packageid);
+				let index = packageids.indexOf(packageid);
+				if (index != -1) {
+					packageids.splice(index, 1);
+				}
+			});
+
+			(body.apps || []).forEach((app) => {
+				// _parsedData will be populated if we have the PICS cache enabled.
+				// If we don't, we need to parse the data here.
+				response.apps[app.appid] = app._parsedData || {
+					"changenumber": app.change_number,
+					"missingToken": !!app.missing_token,
+					"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+				};
+
+				let index = appids.indexOf(app.appid);
+				if (index != -1) {
+					appids.splice(index, 1);
+				}
+			});
+
+			(body.packages || []).forEach((pkg) => {
+				response.packages[pkg.packageid] = pkg._parsedData || {
+					"changenumber": pkg.change_number,
+					"missingToken": !!pkg.missing_token,
+					"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
+				};
+
+				let index = packageids.indexOf(pkg.packageid);
+				if (index != -1) {
+					packageids.splice(index, 1);
+				}
+			});
+
+			// appids and packageids contain the list of IDs that we're still waiting on data for
+			if (appids.length === 0 && packageids.length === 0) {
+				if (!inclTokens) {
+					this._saveProductInfo(response);
+					let combined = {
+						apps: Object.assign(cached.apps, response.apps),
+						packages: Object.assign(cached.packages, response.packages),
+						unknownApps: response.unknownApps,
+						unknownPackages: response.unknownPackages
+					}
+					return combined;
+				}
+
+				// We want tokens
+				let tokenlessAppids = [];
+				let tokenlessPackages = [];
+
+				for (let appid in response.apps) {
+					if (response.apps[appid].missingToken) {
+						tokenlessAppids.push(parseInt(appid, 10));
+					}
+				}
+
+				for (let packageid in response.packages) {
+					if (response.packages[packageid].missingToken) {
+						tokenlessPackages.push(parseInt(packageid, 10));
+					}
+				}
+
+				if (tokenlessAppids.length == 0 && tokenlessPackages.length == 0) {
+					// No tokens needed
+					this._saveProductInfo(response);
+					let combined = {
+						apps: Object.assign(cached.apps, response.apps),
+						packages: Object.assign(cached.packages, response.packages),
+						unknownApps: response.unknownApps,
+						unknownPackages: response.unknownPackages
+					}
+					return combined;
+				}
+
+				let {
+					appTokens,
+					packageTokens
+				} = await this.getProductAccessToken(tokenlessAppids, tokenlessPackages);
+				let tokenApps = [];
+				let tokenPackages = [];
+
+				for (let appid in appTokens) {
+					tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
+				}
+
+				for (let packageid in packageTokens) {
+					tokenPackages.push({
+						packageid: parseInt(packageid, 10),
+						access_token: packageTokens[packageid]
+					})
+				}
+
+				// Now we have the tokens. Request the data.
+				let {apps, packages} = await this.getProductInfo(tokenApps, tokenPackages, false);
+				for (let appid in apps) {
+					response.apps[appid] = apps[appid];
+					let index = response.unknownApps.indexOf(parseInt(appid, 10));
+					if (index != -1) {
+						response.unknownApps.splice(index, 1);
+					}
+				}
+
+				for (let packageid in packages) {
+					response.packages[packageid] = packages[packageid];
+					let index = response.unknownPackages.indexOf(parseInt(packageid, 10));
+					if (index != -1) {
+						response.unknownPackages.splice(index, 1);
+					}
+				}
+
+				this._saveProductInfo(response);
+				let combined = {
+					apps: Object.assign(cached.apps, response.apps),
+					packages: Object.assign(cached.packages, response.packages),
+					unknownApps: response.unknownApps,
+					unknownPackages: response.unknownPackages
+				}
+				return combined;
+			}
+		});
+	}
+
+	/**
+	 * Get info about some apps and/or packages from Steam, but first split it into chunks
+	 * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
+	 * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
+	 * @param {boolean} [inclTokens=false] - If true, automatically retrieve access tokens if needed
+	 * @param {function} [callback]
+	 * @param {int} [requestType] - Don't touch
+	 * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, unknownApps: number[], unknownPackages: number[]}>}
+	 */
+	getProductInfo(apps, packages, inclTokens, callback, requestType) {
+		// This one actually can take a while, so allow it to go as long as 120 minutes
+		return StdLib.Promises.timeoutCallbackPromise(7200000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, async (resolve, reject) => {
+			try {
+				let response = {
+					apps: {},
+					packages: {},
+					unknownApps: [],
+					unknownPackages: []
+				};
+				// split apps + packages into chunks of 1000
+				let chunkSize = 1000;
+				for (let i = 0; i < packages.length; i += chunkSize) {
+					let packagesChunk = packages.slice(i, i + chunkSize);
+					let result = await this._getProductInfo([], packagesChunk, inclTokens, callback, requestType);
+					response = {
+						apps: Object.assign(response.apps, result.apps),
+						packages: Object.assign(response.packages, result.packages),
+						unknownApps: response.unknownApps.concat(result.unknownApps),
+						unknownPackages: response.unknownPackages.concat(result.unknownPackages)
+					}
+				}
+				for (let i = 0; i < apps.length; i += chunkSize) {
+					let appsChunk = apps.slice(i, i + chunkSize);
+					let result = await this._getProductInfo(appsChunk, [], inclTokens, callback, requestType);
+					response = {
+						apps: Object.assign(response.apps, result.apps),
+						packages: Object.assign(response.packages, result.packages),
+						unknownApps: response.unknownApps.concat(result.unknownApps),
+						unknownPackages: response.unknownPackages.concat(result.unknownPackages)
+					}
+				}
+				resolve(response);
+			} catch (ex) {
+				return reject(ex);
+			}
 		});
 	}
 
