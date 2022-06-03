@@ -262,20 +262,22 @@ class SteamUserApps extends SteamUserAppAuth {
 			let appid = appFiles[filename];
 			let packageid = packageFiles[filename];
 			
-			if (appid) {
+			if (appid !== undefined) {
 				if (error || !contents) {
 					response.notCachedApps.push(appid);
 				} else {
 					this.picsCache.apps[appid] = JSON.parse(contents);
 					response.apps[appid] = this.picsCache.apps[appid];
 				}
-			} else if (packageid) {
+			} else if (packageid !== undefined) { // Remember, package ID can be 0
 				if (error || !contents) {
 					response.notCachedPackages.push(packageid);
 				} else {
 					this.picsCache.packages[packageid] = JSON.parse(contents);
 					response.packages[packageid] = this.picsCache.packages[packageid];
 				}
+			} else {
+				this.emit('debug', `Error retrieving origins of file ${filename}`);
 			}
 		}
 
@@ -299,15 +301,16 @@ class SteamUserApps extends SteamUserAppAuth {
 			callback = inclTokens;
 			inclTokens = false;
 		}
+
 		// Add support for optional callback
-		if (!requestType && typeof callback === 'number') {
+		if (!requestType && typeof callback !== 'function') {
 			requestType = callback;
 			callback = undefined;
 		}
 		
-		return StdLib.Promises.timeoutCallbackPromise(7200000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, async (resolve, reject) => {
-			requestType = requestType || PICSRequestType.User;
+		requestType = requestType || PICSRequestType.User;
 
+		return StdLib.Promises.timeoutCallbackPromise(7200000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, async (resolve, reject) => {
 			// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
 			let appids = [];
 			let packageids = [];
@@ -324,8 +327,8 @@ class SteamUserApps extends SteamUserAppAuth {
 				notCachedPackages: []
 			};
 
-			// Changelist requests always require fresh product info
-			if (this.options.enablePicsCache && requestType !== PICSRequestType.Changelist) {
+			// Changelist requests always require fresh product info anyway
+			if (this.options.enablePicsCache && requestType != PICSRequestType.Changelist) {
 				cached = await this._getCachedProductInfo(apps, packages);
 				// If we already have all the info, we can return it immediately
 				if (cached.notCachedApps.length === 0 && cached.notCachedPackages.length === 0) {
@@ -334,15 +337,14 @@ class SteamUserApps extends SteamUserAppAuth {
 					return resolve(response);
 				}
 			}
+			
+			if (requestType != PICSRequestType.Changelist) {
+				// Filter out any apps & packages we already have cached
+				apps = apps.filter((app) => cached.notCachedApps.includes(typeof app === 'object' ? app.appid : app));
+				packages = packages.filter((pkg) => cached.notCachedPackages.includes(typeof pkg === 'object' ? pkg.packageid : pkg));
+			}
 
-			// Filter out any apps we already have cached
-			apps = apps.filter((app) => {
-				if (typeof app === 'object') {
-					return cached.notCachedApps.includes(app.appid);
-				} else {
-					return cached.notCachedApps.includes(app);
-				}
-			}).map((app) => {
+			apps = apps.map((app) => {
 				if (typeof app === 'object') {
 					appids.push(app.appid);
 					return app;
@@ -352,14 +354,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				}
 			});
 
-			// Filter out any packages we already have cached
-			packages = packages.filter((pkg) => {
-				if (typeof pkg === 'object') {
-					return cached.notCachedPackages.includes(pkg.packageid);
-				} else {
-					return cached.notCachedPackages.includes(pkg);
-				}
-			}).map((pkg) => {
+			packages = packages.map((pkg) => {
 				if (typeof pkg === 'object') {
 					packageids.push(pkg.packageid);
 					return pkg;
@@ -577,6 +572,21 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, unknownApps: number[], unknownPackages: number[]}>}
 	 */
 	getProductInfo(apps, packages, inclTokens, callback, requestType) {
+		// Adds support for the previous syntax
+		if (typeof inclTokens !== 'boolean' && typeof inclTokens === 'function') {
+			requestType = callback;
+			callback = inclTokens;
+			inclTokens = false;
+		}
+
+		// Add support for optional callback
+		if (!requestType && typeof callback !== 'function') {
+			requestType = callback;
+			callback = undefined;
+		}
+		
+		requestType = requestType || PICSRequestType.User;
+
 		// This one actually can take a while, so allow it to go as long as 120 minutes
 		return StdLib.Promises.timeoutCallbackPromise(7200000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, async (resolve, reject) => {
 			try {
@@ -586,12 +596,12 @@ class SteamUserApps extends SteamUserAppAuth {
 					unknownApps: [],
 					unknownPackages: []
 				};
-				// split apps + packages into chunks of 1000
+				// Split apps + packages into chunks of 1000
 				let chunkSize = 1000;
 				for (let i = 0; i < packages.length; i += chunkSize) {
 					let packagesChunk = packages.slice(i, i + chunkSize);
 					// Do not include callback in the request, it will be called multiple times
-					let result = await this._getProductInfo([], packagesChunk, inclTokens, requestType);
+					let result = await this._getProductInfo([], packagesChunk, inclTokens, undefined, requestType);
 					response = {
 						apps: Object.assign(response.apps, result.apps),
 						packages: Object.assign(response.packages, result.packages),
@@ -602,7 +612,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				for (let i = 0; i < apps.length; i += chunkSize) {
 					let appsChunk = apps.slice(i, i + chunkSize);
 					// Do not include callback in the request, it will be called multiple times
-					let result = await this._getProductInfo(appsChunk, [], inclTokens, requestType);
+					let result = await this._getProductInfo(appsChunk, [], inclTokens, undefined, requestType);
 					response = {
 						apps: Object.assign(response.apps, result.apps),
 						packages: Object.assign(response.packages, result.packages),
@@ -688,6 +698,12 @@ class SteamUserApps extends SteamUserAppAuth {
 			return;
 		}
 
+		// First wait for ownership cache to be loaded, so we can calculate ourApps & ourPackages correctly.
+		if (!this.picsCache.ownershipModified) {
+			this._resetChangelistUpdateTimer();
+			return;
+		}
+
 		let result = null;
 		try {
 			result = await this.getProductChanges(this.picsCache.changenumber);
@@ -756,8 +772,22 @@ class SteamUserApps extends SteamUserAppAuth {
 		}
 
 		// Add a no-op catch in case there's some kind of error
-		this.getProductInfo(ourApps, ourPackages, false, null, PICSRequestType.Changelist).catch(() => {
+		let {packages} = await this.getProductInfo(ourApps, ourPackages, false, null, PICSRequestType.Changelist).catch(() => {
 		});
+		
+		// Request info for all the apps in these packages
+		let appids = [];
+
+		for (let pkgid in packages) {
+			((packages[pkgid].packageinfo || {}).appids || []).filter(appid => !appids.includes(appid)).forEach(appid => appids.push(appid));
+		}
+
+		try {
+			// Request type is changelist, because we need to refresh their pics cache
+			await this.getProductInfo(appids, [], true, undefined, PICSRequestType.Changelist);
+		} catch (ex) {
+			this.emit('debug', `Error retrieving product info of changed apps: ${ex.message}`);
+		}
 	}
 
 	/**
