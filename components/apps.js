@@ -326,43 +326,51 @@ class SteamUserApps extends SteamUserAppAuth {
 				notCachedApps: [],
 				notCachedPackages: []
 			};
+			let shaList = {
+				apps: {}, 
+				packages: {}
+			};
 
 			// Changelist requests always require fresh product info anyway
 			if (this.options.enablePicsCache && requestType != PICSRequestType.Changelist) {
 				cached = await this._getCachedProductInfo(apps, packages);
-				// If we already have all the info, we can return it immediately
-				if (cached.notCachedApps.length === 0 && cached.notCachedPackages.length === 0) {
-					response.apps = cached.apps;
-					response.packages = cached.packages;
-					return resolve(response);
-				}
-			}
-			
-			if (requestType != PICSRequestType.Changelist) {
-				// Filter out any apps & packages we already have cached
-				apps = apps.filter((app) => cached.notCachedApps.includes(typeof app === 'object' ? app.appid : app));
-				packages = packages.filter((pkg) => cached.notCachedPackages.includes(typeof pkg === 'object' ? pkg.packageid : pkg));
 			}
 
-			apps = apps.map((app) => {
+			let _apps = [];
+			for (let app of apps) {
+				let appid = parseInt(typeof app === 'object' ? app.appid : app, 10);
+				// Ensure uniqueness to prevent nasty bugs
+				if (appids.includes(appid)) {
+					continue;
+				}
 				if (typeof app === 'object') {
+					app.appid = appid;
 					appids.push(app.appid);
-					return app;
+					_apps.push(app);
 				} else {
-					appids.push(app);
-					return {appid: app};
+					appids.push(appid);
+					_apps.push({appid});
 				}
-			});
+			}
+			apps = _apps;
 
-			packages = packages.map((pkg) => {
-				if (typeof pkg === 'object') {
-					packageids.push(pkg.packageid);
-					return pkg;
-				} else {
-					packageids.push(pkg);
-					return {packageid: pkg};
+			let _packages = [];
+			for (let pkg of packages) {
+				let packageid = parseInt(typeof pkg === 'object' ? pkg.packageid : pkg, 10);
+				// Ensure uniqueness to prevent nasty bugs
+				if (packageids.includes(packageid)) {
+					continue;
 				}
-			});
+				if (typeof pkg === 'object') {
+					pkg.packageid = packageid;
+					packageids.push(pkg.packageid);
+					_packages.push(pkg);
+				} else {
+					packageids.push(packageid);
+					_packages.push({packageid});
+				}
+			}
+			packages = _packages;
 
 			if (inclTokens) {
 				packages.filter(pkg => !pkg.access_token).forEach((pkg) => {
@@ -376,129 +384,78 @@ class SteamUserApps extends SteamUserAppAuth {
 			}
 
 			// Note: This callback can be called multiple times
-			this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages}, async (body) => {
-				// If we're using the PICS cache, then add the items in this response to it
-				if (this.options.enablePicsCache) {
-					let cache = this.picsCache;
-					cache.apps = cache.apps || {};
-					cache.packages = cache.packages || {};
-
-					(body.apps || []).forEach((app) => {
-						let data = {
-							changenumber: app.change_number,
-							missingToken: !!app.missing_token,
-							appinfo: VDF.parse(app.buffer.toString('utf8')).appinfo
-						};
-
-						if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
-							// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
-							this.emit('appUpdate', app.appid, data);
-						}
-
-						cache.apps[app.appid] = data;
-
-						app._parsedData = data;
-					});
-
-					(body.packages || []).forEach((pkg) => {
-						let data = {
-							changenumber: pkg.change_number,
-							missingToken: !!pkg.missing_token,
-							packageinfo: pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
-						};
-
-						if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
-							this.emit('packageUpdate', pkg.packageid, data);
-						}
-
-						cache.packages[pkg.packageid] = data;
-
-						pkg._parsedData = data;
-
-						// Request info for all the apps in this package, if this request didn't originate from the license list
-						if (requestType != PICSRequestType.Licenses) {
-							let appids = (pkg.packageinfo || {}).appids || [];
-							this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {
-							});
-						}
-					});
-				}
-
-				(body.unknown_appids || []).forEach((appid) => {
-					response.unknownApps.push(appid);
-					let index = appids.indexOf(appid);
-					if (index != -1) {
-						appids.splice(index, 1);
-					}
-				});
-
-				(body.unknown_packageids || []).forEach((packageid) => {
-					response.unknownPackages.push(packageid);
-					let index = packageids.indexOf(packageid);
-					if (index != -1) {
-						packageids.splice(index, 1);
-					}
-				});
-
+			this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages, meta_data_only: true}, async (body) => {
 				(body.apps || []).forEach((app) => {
-					// _parsedData will be populated if we have the PICS cache enabled.
-					// If we don't, we need to parse the data here.
-					response.apps[app.appid] = app._parsedData || {
-						"changenumber": app.change_number,
-						"missingToken": !!app.missing_token,
-						"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
-					};
-
-					let index = appids.indexOf(app.appid);
-					if (index != -1) {
-						appids.splice(index, 1);
-					}
+					shaList.apps[app.appid] = app.sha.toString('hex');
 				});
 
 				(body.packages || []).forEach((pkg) => {
-					response.packages[pkg.packageid] = pkg._parsedData || {
-						"changenumber": pkg.change_number,
-						"missingToken": !!pkg.missing_token,
-						"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
-					};
-
-					let index = packageids.indexOf(pkg.packageid);
-					if (index != -1) {
-						packageids.splice(index, 1);
-					}
+					shaList.packages[pkg.packageid] = pkg.sha.toString('hex');
 				});
 
-				// appids and packageids contain the list of IDs that we're still waiting on data for
-				if (appids.length === 0 && packageids.length === 0) {
-					if (!inclTokens) {
-						this._saveProductInfo(response);
-						let combined = {
-							apps: Object.assign(cached.apps, response.apps),
-							packages: Object.assign(cached.packages, response.packages),
-							unknownApps: response.unknownApps,
-							unknownPackages: response.unknownPackages
-						}
-						return resolve(combined);
-					}
+				response.unknownApps = response.unknownApps.concat(body.unknown_appids || []);
+				response.unknownPackages = response.unknownPackages.concat(body.unknown_packageids || []);
+
+				let appTotal = Object.keys(shaList.apps).length + response.unknownApps.length;
+				let packageTotal = Object.keys(shaList.packages).length + response.unknownPackages.length;
+
+				// If our collected totals match the total we requested
+				if (appTotal === appids.length && packageTotal === packageids.length) {
+					// Filter out any apps & packages we already have cached and do not need to be refreshed
+					apps = apps.filter((app) => !response.unknownApps.includes(app.appid) && (cached.apps[app.appid] || {}).sha !== shaList.apps[app.appid]);
+					packages = packages.filter((pkg) => !response.unknownPackages.includes(pkg.packageid) && (cached.packages[pkg.packageid] || {}).sha !== shaList.packages[pkg.packageid]);
+					// console.log(
+					// 	"requestType:", requestType,
+					// 	"app request:",	appids.length,
+					// 	"pkg request:",	packageids.length,
+					// 	"app unknown:",	response.unknownApps.length,
+					// 	"pkg unknown:",	response.unknownPackages.length,
+					// 	"app cache:", 	Object.keys(cached.apps).length,
+					// 	"pkg cache:", 	Object.keys(cached.packages).length,
+					// 	"app to refresh:",	apps.length,
+					// 	"pkg to refresh:",	packages.length,
+					// );
 
 					// We want tokens
-					let tokenlessAppids = [];
-					let tokenlessPackages = [];
+					if (inclTokens) {
+						let _appids = apps.map(app => app.appid);
+						let _packageids = packages.map(pkg => pkg.packageid);
+						let tokenlessAppids = body.apps.filter(app => _appids.includes(app.appid) && !!app.missing_token).map(app => app.appid);
+						let tokenlessPackages = body.packages.filter(pkg => _packageids.includes(pkg.packageid) && !!pkg.missing_token).map(pkg => pkg.packageid);
+						if (tokenlessAppids.length > 0 || tokenlessPackages.length > 0) {
+							try {
+								let {
+									appTokens,
+									packageTokens
+								} = await this.getProductAccessToken(tokenlessAppids, tokenlessPackages);
+								let tokenApps = [];
+								let tokenPackages = [];
 
-					for (let appid in response.apps) {
-						if (response.apps[appid].missingToken) {
-							tokenlessAppids.push(parseInt(appid, 10));
+								for (let appid in appTokens) {
+									tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]});
+								}
+
+								for (let packageid in packageTokens) {
+									tokenPackages.push({
+										packageid: parseInt(packageid, 10),
+										access_token: packageTokens[packageid]
+									});
+								}
+
+								// Replace products to request with included tokens
+								apps = apps.filter(app => !tokenlessAppids.includes(app.appid)).concat(tokenApps);
+								packages = packages.filter(pkg => !tokenlessPackages.includes(pkg.packageid)).concat(tokenPackages);
+							} catch (ex) {
+								return reject(ex);
+							}
 						}
 					}
+					
+					appids = apps.map(app => app.appid);
+					packageids = packages.map(pkg => pkg.packageid);
 
-					for (let packageid in response.packages) {
-						if (response.packages[packageid].missingToken) {
-							tokenlessPackages.push(parseInt(packageid, 10));
-						}
-					}
-
-					if (tokenlessAppids.length == 0 && tokenlessPackages.length == 0) {
-						// No tokens needed
+					// If we have nothing to refresh / no stale data
+					if (apps.length === 0 && packages.length === 0) {
 						this._saveProductInfo(response);
 						let combined = {
 							apps: Object.assign(cached.apps, response.apps),
@@ -509,54 +466,99 @@ class SteamUserApps extends SteamUserAppAuth {
 						return resolve(combined);
 					}
 
-					try {
-						let {
-							appTokens,
-							packageTokens
-						} = await this.getProductAccessToken(tokenlessAppids, tokenlessPackages);
-						let tokenApps = [];
-						let tokenPackages = [];
+					// Note: This callback can be called multiple times
+					this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages}, async (body) => {
+						// If we're using the PICS cache, then add the items in this response to it
+						if (this.options.enablePicsCache) {
+							let cache = this.picsCache;
+							cache.apps = cache.apps || {};
+							cache.packages = cache.packages || {};
 
-						for (let appid in appTokens) {
-							tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
+							(body.apps || []).forEach((app) => {
+								let data = {
+									sha: app.sha.toString('hex'),
+									changenumber: app.change_number,
+									missingToken: !!app.missing_token,
+									appinfo: app.buffer ? VDF.parse(app.buffer.toString('utf8')).appinfo : null
+								};
+
+								if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
+									// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
+									this.emit('appUpdate', app.appid, data);
+								}
+
+								cache.apps[app.appid] = data;
+
+								app._parsedData = data;
+							});
+
+							(body.packages || []).forEach((pkg) => {
+								let data = {
+									sha: pkg.sha.toString('hex'),
+									changenumber: pkg.change_number,
+									missingToken: !!pkg.missing_token,
+									packageinfo: pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
+								};
+
+								if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
+									this.emit('packageUpdate', pkg.packageid, data);
+								}
+
+								cache.packages[pkg.packageid] = data;
+
+								pkg._parsedData = data;
+
+								// Request info for all the apps in this package, if this request didn't originate from the license list
+								if (requestType != PICSRequestType.Licenses) {
+									let appids = (pkg.packageinfo || {}).appids || [];
+									this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {
+									});
+								}
+							});
 						}
 
-						for (let packageid in packageTokens) {
-							tokenPackages.push({
-								packageid: parseInt(packageid, 10),
-								access_token: packageTokens[packageid]
-							})
-						}
+						(body.apps || []).forEach((app) => {
+							// _parsedData will be populated if we have the PICS cache enabled.
+							// If we don't, we need to parse the data here.
+							response.apps[app.appid] = app._parsedData || {
+								"sha": app.sha.toString('hex'),
+								"changenumber": app.change_number,
+								"missingToken": !!app.missing_token,
+								"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+							};
 
-						// Now we have the tokens. Request the data.
-						let {apps, packages} = await this.getProductInfo(tokenApps, tokenPackages, false);
-						for (let appid in apps) {
-							response.apps[appid] = apps[appid];
-							let index = response.unknownApps.indexOf(parseInt(appid, 10));
+							let index = appids.indexOf(app.appid);
 							if (index != -1) {
-								response.unknownApps.splice(index, 1);
+								appids.splice(index, 1);
 							}
-						}
+						});
 
-						for (let packageid in packages) {
-							response.packages[packageid] = packages[packageid];
-							let index = response.unknownPackages.indexOf(parseInt(packageid, 10));
+						(body.packages || []).forEach((pkg) => {
+							response.packages[pkg.packageid] = pkg._parsedData || {
+								"sha": pkg.sha.toString('hex'),
+								"changenumber": pkg.change_number,
+								"missingToken": !!pkg.missing_token,
+								"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
+							};
+
+							let index = packageids.indexOf(pkg.packageid);
 							if (index != -1) {
-								response.unknownPackages.splice(index, 1);
+								packageids.splice(index, 1);
 							}
-						}
+						});
 
-						this._saveProductInfo(response);
-						let combined = {
-							apps: Object.assign(cached.apps, response.apps),
-							packages: Object.assign(cached.packages, response.packages),
-							unknownApps: response.unknownApps,
-							unknownPackages: response.unknownPackages
+						// appids and packageids contain the list of IDs that we're still waiting on data for
+						if (appids.length === 0 && packageids.length === 0) {
+							this._saveProductInfo(response);
+							let combined = {
+								apps: Object.assign(cached.apps, response.apps),
+								packages: Object.assign(cached.packages, response.packages),
+								unknownApps: response.unknownApps,
+								unknownPackages: response.unknownPackages
+							}
+							return resolve(combined);
 						}
-						resolve(combined);
-					} catch (ex) {
-						return reject(ex);
-					}
+					});
 				}
 			});
 		});
@@ -597,7 +599,7 @@ class SteamUserApps extends SteamUserAppAuth {
 					unknownPackages: []
 				};
 				// Split apps + packages into chunks of 1000
-				let chunkSize = 1000;
+				let chunkSize = 2000;
 				for (let i = 0; i < packages.length; i += chunkSize) {
 					let packagesChunk = packages.slice(i, i + chunkSize);
 					// Do not include callback in the request, it will be called multiple times
