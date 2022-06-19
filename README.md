@@ -126,7 +126,7 @@ user.storage.on('read', function(filename, callback) {
 });
 ```
 
-In this manner, you can save data to a database, a cloud service, or anything else you choose.
+In this manner, you can save data to a database, a cloud service, or anything else you choose. If both [`savePicsCache`](#savePicsCache) and [`picsCacheAll`](#picsCacheAll) are enabled, it is possible to maintain your own Steam database this way.
 
 ### autoRelogin
 
@@ -181,13 +181,13 @@ Defaults to `false`.
 
 ### savePicsCache
 
-If `enablePicsCache` is enabled, save product info to disk. (TODO: Improve description)
+If `enablePicsCache` is enabled, saves all product info from [the PICS cache](#picscache) to disk (in [`dataDirectory`](#dataDirectory)) or to your [Custom Storage Engine](#custom-storage-engine). This will significantly speed up the [`appOwnershipCached`](#appOwnershipCache) event from firing and reduce the amount product info requests to Steam. It will only save product info if it's not missing its access token.
 
-Added in 4.24.0
+Added in {{TODO}}
 
 Defaults to `false`.
 
-**Warning:** This will significantly increase the storage space that is needed!
+**Warning:** Mind that this will significantly increase the storage usage and space!
 
 ### picsCacheAll
 
@@ -843,6 +843,7 @@ Requests a list of game servers from the master server.
 - `callback` - Called when requested data is available
     - `err` - An `Error` object on failure, or `null` on success
 	- `apps` - An object whose keys are AppIDs and whose values are objects
+	    - `sha` - The SHA hash of the app info in hex format (useful to compare to old data)
 		- `changenumber` - The changenumber of the latest changelist in which this app changed
 		- `missingToken` - `true` if you need to provide an access token to get more details about this app
 		- `appinfo` - An object whose structure is identical to the output of `app_info_print` in the [Steam console](steam://nav/console)
