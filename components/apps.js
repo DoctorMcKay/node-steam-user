@@ -375,7 +375,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			if (inclTokens) {
 				packages.filter(pkg => !pkg.access_token).forEach((pkg) => {
 					// Check if we have a license for this package which includes a token
-					let license = this.licenses.find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
+					let license = (this.licenses || []).find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
 					if (license) {
 						this.emit('debug', `Using token "${license.access_token}" from license for package ${pkg.packageid}`);
 						pkg.access_token = license.access_token;
@@ -833,7 +833,13 @@ class SteamUserApps extends SteamUserAppAuth {
 		}
 
 		// Get all owned lisense id's
-		let packageids = this.licenses.map(license => license.package_id);
+		let packageids;
+		// We're anonymous
+		if (this.steamID.type == SteamID.Type.ANON_USER) {
+			packageids = [17906];
+		} else {
+			packageids = this.licenses.map(license => license.package_id);
+		}
 		let result;
 
 		try {
