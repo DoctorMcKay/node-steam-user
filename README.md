@@ -1752,7 +1752,20 @@ license(s).
 (i.e. "free to keep for a limited time") cannot be requested using this method. You can request such licenses using
 the steamstore module's [addFreeLicense](https://github.com/DoctorMcKay/node-steamstore#addfreelicensesubid-callback) method.
 
-### getEncryptedAppTicket(appid[, userData], callback)
+### getLegacyGameKey(appid, callback)
+- `appid` - The Steam AppID of the app for which you want a legacy key
+- `callback` - Called when the request completes
+    - `err` - If there was an error, this is an `Error` object. Otherwise, it's `null`.
+    - `response` - The response object
+        - `key` - Your key, as a string
+
+**v4.24.0 or later is required to use this method**
+
+Requests your legacy CD key for a game in your library. This will only succeed if the game in question uses legacy CD
+keys (usually you'll get a Steam popup when you launch this game presenting you with your key which you can copy and
+paste into the game when prompted).
+
+### createEncryptedAppTicket(appid[, userData], callback)
 - `appid` - The Steam AppID of the app for which you want a ticket
 - `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.
 - `callback` - Called when the request completes

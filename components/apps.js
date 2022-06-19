@@ -13,6 +13,11 @@ const EResult = require('../enums/EResult.js');
 const SteamUserBase = require('./00-base.js');
 const SteamUserAppAuth = require('./appauth.js');
 
+// This package is implicitly owned by anonymous users. They don't receive a license list, and should instead just
+// automatically assume that they own package 17906 (and no others, including 0).
+// https://steamdb.info/sub/17906/
+const ANONYMOUS_DEDICATED_SERVER_COMP = 17906;
+
 const PICSRequestType = {
 	User: 0,
 	Changelist: 1,
@@ -832,14 +837,10 @@ class SteamUserApps extends SteamUserAppAuth {
 			return;
 		}
 
-		// Get all owned lisense id's
-		let packageids;
-		// We're anonymous
-		if (this.steamID.type == SteamID.Type.ANON_USER) {
-			packageids = [17906];
-		} else {
-			packageids = this.licenses.map(license => license.package_id);
-		}
+		// Get all owned license id's
+		let packageids = this.steamID.type == SteamID.Type.ANON_USER
+			? [ANONYMOUS_DEDICATED_SERVER_COMP]
+			: this.licenses.map(license => license.package_id);
 		let result;
 
 		try {
@@ -980,8 +981,12 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * @protected
 	 */
 	_getOwnedLicenses() {
+		if (this.steamID.type == SteamID.Type.ANON_USER) {
+			throw new Error('Anonymous user accounts cannot own licenses');
+		}
+
 		if (!this.licenses) {
-			throw new Error("We don't have our license list yet.");
+			throw new Error('We don\'t have our license list yet.');
 		}
 
 		return this.licenses;
@@ -996,7 +1001,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	getOwnedPackages(filter) {
 		// We're anonymous
 		if (this.steamID.type == SteamID.Type.ANON_USER) {
-			return [17906];
+			return [ANONYMOUS_DEDICATED_SERVER_COMP];
 		}
 
 		// We're an individual user
@@ -1190,6 +1195,46 @@ class SteamUserApps extends SteamUserAppAuth {
 						grantedAppIds: body.granted_appids
 					})
 				}
+			});
+		});
+	}
+
+	/**
+	 * Gets your legacy CD key for a game in your library which uses CD keys
+	 * @param {number} appid
+	 * @param {function} [callback]
+	 * @returns {Promise<{key: string}>}
+	 */
+	getLegacyGameKey(appid, callback) {
+		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+			let request = Buffer.alloc(4);
+			request.writeUInt32LE(appid);
+			this._send(EMsg.ClientGetLegacyGameKey, request, (body) => {
+				let responseAppId = body.readUint32();
+				if (responseAppId != appid) {
+					// Is this even possible?
+					return reject(new Error(`Received response for wrong appid ${responseAppId}`));
+				}
+
+				let eresult = body.readUint32();
+				let err = Helpers.eresultError(eresult);
+				if (err) {
+					return reject(err);
+				}
+
+				let keyLength = body.readUint32();
+				if (keyLength == 0) {
+					// Unsure if this is possible
+					return reject(new Error('No key returned'));
+				}
+
+				let key = body.readCString();
+				if (key.length != keyLength - 1) {
+					// keyLength includes the null terminator
+					return reject(new Error(`Incorrect key length: expected ${keyLength - 1} but got ${key.length}`));
+				}
+
+				return resolve({key});
 			});
 		});
 	}
