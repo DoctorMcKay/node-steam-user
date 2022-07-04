@@ -293,30 +293,15 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * Get info about some apps and/or packages from Steam.
 	 * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
 	 * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
-	 * @param {boolean} [inclTokens=false] - If true, automatically retrieve access tokens if needed
-	 * @param {function} [callback]
+	 * @param {boolean} inclTokens - If true, automatically retrieve access tokens if needed
+	 * @param {function} callback
 	 * @param {int} [requestType] - Don't touch
 	 * @returns {Promise<{apps: Object<string, {changenumber: number, missingToken: boolean, appinfo: object}>, packages: Object<string, {changenumber: number, missingToken: boolean, packageinfo: object}>, unknownApps: number[], unknownPackages: number[]}>}
 	 * @protected
 	 */
-	_getProductInfo(apps, packages, inclTokens, callback, requestType) {
-		// Adds support for the previous syntax
-		if (typeof inclTokens !== 'boolean' && typeof inclTokens === 'function') {
-			requestType = callback;
-			callback = inclTokens;
-			inclTokens = false;
-		}
-
-		// Add support for optional callback
-		if (!requestType && typeof callback !== 'function') {
-			requestType = callback;
-			callback = undefined;
-		}
-		
-		requestType = requestType || PICSRequestType.User;
-
+	_getProductInfo(apps, packages, inclTokens, callback, requestType = PICSRequestType.User) {
+		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
 		return StdLib.Promises.timeoutCallbackPromise(7200000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, async (resolve, reject) => {
-			// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
 			let appids = [];
 			let packageids = [];
 			let response = {
@@ -336,11 +321,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				packages: {}
 			};
 
-			// Changelist requests always require fresh product info anyway
-			if (this.options.enablePicsCache && requestType != PICSRequestType.Changelist) {
-				cached = await this._getCachedProductInfo(apps, packages);
-			}
-
+			// Preprocess input: apps and packages
 			let _apps = [];
 			for (let app of apps) {
 				let appid = parseInt(typeof app === 'object' ? app.appid : app, 10);
@@ -351,11 +332,11 @@ class SteamUserApps extends SteamUserAppAuth {
 				if (typeof app === 'object') {
 					app.appid = appid;
 					appids.push(app.appid);
-					_apps.push(app);
 				} else {
 					appids.push(appid);
-					_apps.push({appid});
+					app = {appid};
 				}
+				_apps.push(app);
 			}
 			apps = _apps;
 
@@ -369,23 +350,31 @@ class SteamUserApps extends SteamUserAppAuth {
 				if (typeof pkg === 'object') {
 					pkg.packageid = packageid;
 					packageids.push(pkg.packageid);
-					_packages.push(pkg);
 				} else {
 					packageids.push(packageid);
-					_packages.push({packageid});
+					pkg = {packageid};
 				}
-			}
-			packages = _packages;
-
-			if (inclTokens) {
-				packages.filter(pkg => !pkg.access_token).forEach((pkg) => {
+				if (inclTokens && !pkg.access_token) {
 					// Check if we have a license for this package which includes a token
 					let license = (this.licenses || []).find(lic => lic.package_id == pkg.packageid && lic.access_token != 0);
 					if (license) {
 						this.emit('debug', `Using token "${license.access_token}" from license for package ${pkg.packageid}`);
 						pkg.access_token = license.access_token;
 					}
-				});
+				}
+				_packages.push(pkg);
+			}
+			packages = _packages;
+
+			// If we have no apps or packages, we're done
+			if (appids.length === 0 && packageids.length === 0) {
+				resolve(response);
+				return;
+			}
+
+			// Changelist requests always require fresh product info anyway
+			if (this.options.enablePicsCache && requestType != PICSRequestType.Changelist) {
+				cached = await this._getCachedProductInfo(apps, packages);
 			}
 
 			// Note: This callback can be called multiple times
