@@ -380,11 +380,11 @@ class SteamUserApps extends SteamUserAppAuth {
 			// Note: This callback can be called multiple times
 			this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages, meta_data_only: true}, async (body) => {
 				(body.apps || []).forEach((app) => {
-					shaList.apps[app.appid] = app.sha.toString('hex');
+					shaList.apps[app.appid] = app.sha ? app.sha.toString('hex') : null;
 				});
 
 				(body.packages || []).forEach((pkg) => {
-					shaList.packages[pkg.packageid] = pkg.sha.toString('hex');
+					shaList.packages[pkg.packageid] = pkg.sha ? pkg.sha.toString('hex') : null;
 				});
 
 				response.unknownApps = response.unknownApps.concat(body.unknown_appids || []);
@@ -422,29 +422,32 @@ class SteamUserApps extends SteamUserAppAuth {
 									appTokens,
 									packageTokens
 								} = await this.getProductAccessToken(tokenlessAppids, tokenlessPackages);
-								let tokenApps = [];
-								let tokenPackages = [];
+								let tokenApps = {};
+								let tokenPackages = {};
 
 								for (let appid in appTokens) {
-									tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]});
+									tokenApps[appid] = {
+										appid: parseInt(appid, 10), 
+										access_token: appTokens[appid]
+									};
 								}
 
 								for (let packageid in packageTokens) {
-									tokenPackages.push({
+									tokenPackages[packageid] = {
 										packageid: parseInt(packageid, 10),
 										access_token: packageTokens[packageid]
-									});
+									};
 								}
 
 								// Replace products to request with included tokens
-								apps = apps.filter(app => !tokenlessAppids.includes(app.appid)).concat(tokenApps);
-								packages = packages.filter(pkg => !tokenlessPackages.includes(pkg.packageid)).concat(tokenPackages);
+								apps = apps.filter(app => !appTokens[app.appid]).concat(Object.values(tokenApps));
+								packages = packages.filter(pkg => !tokenPackages[pkg.packageid]).concat(Object.values(tokenPackages));
 							} catch (ex) {
 								return reject(ex);
 							}
 						}
 					}
-					
+
 					appids = apps.map(app => app.appid);
 					packageids = packages.map(pkg => pkg.packageid);
 
@@ -470,7 +473,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 							(body.apps || []).forEach((app) => {
 								let data = {
-									sha: app.sha.toString('hex'),
+									sha: app.sha ? app.sha.toString('hex') : null,
 									changenumber: app.change_number,
 									missingToken: !!app.missing_token,
 									appinfo: app.buffer ? VDF.parse(app.buffer.toString('utf8')).appinfo : null
@@ -488,7 +491,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 							(body.packages || []).forEach((pkg) => {
 								let data = {
-									sha: pkg.sha.toString('hex'),
+									sha: pkg.sha ? pkg.sha.toString('hex') : null,
 									changenumber: pkg.change_number,
 									missingToken: !!pkg.missing_token,
 									packageinfo: pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
@@ -515,7 +518,7 @@ class SteamUserApps extends SteamUserAppAuth {
 							// _parsedData will be populated if we have the PICS cache enabled.
 							// If we don't, we need to parse the data here.
 							response.apps[app.appid] = app._parsedData || {
-								"sha": app.sha.toString('hex'),
+								"sha": app.sha ? app.sha.toString('hex') : null,
 								"changenumber": app.change_number,
 								"missingToken": !!app.missing_token,
 								"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
@@ -529,7 +532,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 						(body.packages || []).forEach((pkg) => {
 							response.packages[pkg.packageid] = pkg._parsedData || {
-								"sha": pkg.sha.toString('hex'),
+								"sha": pkg.sha ? pkg.sha.toString('hex') : null,
 								"changenumber": pkg.change_number,
 								"missingToken": !!pkg.missing_token,
 								"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
