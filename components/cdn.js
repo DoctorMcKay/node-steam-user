@@ -174,7 +174,7 @@ class SteamUserCDN extends SteamUserApps {
 	 * @param {int} appID
 	 * @param {int} depotID
 	 * @param {string} manifestID
-	 * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
+	 * @param {string} branchName - Now mandatory. Use 'public' for a the public build (i.e. not a beta)
 	 * @param {string} [branchPassword]
 	 * @param {function} [callback]
 	 * @return Promise
@@ -207,7 +207,7 @@ class SteamUserCDN extends SteamUserApps {
 	 * @param {int} appID
 	 * @param {int} depotID
 	 * @param {string} manifestID
-	 * @param {string} [branchName] - Currently optional, but may become mandatory in the future (see https://steamdb.info/blog/manifest-request-codes/)
+	 * @param {string} branchName - Now mandatory. Use 'public' for a the public build (i.e. not a beta)
 	 * @param {string} [branchPassword]
 	 * @param {function} [callback]
 	 */
@@ -236,11 +236,13 @@ class SteamUserCDN extends SteamUserApps {
 				token = (await this.getCDNAuthToken(appID, depotID, vhost)).token;
 			}
 
-			let manifestRequestCode = '';
-			if (branchName) {
-				let {requestCode} = await this.getManifestRequestCode(appID, depotID, manifestID, branchName, branchPassword);
-				manifestRequestCode = `/${requestCode}`;
+			if (!branchName) {
+				this._warn(`No branch name was specified for app ${appID}, depot ${depotID}. Assuming "public".`);
+				branchName = 'public';
 			}
+
+			let {requestCode} = await this.getManifestRequestCode(appID, depotID, manifestID, branchName, branchPassword);
+			let manifestRequestCode = `/${requestCode}`;
 
 			let manifestUrl = `${urlBase}/depot/${depotID}/manifest/${manifestID}/5${manifestRequestCode}${token}`;
 			this.emit('debug', `Downloading manifest from ${manifestUrl} (${vhost})`);
@@ -284,7 +286,7 @@ class SteamUserCDN extends SteamUserApps {
 				depot_id: depotID,
 				manifest_id: manifestID,
 				app_branch: branchName,
-				branch_password_hash: StdLib.Hashing.sha1(branchPassword)
+				branch_password_hash: branchPassword ? StdLib.Hashing.sha1(branchPassword) : undefined
 			}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
