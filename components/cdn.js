@@ -77,7 +77,7 @@ class SteamUserCDN extends SteamUserApps {
 					Host: srv.host,
 					vhost: srv.vhost,
 					https_support: srv.https_support,
-					usetokenauth: '1'
+					//usetokenauth: '1'
 				};
 
 				if (srv.allowed_app_ids) {
@@ -227,7 +227,14 @@ class SteamUserCDN extends SteamUserApps {
 			let server = servers[Math.floor(Math.random() * servers.length)];
 			let urlBase = (server.https_support == 'mandatory' ? 'https://' : 'http://') + server.Host;
 			let vhost = server.vhost || server.Host;
-			let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
+
+			let token = '';
+			if (server.usetokenauth == 1) {
+				// Only request a CDN auth token if this server wants one.
+				// I'm not sure that any servers use token auth anymore, but in case there's one out there that does,
+				// we should still try.
+				token = (await this.getCDNAuthToken(appID, depotID, vhost)).token;
+			}
 
 			let manifestRequestCode = '';
 			if (branchName) {
@@ -315,7 +322,11 @@ class SteamUserCDN extends SteamUserApps {
 			let urlBase = (contentServer.https_support == 'mandatory' ? 'https://' : 'http://') + contentServer.Host;
 			let vhost = contentServer.vhost || contentServer.Host;
 			let {key} = await this.getDepotDecryptionKey(appID, depotID);
-			let {token} = await this.getCDNAuthToken(appID, depotID, vhost);
+
+			let token = '';
+			if (contentServer.usetokenauth == 1) {
+				token = (await this.getCDNAuthToken(appID, depotID, vhost)).token;
+			}
 
 			download(`${urlBase}/depot/${depotID}/chunk/${chunkSha1}${token}`, vhost, async (err, res) => {
 				if (err) {
