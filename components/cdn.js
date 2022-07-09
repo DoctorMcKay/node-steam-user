@@ -284,7 +284,7 @@ class SteamUserCDN extends SteamUserApps {
 				depot_id: depotID,
 				manifest_id: manifestID,
 				app_branch: branchName,
-				branch_password_hash: branchPassword // TODO figure out how this is "hashed"
+				branch_password_hash: StdLib.Hashing.sha1(branchPassword)
 			}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
@@ -509,9 +509,7 @@ class SteamUserCDN extends SteamUserApps {
 						});
 					});
 				} else {
-					hash = require('crypto').createHash('sha1');
-					hash.update(downloadBuffer);
-					if (hash.digest('hex') != fileManifest.sha_content) {
+					if (StdLib.Hashing.sha1(downloadBuffer) != fileManifest.sha_content) {
 						return reject(new Error('File checksum mismatch'));
 					}
 
@@ -556,7 +554,7 @@ class SteamUserCDN extends SteamUserApps {
 					branches[beta.betaname] = Buffer.from(beta.betapassword, 'hex');
 				});
 
-				return resolve({"keys": branches});
+				return resolve({keys: branches});
 			});
 		});
 	}
