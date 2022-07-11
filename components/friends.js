@@ -912,7 +912,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 *
 	 * @param {number} appid
 	 * @param {object} tokens
-	 * @param {string} language
+	 * @param {string} [language]
 	 * @returns {Promise}
 	 * @protected
 	 */
@@ -1027,7 +1027,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 				}
 
 				try {
-					user.rich_presence_string = await steamUser._getRPLocalizedString(user.gameid, rpTokens);
+					user.rich_presence_string = await this._getRPLocalizedString(user.gameid, rpTokens);
 				} catch (ex) {
 					delete user.rich_presence_string;
 				}
