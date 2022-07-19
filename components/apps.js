@@ -884,14 +884,15 @@ class SteamUserApps extends SteamUserAppAuth {
 		let appids = {};
 
 		ownedPackages.forEach((pkg) => {
-			if (!this.picsCache.packages[pkg]) {
-				this._warn(`Failed to get owned apps for package ${pkg}`);
+			let pkgid = pkg;
+			if (!this.picsCache.packages[pkgid]) {
+				this._warn(`Failed to get owned apps for package ${pkgid}: not in cache`);
 				return;
 			}
 
-			pkg = this.picsCache.packages[pkg];
+			pkg = this.picsCache.packages[pkgid];
 			if (!pkg.packageinfo) {
-				this._warn(`Failed to get owned apps for package ${pkg}`);
+				this._warn(`Failed to get owned apps for package ${pkgid}: no package info`);
 				return;
 			}
 
@@ -932,14 +933,15 @@ class SteamUserApps extends SteamUserAppAuth {
 		let depotids = {};
 
 		ownedPackages.forEach((pkg) => {
-			if (!this.picsCache.packages[pkg]) {
-				this._warn(`Failed to get owned depots for package ${pkg}`);
+			let pkgid = pkg;
+			if (!this.picsCache.packages[pkgid]) {
+				this._warn(`Failed to get owned depots for package ${pkgid}: not in cache`);
 				return;
 			}
 
-			pkg = this.picsCache.packages[pkg];
+			pkg = this.picsCache.packages[pkgid];
 			if (!pkg.packageinfo) {
-				this._warn(`Failed to get owned depots for package ${pkg}`);
+				this._warn(`Failed to get owned depots for package ${pkgid}: no package info`);
 				return;
 			}
 
