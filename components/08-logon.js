@@ -283,8 +283,6 @@ class SteamUserLogon extends SteamUserWeb {
 	 */
 	_disconnect(suppressLogoff) {
 		this._clearChangelistUpdateTimer();
-		clearTimeout(this._logonTimeout); // cancel any queued reconnect attempt
-		clearTimeout(this._logonMsgTimeout);
 		this._incomingMessageQueue = []; // clear the incoming message queue. If we're disconnecting, we don't care about anything else in the queue.
 
 		this.emit('debug', 'Disconnecting' + (suppressLogoff ? ' without sending logoff' : ''));
@@ -298,15 +296,18 @@ class SteamUserLogon extends SteamUserWeb {
 				this._loggingOff = false;
 				this._connection && this._connection.end(true);
 				this.steamID = null;
+				this._cleanupClosedConnection();
 			}, 4000);
 
 			this.once('disconnected', (eresult) => {
 				clearTimeout(timeout);
 				this.steamID = null;
+				this._cleanupClosedConnection();
 			});
 		} else {
 			this._connection && this._connection.end(true);
 			this.steamID = null;
+			this._cleanupClosedConnection();
 		}
 	}
 

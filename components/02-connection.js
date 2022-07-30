@@ -26,19 +26,28 @@ class SteamUserConnection extends SteamUserEnums {
 		}
 
 		this.emit('debug', `[${connPrefix}] Handling connection close`);
-
-		clearTimeout(this._logonMsgTimeout);
-		delete this._logonMsgTimeout;
+		this._cleanupClosedConnection();
 
 		if (!this.steamID) {
 			// connection closed while connecting; reconnect
-			clearInterval(this._heartbeatInterval);
 			setTimeout(() => this._doConnection(), 1000);
 		} else {
 			// connection closed while we were connected; fire logoff
 			this._handleLogOff(EResult.NoConnection, 'NoConnection');
 		}
-	};
+	}
+
+	_cleanupClosedConnection() {
+		clearTimeout(this._logonTimeout); // cancel any queued reconnect attempt
+		clearTimeout(this._logonMsgTimeout);
+		clearInterval(this._heartbeatInterval);
+
+		this._incomingMessageQueue = []; // clear the incoming message queue. If we're disconnecting, we don't care about anything else in the queue.
+		this._jobCleanupTimers.forEach(timer => clearTimeout(timer));
+		this._jobCleanupTimers = [];
+
+		this._clearChangelistUpdateTimer();
+	}
 }
 
 // Handlers
