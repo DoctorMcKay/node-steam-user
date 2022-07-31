@@ -504,6 +504,18 @@ class SteamUserApps extends SteamUserAppAuth {
 					// 	"pkg to refresh:",	packages.length,
 					// );
 
+					// If we have nothing to refresh / no stale data (e.g. all of them were unknown)
+					if (apps.length === 0 && packages.length === 0) {
+						this._saveProductInfo(response);
+						let combined = {
+							apps: Object.assign(cached.apps, response.apps),
+							packages: Object.assign(cached.packages, response.packages),
+							unknownApps: response.unknownApps,
+							unknownPackages: response.unknownPackages
+						}
+						return resolve(combined);
+					}
+
 					// We want tokens
 					if (inclTokens) {
 						let _appids = apps.map(app => app.appid);
@@ -544,18 +556,6 @@ class SteamUserApps extends SteamUserAppAuth {
 
 					appids = apps.map(app => app.appid);
 					packageids = packages.map(pkg => pkg.packageid);
-
-					// If we have nothing to refresh / no stale data
-					if (apps.length === 0 && packages.length === 0) {
-						this._saveProductInfo(response);
-						let combined = {
-							apps: Object.assign(cached.apps, response.apps),
-							packages: Object.assign(cached.packages, response.packages),
-							unknownApps: response.unknownApps,
-							unknownPackages: response.unknownPackages
-						}
-						return resolve(combined);
-					}
 
 					// Request the apps & packages we need to refresh
 					this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages}, onResponse);
