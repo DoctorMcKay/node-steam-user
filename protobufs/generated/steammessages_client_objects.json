@@ -14,6 +14,45 @@
         "k_ECloudPendingRemoteOperationAppSessionSuspended": 4
       }
     },
+    "ESteamDeckKeyboardLayout": {
+      "values": {
+        "k_ESteamDeckKeyboardLayout_QWERTY": 0,
+        "k_ESteamDeckKeyboardLayout_Bulgarian": 1,
+        "k_ESteamDeckKeyboardLayout_Chinese_Simplified": 2,
+        "k_ESteamDeckKeyboardLayout_Chinese_Traditional": 3,
+        "k_ESteamDeckKeyboardLayout_Czech": 4,
+        "k_ESteamDeckKeyboardLayout_Danish": 5,
+        "k_ESteamDeckKeyboardLayout_Finnish": 6,
+        "k_ESteamDeckKeyboardLayout_French": 7,
+        "k_ESteamDeckKeyboardLayout_German": 8,
+        "k_ESteamDeckKeyboardLayout_Greek": 9,
+        "k_ESteamDeckKeyboardLayout_Hungarian": 10,
+        "k_ESteamDeckKeyboardLayout_Italian": 11,
+        "k_ESteamDeckKeyboardLayout_Japanese": 12,
+        "k_ESteamDeckKeyboardLayout_Korean": 13,
+        "k_ESteamDeckKeyboardLayout_Norwegian": 14,
+        "k_ESteamDeckKeyboardLayout_Polish": 15,
+        "k_ESteamDeckKeyboardLayout_Portuguese": 16,
+        "k_ESteamDeckKeyboardLayout_Romanian": 17,
+        "k_ESteamDeckKeyboardLayout_Russian": 18,
+        "k_ESteamDeckKeyboardLayout_Spanish": 19,
+        "k_ESteamDeckKeyboardLayout_Swedish": 20,
+        "k_ESteamDeckKeyboardLayout_Thai": 21,
+        "k_ESteamDeckKeyboardLayout_Turkish_F": 22,
+        "k_ESteamDeckKeyboardLayout_Turkish_Q": 23,
+        "k_ESteamDeckKeyboardLayout_Ukrainian": 24,
+        "k_ESteamDeckKeyboardLayout_Vietnamese": 25,
+        "k_ESteamDeckKeyboardLayout_QWERTY_International": 26,
+        "k_ESteamDeckKeyboardLayout_Dvorak": 27,
+        "k_ESteamDeckKeyboardLayout_Colemak": 28,
+        "k_ESteamDeckKeyboardLayout_Bulgarian_Phonetic_Traditional": 29,
+        "k_ESteamDeckKeyboardLayout_Bulgarian_Phonetic": 30,
+        "k_ESteamDeckKeyboardLayout_Chinese_Traditional_Bopomofo": 31,
+        "k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie": 32,
+        "k_ESteamDeckKeyboardLayout_Japanese_Kana": 33,
+        "k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick": 34
+      }
+    },
     "SteamMessagesClientIClientForcedEnumDependencies": {
       "fields": {
         "a": {
@@ -35,6 +74,13 @@
           "id": 3,
           "options": {
             "default": "k_EStorageBlockFileSystemType_Invalid"
+          }
+        },
+        "d": {
+          "type": ".ESDCardFormatStage",
+          "id": 4,
+          "options": {
+            "default": "k_ESDCardFormatStage_Invalid"
           }
         }
       }
@@ -360,6 +406,10 @@
           "rule": "repeated",
           "type": ".CMsgStorageDevicesData.BlockDevice",
           "id": 2
+        },
+        "is_unmount_supported": {
+          "type": "bool",
+          "id": 3
         }
       },
       "nested": {
@@ -503,6 +553,10 @@
           "rule": "repeated",
           "type": ".CMsgBluetoothDevicesData.Device",
           "id": 2
+        },
+        "manager": {
+          "type": ".CMsgBluetoothDevicesData.Manager",
+          "id": 3
         }
       },
       "nested": {
@@ -577,14 +631,14 @@
               "id": 8
             }
           }
-        }
-      }
-    },
-    "CMsgBluetoothSettings": {
-      "fields": {
-        "is_enabled": {
-          "type": "bool",
-          "id": 1
+        },
+        "Manager": {
+          "fields": {
+            "is_bluetooth_enabled": {
+              "type": "bool",
+              "id": 1
+            }
+          }
         }
       }
     },
@@ -600,24 +654,1055 @@
         }
       }
     },
+    "CMsgSystemPerfNetworkInterface": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "timestamp": {
+          "type": "double",
+          "id": 2
+        },
+        "tx_bytes_total": {
+          "type": "int64",
+          "id": 3
+        },
+        "rx_bytes_total": {
+          "type": "int64",
+          "id": 4
+        },
+        "tx_bytes_per_sec": {
+          "type": "int32",
+          "id": 5
+        },
+        "rx_bytes_per_sec": {
+          "type": "int32",
+          "id": 6
+        }
+      }
+    },
     "CMsgSystemPerfDiagnosticInfo": {
       "fields": {
         "entries": {
           "rule": "repeated",
           "type": ".CMsgSystemPerfDiagnosticEntry",
           "id": 1
+        },
+        "interfaces": {
+          "rule": "repeated",
+          "type": ".CMsgSystemPerfNetworkInterface",
+          "id": 2
+        },
+        "battery_temp_c": {
+          "type": "float",
+          "id": 3
         }
       }
     },
-    "CMsgSystemPerfSettings": {
+    "CMsgSystemPerfLimits": {
+      "fields": {
+        "cpu_governor_manual_min_mhz": {
+          "type": "int32",
+          "id": 1
+        },
+        "cpu_governor_manual_max_mhz": {
+          "type": "int32",
+          "id": 2
+        },
+        "fsr_sharpness_min": {
+          "type": "int32",
+          "id": 3
+        },
+        "fsr_sharpness_max": {
+          "type": "int32",
+          "id": 4
+        },
+        "gpu_performance_manual_min_mhz": {
+          "type": "int32",
+          "id": 5
+        },
+        "gpu_performance_manual_max_mhz": {
+          "type": "int32",
+          "id": 6
+        },
+        "perf_overlay_is_standalone": {
+          "type": "bool",
+          "id": 7
+        },
+        "is_dynamic_vrs_available": {
+          "type": "bool",
+          "id": 8
+        },
+        "is_manual_display_refresh_rate_available": {
+          "type": "bool",
+          "id": 9
+        },
+        "gpu_performance_levels_available": {
+          "rule": "repeated",
+          "type": ".EGPUPerformanceLevel",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "display_refresh_manual_hz_min": {
+          "type": "int32",
+          "id": 11
+        },
+        "display_refresh_manual_hz_max": {
+          "type": "int32",
+          "id": 12
+        },
+        "fps_limit_options": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "packed": false
+          }
+        },
+        "tdp_limit_min": {
+          "type": "int32",
+          "id": 14
+        },
+        "tdp_limit_max": {
+          "type": "int32",
+          "id": 15
+        },
+        "is_nis_supported": {
+          "type": "bool",
+          "id": 16
+        },
+        "nis_sharpness_min": {
+          "type": "int32",
+          "id": 17
+        },
+        "nis_sharpness_max": {
+          "type": "int32",
+          "id": 18
+        }
+      }
+    },
+    "CMsgSystemPerfSettingsGlobal": {
       "fields": {
         "diagnostic_update_rate": {
           "type": "float",
           "id": 1
         },
-        "is_shark_mode": {
+        "system_trace_service_state": {
+          "type": ".ESystemServiceState",
+          "id": 2,
+          "options": {
+            "default": "k_ESystemServiceState_Unavailable"
+          }
+        },
+        "graphics_profiling_service_state": {
+          "type": ".ESystemServiceState",
+          "id": 3,
+          "options": {
+            "default": "k_ESystemServiceState_Unavailable"
+          }
+        },
+        "perf_overlay_service_state": {
+          "type": ".ESystemServiceState",
+          "id": 4,
+          "options": {
+            "default": "k_ESystemServiceState_Unavailable"
+          }
+        },
+        "perf_overlay_level": {
+          "type": ".EGraphicsPerfOverlayLevel",
+          "id": 5,
+          "options": {
+            "default": "k_EGraphicsPerfOverlayLevel_Hidden"
+          }
+        },
+        "is_show_perf_overlay_over_steam_enabled": {
+          "type": "bool",
+          "id": 6
+        },
+        "is_advanced_settings_enabled": {
+          "type": "bool",
+          "id": 7
+        }
+      }
+    },
+    "CMsgSystemPerfSettingsPerApp": {
+      "fields": {
+        "gpu_performance_manual_mhz": {
+          "type": "int32",
+          "id": 1
+        },
+        "fps_limit": {
+          "type": "int32",
+          "id": 2
+        },
+        "is_variable_resolution_enabled": {
+          "type": "bool",
+          "id": 3
+        },
+        "is_dynamic_refresh_rate_enabled": {
+          "type": "bool",
+          "id": 4
+        },
+        "tdp_limit": {
+          "type": "int32",
+          "id": 5
+        },
+        "cpu_governor": {
+          "type": ".ECPUGovernor",
+          "id": 6,
+          "options": {
+            "default": "k_ECPUGovernor_Invalid"
+          }
+        },
+        "cpu_governor_manual_mhz": {
+          "type": "int32",
+          "id": 7
+        },
+        "scaling_filter": {
+          "type": "int32",
+          "id": 8
+        },
+        "fsr_sharpness": {
+          "type": "int32",
+          "id": 9
+        },
+        "is_fps_limit_enabled": {
+          "type": "bool",
+          "id": 10
+        },
+        "is_tdp_limit_enabled": {
+          "type": "bool",
+          "id": 11
+        },
+        "is_low_latency_mode_enabled": {
+          "type": "bool",
+          "id": 12
+        },
+        "display_refresh_manual_hz": {
+          "type": "int32",
+          "id": 13
+        },
+        "is_game_perf_profile_enabled": {
+          "type": "bool",
+          "id": 14
+        },
+        "gpu_performance_level": {
+          "type": ".EGPUPerformanceLevel",
+          "id": 15,
+          "options": {
+            "default": "k_EGPUPerformanceLevel_Invalid"
+          }
+        },
+        "nis_sharpness": {
+          "type": "int32",
+          "id": 16
+        }
+      }
+    },
+    "CMsgSystemPerfSettings": {
+      "fields": {
+        "global": {
+          "type": ".CMsgSystemPerfSettingsGlobal",
+          "id": 1
+        },
+        "per_app": {
+          "type": ".CMsgSystemPerfSettingsPerApp",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSystemPerfSettingsV1": {
+      "fields": {
+        "diagnostic_update_rate": {
+          "type": "float",
+          "id": 1
+        },
+        "system_trace_service_state": {
+          "type": ".ESystemServiceState",
+          "id": 2,
+          "options": {
+            "default": "k_ESystemServiceState_Unavailable"
+          }
+        },
+        "graphics_profiling_service_state": {
+          "type": ".ESystemServiceState",
+          "id": 3,
+          "options": {
+            "default": "k_ESystemServiceState_Unavailable"
+          }
+        },
+        "perf_overlay_service_state": {
+          "type": ".ESystemServiceState",
+          "id": 4,
+          "options": {
+            "default": "k_ESystemServiceState_Unavailable"
+          }
+        },
+        "perf_overlay_level": {
+          "type": ".EGraphicsPerfOverlayLevel",
+          "id": 5,
+          "options": {
+            "default": "k_EGraphicsPerfOverlayLevel_Hidden"
+          }
+        },
+        "gpu_performance_level": {
+          "type": ".EGPUPerformanceLevel",
+          "id": 6,
+          "options": {
+            "default": "k_EGPUPerformanceLevel_Invalid"
+          }
+        },
+        "gpu_performance_manual_mhz": {
+          "type": "int32",
+          "id": 7
+        },
+        "fps_limit": {
+          "type": "int32",
+          "id": 8
+        },
+        "is_variable_resolution_enabled": {
+          "type": "bool",
+          "id": 9
+        },
+        "is_dynamic_refresh_rate_enabled": {
+          "type": "bool",
+          "id": 10
+        },
+        "tdp_limit": {
+          "type": "int32",
+          "id": 11
+        },
+        "cpu_governor": {
+          "type": ".ECPUGovernor",
+          "id": 12,
+          "options": {
+            "default": "k_ECPUGovernor_Invalid"
+          }
+        },
+        "cpu_governor_manual_mhz": {
+          "type": "int32",
+          "id": 13
+        },
+        "scaling_filter": {
+          "type": "int32",
+          "id": 14
+        },
+        "fsr_sharpness": {
+          "type": "int32",
+          "id": 15
+        },
+        "is_fps_limit_enabled": {
+          "type": "bool",
+          "id": 16
+        },
+        "is_tdp_limit_enabled": {
+          "type": "bool",
+          "id": 17
+        },
+        "is_show_perf_overlay_over_steam_enabled": {
+          "type": "bool",
+          "id": 18
+        },
+        "is_low_latency_mode_enabled": {
+          "type": "bool",
+          "id": 19
+        },
+        "display_refresh_manual_hz": {
+          "type": "int32",
+          "id": 20
+        },
+        "is_game_perf_profile_enabled": {
+          "type": "bool",
+          "id": 21
+        }
+      }
+    },
+    "CMsgSystemPerfState": {
+      "fields": {
+        "limits": {
+          "type": ".CMsgSystemPerfLimits",
+          "id": 1
+        },
+        "settings": {
+          "type": ".CMsgSystemPerfSettings",
+          "id": 2
+        },
+        "current_game_id": {
+          "type": "uint64",
+          "id": 3
+        },
+        "active_profile_game_id": {
+          "type": "uint64",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSystemPerfUpdateSettings": {
+      "oneofs": {
+        "update": {
+          "oneof": [
+            "reset_to_default",
+            "settings_delta"
+          ]
+        }
+      },
+      "fields": {
+        "gameid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "reset_to_default": {
           "type": "bool",
           "id": 2
+        },
+        "settings_delta": {
+          "type": ".CMsgSystemPerfSettings",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSystemDockUpdateState": {
+      "fields": {
+        "state": {
+          "type": ".EUpdaterState",
+          "id": 1,
+          "options": {
+            "default": "k_EUpdaterState_Invalid"
+          }
+        },
+        "rtime_last_checked": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "version_current": {
+          "type": "string",
+          "id": 3
+        },
+        "version_available": {
+          "type": "string",
+          "id": 4
+        },
+        "stage_progress": {
+          "type": "float",
+          "id": 5
+        },
+        "rtime_estimated_completion": {
+          "type": "fixed32",
+          "id": 6
+        }
+      }
+    },
+    "CMsgSystemDockState": {
+      "fields": {
+        "update_state": {
+          "type": ".CMsgSystemDockUpdateState",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSystemDockUpdateFirmware": {
+      "fields": {
+        "check_only": {
+          "type": "bool",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSystemAudioVolume": {
+      "fields": {
+        "entries": {
+          "rule": "repeated",
+          "type": ".CMsgSystemAudioVolume.ChannelEntry",
+          "id": 1
+        },
+        "is_muted": {
+          "type": "bool",
+          "id": 2
+        }
+      },
+      "nested": {
+        "ChannelEntry": {
+          "fields": {
+            "echannel": {
+              "type": ".ESystemAudioChannel",
+              "id": 1,
+              "options": {
+                "default": "k_SystemAudioChannel_Invalid"
+              }
+            },
+            "volume": {
+              "type": "float",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgSystemAudioManagerObject": {
+      "fields": {
+        "id": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rtime_last_update": {
+          "type": "fixed32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSystemAudioManagerDevice": {
+      "fields": {
+        "base": {
+          "type": ".CMsgSystemAudioManagerObject",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "nick": {
+          "type": "string",
+          "id": 3
+        },
+        "description": {
+          "type": "string",
+          "id": 4
+        },
+        "api": {
+          "type": "string",
+          "id": 5
+        }
+      }
+    },
+    "CMsgSystemAudioManagerNode": {
+      "fields": {
+        "base": {
+          "type": ".CMsgSystemAudioManagerObject",
+          "id": 1
+        },
+        "device_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "name": {
+          "type": "string",
+          "id": 3
+        },
+        "nick": {
+          "type": "string",
+          "id": 4
+        },
+        "description": {
+          "type": "string",
+          "id": 5
+        },
+        "edirection": {
+          "type": ".ESystemAudioDirection",
+          "id": 6,
+          "options": {
+            "default": "k_SystemAudioDirection_Invalid"
+          }
+        },
+        "volume": {
+          "type": ".CMsgSystemAudioVolume",
+          "id": 7
+        }
+      }
+    },
+    "CMsgSystemAudioManagerPort": {
+      "fields": {
+        "base": {
+          "type": ".CMsgSystemAudioManagerObject",
+          "id": 1
+        },
+        "node_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "name": {
+          "type": "string",
+          "id": 4
+        },
+        "alias": {
+          "type": "string",
+          "id": 5
+        },
+        "etype": {
+          "type": ".ESystemAudioPortType",
+          "id": 6,
+          "options": {
+            "default": "k_SystemAudioPortType_Invalid"
+          }
+        },
+        "edirection": {
+          "type": ".ESystemAudioPortDirection",
+          "id": 7,
+          "options": {
+            "default": "k_SystemAudioPortDirection_Invalid"
+          }
+        },
+        "is_physical": {
+          "type": "bool",
+          "id": 8
+        },
+        "is_terminal": {
+          "type": "bool",
+          "id": 9
+        },
+        "is_control": {
+          "type": "bool",
+          "id": 10
+        },
+        "is_monitor": {
+          "type": "bool",
+          "id": 11
+        }
+      }
+    },
+    "CMsgSystemAudioManagerLink": {
+      "fields": {
+        "base": {
+          "type": ".CMsgSystemAudioManagerObject",
+          "id": 1
+        },
+        "output_node_id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "output_port_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "input_node_id": {
+          "type": "uint32",
+          "id": 4
+        },
+        "input_port_id": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "CMsgSystemAudioManagerStateHW": {
+      "fields": {
+        "devices": {
+          "rule": "repeated",
+          "type": ".CMsgSystemAudioManagerDevice",
+          "id": 1
+        },
+        "nodes": {
+          "rule": "repeated",
+          "type": ".CMsgSystemAudioManagerNode",
+          "id": 2
+        },
+        "ports": {
+          "rule": "repeated",
+          "type": ".CMsgSystemAudioManagerPort",
+          "id": 3
+        },
+        "links": {
+          "rule": "repeated",
+          "type": ".CMsgSystemAudioManagerLink",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSystemAudioManagerState": {
+      "fields": {
+        "rtime_filter": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "counter": {
+          "type": "int32",
+          "id": 2
+        },
+        "hw": {
+          "type": ".CMsgSystemAudioManagerStateHW",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSystemAudioManagerUpdateSomething": {
+      "fields": {
+        "counter": {
+          "type": "int32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSystemManagerSettings": {
+      "fields": {
+        "idle_backlight_dim_battery_seconds": {
+          "type": "float",
+          "id": 1
+        },
+        "idle_backlight_dim_ac_seconds": {
+          "type": "float",
+          "id": 2
+        },
+        "idle_suspend_battery_seconds": {
+          "type": "float",
+          "id": 3
+        },
+        "idle_suspend_ac_seconds": {
+          "type": "float",
+          "id": 4
+        },
+        "idle_suspend_supressed": {
+          "type": "bool",
+          "id": 5
+        },
+        "is_adaptive_brightness_available": {
+          "type": "bool",
+          "id": 6
+        },
+        "display_adaptive_brightness_enabled": {
+          "type": "bool",
+          "id": 7
+        },
+        "is_display_colorprofile_available": {
+          "type": "bool",
+          "id": 8
+        },
+        "display_colorprofile": {
+          "type": ".EColorProfile",
+          "id": 9,
+          "options": {
+            "default": "k_EColorProfile_Invalid"
+          }
+        },
+        "display_nightmode_enabled": {
+          "type": "bool",
+          "id": 10
+        },
+        "display_nightmode_tintstrength": {
+          "type": "float",
+          "id": 11
+        },
+        "display_nightmode_maxhue": {
+          "type": "float",
+          "id": 12
+        },
+        "display_nightmode_maxsat": {
+          "type": "float",
+          "id": 13
+        },
+        "display_nightmode_uiexp": {
+          "type": "float",
+          "id": 14
+        },
+        "display_nightmode_blend": {
+          "type": "float",
+          "id": 15
+        },
+        "display_nightmode_reset": {
+          "type": "bool",
+          "id": 16
+        },
+        "display_nightmode_schedule_enabled": {
+          "type": "bool",
+          "id": 17
+        },
+        "display_nightmode_schedule_starttime": {
+          "type": "float",
+          "id": 18
+        },
+        "display_nightmode_schedule_endtime": {
+          "type": "float",
+          "id": 19
+        },
+        "display_diagnostics_enabled": {
+          "type": "bool",
+          "id": 20
+        },
+        "als_lux_latest": {
+          "type": "float",
+          "id": 21
+        },
+        "als_lux_median": {
+          "type": "float",
+          "id": 22
+        },
+        "display_brightness_linear": {
+          "type": "float",
+          "id": 23
+        },
+        "display_brightness_adaptivemin": {
+          "type": "float",
+          "id": 24
+        },
+        "display_brightness_adaptivemax": {
+          "type": "float",
+          "id": 25
+        },
+        "is_wifi_powersave_enabled": {
+          "type": "bool",
+          "id": 26
+        },
+        "is_fan_control_available": {
+          "type": "bool",
+          "id": 27
+        },
+        "fan_control_mode": {
+          "type": ".ESystemFanControlMode",
+          "id": 28,
+          "options": {
+            "default": "k_SystemFanControlMode_Invalid"
+          }
+        }
+      }
+    },
+    "CMsgSelectOSBranchParams": {
+      "fields": {
+        "branch": {
+          "type": ".EOSBranch",
+          "id": 1,
+          "options": {
+            "default": "k_EOSBranch_Unknown"
+          }
+        }
+      }
+    },
+    "CMsgSystemUpdateProgress": {
+      "fields": {
+        "stage_progress": {
+          "type": "float",
+          "id": 1
+        },
+        "stage_size_bytes": {
+          "type": "int64",
+          "id": 2
+        },
+        "rtime_estimated_completion": {
+          "type": "fixed32",
+          "id": 3
+        }
+      }
+    },
+    "CMsgSystemUpdateCheckResult": {
+      "fields": {
+        "type": {
+          "type": ".EUpdaterType",
+          "id": 1,
+          "options": {
+            "default": "k_EUpdaterType_Invalid"
+          }
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "rtime_checked": {
+          "type": "fixed32",
+          "id": 3
+        },
+        "available": {
+          "type": "bool",
+          "id": 4
+        },
+        "version": {
+          "type": "string",
+          "id": 5
+        }
+      }
+    },
+    "CMsgSystemUpdateApplyParams": {
+      "fields": {
+        "apply_types": {
+          "rule": "repeated",
+          "type": ".EUpdaterType",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgSystemUpdateApplyResult": {
+      "fields": {
+        "type": {
+          "type": ".EUpdaterType",
+          "id": 1,
+          "options": {
+            "default": "k_EUpdaterType_Invalid"
+          }
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "requires_client_restart": {
+          "type": "bool",
+          "id": 3,
+          "options": {
+            "default": false
+          }
+        },
+        "requires_system_restart": {
+          "type": "bool",
+          "id": 4,
+          "options": {
+            "default": false
+          }
+        }
+      }
+    },
+    "CMsgSystemUpdateState": {
+      "fields": {
+        "state": {
+          "type": ".EUpdaterState",
+          "id": 1,
+          "options": {
+            "default": "k_EUpdaterState_Invalid"
+          }
+        },
+        "progress": {
+          "type": ".CMsgSystemUpdateProgress",
+          "id": 2
+        },
+        "update_check_results": {
+          "rule": "repeated",
+          "type": ".CMsgSystemUpdateCheckResult",
+          "id": 3
+        },
+        "update_apply_results": {
+          "rule": "repeated",
+          "type": ".CMsgSystemUpdateApplyResult",
+          "id": 4
+        }
+      }
+    },
+    "CMsgAchievementChange": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgCellList": {
+      "fields": {
+        "cells": {
+          "rule": "repeated",
+          "type": ".CMsgCellList.Cell",
+          "id": 1
+        }
+      },
+      "nested": {
+        "Cell": {
+          "fields": {
+            "cell_id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "loc_name": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "CMsgShortcutInfo": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "exe": {
+          "type": "string",
+          "id": 2
+        },
+        "start_dir": {
+          "type": "string",
+          "id": 3
+        },
+        "icon": {
+          "type": "string",
+          "id": 4
+        },
+        "path": {
+          "type": "string",
+          "id": 5
+        },
+        "args": {
+          "type": "string",
+          "id": 6
+        },
+        "app_name": {
+          "type": "string",
+          "id": 7
+        },
+        "override_appid": {
+          "type": "uint32",
+          "id": 8
+        },
+        "flatpak_appid": {
+          "type": "string",
+          "id": 9
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 10
+        },
+        "is_remote": {
+          "type": "bool",
+          "id": 11
+        },
+        "is_hidden": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_temporary": {
+          "type": "bool",
+          "id": 13
+        },
+        "is_openvr": {
+          "type": "bool",
+          "id": 14
+        },
+        "allow_desktop_config": {
+          "type": "bool",
+          "id": 15
+        },
+        "allow_overlay": {
+          "type": "bool",
+          "id": 16
+        },
+        "rt_last_played_time": {
+          "type": "uint32",
+          "id": 17
+        },
+        "is_devkit_shortcut": {
+          "type": "bool",
+          "id": 18
+        },
+        "devkit_gameid": {
+          "type": "string",
+          "id": 19
+        }
+      }
+    },
+    "CMsgShortcutAppIds": {
+      "fields": {
+        "appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -686,18 +1771,6 @@
         "k_EContentCheckProvider_Local": 3
       }
     },
-    "EBanContentCheckResult": {
-      "values": {
-        "k_EBanContentCheckResult_NotScanned": 0,
-        "k_EBanContentCheckResult_Reset": 1,
-        "k_EBanContentCheckResult_NeedsChecking": 2,
-        "k_EBanContentCheckResult_VeryUnlikely": 5,
-        "k_EBanContentCheckResult_Unlikely": 30,
-        "k_EBanContentCheckResult_Possible": 50,
-        "k_EBanContentCheckResult_Likely": 75,
-        "k_EBanContentCheckResult_VeryLikely": 100
-      }
-    },
     "EProfileCustomizationType": {
       "values": {
         "k_EProfileCustomizationTypeInvalid": 0,
@@ -741,6 +1814,31 @@
         "k_ECloudStoragePersistStateDeleted": 2
       }
     },
+    "ESDCardFormatStage": {
+      "values": {
+        "k_ESDCardFormatStage_Invalid": 0,
+        "k_ESDCardFormatStage_Starting": 1,
+        "k_ESDCardFormatStage_Testing": 2,
+        "k_ESDCardFormatStage_Rescuing": 3,
+        "k_ESDCardFormatStage_Formatting": 4,
+        "k_ESDCardFormatStage_Finalizing": 5
+      }
+    },
+    "ESystemFanControlMode": {
+      "values": {
+        "k_SystemFanControlMode_Invalid": 0,
+        "k_SystemFanControlMode_Disabled": 1,
+        "k_SystemFanControlMode_Default": 2
+      }
+    },
+    "EColorProfile": {
+      "values": {
+        "k_EColorProfile_Invalid": 0,
+        "k_EColorProfile_Native": 1,
+        "k_EColorProfile_Standard": 2,
+        "k_EColorProfile_Vivid": 3
+      }
+    },
     "EBluetoothDeviceType": {
       "values": {
         "k_BluetoothDeviceType_Invalid": 0,
@@ -755,6 +1853,110 @@
         "k_BluetoothDeviceType_Joystick": 9,
         "k_BluetoothDeviceType_Gamepad": 10,
         "k_BluetoothDeviceType_Keyboard": 11
+      }
+    },
+    "ESystemAudioDirection": {
+      "values": {
+        "k_SystemAudioDirection_Invalid": 0,
+        "k_SystemAudioDirection_Input": 1,
+        "k_SystemAudioDirection_Output": 2
+      }
+    },
+    "ESystemAudioChannel": {
+      "values": {
+        "k_SystemAudioChannel_Invalid": 0,
+        "k_SystemAudioChannel_Aggregated": 1,
+        "k_SystemAudioChannel_FrontLeft": 2,
+        "k_SystemAudioChannel_FrontRight": 3,
+        "k_SystemAudioChannel_LFE": 4,
+        "k_SystemAudioChannel_BackLeft": 5,
+        "k_SystemAudioChannel_BackRight": 6,
+        "k_SystemAudioChannel_FrontCenter": 7,
+        "k_SystemAudioChannel_Unknown": 8,
+        "k_SystemAudioChannel_Mono": 9
+      }
+    },
+    "ESystemAudioPortType": {
+      "values": {
+        "k_SystemAudioPortType_Invalid": 0,
+        "k_SystemAudioPortType_Unknown": 1,
+        "k_SystemAudioPortType_Audio32f": 2,
+        "k_SystemAudioPortType_Midi8b": 3,
+        "k_SystemAudioPortType_Video32RGBA": 4
+      }
+    },
+    "ESystemAudioPortDirection": {
+      "values": {
+        "k_SystemAudioPortDirection_Invalid": 0,
+        "k_SystemAudioPortDirection_Input": 1,
+        "k_SystemAudioPortDirection_Output": 2
+      }
+    },
+    "ESystemServiceState": {
+      "values": {
+        "k_ESystemServiceState_Unavailable": 0,
+        "k_ESystemServiceState_Disabled": 1,
+        "k_ESystemServiceState_Enabled": 2
+      }
+    },
+    "EGraphicsPerfOverlayLevel": {
+      "values": {
+        "k_EGraphicsPerfOverlayLevel_Hidden": 0,
+        "k_EGraphicsPerfOverlayLevel_Basic": 1,
+        "k_EGraphicsPerfOverlayLevel_Medium": 2,
+        "k_EGraphicsPerfOverlayLevel_Full": 3,
+        "k_EGraphicsPerfOverlayLevel_Minimal": 4
+      }
+    },
+    "EGPUPerformanceLevel": {
+      "values": {
+        "k_EGPUPerformanceLevel_Invalid": 0,
+        "k_EGPUPerformanceLevel_Auto": 1,
+        "k_EGPUPerformanceLevel_Manual": 2,
+        "k_EGPUPerformanceLevel_Low": 3,
+        "k_EGPUPerformanceLevel_High": 4,
+        "k_EGPUPerformanceLevel_Profiling": 5
+      }
+    },
+    "EScalingFilter": {
+      "values": {
+        "k_EScalingFilter_Invalid": 0,
+        "k_EScalingFilter_FSR": 1,
+        "k_EScalingFilter_Nearest": 2,
+        "k_EScalingFilter_Integer": 3,
+        "k_EScalingFilter_Linear": 4,
+        "k_EScalingFilter_NIS": 5
+      }
+    },
+    "ECPUGovernor": {
+      "values": {
+        "k_ECPUGovernor_Invalid": 0,
+        "k_ECPUGovernor_Perf": 1,
+        "k_ECPUGovernor_Powersave": 2,
+        "k_ECPUGovernor_Manual": 3
+      }
+    },
+    "EUpdaterType": {
+      "values": {
+        "k_EUpdaterType_Invalid": 0,
+        "k_EUpdaterType_Client": 1,
+        "k_EUpdaterType_OS": 2,
+        "k_EUpdaterType_BIOS": 3,
+        "k_EUpdaterType_Aggregated": 4,
+        "k_EUpdaterType_Test1": 5,
+        "k_EUpdaterType_Test2": 6,
+        "k_EUpdaterType_Dummy": 7
+      }
+    },
+    "EUpdaterState": {
+      "values": {
+        "k_EUpdaterState_Invalid": 0,
+        "k_EUpdaterState_UpToDate": 2,
+        "k_EUpdaterState_Checking": 3,
+        "k_EUpdaterState_Available": 4,
+        "k_EUpdaterState_Applying": 5,
+        "k_EUpdaterState_ClientRestartPending": 6,
+        "k_EUpdaterState_SystemRestartPending": 7
       }
     },
     "EStorageBlockContentType": {
@@ -772,6 +1974,110 @@
         "k_EStorageBlockFileSystemType_Unknown": 1,
         "k_EStorageBlockFileSystemType_VFat": 2,
         "k_EStorageBlockFileSystemType_Ext4": 3
+      }
+    },
+    "ESteamDeckCompatibilityCategory": {
+      "values": {
+        "k_ESteamDeckCompatibilityCategory_Unknown": 0,
+        "k_ESteamDeckCompatibilityCategory_Unsupported": 1,
+        "k_ESteamDeckCompatibilityCategory_Playable": 2,
+        "k_ESteamDeckCompatibilityCategory_Verified": 3
+      }
+    },
+    "ESteamDeckCompatibilityResultDisplayType": {
+      "values": {
+        "k_ESteamDeckCompatibilityResultDisplayType_Invisible": 0,
+        "k_ESteamDeckCompatibilityResultDisplayType_Informational": 1,
+        "k_ESteamDeckCompatibilityResultDisplayType_Unsupported": 2,
+        "k_ESteamDeckCompatibilityResultDisplayType_Playable": 3,
+        "k_ESteamDeckCompatibilityResultDisplayType_Verified": 4
+      }
+    },
+    "EACState": {
+      "values": {
+        "k_EACState_Unknown": 0,
+        "k_EACState_Disconnected": 1,
+        "k_EACState_Connected": 2,
+        "k_EACState_ConnectedSlow": 3
+      }
+    },
+    "EBatteryState": {
+      "values": {
+        "k_EBatteryState_Unknown": 0,
+        "k_EBatteryState_Discharging": 1,
+        "k_EBatteryState_Charging": 2,
+        "k_EBatteryState_Full": 3
+      }
+    },
+    "EOSBranch": {
+      "values": {
+        "k_EOSBranch_Unknown": 0,
+        "k_EOSBranch_Release": 1,
+        "k_EOSBranch_ReleaseCandidate": 2,
+        "k_EOSBranch_Beta": 3,
+        "k_EOSBranch_BetaCandidate": 4,
+        "k_EOSBranch_Main": 5
+      }
+    },
+    "ECommunityItemClass": {
+      "values": {
+        "k_ECommunityItemClass_Invalid": 0,
+        "k_ECommunityItemClass_Badge": 1,
+        "k_ECommunityItemClass_GameCard": 2,
+        "k_ECommunityItemClass_ProfileBackground": 3,
+        "k_ECommunityItemClass_Emoticon": 4,
+        "k_ECommunityItemClass_BoosterPack": 5,
+        "k_ECommunityItemClass_Consumable": 6,
+        "k_ECommunityItemClass_GameGoo": 7,
+        "k_ECommunityItemClass_ProfileModifier": 8,
+        "k_ECommunityItemClass_Scene": 9,
+        "k_ECommunityItemClass_SalienItem": 10,
+        "k_ECommunityItemClass_Sticker": 11,
+        "k_ECommunityItemClass_ChatEffect": 12,
+        "k_ECommunityItemClass_MiniProfileBackground": 13,
+        "k_ECommunityItemClass_AvatarFrame": 14,
+        "k_ECommunityItemClass_AnimatedAvatar": 15,
+        "k_ECommunityItemClass_SteamDeckKeyboardSkin": 16
+      }
+    },
+    "ESteamDeckCompatibilityFeedback": {
+      "values": {
+        "k_ESteamDeckCompatibilityFeedback_Unset": 0,
+        "k_ESteamDeckCompatibilityFeedback_Agree": 1,
+        "k_ESteamDeckCompatibilityFeedback_Disagree": 2,
+        "k_ESteamDeckCompatibilityFeedback_Ignore": 3
+      }
+    },
+    "EProvideDeckFeedbackPreference": {
+      "values": {
+        "k_EProvideDeckFeedbackPreference_Unset": 0,
+        "k_EProvideDeckFeedbackPreference_Yes": 1,
+        "k_EProvideDeckFeedbackPreference_No": 2
+      }
+    },
+    "ETouchGesture": {
+      "values": {
+        "k_ETouchGestureNone": 0,
+        "k_ETouchGestureTouch": 1,
+        "k_ETouchGestureTap": 2,
+        "k_ETouchGestureDoubleTap": 3,
+        "k_ETouchGestureShortPress": 4,
+        "k_ETouchGestureLongPress": 5,
+        "k_ETouchGestureLongTap": 6,
+        "k_ETouchGestureTwoFingerTap": 7,
+        "k_ETouchGestureTapCancelled": 8,
+        "k_ETouchGesturePinchBegin": 9,
+        "k_ETouchGesturePinchUpdate": 10,
+        "k_ETouchGesturePinchEnd": 11,
+        "k_ETouchGestureFlingStart": 12,
+        "k_ETouchGestureFlingCancelled": 13
+      }
+    },
+    "ESessionPersistence": {
+      "values": {
+        "k_ESessionPersistence_Invalid": -1,
+        "k_ESessionPersistence_Ephemeral": 0,
+        "k_ESessionPersistence_Persistent": 1
       }
     },
     "msgpool_soft_limit": {
@@ -804,6 +2110,26 @@
       "extend": ".google.protobuf.FieldOptions",
       "options": {
         "default": false
+      }
+    },
+    "allow_field_named_steam_id": {
+      "type": "bool",
+      "id": 50024,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
       }
     },
     "EProtoClanEventType": {
@@ -998,10 +2324,6 @@
           "type": "uint32",
           "id": 28
         },
-        "wg_token": {
-          "type": "string",
-          "id": 30
-        },
         "launcher_type": {
           "type": "uint32",
           "id": 31,
@@ -1015,6 +2337,25 @@
           "options": {
             "default": 0
           }
+        },
+        "timeout_ms": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": -1
+          }
+        },
+        "debug_source": {
+          "type": "string",
+          "id": 34
+        },
+        "debug_source_string_index": {
+          "type": "uint32",
+          "id": 35
+        },
+        "token_id": {
+          "type": "uint64",
+          "id": 36
         },
         "ip": {
           "type": "uint32",
@@ -1095,14 +2436,6 @@
           "type": "string",
           "id": 3
         },
-        "logo": {
-          "type": "string",
-          "id": 4
-        },
-        "logo_small": {
-          "type": "string",
-          "id": 5
-        },
         "tool": {
           "type": "bool",
           "id": 6
@@ -1134,6 +2467,10 @@
         "is_visible_in_steam_china": {
           "type": "bool",
           "id": 13
+        },
+        "app_type": {
+          "type": "uint32",
+          "id": 14
         }
       }
     },
@@ -1416,6 +2753,13 @@
         "votedowncount": {
           "type": "int32",
           "id": 15
+        },
+        "ban_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 16,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
+          }
         }
       }
     },
@@ -1627,6 +2971,27 @@
         "time_reserved": {
           "type": "uint32",
           "id": 8
+        }
+      }
+    },
+    "CMsgKeyValuePair": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgKeyValueSet": {
+      "fields": {
+        "pairs": {
+          "rule": "repeated",
+          "type": ".CMsgKeyValuePair",
+          "id": 1
         }
       }
     },

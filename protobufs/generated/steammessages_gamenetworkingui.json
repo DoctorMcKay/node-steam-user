@@ -554,6 +554,14 @@
         }
       }
     },
+    "CMsgICECandidate": {
+      "fields": {
+        "candidate": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
     "CMsgICERendezvous": {
       "fields": {
         "auth": {
@@ -561,7 +569,7 @@
           "id": 2
         },
         "add_candidate": {
-          "type": ".CMsgICERendezvous.Candidate",
+          "type": ".CMsgICECandidate",
           "id": 1
         }
       },
@@ -571,14 +579,6 @@
             "pwd_frag": {
               "type": "string",
               "id": 1
-            }
-          }
-        },
-        "Candidate": {
-          "fields": {
-            "candidate": {
-              "type": "string",
-              "id": 3
             }
           }
         }
@@ -719,6 +719,10 @@
             "flags": {
               "type": "uint32",
               "id": 3
+            },
+            "lane_idx": {
+              "type": "uint32",
+              "id": 4
             }
           }
         }
@@ -905,7 +909,6 @@
         "k_ESteamDatagramMsg_RouterPingRequest": 1,
         "k_ESteamDatagramMsg_RouterPingReply": 2,
         "k_ESteamDatagramMsg_GameserverPingRequest": 3,
-        "k_ESteamDatagramMsg_LegacyGameserverPingReply": 4,
         "k_ESteamDatagramMsg_GameserverSessionRequest": 5,
         "k_ESteamDatagramMsg_GameserverSessionEstablished": 6,
         "k_ESteamDatagramMsg_NoSession": 7,
@@ -923,17 +926,47 @@
         "k_ESteamDatagramMsg_ConnectOK": 19,
         "k_ESteamDatagramMsg_ConnectionClosed": 20,
         "k_ESteamDatagramMsg_NoConnection": 21,
-        "k_ESteamDatagramMsg_RelayToRelayPingRequest": 22,
-        "k_ESteamDatagramMsg_RelayToRelayPingReply": 23,
+        "k_ESteamDatagramMsg_TicketDecryptRequest": 22,
+        "k_ESteamDatagramMsg_TicketDecryptReply": 23,
         "k_ESteamDatagramMsg_P2PSessionRequest": 24,
         "k_ESteamDatagramMsg_P2PSessionEstablished": 25,
         "k_ESteamDatagramMsg_P2PStatsClient": 26,
         "k_ESteamDatagramMsg_P2PStatsRelay": 27,
         "k_ESteamDatagramMsg_P2PBadRoute": 28,
         "k_ESteamDatagramMsg_GameserverPingReply": 29,
-        "k_ESteamDatagramMsg_GameserverRegistration": 30,
+        "k_ESteamDatagramMsg_LegacyGameserverRegistration": 30,
         "k_ESteamDatagramMsg_SetSecondaryAddressRequest": 31,
-        "k_ESteamDatagramMsg_SetSecondaryAddressResult": 32
+        "k_ESteamDatagramMsg_SetSecondaryAddressResult": 32,
+        "k_ESteamDatagramMsg_RelayToRelayPingRequest": 33,
+        "k_ESteamDatagramMsg_RelayToRelayPingReply": 34
+      }
+    },
+    "CMsgSteamNetworkingIPAddress": {
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSteamDatagramSignedMessageGeneric": {
+      "fields": {
+        "cert": {
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 1
+        },
+        "signed_data": {
+          "type": "bytes",
+          "id": 2
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 3
+        }
       }
     },
     "CMsgSteamDatagramRouterPingReply": {
@@ -1065,81 +1098,116 @@
         }
       }
     },
-    "CMsgSteamDatagramGameserverPingRequest": {
+    "CMsgSteamDatagramGameserverPingRequestBody": {
       "fields": {
-        "your_public_ip": {
+        "relay_popid": {
           "type": "fixed32",
           "id": 1
         },
-        "your_public_port": {
-          "type": "fixed32",
-          "id": 5
-        },
-        "server_time": {
-          "type": "fixed32",
+        "your_public_ip": {
+          "type": ".CMsgSteamNetworkingIPAddress",
           "id": 2
         },
-        "challenge": {
-          "type": "fixed64",
+        "your_public_port": {
+          "type": "uint32",
           "id": 3
         },
-        "router_timestamp": {
-          "type": "fixed32",
-          "id": 4
-        }
-      }
-    },
-    "CMsgSteamDatagramLegacyGameserverPingReply": {
-      "fields": {
-        "router_timestamp": {
-          "type": "fixed32",
+        "relay_unix_time": {
+          "type": "uint64",
           "id": 4
         },
-        "dummy_pad": {
+        "routing_secret": {
           "type": "fixed64",
-          "id": 99
+          "id": 5
+        },
+        "my_ips": {
+          "rule": "repeated",
+          "type": ".CMsgSteamNetworkingIPAddress",
+          "id": 6
+        },
+        "echo": {
+          "type": "bytes",
+          "id": 8
         }
       }
     },
-    "CMsgSteamDatagramGameserverPingReply": {
+    "CMsgSteamDatagramGameserverPingRequestEnvelope": {
       "fields": {
         "cert": {
           "type": ".CMsgSteamDatagramCertificateSigned",
-          "id": 1
+          "id": 6
         },
         "signed_data": {
           "type": "bytes",
-          "id": 2
+          "id": 7
         },
         "signature": {
           "type": "bytes",
+          "id": 8
+        },
+        "legacy_your_public_ip": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "legacy_your_public_port": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "legacy_relay_unix_time": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "legacy_challenge": {
+          "type": "fixed64",
           "id": 3
+        },
+        "legacy_router_timestamp": {
+          "type": "fixed32",
+          "id": 4
         }
-      },
-      "nested": {
-        "SignedData": {
-          "fields": {
-            "challenge_time": {
-              "type": "fixed32",
-              "id": 2
-            },
-            "challenge": {
-              "type": "fixed64",
-              "id": 3
-            },
-            "router_timestamp": {
-              "type": "fixed32",
-              "id": 4
-            },
-            "data_center_id": {
-              "type": "fixed32",
-              "id": 5
-            },
-            "appid": {
-              "type": "uint32",
-              "id": 6
-            }
-          }
+      }
+    },
+    "CMsgSteamDatagramGameserverPingReplyData": {
+      "fields": {
+        "echo_relay_unix_time": {
+          "type": "fixed32",
+          "id": 2
+        },
+        "echo": {
+          "type": "bytes",
+          "id": 8
+        },
+        "legacy_challenge": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "legacy_router_timestamp": {
+          "type": "fixed32",
+          "id": 4
+        },
+        "data_center_id": {
+          "type": "fixed32",
+          "id": 5
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 6
+        },
+        "protocol_version": {
+          "type": "uint32",
+          "id": 7
+        },
+        "build": {
+          "type": "string",
+          "id": 9
+        },
+        "network_config_version": {
+          "type": "uint64",
+          "id": 10
+        },
+        "my_unix_time": {
+          "type": "fixed32",
+          "id": 11
         }
       }
     },
@@ -1727,7 +1795,7 @@
           "id": 8
         },
         "network_config_version": {
-          "type": "uint32",
+          "type": "uint64",
           "id": 6
         },
         "protocol_version": {
@@ -1741,6 +1809,14 @@
         "build": {
           "type": "string",
           "id": 10
+        },
+        "dev_gameserver_identity": {
+          "type": "string",
+          "id": 100
+        },
+        "dev_client_cert": {
+          "type": ".CMsgSteamDatagramCertificateSigned",
+          "id": 101
         }
       }
     },
@@ -2055,17 +2131,25 @@
           "type": "fixed32",
           "id": 5
         },
+        "encrypted_data": {
+          "type": "bytes",
+          "id": 14
+        },
+        "encryption_your_public_key_lead_byte": {
+          "type": "uint32",
+          "id": 15
+        },
+        "encryption_my_ephemeral_public_key": {
+          "type": "bytes",
+          "id": 16
+        },
         "protocol_version": {
           "type": "uint32",
           "id": 8
         },
         "network_config_version": {
-          "type": "uint32",
+          "type": "uint64",
           "id": 9
-        },
-        "unused_public_ip": {
-          "type": "fixed32",
-          "id": 10
         },
         "platform": {
           "type": "string",
@@ -2074,6 +2158,16 @@
         "build": {
           "type": "string",
           "id": 13
+        }
+      },
+      "nested": {
+        "EncryptedData": {
+          "fields": {
+            "peer_identity_string": {
+              "type": "string",
+              "id": 1
+            }
+          }
         }
       }
     },

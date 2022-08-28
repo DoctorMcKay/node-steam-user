@@ -1,3 +1,4 @@
+import "steammessages_base.proto";
 import "steammessages_unified_base.steamclient.proto";
 import "clientmetrics.proto";
 
@@ -59,6 +60,30 @@ message CClientMetrics_SteamPipeWorkStats_Notification {
 	optional uint32 depotid = 2;
 	optional .ESteamPipeWorkType work_type = 3 [default = k_ESteamPipeClientWorkType_Invalid];
 	repeated .CClientMetrics_SteamPipeWorkStats_Operation operations = 4;
+	optional uint32 hardware_type = 5;
+}
+
+message CClientMetrics_ReportReactUsage_Notification {
+	message RouteData {
+		optional string route = 1;
+		optional uint32 count = 2;
+	}
+
+	message ComponentData {
+		optional string component = 1;
+		optional uint32 count = 2;
+	}
+
+	message ActionData {
+		optional string action = 1;
+		optional uint32 count = 2;
+	}
+
+	optional string product = 1;
+	optional string version = 2;
+	repeated .CClientMetrics_ReportReactUsage_Notification.RouteData routes = 3;
+	repeated .CClientMetrics_ReportReactUsage_Notification.ComponentData components = 4;
+	repeated .CClientMetrics_ReportReactUsage_Notification.ActionData actions = 5;
 }
 
 message CClientMetrics_ReportClientError_Notification {
@@ -141,6 +166,7 @@ service ClientMetrics {
 	rpc ClientAppInterfaceStatsReport (.CClientMetrics_AppInterfaceStats_Notification) returns (.NoResponse);
 	rpc ClientIPv6ConnectivityReport (.CClientMetrics_IPv6Connectivity_Notification) returns (.NoResponse);
 	rpc SteamPipeWorkStatsReport (.CClientMetrics_SteamPipeWorkStats_Notification) returns (.NoResponse);
+	rpc ReportReactUsage (.CClientMetrics_ReportReactUsage_Notification) returns (.NoResponse);
 	rpc ReportClientError (.CClientMetrics_ReportClientError_Notification) returns (.NoResponse);
 	rpc ClientBootstrapReport (.CClientMetrics_ClientBootstrap_Notification) returns (.NoResponse);
 	rpc ClientDownloadRatesReport (.CClientMetrics_DownloadRates_Notification) returns (.NoResponse);

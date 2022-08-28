@@ -1,7 +1,8 @@
 {
   "options": {
-    "cc_generic_services": false,
-    "optimize_for": "SPEED"
+    "cc_generic_services": true,
+    "optimize_for": "SPEED",
+    "(force_php_generation)": true
   },
   "nested": {
     "EAuthTokenPlatformType": {
@@ -19,7 +20,26 @@
         "k_EAuthSessionGuardType_EmailCode": 2,
         "k_EAuthSessionGuardType_DeviceCode": 3,
         "k_EAuthSessionGuardType_DeviceConfirmation": 4,
-        "k_EAuthSessionGuardType_EmailConfirmation": 5
+        "k_EAuthSessionGuardType_EmailConfirmation": 5,
+        "k_EAuthSessionGuardType_MachineToken": 6
+      }
+    },
+    "EAuthSessionSecurityHistory": {
+      "values": {
+        "k_EAuthSessionSecurityHistory_Invalid": 0,
+        "k_EAuthSessionSecurityHistory_UsedPreviously": 1,
+        "k_EAuthSessionSecurityHistory_NoPriorHistory": 2
+      }
+    },
+    "EAuthTokenState": {
+      "values": {
+        "k_EAuthTokenState_Invalid": 0,
+        "k_EAuthTokenState_New": 1,
+        "k_EAuthTokenState_Confirmed": 2,
+        "k_EAuthTokenState_Issued": 3,
+        "k_EAuthTokenState_Denied": 4,
+        "k_EAuthTokenState_LoggedOut": 5,
+        "k_EAuthTokenState_Revoked": 99
       }
     },
     "CAuthentication_GetPasswordRSAPublicKey_Request": {
@@ -165,13 +185,32 @@
         },
         "remember_login": {
           "type": "bool",
-          "id": 5
+          "id": 5,
+          "options": {
+            "(description)": "deprecated"
+          }
         },
         "platform_type": {
           "type": ".EAuthTokenPlatformType",
           "id": 6,
           "options": {
             "default": "k_EAuthTokenPlatformType_Unknown"
+          }
+        },
+        "persistence": {
+          "type": ".ESessionPersistence",
+          "id": 7,
+          "options": {
+            "default": "k_ESessionPersistence_Persistent",
+            "(description)": "whether we are requesting a persistent or an ephemeral session"
+          }
+        },
+        "website_id": {
+          "type": "string",
+          "id": 8,
+          "options": {
+            "default": "Unknown",
+            "(description)": "(EMachineAuthWebDomain) identifier of client requesting auth"
           }
         }
       }
@@ -213,6 +252,13 @@
           "options": {
             "(description)": "steamid of the account logging in - will only be included if the credentials were correct"
           }
+        },
+        "weak_token": {
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "partial-authentication token - limited lifetime and scope, included only if credentials were valid"
+          }
         }
       }
     },
@@ -225,6 +271,13 @@
         "request_id": {
           "type": "bytes",
           "id": 2
+        },
+        "token_to_revoke": {
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "(description)": "If this is set to a token owned by this user, that token will be retired"
+          }
         }
       }
     },
@@ -256,6 +309,20 @@
           "id": 4,
           "options": {
             "(description)": "if login has been confirmed, this is a new token subordinate to refresh_token"
+          }
+        },
+        "had_remote_interaction": {
+          "type": "bool",
+          "id": 5,
+          "options": {
+            "(description)": "whether or not the auth session appears to have had remote interaction from a potential confirmer"
+          }
+        },
+        "account_name": {
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "account name of authenticating account, for use by UI layer"
           }
         }
       }
@@ -318,7 +385,47 @@
         },
         "device_friendly_name": {
           "type": "string",
-          "id": 7
+          "id": 7,
+          "options": {
+            "(description)": "name of requestor device"
+          }
+        },
+        "version": {
+          "type": "int32",
+          "id": 8,
+          "options": {
+            "(description)": "version field"
+          }
+        },
+        "login_history": {
+          "type": ".EAuthSessionSecurityHistory",
+          "id": 9,
+          "options": {
+            "default": "k_EAuthSessionSecurityHistory_Invalid",
+            "(description)": "whether the ip has previuously been used on the account successfully"
+          }
+        },
+        "requestor_location_mismatch": {
+          "type": "bool",
+          "id": 10,
+          "options": {
+            "(description)": "whether the requestor location matches this requests location"
+          }
+        },
+        "high_usage_login": {
+          "type": "bool",
+          "id": 11,
+          "options": {
+            "(description)": "whether this login has seen high usage recently"
+          }
+        },
+        "requested_persistence": {
+          "type": ".ESessionPersistence",
+          "id": 12,
+          "options": {
+            "default": "k_ESessionPersistence_Invalid",
+            "(description)": "session persistence requestor has indicated they want"
+          }
         }
       }
     },
@@ -358,6 +465,14 @@
           "options": {
             "default": false,
             "(description)": "Whether to confirm the login (true) or deny the login (false)"
+          }
+        },
+        "persistence": {
+          "type": ".ESessionPersistence",
+          "id": 6,
+          "options": {
+            "default": "k_ESessionPersistence_Persistent",
+            "(description)": "whether we are requesting a persistent or an ephemeral session"
           }
         }
       }
@@ -400,6 +515,214 @@
     },
     "CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response": {
       "fields": {}
+    },
+    "CAuthentication_AccessToken_GenerateForApp_Request": {
+      "fields": {
+        "refresh_token": {
+          "type": "string",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CAuthentication_AccessToken_GenerateForApp_Response": {
+      "fields": {
+        "access_token": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CAuthentication_GetAuthSessionsForAccount_Request": {
+      "fields": {}
+    },
+    "CAuthentication_GetAuthSessionsForAccount_Response": {
+      "fields": {
+        "client_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "unique identifier of requestor, also used for routing",
+            "packed": false
+          }
+        }
+      }
+    },
+    "CAuthentication_MigrateMobileSession_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Steam ID of the user to migrate"
+          }
+        },
+        "token": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "WG Token to migrate"
+          }
+        },
+        "signature": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "Signature over the wg token using the user's 2FA token"
+          }
+        }
+      }
+    },
+    "CAuthentication_MigrateMobileSession_Response": {
+      "fields": {
+        "refresh_token": {
+          "type": "string",
+          "id": 1
+        },
+        "access_token": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CAuthenticationSupport_QueryRefreshTokensByAccount_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "SteamID of the account to query (required)"
+          }
+        },
+        "include_revoked_tokens": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "Includes tokens that are revoked or expired in the query"
+          }
+        }
+      }
+    },
+    "CSupportRefreshTokenDescription": {
+      "fields": {
+        "token_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "token_description": {
+          "type": "string",
+          "id": 2
+        },
+        "time_updated": {
+          "type": "uint32",
+          "id": 3
+        },
+        "platform_type": {
+          "type": ".EAuthTokenPlatformType",
+          "id": 4,
+          "options": {
+            "default": "k_EAuthTokenPlatformType_Unknown"
+          }
+        },
+        "token_state": {
+          "type": ".EAuthTokenState",
+          "id": 5,
+          "options": {
+            "default": "k_EAuthTokenState_Invalid"
+          }
+        },
+        "owner_steamid": {
+          "type": "fixed64",
+          "id": 6
+        }
+      }
+    },
+    "CAuthenticationSupport_QueryRefreshTokensByAccount_Response": {
+      "fields": {
+        "refresh_tokens": {
+          "rule": "repeated",
+          "type": ".CSupportRefreshTokenDescription",
+          "id": 1
+        }
+      }
+    },
+    "CAuthenticationSupport_QueryRefreshTokenByID_Request": {
+      "fields": {
+        "token_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Token ID of the token to look up (required)"
+          }
+        }
+      }
+    },
+    "CAuthenticationSupport_QueryRefreshTokenByID_Response": {
+      "fields": {
+        "refresh_tokens": {
+          "rule": "repeated",
+          "type": ".CSupportRefreshTokenDescription",
+          "id": 1
+        }
+      }
+    },
+    "CAuthenticationSupport_RevokeToken_Request": {
+      "fields": {
+        "token_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Token ID of the token to revoke (required)"
+          }
+        }
+      }
+    },
+    "CAuthenticationSupport_RevokeToken_Response": {
+      "fields": {}
+    },
+    "CAuthenticationSupport_GetTokenHistory_Request": {
+      "fields": {
+        "token_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Token ID of the token to get history for (required)"
+          }
+        }
+      }
+    },
+    "CSupportRefreshTokenAudit": {
+      "fields": {
+        "action": {
+          "type": "int32",
+          "id": 1
+        },
+        "time": {
+          "type": "uint32",
+          "id": 2
+        },
+        "ip": {
+          "type": ".CMsgIPAddress",
+          "id": 3
+        },
+        "actor": {
+          "type": "fixed64",
+          "id": 4
+        }
+      }
+    },
+    "CAuthenticationSupport_GetTokenHistory_Response": {
+      "fields": {
+        "history": {
+          "rule": "repeated",
+          "type": ".CSupportRefreshTokenAudit",
+          "id": 1
+        }
+      }
     },
     "CCloudGaming_CreateNonce_Request": {
       "fields": {
@@ -472,49 +795,175 @@
           "responseType": ".CAuthentication_GetPasswordRSAPublicKey_Response",
           "options": {
             "(method_description)": "Fetches RSA public key to use to encrypt passwords for a given account name"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Fetches RSA public key to use to encrypt passwords for a given account name"
+            }
+          ]
         },
         "BeginAuthSessionViaQR": {
           "requestType": ".CAuthentication_BeginAuthSessionViaQR_Request",
           "responseType": ".CAuthentication_BeginAuthSessionViaQR_Response",
           "options": {
             "(method_description)": "start authentication process"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "start authentication process"
+            }
+          ]
         },
         "BeginAuthSessionViaCredentials": {
           "requestType": ".CAuthentication_BeginAuthSessionViaCredentials_Request",
           "responseType": ".CAuthentication_BeginAuthSessionViaCredentials_Response",
           "options": {
             "(method_description)": "start authentication process"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "start authentication process"
+            }
+          ]
         },
         "PollAuthSessionStatus": {
           "requestType": ".CAuthentication_PollAuthSessionStatus_Request",
           "responseType": ".CAuthentication_PollAuthSessionStatus_Response",
           "options": {
             "(method_description)": "poll during authentication process"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "poll during authentication process"
+            }
+          ]
         },
         "GetAuthSessionInfo": {
           "requestType": ".CAuthentication_GetAuthSessionInfo_Request",
           "responseType": ".CAuthentication_GetAuthSessionInfo_Response",
           "options": {
-            "(method_description)": "get metadata of specific auth session"
-          }
+            "(method_description)": "get metadata of specific auth session, this will also implicitly bind the calling account"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "get metadata of specific auth session, this will also implicitly bind the calling account"
+            }
+          ]
         },
         "UpdateAuthSessionWithMobileConfirmation": {
           "requestType": ".CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request",
           "responseType": ".CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response",
           "options": {
             "(method_description)": "approve an authentication session via mobile 2fa"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "approve an authentication session via mobile 2fa"
+            }
+          ]
         },
         "UpdateAuthSessionWithSteamGuardCode": {
           "requestType": ".CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request",
           "responseType": ".CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response",
           "options": {
             "(method_description)": "approve an authentication session via steam guard code"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "approve an authentication session via steam guard code"
+            }
+          ]
+        },
+        "GenerateAccessTokenForApp": {
+          "requestType": ".CAuthentication_AccessToken_GenerateForApp_Request",
+          "responseType": ".CAuthentication_AccessToken_GenerateForApp_Response",
+          "options": {
+            "(method_description)": "Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token"
+            }
+          ]
+        },
+        "GetAuthSessionsForAccount": {
+          "requestType": ".CAuthentication_GetAuthSessionsForAccount_Request",
+          "responseType": ".CAuthentication_GetAuthSessionsForAccount_Response",
+          "options": {
+            "(method_description)": "Gets all active auth sessions for an account for reference by the mobile app"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets all active auth sessions for an account for reference by the mobile app"
+            }
+          ]
+        },
+        "MigrateMobileSession": {
+          "requestType": ".CAuthentication_MigrateMobileSession_Request",
+          "responseType": ".CAuthentication_MigrateMobileSession_Response",
+          "options": {
+            "(method_description)": "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret"
+            }
+          ]
+        }
+      }
+    },
+    "AuthenticationSupport": {
+      "options": {
+        "(service_description)": "Authentication Support Service"
+      },
+      "methods": {
+        "QueryRefreshTokensByAccount": {
+          "requestType": ".CAuthenticationSupport_QueryRefreshTokensByAccount_Request",
+          "responseType": ".CAuthenticationSupport_QueryRefreshTokensByAccount_Response",
+          "options": {
+            "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
+            }
+          ]
+        },
+        "QueryRefreshTokenByID": {
+          "requestType": ".CAuthenticationSupport_QueryRefreshTokenByID_Request",
+          "responseType": ".CAuthenticationSupport_QueryRefreshTokenByID_Response",
+          "options": {
+            "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
+            }
+          ]
+        },
+        "RevokeToken": {
+          "requestType": ".CAuthenticationSupport_RevokeToken_Request",
+          "responseType": ".CAuthenticationSupport_RevokeToken_Response",
+          "options": {
+            "(method_description)": "Revokes a user's auth token"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Revokes a user's auth token"
+            }
+          ]
+        },
+        "GetTokenHistory": {
+          "requestType": ".CAuthenticationSupport_GetTokenHistory_Request",
+          "responseType": ".CAuthenticationSupport_GetTokenHistory_Response",
+          "options": {
+            "(method_description)": "Gets the audit history for a user's auth token"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the audit history for a user's auth token"
+            }
+          ]
         }
       }
     },
@@ -528,58 +977,941 @@
           "responseType": ".CCloudGaming_CreateNonce_Response",
           "options": {
             "(method_description)": "Create a nonce for a cloud gaming service session"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Create a nonce for a cloud gaming service session"
+            }
+          ]
         },
         "GetTimeRemaining": {
           "requestType": ".CCloudGaming_GetTimeRemaining_Request",
           "responseType": ".CCloudGaming_GetTimeRemaining_Response",
           "options": {
             "(method_description)": "Get the amount of streaming time remaining for a set of apps"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get the amount of streaming time remaining for a set of apps"
+            }
+          ]
+        }
+      }
+    },
+    "msgpool_soft_limit": {
+      "type": "int32",
+      "id": 50000,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 32
+      }
+    },
+    "msgpool_hard_limit": {
+      "type": "int32",
+      "id": 50001,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 384
+      }
+    },
+    "force_php_generation": {
+      "type": "bool",
+      "id": 50000,
+      "extend": ".google.protobuf.FileOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "php_output_always_number": {
+      "type": "bool",
+      "id": 50020,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "allow_field_named_steam_id": {
+      "type": "bool",
+      "id": 50024,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
+      }
+    },
+    "EProtoClanEventType": {
+      "values": {
+        "k_EClanOtherEvent": 1,
+        "k_EClanGameEvent": 2,
+        "k_EClanPartyEvent": 3,
+        "k_EClanMeetingEvent": 4,
+        "k_EClanSpecialCauseEvent": 5,
+        "k_EClanMusicAndArtsEvent": 6,
+        "k_EClanSportsEvent": 7,
+        "k_EClanTripEvent": 8,
+        "k_EClanChatEvent": 9,
+        "k_EClanGameReleaseEvent": 10,
+        "k_EClanBroadcastEvent": 11,
+        "k_EClanSmallUpdateEvent": 12,
+        "k_EClanPreAnnounceMajorUpdateEvent": 13,
+        "k_EClanMajorUpdateEvent": 14,
+        "k_EClanDLCReleaseEvent": 15,
+        "k_EClanFutureReleaseEvent": 16,
+        "k_EClanESportTournamentStreamEvent": 17,
+        "k_EClanDevStreamEvent": 18,
+        "k_EClanFamousStreamEvent": 19,
+        "k_EClanGameSalesEvent": 20,
+        "k_EClanGameItemSalesEvent": 21,
+        "k_EClanInGameBonusXPEvent": 22,
+        "k_EClanInGameLootEvent": 23,
+        "k_EClanInGamePerksEvent": 24,
+        "k_EClanInGameChallengeEvent": 25,
+        "k_EClanInGameContestEvent": 26,
+        "k_EClanIRLEvent": 27,
+        "k_EClanNewsEvent": 28,
+        "k_EClanBetaReleaseEvent": 29,
+        "k_EClanInGameContentReleaseEvent": 30,
+        "k_EClanFreeTrial": 31,
+        "k_EClanSeasonRelease": 32,
+        "k_EClanSeasonUpdate": 33,
+        "k_EClanCrosspostEvent": 34,
+        "k_EClanInGameEventGeneral": 35
+      }
+    },
+    "PartnerEventNotificationType": {
+      "values": {
+        "k_EEventStart": 0,
+        "k_EEventBroadcastStart": 1,
+        "k_EEventMatchStart": 2,
+        "k_EEventPartnerMaxType": 3
+      }
+    },
+    "CMsgIPAddress": {
+      "oneofs": {
+        "ip": {
+          "oneof": [
+            "v4",
+            "v6"
+          ]
+        }
+      },
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgIPAddressBucket": {
+      "fields": {
+        "original_ip_address": {
+          "type": ".CMsgIPAddress",
+          "id": 1
+        },
+        "bucket": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtoBufHeader": {
+      "oneofs": {
+        "ip_addr": {
+          "oneof": [
+            "ip",
+            "ip_v6"
+          ]
+        }
+      },
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_sessionid": {
+          "type": "int32",
+          "id": 2
+        },
+        "routing_appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "jobid_source": {
+          "type": "fixed64",
+          "id": 10,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "jobid_target": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "target_job_name": {
+          "type": "string",
+          "id": 12
+        },
+        "seq_num": {
+          "type": "int32",
+          "id": 24
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "default": 2
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "id": 14
+        },
+        "auth_account_flags": {
+          "type": "uint32",
+          "id": 16
+        },
+        "token_source": {
+          "type": "uint32",
+          "id": 22
+        },
+        "admin_spoofing_user": {
+          "type": "bool",
+          "id": 23
+        },
+        "transport_error": {
+          "type": "int32",
+          "id": 17,
+          "options": {
+            "default": 1
+          }
+        },
+        "messageid": {
+          "type": "uint64",
+          "id": 18,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "publisher_group_id": {
+          "type": "uint32",
+          "id": 19
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "trace_tag": {
+          "type": "uint64",
+          "id": 21
+        },
+        "webapi_key_id": {
+          "type": "uint32",
+          "id": 25
+        },
+        "is_from_external_source": {
+          "type": "bool",
+          "id": 26
+        },
+        "forward_to_sysid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_sysid": {
+          "type": "uint32",
+          "id": 28
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "realm": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        },
+        "timeout_ms": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": -1
+          }
+        },
+        "debug_source": {
+          "type": "string",
+          "id": 34
+        },
+        "debug_source_string_index": {
+          "type": "uint32",
+          "id": 35
+        },
+        "token_id": {
+          "type": "uint64",
+          "id": 36
+        },
+        "ip": {
+          "type": "uint32",
+          "id": 15
+        },
+        "ip_v6": {
+          "type": "bytes",
+          "id": 29
+        }
+      }
+    },
+    "CMsgMulti": {
+      "fields": {
+        "size_unzipped": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message_body": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtobufWrapped": {
+      "fields": {
+        "message_body": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgAuthTicket": {
+      "fields": {
+        "estate": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "h_steam_pipe": {
+          "type": "uint32",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 7
+        }
+      }
+    },
+    "CCDDBAppDetailCommon": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "icon": {
+          "type": "string",
+          "id": 3
+        },
+        "tool": {
+          "type": "bool",
+          "id": 6
+        },
+        "demo": {
+          "type": "bool",
+          "id": 7
+        },
+        "media": {
+          "type": "bool",
+          "id": 8
+        },
+        "community_visible_stats": {
+          "type": "bool",
+          "id": 9
+        },
+        "friendly_name": {
+          "type": "string",
+          "id": 10
+        },
+        "propagation": {
+          "type": "string",
+          "id": 11
+        },
+        "has_adult_content": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_visible_in_steam_china": {
+          "type": "bool",
+          "id": 13
+        },
+        "app_type": {
+          "type": "uint32",
+          "id": 14
+        }
+      }
+    },
+    "CMsgAppRights": {
+      "fields": {
+        "edit_info": {
+          "type": "bool",
+          "id": 1
+        },
+        "publish": {
+          "type": "bool",
+          "id": 2
+        },
+        "view_error_data": {
+          "type": "bool",
+          "id": 3
+        },
+        "download": {
+          "type": "bool",
+          "id": 4
+        },
+        "upload_cdkeys": {
+          "type": "bool",
+          "id": 5
+        },
+        "generate_cdkeys": {
+          "type": "bool",
+          "id": 6
+        },
+        "view_financials": {
+          "type": "bool",
+          "id": 7
+        },
+        "manage_ceg": {
+          "type": "bool",
+          "id": 8
+        },
+        "manage_signing": {
+          "type": "bool",
+          "id": 9
+        },
+        "manage_cdkeys": {
+          "type": "bool",
+          "id": 10
+        },
+        "edit_marketing": {
+          "type": "bool",
+          "id": 11
+        },
+        "economy_support": {
+          "type": "bool",
+          "id": 12
+        },
+        "economy_support_supervisor": {
+          "type": "bool",
+          "id": 13
+        },
+        "manage_pricing": {
+          "type": "bool",
+          "id": 14
+        },
+        "broadcast_live": {
+          "type": "bool",
+          "id": 15
+        },
+        "view_marketing_traffic": {
+          "type": "bool",
+          "id": 16
+        },
+        "edit_store_display_content": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CCuratorPreferences": {
+      "fields": {
+        "supported_languages": {
+          "type": "uint32",
+          "id": 1
+        },
+        "platform_windows": {
+          "type": "bool",
+          "id": 2
+        },
+        "platform_mac": {
+          "type": "bool",
+          "id": 3
+        },
+        "platform_linux": {
+          "type": "bool",
+          "id": 4
+        },
+        "vr_content": {
+          "type": "bool",
+          "id": 5
+        },
+        "adult_content_violence": {
+          "type": "bool",
+          "id": 6
+        },
+        "adult_content_sex": {
+          "type": "bool",
+          "id": 7
+        },
+        "timestamp_updated": {
+          "type": "uint32",
+          "id": 8
+        },
+        "tagids_curated": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "packed": false
+          }
+        },
+        "tagids_filtered": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "website_title": {
+          "type": "string",
+          "id": 11
+        },
+        "website_url": {
+          "type": "string",
+          "id": 12
+        },
+        "discussion_url": {
+          "type": "string",
+          "id": 13
+        },
+        "show_broadcast": {
+          "type": "bool",
+          "id": 14
+        }
+      }
+    },
+    "CLocalizationToken": {
+      "fields": {
+        "language": {
+          "type": "uint32",
+          "id": 1
+        },
+        "localized_string": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClanEventUserNewsTuple": {
+      "fields": {
+        "clanid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "announcement_gid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "rtime_start": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime_end": {
+          "type": "uint32",
+          "id": 5
+        },
+        "priority_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "type": {
+          "type": "uint32",
+          "id": 7
+        },
+        "clamp_range_slot": {
+          "type": "uint32",
+          "id": 8
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CClanMatchEventByRange": {
+      "fields": {
+        "rtime_before": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rtime_after": {
+          "type": "uint32",
+          "id": 2
+        },
+        "qualified": {
+          "type": "uint32",
+          "id": 3
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CClanEventUserNewsTuple",
+          "id": 4
+        }
+      }
+    },
+    "CCommunity_ClanAnnouncementInfo": {
+      "fields": {
+        "gid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "clanid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "posterid": {
+          "type": "uint64",
+          "id": 3
+        },
+        "headline": {
+          "type": "string",
+          "id": 4
+        },
+        "posttime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "updatetime": {
+          "type": "uint32",
+          "id": 6
+        },
+        "body": {
+          "type": "string",
+          "id": 7
+        },
+        "commentcount": {
+          "type": "int32",
+          "id": 8
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 9
+        },
+        "language": {
+          "type": "int32",
+          "id": 10
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 11
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 13
+        },
+        "voteupcount": {
+          "type": "int32",
+          "id": 14
+        },
+        "votedowncount": {
+          "type": "int32",
+          "id": 15
+        },
+        "ban_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 16,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
           }
         }
       }
     },
-    "description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.FieldOptions"
-    },
-    "service_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.ServiceOptions"
-    },
-    "service_execution_site": {
-      "type": ".EProtoExecutionSite",
-      "id": 50008,
-      "extend": ".google.protobuf.ServiceOptions",
-      "options": {
-        "default": "k_EProtoExecutionSiteUnknown"
+    "CClanEventData": {
+      "fields": {
+        "gid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "event_name": {
+          "type": "string",
+          "id": 3
+        },
+        "event_type": {
+          "type": ".EProtoClanEventType",
+          "id": 4,
+          "options": {
+            "default": "k_EClanOtherEvent"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "server_address": {
+          "type": "string",
+          "id": 6
+        },
+        "server_password": {
+          "type": "string",
+          "id": 7
+        },
+        "rtime32_start_time": {
+          "type": "uint32",
+          "id": 8
+        },
+        "rtime32_end_time": {
+          "type": "uint32",
+          "id": 9
+        },
+        "comment_count": {
+          "type": "int32",
+          "id": 10
+        },
+        "creator_steamid": {
+          "type": "fixed64",
+          "id": 11
+        },
+        "last_update_steamid": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_notes": {
+          "type": "string",
+          "id": 13
+        },
+        "jsondata": {
+          "type": "string",
+          "id": 14
+        },
+        "announcement_body": {
+          "type": ".CCommunity_ClanAnnouncementInfo",
+          "id": 15
+        },
+        "published": {
+          "type": "bool",
+          "id": 16
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 17
+        },
+        "rtime32_visibility_start": {
+          "type": "uint32",
+          "id": 18
+        },
+        "rtime32_visibility_end": {
+          "type": "uint32",
+          "id": 19
+        },
+        "broadcaster_accountid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "follower_count": {
+          "type": "uint32",
+          "id": 21
+        },
+        "ignore_count": {
+          "type": "uint32",
+          "id": 22
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 23
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 24
+        },
+        "news_post_gid": {
+          "type": "fixed64",
+          "id": 25
+        },
+        "rtime_mod_reviewed": {
+          "type": "uint32",
+          "id": 26
+        },
+        "featured_app_tagid": {
+          "type": "uint32",
+          "id": 27
+        },
+        "referenced_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 28,
+          "options": {
+            "packed": false
+          }
+        },
+        "build_id": {
+          "type": "uint32",
+          "id": 29
+        },
+        "build_branch": {
+          "type": "string",
+          "id": 30
+        }
       }
     },
-    "method_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.MethodOptions"
-    },
-    "enum_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.EnumOptions"
-    },
-    "enum_value_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.EnumValueOptions"
-    },
-    "EProtoExecutionSite": {
-      "values": {
-        "k_EProtoExecutionSiteUnknown": 0,
-        "k_EProtoExecutionSiteSteamClient": 2
+    "CBilling_Address": {
+      "fields": {
+        "first_name": {
+          "type": "string",
+          "id": 1
+        },
+        "last_name": {
+          "type": "string",
+          "id": 2
+        },
+        "address1": {
+          "type": "string",
+          "id": 3
+        },
+        "address2": {
+          "type": "string",
+          "id": 4
+        },
+        "city": {
+          "type": "string",
+          "id": 5
+        },
+        "us_state": {
+          "type": "string",
+          "id": 6
+        },
+        "country_code": {
+          "type": "string",
+          "id": 7
+        },
+        "postcode": {
+          "type": "string",
+          "id": 8
+        },
+        "zip_plus4": {
+          "type": "int32",
+          "id": 9
+        },
+        "phone": {
+          "type": "string",
+          "id": 10
+        }
       }
     },
-    "NoResponse": {
-      "fields": {}
+    "CPackageReservationStatus": {
+      "fields": {
+        "packageid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "reservation_state": {
+          "type": "int32",
+          "id": 2
+        },
+        "queue_position": {
+          "type": "int32",
+          "id": 3
+        },
+        "total_queue_size": {
+          "type": "int32",
+          "id": 4
+        },
+        "reservation_country_code": {
+          "type": "string",
+          "id": 5
+        },
+        "expired": {
+          "type": "bool",
+          "id": 6
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 7
+        },
+        "time_reserved": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgKeyValuePair": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgKeyValueSet": {
+      "fields": {
+        "pairs": {
+          "rule": "repeated",
+          "type": ".CMsgKeyValuePair",
+          "id": 1
+        }
+      }
     },
     "google": {
       "nested": {
@@ -1314,6 +2646,422 @@
             }
           }
         }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
+    "EPublishedFileQueryType": {
+      "values": {
+        "k_PublishedFileQueryType_RankedByVote": 0,
+        "k_PublishedFileQueryType_RankedByPublicationDate": 1,
+        "k_PublishedFileQueryType_AcceptedForGameRankedByAcceptanceDate": 2,
+        "k_PublishedFileQueryType_RankedByTrend": 3,
+        "k_PublishedFileQueryType_FavoritedByFriendsRankedByPublicationDate": 4,
+        "k_PublishedFileQueryType_CreatedByFriendsRankedByPublicationDate": 5,
+        "k_PublishedFileQueryType_RankedByNumTimesReported": 6,
+        "k_PublishedFileQueryType_CreatedByFollowedUsersRankedByPublicationDate": 7,
+        "k_PublishedFileQueryType_NotYetRated": 8,
+        "k_PublishedFileQueryType_RankedByTotalUniqueSubscriptions": 9,
+        "k_PublishedFileQueryType_RankedByTotalVotesAsc": 10,
+        "k_PublishedFileQueryType_RankedByVotesUp": 11,
+        "k_PublishedFileQueryType_RankedByTextSearch": 12,
+        "k_PublishedFileQueryType_RankedByPlaytimeTrend": 13,
+        "k_PublishedFileQueryType_RankedByTotalPlaytime": 14,
+        "k_PublishedFileQueryType_RankedByAveragePlaytimeTrend": 15,
+        "k_PublishedFileQueryType_RankedByLifetimeAveragePlaytime": 16,
+        "k_PublishedFileQueryType_RankedByPlaytimeSessionsTrend": 17,
+        "k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions": 18,
+        "k_PublishedFileQueryType_RankedByInappropriateContentRating": 19,
+        "k_PublishedFileQueryType_RankedByBanContentCheck": 20,
+        "k_PublishedFileQueryType_RankedByLastUpdatedDate": 21
+      }
+    },
+    "EPublishedFileInappropriateProvider": {
+      "values": {
+        "k_EPublishedFileInappropriateProvider_Invalid": 0,
+        "k_EPublishedFileInappropriateProvider_Google": 1,
+        "k_EPublishedFileInappropriateProvider_Amazon": 2
+      }
+    },
+    "EPublishedFileInappropriateResult": {
+      "values": {
+        "k_EPublishedFileInappropriateResult_NotScanned": 0,
+        "k_EPublishedFileInappropriateResult_VeryUnlikely": 1,
+        "k_EPublishedFileInappropriateResult_Unlikely": 30,
+        "k_EPublishedFileInappropriateResult_Possible": 50,
+        "k_EPublishedFileInappropriateResult_Likely": 75,
+        "k_EPublishedFileInappropriateResult_VeryLikely": 100
+      }
+    },
+    "EPersonaStateFlag": {
+      "values": {
+        "k_EPersonaStateFlag_HasRichPresence": 1,
+        "k_EPersonaStateFlag_InJoinableGame": 2,
+        "k_EPersonaStateFlag_Golden": 4,
+        "k_EPersonaStateFlag_RemotePlayTogether": 8,
+        "k_EPersonaStateFlag_ClientTypeWeb": 256,
+        "k_EPersonaStateFlag_ClientTypeMobile": 512,
+        "k_EPersonaStateFlag_ClientTypeTenfoot": 1024,
+        "k_EPersonaStateFlag_ClientTypeVR": 2048,
+        "k_EPersonaStateFlag_LaunchTypeGamepad": 4096,
+        "k_EPersonaStateFlag_LaunchTypeCompatTool": 8192
+      }
+    },
+    "EContentCheckProvider": {
+      "values": {
+        "k_EContentCheckProvider_Invalid": 0,
+        "k_EContentCheckProvider_Google": 1,
+        "k_EContentCheckProvider_Amazon": 2,
+        "k_EContentCheckProvider_Local": 3
+      }
+    },
+    "EProfileCustomizationType": {
+      "values": {
+        "k_EProfileCustomizationTypeInvalid": 0,
+        "k_EProfileCustomizationTypeRareAchievementShowcase": 1,
+        "k_EProfileCustomizationTypeGameCollector": 2,
+        "k_EProfileCustomizationTypeItemShowcase": 3,
+        "k_EProfileCustomizationTypeTradeShowcase": 4,
+        "k_EProfileCustomizationTypeBadges": 5,
+        "k_EProfileCustomizationTypeFavoriteGame": 6,
+        "k_EProfileCustomizationTypeScreenshotShowcase": 7,
+        "k_EProfileCustomizationTypeCustomText": 8,
+        "k_EProfileCustomizationTypeFavoriteGroup": 9,
+        "k_EProfileCustomizationTypeRecommendation": 10,
+        "k_EProfileCustomizationTypeWorkshopItem": 11,
+        "k_EProfileCustomizationTypeMyWorkshop": 12,
+        "k_EProfileCustomizationTypeArtworkShowcase": 13,
+        "k_EProfileCustomizationTypeVideoShowcase": 14,
+        "k_EProfileCustomizationTypeGuides": 15,
+        "k_EProfileCustomizationTypeMyGuides": 16,
+        "k_EProfileCustomizationTypeAchievements": 17,
+        "k_EProfileCustomizationTypeGreenlight": 18,
+        "k_EProfileCustomizationTypeMyGreenlight": 19,
+        "k_EProfileCustomizationTypeSalien": 20,
+        "k_EProfileCustomizationTypeLoyaltyRewardReactions": 21,
+        "k_EProfileCustomizationTypeSingleArtworkShowcase": 22,
+        "k_EProfileCustomizationTypeAchievementsCompletionist": 23
+      }
+    },
+    "EPublishedFileStorageSystem": {
+      "values": {
+        "k_EPublishedFileStorageSystemInvalid": 0,
+        "k_EPublishedFileStorageSystemLegacyCloud": 1,
+        "k_EPublishedFileStorageSystemDepot": 2,
+        "k_EPublishedFileStorageSystemUGCCloud": 3
+      }
+    },
+    "ECloudStoragePersistState": {
+      "values": {
+        "k_ECloudStoragePersistStatePersisted": 0,
+        "k_ECloudStoragePersistStateForgotten": 1,
+        "k_ECloudStoragePersistStateDeleted": 2
+      }
+    },
+    "ESDCardFormatStage": {
+      "values": {
+        "k_ESDCardFormatStage_Invalid": 0,
+        "k_ESDCardFormatStage_Starting": 1,
+        "k_ESDCardFormatStage_Testing": 2,
+        "k_ESDCardFormatStage_Rescuing": 3,
+        "k_ESDCardFormatStage_Formatting": 4,
+        "k_ESDCardFormatStage_Finalizing": 5
+      }
+    },
+    "ESystemFanControlMode": {
+      "values": {
+        "k_SystemFanControlMode_Invalid": 0,
+        "k_SystemFanControlMode_Disabled": 1,
+        "k_SystemFanControlMode_Default": 2
+      }
+    },
+    "EColorProfile": {
+      "values": {
+        "k_EColorProfile_Invalid": 0,
+        "k_EColorProfile_Native": 1,
+        "k_EColorProfile_Standard": 2,
+        "k_EColorProfile_Vivid": 3
+      }
+    },
+    "EBluetoothDeviceType": {
+      "values": {
+        "k_BluetoothDeviceType_Invalid": 0,
+        "k_BluetoothDeviceType_Unknown": 1,
+        "k_BluetoothDeviceType_Phone": 2,
+        "k_BluetoothDeviceType_Computer": 3,
+        "k_BluetoothDeviceType_Headset": 4,
+        "k_BluetoothDeviceType_Headphones": 5,
+        "k_BluetoothDeviceType_Speakers": 6,
+        "k_BluetoothDeviceType_OtherAudio": 7,
+        "k_BluetoothDeviceType_Mouse": 8,
+        "k_BluetoothDeviceType_Joystick": 9,
+        "k_BluetoothDeviceType_Gamepad": 10,
+        "k_BluetoothDeviceType_Keyboard": 11
+      }
+    },
+    "ESystemAudioDirection": {
+      "values": {
+        "k_SystemAudioDirection_Invalid": 0,
+        "k_SystemAudioDirection_Input": 1,
+        "k_SystemAudioDirection_Output": 2
+      }
+    },
+    "ESystemAudioChannel": {
+      "values": {
+        "k_SystemAudioChannel_Invalid": 0,
+        "k_SystemAudioChannel_Aggregated": 1,
+        "k_SystemAudioChannel_FrontLeft": 2,
+        "k_SystemAudioChannel_FrontRight": 3,
+        "k_SystemAudioChannel_LFE": 4,
+        "k_SystemAudioChannel_BackLeft": 5,
+        "k_SystemAudioChannel_BackRight": 6,
+        "k_SystemAudioChannel_FrontCenter": 7,
+        "k_SystemAudioChannel_Unknown": 8,
+        "k_SystemAudioChannel_Mono": 9
+      }
+    },
+    "ESystemAudioPortType": {
+      "values": {
+        "k_SystemAudioPortType_Invalid": 0,
+        "k_SystemAudioPortType_Unknown": 1,
+        "k_SystemAudioPortType_Audio32f": 2,
+        "k_SystemAudioPortType_Midi8b": 3,
+        "k_SystemAudioPortType_Video32RGBA": 4
+      }
+    },
+    "ESystemAudioPortDirection": {
+      "values": {
+        "k_SystemAudioPortDirection_Invalid": 0,
+        "k_SystemAudioPortDirection_Input": 1,
+        "k_SystemAudioPortDirection_Output": 2
+      }
+    },
+    "ESystemServiceState": {
+      "values": {
+        "k_ESystemServiceState_Unavailable": 0,
+        "k_ESystemServiceState_Disabled": 1,
+        "k_ESystemServiceState_Enabled": 2
+      }
+    },
+    "EGraphicsPerfOverlayLevel": {
+      "values": {
+        "k_EGraphicsPerfOverlayLevel_Hidden": 0,
+        "k_EGraphicsPerfOverlayLevel_Basic": 1,
+        "k_EGraphicsPerfOverlayLevel_Medium": 2,
+        "k_EGraphicsPerfOverlayLevel_Full": 3,
+        "k_EGraphicsPerfOverlayLevel_Minimal": 4
+      }
+    },
+    "EGPUPerformanceLevel": {
+      "values": {
+        "k_EGPUPerformanceLevel_Invalid": 0,
+        "k_EGPUPerformanceLevel_Auto": 1,
+        "k_EGPUPerformanceLevel_Manual": 2,
+        "k_EGPUPerformanceLevel_Low": 3,
+        "k_EGPUPerformanceLevel_High": 4,
+        "k_EGPUPerformanceLevel_Profiling": 5
+      }
+    },
+    "EScalingFilter": {
+      "values": {
+        "k_EScalingFilter_Invalid": 0,
+        "k_EScalingFilter_FSR": 1,
+        "k_EScalingFilter_Nearest": 2,
+        "k_EScalingFilter_Integer": 3,
+        "k_EScalingFilter_Linear": 4,
+        "k_EScalingFilter_NIS": 5
+      }
+    },
+    "ECPUGovernor": {
+      "values": {
+        "k_ECPUGovernor_Invalid": 0,
+        "k_ECPUGovernor_Perf": 1,
+        "k_ECPUGovernor_Powersave": 2,
+        "k_ECPUGovernor_Manual": 3
+      }
+    },
+    "EUpdaterType": {
+      "values": {
+        "k_EUpdaterType_Invalid": 0,
+        "k_EUpdaterType_Client": 1,
+        "k_EUpdaterType_OS": 2,
+        "k_EUpdaterType_BIOS": 3,
+        "k_EUpdaterType_Aggregated": 4,
+        "k_EUpdaterType_Test1": 5,
+        "k_EUpdaterType_Test2": 6,
+        "k_EUpdaterType_Dummy": 7
+      }
+    },
+    "EUpdaterState": {
+      "values": {
+        "k_EUpdaterState_Invalid": 0,
+        "k_EUpdaterState_UpToDate": 2,
+        "k_EUpdaterState_Checking": 3,
+        "k_EUpdaterState_Available": 4,
+        "k_EUpdaterState_Applying": 5,
+        "k_EUpdaterState_ClientRestartPending": 6,
+        "k_EUpdaterState_SystemRestartPending": 7
+      }
+    },
+    "EStorageBlockContentType": {
+      "values": {
+        "k_EStorageBlockContentType_Invalid": 0,
+        "k_EStorageBlockContentType_Unknown": 1,
+        "k_EStorageBlockContentType_FileSystem": 2,
+        "k_EStorageBlockContentType_Crypto": 3,
+        "k_EStorageBlockContentType_Raid": 4
+      }
+    },
+    "EStorageBlockFileSystemType": {
+      "values": {
+        "k_EStorageBlockFileSystemType_Invalid": 0,
+        "k_EStorageBlockFileSystemType_Unknown": 1,
+        "k_EStorageBlockFileSystemType_VFat": 2,
+        "k_EStorageBlockFileSystemType_Ext4": 3
+      }
+    },
+    "ESteamDeckCompatibilityCategory": {
+      "values": {
+        "k_ESteamDeckCompatibilityCategory_Unknown": 0,
+        "k_ESteamDeckCompatibilityCategory_Unsupported": 1,
+        "k_ESteamDeckCompatibilityCategory_Playable": 2,
+        "k_ESteamDeckCompatibilityCategory_Verified": 3
+      }
+    },
+    "ESteamDeckCompatibilityResultDisplayType": {
+      "values": {
+        "k_ESteamDeckCompatibilityResultDisplayType_Invisible": 0,
+        "k_ESteamDeckCompatibilityResultDisplayType_Informational": 1,
+        "k_ESteamDeckCompatibilityResultDisplayType_Unsupported": 2,
+        "k_ESteamDeckCompatibilityResultDisplayType_Playable": 3,
+        "k_ESteamDeckCompatibilityResultDisplayType_Verified": 4
+      }
+    },
+    "EACState": {
+      "values": {
+        "k_EACState_Unknown": 0,
+        "k_EACState_Disconnected": 1,
+        "k_EACState_Connected": 2,
+        "k_EACState_ConnectedSlow": 3
+      }
+    },
+    "EBatteryState": {
+      "values": {
+        "k_EBatteryState_Unknown": 0,
+        "k_EBatteryState_Discharging": 1,
+        "k_EBatteryState_Charging": 2,
+        "k_EBatteryState_Full": 3
+      }
+    },
+    "EOSBranch": {
+      "values": {
+        "k_EOSBranch_Unknown": 0,
+        "k_EOSBranch_Release": 1,
+        "k_EOSBranch_ReleaseCandidate": 2,
+        "k_EOSBranch_Beta": 3,
+        "k_EOSBranch_BetaCandidate": 4,
+        "k_EOSBranch_Main": 5
+      }
+    },
+    "ECommunityItemClass": {
+      "values": {
+        "k_ECommunityItemClass_Invalid": 0,
+        "k_ECommunityItemClass_Badge": 1,
+        "k_ECommunityItemClass_GameCard": 2,
+        "k_ECommunityItemClass_ProfileBackground": 3,
+        "k_ECommunityItemClass_Emoticon": 4,
+        "k_ECommunityItemClass_BoosterPack": 5,
+        "k_ECommunityItemClass_Consumable": 6,
+        "k_ECommunityItemClass_GameGoo": 7,
+        "k_ECommunityItemClass_ProfileModifier": 8,
+        "k_ECommunityItemClass_Scene": 9,
+        "k_ECommunityItemClass_SalienItem": 10,
+        "k_ECommunityItemClass_Sticker": 11,
+        "k_ECommunityItemClass_ChatEffect": 12,
+        "k_ECommunityItemClass_MiniProfileBackground": 13,
+        "k_ECommunityItemClass_AvatarFrame": 14,
+        "k_ECommunityItemClass_AnimatedAvatar": 15,
+        "k_ECommunityItemClass_SteamDeckKeyboardSkin": 16
+      }
+    },
+    "ESteamDeckCompatibilityFeedback": {
+      "values": {
+        "k_ESteamDeckCompatibilityFeedback_Unset": 0,
+        "k_ESteamDeckCompatibilityFeedback_Agree": 1,
+        "k_ESteamDeckCompatibilityFeedback_Disagree": 2,
+        "k_ESteamDeckCompatibilityFeedback_Ignore": 3
+      }
+    },
+    "EProvideDeckFeedbackPreference": {
+      "values": {
+        "k_EProvideDeckFeedbackPreference_Unset": 0,
+        "k_EProvideDeckFeedbackPreference_Yes": 1,
+        "k_EProvideDeckFeedbackPreference_No": 2
+      }
+    },
+    "ETouchGesture": {
+      "values": {
+        "k_ETouchGestureNone": 0,
+        "k_ETouchGestureTouch": 1,
+        "k_ETouchGestureTap": 2,
+        "k_ETouchGestureDoubleTap": 3,
+        "k_ETouchGestureShortPress": 4,
+        "k_ETouchGestureLongPress": 5,
+        "k_ETouchGestureLongTap": 6,
+        "k_ETouchGestureTwoFingerTap": 7,
+        "k_ETouchGestureTapCancelled": 8,
+        "k_ETouchGesturePinchBegin": 9,
+        "k_ETouchGesturePinchUpdate": 10,
+        "k_ETouchGesturePinchEnd": 11,
+        "k_ETouchGestureFlingStart": 12,
+        "k_ETouchGestureFlingCancelled": 13
+      }
+    },
+    "ESessionPersistence": {
+      "values": {
+        "k_ESessionPersistence_Invalid": -1,
+        "k_ESessionPersistence_Ephemeral": 0,
+        "k_ESessionPersistence_Persistent": 1
       }
     }
   }

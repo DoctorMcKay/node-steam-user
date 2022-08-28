@@ -12,6 +12,20 @@ enum EClientNotificationType {
 	k_EClientNotificationType_SystemUpdate = 7;
 	k_EClientNotificationType_FriendMessage = 8;
 	k_EClientNotificationType_GroupChatMessage = 9;
+	k_EClientNotificationType_FriendInviteRollup = 10;
+	k_EClientNotificationType_FamilySharingDeviceAuthorizationChanged = 11;
+	k_EClientNotificationType_FamilySharingStopPlaying = 12;
+	k_EClientNotificationType_FamilySharingLibraryAvailable = 13;
+	k_EClientNotificationType_Screenshot = 14;
+	k_EClientNotificationType_CloudSyncFailure = 15;
+	k_EClientNotificationType_CloudSyncConflict = 16;
+	k_EClientNotificationType_IncomingVoiceChat = 17;
+	k_EClientNotificationType_ClaimSteamDeckRewards = 18;
+	k_EClientNotificationType_GiftReceived = 19;
+	k_EClientNotificationType_ItemAnnouncement = 20;
+	k_EClientNotificationType_HardwareSurvey = 21;
+	k_EClientNotificationType_LowDiskSpace = 22;
+	k_EClientNotificationType_BatteryTemperature = 23;
 }
 
 enum ESystemUpdateNotificationType {
@@ -20,12 +34,30 @@ enum ESystemUpdateNotificationType {
 	k_ESystemUpdateNotificationType_NeedsRestart = 2;
 }
 
+message CClientNotificationCloudSyncFailure {
+	optional uint32 appid = 1;
+}
+
+message CClientNotificationCloudSyncConflict {
+	optional uint32 appid = 1;
+}
+
+message CClientNotificationScreenshot {
+	optional string screenshot_handle = 1;
+	optional string description = 2;
+	optional string local_url = 3;
+}
+
 message CClientNotificationDownloadCompleted {
 	optional uint32 appid = 1;
 }
 
 message CClientNotificationFriendInvite {
 	optional fixed64 steamid = 1;
+}
+
+message CClientNotificationFriendInviteRollup {
+	optional uint32 new_invite_count = 1;
 }
 
 message CClientNotificationFriendInGame {
@@ -78,4 +110,51 @@ message CClientNotificationGroupChatMessage {
 	optional string rawbody = 7;
 	optional string icon = 8;
 	optional uint32 notificationid = 9;
+}
+
+message CClientNotificationFamilySharingDeviceAuthorizationChanged {
+	optional uint32 accountid_owner = 1;
+	optional bool authorized = 2;
+}
+
+message CClientNotificationFamilySharingStopPlaying {
+	optional uint32 accountid_owner = 1;
+	optional uint32 seconds_remaining = 2;
+}
+
+message CClientNotificationFamilySharingLibraryAvailable {
+	optional uint32 accountid_owner = 1;
+}
+
+message CClientNotificationIncomingVoiceChat {
+	optional fixed64 steamid = 1;
+}
+
+message CClientNotificationClaimSteamDeckRewards {
+}
+
+message CClientNotificationGiftReceived {
+	optional string sender_name = 1;
+}
+
+message CClientNotificationItemAnnouncement {
+	optional uint32 new_item_count = 1;
+	optional bool new_backpack_items = 2;
+}
+
+message CClientNotificationInboxStats {
+	optional uint32 friend_invite_count = 1;
+	optional uint32 new_comment_count = 2;
+}
+
+message CClientNotificationHardwareSurveyPending {
+}
+
+message CClientNotificationLowDiskSpace {
+	optional uint32 folder_index = 1;
+}
+
+message CClientNotificationBatteryTemperature {
+	optional uint32 temperature = 1;
+	optional string notification_type = 2;
 }

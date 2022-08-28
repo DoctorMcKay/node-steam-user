@@ -565,6 +565,26 @@
         "default": false
       }
     },
+    "allow_field_named_steam_id": {
+      "type": "bool",
+      "id": 50024,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
+      }
+    },
     "EProtoClanEventType": {
       "values": {
         "k_EClanOtherEvent": 1,
@@ -757,10 +777,6 @@
           "type": "uint32",
           "id": 28
         },
-        "wg_token": {
-          "type": "string",
-          "id": 30
-        },
         "launcher_type": {
           "type": "uint32",
           "id": 31,
@@ -774,6 +790,25 @@
           "options": {
             "default": 0
           }
+        },
+        "timeout_ms": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": -1
+          }
+        },
+        "debug_source": {
+          "type": "string",
+          "id": 34
+        },
+        "debug_source_string_index": {
+          "type": "uint32",
+          "id": 35
+        },
+        "token_id": {
+          "type": "uint64",
+          "id": 36
         },
         "ip": {
           "type": "uint32",
@@ -854,14 +889,6 @@
           "type": "string",
           "id": 3
         },
-        "logo": {
-          "type": "string",
-          "id": 4
-        },
-        "logo_small": {
-          "type": "string",
-          "id": 5
-        },
         "tool": {
           "type": "bool",
           "id": 6
@@ -893,6 +920,10 @@
         "is_visible_in_steam_china": {
           "type": "bool",
           "id": 13
+        },
+        "app_type": {
+          "type": "uint32",
+          "id": 14
         }
       }
     },
@@ -1175,6 +1206,13 @@
         "votedowncount": {
           "type": "int32",
           "id": 15
+        },
+        "ban_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 16,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
+          }
         }
       }
     },
@@ -1386,6 +1424,27 @@
         "time_reserved": {
           "type": "uint32",
           "id": 8
+        }
+      }
+    },
+    "CMsgKeyValuePair": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgKeyValueSet": {
+      "fields": {
+        "pairs": {
+          "rule": "repeated",
+          "type": ".CMsgKeyValuePair",
+          "id": 1
         }
       }
     },
