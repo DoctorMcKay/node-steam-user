@@ -412,8 +412,23 @@ class SteamUserLogon extends SteamUserWeb {
 			throw new Error("Cannot relog if not already connected");
 		}
 
-		if (this.steamID.type == SteamID.Type.INDIVIDUAL && (!this._logOnDetails || !this._logOnDetails.should_remember_password || !this._logOnDetails.login_key)) {
-			throw new Error("To use relog(), you must specify rememberPassword=true when logging on and wait for loginKey to be emitted");
+		let relogAvailable = (
+			this.steamID.type == SteamID.Type.ANON_USER
+			|| (
+				this.steamID.type == SteamID.Type.INDIVIDUAL
+				&& this._logOnDetails
+				&& this._logOnDetails.should_remember_password
+				&& this._logOnDetails.login_key
+			)
+			|| (
+				this.steamID.type == SteamID.Type.INDIVIDUAL
+				&& this._logOnDetails
+				&& this._logOnDetails.access_token
+			)
+		);
+
+		if (!relogAvailable) {
+			throw new Error("To use relog(), you must specify rememberPassword=true when logging on and wait for loginKey to be emitted, or log on using a refresh token");
 		}
 
 		this._relogging = true;
