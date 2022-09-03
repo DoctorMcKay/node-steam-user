@@ -116,7 +116,6 @@ const EOSType = {
 	"Windows10": 16,
 	"Win2016": 17,
 	"Win2019": 18,
-	"WinMAX": 19, // obsolete
 	"Win2022": 19,
 	"Win11": 20,
 	"WinMAX": 21,
