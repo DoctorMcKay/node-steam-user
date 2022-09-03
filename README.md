@@ -620,6 +620,9 @@ As of 2022-09-03, refresh tokens are JWTs that are valid for ~200 days. You can 
 on until it expires. You can find out when a token expires by [decoding it](https://www.npmjs.com/search?q=jwt) and checking
 the `exp` property, which is a Unix timestamp indicating when the token expires.
 
+If you attempt to log on using a refresh token that isn't valid for use with client logins, the app will crash with a
+relevant error message.
+
 All other ways of authenticating to an individual user account should be considered deprecated, although steam-user will
 continue to support them as long as they keep working on the Steam backend.
 
