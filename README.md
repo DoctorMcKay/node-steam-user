@@ -549,7 +549,7 @@ There are five ways to log onto Steam:
 	- These properties are required:
         - `refreshToken`
     - These properties are optional:
-        - `steamID` - If provided, steam-user will check to make sure that the provided `refreshToken` matches this SteamID. If not, the app will crash.
+        - `steamID` - If provided, steam-user will check to make sure that the provided `refreshToken` matches this SteamID. If SteamIDs don't match, the app will crash.
         - `logonID` - Defaults to 0 if not specified.
         - `machineName` - Defaults to empty string if not specified.
         - `clientOS` - Defaults to an auto-detected value if not specified.
