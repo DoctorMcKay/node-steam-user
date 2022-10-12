@@ -1,0 +1,32 @@
+{
+  "nested": {
+    "Offline_Ticket": {
+      "fields": {
+        "encrypted_ticket": {
+          "type": "bytes",
+          "id": 1
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 2
+        },
+        "kdf1": {
+          "type": "int32",
+          "id": 3
+        },
+        "salt1": {
+          "type": "bytes",
+          "id": 4
+        },
+        "kdf2": {
+          "type": "int32",
+          "id": 5
+        },
+        "salt2": {
+          "type": "bytes",
+          "id": 6
+        }
+      }
+    }
+  }
+}

@@ -108,7 +108,9 @@
         "k_EStreamControlRemotePlayTogetherGroupUpdate": 132,
         "k_EStreamControlSetInputTemporarilyDisabled": 133,
         "k_EStreamControlSetQualityOverride": 134,
-        "k_EStreamControlSetBitrateOverride": 135
+        "k_EStreamControlSetBitrateOverride": 135,
+        "k_EStreamControlShowOnScreenKeyboard": 136,
+        "k_EStreamControlControllerConfigMsg": 137
       }
     },
     "EStreamVersion": {
@@ -151,6 +153,15 @@
       "values": {
         "k_EStreamBitrateAutodetect": -1,
         "k_EStreamBitrateUnlimited": 0
+      }
+    },
+    "EStreamColorspace": {
+      "values": {
+        "k_EStreamColorspace_Unknown": 0,
+        "k_EStreamColorspace_BT601": 1,
+        "k_EStreamColorspace_BT601_Full": 2,
+        "k_EStreamColorspace_BT709": 3,
+        "k_EStreamColorspace_BT709_Full": 4
       }
     },
     "EStreamP2PScope": {
@@ -306,6 +317,15 @@
         "k_ELogFileSystemBoot": 0,
         "k_ELogFileSystemReset": 1,
         "k_ELogFileSystemDebug": 2
+      }
+    },
+    "EStreamControllerConfigMsg": {
+      "values": {
+        "k_EStreamControllerConfigMsg_RequestConfigsForApp": 0,
+        "k_EStreamControllerConfigMsg_ConfigResponse": 1,
+        "k_EStreamControllerConfigMsg_PersonalizationResponse": 2,
+        "k_EStreamControllerConfigMsg_ActiveConfigChange": 3,
+        "k_EStreamControllerConfigMsg_RequestActiveConfig": 4
       }
     },
     "CDiscoveryPingRequest": {
@@ -509,6 +529,18 @@
         "form_factor": {
           "type": "int32",
           "id": 11
+        },
+        "has_on_screen_keyboard": {
+          "type": "bool",
+          "id": 12
+        },
+        "supported_colorspaces": {
+          "rule": "repeated",
+          "type": ".EStreamColorspace",
+          "id": 13,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -702,6 +734,10 @@
         "enable_touch_input": {
           "type": "bool",
           "id": 6
+        },
+        "disable_client_cursor": {
+          "type": "bool",
+          "id": 7
         }
       }
     },
@@ -1445,6 +1481,10 @@
         "data": {
           "type": "bytes",
           "id": 1
+        },
+        "active_input": {
+          "type": "bool",
+          "id": 2
         }
       }
     },
@@ -1658,6 +1698,9 @@
           "id": 1
         }
       }
+    },
+    "CShowOnScreenKeyboardMsg": {
+      "fields": {}
     },
     "CStreamDataLostMsg": {
       "fields": {
@@ -1948,6 +1991,117 @@
                   "id": 3
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "CControllerConfigMsg": {
+      "fields": {
+        "type": {
+          "rule": "required",
+          "type": ".EStreamControllerConfigMsg",
+          "id": 1,
+          "options": {
+            "default": "k_EStreamControllerConfigMsg_RequestConfigsForApp"
+          }
+        },
+        "controllerPath": {
+          "type": "string",
+          "id": 2
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "personalizationResponse": {
+          "type": ".CControllerConfigMsg.ControllerPersonalizationResponse",
+          "id": 4
+        },
+        "configResponse": {
+          "rule": "repeated",
+          "type": ".CControllerConfigMsg.ControllerConfigResponse",
+          "id": 6
+        },
+        "activeConfigChangeMsg": {
+          "type": ".CControllerConfigMsg.ControllerActiveConfigMsg",
+          "id": 7
+        }
+      },
+      "nested": {
+        "ControllerConfigResponse": {
+          "fields": {
+            "appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "configURL": {
+              "type": "string",
+              "id": 2
+            },
+            "controllerType": {
+              "type": "uint32",
+              "id": 3
+            },
+            "controllerData": {
+              "type": "string",
+              "id": 4
+            },
+            "selectionOrder": {
+              "type": "uint32",
+              "id": 5
+            },
+            "actionBlock": {
+              "type": "bool",
+              "id": 6
+            }
+          }
+        },
+        "ControllerPersonalizationResponse": {
+          "fields": {
+            "personalizationData": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "ControllerActiveConfigChangeResponse": {
+          "fields": {
+            "configURL": {
+              "type": "string",
+              "id": 2
+            },
+            "controllerType": {
+              "type": "uint32",
+              "id": 3
+            },
+            "controllerData": {
+              "type": "string",
+              "id": 4
+            },
+            "selectionOrder": {
+              "type": "uint32",
+              "id": 5
+            }
+          }
+        },
+        "ControllerActiveConfigMsg": {
+          "fields": {
+            "appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "configURL": {
+              "type": "string",
+              "id": 2
+            },
+            "controllerType": {
+              "type": "uint32",
+              "id": 3
+            },
+            "controllerData": {
+              "type": "string",
+              "id": 4
             }
           }
         }

@@ -3,6 +3,8 @@ const SteamID = require('steamid');
 
 const Helpers = require('./helpers.js');
 
+const EMsg = require('../enums/EMsg.js');
+
 const SteamUserGameCoordinator = require('./gamecoordinator.js');
 
 class SteamUserGameServers extends SteamUserGameCoordinator {

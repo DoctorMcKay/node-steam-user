@@ -151,6 +151,7 @@ message CRemotePlayTogether_Notification {
 	message ControllerSlot {
 		optional uint32 slotid = 1;
 		optional .CRemotePlayTogether_Notification.Player player = 2;
+		optional int32 controller_type = 3;
 	}
 
 	message GroupUpdated {

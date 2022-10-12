@@ -1,3 +1,4 @@
+import "steammessages_base.proto";
 import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;

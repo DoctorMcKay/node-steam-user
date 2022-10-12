@@ -111,6 +111,20 @@
             "default": true,
             "(description)": "if set, skip unvetted store apps"
           }
+        },
+        "language": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "Will return appinfo in this language"
+          }
+        },
+        "include_extended_appinfo": {
+          "type": "bool",
+          "id": 8,
+          "options": {
+            "(description)": "true if we want even more details (capsule, sortas, and capabilities) about each game.  include_appinfo must also be true."
+          }
         }
       }
     },
@@ -149,10 +163,6 @@
               "type": "string",
               "id": 5
             },
-            "img_logo_url": {
-              "type": "string",
-              "id": 6
-            },
             "has_community_visible_stats": {
               "type": "bool",
               "id": 7
@@ -168,6 +178,30 @@
             "playtime_linux_forever": {
               "type": "int32",
               "id": 10
+            },
+            "rtime_last_played": {
+              "type": "uint32",
+              "id": 11
+            },
+            "capsule_filename": {
+              "type": "string",
+              "id": 12
+            },
+            "sort_as": {
+              "type": "string",
+              "id": 13
+            },
+            "has_workshop": {
+              "type": "bool",
+              "id": 14
+            },
+            "has_market": {
+              "type": "bool",
+              "id": 15
+            },
+            "has_dlc": {
+              "type": "bool",
+              "id": 16
             }
           }
         }
@@ -283,161 +317,6 @@
             "owned": {
               "type": "bool",
               "id": 5
-            }
-          }
-        }
-      }
-    },
-    "CPlayer_GetFriendsAppsActivity_Request": {
-      "fields": {
-        "news_language": {
-          "type": "string",
-          "id": 1,
-          "options": {
-            "(description)": "Language for which to query about news items (for the being_discussed results). DEPRECATED AND UNUSED."
-          }
-        },
-        "request_flags": {
-          "type": "uint32",
-          "id": 2,
-          "options": {
-            "(description)": "Flags describing the request; see EGetFriendsAppsActivityFlags"
-          }
-        }
-      }
-    },
-    "CPlayer_GetFriendsAppsActivity_Response": {
-      "fields": {
-        "trending": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 1,
-          "options": {
-            "(description)": "Apps that friends have played more this week than last, with list of friends who've played more this week"
-          }
-        },
-        "recent_purchases": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 2,
-          "options": {
-            "(description)": "Apps friends have played in the past two weeks for which the user recently acquired a license"
-          }
-        },
-        "unowned": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 3,
-          "options": {
-            "(description)": "Apps friends have played in the past two weeks for which the user has no license"
-          }
-        },
-        "popular": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 4,
-          "options": {
-            "(description)": "Apps friends have played in the past two weeks, for which the user has a license, sorted by count"
-          }
-        },
-        "dont_forget": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 5,
-          "options": {
-            "(description)": "Apps friends have played in the past two weeks which the user has neither purchased nor played in the past two weeks"
-          }
-        },
-        "being_discussed": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 6,
-          "options": {
-            "(description)": "Owned apps that friends have posted status or screenshots for in the past two weeks. DEPRECATED AND UNUSED."
-          }
-        },
-        "new_to_group": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 7,
-          "options": {
-            "(description)": "Owned apps that none of your friends had played prior to 2 weeks."
-          }
-        },
-        "returned_to_group": {
-          "rule": "repeated",
-          "type": ".CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo",
-          "id": 8,
-          "options": {
-            "(description)": "Owned apps that friends hadn't played for a while, but are again."
-          }
-        },
-        "active_friend_count": {
-          "type": "uint32",
-          "id": 9,
-          "options": {
-            "default": 0,
-            "(description)": "Number of friends with non-trivial activity in the past two weeks."
-          }
-        }
-      },
-      "nested": {
-        "FriendPlayTime": {
-          "fields": {
-            "steamid": {
-              "type": "fixed64",
-              "id": 1
-            },
-            "minutes_played_this_week": {
-              "type": "uint32",
-              "id": 2,
-              "options": {
-                "(description)": "Minutes this friend played the game (from the enclosing structure) this week."
-              }
-            },
-            "minutes_played_two_weeks": {
-              "type": "uint32",
-              "id": 3,
-              "options": {
-                "(description)": "Minutes this friend played the game (from the enclosing structure) in the past 2 weeks."
-              }
-            },
-            "minutes_played_forever": {
-              "type": "uint32",
-              "id": 4,
-              "options": {
-                "(description)": "Minutes this friend played the game (from the enclosing structure) all time."
-              }
-            },
-            "event_count": {
-              "type": "uint32",
-              "id": 5,
-              "options": {
-                "(description)": "Number of events involving this user & app. (Only set for results in being_discussed.) DEPRECATED AND UNUSED."
-              }
-            }
-          }
-        },
-        "AppFriendsInfo": {
-          "fields": {
-            "appid": {
-              "type": "uint32",
-              "id": 1
-            },
-            "friends": {
-              "rule": "repeated",
-              "type": ".CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime",
-              "id": 2,
-              "options": {
-                "(description)": "Friends (w/ playtime) that meet a specific criteria -- e.g. for trending, only includes friends w/ more playtime this week."
-              }
-            },
-            "display_order": {
-              "type": "uint32",
-              "id": 3,
-              "options": {
-                "(description)": "Index indicating the order in which this app should be displayed, relative to other apps in the same response."
-              }
             }
           }
         }
@@ -708,11 +587,53 @@
     "CPlayer_SetAnimatedAvatar_Response": {
       "fields": {}
     },
+    "CPlayer_GetSteamDeckKeyboardSkin_Request": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "The player we're asking about"
+          }
+        },
+        "language": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CPlayer_GetSteamDeckKeyboardSkin_Response": {
+      "fields": {
+        "steam_deck_keyboard_skin": {
+          "type": ".ProfileItem",
+          "id": 1
+        }
+      }
+    },
+    "CPlayer_SetSteamDeckKeyboardSkin_Request": {
+      "fields": {
+        "communityitemid": {
+          "type": "uint64",
+          "id": 1
+        }
+      }
+    },
+    "CPlayer_SetSteamDeckKeyboardSkin_Response": {
+      "fields": {}
+    },
     "CPlayer_GetProfileItemsOwned_Request": {
       "fields": {
         "language": {
           "type": "string",
           "id": 1
+        },
+        "filters": {
+          "rule": "repeated",
+          "type": ".ECommunityItemClass",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -742,6 +663,11 @@
           "rule": "repeated",
           "type": ".ProfileItem",
           "id": 5
+        },
+        "steam_deck_keyboard_skins": {
+          "rule": "repeated",
+          "type": ".ProfileItem",
+          "id": 6
         }
       }
     },
@@ -778,6 +704,10 @@
         "profile_modifier": {
           "type": ".ProfileItem",
           "id": 5
+        },
+        "steam_deck_keyboard_skin": {
+          "type": ".ProfileItem",
+          "id": 6
         }
       }
     },
@@ -1405,6 +1335,25 @@
         }
       }
     },
+    "CPlayer_GetTimeSSAAccepted_Request": {
+      "fields": {}
+    },
+    "CPlayer_GetTimeSSAAccepted_Response": {
+      "fields": {
+        "time_ssa_accepted": {
+          "type": "uint32",
+          "id": 1
+        },
+        "time_ssa_updated": {
+          "type": "uint32",
+          "id": 2
+        },
+        "time_chinassa_accepted": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
     "CPlayer_AcceptSSA_Request": {
       "fields": {
         "agreement_type": {
@@ -1945,315 +1894,564 @@
           "responseType": ".CPlayer_GetMutualFriendsForIncomingInvites_Response",
           "options": {
             "(method_description)": "Get me the mutual friends for each of my pending incoming invites (individuals and clans)."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get me the mutual friends for each of my pending incoming invites (individuals and clans)."
+            }
+          ]
         },
         "GetOwnedGames": {
           "requestType": ".CPlayer_GetOwnedGames_Request",
           "responseType": ".CPlayer_GetOwnedGames_Response",
           "options": {
             "(method_description)": "Return a list of games owned by the player"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Return a list of games owned by the player"
+            }
+          ]
         },
         "GetPlayNext": {
           "requestType": ".CPlayer_GetPlayNext_Request",
           "responseType": ".CPlayer_GetPlayNext_Response",
           "options": {
             "(method_description)": "Return suggested games for player to play next."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Return suggested games for player to play next."
+            }
+          ]
         },
         "GetFriendsGameplayInfo": {
           "requestType": ".CPlayer_GetFriendsGameplayInfo_Request",
           "responseType": ".CPlayer_GetFriendsGameplayInfo_Response",
           "options": {
             "(method_description)": "Get a list of friends who are playing, have played, own, or want a game"
-          }
-        },
-        "GetFriendsAppsActivity": {
-          "requestType": ".CPlayer_GetFriendsAppsActivity_Request",
-          "responseType": ".CPlayer_GetFriendsAppsActivity_Response",
-          "options": {
-            "(method_description)": "Get lists of apps friends are active in, in a variety of ways"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get a list of friends who are playing, have played, own, or want a game"
+            }
+          ]
         },
         "GetGameBadgeLevels": {
           "requestType": ".CPlayer_GetGameBadgeLevels_Request",
           "responseType": ".CPlayer_GetGameBadgeLevels_Response",
           "options": {
             "(method_description)": "Returns the Steam Level of a user, the Badge level for the game, and if it's foil"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the Steam Level of a user, the Badge level for the game, and if it's foil"
+            }
+          ]
         },
         "GetProfileBackground": {
           "requestType": ".CPlayer_GetProfileBackground_Request",
           "responseType": ".CPlayer_GetProfileBackground_Response",
           "options": {
             "(method_description)": "Gets which profile background is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which profile background is active for a specific user"
+            }
+          ]
         },
         "SetProfileBackground": {
           "requestType": ".CPlayer_SetProfileBackground_Request",
           "responseType": ".CPlayer_SetProfileBackground_Response",
           "options": {
             "(method_description)": "Sets the user's profile background"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's profile background"
+            }
+          ]
         },
         "GetMiniProfileBackground": {
           "requestType": ".CPlayer_GetMiniProfileBackground_Request",
           "responseType": ".CPlayer_GetMiniProfileBackground_Response",
           "options": {
             "(method_description)": "Gets which mini profile background is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which mini profile background is active for a specific user"
+            }
+          ]
         },
         "SetMiniProfileBackground": {
           "requestType": ".CPlayer_SetMiniProfileBackground_Request",
           "responseType": ".CPlayer_SetMiniProfileBackground_Response",
           "options": {
             "(method_description)": "Sets the user's mini profile background"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's mini profile background"
+            }
+          ]
         },
         "GetAvatarFrame": {
           "requestType": ".CPlayer_GetAvatarFrame_Request",
           "responseType": ".CPlayer_GetAvatarFrame_Response",
           "options": {
             "(method_description)": "Gets which avatar frame is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which avatar frame is active for a specific user"
+            }
+          ]
         },
         "SetAvatarFrame": {
           "requestType": ".CPlayer_SetAvatarFrame_Request",
           "responseType": ".CPlayer_SetAvatarFrame_Response",
           "options": {
             "(method_description)": "Sets the user's avatar frame for their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's avatar frame for their profile"
+            }
+          ]
         },
         "GetAnimatedAvatar": {
           "requestType": ".CPlayer_GetAnimatedAvatar_Request",
           "responseType": ".CPlayer_GetAnimatedAvatar_Response",
           "options": {
             "(method_description)": "Gets which animated avatar is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which animated avatar is active for a specific user"
+            }
+          ]
         },
         "SetAnimatedAvatar": {
           "requestType": ".CPlayer_SetAnimatedAvatar_Request",
           "responseType": ".CPlayer_SetAnimatedAvatar_Response",
           "options": {
             "(method_description)": "Sets the user's animated avatar for their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's animated avatar for their profile"
+            }
+          ]
+        },
+        "GetSteamDeckKeyboardSkin": {
+          "requestType": ".CPlayer_GetSteamDeckKeyboardSkin_Request",
+          "responseType": ".CPlayer_GetSteamDeckKeyboardSkin_Response",
+          "options": {
+            "(method_description)": "Gets which Steam Deck keyboard skin is active for a specific user"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which Steam Deck keyboard skin is active for a specific user"
+            }
+          ]
+        },
+        "SetSteamDeckKeyboardSkin": {
+          "requestType": ".CPlayer_SetSteamDeckKeyboardSkin_Request",
+          "responseType": ".CPlayer_SetSteamDeckKeyboardSkin_Response",
+          "options": {
+            "(method_description)": "Sets the user's current Steam Deck keyboard skin"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's current Steam Deck keyboard skin"
+            }
+          ]
         },
         "GetProfileItemsOwned": {
           "requestType": ".CPlayer_GetProfileItemsOwned_Request",
           "responseType": ".CPlayer_GetProfileItemsOwned_Response",
           "options": {
             "(method_description)": "Returns the items the user can equip on their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the items the user can equip on their profile"
+            }
+          ]
         },
         "GetProfileItemsEquipped": {
           "requestType": ".CPlayer_GetProfileItemsEquipped_Request",
           "responseType": ".CPlayer_GetProfileItemsEquipped_Response",
           "options": {
             "(method_description)": "Returns the items the user has equipped on their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the items the user has equipped on their profile"
+            }
+          ]
         },
         "SetEquippedProfileItemFlags": {
           "requestType": ".CPlayer_SetEquippedProfileItemFlags_Request",
           "responseType": ".CPlayer_SetEquippedProfileItemFlags_Response",
           "options": {
             "(method_description)": "Sets special flags on the equipped item"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets special flags on the equipped item"
+            }
+          ]
         },
         "GetEmoticonList": {
           "requestType": ".CPlayer_GetEmoticonList_Request",
           "responseType": ".CPlayer_GetEmoticonList_Response",
           "options": {
             "(method_description)": "Gets a list of the emoticons a user has with metadata"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets a list of the emoticons a user has with metadata"
+            }
+          ]
         },
         "GetAchievementsProgress": {
           "requestType": ".CPlayer_GetAchievementsProgress_Request",
           "responseType": ".CPlayer_GetAchievementsProgress_Response",
           "options": {
             "(method_description)": "Gets the achievement completion stats for the specified list of apps."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the achievement completion stats for the specified list of apps."
+            }
+          ]
         },
         "GetFavoriteBadge": {
           "requestType": ".CPlayer_GetFavoriteBadge_Request",
           "responseType": ".CPlayer_GetFavoriteBadge_Response",
           "options": {
             "(method_description)": "Gets the badge the user has set as their favorite"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the badge the user has set as their favorite"
+            }
+          ]
         },
         "SetFavoriteBadge": {
           "requestType": ".CPlayer_SetFavoriteBadge_Request",
           "responseType": ".CPlayer_SetFavoriteBadge_Response",
           "options": {
             "(method_description)": "Sets the badge  as the users favorite"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the badge  as the users favorite"
+            }
+          ]
         },
         "GetProfileCustomization": {
           "requestType": ".CPlayer_GetProfileCustomization_Request",
           "responseType": ".CPlayer_GetProfileCustomization_Response",
           "options": {
             "(method_description)": "Returns the customizations (if any) for a profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the customizations (if any) for a profile"
+            }
+          ]
         },
         "GetPurchasedProfileCustomizations": {
           "requestType": ".CPlayer_GetPurchasedProfileCustomizations_Request",
           "responseType": ".CPlayer_GetPurchasedProfileCustomizations_Response",
           "options": {
             "(method_description)": "Returns the purchased profile customizations"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the purchased profile customizations"
+            }
+          ]
         },
         "GetPurchasedAndUpgradedProfileCustomizations": {
           "requestType": ".CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request",
           "responseType": ".CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response",
           "options": {
             "(method_description)": "Returns the purchased and upgraded profile customizations"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the purchased and upgraded profile customizations"
+            }
+          ]
         },
         "GetProfileThemesAvailable": {
           "requestType": ".CPlayer_GetProfileThemesAvailable_Request",
           "responseType": ".CPlayer_GetProfileThemesAvailable_Response",
           "options": {
             "(method_description)": "Gets themes available for the user."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets themes available for the user."
+            }
+          ]
         },
         "SetProfileTheme": {
           "requestType": ".CPlayer_SetProfileTheme_Request",
           "responseType": ".CPlayer_SetProfileTheme_Response",
           "options": {
             "(method_description)": "Selects a theme for the profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Selects a theme for the profile"
+            }
+          ]
         },
         "SetProfilePreferences": {
           "requestType": ".CPlayer_SetProfilePreferences_Request",
           "responseType": ".CPlayer_SetProfilePreferences_Response",
           "options": {
             "(method_description)": "Sets profile preferences"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets profile preferences"
+            }
+          ]
         },
         "PostStatusToFriends": {
           "requestType": ".CPlayer_PostStatusToFriends_Request",
           "responseType": ".CPlayer_PostStatusToFriends_Response",
           "options": {
             "(method_description)": "Posts custom status text into the blotter"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Posts custom status text into the blotter"
+            }
+          ]
         },
         "GetPostedStatus": {
           "requestType": ".CPlayer_GetPostedStatus_Request",
           "responseType": ".CPlayer_GetPostedStatus_Response",
           "options": {
             "(method_description)": "Gets a posted status text for a user by id"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets a posted status text for a user by id"
+            }
+          ]
         },
         "DeletePostedStatus": {
           "requestType": ".CPlayer_DeletePostedStatus_Request",
           "responseType": ".CPlayer_DeletePostedStatus_Response",
           "options": {
             "(method_description)": "Deletes a posted status text for a user by id"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Deletes a posted status text for a user by id"
+            }
+          ]
         },
         "ClientGetLastPlayedTimes": {
           "requestType": ".CPlayer_GetLastPlayedTimes_Request",
           "responseType": ".CPlayer_GetLastPlayedTimes_Response",
           "options": {
             "(method_description)": "Gets the last-played times for the account"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the last-played times for the account"
+            }
+          ]
+        },
+        "GetTimeSSAAccepted": {
+          "requestType": ".CPlayer_GetTimeSSAAccepted_Request",
+          "responseType": ".CPlayer_GetTimeSSAAccepted_Response",
+          "options": {
+            "(method_description)": "Gets the time when the user accepted the SSA"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the time when the user accepted the SSA"
+            }
+          ]
         },
         "AcceptSSA": {
           "requestType": ".CPlayer_AcceptSSA_Request",
           "responseType": ".CPlayer_AcceptSSA_Response",
           "options": {
             "(method_description)": "User is accepting the SSA"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "User is accepting the SSA"
+            }
+          ]
         },
         "GetNicknameList": {
           "requestType": ".CPlayer_GetNicknameList_Request",
           "responseType": ".CPlayer_GetNicknameList_Response",
           "options": {
             "(method_description)": "Gets the list of nicknames this user has for other users"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the list of nicknames this user has for other users"
+            }
+          ]
         },
         "GetPerFriendPreferences": {
           "requestType": ".CPlayer_GetPerFriendPreferences_Request",
           "responseType": ".CPlayer_GetPerFriendPreferences_Response",
           "options": {
             "(method_description)": "Gets the list of per-friend preferences this user has set for other users"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the list of per-friend preferences this user has set for other users"
+            }
+          ]
         },
         "SetPerFriendPreferences": {
           "requestType": ".CPlayer_SetPerFriendPreferences_Request",
           "responseType": ".CPlayer_SetPerFriendPreferences_Response",
           "options": {
             "(method_description)": "Sets the logged in user's per-friend preferences for the given user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the logged in user's per-friend preferences for the given user"
+            }
+          ]
         },
         "AddFriend": {
           "requestType": ".CPlayer_AddFriend_Request",
           "responseType": ".CPlayer_AddFriend_Response",
           "options": {
             "(method_description)": "Invites another Steam user to be a friend"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Invites another Steam user to be a friend"
+            }
+          ]
         },
         "RemoveFriend": {
           "requestType": ".CPlayer_RemoveFriend_Request",
           "responseType": ".CPlayer_RemoveFriend_Response",
           "options": {
             "(method_description)": "Removes a friend or ignores a friend suggestion"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Removes a friend or ignores a friend suggestion"
+            }
+          ]
         },
         "IgnoreFriend": {
           "requestType": ".CPlayer_IgnoreFriend_Request",
           "responseType": ".CPlayer_IgnoreFriend_Response",
           "options": {
             "(method_description)": "Blocks or unblocks communication with the user.  Despite name, can be a non-friend."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Blocks or unblocks communication with the user.  Despite name, can be a non-friend."
+            }
+          ]
         },
         "GetCommunityPreferences": {
           "requestType": ".CPlayer_GetCommunityPreferences_Request",
           "responseType": ".CPlayer_GetCommunityPreferences_Response",
           "options": {
             "(method_description)": "Returns the player's community preferences"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the player's community preferences"
+            }
+          ]
         },
         "SetCommunityPreferences": {
           "requestType": ".CPlayer_SetCommunityPreferences_Request",
           "responseType": ".CPlayer_SetCommunityPreferences_Response",
           "options": {
             "(method_description)": "Sets the player's community preferences"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the player's community preferences"
+            }
+          ]
         },
         "GetTextFilterWords": {
           "requestType": ".CPlayer_GetTextFilterWords_Request",
           "responseType": ".CPlayer_GetTextFilterWords_Response",
           "options": {
             "(method_description)": "Get the custom text filtering dictionary for this user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get the custom text filtering dictionary for this user"
+            }
+          ]
         },
         "GetNewSteamAnnouncementState": {
           "requestType": ".CPlayer_GetNewSteamAnnouncementState_Request",
           "responseType": ".CPlayer_GetNewSteamAnnouncementState_Response",
           "options": {
             "(method_description)": "Calculates and returns what to display for UI that renders new steam announcement available"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Calculates and returns what to display for UI that renders new steam announcement available"
+            }
+          ]
         },
         "UpdateSteamAnnouncementLastRead": {
           "requestType": ".CPlayer_UpdateSteamAnnouncementLastRead_Request",
           "responseType": ".CPlayer_UpdateSteamAnnouncementLastRead_Response",
           "options": {
             "(method_description)": "Marks latest announcement timestamp read by user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Marks latest announcement timestamp read by user"
+            }
+          ]
         },
         "GetPrivacySettings": {
           "requestType": ".CPlayer_GetPrivacySettings_Request",
           "responseType": ".CPlayer_GetPrivacySettings_Response",
           "options": {
             "(method_description)": "Get current privacy settings."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get current privacy settings."
+            }
+          ]
         },
         "GetDurationControl": {
           "requestType": ".CPlayer_GetDurationControl_Request",
           "responseType": ".CPlayer_GetDurationControl_Response",
           "options": {
             "(method_description)": "Get gameplay duration control settings."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get gameplay duration control settings."
+            }
+          ]
         }
       }
     },
@@ -2268,100 +2466,1013 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client of more recent play time"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client of more recent play time"
+            }
+          ]
         },
         "NotifyFriendNicknameChanged": {
           "requestType": ".CPlayer_FriendNicknameChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that a friend's nickname has changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that a friend's nickname has changed"
+            }
+          ]
         },
         "NotifyFriendEquippedProfileItemsChanged": {
           "requestType": ".CPlayer_FriendEquippedProfileItemsChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that a friend's equipped profile items have changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that a friend's equipped profile items have changed"
+            }
+          ]
         },
         "NotifyNewSteamAnnouncementState": {
           "requestType": ".CPlayer_NewSteamAnnouncementState_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notifies client of changes to steam announcement state for user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notifies client of changes to steam announcement state for user"
+            }
+          ]
         },
         "NotifyCommunityPreferencesChanged": {
           "requestType": ".CPlayer_CommunityPreferencesChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that their community preferences have changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that their community preferences have changed"
+            }
+          ]
         },
         "NotifyTextFilterWordsChanged": {
           "requestType": ".CPlayer_TextFilterWordsChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that their text filtering dictionary has changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that their text filtering dictionary has changed"
+            }
+          ]
         },
         "NotifyPerFriendPreferencesChanged": {
           "requestType": ".CPlayer_PerFriendPreferencesChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server that per-friend preferences have changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server that per-friend preferences have changed"
+            }
+          ]
         },
         "NotifyPrivacyPrivacySettingsChanged": {
           "requestType": ".CPlayer_PrivacySettingsChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server that privacy settings changed"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server that privacy settings changed"
+            }
+          ]
+        }
+      }
+    },
+    "msgpool_soft_limit": {
+      "type": "int32",
+      "id": 50000,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 32
+      }
+    },
+    "msgpool_hard_limit": {
+      "type": "int32",
+      "id": 50001,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 384
+      }
+    },
+    "force_php_generation": {
+      "type": "bool",
+      "id": 50000,
+      "extend": ".google.protobuf.FileOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "php_output_always_number": {
+      "type": "bool",
+      "id": 50020,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "allow_field_named_steam_id": {
+      "type": "bool",
+      "id": 50024,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
+      }
+    },
+    "EProtoClanEventType": {
+      "values": {
+        "k_EClanOtherEvent": 1,
+        "k_EClanGameEvent": 2,
+        "k_EClanPartyEvent": 3,
+        "k_EClanMeetingEvent": 4,
+        "k_EClanSpecialCauseEvent": 5,
+        "k_EClanMusicAndArtsEvent": 6,
+        "k_EClanSportsEvent": 7,
+        "k_EClanTripEvent": 8,
+        "k_EClanChatEvent": 9,
+        "k_EClanGameReleaseEvent": 10,
+        "k_EClanBroadcastEvent": 11,
+        "k_EClanSmallUpdateEvent": 12,
+        "k_EClanPreAnnounceMajorUpdateEvent": 13,
+        "k_EClanMajorUpdateEvent": 14,
+        "k_EClanDLCReleaseEvent": 15,
+        "k_EClanFutureReleaseEvent": 16,
+        "k_EClanESportTournamentStreamEvent": 17,
+        "k_EClanDevStreamEvent": 18,
+        "k_EClanFamousStreamEvent": 19,
+        "k_EClanGameSalesEvent": 20,
+        "k_EClanGameItemSalesEvent": 21,
+        "k_EClanInGameBonusXPEvent": 22,
+        "k_EClanInGameLootEvent": 23,
+        "k_EClanInGamePerksEvent": 24,
+        "k_EClanInGameChallengeEvent": 25,
+        "k_EClanInGameContestEvent": 26,
+        "k_EClanIRLEvent": 27,
+        "k_EClanNewsEvent": 28,
+        "k_EClanBetaReleaseEvent": 29,
+        "k_EClanInGameContentReleaseEvent": 30,
+        "k_EClanFreeTrial": 31,
+        "k_EClanSeasonRelease": 32,
+        "k_EClanSeasonUpdate": 33,
+        "k_EClanCrosspostEvent": 34,
+        "k_EClanInGameEventGeneral": 35
+      }
+    },
+    "PartnerEventNotificationType": {
+      "values": {
+        "k_EEventStart": 0,
+        "k_EEventBroadcastStart": 1,
+        "k_EEventMatchStart": 2,
+        "k_EEventPartnerMaxType": 3
+      }
+    },
+    "CMsgIPAddress": {
+      "oneofs": {
+        "ip": {
+          "oneof": [
+            "v4",
+            "v6"
+          ]
+        }
+      },
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgIPAddressBucket": {
+      "fields": {
+        "original_ip_address": {
+          "type": ".CMsgIPAddress",
+          "id": 1
+        },
+        "bucket": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtoBufHeader": {
+      "oneofs": {
+        "ip_addr": {
+          "oneof": [
+            "ip",
+            "ip_v6"
+          ]
+        }
+      },
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_sessionid": {
+          "type": "int32",
+          "id": 2
+        },
+        "routing_appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "jobid_source": {
+          "type": "fixed64",
+          "id": 10,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "jobid_target": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "target_job_name": {
+          "type": "string",
+          "id": 12
+        },
+        "seq_num": {
+          "type": "int32",
+          "id": 24
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "default": 2
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "id": 14
+        },
+        "auth_account_flags": {
+          "type": "uint32",
+          "id": 16
+        },
+        "token_source": {
+          "type": "uint32",
+          "id": 22
+        },
+        "admin_spoofing_user": {
+          "type": "bool",
+          "id": 23
+        },
+        "transport_error": {
+          "type": "int32",
+          "id": 17,
+          "options": {
+            "default": 1
+          }
+        },
+        "messageid": {
+          "type": "uint64",
+          "id": 18,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "publisher_group_id": {
+          "type": "uint32",
+          "id": 19
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "trace_tag": {
+          "type": "uint64",
+          "id": 21
+        },
+        "webapi_key_id": {
+          "type": "uint32",
+          "id": 25
+        },
+        "is_from_external_source": {
+          "type": "bool",
+          "id": 26
+        },
+        "forward_to_sysid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_sysid": {
+          "type": "uint32",
+          "id": 28
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "realm": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        },
+        "timeout_ms": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": -1
+          }
+        },
+        "debug_source": {
+          "type": "string",
+          "id": 34
+        },
+        "debug_source_string_index": {
+          "type": "uint32",
+          "id": 35
+        },
+        "token_id": {
+          "type": "uint64",
+          "id": 36
+        },
+        "ip": {
+          "type": "uint32",
+          "id": 15
+        },
+        "ip_v6": {
+          "type": "bytes",
+          "id": 29
+        }
+      }
+    },
+    "CMsgMulti": {
+      "fields": {
+        "size_unzipped": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message_body": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtobufWrapped": {
+      "fields": {
+        "message_body": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgAuthTicket": {
+      "fields": {
+        "estate": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "h_steam_pipe": {
+          "type": "uint32",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 7
+        }
+      }
+    },
+    "CCDDBAppDetailCommon": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "icon": {
+          "type": "string",
+          "id": 3
+        },
+        "tool": {
+          "type": "bool",
+          "id": 6
+        },
+        "demo": {
+          "type": "bool",
+          "id": 7
+        },
+        "media": {
+          "type": "bool",
+          "id": 8
+        },
+        "community_visible_stats": {
+          "type": "bool",
+          "id": 9
+        },
+        "friendly_name": {
+          "type": "string",
+          "id": 10
+        },
+        "propagation": {
+          "type": "string",
+          "id": 11
+        },
+        "has_adult_content": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_visible_in_steam_china": {
+          "type": "bool",
+          "id": 13
+        },
+        "app_type": {
+          "type": "uint32",
+          "id": 14
+        }
+      }
+    },
+    "CMsgAppRights": {
+      "fields": {
+        "edit_info": {
+          "type": "bool",
+          "id": 1
+        },
+        "publish": {
+          "type": "bool",
+          "id": 2
+        },
+        "view_error_data": {
+          "type": "bool",
+          "id": 3
+        },
+        "download": {
+          "type": "bool",
+          "id": 4
+        },
+        "upload_cdkeys": {
+          "type": "bool",
+          "id": 5
+        },
+        "generate_cdkeys": {
+          "type": "bool",
+          "id": 6
+        },
+        "view_financials": {
+          "type": "bool",
+          "id": 7
+        },
+        "manage_ceg": {
+          "type": "bool",
+          "id": 8
+        },
+        "manage_signing": {
+          "type": "bool",
+          "id": 9
+        },
+        "manage_cdkeys": {
+          "type": "bool",
+          "id": 10
+        },
+        "edit_marketing": {
+          "type": "bool",
+          "id": 11
+        },
+        "economy_support": {
+          "type": "bool",
+          "id": 12
+        },
+        "economy_support_supervisor": {
+          "type": "bool",
+          "id": 13
+        },
+        "manage_pricing": {
+          "type": "bool",
+          "id": 14
+        },
+        "broadcast_live": {
+          "type": "bool",
+          "id": 15
+        },
+        "view_marketing_traffic": {
+          "type": "bool",
+          "id": 16
+        },
+        "edit_store_display_content": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CCuratorPreferences": {
+      "fields": {
+        "supported_languages": {
+          "type": "uint32",
+          "id": 1
+        },
+        "platform_windows": {
+          "type": "bool",
+          "id": 2
+        },
+        "platform_mac": {
+          "type": "bool",
+          "id": 3
+        },
+        "platform_linux": {
+          "type": "bool",
+          "id": 4
+        },
+        "vr_content": {
+          "type": "bool",
+          "id": 5
+        },
+        "adult_content_violence": {
+          "type": "bool",
+          "id": 6
+        },
+        "adult_content_sex": {
+          "type": "bool",
+          "id": 7
+        },
+        "timestamp_updated": {
+          "type": "uint32",
+          "id": 8
+        },
+        "tagids_curated": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "packed": false
+          }
+        },
+        "tagids_filtered": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "website_title": {
+          "type": "string",
+          "id": 11
+        },
+        "website_url": {
+          "type": "string",
+          "id": 12
+        },
+        "discussion_url": {
+          "type": "string",
+          "id": 13
+        },
+        "show_broadcast": {
+          "type": "bool",
+          "id": 14
+        }
+      }
+    },
+    "CLocalizationToken": {
+      "fields": {
+        "language": {
+          "type": "uint32",
+          "id": 1
+        },
+        "localized_string": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClanEventUserNewsTuple": {
+      "fields": {
+        "clanid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "announcement_gid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "rtime_start": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime_end": {
+          "type": "uint32",
+          "id": 5
+        },
+        "priority_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "type": {
+          "type": "uint32",
+          "id": 7
+        },
+        "clamp_range_slot": {
+          "type": "uint32",
+          "id": 8
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CClanMatchEventByRange": {
+      "fields": {
+        "rtime_before": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rtime_after": {
+          "type": "uint32",
+          "id": 2
+        },
+        "qualified": {
+          "type": "uint32",
+          "id": 3
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CClanEventUserNewsTuple",
+          "id": 4
+        }
+      }
+    },
+    "CCommunity_ClanAnnouncementInfo": {
+      "fields": {
+        "gid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "clanid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "posterid": {
+          "type": "uint64",
+          "id": 3
+        },
+        "headline": {
+          "type": "string",
+          "id": 4
+        },
+        "posttime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "updatetime": {
+          "type": "uint32",
+          "id": 6
+        },
+        "body": {
+          "type": "string",
+          "id": 7
+        },
+        "commentcount": {
+          "type": "int32",
+          "id": 8
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 9
+        },
+        "language": {
+          "type": "int32",
+          "id": 10
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 11
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 13
+        },
+        "voteupcount": {
+          "type": "int32",
+          "id": 14
+        },
+        "votedowncount": {
+          "type": "int32",
+          "id": 15
+        },
+        "ban_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 16,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
           }
         }
       }
     },
-    "description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.FieldOptions"
-    },
-    "service_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.ServiceOptions"
-    },
-    "service_execution_site": {
-      "type": ".EProtoExecutionSite",
-      "id": 50008,
-      "extend": ".google.protobuf.ServiceOptions",
-      "options": {
-        "default": "k_EProtoExecutionSiteUnknown"
+    "CClanEventData": {
+      "fields": {
+        "gid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "event_name": {
+          "type": "string",
+          "id": 3
+        },
+        "event_type": {
+          "type": ".EProtoClanEventType",
+          "id": 4,
+          "options": {
+            "default": "k_EClanOtherEvent"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "server_address": {
+          "type": "string",
+          "id": 6
+        },
+        "server_password": {
+          "type": "string",
+          "id": 7
+        },
+        "rtime32_start_time": {
+          "type": "uint32",
+          "id": 8
+        },
+        "rtime32_end_time": {
+          "type": "uint32",
+          "id": 9
+        },
+        "comment_count": {
+          "type": "int32",
+          "id": 10
+        },
+        "creator_steamid": {
+          "type": "fixed64",
+          "id": 11
+        },
+        "last_update_steamid": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_notes": {
+          "type": "string",
+          "id": 13
+        },
+        "jsondata": {
+          "type": "string",
+          "id": 14
+        },
+        "announcement_body": {
+          "type": ".CCommunity_ClanAnnouncementInfo",
+          "id": 15
+        },
+        "published": {
+          "type": "bool",
+          "id": 16
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 17
+        },
+        "rtime32_visibility_start": {
+          "type": "uint32",
+          "id": 18
+        },
+        "rtime32_visibility_end": {
+          "type": "uint32",
+          "id": 19
+        },
+        "broadcaster_accountid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "follower_count": {
+          "type": "uint32",
+          "id": 21
+        },
+        "ignore_count": {
+          "type": "uint32",
+          "id": 22
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 23
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 24
+        },
+        "news_post_gid": {
+          "type": "fixed64",
+          "id": 25
+        },
+        "rtime_mod_reviewed": {
+          "type": "uint32",
+          "id": 26
+        },
+        "featured_app_tagid": {
+          "type": "uint32",
+          "id": 27
+        },
+        "referenced_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 28,
+          "options": {
+            "packed": false
+          }
+        },
+        "build_id": {
+          "type": "uint32",
+          "id": 29
+        },
+        "build_branch": {
+          "type": "string",
+          "id": 30
+        }
       }
     },
-    "method_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.MethodOptions"
-    },
-    "enum_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.EnumOptions"
-    },
-    "enum_value_description": {
-      "type": "string",
-      "id": 50000,
-      "extend": ".google.protobuf.EnumValueOptions"
-    },
-    "EProtoExecutionSite": {
-      "values": {
-        "k_EProtoExecutionSiteUnknown": 0,
-        "k_EProtoExecutionSiteSteamClient": 2
+    "CBilling_Address": {
+      "fields": {
+        "first_name": {
+          "type": "string",
+          "id": 1
+        },
+        "last_name": {
+          "type": "string",
+          "id": 2
+        },
+        "address1": {
+          "type": "string",
+          "id": 3
+        },
+        "address2": {
+          "type": "string",
+          "id": 4
+        },
+        "city": {
+          "type": "string",
+          "id": 5
+        },
+        "us_state": {
+          "type": "string",
+          "id": 6
+        },
+        "country_code": {
+          "type": "string",
+          "id": 7
+        },
+        "postcode": {
+          "type": "string",
+          "id": 8
+        },
+        "zip_plus4": {
+          "type": "int32",
+          "id": 9
+        },
+        "phone": {
+          "type": "string",
+          "id": 10
+        }
       }
     },
-    "NoResponse": {
-      "fields": {}
+    "CPackageReservationStatus": {
+      "fields": {
+        "packageid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "reservation_state": {
+          "type": "int32",
+          "id": 2
+        },
+        "queue_position": {
+          "type": "int32",
+          "id": 3
+        },
+        "total_queue_size": {
+          "type": "int32",
+          "id": 4
+        },
+        "reservation_country_code": {
+          "type": "string",
+          "id": 5
+        },
+        "expired": {
+          "type": "bool",
+          "id": 6
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 7
+        },
+        "time_reserved": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgKeyValuePair": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgKeyValueSet": {
+      "fields": {
+        "pairs": {
+          "rule": "repeated",
+          "type": ".CMsgKeyValuePair",
+          "id": 1
+        }
+      }
     },
     "google": {
       "nested": {
@@ -3098,6 +4209,48 @@
         }
       }
     },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
     "EPublishedFileQueryType": {
       "values": {
         "k_PublishedFileQueryType_RankedByVote": 0,
@@ -3163,18 +4316,6 @@
         "k_EContentCheckProvider_Local": 3
       }
     },
-    "EBanContentCheckResult": {
-      "values": {
-        "k_EBanContentCheckResult_NotScanned": 0,
-        "k_EBanContentCheckResult_Reset": 1,
-        "k_EBanContentCheckResult_NeedsChecking": 2,
-        "k_EBanContentCheckResult_VeryUnlikely": 5,
-        "k_EBanContentCheckResult_Unlikely": 30,
-        "k_EBanContentCheckResult_Possible": 50,
-        "k_EBanContentCheckResult_Likely": 75,
-        "k_EBanContentCheckResult_VeryLikely": 100
-      }
-    },
     "EProfileCustomizationType": {
       "values": {
         "k_EProfileCustomizationTypeInvalid": 0,
@@ -3218,6 +4359,31 @@
         "k_ECloudStoragePersistStateDeleted": 2
       }
     },
+    "ESDCardFormatStage": {
+      "values": {
+        "k_ESDCardFormatStage_Invalid": 0,
+        "k_ESDCardFormatStage_Starting": 1,
+        "k_ESDCardFormatStage_Testing": 2,
+        "k_ESDCardFormatStage_Rescuing": 3,
+        "k_ESDCardFormatStage_Formatting": 4,
+        "k_ESDCardFormatStage_Finalizing": 5
+      }
+    },
+    "ESystemFanControlMode": {
+      "values": {
+        "k_SystemFanControlMode_Invalid": 0,
+        "k_SystemFanControlMode_Disabled": 1,
+        "k_SystemFanControlMode_Default": 2
+      }
+    },
+    "EColorProfile": {
+      "values": {
+        "k_EColorProfile_Invalid": 0,
+        "k_EColorProfile_Native": 1,
+        "k_EColorProfile_Standard": 2,
+        "k_EColorProfile_Vivid": 3
+      }
+    },
     "EBluetoothDeviceType": {
       "values": {
         "k_BluetoothDeviceType_Invalid": 0,
@@ -3232,6 +4398,110 @@
         "k_BluetoothDeviceType_Joystick": 9,
         "k_BluetoothDeviceType_Gamepad": 10,
         "k_BluetoothDeviceType_Keyboard": 11
+      }
+    },
+    "ESystemAudioDirection": {
+      "values": {
+        "k_SystemAudioDirection_Invalid": 0,
+        "k_SystemAudioDirection_Input": 1,
+        "k_SystemAudioDirection_Output": 2
+      }
+    },
+    "ESystemAudioChannel": {
+      "values": {
+        "k_SystemAudioChannel_Invalid": 0,
+        "k_SystemAudioChannel_Aggregated": 1,
+        "k_SystemAudioChannel_FrontLeft": 2,
+        "k_SystemAudioChannel_FrontRight": 3,
+        "k_SystemAudioChannel_LFE": 4,
+        "k_SystemAudioChannel_BackLeft": 5,
+        "k_SystemAudioChannel_BackRight": 6,
+        "k_SystemAudioChannel_FrontCenter": 7,
+        "k_SystemAudioChannel_Unknown": 8,
+        "k_SystemAudioChannel_Mono": 9
+      }
+    },
+    "ESystemAudioPortType": {
+      "values": {
+        "k_SystemAudioPortType_Invalid": 0,
+        "k_SystemAudioPortType_Unknown": 1,
+        "k_SystemAudioPortType_Audio32f": 2,
+        "k_SystemAudioPortType_Midi8b": 3,
+        "k_SystemAudioPortType_Video32RGBA": 4
+      }
+    },
+    "ESystemAudioPortDirection": {
+      "values": {
+        "k_SystemAudioPortDirection_Invalid": 0,
+        "k_SystemAudioPortDirection_Input": 1,
+        "k_SystemAudioPortDirection_Output": 2
+      }
+    },
+    "ESystemServiceState": {
+      "values": {
+        "k_ESystemServiceState_Unavailable": 0,
+        "k_ESystemServiceState_Disabled": 1,
+        "k_ESystemServiceState_Enabled": 2
+      }
+    },
+    "EGraphicsPerfOverlayLevel": {
+      "values": {
+        "k_EGraphicsPerfOverlayLevel_Hidden": 0,
+        "k_EGraphicsPerfOverlayLevel_Basic": 1,
+        "k_EGraphicsPerfOverlayLevel_Medium": 2,
+        "k_EGraphicsPerfOverlayLevel_Full": 3,
+        "k_EGraphicsPerfOverlayLevel_Minimal": 4
+      }
+    },
+    "EGPUPerformanceLevel": {
+      "values": {
+        "k_EGPUPerformanceLevel_Invalid": 0,
+        "k_EGPUPerformanceLevel_Auto": 1,
+        "k_EGPUPerformanceLevel_Manual": 2,
+        "k_EGPUPerformanceLevel_Low": 3,
+        "k_EGPUPerformanceLevel_High": 4,
+        "k_EGPUPerformanceLevel_Profiling": 5
+      }
+    },
+    "EScalingFilter": {
+      "values": {
+        "k_EScalingFilter_Invalid": 0,
+        "k_EScalingFilter_FSR": 1,
+        "k_EScalingFilter_Nearest": 2,
+        "k_EScalingFilter_Integer": 3,
+        "k_EScalingFilter_Linear": 4,
+        "k_EScalingFilter_NIS": 5
+      }
+    },
+    "ECPUGovernor": {
+      "values": {
+        "k_ECPUGovernor_Invalid": 0,
+        "k_ECPUGovernor_Perf": 1,
+        "k_ECPUGovernor_Powersave": 2,
+        "k_ECPUGovernor_Manual": 3
+      }
+    },
+    "EUpdaterType": {
+      "values": {
+        "k_EUpdaterType_Invalid": 0,
+        "k_EUpdaterType_Client": 1,
+        "k_EUpdaterType_OS": 2,
+        "k_EUpdaterType_BIOS": 3,
+        "k_EUpdaterType_Aggregated": 4,
+        "k_EUpdaterType_Test1": 5,
+        "k_EUpdaterType_Test2": 6,
+        "k_EUpdaterType_Dummy": 7
+      }
+    },
+    "EUpdaterState": {
+      "values": {
+        "k_EUpdaterState_Invalid": 0,
+        "k_EUpdaterState_UpToDate": 2,
+        "k_EUpdaterState_Checking": 3,
+        "k_EUpdaterState_Available": 4,
+        "k_EUpdaterState_Applying": 5,
+        "k_EUpdaterState_ClientRestartPending": 6,
+        "k_EUpdaterState_SystemRestartPending": 7
       }
     },
     "EStorageBlockContentType": {
@@ -3251,860 +4521,108 @@
         "k_EStorageBlockFileSystemType_Ext4": 3
       }
     },
-    "msgpool_soft_limit": {
-      "type": "int32",
-      "id": 50000,
-      "extend": ".google.protobuf.MessageOptions",
-      "options": {
-        "default": 32
-      }
-    },
-    "msgpool_hard_limit": {
-      "type": "int32",
-      "id": 50001,
-      "extend": ".google.protobuf.MessageOptions",
-      "options": {
-        "default": 384
-      }
-    },
-    "force_php_generation": {
-      "type": "bool",
-      "id": 50000,
-      "extend": ".google.protobuf.FileOptions",
-      "options": {
-        "default": false
-      }
-    },
-    "php_output_always_number": {
-      "type": "bool",
-      "id": 50020,
-      "extend": ".google.protobuf.FieldOptions",
-      "options": {
-        "default": false
-      }
-    },
-    "EProtoClanEventType": {
+    "ESteamDeckCompatibilityCategory": {
       "values": {
-        "k_EClanOtherEvent": 1,
-        "k_EClanGameEvent": 2,
-        "k_EClanPartyEvent": 3,
-        "k_EClanMeetingEvent": 4,
-        "k_EClanSpecialCauseEvent": 5,
-        "k_EClanMusicAndArtsEvent": 6,
-        "k_EClanSportsEvent": 7,
-        "k_EClanTripEvent": 8,
-        "k_EClanChatEvent": 9,
-        "k_EClanGameReleaseEvent": 10,
-        "k_EClanBroadcastEvent": 11,
-        "k_EClanSmallUpdateEvent": 12,
-        "k_EClanPreAnnounceMajorUpdateEvent": 13,
-        "k_EClanMajorUpdateEvent": 14,
-        "k_EClanDLCReleaseEvent": 15,
-        "k_EClanFutureReleaseEvent": 16,
-        "k_EClanESportTournamentStreamEvent": 17,
-        "k_EClanDevStreamEvent": 18,
-        "k_EClanFamousStreamEvent": 19,
-        "k_EClanGameSalesEvent": 20,
-        "k_EClanGameItemSalesEvent": 21,
-        "k_EClanInGameBonusXPEvent": 22,
-        "k_EClanInGameLootEvent": 23,
-        "k_EClanInGamePerksEvent": 24,
-        "k_EClanInGameChallengeEvent": 25,
-        "k_EClanInGameContestEvent": 26,
-        "k_EClanIRLEvent": 27,
-        "k_EClanNewsEvent": 28,
-        "k_EClanBetaReleaseEvent": 29,
-        "k_EClanInGameContentReleaseEvent": 30,
-        "k_EClanFreeTrial": 31,
-        "k_EClanSeasonRelease": 32,
-        "k_EClanSeasonUpdate": 33,
-        "k_EClanCrosspostEvent": 34,
-        "k_EClanInGameEventGeneral": 35
+        "k_ESteamDeckCompatibilityCategory_Unknown": 0,
+        "k_ESteamDeckCompatibilityCategory_Unsupported": 1,
+        "k_ESteamDeckCompatibilityCategory_Playable": 2,
+        "k_ESteamDeckCompatibilityCategory_Verified": 3
       }
     },
-    "PartnerEventNotificationType": {
+    "ESteamDeckCompatibilityResultDisplayType": {
       "values": {
-        "k_EEventStart": 0,
-        "k_EEventBroadcastStart": 1,
-        "k_EEventMatchStart": 2,
-        "k_EEventPartnerMaxType": 3
+        "k_ESteamDeckCompatibilityResultDisplayType_Invisible": 0,
+        "k_ESteamDeckCompatibilityResultDisplayType_Informational": 1,
+        "k_ESteamDeckCompatibilityResultDisplayType_Unsupported": 2,
+        "k_ESteamDeckCompatibilityResultDisplayType_Playable": 3,
+        "k_ESteamDeckCompatibilityResultDisplayType_Verified": 4
       }
     },
-    "CMsgIPAddress": {
-      "oneofs": {
-        "ip": {
-          "oneof": [
-            "v4",
-            "v6"
-          ]
-        }
-      },
-      "fields": {
-        "v4": {
-          "type": "fixed32",
-          "id": 1
-        },
-        "v6": {
-          "type": "bytes",
-          "id": 2
-        }
+    "EACState": {
+      "values": {
+        "k_EACState_Unknown": 0,
+        "k_EACState_Disconnected": 1,
+        "k_EACState_Connected": 2,
+        "k_EACState_ConnectedSlow": 3
       }
     },
-    "CMsgIPAddressBucket": {
-      "fields": {
-        "original_ip_address": {
-          "type": ".CMsgIPAddress",
-          "id": 1
-        },
-        "bucket": {
-          "type": "fixed64",
-          "id": 2
-        }
+    "EBatteryState": {
+      "values": {
+        "k_EBatteryState_Unknown": 0,
+        "k_EBatteryState_Discharging": 1,
+        "k_EBatteryState_Charging": 2,
+        "k_EBatteryState_Full": 3
       }
     },
-    "CMsgProtoBufHeader": {
-      "oneofs": {
-        "ip_addr": {
-          "oneof": [
-            "ip",
-            "ip_v6"
-          ]
-        }
-      },
-      "fields": {
-        "steamid": {
-          "type": "fixed64",
-          "id": 1
-        },
-        "client_sessionid": {
-          "type": "int32",
-          "id": 2
-        },
-        "routing_appid": {
-          "type": "uint32",
-          "id": 3
-        },
-        "jobid_source": {
-          "type": "fixed64",
-          "id": 10,
-          "options": {
-            "default": 18446744073709552000
-          }
-        },
-        "jobid_target": {
-          "type": "fixed64",
-          "id": 11,
-          "options": {
-            "default": 18446744073709552000
-          }
-        },
-        "target_job_name": {
-          "type": "string",
-          "id": 12
-        },
-        "seq_num": {
-          "type": "int32",
-          "id": 24
-        },
-        "eresult": {
-          "type": "int32",
-          "id": 13,
-          "options": {
-            "default": 2
-          }
-        },
-        "error_message": {
-          "type": "string",
-          "id": 14
-        },
-        "auth_account_flags": {
-          "type": "uint32",
-          "id": 16
-        },
-        "token_source": {
-          "type": "uint32",
-          "id": 22
-        },
-        "admin_spoofing_user": {
-          "type": "bool",
-          "id": 23
-        },
-        "transport_error": {
-          "type": "int32",
-          "id": 17,
-          "options": {
-            "default": 1
-          }
-        },
-        "messageid": {
-          "type": "uint64",
-          "id": 18,
-          "options": {
-            "default": 18446744073709552000
-          }
-        },
-        "publisher_group_id": {
-          "type": "uint32",
-          "id": 19
-        },
-        "sysid": {
-          "type": "uint32",
-          "id": 20
-        },
-        "trace_tag": {
-          "type": "uint64",
-          "id": 21
-        },
-        "webapi_key_id": {
-          "type": "uint32",
-          "id": 25
-        },
-        "is_from_external_source": {
-          "type": "bool",
-          "id": 26
-        },
-        "forward_to_sysid": {
-          "rule": "repeated",
-          "type": "uint32",
-          "id": 27,
-          "options": {
-            "packed": false
-          }
-        },
-        "cm_sysid": {
-          "type": "uint32",
-          "id": 28
-        },
-        "wg_token": {
-          "type": "string",
-          "id": 30
-        },
-        "launcher_type": {
-          "type": "uint32",
-          "id": 31,
-          "options": {
-            "default": 0
-          }
-        },
-        "realm": {
-          "type": "uint32",
-          "id": 32,
-          "options": {
-            "default": 0
-          }
-        },
-        "ip": {
-          "type": "uint32",
-          "id": 15
-        },
-        "ip_v6": {
-          "type": "bytes",
-          "id": 29
-        }
+    "EOSBranch": {
+      "values": {
+        "k_EOSBranch_Unknown": 0,
+        "k_EOSBranch_Release": 1,
+        "k_EOSBranch_ReleaseCandidate": 2,
+        "k_EOSBranch_Beta": 3,
+        "k_EOSBranch_BetaCandidate": 4,
+        "k_EOSBranch_Main": 5
       }
     },
-    "CMsgMulti": {
-      "fields": {
-        "size_unzipped": {
-          "type": "uint32",
-          "id": 1
-        },
-        "message_body": {
-          "type": "bytes",
-          "id": 2
-        }
+    "ECommunityItemClass": {
+      "values": {
+        "k_ECommunityItemClass_Invalid": 0,
+        "k_ECommunityItemClass_Badge": 1,
+        "k_ECommunityItemClass_GameCard": 2,
+        "k_ECommunityItemClass_ProfileBackground": 3,
+        "k_ECommunityItemClass_Emoticon": 4,
+        "k_ECommunityItemClass_BoosterPack": 5,
+        "k_ECommunityItemClass_Consumable": 6,
+        "k_ECommunityItemClass_GameGoo": 7,
+        "k_ECommunityItemClass_ProfileModifier": 8,
+        "k_ECommunityItemClass_Scene": 9,
+        "k_ECommunityItemClass_SalienItem": 10,
+        "k_ECommunityItemClass_Sticker": 11,
+        "k_ECommunityItemClass_ChatEffect": 12,
+        "k_ECommunityItemClass_MiniProfileBackground": 13,
+        "k_ECommunityItemClass_AvatarFrame": 14,
+        "k_ECommunityItemClass_AnimatedAvatar": 15,
+        "k_ECommunityItemClass_SteamDeckKeyboardSkin": 16
       }
     },
-    "CMsgProtobufWrapped": {
-      "fields": {
-        "message_body": {
-          "type": "bytes",
-          "id": 1
-        }
+    "ESteamDeckCompatibilityFeedback": {
+      "values": {
+        "k_ESteamDeckCompatibilityFeedback_Unset": 0,
+        "k_ESteamDeckCompatibilityFeedback_Agree": 1,
+        "k_ESteamDeckCompatibilityFeedback_Disagree": 2,
+        "k_ESteamDeckCompatibilityFeedback_Ignore": 3
       }
     },
-    "CMsgAuthTicket": {
-      "fields": {
-        "estate": {
-          "type": "uint32",
-          "id": 1
-        },
-        "eresult": {
-          "type": "uint32",
-          "id": 2,
-          "options": {
-            "default": 2
-          }
-        },
-        "steamid": {
-          "type": "fixed64",
-          "id": 3
-        },
-        "gameid": {
-          "type": "fixed64",
-          "id": 4
-        },
-        "h_steam_pipe": {
-          "type": "uint32",
-          "id": 5
-        },
-        "ticket_crc": {
-          "type": "uint32",
-          "id": 6
-        },
-        "ticket": {
-          "type": "bytes",
-          "id": 7
-        }
+    "EProvideDeckFeedbackPreference": {
+      "values": {
+        "k_EProvideDeckFeedbackPreference_Unset": 0,
+        "k_EProvideDeckFeedbackPreference_Yes": 1,
+        "k_EProvideDeckFeedbackPreference_No": 2
       }
     },
-    "CCDDBAppDetailCommon": {
-      "fields": {
-        "appid": {
-          "type": "uint32",
-          "id": 1
-        },
-        "name": {
-          "type": "string",
-          "id": 2
-        },
-        "icon": {
-          "type": "string",
-          "id": 3
-        },
-        "logo": {
-          "type": "string",
-          "id": 4
-        },
-        "logo_small": {
-          "type": "string",
-          "id": 5
-        },
-        "tool": {
-          "type": "bool",
-          "id": 6
-        },
-        "demo": {
-          "type": "bool",
-          "id": 7
-        },
-        "media": {
-          "type": "bool",
-          "id": 8
-        },
-        "community_visible_stats": {
-          "type": "bool",
-          "id": 9
-        },
-        "friendly_name": {
-          "type": "string",
-          "id": 10
-        },
-        "propagation": {
-          "type": "string",
-          "id": 11
-        },
-        "has_adult_content": {
-          "type": "bool",
-          "id": 12
-        },
-        "is_visible_in_steam_china": {
-          "type": "bool",
-          "id": 13
-        }
+    "ETouchGesture": {
+      "values": {
+        "k_ETouchGestureNone": 0,
+        "k_ETouchGestureTouch": 1,
+        "k_ETouchGestureTap": 2,
+        "k_ETouchGestureDoubleTap": 3,
+        "k_ETouchGestureShortPress": 4,
+        "k_ETouchGestureLongPress": 5,
+        "k_ETouchGestureLongTap": 6,
+        "k_ETouchGestureTwoFingerTap": 7,
+        "k_ETouchGestureTapCancelled": 8,
+        "k_ETouchGesturePinchBegin": 9,
+        "k_ETouchGesturePinchUpdate": 10,
+        "k_ETouchGesturePinchEnd": 11,
+        "k_ETouchGestureFlingStart": 12,
+        "k_ETouchGestureFlingCancelled": 13
       }
     },
-    "CMsgAppRights": {
-      "fields": {
-        "edit_info": {
-          "type": "bool",
-          "id": 1
-        },
-        "publish": {
-          "type": "bool",
-          "id": 2
-        },
-        "view_error_data": {
-          "type": "bool",
-          "id": 3
-        },
-        "download": {
-          "type": "bool",
-          "id": 4
-        },
-        "upload_cdkeys": {
-          "type": "bool",
-          "id": 5
-        },
-        "generate_cdkeys": {
-          "type": "bool",
-          "id": 6
-        },
-        "view_financials": {
-          "type": "bool",
-          "id": 7
-        },
-        "manage_ceg": {
-          "type": "bool",
-          "id": 8
-        },
-        "manage_signing": {
-          "type": "bool",
-          "id": 9
-        },
-        "manage_cdkeys": {
-          "type": "bool",
-          "id": 10
-        },
-        "edit_marketing": {
-          "type": "bool",
-          "id": 11
-        },
-        "economy_support": {
-          "type": "bool",
-          "id": 12
-        },
-        "economy_support_supervisor": {
-          "type": "bool",
-          "id": 13
-        },
-        "manage_pricing": {
-          "type": "bool",
-          "id": 14
-        },
-        "broadcast_live": {
-          "type": "bool",
-          "id": 15
-        },
-        "view_marketing_traffic": {
-          "type": "bool",
-          "id": 16
-        },
-        "edit_store_display_content": {
-          "type": "bool",
-          "id": 17
-        }
-      }
-    },
-    "CCuratorPreferences": {
-      "fields": {
-        "supported_languages": {
-          "type": "uint32",
-          "id": 1
-        },
-        "platform_windows": {
-          "type": "bool",
-          "id": 2
-        },
-        "platform_mac": {
-          "type": "bool",
-          "id": 3
-        },
-        "platform_linux": {
-          "type": "bool",
-          "id": 4
-        },
-        "vr_content": {
-          "type": "bool",
-          "id": 5
-        },
-        "adult_content_violence": {
-          "type": "bool",
-          "id": 6
-        },
-        "adult_content_sex": {
-          "type": "bool",
-          "id": 7
-        },
-        "timestamp_updated": {
-          "type": "uint32",
-          "id": 8
-        },
-        "tagids_curated": {
-          "rule": "repeated",
-          "type": "uint32",
-          "id": 9,
-          "options": {
-            "packed": false
-          }
-        },
-        "tagids_filtered": {
-          "rule": "repeated",
-          "type": "uint32",
-          "id": 10,
-          "options": {
-            "packed": false
-          }
-        },
-        "website_title": {
-          "type": "string",
-          "id": 11
-        },
-        "website_url": {
-          "type": "string",
-          "id": 12
-        },
-        "discussion_url": {
-          "type": "string",
-          "id": 13
-        },
-        "show_broadcast": {
-          "type": "bool",
-          "id": 14
-        }
-      }
-    },
-    "CLocalizationToken": {
-      "fields": {
-        "language": {
-          "type": "uint32",
-          "id": 1
-        },
-        "localized_string": {
-          "type": "string",
-          "id": 2
-        }
-      }
-    },
-    "CClanEventUserNewsTuple": {
-      "fields": {
-        "clanid": {
-          "type": "uint32",
-          "id": 1
-        },
-        "event_gid": {
-          "type": "fixed64",
-          "id": 2
-        },
-        "announcement_gid": {
-          "type": "fixed64",
-          "id": 3
-        },
-        "rtime_start": {
-          "type": "uint32",
-          "id": 4
-        },
-        "rtime_end": {
-          "type": "uint32",
-          "id": 5
-        },
-        "priority_score": {
-          "type": "uint32",
-          "id": 6
-        },
-        "type": {
-          "type": "uint32",
-          "id": 7
-        },
-        "clamp_range_slot": {
-          "type": "uint32",
-          "id": 8
-        },
-        "appid": {
-          "type": "uint32",
-          "id": 9
-        },
-        "rtime32_last_modified": {
-          "type": "uint32",
-          "id": 10
-        }
-      }
-    },
-    "CClanMatchEventByRange": {
-      "fields": {
-        "rtime_before": {
-          "type": "uint32",
-          "id": 1
-        },
-        "rtime_after": {
-          "type": "uint32",
-          "id": 2
-        },
-        "qualified": {
-          "type": "uint32",
-          "id": 3
-        },
-        "events": {
-          "rule": "repeated",
-          "type": ".CClanEventUserNewsTuple",
-          "id": 4
-        }
-      }
-    },
-    "CCommunity_ClanAnnouncementInfo": {
-      "fields": {
-        "gid": {
-          "type": "uint64",
-          "id": 1
-        },
-        "clanid": {
-          "type": "uint64",
-          "id": 2
-        },
-        "posterid": {
-          "type": "uint64",
-          "id": 3
-        },
-        "headline": {
-          "type": "string",
-          "id": 4
-        },
-        "posttime": {
-          "type": "uint32",
-          "id": 5
-        },
-        "updatetime": {
-          "type": "uint32",
-          "id": 6
-        },
-        "body": {
-          "type": "string",
-          "id": 7
-        },
-        "commentcount": {
-          "type": "int32",
-          "id": 8
-        },
-        "tags": {
-          "rule": "repeated",
-          "type": "string",
-          "id": 9
-        },
-        "language": {
-          "type": "int32",
-          "id": 10
-        },
-        "hidden": {
-          "type": "bool",
-          "id": 11
-        },
-        "forum_topic_id": {
-          "type": "fixed64",
-          "id": 12
-        },
-        "event_gid": {
-          "type": "fixed64",
-          "id": 13
-        },
-        "voteupcount": {
-          "type": "int32",
-          "id": 14
-        },
-        "votedowncount": {
-          "type": "int32",
-          "id": 15
-        }
-      }
-    },
-    "CClanEventData": {
-      "fields": {
-        "gid": {
-          "type": "fixed64",
-          "id": 1
-        },
-        "clan_steamid": {
-          "type": "fixed64",
-          "id": 2
-        },
-        "event_name": {
-          "type": "string",
-          "id": 3
-        },
-        "event_type": {
-          "type": ".EProtoClanEventType",
-          "id": 4,
-          "options": {
-            "default": "k_EClanOtherEvent"
-          }
-        },
-        "appid": {
-          "type": "uint32",
-          "id": 5
-        },
-        "server_address": {
-          "type": "string",
-          "id": 6
-        },
-        "server_password": {
-          "type": "string",
-          "id": 7
-        },
-        "rtime32_start_time": {
-          "type": "uint32",
-          "id": 8
-        },
-        "rtime32_end_time": {
-          "type": "uint32",
-          "id": 9
-        },
-        "comment_count": {
-          "type": "int32",
-          "id": 10
-        },
-        "creator_steamid": {
-          "type": "fixed64",
-          "id": 11
-        },
-        "last_update_steamid": {
-          "type": "fixed64",
-          "id": 12
-        },
-        "event_notes": {
-          "type": "string",
-          "id": 13
-        },
-        "jsondata": {
-          "type": "string",
-          "id": 14
-        },
-        "announcement_body": {
-          "type": ".CCommunity_ClanAnnouncementInfo",
-          "id": 15
-        },
-        "published": {
-          "type": "bool",
-          "id": 16
-        },
-        "hidden": {
-          "type": "bool",
-          "id": 17
-        },
-        "rtime32_visibility_start": {
-          "type": "uint32",
-          "id": 18
-        },
-        "rtime32_visibility_end": {
-          "type": "uint32",
-          "id": 19
-        },
-        "broadcaster_accountid": {
-          "type": "uint32",
-          "id": 20
-        },
-        "follower_count": {
-          "type": "uint32",
-          "id": 21
-        },
-        "ignore_count": {
-          "type": "uint32",
-          "id": 22
-        },
-        "forum_topic_id": {
-          "type": "fixed64",
-          "id": 23
-        },
-        "rtime32_last_modified": {
-          "type": "uint32",
-          "id": 24
-        },
-        "news_post_gid": {
-          "type": "fixed64",
-          "id": 25
-        },
-        "rtime_mod_reviewed": {
-          "type": "uint32",
-          "id": 26
-        },
-        "featured_app_tagid": {
-          "type": "uint32",
-          "id": 27
-        },
-        "referenced_appids": {
-          "rule": "repeated",
-          "type": "uint32",
-          "id": 28,
-          "options": {
-            "packed": false
-          }
-        },
-        "build_id": {
-          "type": "uint32",
-          "id": 29
-        },
-        "build_branch": {
-          "type": "string",
-          "id": 30
-        }
-      }
-    },
-    "CBilling_Address": {
-      "fields": {
-        "first_name": {
-          "type": "string",
-          "id": 1
-        },
-        "last_name": {
-          "type": "string",
-          "id": 2
-        },
-        "address1": {
-          "type": "string",
-          "id": 3
-        },
-        "address2": {
-          "type": "string",
-          "id": 4
-        },
-        "city": {
-          "type": "string",
-          "id": 5
-        },
-        "us_state": {
-          "type": "string",
-          "id": 6
-        },
-        "country_code": {
-          "type": "string",
-          "id": 7
-        },
-        "postcode": {
-          "type": "string",
-          "id": 8
-        },
-        "zip_plus4": {
-          "type": "int32",
-          "id": 9
-        },
-        "phone": {
-          "type": "string",
-          "id": 10
-        }
-      }
-    },
-    "CPackageReservationStatus": {
-      "fields": {
-        "packageid": {
-          "type": "uint32",
-          "id": 1
-        },
-        "reservation_state": {
-          "type": "int32",
-          "id": 2
-        },
-        "queue_position": {
-          "type": "int32",
-          "id": 3
-        },
-        "total_queue_size": {
-          "type": "int32",
-          "id": 4
-        },
-        "reservation_country_code": {
-          "type": "string",
-          "id": 5
-        },
-        "expired": {
-          "type": "bool",
-          "id": 6
-        },
-        "time_expires": {
-          "type": "uint32",
-          "id": 7
-        },
-        "time_reserved": {
-          "type": "uint32",
-          "id": 8
-        }
+    "ESessionPersistence": {
+      "values": {
+        "k_ESessionPersistence_Invalid": -1,
+        "k_ESessionPersistence_Ephemeral": 0,
+        "k_ESessionPersistence_Persistent": 1
       }
     }
   }

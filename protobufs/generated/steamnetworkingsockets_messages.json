@@ -430,6 +430,14 @@
         }
       }
     },
+    "CMsgICECandidate": {
+      "fields": {
+        "candidate": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
     "CMsgICERendezvous": {
       "fields": {
         "auth": {
@@ -437,7 +445,7 @@
           "id": 2
         },
         "add_candidate": {
-          "type": ".CMsgICERendezvous.Candidate",
+          "type": ".CMsgICECandidate",
           "id": 1
         }
       },
@@ -447,14 +455,6 @@
             "pwd_frag": {
               "type": "string",
               "id": 1
-            }
-          }
-        },
-        "Candidate": {
-          "fields": {
-            "candidate": {
-              "type": "string",
-              "id": 3
             }
           }
         }
@@ -595,6 +595,10 @@
             "flags": {
               "type": "uint32",
               "id": 3
+            },
+            "lane_idx": {
+              "type": "uint32",
+              "id": 4
             }
           }
         }

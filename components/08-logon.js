@@ -48,21 +48,23 @@ class SteamUserLogon extends SteamUserWeb {
 					}
 				}
 
+				let anonLogin = !details.accountName && !details.accessToken;
+
 				this._logOnDetails = {
 					account_name: details.accountName,
 					password: details.password,
 					login_key: details.loginKey,
 					auth_code: details.authCode,
 					two_factor_code: details.twoFactorCode,
-					should_remember_password: !!details.rememberPassword,
+					should_remember_password: !!(details.rememberPassword || details.accessToken),
 					obfuscated_private_ip: {v4: logonId || 0},
 					protocol_version: PROTOCOL_VERSION,
-					supports_rate_limit_response: !!details.accountName,
-					machine_name: details.accountName ? (details.machineName || '') : '',
-					ping_ms_from_cell_search: details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
-					client_language: details.accountName ? 'english' : '',
+					supports_rate_limit_response: !anonLogin,
+					machine_name: !anonLogin ? (details.machineName || '') : '',
+					ping_ms_from_cell_search: !anonLogin ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
+					client_language: !anonLogin ? 'english' : '',
 					client_os_type: Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
-					anon_user_target_account_name: details.accountName ? '' : 'anonymous',
+					anon_user_target_account_name: !anonLogin ? undefined : 'anonymous',
 					steamguard_dont_remember_computer: !!(details.accountName && details.authCode && details.dontRememberMachine),
 					ui_mode: undefined,
 					chat_mode: 2, // enable new chat
@@ -91,7 +93,55 @@ class SteamUserLogon extends SteamUserWeb {
 				delete this._logOnDetails.supports_rate_limit_response;
 			}
 
-			let anonLogin = !this._logOnDetails.account_name;
+			if (details.refreshToken) {
+				// If logging in with a refresh token, we need to make sure that no conflicting properties are set
+				let disallowedProps = [
+					'account_name',
+					'password',
+					'login_key',
+					'auth_code',
+					'two_factor_code'
+				];
+
+				disallowedProps.forEach((prop) => {
+					if (this._logOnDetails[prop]) {
+						throw new Error(`Cannot specify ${prop} when logging in with a refresh token`);
+					}
+				});
+
+				// A SteamID doesn't need to be provided since we can extract it from the JWT, but if one was provided,
+				// make sure it matches the JWT.
+
+				let decodedToken = Helpers.decodeJwt(details.refreshToken);
+				let tokenSteamId = Helpers.steamID(decodedToken.sub);
+				if (this._logOnDetails._steamid) {
+					let providedSteamId = Helpers.steamID(this._logOnDetails.steamID);
+					if (providedSteamId.getSteam3RenderedID() != tokenSteamId.getSteam3RenderedID()) {
+						throw new Error(`Specified SteamID (${providedSteamId}) does not match refreshToken (${tokenSteamId}`);
+					}
+				}
+
+				if (decodedToken.iss != 'steam') {
+					// Only refresh tokens have iss=steam, and only refresh tokens are accepted by the CM
+					let err = new Error('refreshToken is not a Steam refresh token');
+					err.tokenIssuer = decodedToken.iss;
+					throw err;
+				}
+
+				// Make sure this token has the correct audience
+				if (!(decodedToken.aud || []).includes('client')) {
+					let err = new Error('This refreshToken is not valid for logging in to the Steam client');
+					err.tokenAudiences = decodedToken.aud || [];
+					throw err;
+				}
+
+				this._logOnDetails._steamid = tokenSteamId;
+				this._logOnDetails.access_token = details.refreshToken;
+
+				this.emit('debug', `Provided refresh token has sub ${decodedToken.sub}, aud ${(decodedToken.aud || []).join(',')}`);
+			}
+
+			let anonLogin = !this._logOnDetails.account_name && !this._logOnDetails.access_token;
 
 			// Read the required files
 			let filenames = [];
@@ -187,12 +237,7 @@ class SteamUserLogon extends SteamUserWeb {
 
 			// Do the login
 			if (this._logOnDetails._steamid) {
-				let sid = this._logOnDetails._steamid;
-				if (typeof sid == 'string') {
-					sid = new SteamID(sid);
-				}
-
-				this._tempSteamID = sid;
+				this._tempSteamID = Helpers.steamID(this._logOnDetails._steamid);
 			} else {
 				let sid = new SteamID();
 				sid.universe = SteamID.Universe.PUBLIC;
@@ -283,8 +328,6 @@ class SteamUserLogon extends SteamUserWeb {
 	 */
 	_disconnect(suppressLogoff) {
 		this._clearChangelistUpdateTimer();
-		clearTimeout(this._logonTimeout); // cancel any queued reconnect attempt
-		clearTimeout(this._logonMsgTimeout);
 		this._incomingMessageQueue = []; // clear the incoming message queue. If we're disconnecting, we don't care about anything else in the queue.
 
 		this.emit('debug', 'Disconnecting' + (suppressLogoff ? ' without sending logoff' : ''));
@@ -298,15 +341,18 @@ class SteamUserLogon extends SteamUserWeb {
 				this._loggingOff = false;
 				this._connection && this._connection.end(true);
 				this.steamID = null;
+				this._cleanupClosedConnection();
 			}, 4000);
 
 			this.once('disconnected', (eresult) => {
 				clearTimeout(timeout);
 				this.steamID = null;
+				this._cleanupClosedConnection();
 			});
 		} else {
 			this._connection && this._connection.end(true);
 			this.steamID = null;
+			this._cleanupClosedConnection();
 		}
 	}
 
@@ -366,8 +412,23 @@ class SteamUserLogon extends SteamUserWeb {
 			throw new Error("Cannot relog if not already connected");
 		}
 
-		if (this.steamID.type == SteamID.Type.INDIVIDUAL && (!this._logOnDetails || !this._logOnDetails.should_remember_password || !this._logOnDetails.login_key)) {
-			throw new Error("To use relog(), you must specify rememberPassword=true when logging on and wait for loginKey to be emitted");
+		let relogAvailable = (
+			this.steamID.type == SteamID.Type.ANON_USER
+			|| (
+				this.steamID.type == SteamID.Type.INDIVIDUAL
+				&& this._logOnDetails
+				&& this._logOnDetails.should_remember_password
+				&& this._logOnDetails.login_key
+			)
+			|| (
+				this.steamID.type == SteamID.Type.INDIVIDUAL
+				&& this._logOnDetails
+				&& this._logOnDetails.access_token
+			)
+		);
+
+		if (!relogAvailable) {
+			throw new Error("To use relog(), you must specify rememberPassword=true when logging on and wait for loginKey to be emitted, or log on using a refresh token");
 		}
 
 		this._relogging = true;
@@ -540,7 +601,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLogOnResponse, function(b
 
 			this._heartbeatInterval = setInterval(() => {
 				this._send(EMsg.ClientHeartBeat, {});
-			}, body.out_of_game_heartbeat_seconds * 1000);
+			}, body.heartbeat_seconds * 1000);
 
 			break;
 

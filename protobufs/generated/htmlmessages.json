@@ -345,6 +345,10 @@
             "allowed_extensions": {
               "type": "string",
               "id": 3
+            },
+            "url_rewrite": {
+              "type": "bool",
+              "id": 4
             }
           }
         }
@@ -383,6 +387,18 @@
         "unknown": {
           "type": "string",
           "id": 8
+        }
+      }
+    },
+    "CMsgBrowserSetName": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
         }
       }
     },
@@ -463,6 +479,18 @@
         "height": {
           "type": "uint32",
           "id": 5
+        },
+        "dpi_horizontal": {
+          "type": "double",
+          "id": 6
+        },
+        "dpi_vertical": {
+          "type": "double",
+          "id": 7
+        },
+        "display_name": {
+          "type": "string",
+          "id": 8
         }
       }
     },
@@ -546,7 +574,7 @@
         }
       }
     },
-    "CMsgBrowserViewSetVisible": {
+    "CMsgSetWindowVisibility": {
       "fields": {
         "browser_handle": {
           "type": "uint32",
@@ -802,6 +830,51 @@
         "bNewNavigation": {
           "type": "bool",
           "id": 6
+        }
+      }
+    },
+    "CHistoryEntry": {
+      "fields": {
+        "url": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CMsgHistoryChanged": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "index": {
+          "type": "uint32",
+          "id": 2
+        },
+        "entries": {
+          "rule": "repeated",
+          "type": ".CHistoryEntry",
+          "id": 3
+        }
+      }
+    },
+    "CMsgLoadError": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "error_code": {
+          "type": "int32",
+          "id": 2
+        },
+        "url": {
+          "type": "string",
+          "id": 3
+        },
+        "error_description": {
+          "type": "string",
+          "id": 4
         }
       }
     },
@@ -1839,6 +1912,10 @@
         "input_type": {
           "type": "string",
           "id": 7
+        },
+        "bIsMainFrame": {
+          "type": "bool",
+          "id": 8
         }
       }
     },
@@ -2034,18 +2111,6 @@
         }
       }
     },
-    "CJSMethodArgument": {
-      "fields": {
-        "json_data": {
-          "type": "string",
-          "id": 1
-        },
-        "function_handle": {
-          "type": "uint64",
-          "id": 2
-        }
-      }
-    },
     "CMsgJSValue": {
       "fields": {
         "bool_value": {
@@ -2116,14 +2181,18 @@
           "type": "uint32",
           "id": 1
         },
+        "owning_browser_handle": {
+          "type": "uint32",
+          "id": 2
+        },
         "name": {
           "type": "string",
-          "id": 2
+          "id": 3
         },
         "arguments": {
           "rule": "repeated",
           "type": ".CMsgJSValue",
-          "id": 3
+          "id": 4
         }
       }
     },
@@ -2133,14 +2202,18 @@
           "type": "uint32",
           "id": 1
         },
+        "owning_browser_handle": {
+          "type": "uint32",
+          "id": 2
+        },
         "function_handle": {
           "type": "uint64",
-          "id": 2
+          "id": 3
         },
         "arguments": {
           "rule": "repeated",
           "type": ".CMsgJSValue",
-          "id": 3
+          "id": 4
         }
       }
     },
@@ -2150,9 +2223,13 @@
           "type": "uint32",
           "id": 1
         },
+        "owning_browser_handle": {
+          "type": "uint32",
+          "id": 2
+        },
         "function_handle": {
           "type": "uint64",
-          "id": 2
+          "id": 3
         }
       }
     },
@@ -2162,9 +2239,13 @@
           "type": "uint32",
           "id": 1
         },
+        "owning_browser_handle": {
+          "type": "uint32",
+          "id": 2
+        },
         "exception": {
           "type": "string",
-          "id": 2
+          "id": 3
         }
       }
     },
@@ -2181,6 +2262,22 @@
         "language": {
           "type": "string",
           "id": 3
+        }
+      }
+    },
+    "CMsgNotifyUserActivation": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgSetNetFakeLocalSystemState": {
+      "fields": {
+        "state": {
+          "type": "uint32",
+          "id": 1
         }
       }
     },
@@ -2481,6 +2578,10 @@
         "tap_count": {
           "type": "uint32",
           "id": 8
+        },
+        "pinch_scale": {
+          "type": "double",
+          "id": 9
         }
       }
     },
@@ -2613,6 +2714,38 @@
         "requesting_url": {
           "type": "string",
           "id": 4
+        }
+      }
+    },
+    "CMsgBlockedRequest": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetProtocolBlockList": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "list": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetForceDeviceScaleFactor": {
+      "fields": {
+        "scale_factor": {
+          "type": "double",
+          "id": 1
         }
       }
     }

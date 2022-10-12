@@ -170,6 +170,7 @@ class TCPConnection extends BaseConnection {
 				this.user.emit('error', new Error('Connection out of sync'));
 				// noinspection JSAccessibilityCheck
 				this.user._disconnect(true);
+				return;
 			}
 		}
 
@@ -187,6 +188,7 @@ class TCPConnection extends BaseConnection {
 				this.user.emit('error', new Error('Encrypted message authentication failed'));
 				// noinspection JSAccessibilityCheck
 				this.user._disconnect(true);
+				return;
 			}
 		}
 

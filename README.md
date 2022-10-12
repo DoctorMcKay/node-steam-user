@@ -530,6 +530,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 
 ### logOn([details])
 - `details` - An object containing details for this logon
+	- `refreshToken` - A refresh token, [see below](#using-refresh-tokens)
 	- `accountName` - If logging into a user account, the account's name
 	- `password` - If logging into an account without a login key or a web logon token, the account's password
 	- `loginKey` - If logging into an account with a login key, this is the account's login key
@@ -545,15 +546,33 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `dontRememberMachine` - If you're providing an `authCode` but you don't want Steam to remember this sentryfile, pass `true` here.
 
 **v3.11.0 or later is required to use `machineName` or `dontRememberMachine`.**  
-**v4.3.0 or later is required to use `webLogonToken`.**
+**v4.3.0 or later is required to use `webLogonToken`.**  
+**v4.25.0 or later is required to use `refreshToken`.**
 
 Logs onto Steam. Omit the `details` object if you wish to login to an anonymous user account.
 
-There are four ways to log onto Steam:
+There are five ways to log onto Steam:
 
 - Anonymously
 	- Omit `accountName` (or the `details` object entirely) and you will log onto an anonymous user account.
-- Individually using account name and password
+- Individually using a refresh token **(recommended)**
+	- These properties are required:
+        - `refreshToken`
+    - These properties are optional:
+        - `steamID` - If provided, steam-user will check to make sure that the provided `refreshToken` matches this SteamID. If SteamIDs don't match, the app will crash.
+        - `logonID` - Defaults to 0 if not specified.
+        - `machineName` - Defaults to empty string if not specified.
+        - `clientOS` - Defaults to an auto-detected value if not specified.
+    - These properties must not be provided:
+        - `accountName`
+        - `password`
+        - `loginKey`
+        - `webLogonToken`
+        - `authCode`
+        - `twoFactorCode`
+        - `rememberPassword`
+        - `dontRememberMachine`
+- Individually using account name and password (deprecated)
 	- These properties are required:
 		- `accountName`
 		- `password`
@@ -569,7 +588,7 @@ There are four ways to log onto Steam:
 		- `loginKey`
 		- `webLogonToken`
 		- `steamID`
-- Individually using account name and login key
+- Individually using account name and login key (deprecated)
 	- These properties are required:
 		- `accountName`
 		- `loginKey`
@@ -585,7 +604,7 @@ There are four ways to log onto Steam:
 		- `dontRememberMachine`
 		- `webLogonToken`
 		- `steamID`
-- Individually using account name and [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback)
+- Individually using account name and [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback) (deprecated)
 	- **NOTE:** If you log on this way, [`webSession`](#websession) will **NOT** be emitted automatically, and you will need to use [`webLogOn()`](#weblogon) to get a web session.
 	- These properties are required:
 		- `accountName`
@@ -600,7 +619,22 @@ There are four ways to log onto Steam:
 		- `rememberPassword`
 		- `logonID`
 		- `machineName`
-		- `clientOS` 
+		- `clientOS`
+
+#### Using Refresh Tokens
+
+As of the 2022-08-24 Steam Client beta, the Steam client now uses refresh tokens when logging on. You can obtain a
+refresh token using the [steam-session module](https://www.npmjs.com/package/steam-session).
+
+As of 2022-09-03, refresh tokens are JWTs that are valid for ~200 days. You can keep using the same refresh token to log
+on until it expires. You can find out when a token expires by [decoding it](https://www.npmjs.com/search?q=jwt) and checking
+the `exp` property, which is a Unix timestamp indicating when the token expires.
+
+If you attempt to log on using a refresh token that isn't valid for use with client logins, the app will crash with a
+relevant error message.
+
+All other ways of authenticating to an individual user account should be considered deprecated, although steam-user will
+continue to support them as long as they keep working on the Steam backend.
 
 ### logOff()
 
@@ -610,10 +644,13 @@ Logs you off of Steam and closes the connection.
 
 **v3.18.0 or later is required to use this method**
 
-Logs you off of Steam and then immediately back on. If you aren't logged into an anonymous account, then you **must**
-set `rememberPassword` to `true` when logging on initially to use this. You also **must** wait for the
-[`loginKey`](#loginkey) event to be emitted before you can use this. Attempts to call this method without both
-criteria being met will result in an `Error` being thrown and nothing else will happen.
+Logs you off of Steam and then immediately back on. This can only be used if one of the following criteria are met:
+
+- You're logged into an anonymous account
+- You're logged into an individual account, you set `rememberPassword` to `true` when you logged on, and the `loginKey` event has been emitted
+- You're logged into an individual account and you used a `refreshToken` to log on
+
+Attempts to call this method under any other circumstance will result in an `Error` being thrown and nothing else will happen.
 
 When used, `disconnected` and then `loggedOn` will be emitted in succession. This is essentially the same as using
 `logOff()` and then calling `logOn()` immediately in the `disconnected` event callback.

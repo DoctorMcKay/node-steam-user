@@ -29,7 +29,13 @@ const ENUMS_WITH_DIFFERENT_PREFIXES_FROM_THEIR_NAMES = {
 	"EChatRoomNotificationLevel": "k_EChatroomNotificationLevel",
 	"EPublishedFileQueryType": "k_PublishedFileQueryType_",
 	"EProtoAppType": "k_EAppType",
-	"EBluetoothDeviceType": "k_BluetoothDeviceType_"
+	"EBluetoothDeviceType": "k_BluetoothDeviceType_",
+	"EPlaytestStatus": "k_ETesterStatus",
+	"ESystemAudioChannel": "k_SystemAudioChannel_",
+	"ESystemAudioDirection": "k_SystemAudioDirection_",
+	"ESystemAudioPortDirection": "k_SystemAudioPortDirection_",
+	"ESystemAudioPortType": "k_SystemAudioPortType_",
+	"ESystemFanControlMode": "k_SystemFanControlMode_"
 };
 
 const ENUMS_WITH_SOMETIMES_DIFFERENT_PREFIXES = {
