@@ -1,6 +1,11 @@
 const SteamUser = require("steam-user");
 const fs = require("fs");
 
+const credentials = {
+    accountName: "username", // your steam username
+    password: "password", // your steam password
+};
+
 const client = new SteamUser({
     enablePicsCache: true,
 });
@@ -28,23 +33,23 @@ client.on("ownershipCached", async () => {
             "showcdkeyonlaunch",
             "supportscdkeycopytoclipboard",
             "thirdpartycdkey",
-        ].some(key =>
-            Object.keys(client.picsCache?.apps[appid]?.appinfo?.extended || {}).map(k => k.toLowerCase()).includes(key)
-        );
+        ].some((key) => Object.keys((client.picsCache
+                && client.picsCache.apps[appid]
+                && client.picsCache.apps[appid].appinfo
+                && client.picsCache.apps[appid].appinfo.extended) || {}).map((k) => k.toLowerCase())
+            .includes(key));
     });
 
-
-    console.log("Requesting legacy cd keys for " + apps.length + " owned apps...");
+    console.log(`Requesting legacy cd keys for ${apps.length} owned apps...`);
     let keys = {};
     for (let appid of apps) {
-        let { key } = await client.getLegacyGameKey(appid).catch(err => {
-            if (err.eresult !== 2) { // usually just means no cd key present
+        try {
+            let { key } = await client.getLegacyGameKey(appid);
+            keys[appid] = key;
+        } catch (err) {
+            if (err.eresult !== SteamUser.EResult.Fail) { // usually just means no cd key present
                 console.error(`App: ${appid}`, err);
             }
-            return {};
-        });
-        if (key) {
-            keys[appid] = key;
         }
     }
     fs.writeFileSync("legacy_keys.json", JSON.stringify(keys, null, 4));
@@ -54,8 +59,5 @@ client.on("ownershipCached", async () => {
 
 client.on("disconnected", () => process.exit(0));
 
-client.logOn({
-    accountName: "username", // your steam username
-    password: "password", // your steam password
-    logonID: Math.round(Date.now() / 1000)
-});
+credentials.logonID = Math.round(Date.now() / 1000); // To avoid getting kicked by LogonSessionReplaced
+client.logOn(credentials);
