@@ -381,6 +381,10 @@
             "player": {
               "type": ".CRemotePlayTogether_Notification.Player",
               "id": 2
+            },
+            "controller_type": {
+              "type": "int32",
+              "id": 3
             }
           }
         },

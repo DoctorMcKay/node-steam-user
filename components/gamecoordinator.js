@@ -19,7 +19,7 @@ class SteamUserGameCoordinator extends SteamUserFriends {
 	 * @param {Buffer|ByteBuffer} payload
 	 * @param {function} [callback] - If this is a job-based message, pass a function here to get the response
 	 */
-	sendToGC = function(appid, msgType, protoBufHeader, payload, callback) {
+	sendToGC(appid, msgType, protoBufHeader, payload, callback) {
 		let sourceJobId = JOBID_NONE;
 		if (typeof callback === 'function') {
 			sourceJobId = ++this._currentGCJobID;
@@ -34,7 +34,7 @@ class SteamUserGameCoordinator extends SteamUserFriends {
 		let header;
 		if (protoBufHeader) {
 			msgType = (msgType | PROTO_MASK) >>> 0;
-			protoBufHeader.job_id_source = sourceJobId;
+			protoBufHeader.jobid_source = sourceJobId;
 			let protoHeader = SteamUserGameCoordinator._encodeProto(Schema.CMsgProtoBufHeader, protoBufHeader);
 			header = Buffer.alloc(8);
 			header.writeUInt32LE(msgType, 0);
@@ -70,7 +70,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientFromGC, function(body) {
 		// This is a protobuf message
 		let headerLength = body.payload.readInt32LE(4);
 		let protoHeader = SteamUserGameCoordinator._decodeProto(Schema.CMsgProtoBufHeader, body.payload.slice(8, 8 + headerLength));
-		targetJobID = protoHeader.job_id_target || JOBID_NONE;
+		targetJobID = protoHeader.jobid_target || JOBID_NONE;
 		payload = body.payload.slice(8 + headerLength);
 	} else {
 		let header = ByteBuffer.wrap(body.payload.slice(0, 18));

@@ -9,7 +9,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 	 * @param {function} [callback] - Called when an activation SMS has been sent.
 	 * @return {Promise}
 	 */
-	enableTwoFactor = function(callback) {
+	enableTwoFactor(callback) {
 		return StdLib.Promises.timeoutCallbackPromise(15000, null, callback, (resolve, reject) => {
 			this._sendUnified('TwoFactor.AddAuthenticator#1', {
 				steamid: this.steamID.getSteamID64(),
@@ -42,7 +42,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 	 * @param {function} [callback] - Called with a single Error argument, or null on success
 	 * @return {Promise}
 	 */
-	finalizeTwoFactor = function(secret, activationCode, callback) {
+	finalizeTwoFactor(secret, activationCode, callback) {
 		let attemptsLeft = 30;
 		let diff = 0;
 

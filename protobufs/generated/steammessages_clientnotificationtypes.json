@@ -15,7 +15,21 @@
         "k_EClientNotificationType_LowBattery": 6,
         "k_EClientNotificationType_SystemUpdate": 7,
         "k_EClientNotificationType_FriendMessage": 8,
-        "k_EClientNotificationType_GroupChatMessage": 9
+        "k_EClientNotificationType_GroupChatMessage": 9,
+        "k_EClientNotificationType_FriendInviteRollup": 10,
+        "k_EClientNotificationType_FamilySharingDeviceAuthorizationChanged": 11,
+        "k_EClientNotificationType_FamilySharingStopPlaying": 12,
+        "k_EClientNotificationType_FamilySharingLibraryAvailable": 13,
+        "k_EClientNotificationType_Screenshot": 14,
+        "k_EClientNotificationType_CloudSyncFailure": 15,
+        "k_EClientNotificationType_CloudSyncConflict": 16,
+        "k_EClientNotificationType_IncomingVoiceChat": 17,
+        "k_EClientNotificationType_ClaimSteamDeckRewards": 18,
+        "k_EClientNotificationType_GiftReceived": 19,
+        "k_EClientNotificationType_ItemAnnouncement": 20,
+        "k_EClientNotificationType_HardwareSurvey": 21,
+        "k_EClientNotificationType_LowDiskSpace": 22,
+        "k_EClientNotificationType_BatteryTemperature": 23
       }
     },
     "ESystemUpdateNotificationType": {
@@ -23,6 +37,38 @@
         "k_ESystemUpdateNotificationType_Invalid": 0,
         "k_ESystemUpdateNotificationType_Available": 1,
         "k_ESystemUpdateNotificationType_NeedsRestart": 2
+      }
+    },
+    "CClientNotificationCloudSyncFailure": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationCloudSyncConflict": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationScreenshot": {
+      "fields": {
+        "screenshot_handle": {
+          "type": "string",
+          "id": 1
+        },
+        "description": {
+          "type": "string",
+          "id": 2
+        },
+        "local_url": {
+          "type": "string",
+          "id": 3
+        }
       }
     },
     "CClientNotificationDownloadCompleted": {
@@ -37,6 +83,14 @@
       "fields": {
         "steamid": {
           "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationFriendInviteRollup": {
+      "fields": {
+        "new_invite_count": {
+          "type": "uint32",
           "id": 1
         }
       }
@@ -193,6 +247,104 @@
         "notificationid": {
           "type": "uint32",
           "id": 9
+        }
+      }
+    },
+    "CClientNotificationFamilySharingDeviceAuthorizationChanged": {
+      "fields": {
+        "accountid_owner": {
+          "type": "uint32",
+          "id": 1
+        },
+        "authorized": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CClientNotificationFamilySharingStopPlaying": {
+      "fields": {
+        "accountid_owner": {
+          "type": "uint32",
+          "id": 1
+        },
+        "seconds_remaining": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CClientNotificationFamilySharingLibraryAvailable": {
+      "fields": {
+        "accountid_owner": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationIncomingVoiceChat": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationClaimSteamDeckRewards": {
+      "fields": {}
+    },
+    "CClientNotificationGiftReceived": {
+      "fields": {
+        "sender_name": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationItemAnnouncement": {
+      "fields": {
+        "new_item_count": {
+          "type": "uint32",
+          "id": 1
+        },
+        "new_backpack_items": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CClientNotificationInboxStats": {
+      "fields": {
+        "friend_invite_count": {
+          "type": "uint32",
+          "id": 1
+        },
+        "new_comment_count": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CClientNotificationHardwareSurveyPending": {
+      "fields": {}
+    },
+    "CClientNotificationLowDiskSpace": {
+      "fields": {
+        "folder_index": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CClientNotificationBatteryTemperature": {
+      "fields": {
+        "temperature": {
+          "type": "uint32",
+          "id": 1
+        },
+        "notification_type": {
+          "type": "string",
+          "id": 2
         }
       }
     }

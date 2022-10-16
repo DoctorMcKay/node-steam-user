@@ -29,7 +29,13 @@ const ENUMS_WITH_DIFFERENT_PREFIXES_FROM_THEIR_NAMES = {
 	"EChatRoomNotificationLevel": "k_EChatroomNotificationLevel",
 	"EPublishedFileQueryType": "k_PublishedFileQueryType_",
 	"EProtoAppType": "k_EAppType",
-	"EBluetoothDeviceType": "k_BluetoothDeviceType_"
+	"EBluetoothDeviceType": "k_BluetoothDeviceType_",
+	"EPlaytestStatus": "k_ETesterStatus",
+	"ESystemAudioChannel": "k_SystemAudioChannel_",
+	"ESystemAudioDirection": "k_SystemAudioDirection_",
+	"ESystemAudioPortDirection": "k_SystemAudioPortDirection_",
+	"ESystemAudioPortType": "k_SystemAudioPortType_",
+	"ESystemFanControlMode": "k_SystemFanControlMode_"
 };
 
 const ENUMS_WITH_SOMETIMES_DIFFERENT_PREFIXES = {
@@ -201,9 +207,9 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 				g_EnumNames = Object.keys(g_EnumNames);
 				g_EnumNames.sort();
 
-				let loader = GENERATED_FILE_HEADER + `const SteamUserBase = require('./00-base.js');\n\nclass SteamUserEnums extends SteamUserBase {\n`;
-				loader += g_EnumNames.map(name => `\tstatic ${name} = require('../enums/${name}.js');`).join('\n');
-				loader += '\n}\n\nmodule.exports = SteamUserEnums;\n';
+				let loader = GENERATED_FILE_HEADER + `const SteamUserBase = require('./00-base.js');\n\nclass SteamUserEnums extends SteamUserBase {\n}\n\n`;
+				loader += g_EnumNames.map(name => `SteamUserEnums.${name} = require('../enums/${name}.js');`).join('\n');
+				loader += '\n\nmodule.exports = SteamUserEnums;\n';
 
 				FS.writeFileSync(__dirname + '/../components/01-enums.js', loader);
 				console.log('Wrote loader');

@@ -1,3 +1,4 @@
+import "steammessages_base.proto";
 import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
@@ -71,6 +72,7 @@ message CAccountHardware_SteamControllerGetConfig_ControllerConfig {
 	optional uint64 publishedfileid = 2;
 	optional string templatename = 3;
 	optional string serial_number = 4;
+	optional bool autosave = 5 [default = false];
 }
 
 message CAccountHardware_SteamControllerGetConfig_Response {

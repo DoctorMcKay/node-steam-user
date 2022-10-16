@@ -21,7 +21,6 @@ message CMsgSteamDatagramRelayAuthTicket {
 	repeated .CMsgSteamDatagramRelayAuthTicket.ExtraField extra_fields = 8;
 	optional fixed64 legacy_authorized_steam_id = 2;
 	optional fixed64 legacy_gameserver_steam_id = 4;
-	optional fixed64 legacy_gameserver_net_id = 5;
 	optional fixed32 legacy_gameserver_pop_id = 9;
 	optional bytes legacy_authorized_client_identity_binary = 12;
 	optional bytes legacy_gameserver_identity_binary = 13;
@@ -62,4 +61,5 @@ message CMsgSteamDatagramHostedServerAddressPlaintext {
 	optional bytes ipv6 = 2;
 	optional uint32 port = 3;
 	optional fixed64 routing_secret = 4;
+	optional uint32 protocol_version = 5;
 }

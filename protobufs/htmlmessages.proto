@@ -105,6 +105,7 @@ message CMsgSetLocalFileRequestMapping {
 		optional string relative_url = 1;
 		optional string local_path = 2;
 		optional string allowed_extensions = 3;
+		optional bool url_rewrite = 4;
 	}
 
 	optional uint32 browser_handle = 1;
@@ -122,6 +123,11 @@ message CMsgBrowserErrorStrings {
 	optional string connection_problem = 6;
 	optional string proxy_problem = 7;
 	optional string unknown = 8;
+}
+
+message CMsgBrowserSetName {
+	optional uint32 browser_handle = 1;
+	optional string name = 2;
 }
 
 message CMsgBrowserSize {
@@ -150,6 +156,9 @@ message CMsgBrowserResized {
 	optional int32 y = 3;
 	optional uint32 width = 4;
 	optional uint32 height = 5;
+	optional double dpi_horizontal = 6;
+	optional double dpi_vertical = 7;
+	optional string display_name = 8;
 }
 
 message CMsgPostURL {
@@ -186,7 +195,7 @@ message CMsgWasHidden {
 	optional bool hidden = 2;
 }
 
-message CMsgBrowserViewSetVisible {
+message CMsgSetWindowVisibility {
 	optional uint32 browser_handle = 1;
 	optional bool visible = 2;
 }
@@ -286,6 +295,23 @@ message CMsgURLChanged {
 	optional bool bIsRedirect = 4;
 	optional string pagetitle = 5;
 	optional bool bNewNavigation = 6;
+}
+
+message CHistoryEntry {
+	optional string url = 1;
+}
+
+message CMsgHistoryChanged {
+	optional uint32 browser_handle = 1;
+	optional uint32 index = 2;
+	repeated .CHistoryEntry entries = 3;
+}
+
+message CMsgLoadError {
+	optional uint32 browser_handle = 1;
+	optional int32 error_code = 2;
+	optional string url = 3;
+	optional string error_description = 4;
 }
 
 message CHTMLHeader {
@@ -656,6 +682,7 @@ message CMsgNodeHasFocus {
 	optional string searchbuttontext = 5;
 	optional bool bHasMultipleInputs = 6;
 	optional string input_type = 7;
+	optional bool bIsMainFrame = 8;
 }
 
 message CMsgZoomToFocusedElement {
@@ -737,11 +764,6 @@ message CMsgJSRegisterMethod {
 	optional .EJSRegisterMethodType method_type = 3 [default = k_EJSRegisterMethodType_Invalid];
 }
 
-message CJSMethodArgument {
-	optional string json_data = 1;
-	optional uint64 function_handle = 2;
-}
-
 message CMsgJSValue {
 	message JSObjectProperty {
 		optional string name = 1;
@@ -763,30 +785,42 @@ message CMsgJSValue {
 
 message CMsgJSMethodCall {
 	optional uint32 browser_handle = 1;
-	optional string name = 2;
-	repeated .CMsgJSValue arguments = 3;
+	optional uint32 owning_browser_handle = 2;
+	optional string name = 3;
+	repeated .CMsgJSValue arguments = 4;
 }
 
 message CMsgJSExecuteCallback {
 	optional uint32 browser_handle = 1;
-	optional uint64 function_handle = 2;
-	repeated .CMsgJSValue arguments = 3;
+	optional uint32 owning_browser_handle = 2;
+	optional uint64 function_handle = 3;
+	repeated .CMsgJSValue arguments = 4;
 }
 
 message CMsgJSReleaseCallback {
 	optional uint32 browser_handle = 1;
-	optional uint64 function_handle = 2;
+	optional uint32 owning_browser_handle = 2;
+	optional uint64 function_handle = 3;
 }
 
 message CMsgJSRaiseException {
 	optional uint32 browser_handle = 1;
-	optional string exception = 2;
+	optional uint32 owning_browser_handle = 2;
+	optional string exception = 3;
 }
 
 message CMsgLoadLocalization {
 	optional uint32 browser_handle = 1;
 	optional string localization_path = 2;
 	optional string language = 3;
+}
+
+message CMsgNotifyUserActivation {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgSetNetFakeLocalSystemState {
+	optional uint32 state = 1;
 }
 
 message CMsgJumpListLink {
@@ -897,6 +931,7 @@ message CMsgTouchGesture {
 	optional double width = 6;
 	optional double height = 7;
 	optional uint32 tap_count = 8;
+	optional double pinch_scale = 9;
 }
 
 message CMsgSetTouchGesturesToCancel {
@@ -949,4 +984,18 @@ message CMsgBrowserViewPostMessageToParentRequest {
 	optional string message = 2;
 	optional string args = 3;
 	optional string requesting_url = 4;
+}
+
+message CMsgBlockedRequest {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+}
+
+message CMsgSetProtocolBlockList {
+	optional uint32 browser_handle = 1;
+	optional string list = 2;
+}
+
+message CMsgSetForceDeviceScaleFactor {
+	optional double scale_factor = 1;
 }

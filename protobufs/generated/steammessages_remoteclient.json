@@ -348,6 +348,26 @@
         "default": false
       }
     },
+    "allow_field_named_steam_id": {
+      "type": "bool",
+      "id": 50024,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
+      }
+    },
     "EProtoClanEventType": {
       "values": {
         "k_EClanOtherEvent": 1,
@@ -540,10 +560,6 @@
           "type": "uint32",
           "id": 28
         },
-        "wg_token": {
-          "type": "string",
-          "id": 30
-        },
         "launcher_type": {
           "type": "uint32",
           "id": 31,
@@ -557,6 +573,25 @@
           "options": {
             "default": 0
           }
+        },
+        "timeout_ms": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": -1
+          }
+        },
+        "debug_source": {
+          "type": "string",
+          "id": 34
+        },
+        "debug_source_string_index": {
+          "type": "uint32",
+          "id": 35
+        },
+        "token_id": {
+          "type": "uint64",
+          "id": 36
         },
         "ip": {
           "type": "uint32",
@@ -637,14 +672,6 @@
           "type": "string",
           "id": 3
         },
-        "logo": {
-          "type": "string",
-          "id": 4
-        },
-        "logo_small": {
-          "type": "string",
-          "id": 5
-        },
         "tool": {
           "type": "bool",
           "id": 6
@@ -676,6 +703,10 @@
         "is_visible_in_steam_china": {
           "type": "bool",
           "id": 13
+        },
+        "app_type": {
+          "type": "uint32",
+          "id": 14
         }
       }
     },
@@ -958,6 +989,13 @@
         "votedowncount": {
           "type": "int32",
           "id": 15
+        },
+        "ban_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 16,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
+          }
         }
       }
     },
@@ -1169,6 +1207,27 @@
         "time_reserved": {
           "type": "uint32",
           "id": 8
+        }
+      }
+    },
+    "CMsgKeyValuePair": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgKeyValueSet": {
+      "fields": {
+        "pairs": {
+          "rule": "repeated",
+          "type": ".CMsgKeyValuePair",
+          "id": 1
         }
       }
     },
@@ -1922,7 +1981,8 @@
         "k_ERemoteDeviceStreamingCancelRequest": 10,
         "k_ERemoteClientBroadcastMsgClientIDDeconflict": 11,
         "k_ERemoteDeviceStreamTransportSignal": 12,
-        "k_ERemoteDeviceStreamingProgress": 13
+        "k_ERemoteDeviceStreamingProgress": 13,
+        "k_ERemoteDeviceAuthorizationConfirmed": 14
       }
     },
     "ERemoteClientService": {
@@ -2108,6 +2168,18 @@
         "remoteplay_active": {
           "type": "bool",
           "id": 22
+        },
+        "supported_services": {
+          "type": "uint32",
+          "id": 23
+        },
+        "steam_deck": {
+          "type": "bool",
+          "id": 24
+        },
+        "steam_version": {
+          "type": "uint64",
+          "id": 25
         }
       },
       "nested": {
@@ -2168,6 +2240,10 @@
           "rule": "required",
           "type": "bytes",
           "id": 3
+        },
+        "auth_key": {
+          "type": "bytes",
+          "id": 4
         }
       },
       "nested": {
@@ -2237,6 +2313,26 @@
         "steamid": {
           "type": "fixed64",
           "id": 2
+        },
+        "auth_key": {
+          "type": "bytes",
+          "id": 3
+        },
+        "device_token": {
+          "type": "bytes",
+          "id": 4
+        }
+      }
+    },
+    "CMsgRemoteDeviceAuthorizationConfirmed": {
+      "fields": {
+        "result": {
+          "rule": "required",
+          "type": ".ERemoteDeviceAuthorizationResult",
+          "id": 1,
+          "options": {
+            "default": "k_ERemoteDeviceAuthorizationSuccess"
+          }
         }
       }
     },
@@ -2434,6 +2530,10 @@
         "request_id": {
           "type": "uint32",
           "id": 2
+        },
+        "update_secret": {
+          "type": "bool",
+          "id": 3
         }
       }
     },
@@ -2447,6 +2547,10 @@
         "request_id": {
           "type": "uint32",
           "id": 2
+        },
+        "updated_secret": {
+          "type": "bool",
+          "id": 3
         }
       }
     },

@@ -18,7 +18,8 @@
         "k_ERemoteDeviceStreamingCancelRequest": 10,
         "k_ERemoteClientBroadcastMsgClientIDDeconflict": 11,
         "k_ERemoteDeviceStreamTransportSignal": 12,
-        "k_ERemoteDeviceStreamingProgress": 13
+        "k_ERemoteDeviceStreamingProgress": 13,
+        "k_ERemoteDeviceAuthorizationConfirmed": 14
       }
     },
     "ERemoteClientService": {
@@ -204,6 +205,18 @@
         "remoteplay_active": {
           "type": "bool",
           "id": 22
+        },
+        "supported_services": {
+          "type": "uint32",
+          "id": 23
+        },
+        "steam_deck": {
+          "type": "bool",
+          "id": 24
+        },
+        "steam_version": {
+          "type": "uint64",
+          "id": 25
         }
       },
       "nested": {
@@ -264,6 +277,10 @@
           "rule": "required",
           "type": "bytes",
           "id": 3
+        },
+        "auth_key": {
+          "type": "bytes",
+          "id": 4
         }
       },
       "nested": {
@@ -333,6 +350,26 @@
         "steamid": {
           "type": "fixed64",
           "id": 2
+        },
+        "auth_key": {
+          "type": "bytes",
+          "id": 3
+        },
+        "device_token": {
+          "type": "bytes",
+          "id": 4
+        }
+      }
+    },
+    "CMsgRemoteDeviceAuthorizationConfirmed": {
+      "fields": {
+        "result": {
+          "rule": "required",
+          "type": ".ERemoteDeviceAuthorizationResult",
+          "id": 1,
+          "options": {
+            "default": "k_ERemoteDeviceAuthorizationSuccess"
+          }
         }
       }
     },
@@ -530,6 +567,10 @@
         "request_id": {
           "type": "uint32",
           "id": 2
+        },
+        "update_secret": {
+          "type": "bool",
+          "id": 3
         }
       }
     },
@@ -543,6 +584,10 @@
         "request_id": {
           "type": "uint32",
           "id": 2
+        },
+        "updated_secret": {
+          "type": "bool",
+          "id": 3
         }
       }
     },

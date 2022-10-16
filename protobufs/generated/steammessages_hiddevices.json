@@ -94,7 +94,7 @@
           "type": "uint32",
           "id": 16
         },
-        "eControllerType": {
+        "eControllerType_obsolete": {
           "type": "uint32",
           "id": 17,
           "options": {

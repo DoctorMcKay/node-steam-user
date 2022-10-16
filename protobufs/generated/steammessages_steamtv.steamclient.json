@@ -1,0 +1,3734 @@
+{
+  "options": {
+    "cc_generic_services": false,
+    "optimize_for": "SPEED",
+    "(force_php_generation)": true
+  },
+  "nested": {
+    "EBroadcastImageType": {
+      "values": {
+        "k_EBroadcastImageType_None": 0,
+        "k_EBroadcastImageType_Offline": 1,
+        "k_EBroadcastImageType_Standby": 2,
+        "k_EBroadcastImageType_Avatar": 3,
+        "k_EBroadcastImageType_Summary": 4,
+        "k_EBroadcastImageType_Background": 5,
+        "k_EBroadcastImageType_Emoticon": 6
+      }
+    },
+    "EGetGamesAlgorithm": {
+      "values": {
+        "k_EGetGamesAlgorithm_Default": 1,
+        "k_EGetGamesAlgorithm_MostPlayed": 2,
+        "k_EGetGamesAlgorithm_PopularNew": 3
+      }
+    },
+    "EGetChannelsAlgorithm": {
+      "values": {
+        "k_EGetChannelsAlgorithm_Default": 1,
+        "k_EGetChannelsAlgorithm_Friends": 2,
+        "k_EGetChannelsAlgorithm_Featured": 3,
+        "k_EGetChannelsAlgorithm_Developer": 4,
+        "k_EGetChannelsAlgorithm_Following": 5
+      }
+    },
+    "ESteamTVContentTemplate": {
+      "values": {
+        "k_ESteamTVContentTemplate_Invalid": 0,
+        "k_ESteamTVContentTemplate_Takeover": 1,
+        "k_ESteamTVContentTemplate_SingleGame": 2,
+        "k_ESteamTVContentTemplate_GameList": 3,
+        "k_ESteamTVContentTemplate_QuickExplore": 4,
+        "k_ESteamTVContentTemplate_ConveyorBelt": 5,
+        "k_ESteamTVContentTemplate_WatchParty": 6,
+        "k_ESteamTVContentTemplate_Developer": 7,
+        "k_ESteamTVContentTemplate_Event": 8
+      }
+    },
+    "CSteamTV_CreateBroadcastChannel_Request": {
+      "fields": {
+        "unique_name": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "Unique short broadcast channel name, part of Steam.TV URL"
+          }
+        }
+      }
+    },
+    "CSteamTV_CreateBroadcastChannel_Response": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID or 0"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelID_Request": {
+      "fields": {
+        "unique_name": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "Channel short name)"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelID_Response": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID or 0"
+          }
+        },
+        "unique_name": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "Broadcast channel name"
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3,
+          "options": {
+            "(description)": "Broadcast channel owner"
+          }
+        }
+      }
+    },
+    "CSteamTV_SetBroadcastChannelProfile_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        },
+        "name": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "long channel name"
+          }
+        },
+        "language": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "primary channel language (Steam shortname)"
+          }
+        },
+        "headline": {
+          "type": "string",
+          "id": 4,
+          "options": {
+            "(description)": "short channel desciption"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "id": 5,
+          "options": {
+            "(description)": "long channel desciption"
+          }
+        },
+        "avatar_hash": {
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "community avatar hash"
+          }
+        },
+        "schedule": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "broadcast channel schedule"
+          }
+        },
+        "rules": {
+          "type": "string",
+          "id": 8,
+          "options": {
+            "(description)": "broadcast channel rules"
+          }
+        },
+        "panels": {
+          "type": "string",
+          "id": 9,
+          "options": {
+            "(description)": "JSON data representing the channel panel layout"
+          }
+        }
+      }
+    },
+    "CSteamTV_SetBroadcastChannelProfile_Response": {
+      "fields": {}
+    },
+    "CSteamTV_GetBroadcastChannelProfile_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelProfile_Response": {
+      "fields": {
+        "unique_name": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "Unique short broadcast channel name, part of Steam.TV URL"
+          }
+        },
+        "owner_steamid": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "Broadcast channel owner"
+          }
+        },
+        "name": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "long channel name"
+          }
+        },
+        "language": {
+          "type": "string",
+          "id": 4,
+          "options": {
+            "(description)": "primary channel language (Steam shortname)"
+          }
+        },
+        "headline": {
+          "type": "string",
+          "id": 5,
+          "options": {
+            "(description)": "short channel description"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "long channel description"
+          }
+        },
+        "schedule": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "broadcast channel schedule"
+          }
+        },
+        "rules": {
+          "type": "string",
+          "id": 8,
+          "options": {
+            "(description)": "broadcast channel rules"
+          }
+        },
+        "panels": {
+          "type": "string",
+          "id": 9,
+          "options": {
+            "(description)": "JSON data representing the channel panel layout"
+          }
+        },
+        "is_partnered": {
+          "type": "bool",
+          "id": 10
+        }
+      }
+    },
+    "CSteamTV_SetBroadcastChannelImage_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        },
+        "image_type": {
+          "type": ".EBroadcastImageType",
+          "id": 2,
+          "options": {
+            "default": "k_EBroadcastImageType_None",
+            "(description)": "EBroadcastImage"
+          }
+        },
+        "image_index": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "Index of the image (for supporting multiple uploads of the same type"
+          }
+        },
+        "image_width": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "width in pixels"
+          }
+        },
+        "image_height": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "height in pixels"
+          }
+        },
+        "file_size": {
+          "type": "uint32",
+          "id": 6,
+          "options": {
+            "(description)": "in bytes"
+          }
+        },
+        "file_extension": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "eg .jpg"
+          }
+        },
+        "file_hash": {
+          "type": "string",
+          "id": 8,
+          "options": {
+            "(description)": "image SHA"
+          }
+        },
+        "undo": {
+          "type": "bool",
+          "id": 9,
+          "options": {
+            "(description)": "indicates this is a delete request"
+          }
+        }
+      }
+    },
+    "CSteamTV_SetBroadcastChannelImage_Response": {
+      "fields": {
+        "replace_image_hash": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "set if caller should remove previous SHA file from cache"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelImages_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        },
+        "image_types": {
+          "rule": "repeated",
+          "type": ".EBroadcastImageType",
+          "id": 2,
+          "options": {
+            "(description)": "list of EBroadcastImage",
+            "packed": false
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelImages_Response": {
+      "fields": {
+        "images": {
+          "rule": "repeated",
+          "type": ".CSteamTV_GetBroadcastChannelImages_Response.Images",
+          "id": 1
+        }
+      },
+      "nested": {
+        "Images": {
+          "fields": {
+            "image_type": {
+              "type": ".EBroadcastImageType",
+              "id": 1,
+              "options": {
+                "default": "k_EBroadcastImageType_None",
+                "(description)": "Type of the image"
+              }
+            },
+            "image_path": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "(description)": "Path to the uploaded image"
+              }
+            },
+            "image_index": {
+              "type": "uint32",
+              "id": 3,
+              "options": {
+                "(description)": "Index of the image"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CSteamTV_SetBroadcastChannelLinkRegions_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        },
+        "links": {
+          "rule": "repeated",
+          "type": ".CSteamTV_SetBroadcastChannelLinkRegions_Request.Links",
+          "id": 2
+        }
+      },
+      "nested": {
+        "Links": {
+          "fields": {
+            "link_index": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "Index of the link (lower number has higher priority)"
+              }
+            },
+            "url": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "(description)": "URL "
+              }
+            },
+            "link_description": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "(description)": "URL description that will show in the link region"
+              }
+            },
+            "left": {
+              "type": "uint32",
+              "id": 4,
+              "options": {
+                "(description)": "Left X position in 100th of a % of the video width"
+              }
+            },
+            "top": {
+              "type": "uint32",
+              "id": 5,
+              "options": {
+                "(description)": "Top Y position in 100th of a % of the video height"
+              }
+            },
+            "width": {
+              "type": "uint32",
+              "id": 6,
+              "options": {
+                "(description)": "Region Width in 100th of a % of the video width"
+              }
+            },
+            "height": {
+              "type": "uint32",
+              "id": 7,
+              "options": {
+                "(description)": "Region Height in 100th of a % of the video height"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CSteamTV_SetBroadcastChannelLinkRegions_Response": {
+      "fields": {}
+    },
+    "CSteamTV_GetBroadcastChannelLinks_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelLinks_Response": {
+      "fields": {
+        "links": {
+          "rule": "repeated",
+          "type": ".CSteamTV_GetBroadcastChannelLinks_Response.Links",
+          "id": 1
+        }
+      },
+      "nested": {
+        "Links": {
+          "fields": {
+            "link_index": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "Index of the link (lower number has higher priority)"
+              }
+            },
+            "url": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "(description)": "URL "
+              }
+            },
+            "link_description": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "(description)": "URL description that will show in the link region"
+              }
+            },
+            "left": {
+              "type": "uint32",
+              "id": 4,
+              "options": {
+                "(description)": "Left X position in 100th of a % of the video width"
+              }
+            },
+            "top": {
+              "type": "uint32",
+              "id": 5,
+              "options": {
+                "(description)": "Top Y position in 100th of a % of the video height"
+              }
+            },
+            "width": {
+              "type": "uint32",
+              "id": 6,
+              "options": {
+                "(description)": "Region Width in 100th of a % of the video width"
+              }
+            },
+            "height": {
+              "type": "uint32",
+              "id": 7,
+              "options": {
+                "(description)": "Region Height in 100th of a % of the video height"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelBroadcasters_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelBroadcasters_Response": {
+      "fields": {
+        "broadcasters": {
+          "rule": "repeated",
+          "type": ".CSteamTV_GetBroadcastChannelBroadcasters_Response.Broadcaster",
+          "id": 1
+        }
+      },
+      "nested": {
+        "Broadcaster": {
+          "fields": {
+            "steamid": {
+              "type": "fixed64",
+              "id": 1,
+              "options": {
+                "(description)": "Broadcaster Steam ID"
+              }
+            },
+            "name": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "(description)": "Broadcaster name"
+              }
+            },
+            "rtmp_token": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "(description)": "Broadcaster upload token"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CSteamTV_GetFollowedChannels_Request": {
+      "fields": {}
+    },
+    "GetBroadcastChannelEntry": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID or 0"
+          }
+        },
+        "unique_name": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "Unique broadcast channel name for URL"
+          }
+        },
+        "name": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "Long broadcast channel name"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "The game ID the requested broadcaster is playing"
+          }
+        },
+        "viewers": {
+          "type": "uint64",
+          "id": 5,
+          "options": {
+            "(description)": "Number of viewers currently watching"
+          }
+        },
+        "views": {
+          "type": "uint64",
+          "id": 6,
+          "options": {
+            "(description)": "Number of total views of this channel"
+          }
+        },
+        "thumbnail_url": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "Current thumbnail URL"
+          }
+        },
+        "followers": {
+          "type": "uint64",
+          "id": 8,
+          "options": {
+            "(description)": "Number of followers of this channel"
+          }
+        },
+        "headline": {
+          "type": "string",
+          "id": 9,
+          "options": {
+            "(description)": "short channel description"
+          }
+        },
+        "avatar_url": {
+          "type": "string",
+          "id": 10,
+          "options": {
+            "(description)": "community avatar url"
+          }
+        },
+        "broadcaster_steamid": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "(description)": "Current broadcaster streaming"
+          }
+        },
+        "subscribers": {
+          "type": "uint64",
+          "id": 12,
+          "options": {
+            "(description)": "Number of subscribers of this channel"
+          }
+        },
+        "background_url": {
+          "type": "string",
+          "id": 13,
+          "options": {
+            "(description)": "Background image url"
+          }
+        },
+        "is_featured": {
+          "type": "bool",
+          "id": 14,
+          "options": {
+            "(description)": "Whether the channel is featured"
+          }
+        },
+        "is_disabled": {
+          "type": "bool",
+          "id": 15,
+          "options": {
+            "(description)": "Whether the channel is disabled"
+          }
+        },
+        "is_live": {
+          "type": "bool",
+          "id": 16,
+          "options": {
+            "(description)": "Whether the channel is streaming"
+          }
+        },
+        "language": {
+          "type": "string",
+          "id": 17,
+          "options": {
+            "(description)": "The language the stream is in"
+          }
+        },
+        "reports": {
+          "type": "uint32",
+          "id": 18,
+          "options": {
+            "(description)": "The number of reports the channel has"
+          }
+        },
+        "is_partnered": {
+          "type": "bool",
+          "id": 19
+        }
+      }
+    },
+    "CSteamTV_GetFollowedChannels_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1,
+          "options": {
+            "(description)": "The list of broadcasters"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetSubscribedChannels_Request": {
+      "fields": {}
+    },
+    "CSteamTV_GetSubscribedChannels_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1,
+          "options": {
+            "(description)": "The list of broadcasters"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelStatus_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelStatus_Response": {
+      "fields": {
+        "is_live": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "(description)": "Indicates whether the channel is streaming"
+          }
+        },
+        "is_disabled": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "Indicates whether the channel has been disabled"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "The game ID the requested broadcaster is playing"
+          }
+        },
+        "viewers": {
+          "type": "uint64",
+          "id": 4,
+          "options": {
+            "(description)": "Number of viewers currently watching"
+          }
+        },
+        "views": {
+          "type": "uint64",
+          "id": 5,
+          "options": {
+            "(description)": "Number of total views of this channel"
+          }
+        },
+        "broadcaster_steamid": {
+          "type": "fixed64",
+          "id": 6,
+          "options": {
+            "(description)": "Current broadcaster streaming"
+          }
+        },
+        "thumbnail_url": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "Current thumbnail URL"
+          }
+        },
+        "followers": {
+          "type": "uint64",
+          "id": 8,
+          "options": {
+            "(description)": "Number of followers of this channel"
+          }
+        },
+        "subscribers": {
+          "type": "uint64",
+          "id": 9,
+          "options": {
+            "(description)": "Number of subscribers of this channel"
+          }
+        },
+        "unique_name": {
+          "type": "string",
+          "id": 10
+        },
+        "broadcast_session_id": {
+          "type": "uint64",
+          "id": 11
+        }
+      }
+    },
+    "CSteamTV_FollowBroadcastChannel_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        },
+        "undo": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "Indicates this is an unfollow request"
+          }
+        }
+      }
+    },
+    "CSteamTV_FollowBroadcastChannel_Response": {
+      "fields": {
+        "is_followed": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "(description)": "Whether the user is now following"
+          }
+        }
+      }
+    },
+    "CSteamTV_SubscribeBroadcastChannel_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        }
+      }
+    },
+    "CSteamTV_SubscribeBroadcastChannel_Response": {
+      "fields": {
+        "is_subscribed": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "(description)": "Whether the user is now subscribed"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelClips_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_BroadcastClipInfo": {
+      "fields": {
+        "broadcast_clip_id": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "broadcast clip ID"
+          }
+        },
+        "channel_id": {
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "(description)": "Broadcast Channel ID"
+          }
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "App ID stream is tagged with"
+          }
+        },
+        "broadcaster_steamid": {
+          "type": "fixed64",
+          "id": 4,
+          "options": {
+            "(description)": "Broadcaster SteamID"
+          }
+        },
+        "creator_steamid": {
+          "type": "fixed64",
+          "id": 5,
+          "options": {
+            "(description)": "Clip-maker SteamID"
+          }
+        },
+        "video_description": {
+          "type": "string",
+          "id": 6,
+          "options": {
+            "(description)": "Short name or description of this clip"
+          }
+        },
+        "live_time": {
+          "type": "uint32",
+          "id": 7,
+          "options": {
+            "(description)": "GMT time clip was broadcasted live"
+          }
+        },
+        "length_ms": {
+          "type": "uint32",
+          "id": 8,
+          "options": {
+            "(description)": "length of video in MS"
+          }
+        },
+        "thumbnail_path": {
+          "type": "string",
+          "id": 9,
+          "options": {
+            "(description)": "relative path for thumbnail URL on host"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelClips_Response": {
+      "fields": {
+        "clips": {
+          "rule": "repeated",
+          "type": ".CSteamTV_BroadcastClipInfo",
+          "id": 1
+        },
+        "thumbnail_host": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CSteamTV_ReportBroadcastChannel_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        },
+        "reason": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "The reason for the report"
+          }
+        }
+      }
+    },
+    "CSteamTV_ReportBroadcastChannel_Response": {
+      "fields": {}
+    },
+    "CSteamTV_GetBroadcastChannelInteraction_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1,
+          "options": {
+            "(description)": "Broadcast channel ID"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetBroadcastChannelInteraction_Response": {
+      "fields": {
+        "is_followed": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "(description)": "Whether the user has followed this channel"
+          }
+        },
+        "is_subscribed": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "Whether the user has subscribed to this channel"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetGames_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "The ID for the game"
+          }
+        },
+        "algorithm": {
+          "type": ".EGetGamesAlgorithm",
+          "id": 2,
+          "options": {
+            "default": "k_EGetGamesAlgorithm_Default",
+            "(description)": "The algorithm to use when picking games to return"
+          }
+        },
+        "count": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "The maximum number of results to return"
+          }
+        }
+      }
+    },
+    "CSteamTV_Game": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "The ID for the game"
+          }
+        },
+        "name": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "The name for the game"
+          }
+        },
+        "image": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "The image for the game"
+          }
+        },
+        "viewers": {
+          "type": "uint64",
+          "id": 4,
+          "options": {
+            "(description)": "Number of people watching this game"
+          }
+        },
+        "channels": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 5,
+          "options": {
+            "(description)": "Live channels streaming this game"
+          }
+        },
+        "release_date": {
+          "type": "string",
+          "id": 6
+        },
+        "developer": {
+          "type": "string",
+          "id": 7
+        },
+        "publisher": {
+          "type": "string",
+          "id": 8
+        }
+      }
+    },
+    "CSteamTV_GetGames_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".CSteamTV_Game",
+          "id": 1,
+          "options": {
+            "(description)": "The list of games"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetChannels_Request": {
+      "fields": {
+        "algorithm": {
+          "type": ".EGetChannelsAlgorithm",
+          "id": 1,
+          "options": {
+            "default": "k_EGetChannelsAlgorithm_Default",
+            "(description)": "The algorithm to use when picking channels to return"
+          }
+        },
+        "count": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "(description)": "The maximum number of results to return"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "Filter results to only this appid"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetChannels_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1,
+          "options": {
+            "(description)": "The list of featured broadcasters"
+          }
+        }
+      }
+    },
+    "CSteamTV_AddChatBan_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "chatter_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "duration": {
+          "type": "uint32",
+          "id": 3
+        },
+        "permanent": {
+          "type": "bool",
+          "id": 4
+        },
+        "undo": {
+          "type": "bool",
+          "id": 5
+        }
+      }
+    },
+    "CSteamTV_AddChatBan_Response": {
+      "fields": {}
+    },
+    "CSteamTV_GetChatBans_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_ChatBan": {
+      "fields": {
+        "issuer_steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "chatter_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "time_expires": {
+          "type": "string",
+          "id": 3
+        },
+        "permanent": {
+          "type": "bool",
+          "id": 4
+        },
+        "name": {
+          "type": "string",
+          "id": 5
+        }
+      }
+    },
+    "CSteamTV_GetChatBans_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".CSteamTV_ChatBan",
+          "id": 1,
+          "options": {
+            "(description)": "The list of bans"
+          }
+        }
+      }
+    },
+    "CSteamTV_AddChatModerator_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "moderator_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "undo": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CSteamTV_AddChatModerator_Response": {
+      "fields": {}
+    },
+    "CSteamTV_GetChatModerators_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_ChatModerator": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CSteamTV_GetChatModerators_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".CSteamTV_ChatModerator",
+          "id": 1,
+          "options": {
+            "(description)": "The list of moderators"
+          }
+        }
+      }
+    },
+    "CSteamTV_AddWordBan_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "word": {
+          "type": "string",
+          "id": 2
+        },
+        "undo": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CSteamTV_AddWordBan_Response": {
+      "fields": {}
+    },
+    "CSteamTV_GetWordBans_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_GetWordBans_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "The list of banned words"
+          }
+        }
+      }
+    },
+    "CSteamTV_JoinChat_Request": {
+      "fields": {
+        "broadcast_channel_id": {
+          "type": "fixed64",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_JoinChat_Response": {
+      "fields": {
+        "chat_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "view_url_template": {
+          "type": "string",
+          "id": 2
+        },
+        "flair_group_ids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 3,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CSteamTV_Search_Request": {
+      "fields": {
+        "term": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_Search_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1,
+          "options": {
+            "(description)": "The list of broadcasters"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetSteamTVUserSettings_Request": {
+      "fields": {}
+    },
+    "CSteamTV_GetSteamTVUserSettings_Response": {
+      "fields": {
+        "stream_live_email": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "(description)": "Send email when followed stream starts"
+          }
+        },
+        "stream_live_notification": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "Send Steam notification when followed stream starts"
+          }
+        }
+      }
+    },
+    "CSteamTV_SetSteamTVUserSettings_Request": {
+      "fields": {
+        "stream_live_email": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "(description)": "Send email when followed stream starts"
+          }
+        },
+        "stream_live_notification": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(description)": "Send Steam notification when followed stream starts"
+          }
+        }
+      }
+    },
+    "CSteamTV_SetSteamTVUserSettings_Response": {
+      "fields": {}
+    },
+    "CSteamTV_GetMyBroadcastChannels_Request": {
+      "fields": {}
+    },
+    "CSteamTV_GetMyBroadcastChannels_Response": {
+      "fields": {
+        "results": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1,
+          "options": {
+            "(description)": "The list of broadcasters"
+          }
+        }
+      }
+    },
+    "CSteamTV_GetHomePageContents_Request": {
+      "fields": {}
+    },
+    "CSteamTV_HomePageTemplate_Takeover": {
+      "fields": {
+        "broadcasts": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_HomePageTemplate_SingleGame": {
+      "fields": {
+        "broadcasts": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "title": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "GameListEntry": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "game_name": {
+          "type": "string",
+          "id": 2
+        },
+        "broadcast": {
+          "type": ".GetBroadcastChannelEntry",
+          "id": 3
+        }
+      }
+    },
+    "CSteamTV_HomePageTemplate_GameList": {
+      "fields": {
+        "entries": {
+          "rule": "repeated",
+          "type": ".GameListEntry",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CSteamTV_HomePageTemplate_QuickExplore": {
+      "fields": {
+        "broadcasts": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CSteamTV_HomePageTemplate_ConveyorBelt": {
+      "fields": {
+        "broadcasts": {
+          "rule": "repeated",
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CSteamTV_HomePageTemplate_WatchParty": {
+      "fields": {
+        "broadcast": {
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        },
+        "chat_group_id": {
+          "type": "uint64",
+          "id": 3
+        }
+      }
+    },
+    "CSteamTV_HomePageTemplate_Developer": {
+      "fields": {
+        "broadcast": {
+          "type": ".GetBroadcastChannelEntry",
+          "id": 1
+        },
+        "title": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CSteamTV_HomePageTemplate_Event": {
+      "fields": {
+        "title": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_HomePageContentRow": {
+      "fields": {
+        "template_type": {
+          "type": ".ESteamTVContentTemplate",
+          "id": 1,
+          "options": {
+            "default": "k_ESteamTVContentTemplate_Invalid"
+          }
+        },
+        "takeover": {
+          "type": ".CSteamTV_HomePageTemplate_Takeover",
+          "id": 2
+        },
+        "single_game": {
+          "type": ".CSteamTV_HomePageTemplate_SingleGame",
+          "id": 3
+        },
+        "game_list": {
+          "type": ".CSteamTV_HomePageTemplate_GameList",
+          "id": 4
+        },
+        "quick_explore": {
+          "type": ".CSteamTV_HomePageTemplate_QuickExplore",
+          "id": 5
+        },
+        "conveyor_belt": {
+          "type": ".CSteamTV_HomePageTemplate_ConveyorBelt",
+          "id": 6
+        },
+        "watch_party": {
+          "type": ".CSteamTV_HomePageTemplate_WatchParty",
+          "id": 7
+        },
+        "developer": {
+          "type": ".CSteamTV_HomePageTemplate_Developer",
+          "id": 8
+        },
+        "event": {
+          "type": ".CSteamTV_HomePageTemplate_Event",
+          "id": 9
+        }
+      }
+    },
+    "CSteamTV_GetHomePageContents_Response": {
+      "fields": {
+        "rows": {
+          "rule": "repeated",
+          "type": ".CSteamTV_HomePageContentRow",
+          "id": 1
+        }
+      }
+    },
+    "CSteamTV_AppCheer_SingleCheerType": {
+      "fields": {
+        "cheer_type": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "The type of cheer. App dependent (different teams, heroes, players, etc)"
+          }
+        },
+        "cheer_amount": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "(description)": "The amount of cheers."
+          }
+        }
+      }
+    },
+    "CSteamTV_AppCheer_Request": {
+      "fields": {
+        "app_id": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "App ID this cheer is for."
+          }
+        },
+        "cheer_target_id": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "The thing being cheered on. ID is app dependent (could be steam id, match id, lobby id, server id, etc)."
+          }
+        },
+        "cheers": {
+          "rule": "repeated",
+          "type": ".CSteamTV_AppCheer_SingleCheerType",
+          "id": 3,
+          "options": {
+            "(description)": "The set of cheers this request represents (could be multiple of different types)."
+          }
+        }
+      }
+    },
+    "CSteamTV_AppCheer_Response": {
+      "fields": {
+        "aggregation_delay_ms": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "(description)": "The amount of time in milliseconds that the client should aggregate cheers before sending them. The server can control this dynamically to ask clients to slow down sending."
+          }
+        }
+      }
+    },
+    "SteamTV": {
+      "options": {
+        "(service_description)": "Methods for Steam TV operations"
+      },
+      "methods": {
+        "CreateBroadcastChannel": {
+          "requestType": ".CSteamTV_CreateBroadcastChannel_Request",
+          "responseType": ".CSteamTV_CreateBroadcastChannel_Response",
+          "options": {
+            "(method_description)": "Create a channel on SteamTV"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Create a channel on SteamTV"
+            }
+          ]
+        },
+        "GetBroadcastChannelID": {
+          "requestType": ".CSteamTV_GetBroadcastChannelID_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelID_Response",
+          "options": {
+            "(method_description)": "Get a broadcast channel ID for a channel by name or owner SteamID"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get a broadcast channel ID for a channel by name or owner SteamID"
+            }
+          ]
+        },
+        "SetBroadcastChannelProfile": {
+          "requestType": ".CSteamTV_SetBroadcastChannelProfile_Request",
+          "responseType": ".CSteamTV_SetBroadcastChannelProfile_Response",
+          "options": {
+            "(method_description)": "Set broadcast channel profile data"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set broadcast channel profile data"
+            }
+          ]
+        },
+        "GetBroadcastChannelProfile": {
+          "requestType": ".CSteamTV_GetBroadcastChannelProfile_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelProfile_Response",
+          "options": {
+            "(method_description)": "Get broadcast channel profile data"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get broadcast channel profile data"
+            }
+          ]
+        },
+        "SetBroadcastChannelImage": {
+          "requestType": ".CSteamTV_SetBroadcastChannelImage_Request",
+          "responseType": ".CSteamTV_SetBroadcastChannelImage_Response",
+          "options": {
+            "(method_description)": "Set broadcast channel image hash"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set broadcast channel image hash"
+            }
+          ]
+        },
+        "GetBroadcastChannelImages": {
+          "requestType": ".CSteamTV_GetBroadcastChannelImages_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelImages_Response",
+          "options": {
+            "(method_description)": "Get broadcast channel images"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get broadcast channel images"
+            }
+          ]
+        },
+        "SetBroadcastChannelLinkRegions": {
+          "requestType": ".CSteamTV_SetBroadcastChannelLinkRegions_Request",
+          "responseType": ".CSteamTV_SetBroadcastChannelLinkRegions_Response",
+          "options": {
+            "(method_description)": "Set broadcast channel link regions"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set broadcast channel link regions"
+            }
+          ]
+        },
+        "GetBroadcastChannelLinks": {
+          "requestType": ".CSteamTV_GetBroadcastChannelLinks_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelLinks_Response",
+          "options": {
+            "(method_description)": "Get broadcast channel link regions"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get broadcast channel link regions"
+            }
+          ]
+        },
+        "GetBroadcastChannelBroadcasters": {
+          "requestType": ".CSteamTV_GetBroadcastChannelBroadcasters_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelBroadcasters_Response",
+          "options": {
+            "(method_description)": "Get list of broadcaster info for this channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get list of broadcaster info for this channel"
+            }
+          ]
+        },
+        "GetFollowedChannels": {
+          "requestType": ".CSteamTV_GetFollowedChannels_Request",
+          "responseType": ".CSteamTV_GetFollowedChannels_Response",
+          "options": {
+            "(method_description)": "Get list of followed channels by a viewer"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get list of followed channels by a viewer"
+            }
+          ]
+        },
+        "GetSubscribedChannels": {
+          "requestType": ".CSteamTV_GetSubscribedChannels_Request",
+          "responseType": ".CSteamTV_GetSubscribedChannels_Response",
+          "options": {
+            "(method_description)": "Get list of channels a user is subscribed to"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get list of channels a user is subscribed to"
+            }
+          ]
+        },
+        "GetBroadcastChannelStatus": {
+          "requestType": ".CSteamTV_GetBroadcastChannelStatus_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelStatus_Response",
+          "options": {
+            "(method_description)": "Get broadcast channel live status"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get broadcast channel live status"
+            }
+          ]
+        },
+        "FollowBroadcastChannel": {
+          "requestType": ".CSteamTV_FollowBroadcastChannel_Request",
+          "responseType": ".CSteamTV_FollowBroadcastChannel_Response",
+          "options": {
+            "(method_description)": "Follow a broadcast channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Follow a broadcast channel"
+            }
+          ]
+        },
+        "SubscribeBroadcastChannel": {
+          "requestType": ".CSteamTV_SubscribeBroadcastChannel_Request",
+          "responseType": ".CSteamTV_SubscribeBroadcastChannel_Response",
+          "options": {
+            "(method_description)": "Subscribe to a broadcast channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Subscribe to a broadcast channel"
+            }
+          ]
+        },
+        "GetBroadcastChannelClips": {
+          "requestType": ".CSteamTV_GetBroadcastChannelClips_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelClips_Response",
+          "options": {
+            "(method_description)": "Get broadcast channel clips"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get broadcast channel clips"
+            }
+          ]
+        },
+        "ReportBroadcastChannel": {
+          "requestType": ".CSteamTV_ReportBroadcastChannel_Request",
+          "responseType": ".CSteamTV_ReportBroadcastChannel_Response",
+          "options": {
+            "(method_description)": "Report a broadcast channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Report a broadcast channel"
+            }
+          ]
+        },
+        "GetBroadcastChannelInteraction": {
+          "requestType": ".CSteamTV_GetBroadcastChannelInteraction_Request",
+          "responseType": ".CSteamTV_GetBroadcastChannelInteraction_Response",
+          "options": {
+            "(method_description)": "Get user's interaction status with a broadcast channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get user's interaction status with a broadcast channel"
+            }
+          ]
+        },
+        "GetGames": {
+          "requestType": ".CSteamTV_GetGames_Request",
+          "responseType": ".CSteamTV_GetGames_Response",
+          "options": {
+            "(method_description)": "Get list of games with active broadcasters"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get list of games with active broadcasters"
+            }
+          ]
+        },
+        "GetChannels": {
+          "requestType": ".CSteamTV_GetChannels_Request",
+          "responseType": ".CSteamTV_GetChannels_Response",
+          "options": {
+            "(method_description)": "Get the list of featured broadcast channels"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get the list of featured broadcast channels"
+            }
+          ]
+        },
+        "AddChatBan": {
+          "requestType": ".CSteamTV_AddChatBan_Request",
+          "responseType": ".CSteamTV_AddChatBan_Response",
+          "options": {
+            "(method_description)": "Set the ban for a specific broadcaster. The issuer is the logged in steam account"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set the ban for a specific broadcaster. The issuer is the logged in steam account"
+            }
+          ]
+        },
+        "GetChatBans": {
+          "requestType": ".CSteamTV_GetChatBans_Request",
+          "responseType": ".CSteamTV_GetChatBans_Response",
+          "options": {
+            "(method_description)": "Get list of bans for a specific broadcaster. "
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get list of bans for a specific broadcaster. "
+            }
+          ]
+        },
+        "AddChatModerator": {
+          "requestType": ".CSteamTV_AddChatModerator_Request",
+          "responseType": ".CSteamTV_AddChatModerator_Response",
+          "options": {
+            "(method_description)": "Add or remove a moderator for this broadcast channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Add or remove a moderator for this broadcast channel"
+            }
+          ]
+        },
+        "GetChatModerators": {
+          "requestType": ".CSteamTV_GetChatModerators_Request",
+          "responseType": ".CSteamTV_GetChatModerators_Response",
+          "options": {
+            "(method_description)": "Returns the list of moderators for this broadcast channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the list of moderators for this broadcast channel"
+            }
+          ]
+        },
+        "AddWordBan": {
+          "requestType": ".CSteamTV_AddWordBan_Request",
+          "responseType": ".CSteamTV_AddWordBan_Response",
+          "options": {
+            "(method_description)": "Add or remove a banned keyword in this broadcast channel chat"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Add or remove a banned keyword in this broadcast channel chat"
+            }
+          ]
+        },
+        "GetWordBans": {
+          "requestType": ".CSteamTV_GetWordBans_Request",
+          "responseType": ".CSteamTV_GetWordBans_Response",
+          "options": {
+            "(method_description)": "Returns the list of banned keywords for this broadcast channel"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the list of banned keywords for this broadcast channel"
+            }
+          ]
+        },
+        "JoinChat": {
+          "requestType": ".CSteamTV_JoinChat_Request",
+          "responseType": ".CSteamTV_JoinChat_Response",
+          "options": {
+            "(method_description)": "Joins the chat channel for a broadcast"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Joins the chat channel for a broadcast"
+            }
+          ]
+        },
+        "Search": {
+          "requestType": ".CSteamTV_Search_Request",
+          "responseType": ".CSteamTV_Search_Response",
+          "options": {
+            "(method_description)": "Searches for broadcast channels based on input keywords"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Searches for broadcast channels based on input keywords"
+            }
+          ]
+        },
+        "GetSteamTVUserSettings": {
+          "requestType": ".CSteamTV_GetSteamTVUserSettings_Request",
+          "responseType": ".CSteamTV_GetSteamTVUserSettings_Response",
+          "options": {
+            "(method_description)": "Returns a user's SteamTV settings"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns a user's SteamTV settings"
+            }
+          ]
+        },
+        "SetSteamTVUserSettings": {
+          "requestType": ".CSteamTV_SetSteamTVUserSettings_Request",
+          "responseType": ".CSteamTV_SetSteamTVUserSettings_Response",
+          "options": {
+            "(method_description)": "Sets a user's SteamTV settings"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets a user's SteamTV settings"
+            }
+          ]
+        },
+        "GetMyBroadcastChannels": {
+          "requestType": ".CSteamTV_GetMyBroadcastChannels_Request",
+          "responseType": ".CSteamTV_GetMyBroadcastChannels_Response",
+          "options": {
+            "(method_description)": "Gets the broadcast channels that the current user owns"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the broadcast channels that the current user owns"
+            }
+          ]
+        },
+        "GetHomePageContents": {
+          "requestType": ".CSteamTV_GetHomePageContents_Request",
+          "responseType": ".CSteamTV_GetHomePageContents_Response",
+          "options": {
+            "(method_description)": "Returns homepage contents for user"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns homepage contents for user"
+            }
+          ]
+        },
+        "AppCheer": {
+          "requestType": ".CSteamTV_AppCheer_Request",
+          "responseType": ".CSteamTV_AppCheer_Response",
+          "options": {
+            "(method_description)": "The user is cheering for a specific broadcast for a specific app."
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "The user is cheering for a specific broadcast for a specific app."
+            }
+          ]
+        }
+      }
+    },
+    "msgpool_soft_limit": {
+      "type": "int32",
+      "id": 50000,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 32
+      }
+    },
+    "msgpool_hard_limit": {
+      "type": "int32",
+      "id": 50001,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 384
+      }
+    },
+    "force_php_generation": {
+      "type": "bool",
+      "id": 50000,
+      "extend": ".google.protobuf.FileOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "php_output_always_number": {
+      "type": "bool",
+      "id": 50020,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "allow_field_named_steam_id": {
+      "type": "bool",
+      "id": 50024,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
+      }
+    },
+    "EProtoClanEventType": {
+      "values": {
+        "k_EClanOtherEvent": 1,
+        "k_EClanGameEvent": 2,
+        "k_EClanPartyEvent": 3,
+        "k_EClanMeetingEvent": 4,
+        "k_EClanSpecialCauseEvent": 5,
+        "k_EClanMusicAndArtsEvent": 6,
+        "k_EClanSportsEvent": 7,
+        "k_EClanTripEvent": 8,
+        "k_EClanChatEvent": 9,
+        "k_EClanGameReleaseEvent": 10,
+        "k_EClanBroadcastEvent": 11,
+        "k_EClanSmallUpdateEvent": 12,
+        "k_EClanPreAnnounceMajorUpdateEvent": 13,
+        "k_EClanMajorUpdateEvent": 14,
+        "k_EClanDLCReleaseEvent": 15,
+        "k_EClanFutureReleaseEvent": 16,
+        "k_EClanESportTournamentStreamEvent": 17,
+        "k_EClanDevStreamEvent": 18,
+        "k_EClanFamousStreamEvent": 19,
+        "k_EClanGameSalesEvent": 20,
+        "k_EClanGameItemSalesEvent": 21,
+        "k_EClanInGameBonusXPEvent": 22,
+        "k_EClanInGameLootEvent": 23,
+        "k_EClanInGamePerksEvent": 24,
+        "k_EClanInGameChallengeEvent": 25,
+        "k_EClanInGameContestEvent": 26,
+        "k_EClanIRLEvent": 27,
+        "k_EClanNewsEvent": 28,
+        "k_EClanBetaReleaseEvent": 29,
+        "k_EClanInGameContentReleaseEvent": 30,
+        "k_EClanFreeTrial": 31,
+        "k_EClanSeasonRelease": 32,
+        "k_EClanSeasonUpdate": 33,
+        "k_EClanCrosspostEvent": 34,
+        "k_EClanInGameEventGeneral": 35
+      }
+    },
+    "PartnerEventNotificationType": {
+      "values": {
+        "k_EEventStart": 0,
+        "k_EEventBroadcastStart": 1,
+        "k_EEventMatchStart": 2,
+        "k_EEventPartnerMaxType": 3
+      }
+    },
+    "CMsgIPAddress": {
+      "oneofs": {
+        "ip": {
+          "oneof": [
+            "v4",
+            "v6"
+          ]
+        }
+      },
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgIPAddressBucket": {
+      "fields": {
+        "original_ip_address": {
+          "type": ".CMsgIPAddress",
+          "id": 1
+        },
+        "bucket": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtoBufHeader": {
+      "oneofs": {
+        "ip_addr": {
+          "oneof": [
+            "ip",
+            "ip_v6"
+          ]
+        }
+      },
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_sessionid": {
+          "type": "int32",
+          "id": 2
+        },
+        "routing_appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "jobid_source": {
+          "type": "fixed64",
+          "id": 10,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "jobid_target": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "target_job_name": {
+          "type": "string",
+          "id": 12
+        },
+        "seq_num": {
+          "type": "int32",
+          "id": 24
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "default": 2
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "id": 14
+        },
+        "auth_account_flags": {
+          "type": "uint32",
+          "id": 16
+        },
+        "token_source": {
+          "type": "uint32",
+          "id": 22
+        },
+        "admin_spoofing_user": {
+          "type": "bool",
+          "id": 23
+        },
+        "transport_error": {
+          "type": "int32",
+          "id": 17,
+          "options": {
+            "default": 1
+          }
+        },
+        "messageid": {
+          "type": "uint64",
+          "id": 18,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "publisher_group_id": {
+          "type": "uint32",
+          "id": 19
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "trace_tag": {
+          "type": "uint64",
+          "id": 21
+        },
+        "webapi_key_id": {
+          "type": "uint32",
+          "id": 25
+        },
+        "is_from_external_source": {
+          "type": "bool",
+          "id": 26
+        },
+        "forward_to_sysid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_sysid": {
+          "type": "uint32",
+          "id": 28
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "realm": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        },
+        "timeout_ms": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": -1
+          }
+        },
+        "debug_source": {
+          "type": "string",
+          "id": 34
+        },
+        "debug_source_string_index": {
+          "type": "uint32",
+          "id": 35
+        },
+        "token_id": {
+          "type": "uint64",
+          "id": 36
+        },
+        "ip": {
+          "type": "uint32",
+          "id": 15
+        },
+        "ip_v6": {
+          "type": "bytes",
+          "id": 29
+        }
+      }
+    },
+    "CMsgMulti": {
+      "fields": {
+        "size_unzipped": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message_body": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtobufWrapped": {
+      "fields": {
+        "message_body": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgAuthTicket": {
+      "fields": {
+        "estate": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "h_steam_pipe": {
+          "type": "uint32",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 7
+        }
+      }
+    },
+    "CCDDBAppDetailCommon": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "icon": {
+          "type": "string",
+          "id": 3
+        },
+        "tool": {
+          "type": "bool",
+          "id": 6
+        },
+        "demo": {
+          "type": "bool",
+          "id": 7
+        },
+        "media": {
+          "type": "bool",
+          "id": 8
+        },
+        "community_visible_stats": {
+          "type": "bool",
+          "id": 9
+        },
+        "friendly_name": {
+          "type": "string",
+          "id": 10
+        },
+        "propagation": {
+          "type": "string",
+          "id": 11
+        },
+        "has_adult_content": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_visible_in_steam_china": {
+          "type": "bool",
+          "id": 13
+        },
+        "app_type": {
+          "type": "uint32",
+          "id": 14
+        }
+      }
+    },
+    "CMsgAppRights": {
+      "fields": {
+        "edit_info": {
+          "type": "bool",
+          "id": 1
+        },
+        "publish": {
+          "type": "bool",
+          "id": 2
+        },
+        "view_error_data": {
+          "type": "bool",
+          "id": 3
+        },
+        "download": {
+          "type": "bool",
+          "id": 4
+        },
+        "upload_cdkeys": {
+          "type": "bool",
+          "id": 5
+        },
+        "generate_cdkeys": {
+          "type": "bool",
+          "id": 6
+        },
+        "view_financials": {
+          "type": "bool",
+          "id": 7
+        },
+        "manage_ceg": {
+          "type": "bool",
+          "id": 8
+        },
+        "manage_signing": {
+          "type": "bool",
+          "id": 9
+        },
+        "manage_cdkeys": {
+          "type": "bool",
+          "id": 10
+        },
+        "edit_marketing": {
+          "type": "bool",
+          "id": 11
+        },
+        "economy_support": {
+          "type": "bool",
+          "id": 12
+        },
+        "economy_support_supervisor": {
+          "type": "bool",
+          "id": 13
+        },
+        "manage_pricing": {
+          "type": "bool",
+          "id": 14
+        },
+        "broadcast_live": {
+          "type": "bool",
+          "id": 15
+        },
+        "view_marketing_traffic": {
+          "type": "bool",
+          "id": 16
+        },
+        "edit_store_display_content": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CCuratorPreferences": {
+      "fields": {
+        "supported_languages": {
+          "type": "uint32",
+          "id": 1
+        },
+        "platform_windows": {
+          "type": "bool",
+          "id": 2
+        },
+        "platform_mac": {
+          "type": "bool",
+          "id": 3
+        },
+        "platform_linux": {
+          "type": "bool",
+          "id": 4
+        },
+        "vr_content": {
+          "type": "bool",
+          "id": 5
+        },
+        "adult_content_violence": {
+          "type": "bool",
+          "id": 6
+        },
+        "adult_content_sex": {
+          "type": "bool",
+          "id": 7
+        },
+        "timestamp_updated": {
+          "type": "uint32",
+          "id": 8
+        },
+        "tagids_curated": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "packed": false
+          }
+        },
+        "tagids_filtered": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "website_title": {
+          "type": "string",
+          "id": 11
+        },
+        "website_url": {
+          "type": "string",
+          "id": 12
+        },
+        "discussion_url": {
+          "type": "string",
+          "id": 13
+        },
+        "show_broadcast": {
+          "type": "bool",
+          "id": 14
+        }
+      }
+    },
+    "CLocalizationToken": {
+      "fields": {
+        "language": {
+          "type": "uint32",
+          "id": 1
+        },
+        "localized_string": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClanEventUserNewsTuple": {
+      "fields": {
+        "clanid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "announcement_gid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "rtime_start": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime_end": {
+          "type": "uint32",
+          "id": 5
+        },
+        "priority_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "type": {
+          "type": "uint32",
+          "id": 7
+        },
+        "clamp_range_slot": {
+          "type": "uint32",
+          "id": 8
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CClanMatchEventByRange": {
+      "fields": {
+        "rtime_before": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rtime_after": {
+          "type": "uint32",
+          "id": 2
+        },
+        "qualified": {
+          "type": "uint32",
+          "id": 3
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CClanEventUserNewsTuple",
+          "id": 4
+        }
+      }
+    },
+    "CCommunity_ClanAnnouncementInfo": {
+      "fields": {
+        "gid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "clanid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "posterid": {
+          "type": "uint64",
+          "id": 3
+        },
+        "headline": {
+          "type": "string",
+          "id": 4
+        },
+        "posttime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "updatetime": {
+          "type": "uint32",
+          "id": 6
+        },
+        "body": {
+          "type": "string",
+          "id": 7
+        },
+        "commentcount": {
+          "type": "int32",
+          "id": 8
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 9
+        },
+        "language": {
+          "type": "int32",
+          "id": 10
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 11
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 13
+        },
+        "voteupcount": {
+          "type": "int32",
+          "id": 14
+        },
+        "votedowncount": {
+          "type": "int32",
+          "id": 15
+        },
+        "ban_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 16,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
+          }
+        }
+      }
+    },
+    "CClanEventData": {
+      "fields": {
+        "gid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "event_name": {
+          "type": "string",
+          "id": 3
+        },
+        "event_type": {
+          "type": ".EProtoClanEventType",
+          "id": 4,
+          "options": {
+            "default": "k_EClanOtherEvent"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "server_address": {
+          "type": "string",
+          "id": 6
+        },
+        "server_password": {
+          "type": "string",
+          "id": 7
+        },
+        "rtime32_start_time": {
+          "type": "uint32",
+          "id": 8
+        },
+        "rtime32_end_time": {
+          "type": "uint32",
+          "id": 9
+        },
+        "comment_count": {
+          "type": "int32",
+          "id": 10
+        },
+        "creator_steamid": {
+          "type": "fixed64",
+          "id": 11
+        },
+        "last_update_steamid": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_notes": {
+          "type": "string",
+          "id": 13
+        },
+        "jsondata": {
+          "type": "string",
+          "id": 14
+        },
+        "announcement_body": {
+          "type": ".CCommunity_ClanAnnouncementInfo",
+          "id": 15
+        },
+        "published": {
+          "type": "bool",
+          "id": 16
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 17
+        },
+        "rtime32_visibility_start": {
+          "type": "uint32",
+          "id": 18
+        },
+        "rtime32_visibility_end": {
+          "type": "uint32",
+          "id": 19
+        },
+        "broadcaster_accountid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "follower_count": {
+          "type": "uint32",
+          "id": 21
+        },
+        "ignore_count": {
+          "type": "uint32",
+          "id": 22
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 23
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 24
+        },
+        "news_post_gid": {
+          "type": "fixed64",
+          "id": 25
+        },
+        "rtime_mod_reviewed": {
+          "type": "uint32",
+          "id": 26
+        },
+        "featured_app_tagid": {
+          "type": "uint32",
+          "id": 27
+        },
+        "referenced_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 28,
+          "options": {
+            "packed": false
+          }
+        },
+        "build_id": {
+          "type": "uint32",
+          "id": 29
+        },
+        "build_branch": {
+          "type": "string",
+          "id": 30
+        }
+      }
+    },
+    "CBilling_Address": {
+      "fields": {
+        "first_name": {
+          "type": "string",
+          "id": 1
+        },
+        "last_name": {
+          "type": "string",
+          "id": 2
+        },
+        "address1": {
+          "type": "string",
+          "id": 3
+        },
+        "address2": {
+          "type": "string",
+          "id": 4
+        },
+        "city": {
+          "type": "string",
+          "id": 5
+        },
+        "us_state": {
+          "type": "string",
+          "id": 6
+        },
+        "country_code": {
+          "type": "string",
+          "id": 7
+        },
+        "postcode": {
+          "type": "string",
+          "id": 8
+        },
+        "zip_plus4": {
+          "type": "int32",
+          "id": 9
+        },
+        "phone": {
+          "type": "string",
+          "id": 10
+        }
+      }
+    },
+    "CPackageReservationStatus": {
+      "fields": {
+        "packageid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "reservation_state": {
+          "type": "int32",
+          "id": 2
+        },
+        "queue_position": {
+          "type": "int32",
+          "id": 3
+        },
+        "total_queue_size": {
+          "type": "int32",
+          "id": 4
+        },
+        "reservation_country_code": {
+          "type": "string",
+          "id": 5
+        },
+        "expired": {
+          "type": "bool",
+          "id": 6
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 7
+        },
+        "time_reserved": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgKeyValuePair": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgKeyValueSet": {
+      "fields": {
+        "pairs": {
+          "rule": "repeated",
+          "type": ".CMsgKeyValuePair",
+          "id": 1
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    }
+  }
+}

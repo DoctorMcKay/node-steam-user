@@ -47,10 +47,6 @@
           "type": "fixed64",
           "id": 4
         },
-        "legacy_gameserver_net_id": {
-          "type": "fixed64",
-          "id": 5
-        },
         "legacy_gameserver_pop_id": {
           "type": "fixed32",
           "id": 9
@@ -194,6 +190,10 @@
         "routing_secret": {
           "type": "fixed64",
           "id": 4
+        },
+        "protocol_version": {
+          "type": "uint32",
+          "id": 5
         }
       }
     },
