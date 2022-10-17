@@ -31,6 +31,14 @@
         "k_EAuthSessionSecurityHistory_NoPriorHistory": 2
       }
     },
+    "EAuthTokenRevokeAction": {
+      "values": {
+        "k_EAuthTokenRevokeLogout": 0,
+        "k_EAuthTokenRevokePermanent": 1,
+        "k_EAuthTokenRevokeReplaced": 2,
+        "k_EAuthTokenRevokeSupport": 3
+      }
+    },
     "EAuthTokenState": {
       "values": {
         "k_EAuthTokenState_Invalid": 0,
@@ -78,6 +86,39 @@
         }
       }
     },
+    "CAuthentication_DeviceDetails": {
+      "fields": {
+        "device_friendly_name": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "User-supplied, or client-supplied, friendly name of device"
+          }
+        },
+        "platform_type": {
+          "type": ".EAuthTokenPlatformType",
+          "id": 2,
+          "options": {
+            "default": "k_EAuthTokenPlatformType_Unknown",
+            "(description)": "EAuthTokenPlatformType, claimed, of device"
+          }
+        },
+        "os_type": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "(description)": "EOSType, claimed, of authorized device"
+          }
+        },
+        "gaming_device_type": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "EGamingDeviceType, claimed, of authorized device for steam client-type devices"
+          }
+        }
+      }
+    },
     "CAuthentication_BeginAuthSessionViaQR_Request": {
       "fields": {
         "device_friendly_name": {
@@ -89,6 +130,13 @@
           "id": 2,
           "options": {
             "default": "k_EAuthTokenPlatformType_Unknown"
+          }
+        },
+        "device_details": {
+          "type": ".CAuthentication_DeviceDetails",
+          "id": 3,
+          "options": {
+            "(description)": "User-supplied details about the device attempting to sign in"
           }
         }
       }
@@ -212,6 +260,20 @@
             "default": "Unknown",
             "(description)": "(EMachineAuthWebDomain) identifier of client requesting auth"
           }
+        },
+        "device_details": {
+          "type": ".CAuthentication_DeviceDetails",
+          "id": 9,
+          "options": {
+            "(description)": "User-supplied details about the device attempting to sign in"
+          }
+        },
+        "guard_data": {
+          "type": "string",
+          "id": 10,
+          "options": {
+            "(description)": "steam guard data for client login"
+          }
         }
       }
     },
@@ -323,6 +385,13 @@
           "id": 6,
           "options": {
             "(description)": "account name of authenticating account, for use by UI layer"
+          }
+        },
+        "new_guard_data": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "if login has been confirmed, may contain remembered machine ID for future login"
           }
         }
       }
@@ -536,6 +605,121 @@
         }
       }
     },
+    "CAuthentication_RefreshToken_Enumerate_Request": {
+      "fields": {}
+    },
+    "CAuthentication_RefreshToken_Enumerate_Response": {
+      "fields": {
+        "refresh_tokens": {
+          "rule": "repeated",
+          "type": ".CAuthentication_RefreshToken_Enumerate_Response.RefreshTokenDescription",
+          "id": 1
+        },
+        "requesting_token": {
+          "type": "fixed64",
+          "id": 2
+        }
+      },
+      "nested": {
+        "TokenUsageEvent": {
+          "fields": {
+            "time": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "Approximate time of history event (may be deliberately fuzzed or omitted)"
+              }
+            },
+            "ip": {
+              "type": ".CMsgIPAddress",
+              "id": 2,
+              "options": {
+                "(description)": "IP at which event was observed"
+              }
+            },
+            "locale": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "(description)": "city/location name, if known"
+              }
+            }
+          }
+        },
+        "RefreshTokenDescription": {
+          "fields": {
+            "token_id": {
+              "type": "fixed64",
+              "id": 1,
+              "options": {
+                "(description)": "Persistent token/device identifier"
+              }
+            },
+            "token_description": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "(description)": "client-supplied friendly name for the device"
+              }
+            },
+            "time_updated": {
+              "type": "uint32",
+              "id": 3
+            },
+            "platform_type": {
+              "type": ".EAuthTokenPlatformType",
+              "id": 4,
+              "options": {
+                "default": "k_EAuthTokenPlatformType_Unknown",
+                "(description)": "gross platform type (mobile/client/browser)"
+              }
+            },
+            "logged_in": {
+              "type": "bool",
+              "id": 5,
+              "options": {
+                "(description)": "If true, this token is currently valid. False indicates it is a machine token - ok for steamguard if you know the credential"
+              }
+            },
+            "os_platform": {
+              "type": "uint32",
+              "id": 6,
+              "options": {
+                "(description)": "EPlatformType - rough classification of device OS, if known"
+              }
+            },
+            "auth_type": {
+              "type": "uint32",
+              "id": 7,
+              "options": {
+                "(description)": "EAuthTokenGuardType - device authorization mechanism, if known"
+              }
+            },
+            "gaming_device_type": {
+              "type": "uint32",
+              "id": 8,
+              "options": {
+                "(description)": "EGamingDeviceType - classify console/PC/SteamDeck, if known; applies only for Steam Client devices"
+              }
+            },
+            "first_seen": {
+              "type": ".CAuthentication_RefreshToken_Enumerate_Response.TokenUsageEvent",
+              "id": 9,
+              "options": {
+                "(description)": "Information about original authorization event"
+              }
+            },
+            "last_seen": {
+              "type": ".CAuthentication_RefreshToken_Enumerate_Response.TokenUsageEvent",
+              "id": 10,
+              "options": {
+                "(description)": "Information about most-recently seen, if known for this device"
+              }
+            }
+          }
+        }
+      }
+    },
     "CAuthentication_GetAuthSessionsForAccount_Request": {
       "fields": {}
     },
@@ -588,6 +772,39 @@
           "id": 2
         }
       }
+    },
+    "CAuthentication_RefreshToken_Revoke_Request": {
+      "fields": {
+        "token_id": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 2,
+          "options": {
+            "(description)": "Token holder if an admin action on behalf of another user"
+          }
+        },
+        "revoke_action": {
+          "type": ".EAuthTokenRevokeAction",
+          "id": 3,
+          "options": {
+            "default": "k_EAuthTokenRevokePermanent",
+            "(description)": "Select between logout and logout-and-forget-machine"
+          }
+        },
+        "signature": {
+          "type": "bytes",
+          "id": 4,
+          "options": {
+            "(description)": "required signature over token_id"
+          }
+        }
+      }
+    },
+    "CAuthentication_RefreshToken_Revoke_Response": {
+      "fields": {}
     },
     "CAuthenticationSupport_QueryRefreshTokensByAccount_Request": {
       "fields": {
@@ -795,120 +1012,84 @@
           "responseType": ".CAuthentication_GetPasswordRSAPublicKey_Response",
           "options": {
             "(method_description)": "Fetches RSA public key to use to encrypt passwords for a given account name"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Fetches RSA public key to use to encrypt passwords for a given account name"
-            }
-          ]
+          }
         },
         "BeginAuthSessionViaQR": {
           "requestType": ".CAuthentication_BeginAuthSessionViaQR_Request",
           "responseType": ".CAuthentication_BeginAuthSessionViaQR_Response",
           "options": {
             "(method_description)": "start authentication process"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "start authentication process"
-            }
-          ]
+          }
         },
         "BeginAuthSessionViaCredentials": {
           "requestType": ".CAuthentication_BeginAuthSessionViaCredentials_Request",
           "responseType": ".CAuthentication_BeginAuthSessionViaCredentials_Response",
           "options": {
             "(method_description)": "start authentication process"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "start authentication process"
-            }
-          ]
+          }
         },
         "PollAuthSessionStatus": {
           "requestType": ".CAuthentication_PollAuthSessionStatus_Request",
           "responseType": ".CAuthentication_PollAuthSessionStatus_Response",
           "options": {
             "(method_description)": "poll during authentication process"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "poll during authentication process"
-            }
-          ]
+          }
         },
         "GetAuthSessionInfo": {
           "requestType": ".CAuthentication_GetAuthSessionInfo_Request",
           "responseType": ".CAuthentication_GetAuthSessionInfo_Response",
           "options": {
             "(method_description)": "get metadata of specific auth session, this will also implicitly bind the calling account"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "get metadata of specific auth session, this will also implicitly bind the calling account"
-            }
-          ]
+          }
         },
         "UpdateAuthSessionWithMobileConfirmation": {
           "requestType": ".CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request",
           "responseType": ".CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response",
           "options": {
             "(method_description)": "approve an authentication session via mobile 2fa"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "approve an authentication session via mobile 2fa"
-            }
-          ]
+          }
         },
         "UpdateAuthSessionWithSteamGuardCode": {
           "requestType": ".CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request",
           "responseType": ".CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response",
           "options": {
             "(method_description)": "approve an authentication session via steam guard code"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "approve an authentication session via steam guard code"
-            }
-          ]
+          }
         },
         "GenerateAccessTokenForApp": {
           "requestType": ".CAuthentication_AccessToken_GenerateForApp_Request",
           "responseType": ".CAuthentication_AccessToken_GenerateForApp_Response",
           "options": {
             "(method_description)": "Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token"
-            }
-          ]
+          }
+        },
+        "EnumerateTokens": {
+          "requestType": ".CAuthentication_RefreshToken_Enumerate_Request",
+          "responseType": ".CAuthentication_RefreshToken_Enumerate_Response",
+          "options": {
+            "(method_description)": "Enumerate durable (refresh) tokens for the given subject account"
+          }
         },
         "GetAuthSessionsForAccount": {
           "requestType": ".CAuthentication_GetAuthSessionsForAccount_Request",
           "responseType": ".CAuthentication_GetAuthSessionsForAccount_Response",
           "options": {
             "(method_description)": "Gets all active auth sessions for an account for reference by the mobile app"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Gets all active auth sessions for an account for reference by the mobile app"
-            }
-          ]
+          }
         },
         "MigrateMobileSession": {
           "requestType": ".CAuthentication_MigrateMobileSession_Request",
           "responseType": ".CAuthentication_MigrateMobileSession_Response",
           "options": {
             "(method_description)": "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret"
-            }
-          ]
+          }
+        },
+        "RevokeRefreshToken": {
+          "requestType": ".CAuthentication_RefreshToken_Revoke_Request",
+          "responseType": ".CAuthentication_RefreshToken_Revoke_Response",
+          "options": {
+            "(method_description)": "Mark the given refresh token as revoked"
+          }
         }
       }
     },
@@ -922,48 +1103,28 @@
           "responseType": ".CAuthenticationSupport_QueryRefreshTokensByAccount_Response",
           "options": {
             "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
-            }
-          ]
+          }
         },
         "QueryRefreshTokenByID": {
           "requestType": ".CAuthenticationSupport_QueryRefreshTokenByID_Request",
           "responseType": ".CAuthenticationSupport_QueryRefreshTokenByID_Response",
           "options": {
             "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Asks the server for a list of refresh tokens associated with an account"
-            }
-          ]
+          }
         },
         "RevokeToken": {
           "requestType": ".CAuthenticationSupport_RevokeToken_Request",
           "responseType": ".CAuthenticationSupport_RevokeToken_Response",
           "options": {
             "(method_description)": "Revokes a user's auth token"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Revokes a user's auth token"
-            }
-          ]
+          }
         },
         "GetTokenHistory": {
           "requestType": ".CAuthenticationSupport_GetTokenHistory_Request",
           "responseType": ".CAuthenticationSupport_GetTokenHistory_Response",
           "options": {
             "(method_description)": "Gets the audit history for a user's auth token"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Gets the audit history for a user's auth token"
-            }
-          ]
+          }
         }
       }
     },
@@ -977,24 +1138,14 @@
           "responseType": ".CCloudGaming_CreateNonce_Response",
           "options": {
             "(method_description)": "Create a nonce for a cloud gaming service session"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Create a nonce for a cloud gaming service session"
-            }
-          ]
+          }
         },
         "GetTimeRemaining": {
           "requestType": ".CCloudGaming_GetTimeRemaining_Request",
           "responseType": ".CCloudGaming_GetTimeRemaining_Response",
           "options": {
             "(method_description)": "Get the amount of streaming time remaining for a set of apps"
-          },
-          "parsedOptions": [
-            {
-              "(method_description)": "Get the amount of streaming time remaining for a set of apps"
-            }
-          ]
+          }
         }
       }
     },
@@ -1916,6 +2067,15 @@
     "google": {
       "nested": {
         "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -1988,6 +2148,10 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
+                },
+                "edition": {
+                  "type": "string",
+                  "id": 13
                 }
               }
             },
@@ -2052,6 +2216,10 @@
                     "end": {
                       "type": "int32",
                       "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
                     }
                   }
                 },
@@ -2068,6 +2236,21 @@
                   }
                 }
               }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -2110,6 +2293,10 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
+                },
+                "proto3_optional": {
+                  "type": "bool",
+                  "id": 17
                 }
               },
               "nested": {
@@ -2170,6 +2357,30 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
                 }
               }
             },
@@ -2226,11 +2437,17 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
                 }
               }
             },
@@ -2246,7 +2463,10 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -2257,7 +2477,10 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -2272,23 +2495,45 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "php_generic_services": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -2297,6 +2542,26 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
+                },
+                "swift_prefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "php_class_prefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "php_namespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "php_metadata_namespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "ruby_package": {
+                  "type": "string",
+                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2330,15 +2595,24 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "map_entry": {
                   "type": "bool",
@@ -2358,8 +2632,24 @@
               ],
               "reserved": [
                 [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
                   8,
                   8
+                ],
+                [
+                  9,
+                  9
                 ]
               ]
             },
@@ -2385,15 +2675,31 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "unverified_lazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2453,7 +2759,10 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2466,13 +2775,22 @@
                   1000,
                   536870911
                 ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2491,7 +2809,10 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2510,7 +2831,17 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotency_level": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2523,7 +2854,16 @@
                   1000,
                   536870911
                 ]
-              ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
             },
             "UninterpretedOption": {
               "fields": {
@@ -2639,6 +2979,19 @@
                     "end": {
                       "type": "int32",
                       "id": 4
+                    },
+                    "semantic": {
+                      "type": "Semantic",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Semantic": {
+                      "values": {
+                        "NONE": 0,
+                        "SET": 1,
+                        "ALIAS": 2
+                      }
                     }
                   }
                 }
