@@ -35,7 +35,8 @@ const ENUMS_WITH_DIFFERENT_PREFIXES_FROM_THEIR_NAMES = {
 	"ESystemAudioDirection": "k_SystemAudioDirection_",
 	"ESystemAudioPortDirection": "k_SystemAudioPortDirection_",
 	"ESystemAudioPortType": "k_SystemAudioPortType_",
-	"ESystemFanControlMode": "k_SystemFanControlMode_"
+	"ESystemFanControlMode": "k_SystemFanControlMode_",
+	"EAuthTokenRevokeAction": "k_EAuthTokenRevoke"
 };
 
 const ENUMS_WITH_SOMETIMES_DIFFERENT_PREFIXES = {
