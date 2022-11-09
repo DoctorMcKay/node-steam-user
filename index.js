@@ -228,6 +228,7 @@ class SteamUser extends SteamUserTwoFactor {
 	_checkOptionTypes() {
 		// We'll infer types from DefaultOptions, but stuff that's null (for example) needs to be defined explicitly
 		let types = {
+			socksProxy: 'string',
 			httpProxy: 'string',
 			localAddress: 'string',
 			localPort: 'number',

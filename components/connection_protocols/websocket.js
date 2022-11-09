@@ -77,12 +77,12 @@ class WebSocketConnection extends BaseConnection {
 
 		let addr = servers[Math.floor(Math.random() * servers.length)];
 		this._debug(`Randomly chose WebSocket CM ${addr}`);
-		this.stream = new WS13.WebSocket("wss://" + addr + "/cmsocket/", {
-			"pingInterval": 30000,
-			"httpProxy": this.user.options.httpProxy,
-			"proxyTimeout": this.user.options.proxyTimeout,
-			"connection": {
-				"localAddress": this.user.options.localAddress
+		this.stream = new WS13.WebSocket(`wss://${addr}/cmsocket/`, {
+			pingInterval: 30000,
+			proxyTimeout: this.user.options.proxyTimeout,
+			connection: {
+				localAddress: this.user.options.localAddress,
+				agent: this.user._getProxyAgent()
 			}
 		});
 
@@ -110,7 +110,7 @@ class WebSocketConnection extends BaseConnection {
 			this._disconnected = true;
 			this._debug('WebSocket disconnected with error: ' + err.message);
 
-			if (err.proxyConnecting) {
+			if (err.proxyConnecting || err.constructor.name == 'SocksClientError') {
 				// This error happened while connecting to the proxy
 				this.user.emit('error', err);
 			} else {
@@ -207,9 +207,9 @@ class WebSocketConnection extends BaseConnection {
 		let options = {
 			host,
 			port,
-			"timeout": 700,
-			"path": "/cmping/",
-			"agent": StdLib.HTTP.getProxyAgent(true, this.user.options.httpProxy)
+			timeout: 700,
+			path: '/cmping/',
+			agent: this.user._getProxyAgent()
 		};
 
 		// The timeout option seems to not work
@@ -219,7 +219,7 @@ class WebSocketConnection extends BaseConnection {
 				return;
 			}
 
-			this._debug('CM ' + addr + ' timed out', true);
+			this._debug(`CM ${addr} timed out`, true);
 			callback(new Error(`CM ${addr} timed out`));
 			finished = true;
 		}, 700);
@@ -238,18 +238,18 @@ class WebSocketConnection extends BaseConnection {
 
 			if (res.statusCode != 200) {
 				// CM is disqualified
-				this._debug('CM ' + addr + ' disqualified: HTTP error ' + res.statusCode, true);
+				this._debug(`CM ${addr} disqualified: HTTP error ${res.statusCode}`, true);
 				callback(new Error(`CM ${addr} disqualified: HTTP error ${res.statusCode}`));
 				return;
 			}
 
 			let load = parseInt(res.headers['x-steam-cmload'], 10) || 999;
-			this._debug('CM ' + addr + ' latency ' + latency + ' ms + load ' + load, true);
+			this._debug(`CM ${addr} latency ${latency} ms + load ${load}`, true);
 			callback(null, {addr, load, latency});
 		}).on('error', (err) => {
 			clearTimeout(timeout);
 			if (!finished) {
-				this._debug('CM ' + addr + ' disqualified: ' + err.message, true);
+				this._debug(`CM ${addr} disqualified: ${err.message}`, true);
 				callback(new Error(`CM ${addr} disqualified: ${err.message}`)); // if error, this CM is disqualified
 			}
 		});

@@ -1,4 +1,5 @@
 const ByteBuffer = require('bytebuffer');
+const {SocksProxyAgent} = require('socks-proxy-agent');
 const StdLib = require('@doctormckay/stdlib');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 
@@ -47,6 +48,22 @@ class SteamUserConnection extends SteamUserEnums {
 		this._jobCleanupTimers = [];
 
 		this._clearChangelistUpdateTimer();
+	}
+
+	_getProxyAgent() {
+		if (this.options.socksProxy && this.options.httpProxy) {
+			throw new Error('Cannot specify both socksProxy and httpProxy options');
+		}
+
+		if (this.options.socksProxy) {
+			return new SocksProxyAgent(this.options.socksProxy);
+		}
+
+		if (this.options.httpProxy) {
+			return StdLib.HTTP.getProxyAgent(true, this.options.httpProxy);
+		}
+
+		return undefined;
 	}
 }
 
