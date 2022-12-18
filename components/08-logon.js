@@ -115,7 +115,7 @@ class SteamUserLogon extends SteamUserWeb {
 				let decodedToken = Helpers.decodeJwt(details.refreshToken);
 				let tokenSteamId = Helpers.steamID(decodedToken.sub);
 				if (this._logOnDetails._steamid) {
-					let providedSteamId = Helpers.steamID(this._logOnDetails.steamID);
+					let providedSteamId = Helpers.steamID(this._logOnDetails._steamid);
 					if (providedSteamId.getSteam3RenderedID() != tokenSteamId.getSteam3RenderedID()) {
 						throw new Error(`Specified SteamID (${providedSteamId}) does not match refreshToken (${tokenSteamId}`);
 					}
