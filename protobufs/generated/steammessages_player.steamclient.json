@@ -1894,329 +1894,564 @@
           "responseType": ".CPlayer_GetMutualFriendsForIncomingInvites_Response",
           "options": {
             "(method_description)": "Get me the mutual friends for each of my pending incoming invites (individuals and clans)."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get me the mutual friends for each of my pending incoming invites (individuals and clans)."
+            }
+          ]
         },
         "GetOwnedGames": {
           "requestType": ".CPlayer_GetOwnedGames_Request",
           "responseType": ".CPlayer_GetOwnedGames_Response",
           "options": {
             "(method_description)": "Return a list of games owned by the player"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Return a list of games owned by the player"
+            }
+          ]
         },
         "GetPlayNext": {
           "requestType": ".CPlayer_GetPlayNext_Request",
           "responseType": ".CPlayer_GetPlayNext_Response",
           "options": {
             "(method_description)": "Return suggested games for player to play next."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Return suggested games for player to play next."
+            }
+          ]
         },
         "GetFriendsGameplayInfo": {
           "requestType": ".CPlayer_GetFriendsGameplayInfo_Request",
           "responseType": ".CPlayer_GetFriendsGameplayInfo_Response",
           "options": {
             "(method_description)": "Get a list of friends who are playing, have played, own, or want a game"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get a list of friends who are playing, have played, own, or want a game"
+            }
+          ]
         },
         "GetGameBadgeLevels": {
           "requestType": ".CPlayer_GetGameBadgeLevels_Request",
           "responseType": ".CPlayer_GetGameBadgeLevels_Response",
           "options": {
             "(method_description)": "Returns the Steam Level of a user, the Badge level for the game, and if it's foil"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the Steam Level of a user, the Badge level for the game, and if it's foil"
+            }
+          ]
         },
         "GetProfileBackground": {
           "requestType": ".CPlayer_GetProfileBackground_Request",
           "responseType": ".CPlayer_GetProfileBackground_Response",
           "options": {
             "(method_description)": "Gets which profile background is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which profile background is active for a specific user"
+            }
+          ]
         },
         "SetProfileBackground": {
           "requestType": ".CPlayer_SetProfileBackground_Request",
           "responseType": ".CPlayer_SetProfileBackground_Response",
           "options": {
             "(method_description)": "Sets the user's profile background"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's profile background"
+            }
+          ]
         },
         "GetMiniProfileBackground": {
           "requestType": ".CPlayer_GetMiniProfileBackground_Request",
           "responseType": ".CPlayer_GetMiniProfileBackground_Response",
           "options": {
             "(method_description)": "Gets which mini profile background is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which mini profile background is active for a specific user"
+            }
+          ]
         },
         "SetMiniProfileBackground": {
           "requestType": ".CPlayer_SetMiniProfileBackground_Request",
           "responseType": ".CPlayer_SetMiniProfileBackground_Response",
           "options": {
             "(method_description)": "Sets the user's mini profile background"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's mini profile background"
+            }
+          ]
         },
         "GetAvatarFrame": {
           "requestType": ".CPlayer_GetAvatarFrame_Request",
           "responseType": ".CPlayer_GetAvatarFrame_Response",
           "options": {
             "(method_description)": "Gets which avatar frame is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which avatar frame is active for a specific user"
+            }
+          ]
         },
         "SetAvatarFrame": {
           "requestType": ".CPlayer_SetAvatarFrame_Request",
           "responseType": ".CPlayer_SetAvatarFrame_Response",
           "options": {
             "(method_description)": "Sets the user's avatar frame for their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's avatar frame for their profile"
+            }
+          ]
         },
         "GetAnimatedAvatar": {
           "requestType": ".CPlayer_GetAnimatedAvatar_Request",
           "responseType": ".CPlayer_GetAnimatedAvatar_Response",
           "options": {
             "(method_description)": "Gets which animated avatar is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which animated avatar is active for a specific user"
+            }
+          ]
         },
         "SetAnimatedAvatar": {
           "requestType": ".CPlayer_SetAnimatedAvatar_Request",
           "responseType": ".CPlayer_SetAnimatedAvatar_Response",
           "options": {
             "(method_description)": "Sets the user's animated avatar for their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's animated avatar for their profile"
+            }
+          ]
         },
         "GetSteamDeckKeyboardSkin": {
           "requestType": ".CPlayer_GetSteamDeckKeyboardSkin_Request",
           "responseType": ".CPlayer_GetSteamDeckKeyboardSkin_Response",
           "options": {
             "(method_description)": "Gets which Steam Deck keyboard skin is active for a specific user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets which Steam Deck keyboard skin is active for a specific user"
+            }
+          ]
         },
         "SetSteamDeckKeyboardSkin": {
           "requestType": ".CPlayer_SetSteamDeckKeyboardSkin_Request",
           "responseType": ".CPlayer_SetSteamDeckKeyboardSkin_Response",
           "options": {
             "(method_description)": "Sets the user's current Steam Deck keyboard skin"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the user's current Steam Deck keyboard skin"
+            }
+          ]
         },
         "GetProfileItemsOwned": {
           "requestType": ".CPlayer_GetProfileItemsOwned_Request",
           "responseType": ".CPlayer_GetProfileItemsOwned_Response",
           "options": {
             "(method_description)": "Returns the items the user can equip on their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the items the user can equip on their profile"
+            }
+          ]
         },
         "GetProfileItemsEquipped": {
           "requestType": ".CPlayer_GetProfileItemsEquipped_Request",
           "responseType": ".CPlayer_GetProfileItemsEquipped_Response",
           "options": {
             "(method_description)": "Returns the items the user has equipped on their profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the items the user has equipped on their profile"
+            }
+          ]
         },
         "SetEquippedProfileItemFlags": {
           "requestType": ".CPlayer_SetEquippedProfileItemFlags_Request",
           "responseType": ".CPlayer_SetEquippedProfileItemFlags_Response",
           "options": {
             "(method_description)": "Sets special flags on the equipped item"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets special flags on the equipped item"
+            }
+          ]
         },
         "GetEmoticonList": {
           "requestType": ".CPlayer_GetEmoticonList_Request",
           "responseType": ".CPlayer_GetEmoticonList_Response",
           "options": {
             "(method_description)": "Gets a list of the emoticons a user has with metadata"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets a list of the emoticons a user has with metadata"
+            }
+          ]
         },
         "GetAchievementsProgress": {
           "requestType": ".CPlayer_GetAchievementsProgress_Request",
           "responseType": ".CPlayer_GetAchievementsProgress_Response",
           "options": {
             "(method_description)": "Gets the achievement completion stats for the specified list of apps."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the achievement completion stats for the specified list of apps."
+            }
+          ]
         },
         "GetFavoriteBadge": {
           "requestType": ".CPlayer_GetFavoriteBadge_Request",
           "responseType": ".CPlayer_GetFavoriteBadge_Response",
           "options": {
             "(method_description)": "Gets the badge the user has set as their favorite"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the badge the user has set as their favorite"
+            }
+          ]
         },
         "SetFavoriteBadge": {
           "requestType": ".CPlayer_SetFavoriteBadge_Request",
           "responseType": ".CPlayer_SetFavoriteBadge_Response",
           "options": {
             "(method_description)": "Sets the badge  as the users favorite"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the badge  as the users favorite"
+            }
+          ]
         },
         "GetProfileCustomization": {
           "requestType": ".CPlayer_GetProfileCustomization_Request",
           "responseType": ".CPlayer_GetProfileCustomization_Response",
           "options": {
             "(method_description)": "Returns the customizations (if any) for a profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the customizations (if any) for a profile"
+            }
+          ]
         },
         "GetPurchasedProfileCustomizations": {
           "requestType": ".CPlayer_GetPurchasedProfileCustomizations_Request",
           "responseType": ".CPlayer_GetPurchasedProfileCustomizations_Response",
           "options": {
             "(method_description)": "Returns the purchased profile customizations"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the purchased profile customizations"
+            }
+          ]
         },
         "GetPurchasedAndUpgradedProfileCustomizations": {
           "requestType": ".CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request",
           "responseType": ".CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response",
           "options": {
             "(method_description)": "Returns the purchased and upgraded profile customizations"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the purchased and upgraded profile customizations"
+            }
+          ]
         },
         "GetProfileThemesAvailable": {
           "requestType": ".CPlayer_GetProfileThemesAvailable_Request",
           "responseType": ".CPlayer_GetProfileThemesAvailable_Response",
           "options": {
             "(method_description)": "Gets themes available for the user."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets themes available for the user."
+            }
+          ]
         },
         "SetProfileTheme": {
           "requestType": ".CPlayer_SetProfileTheme_Request",
           "responseType": ".CPlayer_SetProfileTheme_Response",
           "options": {
             "(method_description)": "Selects a theme for the profile"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Selects a theme for the profile"
+            }
+          ]
         },
         "SetProfilePreferences": {
           "requestType": ".CPlayer_SetProfilePreferences_Request",
           "responseType": ".CPlayer_SetProfilePreferences_Response",
           "options": {
             "(method_description)": "Sets profile preferences"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets profile preferences"
+            }
+          ]
         },
         "PostStatusToFriends": {
           "requestType": ".CPlayer_PostStatusToFriends_Request",
           "responseType": ".CPlayer_PostStatusToFriends_Response",
           "options": {
             "(method_description)": "Posts custom status text into the blotter"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Posts custom status text into the blotter"
+            }
+          ]
         },
         "GetPostedStatus": {
           "requestType": ".CPlayer_GetPostedStatus_Request",
           "responseType": ".CPlayer_GetPostedStatus_Response",
           "options": {
             "(method_description)": "Gets a posted status text for a user by id"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets a posted status text for a user by id"
+            }
+          ]
         },
         "DeletePostedStatus": {
           "requestType": ".CPlayer_DeletePostedStatus_Request",
           "responseType": ".CPlayer_DeletePostedStatus_Response",
           "options": {
             "(method_description)": "Deletes a posted status text for a user by id"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Deletes a posted status text for a user by id"
+            }
+          ]
         },
         "ClientGetLastPlayedTimes": {
           "requestType": ".CPlayer_GetLastPlayedTimes_Request",
           "responseType": ".CPlayer_GetLastPlayedTimes_Response",
           "options": {
             "(method_description)": "Gets the last-played times for the account"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the last-played times for the account"
+            }
+          ]
         },
         "GetTimeSSAAccepted": {
           "requestType": ".CPlayer_GetTimeSSAAccepted_Request",
           "responseType": ".CPlayer_GetTimeSSAAccepted_Response",
           "options": {
             "(method_description)": "Gets the time when the user accepted the SSA"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the time when the user accepted the SSA"
+            }
+          ]
         },
         "AcceptSSA": {
           "requestType": ".CPlayer_AcceptSSA_Request",
           "responseType": ".CPlayer_AcceptSSA_Response",
           "options": {
             "(method_description)": "User is accepting the SSA"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "User is accepting the SSA"
+            }
+          ]
         },
         "GetNicknameList": {
           "requestType": ".CPlayer_GetNicknameList_Request",
           "responseType": ".CPlayer_GetNicknameList_Response",
           "options": {
             "(method_description)": "Gets the list of nicknames this user has for other users"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the list of nicknames this user has for other users"
+            }
+          ]
         },
         "GetPerFriendPreferences": {
           "requestType": ".CPlayer_GetPerFriendPreferences_Request",
           "responseType": ".CPlayer_GetPerFriendPreferences_Response",
           "options": {
             "(method_description)": "Gets the list of per-friend preferences this user has set for other users"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the list of per-friend preferences this user has set for other users"
+            }
+          ]
         },
         "SetPerFriendPreferences": {
           "requestType": ".CPlayer_SetPerFriendPreferences_Request",
           "responseType": ".CPlayer_SetPerFriendPreferences_Response",
           "options": {
             "(method_description)": "Sets the logged in user's per-friend preferences for the given user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the logged in user's per-friend preferences for the given user"
+            }
+          ]
         },
         "AddFriend": {
           "requestType": ".CPlayer_AddFriend_Request",
           "responseType": ".CPlayer_AddFriend_Response",
           "options": {
             "(method_description)": "Invites another Steam user to be a friend"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Invites another Steam user to be a friend"
+            }
+          ]
         },
         "RemoveFriend": {
           "requestType": ".CPlayer_RemoveFriend_Request",
           "responseType": ".CPlayer_RemoveFriend_Response",
           "options": {
             "(method_description)": "Removes a friend or ignores a friend suggestion"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Removes a friend or ignores a friend suggestion"
+            }
+          ]
         },
         "IgnoreFriend": {
           "requestType": ".CPlayer_IgnoreFriend_Request",
           "responseType": ".CPlayer_IgnoreFriend_Response",
           "options": {
             "(method_description)": "Blocks or unblocks communication with the user.  Despite name, can be a non-friend."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Blocks or unblocks communication with the user.  Despite name, can be a non-friend."
+            }
+          ]
         },
         "GetCommunityPreferences": {
           "requestType": ".CPlayer_GetCommunityPreferences_Request",
           "responseType": ".CPlayer_GetCommunityPreferences_Response",
           "options": {
             "(method_description)": "Returns the player's community preferences"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the player's community preferences"
+            }
+          ]
         },
         "SetCommunityPreferences": {
           "requestType": ".CPlayer_SetCommunityPreferences_Request",
           "responseType": ".CPlayer_SetCommunityPreferences_Response",
           "options": {
             "(method_description)": "Sets the player's community preferences"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets the player's community preferences"
+            }
+          ]
         },
         "GetTextFilterWords": {
           "requestType": ".CPlayer_GetTextFilterWords_Request",
           "responseType": ".CPlayer_GetTextFilterWords_Response",
           "options": {
             "(method_description)": "Get the custom text filtering dictionary for this user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get the custom text filtering dictionary for this user"
+            }
+          ]
         },
         "GetNewSteamAnnouncementState": {
           "requestType": ".CPlayer_GetNewSteamAnnouncementState_Request",
           "responseType": ".CPlayer_GetNewSteamAnnouncementState_Response",
           "options": {
             "(method_description)": "Calculates and returns what to display for UI that renders new steam announcement available"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Calculates and returns what to display for UI that renders new steam announcement available"
+            }
+          ]
         },
         "UpdateSteamAnnouncementLastRead": {
           "requestType": ".CPlayer_UpdateSteamAnnouncementLastRead_Request",
           "responseType": ".CPlayer_UpdateSteamAnnouncementLastRead_Response",
           "options": {
             "(method_description)": "Marks latest announcement timestamp read by user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Marks latest announcement timestamp read by user"
+            }
+          ]
         },
         "GetPrivacySettings": {
           "requestType": ".CPlayer_GetPrivacySettings_Request",
           "responseType": ".CPlayer_GetPrivacySettings_Response",
           "options": {
             "(method_description)": "Get current privacy settings."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get current privacy settings."
+            }
+          ]
         },
         "GetDurationControl": {
           "requestType": ".CPlayer_GetDurationControl_Request",
           "responseType": ".CPlayer_GetDurationControl_Response",
           "options": {
             "(method_description)": "Get gameplay duration control settings."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get gameplay duration control settings."
+            }
+          ]
         }
       }
     },
@@ -2231,56 +2466,96 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client of more recent play time"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client of more recent play time"
+            }
+          ]
         },
         "NotifyFriendNicknameChanged": {
           "requestType": ".CPlayer_FriendNicknameChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that a friend's nickname has changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that a friend's nickname has changed"
+            }
+          ]
         },
         "NotifyFriendEquippedProfileItemsChanged": {
           "requestType": ".CPlayer_FriendEquippedProfileItemsChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that a friend's equipped profile items have changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that a friend's equipped profile items have changed"
+            }
+          ]
         },
         "NotifyNewSteamAnnouncementState": {
           "requestType": ".CPlayer_NewSteamAnnouncementState_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notifies client of changes to steam announcement state for user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notifies client of changes to steam announcement state for user"
+            }
+          ]
         },
         "NotifyCommunityPreferencesChanged": {
           "requestType": ".CPlayer_CommunityPreferencesChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that their community preferences have changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that their community preferences have changed"
+            }
+          ]
         },
         "NotifyTextFilterWordsChanged": {
           "requestType": ".CPlayer_TextFilterWordsChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that their text filtering dictionary has changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that their text filtering dictionary has changed"
+            }
+          ]
         },
         "NotifyPerFriendPreferencesChanged": {
           "requestType": ".CPlayer_PerFriendPreferencesChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server that per-friend preferences have changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server that per-friend preferences have changed"
+            }
+          ]
         },
         "NotifyPrivacyPrivacySettingsChanged": {
           "requestType": ".CPlayer_PrivacySettingsChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server that privacy settings changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server that privacy settings changed"
+            }
+          ]
         }
       }
     },
@@ -3202,15 +3477,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -3283,10 +3549,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -3351,10 +3613,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -3371,21 +3629,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -3428,10 +3671,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -3492,30 +3731,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -3572,17 +3787,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -3598,10 +3807,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -3612,10 +3818,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -3630,45 +3833,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -3677,26 +3858,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3730,24 +3891,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -3767,24 +3919,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -3810,31 +3946,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3894,10 +4014,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3910,22 +4027,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3944,10 +4052,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3966,17 +4071,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3989,16 +4084,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -4114,19 +4200,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }

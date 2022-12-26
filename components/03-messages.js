@@ -310,6 +310,8 @@ protobufs['DeviceAuth.GetAuthorizedBorrowers#1_Request'] = Schema.CDeviceAuth_Ge
 protobufs['DeviceAuth.GetAuthorizedBorrowers#1_Response'] = Schema.CDeviceAuth_GetAuthorizedBorrowers_Response;
 protobufs['ContentServerDirectory.GetManifestRequestCode#1_Request'] = Schema.CContentServerDirectory_GetManifestRequestCode_Request;
 protobufs['ContentServerDirectory.GetManifestRequestCode#1_Response'] = Schema.CContentServerDirectory_GetManifestRequestCode_Response;
+protobufs['Quest.GetCommunityItemDefinitions#1_Request'] = Schema.CQuest_GetCommunityItemDefinitions_Request;
+protobufs['Quest.GetCommunityItemDefinitions#1_Response'] = Schema.CQuest_GetCommunityItemDefinitions_Response;
 
 // Make sure that every protobuf we used actually exists
 let hadMissingProtobuf = false;

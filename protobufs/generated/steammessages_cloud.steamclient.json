@@ -1464,196 +1464,336 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Client checking for pending log upload requests."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Client checking for pending log upload requests."
+            }
+          ]
         },
         "ClientLogUploadComplete": {
           "requestType": ".CCloud_ClientLogUploadComplete_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Client is flagging a log upload request as completed."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Client is flagging a log upload request as completed."
+            }
+          ]
         },
         "GetUploadServerInfo": {
           "requestType": ".CCloud_GetUploadServerInfo_Request",
           "responseType": ".CCloud_GetUploadServerInfo_Response",
           "options": {
             "(method_description)": "Returns the URL of the proper cloud server for a user."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the URL of the proper cloud server for a user."
+            }
+          ]
         },
         "BeginHTTPUpload": {
           "requestType": ".CCloud_BeginHTTPUpload_Request",
           "responseType": ".CCloud_BeginHTTPUpload_Response",
           "options": {
             "(method_description)": "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."
+            }
+          ]
         },
         "CommitHTTPUpload": {
           "requestType": ".CCloud_CommitHTTPUpload_Request",
           "responseType": ".CCloud_CommitHTTPUpload_Response",
           "options": {
             "(method_description)": "Commits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Commits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT."
+            }
+          ]
         },
         "BeginUGCUpload": {
           "requestType": ".CCloud_BeginUGCUpload_Request",
           "responseType": ".CCloud_BeginUGCUpload_Response",
           "options": {
             "(method_description)": "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload."
+            }
+          ]
         },
         "CommitUGCUpload": {
           "requestType": ".CCloud_CommitUGCUpload_Request",
           "responseType": ".CCloud_CommitUGCUpload_Response",
           "options": {
             "(method_description)": "Commits a file upload initiated by BeginUGCUpload and transferred via HTTP PUT."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Commits a file upload initiated by BeginUGCUpload and transferred via HTTP PUT."
+            }
+          ]
         },
         "GetFileDetails": {
           "requestType": ".CCloud_GetFileDetails_Request",
           "responseType": ".CCloud_GetFileDetails_Response",
           "options": {
             "(method_description)": "Returns details on a Cloud file."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns details on a Cloud file."
+            }
+          ]
         },
         "EnumerateUserFiles": {
           "requestType": ".CCloud_EnumerateUserFiles_Request",
           "responseType": ".CCloud_EnumerateUserFiles_Response",
           "options": {
             "(method_description)": "Enumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Enumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time."
+            }
+          ]
         },
         "Delete": {
           "requestType": ".CCloud_Delete_Request",
           "responseType": ".CCloud_Delete_Response",
           "options": {
             "(method_description)": "Deletes a file from the user's cloud."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Deletes a file from the user's cloud."
+            }
+          ]
         },
         "GetClientEncryptionKey": {
           "requestType": ".CCloud_GetClientEncryptionKey_Request",
           "responseType": ".CCloud_GetClientEncryptionKey_Response",
           "options": {
             "(method_description)": "Gets the user's Cloud file encryption key."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets the user's Cloud file encryption key."
+            }
+          ]
         },
         "CDNReport": {
           "requestType": ".CCloud_CDNReport_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Reports the result of a CDN transfer."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Reports the result of a CDN transfer."
+            }
+          ]
         },
         "ExternalStorageTransferReport": {
           "requestType": ".CCloud_ExternalStorageTransferReport_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Reports the result of an external Cloud storage transfer."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Reports the result of an external Cloud storage transfer."
+            }
+          ]
         },
         "BeginAppUploadBatch": {
           "requestType": ".CCloud_BeginAppUploadBatch_Request",
           "responseType": ".CCloud_BeginAppUploadBatch_Response",
           "options": {
             "(method_description)": "Indicate a batch of files that will be uploaded / deleted for an app."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Indicate a batch of files that will be uploaded / deleted for an app."
+            }
+          ]
         },
         "CompleteAppUploadBatch": {
           "requestType": ".CCloud_CompleteAppUploadBatch_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Indicate that the batch is complete or being stopped for some other reason."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Indicate that the batch is complete or being stopped for some other reason."
+            }
+          ]
         },
         "CompleteAppUploadBatchBlocking": {
           "requestType": ".CCloud_CompleteAppUploadBatch_Request",
           "responseType": ".CCloud_CompleteAppUploadBatch_Response",
           "options": {
             "(method_description)": "Indicate that the batch is complete or being stopped for some other reason."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Indicate that the batch is complete or being stopped for some other reason."
+            }
+          ]
         },
         "ClientBeginFileUpload": {
           "requestType": ".CCloud_ClientBeginFileUpload_Request",
           "responseType": ".CCloud_ClientBeginFileUpload_Response",
           "options": {
             "(method_description)": "Initiate an upload to Cloud."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Initiate an upload to Cloud."
+            }
+          ]
         },
         "ClientCommitFileUpload": {
           "requestType": ".CCloud_ClientCommitFileUpload_Request",
           "responseType": ".CCloud_ClientCommitFileUpload_Response",
           "options": {
             "(method_description)": "Commit the file upload or indicate failure."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Commit the file upload or indicate failure."
+            }
+          ]
         },
         "ClientFileDownload": {
           "requestType": ".CCloud_ClientFileDownload_Request",
           "responseType": ".CCloud_ClientFileDownload_Response",
           "options": {
             "(method_description)": "Initiate a file download."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Initiate a file download."
+            }
+          ]
         },
         "ClientDeleteFile": {
           "requestType": ".CCloud_ClientDeleteFile_Request",
           "responseType": ".CCloud_ClientDeleteFile_Response",
           "options": {
             "(method_description)": "Delete or forget a file."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Delete or forget a file."
+            }
+          ]
         },
         "ClientConflictResolution": {
           "requestType": ".CCloud_ClientConflictResolution_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "User has picked a resolution for a Cloud conflict."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "User has picked a resolution for a Cloud conflict."
+            }
+          ]
         },
         "EnumerateUserApps": {
           "requestType": ".CCloud_EnumerateUserApps_Request",
           "responseType": ".CCloud_EnumerateUserApps_Response",
           "options": {
             "(method_description)": "Enumerates apps stroing cloud files for a user."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Enumerates apps stroing cloud files for a user."
+            }
+          ]
         },
         "GetAppFileChangelist": {
           "requestType": ".CCloud_GetAppFileChangelist_Request",
           "responseType": ".CCloud_GetAppFileChangelist_Response",
           "options": {
             "(method_description)": "Get a list of Cloud file changes for an app given a starting Change Number."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get a list of Cloud file changes for an app given a starting Change Number."
+            }
+          ]
         },
         "SuspendAppSession": {
           "requestType": ".CCloud_AppSessionSuspend_Request",
           "responseType": ".CCloud_AppSessionSuspend_Response",
           "options": {
             "(method_description)": "An app session is being suspended"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "An app session is being suspended"
+            }
+          ]
         },
         "ResumeAppSession": {
           "requestType": ".CCloud_AppSessionResume_Request",
           "responseType": ".CCloud_AppSessionResume_Response",
           "options": {
             "(method_description)": "An app session is being resumed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "An app session is being resumed"
+            }
+          ]
         },
         "SignalAppLaunchIntent": {
           "requestType": ".CCloud_AppLaunchIntent_Request",
           "responseType": ".CCloud_AppLaunchIntent_Response",
           "options": {
             "(method_description)": "Client intends to launch an app"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Client intends to launch an app"
+            }
+          ]
         },
         "SignalAppExitSyncDone": {
           "requestType": ".CCloud_AppExitSyncDone_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Client is done trying to sync after a game session"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Client is done trying to sync after a game session"
+            }
+          ]
         },
         "ClientGetAppQuotaUsage": {
           "requestType": ".CCloud_ClientGetAppQuotaUsage_Request",
           "responseType": ".CCloud_ClientGetAppQuotaUsage_Response",
           "options": {
             "(method_description)": "Client is requesting quota usage for an app"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Client is requesting quota usage for an app"
+            }
+          ]
         }
       }
     },
@@ -1668,14 +1808,24 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Cloud state for the given app has changed."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Cloud state for the given app has changed."
+            }
+          ]
         },
         "ClientLogUploadRequest": {
           "requestType": ".CCloud_ClientLogUploadRequest_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Server is requesting log file uploads from the given client."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Server is requesting log file uploads from the given client."
+            }
+          ]
         }
       }
     },
@@ -2597,15 +2747,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -2678,10 +2819,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -2746,10 +2883,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -2766,21 +2899,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -2823,10 +2941,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -2887,30 +3001,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -2967,17 +3057,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -2993,10 +3077,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -3007,10 +3088,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -3025,45 +3103,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -3072,26 +3128,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3125,24 +3161,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -3162,24 +3189,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -3205,31 +3216,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3289,10 +3284,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3305,22 +3297,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3339,10 +3322,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3361,17 +3341,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3384,16 +3354,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -3509,19 +3470,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }
