@@ -314,6 +314,8 @@ protobufs['Quest.GetCommunityItemDefinitions#1_Request'] = Schema.CQuest_GetComm
 protobufs['Quest.GetCommunityItemDefinitions#1_Response'] = Schema.CQuest_GetCommunityItemDefinitions_Response;
 protobufs['LoyaltyRewards.QueryRewardItems#1_Request'] = Schema.CLoyaltyRewards_QueryRewardItems_Request;
 protobufs['LoyaltyRewards.QueryRewardItems#1_Response'] = Schema.CLoyaltyRewards_QueryRewardItems_Response;
+protobufs['Community.GetApps#1_Request'] = Schema.CCommunity_GetApps_Request;
+protobufs['Community.GetApps#1_Response'] = Schema.CCommunity_GetApps_Response;
 
 // Make sure that every protobuf we used actually exists
 let hadMissingProtobuf = false;
