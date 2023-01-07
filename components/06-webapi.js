@@ -53,9 +53,7 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 				options.localAddress = this.options.localAddress;
 			}
 
-			if (this.options.httpProxy) {
-				options.agent = StdLib.HTTP.getProxyAgent(true, this.options.httpProxy);
-			}
+			options.agent = this._getProxyAgent();
 
 			let req = HTTPS.request(options, (res) => {
 				this.emit('debug', `API ${options.method} request to https://${HOSTNAME}${path}: ${res.statusCode}`);

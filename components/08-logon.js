@@ -115,9 +115,9 @@ class SteamUserLogon extends SteamUserWeb {
 				let decodedToken = Helpers.decodeJwt(details.refreshToken);
 				let tokenSteamId = Helpers.steamID(decodedToken.sub);
 				if (this._logOnDetails._steamid) {
-					let providedSteamId = Helpers.steamID(this._logOnDetails.steamID);
+					let providedSteamId = Helpers.steamID(this._logOnDetails._steamid);
 					if (providedSteamId.getSteam3RenderedID() != tokenSteamId.getSteam3RenderedID()) {
-						throw new Error(`Specified SteamID (${providedSteamId}) does not match refreshToken (${tokenSteamId}`);
+						throw new Error(`Specified SteamID (${providedSteamId}) does not match refreshToken (${tokenSteamId})`);
 					}
 				}
 
@@ -259,13 +259,23 @@ class SteamUserLogon extends SteamUserWeb {
 	 * @private
 	 */
 	_doConnection() {
-		let thisProtocol = this.options.webCompatibilityMode ? EConnectionProtocol.WebSocket : this.options.protocol;
+		let thisProtocol = this.options.protocol;
+
+		if (thisProtocol == EConnectionProtocol.TCP && this.options.webCompatibilityMode) {
+			this._warn('Forcing protocol to EConnectionProtocol.WebSocket because webCompatibilityMode is enabled');
+			thisProtocol = EConnectionProtocol.WebSocket;
+		}
+
+		if (thisProtocol == EConnectionProtocol.TCP && this.options.socksProxy) {
+			this._warn('Forcing protocol to EConnectionProtocol.WebSocket because a socksProxy is specified and SOCKS proxy support is incompatible with TCP');
+			thisProtocol = EConnectionProtocol.WebSocket;
+		}
 
 		if (thisProtocol == EConnectionProtocol.Auto) {
 			if (this._cmList.auto_pct_websocket) {
 				let roll = Math.floor(Math.random() * 100);
 				thisProtocol = roll <= this._cmList.auto_pct_websocket ? EConnectionProtocol.WebSocket : EConnectionProtocol.TCP;
-				this.emit('debug', 'Using ' + (thisProtocol == EConnectionProtocol.WebSocket ? 'WebSocket' : 'TCP') + '; we rolled ' + roll + ' and percent to use WS is ' + this._cmList.auto_pct_websocket);
+				this.emit('debug', `Using ${thisProtocol == EConnectionProtocol.WebSocket ? 'WebSocket' : 'TCP'}; we rolled ${roll} and percent to use WS is ${this._cmList.auto_pct_websocket}`);
 			} else {
 				thisProtocol = EConnectionProtocol.TCP;
 			}

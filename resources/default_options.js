@@ -17,6 +17,7 @@ const EMachineIDType = require('./EMachineIDType.js');
  * @property {string|null} [localAddress=null]
  * @property {number|null} [localPort=null]
  * @property {string|null} [httpProxy=null]
+ * @property {string|null} [socksProxy=null]
  * @property {EConnectionProtocol} [protocol]
  * @property {string} [language='english']
  * @property {boolean} [webCompatibilityMode=false]
@@ -36,6 +37,7 @@ module.exports = {
 	localAddress: null,
 	localPort: null,
 	httpProxy: null,
+	socksProxy: null,
 	protocol: EConnectionProtocol.Auto,
 	language: 'english',
 	webCompatibilityMode: false,

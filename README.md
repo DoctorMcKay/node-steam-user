@@ -286,6 +286,14 @@ Specify a URL here to use an HTTP proxy. For example, `http://user:pass@1.2.3.4:
 
 Added in 4.0.0.
 
+### socksProxy
+
+Specify a URL here to use a SOCKS proxy. SOCKS4, SOCKS4a, and SOCKS5 are supported.
+
+Example: `socks5://x1234567:kNRLnUDG46@proxy-nl.privateinternetaccess.com:1080`
+
+Added in 4.26.0.
+
 ### protocol
 
 A value from [`EConnectionProtocol`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EConnectionProtocol.js).
