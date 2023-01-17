@@ -254,7 +254,7 @@ class SteamUserLogon extends SteamUserWeb {
 			if (anonLogin) {
 				if (this._logOnDetails.password || this._logOnDetails.login_key) {
 					this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
-				} else if (!explicitlyRequestedAnonLogin) {
+				} else if (details !== true && !explicitlyRequestedAnonLogin) {
 					this._warn('Logging into anonymous Steam account. If you didn\'t expect this warning, make sure that you\'re properly passing your log on details to the logOn() method. To suppress this warning, pass {anonymous: true} to logOn().');
 				}
 			}
