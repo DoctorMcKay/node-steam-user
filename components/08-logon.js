@@ -48,7 +48,7 @@ class SteamUserLogon extends SteamUserWeb {
 					}
 				}
 
-				let anonLogin = !details.accountName && !details.accessToken;
+				let anonLogin = !details.accountName && !details.refreshToken;
 
 				this._logOnDetails = {
 					account_name: details.accountName,
@@ -56,7 +56,7 @@ class SteamUserLogon extends SteamUserWeb {
 					login_key: details.loginKey,
 					auth_code: details.authCode,
 					two_factor_code: details.twoFactorCode,
-					should_remember_password: !!(details.rememberPassword || details.accessToken),
+					should_remember_password: !!(details.rememberPassword || details.refreshToken),
 					obfuscated_private_ip: {v4: logonId || 0},
 					protocol_version: PROTOCOL_VERSION,
 					supports_rate_limit_response: !anonLogin,
@@ -142,6 +142,7 @@ class SteamUserLogon extends SteamUserWeb {
 			}
 
 			let anonLogin = !this._logOnDetails.account_name && !this._logOnDetails.access_token;
+			let anonLoginWarn = anonLogin && details !== true && !details.anonymous;
 
 			// Read the required files
 			let filenames = [];
@@ -247,8 +248,12 @@ class SteamUserLogon extends SteamUserWeb {
 				this._tempSteamID = sid;
 			}
 
-			if (anonLogin && (this._logOnDetails.password || this._logOnDetails.login_key)) {
-				this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
+			if (anonLogin) {
+				if (this._logOnDetails.password || this._logOnDetails.login_key) {
+					this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
+				} else if (anonLoginWarn) {
+					this._warn('Logging into anonymous Steam account. If you didn\'t expect this warning, make sure that you\'re properly passing your log on details to the logOn() method. To suppress this warning, pass {anonymous: true} to logOn().');
+				}
 			}
 
 			this._doConnection();
