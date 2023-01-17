@@ -528,6 +528,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 
 ### logOn([details])
 - `details` - An object containing details for this logon
+	- `anonymous` - Pass `true` if you want to log into an anonymous account, omit or pass `false` if not
 	- `refreshToken` - A refresh token, [see below](#using-refresh-tokens)
 	- `accountName` - If logging into a user account, the account's name
 	- `password` - If logging into an account without a login key or a web logon token, the account's password
@@ -552,7 +553,16 @@ Logs onto Steam. Omit the `details` object if you wish to login to an anonymous 
 There are five ways to log onto Steam:
 
 - Anonymously
-	- Omit `accountName` (or the `details` object entirely) and you will log onto an anonymous user account.
+	- Pass `anonymous: true` to log onto an anonymous user account
+    - These properties are optional:
+        - `machineName`
+        - `clientOS`
+        - *All other properties **must not** be provided*
+    - In versions of steam-user prior to 4.27.0, logging on anonymously was accomplished by simply omitting `refreshToken`
+      and `accountName` (or omitting the `details` object entirely). If neither property was set then steam-user would
+      default to logging on anonymously. This is still current behavior, but logging on in this manner is now deprecated.
+      If you now call `logOn()` without providing a `refreshToken` or `accountName` and without specifying `anonymous: true`,
+      then steam-user will raise a warning and then log on anonymously.
 - Individually using a refresh token **(recommended)**
 	- These properties are required:
         - `refreshToken`
