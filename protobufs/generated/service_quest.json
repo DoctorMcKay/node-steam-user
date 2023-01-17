@@ -1,0 +1,389 @@
+{
+  "nested": {
+    "CQuest_ActivateProfileModifierItem_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "communityitemid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "activate": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "CQuest_ActivateProfileModifierItem_Response": {
+      "fields": {}
+    },
+    "CQuest_CommunityItem": {
+      "fields": {
+        "communityitemid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "item_type": {
+          "type": "uint32",
+          "id": 2
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "owner": {
+          "type": "uint32",
+          "id": 4
+        },
+        "attributes": {
+          "rule": "repeated",
+          "type": ".CQuest_CommunityItem_Attribute",
+          "id": 5
+        },
+        "used": {
+          "type": "bool",
+          "id": 6
+        },
+        "owner_origin": {
+          "type": "uint32",
+          "id": 7
+        },
+        "amount": {
+          "type": "int64",
+          "id": 8
+        }
+      }
+    },
+    "CQuest_CommunityItem_Attribute": {
+      "fields": {
+        "attributeid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "value": {
+          "type": "uint64",
+          "id": 2
+        }
+      }
+    },
+    "CQuest_GetCommunityInventory_Request": {
+      "fields": {
+        "filter_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CQuest_GetCommunityInventory_Response": {
+      "fields": {
+        "items": {
+          "rule": "repeated",
+          "type": ".CQuest_CommunityItem",
+          "id": 1
+        }
+      }
+    },
+    "CQuest_GetCommunityItemDefinitions_Request": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "item_type": {
+          "type": "uint32",
+          "id": 3
+        },
+        "language": {
+          "type": "string",
+          "id": 4
+        },
+        "broadcast_channel_id": {
+          "type": "uint64",
+          "id": 5
+        },
+        "keyvalues_as_json": {
+          "type": "bool",
+          "id": 6
+        }
+      }
+    },
+    "CQuest_GetCommunityItemDefinitions_Response": {
+      "fields": {
+        "item_definitions": {
+          "rule": "repeated",
+          "type": ".CQuest_GetCommunityItemDefinitions_Response_ItemDefinition",
+          "id": 1
+        }
+      }
+    },
+    "CQuest_GetCommunityItemDefinitions_Response_ItemDefinition": {
+      "fields": {
+        "item_type": {
+          "type": "uint32",
+          "id": 1
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "item_name": {
+          "type": "string",
+          "id": 3
+        },
+        "item_title": {
+          "type": "string",
+          "id": 4
+        },
+        "item_description": {
+          "type": "string",
+          "id": 5
+        },
+        "item_image_small": {
+          "type": "string",
+          "id": 6
+        },
+        "item_image_large": {
+          "type": "string",
+          "id": 7
+        },
+        "item_key_values": {
+          "type": "string",
+          "id": 8
+        },
+        "item_series": {
+          "type": "uint32",
+          "id": 9
+        },
+        "item_class": {
+          "type": "uint32",
+          "id": 10
+        },
+        "editor_accountid": {
+          "type": "uint32",
+          "id": 11
+        },
+        "active": {
+          "type": "bool",
+          "id": 12
+        },
+        "item_image_composed": {
+          "type": "string",
+          "id": 13
+        },
+        "item_image_composed_foil": {
+          "type": "string",
+          "id": 14
+        },
+        "deleted": {
+          "type": "bool",
+          "id": 15
+        },
+        "item_last_changed": {
+          "type": "uint32",
+          "id": 16
+        },
+        "broadcast_channel_id": {
+          "type": "uint64",
+          "id": 17
+        },
+        "item_movie_webm": {
+          "type": "string",
+          "id": 18
+        },
+        "item_movie_mp4": {
+          "type": "string",
+          "id": 19
+        },
+        "item_movie_webm_small": {
+          "type": "string",
+          "id": 20
+        },
+        "item_movie_mp4_small": {
+          "type": "string",
+          "id": 21
+        }
+      }
+    },
+    "CQuest_GetNumTradingCardsEarned_Request": {
+      "fields": {
+        "timestamp_start": {
+          "type": "uint32",
+          "id": 1,
+          "options": {
+            "default": 0
+          }
+        },
+        "timestamp_end": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 4294967295
+          }
+        }
+      }
+    },
+    "CQuest_GetNumTradingCardsEarned_Response": {
+      "fields": {
+        "num_trading_cards": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CQuest_SetVirtualItemRewardDefinition_Request": {
+      "fields": {
+        "eventid": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(.description)": "enum"
+          }
+        },
+        "itemsdefs": {
+          "rule": "repeated",
+          "type": ".CVirtualItemRewardDefinition",
+          "id": 2
+        },
+        "action": {
+          "type": "int32",
+          "id": 3,
+          "options": {
+            "(.description)": "enum"
+          }
+        }
+      }
+    },
+    "CQuest_SetVirtualItemRewardDefinition_Response": {
+      "fields": {}
+    },
+    "CQuest_VirtualItemRewardDefinition_Request": {
+      "fields": {
+        "eventid": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(.description)": "enum"
+          }
+        },
+        "include_inactive": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "CQuest_VirtualItemRewardDefinition_Response": {
+      "fields": {
+        "rewards": {
+          "rule": "repeated",
+          "type": ".CVirtualItemRewardDefinition",
+          "id": 1
+        }
+      }
+    },
+    "CVirtualItemRewardDefinition": {
+      "fields": {
+        "eventid": {
+          "type": "int32",
+          "id": 1,
+          "options": {
+            "(.description)": "enum"
+          }
+        },
+        "item_bucket": {
+          "type": "uint32",
+          "id": 2
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "active": {
+          "type": "bool",
+          "id": 4
+        },
+        "rarity": {
+          "type": "uint32",
+          "id": 5
+        },
+        "package_to_grant": {
+          "type": "uint32",
+          "id": 6
+        },
+        "game_item_id": {
+          "type": "fixed64",
+          "id": 7
+        },
+        "community_item_class": {
+          "type": "int32",
+          "id": 8
+        },
+        "community_item_type": {
+          "type": "uint32",
+          "id": 9
+        },
+        "loyalty_point_type": {
+          "type": "uint32",
+          "id": 10
+        },
+        "amount": {
+          "type": "int64",
+          "id": 11
+        },
+        "rtime_time_active": {
+          "type": "uint32",
+          "id": 12
+        },
+        "loyalty_reward_defid": {
+          "type": "uint32",
+          "id": 13
+        },
+        "user_badge_to_grant": {
+          "type": "uint32",
+          "id": 14
+        },
+        "user_badge_level": {
+          "type": "uint32",
+          "id": 15
+        },
+        "virtual_item_def_id": {
+          "type": "uint32",
+          "id": 16
+        }
+      }
+    },
+    "Quest": {
+      "methods": {
+        "ActivateProfileModifierItem": {
+          "requestType": ".CQuest_ActivateProfileModifierItem_Request",
+          "responseType": ".CQuest_ActivateProfileModifierItem_Response"
+        },
+        "GetCommunityInventory": {
+          "requestType": ".CQuest_GetCommunityInventory_Request",
+          "responseType": ".CQuest_GetCommunityInventory_Response"
+        },
+        "GetCommunityItemDefinitions": {
+          "requestType": ".CQuest_GetCommunityItemDefinitions_Request",
+          "responseType": ".CQuest_GetCommunityItemDefinitions_Response"
+        },
+        "GetNumTradingCardsEarned": {
+          "requestType": ".CQuest_GetNumTradingCardsEarned_Request",
+          "responseType": ".CQuest_GetNumTradingCardsEarned_Response"
+        },
+        "GetVirtualItemRewardDefinition": {
+          "requestType": ".CQuest_VirtualItemRewardDefinition_Request",
+          "responseType": ".CQuest_VirtualItemRewardDefinition_Response"
+        },
+        "SetVirtualItemRewardDefinition": {
+          "requestType": ".CQuest_SetVirtualItemRewardDefinition_Request",
+          "responseType": ".CQuest_SetVirtualItemRewardDefinition_Response"
+        }
+      }
+    }
+  }
+}
