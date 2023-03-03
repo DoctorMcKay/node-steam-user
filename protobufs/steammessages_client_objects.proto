@@ -159,6 +159,7 @@ message CMsgStorageDevicesData {
 		optional string serial = 4;
 		optional bool is_ejectable = 5;
 		optional uint64 size_bytes = 6;
+		optional .EStorageDriveMediaType media_type = 7 [default = k_EStorageDriveMediaType_Invalid];
 	}
 
 	message BlockDevice {
@@ -179,6 +180,8 @@ message CMsgStorageDevicesData {
 	repeated .CMsgStorageDevicesData.Drive drives = 1;
 	repeated .CMsgStorageDevicesData.BlockDevice block_devices = 2;
 	optional bool is_unmount_supported = 3;
+	optional bool is_trim_supported = 4;
+	optional bool is_trim_running = 5;
 }
 
 message CCloud_PendingRemoteOperation {
@@ -260,6 +263,16 @@ message CMsgSystemPerfLimits {
 	optional bool is_nis_supported = 16;
 	optional int32 nis_sharpness_min = 17;
 	optional int32 nis_sharpness_max = 18;
+	optional int32 display_external_refresh_manual_hz_min = 19;
+	optional int32 display_external_refresh_manual_hz_max = 20;
+	repeated int32 fps_limit_options_external = 21;
+	optional bool is_tearing_supported = 22;
+	optional bool is_vrr_supported = 23;
+	optional bool is_dynamic_refresh_rate_in_steam_supported = 24;
+	optional bool is_split_scaling_and_filtering_supported = 25;
+	repeated .ESplitScalingFilter split_scaling_filters_available = 26;
+	repeated .ESplitScalingScaler split_scaling_scalers_available = 27;
+	optional bool is_hdr_supported = 28;
 }
 
 message CMsgSystemPerfSettingsGlobal {
@@ -270,6 +283,13 @@ message CMsgSystemPerfSettingsGlobal {
 	optional .EGraphicsPerfOverlayLevel perf_overlay_level = 5 [default = k_EGraphicsPerfOverlayLevel_Hidden];
 	optional bool is_show_perf_overlay_over_steam_enabled = 6;
 	optional bool is_advanced_settings_enabled = 7;
+	optional bool allow_external_display_refresh_control = 8;
+	optional bool is_hdr_enabled = 9;
+	optional bool force_hdr_10pq_output_debug = 11;
+	optional .EHDRToneMapOperator hdr_on_sdr_tonemap_operator = 12 [default = k_EHDRToneMapOperator_Invalid];
+	optional bool is_hdr_debug_heatmap_enabled = 13;
+	optional bool debug_force_hdr_support = 14;
+	optional bool force_hdr_wide_gammut_for_sdr = 15 [default = true];
 }
 
 message CMsgSystemPerfSettingsPerApp {
@@ -289,6 +309,15 @@ message CMsgSystemPerfSettingsPerApp {
 	optional bool is_game_perf_profile_enabled = 14;
 	optional .EGPUPerformanceLevel gpu_performance_level = 15 [default = k_EGPUPerformanceLevel_Invalid];
 	optional int32 nis_sharpness = 16;
+	optional int32 display_external_refresh_manual_hz = 17;
+	optional int32 fps_limit_external = 18;
+	optional bool is_tearing_enabled = 19;
+	optional bool is_vrr_enabled = 20;
+	optional bool is_composite_debug_enabled = 21;
+	optional bool force_composite = 22;
+	optional bool use_dynamic_refresh_rate_in_steam = 23;
+	optional .ESplitScalingFilter split_scaling_filter = 24 [default = k_ESplitScalingFilter_Invalid];
+	optional .ESplitScalingScaler split_scaling_scaler = 25 [default = k_ESplitScalingScaler_Invalid];
 }
 
 message CMsgSystemPerfSettings {
@@ -343,6 +372,7 @@ message CMsgSystemDockUpdateState {
 	optional string version_available = 4;
 	optional float stage_progress = 5;
 	optional fixed32 rtime_estimated_completion = 6;
+	optional int32 old_fw_workaround = 7;
 }
 
 message CMsgSystemDockState {
@@ -424,6 +454,44 @@ message CMsgSystemAudioManagerUpdateSomething {
 	optional int32 counter = 1;
 }
 
+message CMsgSystemDisplayMode {
+	optional int32 id = 1;
+	optional int32 width = 2;
+	optional int32 height = 3;
+	optional int32 refresh_hz = 4;
+}
+
+message CMsgSystemDisplay {
+	optional int32 id = 1;
+	optional string name = 2;
+	optional string description = 3;
+	optional bool is_primary = 4;
+	optional bool is_enabled = 5;
+	optional bool is_internal = 6;
+	optional bool has_mode_override = 7;
+	optional int32 width_mm = 8;
+	optional int32 height_mm = 9;
+	optional int32 current_mode_id = 10;
+	repeated .CMsgSystemDisplayMode modes = 11;
+	optional int32 refresh_rate_min = 12;
+	optional int32 refresh_rate_max = 13;
+	optional bool is_vrr_capable = 14;
+	optional bool is_vrr_enabled = 15;
+	optional bool is_hdr_capable = 16;
+	optional bool is_hdr_enabled = 17;
+}
+
+message CMsgSystemDisplayManagerState {
+	repeated .CMsgSystemDisplay displays = 1;
+	optional bool is_mode_switching_supported = 2;
+	optional .ESystemDisplayCompatibilityMode compatibility_mode = 3 [default = k_ESystemDisplayCompatibilityMode_Invalid];
+}
+
+message CMsgSystemDisplayManagerSetMode {
+	optional int32 display_id = 1;
+	optional int32 mode_id = 2;
+}
+
 message CMsgSystemManagerSettings {
 	optional float idle_backlight_dim_battery_seconds = 1;
 	optional float idle_backlight_dim_ac_seconds = 2;
@@ -457,6 +525,7 @@ message CMsgSystemManagerSettings {
 
 message CMsgSelectOSBranchParams {
 	optional .EOSBranch branch = 1 [default = k_EOSBranch_Unknown];
+	optional string custom_branch = 2;
 }
 
 message CMsgSystemUpdateProgress {
@@ -489,6 +558,7 @@ message CMsgSystemUpdateState {
 	optional .CMsgSystemUpdateProgress progress = 2;
 	repeated .CMsgSystemUpdateCheckResult update_check_results = 3;
 	repeated .CMsgSystemUpdateApplyResult update_apply_results = 4;
+	optional bool supports_os_updates = 5;
 }
 
 message CMsgAchievementChange {
@@ -528,4 +598,14 @@ message CMsgShortcutInfo {
 
 message CMsgShortcutAppIds {
 	repeated uint32 appids = 1;
+}
+
+message CMsgMonitorInfo {
+	message MonitorInfo {
+		required string monitor_device_name = 1;
+		required string monitor_display_name = 2;
+	}
+
+	required string selected_display_name = 1;
+	repeated .CMsgMonitorInfo.MonitorInfo monitors = 2;
 }

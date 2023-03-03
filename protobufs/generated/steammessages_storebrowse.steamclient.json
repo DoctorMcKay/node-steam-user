@@ -1,0 +1,3676 @@
+{
+  "options": {
+    "cc_generic_services": true,
+    "optimize_for": "SPEED",
+    "(force_php_generation)": true
+  },
+  "nested": {
+    "EStoreItemType": {
+      "values": {
+        "k_EStoreItemType_Invalid": -1,
+        "k_EStoreItemType_App": 0,
+        "k_EStoreItemType_Package": 1,
+        "k_EStoreItemType_Bundle": 2,
+        "k_EStoreItemType_Mtx": 3,
+        "k_EStoreItemType_Tag": 4,
+        "k_EStoreItemType_Creator": 5
+      }
+    },
+    "EStoreAppType": {
+      "values": {
+        "k_EStoreAppType_Game": 0,
+        "k_EStoreAppType_Demo": 1,
+        "k_EStoreAppType_Mod": 2,
+        "k_EStoreAppType_Movie": 3,
+        "k_EStoreAppType_DLC": 4,
+        "k_EStoreAppType_Guide": 5,
+        "k_EStoreAppType_Software": 6,
+        "k_EStoreAppType_Video": 7,
+        "k_EStoreAppType_Series": 8,
+        "k_EStoreAppType_Episode": 9,
+        "k_EStoreAppType_Hardware": 10,
+        "k_EStoreAppType_Music": 11,
+        "k_EStoreAppType_Beta": 12,
+        "k_EStoreAppType_Tool": 13,
+        "k_EStoreAppType_Advertising": 14
+      }
+    },
+    "EUserReviewScore": {
+      "values": {
+        "k_EUserReviewScore_None": 0,
+        "k_EUserReviewScore_OverwhelminglyNegative": 1,
+        "k_EUserReviewScore_VeryNegative": 2,
+        "k_EUserReviewScore_Negative": 3,
+        "k_EUserReviewScore_MostlyNegative": 4,
+        "k_EUserReviewScore_Mixed": 5,
+        "k_EUserReviewScore_MostlyPositive": 6,
+        "k_EUserReviewScore_Positive": 7,
+        "k_EUserReviewScore_VeryPositive": 8,
+        "k_EUserReviewScore_OverwhelminglyPositive": 9
+      }
+    },
+    "EStoreCategoryType": {
+      "values": {
+        "k_EStoreCategoryType_Category": 0,
+        "k_EStoreCategoryType_SupportedPlayers": 1,
+        "k_EStoreCategoryType_Feature": 2,
+        "k_EStoreCategoryType_ControllerSupport": 3,
+        "k_EStoreCategoryType_CloudGaming": 4,
+        "k_EStoreCategoryType_MAX": 5
+      }
+    },
+    "StoreItemID": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "packageid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "bundleid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "tagid": {
+          "type": "uint32",
+          "id": 4
+        },
+        "creatorid": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "StoreBrowseContext": {
+      "fields": {
+        "language": {
+          "type": "string",
+          "id": 1
+        },
+        "elanguage": {
+          "type": "int32",
+          "id": 2,
+          "options": {
+            "(description)": "ELanguage"
+          }
+        },
+        "country_code": {
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "2-character country code; required"
+          }
+        },
+        "steam_realm": {
+          "type": "int32",
+          "id": 4,
+          "options": {
+            "(description)": "ESteamRealm"
+          }
+        }
+      }
+    },
+    "StoreBrowseItemDataRequest": {
+      "fields": {
+        "include_assets": {
+          "type": "bool",
+          "id": 1
+        },
+        "include_release": {
+          "type": "bool",
+          "id": 2
+        },
+        "include_platforms": {
+          "type": "bool",
+          "id": 3
+        },
+        "include_all_purchase_options": {
+          "type": "bool",
+          "id": 4
+        },
+        "include_screenshots": {
+          "type": "bool",
+          "id": 5
+        },
+        "include_trailers": {
+          "type": "bool",
+          "id": 6
+        },
+        "include_ratings": {
+          "type": "bool",
+          "id": 7
+        },
+        "include_tag_count": {
+          "type": "int32",
+          "id": 8,
+          "options": {
+            "(description)": "Count of tags to return, as tagids.  Maximum 20."
+          }
+        },
+        "include_reviews": {
+          "type": "bool",
+          "id": 9
+        },
+        "include_basic_info": {
+          "type": "bool",
+          "id": 10,
+          "options": {
+            "(description)": "Include short description, publisher, developers"
+          }
+        },
+        "include_supported_languages": {
+          "type": "bool",
+          "id": 11,
+          "options": {
+            "(description)": "includes the games support for languages: supported, full_audio, subtitles"
+          }
+        }
+      }
+    },
+    "CStoreBrowse_GetItems_Request": {
+      "fields": {
+        "ids": {
+          "rule": "repeated",
+          "type": ".StoreItemID",
+          "id": 1
+        },
+        "context": {
+          "type": ".StoreBrowseContext",
+          "id": 2
+        },
+        "data_request": {
+          "type": ".StoreBrowseItemDataRequest",
+          "id": 3
+        }
+      }
+    },
+    "StoreGameRating": {
+      "fields": {
+        "type": {
+          "type": "string",
+          "id": 1,
+          "options": {
+            "(description)": "'esrb', 'pegi', ..."
+          }
+        },
+        "rating": {
+          "type": "string",
+          "id": 2,
+          "options": {
+            "(description)": "'t' for teen, 'm' for mature, ..."
+          }
+        },
+        "descriptors": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 3,
+          "options": {
+            "(description)": "Additional descriptors like 'Intense Violence', 'Strong Language',..."
+          }
+        },
+        "interactive_elements": {
+          "type": "string",
+          "id": 4,
+          "options": {
+            "(description)": "ESRB-specific"
+          }
+        },
+        "required_age": {
+          "type": "int32",
+          "id": 10,
+          "options": {
+            "(description)": "Age in years.  Store pages will prompt with an age gate"
+          }
+        },
+        "use_age_gate": {
+          "type": "bool",
+          "id": 11
+        },
+        "image_url": {
+          "type": "string",
+          "id": 20,
+          "options": {
+            "(description)": "An image corresponding to the rating."
+          }
+        },
+        "image_target": {
+          "type": "string",
+          "id": 21,
+          "options": {
+            "(description)": "URL where the image should link for more information."
+          }
+        }
+      }
+    },
+    "StoreItem": {
+      "fields": {
+        "item_type": {
+          "type": ".EStoreItemType",
+          "id": 1,
+          "options": {
+            "default": "k_EStoreItemType_Invalid"
+          }
+        },
+        "id": {
+          "type": "uint32",
+          "id": 2
+        },
+        "success": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "(description)": "EResult of this lookup action"
+          }
+        },
+        "visible": {
+          "type": "bool",
+          "id": 4
+        },
+        "unvailable_for_country_restriction": {
+          "type": "bool",
+          "id": 5,
+          "options": {
+            "(description)": "Indicates this app is visible in other regions, but not the requested reagion"
+          }
+        },
+        "name": {
+          "type": "string",
+          "id": 6
+        },
+        "store_url_path": {
+          "type": "string",
+          "id": 7,
+          "options": {
+            "(description)": "The URL of this item's store page, to be appended to STORE_BASE_URL."
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "(description)": "If this is an app, or a single-app package, the steamworks appid."
+          }
+        },
+        "type": {
+          "type": ".EStoreAppType",
+          "id": 10,
+          "options": {
+            "default": "k_EStoreAppType_Game",
+            "(description)": "Type of app (Game, Software, Music).  For packages/bundles, this will be the most interesting type (eg Game + Soundtrack bundle will have type Game)"
+          }
+        },
+        "included_types": {
+          "rule": "repeated",
+          "type": ".EStoreAppType",
+          "id": 11,
+          "options": {
+            "(description)": "For packages/bundles, all types of included items",
+            "packed": false
+          }
+        },
+        "included_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 12,
+          "options": {
+            "(description)": "For packages/bundles, all included appids",
+            "packed": false
+          }
+        },
+        "is_free": {
+          "type": "bool",
+          "id": 13
+        },
+        "is_early_access": {
+          "type": "bool",
+          "id": 14
+        },
+        "related_items": {
+          "type": ".StoreItem.RelatedItems",
+          "id": 15
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": ".EContentDescriptorID",
+          "id": 20,
+          "options": {
+            "packed": false
+          }
+        },
+        "tagids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 21,
+          "options": {
+            "packed": false
+          }
+        },
+        "categories": {
+          "type": ".StoreItem.Categories",
+          "id": 22
+        },
+        "reviews": {
+          "type": ".StoreItem.Reviews",
+          "id": 23
+        },
+        "basic_info": {
+          "type": ".StoreItem.BasicInfo",
+          "id": 24
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": ".StoreItem.Tag",
+          "id": 25
+        },
+        "assets": {
+          "type": ".StoreItem.Assets",
+          "id": 30
+        },
+        "release": {
+          "type": ".StoreItem.ReleaseInfo",
+          "id": 31
+        },
+        "platforms": {
+          "type": ".StoreItem.Platforms",
+          "id": 32
+        },
+        "game_rating": {
+          "type": ".StoreGameRating",
+          "id": 33,
+          "options": {
+            "(description)": "Local ratings agency information, like ESRB or PEGI"
+          }
+        },
+        "best_purchase_option": {
+          "type": ".StoreItem.PurchaseOption",
+          "id": 40,
+          "options": {
+            "(description)": "The cheapest way for the user to acquire this app or package (may be a bundle)."
+          }
+        },
+        "purchase_options": {
+          "rule": "repeated",
+          "type": ".StoreItem.PurchaseOption",
+          "id": 41,
+          "options": {
+            "(description)": "Different ways to buy this app or packages (packages can be purchased directly, but may also be included in bundles)."
+          }
+        },
+        "accessories": {
+          "rule": "repeated",
+          "type": ".StoreItem.PurchaseOption",
+          "id": 42,
+          "options": {
+            "(description)": "Additional packages or bundles associated with an app, but that do not contain the app."
+          }
+        },
+        "screenshots": {
+          "type": ".StoreItem.Screenshots",
+          "id": 50
+        },
+        "trailers": {
+          "type": ".StoreItem.Trailers",
+          "id": 51
+        },
+        "supported_languages": {
+          "rule": "repeated",
+          "type": ".StoreItem.SupportedLanguage",
+          "id": 52
+        },
+        "store_url_path_override": {
+          "type": "string",
+          "id": 53,
+          "options": {
+            "(description)": "Navigate to this URL (relative to store home) when the store capsule for this item is clicked, instead of the default /app/... URL. Used by advertising apps that point to a sale page."
+          }
+        },
+        "free_weekend": {
+          "type": ".StoreItem.FreeWeekend",
+          "id": 54,
+          "options": {
+            "(description)": "Information about a free weekend offer."
+          }
+        },
+        "unlisted": {
+          "type": "bool",
+          "id": 55,
+          "options": {
+            "(description)": "If true, item is only accessible on store via a direct link"
+          }
+        },
+        "game_count": {
+          "type": "uint32",
+          "id": 56,
+          "options": {
+            "(description)": "For creators and tags, how many games belong to them"
+          }
+        }
+      },
+      "nested": {
+        "RelatedItems": {
+          "fields": {
+            "parent_appid": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "For DLC, Demos, etc, this is the main app."
+              }
+            }
+          }
+        },
+        "Categories": {
+          "fields": {
+            "supported_player_categoryids": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "Categories like Single Player, Multiplayer, MMO",
+                "packed": false
+              }
+            },
+            "feature_categoryids": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 3,
+              "options": {
+                "(description)": "Categories indicating supported features like Steam Cloud, VAC, Achievements, etc",
+                "packed": false
+              }
+            },
+            "controller_categoryids": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 4,
+              "options": {
+                "(description)": "Categories indicating controller support and full controller support.",
+                "packed": false
+              }
+            }
+          }
+        },
+        "Reviews": {
+          "fields": {
+            "summary_filtered": {
+              "type": ".StoreItem.Reviews.StoreReviewSummary",
+              "id": 1,
+              "options": {
+                "(description)": "Review summary with review bombs removed (if any).  Always present (if include_reviews set in request)"
+              }
+            },
+            "summary_unfiltered": {
+              "type": ".StoreItem.Reviews.StoreReviewSummary",
+              "id": 2,
+              "options": {
+                "(description)": "Review summary with review bombs included.  Only present if there are review bombs."
+              }
+            }
+          },
+          "nested": {
+            "StoreReviewSummary": {
+              "fields": {
+                "review_count": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "percent_positive": {
+                  "type": "int32",
+                  "id": 2,
+                  "options": {
+                    "(description)": "0-100"
+                  }
+                },
+                "review_score": {
+                  "type": ".EUserReviewScore",
+                  "id": 3,
+                  "options": {
+                    "default": "k_EUserReviewScore_None"
+                  }
+                },
+                "review_score_label": {
+                  "type": "string",
+                  "id": 4,
+                  "options": {
+                    "(description)": "A string like 'Mixed', 'Negative', 'Overwhelmingly Positive'"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "BasicInfo": {
+          "fields": {
+            "short_description": {
+              "type": "string",
+              "id": 1
+            },
+            "publishers": {
+              "rule": "repeated",
+              "type": ".StoreItem.BasicInfo.CreatorHomeLink",
+              "id": 2
+            },
+            "developers": {
+              "rule": "repeated",
+              "type": ".StoreItem.BasicInfo.CreatorHomeLink",
+              "id": 3
+            },
+            "franchises": {
+              "rule": "repeated",
+              "type": ".StoreItem.BasicInfo.CreatorHomeLink",
+              "id": 4
+            },
+            "capsule_headline": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "(description)": "A custom string specified by the partner for display on or around a capsule on the store, e.g. 'Just Updated!'"
+              }
+            }
+          },
+          "nested": {
+            "CreatorHomeLink": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "creator_clan_account_id": {
+                  "type": "uint32",
+                  "id": 2,
+                  "options": {
+                    "(description)": "Optioanl field indicating this name is associated this the creator home via the clan account id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Tag": {
+          "fields": {
+            "tagid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "weight": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        },
+        "Assets": {
+          "fields": {
+            "asset_url_format": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "(description)": "Format for URLs, should substitute the capsule name for ${FILENAME} in the URL."
+              }
+            },
+            "main_capsule": {
+              "type": "string",
+              "id": 2
+            },
+            "small_capsule": {
+              "type": "string",
+              "id": 3
+            },
+            "header": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "(description)": "Equivalent to GetConstantRatioHeaderImage in PHP; apps will always have this, packages and bundles may not."
+              }
+            },
+            "package_header": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "(description)": "A wider header used on package/bundle pages.  Not set for apps."
+              }
+            },
+            "page_background": {
+              "type": "string",
+              "id": 6
+            },
+            "hero_capsule": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "(description)": "374x448"
+              }
+            },
+            "hero_capsule_2x": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "(description)": "748x896 version of hero capsule."
+              }
+            },
+            "library_capsule": {
+              "type": "string",
+              "id": 9,
+              "options": {
+                "(description)": "300x450 - tall library asset"
+              }
+            },
+            "library_capsule_2x": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "(description)": "600x900 - tall library asset"
+              }
+            },
+            "library_hero": {
+              "type": "string",
+              "id": 11,
+              "options": {
+                "(description)": "960x310 or 1920x620 - library detail background asset"
+              }
+            },
+            "library_hero_2x": {
+              "type": "string",
+              "id": 12,
+              "options": {
+                "(description)": "1920x620 or 3840x1240 - library detail background asset"
+              }
+            },
+            "community_icon": {
+              "type": "string",
+              "id": 13,
+              "options": {
+                "(description)": "32x32 jpg uploading via steamworks under community assets"
+              }
+            },
+            "clan_avatar": {
+              "type": "string",
+              "id": 14
+            }
+          }
+        },
+        "ReleaseInfo": {
+          "fields": {
+            "steam_release_date": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "The date this item first released on the Steam store.  For Early Access graduates, this is their graduation day."
+              }
+            },
+            "original_release_date": {
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "Optional; the date this item first released elsewhere, typically back catalog items."
+              }
+            },
+            "original_steam_release_date": {
+              "type": "uint32",
+              "id": 3,
+              "options": {
+                "(description)": "For Early Access graduates, the date the game first appeared on Steam."
+              }
+            },
+            "is_coming_soon": {
+              "type": "bool",
+              "id": 4,
+              "options": {
+                "(description)": "Is the app coming soon?  This flag should be preferred to doing time comparisons against steam_release_date."
+              }
+            },
+            "is_preload": {
+              "type": "bool",
+              "id": 5,
+              "options": {
+                "(description)": "Can the app be preloaded?  Only applies to Coming Soon titles."
+              }
+            },
+            "custom_release_date_message": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "(description)": "Custom release date string.  steam_release_date will be unset if this is set."
+              }
+            },
+            "is_abridged_release_date": {
+              "type": "bool",
+              "id": 7,
+              "options": {
+                "(description)": "Release date should be displayed as month-year only.  steam_release_date is the last day of the month."
+              }
+            },
+            "coming_soon_display": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "(description)": "One of 'date_full', 'date_month', 'date_quarter', 'date_year', 'text_comingsoon', 'text_tba'"
+              }
+            },
+            "is_early_access": {
+              "type": "bool",
+              "id": 10
+            },
+            "mac_release_date": {
+              "type": "uint32",
+              "id": 20
+            },
+            "linux_release_date": {
+              "type": "uint32",
+              "id": 21
+            }
+          }
+        },
+        "Platforms": {
+          "fields": {
+            "windows": {
+              "type": "bool",
+              "id": 1
+            },
+            "mac": {
+              "type": "bool",
+              "id": 2
+            },
+            "steamos_linux": {
+              "type": "bool",
+              "id": 3
+            },
+            "vr_support": {
+              "type": ".StoreItem.Platforms.VRSupport",
+              "id": 10
+            },
+            "steam_deck_compat_category": {
+              "type": ".ESteamDeckCompatibilityCategory",
+              "id": 11,
+              "options": {
+                "default": "k_ESteamDeckCompatibilityCategory_Unknown"
+              }
+            }
+          },
+          "nested": {
+            "VRSupport": {
+              "fields": {
+                "vrhmd": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "vrhmd_only": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "htc_vive": {
+                  "type": "bool",
+                  "id": 40
+                },
+                "oculus_rift": {
+                  "type": "bool",
+                  "id": 41
+                },
+                "windows_mr": {
+                  "type": "bool",
+                  "id": 42
+                },
+                "valve_index": {
+                  "type": "bool",
+                  "id": 43
+                }
+              }
+            }
+          }
+        },
+        "PurchaseOption": {
+          "fields": {
+            "packageid": {
+              "type": "int32",
+              "id": 1
+            },
+            "bundleid": {
+              "type": "int32",
+              "id": 2
+            },
+            "purchase_option_name": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "(description)": "The name of the package or bundle"
+              }
+            },
+            "final_price_in_cents": {
+              "type": "int64",
+              "id": 5,
+              "options": {
+                "(description)": "Always set.  Includes any applicable non user-specific discounts."
+              }
+            },
+            "original_price_in_cents": {
+              "type": "int64",
+              "id": 6,
+              "options": {
+                "(description)": "If discounted, this is the price the item would normally cost."
+              }
+            },
+            "user_final_price_in_cents": {
+              "type": "int64",
+              "id": 7
+            },
+            "formatted_final_price": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "(description)": "Always set.  Formatted with currency symbol and decimal, like '$10.00'."
+              }
+            },
+            "formatted_original_price": {
+              "type": "string",
+              "id": 9
+            },
+            "discount_pct": {
+              "type": "int32",
+              "id": 10,
+              "options": {
+                "(description)": "If discounted, calculated from final price and original price."
+              }
+            },
+            "user_discount_pct": {
+              "type": "int32",
+              "id": 11
+            },
+            "bundle_discount_pct": {
+              "type": "int32",
+              "id": 12,
+              "options": {
+                "(description)": "If this is a bundle, the savings from buying the bundle.  If no bundle items are on active discount, this will be the same as discount_pct."
+              }
+            },
+            "active_discounts": {
+              "rule": "repeated",
+              "type": ".StoreItem.PurchaseOption.Discount",
+              "id": 20,
+              "options": {
+                "(description)": "Discounts included in discounted_price_in_cents."
+              }
+            },
+            "user_active_discounts": {
+              "rule": "repeated",
+              "type": ".StoreItem.PurchaseOption.Discount",
+              "id": 21,
+              "options": {
+                "(description)": "Additional discounts included in user_discounted_price_in_cents."
+              }
+            },
+            "inactive_discounts": {
+              "rule": "repeated",
+              "type": ".StoreItem.PurchaseOption.Discount",
+              "id": 22,
+              "options": {
+                "(description)": "Additional user-specific discounts that do not apply to the current user."
+              }
+            },
+            "user_can_purchase": {
+              "type": "bool",
+              "id": 30
+            },
+            "user_can_purchase_as_gift": {
+              "type": "bool",
+              "id": 31
+            },
+            "is_commercial_license": {
+              "type": "bool",
+              "id": 40,
+              "options": {
+                "(description)": "This is a commercial license"
+              }
+            },
+            "should_suppress_discount_pct": {
+              "type": "bool",
+              "id": 41,
+              "options": {
+                "(description)": "Don't show the discount percentage on a store capsule for this item."
+              }
+            }
+          },
+          "nested": {
+            "Discount": {
+              "fields": {
+                "discount_amount": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "discount_description": {
+                  "type": "string",
+                  "id": 2
+                },
+                "discount_end_date": {
+                  "type": "uint32",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
+        "Screenshots": {
+          "fields": {
+            "all_ages_screenshots": {
+              "rule": "repeated",
+              "type": ".StoreItem.Screenshots.Screenshot",
+              "id": 2,
+              "options": {
+                "(description)": "Screenshots suitable for all ages."
+              }
+            },
+            "mature_content_screenshots": {
+              "rule": "repeated",
+              "type": ".StoreItem.Screenshots.Screenshot",
+              "id": 3,
+              "options": {
+                "(description)": "Screenshots that may contain mature content; these should only be shown after verifying age (age gate)."
+              }
+            }
+          },
+          "nested": {
+            "Screenshot": {
+              "fields": {
+                "filename": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "(description)": "Path to file on media CDN.  Can access sized version by appending to SHA: '.1920x1080', '.600x338', '.116x65'"
+                  }
+                },
+                "ordinal": {
+                  "type": "int32",
+                  "id": 2,
+                  "options": {
+                    "(description)": "Screenshots should be displayed in order of ascending ordinal; they are returned in-order but client may need to merge all_ages and mature_content_screenshots."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Trailers": {
+          "fields": {
+            "highlights": {
+              "rule": "repeated",
+              "type": ".StoreItem.Trailers.Trailer",
+              "id": 1,
+              "options": {
+                "(description)": "Primary trailers for this app"
+              }
+            },
+            "other_trailers": {
+              "rule": "repeated",
+              "type": ".StoreItem.Trailers.Trailer",
+              "id": 2,
+              "options": {
+                "(description)": "Additional trailers; on the app page, these are shown after screenshots (highlights shown before)"
+              }
+            }
+          },
+          "nested": {
+            "VideoSource": {
+              "fields": {
+                "filename": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "(description)": "Substitute into trailer_url_format"
+                  }
+                },
+                "type": {
+                  "type": "string",
+                  "id": 2,
+                  "options": {
+                    "(description)": "'video/webm' or 'video/mp4'; can just put this directly in to a <source> tag."
+                  }
+                }
+              }
+            },
+            "Trailer": {
+              "fields": {
+                "trailer_name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "trailer_url_format": {
+                  "type": "string",
+                  "id": 2,
+                  "options": {
+                    "(description)": "Format for URLs, should substitute filename for ${FILENAME} in the URL."
+                  }
+                },
+                "trailer_480p": {
+                  "rule": "repeated",
+                  "type": ".StoreItem.Trailers.VideoSource",
+                  "id": 3
+                },
+                "trailer_max": {
+                  "rule": "repeated",
+                  "type": ".StoreItem.Trailers.VideoSource",
+                  "id": 4
+                },
+                "microtrailer": {
+                  "rule": "repeated",
+                  "type": ".StoreItem.Trailers.VideoSource",
+                  "id": 5
+                },
+                "screenshot_medium": {
+                  "type": "string",
+                  "id": 10,
+                  "options": {
+                    "(description)": "293x165px.  Use trailer_url_format."
+                  }
+                },
+                "screenshot_full": {
+                  "type": "string",
+                  "id": 11,
+                  "options": {
+                    "(description)": "Same size as trailer_max.  Use trailer_url_format."
+                  }
+                },
+                "trailer_base_id": {
+                  "type": "int32",
+                  "id": 12,
+                  "options": {
+                    "(description)": "Trailer ID.  For localized trailers, this will be the original trailer's ID"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "SupportedLanguage": {
+          "fields": {
+            "elanguage": {
+              "type": "int32",
+              "id": 1,
+              "options": {
+                "(description)": "ELanguage"
+              }
+            },
+            "supported": {
+              "type": "bool",
+              "id": 2
+            },
+            "full_audio": {
+              "type": "bool",
+              "id": 3
+            },
+            "subtitles": {
+              "type": "bool",
+              "id": 4
+            }
+          }
+        },
+        "FreeWeekend": {
+          "fields": {
+            "start_time": {
+              "type": "uint32",
+              "id": 1,
+              "options": {
+                "(description)": "When the free weekend starts."
+              }
+            },
+            "end_time": {
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "When the free weekend ends."
+              }
+            },
+            "text": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "(description)": "Text to show as a description of the free weekend."
+              }
+            }
+          }
+        }
+      }
+    },
+    "CStoreBrowse_GetItems_Response": {
+      "fields": {
+        "store_items": {
+          "rule": "repeated",
+          "type": ".StoreItem",
+          "id": 1
+        }
+      }
+    },
+    "CStoreBrowse_GetStoreCategories_Request": {
+      "fields": {
+        "language": {
+          "type": "string",
+          "id": 1
+        },
+        "elanguage": {
+          "type": "int32",
+          "id": 2,
+          "options": {
+            "default": -1,
+            "(description)": "ELanguage"
+          }
+        }
+      }
+    },
+    "CStoreBrowse_GetStoreCategories_Response": {
+      "fields": {
+        "categories": {
+          "rule": "repeated",
+          "type": ".CStoreBrowse_GetStoreCategories_Response.Category",
+          "id": 1
+        }
+      },
+      "nested": {
+        "Category": {
+          "fields": {
+            "categoryid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "type": {
+              "type": ".EStoreCategoryType",
+              "id": 2,
+              "options": {
+                "default": "k_EStoreCategoryType_Category"
+              }
+            },
+            "internal_name": {
+              "type": "string",
+              "id": 3
+            },
+            "display_name": {
+              "type": "string",
+              "id": 4
+            },
+            "image_url": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "(description)": "Append to STORE_CDN_URL"
+              }
+            },
+            "show_in_search": {
+              "type": "bool",
+              "id": 6,
+              "options": {
+                "(description)": "Indicates this category can link to search results showing all items in category."
+              }
+            }
+          }
+        }
+      }
+    },
+    "CStoreBrowse_GetDLCForApps_Request": {
+      "fields": {
+        "context": {
+          "type": ".StoreBrowseContext",
+          "id": 1
+        },
+        "store_page_filter": {
+          "type": ".CStorePageFilter",
+          "id": 2
+        },
+        "appids": {
+          "rule": "repeated",
+          "type": ".StoreItemID",
+          "id": 3,
+          "options": {
+            "(description)": "Apps for which we want DLC information."
+          }
+        },
+        "steamid": {
+          "type": "uint64",
+          "id": 4,
+          "options": {
+            "(description)": "If specified, we want DLC information for all apps owned by this user."
+          }
+        }
+      }
+    },
+    "CStoreBrowse_GetDLCForApps_Response": {
+      "fields": {
+        "dlc_data": {
+          "rule": "repeated",
+          "type": ".CStoreBrowse_GetDLCForApps_Response.DLCData",
+          "id": 1
+        },
+        "playtime": {
+          "rule": "repeated",
+          "type": ".CStoreBrowse_GetDLCForApps_Response.PlaytimeForApp",
+          "id": 2
+        }
+      },
+      "nested": {
+        "DLCData": {
+          "fields": {
+            "appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "parentappid": {
+              "type": "uint32",
+              "id": 2
+            },
+            "release_date": {
+              "type": "uint32",
+              "id": 3
+            },
+            "coming_soon": {
+              "type": "bool",
+              "id": 4
+            },
+            "price": {
+              "type": "int64",
+              "id": 5
+            },
+            "discount": {
+              "type": "uint32",
+              "id": 6
+            },
+            "free": {
+              "type": "bool",
+              "id": 7
+            }
+          }
+        },
+        "PlaytimeForApp": {
+          "fields": {
+            "appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "playtime": {
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "(description)": "Total time played over all time."
+              }
+            },
+            "last_played": {
+              "type": "uint32",
+              "id": 3,
+              "options": {
+                "(description)": "Time last played on any platform."
+              }
+            }
+          }
+        }
+      }
+    },
+    "CStoreBrowse_GetDLCForAppsSolr_Request": {
+      "fields": {
+        "context": {
+          "type": ".StoreBrowseContext",
+          "id": 1
+        },
+        "appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
+        },
+        "flavor": {
+          "type": "string",
+          "id": 3
+        },
+        "count": {
+          "type": "uint32",
+          "id": 4
+        },
+        "store_page_filter": {
+          "type": ".CStorePageFilter",
+          "id": 5
+        }
+      }
+    },
+    "CStoreBrowse_GetDLCForAppsSolr_Response": {
+      "fields": {
+        "dlc_lists": {
+          "rule": "repeated",
+          "type": ".CStoreBrowse_GetDLCForAppsSolr_Response.DLCList",
+          "id": 1
+        }
+      },
+      "nested": {
+        "DLCList": {
+          "fields": {
+            "parent_appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "dlc_appids": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 2,
+              "options": {
+                "packed": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "StoreBrowse": {
+      "options": {
+        "(service_description)": "APIs for accessing store item data"
+      },
+      "methods": {
+        "GetItems": {
+          "requestType": ".CStoreBrowse_GetItems_Request",
+          "responseType": ".CStoreBrowse_GetItems_Response",
+          "options": {
+            "(method_description)": "Get information about items on the store"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get information about items on the store"
+            }
+          ]
+        },
+        "GetStoreCategories": {
+          "requestType": ".CStoreBrowse_GetStoreCategories_Request",
+          "responseType": ".CStoreBrowse_GetStoreCategories_Response",
+          "options": {
+            "(method_description)": "Get category definitions for store.  This is a public-facing API (as compared to StoreCatalog.GetCategories, which is intended for PHP)"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get category definitions for store.  This is a public-facing API (as compared to StoreCatalog.GetCategories, which is intended for PHP)"
+            }
+          ]
+        },
+        "GetDLCForApps": {
+          "requestType": ".CStoreBrowse_GetDLCForApps_Request",
+          "responseType": ".CStoreBrowse_GetDLCForApps_Response",
+          "options": {
+            "(method_description)": "Returns all DLC appids for games owned by the user."
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns all DLC appids for games owned by the user."
+            }
+          ]
+        },
+        "GetDLCForAppsSolr": {
+          "requestType": ".CStoreBrowse_GetDLCForAppsSolr_Request",
+          "responseType": ".CStoreBrowse_GetDLCForAppsSolr_Response",
+          "options": {
+            "(method_description)": "Returns all DLC appids for the specified games."
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns all DLC appids for the specified games."
+            }
+          ]
+        }
+      }
+    },
+    "msgpool_soft_limit": {
+      "type": "int32",
+      "id": 50000,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 32
+      }
+    },
+    "msgpool_hard_limit": {
+      "type": "int32",
+      "id": 50001,
+      "extend": ".google.protobuf.MessageOptions",
+      "options": {
+        "default": 384
+      }
+    },
+    "force_php_generation": {
+      "type": "bool",
+      "id": 50000,
+      "extend": ".google.protobuf.FileOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "php_output_always_number": {
+      "type": "bool",
+      "id": 50020,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "allow_field_named_steam_id": {
+      "type": "bool",
+      "id": 50024,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": false
+      }
+    },
+    "EBanContentCheckResult": {
+      "values": {
+        "k_EBanContentCheckResult_NotScanned": 0,
+        "k_EBanContentCheckResult_Reset": 1,
+        "k_EBanContentCheckResult_NeedsChecking": 2,
+        "k_EBanContentCheckResult_VeryUnlikely": 5,
+        "k_EBanContentCheckResult_Unlikely": 30,
+        "k_EBanContentCheckResult_Possible": 50,
+        "k_EBanContentCheckResult_Likely": 75,
+        "k_EBanContentCheckResult_VeryLikely": 100
+      }
+    },
+    "EProtoClanEventType": {
+      "values": {
+        "k_EClanOtherEvent": 1,
+        "k_EClanGameEvent": 2,
+        "k_EClanPartyEvent": 3,
+        "k_EClanMeetingEvent": 4,
+        "k_EClanSpecialCauseEvent": 5,
+        "k_EClanMusicAndArtsEvent": 6,
+        "k_EClanSportsEvent": 7,
+        "k_EClanTripEvent": 8,
+        "k_EClanChatEvent": 9,
+        "k_EClanGameReleaseEvent": 10,
+        "k_EClanBroadcastEvent": 11,
+        "k_EClanSmallUpdateEvent": 12,
+        "k_EClanPreAnnounceMajorUpdateEvent": 13,
+        "k_EClanMajorUpdateEvent": 14,
+        "k_EClanDLCReleaseEvent": 15,
+        "k_EClanFutureReleaseEvent": 16,
+        "k_EClanESportTournamentStreamEvent": 17,
+        "k_EClanDevStreamEvent": 18,
+        "k_EClanFamousStreamEvent": 19,
+        "k_EClanGameSalesEvent": 20,
+        "k_EClanGameItemSalesEvent": 21,
+        "k_EClanInGameBonusXPEvent": 22,
+        "k_EClanInGameLootEvent": 23,
+        "k_EClanInGamePerksEvent": 24,
+        "k_EClanInGameChallengeEvent": 25,
+        "k_EClanInGameContestEvent": 26,
+        "k_EClanIRLEvent": 27,
+        "k_EClanNewsEvent": 28,
+        "k_EClanBetaReleaseEvent": 29,
+        "k_EClanInGameContentReleaseEvent": 30,
+        "k_EClanFreeTrial": 31,
+        "k_EClanSeasonRelease": 32,
+        "k_EClanSeasonUpdate": 33,
+        "k_EClanCrosspostEvent": 34,
+        "k_EClanInGameEventGeneral": 35
+      }
+    },
+    "PartnerEventNotificationType": {
+      "values": {
+        "k_EEventStart": 0,
+        "k_EEventBroadcastStart": 1,
+        "k_EEventMatchStart": 2,
+        "k_EEventPartnerMaxType": 3
+      }
+    },
+    "CMsgIPAddress": {
+      "oneofs": {
+        "ip": {
+          "oneof": [
+            "v4",
+            "v6"
+          ]
+        }
+      },
+      "fields": {
+        "v4": {
+          "type": "fixed32",
+          "id": 1
+        },
+        "v6": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgIPAddressBucket": {
+      "fields": {
+        "original_ip_address": {
+          "type": ".CMsgIPAddress",
+          "id": 1
+        },
+        "bucket": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGCRoutingProtoBufHeader": {
+      "fields": {
+        "dst_gcid_queue": {
+          "type": "uint64",
+          "id": 1
+        },
+        "dst_gc_dir_index": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtoBufHeader": {
+      "oneofs": {
+        "ip_addr": {
+          "oneof": [
+            "ip",
+            "ip_v6"
+          ]
+        }
+      },
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_sessionid": {
+          "type": "int32",
+          "id": 2
+        },
+        "routing_appid": {
+          "type": "uint32",
+          "id": 3
+        },
+        "jobid_source": {
+          "type": "fixed64",
+          "id": 10,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "jobid_target": {
+          "type": "fixed64",
+          "id": 11,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "target_job_name": {
+          "type": "string",
+          "id": 12
+        },
+        "seq_num": {
+          "type": "int32",
+          "id": 24
+        },
+        "eresult": {
+          "type": "int32",
+          "id": 13,
+          "options": {
+            "default": 2
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "id": 14
+        },
+        "auth_account_flags": {
+          "type": "uint32",
+          "id": 16
+        },
+        "token_source": {
+          "type": "uint32",
+          "id": 22
+        },
+        "admin_spoofing_user": {
+          "type": "bool",
+          "id": 23
+        },
+        "transport_error": {
+          "type": "int32",
+          "id": 17,
+          "options": {
+            "default": 1
+          }
+        },
+        "messageid": {
+          "type": "uint64",
+          "id": 18,
+          "options": {
+            "default": 18446744073709552000
+          }
+        },
+        "publisher_group_id": {
+          "type": "uint32",
+          "id": 19
+        },
+        "sysid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "trace_tag": {
+          "type": "uint64",
+          "id": 21
+        },
+        "webapi_key_id": {
+          "type": "uint32",
+          "id": 25
+        },
+        "is_from_external_source": {
+          "type": "bool",
+          "id": 26
+        },
+        "forward_to_sysid": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "cm_sysid": {
+          "type": "uint32",
+          "id": 28
+        },
+        "launcher_type": {
+          "type": "uint32",
+          "id": 31,
+          "options": {
+            "default": 0
+          }
+        },
+        "realm": {
+          "type": "uint32",
+          "id": 32,
+          "options": {
+            "default": 0
+          }
+        },
+        "timeout_ms": {
+          "type": "int32",
+          "id": 33,
+          "options": {
+            "default": -1
+          }
+        },
+        "debug_source": {
+          "type": "string",
+          "id": 34
+        },
+        "debug_source_string_index": {
+          "type": "uint32",
+          "id": 35
+        },
+        "token_id": {
+          "type": "uint64",
+          "id": 36
+        },
+        "routing_gc": {
+          "type": ".CMsgGCRoutingProtoBufHeader",
+          "id": 37
+        },
+        "ip": {
+          "type": "uint32",
+          "id": 15
+        },
+        "ip_v6": {
+          "type": "bytes",
+          "id": 29
+        }
+      }
+    },
+    "CMsgMulti": {
+      "fields": {
+        "size_unzipped": {
+          "type": "uint32",
+          "id": 1
+        },
+        "message_body": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "CMsgProtobufWrapped": {
+      "fields": {
+        "message_body": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "CMsgAuthTicket": {
+      "fields": {
+        "estate": {
+          "type": "uint32",
+          "id": 1
+        },
+        "eresult": {
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "default": 2
+          }
+        },
+        "steamid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "gameid": {
+          "type": "fixed64",
+          "id": 4
+        },
+        "h_steam_pipe": {
+          "type": "uint32",
+          "id": 5
+        },
+        "ticket_crc": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "bytes",
+          "id": 7
+        },
+        "server_secret": {
+          "type": "bytes",
+          "id": 8
+        }
+      }
+    },
+    "CCDDBAppDetailCommon": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "icon": {
+          "type": "string",
+          "id": 3
+        },
+        "tool": {
+          "type": "bool",
+          "id": 6
+        },
+        "demo": {
+          "type": "bool",
+          "id": 7
+        },
+        "media": {
+          "type": "bool",
+          "id": 8
+        },
+        "community_visible_stats": {
+          "type": "bool",
+          "id": 9
+        },
+        "friendly_name": {
+          "type": "string",
+          "id": 10
+        },
+        "propagation": {
+          "type": "string",
+          "id": 11
+        },
+        "has_adult_content": {
+          "type": "bool",
+          "id": 12
+        },
+        "is_visible_in_steam_china": {
+          "type": "bool",
+          "id": 13
+        },
+        "app_type": {
+          "type": "uint32",
+          "id": 14
+        },
+        "has_adult_content_sex": {
+          "type": "bool",
+          "id": 15
+        },
+        "has_adult_content_violence": {
+          "type": "bool",
+          "id": 16
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "packed": false
+          }
+        }
+      }
+    },
+    "CMsgAppRights": {
+      "fields": {
+        "edit_info": {
+          "type": "bool",
+          "id": 1
+        },
+        "publish": {
+          "type": "bool",
+          "id": 2
+        },
+        "view_error_data": {
+          "type": "bool",
+          "id": 3
+        },
+        "download": {
+          "type": "bool",
+          "id": 4
+        },
+        "upload_cdkeys": {
+          "type": "bool",
+          "id": 5
+        },
+        "generate_cdkeys": {
+          "type": "bool",
+          "id": 6
+        },
+        "view_financials": {
+          "type": "bool",
+          "id": 7
+        },
+        "manage_ceg": {
+          "type": "bool",
+          "id": 8
+        },
+        "manage_signing": {
+          "type": "bool",
+          "id": 9
+        },
+        "manage_cdkeys": {
+          "type": "bool",
+          "id": 10
+        },
+        "edit_marketing": {
+          "type": "bool",
+          "id": 11
+        },
+        "economy_support": {
+          "type": "bool",
+          "id": 12
+        },
+        "economy_support_supervisor": {
+          "type": "bool",
+          "id": 13
+        },
+        "manage_pricing": {
+          "type": "bool",
+          "id": 14
+        },
+        "broadcast_live": {
+          "type": "bool",
+          "id": 15
+        },
+        "view_marketing_traffic": {
+          "type": "bool",
+          "id": 16
+        },
+        "edit_store_display_content": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CCuratorPreferences": {
+      "fields": {
+        "supported_languages": {
+          "type": "uint32",
+          "id": 1
+        },
+        "platform_windows": {
+          "type": "bool",
+          "id": 2
+        },
+        "platform_mac": {
+          "type": "bool",
+          "id": 3
+        },
+        "platform_linux": {
+          "type": "bool",
+          "id": 4
+        },
+        "vr_content": {
+          "type": "bool",
+          "id": 5
+        },
+        "adult_content_violence": {
+          "type": "bool",
+          "id": 6
+        },
+        "adult_content_sex": {
+          "type": "bool",
+          "id": 7
+        },
+        "timestamp_updated": {
+          "type": "uint32",
+          "id": 8
+        },
+        "tagids_curated": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "packed": false
+          }
+        },
+        "tagids_filtered": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 10,
+          "options": {
+            "packed": false
+          }
+        },
+        "website_title": {
+          "type": "string",
+          "id": 11
+        },
+        "website_url": {
+          "type": "string",
+          "id": 12
+        },
+        "discussion_url": {
+          "type": "string",
+          "id": 13
+        },
+        "show_broadcast": {
+          "type": "bool",
+          "id": 14
+        }
+      }
+    },
+    "CLocalizationToken": {
+      "fields": {
+        "language": {
+          "type": "uint32",
+          "id": 1
+        },
+        "localized_string": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClanEventUserNewsTuple": {
+      "fields": {
+        "clanid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "announcement_gid": {
+          "type": "fixed64",
+          "id": 3
+        },
+        "rtime_start": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rtime_end": {
+          "type": "uint32",
+          "id": 5
+        },
+        "priority_score": {
+          "type": "uint32",
+          "id": 6
+        },
+        "type": {
+          "type": "uint32",
+          "id": 7
+        },
+        "clamp_range_slot": {
+          "type": "uint32",
+          "id": 8
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 9
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "CClanMatchEventByRange": {
+      "fields": {
+        "rtime_before": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rtime_after": {
+          "type": "uint32",
+          "id": 2
+        },
+        "qualified": {
+          "type": "uint32",
+          "id": 3
+        },
+        "events": {
+          "rule": "repeated",
+          "type": ".CClanEventUserNewsTuple",
+          "id": 4
+        }
+      }
+    },
+    "CCommunity_ClanAnnouncementInfo": {
+      "fields": {
+        "gid": {
+          "type": "uint64",
+          "id": 1
+        },
+        "clanid": {
+          "type": "uint64",
+          "id": 2
+        },
+        "posterid": {
+          "type": "uint64",
+          "id": 3
+        },
+        "headline": {
+          "type": "string",
+          "id": 4
+        },
+        "posttime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "updatetime": {
+          "type": "uint32",
+          "id": 6
+        },
+        "body": {
+          "type": "string",
+          "id": 7
+        },
+        "commentcount": {
+          "type": "int32",
+          "id": 8
+        },
+        "tags": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 9
+        },
+        "language": {
+          "type": "int32",
+          "id": 10
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 11
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_gid": {
+          "type": "fixed64",
+          "id": 13
+        },
+        "voteupcount": {
+          "type": "int32",
+          "id": 14
+        },
+        "votedowncount": {
+          "type": "int32",
+          "id": 15
+        },
+        "ban_check_result": {
+          "type": ".EBanContentCheckResult",
+          "id": 16,
+          "options": {
+            "default": "k_EBanContentCheckResult_NotScanned"
+          }
+        },
+        "banned": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CClanEventData": {
+      "fields": {
+        "gid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "clan_steamid": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "event_name": {
+          "type": "string",
+          "id": 3
+        },
+        "event_type": {
+          "type": ".EProtoClanEventType",
+          "id": 4,
+          "options": {
+            "default": "k_EClanOtherEvent"
+          }
+        },
+        "appid": {
+          "type": "uint32",
+          "id": 5
+        },
+        "server_address": {
+          "type": "string",
+          "id": 6
+        },
+        "server_password": {
+          "type": "string",
+          "id": 7
+        },
+        "rtime32_start_time": {
+          "type": "uint32",
+          "id": 8
+        },
+        "rtime32_end_time": {
+          "type": "uint32",
+          "id": 9
+        },
+        "comment_count": {
+          "type": "int32",
+          "id": 10
+        },
+        "creator_steamid": {
+          "type": "fixed64",
+          "id": 11
+        },
+        "last_update_steamid": {
+          "type": "fixed64",
+          "id": 12
+        },
+        "event_notes": {
+          "type": "string",
+          "id": 13
+        },
+        "jsondata": {
+          "type": "string",
+          "id": 14
+        },
+        "announcement_body": {
+          "type": ".CCommunity_ClanAnnouncementInfo",
+          "id": 15
+        },
+        "published": {
+          "type": "bool",
+          "id": 16
+        },
+        "hidden": {
+          "type": "bool",
+          "id": 17
+        },
+        "rtime32_visibility_start": {
+          "type": "uint32",
+          "id": 18
+        },
+        "rtime32_visibility_end": {
+          "type": "uint32",
+          "id": 19
+        },
+        "broadcaster_accountid": {
+          "type": "uint32",
+          "id": 20
+        },
+        "follower_count": {
+          "type": "uint32",
+          "id": 21
+        },
+        "ignore_count": {
+          "type": "uint32",
+          "id": 22
+        },
+        "forum_topic_id": {
+          "type": "fixed64",
+          "id": 23
+        },
+        "rtime32_last_modified": {
+          "type": "uint32",
+          "id": 24
+        },
+        "news_post_gid": {
+          "type": "fixed64",
+          "id": 25
+        },
+        "rtime_mod_reviewed": {
+          "type": "uint32",
+          "id": 26
+        },
+        "featured_app_tagid": {
+          "type": "uint32",
+          "id": 27
+        },
+        "referenced_appids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 28,
+          "options": {
+            "packed": false
+          }
+        },
+        "build_id": {
+          "type": "uint32",
+          "id": 29
+        },
+        "build_branch": {
+          "type": "string",
+          "id": 30
+        }
+      }
+    },
+    "CBilling_Address": {
+      "fields": {
+        "first_name": {
+          "type": "string",
+          "id": 1
+        },
+        "last_name": {
+          "type": "string",
+          "id": 2
+        },
+        "address1": {
+          "type": "string",
+          "id": 3
+        },
+        "address2": {
+          "type": "string",
+          "id": 4
+        },
+        "city": {
+          "type": "string",
+          "id": 5
+        },
+        "us_state": {
+          "type": "string",
+          "id": 6
+        },
+        "country_code": {
+          "type": "string",
+          "id": 7
+        },
+        "postcode": {
+          "type": "string",
+          "id": 8
+        },
+        "zip_plus4": {
+          "type": "int32",
+          "id": 9
+        },
+        "phone": {
+          "type": "string",
+          "id": 10
+        }
+      }
+    },
+    "CPackageReservationStatus": {
+      "fields": {
+        "packageid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "reservation_state": {
+          "type": "int32",
+          "id": 2
+        },
+        "queue_position": {
+          "type": "int32",
+          "id": 3
+        },
+        "total_queue_size": {
+          "type": "int32",
+          "id": 4
+        },
+        "reservation_country_code": {
+          "type": "string",
+          "id": 5
+        },
+        "expired": {
+          "type": "bool",
+          "id": 6
+        },
+        "time_expires": {
+          "type": "uint32",
+          "id": 7
+        },
+        "time_reserved": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "CMsgKeyValuePair": {
+      "fields": {
+        "name": {
+          "type": "string",
+          "id": 1
+        },
+        "value": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CMsgKeyValueSet": {
+      "fields": {
+        "pairs": {
+          "rule": "repeated",
+          "type": ".CMsgKeyValuePair",
+          "id": 1
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "service_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.ServiceOptions"
+    },
+    "service_execution_site": {
+      "type": ".EProtoExecutionSite",
+      "id": 50008,
+      "extend": ".google.protobuf.ServiceOptions",
+      "options": {
+        "default": "k_EProtoExecutionSiteUnknown"
+      }
+    },
+    "method_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.MethodOptions"
+    },
+    "enum_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumOptions"
+    },
+    "enum_value_description": {
+      "type": "string",
+      "id": 50000,
+      "extend": ".google.protobuf.EnumValueOptions"
+    },
+    "EProtoExecutionSite": {
+      "values": {
+        "k_EProtoExecutionSiteUnknown": 0,
+        "k_EProtoExecutionSiteSteamClient": 2
+      }
+    },
+    "NoResponse": {
+      "fields": {}
+    },
+    "EContentDescriptorID": {
+      "values": {
+        "k_EContentDescriptor_FrequentNudityOrSexualContent": 1,
+        "k_EContentDescriptor_FrequentViolenceOrGore": 2,
+        "k_EContentDescriptor_StrongSexualContent": 3,
+        "k_EContentDescriptor_UNUSED_4": 4,
+        "k_EContentDescriptor_AnyMatureContent": 5
+      }
+    },
+    "EPublishedFileQueryType": {
+      "values": {
+        "k_PublishedFileQueryType_RankedByVote": 0,
+        "k_PublishedFileQueryType_RankedByPublicationDate": 1,
+        "k_PublishedFileQueryType_AcceptedForGameRankedByAcceptanceDate": 2,
+        "k_PublishedFileQueryType_RankedByTrend": 3,
+        "k_PublishedFileQueryType_FavoritedByFriendsRankedByPublicationDate": 4,
+        "k_PublishedFileQueryType_CreatedByFriendsRankedByPublicationDate": 5,
+        "k_PublishedFileQueryType_RankedByNumTimesReported": 6,
+        "k_PublishedFileQueryType_CreatedByFollowedUsersRankedByPublicationDate": 7,
+        "k_PublishedFileQueryType_NotYetRated": 8,
+        "k_PublishedFileQueryType_RankedByTotalUniqueSubscriptions": 9,
+        "k_PublishedFileQueryType_RankedByTotalVotesAsc": 10,
+        "k_PublishedFileQueryType_RankedByVotesUp": 11,
+        "k_PublishedFileQueryType_RankedByTextSearch": 12,
+        "k_PublishedFileQueryType_RankedByPlaytimeTrend": 13,
+        "k_PublishedFileQueryType_RankedByTotalPlaytime": 14,
+        "k_PublishedFileQueryType_RankedByAveragePlaytimeTrend": 15,
+        "k_PublishedFileQueryType_RankedByLifetimeAveragePlaytime": 16,
+        "k_PublishedFileQueryType_RankedByPlaytimeSessionsTrend": 17,
+        "k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions": 18,
+        "k_PublishedFileQueryType_RankedByInappropriateContentRating": 19,
+        "k_PublishedFileQueryType_RankedByBanContentCheck": 20,
+        "k_PublishedFileQueryType_RankedByLastUpdatedDate": 21
+      }
+    },
+    "EPublishedFileInappropriateProvider": {
+      "values": {
+        "k_EPublishedFileInappropriateProvider_Invalid": 0,
+        "k_EPublishedFileInappropriateProvider_Google": 1,
+        "k_EPublishedFileInappropriateProvider_Amazon": 2
+      }
+    },
+    "EPublishedFileInappropriateResult": {
+      "values": {
+        "k_EPublishedFileInappropriateResult_NotScanned": 0,
+        "k_EPublishedFileInappropriateResult_VeryUnlikely": 1,
+        "k_EPublishedFileInappropriateResult_Unlikely": 30,
+        "k_EPublishedFileInappropriateResult_Possible": 50,
+        "k_EPublishedFileInappropriateResult_Likely": 75,
+        "k_EPublishedFileInappropriateResult_VeryLikely": 100
+      }
+    },
+    "EPersonaStateFlag": {
+      "values": {
+        "k_EPersonaStateFlag_HasRichPresence": 1,
+        "k_EPersonaStateFlag_InJoinableGame": 2,
+        "k_EPersonaStateFlag_Golden": 4,
+        "k_EPersonaStateFlag_RemotePlayTogether": 8,
+        "k_EPersonaStateFlag_ClientTypeWeb": 256,
+        "k_EPersonaStateFlag_ClientTypeMobile": 512,
+        "k_EPersonaStateFlag_ClientTypeTenfoot": 1024,
+        "k_EPersonaStateFlag_ClientTypeVR": 2048,
+        "k_EPersonaStateFlag_LaunchTypeGamepad": 4096,
+        "k_EPersonaStateFlag_LaunchTypeCompatTool": 8192
+      }
+    },
+    "EContentCheckProvider": {
+      "values": {
+        "k_EContentCheckProvider_Invalid": 0,
+        "k_EContentCheckProvider_Google": 1,
+        "k_EContentCheckProvider_Amazon": 2,
+        "k_EContentCheckProvider_Local": 3
+      }
+    },
+    "EProfileCustomizationType": {
+      "values": {
+        "k_EProfileCustomizationTypeInvalid": 0,
+        "k_EProfileCustomizationTypeRareAchievementShowcase": 1,
+        "k_EProfileCustomizationTypeGameCollector": 2,
+        "k_EProfileCustomizationTypeItemShowcase": 3,
+        "k_EProfileCustomizationTypeTradeShowcase": 4,
+        "k_EProfileCustomizationTypeBadges": 5,
+        "k_EProfileCustomizationTypeFavoriteGame": 6,
+        "k_EProfileCustomizationTypeScreenshotShowcase": 7,
+        "k_EProfileCustomizationTypeCustomText": 8,
+        "k_EProfileCustomizationTypeFavoriteGroup": 9,
+        "k_EProfileCustomizationTypeRecommendation": 10,
+        "k_EProfileCustomizationTypeWorkshopItem": 11,
+        "k_EProfileCustomizationTypeMyWorkshop": 12,
+        "k_EProfileCustomizationTypeArtworkShowcase": 13,
+        "k_EProfileCustomizationTypeVideoShowcase": 14,
+        "k_EProfileCustomizationTypeGuides": 15,
+        "k_EProfileCustomizationTypeMyGuides": 16,
+        "k_EProfileCustomizationTypeAchievements": 17,
+        "k_EProfileCustomizationTypeGreenlight": 18,
+        "k_EProfileCustomizationTypeMyGreenlight": 19,
+        "k_EProfileCustomizationTypeSalien": 20,
+        "k_EProfileCustomizationTypeLoyaltyRewardReactions": 21,
+        "k_EProfileCustomizationTypeSingleArtworkShowcase": 22,
+        "k_EProfileCustomizationTypeAchievementsCompletionist": 23,
+        "k_EProfileCustomizationTypeReplay": 24
+      }
+    },
+    "EPublishedFileStorageSystem": {
+      "values": {
+        "k_EPublishedFileStorageSystemInvalid": 0,
+        "k_EPublishedFileStorageSystemLegacyCloud": 1,
+        "k_EPublishedFileStorageSystemDepot": 2,
+        "k_EPublishedFileStorageSystemUGCCloud": 3
+      }
+    },
+    "ECloudStoragePersistState": {
+      "values": {
+        "k_ECloudStoragePersistStatePersisted": 0,
+        "k_ECloudStoragePersistStateForgotten": 1,
+        "k_ECloudStoragePersistStateDeleted": 2
+      }
+    },
+    "ESDCardFormatStage": {
+      "values": {
+        "k_ESDCardFormatStage_Invalid": 0,
+        "k_ESDCardFormatStage_Starting": 1,
+        "k_ESDCardFormatStage_Testing": 2,
+        "k_ESDCardFormatStage_Rescuing": 3,
+        "k_ESDCardFormatStage_Formatting": 4,
+        "k_ESDCardFormatStage_Finalizing": 5
+      }
+    },
+    "ESystemFanControlMode": {
+      "values": {
+        "k_SystemFanControlMode_Invalid": 0,
+        "k_SystemFanControlMode_Disabled": 1,
+        "k_SystemFanControlMode_Default": 2
+      }
+    },
+    "EColorProfile": {
+      "values": {
+        "k_EColorProfile_Invalid": 0,
+        "k_EColorProfile_Native": 1,
+        "k_EColorProfile_Standard": 2,
+        "k_EColorProfile_Vivid": 3
+      }
+    },
+    "EBluetoothDeviceType": {
+      "values": {
+        "k_BluetoothDeviceType_Invalid": 0,
+        "k_BluetoothDeviceType_Unknown": 1,
+        "k_BluetoothDeviceType_Phone": 2,
+        "k_BluetoothDeviceType_Computer": 3,
+        "k_BluetoothDeviceType_Headset": 4,
+        "k_BluetoothDeviceType_Headphones": 5,
+        "k_BluetoothDeviceType_Speakers": 6,
+        "k_BluetoothDeviceType_OtherAudio": 7,
+        "k_BluetoothDeviceType_Mouse": 8,
+        "k_BluetoothDeviceType_Joystick": 9,
+        "k_BluetoothDeviceType_Gamepad": 10,
+        "k_BluetoothDeviceType_Keyboard": 11
+      }
+    },
+    "ESystemAudioDirection": {
+      "values": {
+        "k_SystemAudioDirection_Invalid": 0,
+        "k_SystemAudioDirection_Input": 1,
+        "k_SystemAudioDirection_Output": 2
+      }
+    },
+    "ESystemAudioChannel": {
+      "values": {
+        "k_SystemAudioChannel_Invalid": 0,
+        "k_SystemAudioChannel_Aggregated": 1,
+        "k_SystemAudioChannel_FrontLeft": 2,
+        "k_SystemAudioChannel_FrontRight": 3,
+        "k_SystemAudioChannel_LFE": 4,
+        "k_SystemAudioChannel_BackLeft": 5,
+        "k_SystemAudioChannel_BackRight": 6,
+        "k_SystemAudioChannel_FrontCenter": 7,
+        "k_SystemAudioChannel_Unknown": 8,
+        "k_SystemAudioChannel_Mono": 9
+      }
+    },
+    "ESystemAudioPortType": {
+      "values": {
+        "k_SystemAudioPortType_Invalid": 0,
+        "k_SystemAudioPortType_Unknown": 1,
+        "k_SystemAudioPortType_Audio32f": 2,
+        "k_SystemAudioPortType_Midi8b": 3,
+        "k_SystemAudioPortType_Video32RGBA": 4
+      }
+    },
+    "ESystemAudioPortDirection": {
+      "values": {
+        "k_SystemAudioPortDirection_Invalid": 0,
+        "k_SystemAudioPortDirection_Input": 1,
+        "k_SystemAudioPortDirection_Output": 2
+      }
+    },
+    "ESystemServiceState": {
+      "values": {
+        "k_ESystemServiceState_Unavailable": 0,
+        "k_ESystemServiceState_Disabled": 1,
+        "k_ESystemServiceState_Enabled": 2
+      }
+    },
+    "EGraphicsPerfOverlayLevel": {
+      "values": {
+        "k_EGraphicsPerfOverlayLevel_Hidden": 0,
+        "k_EGraphicsPerfOverlayLevel_Basic": 1,
+        "k_EGraphicsPerfOverlayLevel_Medium": 2,
+        "k_EGraphicsPerfOverlayLevel_Full": 3,
+        "k_EGraphicsPerfOverlayLevel_Minimal": 4
+      }
+    },
+    "EGPUPerformanceLevel": {
+      "values": {
+        "k_EGPUPerformanceLevel_Invalid": 0,
+        "k_EGPUPerformanceLevel_Auto": 1,
+        "k_EGPUPerformanceLevel_Manual": 2,
+        "k_EGPUPerformanceLevel_Low": 3,
+        "k_EGPUPerformanceLevel_High": 4,
+        "k_EGPUPerformanceLevel_Profiling": 5
+      }
+    },
+    "EScalingFilter": {
+      "values": {
+        "k_EScalingFilter_Invalid": 0,
+        "k_EScalingFilter_FSR": 1,
+        "k_EScalingFilter_Nearest": 2,
+        "k_EScalingFilter_Integer": 3,
+        "k_EScalingFilter_Linear": 4,
+        "k_EScalingFilter_NIS": 5
+      }
+    },
+    "ESplitScalingFilter": {
+      "values": {
+        "k_ESplitScalingFilter_Invalid": 0,
+        "k_ESplitScalingFilter_Linear": 1,
+        "k_ESplitScalingFilter_Nearest": 2,
+        "k_ESplitScalingFilter_FSR": 3,
+        "k_ESplitScalingFilter_NIS": 4
+      }
+    },
+    "ESplitScalingScaler": {
+      "values": {
+        "k_ESplitScalingScaler_Invalid": 0,
+        "k_ESplitScalingScaler_Auto": 1,
+        "k_ESplitScalingScaler_Integer": 2,
+        "k_ESplitScalingScaler_Fit": 3,
+        "k_ESplitScalingScaler_Fill": 4,
+        "k_ESplitScalingScaler_Stretch": 5
+      }
+    },
+    "EHDRToneMapOperator": {
+      "values": {
+        "k_EHDRToneMapOperator_Invalid": 0,
+        "k_EHDRToneMapOperator_Uncharted": 1,
+        "k_EHDRToneMapOperator_Reinhard": 2
+      }
+    },
+    "ECPUGovernor": {
+      "values": {
+        "k_ECPUGovernor_Invalid": 0,
+        "k_ECPUGovernor_Perf": 1,
+        "k_ECPUGovernor_Powersave": 2,
+        "k_ECPUGovernor_Manual": 3
+      }
+    },
+    "EUpdaterType": {
+      "values": {
+        "k_EUpdaterType_Invalid": 0,
+        "k_EUpdaterType_Client": 1,
+        "k_EUpdaterType_OS": 2,
+        "k_EUpdaterType_BIOS": 3,
+        "k_EUpdaterType_Aggregated": 4,
+        "k_EUpdaterType_Test1": 5,
+        "k_EUpdaterType_Test2": 6,
+        "k_EUpdaterType_Dummy": 7
+      }
+    },
+    "EUpdaterState": {
+      "values": {
+        "k_EUpdaterState_Invalid": 0,
+        "k_EUpdaterState_UpToDate": 2,
+        "k_EUpdaterState_Checking": 3,
+        "k_EUpdaterState_Available": 4,
+        "k_EUpdaterState_Applying": 5,
+        "k_EUpdaterState_ClientRestartPending": 6,
+        "k_EUpdaterState_SystemRestartPending": 7
+      }
+    },
+    "EStorageBlockContentType": {
+      "values": {
+        "k_EStorageBlockContentType_Invalid": 0,
+        "k_EStorageBlockContentType_Unknown": 1,
+        "k_EStorageBlockContentType_FileSystem": 2,
+        "k_EStorageBlockContentType_Crypto": 3,
+        "k_EStorageBlockContentType_Raid": 4
+      }
+    },
+    "EStorageBlockFileSystemType": {
+      "values": {
+        "k_EStorageBlockFileSystemType_Invalid": 0,
+        "k_EStorageBlockFileSystemType_Unknown": 1,
+        "k_EStorageBlockFileSystemType_VFat": 2,
+        "k_EStorageBlockFileSystemType_Ext4": 3
+      }
+    },
+    "EStorageDriveMediaType": {
+      "values": {
+        "k_EStorageDriveMediaType_Invalid": 0,
+        "k_EStorageDriveMediaType_Unknown": 1,
+        "k_EStorageDriveMediaType_HDD": 2,
+        "k_EStorageDriveMediaType_SSD": 3,
+        "k_EStorageDriveMediaType_Removable": 4
+      }
+    },
+    "ESystemDisplayCompatibilityMode": {
+      "values": {
+        "k_ESystemDisplayCompatibilityMode_Invalid": 0,
+        "k_ESystemDisplayCompatibilityMode_None": 1,
+        "k_ESystemDisplayCompatibilityMode_MinimalBandwith": 2
+      }
+    },
+    "ESteamDeckCompatibilityCategory": {
+      "values": {
+        "k_ESteamDeckCompatibilityCategory_Unknown": 0,
+        "k_ESteamDeckCompatibilityCategory_Unsupported": 1,
+        "k_ESteamDeckCompatibilityCategory_Playable": 2,
+        "k_ESteamDeckCompatibilityCategory_Verified": 3
+      }
+    },
+    "ESteamDeckCompatibilityResultDisplayType": {
+      "values": {
+        "k_ESteamDeckCompatibilityResultDisplayType_Invisible": 0,
+        "k_ESteamDeckCompatibilityResultDisplayType_Informational": 1,
+        "k_ESteamDeckCompatibilityResultDisplayType_Unsupported": 2,
+        "k_ESteamDeckCompatibilityResultDisplayType_Playable": 3,
+        "k_ESteamDeckCompatibilityResultDisplayType_Verified": 4
+      }
+    },
+    "EACState": {
+      "values": {
+        "k_EACState_Unknown": 0,
+        "k_EACState_Disconnected": 1,
+        "k_EACState_Connected": 2,
+        "k_EACState_ConnectedSlow": 3
+      }
+    },
+    "EBatteryState": {
+      "values": {
+        "k_EBatteryState_Unknown": 0,
+        "k_EBatteryState_Discharging": 1,
+        "k_EBatteryState_Charging": 2,
+        "k_EBatteryState_Full": 3
+      }
+    },
+    "EOSBranch": {
+      "values": {
+        "k_EOSBranch_Unknown": 0,
+        "k_EOSBranch_Release": 1,
+        "k_EOSBranch_ReleaseCandidate": 2,
+        "k_EOSBranch_Beta": 3,
+        "k_EOSBranch_BetaCandidate": 4,
+        "k_EOSBranch_Main": 5,
+        "k_EOSBranch_Staging": 6
+      }
+    },
+    "ECommunityItemClass": {
+      "values": {
+        "k_ECommunityItemClass_Invalid": 0,
+        "k_ECommunityItemClass_Badge": 1,
+        "k_ECommunityItemClass_GameCard": 2,
+        "k_ECommunityItemClass_ProfileBackground": 3,
+        "k_ECommunityItemClass_Emoticon": 4,
+        "k_ECommunityItemClass_BoosterPack": 5,
+        "k_ECommunityItemClass_Consumable": 6,
+        "k_ECommunityItemClass_GameGoo": 7,
+        "k_ECommunityItemClass_ProfileModifier": 8,
+        "k_ECommunityItemClass_Scene": 9,
+        "k_ECommunityItemClass_SalienItem": 10,
+        "k_ECommunityItemClass_Sticker": 11,
+        "k_ECommunityItemClass_ChatEffect": 12,
+        "k_ECommunityItemClass_MiniProfileBackground": 13,
+        "k_ECommunityItemClass_AvatarFrame": 14,
+        "k_ECommunityItemClass_AnimatedAvatar": 15,
+        "k_ECommunityItemClass_SteamDeckKeyboardSkin": 16,
+        "k_ECommunityItemClass_SteamDeckStartupMovie": 17
+      }
+    },
+    "ESteamDeckCompatibilityFeedback": {
+      "values": {
+        "k_ESteamDeckCompatibilityFeedback_Unset": 0,
+        "k_ESteamDeckCompatibilityFeedback_Agree": 1,
+        "k_ESteamDeckCompatibilityFeedback_Disagree": 2,
+        "k_ESteamDeckCompatibilityFeedback_Ignore": 3
+      }
+    },
+    "EProvideDeckFeedbackPreference": {
+      "values": {
+        "k_EProvideDeckFeedbackPreference_Unset": 0,
+        "k_EProvideDeckFeedbackPreference_Yes": 1,
+        "k_EProvideDeckFeedbackPreference_No": 2
+      }
+    },
+    "ETouchGesture": {
+      "values": {
+        "k_ETouchGestureNone": 0,
+        "k_ETouchGestureTouch": 1,
+        "k_ETouchGestureTap": 2,
+        "k_ETouchGestureDoubleTap": 3,
+        "k_ETouchGestureShortPress": 4,
+        "k_ETouchGestureLongPress": 5,
+        "k_ETouchGestureLongTap": 6,
+        "k_ETouchGestureTwoFingerTap": 7,
+        "k_ETouchGestureTapCancelled": 8,
+        "k_ETouchGesturePinchBegin": 9,
+        "k_ETouchGesturePinchUpdate": 10,
+        "k_ETouchGesturePinchEnd": 11,
+        "k_ETouchGestureFlingStart": 12,
+        "k_ETouchGestureFlingCancelled": 13
+      }
+    },
+    "ESessionPersistence": {
+      "values": {
+        "k_ESessionPersistence_Invalid": -1,
+        "k_ESessionPersistence_Ephemeral": 0,
+        "k_ESessionPersistence_Persistent": 1
+      }
+    },
+    "ENewSteamAnnouncementState": {
+      "values": {
+        "k_ENewSteamAnnouncementState_Invalid": 0,
+        "k_ENewSteamAnnouncementState_AllRead": 1,
+        "k_ENewSteamAnnouncementState_NewAnnouncement": 2,
+        "k_ENewSteamAnnouncementState_FeaturedAnnouncement": 3
+      }
+    },
+    "EContentHubDiscountFilterType": {
+      "values": {
+        "k_EContentHubDiscountFilterType_None": 0,
+        "k_EContentHubDiscountFilterType_DiscountsOnly": 1,
+        "k_EContentHubDiscountFilterType_PrioritizeDiscounts": 2
+      }
+    },
+    "CStorePageFilter": {
+      "fields": {
+        "sale_filter": {
+          "type": ".CStorePageFilter.SalePageFilter",
+          "id": 1
+        },
+        "content_hub_filter": {
+          "type": ".CStorePageFilter.ContentHubFilter",
+          "id": 2
+        },
+        "store_filters": {
+          "rule": "repeated",
+          "type": ".CStorePageFilter.StoreFilter",
+          "id": 3
+        }
+      },
+      "nested": {
+        "SalePageFilter": {
+          "fields": {
+            "sale_tagid": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "ContentHubFilter": {
+          "fields": {
+            "hub_type": {
+              "type": "string",
+              "id": 1
+            },
+            "hub_category": {
+              "type": "string",
+              "id": 2
+            },
+            "hub_tagid": {
+              "type": "uint32",
+              "id": 3
+            },
+            "discount_filter": {
+              "type": ".EContentHubDiscountFilterType",
+              "id": 4,
+              "options": {
+                "default": "k_EContentHubDiscountFilterType_None"
+              }
+            },
+            "optin": {
+              "type": ".CStorePageFilter.ContentHubFilter.OptInInfo",
+              "id": 5
+            }
+          },
+          "nested": {
+            "OptInInfo": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "optin_tagid": {
+                  "type": "uint32",
+                  "id": 2
+                },
+                "prune_tagid": {
+                  "type": "uint32",
+                  "id": 3
+                },
+                "optin_only": {
+                  "type": "bool",
+                  "id": 4
+                }
+              }
+            }
+          }
+        },
+        "StoreFilter": {
+          "fields": {
+            "filter_json": {
+              "type": "string",
+              "id": 1
+            },
+            "cache_key": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -25,43 +25,6 @@ message CMsgClientAppInfoRequest {
 	optional bool supports_batches = 2 [default = false];
 }
 
-message CMsgClientAppInfoResponse {
-	option (msgpool_hard_limit) = 0;
-
-	message App {
-		message Section {
-			optional uint32 section_id = 1;
-			optional bytes section_kv = 2;
-		}
-
-		optional uint32 app_id = 1;
-		optional uint32 change_number = 2;
-		repeated .CMsgClientAppInfoResponse.App.Section sections = 3;
-	}
-
-	repeated .CMsgClientAppInfoResponse.App apps = 1;
-	repeated uint32 apps_unknown = 2;
-	optional uint32 apps_pending = 3;
-}
-
-message CMsgClientPackageInfoRequest {
-	repeated uint32 package_ids = 1;
-	optional bool meta_data_only = 2;
-}
-
-message CMsgClientPackageInfoResponse {
-	message Package {
-		optional uint32 package_id = 1;
-		optional uint32 change_number = 2;
-		optional bytes sha = 3;
-		optional bytes buffer = 4;
-	}
-
-	repeated .CMsgClientPackageInfoResponse.Package packages = 1;
-	repeated uint32 packages_unknown = 2;
-	optional uint32 packages_pending = 3;
-}
-
 message CMsgClientPICSChangesSinceRequest {
 	optional uint32 since_change_number = 1;
 	optional bool send_app_info_changes = 2;
@@ -108,7 +71,8 @@ message CMsgClientPICSProductInfoRequest {
 	repeated .CMsgClientPICSProductInfoRequest.AppInfo apps = 2;
 	optional bool meta_data_only = 3;
 	optional uint32 num_prev_failed = 4;
-	optional uint32 supports_package_tokens = 5;
+	optional uint32 OBSOLETE_supports_package_tokens = 5;
+	optional uint32 sequence_number = 6;
 }
 
 message CMsgClientPICSProductInfoResponse {

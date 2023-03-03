@@ -118,6 +118,10 @@
         "steamid": {
           "type": "fixed64",
           "id": 1
+        },
+        "remote_client_id": {
+          "type": "fixed64",
+          "id": 2
         }
       }
     },

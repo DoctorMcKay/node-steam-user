@@ -27,6 +27,13 @@ message CMsgTest_NotifyServer_Notification {
 	optional string some_text = 1 [(description) = "Some string."];
 }
 
+message CMsgTest_NoBody_Request {
+}
+
+message CMsgTest_CallClient_Response {
+	optional int32 testvalue = 1;
+}
+
 service TestSteamClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 
@@ -47,4 +54,8 @@ service TestServerFromClient {
 	rpc NotifyServer (.CMsgTest_NotifyServer_Notification) returns (.NoResponse) {
 		option (method_description) = "Some description - NotifyServer.";
 	}
+}
+
+service TestExternalPrivilege {
+	rpc CallClient (.CMsgTest_NoBody_Request) returns (.CMsgTest_CallClient_Response);
 }

@@ -86,6 +86,12 @@ message CMsgClientGameConnectTokens {
 }
 
 message CMsgClientGamesPlayed {
+	message ProcessInfo {
+		optional uint32 process_id = 1;
+		optional uint32 process_id_parent = 2;
+		optional bool parent_is_steam = 3;
+	}
+
 	message GamePlayed {
 		optional uint64 steam_id_gs = 1;
 		optional fixed64 game_id = 2;
@@ -118,6 +124,7 @@ message CMsgClientGamesPlayed {
 		optional uint32 compat_tool_build_id = 29;
 		optional string beta_name = 30;
 		optional uint32 dlc_context = 31;
+		repeated .CMsgClientGamesPlayed.ProcessInfo process_id_list = 32;
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;

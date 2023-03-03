@@ -3,6 +3,22 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+message CTwoFactor_Time_Request {
+	optional uint64 sender_time = 1 [(description) = "Current time on the sender (for stats, don't trust this)"];
+}
+
+message CTwoFactor_Time_Response {
+	optional uint64 server_time = 1 [(description) = "Current server time"];
+	optional uint64 skew_tolerance_seconds = 2 [(description) = "Time skew we'll tolerate before applying an adjustment"];
+	optional uint64 large_time_jink = 3 [(description) = "Re-sync if local time jitters by this much"];
+	optional uint32 probe_frequency_seconds = 4 [(description) = "Time probe frequency if phone time is synchronized"];
+	optional uint32 adjusted_time_probe_frequency_seconds = 5 [(description) = "Time probe frequency if phone time is not synchronized"];
+	optional uint32 hint_probe_frequency_seconds = 6 [(description) = "Floor of probe frequency, no matter what"];
+	optional uint32 sync_timeout = 7 [(description) = "More than this, and we call the current sync failed"];
+	optional uint32 try_again_seconds = 8 [(description) = "Seconds to try again after a failed sync"];
+	optional uint32 max_attempts = 9 [(description) = "# times we'll ask for server time before we bail"];
+}
+
 message CTwoFactor_Status_Request {
 	optional fixed64 steamid = 1 [(description) = "steamid to use"];
 }
@@ -21,6 +37,7 @@ message CTwoFactor_Status_Response {
 	optional string classified_agent = 11 [(description) = "Agent that added the authenticator (e.g., ios / android / other)"];
 	optional bool allow_external_authenticator = 12 [(description) = "Allow a third-party authenticator (in addition to two-factor)"];
 	optional uint32 time_transferred = 13 [(description) = "When the token was transferred from another device, if applicable"];
+	optional uint32 version = 14 [(description) = "Current token version"];
 }
 
 message CTwoFactor_AddAuthenticator_Request {
@@ -95,29 +112,6 @@ message CTwoFactor_RemoveAuthenticator_Response {
 	optional uint32 revocation_attempts_remaining = 5 [(description) = "Number of revocation code attempts remaining"];
 }
 
-message CTwoFactor_CreateEmergencyCodes_Request {
-	optional string code = 1;
-}
-
-message CTwoFactor_CreateEmergencyCodes_Response {
-	repeated string codes = 1 [(description) = "Emergency codes"];
-}
-
-message CTwoFactor_DestroyEmergencyCodes_Request {
-	optional fixed64 steamid = 1 [(description) = "steamid to use"];
-}
-
-message CTwoFactor_DestroyEmergencyCodes_Response {
-}
-
-message CTwoFactor_ValidateToken_Request {
-	optional string code = 1 [(description) = "code to validate"];
-}
-
-message CTwoFactor_ValidateToken_Response {
-	optional bool valid = 1 [(description) = "result of validation"];
-}
-
 message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
 }
 
@@ -128,6 +122,7 @@ message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response {
 message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request {
 	optional string sms_code = 1 [(description) = "Code from SMS"];
 	optional bool generate_new_token = 2 [(description) = "Generate new token (instead of removing old one)"];
+	optional uint32 version = 3 [default = 1, (description) = "What the version of our token should be"];
 }
 
 message CRemoveAuthenticatorViaChallengeContinue_Replacement_Token {
@@ -153,6 +148,10 @@ message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response {
 service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
 
+	rpc QueryTime (.CTwoFactor_Time_Request) returns (.CTwoFactor_Time_Response) {
+		option (method_description) = "Get server's idea of the current time";
+	}
+
 	rpc QueryStatus (.CTwoFactor_Status_Request) returns (.CTwoFactor_Status_Response) {
 		option (method_description) = "Get two-factor authentication settings for the logged-in account";
 	}
@@ -175,18 +174,6 @@ service TwoFactor {
 
 	rpc RemoveAuthenticator (.CTwoFactor_RemoveAuthenticator_Request) returns (.CTwoFactor_RemoveAuthenticator_Response) {
 		option (method_description) = "Remove two-factor authentication addition from the logged-in account";
-	}
-
-	rpc CreateEmergencyCodes (.CTwoFactor_CreateEmergencyCodes_Request) returns (.CTwoFactor_CreateEmergencyCodes_Response) {
-		option (method_description) = "Generate emergency authenticator codes";
-	}
-
-	rpc DestroyEmergencyCodes (.CTwoFactor_DestroyEmergencyCodes_Request) returns (.CTwoFactor_DestroyEmergencyCodes_Response) {
-		option (method_description) = "Destroy emergency authenticator codes for the account";
-	}
-
-	rpc ValidateToken (.CTwoFactor_ValidateToken_Request) returns (.CTwoFactor_ValidateToken_Response) {
-		option (method_description) = "Validate (and consume) a token";
 	}
 
 	rpc RemoveAuthenticatorViaChallengeStart (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request) returns (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response) {

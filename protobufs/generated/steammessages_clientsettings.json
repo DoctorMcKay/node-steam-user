@@ -1,0 +1,1543 @@
+{
+  "options": {
+    "optimize_for": "SPEED",
+    "cc_generic_services": true
+  },
+  "nested": {
+    "setting_store": {
+      "type": ".EClientSettingStore",
+      "id": 60000,
+      "extend": ".google.protobuf.FieldOptions",
+      "options": {
+        "default": "k_EClientSettingStore_Invalid"
+      }
+    },
+    "setting_name": {
+      "type": "string",
+      "id": 60001,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_pre_login": {
+      "type": "bool",
+      "id": 60002,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_default_bool": {
+      "type": "bool",
+      "id": 60003,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_default_int": {
+      "type": "int32",
+      "id": 60004,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_default_uint": {
+      "type": "uint32",
+      "id": 60005,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_default_float": {
+      "type": "float",
+      "id": 60006,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_default_string": {
+      "type": "string",
+      "id": 60007,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_readonly": {
+      "type": "bool",
+      "id": 60008,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "setting_description": {
+      "type": "string",
+      "id": 60009,
+      "extend": ".google.protobuf.FieldOptions"
+    },
+    "EClientSettingStore": {
+      "values": {
+        "k_EClientSettingStore_Invalid": 0,
+        "k_EClientSettingStore_ConfigStore_Install": 1,
+        "k_EClientSettingStore_ConfigStore_UserRoaming": 2,
+        "k_EClientSettingStore_ConfigStore_UserLocal": 3,
+        "k_EClientSettingStore_Registry": 4,
+        "k_EClientSettingStore_CustomFunc": 5
+      }
+    },
+    "CMsgHotkey": {
+      "fields": {
+        "key_code": {
+          "type": "uint32",
+          "id": 1
+        },
+        "alt_key": {
+          "type": "bool",
+          "id": 2
+        },
+        "shift_key": {
+          "type": "bool",
+          "id": 3
+        },
+        "ctrl_key": {
+          "type": "bool",
+          "id": 4
+        },
+        "meta_key": {
+          "type": "bool",
+          "id": 5
+        },
+        "display_name": {
+          "type": "string",
+          "id": 6
+        }
+      }
+    },
+    "CMsgClientSettings": {
+      "fields": {
+        "no_save_personal_info": {
+          "type": "bool",
+          "id": 1,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "Software\\Valve\\Steam\\NoSavePersonalInfo"
+          }
+        },
+        "oobe_test_mode_enabled": {
+          "type": "bool",
+          "id": 2,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "Software\\Valve\\Steam\\OOBETestModeEnabled"
+          }
+        },
+        "in_client_beta": {
+          "type": "bool",
+          "id": 3,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc",
+            "(setting_pre_login)": true
+          }
+        },
+        "is_steam_sideloaded": {
+          "type": "bool",
+          "id": 4,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc",
+            "(setting_pre_login)": true
+          }
+        },
+        "preferred_monitor": {
+          "type": "string",
+          "id": 5,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "BigPicture/Monitor"
+          }
+        },
+        "steam_cef_gpu_blocklist_disabled": {
+          "type": "bool",
+          "id": 6,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_Registry",
+            "(setting_name)": "HKEY_CURRENT_USER\\Software\\Valve\\Steam\\CEFGPUBlocklistDisabled"
+          }
+        },
+        "bigpicture_windowed": {
+          "type": "bool",
+          "id": 7,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "BigPicture/Windowed",
+            "(setting_pre_login)": true
+          }
+        },
+        "display_name": {
+          "type": "string",
+          "id": 8,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "UI/Display/Current/Name"
+          }
+        },
+        "is_external_display": {
+          "type": "bool",
+          "id": 9,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "UI/Display/Current/IsExternalDisplay"
+          }
+        },
+        "steam_os_underscan_level": {
+          "type": "float",
+          "id": 10,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "SteamOSScreenUnderscanLevel"
+          }
+        },
+        "steam_os_underscan_enabled": {
+          "type": "bool",
+          "id": 11,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "SteamOSScreenUnderscanEnabled"
+          }
+        },
+        "min_scale_factor": {
+          "type": "float",
+          "id": 12,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "UI/Display/Current/MinScaleFactor"
+          }
+        },
+        "max_scale_factor": {
+          "type": "float",
+          "id": 13,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "UI/Display/Current/MaxScaleFactor"
+          }
+        },
+        "auto_scale_factor": {
+          "type": "float",
+          "id": 14,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "UI/Display/Current/AutoScaleFactor"
+          }
+        },
+        "enable_test_updaters": {
+          "type": "bool",
+          "id": 15,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "EnableTestUpdaters"
+          }
+        },
+        "small_mode": {
+          "type": "bool",
+          "id": 16,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Software\\Valve\\Steam\\SmallMode"
+          }
+        },
+        "disable_all_toasts": {
+          "type": "bool",
+          "id": 17,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserRoaming",
+            "(setting_name)": "DisableAllToasts"
+          }
+        },
+        "disable_toasts_in_game": {
+          "type": "bool",
+          "id": 18,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserRoaming",
+            "(setting_name)": "DisableToastsInGame"
+          }
+        },
+        "show_family_sharing_notifications": {
+          "type": "bool",
+          "id": 3000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "HideSharingNotifications"
+          }
+        },
+        "overlay_fps_counter_corner": {
+          "type": "int32",
+          "id": 4000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\InGameOverlayShowFPSCorner"
+          }
+        },
+        "overlay_fps_counter_high_contrast": {
+          "type": "bool",
+          "id": 4001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\InGameOverlayShowFPSContrast"
+          }
+        },
+        "overlay_key": {
+          "type": ".CMsgHotkey",
+          "id": 4002,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\InGameOverlayShortcutKey",
+            "(setting_default_string)": "Shift\tKEY_TAB"
+          }
+        },
+        "screenshot_key": {
+          "type": ".CMsgHotkey",
+          "id": 4003,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\InGameOverlayScreenshotHotKey",
+            "(setting_default_string)": "KEY_F12"
+          }
+        },
+        "enable_overlay": {
+          "type": "bool",
+          "id": 4004,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\EnableGameOverlay"
+          }
+        },
+        "disable_desktop_game_theater": {
+          "type": "bool",
+          "id": 4005,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\DisableLaunchInVR"
+          }
+        },
+        "enable_screenshot_notification": {
+          "type": "bool",
+          "id": 4006,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\InGameOverlayScreenshotNotification"
+          }
+        },
+        "enable_screenshot_sound": {
+          "type": "bool",
+          "id": 4007,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\InGameOverlayScreenshotPlaySound"
+          }
+        },
+        "save_uncompressed_screenshots": {
+          "type": "bool",
+          "id": 4008,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\InGameOverlayScreenshotSaveUncompressed"
+          }
+        },
+        "screenshots_path": {
+          "type": "string",
+          "id": 4009,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "default_ping_rate": {
+          "type": "int32",
+          "id": 4010,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc",
+            "(setting_readonly)": true,
+            "(setting_description)": "Computed default (automatic) server ping rate based on network speed"
+          }
+        },
+        "server_ping_rate": {
+          "type": "int32",
+          "id": 4011,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "steam_networking_share_ip": {
+          "type": "int32",
+          "id": 4012,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "web_browser_home": {
+          "type": "string",
+          "id": 4013,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "smooth_scroll_webviews": {
+          "type": "bool",
+          "id": 5000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_Registry",
+            "(setting_name)": "HKEY_CURRENT_USER\\Software\\Valve\\Steam\\SmoothScrollWebViews",
+            "(setting_default_bool)": true
+          }
+        },
+        "enable_gpu_accelerated_webviews": {
+          "type": "bool",
+          "id": 5001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "enable_hardware_video_decoding": {
+          "type": "bool",
+          "id": 5003,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "run_at_startup": {
+          "type": "bool",
+          "id": 5004,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "enable_dpi_scaling": {
+          "type": "bool",
+          "id": 5005,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "enable_marketing_messages": {
+          "type": "bool",
+          "id": 5006,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "news\\NotifyAvailableGames"
+          }
+        },
+        "start_in_big_picture_mode": {
+          "type": "bool",
+          "id": 5007,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "jumplist_flags": {
+          "type": "uint32",
+          "id": 5008,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "system\\JumplistSettings",
+            "(setting_default_uint)": 77680
+          }
+        },
+        "library_display_size": {
+          "type": "int32",
+          "id": 7000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "LibraryDisplaySize"
+          }
+        },
+        "library_whats_new_show_only_product_updates": {
+          "type": "bool",
+          "id": 7001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserRoaming",
+            "(setting_name)": "LibraryWhatsNewShowOnlyProductUpdates"
+          }
+        },
+        "show_store_content_on_home": {
+          "type": "bool",
+          "id": 7002,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserRoaming",
+            "(setting_name)": "ShowStoreContentOnHome",
+            "(setting_default_bool)": true
+          }
+        },
+        "start_page": {
+          "type": "string",
+          "id": 7003,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "library_low_bandwidth_mode": {
+          "type": "bool",
+          "id": 7004,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "LibraryLowBandwidthMode"
+          }
+        },
+        "library_low_perf_mode": {
+          "type": "bool",
+          "id": 7005,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "LibraryLowPerfMode"
+          }
+        },
+        "library_disable_community_content": {
+          "type": "bool",
+          "id": 7006,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "LibraryDisableCommunityContent"
+          }
+        },
+        "library_display_icon_in_game_list": {
+          "type": "bool",
+          "id": 7007,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "LibraryDisplayIconInGameList",
+            "(setting_default_bool)": true
+          }
+        },
+        "enable_shader_precache": {
+          "type": "bool",
+          "id": 8000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "enable_shader_background_processing": {
+          "type": "bool",
+          "id": 8001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "shader_precached_size": {
+          "type": "uint64",
+          "id": 8002,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc",
+            "(setting_readonly)": true
+          }
+        },
+        "needs_steam_service_repair": {
+          "type": "bool",
+          "id": 8003,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc",
+            "(setting_readonly)": true
+          }
+        },
+        "download_peer_content": {
+          "type": "int32",
+          "id": 8004,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "download_rate_bits_per_s": {
+          "type": "bool",
+          "id": 8005,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "restrict_auto_updates": {
+          "type": "bool",
+          "id": 8006,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "restrict_auto_updates_start": {
+          "type": "int32",
+          "id": 8007,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "restrict_auto_updates_end": {
+          "type": "int32",
+          "id": 8008,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "download_region": {
+          "type": "int32",
+          "id": 8009,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "download_while_app_running": {
+          "type": "bool",
+          "id": 8010,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "download_throttle_while_streaming": {
+          "type": "bool",
+          "id": 8011,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "download_throttle_rate": {
+          "type": "int32",
+          "id": 8012,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "cloud_enabled": {
+          "type": "bool",
+          "id": 10000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "show_screenshot_manager": {
+          "type": "bool",
+          "id": 10001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserRoaming",
+            "(setting_name)": "Software\\Valve\\Steam\\ShowScreenshotManager"
+          }
+        },
+        "music_volume": {
+          "type": "int32",
+          "id": 11000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        },
+        "music_pause_on_app_start": {
+          "type": "bool",
+          "id": 11001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "Music\\PauseOnAppStartedProcess"
+          }
+        },
+        "music_pause_on_voice_chat": {
+          "type": "bool",
+          "id": 11002,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "Music\\PauseOnVoiceChat"
+          }
+        },
+        "music_download_high_quality": {
+          "type": "bool",
+          "id": 11003,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "Music\\DownloadHighQualityAudioSoundtracks"
+          }
+        },
+        "music_playlist_notification": {
+          "type": "bool",
+          "id": 11004,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "Music\\PlaylistNowPlayingNotification"
+          }
+        },
+        "broadcast_permissions": {
+          "type": "int32",
+          "id": 12000,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\Permissions"
+          }
+        },
+        "broadcast_output_width": {
+          "type": "int32",
+          "id": 12001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\OutputWidth"
+          }
+        },
+        "broadcast_output_height": {
+          "type": "int32",
+          "id": 12002,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\OutputHeight"
+          }
+        },
+        "broadcast_bitrate": {
+          "type": "int32",
+          "id": 12003,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\MaxKbps"
+          }
+        },
+        "broadcast_encoding_option": {
+          "type": "int32",
+          "id": 12004,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\EncoderSetting"
+          }
+        },
+        "broadcast_record_all_video": {
+          "type": "bool",
+          "id": 12005,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\IncludeDesktop"
+          }
+        },
+        "broadcast_record_all_audio": {
+          "type": "bool",
+          "id": 12006,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\RecordSystemAudio"
+          }
+        },
+        "broadcast_record_microphone": {
+          "type": "bool",
+          "id": 12007,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\RecordMic"
+          }
+        },
+        "broadcast_show_upload_stats": {
+          "type": "bool",
+          "id": 12008,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\ShowDebugInfo"
+          }
+        },
+        "broadcast_show_live_reminder": {
+          "type": "bool",
+          "id": 12009,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\ShowReminder"
+          }
+        },
+        "broadcast_chat_corner": {
+          "type": "int32",
+          "id": 12010,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Broadcast\\ShowChat"
+          }
+        },
+        "steam_input_configurator_error_msg_enable": {
+          "type": "bool",
+          "id": 14001,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_Install",
+            "(setting_name)": "SteamInput/Configurator/ErrorMsgEnabled"
+          }
+        },
+        "controller_guide_button_focus_steam": {
+          "type": "bool",
+          "id": 14002,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "Controller_CheckGuideButton"
+          }
+        },
+        "controller_ps4_support": {
+          "type": "bool",
+          "id": 14003,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "SteamController_PS4Support"
+          }
+        },
+        "controller_xbox_support": {
+          "type": "bool",
+          "id": 14004,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "SteamController_XBoxSupport"
+          }
+        },
+        "controller_xbox_driver": {
+          "type": "bool",
+          "id": 14005,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "SteamController_XBoxDriver"
+          }
+        },
+        "controller_switch_support": {
+          "type": "bool",
+          "id": 14006,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "SteamController_SwitchSupport"
+          }
+        },
+        "controller_generic_support": {
+          "type": "bool",
+          "id": 14007,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "SteamController_GenericGamepadSupport"
+          }
+        },
+        "controller_power_off_timeout": {
+          "type": "int32",
+          "id": 14008,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "CSettingsPanelGameController.Timeout",
+            "(setting_default_int)": 15
+          }
+        },
+        "turn_off_controller_on_exit": {
+          "type": "bool",
+          "id": 14009,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_ConfigStore_UserLocal",
+            "(setting_name)": "CSettingsPanelGameController.TurnOff"
+          }
+        },
+        "controller_combine_nintendo_joycons": {
+          "type": "bool",
+          "id": 14010,
+          "options": {
+            "(setting_store)": "k_EClientSettingStore_CustomFunc"
+          }
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "public_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weak_dependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "message_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "source_code_info": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nested_type": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enum_type": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extension_range": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneof_decl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reserved_range": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reserved_name": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "type_name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "default_value": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneof_index": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "json_name": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "input_type": {
+                  "type": "string",
+                  "id": 2
+                },
+                "output_type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "client_streaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "server_streaming": {
+                  "type": "bool",
+                  "id": 6
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "java_package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "java_outer_classname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "java_multiple_files": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "java_generate_equals_and_hash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "java_string_check_utf8": {
+                  "type": "bool",
+                  "id": 27
+                },
+                "optimize_for": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "go_package": {
+                  "type": "string",
+                  "id": 11
+                },
+                "cc_generic_services": {
+                  "type": "bool",
+                  "id": 16
+                },
+                "java_generic_services": {
+                  "type": "bool",
+                  "id": 17
+                },
+                "py_generic_services": {
+                  "type": "bool",
+                  "id": 18
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23
+                },
+                "cc_enable_arenas": {
+                  "type": "bool",
+                  "id": 31
+                },
+                "objc_class_prefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharp_namespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "message_set_wire_format": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "no_standard_descriptor_accessor": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "map_entry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allow_alias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33
+                },
+                "uninterpreted_option": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifier_value": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positive_int_value": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negative_int_value": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "double_value": {
+                  "type": "double",
+                  "id": 6
+                },
+                "string_value": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregate_value": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "name_part": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "is_extension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leading_comments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailing_comments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leading_detached_comments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "source_file": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

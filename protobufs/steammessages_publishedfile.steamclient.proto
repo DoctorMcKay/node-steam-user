@@ -1,5 +1,6 @@
 import "steammessages_base.proto";
 import "steammessages_unified_base.steamclient.proto";
+import "enums_productinfo.proto";
 
 option cc_generic_services = true;
 
@@ -235,6 +236,7 @@ message PublishedFileDetails {
 	optional int32 language = 61 [default = 0, (description) = "The language of the title and description."];
 	optional bool maybe_inappropriate_sex = 65;
 	optional bool maybe_inappropriate_violence = 66;
+	repeated .EContentDescriptorID content_descriptorids = 72;
 	optional uint64 revision_change_number = 67 [(description) = "The change number for the specified revision."];
 	optional .EPublishedFileRevision revision = 68 [default = k_EPublishedFileRevision_Default, (description) = "The revision of the data returned, usually k_EPublishedFileRevision_Latest, but can be another revision/snapshot depending on the caller."];
 	repeated .EPublishedFileRevision available_revisions = 69 [(description) = "Available revisions"];
@@ -504,6 +506,26 @@ message CPublishedFile_GetAppRelationships_Response {
 	repeated .CPublishedFile_GetAppRelationships_Response.AppRelationship app_relationships = 3;
 }
 
+message CPublishedFile_GetAppRelationshipsBatched_Request {
+	repeated uint64 publishedfileids = 1;
+	optional uint32 filter_relationship = 2;
+}
+
+message CPublishedFile_GetAppRelationshipsBatched_Response {
+	message AppRelationship {
+		optional uint32 appid = 1;
+		optional uint32 relationship = 2;
+	}
+
+	message PublishedFileAppRelationship {
+		optional uint64 publishedfileid = 1;
+		optional uint32 result = 2;
+		repeated .CPublishedFile_GetAppRelationshipsBatched_Response.AppRelationship app_relationships = 3;
+	}
+
+	repeated .CPublishedFile_GetAppRelationshipsBatched_Response.PublishedFileAppRelationship relationships = 1;
+}
+
 message CPublishedFile_StartPlaytimeTracking_Request {
 	optional uint32 appid = 1;
 	repeated uint64 publishedfileids = 2;
@@ -696,6 +718,10 @@ service PublishedFile {
 
 	rpc GetAppRelationships (.CPublishedFile_GetAppRelationships_Request) returns (.CPublishedFile_GetAppRelationships_Response) {
 		option (method_description) = "Returns the list of app relationships for this published file";
+	}
+
+	rpc GetAppRelationshipsBatched (.CPublishedFile_GetAppRelationshipsBatched_Request) returns (.CPublishedFile_GetAppRelationshipsBatched_Response) {
+		option (method_description) = "Returns the list of app relationships for set of published files";
 	}
 
 	rpc StartPlaytimeTracking (.CPublishedFile_StartPlaytimeTracking_Request) returns (.CPublishedFile_StartPlaytimeTracking_Response) {

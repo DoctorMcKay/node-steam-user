@@ -111,6 +111,11 @@ message CClientMetrics_DownloadRates_Notification {
 		optional uint64 microseconds = 5;
 		optional bool used_ipv6 = 6;
 		optional bool proxied = 7;
+		optional bool used_http2 = 8;
+		optional uint32 cache_hits = 9;
+		optional uint32 cache_misses = 10;
+		optional uint64 hit_bytes = 11;
+		optional uint64 miss_bytes = 12;
 	}
 
 	optional uint32 cell_id = 1;
@@ -160,6 +165,18 @@ message CClientMetrics_ContentDownloadResponse_Counts_Notification {
 	optional .CClientMetrics_ContentDownloadResponse_Hosts data = 2;
 }
 
+message CClientMetrics_ReportClientArgs_Notification {
+	repeated string client_args = 1;
+	optional bool gpu_webview_regkey_disabled = 2;
+	optional bool suppress_gpu_chrome = 3;
+	optional bool browser_not_supported = 4;
+	optional bool hw_accel_video_regkey_disabled = 5;
+	optional bool mini_mode_enabled = 6;
+	optional bool fps_counter_enabled = 7;
+	optional bool library_low_bandwidth_mode_enabled = 8;
+	optional bool library_low_perf_mode_enabled = 9;
+}
+
 service ClientMetrics {
 	option (service_description) = "A service for client-reported metrics";
 
@@ -173,4 +190,5 @@ service ClientMetrics {
 	rpc ClientContentValidationReport (.CClientMetrics_ContentValidation_Notification) returns (.NoResponse);
 	rpc ClientCloudAppSyncStats (.CClientMetrics_CloudAppSyncStats_Notification) returns (.NoResponse);
 	rpc ClientDownloadResponseCodeCounts (.CClientMetrics_ContentDownloadResponse_Counts_Notification) returns (.NoResponse);
+	rpc ReportClientArgs (.CClientMetrics_ReportClientArgs_Notification) returns (.NoResponse);
 }

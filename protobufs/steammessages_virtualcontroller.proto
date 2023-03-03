@@ -117,7 +117,7 @@ message CVirtualControllerConfig {
 
 	optional string name = 1;
 	repeated .CVirtualControllerConfig.ActionSet actionsets = 2;
-	optional .EMouseMode default_mouse_mode = 3 [default = k_EMouseModeRelative];
+	optional .EMouseMode default_mouse_mode = 3 [default = k_EMouseModeAbsoluteCursor];
 }
 
 message CVirtualControllerLayoutPackage {

@@ -172,7 +172,8 @@ message CAppOverview {
 message CAppOverview_Change {
 	repeated .CAppOverview app_overview = 1;
 	repeated uint32 removed_appid = 2;
-	optional bool complete_update = 3;
+	optional bool full_update = 3;
+	optional bool update_complete = 4;
 }
 
 message CAppBootstrapData {

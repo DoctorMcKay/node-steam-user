@@ -31,8 +31,8 @@ message CHIDDeviceInfo {
 	optional bool is_generic_joystick = 14;
 	optional uint32 caps_bits = 15;
 	optional uint32 session_id = 16;
-	optional uint32 eControllerType_obsolete = 17 [default = 0];
-	optional bool is_xinput_device = 18 [default = false];
+	optional uint32 eControllerType_OBSOLETE = 17 [default = 0];
+	optional bool is_xinput_device_OBSOLETE = 18 [default = false];
 	optional uint32 session_remote_play_together_appid = 19;
 }
 

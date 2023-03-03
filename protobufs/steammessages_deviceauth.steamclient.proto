@@ -112,6 +112,8 @@ message CDeviceAuth_GetAuthorizedAsBorrower_Response {
 		optional bool is_pending = 3;
 		optional bool is_canceled = 4;
 		optional bool is_used = 5;
+		optional uint32 time_removed = 6;
+		optional uint32 time_first = 7;
 	}
 
 	repeated .CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender lenders = 1;
@@ -134,6 +136,7 @@ message CDeviceAuth_GetExcludedGamesInLibrary_Response {
 
 message CDeviceAuth_GetBorrowerPlayHistory_Request {
 	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
 }
 
 message CDeviceAuth_GetBorrowerPlayHistory_Response {

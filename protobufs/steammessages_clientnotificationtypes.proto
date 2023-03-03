@@ -26,6 +26,14 @@ enum EClientNotificationType {
 	k_EClientNotificationType_HardwareSurvey = 21;
 	k_EClientNotificationType_LowDiskSpace = 22;
 	k_EClientNotificationType_BatteryTemperature = 23;
+	k_EClientNotificationType_DockUnsupportedFirmware = 24;
+	k_EClientNotificationType_PeerContentUpload = 25;
+	k_EClientNotificationType_CannotReadControllerGuideButton = 26;
+	k_EClientNotificationType_Comment = 27;
+	k_EClientNotificationType_Wishlist = 28;
+	k_EClientNotificationType_TradeOffer = 29;
+	k_EClientNotificationType_AsyncGame = 30;
+	k_EClientNotificationType_General = 31;
 }
 
 enum ESystemUpdateNotificationType {
@@ -98,6 +106,7 @@ message CClientNotificationFriendMessage {
 	optional string body = 4;
 	optional string icon = 5;
 	optional uint32 notificationid = 6;
+	optional string response_steamurl = 7;
 }
 
 message CClientNotificationGroupChatMessage {
@@ -142,11 +151,6 @@ message CClientNotificationItemAnnouncement {
 	optional bool new_backpack_items = 2;
 }
 
-message CClientNotificationInboxStats {
-	optional uint32 friend_invite_count = 1;
-	optional uint32 new_comment_count = 2;
-}
-
 message CClientNotificationHardwareSurveyPending {
 }
 
@@ -157,4 +161,16 @@ message CClientNotificationLowDiskSpace {
 message CClientNotificationBatteryTemperature {
 	optional uint32 temperature = 1;
 	optional string notification_type = 2;
+}
+
+message CClientNotificationDockUnsupportedFirmware {
+}
+
+message CClientNotificationPeerContentUpload {
+	optional uint32 appid = 1;
+	optional string peer_name = 2;
+}
+
+message CClientNotificationCannotReadControllerGuideButton {
+	optional int32 controller_index = 1;
 }

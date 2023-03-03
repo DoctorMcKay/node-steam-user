@@ -410,6 +410,14 @@
         "is_unmount_supported": {
           "type": "bool",
           "id": 3
+        },
+        "is_trim_supported": {
+          "type": "bool",
+          "id": 4
+        },
+        "is_trim_running": {
+          "type": "bool",
+          "id": 5
         }
       },
       "nested": {
@@ -441,6 +449,13 @@
             "size_bytes": {
               "type": "uint64",
               "id": 6
+            },
+            "media_type": {
+              "type": ".EStorageDriveMediaType",
+              "id": 7,
+              "options": {
+                "default": "k_EStorageDriveMediaType_Invalid"
+              }
             }
           }
         },
@@ -781,6 +796,58 @@
         "nis_sharpness_max": {
           "type": "int32",
           "id": 18
+        },
+        "display_external_refresh_manual_hz_min": {
+          "type": "int32",
+          "id": 19
+        },
+        "display_external_refresh_manual_hz_max": {
+          "type": "int32",
+          "id": 20
+        },
+        "fps_limit_options_external": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 21,
+          "options": {
+            "packed": false
+          }
+        },
+        "is_tearing_supported": {
+          "type": "bool",
+          "id": 22
+        },
+        "is_vrr_supported": {
+          "type": "bool",
+          "id": 23
+        },
+        "is_dynamic_refresh_rate_in_steam_supported": {
+          "type": "bool",
+          "id": 24
+        },
+        "is_split_scaling_and_filtering_supported": {
+          "type": "bool",
+          "id": 25
+        },
+        "split_scaling_filters_available": {
+          "rule": "repeated",
+          "type": ".ESplitScalingFilter",
+          "id": 26,
+          "options": {
+            "packed": false
+          }
+        },
+        "split_scaling_scalers_available": {
+          "rule": "repeated",
+          "type": ".ESplitScalingScaler",
+          "id": 27,
+          "options": {
+            "packed": false
+          }
+        },
+        "is_hdr_supported": {
+          "type": "bool",
+          "id": 28
         }
       }
     },
@@ -825,6 +892,40 @@
         "is_advanced_settings_enabled": {
           "type": "bool",
           "id": 7
+        },
+        "allow_external_display_refresh_control": {
+          "type": "bool",
+          "id": 8
+        },
+        "is_hdr_enabled": {
+          "type": "bool",
+          "id": 9
+        },
+        "force_hdr_10pq_output_debug": {
+          "type": "bool",
+          "id": 11
+        },
+        "hdr_on_sdr_tonemap_operator": {
+          "type": ".EHDRToneMapOperator",
+          "id": 12,
+          "options": {
+            "default": "k_EHDRToneMapOperator_Invalid"
+          }
+        },
+        "is_hdr_debug_heatmap_enabled": {
+          "type": "bool",
+          "id": 13
+        },
+        "debug_force_hdr_support": {
+          "type": "bool",
+          "id": 14
+        },
+        "force_hdr_wide_gammut_for_sdr": {
+          "type": "bool",
+          "id": 15,
+          "options": {
+            "default": true
+          }
         }
       }
     },
@@ -899,6 +1000,48 @@
         "nis_sharpness": {
           "type": "int32",
           "id": 16
+        },
+        "display_external_refresh_manual_hz": {
+          "type": "int32",
+          "id": 17
+        },
+        "fps_limit_external": {
+          "type": "int32",
+          "id": 18
+        },
+        "is_tearing_enabled": {
+          "type": "bool",
+          "id": 19
+        },
+        "is_vrr_enabled": {
+          "type": "bool",
+          "id": 20
+        },
+        "is_composite_debug_enabled": {
+          "type": "bool",
+          "id": 21
+        },
+        "force_composite": {
+          "type": "bool",
+          "id": 22
+        },
+        "use_dynamic_refresh_rate_in_steam": {
+          "type": "bool",
+          "id": 23
+        },
+        "split_scaling_filter": {
+          "type": ".ESplitScalingFilter",
+          "id": 24,
+          "options": {
+            "default": "k_ESplitScalingFilter_Invalid"
+          }
+        },
+        "split_scaling_scaler": {
+          "type": ".ESplitScalingScaler",
+          "id": 25,
+          "options": {
+            "default": "k_ESplitScalingScaler_Invalid"
+          }
         }
       }
     },
@@ -1092,6 +1235,10 @@
         "rtime_estimated_completion": {
           "type": "fixed32",
           "id": 6
+        },
+        "old_fw_workaround": {
+          "type": "int32",
+          "id": 7
         }
       }
     },
@@ -1334,6 +1481,131 @@
         }
       }
     },
+    "CMsgSystemDisplayMode": {
+      "fields": {
+        "id": {
+          "type": "int32",
+          "id": 1
+        },
+        "width": {
+          "type": "int32",
+          "id": 2
+        },
+        "height": {
+          "type": "int32",
+          "id": 3
+        },
+        "refresh_hz": {
+          "type": "int32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgSystemDisplay": {
+      "fields": {
+        "id": {
+          "type": "int32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "description": {
+          "type": "string",
+          "id": 3
+        },
+        "is_primary": {
+          "type": "bool",
+          "id": 4
+        },
+        "is_enabled": {
+          "type": "bool",
+          "id": 5
+        },
+        "is_internal": {
+          "type": "bool",
+          "id": 6
+        },
+        "has_mode_override": {
+          "type": "bool",
+          "id": 7
+        },
+        "width_mm": {
+          "type": "int32",
+          "id": 8
+        },
+        "height_mm": {
+          "type": "int32",
+          "id": 9
+        },
+        "current_mode_id": {
+          "type": "int32",
+          "id": 10
+        },
+        "modes": {
+          "rule": "repeated",
+          "type": ".CMsgSystemDisplayMode",
+          "id": 11
+        },
+        "refresh_rate_min": {
+          "type": "int32",
+          "id": 12
+        },
+        "refresh_rate_max": {
+          "type": "int32",
+          "id": 13
+        },
+        "is_vrr_capable": {
+          "type": "bool",
+          "id": 14
+        },
+        "is_vrr_enabled": {
+          "type": "bool",
+          "id": 15
+        },
+        "is_hdr_capable": {
+          "type": "bool",
+          "id": 16
+        },
+        "is_hdr_enabled": {
+          "type": "bool",
+          "id": 17
+        }
+      }
+    },
+    "CMsgSystemDisplayManagerState": {
+      "fields": {
+        "displays": {
+          "rule": "repeated",
+          "type": ".CMsgSystemDisplay",
+          "id": 1
+        },
+        "is_mode_switching_supported": {
+          "type": "bool",
+          "id": 2
+        },
+        "compatibility_mode": {
+          "type": ".ESystemDisplayCompatibilityMode",
+          "id": 3,
+          "options": {
+            "default": "k_ESystemDisplayCompatibilityMode_Invalid"
+          }
+        }
+      }
+    },
+    "CMsgSystemDisplayManagerSetMode": {
+      "fields": {
+        "display_id": {
+          "type": "int32",
+          "id": 1
+        },
+        "mode_id": {
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
     "CMsgSystemManagerSettings": {
       "fields": {
         "idle_backlight_dim_battery_seconds": {
@@ -1464,6 +1736,10 @@
           "options": {
             "default": "k_EOSBranch_Unknown"
           }
+        },
+        "custom_branch": {
+          "type": "string",
+          "id": 2
         }
       }
     },
@@ -1579,6 +1855,10 @@
           "rule": "repeated",
           "type": ".CMsgSystemUpdateApplyResult",
           "id": 4
+        },
+        "supports_os_updates": {
+          "type": "bool",
+          "id": 5
         }
       }
     },
@@ -1706,6 +1986,36 @@
         }
       }
     },
+    "CMsgMonitorInfo": {
+      "fields": {
+        "selected_display_name": {
+          "rule": "required",
+          "type": "string",
+          "id": 1
+        },
+        "monitors": {
+          "rule": "repeated",
+          "type": ".CMsgMonitorInfo.MonitorInfo",
+          "id": 2
+        }
+      },
+      "nested": {
+        "MonitorInfo": {
+          "fields": {
+            "monitor_device_name": {
+              "rule": "required",
+              "type": "string",
+              "id": 1
+            },
+            "monitor_display_name": {
+              "rule": "required",
+              "type": "string",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
     "EPublishedFileQueryType": {
       "values": {
         "k_PublishedFileQueryType_RankedByVote": 0,
@@ -1796,7 +2106,8 @@
         "k_EProfileCustomizationTypeSalien": 20,
         "k_EProfileCustomizationTypeLoyaltyRewardReactions": 21,
         "k_EProfileCustomizationTypeSingleArtworkShowcase": 22,
-        "k_EProfileCustomizationTypeAchievementsCompletionist": 23
+        "k_EProfileCustomizationTypeAchievementsCompletionist": 23,
+        "k_EProfileCustomizationTypeReplay": 24
       }
     },
     "EPublishedFileStorageSystem": {
@@ -1928,6 +2239,32 @@
         "k_EScalingFilter_NIS": 5
       }
     },
+    "ESplitScalingFilter": {
+      "values": {
+        "k_ESplitScalingFilter_Invalid": 0,
+        "k_ESplitScalingFilter_Linear": 1,
+        "k_ESplitScalingFilter_Nearest": 2,
+        "k_ESplitScalingFilter_FSR": 3,
+        "k_ESplitScalingFilter_NIS": 4
+      }
+    },
+    "ESplitScalingScaler": {
+      "values": {
+        "k_ESplitScalingScaler_Invalid": 0,
+        "k_ESplitScalingScaler_Auto": 1,
+        "k_ESplitScalingScaler_Integer": 2,
+        "k_ESplitScalingScaler_Fit": 3,
+        "k_ESplitScalingScaler_Fill": 4,
+        "k_ESplitScalingScaler_Stretch": 5
+      }
+    },
+    "EHDRToneMapOperator": {
+      "values": {
+        "k_EHDRToneMapOperator_Invalid": 0,
+        "k_EHDRToneMapOperator_Uncharted": 1,
+        "k_EHDRToneMapOperator_Reinhard": 2
+      }
+    },
     "ECPUGovernor": {
       "values": {
         "k_ECPUGovernor_Invalid": 0,
@@ -1976,6 +2313,22 @@
         "k_EStorageBlockFileSystemType_Ext4": 3
       }
     },
+    "EStorageDriveMediaType": {
+      "values": {
+        "k_EStorageDriveMediaType_Invalid": 0,
+        "k_EStorageDriveMediaType_Unknown": 1,
+        "k_EStorageDriveMediaType_HDD": 2,
+        "k_EStorageDriveMediaType_SSD": 3,
+        "k_EStorageDriveMediaType_Removable": 4
+      }
+    },
+    "ESystemDisplayCompatibilityMode": {
+      "values": {
+        "k_ESystemDisplayCompatibilityMode_Invalid": 0,
+        "k_ESystemDisplayCompatibilityMode_None": 1,
+        "k_ESystemDisplayCompatibilityMode_MinimalBandwith": 2
+      }
+    },
     "ESteamDeckCompatibilityCategory": {
       "values": {
         "k_ESteamDeckCompatibilityCategory_Unknown": 0,
@@ -2016,7 +2369,8 @@
         "k_EOSBranch_ReleaseCandidate": 2,
         "k_EOSBranch_Beta": 3,
         "k_EOSBranch_BetaCandidate": 4,
-        "k_EOSBranch_Main": 5
+        "k_EOSBranch_Main": 5,
+        "k_EOSBranch_Staging": 6
       }
     },
     "ECommunityItemClass": {
@@ -2037,7 +2391,8 @@
         "k_ECommunityItemClass_MiniProfileBackground": 13,
         "k_ECommunityItemClass_AvatarFrame": 14,
         "k_ECommunityItemClass_AnimatedAvatar": 15,
-        "k_ECommunityItemClass_SteamDeckKeyboardSkin": 16
+        "k_ECommunityItemClass_SteamDeckKeyboardSkin": 16,
+        "k_ECommunityItemClass_SteamDeckStartupMovie": 17
       }
     },
     "ESteamDeckCompatibilityFeedback": {
@@ -2078,6 +2433,14 @@
         "k_ESessionPersistence_Invalid": -1,
         "k_ESessionPersistence_Ephemeral": 0,
         "k_ESessionPersistence_Persistent": 1
+      }
+    },
+    "ENewSteamAnnouncementState": {
+      "values": {
+        "k_ENewSteamAnnouncementState_Invalid": 0,
+        "k_ENewSteamAnnouncementState_AllRead": 1,
+        "k_ENewSteamAnnouncementState_NewAnnouncement": 2,
+        "k_ENewSteamAnnouncementState_FeaturedAnnouncement": 3
       }
     },
     "msgpool_soft_limit": {
@@ -2207,6 +2570,18 @@
         },
         "bucket": {
           "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGCRoutingProtoBufHeader": {
+      "fields": {
+        "dst_gcid_queue": {
+          "type": "uint64",
+          "id": 1
+        },
+        "dst_gc_dir_index": {
+          "type": "uint32",
           "id": 2
         }
       }
@@ -2357,6 +2732,10 @@
           "type": "uint64",
           "id": 36
         },
+        "routing_gc": {
+          "type": ".CMsgGCRoutingProtoBufHeader",
+          "id": 37
+        },
         "ip": {
           "type": "uint32",
           "id": 15
@@ -2419,6 +2798,10 @@
         "ticket": {
           "type": "bytes",
           "id": 7
+        },
+        "server_secret": {
+          "type": "bytes",
+          "id": 8
         }
       }
     },
@@ -2471,6 +2854,22 @@
         "app_type": {
           "type": "uint32",
           "id": 14
+        },
+        "has_adult_content_sex": {
+          "type": "bool",
+          "id": 15
+        },
+        "has_adult_content_violence": {
+          "type": "bool",
+          "id": 16
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -2760,6 +3159,10 @@
           "options": {
             "default": "k_EBanContentCheckResult_NotScanned"
           }
+        },
+        "banned": {
+          "type": "bool",
+          "id": 17
         }
       }
     },
@@ -2998,15 +3401,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -3079,10 +3473,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -3147,10 +3537,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -3167,21 +3553,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -3224,10 +3595,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -3288,30 +3655,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -3368,17 +3711,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -3394,10 +3731,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -3408,10 +3742,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -3426,45 +3757,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -3473,26 +3782,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3526,24 +3815,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -3563,24 +3843,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -3606,31 +3870,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3690,10 +3938,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3706,22 +3951,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3740,10 +3976,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3762,17 +3995,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3785,16 +4008,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -3910,19 +4124,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }

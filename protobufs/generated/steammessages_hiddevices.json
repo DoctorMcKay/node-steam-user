@@ -94,14 +94,14 @@
           "type": "uint32",
           "id": 16
         },
-        "eControllerType_obsolete": {
+        "eControllerType_OBSOLETE": {
           "type": "uint32",
           "id": 17,
           "options": {
             "default": 0
           }
         },
-        "is_xinput_device": {
+        "is_xinput_device_OBSOLETE": {
           "type": "bool",
           "id": 18,
           "options": {

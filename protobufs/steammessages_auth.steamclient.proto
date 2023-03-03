@@ -19,6 +19,7 @@ enum EAuthSessionGuardType {
 	k_EAuthSessionGuardType_DeviceConfirmation = 4;
 	k_EAuthSessionGuardType_EmailConfirmation = 5;
 	k_EAuthSessionGuardType_MachineToken = 6;
+	k_EAuthSessionGuardType_LegacyMachineAuth = 7;
 }
 
 enum EAuthSessionSecurityHistory {
@@ -32,6 +33,7 @@ enum EAuthTokenRevokeAction {
 	k_EAuthTokenRevokePermanent = 1;
 	k_EAuthTokenRevokeReplaced = 2;
 	k_EAuthTokenRevokeSupport = 3;
+	k_EAuthTokenRevokeConsume = 4;
 }
 
 enum EAuthTokenState {
@@ -41,6 +43,7 @@ enum EAuthTokenState {
 	k_EAuthTokenState_Issued = 3;
 	k_EAuthTokenState_Denied = 4;
 	k_EAuthTokenState_LoggedOut = 5;
+	k_EAuthTokenState_Consumed = 6;
 	k_EAuthTokenState_Revoked = 99;
 }
 
@@ -65,6 +68,7 @@ message CAuthentication_BeginAuthSessionViaQR_Request {
 	optional string device_friendly_name = 1;
 	optional .EAuthTokenPlatformType platform_type = 2 [default = k_EAuthTokenPlatformType_Unknown];
 	optional .CAuthentication_DeviceDetails device_details = 3 [(description) = "User-supplied details about the device attempting to sign in"];
+	optional string website_id = 4 [default = "Unknown", (description) = "(EMachineAuthWebDomain) identifier of client requesting auth"];
 }
 
 message CAuthentication_AllowedConfirmation {
@@ -92,6 +96,8 @@ message CAuthentication_BeginAuthSessionViaCredentials_Request {
 	optional string website_id = 8 [default = "Unknown", (description) = "(EMachineAuthWebDomain) identifier of client requesting auth"];
 	optional .CAuthentication_DeviceDetails device_details = 9 [(description) = "User-supplied details about the device attempting to sign in"];
 	optional string guard_data = 10 [(description) = "steam guard data for client login"];
+	optional uint32 language = 11;
+	optional int32 qos_level = 12 [default = 2, (description) = "[ENetQOSLevel] client-specified priority for this auth attempt"];
 }
 
 message CAuthentication_BeginAuthSessionViaCredentials_Response {
@@ -101,6 +107,8 @@ message CAuthentication_BeginAuthSessionViaCredentials_Response {
 	repeated .CAuthentication_AllowedConfirmation allowed_confirmations = 4 [(description) = "the confirmation types that will be able to confirm the request"];
 	optional uint64 steamid = 5 [(description) = "steamid of the account logging in - will only be included if the credentials were correct"];
 	optional string weak_token = 6 [(description) = "partial-authentication token - limited lifetime and scope, included only if credentials were valid"];
+	optional string agreement_session_url = 7 [(description) = "agreement the user needs to agree to"];
+	optional string extended_error_message = 8 [(description) = "error string to display if supported by the client"];
 }
 
 message CAuthentication_PollAuthSessionStatus_Request {
@@ -117,6 +125,7 @@ message CAuthentication_PollAuthSessionStatus_Response {
 	optional bool had_remote_interaction = 5 [(description) = "whether or not the auth session appears to have had remote interaction from a potential confirmer"];
 	optional string account_name = 6 [(description) = "account name of authenticating account, for use by UI layer"];
 	optional string new_guard_data = 7 [(description) = "if login has been confirmed, may contain remembered machine ID for future login"];
+	optional string agreement_session_url = 8 [(description) = "agreement the user needs to agree to"];
 }
 
 message CAuthentication_GetAuthSessionInfo_Request {
@@ -158,6 +167,7 @@ message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
 }
 
 message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response {
+	optional string agreement_session_url = 7 [(description) = "agreement the user needs to agree to"];
 }
 
 message CAuthentication_AccessToken_GenerateForApp_Request {
@@ -176,7 +186,10 @@ message CAuthentication_RefreshToken_Enumerate_Response {
 	message TokenUsageEvent {
 		optional uint32 time = 1 [(description) = "Approximate time of history event (may be deliberately fuzzed or omitted)"];
 		optional .CMsgIPAddress ip = 2 [(description) = "IP at which event was observed"];
-		optional string locale = 3 [(description) = "city/location name, if known"];
+		optional string locale = 3;
+		optional string country = 4 [(description) = "Location (country code) of event, as inferred from IP"];
+		optional string state = 5 [(description) = "Location (state code) of event, as inferred from IP"];
+		optional string city = 6 [(description) = "Location (city) of event, as inferred from IP"];
 	}
 
 	message RefreshTokenDescription {
@@ -190,6 +203,7 @@ message CAuthentication_RefreshToken_Enumerate_Response {
 		optional uint32 gaming_device_type = 8 [(description) = "EGamingDeviceType - classify console/PC/SteamDeck, if known; applies only for Steam Client devices"];
 		optional .CAuthentication_RefreshToken_Enumerate_Response.TokenUsageEvent first_seen = 9 [(description) = "Information about original authorization event"];
 		optional .CAuthentication_RefreshToken_Enumerate_Response.TokenUsageEvent last_seen = 10 [(description) = "Information about most-recently seen, if known for this device"];
+		optional int32 os_type = 11 [(description) = "EOSType - specific device OS, if known"];
 	}
 
 	repeated .CAuthentication_RefreshToken_Enumerate_Response.RefreshTokenDescription refresh_tokens = 1;
@@ -230,16 +244,31 @@ message CAuthenticationSupport_QueryRefreshTokensByAccount_Request {
 }
 
 message CSupportRefreshTokenDescription {
+	message TokenUsageEvent {
+		optional uint32 time = 1 [(description) = "Approximate time of history event (may be deliberately fuzzed or omitted)"];
+		optional .CMsgIPAddress ip = 2 [(description) = "IP at which event was observed"];
+		optional string country = 3 [(description) = "Location (country code) of event, as inferred from IP"];
+		optional string state = 4 [(description) = "Location (state code) of event, as inferred from IP"];
+		optional string city = 5 [(description) = "Location (city) of event, as inferred from IP"];
+	}
+
 	optional fixed64 token_id = 1;
 	optional string token_description = 2;
 	optional uint32 time_updated = 3;
 	optional .EAuthTokenPlatformType platform_type = 4 [default = k_EAuthTokenPlatformType_Unknown];
 	optional .EAuthTokenState token_state = 5 [default = k_EAuthTokenState_Invalid];
 	optional fixed64 owner_steamid = 6;
+	optional uint32 os_platform = 7 [(description) = "EPlatformType - rough classification of device OS, if known"];
+	optional int32 os_type = 8 [(description) = "EOSType - specific device OS, if known"];
+	optional uint32 auth_type = 9 [(description) = "EAuthTokenGuardType - device authorization mechanism, if known"];
+	optional uint32 gaming_device_type = 10 [(description) = "EGamingDeviceType - classify console/PC/SteamDeck, if known; applies only for Steam Client devices"];
+	optional .CSupportRefreshTokenDescription.TokenUsageEvent first_seen = 11 [(description) = "Information about original authorization event"];
+	optional .CSupportRefreshTokenDescription.TokenUsageEvent last_seen = 12 [(description) = "Information about most-recently seen, if known for this device"];
 }
 
 message CAuthenticationSupport_QueryRefreshTokensByAccount_Response {
 	repeated .CSupportRefreshTokenDescription refresh_tokens = 1;
+	optional int32 last_token_reset = 2;
 }
 
 message CAuthenticationSupport_QueryRefreshTokenByID_Request {
@@ -252,6 +281,7 @@ message CAuthenticationSupport_QueryRefreshTokenByID_Response {
 
 message CAuthenticationSupport_RevokeToken_Request {
 	optional fixed64 token_id = 1 [(description) = "Token ID of the token to revoke (required)"];
+	optional fixed64 steamid = 2 [(description) = "Steam ID of the owner of that token (required)"];
 }
 
 message CAuthenticationSupport_RevokeToken_Response {
