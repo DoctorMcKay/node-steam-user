@@ -21,7 +21,7 @@ class SteamUserSentry extends SteamUserPublishedFiles {
 		if (this.options.singleSentryfile) {
 			return 'sentry.bin';
 		} else {
-			return `sentry.${this._logOnDetails.account_name}.bin`;
+			return `sentry.${this._logOnDetails.account_name || this.steamID.toString()}.bin`;
 		}
 	}
 }

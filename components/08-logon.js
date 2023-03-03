@@ -165,7 +165,7 @@ class SteamUserLogon extends SteamUserWeb {
 
 			if (!anonLogin) {
 				if (!this._logOnDetails.sha_sentryfile && !sentry) {
-					filenames.push(this.options.singleSentryfile ? 'sentry.bin' : 'sentry.' + this._logOnDetails.account_name + '.bin');
+					filenames.push(this.options.singleSentryfile ? 'sentry.bin' : `sentry.${this._logOnDetails.account_name || this._logOnDetails._steamid}.bin`);
 				}
 
 				if (!this._logOnDetails.machine_id && this.options.machineIdType == EMachineIDType.PersistentRandom) {
@@ -380,7 +380,13 @@ class SteamUserLogon extends SteamUserWeb {
 	 * @private
 	 */
 	_getMachineID(localFile) {
-		if (!this._logOnDetails.account_name || this.options.machineIdType == EMachineIDType.None) {
+		if (
+			(
+				!this._logOnDetails.account_name
+				&& !this._logOnDetails._steamid
+			)
+			|| this.options.machineIdType == EMachineIDType.None
+		) {
 			// No machine IDs for anonymous logons
 			return null;
 		}
@@ -400,9 +406,9 @@ class SteamUserLogon extends SteamUserWeb {
 		// The user wants to use a machine ID that's generated off the account name
 		if (this.options.machineIdType == EMachineIDType.AccountNameGenerated) {
 			return createMachineID(
-				this.options.machineIdFormat[0].replace(/\{account_name\}/g, this._logOnDetails.account_name),
-				this.options.machineIdFormat[1].replace(/\{account_name\}/g, this._logOnDetails.account_name),
-				this.options.machineIdFormat[2].replace(/\{account_name\}/g, this._logOnDetails.account_name)
+				this.options.machineIdFormat[0].replace(/\{account_name\}/g, this._logOnDetails.account_name || this._logOnDetails._steamid),
+				this.options.machineIdFormat[1].replace(/\{account_name\}/g, this._logOnDetails.account_name || this._logOnDetails._steamid),
+				this.options.machineIdFormat[2].replace(/\{account_name\}/g, this._logOnDetails.account_name || this._logOnDetails._steamid)
 			);
 		}
 
