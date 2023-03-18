@@ -532,7 +532,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `refreshToken` - A refresh token, [see below](#using-refresh-tokens)
 	- `accountName` - If logging into a user account, the account's name
 	- `password` - If logging into an account without a login key or a web logon token, the account's password
-	- `loginKey` - If logging into an account with a login key, this is the account's login key
+	- `loginKey` - If logging into an account with a login key, this is the account's login key **\[[DEPRECATED](#login-key-deprecation)\]**
 	- `webLogonToken` - If logging into an account with a [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback), this is the token
 	- `steamID` - If logging into an account with a client logon token obtained from the web, this is your account's SteamID, as a string or a `SteamID` object
 	- `authCode` - If you have a Steam Guard email code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
@@ -596,7 +596,7 @@ There are five ways to log onto Steam:
 		- `loginKey`
 		- `webLogonToken`
 		- `steamID`
-- Individually using account name and login key (deprecated)
+- Individually using account name and login key **[(deprecated and possibly non-functional)](#login-key-deprecation)**
 	- These properties are required:
 		- `accountName`
 		- `loginKey`
@@ -643,6 +643,36 @@ relevant error message.
 
 All other ways of authenticating to an individual user account should be considered deprecated, although steam-user will
 continue to support them as long as they keep working on the Steam backend.
+
+#### Legacy Authentication
+
+steam-user will use *legacy authentication* to log onto Steam in either of these cases:
+
+- You are using a steam-user older 4.28.0 and are not using a refresh token
+- You are using steam-user 4.28.0 or later but are running a Node.js version older than 12.22.0
+
+The official Steam client no longer uses legacy authentication, so the backend may drop support for it at any time.
+Additionally, legacy authentication uses login keys, [which are no longer being issued](#login-key-deprecation).
+
+If you are using steam-user 4.28.0 or later and Node.js 12.22.0 or later, then even if you call `logOn()` with an account
+name and password, steam-user will use the modern authentication system to log on.
+
+Legacy authentication is deprecated, and will be removed in the next major steam-user release.
+
+#### Login Key Deprecation
+
+Steam appears to no longer issue login keys. This has implications for you if you're using [legacy authentication](#legacy-authentication):
+
+- The [`loginKey`](#loginkey) event will no longer be emitted
+- If using mobile 2FA, steam-user can no longer reconnect to Steam following a connection drop without having a valid 2FA code
+
+For the sake of backward compatibility, if you call `logOn()` with an account name and password and specify
+`rememberPassword: true` in an environment that supports modern authentication, then the `loginKey` event will be emitted,
+but instead of containing a login key, it will contain a refresh token. You may pass this refresh token to the `loginKey`
+property in `logOn()` as if it were a login key, and it will be used as a refresh token.
+
+**This is strictly offered for backward compatibility. Both the `loginKey` event and `loginKey` property in `logOn()`
+are deprecated and will be removed in the next major steam-user release.**
 
 ### logOff()
 
@@ -1931,6 +1961,8 @@ Some libraries require you to provide your `sessionID`, others don't. If your li
 If you enabled `rememberPassword` in [`logOn`](#logondetails), this will be emitted when Steam sends us a new login key. This key can be passed to [`logOn`](#logondetails) as `loginKey` in lieu of a password on subsequent logins.
 
 At this time, I'm not sure if login keys expire, so to be safe you should record this somewhere (in a database, in a file, etc) and overwrite it every time the event is emitted.
+
+**[THIS IS DEPRECATED AND WILL BE REMOVED IN A FUTURE RELEASE.](#login-key-deprecation)**
 
 ### newItems
 - `count` - How many new items you have (can be 0)
