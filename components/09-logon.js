@@ -93,6 +93,15 @@ class SteamUserLogon extends SteamUserSentry {
 				delete this._logOnDetails.supports_rate_limit_response;
 			}
 
+			if ((this._logOnDetails.login_key || '').split('.').length == 3) {
+				// deprecated: they're using a refresh token as a login key
+				details.refreshToken = this._logOnDetails.login_key;
+				this._logOnDetails._newAuthAccountName = this._logOnDetails.account_name;
+				delete this._logOnDetails.account_name;
+				delete this._logOnDetails.password;
+				delete this._logOnDetails.login_key;
+			}
+
 			if (details.refreshToken) {
 				// If logging in with a refresh token, we need to make sure that no conflicting properties are set
 				let disallowedProps = [
@@ -669,10 +678,19 @@ class SteamUserLogon extends SteamUserSentry {
 				this._connectTime = Date.now();
 				this._connectTimeout = 1000; // reset exponential connect backoff
 
+				// deprecated
 				if (this._logOnDetails.login_key) {
 					// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.
 					this._loginKeyTimer = setTimeout(() => {
 						this.emit('loginKey', this._logOnDetails.login_key);
+					}, 5000);
+				} else if (
+					(this._logOnDetails._newAuthAccountName && this._logOnDetails.should_remember_password) ||
+					this._logOnDetails._newAuthUsedTokenAsLoginKey
+				) {
+					// deprecated: emit the refresh token as a loginKey to support code that depends on login keys
+					this._loginKeyTimer = setTimeout(() => {
+						this.emit('loginKey', this._logOnDetails.access_token);
 					}, 5000);
 				}
 
@@ -782,6 +800,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLoggedOff, function(body)
 	this._handleLogOff(body.eresult, msg);
 });
 
+// deprecated: appears no longer functional
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientNewLoginKey, function(body) {
 	if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;
