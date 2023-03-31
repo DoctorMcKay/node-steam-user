@@ -274,13 +274,21 @@ class SteamUserLogon extends SteamUserSentry {
 	_doConnection() {
 		let thisProtocol = this.options.protocol;
 
-		if (thisProtocol == EConnectionProtocol.TCP && this.options.webCompatibilityMode) {
-			this._warn('Forcing protocol to EConnectionProtocol.WebSocket because webCompatibilityMode is enabled');
+		if (this.options.webCompatibilityMode) {
+			if (thisProtocol == EConnectionProtocol.TCP) {
+				this._warn('Forcing protocol to EConnectionProtocol.WebSocket because webCompatibilityMode is enabled');
+			}
+
+			this.emit('debug', 'Forcing protocol to EConnectionProtocol.WebSocket because webCompatibilityMode is enabled');
 			thisProtocol = EConnectionProtocol.WebSocket;
 		}
 
-		if (thisProtocol == EConnectionProtocol.TCP && this.options.socksProxy) {
-			this._warn('Forcing protocol to EConnectionProtocol.WebSocket because a socksProxy is specified and SOCKS proxy support is incompatible with TCP');
+		if (this.options.socksProxy) {
+			if (thisProtocol == EConnectionProtocol.TCP) {
+				this._warn('Forcing protocol to EConnectionProtocol.WebSocket because a socksProxy is specified and SOCKS proxy support is incompatible with TCP');
+			}
+
+			this.emit('debug', 'Forcing protocol to EConnectionProtocol.WebSocket because a socksProxy is specified and SOCKS proxy support is incompatible with TCP');
 			thisProtocol = EConnectionProtocol.WebSocket;
 		}
 
