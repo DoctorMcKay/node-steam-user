@@ -46,6 +46,8 @@ class SteamUserWeb extends SteamUserWebAPI {
 			encrypted_loginkey: encryptedNonce
 		};
 
+		let sessionid, cookies;
+
 		try {
 			let res = await this._apiRequest('POST', 'ISteamUserAuth', 'AuthenticateUser', 1, data);
 			if (!res.authenticateuser || (!res.authenticateuser.token && !res.authenticateuser.tokensecure)) {
@@ -53,23 +55,14 @@ class SteamUserWeb extends SteamUserWebAPI {
 			}
 
 			// Generate a random sessionid (CSRF token)
-			let sessionid = Crypto.randomBytes(12).toString('hex');
-			let cookies = ['sessionid=' + sessionid];
+			sessionid = Crypto.randomBytes(12).toString('hex');
+			cookies = ['sessionid=' + sessionid];
 			if (res.authenticateuser.token) {
 				cookies.push('steamLogin=' + res.authenticateuser.token);
 			}
 			if (res.authenticateuser.tokensecure) {
 				cookies.push('steamLoginSecure=' + res.authenticateuser.tokensecure);
 			}
-
-			/**
-			 * Emitted when a steamcommunity.com web session is negotiated
-			 * @event SteamUser#webSession
-			 * @param {string} sessionID
-			 * @param {string[]} cookies
-			 */
-
-			this.emit('webSession', sessionid, cookies);
 		} catch (ex) {
 			this.emit('debug', 'Webauth failed: ' + ex.message);
 
@@ -85,7 +78,17 @@ class SteamUserWeb extends SteamUserWebAPI {
 			}
 
 			setTimeout(this._webLogOn.bind(this), this._webauthTimeout);
+			return;
 		}
+
+		/**
+		 * Emitted when a steamcommunity.com web session is negotiated
+		 * @event SteamUser#webSession
+		 * @param {string} sessionID
+		 * @param {string[]} cookies
+		 */
+
+		this.emit('webSession', sessionid, cookies);
 	}
 }
 
