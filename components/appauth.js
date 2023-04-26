@@ -118,9 +118,13 @@ class SteamUserAppAuth extends SteamUserAccount {
 
 					buffer = buffer.flip().toBuffer();
 
-					// We need to activate our ticket
-					await this.activateAuthSessionTickets(appid, buffer);
-					resolve({sessionTicket: buffer});
+					try {
+						// We need to activate our ticket
+						await this.activateAuthSessionTickets(appid, buffer);
+						resolve({sessionTicket: buffer});
+					} catch (err) {
+						reject(err);
+					}
 				};
 
 				// Do we have any GC tokens?
