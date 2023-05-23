@@ -25,7 +25,8 @@ class SteamUserLogon extends SteamUserSentry {
 		// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted)
 		process.nextTick(async () => {
 			if (this.steamID) {
-				throw new Error('Already logged on, cannot log on again');
+				this.emit('error', new Error('Already logged on, cannot log on again'));
+				return;
 			}
 
 			this.steamID = null;
