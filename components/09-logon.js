@@ -1,5 +1,7 @@
 const ByteBuffer = require('bytebuffer');
 const Crypto = require('crypto');
+const Fs = require('fs');
+const Path = require('path');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
@@ -219,7 +221,19 @@ class SteamUserLogon extends SteamUserSentry {
 
 			if (!this._cmList) {
 				// Get built-in list as a last resort
-				this._cmList = require('../resources/servers.json');
+				try {
+					this._cmList = await new Promise((resolve, reject) => {
+						Fs.readFile(Path.join(__dirname, '../resources/servers.json'), (err, data) => {
+							if (err) reject(err);
+							resolve(JSON.parse(data.toString('utf8')));
+						});
+					});
+				} catch (ex) {
+					this.emit('debug', `Error getting built-in CMList: ${ex.message}`);
+					// If we don't have a CM list, we can't do anything else
+					this.emit('error', new Error('Unable to get Steam servers list from cache, WebAPI, or built-in list'));
+					return;
+				}
 			}
 
 			// Sentry file
