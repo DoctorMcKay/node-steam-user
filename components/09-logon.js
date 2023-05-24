@@ -223,8 +223,11 @@ class SteamUserLogon extends SteamUserSentry {
 				try {
 					this._cmList = await new Promise((resolve, reject) => {
 						Fs.readFile(Path.join(__dirname, '../resources/servers.json'), (err, data) => {
-							if (err) reject(err);
-							resolve(JSON.parse(data.toString('utf8')));
+							if (err) {
+								reject(err);
+							} else {
+								resolve(JSON.parse(data.toString('utf8')));
+							}
 						});
 					});
 				} catch (ex) {
