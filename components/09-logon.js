@@ -1,7 +1,5 @@
 const ByteBuffer = require('bytebuffer');
 const Crypto = require('crypto');
-const FS = require('fs');
-const Path = require('path');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
@@ -220,17 +218,6 @@ class SteamUserLogon extends SteamUserSentry {
 
 			if (!this._cmList) {
 				// Get built-in list as a last resort
-				let builtInCmListExists = await new Promise((resolve) => {
-					FS.stat(Path.join(__dirname, '../resources/servers.json'), (err) => {
-						resolve(!err);
-					});
-				});
-
-				if (!builtInCmListExists) {
-					this.emit('error', 'CMlist is missing and could not be retrieved from WebAPI');
-					return;
-				}
-
 				this._cmList = require('../resources/servers.json');
 			}
 
