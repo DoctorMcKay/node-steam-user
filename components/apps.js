@@ -1,7 +1,7 @@
 const BinaryKVParser = require('binarykvparser');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
-const VDF = require('vdf');
+const VDF = require('simple-vdf');
 
 const Helpers = require('./helpers.js');
 
