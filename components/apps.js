@@ -231,10 +231,15 @@ class SteamUserApps extends SteamUserAppAuth {
 					cache.packages = cache.packages || {};
 
 					(body.apps || []).forEach((app) => {
+						let appInfoVdf = app.buffer.toString('utf8');
+						// It seems that Steam appends a NUL byte. Unsure if this is universal or not, but to make sure
+						// that things work regardless of whether there's a NUL byte at the end, just remove it if it's there.
+						appInfoVdf = appInfoVdf.replace(/\0$/, '');
+
 						let data = {
 							changenumber: app.change_number,
 							missingToken: !!app.missing_token,
-							appinfo: VDF.parse(app.buffer.toString('utf8')).appinfo
+							appinfo: VDF.parse(appInfoVdf).appinfo
 						};
 
 						if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
@@ -265,8 +270,7 @@ class SteamUserApps extends SteamUserAppAuth {
 						// Request info for all the apps in this package, if this request didn't originate from the license list
 						if (requestType != PICSRequestType.Licenses) {
 							let appids = (pkg.packageinfo || {}).appids || [];
-							this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {
-							});
+							this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {});
 						}
 					});
 				}
@@ -290,10 +294,16 @@ class SteamUserApps extends SteamUserAppAuth {
 				(body.apps || []).forEach((app) => {
 					// _parsedData will be populated if we have the PICS cache enabled.
 					// If we don't, we need to parse the data here.
+
+					let appInfoVdf = app.buffer.toString('utf8');
+					// It seems that Steam appends a NUL byte. Unsure if this is universal or not, but to make sure
+					// that things work regardless of whether there's a NUL byte at the end, just remove it if it's there.
+					appInfoVdf = appInfoVdf.replace(/\0$/, '');
+
 					response.apps[app.appid] = app._parsedData || {
-						"changenumber": app.change_number,
-						"missingToken": !!app.missing_token,
-						"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+						changenumber: app.change_number,
+						missingToken: !!app.missing_token,
+						appinfo: VDF.parse(appInfoVdf).appinfo
 					};
 
 					let index = appids.indexOf(app.appid);
