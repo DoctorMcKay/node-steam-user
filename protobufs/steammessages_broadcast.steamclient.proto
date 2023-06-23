@@ -322,6 +322,7 @@ message CBroadcast_SetRTMPInfo_Request {
 	optional uint32 chat_rate_limit = 9 [(description) = "Seconds required between chat messages"];
 	optional bool enable_replay = 10 [(description) = "Enable replay of last upload"];
 	optional bool is_partner_chat_only = 11 [(description) = "When true, then only steamwork partner can create chat messages."];
+	optional string wordban_list = 12;
 }
 
 message CBroadcast_SetRTMPInfo_Response {
@@ -345,6 +346,7 @@ message CBroadcast_GetRTMPInfo_Response {
 	optional uint32 chat_rate_limit = 10 [(description) = "Seconds required between chat messages"];
 	optional bool enable_replay = 11 [(description) = "Enable replay of last upload"];
 	optional bool is_partner_chat_only = 12 [(description) = "When true, then only steamwork partner can create chat messages."];
+	optional string wordban_list = 13;
 }
 
 message CBroadcast_WebRTCHaveTURNServer_Notification {

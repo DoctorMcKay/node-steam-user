@@ -1,7 +1,7 @@
 const BinaryKVParser = require('binarykvparser');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
-const VDF = require('vdf');
+const VDF = require('simple-vdf');
 
 const Helpers = require('./helpers.js');
 
@@ -60,19 +60,19 @@ class SteamUserApps extends SteamUserAppAuth {
 
 			let processedApps = apps.map((app) => {
 				if (typeof app == 'string') {
-					app = {game_id: '15190414816125648896', game_extra_info: app};
+					app = { game_id: '15190414816125648896', game_extra_info: app };
 				} else if (typeof app != 'object') {
-					app = {game_id: app};
+					app = { game_id: app };
 				}
 
 				if (typeof app.game_ip_address == 'number') {
-					app.game_ip_address = {v4: app.game_ip_address};
+					app.game_ip_address = { v4: app.game_ip_address };
 				}
 
 				return app;
 			});
 
-			this._send(EMsg.ClientGamesPlayedWithDataBlob, {games_played: processedApps});
+			this._send(EMsg.ClientGamesPlayedWithDataBlob, { games_played: processedApps });
 
 			processedApps.forEach((app) => {
 				if (app.game_id > Math.pow(2, 32)) {
@@ -113,7 +113,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				} else if (blocked) {
 					return reject(new Error('Cannot kick other session'));
 				} else {
-					return resolve({playingApp});
+					return resolve({ playingApp });
 				}
 			});
 		});
@@ -127,12 +127,12 @@ class SteamUserApps extends SteamUserAppAuth {
 	 */
 	getPlayerCount(appid, callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, ['playerCount'], callback, (resolve, reject) => {
-			this._send(EMsg.ClientGetNumberOfCurrentPlayersDP, {appid}, (body) => {
+			this._send(EMsg.ClientGetNumberOfCurrentPlayersDP, { appid }, (body) => {
 				let err = Helpers.eresultError(body.eresult);
 				if (err) {
 					reject(err);
 				} else {
-					resolve({playerCount: body.player_count});
+					resolve({ playerCount: body.player_count });
 				}
 			});
 		});
@@ -192,7 +192,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			let contents = JSON.stringify(packages[packageid]);
 			toSave[filename] = contents;
 		}
-		
+
 		return this._saveFiles(toSave);
 	}
 
@@ -217,14 +217,14 @@ class SteamUserApps extends SteamUserAppAuth {
 		}
 
 		// From this point, we can assume pics cache is up to date (via changelist updates).
-		for (let {appid} of apps) {
+		for (let { appid } of apps) {
 			if (this.picsCache.apps[appid]) {
 				response.apps[appid] = this.picsCache.apps[appid];
 			} else {
 				response.notCachedApps.push(appid);
 			}
 		}
-		for (let {packageid} of packages) {
+		for (let { packageid } of packages) {
 			if (this.picsCache.packages[packageid]) {
 				response.packages[packageid] = this.picsCache.packages[packageid];
 			} else {
@@ -260,13 +260,13 @@ class SteamUserApps extends SteamUserAppAuth {
 		}
 		let files = await this._readFiles(Object.keys(appFiles).concat(Object.keys(packageFiles)));
 
-		for (let {filename, error, contents} of files) {
+		for (let { filename, error, contents } of files) {
 			if (Buffer.isBuffer(contents)) {
 				contents = contents.toString('utf8');
 			}
 			let appid = appFiles[filename];
 			let packageid = packageFiles[filename];
-			
+
 			if (appid !== undefined) {
 				if (error || !contents) {
 					response.notCachedApps.push(appid);
@@ -318,7 +318,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				notCachedPackages: []
 			};
 			let shaList = {
-				apps: {}, 
+				apps: {},
 				packages: {}
 			};
 
@@ -335,7 +335,7 @@ class SteamUserApps extends SteamUserAppAuth {
 					appids.push(app.appid);
 				} else {
 					appids.push(appid);
-					app = {appid};
+					app = { appid };
 				}
 				_apps.push(app);
 			}
@@ -353,7 +353,7 @@ class SteamUserApps extends SteamUserAppAuth {
 					packageids.push(pkg.packageid);
 				} else {
 					packageids.push(packageid);
-					pkg = {packageid};
+					pkg = { packageid };
 				}
 				if (inclTokens && !pkg.access_token) {
 					// Check if we have a license for this package which includes a token
@@ -382,11 +382,20 @@ class SteamUserApps extends SteamUserAppAuth {
 					cache.packages = cache.packages || {};
 
 					(body.apps || []).forEach((app) => {
+						let appinfo = null;
+						if (app.buffer) {
+							let appInfoVdf = app.buffer.toString('utf8');
+							// It seems that Steam appends a NUL byte. Unsure if this is universal or not, but to make sure
+							// that things work regardless of whether there's a NUL byte at the end, just remove it if it's there.
+							appInfoVdf = appInfoVdf.replace(/\0$/, '');
+							appinfo = VDF.parse(appInfoVdf).appinfo;
+						}
+
 						let data = {
 							sha: app.sha ? app.sha.toString('hex') : null,
 							changenumber: app.change_number,
 							missingToken: !!app.missing_token,
-							appinfo: app.buffer ? VDF.parse(app.buffer.toString('utf8')).appinfo : null
+							appinfo
 						};
 
 						if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
@@ -416,8 +425,7 @@ class SteamUserApps extends SteamUserAppAuth {
 						// Request info for all the apps in this package, if this request didn't originate from the license list, because then we'll first process all packages before requesting all package contents
 						if (requestType != PICSRequestType.Licenses) {
 							let appids = (pkg.packageinfo || {}).appids || [];
-							this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {
-							});
+							this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => { });
 						}
 					});
 				}
@@ -425,11 +433,17 @@ class SteamUserApps extends SteamUserAppAuth {
 				(body.apps || []).forEach((app) => {
 					// _parsedData will be populated if we have the PICS cache enabled.
 					// If we don't, we need to parse the data here.
+
+					let appInfoVdf = app.buffer.toString('utf8');
+					// It seems that Steam appends a NUL byte. Unsure if this is universal or not, but to make sure
+					// that things work regardless of whether there's a NUL byte at the end, just remove it if it's there.
+					appInfoVdf = appInfoVdf.replace(/\0$/, '');
+
 					response.apps[app.appid] = app._parsedData || {
 						"sha": app.sha ? app.sha.toString('hex') : null,
 						"changenumber": app.change_number,
 						"missingToken": !!app.missing_token,
-						"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+						"appinfo": VDF.parse(appInfoVdf).appinfo
 					};
 
 					let index = appids.indexOf(app.appid);
@@ -467,12 +481,12 @@ class SteamUserApps extends SteamUserAppAuth {
 
 			// If we don't use PICS cache or require fresh product info for changelist request, then just perform a normal request
 			if (!this.options.enablePicsCache || requestType == PICSRequestType.Changelist) {
-				return this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages}, onResponse);
+				return this._send(EMsg.ClientPICSProductInfoRequest, { apps, packages }, onResponse);
 			}
 
 			cached = await this._getCachedProductInfo(apps, packages);
 			// Note: This callback can be called multiple times
-			this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages, meta_data_only: true}, async (body) => {
+			this._send(EMsg.ClientPICSProductInfoRequest, { apps, packages, meta_data_only: true }, async (body) => {
 				(body.apps || []).forEach((app) => {
 					shaList.apps[app.appid] = app.sha ? app.sha.toString('hex') : null;
 				});
@@ -533,7 +547,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 								for (let appid in appTokens) {
 									tokenApps[appid] = {
-										appid: parseInt(appid, 10), 
+										appid: parseInt(appid, 10),
 										access_token: appTokens[appid]
 									};
 								}
@@ -558,7 +572,7 @@ class SteamUserApps extends SteamUserAppAuth {
 					packageids = packages.map(pkg => pkg.packageid);
 
 					// Request the apps & packages we need to refresh
-					this._send(EMsg.ClientPICSProductInfoRequest, {apps, packages}, onResponse);
+					this._send(EMsg.ClientPICSProductInfoRequest, { apps, packages }, onResponse);
 				}
 			});
 		});
@@ -586,7 +600,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			requestType = callback;
 			callback = undefined;
 		}
-		
+
 		requestType = requestType || PICSRequestType.User;
 
 		// This one actually can take a while, so allow it to go as long as 120 minutes
@@ -715,7 +729,7 @@ class SteamUserApps extends SteamUserAppAuth {
 		}
 
 		let cache = this.picsCache;
-		let {appChanges, packageChanges, currentChangeNumber} = result;
+		let { appChanges, packageChanges, currentChangeNumber } = result;
 
 		cache.apps = cache.apps || {};
 		cache.packages = cache.packages || {};
@@ -752,7 +766,7 @@ class SteamUserApps extends SteamUserAppAuth {
 
 		this.emit('changelist', currentChangeNumber, appChanges, packageChanges);
 
-		let {appTokens, packageTokens} = result;
+		let { appTokens, packageTokens } = result;
 		cache.changenumber = currentChangeNumber;
 		if (this.options.savePicsCache) {
 			this._saveFile('changenumber.txt', currentChangeNumber);
@@ -762,20 +776,20 @@ class SteamUserApps extends SteamUserAppAuth {
 		let index = -1;
 		for (let appid in appTokens) {
 			if (appTokens.hasOwnProperty(appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
-				ourApps[index] = {appid: parseInt(appid, 10), access_token: appTokens[appid]};
+				ourApps[index] = { appid: parseInt(appid, 10), access_token: appTokens[appid] };
 			}
 		}
 
 		for (let packageid in packageTokens) {
 			if (packageTokens.hasOwnProperty(packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
-				ourPackages[index] = {packageid: parseInt(packageid, 10), access_token: packageTokens[packageid]};
+				ourPackages[index] = { packageid: parseInt(packageid, 10), access_token: packageTokens[packageid] };
 			}
 		}
 
 		// Add a no-op catch in case there's some kind of error
-		let {packages} = await this.getProductInfo(ourApps, ourPackages, false, null, PICSRequestType.Changelist).catch(() => {
+		let { packages } = await this.getProductInfo(ourApps, ourPackages, false, null, PICSRequestType.Changelist).catch(() => {
 		});
-		
+
 		// Request info for all the apps in these packages
 		let appids = [];
 
@@ -844,7 +858,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			return;
 		}
 
-		let {packages} = result;
+		let { packages } = result;
 		// Request info for all the apps in these packages, and only after all packages have been processed
 		let appids = [];
 
@@ -948,7 +962,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			}
 
 			pkg = pkg.packageinfo;
-			(pkg.depotids || []).forEach(function(depotid) {
+			(pkg.depotids || []).forEach(function (depotid) {
 				if (!depotids[depotid]) {
 					depotids[depotid] = true;
 				}
@@ -1015,7 +1029,7 @@ class SteamUserApps extends SteamUserAppAuth {
 		}
 		// If filter options is a boolean, we asssume it's excludeSharedLicenses
 		if (typeof filter === 'boolean') {
-			filter = {excludeShared: filter};
+			filter = { excludeShared: filter };
 		}
 
 		// New behavior from this point on
@@ -1144,7 +1158,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	 */
 	redeemKey(key, callback) {
 		return StdLib.Promises.timeoutCallbackPromise(90000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
-			this._send(EMsg.ClientRegisterKey, {"key": key}, (body) => {
+			this._send(EMsg.ClientRegisterKey, { "key": key }, (body) => {
 				let packageList = {};
 
 				let receiptDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
@@ -1182,7 +1196,7 @@ class SteamUserApps extends SteamUserAppAuth {
 		}
 
 		return StdLib.Promises.timeoutCallbackPromise(10000, ['grantedPackageIds', 'grantedAppIds'], callback, (resolve, reject) => {
-			this._send(EMsg.ClientRequestFreeLicense, {appids: appIDs}, (body) => {
+			this._send(EMsg.ClientRequestFreeLicense, { appids: appIDs }, (body) => {
 				if (body.eresult != EResult.OK) {
 					reject(Helpers.eresultError(body.eresult));
 				} else {
@@ -1230,13 +1244,13 @@ class SteamUserApps extends SteamUserAppAuth {
 					return reject(new Error(`Incorrect key length: expected ${keyLength - 1} but got ${key.length}`));
 				}
 
-				return resolve({key});
+				return resolve({ key });
 			});
 		});
 	}
 }
 
-SteamUserBase.prototype._handlerManager.add(EMsg.ClientLicenseList, function(body) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientLicenseList, function (body) {
 	this.emit('licenses', body.licenses);
 	this.licenses = body.licenses;
 
@@ -1244,10 +1258,10 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLicenseList, function(bod
 	this._getLicenseInfo();
 });
 
-SteamUserBase.prototype._handlerManager.add(EMsg.ClientPlayingSessionState, function(body) {
+SteamUserBase.prototype._handlerManager.add(EMsg.ClientPlayingSessionState, function (body) {
 	this._playingBlocked = body.playing_blocked;
 	this.emit('playingState', body.playing_blocked, body.playing_app);
-	this.playingState = {blocked: body.playing_blocked, appid: body.playing_app};
+	this.playingState = { blocked: body.playing_blocked, appid: body.playing_app };
 });
 
 function sortNumeric(a, b) {

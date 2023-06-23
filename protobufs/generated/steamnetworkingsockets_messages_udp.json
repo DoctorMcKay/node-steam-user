@@ -259,6 +259,11 @@
           "options": {
             "packed": false
           }
+        },
+        "ip_addresses": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 13
         }
       },
       "nested": {

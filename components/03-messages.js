@@ -20,6 +20,7 @@ const VERBOSE_EMSG_LIST = [
 const protobufs = {};
 protobufs[EMsg.Multi] = Schema.CMsgMulti;
 protobufs[EMsg.ClientHeartBeat] = Schema.CMsgClientHeartBeat;
+protobufs[EMsg.ClientHello] = Schema.CMsgClientHello;
 protobufs[EMsg.ClientLogon] = Schema.CMsgClientLogon;
 protobufs[EMsg.ClientLogonGameServer] = Schema.CMsgClientLogon;
 protobufs[EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
@@ -110,8 +111,8 @@ protobufs[EMsg.ClientCurrentUIMode] = Schema.CMsgClientUIMode;
 protobufs[EMsg.ClientVanityURLChangedNotification] = Schema.CMsgClientVanityURLChangedNotification;
 protobufs[EMsg.ClientAMGetPersonaNameHistory] = Schema.CMsgClientAMGetPersonaNameHistory;
 protobufs[EMsg.ClientAMGetPersonaNameHistoryResponse] = Schema.CMsgClientAMGetPersonaNameHistoryResponse;
-protobufs[EMsg.ClientUnlockStreaming] = Schema.CMsgAMUnlockStreaming;
-protobufs[EMsg.ClientUnlockStreamingResponse] = Schema.CMsgAMUnlockStreamingResponse;
+//protobufs[EMsg.ClientUnlockStreaming] = Schema.CMsgAMUnlockStreaming;
+//protobufs[EMsg.ClientUnlockStreamingResponse] = Schema.CMsgAMUnlockStreamingResponse;
 protobufs[EMsg.ClientGetDepotDecryptionKey] = Schema.CMsgClientGetDepotDecryptionKey;
 protobufs[EMsg.ClientGetDepotDecryptionKeyResponse] = Schema.CMsgClientGetDepotDecryptionKeyResponse;
 protobufs[EMsg.ClientGetCDNAuthToken] = Schema.CMsgClientGetCDNAuthToken;
@@ -414,10 +415,14 @@ class SteamUserMessages extends SteamUserConnection {
 		let header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
 		let emsg = header.msg;
 
-		let canWeSend = this.steamID || (this._tempSteamID && [EMsg.ChannelEncryptResponse, EMsg.ClientLogon].includes(emsg));
+		let canWeSend = this.steamID ||
+			(
+				this._tempSteamID &&
+				[EMsg.ChannelEncryptResponse, EMsg.ClientLogon, EMsg.ClientHello, EMsg.ServiceMethodCallFromClientNonAuthed].includes(emsg)
+			);
 		if (!canWeSend) {
 			// We're disconnected, drop it
-			this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
+			this.emit('debug', 'Dropping outgoing message ' + emsg + ' because we\'re not logged on.');
 			return;
 		}
 
@@ -439,7 +444,7 @@ class SteamUserMessages extends SteamUserConnection {
 		}
 
 		let emsgName = EMsg[emsg] || emsg;
-		if (emsg == EMsg.ServiceMethodCallFromClient && header.proto && header.proto.target_job_name) {
+		if ([EMsg.ServiceMethodCallFromClient, EMsg.ServiceMethodCallFromClientNonAuthed].includes(emsg) && header.proto && header.proto.target_job_name) {
 			emsgName = header.proto.target_job_name;
 		}
 
@@ -455,8 +460,9 @@ class SteamUserMessages extends SteamUserConnection {
 			hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
 		} else if (header.proto) {
 			// if we have a protobuf header, use that
-			header.proto.client_sessionid = this._sessionID || 0;
-			header.proto.steamid = (this.steamID || this._tempSteamID).getSteamID64();
+			let shouldIncludeSessionId = ![EMsg.ClientHello, EMsg.ServiceMethodCallFromClientNonAuthed].includes(header.msg);
+			header.proto.client_sessionid = shouldIncludeSessionId ? (this._sessionID || 0) : 0;
+			header.proto.steamid = shouldIncludeSessionId ? (this.steamID || this._tempSteamID).getSteamID64() : '0';
 			header.proto.jobid_source = jobIdSource || header.proto.jobid_source || header.sourceJobID || JOBID_NONE;
 			header.proto.jobid_target = header.proto.jobid_target || header.targetJobID || JOBID_NONE;
 			let hdrProtoBuf = SteamUserMessages._encodeProto(Schema.CMsgProtoBufHeader, header.proto);
@@ -546,7 +552,7 @@ class SteamUserMessages extends SteamUserConnection {
 		let sessionID = (header.proto && header.proto.client_sessionid) || header.sessionID;
 		let steamID = (header.proto && header.proto.steamid) || header.steamID;
 		let ourCurrentSteamID = this.steamID ? this.steamID.toString() : null;
-		if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != ourCurrentSteamID)) {
+		if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != ourCurrentSteamID) && steamID != 0) {
 			// TODO if we get a new sessionid, should we check if it matches a previously-closed session? probably not necessary...
 			this._sessionID = sessionID;
 			this.steamID = new SteamID(steamID.toString());

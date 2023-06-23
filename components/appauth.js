@@ -118,9 +118,13 @@ class SteamUserAppAuth extends SteamUserAccount {
 
 					buffer = buffer.flip().toBuffer();
 
-					// We need to activate our ticket
-					await this.activateAuthSessionTickets(appid, buffer);
-					resolve({sessionTicket: buffer});
+					try {
+						// We need to activate our ticket
+						await this.activateAuthSessionTickets(appid, buffer);
+						resolve({sessionTicket: buffer});
+					} catch (err) {
+						reject(err);
+					}
 				};
 
 				// Do we have any GC tokens?
@@ -298,7 +302,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 			let matchingTickets = this._activeAuthTickets.filter(tkt => tkt.gameid == appid && tkt.steamid != 0);
 			if (steamIDs) {
 				steamIDs = steamIDs.map(Helpers.steamID).map(sid => sid.getSteamID64());
-				matchingTickets = matchingTickets.filter(tkt => steamIDs.includes(tkt.steamid.getSteamID64()));
+				matchingTickets = matchingTickets.filter(tkt => steamIDs.includes(tkt.steamid));
 			}
 
 			this.emit('debug', `Got ${matchingTickets.length} matching tickets to end auth sessions for`);

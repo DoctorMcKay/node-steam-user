@@ -576,134 +576,6 @@
         }
       }
     },
-    "CMsgClientUpdateAppJobReport": {
-      "fields": {
-        "app_id": {
-          "type": "uint32",
-          "id": 1
-        },
-        "depot_ids": {
-          "rule": "repeated",
-          "type": "uint32",
-          "id": 2,
-          "options": {
-            "packed": false
-          }
-        },
-        "app_state": {
-          "type": "uint32",
-          "id": 3
-        },
-        "job_app_error": {
-          "type": "uint32",
-          "id": 4
-        },
-        "error_details": {
-          "type": "string",
-          "id": 5
-        },
-        "job_duration": {
-          "type": "uint32",
-          "id": 6
-        },
-        "files_validation_failed": {
-          "type": "uint32",
-          "id": 7
-        },
-        "job_bytes_downloaded": {
-          "type": "uint64",
-          "id": 8
-        },
-        "job_bytes_staged": {
-          "type": "uint64",
-          "id": 9
-        },
-        "bytes_comitted": {
-          "type": "uint64",
-          "id": 10
-        },
-        "start_app_state": {
-          "type": "uint32",
-          "id": 11
-        },
-        "stats_machine_id": {
-          "type": "fixed64",
-          "id": 12
-        },
-        "branch_name": {
-          "type": "string",
-          "id": 13
-        },
-        "total_bytes_downloaded": {
-          "type": "uint64",
-          "id": 14
-        },
-        "total_bytes_staged": {
-          "type": "uint64",
-          "id": 15
-        },
-        "total_bytes_restored": {
-          "type": "uint64",
-          "id": 16
-        },
-        "is_borrowed": {
-          "type": "bool",
-          "id": 17
-        },
-        "is_free_weekend": {
-          "type": "bool",
-          "id": 18
-        },
-        "total_bytes_legacy": {
-          "type": "uint64",
-          "id": 19
-        },
-        "total_bytes_patched": {
-          "type": "uint64",
-          "id": 20
-        },
-        "total_bytes_saved": {
-          "type": "uint64",
-          "id": 21
-        },
-        "cell_id": {
-          "type": "uint32",
-          "id": 22
-        }
-      }
-    },
-    "CMsgClientDPContentStatsReport": {
-      "fields": {
-        "stats_machine_id": {
-          "type": "fixed64",
-          "id": 1
-        },
-        "country_code": {
-          "type": "string",
-          "id": 2
-        },
-        "os_type": {
-          "type": "int32",
-          "id": 3
-        },
-        "language": {
-          "type": "int32",
-          "id": 4
-        },
-        "num_install_folders": {
-          "type": "uint32",
-          "id": 5
-        },
-        "num_installed_games": {
-          "type": "uint32",
-          "id": 6
-        },
-        "size_installed_games": {
-          "type": "uint64",
-          "id": 7
-        }
-      }
-    },
     "CMsgClientGetCDNAuthTokenResponse": {
       "fields": {
         "eresult": {
@@ -1480,10 +1352,6 @@
         "password_or_secretqa_change_requires_code": {
           "type": "bool",
           "id": 5
-        },
-        "remind_user_about_email": {
-          "type": "bool",
-          "id": 6
         }
       }
     },
@@ -2160,10 +2028,23 @@
         }
       }
     },
-    "CMsgAMUnlockStreaming": {
-      "fields": {}
+    "CMsgAMUnlockH264": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "platform": {
+          "type": "int32",
+          "id": 2
+        },
+        "reason": {
+          "type": "int32",
+          "id": 3
+        }
+      }
     },
-    "CMsgAMUnlockStreamingResponse": {
+    "CMsgAMUnlockH264Response": {
       "fields": {
         "eresult": {
           "type": "int32",
@@ -2175,20 +2056,6 @@
         "encryption_key": {
           "type": "bytes",
           "id": 2
-        }
-      }
-    },
-    "CMsgAMUnlockHEVC": {
-      "fields": {}
-    },
-    "CMsgAMUnlockHEVCResponse": {
-      "fields": {
-        "eresult": {
-          "type": "int32",
-          "id": 1,
-          "options": {
-            "default": 2
-          }
         }
       }
     },
@@ -2264,6 +2131,66 @@
         "badge_level": {
           "type": "uint32",
           "id": 2
+        }
+      }
+    },
+    "CMsgClientStartPeerContentServer": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_remote_id": {
+          "type": "fixed64",
+          "id": 2
+        },
+        "app_id": {
+          "type": "uint32",
+          "id": 3
+        },
+        "current_build_id": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "CMsgClientStartPeerContentServerResponse": {
+      "fields": {
+        "result": {
+          "type": "uint32",
+          "id": 1
+        },
+        "server_port": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientGetPeerContentInfo": {
+      "fields": {
+        "steamid": {
+          "type": "fixed64",
+          "id": 1
+        },
+        "client_remote_id": {
+          "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgClientGetPeerContentInfoResponse": {
+      "fields": {
+        "result": {
+          "type": "uint32",
+          "id": 1
+        },
+        "apps": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 2,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -2394,6 +2321,18 @@
         },
         "bucket": {
           "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGCRoutingProtoBufHeader": {
+      "fields": {
+        "dst_gcid_queue": {
+          "type": "uint64",
+          "id": 1
+        },
+        "dst_gc_dir_index": {
+          "type": "uint32",
           "id": 2
         }
       }
@@ -2544,6 +2483,10 @@
           "type": "uint64",
           "id": 36
         },
+        "routing_gc": {
+          "type": ".CMsgGCRoutingProtoBufHeader",
+          "id": 37
+        },
         "ip": {
           "type": "uint32",
           "id": 15
@@ -2606,6 +2549,10 @@
         "ticket": {
           "type": "bytes",
           "id": 7
+        },
+        "server_secret": {
+          "type": "bytes",
+          "id": 8
         }
       }
     },
@@ -2658,6 +2605,22 @@
         "app_type": {
           "type": "uint32",
           "id": 14
+        },
+        "has_adult_content_sex": {
+          "type": "bool",
+          "id": 15
+        },
+        "has_adult_content_violence": {
+          "type": "bool",
+          "id": 16
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -2947,6 +2910,10 @@
           "options": {
             "default": "k_EBanContentCheckResult_NotScanned"
           }
+        },
+        "banned": {
+          "type": "bool",
+          "id": 17
         }
       }
     },
@@ -3185,15 +3152,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -3266,10 +3224,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -3334,10 +3288,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -3354,21 +3304,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -3411,10 +3346,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -3475,30 +3406,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -3555,17 +3462,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -3581,10 +3482,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -3595,10 +3493,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -3613,45 +3508,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -3660,26 +3533,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3713,24 +3566,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -3750,24 +3594,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -3793,31 +3621,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3877,10 +3689,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3893,22 +3702,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3927,10 +3727,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3949,17 +3746,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3972,16 +3759,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -4097,19 +3875,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }

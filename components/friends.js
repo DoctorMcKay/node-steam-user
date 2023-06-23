@@ -976,64 +976,65 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	_processUserPersona(user) {
 		return new Promise((resolve) => {
 			g_ProcessPersonaSemaphore.wait(async (release) => {
-				if (typeof user.last_logoff === 'number') {
-					user.last_logoff = new Date(user.last_logoff * 1000);
-				}
-
-				if (typeof user.last_logon === 'number') {
-					user.last_logon = new Date(user.last_logon * 1000);
-				}
-
-				if (typeof user.last_seen_online === 'number') {
-					user.last_seen_online = new Date(user.last_seen_online * 1000);
-				}
-
-				if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
-					let hash = user.avatar_hash.toString('hex');
-
-					// handle default avatar
-					if (hash === '0000000000000000000000000000000000000000') {
-						hash = 'fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb';
+				try {
+					if (typeof user.last_logoff === 'number') {
+						user.last_logoff = new Date(user.last_logoff * 1000);
 					}
 
-					user.avatar_url_icon = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/${hash.substring(0, 2)}/${hash}`;
-					user.avatar_url_medium = `${user.avatar_url_icon}_medium.jpg`;
-					user.avatar_url_full = `${user.avatar_url_icon}_full.jpg`;
-					user.avatar_url_icon += '.jpg';
-				}
+					if (typeof user.last_logon === 'number') {
+						user.last_logon = new Date(user.last_logon * 1000);
+					}
 
-				// only delete rich_presence_string if we have confirmation that the user isn't in-game
-				if ((user.rich_presence && user.rich_presence.length == 0) || user.gameid === '0') {
-					delete user.rich_presence_string;
-					release();
+					if (typeof user.last_seen_online === 'number') {
+						user.last_seen_online = new Date(user.last_seen_online * 1000);
+					}
+
+					if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
+						let hash = user.avatar_hash.toString('hex');
+
+						// handle default avatar
+						if (hash === '0000000000000000000000000000000000000000') {
+							hash = 'fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb';
+						}
+
+						user.avatar_url_icon = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/${hash.substring(0, 2)}/${hash}`;
+						user.avatar_url_medium = `${user.avatar_url_icon}_medium.jpg`;
+						user.avatar_url_full = `${user.avatar_url_icon}_full.jpg`;
+						user.avatar_url_icon += '.jpg';
+					}
+
+					// only delete rich_presence_string if we have confirmation that the user isn't in-game
+					if ((user.rich_presence && user.rich_presence.length == 0) || user.gameid === '0') {
+						delete user.rich_presence_string;
+						return resolve(user);
+					}
+
+					if (!user.rich_presence) {
+						// if we don't have rich_presence data right now, there's nothing to parse
+						return resolve(user);
+					}
+
+					let rpTokens = {};
+					user.rich_presence.forEach((token) => {
+						rpTokens[token.key] = token.value;
+					});
+
+					if (!rpTokens.steam_display) {
+						// Nothing to do here
+						return resolve(user);
+					}
+
+					try {
+						user.rich_presence_string = await this._getRPLocalizedString(user.gameid, rpTokens);
+					} catch (ex) {
+						delete user.rich_presence_string;
+					}
+
 					return resolve(user);
-				}
-
-				if (!user.rich_presence) {
-					// if we don't have rich_presence data right now, there's nothing to parse
+				} finally {
+					// always release the lock
 					release();
-					return resolve(user);
 				}
-
-				let rpTokens = {};
-				user.rich_presence.forEach((token) => {
-					rpTokens[token.key] = token.value;
-				});
-
-				if (!rpTokens.steam_display) {
-					// Nothing to do here
-					release();
-					return resolve(user);
-				}
-
-				try {
-					user.rich_presence_string = await this._getRPLocalizedString(user.gameid, rpTokens);
-				} catch (ex) {
-					delete user.rich_presence_string;
-				}
-
-				release();
-				return resolve(user);
 			});
 		});
 	}

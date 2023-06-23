@@ -110,7 +110,12 @@
         "k_EStreamControlSetQualityOverride": 134,
         "k_EStreamControlSetBitrateOverride": 135,
         "k_EStreamControlShowOnScreenKeyboard": 136,
-        "k_EStreamControlControllerConfigMsg": 137
+        "k_EStreamControlControllerConfigMsg": 137,
+        "k_EStreamControlControllerPersonalizationUpdate": 138,
+        "k_EStreamControlEnableNeptuneData": 139,
+        "k_EStreamControlDisableNeptuneData": 140,
+        "k_EStreamControlStartNeptuneData": 141,
+        "k_EStreamControlStopNeptuneData": 142
       }
     },
     "EStreamVersion": {
@@ -183,7 +188,8 @@
       "values": {
         "k_EStreamingAudioData": 0,
         "k_EStreamingVideoData": 1,
-        "k_EStreamingMicrophoneData": 2
+        "k_EStreamingMicrophoneData": 2,
+        "k_EStreamingNeptuneData": 3
       }
     },
     "EStreamMouseButton": {
@@ -643,7 +649,7 @@
           "type": "string",
           "id": 16
         },
-        "enable_touch_controller": {
+        "enable_touch_controller_OBSOLETE": {
           "type": "bool",
           "id": 17,
           "options": {
@@ -655,6 +661,13 @@
           "id": 19,
           "options": {
             "default": "k_EStreamP2PScopeAutomatic"
+          }
+        },
+        "enable_audio_uncompressed": {
+          "type": "bool",
+          "id": 20,
+          "options": {
+            "default": false
           }
         }
       }
@@ -853,6 +866,18 @@
       }
     },
     "CStopVideoDataMsg": {
+      "fields": {}
+    },
+    "CStartNeptuneDataMsg": {
+      "fields": {
+        "channel": {
+          "rule": "required",
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "CStopNeptuneDataMsg": {
       "fields": {}
     },
     "CRecordedInput": {
@@ -1268,6 +1293,12 @@
       "fields": {}
     },
     "CDisableHighResCaptureMsg": {
+      "fields": {}
+    },
+    "CEnableNeptuneDataMsg": {
+      "fields": {}
+    },
+    "CDisableNeptuneDataMsg": {
       "fields": {}
     },
     "CToggleMagnificationMsg": {
@@ -1701,6 +1732,22 @@
     },
     "CShowOnScreenKeyboardMsg": {
       "fields": {}
+    },
+    "CControllerPersonalizationUpdateMsg": {
+      "fields": {
+        "controller_path": {
+          "type": "string",
+          "id": 1
+        },
+        "controller_name": {
+          "type": "string",
+          "id": 2
+        },
+        "reverse_diamond_button_layout": {
+          "type": "bool",
+          "id": 3
+        }
+      }
     },
     "CStreamDataLostMsg": {
       "fields": {

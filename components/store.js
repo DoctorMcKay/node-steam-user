@@ -1,8 +1,8 @@
 const StdLib = require('@doctormckay/stdlib');
 
-const SteamUserSentry = require('./sentry.js');
+const SteamUserPubFiles = require('./pubfiles.js');
 
-class SteamUserStore extends SteamUserSentry {
+class SteamUserStore extends SteamUserPubFiles {
 	/**
 	 * Get the localized names for given store tags.
 	 * @param {string} language - The full name of the language you're interested in, e.g. "english" or "spanish"

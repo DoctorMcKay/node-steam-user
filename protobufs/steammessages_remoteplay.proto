@@ -105,6 +105,11 @@ enum EStreamControlMessage {
 	k_EStreamControlSetBitrateOverride = 135;
 	k_EStreamControlShowOnScreenKeyboard = 136;
 	k_EStreamControlControllerConfigMsg = 137;
+	k_EStreamControlControllerPersonalizationUpdate = 138;
+	k_EStreamControlEnableNeptuneData = 139;
+	k_EStreamControlDisableNeptuneData = 140;
+	k_EStreamControlStartNeptuneData = 141;
+	k_EStreamControlStopNeptuneData = 142;
 }
 
 enum EStreamVersion {
@@ -169,6 +174,7 @@ enum EStreamingDataType {
 	k_EStreamingAudioData = 0;
 	k_EStreamingVideoData = 1;
 	k_EStreamingMicrophoneData = 2;
+	k_EStreamingNeptuneData = 3;
 }
 
 enum EStreamMouseButton {
@@ -394,8 +400,9 @@ message CStreamingClientConfig {
 	optional bool enable_performance_icons = 14 [default = true];
 	optional bool enable_microphone_streaming = 15 [default = false];
 	optional string controller_overlay_hotkey = 16;
-	optional bool enable_touch_controller = 17 [default = false];
+	optional bool enable_touch_controller_OBSOLETE = 17 [default = false];
 	optional .EStreamP2PScope p2p_scope = 19 [default = k_EStreamP2PScopeAutomatic];
+	optional bool enable_audio_uncompressed = 20 [default = false];
 }
 
 message CStreamingServerConfig {
@@ -457,6 +464,13 @@ message CStartVideoDataMsg {
 }
 
 message CStopVideoDataMsg {
+}
+
+message CStartNeptuneDataMsg {
+	required uint32 channel = 1;
+}
+
+message CStopNeptuneDataMsg {
 }
 
 message CRecordedInput {
@@ -611,6 +625,12 @@ message CEnableHighResCaptureMsg {
 }
 
 message CDisableHighResCaptureMsg {
+}
+
+message CEnableNeptuneDataMsg {
+}
+
+message CDisableNeptuneDataMsg {
 }
 
 message CToggleMagnificationMsg {
@@ -788,6 +808,12 @@ message CSetBitrateOverrideMsg {
 }
 
 message CShowOnScreenKeyboardMsg {
+}
+
+message CControllerPersonalizationUpdateMsg {
+	optional string controller_path = 1;
+	optional string controller_name = 2;
+	optional bool reverse_diamond_button_layout = 3;
 }
 
 message CStreamDataLostMsg {

@@ -14,12 +14,12 @@ const EMsg = require('../enums/EMsg.js');
 const EResult = require('../enums/EResult.js');
 
 const SteamUserBase = require('./00-base.js');
-const SteamUserWeb = require('./07-web.js');
+const SteamUserSentry = require('./08-sentry.js');
 
 const PROTOCOL_VERSION = 65580;
 const PRIVATE_IP_OBFUSCATION_MASK = 0xbaadf00d;
 
-class SteamUserLogon extends SteamUserWeb {
+class SteamUserLogon extends SteamUserSentry {
 	logOn(details) {
 		// Delay the actual logon by one tick, so if users call logOn from the error event they won't get a crash because
 		// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted)
@@ -48,7 +48,7 @@ class SteamUserLogon extends SteamUserWeb {
 					}
 				}
 
-				let anonLogin = !details.accountName && !details.accessToken;
+				let anonLogin = !details.accountName && !details.refreshToken;
 
 				this._logOnDetails = {
 					account_name: details.accountName,
@@ -56,7 +56,7 @@ class SteamUserLogon extends SteamUserWeb {
 					login_key: details.loginKey,
 					auth_code: details.authCode,
 					two_factor_code: details.twoFactorCode,
-					should_remember_password: !!(details.rememberPassword || details.accessToken),
+					should_remember_password: !!(details.rememberPassword || details.refreshToken),
 					obfuscated_private_ip: {v4: logonId || 0},
 					protocol_version: PROTOCOL_VERSION,
 					supports_rate_limit_response: !anonLogin,
@@ -91,6 +91,15 @@ class SteamUserLogon extends SteamUserWeb {
 				delete this._logOnDetails.machine_name_userchosen;
 				delete this._logOnDetails.two_factor_code;
 				delete this._logOnDetails.supports_rate_limit_response;
+			}
+
+			if ((this._logOnDetails.login_key || '').split('.').length == 3) {
+				// deprecated: they're using a refresh token as a login key
+				details.refreshToken = this._logOnDetails.login_key;
+				this._logOnDetails._newAuthAccountName = this._logOnDetails.account_name;
+				delete this._logOnDetails.account_name;
+				delete this._logOnDetails.password;
+				delete this._logOnDetails.login_key;
 			}
 
 			if (details.refreshToken) {
@@ -142,6 +151,10 @@ class SteamUserLogon extends SteamUserWeb {
 			}
 
 			let anonLogin = !this._logOnDetails.account_name && !this._logOnDetails.access_token;
+			let explicitlyRequestedAnonLogin = details !== true && details.anonymous;
+			if (explicitlyRequestedAnonLogin && !anonLogin) {
+				this._warn('Anonymous logon was requested but account details were specified; logging into specified individual user account');
+			}
 
 			// Read the required files
 			let filenames = [];
@@ -156,14 +169,9 @@ class SteamUserLogon extends SteamUserWeb {
 				filenames.push('cellid-' + Helpers.getInternalMachineID() + '.txt');
 			}
 
-			let sentry = this._sentry;
 			let machineID;
 
 			if (!anonLogin) {
-				if (!this._logOnDetails.sha_sentryfile && !sentry) {
-					filenames.push(this.options.singleSentryfile ? 'sentry.bin' : 'sentry.' + this._logOnDetails.account_name + '.bin');
-				}
-
 				if (!this._logOnDetails.machine_id && this.options.machineIdType == EMachineIDType.PersistentRandom) {
 					filenames.push('machineid.bin');
 				}
@@ -185,10 +193,6 @@ class SteamUserLogon extends SteamUserWeb {
 					if (!isNaN(cellID)) {
 						this._logOnDetails.cell_id = cellID;
 					}
-				}
-
-				if (file.filename.match(/^sentry/) && file.contents) {
-					sentry = file.contents;
 				}
 
 				if (file.filename == 'machineid.bin' && file.contents) {
@@ -218,7 +222,12 @@ class SteamUserLogon extends SteamUserWeb {
 			}
 
 			// Sentry file
-			if (!this._logOnDetails.sha_sentryfile) {
+			if (!anonLogin && !this._logOnDetails.sha_sentryfile) {
+				let sentry = this._sentry;
+				if (!sentry) {
+					sentry = await this._getSentryFileContent();
+				}
+
 				if (sentry && sentry.length > 20) {
 					// Hash the sentry
 					let hash = Crypto.createHash('sha1');
@@ -247,8 +256,12 @@ class SteamUserLogon extends SteamUserWeb {
 				this._tempSteamID = sid;
 			}
 
-			if (anonLogin && (this._logOnDetails.password || this._logOnDetails.login_key)) {
-				this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
+			if (anonLogin) {
+				if (this._logOnDetails.password || this._logOnDetails.login_key) {
+					this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
+				} else if (details !== true && !explicitlyRequestedAnonLogin) {
+					this._warn('Logging into anonymous Steam account. If you didn\'t expect this warning, make sure that you\'re properly passing your log on details to the logOn() method. To suppress this warning, pass {anonymous: true} to logOn().');
+				}
 			}
 
 			this._doConnection();
@@ -261,13 +274,21 @@ class SteamUserLogon extends SteamUserWeb {
 	_doConnection() {
 		let thisProtocol = this.options.protocol;
 
-		if (thisProtocol == EConnectionProtocol.TCP && this.options.webCompatibilityMode) {
-			this._warn('Forcing protocol to EConnectionProtocol.WebSocket because webCompatibilityMode is enabled');
+		if (this.options.webCompatibilityMode) {
+			if (thisProtocol == EConnectionProtocol.TCP) {
+				this._warn('Forcing protocol to EConnectionProtocol.WebSocket because webCompatibilityMode is enabled');
+			}
+
+			this.emit('debug', 'Forcing protocol to EConnectionProtocol.WebSocket because webCompatibilityMode is enabled');
 			thisProtocol = EConnectionProtocol.WebSocket;
 		}
 
-		if (thisProtocol == EConnectionProtocol.TCP && this.options.socksProxy) {
-			this._warn('Forcing protocol to EConnectionProtocol.WebSocket because a socksProxy is specified and SOCKS proxy support is incompatible with TCP');
+		if (this.options.socksProxy) {
+			if (thisProtocol == EConnectionProtocol.TCP) {
+				this._warn('Forcing protocol to EConnectionProtocol.WebSocket because a socksProxy is specified and SOCKS proxy support is incompatible with TCP');
+			}
+
+			this.emit('debug', 'Forcing protocol to EConnectionProtocol.WebSocket because a socksProxy is specified and SOCKS proxy support is incompatible with TCP');
 			thisProtocol = EConnectionProtocol.WebSocket;
 		}
 
@@ -299,7 +320,25 @@ class SteamUserLogon extends SteamUserWeb {
 	 * Send the actual ClientLogOn message.
 	 * @private
 	 */
-	_sendLogOn() {
+	async _sendLogOn() {
+		// If we're logging in with account name/password and we're running node 12.22 or later,
+		// go ahead and get a refresh token.
+		if (this._logOnDetails.account_name && this._logOnDetails.password) {
+			let nodeVersion = process.versions.node.split('.');
+			if (nodeVersion[0] > 12 || (nodeVersion[0] == 12 && nodeVersion[1] >= 22)) {
+				this.emit('debug', 'Node version is new enough for steam-session; performing new auth');
+				let startTime = Date.now();
+				let newAuthSucceeded = await this._performNewAuth();
+				if (!newAuthSucceeded) {
+					return;
+				} else {
+					this.emit('debug', `New auth succeeded in ${Date.now() - startTime} ms`);
+				}
+			} else {
+				this._warn('Logging onto Steam using legacy authentication. steam-user may not behave as expected. To remove this warning, log on using a refresh token or upgrade Node.js to 12.22.0 or later.');
+			}
+		}
+
 		// Realistically, this should never need to elapse since at this point we have already established a successful connection
 		// with the CM. But sometimes, Steam appears to never respond to the logon message. Valve.
 		this._logonMsgTimeout = setTimeout(() => {
@@ -309,6 +348,86 @@ class SteamUserLogon extends SteamUserWeb {
 		}, 5000);
 
 		this._send(this._logOnDetails.game_server_token ? EMsg.ClientLogonGameServer : EMsg.ClientLogon, this._logOnDetails);
+	}
+
+	_performNewAuth() {
+		return new Promise(async (resolve) => {
+			this._send(EMsg.ClientHello, {protocol_version: PROTOCOL_VERSION});
+
+			// import this here to prevent issues on older versions of node
+			const {LoginSession, EAuthTokenPlatformType, EAuthSessionGuardType} = require('steam-session');
+			const CMAuthTransport = require('./classes/CMAuthTransport.js');
+
+			let transport = new CMAuthTransport(this);
+			let session = new LoginSession(EAuthTokenPlatformType.SteamClient, {transport});
+
+			session.on('debug', (...args) => this.emit('debug', '[steam-session]', ...args));
+
+			session.on('authenticated', () => {
+				this._logOnDetails.access_token = session.refreshToken;
+				this._logOnDetails._newAuthAccountName = this._logOnDetails.account_name;
+				this._logOnDetails._steamid = session.steamID;
+				delete this._logOnDetails.account_name;
+				delete this._logOnDetails.password;
+				delete this._logOnDetails.login_key;
+				delete this._logOnDetails.auth_code;
+				delete this._logOnDetails.two_factor_code;
+				this._tempSteamID = session.steamID;
+				resolve(true);
+			});
+
+			session.on('error', (err) => {
+				this.debug(`steam-session error: ${err.message}`);
+				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
+				resolve(false);
+			});
+
+			session.on('timeout', () => {
+				this.debug('steam-session timeout');
+				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
+				resolve(false);
+			});
+
+			// TODO somehow handle steam guard machine tokens
+
+			let sessionStartResult = null;
+
+			try {
+				sessionStartResult = await session.startWithCredentials({
+					accountName: this._logOnDetails.account_name,
+					password: this._logOnDetails.password,
+					steamGuardMachineToken: this._logOnDetails.sha_sentryfile,
+					steamGuardCode: this._logOnDetails.two_factor_code || this._logOnDetails.auth_code
+				});
+			} catch (ex) {
+				// I don't honestly think calling cancelLoginAttempt is ever necessary here, but there's no harm in doing it
+				session.cancelLoginAttempt();
+
+				this.emit('debug', 'steam-session startWithCredentials exception', ex);
+
+				this._handleLogOnResponse({eresult: ex.eresult || EResult.ServiceUnavailable});
+				return resolve(false);
+			}
+
+			if (sessionStartResult.actionRequired) {
+				// We need a code of some kind. Technically we could just wait for a device approval, but in the majority
+				// of consumer use-cases, the app seemingly hanging while waiting for this isn't desirable.
+				session.cancelLoginAttempt();
+
+				// We need to synthesize a LogOnResponse eresult
+				let logOnResponse = {};
+
+				let wantsEmailCode = sessionStartResult.validActions.some(action => action.type == EAuthSessionGuardType.EmailCode);
+				if (wantsEmailCode) {
+					logOnResponse.eresult = EResult.AccountLogonDenied;
+					logOnResponse.email_domain = sessionStartResult.validActions.find(action => action.type == EAuthSessionGuardType.EmailCode).detail;
+				} else {
+					logOnResponse.eresult = this._logOnDetails.two_factor_code ? EResult.TwoFactorCodeMismatch : EResult.AccountLoginDeniedNeedTwoFactor;
+				}
+
+				this._handleLogOnResponse(logOnResponse);
+			}
+		});
 	}
 
 	/**
@@ -372,7 +491,13 @@ class SteamUserLogon extends SteamUserWeb {
 	 * @private
 	 */
 	_getMachineID(localFile) {
-		if (!this._logOnDetails.account_name || this.options.machineIdType == EMachineIDType.None) {
+		if (
+			(
+				!this._logOnDetails.account_name
+				&& !this._logOnDetails._steamid
+			)
+			|| this.options.machineIdType == EMachineIDType.None
+		) {
 			// No machine IDs for anonymous logons
 			return null;
 		}
@@ -392,9 +517,9 @@ class SteamUserLogon extends SteamUserWeb {
 		// The user wants to use a machine ID that's generated off the account name
 		if (this.options.machineIdType == EMachineIDType.AccountNameGenerated) {
 			return createMachineID(
-				this.options.machineIdFormat[0].replace(/\{account_name\}/g, this._logOnDetails.account_name),
-				this.options.machineIdFormat[1].replace(/\{account_name\}/g, this._logOnDetails.account_name),
-				this.options.machineIdFormat[2].replace(/\{account_name\}/g, this._logOnDetails.account_name)
+				this.options.machineIdFormat[0].replace(/\{account_name\}/g, this._getAccountIdentifier()),
+				this.options.machineIdFormat[1].replace(/\{account_name\}/g, this._getAccountIdentifier()),
+				this.options.machineIdFormat[2].replace(/\{account_name\}/g, this._getAccountIdentifier())
 			);
 		}
 
@@ -404,6 +529,12 @@ class SteamUserLogon extends SteamUserWeb {
 		function getRandomID() {
 			return createMachineID(Math.random().toString(), Math.random().toString(), Math.random().toString());
 		}
+	}
+
+	_getAccountIdentifier() {
+		return this._logOnDetails.account_name
+			|| this._logOnDetails._newAuthAccountName
+			|| this._logOnDetails._steamid.toString();
 	}
 
 	/**
@@ -529,127 +660,142 @@ class SteamUserLogon extends SteamUserWeb {
 			this.emit('steamGuard', domain, callback, lastCodeWrong);
 		}
 	}
+
+	_handleLogOnResponse(body) {
+		this.emit('debug', `Handle logon response (${EResult[body.eresult]})`);
+
+		clearTimeout(this._logonMsgTimeout);
+		delete this._logonMsgTimeout;
+
+		switch (body.eresult) {
+			case EResult.OK:
+				delete this._logonTimeoutDuration; // success, so reset reconnect timer
+
+				this._logOnDetails.last_session_id = this._sessionID;
+				this._logOnDetails.client_instance_id = body.client_instance_id;
+				this._logOnDetails.cell_id = body.cell_id;
+				delete this._logOnDetails.auth_code;
+				delete this._logOnDetails.two_factor_code;
+				this.logOnResult = body;
+
+				this.publicIP = null;
+				if (body.public_ip && body.public_ip.v4) {
+					this.publicIP = StdLib.IPv4.intToString(body.public_ip.v4);
+				}
+				this.cellID = body.cell_id;
+				this.vanityURL = body.vanity_url;
+				this.contentServersReady = true;
+
+				this._connectTime = Date.now();
+				this._connectTimeout = 1000; // reset exponential connect backoff
+
+				// deprecated
+				if (this._logOnDetails.login_key) {
+					// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.
+					this._loginKeyTimer = setTimeout(() => {
+						this.emit('loginKey', this._logOnDetails.login_key);
+					}, 5000);
+				} else if (
+					(this._logOnDetails._newAuthAccountName && this._logOnDetails.should_remember_password) ||
+					this._logOnDetails._newAuthUsedTokenAsLoginKey
+				) {
+					// deprecated: emit the refresh token as a loginKey to support code that depends on login keys
+					this._loginKeyTimer = setTimeout(() => {
+						this.emit('loginKey', this._logOnDetails.access_token);
+					}, 5000);
+				}
+
+				this._saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
+
+				let parental = body.parental_settings ? SteamUserLogon._decodeProto(Schema.ParentalSettings, body.parental_settings) : null;
+				if (parental && parental.salt && parental.passwordhash) {
+					let sid = new SteamID();
+					sid.universe = this.steamID.universe;
+					sid.type = SteamID.Type.INDIVIDUAL;
+					sid.instance = SteamID.Instance.DESKTOP;
+					sid.accountid = parental.steamid.low;
+					parental.steamid = sid;
+				}
+
+				if (!this.steamID && body.client_supplied_steamid) {
+					// This should ordinarily not happen. this.steamID is supposed to be set in messages.js according to
+					// the SteamID in the message header. But apparently, sometimes Steam doesn't set that SteamID
+					// appropriately in the log on response message. ¯\_(ツ)_/¯
+					this.steamID = new SteamID(body.client_supplied_steamid);
+				}
+
+				if (!this.steamID) {
+					// This should never happen, but apparently sometimes it does
+					this._disconnect(true);
+					let err = new Error('BadResponse');
+					err.eresult = EResult.BadResponse;
+					this.emit('error', err);
+					return;
+				}
+
+				this.emit('loggedOn', body, parental);
+				this.emit('contentServersReady');
+
+				this._getChangelistUpdate();
+
+				if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
+					this._requestNotifications();
+
+					if (body.webapi_authenticate_user_nonce) {
+						this._webAuthenticate(body.webapi_authenticate_user_nonce);
+					}
+				} else if (this.steamID.type == SteamID.Type.ANON_USER) {
+					this._getLicenseInfo();
+				}
+
+				this._heartbeatInterval = setInterval(() => {
+					this._send(EMsg.ClientHeartBeat, {});
+				}, body.heartbeat_seconds * 1000);
+
+				break;
+
+			case EResult.AccountLogonDenied:
+			case EResult.AccountLoginDeniedNeedTwoFactor:
+			case EResult.TwoFactorCodeMismatch:
+				// server is up, so reset logon timer
+				delete this._logonTimeoutDuration;
+
+				this._disconnect(true);
+
+				let isEmailCode = body.eresult == EResult.AccountLogonDenied;
+				let lastCodeWrong = body.eresult == EResult.TwoFactorCodeMismatch;
+
+				this._steamGuardPrompt(isEmailCode ? body.email_domain : null, lastCodeWrong, (code) => {
+					this._logOnDetails[isEmailCode ? 'auth_code' : 'two_factor_code'] = code;
+					this.logOn(true);
+				});
+
+				break;
+
+			case EResult.Fail:
+			case EResult.ServiceUnavailable:
+			case EResult.TryAnotherCM:
+				this.emit('debug', 'Log on response: ' + EResult[body.eresult]);
+				this._disconnect(true);
+				this._enqueueLogonAttempt();
+				break;
+
+			default:
+				// server is up, so reset logon timer
+				delete this._logonTimeoutDuration;
+
+				let error = new Error(EResult[body.eresult] || body.eresult);
+				error.eresult = body.eresult;
+				this._disconnect(true);
+				this.emit('error', error);
+		}
+	}
 }
 
 // Handlers
 
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientLogOnResponse, function(body) {
-	clearTimeout(this._logonMsgTimeout);
-	delete this._logonMsgTimeout;
-
-	switch (body.eresult) {
-		case EResult.OK:
-			delete this._logonTimeoutDuration; // success, so reset reconnect timer
-
-			this._logOnDetails.last_session_id = this._sessionID;
-			this._logOnDetails.client_instance_id = body.client_instance_id;
-			this._logOnDetails.cell_id = body.cell_id;
-			delete this._logOnDetails.auth_code;
-			delete this._logOnDetails.two_factor_code;
-			this.logOnResult = body;
-
-			this.publicIP = null;
-			if (body.public_ip && body.public_ip.v4) {
-				this.publicIP = StdLib.IPv4.intToString(body.public_ip.v4);
-			}
-			this.cellID = body.cell_id;
-			this.vanityURL = body.vanity_url;
-			this.contentServersReady = true;
-
-			this._connectTime = Date.now();
-			this._connectTimeout = 1000; // reset exponential connect backoff
-
-			if (this._logOnDetails.login_key) {
-				// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.
-				this._loginKeyTimer = setTimeout(() => {
-					this.emit('loginKey', this._logOnDetails.login_key);
-				}, 5000);
-			}
-
-			this._saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
-
-			let parental = body.parental_settings ? SteamUserLogon._decodeProto(Schema.ParentalSettings, body.parental_settings) : null;
-			if (parental && parental.salt && parental.passwordhash) {
-				let sid = new SteamID();
-				sid.universe = this.steamID.universe;
-				sid.type = SteamID.Type.INDIVIDUAL;
-				sid.instance = SteamID.Instance.DESKTOP;
-				sid.accountid = parental.steamid.low;
-				parental.steamid = sid;
-			}
-
-			if (!this.steamID && body.client_supplied_steamid) {
-				// This should ordinarily not happen. this.steamID is supposed to be set in messages.js according to
-				// the SteamID in the message header. But apparently, sometimes Steam doesn't set that SteamID
-				// appropriately in the log on response message. ¯\_(ツ)_/¯
-				this.steamID = new SteamID(body.client_supplied_steamid);
-			}
-
-			if (!this.steamID) {
-				// This should never happen, but apparently sometimes it does
-				this._disconnect(true);
-				let err = new Error('BadResponse');
-				err.eresult = EResult.BadResponse;
-				this.emit('error', err);
-				return;
-			}
-
-			this.emit('loggedOn', body, parental);
-			this.emit('contentServersReady');
-
-			this._getChangelistUpdate();
-
-			if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
-				this._requestNotifications();
-
-				if (body.webapi_authenticate_user_nonce) {
-					this._webAuthenticate(body.webapi_authenticate_user_nonce);
-				}
-			} else if (this.steamID.type == SteamID.Type.ANON_USER) {
-				this._getLicenseInfo();
-			}
-
-			this._heartbeatInterval = setInterval(() => {
-				this._send(EMsg.ClientHeartBeat, {});
-			}, body.heartbeat_seconds * 1000);
-
-			break;
-
-		case EResult.AccountLogonDenied:
-		case EResult.AccountLoginDeniedNeedTwoFactor:
-		case EResult.TwoFactorCodeMismatch:
-			// server is up, so reset logon timer
-			delete this._logonTimeoutDuration;
-
-			this._disconnect(true);
-
-			let isEmailCode = body.eresult == EResult.AccountLogonDenied;
-			let lastCodeWrong = body.eresult == EResult.TwoFactorCodeMismatch;
-
-			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, lastCodeWrong, (code) => {
-				this._logOnDetails[isEmailCode ? 'auth_code' : 'two_factor_code'] = code;
-				this.logOn(true);
-			});
-
-			break;
-
-		case EResult.Fail:
-		case EResult.ServiceUnavailable:
-		case EResult.TryAnotherCM:
-			this.emit('debug', 'Log on response: ' + EResult[body.eresult]);
-			this._disconnect(true);
-			this._enqueueLogonAttempt();
-			break;
-
-		default:
-			// server is up, so reset logon timer
-			delete this._logonTimeoutDuration;
-
-			let error = new Error(EResult[body.eresult] || body.eresult);
-			error.eresult = body.eresult;
-			this._disconnect(true);
-			this.emit('error', error);
-	}
+	this._handleLogOnResponse(body);
 });
 
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientLoggedOff, function(body) {
@@ -665,6 +811,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLoggedOff, function(body)
 	this._handleLogOff(body.eresult, msg);
 });
 
+// deprecated: appears no longer functional
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientNewLoginKey, function(body) {
 	if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;

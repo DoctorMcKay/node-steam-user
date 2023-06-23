@@ -229,7 +229,7 @@
           "type": ".EMouseMode",
           "id": 3,
           "options": {
-            "default": "k_EMouseModeRelative"
+            "default": "k_EMouseModeAbsoluteCursor"
           }
         }
       },

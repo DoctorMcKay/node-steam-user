@@ -89,6 +89,7 @@ enum EProfileCustomizationType {
 	k_EProfileCustomizationTypeLoyaltyRewardReactions = 21;
 	k_EProfileCustomizationTypeSingleArtworkShowcase = 22;
 	k_EProfileCustomizationTypeAchievementsCompletionist = 23;
+	k_EProfileCustomizationTypeReplay = 24;
 }
 
 enum EPublishedFileStorageSystem {
@@ -206,6 +207,29 @@ enum EScalingFilter {
 	k_EScalingFilter_NIS = 5;
 }
 
+enum ESplitScalingFilter {
+	k_ESplitScalingFilter_Invalid = 0;
+	k_ESplitScalingFilter_Linear = 1;
+	k_ESplitScalingFilter_Nearest = 2;
+	k_ESplitScalingFilter_FSR = 3;
+	k_ESplitScalingFilter_NIS = 4;
+}
+
+enum ESplitScalingScaler {
+	k_ESplitScalingScaler_Invalid = 0;
+	k_ESplitScalingScaler_Auto = 1;
+	k_ESplitScalingScaler_Integer = 2;
+	k_ESplitScalingScaler_Fit = 3;
+	k_ESplitScalingScaler_Fill = 4;
+	k_ESplitScalingScaler_Stretch = 5;
+}
+
+enum EHDRToneMapOperator {
+	k_EHDRToneMapOperator_Invalid = 0;
+	k_EHDRToneMapOperator_Uncharted = 1;
+	k_EHDRToneMapOperator_Reinhard = 2;
+}
+
 enum ECPUGovernor {
 	k_ECPUGovernor_Invalid = 0;
 	k_ECPUGovernor_Perf = 1;
@@ -249,6 +273,20 @@ enum EStorageBlockFileSystemType {
 	k_EStorageBlockFileSystemType_Ext4 = 3;
 }
 
+enum EStorageDriveMediaType {
+	k_EStorageDriveMediaType_Invalid = 0;
+	k_EStorageDriveMediaType_Unknown = 1;
+	k_EStorageDriveMediaType_HDD = 2;
+	k_EStorageDriveMediaType_SSD = 3;
+	k_EStorageDriveMediaType_Removable = 4;
+}
+
+enum ESystemDisplayCompatibilityMode {
+	k_ESystemDisplayCompatibilityMode_Invalid = 0;
+	k_ESystemDisplayCompatibilityMode_None = 1;
+	k_ESystemDisplayCompatibilityMode_MinimalBandwith = 2;
+}
+
 enum ESteamDeckCompatibilityCategory {
 	k_ESteamDeckCompatibilityCategory_Unknown = 0;
 	k_ESteamDeckCompatibilityCategory_Unsupported = 1;
@@ -285,6 +323,7 @@ enum EOSBranch {
 	k_EOSBranch_Beta = 3;
 	k_EOSBranch_BetaCandidate = 4;
 	k_EOSBranch_Main = 5;
+	k_EOSBranch_Staging = 6;
 }
 
 enum ECommunityItemClass {
@@ -305,6 +344,7 @@ enum ECommunityItemClass {
 	k_ECommunityItemClass_AvatarFrame = 14;
 	k_ECommunityItemClass_AnimatedAvatar = 15;
 	k_ECommunityItemClass_SteamDeckKeyboardSkin = 16;
+	k_ECommunityItemClass_SteamDeckStartupMovie = 17;
 }
 
 enum ESteamDeckCompatibilityFeedback {
@@ -341,4 +381,11 @@ enum ESessionPersistence {
 	k_ESessionPersistence_Invalid = -1;
 	k_ESessionPersistence_Ephemeral = 0;
 	k_ESessionPersistence_Persistent = 1;
+}
+
+enum ENewSteamAnnouncementState {
+	k_ENewSteamAnnouncementState_Invalid = 0;
+	k_ENewSteamAnnouncementState_AllRead = 1;
+	k_ENewSteamAnnouncementState_NewAnnouncement = 2;
+	k_ENewSteamAnnouncementState_FeaturedAnnouncement = 3;
 }

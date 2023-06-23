@@ -132,30 +132,30 @@ message CMsgBrowserSetName {
 
 message CMsgBrowserSize {
 	optional uint32 browser_handle = 1;
-	optional uint32 width = 2;
-	optional uint32 height = 3;
+	optional double width = 2;
+	optional double height = 3;
 }
 
 message CMsgBrowserSetMinSize {
 	optional uint32 browser_handle = 1;
-	optional uint32 width = 2;
-	optional uint32 height = 3;
+	optional double width = 2;
+	optional double height = 3;
 }
 
 message CMsgBrowserPosition {
 	optional uint32 browser_handle = 1;
-	optional int32 x = 2;
-	optional int32 y = 3;
-	optional int32 x_local = 4;
-	optional int32 y_local = 5;
+	optional double x = 2;
+	optional double y = 3;
+	optional double x_local = 4;
+	optional double y_local = 5;
 }
 
 message CMsgBrowserResized {
 	optional uint32 browser_handle = 1;
-	optional int32 x = 2;
-	optional int32 y = 3;
-	optional uint32 width = 4;
-	optional uint32 height = 5;
+	optional double x = 2;
+	optional double y = 3;
+	optional double width = 4;
+	optional double height = 5;
 	optional double dpi_horizontal = 6;
 	optional double dpi_vertical = 7;
 	optional string display_name = 8;
@@ -392,6 +392,9 @@ message CMsgPopupHTMLWindow {
 	optional uint32 tall = 6;
 	optional uint32 popup_index = 7;
 	optional bool trusted_creator = 8;
+	optional string name = 9;
+	optional uint64 hwnd = 10;
+	optional uint32 parent_popup_index = 11;
 }
 
 message CMsgPopupHTMLWindowResponse {
@@ -746,6 +749,10 @@ message CMsgScreenDPI {
 	optional float dpi_scaling = 2;
 }
 
+message CMsgAckScreenDPI {
+	optional uint32 browser_handle = 1;
+}
+
 message CMsgAuthedSteamDomains {
 	repeated string domains = 1;
 }
@@ -875,12 +882,12 @@ message CMsgResizeGripChanged {
 
 message CMsgSetWindowPosition {
 	optional uint32 browser_handle = 1;
-	optional int32 x = 2;
-	optional int32 y = 3;
-	optional int32 width = 4;
-	optional int32 height = 5;
-	optional int32 min_width = 6;
-	optional int32 min_height = 7;
+	optional double x = 2;
+	optional double y = 3;
+	optional double width = 4;
+	optional double height = 5;
+	optional double min_width = 6;
+	optional double min_height = 7;
 }
 
 message CMsgShowWindow {
@@ -991,11 +998,25 @@ message CMsgBlockedRequest {
 	optional string url = 2;
 }
 
+message CMsgBrowserFocusChanged {
+	optional uint32 browser_handle = 1;
+	optional bool focused = 2;
+}
+
 message CMsgSetProtocolBlockList {
 	optional uint32 browser_handle = 1;
 	optional string list = 2;
 }
 
-message CMsgSetForceDeviceScaleFactor {
-	optional double scale_factor = 1;
+message CMsgSetForceDeviceScaleFactors {
+	optional double dpi_scale = 1;
+	optional double browser_scale = 2;
+}
+
+message CMsgSetUIMode {
+	optional int32 ui_mode = 1;
+}
+
+message CMsgPopupCreated {
+	optional uint32 browser_handle = 1;
 }

@@ -409,11 +409,11 @@
           "id": 1
         },
         "width": {
-          "type": "uint32",
+          "type": "double",
           "id": 2
         },
         "height": {
-          "type": "uint32",
+          "type": "double",
           "id": 3
         }
       }
@@ -425,11 +425,11 @@
           "id": 1
         },
         "width": {
-          "type": "uint32",
+          "type": "double",
           "id": 2
         },
         "height": {
-          "type": "uint32",
+          "type": "double",
           "id": 3
         }
       }
@@ -441,19 +441,19 @@
           "id": 1
         },
         "x": {
-          "type": "int32",
+          "type": "double",
           "id": 2
         },
         "y": {
-          "type": "int32",
+          "type": "double",
           "id": 3
         },
         "x_local": {
-          "type": "int32",
+          "type": "double",
           "id": 4
         },
         "y_local": {
-          "type": "int32",
+          "type": "double",
           "id": 5
         }
       }
@@ -465,19 +465,19 @@
           "id": 1
         },
         "x": {
-          "type": "int32",
+          "type": "double",
           "id": 2
         },
         "y": {
-          "type": "int32",
+          "type": "double",
           "id": 3
         },
         "width": {
-          "type": "uint32",
+          "type": "double",
           "id": 4
         },
         "height": {
-          "type": "uint32",
+          "type": "double",
           "id": 5
         },
         "dpi_horizontal": {
@@ -1121,6 +1121,18 @@
         "trusted_creator": {
           "type": "bool",
           "id": 8
+        },
+        "name": {
+          "type": "string",
+          "id": 9
+        },
+        "hwnd": {
+          "type": "uint64",
+          "id": 10
+        },
+        "parent_popup_index": {
+          "type": "uint32",
+          "id": 11
         }
       }
     },
@@ -2067,6 +2079,14 @@
         }
       }
     },
+    "CMsgAckScreenDPI": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
     "CMsgAuthedSteamDomains": {
       "fields": {
         "domains": {
@@ -2433,27 +2453,27 @@
           "id": 1
         },
         "x": {
-          "type": "int32",
+          "type": "double",
           "id": 2
         },
         "y": {
-          "type": "int32",
+          "type": "double",
           "id": 3
         },
         "width": {
-          "type": "int32",
+          "type": "double",
           "id": 4
         },
         "height": {
-          "type": "int32",
+          "type": "double",
           "id": 5
         },
         "min_width": {
-          "type": "int32",
+          "type": "double",
           "id": 6
         },
         "min_height": {
-          "type": "int32",
+          "type": "double",
           "id": 7
         }
       }
@@ -2729,6 +2749,18 @@
         }
       }
     },
+    "CMsgBrowserFocusChanged": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
+          "id": 1
+        },
+        "focused": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
     "CMsgSetProtocolBlockList": {
       "fields": {
         "browser_handle": {
@@ -2741,10 +2773,30 @@
         }
       }
     },
-    "CMsgSetForceDeviceScaleFactor": {
+    "CMsgSetForceDeviceScaleFactors": {
       "fields": {
-        "scale_factor": {
+        "dpi_scale": {
           "type": "double",
+          "id": 1
+        },
+        "browser_scale": {
+          "type": "double",
+          "id": 2
+        }
+      }
+    },
+    "CMsgSetUIMode": {
+      "fields": {
+        "ui_mode": {
+          "type": "int32",
+          "id": 1
+        }
+      }
+    },
+    "CMsgPopupCreated": {
+      "fields": {
+        "browser_handle": {
+          "type": "uint32",
           "id": 1
         }
       }

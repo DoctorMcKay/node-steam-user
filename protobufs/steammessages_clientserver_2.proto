@@ -198,41 +198,6 @@ message CMsgClientCheckAppBetaPasswordResponse {
 	repeated .CMsgClientCheckAppBetaPasswordResponse.BetaPassword betapasswords = 4;
 }
 
-message CMsgClientUpdateAppJobReport {
-	optional uint32 app_id = 1;
-	repeated uint32 depot_ids = 2;
-	optional uint32 app_state = 3;
-	optional uint32 job_app_error = 4;
-	optional string error_details = 5;
-	optional uint32 job_duration = 6;
-	optional uint32 files_validation_failed = 7;
-	optional uint64 job_bytes_downloaded = 8;
-	optional uint64 job_bytes_staged = 9;
-	optional uint64 bytes_comitted = 10;
-	optional uint32 start_app_state = 11;
-	optional fixed64 stats_machine_id = 12;
-	optional string branch_name = 13;
-	optional uint64 total_bytes_downloaded = 14;
-	optional uint64 total_bytes_staged = 15;
-	optional uint64 total_bytes_restored = 16;
-	optional bool is_borrowed = 17;
-	optional bool is_free_weekend = 18;
-	optional uint64 total_bytes_legacy = 19;
-	optional uint64 total_bytes_patched = 20;
-	optional uint64 total_bytes_saved = 21;
-	optional uint32 cell_id = 22;
-}
-
-message CMsgClientDPContentStatsReport {
-	optional fixed64 stats_machine_id = 1;
-	optional string country_code = 2;
-	optional int32 os_type = 3;
-	optional int32 language = 4;
-	optional uint32 num_install_folders = 5;
-	optional uint32 num_installed_games = 6;
-	optional uint64 size_installed_games = 7;
-}
-
 message CMsgClientGetCDNAuthTokenResponse {
 	optional uint32 eresult = 1 [default = 2];
 	optional string token = 2;
@@ -499,7 +464,6 @@ message CMsgClientEmailAddrInfo {
 	optional bool email_validation_changed = 3;
 	optional bool credential_change_requires_code = 4;
 	optional bool password_or_secretqa_change_requires_code = 5;
-	optional bool remind_user_about_email = 6;
 }
 
 message CMsgCREItemVoteSummary {
@@ -732,19 +696,15 @@ message CMsgClientServiceCallResponse {
 	optional uint32 last_callcomplete_delta = 21;
 }
 
-message CMsgAMUnlockStreaming {
+message CMsgAMUnlockH264 {
+	optional uint32 appid = 1;
+	optional int32 platform = 2;
+	optional int32 reason = 3;
 }
 
-message CMsgAMUnlockStreamingResponse {
+message CMsgAMUnlockH264Response {
 	optional int32 eresult = 1 [default = 2];
 	optional bytes encryption_key = 2;
-}
-
-message CMsgAMUnlockHEVC {
-}
-
-message CMsgAMUnlockHEVCResponse {
-	optional int32 eresult = 1 [default = 2];
 }
 
 message CMsgClientPlayingSessionState {
@@ -773,4 +733,26 @@ message CMsgClientVoiceCallPreAuthorizeResponse {
 message CMsgBadgeCraftedNotification {
 	optional uint32 appid = 1;
 	optional uint32 badge_level = 2;
+}
+
+message CMsgClientStartPeerContentServer {
+	optional fixed64 steamid = 1;
+	optional fixed64 client_remote_id = 2;
+	optional uint32 app_id = 3;
+	optional uint32 current_build_id = 4;
+}
+
+message CMsgClientStartPeerContentServerResponse {
+	optional uint32 result = 1;
+	optional uint32 server_port = 2;
+}
+
+message CMsgClientGetPeerContentInfo {
+	optional fixed64 steamid = 1;
+	optional fixed64 client_remote_id = 2;
+}
+
+message CMsgClientGetPeerContentInfoResponse {
+	optional uint32 result = 1;
+	repeated uint32 apps = 2;
 }

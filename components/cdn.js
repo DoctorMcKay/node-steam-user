@@ -180,6 +180,15 @@ class SteamUserCDN extends SteamUserApps {
 	 * @return Promise
 	 */
 	getManifest(appID, depotID, manifestID, branchName, branchPassword, callback) {
+		if (typeof manifestID == 'object' && typeof manifestID.gid == 'string') {
+			// At some point, Valve changed the format of appinfo.
+			// Previously, appinfo.depots[depotId].manifests.public would get you the public manifest ID.
+			// Now, you need to access it with appinfo.depots[depotId].manifests.public.gid.
+			// Here's a shim to keep consumers working properly if they expect the old format.
+			manifestID = manifestID.gid;
+			this._warn(`appinfo format has changed: you now need to use appinfo.depots[${depotID}].manifests.${branchName || 'public'}.gid to access the manifest ID. steam-user is fixing up your input, but you should update your code to retrieve the manifest ID from its new location in the appinfo structure.`);
+		}
+
 		if (typeof branchName == 'function') {
 			callback = branchName;
 			branchName = null;

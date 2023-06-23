@@ -978,6 +978,10 @@
           "options": {
             "(description)": "When true, then only steamwork partner can create chat messages."
           }
+        },
+        "wordban_list": {
+          "type": "string",
+          "id": 12
         }
       }
     },
@@ -1067,6 +1071,10 @@
           "options": {
             "(description)": "When true, then only steamwork partner can create chat messages."
           }
+        },
+        "wordban_list": {
+          "type": "string",
+          "id": 13
         }
       }
     },
@@ -1729,238 +1737,408 @@
           "responseType": ".CBroadcast_BeginBroadcastSession_Response",
           "options": {
             "(method_description)": "Request from client to directory to begin a broadcast session. No data being sent to relay; just available for broadcast."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request from client to directory to begin a broadcast session. No data being sent to relay; just available for broadcast."
+            }
+          ]
         },
         "EndBroadcastSession": {
           "requestType": ".CBroadcast_EndBroadcastSession_Request",
           "responseType": ".CBroadcast_EndBroadcastSession_Response",
           "options": {
             "(method_description)": "Request from client to stop a broadcast session. Any uploads will terminate."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request from client to stop a broadcast session. Any uploads will terminate."
+            }
+          ]
         },
         "StartBroadcastUpload": {
           "requestType": ".CBroadcast_StartBroadcastUpload_Request",
           "responseType": ".CBroadcast_StartBroadcastUpload_Response",
           "options": {
             "(method_description)": "Request from client to begin sending video for a broadcast."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request from client to begin sending video for a broadcast."
+            }
+          ]
         },
         "NotifyBroadcastUploadStop": {
           "requestType": ".CBroadcast_NotifyBroadcastUploadStop_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Tells directory that client stopped uploading broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Tells directory that client stopped uploading broadcast"
+            }
+          ]
         },
         "WatchBroadcast": {
           "requestType": ".CBroadcast_WatchBroadcast_Request",
           "responseType": ".CBroadcast_WatchBroadcast_Response",
           "options": {
             "(method_description)": "Request from viewer to watch a broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request from viewer to watch a broadcast"
+            }
+          ]
         },
         "HeartbeatBroadcast": {
           "requestType": ".CBroadcast_HeartbeatBroadcast_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notify directory that user is still watching."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notify directory that user is still watching."
+            }
+          ]
         },
         "StopWatchingBroadcast": {
           "requestType": ".CBroadcast_StopWatchingBroadcast_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Request to immediately stop watching a broadcast. Optional Method, if not called, viewer will time out."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request to immediately stop watching a broadcast. Optional Method, if not called, viewer will time out."
+            }
+          ]
         },
         "GetBroadcastStatus": {
           "requestType": ".CBroadcast_GetBroadcastStatus_Request",
           "responseType": ".CBroadcast_GetBroadcastStatus_Response",
           "options": {
             "(method_description)": "Request from viewer about broadcast details"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request from viewer about broadcast details"
+            }
+          ]
         },
         "GetBroadcastThumbnail": {
           "requestType": ".CBroadcast_GetBroadcastThumbnail_Request",
           "responseType": ".CBroadcast_GetBroadcastThumbnail_Response",
           "options": {
             "(method_description)": "Request thumbnail URL for broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request thumbnail URL for broadcast"
+            }
+          ]
         },
         "InviteToBroadcast": {
           "requestType": ".CBroadcast_InviteToBroadcast_Request",
           "responseType": ".CBroadcast_InviteToBroadcast_Response",
           "options": {
             "(method_description)": "Invites another steam user to watch the caller's broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Invites another steam user to watch the caller's broadcast"
+            }
+          ]
         },
         "SendBroadcastStateToServer": {
           "requestType": ".CBroadcast_SendBroadcastStateToServer_Request",
           "responseType": ".CBroadcast_SendBroadcastStateToServer_Response",
           "options": {
             "(method_description)": "Sends users current broadcast state (permissions, game) to the server"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sends users current broadcast state (permissions, game) to the server"
+            }
+          ]
         },
         "NotifyBroadcastSessionHeartbeat": {
           "requestType": ".CBroadcast_NotifyBroadcastSessionHeartbeat_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Tells directory broadcast session is still available"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Tells directory broadcast session is still available"
+            }
+          ]
         },
         "GetBroadcastChatInfo": {
           "requestType": ".CBroadcast_GetBroadcastChatInfo_Request",
           "responseType": ".CBroadcast_GetBroadcastChatInfo_Response",
           "options": {
             "(method_description)": "Gets chat room info for a broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets chat room info for a broadcast"
+            }
+          ]
         },
         "PostChatMessage": {
           "requestType": ".CBroadcast_PostChatMessage_Request",
           "responseType": ".CBroadcast_PostChatMessage_Response",
           "options": {
             "(method_description)": "Post chat message to specified chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Post chat message to specified chat room"
+            }
+          ]
         },
         "UpdateChatMessageFlair": {
           "requestType": ".CBroadcast_UpdateChatMessageFlair_Request",
           "responseType": ".CBroadcast_UpdateChatMessageFlair_Response",
           "options": {
             "(method_description)": "Update chat message flair in the specified chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Update chat message flair in the specified chat room"
+            }
+          ]
         },
         "MuteBroadcastChatUser": {
           "requestType": ".CBroadcast_MuteBroadcastChatUser_Request",
           "responseType": ".CBroadcast_MuteBroadcastChatUser_Response",
           "options": {
             "(method_description)": "Mute a user in your broadcast chat"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Mute a user in your broadcast chat"
+            }
+          ]
         },
         "RemoveUserChatText": {
           "requestType": ".CBroadcast_RemoveUserChatText_Request",
           "responseType": ".CBroadcast_RemoveUserChatText_Response",
           "options": {
             "(method_description)": "Tell all viewers to remove user chat text"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Tell all viewers to remove user chat text"
+            }
+          ]
         },
         "GetBroadcastChatUserNames": {
           "requestType": ".CBroadcast_GetBroadcastChatUserNames_Request",
           "responseType": ".CBroadcast_GetBroadcastChatUserNames_Response",
           "options": {
             "(method_description)": "Get names for list of users in chat"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get names for list of users in chat"
+            }
+          ]
         },
         "StartBuildClip": {
           "requestType": ".CBroadcast_StartBuildClip_Request",
           "responseType": ".CBroadcast_StartBuildClip_Response",
           "options": {
             "(method_description)": "Start building a broadcast clip"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Start building a broadcast clip"
+            }
+          ]
         },
         "GetBuildClipStatus": {
           "requestType": ".CBroadcast_GetBuildClipStatus_Request",
           "responseType": ".CBroadcast_GetBuildClipStatus_Response",
           "options": {
             "(method_description)": "Start building a broadcast clip"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Start building a broadcast clip"
+            }
+          ]
         },
         "SetClipDetails": {
           "requestType": ".CBroadcast_SetClipDetails_Request",
           "responseType": ".CBroadcast_SetClipDetails_Response",
           "options": {
             "(method_description)": "Updates a broadcast clip"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Updates a broadcast clip"
+            }
+          ]
         },
         "GetClipDetails": {
           "requestType": ".CBroadcast_GetClipDetails_Request",
           "responseType": ".CBroadcast_GetClipDetails_Response",
           "options": {
             "(method_description)": "Get details for Broadcast Clips"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get details for Broadcast Clips"
+            }
+          ]
         },
         "SetRTMPInfo": {
           "requestType": ".CBroadcast_SetRTMPInfo_Request",
           "responseType": ".CBroadcast_SetRTMPInfo_Response",
           "options": {
             "(method_description)": "Sets RTMP broadcast info"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets RTMP broadcast info"
+            }
+          ]
         },
         "GetRTMPInfo": {
           "requestType": ".CBroadcast_GetRTMPInfo_Request",
           "responseType": ".CBroadcast_GetRTMPInfo_Response",
           "options": {
             "(method_description)": "Gets RTMP broadcast info"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets RTMP broadcast info"
+            }
+          ]
         },
         "NotifyWebRTCHaveTURNServer": {
           "requestType": ".CBroadcast_WebRTCHaveTURNServer_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from client to server with the client's TURN server"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from client to server with the client's TURN server"
+            }
+          ]
         },
         "WebRTCStartResult": {
           "requestType": ".CBroadcast_WebRTCStartResult_Request",
           "responseType": ".CBroadcast_WebRTCStartResult_Response",
           "options": {
             "(method_description)": "Notify the server that a WebRTC session has been created by the host"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notify the server that a WebRTC session has been created by the host"
+            }
+          ]
         },
         "WebRTCStopped": {
           "requestType": ".CBroadcast_WebRTCStopped_Request",
           "responseType": ".CBroadcast_WebRTCStopped_Response",
           "options": {
             "(method_description)": "Notify the server that a WebRTC session has been stopped by the host"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notify the server that a WebRTC session has been stopped by the host"
+            }
+          ]
         },
         "WebRTCSetAnswer": {
           "requestType": ".CBroadcast_WebRTCSetAnswer_Request",
           "responseType": ".CBroadcast_WebRTCSetAnswer_Response",
           "options": {
             "(method_description)": "Notify the server that a WebRTC session has been created by the viewer"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notify the server that a WebRTC session has been created by the viewer"
+            }
+          ]
         },
         "WebRTCLookupTURNServer": {
           "requestType": ".CBroadcast_WebRTCLookupTURNServer_Request",
           "responseType": ".CBroadcast_WebRTCLookupTURNServer_Response",
           "options": {
             "(method_description)": "Lookup the best TURN server for this client"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Lookup the best TURN server for this client"
+            }
+          ]
         },
         "WebRTCAddHostCandidate": {
           "requestType": ".CBroadcast_WebRTCAddHostCandidate_Request",
           "responseType": ".CBroadcast_WebRTCAddHostCandidate_Response",
           "options": {
             "(method_description)": "Add an ICE candidate for the host side of a WebRTC session"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Add an ICE candidate for the host side of a WebRTC session"
+            }
+          ]
         },
         "WebRTCAddViewerCandidate": {
           "requestType": ".CBroadcast_WebRTCAddViewerCandidate_Request",
           "responseType": ".CBroadcast_WebRTCAddViewerCandidate_Response",
           "options": {
             "(method_description)": "Add an ICE candidate for the viewer side of a WebRTC session"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Add an ICE candidate for the viewer side of a WebRTC session"
+            }
+          ]
         },
         "WebRTCGetHostCandidates": {
           "requestType": ".CBroadcast_WebRTCGetHostCandidates_Request",
           "responseType": ".CBroadcast_WebRTCGetHostCandidates_Response",
           "options": {
             "(method_description)": "Get the ICE candidates for the host side of a WebRTC session"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get the ICE candidates for the host side of a WebRTC session"
+            }
+          ]
         },
         "GetBroadcastUploadStats": {
           "requestType": ".CBroadcast_GetBroadcastUploadStats_Request",
           "responseType": ".CBroadcast_GetBroadcastUploadStats_Response",
           "options": {
             "(method_description)": "Gets broadcast upload stats for user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets broadcast upload stats for user"
+            }
+          ]
         },
         "GetBroadcastViewerStats": {
           "requestType": ".CBroadcast_GetBroadcastViewerStats_Request",
           "responseType": ".CBroadcast_GetBroadcastViewerStats_Response",
           "options": {
             "(method_description)": "Gets viewer stats for given broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets viewer stats for given broadcast"
+            }
+          ]
         }
       }
     },
@@ -1974,91 +2152,156 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that a viewers state has changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that a viewers state has changed"
+            }
+          ]
         },
         "NotifyWaitingBroadcastViewer": {
           "requestType": ".CBroadcast_WaitingBroadcastViewer_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client one or more users is waiting for user to start broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client one or more users is waiting for user to start broadcast"
+            }
+          ]
         },
         "NotifyBroadcastUploadStarted": {
           "requestType": ".CBroadcast_BroadcastUploadStarted_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client with information about a broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client with information about a broadcast"
+            }
+          ]
         },
         "NotifyStopBroadcastUpload": {
           "requestType": ".CBroadcast_StopBroadcastUpload_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client telling it to stop uploading when the last viewer has disconnected from their broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client telling it to stop uploading when the last viewer has disconnected from their broadcast"
+            }
+          ]
         },
         "NotifySessionClosed": {
           "requestType": ".CBroadcast_SessionClosed_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client telling it a session has been closed unexpectedly by the directory"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client telling it a session has been closed unexpectedly by the directory"
+            }
+          ]
         },
         "NotifyViewerBroadcastInvite": {
           "requestType": ".CBroadcast_ViewerBroadcastInvite_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast"
+            }
+          ]
         },
         "NotifyBroadcastStatus": {
           "requestType": ".CBroadcast_BroadcastStatus_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client about current broadcast status"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client about current broadcast status"
+            }
+          ]
         },
         "NotifyBroadcastChannelLive": {
           "requestType": ".CBroadcast_BroadcastChannelLive_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client about current broadcast status"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client about current broadcast status"
+            }
+          ]
         },
         "SendThumbnailToRelay": {
           "requestType": ".CBroadcast_SendThumbnailToRelay_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Send thumbnails to relay"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Send thumbnails to relay"
+            }
+          ]
         },
         "NotifyWebRTCNeedTURNServer": {
           "requestType": ".CBroadcast_WebRTCNeedTURNServer_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that it needs the client's TURN server"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that it needs the client's TURN server"
+            }
+          ]
         },
         "NotifyWebRTCStart": {
           "requestType": ".CBroadcast_WebRTCStart_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client that it should start a WebRTC session"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client that it should start a WebRTC session"
+            }
+          ]
         },
         "NotifyWebRTCSetAnswer": {
           "requestType": ".CBroadcast_WebRTCSetAnswer_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client about the broadcast viewer WebRTC answer"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client about the broadcast viewer WebRTC answer"
+            }
+          ]
         },
         "NotifyWebRTCAddViewerCandidate": {
           "requestType": ".CBroadcast_WebRTCAddViewerCandidate_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from server to client about a broadcast viewer WebRTC ICE candidate"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from server to client about a broadcast viewer WebRTC ICE candidate"
+            }
+          ]
         }
       }
     },
@@ -2189,6 +2432,18 @@
         },
         "bucket": {
           "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGCRoutingProtoBufHeader": {
+      "fields": {
+        "dst_gcid_queue": {
+          "type": "uint64",
+          "id": 1
+        },
+        "dst_gc_dir_index": {
+          "type": "uint32",
           "id": 2
         }
       }
@@ -2339,6 +2594,10 @@
           "type": "uint64",
           "id": 36
         },
+        "routing_gc": {
+          "type": ".CMsgGCRoutingProtoBufHeader",
+          "id": 37
+        },
         "ip": {
           "type": "uint32",
           "id": 15
@@ -2401,6 +2660,10 @@
         "ticket": {
           "type": "bytes",
           "id": 7
+        },
+        "server_secret": {
+          "type": "bytes",
+          "id": 8
         }
       }
     },
@@ -2453,6 +2716,22 @@
         "app_type": {
           "type": "uint32",
           "id": 14
+        },
+        "has_adult_content_sex": {
+          "type": "bool",
+          "id": 15
+        },
+        "has_adult_content_violence": {
+          "type": "bool",
+          "id": 16
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -2742,6 +3021,10 @@
           "options": {
             "default": "k_EBanContentCheckResult_NotScanned"
           }
+        },
+        "banned": {
+          "type": "bool",
+          "id": 17
         }
       }
     },
@@ -2980,15 +3263,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -3061,10 +3335,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -3129,10 +3399,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -3149,21 +3415,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -3206,10 +3457,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -3270,30 +3517,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -3350,17 +3573,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -3376,10 +3593,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -3390,10 +3604,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -3408,45 +3619,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -3455,26 +3644,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3508,24 +3677,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -3545,24 +3705,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -3588,31 +3732,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3672,10 +3800,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3688,22 +3813,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3722,10 +3838,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3744,17 +3857,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3767,16 +3870,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -3892,19 +3986,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }

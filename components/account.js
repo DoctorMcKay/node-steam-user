@@ -7,7 +7,7 @@ const EMsg = require('../enums/EMsg.js');
 const EResult = require('../enums/EResult.js');
 
 const SteamUserBase = require('./00-base.js');
-const SteamUserLogon = require('./08-logon.js');
+const SteamUserLogon = require('./09-logon.js');
 
 class SteamUserAccount extends SteamUserLogon {
 	requestValidationEmail(callback) {

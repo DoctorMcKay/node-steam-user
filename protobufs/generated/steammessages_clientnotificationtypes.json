@@ -29,7 +29,15 @@
         "k_EClientNotificationType_ItemAnnouncement": 20,
         "k_EClientNotificationType_HardwareSurvey": 21,
         "k_EClientNotificationType_LowDiskSpace": 22,
-        "k_EClientNotificationType_BatteryTemperature": 23
+        "k_EClientNotificationType_BatteryTemperature": 23,
+        "k_EClientNotificationType_DockUnsupportedFirmware": 24,
+        "k_EClientNotificationType_PeerContentUpload": 25,
+        "k_EClientNotificationType_CannotReadControllerGuideButton": 26,
+        "k_EClientNotificationType_Comment": 27,
+        "k_EClientNotificationType_Wishlist": 28,
+        "k_EClientNotificationType_TradeOffer": 29,
+        "k_EClientNotificationType_AsyncGame": 30,
+        "k_EClientNotificationType_General": 31
       }
     },
     "ESystemUpdateNotificationType": {
@@ -207,6 +215,10 @@
         "notificationid": {
           "type": "uint32",
           "id": 6
+        },
+        "response_steamurl": {
+          "type": "string",
+          "id": 7
         }
       }
     },
@@ -313,18 +325,6 @@
         }
       }
     },
-    "CClientNotificationInboxStats": {
-      "fields": {
-        "friend_invite_count": {
-          "type": "uint32",
-          "id": 1
-        },
-        "new_comment_count": {
-          "type": "uint32",
-          "id": 2
-        }
-      }
-    },
     "CClientNotificationHardwareSurveyPending": {
       "fields": {}
     },
@@ -345,6 +345,29 @@
         "notification_type": {
           "type": "string",
           "id": 2
+        }
+      }
+    },
+    "CClientNotificationDockUnsupportedFirmware": {
+      "fields": {}
+    },
+    "CClientNotificationPeerContentUpload": {
+      "fields": {
+        "appid": {
+          "type": "uint32",
+          "id": 1
+        },
+        "peer_name": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "CClientNotificationCannotReadControllerGuideButton": {
+      "fields": {
+        "controller_index": {
+          "type": "int32",
+          "id": 1
         }
       }
     }

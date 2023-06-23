@@ -53,6 +53,7 @@ message CRemoteClient_UnregisterStatusUpdate_Notification {
 
 message CRemoteClient_Online_Notification {
 	optional fixed64 steamid = 1;
+	optional fixed64 remote_client_id = 2;
 }
 
 message CRemoteClient_RemotePacket_Notification {

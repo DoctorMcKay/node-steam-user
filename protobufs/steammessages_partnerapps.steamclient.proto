@@ -48,6 +48,7 @@ message CPartnerApps_FinishUploadDepot_Request {
 }
 
 message CPartnerApps_FinishUploadDepot_Response {
+	optional uint64 build_routing_id = 1;
 }
 
 message CPartnerApps_GetDepotBuildResult_Request {

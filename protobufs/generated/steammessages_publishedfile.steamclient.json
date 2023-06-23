@@ -1,6 +1,6 @@
 {
   "options": {
-    "cc_generic_services": false,
+    "cc_generic_services": true,
     "optimize_for": "SPEED",
     "(force_php_generation)": true
   },
@@ -669,6 +669,14 @@
         "maybe_inappropriate_violence": {
           "type": "bool",
           "id": 66
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": ".EContentDescriptorID",
+          "id": 72,
+          "options": {
+            "packed": false
+          }
         },
         "revision_change_number": {
           "type": "uint64",
@@ -1990,6 +1998,62 @@
         }
       }
     },
+    "CPublishedFile_GetAppRelationshipsBatched_Request": {
+      "fields": {
+        "publishedfileids": {
+          "rule": "repeated",
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "packed": false
+          }
+        },
+        "filter_relationship": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "CPublishedFile_GetAppRelationshipsBatched_Response": {
+      "fields": {
+        "relationships": {
+          "rule": "repeated",
+          "type": ".CPublishedFile_GetAppRelationshipsBatched_Response.PublishedFileAppRelationship",
+          "id": 1
+        }
+      },
+      "nested": {
+        "AppRelationship": {
+          "fields": {
+            "appid": {
+              "type": "uint32",
+              "id": 1
+            },
+            "relationship": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        },
+        "PublishedFileAppRelationship": {
+          "fields": {
+            "publishedfileid": {
+              "type": "uint64",
+              "id": 1
+            },
+            "result": {
+              "type": "uint32",
+              "id": 2
+            },
+            "app_relationships": {
+              "rule": "repeated",
+              "type": ".CPublishedFile_GetAppRelationshipsBatched_Response.AppRelationship",
+              "id": 3
+            }
+          }
+        }
+      }
+    },
     "CPublishedFile_StartPlaytimeTracking_Request": {
       "fields": {
         "appid": {
@@ -2308,196 +2372,348 @@
           "responseType": ".CPublishedFile_Vote_Response",
           "options": {
             "(method_description)": "User wants to vote on the item"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "User wants to vote on the item"
+            }
+          ]
         },
         "Subscribe": {
           "requestType": ".CPublishedFile_Subscribe_Request",
           "responseType": ".CPublishedFile_Subscribe_Response",
           "options": {
             "(method_description)": "Subscribes the user to the published file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Subscribes the user to the published file"
+            }
+          ]
         },
         "Unsubscribe": {
           "requestType": ".CPublishedFile_Unsubscribe_Request",
           "responseType": ".CPublishedFile_Unsubscribe_Response",
           "options": {
             "(method_description)": "Unsubscribes the user from the published file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Unsubscribes the user from the published file"
+            }
+          ]
         },
         "CanSubscribe": {
           "requestType": ".CPublishedFile_CanSubscribe_Request",
           "responseType": ".CPublishedFile_CanSubscribe_Response",
           "options": {
             "(method_description)": "Check if the user can subscribe to the published file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Check if the user can subscribe to the published file"
+            }
+          ]
         },
         "GetSubSectionData": {
           "requestType": ".CPublishedFile_GetSubSectionData_Request",
           "responseType": ".CPublishedFile_GetSubSectionData_Response",
           "options": {
             "(method_description)": "Get sub section data (for table of contents, a specific section, or all)"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get sub section data (for table of contents, a specific section, or all)"
+            }
+          ]
         },
         "Publish": {
           "requestType": ".CPublishedFile_Publish_Request",
           "responseType": ".CPublishedFile_Publish_Response",
           "options": {
             "(method_description)": "Publishes a clouded user file to the Workshop."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Publishes a clouded user file to the Workshop."
+            }
+          ]
         },
         "GetDetails": {
           "requestType": ".CPublishedFile_GetDetails_Request",
           "responseType": ".CPublishedFile_GetDetails_Response",
           "options": {
             "(method_description)": "Retrieves information about a set of published files."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Retrieves information about a set of published files."
+            }
+          ]
         },
         "GetItemInfo": {
           "requestType": ".CPublishedFile_GetItemInfo_Request",
           "responseType": ".CPublishedFile_GetItemInfo_Response",
           "options": {
             "(method_description)": "Retrieves information about a set of published files."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Retrieves information about a set of published files."
+            }
+          ]
         },
         "GetUserFiles": {
           "requestType": ".CPublishedFile_GetUserFiles_Request",
           "responseType": ".CPublishedFile_GetUserFiles_Response",
           "options": {
             "(method_description)": "Retrieves files published by a user."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Retrieves files published by a user."
+            }
+          ]
         },
         "GetUserFileCount": {
           "requestType": ".CPublishedFile_GetUserFiles_Request",
           "responseType": ".CPublishedFile_GetUserFiles_Response",
           "options": {
             "(method_description)": "Retrieves a count of files published by a user. Uses the same messages as GetUserFiles but totalonly must be true."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Retrieves a count of files published by a user. Uses the same messages as GetUserFiles but totalonly must be true."
+            }
+          ]
         },
         "AreFilesInSubscriptionList": {
           "requestType": ".CPublishedFile_AreFilesInSubscriptionList_Request",
           "responseType": ".CPublishedFile_AreFilesInSubscriptionList_Response",
           "options": {
             "(method_description)": "Determines which files in the given list are in a user's subscription list"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Determines which files in the given list are in a user's subscription list"
+            }
+          ]
         },
         "Update": {
           "requestType": ".CPublishedFile_Update_Request",
           "responseType": ".CPublishedFile_Update_Response",
           "options": {
             "(method_description)": "Updates information about a published file."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Updates information about a published file."
+            }
+          ]
         },
         "Delete": {
           "requestType": ".CPublishedFile_Delete_Request",
           "responseType": ".CPublishedFile_Delete_Response",
           "options": {
             "(method_description)": "Deletes a published file."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Deletes a published file."
+            }
+          ]
         },
         "GetChangeHistoryEntry": {
           "requestType": ".CPublishedFile_GetChangeHistoryEntry_Request",
           "responseType": ".CPublishedFile_GetChangeHistoryEntry_Response",
           "options": {
             "(method_description)": "Returns data on a specific change history entry for a published file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns data on a specific change history entry for a published file"
+            }
+          ]
         },
         "GetChangeHistory": {
           "requestType": ".CPublishedFile_GetChangeHistory_Request",
           "responseType": ".CPublishedFile_GetChangeHistory_Response",
           "options": {
             "(method_description)": "Returns data on the change history for a published file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns data on the change history for a published file"
+            }
+          ]
         },
         "RefreshVotingQueue": {
           "requestType": ".CPublishedFile_RefreshVotingQueue_Request",
           "responseType": ".CPublishedFile_RefreshVotingQueue_Response",
           "options": {
             "(method_description)": "Refresh the voting queue for the user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Refresh the voting queue for the user"
+            }
+          ]
         },
         "QueryFiles": {
           "requestType": ".CPublishedFile_QueryFiles_Request",
           "responseType": ".CPublishedFile_QueryFiles_Response",
           "options": {
             "(method_description)": "Performs a search query for published files"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Performs a search query for published files"
+            }
+          ]
         },
         "AddAppRelationship": {
           "requestType": ".CPublishedFile_AddAppRelationship_Request",
           "responseType": ".CPublishedFile_AddAppRelationship_Response",
           "options": {
             "(method_description)": "Adds a relationship between the published file and the given app"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Adds a relationship between the published file and the given app"
+            }
+          ]
         },
         "RemoveAppRelationship": {
           "requestType": ".CPublishedFile_RemoveAppRelationship_Request",
           "responseType": ".CPublishedFile_RemoveAppRelationship_Response",
           "options": {
             "(method_description)": "Remove a relationship between the published file and the given app"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Remove a relationship between the published file and the given app"
+            }
+          ]
         },
         "GetAppRelationships": {
           "requestType": ".CPublishedFile_GetAppRelationships_Request",
           "responseType": ".CPublishedFile_GetAppRelationships_Response",
           "options": {
             "(method_description)": "Returns the list of app relationships for this published file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the list of app relationships for this published file"
+            }
+          ]
+        },
+        "GetAppRelationshipsBatched": {
+          "requestType": ".CPublishedFile_GetAppRelationshipsBatched_Request",
+          "responseType": ".CPublishedFile_GetAppRelationshipsBatched_Response",
+          "options": {
+            "(method_description)": "Returns the list of app relationships for set of published files"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns the list of app relationships for set of published files"
+            }
+          ]
         },
         "StartPlaytimeTracking": {
           "requestType": ".CPublishedFile_StartPlaytimeTracking_Request",
           "responseType": ".CPublishedFile_StartPlaytimeTracking_Response",
           "options": {
             "(method_description)": "Start usage tracking for a given set of published files"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Start usage tracking for a given set of published files"
+            }
+          ]
         },
         "StopPlaytimeTracking": {
           "requestType": ".CPublishedFile_StopPlaytimeTracking_Request",
           "responseType": ".CPublishedFile_StopPlaytimeTracking_Response",
           "options": {
             "(method_description)": "Stops usage tracking for a given set of published files"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Stops usage tracking for a given set of published files"
+            }
+          ]
         },
         "StopPlaytimeTrackingForAllAppItems": {
           "requestType": ".CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request",
           "responseType": ".CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response",
           "options": {
             "(method_description)": "Stops usage tracking for all items currently tracked for the specified app"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Stops usage tracking for all items currently tracked for the specified app"
+            }
+          ]
         },
         "SetPlaytimeForControllerConfigs": {
           "requestType": ".CPublishedFile_SetPlaytimeForControllerConfigs_Request",
           "responseType": ".CPublishedFile_SetPlaytimeForControllerConfigs_Response",
           "options": {
             "(method_description)": "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs"
+            }
+          ]
         },
         "AddChild": {
           "requestType": ".CPublishedFile_AddChild_Request",
           "responseType": ".CPublishedFile_AddChild_Response",
           "options": {
             "(method_description)": "Adds a parent->child relationship between the given items."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Adds a parent->child relationship between the given items."
+            }
+          ]
         },
         "RemoveChild": {
           "requestType": ".CPublishedFile_RemoveChild_Request",
           "responseType": ".CPublishedFile_RemoveChild_Response",
           "options": {
             "(method_description)": "Removes parent->child relationship between the given items."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Removes parent->child relationship between the given items."
+            }
+          ]
         },
         "GetUserVoteSummary": {
           "requestType": ".CPublishedFile_GetUserVoteSummary_Request",
           "responseType": ".CPublishedFile_GetUserVoteSummary_Response",
           "options": {
             "(method_description)": "Get user vote summary"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get user vote summary"
+            }
+          ]
         },
         "GetItemChanges": {
           "requestType": ".CPublishedFile_GetItemChanges_Request",
           "responseType": ".CPublishedFile_GetItemChanges_Response",
           "options": {
             "(method_description)": "Get list of updated items since given date"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get list of updated items since given date"
+            }
+          ]
         }
       }
     },
@@ -2512,21 +2728,36 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from the server when a user subscribes to a file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from the server when a user subscribes to a file"
+            }
+          ]
         },
         "NotifyFileUnsubscribed": {
           "requestType": ".CPublishedFile_FileUnsubscribed_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from the server when a user unsubscribes from a file"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from the server when a user unsubscribes from a file"
+            }
+          ]
         },
         "NotifyFileDeleted": {
           "requestType": ".CPublishedFile_FileDeleted_Client_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Notification from the server when a published file is deleted"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Notification from the server when a published file is deleted"
+            }
+          ]
         }
       }
     },
@@ -2657,6 +2888,18 @@
         },
         "bucket": {
           "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGCRoutingProtoBufHeader": {
+      "fields": {
+        "dst_gcid_queue": {
+          "type": "uint64",
+          "id": 1
+        },
+        "dst_gc_dir_index": {
+          "type": "uint32",
           "id": 2
         }
       }
@@ -2807,6 +3050,10 @@
           "type": "uint64",
           "id": 36
         },
+        "routing_gc": {
+          "type": ".CMsgGCRoutingProtoBufHeader",
+          "id": 37
+        },
         "ip": {
           "type": "uint32",
           "id": 15
@@ -2869,6 +3116,10 @@
         "ticket": {
           "type": "bytes",
           "id": 7
+        },
+        "server_secret": {
+          "type": "bytes",
+          "id": 8
         }
       }
     },
@@ -2921,6 +3172,22 @@
         "app_type": {
           "type": "uint32",
           "id": 14
+        },
+        "has_adult_content_sex": {
+          "type": "bool",
+          "id": 15
+        },
+        "has_adult_content_violence": {
+          "type": "bool",
+          "id": 16
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -3210,6 +3477,10 @@
           "options": {
             "default": "k_EBanContentCheckResult_NotScanned"
           }
+        },
+        "banned": {
+          "type": "bool",
+          "id": 17
         }
       }
     },
@@ -3448,15 +3719,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -3529,10 +3791,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -3597,10 +3855,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -3617,21 +3871,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -3674,10 +3913,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -3738,30 +3973,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -3818,17 +4029,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -3844,10 +4049,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -3858,10 +4060,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -3876,45 +4075,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -3923,26 +4100,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -3976,24 +4133,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -4013,24 +4161,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -4056,31 +4188,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4140,10 +4256,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4156,22 +4269,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4190,10 +4294,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4212,17 +4313,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4235,16 +4326,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -4360,19 +4442,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }
@@ -4423,6 +4492,15 @@
     },
     "NoResponse": {
       "fields": {}
+    },
+    "EContentDescriptorID": {
+      "values": {
+        "k_EContentDescriptor_FrequentNudityOrSexualContent": 1,
+        "k_EContentDescriptor_FrequentViolenceOrGore": 2,
+        "k_EContentDescriptor_StrongSexualContent": 3,
+        "k_EContentDescriptor_UNUSED_4": 4,
+        "k_EContentDescriptor_AnyMatureContent": 5
+      }
     }
   }
 }

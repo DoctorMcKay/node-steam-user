@@ -84,6 +84,8 @@ message CMsgClientLogon {
 	optional bool disable_partner_autogrants = 106;
 	optional bool is_steam_deck = 107;
 	optional string access_token = 108;
+	optional bool is_chrome_os = 109;
+	optional bool is_tesla = 110;
 }
 
 message CMsgClientLogonResponse {
@@ -148,7 +150,6 @@ message CMsgClientAccountInfo {
 	optional uint32 account_flags = 7;
 	optional uint64 facebook_id = 8;
 	optional string facebook_name = 9;
-	optional bool steamguard_notify_newmachines = 14;
 	optional string steamguard_machine_name_user_chosen = 15;
 	optional bool is_phone_verified = 16;
 	optional uint32 two_factor_state = 17;

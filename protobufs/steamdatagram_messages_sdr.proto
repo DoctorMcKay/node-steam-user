@@ -50,6 +50,7 @@ message CMsgSteamDatagramSignedMessageGeneric {
 	optional .CMsgSteamDatagramCertificateSigned cert = 1;
 	optional bytes signed_data = 2;
 	optional bytes signature = 3;
+	optional bytes dummy_pad = 1023;
 }
 
 message CMsgSteamDatagramRouterPingReply {
@@ -113,6 +114,7 @@ message CMsgSteamDatagramGameserverPingRequestEnvelope {
 	optional fixed32 legacy_relay_unix_time = 2;
 	optional fixed64 legacy_challenge = 3;
 	optional fixed32 legacy_router_timestamp = 4;
+	optional bytes dummy_pad = 1023;
 }
 
 message CMsgSteamDatagramGameserverPingReplyData {

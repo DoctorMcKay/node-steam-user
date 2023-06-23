@@ -2707,7 +2707,12 @@
           "responseType": ".CChat_RequestFriendPersonaStates_Response",
           "options": {
             "(method_description)": "Request to be notified of online friend persona state information.  Responses sent via CMsgClientPersonaState."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request to be notified of online friend persona state information.  Responses sent via CMsgClientPersonaState."
+            }
+          ]
         }
       }
     },
@@ -2721,371 +2726,636 @@
           "responseType": ".CChatRoom_CreateChatRoomGroup_Response",
           "options": {
             "(method_description)": "Create's a chat group that can contain other chat rooms"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Create's a chat group that can contain other chat rooms"
+            }
+          ]
         },
         "SaveChatRoomGroup": {
           "requestType": ".CChatRoom_SaveChatRoomGroup_Request",
           "responseType": ".CChatRoom_SaveChatRoomGroup_Response",
           "options": {
             "(method_description)": "Saves's a chat group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Saves's a chat group"
+            }
+          ]
         },
         "RenameChatRoomGroup": {
           "requestType": ".CChatRoom_RenameChatRoomGroup_Request",
           "responseType": ".CChatRoom_RenameChatRoomGroup_Response",
           "options": {
             "(method_description)": "Rename a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Rename a chat room group"
+            }
+          ]
         },
         "SetChatRoomGroupTagline": {
           "requestType": ".CChatRoom_SetChatRoomGroupTagline_Request",
           "responseType": ".CChatRoom_SetChatRoomGroupTagline_Response",
           "options": {
             "(method_description)": "Set tagline for a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set tagline for a chat room group"
+            }
+          ]
         },
         "SetChatRoomGroupAvatar": {
           "requestType": ".CChatRoom_SetChatRoomGroupAvatar_Request",
           "responseType": ".CChatRoom_SetChatRoomGroupAvatar_Response",
           "options": {
             "(method_description)": "Set avatar SHA for a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set avatar SHA for a chat room group"
+            }
+          ]
         },
         "SetChatRoomGroupWatchingBroadcast": {
           "requestType": ".CChatRoom_SetChatRoomGroupWatchingBroadcast_Request",
           "responseType": ".CChatRoom_SetChatRoomGroupWatchingBroadcast_Response",
           "options": {
             "(method_description)": "Sets a broadcast that the chat room group is watching"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Sets a broadcast that the chat room group is watching"
+            }
+          ]
         },
         "JoinMiniGameForChatRoomGroup": {
           "requestType": ".CChatRoom_JoinMiniGameForChatRoomGroup_Request",
           "responseType": ".CChatRoom_JoinMiniGameForChatRoomGroup_Response",
           "options": {
             "(method_description)": "Joins the minigame for the chat room group or starts a new one (Winter 2019 sale party game)"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Joins the minigame for the chat room group or starts a new one (Winter 2019 sale party game)"
+            }
+          ]
         },
         "EndMiniGameForChatRoomGroup": {
           "requestType": ".CChatRoom_EndMiniGameForChatRoomGroup_Request",
           "responseType": ".CChatRoom_EndMiniGameForChatRoomGroup_Response",
           "options": {
             "(method_description)": "Ends the minigame in the chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Ends the minigame in the chat room group"
+            }
+          ]
         },
         "MuteUserInGroup": {
           "requestType": ".CChatRoom_MuteUser_Request",
           "responseType": ".CChatRoom_MuteUser_Response",
           "options": {
             "(method_description)": "Mute user in group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Mute user in group"
+            }
+          ]
         },
         "KickUserFromGroup": {
           "requestType": ".CChatRoom_KickUser_Request",
           "responseType": ".CChatRoom_KickUser_Response",
           "options": {
             "(method_description)": "Kick user from group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Kick user from group"
+            }
+          ]
         },
         "SetUserBanState": {
           "requestType": ".CChatRoom_SetUserBanState_Request",
           "responseType": ".CChatRoom_SetUserBanState_Response",
           "options": {
             "(method_description)": "Ban/unban user from group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Ban/unban user from group"
+            }
+          ]
         },
         "RevokeInviteToGroup": {
           "requestType": ".CChatRoom_RevokeInvite_Request",
           "responseType": ".CChatRoom_RevokeInvite_Response",
           "options": {
             "(method_description)": "Revoke a direct invitation of a user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Revoke a direct invitation of a user"
+            }
+          ]
         },
         "CreateRole": {
           "requestType": ".CChatRoom_CreateRole_Request",
           "responseType": ".CChatRoom_CreateRole_Response",
           "options": {
             "(method_description)": "Create role for goup"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Create role for goup"
+            }
+          ]
         },
         "GetRoles": {
           "requestType": ".CChatRoom_GetRoles_Request",
           "responseType": ".CChatRoom_GetRoles_Response",
           "options": {
             "(method_description)": "Get all roles in group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get all roles in group"
+            }
+          ]
         },
         "RenameRole": {
           "requestType": ".CChatRoom_RenameRole_Request",
           "responseType": ".CChatRoom_RenameRole_Response",
           "options": {
             "(method_description)": "Rename role for goup"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Rename role for goup"
+            }
+          ]
         },
         "ReorderRole": {
           "requestType": ".CChatRoom_ReorderRole_Request",
           "responseType": ".CChatRoom_ReorderRole_Response",
           "options": {
             "(method_description)": "Reorder role with a goup"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Reorder role with a goup"
+            }
+          ]
         },
         "DeleteRole": {
           "requestType": ".CChatRoom_DeleteRole_Request",
           "responseType": ".CChatRoom_DeleteRole_Response",
           "options": {
             "(method_description)": "Delete role from group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Delete role from group"
+            }
+          ]
         },
         "GetRoleActions": {
           "requestType": ".CChatRoom_GetRoleActions_Request",
           "responseType": ".CChatRoom_GetRoleActions_Response",
           "options": {
             "(method_description)": "Get all defined roles and actions in group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get all defined roles and actions in group"
+            }
+          ]
         },
         "ReplaceRoleActions": {
           "requestType": ".CChatRoom_ReplaceRoleActions_Request",
           "responseType": ".CChatRoom_ReplaceRoleActions_Response",
           "options": {
             "(method_description)": "Replace role actions in group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Replace role actions in group"
+            }
+          ]
         },
         "AddRoleToUser": {
           "requestType": ".CChatRoom_AddRoleToUser_Request",
           "responseType": ".CChatRoom_AddRoleToUser_Response",
           "options": {
             "(method_description)": "Add role to user in group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Add role to user in group"
+            }
+          ]
         },
         "GetRolesForUser": {
           "requestType": ".CChatRoom_GetRolesForUser_Request",
           "responseType": ".CChatRoom_GetRolesForUser_Response",
           "options": {
             "(method_description)": "Get all roles assigned to user in group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get all roles assigned to user in group"
+            }
+          ]
         },
         "DeleteRoleFromUser": {
           "requestType": ".CChatRoom_DeleteRoleFromUser_Request",
           "responseType": ".CChatRoom_DeleteRoleFromUser_Response",
           "options": {
             "(method_description)": "Delete role from user in group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Delete role from user in group"
+            }
+          ]
         },
         "JoinChatRoomGroup": {
           "requestType": ".CChatRoom_JoinChatRoomGroup_Request",
           "responseType": ".CChatRoom_JoinChatRoomGroup_Response",
           "options": {
             "(method_description)": "Join a multi-user chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Join a multi-user chat room"
+            }
+          ]
         },
         "InviteFriendToChatRoomGroup": {
           "requestType": ".CChatRoom_InviteFriendToChatRoomGroup_Request",
           "responseType": ".CChatRoom_InviteFriendToChatRoomGroup_Response",
           "options": {
             "(method_description)": "Invite a friend to a multi-user chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Invite a friend to a multi-user chat room"
+            }
+          ]
         },
         "LeaveChatRoomGroup": {
           "requestType": ".CChatRoom_LeaveChatRoomGroup_Request",
           "responseType": ".CChatRoom_LeaveChatRoomGroup_Response",
           "options": {
             "(method_description)": "Leaves a chat room group and all related chats"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Leaves a chat room group and all related chats"
+            }
+          ]
         },
         "CreateChatRoom": {
           "requestType": ".CChatRoom_CreateChatRoom_Request",
           "responseType": ".CChatRoom_CreateChatRoom_Response",
           "options": {
             "(method_description)": "Creates a chat room inside a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Creates a chat room inside a chat room group"
+            }
+          ]
         },
         "DeleteChatRoom": {
           "requestType": ".CChatRoom_DeleteChatRoom_Request",
           "responseType": ".CChatRoom_DeleteChatRoom_Response",
           "options": {
             "(method_description)": "Deletes a chat room inside a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Deletes a chat room inside a chat room group"
+            }
+          ]
         },
         "RenameChatRoom": {
           "requestType": ".CChatRoom_RenameChatRoom_Request",
           "responseType": ".CChatRoom_RenameChatRoom_Response",
           "options": {
             "(method_description)": "Renames a chat room inside a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Renames a chat room inside a chat room group"
+            }
+          ]
         },
         "ReorderChatRoom": {
           "requestType": ".CChatRoom_ReorderChatRoom_Request",
           "responseType": ".CChatRoom_ReorderChatRoom_Response",
           "options": {
             "(method_description)": "Reorders a chat room inside a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Reorders a chat room inside a chat room group"
+            }
+          ]
         },
         "SendChatMessage": {
           "requestType": ".CChatRoom_SendChatMessage_Request",
           "responseType": ".CChatRoom_SendChatMessage_Response",
           "options": {
             "(method_description)": "Send a chat message to a multi-user chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Send a chat message to a multi-user chat room"
+            }
+          ]
         },
         "JoinVoiceChat": {
           "requestType": ".CChatRoom_JoinVoiceChat_Request",
           "responseType": ".CChatRoom_JoinVoiceChat_Response",
           "options": {
             "(method_description)": "Join the voice chat in a multi-room chat (should already be in the chat room)"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Join the voice chat in a multi-room chat (should already be in the chat room)"
+            }
+          ]
         },
         "LeaveVoiceChat": {
           "requestType": ".CChatRoom_LeaveVoiceChat_Request",
           "responseType": ".CChatRoom_LeaveVoiceChat_Response",
           "options": {
             "(method_description)": "Leave the voice chat in a multi-room chat"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Leave the voice chat in a multi-room chat"
+            }
+          ]
         },
         "GetMessageHistory": {
           "requestType": ".CChatRoom_GetMessageHistory_Request",
           "responseType": ".CChatRoom_GetMessageHistory_Response",
           "options": {
             "(method_description)": "Get the history of messages in a chat room.  You must currently be a member of the chat room."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get the history of messages in a chat room.  You must currently be a member of the chat room."
+            }
+          ]
         },
         "GetMyChatRoomGroups": {
           "requestType": ".CChatRoom_GetMyChatRoomGroups_Request",
           "responseType": ".CChatRoom_GetMyChatRoomGroups_Response",
           "options": {
             "(method_description)": "Get a list of our chat rooms"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get a list of our chat rooms"
+            }
+          ]
         },
         "GetChatRoomGroupState": {
           "requestType": ".CChatRoom_GetChatRoomGroupState_Request",
           "responseType": ".CChatRoom_GetChatRoomGroupState_Response",
           "options": {
             "(method_description)": "Get information about a single chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get information about a single chat room"
+            }
+          ]
         },
         "GetChatRoomGroupSummary": {
           "requestType": ".CChatRoom_GetChatRoomGroupSummary_Request",
           "responseType": ".CChatRoom_GetChatRoomGroupSummary_Response",
           "options": {
             "(method_description)": "Get basic information about a chat room group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get basic information about a chat room group"
+            }
+          ]
         },
         "SetAppChatRoomGroupForceActive": {
           "requestType": ".CChatRoom_SetAppChatRoomGroupForceActive_Request",
           "responseType": ".CChatRoom_SetAppChatRoomGroupForceActive_Response",
           "options": {
             "(method_description)": "Force a group chat to be considered active on the server for this user"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Force a group chat to be considered active on the server for this user"
+            }
+          ]
         },
         "SetAppChatRoomGroupStopForceActive": {
           "requestType": ".CChatRoom_SetAppChatRoomGroupStopForceActive_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "If a group chat is forced active (see SetAppChatRoomGroupForceActive), decrement the force count"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "If a group chat is forced active (see SetAppChatRoomGroupForceActive), decrement the force count"
+            }
+          ]
         },
         "AckChatMessage": {
           "requestType": ".CChatRoom_AckChatMessage_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Acknowledge that we have seen the most recent chat message in a chat"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Acknowledge that we have seen the most recent chat message in a chat"
+            }
+          ]
         },
         "CreateInviteLink": {
           "requestType": ".CChatRoom_CreateInviteLink_Request",
           "responseType": ".CChatRoom_CreateInviteLink_Response",
           "options": {
             "(method_description)": "Creates a chatroom invite link"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Creates a chatroom invite link"
+            }
+          ]
         },
         "GetInviteLinkInfo": {
           "requestType": ".CChatRoom_GetInviteLinkInfo_Request",
           "responseType": ".CChatRoom_GetInviteLinkInfo_Response",
           "options": {
             "(method_description)": "Returns chat room info about provided link"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns chat room info about provided link"
+            }
+          ]
         },
         "GetInviteInfo": {
           "requestType": ".CChatRoom_GetInviteInfo_Request",
           "responseType": ".CChatRoom_GetInviteInfo_Response",
           "options": {
             "(method_description)": "Returns chat room info about any invite involving the sender and passed group id"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns chat room info about any invite involving the sender and passed group id"
+            }
+          ]
         },
         "GetInviteLinksForGroup": {
           "requestType": ".CChatRoom_GetInviteLinksForGroup_Request",
           "responseType": ".CChatRoom_GetInviteLinksForGroup_Response",
           "options": {
             "(method_description)": "Returns all invite links for the specified group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Returns all invite links for the specified group"
+            }
+          ]
         },
         "GetBanList": {
           "requestType": ".CChatRoom_GetBanList_Request",
           "responseType": ".CChatRoom_GetBanList_Response",
           "options": {
             "(method_description)": "Gets a list of users who have been banned from a chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets a list of users who have been banned from a chat room"
+            }
+          ]
         },
         "GetInviteList": {
           "requestType": ".CChatRoom_GetInviteList_Request",
           "responseType": ".CChatRoom_GetInviteList_Response",
           "options": {
             "(method_description)": "Gets a list of users who have been invited to a chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Gets a list of users who have been invited to a chat room"
+            }
+          ]
         },
         "DeleteInviteLink": {
           "requestType": ".CChatRoom_DeleteInviteLink_Request",
           "responseType": ".CChatRoom_DeleteInviteLink_Response",
           "options": {
             "(method_description)": "Deletes specified invite link"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Deletes specified invite link"
+            }
+          ]
         },
         "SetSessionActiveChatRoomGroups": {
           "requestType": ".CChatRoom_SetSessionActiveChatRoomGroups_Request",
           "responseType": ".CChatRoom_SetSessionActiveChatRoomGroups_Response",
           "options": {
             "(method_description)": "Set which chat rooms we are using in the active session"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set which chat rooms we are using in the active session"
+            }
+          ]
         },
         "SetUserChatGroupPreferences": {
           "requestType": ".CChatRoom_SetUserChatGroupPreferences_Request",
           "responseType": ".CChatRoom_SetUserChatGroupPreferences_Response",
           "options": {
             "(method_description)": "Set preferences around chat notifications for a group"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set preferences around chat notifications for a group"
+            }
+          ]
         },
         "DeleteChatMessages": {
           "requestType": ".CChatRoom_DeleteChatMessages_Request",
           "responseType": ".CChatRoom_DeleteChatMessages_Response",
           "options": {
             "(method_description)": "Deletes specified chat messages"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Deletes specified chat messages"
+            }
+          ]
         },
         "UpdateMemberListView": {
           "requestType": ".CChatRoom_UpdateMemberListView_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "A client is indicating it has an active view into the members list."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "A client is indicating it has an active view into the members list."
+            }
+          ]
         },
         "SearchMembers": {
           "requestType": ".CChatRoom_SearchMembers_Request",
           "responseType": ".CChatRoom_SearchMembers_Response",
           "options": {
             "(method_description)": "Search chat room members by name."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Search chat room members by name."
+            }
+          ]
         },
         "UpdateMessageReaction": {
           "requestType": ".CChatRoom_UpdateMessageReaction_Request",
           "responseType": ".CChatRoom_UpdateMessageReaction_Response",
           "options": {
             "(method_description)": "Adds/removes a reaction to/from a chat room message"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Adds/removes a reaction to/from a chat room message"
+            }
+          ]
         },
         "GetMessageReactionReactors": {
           "requestType": ".CChatRoom_GetMessageReactionReactors_Request",
           "responseType": ".CChatRoom_GetMessageReactionReactors_Response",
           "options": {
             "(method_description)": "Fetches a list of reactors for a specified reaction"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Fetches a list of reactors for a specified reaction"
+            }
+          ]
         }
       }
     },
@@ -3099,14 +3369,24 @@
           "responseType": ".CClanChatRooms_GetClanChatRoomInfo_Response",
           "options": {
             "(method_description)": "Get a list of chat rooms for a clan, optionally creating a new one"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get a list of chat rooms for a clan, optionally creating a new one"
+            }
+          ]
         },
         "SetClanChatRoomPrivate": {
           "requestType": ".CClanChatRooms_SetClanChatRoomPrivate_Request",
           "responseType": ".CClanChatRooms_SetClanChatRoomPrivate_Response",
           "options": {
             "(method_description)": "Set a clan chat room to be members only (or public)"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Set a clan chat room to be members only (or public)"
+            }
+          ]
         }
       }
     },
@@ -3121,77 +3401,132 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "New chat message for a chat room"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "New chat message for a chat room"
+            }
+          ]
         },
         "NotifyChatMessageModified": {
           "requestType": ".CChatRoom_ChatMessageModified_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "An existing chat message has been modified on the backend"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "An existing chat message has been modified on the backend"
+            }
+          ]
         },
         "NotifyMemberStateChange": {
           "requestType": ".CChatRoom_MemberStateChange_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "A chat room member's state has changed (join/part/permissions)"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "A chat room member's state has changed (join/part/permissions)"
+            }
+          ]
         },
         "NotifyChatRoomHeaderStateChange": {
           "requestType": ".CChatRoom_ChatRoomHeaderState_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Chat Room header / metadata has changed"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Chat Room header / metadata has changed"
+            }
+          ]
         },
         "NotifyChatRoomGroupRoomsChange": {
           "requestType": ".CChatRoom_ChatRoomGroupRoomsChange_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Something about a chatroom group changed (created, deleted, etc.)"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Something about a chatroom group changed (created, deleted, etc.)"
+            }
+          ]
         },
         "NotifyShouldRejoinChatRoomVoiceChat": {
           "requestType": ".CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Voice chat was recreated or dropped on the backend and client needs to rejoin to remain in chat."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Voice chat was recreated or dropped on the backend and client needs to rejoin to remain in chat."
+            }
+          ]
         },
         "NotifyChatGroupUserStateChanged": {
           "requestType": ".ChatRoomClient_NotifyChatGroupUserStateChanged_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "User chat group state (preferences, ack state, etc) have changed."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "User chat group state (preferences, ack state, etc) have changed."
+            }
+          ]
         },
         "NotifyAckChatMessageEcho": {
           "requestType": ".CChatRoom_AckChatMessage_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "A session acked an unread message, echo to other sessions."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "A session acked an unread message, echo to other sessions."
+            }
+          ]
         },
         "NotifyChatRoomDisconnect": {
           "requestType": ".ChatRoomClient_NotifyChatRoomDisconnect_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "The ChatRoom server hosting the chat rooms has reconnected to the user's Chat server (may have restarted), client should refresh state."
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "The ChatRoom server hosting the chat rooms has reconnected to the user's Chat server (may have restarted), client should refresh state."
+            }
+          ]
         },
         "NotifyMemberListViewUpdated": {
           "requestType": ".CChatRoomClient_MemberListViewUpdated_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "The list of members for a chat room with virtualized member list has changed on the server (or client requested)"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "The list of members for a chat room with virtualized member list has changed on the server (or client requested)"
+            }
+          ]
         },
         "NotifyMessageReaction": {
           "requestType": ".CChatRoom_MessageReaction_Notification",
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "New message reaction"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "New message reaction"
+            }
+          ]
         }
       }
     },
@@ -3205,7 +3540,12 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Incoming metrics from the client"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Incoming metrics from the client"
+            }
+          ]
         }
       }
     },
@@ -3220,7 +3560,12 @@
           "responseType": ".NoResponse",
           "options": {
             "(method_description)": "Request client send usability metrics"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Request client send usability metrics"
+            }
+          ]
         }
       }
     },
@@ -3351,6 +3696,18 @@
         },
         "bucket": {
           "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGCRoutingProtoBufHeader": {
+      "fields": {
+        "dst_gcid_queue": {
+          "type": "uint64",
+          "id": 1
+        },
+        "dst_gc_dir_index": {
+          "type": "uint32",
           "id": 2
         }
       }
@@ -3501,6 +3858,10 @@
           "type": "uint64",
           "id": 36
         },
+        "routing_gc": {
+          "type": ".CMsgGCRoutingProtoBufHeader",
+          "id": 37
+        },
         "ip": {
           "type": "uint32",
           "id": 15
@@ -3563,6 +3924,10 @@
         "ticket": {
           "type": "bytes",
           "id": 7
+        },
+        "server_secret": {
+          "type": "bytes",
+          "id": 8
         }
       }
     },
@@ -3615,6 +3980,22 @@
         "app_type": {
           "type": "uint32",
           "id": 14
+        },
+        "has_adult_content_sex": {
+          "type": "bool",
+          "id": 15
+        },
+        "has_adult_content_violence": {
+          "type": "bool",
+          "id": 16
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -3904,6 +4285,10 @@
           "options": {
             "default": "k_EBanContentCheckResult_NotScanned"
           }
+        },
+        "banned": {
+          "type": "bool",
+          "id": 17
         }
       }
     },
@@ -4142,15 +4527,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -4223,10 +4599,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -4291,10 +4663,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -4311,21 +4679,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -4368,10 +4721,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -4432,30 +4781,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -4512,17 +4837,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -4538,10 +4857,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -4552,10 +4868,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -4570,45 +4883,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -4617,26 +4908,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4670,24 +4941,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -4707,24 +4969,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -4750,31 +4996,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4834,10 +5064,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4850,22 +5077,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4884,10 +5102,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4906,17 +5121,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -4929,16 +5134,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -5054,19 +5250,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }

@@ -3,9 +3,9 @@ const StdLib = require('@doctormckay/stdlib');
 const EMsg = require('../enums/EMsg.js');
 
 const SteamUserBase = require('./00-base.js');
-const SteamUserPublishedFiles = require('./pubfiles.js');
+const SteamUserWeb = require('./07-web.js');
 
-class SteamUserSentry extends SteamUserPublishedFiles {
+class SteamUserSentry extends SteamUserWeb {
 	/**
 	 * @param {Buffer} sentry
 	 */
@@ -13,15 +13,21 @@ class SteamUserSentry extends SteamUserPublishedFiles {
 		this._sentry = sentry;
 	}
 
-	/**
-	 * @returns {string}
-	 * @protected
-	 */
-	_getSentryFilename() {
+	async _getSentryFileContent() {
+		let files = await this._readFiles(this._getSentryFilenames());
+		let firstFile = files.find(f => f.contents);
+		return firstFile ? firstFile.contents : null;
+	}
+
+	_getSentryFilenames() {
 		if (this.options.singleSentryfile) {
-			return 'sentry.bin';
+			return ['sentry.bin'];
 		} else {
-			return `sentry.${this._logOnDetails.account_name}.bin`;
+			return [
+				// prefer the steamid-named sentry file if we have it
+				`sentry.${this._logOnDetails._steamid}.bin`,
+				`sentry.${this._logOnDetails.account_name || this._logOnDetails._newAuthAccountName}.bin`
+			];
 		}
 	}
 }
@@ -32,7 +38,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientUpdateMachineAuth, async 
 	// TODO: Handle partial updates
 
 	this.emit('debug', 'Got new sentry file');
-	await this._saveFile(this._getSentryFilename(), body.bytes);
+	await Promise.all(this._getSentryFilenames().map(filename => this._saveFile(filename, body.bytes)));
 	this.emit('sentry', body.bytes);
 
 	// Accept the sentry

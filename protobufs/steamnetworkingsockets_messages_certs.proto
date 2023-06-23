@@ -24,6 +24,7 @@ message CMsgSteamDatagramCertificate {
 	optional fixed32 time_created = 8;
 	optional fixed32 time_expiry = 9;
 	repeated uint32 app_ids = 10;
+	repeated string ip_addresses = 13;
 }
 
 message CMsgSteamDatagramCertificateSigned {

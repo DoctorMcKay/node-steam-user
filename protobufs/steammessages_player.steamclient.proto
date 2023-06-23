@@ -72,6 +72,8 @@ message CPlayer_GetOwnedGames_Response {
 		optional bool has_workshop = 14;
 		optional bool has_market = 15;
 		optional bool has_dlc = 16;
+		optional bool has_leaderboards = 17;
+		repeated uint32 content_descriptorids = 18;
 	}
 
 	optional uint32 game_count = 1;
@@ -136,6 +138,11 @@ message CPlayer_GetProfileBackground_Request {
 }
 
 message ProfileItem {
+	message ProfileColor {
+		optional string style_name = 1 [(description) = "EProfileColorStyle string version"];
+		optional string color = 2 [(description) = "hex color to apply"];
+	}
+
 	optional uint64 communityitemid = 1;
 	optional string image_small = 2 [(description) = "small image used in backpack or selection"];
 	optional string image_large = 3 [(description) = "the image itself"];
@@ -150,6 +157,7 @@ message ProfileItem {
 	optional string movie_webm_small = 13 [(description) = "URL to small webm, if any"];
 	optional string movie_mp4_small = 14 [(description) = "URL to small mp4, if any"];
 	optional uint32 equipped_flags = 12 [(description) = "Special flags set when equipped (EProfileItemEquippedFlag)"];
+	repeated .ProfileItem.ProfileColor profile_colors = 15 [(description) = "Game profile css colors"];
 }
 
 message CPlayer_GetProfileBackground_Response {
@@ -239,6 +247,7 @@ message CPlayer_GetProfileItemsOwned_Response {
 	repeated .ProfileItem animated_avatars = 4;
 	repeated .ProfileItem profile_modifiers = 5;
 	repeated .ProfileItem steam_deck_keyboard_skins = 6;
+	repeated .ProfileItem steam_deck_startup_movies = 7;
 }
 
 message CPlayer_GetProfileItemsEquipped_Request {
@@ -279,6 +288,34 @@ message CPlayer_GetEmoticonList_Response {
 	repeated .CPlayer_GetEmoticonList_Response.Emoticon emoticons = 1;
 }
 
+message CPlayer_GetTopAchievementsForGames_Request {
+	optional uint64 steamid = 1;
+	optional string language = 2;
+	optional uint32 max_achievements = 3 [(description) = "The max achievements to load. Max 8"];
+	repeated uint32 appids = 4;
+}
+
+message CPlayer_GetTopAchievementsForGames_Response {
+	message Achievement {
+		optional uint32 statid = 1;
+		optional uint32 bit = 2;
+		optional string name = 3;
+		optional string desc = 4;
+		optional string icon = 5;
+		optional string icon_gray = 6;
+		optional bool hidden = 7;
+		optional string player_percent_unlocked = 8 [(description) = "Formatted to one decimal place, min value is 0.1, max value 100"];
+	}
+
+	message Game {
+		optional uint32 appid = 1;
+		optional uint32 total_achievements = 2;
+		repeated .CPlayer_GetTopAchievementsForGames_Response.Achievement achievements = 3;
+	}
+
+	repeated .CPlayer_GetTopAchievementsForGames_Response.Game games = 1;
+}
+
 message CPlayer_GetAchievementsProgress_Request {
 	optional uint64 steamid = 1;
 	optional string language = 2;
@@ -296,6 +333,25 @@ message CPlayer_GetAchievementsProgress_Response {
 	}
 
 	repeated .CPlayer_GetAchievementsProgress_Response.AchievementProgress achievement_progress = 1;
+}
+
+message CPlayer_GetGameAchievements_Request {
+	optional uint32 appid = 1;
+	optional string language = 2 [(description) = "Lowercase, language shortnames"];
+}
+
+message CPlayer_GetGameAchievements_Response {
+	message Achievement {
+		optional string internal_name = 1 [(description) = "Will come uppercase, internal facing name set by the partner; needed to associate with user unlock"];
+		optional string localized_name = 2;
+		optional string localized_desc = 3;
+		optional string icon = 4;
+		optional string icon_gray = 5;
+		optional bool hidden = 6;
+		optional string player_percent_unlocked = 7 [(description) = "Formatted to one decimal place, min value is 0.1, max value 100"];
+	}
+
+	repeated .CPlayer_GetGameAchievements_Response.Achievement achievements = 1;
 }
 
 message CPlayer_GetFavoriteBadge_Request {
@@ -340,6 +396,7 @@ message ProfileCustomizationSlot {
 	optional uint64 item_classid = 11;
 	optional uint64 item_instanceid = 12;
 	optional .EBanContentCheckResult ban_check_result = 13 [default = k_EBanContentCheckResult_NotScanned];
+	optional uint32 replay_year = 14;
 }
 
 message ProfileCustomization {
@@ -567,8 +624,6 @@ message CPlayer_GetCommunityPreferences_Request {
 }
 
 message CPlayer_CommunityPreferences {
-	optional bool hide_adult_content_violence = 1 [default = true];
-	optional bool hide_adult_content_sex = 2 [default = true];
 	optional bool parenthesize_nicknames = 4 [default = false];
 	optional .ETextFilterSetting text_filter_setting = 5 [default = k_ETextFilterSettingSteamLabOptedOut];
 	optional bool text_filter_ignore_friends = 6 [default = true];
@@ -605,7 +660,7 @@ message CPlayer_GetNewSteamAnnouncementState_Request {
 }
 
 message CPlayer_GetNewSteamAnnouncementState_Response {
-	optional int32 state = 1;
+	optional .ENewSteamAnnouncementState state = 1 [default = k_ENewSteamAnnouncementState_Invalid];
 	optional string announcement_headline = 2;
 	optional string announcement_url = 3;
 	optional uint32 time_posted = 4;
@@ -651,6 +706,20 @@ message CPlayer_GetDurationControl_Response {
 	optional bool block_minors = 8;
 }
 
+message CPlayer_RecordDisconnectedPlaytime_Request {
+	message PlayHistory {
+		optional uint32 appid = 1;
+		optional uint32 session_time_start = 2;
+		optional uint32 seconds = 3;
+		optional bool offline = 4;
+	}
+
+	repeated .CPlayer_RecordDisconnectedPlaytime_Request.PlayHistory play_sessions = 3;
+}
+
+message CPlayer_RecordDisconnectedPlaytime_Response {
+}
+
 message CPlayer_LastPlayedTimes_Notification {
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
 }
@@ -666,7 +735,7 @@ message CPlayer_FriendEquippedProfileItemsChanged_Notification {
 }
 
 message CPlayer_NewSteamAnnouncementState_Notification {
-	optional int32 state = 1;
+	optional .ENewSteamAnnouncementState state = 1 [default = k_ENewSteamAnnouncementState_Invalid];
 	optional string announcement_headline = 2;
 	optional string announcement_url = 3;
 	optional uint32 time_posted = 4;
@@ -769,8 +838,16 @@ service Player {
 		option (method_description) = "Gets a list of the emoticons a user has with metadata";
 	}
 
+	rpc GetTopAchievementsForGames (.CPlayer_GetTopAchievementsForGames_Request) returns (.CPlayer_GetTopAchievementsForGames_Response) {
+		option (method_description) = "Gets the best achievements the user has gotten for the specified list of apps.";
+	}
+
 	rpc GetAchievementsProgress (.CPlayer_GetAchievementsProgress_Request) returns (.CPlayer_GetAchievementsProgress_Response) {
 		option (method_description) = "Gets the achievement completion stats for the specified list of apps.";
+	}
+
+	rpc GetGameAchievements (.CPlayer_GetGameAchievements_Request) returns (.CPlayer_GetGameAchievements_Response) {
+		option (method_description) = "Get a games available achievements for display purposes.";
 	}
 
 	rpc GetFavoriteBadge (.CPlayer_GetFavoriteBadge_Request) returns (.CPlayer_GetFavoriteBadge_Response) {
@@ -879,6 +956,10 @@ service Player {
 
 	rpc GetDurationControl (.CPlayer_GetDurationControl_Request) returns (.CPlayer_GetDurationControl_Response) {
 		option (method_description) = "Get gameplay duration control settings.";
+	}
+
+	rpc RecordDisconnectedPlaytime (.CPlayer_RecordDisconnectedPlaytime_Request) returns (.CPlayer_RecordDisconnectedPlaytime_Response) {
+		option (method_description) = "Submit playtime records that happened while the client was disconnected from steam (whether marked offline or not)";
 	}
 }
 

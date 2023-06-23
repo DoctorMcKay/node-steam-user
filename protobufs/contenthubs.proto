@@ -1,0 +1,41 @@
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = true;
+option (force_php_generation) = true;
+
+enum EContentHubDiscountFilterType {
+	k_EContentHubDiscountFilterType_None = 0;
+	k_EContentHubDiscountFilterType_DiscountsOnly = 1;
+	k_EContentHubDiscountFilterType_PrioritizeDiscounts = 2;
+}
+
+message CStorePageFilter {
+	message SalePageFilter {
+		optional uint32 sale_tagid = 1;
+	}
+
+	message ContentHubFilter {
+		message OptInInfo {
+			optional string name = 1;
+			optional uint32 optin_tagid = 2;
+			optional uint32 prune_tagid = 3;
+			optional bool optin_only = 4;
+		}
+
+		optional string hub_type = 1;
+		optional string hub_category = 2;
+		optional uint32 hub_tagid = 3;
+		optional .EContentHubDiscountFilterType discount_filter = 4 [default = k_EContentHubDiscountFilterType_None];
+		optional .CStorePageFilter.ContentHubFilter.OptInInfo optin = 5;
+	}
+
+	message StoreFilter {
+		optional string filter_json = 1;
+		optional string cache_key = 2;
+	}
+
+	optional .CStorePageFilter.SalePageFilter sale_filter = 1;
+	optional .CStorePageFilter.ContentHubFilter content_hub_filter = 2;
+	repeated .CStorePageFilter.StoreFilter store_filters = 3;
+}

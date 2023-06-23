@@ -1,5 +1,6 @@
 import "steammessages_base.proto";
 import "steammessages_unified_base.steamclient.proto";
+import "contenthubs.proto";
 import "enums.proto";
 
 option cc_generic_services = true;
@@ -129,6 +130,7 @@ message CStore_GetDiscoveryQueue_Request {
 	optional bool no_experimental_results = 9;
 	optional uint32 experimental_cohort = 10;
 	optional bool debug_get_solr_query = 11;
+	optional .CStorePageFilter store_page_filter = 12;
 }
 
 message CStore_GetDiscoveryQueue_Response {
@@ -143,6 +145,7 @@ message CStore_GetDiscoveryQueue_Response {
 
 message CStore_GetDiscoveryQueueSettings_Request {
 	optional .EStoreDiscoveryQueueType queue_type = 1 [default = k_EStoreDiscoveryQueueTypeNew];
+	optional .CStorePageFilter store_page_filter = 2;
 }
 
 message CStore_GetDiscoveryQueueSettings_Response {
@@ -153,6 +156,7 @@ message CStore_GetDiscoveryQueueSettings_Response {
 message CStore_SkipDiscoveryQueueItem_Request {
 	optional .EStoreDiscoveryQueueType queue_type = 1 [default = k_EStoreDiscoveryQueueTypeNew];
 	optional uint32 appid = 2;
+	optional .CStorePageFilter store_page_filter = 3;
 }
 
 message CStore_SkipDiscoveryQueueItem_Response {
@@ -187,6 +191,16 @@ message CStore_GetUserGameInterestState_Response {
 	optional .EPlaytestStatus beta_status = 12 [default = k_ETesterStatusNone, (description) = "User interest or membership in the playtest for this app if any"];
 }
 
+message CStore_GetDiscoveryQueueSkippedApps_Request {
+	optional fixed64 steamid = 1;
+	optional .EStoreDiscoveryQueueType queue_type = 2 [default = k_EStoreDiscoveryQueueTypeNew];
+	optional .CStorePageFilter store_page_filter = 3;
+}
+
+message CStore_GetDiscoveryQueueSkippedApps_Response {
+	repeated uint32 appids = 1;
+}
+
 message CStore_GetStorePreferences_Request {
 }
 
@@ -196,13 +210,12 @@ message CStore_UserPreferences {
 	optional bool platform_windows = 3;
 	optional bool platform_mac = 4;
 	optional bool platform_linux = 5;
-	optional bool hide_adult_content_violence = 6;
-	optional bool hide_adult_content_sex = 7;
 	optional uint32 timestamp_updated = 8;
 	optional bool hide_store_broadcast = 9;
 	optional .EUserReviewScorePreference review_score_preference = 10 [default = k_EUserReviewScorePreference_Unset];
 	optional int32 timestamp_content_descriptor_preferences_updated = 11;
 	optional .EProvideDeckFeedbackPreference provide_deck_feedback = 12 [default = k_EProvideDeckFeedbackPreference_Unset];
+	optional string additional_languages = 13;
 }
 
 message CStore_UserTagPreferences {
@@ -298,6 +311,10 @@ service Store {
 
 	rpc GetUserGameInterestState (.CStore_GetUserGameInterestState_Request) returns (.CStore_GetUserGameInterestState_Response) {
 		option (method_description) = "Get information about a user's relationship to a game - ownership, wishlist, discovery queue state, etc.";
+	}
+
+	rpc GetDiscoveryQueueSkippedApps (.CStore_GetDiscoveryQueueSkippedApps_Request) returns (.CStore_GetDiscoveryQueueSkippedApps_Response) {
+		option (method_description) = "Returns all the apps skipped so far in the given discovery queue for the given user.";
 	}
 
 	rpc GetStorePreferences (.CStore_GetStorePreferences_Request) returns (.CStore_GetStorePreferences_Response) {

@@ -143,6 +143,15 @@ message CAccountHardware_RegisterValveIndexComponent_Request {
 message CAccountHardware_RegisterValveIndexComponent_Response {
 }
 
+message CAccountHardware_GetSteamDeckComponents_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+}
+
+message CAccountHardware_GetSteamDeckComponents_Response {
+	optional string json_components = 1;
+}
+
 service AccountHardware {
 	option (service_description) = "A service to use account hardware related methods";
 
@@ -184,5 +193,9 @@ service AccountHardware {
 
 	rpc RegisterValveIndexComponent (.CAccountHardware_RegisterValveIndexComponent_Request) returns (.CAccountHardware_RegisterValveIndexComponent_Response) {
 		option (method_description) = "Registers a valve index component to a customer";
+	}
+
+	rpc GetSteamDeckComponents (.CAccountHardware_GetSteamDeckComponents_Request) returns (.CAccountHardware_GetSteamDeckComponents_Response) {
+		option (method_description) = "Returns the components that went into the given Steam Deck";
 	}
 }

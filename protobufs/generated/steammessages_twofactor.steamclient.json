@@ -5,6 +5,84 @@
     "(force_php_generation)": true
   },
   "nested": {
+    "CTwoFactor_Time_Request": {
+      "fields": {
+        "sender_time": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "Current time on the sender (for stats, don't trust this)"
+          }
+        }
+      }
+    },
+    "CTwoFactor_Time_Response": {
+      "fields": {
+        "server_time": {
+          "type": "uint64",
+          "id": 1,
+          "options": {
+            "(description)": "Current server time"
+          }
+        },
+        "skew_tolerance_seconds": {
+          "type": "uint64",
+          "id": 2,
+          "options": {
+            "(description)": "Time skew we'll tolerate before applying an adjustment"
+          }
+        },
+        "large_time_jink": {
+          "type": "uint64",
+          "id": 3,
+          "options": {
+            "(description)": "Re-sync if local time jitters by this much"
+          }
+        },
+        "probe_frequency_seconds": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "(description)": "Time probe frequency if phone time is synchronized"
+          }
+        },
+        "adjusted_time_probe_frequency_seconds": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "Time probe frequency if phone time is not synchronized"
+          }
+        },
+        "hint_probe_frequency_seconds": {
+          "type": "uint32",
+          "id": 6,
+          "options": {
+            "(description)": "Floor of probe frequency, no matter what"
+          }
+        },
+        "sync_timeout": {
+          "type": "uint32",
+          "id": 7,
+          "options": {
+            "(description)": "More than this, and we call the current sync failed"
+          }
+        },
+        "try_again_seconds": {
+          "type": "uint32",
+          "id": 8,
+          "options": {
+            "(description)": "Seconds to try again after a failed sync"
+          }
+        },
+        "max_attempts": {
+          "type": "uint32",
+          "id": 9,
+          "options": {
+            "(description)": "# times we'll ask for server time before we bail"
+          }
+        }
+      }
+    },
     "CTwoFactor_Status_Request": {
       "fields": {
         "steamid": {
@@ -107,6 +185,13 @@
           "id": 13,
           "options": {
             "(description)": "When the token was transferred from another device, if applicable"
+          }
+        },
+        "version": {
+          "type": "uint32",
+          "id": 14,
+          "options": {
+            "(description)": "Current token version"
           }
         }
       }
@@ -443,62 +528,6 @@
         }
       }
     },
-    "CTwoFactor_CreateEmergencyCodes_Request": {
-      "fields": {
-        "code": {
-          "type": "string",
-          "id": 1
-        }
-      }
-    },
-    "CTwoFactor_CreateEmergencyCodes_Response": {
-      "fields": {
-        "codes": {
-          "rule": "repeated",
-          "type": "string",
-          "id": 1,
-          "options": {
-            "(description)": "Emergency codes"
-          }
-        }
-      }
-    },
-    "CTwoFactor_DestroyEmergencyCodes_Request": {
-      "fields": {
-        "steamid": {
-          "type": "fixed64",
-          "id": 1,
-          "options": {
-            "(description)": "steamid to use"
-          }
-        }
-      }
-    },
-    "CTwoFactor_DestroyEmergencyCodes_Response": {
-      "fields": {}
-    },
-    "CTwoFactor_ValidateToken_Request": {
-      "fields": {
-        "code": {
-          "type": "string",
-          "id": 1,
-          "options": {
-            "(description)": "code to validate"
-          }
-        }
-      }
-    },
-    "CTwoFactor_ValidateToken_Response": {
-      "fields": {
-        "valid": {
-          "type": "bool",
-          "id": 1,
-          "options": {
-            "(description)": "result of validation"
-          }
-        }
-      }
-    },
     "CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request": {
       "fields": {}
     },
@@ -527,6 +556,14 @@
           "id": 2,
           "options": {
             "(description)": "Generate new token (instead of removing old one)"
+          }
+        },
+        "version": {
+          "type": "uint32",
+          "id": 3,
+          "options": {
+            "default": 1,
+            "(description)": "What the version of our token should be"
           }
         }
       }
@@ -642,82 +679,113 @@
         "(service_description)": "Two Factor Authentication Service"
       },
       "methods": {
+        "QueryTime": {
+          "requestType": ".CTwoFactor_Time_Request",
+          "responseType": ".CTwoFactor_Time_Response",
+          "options": {
+            "(method_description)": "Get server's idea of the current time"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get server's idea of the current time"
+            }
+          ]
+        },
         "QueryStatus": {
           "requestType": ".CTwoFactor_Status_Request",
           "responseType": ".CTwoFactor_Status_Response",
           "options": {
             "(method_description)": "Get two-factor authentication settings for the logged-in account"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Get two-factor authentication settings for the logged-in account"
+            }
+          ]
         },
         "AddAuthenticator": {
           "requestType": ".CTwoFactor_AddAuthenticator_Request",
           "responseType": ".CTwoFactor_AddAuthenticator_Response",
           "options": {
             "(method_description)": "Add two-factor authenticator to the logged-in account"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Add two-factor authenticator to the logged-in account"
+            }
+          ]
         },
         "SendEmail": {
           "requestType": ".CTwoFactor_SendEmail_Request",
           "responseType": ".CTwoFactor_SendEmail_Response",
           "options": {
             "(method_description)": "Send email to the account"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Send email to the account"
+            }
+          ]
         },
         "FinalizeAddAuthenticator": {
           "requestType": ".CTwoFactor_FinalizeAddAuthenticator_Request",
           "responseType": ".CTwoFactor_FinalizeAddAuthenticator_Response",
           "options": {
             "(method_description)": "Finalize two-factor authentication addition to the logged-in account"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Finalize two-factor authentication addition to the logged-in account"
+            }
+          ]
         },
         "UpdateTokenVersion": {
           "requestType": ".CTwoFactor_UpdateTokenVersion_Request",
           "responseType": ".CTwoFactor_UpdateTokenVersion_Response",
           "options": {
             "(method_description)": "Update the version for my token"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Update the version for my token"
+            }
+          ]
         },
         "RemoveAuthenticator": {
           "requestType": ".CTwoFactor_RemoveAuthenticator_Request",
           "responseType": ".CTwoFactor_RemoveAuthenticator_Response",
           "options": {
             "(method_description)": "Remove two-factor authentication addition from the logged-in account"
-          }
-        },
-        "CreateEmergencyCodes": {
-          "requestType": ".CTwoFactor_CreateEmergencyCodes_Request",
-          "responseType": ".CTwoFactor_CreateEmergencyCodes_Response",
-          "options": {
-            "(method_description)": "Generate emergency authenticator codes"
-          }
-        },
-        "DestroyEmergencyCodes": {
-          "requestType": ".CTwoFactor_DestroyEmergencyCodes_Request",
-          "responseType": ".CTwoFactor_DestroyEmergencyCodes_Response",
-          "options": {
-            "(method_description)": "Destroy emergency authenticator codes for the account"
-          }
-        },
-        "ValidateToken": {
-          "requestType": ".CTwoFactor_ValidateToken_Request",
-          "responseType": ".CTwoFactor_ValidateToken_Response",
-          "options": {
-            "(method_description)": "Validate (and consume) a token"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Remove two-factor authentication addition from the logged-in account"
+            }
+          ]
         },
         "RemoveAuthenticatorViaChallengeStart": {
           "requestType": ".CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request",
           "responseType": ".CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response",
           "options": {
             "(method_description)": "Start challenge-based authenticator removal"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Start challenge-based authenticator removal"
+            }
+          ]
         },
         "RemoveAuthenticatorViaChallengeContinue": {
           "requestType": ".CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request",
           "responseType": ".CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response",
           "options": {
             "(method_description)": "Continue challenge-based authenticator removal"
-          }
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Continue challenge-based authenticator removal"
+            }
+          ]
         }
       }
     },
@@ -848,6 +916,18 @@
         },
         "bucket": {
           "type": "fixed64",
+          "id": 2
+        }
+      }
+    },
+    "CMsgGCRoutingProtoBufHeader": {
+      "fields": {
+        "dst_gcid_queue": {
+          "type": "uint64",
+          "id": 1
+        },
+        "dst_gc_dir_index": {
+          "type": "uint32",
           "id": 2
         }
       }
@@ -998,6 +1078,10 @@
           "type": "uint64",
           "id": 36
         },
+        "routing_gc": {
+          "type": ".CMsgGCRoutingProtoBufHeader",
+          "id": 37
+        },
         "ip": {
           "type": "uint32",
           "id": 15
@@ -1060,6 +1144,10 @@
         "ticket": {
           "type": "bytes",
           "id": 7
+        },
+        "server_secret": {
+          "type": "bytes",
+          "id": 8
         }
       }
     },
@@ -1112,6 +1200,22 @@
         "app_type": {
           "type": "uint32",
           "id": 14
+        },
+        "has_adult_content_sex": {
+          "type": "bool",
+          "id": 15
+        },
+        "has_adult_content_violence": {
+          "type": "bool",
+          "id": 16
+        },
+        "content_descriptorids": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 17,
+          "options": {
+            "packed": false
+          }
         }
       }
     },
@@ -1401,6 +1505,10 @@
           "options": {
             "default": "k_EBanContentCheckResult_NotScanned"
           }
+        },
+        "banned": {
+          "type": "bool",
+          "id": 17
         }
       }
     },
@@ -1639,15 +1747,6 @@
     "google": {
       "nested": {
         "protobuf": {
-          "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
-            "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "objc_class_prefix": "GPB",
-            "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
-          },
           "nested": {
             "FileDescriptorSet": {
               "fields": {
@@ -1720,10 +1819,6 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
-                },
-                "edition": {
-                  "type": "string",
-                  "id": 13
                 }
               }
             },
@@ -1788,10 +1883,6 @@
                     "end": {
                       "type": "int32",
                       "id": 2
-                    },
-                    "options": {
-                      "type": "ExtensionRangeOptions",
-                      "id": 3
                     }
                   }
                 },
@@ -1808,21 +1899,6 @@
                   }
                 }
               }
-            },
-            "ExtensionRangeOptions": {
-              "fields": {
-                "uninterpreted_option": {
-                  "rule": "repeated",
-                  "type": "UninterpretedOption",
-                  "id": 999
-                }
-              },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -1865,10 +1941,6 @@
                 "options": {
                   "type": "FieldOptions",
                   "id": 8
-                },
-                "proto3_optional": {
-                  "type": "bool",
-                  "id": 17
                 }
               },
               "nested": {
@@ -1929,30 +2001,6 @@
                 "options": {
                   "type": "EnumOptions",
                   "id": 3
-                },
-                "reserved_range": {
-                  "rule": "repeated",
-                  "type": "EnumReservedRange",
-                  "id": 4
-                },
-                "reserved_name": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "EnumReservedRange": {
-                  "fields": {
-                    "start": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "end": {
-                      "type": "int32",
-                      "id": 2
-                    }
-                  }
                 }
               }
             },
@@ -2009,17 +2057,11 @@
                 },
                 "client_streaming": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "server_streaming": {
                   "type": "bool",
-                  "id": 6,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 6
                 }
               }
             },
@@ -2035,10 +2077,7 @@
                 },
                 "java_multiple_files": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "java_generate_equals_and_hash": {
                   "type": "bool",
@@ -2049,10 +2088,7 @@
                 },
                 "java_string_check_utf8": {
                   "type": "bool",
-                  "id": 27,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 27
                 },
                 "optimize_for": {
                   "type": "OptimizeMode",
@@ -2067,45 +2103,23 @@
                 },
                 "cc_generic_services": {
                   "type": "bool",
-                  "id": 16,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 16
                 },
                 "java_generic_services": {
                   "type": "bool",
-                  "id": 17,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 17
                 },
                 "py_generic_services": {
                   "type": "bool",
-                  "id": 18,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "php_generic_services": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 18
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 23,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 23
                 },
                 "cc_enable_arenas": {
                   "type": "bool",
-                  "id": 31,
-                  "options": {
-                    "default": true
-                  }
+                  "id": 31
                 },
                 "objc_class_prefix": {
                   "type": "string",
@@ -2114,26 +2128,6 @@
                 "csharp_namespace": {
                   "type": "string",
                   "id": 37
-                },
-                "swift_prefix": {
-                  "type": "string",
-                  "id": 39
-                },
-                "php_class_prefix": {
-                  "type": "string",
-                  "id": 40
-                },
-                "php_namespace": {
-                  "type": "string",
-                  "id": 41
-                },
-                "php_metadata_namespace": {
-                  "type": "string",
-                  "id": 44
-                },
-                "ruby_package": {
-                  "type": "string",
-                  "id": 45
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2167,24 +2161,15 @@
               "fields": {
                 "message_set_wire_format": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "no_standard_descriptor_accessor": {
                   "type": "bool",
-                  "id": 2,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 2
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "map_entry": {
                   "type": "bool",
@@ -2204,24 +2189,8 @@
               ],
               "reserved": [
                 [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
                   8,
                   8
-                ],
-                [
-                  9,
-                  9
                 ]
               ]
             },
@@ -2247,31 +2216,15 @@
                 },
                 "lazy": {
                   "type": "bool",
-                  "id": 5,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "unverified_lazy": {
-                  "type": "bool",
-                  "id": 15,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 5
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "weak": {
                   "type": "bool",
-                  "id": 10,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 10
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2331,10 +2284,7 @@
                 },
                 "deprecated": {
                   "type": "bool",
-                  "id": 3,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 3
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2347,22 +2297,13 @@
                   1000,
                   536870911
                 ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
               ]
             },
             "EnumValueOptions": {
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 1,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 1
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2381,10 +2322,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2403,17 +2341,7 @@
               "fields": {
                 "deprecated": {
                   "type": "bool",
-                  "id": 33,
-                  "options": {
-                    "default": false
-                  }
-                },
-                "idempotency_level": {
-                  "type": "IdempotencyLevel",
-                  "id": 34,
-                  "options": {
-                    "default": "IDEMPOTENCY_UNKNOWN"
-                  }
+                  "id": 33
                 },
                 "uninterpreted_option": {
                   "rule": "repeated",
@@ -2426,16 +2354,7 @@
                   1000,
                   536870911
                 ]
-              ],
-              "nested": {
-                "IdempotencyLevel": {
-                  "values": {
-                    "IDEMPOTENCY_UNKNOWN": 0,
-                    "NO_SIDE_EFFECTS": 1,
-                    "IDEMPOTENT": 2
-                  }
-                }
-              }
+              ]
             },
             "UninterpretedOption": {
               "fields": {
@@ -2551,19 +2470,6 @@
                     "end": {
                       "type": "int32",
                       "id": 4
-                    },
-                    "semantic": {
-                      "type": "Semantic",
-                      "id": 5
-                    }
-                  },
-                  "nested": {
-                    "Semantic": {
-                      "values": {
-                        "NONE": 0,
-                        "SET": 1,
-                        "ALIAS": 2
-                      }
                     }
                   }
                 }

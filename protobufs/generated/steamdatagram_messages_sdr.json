@@ -67,6 +67,10 @@
         "signature": {
           "type": "bytes",
           "id": 3
+        },
+        "dummy_pad": {
+          "type": "bytes",
+          "id": 1023
         }
       }
     },
@@ -265,6 +269,10 @@
         "legacy_router_timestamp": {
           "type": "fixed32",
           "id": 4
+        },
+        "dummy_pad": {
+          "type": "bytes",
+          "id": 1023
         }
       }
     },
@@ -1657,6 +1665,11 @@
           "options": {
             "packed": false
           }
+        },
+        "ip_addresses": {
+          "rule": "repeated",
+          "type": "string",
+          "id": 13
         }
       },
       "nested": {

@@ -24,3 +24,19 @@ message CMsgClientLANP2PRequestChunksResponse {
 
 	repeated .CMsgClientLANP2PRequestChunksResponse.ChunkData chunk_responses = 1;
 }
+
+message CMsgClientPeerChunkRequest {
+	optional uint32 app_id = 1;
+	optional uint32 depot_id = 2;
+	optional bytes sha = 3;
+}
+
+message CMsgClientPeerChunkResponse {
+	optional uint32 result = 1;
+	optional uint32 app_id = 2;
+	optional uint32 depot_id = 3;
+	optional bytes sha = 4;
+	optional bool encrypted = 5;
+	optional bool compressed = 6;
+	optional bytes chunk_data = 7;
+}
