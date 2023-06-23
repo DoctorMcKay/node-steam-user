@@ -327,9 +327,12 @@ class SteamUserLogon extends SteamUserSentry {
 			let nodeVersion = process.versions.node.split('.');
 			if (nodeVersion[0] > 12 || (nodeVersion[0] == 12 && nodeVersion[1] >= 22)) {
 				this.emit('debug', 'Node version is new enough for steam-session; performing new auth');
+				let startTime = Date.now();
 				let newAuthSucceeded = await this._performNewAuth();
 				if (!newAuthSucceeded) {
 					return;
+				} else {
+					this.emit('debug', `New auth succeeded in ${Date.now() - startTime} ms`);
 				}
 			} else {
 				this._warn('Logging onto Steam using legacy authentication. steam-user may not behave as expected. To remove this warning, log on using a refresh token or upgrade Node.js to 12.22.0 or later.');
