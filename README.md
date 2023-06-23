@@ -580,7 +580,7 @@ There are five ways to log onto Steam:
         - `twoFactorCode`
         - `rememberPassword`
         - `dontRememberMachine`
-- Individually using account name and password (deprecated)
+- Individually using account name and password
 	- These properties are required:
 		- `accountName`
 		- `password`
