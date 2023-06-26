@@ -438,6 +438,7 @@ class SteamUserMessages extends SteamUserConnection {
 		if (callback) {
 			jobIdSource = ++this._currentJobID;
 			this._jobs[jobIdSource] = callback;
+			this._jobs[jobIdSource].type = emsg; // Save type of this job to be able to filter the object later on
 
 			// Clean up old job callbacks after 2 minutes
 			this._jobCleanupTimers.push(setTimeout(() => delete this._jobs[jobIdSource], 1000 * 60 * 2));
