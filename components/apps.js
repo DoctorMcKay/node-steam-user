@@ -568,6 +568,23 @@ class SteamUserApps extends SteamUserAppAuth {
 	}
 
 	/**
+	 * Clears the current picsCache content.
+	 * Make sure to disable 'changelistUpdateInterval' if the cache should not get repopulated.
+	 */
+	clearPicsCache() {
+		if (!this.options.enablePicsCache) {
+			throw new Error("PICS cache is not enabled.");
+		}
+
+		// Reset cache back to default
+		this.picsCache = {
+			changenumber: 0,
+			apps: {},
+			packages: {}
+		};
+	}
+
+	/**
 	 * @protected
 	 */
 	async _getLicenseInfo() {
