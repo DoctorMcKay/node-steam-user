@@ -32,13 +32,22 @@
         "k_EAuthSessionSecurityHistory_NoPriorHistory": 2
       }
     },
+    "ETokenRenewalType": {
+      "values": {
+        "k_ETokenRenewalType_None": 0,
+        "k_ETokenRenewalType_Allow": 1
+      }
+    },
     "EAuthTokenRevokeAction": {
       "values": {
         "k_EAuthTokenRevokeLogout": 0,
         "k_EAuthTokenRevokePermanent": 1,
         "k_EAuthTokenRevokeReplaced": 2,
         "k_EAuthTokenRevokeSupport": 3,
-        "k_EAuthTokenRevokeConsume": 4
+        "k_EAuthTokenRevokeConsume": 4,
+        "k_EAuthTokenRevokeNonRememberedLogout": 5,
+        "k_EAuthTokenRevokeNonRememberedPermanent": 6,
+        "k_EAuthTokenRevokeAutomatic": 7
       }
     },
     "EAuthTokenState": {
@@ -118,6 +127,20 @@
           "id": 4,
           "options": {
             "(description)": "EGamingDeviceType, claimed, of authorized device for steam client-type devices"
+          }
+        },
+        "client_count": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "(description)": "For desktop clients, quantized number of users in history"
+          }
+        },
+        "machine_id": {
+          "type": "bytes",
+          "id": 6,
+          "options": {
+            "(description)": "Additional device context"
           }
         }
       }
@@ -646,6 +669,13 @@
         "steamid": {
           "type": "fixed64",
           "id": 2
+        },
+        "renewal_type": {
+          "type": ".ETokenRenewalType",
+          "id": 3,
+          "options": {
+            "default": "k_ETokenRenewalType_None"
+          }
         }
       }
     },
@@ -654,6 +684,10 @@
         "access_token": {
           "type": "string",
           "id": 1
+        },
+        "refresh_token": {
+          "type": "string",
+          "id": 2
         }
       }
     },
@@ -849,6 +883,25 @@
           "id": 2
         }
       }
+    },
+    "CAuthentication_Token_Revoke_Request": {
+      "fields": {
+        "token": {
+          "type": "string",
+          "id": 1
+        },
+        "revoke_action": {
+          "type": ".EAuthTokenRevokeAction",
+          "id": 2,
+          "options": {
+            "default": "k_EAuthTokenRevokePermanent",
+            "(description)": "Select between logout and logout-and-forget-machine"
+          }
+        }
+      }
+    },
+    "CAuthentication_Token_Revoke_Response": {
+      "fields": {}
     },
     "CAuthentication_RefreshToken_Revoke_Request": {
       "fields": {
@@ -1307,6 +1360,18 @@
           "parsedOptions": [
             {
               "(method_description)": "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret"
+            }
+          ]
+        },
+        "RevokeToken": {
+          "requestType": ".CAuthentication_Token_Revoke_Request",
+          "responseType": ".CAuthentication_Token_Revoke_Response",
+          "options": {
+            "(method_description)": "Revoke a single token immediately, making it unable to renew or generate new access tokens"
+          },
+          "parsedOptions": [
+            {
+              "(method_description)": "Revoke a single token immediately, making it unable to renew or generate new access tokens"
             }
           ]
         },
