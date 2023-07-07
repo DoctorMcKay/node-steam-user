@@ -23,10 +23,9 @@
 	},
 	"dependencies": {
 		"@bbob/parser": "^2.2.0",
-		"@doctormckay/stdlib": "^1.15.2",
+		"@doctormckay/stdlib": "^1.16.0",
 		"@doctormckay/steam-crypto": "^1.2.0",
 		"adm-zip": "^0.5.10",
-		"appdirectory": "^0.1.0",
 		"binarykvparser": "^2.2.0",
 		"bytebuffer": "^5.0.0",
 		"file-manager": "^2.0.0",

@@ -1,5 +1,5 @@
-const AppDirectory = require('appdirectory');
 const FileManager = require('file-manager');
+const StdLib = require('@doctormckay/stdlib');
 
 const SteamChatRoomClient = require('./components/chatroom.js');
 
@@ -77,10 +77,10 @@ class SteamUser extends SteamUserTwoFactor {
 			if (process.env.OPENSHIFT_DATA_DIR) {
 				this.options.dataDirectory = process.env.OPENSHIFT_DATA_DIR + '/node-steamuser';
 			} else {
-				this.options.dataDirectory = (new AppDirectory({
+				this.options.dataDirectory = StdLib.OS.appDataDirectory({
 					appName: 'node-steamuser',
 					appAuthor: 'doctormckay'
-				})).userData();
+				});
 			}
 		}
 
