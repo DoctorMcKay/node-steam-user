@@ -28,12 +28,20 @@ enum EAuthSessionSecurityHistory {
 	k_EAuthSessionSecurityHistory_NoPriorHistory = 2;
 }
 
+enum ETokenRenewalType {
+	k_ETokenRenewalType_None = 0;
+	k_ETokenRenewalType_Allow = 1;
+}
+
 enum EAuthTokenRevokeAction {
 	k_EAuthTokenRevokeLogout = 0;
 	k_EAuthTokenRevokePermanent = 1;
 	k_EAuthTokenRevokeReplaced = 2;
 	k_EAuthTokenRevokeSupport = 3;
 	k_EAuthTokenRevokeConsume = 4;
+	k_EAuthTokenRevokeNonRememberedLogout = 5;
+	k_EAuthTokenRevokeNonRememberedPermanent = 6;
+	k_EAuthTokenRevokeAutomatic = 7;
 }
 
 enum EAuthTokenState {
@@ -62,6 +70,8 @@ message CAuthentication_DeviceDetails {
 	optional .EAuthTokenPlatformType platform_type = 2 [default = k_EAuthTokenPlatformType_Unknown, (description) = "EAuthTokenPlatformType, claimed, of device"];
 	optional int32 os_type = 3 [(description) = "EOSType, claimed, of authorized device"];
 	optional uint32 gaming_device_type = 4 [(description) = "EGamingDeviceType, claimed, of authorized device for steam client-type devices"];
+	optional uint32 client_count = 5 [(description) = "For desktop clients, quantized number of users in history"];
+	optional bytes machine_id = 6 [(description) = "Additional device context"];
 }
 
 message CAuthentication_BeginAuthSessionViaQR_Request {
@@ -173,10 +183,12 @@ message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response {
 message CAuthentication_AccessToken_GenerateForApp_Request {
 	optional string refresh_token = 1;
 	optional fixed64 steamid = 2;
+	optional .ETokenRenewalType renewal_type = 3 [default = k_ETokenRenewalType_None];
 }
 
 message CAuthentication_AccessToken_GenerateForApp_Response {
 	optional string access_token = 1;
+	optional string refresh_token = 2;
 }
 
 message CAuthentication_RefreshToken_Enumerate_Request {
@@ -226,6 +238,14 @@ message CAuthentication_MigrateMobileSession_Request {
 message CAuthentication_MigrateMobileSession_Response {
 	optional string refresh_token = 1;
 	optional string access_token = 2;
+}
+
+message CAuthentication_Token_Revoke_Request {
+	optional string token = 1;
+	optional .EAuthTokenRevokeAction revoke_action = 2 [default = k_EAuthTokenRevokePermanent, (description) = "Select between logout and logout-and-forget-machine"];
+}
+
+message CAuthentication_Token_Revoke_Response {
 }
 
 message CAuthentication_RefreshToken_Revoke_Request {
@@ -371,6 +391,10 @@ service Authentication {
 
 	rpc MigrateMobileSession (.CAuthentication_MigrateMobileSession_Request) returns (.CAuthentication_MigrateMobileSession_Response) {
 		option (method_description) = "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret";
+	}
+
+	rpc RevokeToken (.CAuthentication_Token_Revoke_Request) returns (.CAuthentication_Token_Revoke_Response) {
+		option (method_description) = "Revoke a single token immediately, making it unable to renew or generate new access tokens";
 	}
 
 	rpc RevokeRefreshToken (.CAuthentication_RefreshToken_Revoke_Request) returns (.CAuthentication_RefreshToken_Revoke_Response) {

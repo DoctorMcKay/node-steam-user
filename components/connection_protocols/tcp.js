@@ -1,7 +1,7 @@
 const HTTP = require('http');
 const Socket = require('net').Socket;
 const SteamCrypto = require('@doctormckay/steam-crypto');
-const URL = require('url');
+const {URL} = require('url');
 
 const BaseConnection = require('./base.js');
 
@@ -31,18 +31,25 @@ class TCPConnection extends BaseConnection {
 		let cmPort = parseInt(cmParts[1], 10);
 
 		if (user.options.httpProxy) {
-			let url = URL.parse(user.options.httpProxy);
-			url.method = 'CONNECT';
-			url.path = tcpCm;
-			url.localAddress = user.options.localAddress;
-			url.localPort = user.options.localPort;
-			if (url.auth) {
-				url.headers = {"Proxy-Authorization": "Basic " + (Buffer.from(url.auth, 'utf8')).toString('base64')};
-				delete url.auth;
+			let url = new URL(user.options.httpProxy);
+			let prox = {
+				protocol: url.protocol,
+				host: url.hostname,
+				port: url.port,
+
+				method: 'CONNECT',
+				path: tcpCm,
+				localAddress: user.options.localAddress,
+				localPort: user.options.localPort
+			}
+			if (url.username) {
+				prox.headers = {
+					'Proxy-Authorization': `Basic ${(Buffer.from(`${url.username}:${url.password || ''}`, 'utf8')).toString('base64')}`
+				};
 			}
 
 			let connectionEstablished = false;
-			let req = HTTP.request(url);
+			let req = HTTP.request(prox);
 			req.end();
 			req.setTimeout(user.options.proxyTimeout || 5000);
 			req.on('connect', (res, socket) => {
@@ -79,10 +86,10 @@ class TCPConnection extends BaseConnection {
 			this._setupStream();
 
 			socket.connect({
-				"port": cmPort,
-				"host": cmHost,
-				"localAddress": user.options.localAddress,
-				"localPort": user.options.localPort
+				port: cmPort,
+				host: cmHost,
+				localAddress: user.options.localAddress,
+				localPort: user.options.localPort
 			});
 
 			this.stream.setTimeout(this.user._connectTimeout);

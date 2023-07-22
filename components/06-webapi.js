@@ -1,6 +1,6 @@
 const HTTPS = require('https');
 const StdLib = require('@doctormckay/stdlib');
-const VDF = require('simple-vdf');
+const VDF = require('kvparser');
 const Zlib = require('zlib');
 
 const SteamUserFileStorage = require('./05-filestorage.js');

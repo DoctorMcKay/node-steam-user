@@ -36,7 +36,11 @@ const ENUMS_WITH_DIFFERENT_PREFIXES_FROM_THEIR_NAMES = {
 	"ESystemAudioPortDirection": "k_SystemAudioPortDirection_",
 	"ESystemAudioPortType": "k_SystemAudioPortType_",
 	"ESystemFanControlMode": "k_SystemFanControlMode_",
-	"EAuthTokenRevokeAction": "k_EAuthTokenRevoke"
+	"EAuthTokenRevokeAction": "k_EAuthTokenRevoke",
+	"EMarketingMessageAssociationType": "k_EMarketingMessage",
+	"EMarketingMessageLookupType": "k_EMarketingMessageLookup",
+	"EMarketingMessageType": "k_EMarketingMessage",
+	"EMarketingMessageVisibility": "k_EMarketingMessageVisible"
 };
 
 const ENUMS_WITH_SOMETIMES_DIFFERENT_PREFIXES = {
