@@ -34,7 +34,7 @@
 		"protobufjs": "^6.11.3",
 		"socks-proxy-agent": "^7.0.0",
 		"steam-appticket": "^1.0.1",
-		"steam-session": "^1.1.0",
+		"steam-session": "^1.2.5",
 		"steam-totp": "^2.0.1",
 		"steamid": "^1.1.0",
 		"websocket13": "^3.0.1"

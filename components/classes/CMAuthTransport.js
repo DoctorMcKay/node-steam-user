@@ -20,7 +20,7 @@ class CMAuthTransport {
 	sendRequest(request) {
 		return new Promise((resolve) => {
 			this._user._send({
-				msg: EMsg.ServiceMethodCallFromClientNonAuthed,
+				msg: this._user.steamID ? EMsg.ServiceMethodCallFromClient : EMsg.ServiceMethodCallFromClientNonAuthed,
 				proto: {
 					target_job_name: `${request.apiInterface}.${request.apiMethod}#${request.apiVersion}`,
 					realm: 1

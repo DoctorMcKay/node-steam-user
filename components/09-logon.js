@@ -311,8 +311,7 @@ class SteamUserLogon extends SteamUserSentry {
 		// If we're logging in with account name/password and we're running node 12.22 or later,
 		// go ahead and get a refresh token.
 		if (this._logOnDetails.account_name && this._logOnDetails.password) {
-			let nodeVersion = process.versions.node.split('.');
-			if (nodeVersion[0] > 12 || (nodeVersion[0] == 12 && nodeVersion[1] >= 22)) {
+			if (Helpers.newAuthCapable()) {
 				this.emit('debug', 'Node version is new enough for steam-session; performing new auth');
 				let startTime = Date.now();
 				let newAuthSucceeded = await this._performNewAuth();
@@ -724,7 +723,9 @@ class SteamUserLogon extends SteamUserSentry {
 				if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 					this._requestNotifications();
 
-					if (body.webapi_authenticate_user_nonce) {
+					if (Helpers.newAuthCapable() && this._logOnDetails.access_token) {
+						this.webLogOn();
+					} else if (body.webapi_authenticate_user_nonce) {
 						this._webAuthenticate(body.webapi_authenticate_user_nonce);
 					}
 				} else if (this.steamID.type == SteamID.Type.ANON_USER) {
