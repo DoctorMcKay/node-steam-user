@@ -53,7 +53,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				this._logOnDetails = {
 					account_name: details.accountName,
 					password: details.password,
-					login_key: details.loginKey,
 					auth_code: details.authCode,
 					two_factor_code: details.twoFactorCode,
 					should_remember_password: !!details.refreshToken,
@@ -82,7 +81,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				delete this._logOnDetails.ping_ms_from_cell_search;
 				delete this._logOnDetails.machine_id;
 				delete this._logOnDetails.password;
-				delete this._logOnDetails.login_key;
 				delete this._logOnDetails.auth_code;
 				delete this._logOnDetails.machine_name;
 				delete this._logOnDetails.machine_name_userchosen;
@@ -90,21 +88,11 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				delete this._logOnDetails.supports_rate_limit_response;
 			}
 
-			if ((this._logOnDetails.login_key || '').split('.').length == 3) {
-				// deprecated: they're using a refresh token as a login key
-				details.refreshToken = this._logOnDetails.login_key;
-				this._logOnDetails._newAuthAccountName = this._logOnDetails.account_name;
-				delete this._logOnDetails.account_name;
-				delete this._logOnDetails.password;
-				delete this._logOnDetails.login_key;
-			}
-
 			if (details.refreshToken) {
 				// If logging in with a refresh token, we need to make sure that no conflicting properties are set
 				let disallowedProps = [
 					'account_name',
 					'password',
-					'login_key',
 					'auth_code',
 					'two_factor_code'
 				];
@@ -244,7 +232,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			}
 
 			if (anonLogin) {
-				if (this._logOnDetails.password || this._logOnDetails.login_key) {
+				if (this._logOnDetails.password) {
 					this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
 				} else if (details !== true && !explicitlyRequestedAnonLogin) {
 					this._warn('Logging into anonymous Steam account. If you didn\'t expect this warning, make sure that you\'re properly passing your log on details to the logOn() method. To suppress this warning, pass {anonymous: true} to logOn().');
@@ -355,7 +343,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				this._logOnDetails._steamid = session.steamID;
 				delete this._logOnDetails.account_name;
 				delete this._logOnDetails.password;
-				delete this._logOnDetails.login_key;
 				delete this._logOnDetails.auth_code;
 				delete this._logOnDetails.two_factor_code;
 				this._tempSteamID = session.steamID;
@@ -671,22 +658,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				this._connectTime = Date.now();
 				this._connectTimeout = 1000; // reset exponential connect backoff
 
-				// deprecated
-				if (this._logOnDetails.login_key) {
-					// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.
-					this._loginKeyTimer = setTimeout(() => {
-						this.emit('loginKey', this._logOnDetails.login_key);
-					}, 5000);
-				} else if (
-					(this._logOnDetails._newAuthAccountName && this._logOnDetails.should_remember_password) ||
-					this._logOnDetails._newAuthUsedTokenAsLoginKey
-				) {
-					// deprecated: emit the refresh token as a loginKey to support code that depends on login keys
-					this._loginKeyTimer = setTimeout(() => {
-						this.emit('loginKey', this._logOnDetails.access_token);
-					}, 5000);
-				}
-
 				this._saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
 
 				let parental = body.parental_settings ? SteamUserLogon._decodeProto(Schema.ParentalSettings, body.parental_settings) : null;
@@ -793,25 +764,6 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLoggedOff, function(body)
 
 	this.emit('debug', 'Logged off: ' + msg);
 	this._handleLogOff(body.eresult, msg);
-});
-
-// deprecated: appears no longer functional
-SteamUserBase.prototype._handlerManager.add(EMsg.ClientNewLoginKey, function(body) {
-	if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
-		delete this._logOnDetails.password;
-		this._logOnDetails.login_key = body.login_key;
-
-		if (this._loginKeyTimer) {
-			clearTimeout(this._loginKeyTimer);
-		}
-
-		if (this._logOnDetails.should_remember_password) {
-			this.emit('loginKey', body.login_key);
-		}
-
-		// Accept the key
-		this._send(EMsg.ClientNewLoginKeyAccepted, {"unique_id": body.unique_id});
-	}
 });
 
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientCMList, function(body) {
