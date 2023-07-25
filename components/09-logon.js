@@ -56,7 +56,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 					login_key: details.loginKey,
 					auth_code: details.authCode,
 					two_factor_code: details.twoFactorCode,
-					should_remember_password: !!(details.rememberPassword || details.refreshToken),
+					should_remember_password: !!details.refreshToken,
 					obfuscated_private_ip: {v4: logonId || 0},
 					protocol_version: PROTOCOL_VERSION,
 					supports_rate_limit_response: !anonLogin,
@@ -551,7 +551,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		);
 
 		if (!relogAvailable) {
-			throw new Error("To use relog(), you must specify rememberPassword=true when logging on and wait for loginKey to be emitted, or log on using a refresh token");
+			throw new Error('To use relog(), you must log on using a refresh token or using your account name and password');
 		}
 
 		this._relogging = true;
