@@ -7,45 +7,34 @@ const SteamUserWeb = require('./07-web.js');
 
 class SteamUserSentry extends SteamUserWeb {
 	/**
-	 * @param {Buffer} sentry
+	 * @param {Buffer|string} sentry
+	 * @deprecated Use `machineAuthToken` property in `logOn()` instead
 	 */
 	setSentry(sentry) {
-		this._sentry = sentry;
+		this._machineAuthTokenSetByDeprecatedSetSentry = true;
+		this._machineAuthToken = Buffer.isBuffer(sentry) ? sentry.toString('utf8') : sentry;
 	}
 
-	async _getSentryFileContent() {
-		let files = await this._readFiles(this._getSentryFilenames());
-		let firstFile = files.find(f => f.contents);
-		return firstFile ? firstFile.contents : null;
+	_getMachineAuthFilename() {
+		let accountName = (this._logOnDetails.account_name || this._logOnDetails._newAuthAccountName).toLowerCase();
+		return `machineAuthToken.${accountName}.txt`;
 	}
 
-	_getSentryFilenames() {
-		if (this.options.singleSentryfile) {
-			return ['sentry.bin'];
-		} else {
-			return [
-				// prefer the steamid-named sentry file if we have it
-				`sentry.${this._logOnDetails._steamid}.bin`,
-				`sentry.${this._logOnDetails.account_name || this._logOnDetails._newAuthAccountName}.bin`
-			];
+	_handleNewMachineToken(machineToken) {
+		this._machineAuthToken = machineToken;
+
+		this.emit('machineAuthToken', machineToken);
+		this.emit('sentry', Buffer.from(machineToken, 'utf8')); // legacy
+
+		// We should always have an account name available here since this is only possible when logging on using an
+		// account name and password.
+		if (!this._logOnDetails.account_name && !this._logOnDetails._newAuthAccountName) {
+			this._warn('Received new machine token, but no account name is available. This should never happen. Please alert the developer.');
+			return;
 		}
+
+		this._saveFile(this._getMachineAuthFilename(), Buffer.from(machineToken, 'utf8'));
 	}
 }
-
-// Handlers
-
-SteamUserBase.prototype._handlerManager.add(EMsg.ClientUpdateMachineAuth, async function(body, hdr, callback) {
-	// TODO: Handle partial updates
-
-	this.emit('debug', 'Got new sentry file');
-	await Promise.all(this._getSentryFilenames().map(filename => this._saveFile(filename, body.bytes)));
-	this.emit('sentry', body.bytes);
-
-	// Accept the sentry
-
-	callback(EMsg.ClientUpdateMachineAuthResponse, {
-		sha_file: StdLib.Hashing.sha1(body.bytes, 'buffer')
-	});
-});
 
 module.exports = SteamUserSentry;
