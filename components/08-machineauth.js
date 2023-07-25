@@ -5,7 +5,7 @@ const EMsg = require('../enums/EMsg.js');
 const SteamUserBase = require('./00-base.js');
 const SteamUserWeb = require('./07-web.js');
 
-class SteamUserSentry extends SteamUserWeb {
+class SteamUserMachineAuth extends SteamUserWeb {
 	/**
 	 * @param {Buffer|string} sentry
 	 * @deprecated Use `machineAuthToken` property in `logOn()` instead
@@ -37,4 +37,4 @@ class SteamUserSentry extends SteamUserWeb {
 	}
 }
 
-module.exports = SteamUserSentry;
+module.exports = SteamUserMachineAuth;

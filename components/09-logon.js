@@ -14,12 +14,12 @@ const EMsg = require('../enums/EMsg.js');
 const EResult = require('../enums/EResult.js');
 
 const SteamUserBase = require('./00-base.js');
-const SteamUserSentry = require('./08-sentry.js');
+const SteamUserMachineAuth = require('./08-machineauth.js');
 
 const PROTOCOL_VERSION = 65580;
 const PRIVATE_IP_OBFUSCATION_MASK = 0xbaadf00d;
 
-class SteamUserLogon extends SteamUserSentry {
+class SteamUserLogon extends SteamUserMachineAuth {
 	logOn(details) {
 		// Delay the actual logon by one tick, so if users call logOn from the error event they won't get a crash because
 		// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted)
