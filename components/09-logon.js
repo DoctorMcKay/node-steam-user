@@ -210,8 +210,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				this._cmList = require('../resources/servers.json');
 			}
 
-			// Machine auth token
-			if (!anonLogin && !this._machineAuthToken) {
+			// Machine auth token (only necessary if logging on with account name and password)
+			if (!anonLogin && !this._machineAuthToken && this._logOnDetails.account_name) {
 				let tokenContent = await this._readFile(this._getMachineAuthFilename());
 				if (tokenContent) {
 					this._machineAuthToken = tokenContent.toString('utf8').trim();
