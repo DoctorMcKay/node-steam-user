@@ -3,10 +3,6 @@ const Crypto = require('crypto');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
-// steam-session dependencies
-const {LoginSession, EAuthTokenPlatformType, EAuthSessionGuardType} = require('steam-session');
-const CMAuthTransport = require('./classes/CMAuthTransport.js');
-
 const Helpers = require('./helpers.js');
 const Schema = require('../protobufs/generated/_load.js');
 const TCPConnection = require('./connection_protocols/tcp.js');
@@ -137,6 +133,11 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				this._logOnDetails.access_token = details.refreshToken;
 
 				this.emit('debug', `Provided refresh token has sub ${decodedToken.sub}, aud ${(decodedToken.aud || []).join(',')}`);
+
+				// After we log on, we should attempt to renew this refresh token if requested
+				if (this.options.renewRefreshTokens) {
+					this._shouldAttemptRefreshTokenRenewal = true;
+				}
 			}
 
 			let anonLogin = !this._logOnDetails.account_name && !this._logOnDetails.access_token;
@@ -327,8 +328,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		return new Promise(async (resolve) => {
 			this._send(EMsg.ClientHello, {protocol_version: PROTOCOL_VERSION});
 
-			let transport = new CMAuthTransport(this);
-			let session = new LoginSession(EAuthTokenPlatformType.SteamClient, {transport});
+			let session = this._getLoginSession();
 
 			session.on('debug', (...args) => {
 				this.emit('debug', '[steam-session] ' + args.map(arg => typeof arg == 'object' ? JSON.stringify(arg) : arg).join(' '));
@@ -348,15 +348,15 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				resolve(true);
 			});
 
-			session.on('error', (err) => {
+			session.on('error', async (err) => {
 				this.debug(`steam-session error: ${err.message}`);
-				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
+				await this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
 				resolve(false);
 			});
 
-			session.on('timeout', () => {
+			session.on('timeout', async () => {
 				this.debug('steam-session timeout');
-				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
+				await this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
 				resolve(false);
 			});
 
@@ -379,7 +379,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 
 				this.emit('debug', 'steam-session startWithCredentials exception', ex);
 
-				this._handleLogOnResponse({eresult: ex.eresult || EResult.ServiceUnavailable});
+				await this._handleLogOnResponse({eresult: ex.eresult || EResult.ServiceUnavailable});
 				return resolve(false);
 			}
 
@@ -399,7 +399,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 					logOnResponse.eresult = this._logOnDetails.two_factor_code ? EResult.TwoFactorCodeMismatch : EResult.AccountLoginDeniedNeedTwoFactor;
 				}
 
-				this._handleLogOnResponse(logOnResponse);
+				await this._handleLogOnResponse(logOnResponse);
 			}
 		});
 	}
@@ -629,7 +629,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		}
 	}
 
-	_handleLogOnResponse(body) {
+	async _handleLogOnResponse(body) {
 		this.emit('debug', `Handle logon response (${EResult[body.eresult]})`);
 
 		clearTimeout(this._logonMsgTimeout);
@@ -694,6 +694,27 @@ class SteamUserLogon extends SteamUserMachineAuth {
 					this._requestNotifications();
 
 					if (this._logOnDetails.access_token) {
+						// Even though we might have an access token available from password auth, the official client
+						// doesn't actually use this access token and rather immediately refreshes it. So let's delete
+						// our access token to match this behavior.
+						this._getLoginSession().accessToken = null;
+
+						if (this._shouldAttemptRefreshTokenRenewal) {
+							delete this._shouldAttemptRefreshTokenRenewal;
+
+							// Try to renew our refresh token. This will also handle the actual network request that
+							// fetches our web session cookie, and our subsequent call to webLogOn() will then return
+							// that cookie without making another request.
+							let session = this._getLoginSession();
+							session.refreshToken = this._logOnDetails.access_token;
+							let renewed = await session.renewRefreshToken();
+							this.emit('debug', `Attempted to renew refresh token, success = ${renewed}`);
+							if (renewed) {
+								this._logOnDetails.access_token = session.refreshToken;
+								this.emit('refreshToken', session.refreshToken);
+							}
+						}
+
 						// The new way of getting web cookies is to use a refresh token to get a fresh access token, which
 						// is what's used as the cookie. Confusingly, access_token in CMsgClientLogOn is actually a refresh token.
 						this.webLogOn();

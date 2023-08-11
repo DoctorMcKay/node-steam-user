@@ -6,7 +6,7 @@ class CMAuthTransport {
 	_user;
 
 	/**
-	 * @param {SteamUserLogon} steamUser
+	 * @param {SteamUserMessages} steamUser
 	 */
 	constructor(steamUser) {
 		this._user = steamUser;
