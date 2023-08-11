@@ -593,9 +593,9 @@ There are five ways to log onto Steam:
 #### Using Refresh Tokens
 
 The Steam client uses refresh tokens when logging on. You can obtain a refresh token using the
-[steam-session module](https://www.npmjs.com/package/steam-session), or you can log on to steam-user using your account
-name and password as normal, and steam-user will internally fetch a refresh token if it can
-(see [legacy authentication](#legacy-authentication)).
+[steam-session module](https://www.npmjs.com/package/steam-session), or you can log on to steam-user using your account name and password as normal. When
+logging on using your account name and password, steam-user will internally fetch a refresh token, emit the
+[`refreshToken`](#refreshtoken) event, and then use that token to log on to Steam.
 
 As of 2022-09-03, refresh tokens are JWTs that are valid for ~200 days. You can keep using the same refresh token to log
 on until it expires. You can find out when a token expires by [decoding it](https://www.npmjs.com/search?q=jwt) and checking
@@ -622,7 +622,7 @@ Logs you off of Steam and closes the connection.
 Logs you off of Steam and then immediately back on. This can only be used if one of the following criteria are met:
 
 - You're logged into an anonymous account
-- You're logged into an individual account, you logged in using an account name and password, and you didn't use [legacy authentication](#legacy-authentication)
+- You're logged into an individual account and you logged in using an account name and password
 - You're logged into an individual account and you used a `refreshToken` to log on
 
 Attempts to call this method under any other circumstance will result in an `Error` being thrown and nothing else will happen.
@@ -1887,6 +1887,8 @@ This may be emitted before [`loggedOn`](#loggedon) fires.
 
 ### refreshToken
 - `refreshToken` - A string containing your new refresh token
+
+**v5.0.0 or later is required to use this event**
 
 Emitted when a new refresh token is issued. This will always be emitted when logging on using an account name and password,
 and when logging on using an existing refresh token, this may be issued if a new refresh token is issued because your
