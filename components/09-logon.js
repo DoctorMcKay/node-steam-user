@@ -330,7 +330,9 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			let transport = new CMAuthTransport(this);
 			let session = new LoginSession(EAuthTokenPlatformType.SteamClient, {transport});
 
-			session.on('debug', (...args) => this.emit('debug', '[steam-session]', ...args));
+			session.on('debug', (...args) => {
+				this.emit('debug', '[steam-session] ' + args.map(arg => typeof arg == 'object' ? JSON.stringify(arg) : arg).join(' '));
+			});
 
 			session.on('authenticated', () => {
 				this._logOnDetails.access_token = session.refreshToken;
