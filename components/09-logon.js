@@ -19,7 +19,26 @@ const SteamUserMachineAuth = require('./08-machineauth.js');
 const PROTOCOL_VERSION = 65580;
 const PRIVATE_IP_OBFUSCATION_MASK = 0xbaadf00d;
 
+/**
+ * @typedef LogOnDetails
+ * @property {boolean} [anonymous=false]
+ * @property {string} [refreshToken]
+ * @property {string} [accountName]
+ * @property {string} [password]
+ * @property {string} [machineAuthToken]
+ * @property {string} [webLogonToken]
+ * @property {string|SteamID} [steamID]
+ * @property {String} [authCode]
+ * @property {string} [twoFactorCode]
+ * @property {number} [logonID]
+ * @property {string} [machineName]
+ * @property {number} [clientOS]
+ */
+
 class SteamUserLogon extends SteamUserMachineAuth {
+	/**
+	 * @param {LogOnDetails} details
+	 */
 	logOn(details) {
 		// Delay the actual logon by one tick, so if users call logOn from the error event they won't get a crash because
 		// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted)
