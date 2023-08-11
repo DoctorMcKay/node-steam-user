@@ -312,6 +312,16 @@ Added in 3.5.0.
 
 Defaults to `true`.
 
+### renewRefreshTokens
+
+If true, then `SteamUser` will attempt to renew your refresh token every time you call [`logOn()`](#logondetails) by
+passing a refresh token. If renewal succeeds, the [`refreshToken`](#refreshtoken) event will be emitted, and the refresh
+token you used to log on will become invalid.
+
+Added in 5.0.0.
+
+Defaults to `false`.
+
 # Properties [^](#contents)
 
 ### steamID
@@ -1893,8 +1903,8 @@ This may be emitted before [`loggedOn`](#loggedon) fires.
 **v5.0.0 or later is required to use this event**
 
 Emitted when a new refresh token is issued. This will always be emitted when logging on using an account name and password,
-and when logging on using an existing refresh token, this may be issued if a new refresh token is issued because your
-provided token is nearly expired.
+and when logging on using an existing refresh token, this may be emitted if a new refresh token is issued because your
+provided token is nearly expired (only if [`renewRefreshTokens`](#renewrefreshtokens) is set to true).
 
 This may be emitted before [`loggedOn`](#loggedon) fires.
 
