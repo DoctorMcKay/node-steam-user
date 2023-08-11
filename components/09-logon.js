@@ -335,6 +335,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			});
 
 			session.on('authenticated', () => {
+				this.emit('refreshToken', session.refreshToken);
+
 				this._logOnDetails.access_token = session.refreshToken;
 				this._logOnDetails._newAuthAccountName = this._logOnDetails.account_name;
 				this._logOnDetails._steamid = session.steamID;
