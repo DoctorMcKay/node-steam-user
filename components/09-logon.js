@@ -3,6 +3,10 @@ const Crypto = require('crypto');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
+// steam-session dependencies
+const {LoginSession, EAuthTokenPlatformType, EAuthSessionGuardType} = require('steam-session');
+const CMAuthTransport = require('./classes/CMAuthTransport.js');
+
 const Helpers = require('./helpers.js');
 const Schema = require('../protobufs/generated/_load.js');
 const TCPConnection = require('./connection_protocols/tcp.js');
@@ -296,20 +300,15 @@ class SteamUserLogon extends SteamUserMachineAuth {
 	 * @private
 	 */
 	async _sendLogOn() {
-		// If we're logging in with account name/password and we're running node 12.22 or later,
-		// go ahead and get a refresh token.
 		if (this._logOnDetails.account_name && this._logOnDetails.password) {
-			if (Helpers.newAuthCapable()) {
-				this.emit('debug', 'Node version is new enough for steam-session; performing new auth');
-				let startTime = Date.now();
-				let newAuthSucceeded = await this._performNewAuth();
-				if (!newAuthSucceeded) {
-					return;
-				} else {
-					this.emit('debug', `New auth succeeded in ${Date.now() - startTime} ms`);
-				}
+			this.emit('debug', 'Logging on with account name and password; fetching a new refresh token');
+			let startTime = Date.now();
+			let authSuccess = await this._performPasswordAuth();
+			if (!authSuccess) {
+				// We would have already emitted 'error' so let's just bail now
+				return;
 			} else {
-				this._warn('Logging onto Steam using legacy authentication. steam-user may not behave as expected. To remove this warning, log on using a refresh token or upgrade Node.js to 12.22.0 or later.');
+				this.emit('debug', `Password auth succeeded in ${Date.now() - startTime} ms`);
 			}
 		}
 
@@ -324,13 +323,9 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		this._send(this._logOnDetails.game_server_token ? EMsg.ClientLogonGameServer : EMsg.ClientLogon, this._logOnDetails);
 	}
 
-	_performNewAuth() {
+	_performPasswordAuth() {
 		return new Promise(async (resolve) => {
 			this._send(EMsg.ClientHello, {protocol_version: PROTOCOL_VERSION});
-
-			// import this here to prevent issues on older versions of node
-			const {LoginSession, EAuthTokenPlatformType, EAuthSessionGuardType} = require('steam-session');
-			const CMAuthTransport = require('./classes/CMAuthTransport.js');
 
 			let transport = new CMAuthTransport(this);
 			let session = new LoginSession(EAuthTokenPlatformType.SteamClient, {transport});
@@ -694,7 +689,9 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 					this._requestNotifications();
 
-					if (Helpers.newAuthCapable() && this._logOnDetails.access_token) {
+					if (this._logOnDetails.access_token) {
+						// The new way of getting web cookies is to use a refresh token to get a fresh access token, which
+						// is what's used as the cookie. Confusingly, access_token in CMsgClientLogOn is actually a refresh token.
 						this.webLogOn();
 					} else if (body.webapi_authenticate_user_nonce) {
 						this._webAuthenticate(body.webapi_authenticate_user_nonce);
