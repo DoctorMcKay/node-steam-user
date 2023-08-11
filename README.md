@@ -1879,6 +1879,8 @@ directly, without Steam sending a LoggedOff message.
 ### machineAuthToken
 - `machineAuthToken` - A string containing your new machine auth token
 
+**v4.29.0 or later is required to use this event**
+
 Emitted when a new machine auth token is issued. This is only relevant for accounts using email Steam Guard. Even if you
 are using email Steam Guard, you likely don't need to worry about this event as steam-user will [automatically manage
 your machine auth tokens for you](#machine-auth-tokens).
