@@ -1802,7 +1802,8 @@ data which only the developer/publisher of the game can do anything with.
 
 ## ID Events
 
-Events marked as **ID events** are special. They all have a `SteamID` object as their first parameter. In addition to the event itself firing, a second event comprised of `eventName + "#" + steamID.getSteamID64()` is fired.
+Events marked as **ID events** are special. They all have a `SteamID` object as their first parameter. In addition to the
+event itself firing, a second event comprised of `eventName + "#" + steamID.getSteamID64()` is fired.
 
 For example:
 
@@ -1881,6 +1882,15 @@ directly, without Steam sending a LoggedOff message.
 Emitted when a new machine auth token is issued. This is only relevant for accounts using email Steam Guard. Even if you
 are using email Steam Guard, you likely don't need to worry about this event as steam-user will [automatically manage
 your machine auth tokens for you](#machine-auth-tokens).
+
+This may be emitted before [`loggedOn`](#loggedon) fires.
+
+### refreshToken
+- `refreshToken` - A string containing your new refresh token
+
+Emitted when a new refresh token is issued. This will always be emitted when logging on using an account name and password,
+and when logging on using an existing refresh token, this may be issued if a new refresh token is issued because your
+provided token is nearly expired.
 
 This may be emitted before [`loggedOn`](#loggedon) fires.
 
