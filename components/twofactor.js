@@ -10,7 +10,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 	 * @return {Promise}
 	 */
 	enableTwoFactor(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(15000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 15000, null, callback, (resolve, reject) => {
 			this._sendUnified('TwoFactor.AddAuthenticator#1', {
 				steamid: this.steamID.getSteamID64(),
 				authenticator_time: Math.floor(Date.now() / 1000),
@@ -47,7 +47,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 		let diff = 0;
 
 		let self = this;
-		return StdLib.Promises.timeoutCallbackPromise(15000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 15000, null, callback, (resolve, reject) => {
 			SteamTotp.getTimeOffset((err, offset, latency) => {
 				if (err) {
 					return reject(err);

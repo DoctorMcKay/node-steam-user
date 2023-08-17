@@ -30,7 +30,7 @@ class SteamUserCDN extends SteamUserApps {
 			appid = null;
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, async (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['servers'], callback, async (resolve, reject) => {
 			let res;
 			if (this._contentServerCache && this._contentServerCache.timestamp && Date.now() - this._contentServerCache.timestamp < (1000 * 60 * 60)) {
 				// Cache for 1 hour
@@ -108,7 +108,7 @@ class SteamUserCDN extends SteamUserApps {
 		appID = parseInt(appID, 10);
 		depotID = parseInt(depotID, 10);
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['key'], callback, async (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['key'], callback, async (resolve, reject) => {
 			// Check if it's cached locally
 			let filename = `depot_key_${appID}_${depotID}.bin`;
 			let file = await this._readFile(filename);
@@ -147,7 +147,7 @@ class SteamUserCDN extends SteamUserApps {
 	 * @return Promise
 	 */
 	getCDNAuthToken(appID, depotID, hostname, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['token', 'expires'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['token', 'expires'], callback, (resolve, reject) => {
 			if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
 				return resolve(this._contentServerTokens[depotID + '_' + hostname]);
 			}
@@ -199,7 +199,7 @@ class SteamUserCDN extends SteamUserApps {
 			branchPassword = null;
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['manifest'], callback, async (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['manifest'], callback, async (resolve, reject) => {
 			let manifest = ContentManifest.parse((await this.getRawManifest(appID, depotID, manifestID, branchName, branchPassword)).manifest);
 
 			if (!manifest.filenames_encrypted) {
@@ -289,7 +289,7 @@ class SteamUserCDN extends SteamUserApps {
 			branchPassword = null;
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			this._sendUnified('ContentServerDirectory.GetManifestRequestCode#1', {
 				app_id: appID,
 				depot_id: depotID,
@@ -551,7 +551,7 @@ class SteamUserCDN extends SteamUserApps {
 	 * @return Promise
 	 */
 	getAppBetaDecryptionKeys(appID, password, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['keys'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['keys'], callback, (resolve, reject) => {
 			this._send(EMsg.ClientCheckAppBetaPassword, {
 				app_id: appID,
 				betapassword: password

@@ -5,6 +5,7 @@ const EMachineIDType = require('./EMachineIDType.js');
  * @typedef {object} OptionsObject
  * @property {string|null} [dataDirectory]
  * @property {boolean} [autoRelogin=true]
+ * @property {number|null} [maxTimeout=null]
  * @property {EMachineIDType} [machineIdType]
  * @property {string[]} [machineIdFormat]
  * @property {boolean} [enablePicsCache=false]
@@ -37,5 +38,6 @@ module.exports = {
 	protocol: EConnectionProtocol.Auto,
 	language: 'english',
 	webCompatibilityMode: false,
-	saveAppTickets: true
+	saveAppTickets: true,
+	maxTimeout: null
 };

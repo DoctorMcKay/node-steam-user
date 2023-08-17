@@ -15,7 +15,7 @@ class SteamUserPublishedFiles extends SteamUserNotifications {
 			ids = [ids];
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['files'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['files'], callback, (resolve, reject) => {
 			this._sendUnified('PublishedFile.GetDetails#1', {
 				publishedfileids: ids,
 				includetags: true,

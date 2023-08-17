@@ -74,7 +74,7 @@ class SteamUserGameServers extends SteamUserGameCoordinator {
 	 * @param {function} [callback]
 	 */
 	getServerSteamIDsByIP(ips, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['servers'], callback, (resolve, reject) => {
 			this._sendUnified('GameServers.GetServerSteamIDsByIP#1', {
 				server_ips: ips
 			}, (body) => {
@@ -96,7 +96,7 @@ class SteamUserGameServers extends SteamUserGameCoordinator {
 	 * @return {Promise}
 	 */
 	getServerIPsBySteamID(steamids, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['servers'], callback, (resolve, reject) => {
 			steamids = steamids.map(Helpers.steamID);
 
 			this._sendUnified('GameServers.GetServerIPsBySteamID#1', {

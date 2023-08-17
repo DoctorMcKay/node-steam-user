@@ -107,7 +107,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	kickPlayingSession(callback) {
 		return StdLib.Promises.callbackPromise([], callback, true, (resolve, reject) => {
 			this._send(EMsg.ClientKickPlayingSession, {});
-			Helpers.onceTimeout(10000, this, 'playingState', (err, blocked, playingApp) => {
+			Helpers.onceTimeout(this.options.maxTimeout || 10000, this, 'playingState', (err, blocked, playingApp) => {
 				if (err) {
 					return reject(err);
 				} else if (blocked) {
@@ -126,7 +126,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * @returns {Promise<{playerCount: number}>}
 	 */
 	getPlayerCount(appid, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['playerCount'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['playerCount'], callback, (resolve, reject) => {
 			this._send(EMsg.ClientGetNumberOfCurrentPlayersDP, {appid}, (body) => {
 				let err = Helpers.eresultError(body.eresult);
 				if (err) {
@@ -146,7 +146,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	 */
 	getProductChanges(sinceChangenumber, callback) {
 		let args = ['currentChangeNumber', 'appChanges', 'packageChanges'];
-		return StdLib.Promises.timeoutCallbackPromise(10000, args, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, args, callback, (resolve, reject) => {
 			this._send(EMsg.ClientPICSChangesSinceRequest, {
 				since_change_number: sinceChangenumber,
 				send_app_info_changes: true,
@@ -407,7 +407,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	 */
 	getProductAccessToken(apps, packages, callback) {
 		let args = ['appTokens', 'packageTokens', 'appDeniedTokens', 'packageDeniedTokens'];
-		return StdLib.Promises.timeoutCallbackPromise(10000, args, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, args, callback, (resolve, reject) => {
 			this._send(EMsg.ClientPICSAccessTokenRequest, {
 				packageids: packages,
 				appids: apps
@@ -923,7 +923,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			appIDs = [appIDs];
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['grantedPackageIds', 'grantedAppIds'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['grantedPackageIds', 'grantedAppIds'], callback, (resolve, reject) => {
 			this._send(EMsg.ClientRequestFreeLicense, {appids: appIDs}, (body) => {
 				if (body.eresult != EResult.OK) {
 					reject(Helpers.eresultError(body.eresult));
@@ -944,7 +944,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * @returns {Promise<{key: string}>}
 	 */
 	getLegacyGameKey(appid, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			let request = Buffer.alloc(4);
 			request.writeUInt32LE(appid);
 			this._send(EMsg.ClientGetLegacyGameKey, request, (body) => {

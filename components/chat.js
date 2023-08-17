@@ -90,7 +90,7 @@ class SteamUserChat extends SteamUserCDN {
 			 * @param {string} messages[].message - The message that was sent
 			 * @param {bool} messages[].unread - true if it was an unread offline message, false if just a history message
 			 */
-			Helpers.onceTimeout(10000, this, 'chatHistory#' + sid64, (err, steamID, success, messages) => {
+			Helpers.onceTimeout(this.options.maxTimeout || 10000, this, 'chatHistory#' + sid64, (err, steamID, success, messages) => {
 				err = err || Helpers.eresultError(success);
 				if (err) {
 					return reject(err);
@@ -115,7 +115,7 @@ class SteamUserChat extends SteamUserCDN {
 			msg.writeUint8(0); // isVoiceSpeaker
 			this._send(EMsg.ClientJoinChat, msg.flip());
 
-			Helpers.onceTimeout(10000, this, 'chatEnter#' + Helpers.steamID(steamID).getSteamID64(), (err, chatID, result) => {
+			Helpers.onceTimeout(this.options.maxTimeout || 10000, this, 'chatEnter#' + Helpers.steamID(steamID).getSteamID64(), (err, chatID, result) => {
 				err = err || Helpers.eresultError(result);
 				if (err) {
 					return reject(err);
@@ -292,7 +292,7 @@ class SteamUserChat extends SteamUserCDN {
 			 * @param {Error|null} err - The result of the creation request
 			 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
 			 */
-			Helpers.onceTimeout(10000, this, 'chatCreated#' + convertUserID.getSteamID64(), (err, convertUserID, result, chatID) => {
+			Helpers.onceTimeout(this.options.maxTimeout || 10000, this, 'chatCreated#' + convertUserID.getSteamID64(), (err, convertUserID, result, chatID) => {
 				err = err || Helpers.eresultError(result || EResult.OK);
 				if (err) {
 					return reject(err);

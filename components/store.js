@@ -11,7 +11,7 @@ class SteamUserStore extends SteamUserPubFiles {
 	 * @return {Promise}
 	 */
 	getStoreTagNames(language, tagIDs, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['tags'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['tags'], callback, (resolve, reject) => {
 			this._sendUnified('Store.GetLocalizedNameForTags#1', {language, tagids: tagIDs}, (body) => {
 				if (body.tags.length == 0) {
 					return reject(new Error('Unable to get tag data; is your language correct?'));

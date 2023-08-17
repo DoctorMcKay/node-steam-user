@@ -15,7 +15,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 	 * @returns {Promise}
 	 */
 	addAuthorizedBorrowers(borrowersSteamID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(5000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 5000, null, callback, true, (resolve, reject) => {
 			if (!Array.isArray(borrowersSteamID)) {
 				borrowersSteamID = [borrowersSteamID];
 			}
@@ -37,7 +37,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 	 * @returns {Promise}
 	 */
 	removeAuthorizedBorrowers(borrowersSteamID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(5000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 5000, null, callback, true, (resolve, reject) => {
 			if (!Array.isArray(borrowersSteamID)) {
 				return reject(new Error('The \'borrowersSteamID\' argument must be an array'));
 			}
@@ -59,7 +59,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 	 * @returns {Promise}
 	 */
 	getAuthorizedBorrowers(options, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(5000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 5000, null, callback, (resolve, reject) => {
 			if (typeof options == 'function') {
 				callback = options;
 			}
@@ -100,7 +100,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 
 		options = options || {};
 
-		return StdLib.Promises.timeoutCallbackPromise(5000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 5000, null, callback, (resolve, reject) => {
 			this._sendUnified('DeviceAuth.GetOwnAuthorizedDevices#1', {
 				steamid: this.steamID.getSteamID64(),
 				includeCancelled: !!options.includeCanceled
@@ -131,7 +131,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 	 * @returns {Promise}
 	 */
 	authorizeLocalSharingDevice(deviceName, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(5000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 5000, null, callback, true, (resolve, reject) => {
 			if (!deviceName) {
 				return reject(new Error('The \'deviceName\' argument is required.'));
 			}
@@ -152,7 +152,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 	 * @param {function} [callback]
 	 */
 	deauthorizeSharingDevice(deviceToken, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(5000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 5000, null, callback, true, (resolve, reject) => {
 			if (typeof deviceToken == 'object' && typeof deviceToken.deviceToken == 'string') {
 				deviceToken = deviceToken.deviceToken;
 			}

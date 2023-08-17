@@ -81,7 +81,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @param {function} [callback] - Optional. Called with `err` and `name` parameters on completion.
 	 */
 	addFriend(steamID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['personaName'], callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['personaName'], callback, true, (resolve, reject) => {
 			this._send(EMsg.ClientAddFriend, {steamid_to_add: Helpers.steamID(steamID).getSteamID64()}, (body) => {
 				if (body.eresult != EResult.OK) {
 					return reject(Helpers.eresultError(body.eresult));
@@ -113,7 +113,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	blockUser(steamID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			if (typeof steamID === 'string') {
 				steamID = new SteamID(steamID);
 			}
@@ -138,7 +138,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	unblockUser(steamID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			if (typeof steamID === 'string') {
 				steamID = new SteamID(steamID);
 			}
@@ -170,7 +170,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 
 		options = options || {};
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
 			this._sendUnified('UserAccount.CreateFriendInviteToken#1', {
 				// Accept both camelCase and snake_case for backwards compatibility
 				invite_limit: options.inviteLimit || options.invite_limit || 1,
@@ -194,7 +194,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {Promise}
 	 */
 	listQuickInviteLinks(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
 			this._sendUnified("UserAccount.GetFriendInviteTokens#1", {}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
@@ -214,7 +214,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {Promise}
 	 */
 	revokeQuickInviteLink(linkOrToken, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			if (linkOrToken.includes('/')) {
 				// It's a link
 				let parts = linkOrToken.split('/');
@@ -257,7 +257,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {Promise<{valid: boolean, steamid: SteamID, invite_duration?: int}>}
 	 */
 	checkQuickInviteLinkValidity(link, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
 			let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
 			if (!match) {
 				return reject(new Error('Malformed quick-invite link'));
@@ -289,7 +289,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {Promise}
 	 */
 	redeemQuickInviteLink(link, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
 			if (!match) {
 				return reject(new Error('Malformed quick-invite link'));
@@ -320,7 +320,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	getPersonas(steamids, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['personas'], callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['personas'], callback, true, (resolve, reject) => {
 			const Flags = EClientPersonaStateFlag;
 			let flags = Flags.Status | Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
 				Flags.Metadata | Flags.LastSeen | Flags.UserClanRank | Flags.GameExtraInfo | Flags.GameDataBlob |
@@ -343,7 +343,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 			let output = {};
 
 			ids.forEach((id) => {
-				Helpers.onceTimeout(10000, this, 'user#' + id, receive);
+				Helpers.onceTimeout(this.options.maxTimeout || 10000, this, 'user#' + id, receive);
 			});
 
 			function receive(err, sid, user) {
@@ -373,7 +373,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	getSteamLevels(steamids, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['users'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['users'], callback, (resolve, reject) => {
 			let accountids = steamids.map((steamID) => {
 				if (typeof steamID === 'string') {
 					return (new SteamID(steamID)).accountid;
@@ -407,7 +407,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {Promise}
 	 */
 	getGameBadgeLevel(appid, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['steamLevel', 'regularBadgeLevel', 'foilBadgeLevel'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['steamLevel', 'regularBadgeLevel', 'foilBadgeLevel'], callback, (resolve, reject) => {
 			this._sendUnified('Player.GetGameBadgeLevels#1', {appid}, (body) => {
 				let regular = 0;
 				let foil = 0;
@@ -470,7 +470,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	createFriendsGroup(groupName, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['groupID'], callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['groupID'], callback, true, (resolve, reject) => {
 			this._send(EMsg.AMClientCreateFriendsGroup, {
 				groupname: groupName
 			}, (body) => {
@@ -495,7 +495,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	deleteFriendsGroup(groupID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			this._send(EMsg.AMClientDeleteFriendsGroup, {
 				groupid: groupID
 			}, (body) => {
@@ -518,7 +518,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	renameFriendsGroup(groupID, newName, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			this._send(EMsg.AMClientRenameFriendsGroup, {
 				groupid: groupID,
 				groupname: newName
@@ -542,7 +542,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	addFriendToGroup(groupID, userSteamID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			let sid = Helpers.steamID(userSteamID);
 
 			this._send(EMsg.AMClientAddFriendToGroup, {
@@ -568,7 +568,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	removeFriendFromGroup(groupID, userSteamID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			let sid = Helpers.steamID(userSteamID);
 
 			this._send(EMsg.AMClientRemoveFriendFromGroup, {
@@ -599,7 +599,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	getAliases(userSteamIDs, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['users'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['users'], callback, (resolve, reject) => {
 			if (!(userSteamIDs instanceof Array)) {
 				userSteamIDs = [userSteamIDs];
 			}
@@ -638,7 +638,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	setNickname(steamID, nickname, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			steamID = Helpers.steamID(steamID);
 			this._send(EMsg.AMClientSetPlayerNickname, {
 				steamid: steamID.toString(),
@@ -666,7 +666,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @return {Promise}
 	 */
 	getNicknames(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['nicknames'], callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['nicknames'], callback, true, (resolve, reject) => {
 			this._sendUnified('Player.GetNicknameList#1', {}, (body) => {
 				let nicks = {};
 				body.nicknames.forEach(player => nicks[SteamID.fromIndividualAccountID(player.accountid).getSteamID64()] = player.nickname);
@@ -687,7 +687,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {Promise}
 	 */
 	getAppRichPresenceLocalization(appID, language, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			let cacheKey = `${appID}_${language}`;
 			let cache = this._richPresenceLocalization[cacheKey];
 			if (cache && Date.now() - cache.timestamp < (1000 * 60 * 60)) {
@@ -787,7 +787,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 			language = null;
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			this._send({
 				// Header
 				msg: EMsg.ClientRichPresenceRequest,
@@ -840,7 +840,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 
 		options = options || {};
 
-		return new StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		return new StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
 			steamID = Helpers.steamID(steamID);
 			this._sendUnified('Player.GetOwnedGames#1', {
 				steamid: steamID.toString(),
@@ -881,7 +881,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {Promise}
 	 */
 	getFriendsThatPlay(appID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			let buf = ByteBuffer.allocate(8, ByteBuffer.LITTLE_ENDIAN);
 			buf.writeUint64(appID);
 			this._send(EMsg.ClientGetFriendsWhoPlayGame, buf.flip(), (body) => {

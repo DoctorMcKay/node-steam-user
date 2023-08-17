@@ -11,7 +11,7 @@ const SteamUserLogon = require('./09-logon.js');
 
 class SteamUserAccount extends SteamUserLogon {
 	requestValidationEmail(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			let body = Buffer.alloc(1, 0x0); // pre-fills with 0x0
 			this._send(EMsg.ClientRequestValidationMail, body, (response) => {
 				let err = Helpers.eresultError(response.readUint32());
@@ -30,7 +30,7 @@ class SteamUserAccount extends SteamUserLogon {
 			'isPhoneVerified'
 		];
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, callbackArgs, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, callbackArgs, callback, (resolve, reject) => {
 			this._sendUnified('Credentials.GetSteamGuardDetails#1', {}, (body) => {
 				let res = {};
 
@@ -70,7 +70,7 @@ class SteamUserAccount extends SteamUserLogon {
 			'timestampLastEmailChange'
 		];
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, callbackArgs, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, callbackArgs, callback, (resolve, reject) => {
 			this._sendUnified('Credentials.GetCredentialChangeTimeDetails#1', {}, (body) => {
 				resolve({
 					timestampLastPasswordChange: body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
@@ -82,7 +82,7 @@ class SteamUserAccount extends SteamUserLogon {
 	}
 
 	getAuthSecret(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['secretID', 'key'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['secretID', 'key'], callback, (resolve, reject) => {
 			this._sendUnified('Credentials.GetAccountAuthSecret#1', {}, (body) => {
 				resolve({
 					secretID: body.secret_id,
@@ -98,7 +98,7 @@ class SteamUserAccount extends SteamUserLogon {
 	 * @returns {Promise<{privacy_state: int, privacy_state_inventory: int, privacy_state_gifts: int, privacy_state_ownedgames: int, privacy_state_playtime: int, privacy_state_friendslist: int}>}
 	 */
 	getPrivacySettings(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			this._sendUnified("Player.GetPrivacySettings#1", {}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {

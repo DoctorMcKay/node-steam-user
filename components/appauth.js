@@ -26,7 +26,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 			userData = Buffer.alloc(0);
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['encryptedAppTicket'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['encryptedAppTicket'], callback, (resolve, reject) => {
 			this._send(EMsg.ClientRequestEncryptedAppTicket, {
 				"app_id": appid,
 				"userdata": userData
@@ -131,14 +131,14 @@ class SteamUserAppAuth extends SteamUserAccount {
 				if (this._gcTokens.length > 0) {
 					buildToken();
 				} else {
-					Helpers.onceTimeout(10000, this, '_gcTokens', buildToken);
+					Helpers.onceTimeout(this.options.maxTimeout || 10000, this, '_gcTokens', buildToken);
 				}
 			});
 		});
 	}
 
 	getAppOwnershipTicket(appid, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['appOwnershipTicket'], callback, async (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['appOwnershipTicket'], callback, async (resolve, reject) => {
 			// See if we have one saved
 			let filename = `appOwnershipTicket_${this.steamID}_${appid}.bin`;
 			let file = await this._readFile(filename);
@@ -176,7 +176,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 			tickets = [tickets];
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, async (resolve, reject) => {
 			tickets.forEach((ticket, idx) => {
 				if (ticket instanceof Buffer) {
 					ticket = AppTicket.parseAppTicket(ticket);
@@ -253,7 +253,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 			gcTokens = [gcTokens];
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, async (resolve) => {
 			let matchingTickets = this._activeAuthTickets.filter(tkt => tkt.steamid == 0 && tkt.gameid == appid);
 			if (gcTokens) {
 				matchingTickets = matchingTickets.filter((tkt) => {
@@ -298,7 +298,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 			steamIDs = [steamIDs];
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, async (resolve) => {
 			let matchingTickets = this._activeAuthTickets.filter(tkt => tkt.gameid == appid && tkt.steamid != 0);
 			if (steamIDs) {
 				steamIDs = steamIDs.map(Helpers.steamID).map(sid => sid.getSteamID64());
@@ -337,7 +337,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 	}
 
 	_sendAuthList(forceAppId) {
-		return StdLib.Promises.timeoutPromise(10000, (resolve) => {
+		return StdLib.Promises.timeoutPromise(this.options.maxTimeout || 10000, (resolve) => {
 			let uniqueAppIds = this._activeAuthTickets.map(tkt => tkt.gameid).filter((appid, idx, arr) => arr.indexOf(appid) == idx);
 			if (forceAppId && !uniqueAppIds.includes(forceAppId)) {
 				uniqueAppIds.push(forceAppId);

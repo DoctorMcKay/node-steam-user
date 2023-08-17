@@ -312,6 +312,12 @@ Added in 3.5.0.
 
 Defaults to `true`.
 
+### maxTimeout
+
+Define a maximum timeout value for requests.
+
+Defaults to `null`.
+
 # Properties [^](#contents)
 
 ### steamID

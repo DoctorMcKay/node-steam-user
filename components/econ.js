@@ -14,7 +14,7 @@ class SteamUserEcon extends SteamUserChat {
 	 * @returns {Promise}
 	 */
 	getAssetClassInfo(language, appid, classes, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['descriptions'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, ['descriptions'], callback, (resolve, reject) => {
 			this._sendUnified('Econ.GetAssetClassInfo#1', {language, appid, classes}, (body) => {
 				resolve({descriptions: body.descriptions});
 			});
@@ -27,7 +27,7 @@ class SteamUserEcon extends SteamUserChat {
 	 * @returns {Promise}
 	 */
 	getTradeURL(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			this._sendUnified('Econ.GetTradeOfferAccessToken#1', {}, (body) => {
 				resolve({
 					"token": body.trade_offer_access_token,
@@ -43,7 +43,7 @@ class SteamUserEcon extends SteamUserChat {
 	 * @returns {Promise}
 	 */
 	changeTradeURL(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			this._sendUnified("Econ.GetTradeOfferAccessToken#1", {"generate_new_token": true}, (body) => {
 				resolve({
 					token: body.trade_offer_access_token,
@@ -59,7 +59,7 @@ class SteamUserEcon extends SteamUserChat {
 	 * @returns {Promise}
 	 */
 	getEmoticonList(callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, (resolve, reject) => {
 			this._sendUnified('Player.GetEmoticonList#1', {}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
@@ -98,7 +98,7 @@ class SteamUserEcon extends SteamUserChat {
 
 		options = options || {};
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
 			this._sendUnified('Player.GetProfileItemsOwned#1', {language: options.language || 'english'}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
@@ -131,7 +131,7 @@ class SteamUserEcon extends SteamUserChat {
 
 		options = options || {};
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
 			steamID = Helpers.steamID(steamID);
 
 			this._sendUnified('Player.GetProfileItemsEquipped#1', {
@@ -158,7 +158,7 @@ class SteamUserEcon extends SteamUserChat {
 	 * @param {function} [callback]
 	 */
 	setProfileBackground(backgroundAssetID, callback) {
-		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, true, (resolve, reject) => {
 			this._sendUnified('Player.SetProfileBackground#1', {communityitemid: backgroundAssetID}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
