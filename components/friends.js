@@ -840,7 +840,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 
 		options = options || {};
 
-		return new StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(this.options.maxTimeout || 10000, null, callback, false, (resolve, reject) => {
 			steamID = Helpers.steamID(steamID);
 			this._sendUnified('Player.GetOwnedGames#1', {
 				steamid: steamID.toString(),
