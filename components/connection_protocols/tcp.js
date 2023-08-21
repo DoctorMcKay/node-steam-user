@@ -16,7 +16,7 @@ class TCPConnection extends BaseConnection {
 	constructor(user) {
 		super(user);
 
-		this.maxTimeout = user.options.maxTimeout;
+		this.maxTimeout = user.options.maxTimeout || 10000;
 		this.connectionType = 'TCP';
 		this.sessionKey = null;
 
