@@ -367,13 +367,13 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				// communicate with Steam. Errors for invalid credentials are handled elsewhere, so we only need to
 				// emit ServiceUnavailable here since this should be a transient error.
 
-				this._debug(`steam-session error: ${err.message}`);
+				this.emit('debug', `steam-session error: ${err.message}`);
 				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
 				resolve(false);
 			});
 
 			session.on('timeout', () => {
-				this._debug('steam-session timeout');
+				this.emit('debug', 'steam-session timeout');
 				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
 				resolve(false);
 			});
