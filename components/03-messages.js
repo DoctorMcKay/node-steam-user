@@ -9,6 +9,10 @@ const Schema = require('../protobufs/generated/_load.js');
 const EMsg = require('../enums/EMsg.js');
 const EResult = require('../enums/EResult.js');
 
+// steam-session dependencies
+const {LoginSession, EAuthTokenPlatformType} = require('steam-session');
+const CMAuthTransport = require('./classes/CMAuthTransport');
+
 const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
 
@@ -729,6 +733,16 @@ class SteamUserMessages extends SteamUserConnection {
 		};
 
 		this._send(header, SteamUserMessages._encodeProto(Proto, methodData), callback);
+	}
+
+	_getLoginSession() {
+		if (!this._loginSession) {
+			this._loginSession = new LoginSession(EAuthTokenPlatformType.SteamClient, {
+				transport: new CMAuthTransport(this)
+			});
+		}
+
+		return this._loginSession;
 	}
 }
 

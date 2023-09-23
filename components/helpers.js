@@ -254,8 +254,3 @@ exports.decodeJwt = function(jwt) {
 
 	return JSON.parse(Buffer.from(standardBase64, 'base64').toString('utf8'));
 }
-
-exports.newAuthCapable = function() {
-	let nodeVersion = process.versions.node.split('.');
-	return nodeVersion[0] > 12 || (nodeVersion[0] == 12 && nodeVersion[1] >= 22);
-};

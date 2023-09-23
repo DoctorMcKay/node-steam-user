@@ -132,9 +132,9 @@ class SteamUser extends SteamUserTwoFactor {
 		this._incomingMessageQueue = [];
 		this._useMessageQueue = false; // we only use the message queue while we're processing a multi message
 
-		if (!this._machineAuthTokenSetByDeprecatedSetSentry) {
-			delete this._machineAuthToken;
-		}
+		delete this._machineAuthToken;
+		delete this._shouldAttemptRefreshTokenRenewal;
+		delete this._loginSession;
 	}
 
 	get packageName() {

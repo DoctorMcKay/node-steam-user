@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@bbob/parser": "^2.2.0",
-		"@doctormckay/stdlib": "^1.16.0",
+		"@doctormckay/stdlib": "^2.7.1",
 		"@doctormckay/steam-crypto": "^1.2.0",
 		"adm-zip": "^0.5.10",
 		"binarykvparser": "^2.2.0",
@@ -31,13 +31,13 @@
 		"file-manager": "^2.0.0",
 		"kvparser": "^1.0.1",
 		"lzma": "^2.3.2",
-		"protobufjs": "^6.11.3",
+		"protobufjs": "^7.2.4",
 		"socks-proxy-agent": "^7.0.0",
 		"steam-appticket": "^1.0.1",
-		"steam-session": "^1.3.3",
+		"steam-session": "^1.3.4",
 		"steam-totp": "^2.0.1",
-		"steamid": "^1.1.0",
-		"websocket13": "^3.0.1"
+		"steamid": "^2.0.0",
+		"websocket13": "^4.0.0"
 	},
 	"devDependencies": {
 		"steamcommunity": "^3.39.0",
@@ -49,6 +49,6 @@
 		"generate-protos": "node scripts/generate-protos.js"
 	},
 	"engines": {
-		"node": ">=8.0.0"
+		"node": ">=14.0.0"
 	}
 }

@@ -312,6 +312,16 @@ Added in 3.5.0.
 
 Defaults to `true`.
 
+### renewRefreshTokens
+
+If true, then `SteamUser` will attempt to renew your refresh token every time you call [`logOn()`](#logondetails) by
+passing a refresh token. If renewal succeeds, the [`refreshToken`](#refreshtoken) event will be emitted, and the refresh
+token you used to log on will become invalid.
+
+Added in 5.0.0.
+
+Defaults to `false`.
+
 # Properties [^](#contents)
 
 ### steamID
@@ -508,29 +518,19 @@ Changes the value of an [option](#options-).
 ### setOptions(options)
 - `options` - An object containing zero or more [options](#options-).
 
-### setSentry(sentry)
-- `sentry` - A Buffer or string containing your machine auth token
-
-**THIS IS DEPRECATED AND WILL BE REMOVED IN THE NEXT MAJOR RELEASE.**
-
-This is retained exclusively for backwards compatibility. You should use the `machineAuthToken` property in `logOn()`
-instead.
-
 ### logOn([details])
 - `details` - An object containing details for this logon
 	- `anonymous` - Pass `true` if you want to log into an anonymous account, omit or pass `false` if not
 	- `refreshToken` - A refresh token, [see below](#using-refresh-tokens)
 	- `accountName` - If logging into a user account, the account's name
-	- `password` - If logging into an account without a login key or a web logon token, the account's password
+	- `password` - If logging into an account without a refresh token or web logon token, the account's password
     - `machineAuthToken` - If logging into an account that has email Steam Guard using the account name and password,
        pass a valid machine auth token to avoid needing to provide an `authCode`. This is only necessary in advanced cases,
        as steam-user [will take care of this for you by default](#machine-auth-tokens)
-	- `loginKey` - If logging into an account with a login key, this is the account's login key **\[[DEPRECATED](#login-key-deprecation)\]**
 	- `webLogonToken` - If logging into an account with a [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback), this is the token
 	- `steamID` - If logging into an account with a client logon token obtained from the web, this is your account's SteamID, as a string or a `SteamID` object
 	- `authCode` - If you have a Steam Guard email code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
 	- `twoFactorCode` - If you have a Steam Guard mobile two-factor authentication code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
-	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 	- `logonID` - A 32-bit integer to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfuscated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `SteamUser.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 		- As of v4.13.0, this can also be an IPv4 address as a string, in dotted-decimal notation (e.g. `"192.168.1.5"`)
 	- `machineName` - A string containing the name of this machine that you want to report to Steam. This will be displayed on steamcommunity.com when you view your games list (when logged in).
@@ -568,11 +568,9 @@ There are five ways to log onto Steam:
         - `accountName`
         - `password`
         - `machineAuthToken`
-        - `loginKey`
         - `webLogonToken`
         - `authCode`
         - `twoFactorCode`
-        - `rememberPassword`
 - Individually using account name and password
 	- These properties are required:
 		- `accountName`
@@ -581,28 +579,10 @@ There are five ways to log onto Steam:
         - `machineAuthToken` - Specify if you are logged into an account with email Steam Guard and you have a valid machien token
 		- `authCode` - Specify if you are using an email Steam Guard code.
 		- `twoFactorCode` - Specify if you are using a TOTP two-factor code (required if your account has 2FA enabled).
-		- `rememberPassword` - Specify if you want to get a login key for subsequent logins.
 		- `logonID` - Defaults to 0 if not specified.
 		- `machineName` - Defaults to empty string if not specified.
 		- `clientOS` - Defaults to an auto-detected value if not specified.
 	- These properties must not be provided:
-		- `loginKey`
-		- `webLogonToken`
-		- `steamID`
-- Individually using account name and login key **[(deprecated and possibly non-functional)](#login-key-deprecation)**
-	- These properties are required:
-		- `accountName`
-		- `loginKey`
-	- These properties are optional:
-		- `rememberPassword` - Specify if you want to get a new login key for subsequent logins.
-		- `logonID` - Defaults to 0 if not specified.
-		- `machineName` - Defaults to empty string if not specified.
-		- `clientOS` - Defaults to an auto-detected value if not specified.
-	- These properties must not be provided:
-		- `password`
-        - `machineAuthToken`
-		- `authCode`
-		- `twoFactorCode`
 		- `webLogonToken`
 		- `steamID`
 - Individually using account name and [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback) (deprecated)
@@ -616,8 +596,6 @@ There are five ways to log onto Steam:
         - `machineAuthToken`
 		- `authCode`
 		- `twoFactorCode`
-		- `loginKey`
-		- `rememberPassword`
 		- `logonID`
 		- `machineName`
 		- `clientOS`
@@ -625,9 +603,9 @@ There are five ways to log onto Steam:
 #### Using Refresh Tokens
 
 The Steam client uses refresh tokens when logging on. You can obtain a refresh token using the
-[steam-session module](https://www.npmjs.com/package/steam-session), or you can log on to steam-user using your account
-name and password as normal, and steam-user will internally fetch a refresh token if it can
-(see [legacy authentication](#legacy-authentication)).
+[steam-session module](https://www.npmjs.com/package/steam-session), or you can log on to steam-user using your account name and password as normal. When
+logging on using your account name and password, steam-user will internally fetch a refresh token, emit the
+[`refreshToken`](#refreshtoken) event, and then use that token to log on to Steam.
 
 As of 2022-09-03, refresh tokens are JWTs that are valid for ~200 days. You can keep using the same refresh token to log
 on until it expires. You can find out when a token expires by [decoding it](https://www.npmjs.com/search?q=jwt) and checking
@@ -643,36 +621,6 @@ provide a code every time you login. By default, steam-user will automatically s
 [data directory](#datadirectory), but you can also manage them yourself by listening for the [`machineAuthToken`](#machineauthtoken)
 event and providing the token as a `machineAuthToken` property when you log on.
 
-#### Legacy Authentication
-
-steam-user will use *legacy authentication* to log onto Steam in either of these cases:
-
-- You are using a steam-user older 4.28.0 and are not using a refresh token
-- You are using steam-user 4.28.0 or later but are running a Node.js version older than 12.22.0
-
-The official Steam client no longer uses legacy authentication, so the backend may drop support for it at any time.
-Additionally, legacy authentication uses login keys, [which are no longer being issued](#login-key-deprecation).
-
-If you are using steam-user 4.28.0 or later and Node.js 12.22.0 or later, then even if you call `logOn()` with an account
-name and password, steam-user will use the modern authentication system to log on.
-
-Legacy authentication is deprecated, and will be removed in the next major steam-user release.
-
-#### Login Key Deprecation
-
-Steam appears to no longer issue login keys. This has implications for you if you're using [legacy authentication](#legacy-authentication):
-
-- The [`loginKey`](#loginkey) event will no longer be emitted
-- If using mobile 2FA, steam-user can no longer reconnect to Steam following a connection drop without having a valid 2FA code
-
-For the sake of backward compatibility, if you call `logOn()` with an account name and password and specify
-`rememberPassword: true` in an environment that supports modern authentication, then the `loginKey` event will be emitted,
-but instead of containing a login key, it will contain a refresh token. You may pass this refresh token to the `loginKey`
-property in `logOn()` as if it were a login key, and it will be used as a refresh token.
-
-**This is strictly offered for backward compatibility. Both the `loginKey` event and `loginKey` property in `logOn()`
-are deprecated and will be removed in the next major steam-user release.**
-
 ### logOff()
 
 Logs you off of Steam and closes the connection.
@@ -684,7 +632,7 @@ Logs you off of Steam and closes the connection.
 Logs you off of Steam and then immediately back on. This can only be used if one of the following criteria are met:
 
 - You're logged into an anonymous account
-- You're logged into an individual account, you logged in using an account name and password, and you didn't use [legacy authentication](#legacy-authentication)
+- You're logged into an individual account and you logged in using an account name and password
 - You're logged into an individual account and you used a `refreshToken` to log on
 
 Attempts to call this method under any other circumstance will result in an `Error` being thrown and nothing else will happen.
@@ -734,7 +682,7 @@ Properties of note in the `response` object:
 
 Finishes the process of enabling TOTP two-factor authentication for your account. You can use [`steam-totp`](https://www.npmjs.com/package/steam-totp) in the future when logging on to get a code.
 
-**If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a `loginKey` is used.**
+**If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a refresh token is used.**
 
 ### getSteamGuardDetails(callback)
 - `callback` - A function to be called when the requested data is available
@@ -1864,7 +1812,8 @@ data which only the developer/publisher of the game can do anything with.
 
 ## ID Events
 
-Events marked as **ID events** are special. They all have a `SteamID` object as their first parameter. In addition to the event itself firing, a second event comprised of `eventName + "#" + steamID.getSteamID64()` is fired.
+Events marked as **ID events** are special. They all have a `SteamID` object as their first parameter. In addition to the
+event itself firing, a second event comprised of `eventName + "#" + steamID.getSteamID64()` is fired.
 
 For example:
 
@@ -1937,20 +1886,25 @@ The `SteamUser` object's `steamID` property will still be defined when this is e
 The `eresult` value might be 0 (Invalid), which indicates that the disconnection was due to the connection being closed
 directly, without Steam sending a LoggedOff message.
 
-### sentry
-- `sentry` - A Buffer containing your new machine auth token
-
-**THIS IS DEPRECATED AND WILL BE REMOVED IN THE NEXT MAJOR RELEASE.**
-
-This is retained exclusively for backwards compatibility. You should use the [machineAuthToken](#machineauthtoken) event
-instead.
-
 ### machineAuthToken
 - `machineAuthToken` - A string containing your new machine auth token
+
+**v4.29.0 or later is required to use this event**
 
 Emitted when a new machine auth token is issued. This is only relevant for accounts using email Steam Guard. Even if you
 are using email Steam Guard, you likely don't need to worry about this event as steam-user will [automatically manage
 your machine auth tokens for you](#machine-auth-tokens).
+
+This may be emitted before [`loggedOn`](#loggedon) fires.
+
+### refreshToken
+- `refreshToken` - A string containing your new refresh token
+
+**v5.0.0 or later is required to use this event**
+
+Emitted when a new refresh token is issued. This will always be emitted when logging on using an account name and password,
+and when logging on using an existing refresh token, this may be emitted if a new refresh token is issued because your
+provided token is nearly expired (only if [`renewRefreshTokens`](#renewrefreshtokens) is set to true).
 
 This may be emitted before [`loggedOn`](#loggedon) fires.
 
@@ -1962,18 +1916,10 @@ Emitted when a steamcommunity.com web session is successfully negotiated.
 This will automatically be emitted on logon (**unless** you used a `webLogonToken` to log on) and in response to
 [`webLogOn`](#weblogon) calls.
 
-Some libraries require you to provide your `sessionID`, others don't. If your library doesn't, you can safely ignore it.
+Some libraries require you to provide your `sessionID`, others don't. If the library you're using doesn't need you to
+provide a `sessionID`, then you can safely ignore it.
 
 [Read more about how cookies work and interact with other modules.](https://dev.doctormckay.com/topic/365-cookies/#user-cookieusage)
-
-### loginKey
-- `key` - Your login key
-
-If you enabled `rememberPassword` in [`logOn`](#logondetails), this will be emitted when Steam sends us a new login key. This key can be passed to [`logOn`](#logondetails) as `loginKey` in lieu of a password on subsequent logins.
-
-At this time, I'm not sure if login keys expire, so to be safe you should record this somewhere (in a database, in a file, etc) and overwrite it every time the event is emitted.
-
-**[THIS IS DEPRECATED AND WILL BE REMOVED IN A FUTURE RELEASE.](#login-key-deprecation)**
 
 ### newItems
 - `count` - How many new items you have (can be 0)
