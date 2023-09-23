@@ -580,7 +580,7 @@ There are five ways to log onto Steam:
 		- `accountName`
 		- `password`
 	- These properties are optional:
-        - `machineAuthToken` - Specify if you are logged into an account with email Steam Guard and you have a valid machien token
+        - `machineAuthToken` - Specify if you are logged into an account with email Steam Guard and you have a valid machine token
 		- `authCode` - Specify if you are using an email Steam Guard code.
 		- `twoFactorCode` - Specify if you are using a TOTP two-factor code (required if your account has 2FA enabled).
 		- `logonID` - Defaults to 0 if not specified.
