@@ -13,6 +13,8 @@ const EMachineIDType = require('../resources/EMachineIDType.js');
 const EMsg = require('../enums/EMsg.js');
 const EResult = require('../enums/EResult.js');
 
+const {EAuthSessionGuardType} = require('steam-session');
+
 const SteamUserBase = require('./00-base.js');
 const SteamUserMachineAuth = require('./08-machineauth.js');
 
