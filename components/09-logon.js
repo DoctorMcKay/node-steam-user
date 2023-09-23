@@ -88,7 +88,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 					ui_mode: undefined,
 					chat_mode: 2, // enable new chat
 					web_logon_nonce: details.webLogonToken && details.steamID ? details.webLogonToken : undefined,
-					_steamid: details.steamID
+					_steamid: details.steamID,
+					_machineAuthToken: details.machineAuthToken
 				};
 			}
 
@@ -234,11 +235,13 @@ class SteamUserLogon extends SteamUserMachineAuth {
 
 			// Machine auth token (only necessary if logging on with account name and password)
 			if (!anonLogin && !this._machineAuthToken && this._logOnDetails.account_name) {
-				let tokenContent = await this._readFile(this._getMachineAuthFilename());
+				let tokenContent = this._logOnDetails._machineAuthToken || this._readFile(this._getMachineAuthFilename());
 				if (tokenContent) {
 					this._machineAuthToken = tokenContent.toString('utf8').trim();
 				}
 			}
+
+			delete this._logOnDetails._machineAuthToken;
 
 			// Machine ID
 			if (!anonLogin && !this._logOnDetails.machine_id) {
