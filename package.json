@@ -37,7 +37,7 @@
 		"steam-session": "^1.3.0",
 		"steam-totp": "^2.0.1",
 		"steamid": "^2.0.0",
-		"websocket13": "^3.0.1"
+		"websocket13": "^4.0.0"
 	},
 	"devDependencies": {
 		"steamcommunity": "^3.39.0",
