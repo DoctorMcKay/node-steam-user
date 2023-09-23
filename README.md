@@ -1010,6 +1010,15 @@ If `filter` is a boolean, it is interpreted as `excludeShared` for backward comp
 `ownsPackage(16018, true)` is the same as `ownsPackage(16018, {excludeShared: true})`.
 This usage is deprecated and will be removed in a future release.
 
+### clearPicsCache()
+
+**v4.xx.x or later is required to use this method**  
+
+Clears the content of the `picsCache` object and removes any associated jobs to free memory.  
+Make sure to disable [`changelistUpdateInterval`](#changelistUpdateInterval) if the cache should not get repopulated.  
+
+`enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.  
+
 ### getStoreTagNames(language, tagIDs, callback)
 - `language` - The language you want tag names in, e.g. "english" or "spanish"
 - `tagIDs` - An array of one or more tag IDs
