@@ -8,10 +8,14 @@
 SteamUser allows you to communicate with the Steam servers in the same manner as a proper Steam client. It's designed to
 be a self-contained module which provides all the functionality expected of a Steam user client.
 
+Node.js v14.0.0 or later is required.
+
 [Subscribe to release announcements](https://github.com/DoctorMcKay/node-steam-user/releases.atom)
 
-**Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
+**Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature
+requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
 
+[Upgrading from v4?](https://github.com/DoctorMcKay/node-steam-user/wiki/v4-%E2%86%92-v5-migration-guide)  
 [Upgrading from v3?](https://github.com/DoctorMcKay/node-steam-user/releases/tag/v4.0.0)
 
 ## Installation
