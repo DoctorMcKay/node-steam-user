@@ -287,9 +287,9 @@ function processProtobufEnums() {
 		processed.sort(sortEnum);
 
 		let enumFile = GENERATED_FILE_HEADER + `/**\n * @enum\n * @readonly\n */\nconst ${enumName} = {\n`;
-		enumFile += processed.map(v => `\t"${v.name}": ${v.value},` + (v.comment ? ` // ${v.comment}` : '')).join('\n');
+		enumFile += processed.map(v => `\t${quoteObjectKey(v.name)}: ${v.value},` + (v.comment ? ` // ${v.comment}` : '')).join('\n');
 		enumFile += '\n\n\t// Value-to-name mapping for convenience\n';
-		enumFile += processed.filter(v => v.comment !== 'obsolete').map(v => `\t"${v.value}": "${v.name}",`).join('\n');
+		enumFile += processed.filter(v => v.comment !== 'obsolete').map(v => `\t${quoteObjectKey(v.value)}: '${v.name}',`).join('\n');
 		enumFile += `\n};\n\nmodule.exports = ${enumName};\n`;
 		FS.writeFileSync(`${__dirname}/../enums/${enumName}.js`, enumFile);
 
@@ -396,4 +396,8 @@ function sortEnum(a, b) {
 	}
 
 	return aValue < bValue ? -1 : 1;
+}
+
+function quoteObjectKey(key) {
+	return key.toString().includes('-') ? `'${key}'` : key;
 }
