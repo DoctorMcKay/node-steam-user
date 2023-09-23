@@ -6,11 +6,11 @@
  */
 module.exports = {
 	/** Pick one automatically */
-	"Auto": 0,
+	Auto: 0,
 
 	/** TCP with Valve-crypto */
-	"TCP": 1,
+	TCP: 1,
 
 	/** WebSocket with TLS */
-	"WebSocket": 2
+	WebSocket: 2
 };

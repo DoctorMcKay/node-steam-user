@@ -314,9 +314,9 @@ class SteamUserApps extends SteamUserAppAuth {
 
 				(body.packages || []).forEach((pkg) => {
 					response.packages[pkg.packageid] = pkg._parsedData || {
-						"changenumber": pkg.change_number,
-						"missingToken": !!pkg.missing_token,
-						"packageinfo": pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
+						changenumber: pkg.change_number,
+						missingToken: !!pkg.missing_token,
+						packageinfo: pkg.buffer ? BinaryKVParser.parse(pkg.buffer)[pkg.packageid] : null
 					};
 
 					let index = packageids.indexOf(pkg.packageid);
@@ -361,14 +361,14 @@ class SteamUserApps extends SteamUserAppAuth {
 						let tokenPackages = [];
 
 						for (let appid in appTokens) {
-							tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
+							tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]});
 						}
 
 						for (let packageid in packageTokens) {
 							tokenPackages.push({
 								packageid: parseInt(packageid, 10),
 								access_token: packageTokens[packageid]
-							})
+							});
 						}
 
 						// Now we have the tokens. Request the data.
@@ -519,13 +519,13 @@ class SteamUserApps extends SteamUserAppAuth {
 
 		let index = -1;
 		for (let appid in appTokens) {
-			if (appTokens.hasOwnProperty(appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
+			if (Object.hasOwnProperty.call(appTokens, appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
 				ourApps[index] = {appid: parseInt(appid, 10), access_token: appTokens[appid]};
 			}
 		}
 
 		for (let packageid in packageTokens) {
-			if (packageTokens.hasOwnProperty(packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
+			if (Object.hasOwnProperty.call(packageTokens, packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
 				ourPackages[index] = {packageid: parseInt(packageid, 10), access_token: packageTokens[packageid]};
 			}
 		}
@@ -559,11 +559,11 @@ class SteamUserApps extends SteamUserAppAuth {
 	 */
 	_ensurePicsCache() {
 		if (!this.options.enablePicsCache) {
-			throw new Error("PICS cache is not enabled.");
+			throw new Error('PICS cache is not enabled.');
 		}
 
 		if (!this.picsCache.ownershipModified) {
-			throw new Error("No data in PICS package cache yet.");
+			throw new Error('No data in PICS package cache yet.');
 		}
 	}
 
@@ -841,7 +841,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				}
 
 				return true;
-			}
+			};
 		}
 
 		if (packageFilter === null) {
@@ -886,7 +886,7 @@ class SteamUserApps extends SteamUserAppAuth {
 	 */
 	redeemKey(key, callback) {
 		return StdLib.Promises.timeoutCallbackPromise(90000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
-			this._send(EMsg.ClientRegisterKey, {"key": key}, (body) => {
+			this._send(EMsg.ClientRegisterKey, {key: key}, (body) => {
 				let packageList = {};
 
 				let receiptDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
@@ -931,7 +931,7 @@ class SteamUserApps extends SteamUserAppAuth {
 					resolve({
 						grantedPackageIds: body.granted_packageids,
 						grantedAppIds: body.granted_appids
-					})
+					});
 				}
 			});
 		});

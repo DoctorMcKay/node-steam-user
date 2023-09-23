@@ -145,6 +145,7 @@ class SteamChatRoomClient extends EventEmitter {
 				Helpers.steamID(inviteeSteamIds); // throws if not valid steamid
 				inviteeSteamIds = [inviteeSteamIds];
 			} catch (ex) {
+				// ignore
 			}
 		}
 
@@ -243,7 +244,7 @@ class SteamChatRoomClient extends EventEmitter {
 		}
 
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
-			this.user._sendUnified("ChatRoom.SetSessionActiveChatRoomGroups#1", {
+			this.user._sendUnified('ChatRoom.SetSessionActiveChatRoomGroups#1', {
 				chat_group_ids: groupIDs,
 				chat_groups_data_requested: groupIDs
 			}, (body, hdr) => {
@@ -270,7 +271,7 @@ class SteamChatRoomClient extends EventEmitter {
 	 */
 	getInviteLinkInfo(linkUrl, callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
-			let match = linkUrl.match(/^https?:\/\/s\.team\/chat\/([^\/]+)$/);
+			let match = linkUrl.match(/^https?:\/\/s\.team\/chat\/([^/]+)$/);
 			if (!match) {
 				return reject(new Error('Invalid invite link'));
 			}
@@ -597,7 +598,7 @@ class SteamChatRoomClient extends EventEmitter {
 				resolve(body);
 			});
 		});
-	};
+	}
 
 	/**
 	 * Get a list of which friends we have "active" (recent) message sessions with.
@@ -681,7 +682,7 @@ class SteamChatRoomClient extends EventEmitter {
 				this.user.emit('debug', `Exception reported calling getActiveFriendMessageSessions() inside of getFriendMessageHistory(): ${ex.message}`);
 			}
 
-			this.user._sendUnified("FriendMessages.GetRecentMessages#1", {
+			this.user._sendUnified('FriendMessages.GetRecentMessages#1', {
 				steamid1: this.user.steamID.toString(),
 				steamid2,
 				count,
@@ -829,7 +830,7 @@ class SteamChatRoomClient extends EventEmitter {
 				return out;
 			});
 
-			this.user._sendUnified("ChatRoom.DeleteChatMessages#1", {
+			this.user._sendUnified('ChatRoom.DeleteChatMessages#1', {
 				chat_group_id: groupId,
 				chat_id: chatId,
 				messages
@@ -968,7 +969,7 @@ class SteamChatRoomClient extends EventEmitter {
 
 				preProcessObject(body);
 				resolve(body);
-			})
+			});
 		});
 	}
 
@@ -1342,7 +1343,7 @@ function processChatMentions(mentions) {
  */
 function preProcessObject(obj) {
 	for (let key in obj) {
-		if (!obj.hasOwnProperty(key)) {
+		if (!Object.hasOwnProperty.call(obj, key)) {
 			continue;
 		}
 
@@ -1369,7 +1370,7 @@ function preProcessObject(obj) {
 		} else if (key.includes('avatar_sha')) {
 			let url = null;
 			if (obj[key] && obj[key].length) {
-				url = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/chaticons/";
+				url = 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/chaticons/';
 				url += obj[key][0].toString(16) + '/';
 				url += obj[key][1].toString(16) + '/';
 				url += obj[key][2].toString(16) + '/';

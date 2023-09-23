@@ -6,8 +6,8 @@ const SteamUserBase = require('./00-base.js');
 const SteamUserGameServers = require('./gameservers.js');
 
 const NOTIFICATION_TYPES = {
-	'1': 'tradeOffers',
-	'3': 'communityMessages'
+	1: 'tradeOffers',
+	3: 'communityMessages'
 };
 
 class SteamUserNotifications extends SteamUserGameServers {
@@ -39,7 +39,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientUserNotifications, functi
 	});
 
 	for (let type in NOTIFICATION_TYPES) {
-		if (!NOTIFICATION_TYPES.hasOwnProperty(type)) {
+		if (!Object.hasOwnProperty.call(NOTIFICATION_TYPES, type)) {
 			continue;
 		}
 

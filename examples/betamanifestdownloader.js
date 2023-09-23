@@ -23,7 +23,7 @@ user.logOn({
 	twoFactorCode: STEAM_ACCOUNT_2FA_SECRET ? SteamTotp.generateAuthCode(STEAM_ACCOUNT_2FA_SECRET) : undefined
 });
 
-user.on('loggedOn', async() => {
+user.on('loggedOn', async () => {
 	console.log(`Logged on to Steam as ${user.steamID.steam3()}`);
 
 	// First we need to download product info for the app so we can find the encrypted manifest id for the depot we want.

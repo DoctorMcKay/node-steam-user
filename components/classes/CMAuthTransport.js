@@ -1,10 +1,9 @@
+// eslint-disable-next-line
 const {ApiRequest, ApiResponse} = require('steam-session');
 
 const EMsg = require('../../enums/EMsg.js');
 
 class CMAuthTransport {
-	_user;
-
 	/**
 	 * @param {SteamUserMessages} steamUser
 	 */

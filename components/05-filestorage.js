@@ -15,7 +15,7 @@ class SteamUserFileStorage extends SteamUserUtility {
 		} catch (ex) {
 			this.emit('debug', `Error saving file ${filename}: ${ex.message}`);
 		}
-	};
+	}
 
 	/**
 	 * @param {string} filename
@@ -34,7 +34,7 @@ class SteamUserFileStorage extends SteamUserUtility {
 		}
 
 		return content;
-	};
+	}
 
 	/**
 	 * @param {string[]} filenames
@@ -43,12 +43,12 @@ class SteamUserFileStorage extends SteamUserUtility {
 	 */
 	async _readFiles(filenames) {
 		if (!this.storage) {
-			return filenames.map(filename => ({filename, "error": new Error('Storage system disabled')}));
+			return filenames.map(filename => ({filename, error: new Error('Storage system disabled')}));
 		}
 
 		// No need for a try/catch because readFiles can't reject
 		return await this.storage.readFiles(filenames);
-	};
+	}
 }
 
 module.exports = SteamUserFileStorage;

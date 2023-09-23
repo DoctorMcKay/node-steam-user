@@ -99,7 +99,7 @@ class SteamUserAccount extends SteamUserLogon {
 	 */
 	getPrivacySettings(callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
-			this._sendUnified("Player.GetPrivacySettings#1", {}, (body, hdr) => {
+			this._sendUnified('Player.GetPrivacySettings#1', {}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
 					return reject(err);
@@ -110,7 +110,7 @@ class SteamUserAccount extends SteamUserLogon {
 		});
 	}
 
-// Honestly not sure what this is for, but it works.
+	// Honestly not sure what this is for, but it works.
 	/*getStreamingEncryptionKey(callback) {
 		this._send(EMsg.ClientUnlockStreaming, {}, function(body) {
 			if (body.eresult != EResult.OK) {
@@ -138,7 +138,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientAccountInfo, function(bod
 		// Check if everything is identical
 		let anythingDifferent = false;
 		for (let i in this.accountInfo) {
-			if (this.accountInfo.hasOwnProperty(i) && info.hasOwnProperty(i) && this.accountInfo[i] != info[i]) {
+			if (Object.hasOwnProperty.call(this.accountInfo, i) && Object.hasOwnProperty.call(info, i) && this.accountInfo[i] != info[i]) {
 				anythingDifferent = true;
 				break;
 			}
@@ -236,7 +236,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientUpdateGuestPassesList, fu
 		gift = BinaryKVParser.parse(body).MessageObject;
 
 		for (key in gift) {
-			if (!gift.hasOwnProperty(key)) {
+			if (!Object.hasOwnProperty.call(gift, key)) {
 				continue;
 			}
 

@@ -10,7 +10,7 @@ let client = new SteamUser();
 client.logOn(); // Log onto Steam anonymously
 
 client.on('loggedOn', (details) => {
-	console.log("Logged onto Steam as " + client.steamID.getSteam3RenderedID());
+	console.log('Logged onto Steam as ' + client.steamID.getSteam3RenderedID());
 
 	let idList = [];
 	for (let i = 0; i < 1000000; i++) {
@@ -19,21 +19,21 @@ client.on('loggedOn', (details) => {
 
 	// doing this for packages just hangs forever
 	client.getProductAccessToken(idList, [], (appTokens, packageTokens, appDeniedTokens, packageDeniedTokens) => {
-		console.log("Tokens denied for " + appDeniedTokens.length + " apps and " + packageDeniedTokens.length + " packages");
+		console.log('Tokens denied for ' + appDeniedTokens.length + ' apps and ' + packageDeniedTokens.length + ' packages');
 
 		for (let appid in appTokens) {
-			if (appTokens.hasOwnProperty(appid) && appTokens[appid].toString() != '0') {
-				console.log("App " + appid + ": " + appTokens[appid].toString());
+			if (Object.hasOwnProperty.call(appTokens, appid) && appTokens[appid].toString() != '0') {
+				console.log('App ' + appid + ': ' + appTokens[appid].toString());
 			}
 		}
 
 		for (let packageid in packageTokens) {
-			if (packageTokens.hasOwnProperty(packageid) && packageTokens[packageid].toString() != '0') {
-				console.log("Package " + packageid + ": " + packageTokens[packageid].toString());
+			if (Object.hasOwnProperty.call(packageTokens, packageid) && packageTokens[packageid].toString() != '0') {
+				console.log('Package ' + packageid + ': ' + packageTokens[packageid].toString());
 			}
 		}
 
-		console.log("Logging off of Steam");
+		console.log('Logging off of Steam');
 		client.logOff();
 	});
 });

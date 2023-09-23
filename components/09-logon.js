@@ -468,7 +468,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			this._send(EMsg.ClientLogOff, {});
 
 			let timeout = setTimeout(() => {
-				this.emit('disconnected', 0, "Logged off");
+				this.emit('disconnected', 0, 'Logged off');
 				this._loggingOff = false;
 				this._connection && this._connection.end(true);
 				this.steamID = null;
@@ -547,12 +547,12 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			return;
 		}
 
-		this._saveFile('cm_list.json', JSON.stringify(this._cmList, null, "\t"));
+		this._saveFile('cm_list.json', JSON.stringify(this._cmList, null, '\t'));
 	}
 
 	relog() {
 		if (!this.steamID) {
-			throw new Error("Cannot relog if not already connected");
+			throw new Error('Cannot relog if not already connected');
 		}
 
 		let relogAvailable = (
@@ -644,8 +644,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			// No steamGuard listeners, so prompt for one from stdin
 
 			let rl = require('readline').createInterface({
-				"input": process.stdin,
-				"output": process.stdout
+				input: process.stdin,
+				output: process.stdout
 			});
 
 			rl.question('Steam Guard' + (!domain ? ' App' : '') + ' Code: ', function(code) {
@@ -806,7 +806,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLogOnResponse, function(b
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientLoggedOff, function(body) {
 	let msg = body.eresult;
 	for (let i in EResult) {
-		if (EResult.hasOwnProperty(i) && EResult[i] == body.eresult) {
+		if (Object.hasOwnProperty.call(EResult, i) && EResult[i] == body.eresult) {
 			msg = i;
 			break;
 		}
@@ -837,18 +837,18 @@ function createMachineID(val_bb3, val_ff2, val_3b3) {
 
 	let buffer = ByteBuffer.allocate(155, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeByte(0); // 1 byte, total 1
-	buffer.writeCString("MessageObject"); // 14 bytes, total 15
+	buffer.writeCString('MessageObject'); // 14 bytes, total 15
 
 	buffer.writeByte(1); // 1 byte, total 16
-	buffer.writeCString("BB3"); // 4 bytes, total 20
+	buffer.writeCString('BB3'); // 4 bytes, total 20
 	buffer.writeCString(sha1(val_bb3)); // 41 bytes, total 61
 
 	buffer.writeByte(1); // 1 byte, total 62
-	buffer.writeCString("FF2"); // 4 bytes, total 66
+	buffer.writeCString('FF2'); // 4 bytes, total 66
 	buffer.writeCString(sha1(val_ff2)); // 41 bytes, total 107
 
 	buffer.writeByte(1); // 1 byte, total 108
-	buffer.writeCString("3B3"); // 4 bytes, total 112
+	buffer.writeCString('3B3'); // 4 bytes, total 112
 	buffer.writeCString(sha1(val_3b3)); // 41 bytes, total 153
 
 	buffer.writeByte(8); // 1 byte, total 154

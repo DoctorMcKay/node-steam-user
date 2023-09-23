@@ -57,13 +57,13 @@ FS.readdirSync(__dirname + '/../protobufs').forEach((filename) => {
 
 FS.closeSync(typesFile);
 
-console.log("Generating _load.js");
+console.log('Generating _load.js');
 loader += `\n${mergeObjects.toString()}\n`;
 FS.writeFileSync(GENERATED_DIR + '/_load.js', loader);
 
 function mergeObjects(destinationObject, sourceObject) {
 	for (let i in sourceObject) {
-		if (sourceObject.hasOwnProperty(i)) {
+		if (Object.hasOwnProperty.call(sourceObject, i)) {
 			destinationObject[i] = sourceObject[i];
 		}
 	}

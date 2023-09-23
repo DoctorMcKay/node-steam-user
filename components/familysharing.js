@@ -28,7 +28,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 				return err ? reject(err) : resolve();
 			});
 		});
-	};
+	}
 
 	/**
 	 * Remove borrowers.
@@ -50,7 +50,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 				return err ? reject(err) : resolve();
 			});
 		});
-	};
+	}
 
 	/**
 	 * Retrieve a list of Steam accounts authorized to borrow your library.
@@ -82,9 +82,9 @@ class SteamUserFamilySharing extends SteamUserEcon {
 						};
 					})
 				});
-			})
+			});
 		});
-	};
+	}
 
 	/**
 	 * Get a list of devices we have authorized.
@@ -122,7 +122,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 				});
 			});
 		});
-	};
+	}
 
 	/**
 	 * Authorize local device for library sharing.
@@ -144,7 +144,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 				return err ? reject(err) : resolve({deviceToken: body.authed_device_token});
 			});
 		});
-	};
+	}
 
 	/**
 	 * Deauthorize a device from family sharing.
@@ -169,7 +169,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 				return err ? reject(err) : resolve();
 			});
 		});
-	};
+	}
 
 	/**
 	 * Use local device authorizations to allow usage of shared licenses.
@@ -196,7 +196,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 			authorization_account_id: [ownerSteamID.accountid],
 			device_tokens: [{owner_account_id: ownerSteamID.accountid, token_id: deviceToken}]
 		});
-	};
+	}
 
 	/**
 	 * Deactivate family sharing authorizations. Removes shared licenses.
@@ -206,7 +206,7 @@ class SteamUserFamilySharing extends SteamUserEcon {
 			authorization_account_id: [],
 			device_tokens: []
 		});
-	};
+	}
 }
 
 module.exports = SteamUserFamilySharing;

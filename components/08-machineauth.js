@@ -1,8 +1,3 @@
-const StdLib = require('@doctormckay/stdlib');
-
-const EMsg = require('../enums/EMsg.js');
-
-const SteamUserBase = require('./00-base.js');
 const SteamUserWeb = require('./07-web.js');
 
 class SteamUserMachineAuth extends SteamUserWeb {

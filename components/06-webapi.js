@@ -100,7 +100,7 @@ function buildQueryString(data) {
 	let str = '';
 
 	for (let i in data) {
-		if (!data.hasOwnProperty(i)) {
+		if (!Object.hasOwnProperty.call(data, i)) {
 			continue;
 		}
 

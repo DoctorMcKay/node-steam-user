@@ -40,13 +40,15 @@
 		"websocket13": "^4.0.0"
 	},
 	"devDependencies": {
+		"eslint": "^8.23.0",
 		"steamcommunity": "^3.39.0",
 		"wtfnode": "^0.8.4"
 	},
 	"scripts": {
 		"prepublishOnly": "node scripts/prepublish.js",
 		"generate-enums": "node scripts/generate-enums.js",
-		"generate-protos": "node scripts/generate-protos.js"
+		"generate-protos": "node scripts/generate-protos.js",
+		"lint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
 	},
 	"engines": {
 		"node": ">=14.0.0"

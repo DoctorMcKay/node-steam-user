@@ -184,7 +184,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 
 				processInviteToken(this.steamID, body);
 				resolve({token: body});
-			})
+			});
 		});
 	}
 
@@ -195,7 +195,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 */
 	listQuickInviteLinks(callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
-			this._sendUnified("UserAccount.GetFriendInviteTokens#1", {}, (body, hdr) => {
+			this._sendUnified('UserAccount.GetFriendInviteTokens#1', {}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
 					return reject(err);
@@ -222,7 +222,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 				linkOrToken = parts[parts.length - 1];
 			}
 
-			this._sendUnified("UserAccount.RevokeFriendInviteToken#1", {
+			this._sendUnified('UserAccount.RevokeFriendInviteToken#1', {
 				invite_token: linkOrToken
 			}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
@@ -242,7 +242,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 * @returns {SteamID|null} - null if the link isn't well-formed
 	 */
 	getQuickInviteLinkSteamID(link) {
-		let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
+		let match = link.match(/^https?:\/\/s\.team\/p\/([^/]+)\/([^/]+)/);
 		if (!match) {
 			return null;
 		}
@@ -258,7 +258,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 */
 	checkQuickInviteLinkValidity(link, callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
-			let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
+			let match = link.match(/^https?:\/\/s\.team\/p\/([^/]+)\/([^/]+)/);
 			if (!match) {
 				return reject(new Error('Malformed quick-invite link'));
 			}
@@ -278,7 +278,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 				body.steamid = Helpers.steamID(body.steamid);
 				body.invite_duration = body.invite_duration ? parseInt(body.invite_duration, 10) : null;
 				resolve(body);
-			})
+			});
 		});
 	}
 
@@ -290,7 +290,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 */
 	redeemQuickInviteLink(link, callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
-			let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
+			let match = link.match(/^https?:\/\/s\.team\/p\/([^/]+)\/([^/]+)/);
 			if (!match) {
 				return reject(new Error('Malformed quick-invite link'));
 			}
@@ -748,7 +748,7 @@ class SteamUserFriends extends SteamUserFamilySharing {
 		buf.writeByte(0);
 		buf.writeCString('RP');
 		for (let i in richPresence) {
-			if (!richPresence.hasOwnProperty(i)) {
+			if (!Object.hasOwnProperty.call(richPresence, i)) {
 				continue;
 			}
 
@@ -937,16 +937,17 @@ class SteamUserFriends extends SteamUserFamilySharing {
 
 			let rpTokens = JSON.parse(JSON.stringify(tokens)); // So we don't modify the original objects
 			for (let i in rpTokens) {
-				if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i].toLowerCase()]) {
+				if (Object.hasOwnProperty.call(rpTokens, i) && localizationTokens[rpTokens[i].toLowerCase()]) {
 					rpTokens[i] = localizationTokens[rpTokens[i].toLowerCase()];
 				}
 			}
 
 			let rpString = rpTokens.steam_display;
+			// eslint-disable-next-line
 			while (true) {
 				let newRpString = rpString;
 				for (let i in rpTokens) {
-					if (rpTokens.hasOwnProperty(i)) {
+					if (Object.hasOwnProperty.call(rpTokens, i)) {
 						newRpString = newRpString.replace(new RegExp('%' + i + '%', 'gi'), rpTokens[i]);
 					}
 				}
@@ -1066,7 +1067,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientPersonaState, function(bo
 		} else {
 			// Replace unknown data in the received object with already-known data
 			for (let i in this.users[sid64]) {
-				if (this.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
+				if (Object.hasOwnProperty.call(this.users[sid64], i) && Object.hasOwnProperty.call(user, i) && user[i] === null) {
 					user[i] = this.users[sid64][i];
 				}
 			}
@@ -1094,7 +1095,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientPersonaState, function(bo
 			}
 
 			for (let i in processedUser) {
-				if (processedUser.hasOwnProperty(i) && processedUser[i] !== null) {
+				if (Object.hasOwnProperty.call(processedUser, i) && processedUser[i] !== null) {
 					this.users[sid64][i] = processedUser[i];
 				}
 			}
@@ -1113,7 +1114,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientClanState, function(body)
 	} else {
 		// Replace unknown data in the received object with already-known data
 		for (i in this.groups[sid64]) {
-			if (this.groups[sid64].hasOwnProperty(i) && body.hasOwnProperty(i) && body[i] === null) {
+			if (Object.hasOwnProperty.call(this.groups[sid64], i) && Object.hasOwnProperty.call(body, i) && body[i] === null) {
 				body[i] = this.groups[sid64][i];
 			}
 		}
@@ -1141,7 +1142,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientClanState, function(body)
 	this._emitIdEvent('group', sid, body);
 
 	for (i in body) {
-		if (body.hasOwnProperty(i) && body[i] !== null) {
+		if (Object.hasOwnProperty.call(body, i) && body[i] !== null) {
 			this.groups[sid64][i] = body[i];
 		}
 	}
@@ -1263,8 +1264,8 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientFriendsGroupsList, functi
 
 	body.friendGroups.forEach(function(group) {
 		groupList[group.nGroupID] = {
-			"name": group.strGroupName,
-			"members": []
+			name: group.strGroupName,
+			members: []
 		};
 	});
 

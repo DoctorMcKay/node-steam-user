@@ -102,7 +102,7 @@ exports.eresultError = function(eresult) {
 		return null;
 	}
 
-	let err = new Error(EResult[eresult] || ("Error " + eresult));
+	let err = new Error(EResult[eresult] || ('Error ' + eresult));
 	err.eresult = eresult;
 	return err;
 };
@@ -164,7 +164,7 @@ exports.getOsType = function() {
 				return EOSType.WinME;
 			}
 
-			if (verParts[0] == 5 && verParts[1] == "00" && verParts[2] == 1515) {
+			if (verParts[0] == 5 && verParts[1] == '00' && verParts[2] == 1515) {
 				return EOSType.WinNT;
 			}
 
@@ -253,4 +253,4 @@ exports.decodeJwt = function(jwt) {
 		.replace(/_/g, '/');
 
 	return JSON.parse(Buffer.from(standardBase64, 'base64').toString('utf8'));
-}
+};

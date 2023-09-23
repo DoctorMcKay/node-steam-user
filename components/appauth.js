@@ -28,8 +28,8 @@ class SteamUserAppAuth extends SteamUserAccount {
 
 		return StdLib.Promises.timeoutCallbackPromise(10000, ['encryptedAppTicket'], callback, (resolve, reject) => {
 			this._send(EMsg.ClientRequestEncryptedAppTicket, {
-				"app_id": appid,
-				"userdata": userData
+				app_id: appid,
+				userdata: userData
 			}, (body) => {
 				let err = Helpers.eresultError(body.eresult);
 				if (err) {
@@ -38,11 +38,11 @@ class SteamUserAppAuth extends SteamUserAccount {
 
 				if (body.app_id != appid) {
 					// Don't know if this can even happen
-					return reject(new Error("Steam did not send an appticket for the requested appid"));
+					return reject(new Error('Steam did not send an appticket for the requested appid'));
 				}
 
 				if (!body.encrypted_app_ticket) {
-					return reject(new Error("No appticket in response"));
+					return reject(new Error('No appticket in response'));
 				}
 
 				resolve({
@@ -158,7 +158,7 @@ class SteamUserAppAuth extends SteamUserAccount {
 				}
 
 				if (body.app_id != appid) {
-					return reject(new Error("Cannot get app ownership ticket"));
+					return reject(new Error('Cannot get app ownership ticket'));
 				}
 
 				let ticket = body.ticket;

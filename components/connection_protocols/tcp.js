@@ -21,7 +21,7 @@ class TCPConnection extends BaseConnection {
 
 		// Pick a CM randomly
 		if (!user._cmList || !user._cmList.tcp_servers) {
-			throw new Error("Nothing to connect to: " + (user._cmList ? "no TCP server list" : "no CM list"));
+			throw new Error('Nothing to connect to: ' + (user._cmList ? 'no TCP server list' : 'no CM list'));
 		}
 
 		let tcpCm = user._cmList.tcp_servers[Math.floor(Math.random() * user._cmList.tcp_servers.length)];
@@ -41,7 +41,7 @@ class TCPConnection extends BaseConnection {
 				path: tcpCm,
 				localAddress: user.options.localAddress,
 				localPort: user.options.localPort
-			}
+			};
 			if (url.username) {
 				prox.headers = {
 					'Proxy-Authorization': `Basic ${(Buffer.from(`${url.username}:${url.password || ''}`, 'utf8')).toString('base64')}`

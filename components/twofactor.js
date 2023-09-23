@@ -25,7 +25,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 
 				// Delete all the null keys
 				for (let i in body) {
-					if (body.hasOwnProperty(i) && body[i] === null) {
+					if (Object.hasOwnProperty.call(body, i) && body[i] === null) {
 						delete body[i];
 					}
 				}
@@ -77,6 +77,10 @@ class SteamUserTwoFactor extends SteamUserTrading {
 					} else if (body.want_more) {
 						attemptsLeft--;
 						diff += 30;
+
+						if (attemptsLeft <= 0) {
+							return reject(new Error('Failed to finalize adding authenticator after 30 attempts'));
+						}
 
 						finalize();
 					} else {

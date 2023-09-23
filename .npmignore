@@ -2,3 +2,4 @@
 node_modules/
 test.js
 dev_data.json
+dev/

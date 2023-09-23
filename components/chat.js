@@ -393,8 +393,8 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientChatEnter, function(body)
 
 		let sid64 = chatID.getSteamID64();
 		this.chats[sid64] = {
-			"name": chatName,
-			"members": {}
+			name: chatName,
+			members: {}
 		};
 
 		decomposeChatFlags(this.chats[sid64], chatFlags);
@@ -404,8 +404,8 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientChatEnter, function(body)
 		for (let i = 0; i < numMembers; i++) {
 			member = BinaryKVParser.parse(body).MessageObject;
 			this.chats[sid64].members[member.steamid.toString()] = {
-				"rank": member.Details,
-				"permissions": member.permissions
+				rank: member.Details,
+				permissions: member.permissions
 			};
 
 			// Move on to the next chat member
@@ -452,8 +452,8 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientChatMemberInfo, function(
 		// There's a user info here
 		let userInfo = BinaryKVParser.parse(body).MessageObject;
 		this.chats[sid64].members[userInfo.steamid.toString()] = {
-			"rank": userInfo.Details,
-			"permissions": userInfo.permissions
+			rank: userInfo.Details,
+			permissions: userInfo.permissions
 		};
 	}
 

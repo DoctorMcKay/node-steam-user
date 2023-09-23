@@ -16,7 +16,7 @@ class WebSocketConnection extends BaseConnection {
 
 		// Pick a CM semi-randomly
 		if (!user._cmList || !user._cmList.websocket_servers) {
-			throw new Error("Nothing to connect to: " + (user._cmList ? "no WebSocket server list" : "no CM list"));
+			throw new Error('Nothing to connect to: ' + (user._cmList ? 'no WebSocket server list' : 'no CM list'));
 		}
 
 		// Only allow one CM ping to happen at once
@@ -44,7 +44,7 @@ class WebSocketConnection extends BaseConnection {
 						}
 
 						resolve();
-					})
+					});
 				}));
 			});
 
