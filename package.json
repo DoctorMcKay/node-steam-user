@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@bbob/parser": "^2.2.0",
-		"@doctormckay/stdlib": "^2.7.1",
+		"@doctormckay/stdlib": "^2.8.1",
 		"@doctormckay/steam-crypto": "^1.2.0",
 		"adm-zip": "^0.5.10",
 		"binarykvparser": "^2.2.0",

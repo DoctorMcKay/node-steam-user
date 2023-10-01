@@ -44,8 +44,6 @@ class SteamUserConnection extends SteamUserEnums {
 		clearInterval(this._heartbeatInterval);
 
 		this._incomingMessageQueue = []; // clear the incoming message queue. If we're disconnecting, we don't care about anything else in the queue.
-		this._jobCleanupTimers.forEach(timer => clearTimeout(timer));
-		this._jobCleanupTimers = [];
 
 		this._clearChangelistUpdateTimer();
 	}

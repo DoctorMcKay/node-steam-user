@@ -596,7 +596,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		delete this.cellID;
 		this.contentServersReady = false;
 
-		this._jobCleanupTimers.forEach(timer => clearTimeout(timer));
 		this._initProperties();
 
 		this._clearChangelistUpdateTimer();

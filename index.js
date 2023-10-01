@@ -125,9 +125,8 @@ class SteamUser extends SteamUserTwoFactor {
 		this._sessionID = 0;
 		this._currentJobID = 0;
 		this._currentGCJobID = 0;
-		this._jobs = {};
-		this._jobsGC = {};
-		this._jobCleanupTimers = [];
+		this._jobs = new StdLib.DataStructures.TTLCache(1000 * 60 * 2); // job callbacks are cleaned up after 2 minutes
+		this._jobsGC = new StdLib.DataStructures.TTLCache(1000 * 60 * 2);
 		this._richPresenceLocalization = {};
 		this._incomingMessageQueue = [];
 		this._useMessageQueue = false; // we only use the message queue while we're processing a multi message

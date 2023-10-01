@@ -441,10 +441,7 @@ class SteamUserMessages extends SteamUserConnection {
 		let jobIdSource = null;
 		if (callback) {
 			jobIdSource = ++this._currentJobID;
-			this._jobs[jobIdSource] = callback;
-
-			// Clean up old job callbacks after 2 minutes
-			this._jobCleanupTimers.push(setTimeout(() => delete this._jobs[jobIdSource], 1000 * 60 * 2));
+			this._jobs.add(jobIdSource.toString(), callback);
 		}
 
 		let emsgName = EMsg[emsg] || emsg;
@@ -604,7 +601,7 @@ class SteamUserMessages extends SteamUserConnection {
 			this.emit('debug', debugPrefix + 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
 		}
 
-		if (!this._handlerManager.hasHandler(handlerName) && !this._jobs[header.targetJobID]) {
+		if (!this._handlerManager.hasHandler(handlerName) && this._jobs.get(header.targetJobID.toString()) === null) {
 			this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', debugPrefix + 'Unhandled message: ' + msgName);
 			return;
 		}
@@ -638,9 +635,10 @@ class SteamUserMessages extends SteamUserConnection {
 			};
 		}
 
-		if (this._jobs[header.targetJobID]) {
+		let jobCallback = this._jobs.get(header.targetJobID.toString());
+		if (jobCallback) {
 			// this is a response to something, so invoke the appropriate callback
-			this._jobs[header.targetJobID].call(this, body, header, cb);
+			jobCallback.call(this, body, header, cb);
 		} else {
 			this._handlerManager.emit(this, handlerName, body, header, cb);
 		}
