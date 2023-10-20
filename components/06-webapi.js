@@ -1,5 +1,4 @@
 const HTTPS = require('https');
-const StdLib = require('@doctormckay/stdlib');
 const VDF = require('kvparser');
 const Zlib = require('zlib');
 

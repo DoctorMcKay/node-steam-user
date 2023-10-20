@@ -85,7 +85,8 @@ There are a number of options which can control the behavior of the `SteamUser` 
 
 ### dataDirectory
 
-Controls where the Steam server list and sentry files are written. If `null`, no data will be automatically stored.
+Controls where the Steam server list and machine auth token files are written. If `null`, no data will be automatically
+stored.
 
 Defaults to a platform-specific user data directory.
 
@@ -133,15 +134,6 @@ In this manner, you can save data to a database, a cloud service, or anything el
 A boolean which controls whether or not `SteamUser` will automatically reconnect to Steam if disconnected due to Steam going down.
 
 Defaults to `true`.
-
-### singleSentryfile
-
-A boolean which controls whether or not `SteamUser` will use a single sentry file for all accounts.
-
-If off, a file named `sentry.accountname.bin` will be saved for each account.
-If on, a file named `sentry.bin` will be used for all accounts.
-
-Defaults to `false`.
 
 ### machineIdType
 
@@ -527,14 +519,12 @@ Changes the value of an [option](#options-).
 - `options` - An object containing zero or more [options](#options-).
 
 ### setSentry(sentry)
-- `sentry` - A Buffer containing the binary sentry file, binary SHA1 hash, or `null` to unset the set sentry
+- `sentry` - A Buffer or string containing your machine auth token
 
-If you aren't using `dataDirectory` or you just want to provide your own sentry file, you can do it using this method.
+**THIS IS DEPRECATED AND WILL BE REMOVED IN THE NEXT MAJOR RELEASE.**
 
-You should call this before calling `logOn`. When you log on, `SteamUser` will use this sentry file.
-
-You can provide either an entire sentryfile (preferred), or a Buffer containing the binary SHA1 hash of your sentryfile
-(e.g. the output of the `sentry` event in node-steam 0.6.x).
+This is retained exclusively for backwards compatibility. You should use the `machineAuthToken` property in `logOn()`
+instead.
 
 ### logOn([details])
 - `details` - An object containing details for this logon
@@ -542,6 +532,9 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `refreshToken` - A refresh token, [see below](#using-refresh-tokens)
 	- `accountName` - If logging into a user account, the account's name
 	- `password` - If logging into an account without a login key or a web logon token, the account's password
+    - `machineAuthToken` - If logging into an account that has email Steam Guard using the account name and password,
+       pass a valid machine auth token to avoid needing to provide an `authCode`. This is only necessary in advanced cases,
+       as steam-user [will take care of this for you by default](#machine-auth-tokens)
 	- `loginKey` - If logging into an account with a login key, this is the account's login key **\[[DEPRECATED](#login-key-deprecation)\]**
 	- `webLogonToken` - If logging into an account with a [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback), this is the token
 	- `steamID` - If logging into an account with a client logon token obtained from the web, this is your account's SteamID, as a string or a `SteamID` object
@@ -552,11 +545,11 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 		- As of v4.13.0, this can also be an IPv4 address as a string, in dotted-decimal notation (e.g. `"192.168.1.5"`)
 	- `machineName` - A string containing the name of this machine that you want to report to Steam. This will be displayed on steamcommunity.com when you view your games list (when logged in).
 	- `clientOS` - A [number](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EOSType.js) to identify your client OS. Auto-detected if you don't provide one.
-	- `dontRememberMachine` - If you're providing an `authCode` but you don't want Steam to remember this sentryfile, pass `true` here.
 
-**v3.11.0 or later is required to use `machineName` or `dontRememberMachine`.**  
+**v3.11.0 or later is required to use `machineName`.**  
 **v4.3.0 or later is required to use `webLogonToken`.**  
-**v4.25.0 or later is required to use `refreshToken`.**
+**v4.25.0 or later is required to use `refreshToken`.**  
+**v4.29.0 or later is required to use `machineAuthToken`.**
 
 Logs onto Steam. Omit the `details` object if you wish to login to an anonymous user account.
 
@@ -584,24 +577,24 @@ There are five ways to log onto Steam:
     - These properties must not be provided:
         - `accountName`
         - `password`
+        - `machineAuthToken`
         - `loginKey`
         - `webLogonToken`
         - `authCode`
         - `twoFactorCode`
         - `rememberPassword`
-        - `dontRememberMachine`
 - Individually using account name and password
 	- These properties are required:
 		- `accountName`
 		- `password`
 	- These properties are optional:
+        - `machineAuthToken` - Specify if you are logged into an account with email Steam Guard and you have a valid machien token
 		- `authCode` - Specify if you are using an email Steam Guard code.
 		- `twoFactorCode` - Specify if you are using a TOTP two-factor code (required if your account has 2FA enabled).
 		- `rememberPassword` - Specify if you want to get a login key for subsequent logins.
 		- `logonID` - Defaults to 0 if not specified.
 		- `machineName` - Defaults to empty string if not specified.
 		- `clientOS` - Defaults to an auto-detected value if not specified.
-		- `dontRememberMachine` - Only relevant if using an `authCode`. Defaults to `false` if not specified.
 	- These properties must not be provided:
 		- `loginKey`
 		- `webLogonToken`
@@ -617,9 +610,9 @@ There are five ways to log onto Steam:
 		- `clientOS` - Defaults to an auto-detected value if not specified.
 	- These properties must not be provided:
 		- `password`
+        - `machineAuthToken`
 		- `authCode`
 		- `twoFactorCode`
-		- `dontRememberMachine`
 		- `webLogonToken`
 		- `steamID`
 - Individually using account name and [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback) (deprecated)
@@ -630,9 +623,9 @@ There are five ways to log onto Steam:
 		- `steamID`
 	- These properties must not be provided:
 		- `password`
+        - `machineAuthToken`
 		- `authCode`
 		- `twoFactorCode`
-		- `dontRememberMachine`
 		- `loginKey`
 		- `rememberPassword`
 		- `logonID`
@@ -641,8 +634,10 @@ There are five ways to log onto Steam:
 
 #### Using Refresh Tokens
 
-As of the 2022-08-24 Steam Client beta, the Steam client now uses refresh tokens when logging on. You can obtain a
-refresh token using the [steam-session module](https://www.npmjs.com/package/steam-session).
+The Steam client uses refresh tokens when logging on. You can obtain a refresh token using the
+[steam-session module](https://www.npmjs.com/package/steam-session), or you can log on to steam-user using your account
+name and password as normal, and steam-user will internally fetch a refresh token if it can
+(see [legacy authentication](#legacy-authentication)).
 
 As of 2022-09-03, refresh tokens are JWTs that are valid for ~200 days. You can keep using the same refresh token to log
 on until it expires. You can find out when a token expires by [decoding it](https://www.npmjs.com/search?q=jwt) and checking
@@ -651,8 +646,12 @@ the `exp` property, which is a Unix timestamp indicating when the token expires.
 If you attempt to log on using a refresh token that isn't valid for use with client logins, the app will crash with a
 relevant error message.
 
-All other ways of authenticating to an individual user account should be considered deprecated, although steam-user will
-continue to support them as long as they keep working on the Steam backend.
+#### Machine Auth Tokens
+
+When using email Steam Guard, *machine auth tokens* are used to remember a device, in order to bypass the requirement to
+provide a code every time you login. By default, steam-user will automatically save your machine auth tokens in your
+[data directory](#datadirectory), but you can also manage them yourself by listening for the [`machineAuthToken`](#machineauthtoken)
+event and providing the token as a `machineAuthToken` property when you log on.
 
 #### Legacy Authentication
 
@@ -695,7 +694,7 @@ Logs you off of Steam and closes the connection.
 Logs you off of Steam and then immediately back on. This can only be used if one of the following criteria are met:
 
 - You're logged into an anonymous account
-- You're logged into an individual account, you set `rememberPassword` to `true` when you logged on, and the `loginKey` event has been emitted
+- You're logged into an individual account, you logged in using an account name and password, and you didn't use [legacy authentication](#legacy-authentication)
 - You're logged into an individual account and you used a `refreshToken` to log on
 
 Attempts to call this method under any other circumstance will result in an `Error` being thrown and nothing else will happen.
@@ -767,7 +766,7 @@ Requests details about your account's Steam Guard status. This could be used to 
 In order to trade, **all** of the following must be true:
 - `enabled` must be `true` (account-level restriction)
 - `enabledTime` must be at least 15 days ago (account-level restriction)
-- ONE of `machineTime` OR `twoFactorTime` must be at least 7 days ago (sentryfile-level restriction)
+- ONE of `machineTime` OR `twoFactorTime` must be at least 7 days ago
 
 ### getCredentialChangeTimes(callback)
 - `callback` - A function to be called when the requested data is available
@@ -1950,9 +1949,21 @@ The `eresult` value might be 0 (Invalid), which indicates that the disconnection
 directly, without Steam sending a LoggedOff message.
 
 ### sentry
-- `sentry` - A Buffer containing your new sentry file
+- `sentry` - A Buffer containing your new machine auth token
 
-Emitted when Steam sends us a new sentry file. By default, `SteamUser` will automatically save and reuse this sentry file for subsequent logins, but if you wish you may handle it yourself (see [`setSentry`](#setsentrysentry)).
+**THIS IS DEPRECATED AND WILL BE REMOVED IN THE NEXT MAJOR RELEASE.**
+
+This is retained exclusively for backwards compatibility. You should use the [machineAuthToken](#machineauthtoken) event
+instead.
+
+### machineAuthToken
+- `machineAuthToken` - A string containing your new machine auth token
+
+Emitted when a new machine auth token is issued. This is only relevant for accounts using email Steam Guard. Even if you
+are using email Steam Guard, you likely don't need to worry about this event as steam-user will [automatically manage
+your machine auth tokens for you](#machine-auth-tokens).
+
+This may be emitted before [`loggedOn`](#loggedon) fires.
 
 ### webSession
 - `sessionID` - The value of the `sessionid` cookie

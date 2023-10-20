@@ -14,12 +14,12 @@ const EMsg = require('../enums/EMsg.js');
 const EResult = require('../enums/EResult.js');
 
 const SteamUserBase = require('./00-base.js');
-const SteamUserSentry = require('./08-sentry.js');
+const SteamUserMachineAuth = require('./08-machineauth.js');
 
 const PROTOCOL_VERSION = 65580;
 const PRIVATE_IP_OBFUSCATION_MASK = 0xbaadf00d;
 
-class SteamUserLogon extends SteamUserSentry {
+class SteamUserLogon extends SteamUserMachineAuth {
 	logOn(details) {
 		// Delay the actual logon by one tick, so if users call logOn from the error event they won't get a crash because
 		// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted)
@@ -65,7 +65,6 @@ class SteamUserLogon extends SteamUserSentry {
 					client_language: !anonLogin ? 'english' : '',
 					client_os_type: Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
 					anon_user_target_account_name: !anonLogin ? undefined : 'anonymous',
-					steamguard_dont_remember_computer: !!(details.accountName && details.authCode && details.dontRememberMachine),
 					ui_mode: undefined,
 					chat_mode: 2, // enable new chat
 					web_logon_nonce: details.webLogonToken && details.steamID ? details.webLogonToken : undefined,
@@ -84,9 +83,7 @@ class SteamUserLogon extends SteamUserSentry {
 				delete this._logOnDetails.machine_id;
 				delete this._logOnDetails.password;
 				delete this._logOnDetails.login_key;
-				delete this._logOnDetails.sha_sentryfile;
 				delete this._logOnDetails.auth_code;
-				delete this._logOnDetails.steamguard_dont_remember_computer;
 				delete this._logOnDetails.machine_name;
 				delete this._logOnDetails.machine_name_userchosen;
 				delete this._logOnDetails.two_factor_code;
@@ -221,22 +218,12 @@ class SteamUserLogon extends SteamUserSentry {
 				this._cmList = require('../resources/servers.json');
 			}
 
-			// Sentry file
-			if (!anonLogin && !this._logOnDetails.sha_sentryfile) {
-				let sentry = this._sentry;
-				if (!sentry) {
-					sentry = await this._getSentryFileContent();
+			// Machine auth token (only necessary if logging on with account name and password)
+			if (!anonLogin && !this._machineAuthToken && this._logOnDetails.account_name) {
+				let tokenContent = await this._readFile(this._getMachineAuthFilename());
+				if (tokenContent) {
+					this._machineAuthToken = tokenContent.toString('utf8').trim();
 				}
-
-				if (sentry && sentry.length > 20) {
-					// Hash the sentry
-					let hash = Crypto.createHash('sha1');
-					hash.update(sentry);
-					sentry = hash.digest();
-				}
-
-				this._logOnDetails.sha_sentryfile = sentry;
-				this._logOnDetails.eresult_sentryfile = sentry ? 1 : 0;
 			}
 
 			// Machine ID
@@ -324,8 +311,7 @@ class SteamUserLogon extends SteamUserSentry {
 		// If we're logging in with account name/password and we're running node 12.22 or later,
 		// go ahead and get a refresh token.
 		if (this._logOnDetails.account_name && this._logOnDetails.password) {
-			let nodeVersion = process.versions.node.split('.');
-			if (nodeVersion[0] > 12 || (nodeVersion[0] == 12 && nodeVersion[1] >= 22)) {
+			if (Helpers.newAuthCapable()) {
 				this.emit('debug', 'Node version is new enough for steam-session; performing new auth');
 				let startTime = Date.now();
 				let newAuthSucceeded = await this._performNewAuth();
@@ -377,18 +363,24 @@ class SteamUserLogon extends SteamUserSentry {
 			});
 
 			session.on('error', (err) => {
-				this.debug(`steam-session error: ${err.message}`);
+				// LoginSession only emits an `error` event if there's some problem with the actual interface used to
+				// communicate with Steam. Errors for invalid credentials are handled elsewhere, so we only need to
+				// emit ServiceUnavailable here since this should be a transient error.
+
+				this.emit('debug', `steam-session error: ${err.message}`);
 				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
 				resolve(false);
 			});
 
 			session.on('timeout', () => {
-				this.debug('steam-session timeout');
+				this.emit('debug', 'steam-session timeout');
 				this._handleLogOnResponse({eresult: EResult.ServiceUnavailable});
 				resolve(false);
 			});
 
-			// TODO somehow handle steam guard machine tokens
+			session.on('steamGuardMachineToken', () => {
+				this._handleNewMachineToken(session.steamGuardMachineToken);
+			});
 
 			let sessionStartResult = null;
 
@@ -396,7 +388,7 @@ class SteamUserLogon extends SteamUserSentry {
 				sessionStartResult = await session.startWithCredentials({
 					accountName: this._logOnDetails.account_name,
 					password: this._logOnDetails.password,
-					steamGuardMachineToken: this._logOnDetails.sha_sentryfile,
+					steamGuardMachineToken: this._machineAuthToken,
 					steamGuardCode: this._logOnDetails.two_factor_code || this._logOnDetails.auth_code
 				});
 			} catch (ex) {
@@ -555,12 +547,6 @@ class SteamUserLogon extends SteamUserSentry {
 
 		let relogAvailable = (
 			this.steamID.type == SteamID.Type.ANON_USER
-			|| (
-				this.steamID.type == SteamID.Type.INDIVIDUAL
-				&& this._logOnDetails
-				&& this._logOnDetails.should_remember_password
-				&& this._logOnDetails.login_key
-			)
 			|| (
 				this.steamID.type == SteamID.Type.INDIVIDUAL
 				&& this._logOnDetails
@@ -741,7 +727,9 @@ class SteamUserLogon extends SteamUserSentry {
 				if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 					this._requestNotifications();
 
-					if (body.webapi_authenticate_user_nonce) {
+					if (Helpers.newAuthCapable() && this._logOnDetails.access_token) {
+						this.webLogOn();
+					} else if (body.webapi_authenticate_user_nonce) {
 						this._webAuthenticate(body.webapi_authenticate_user_nonce);
 					}
 				} else if (this.steamID.type == SteamID.Type.ANON_USER) {

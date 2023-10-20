@@ -57,8 +57,6 @@ class SteamUser extends SteamUserTwoFactor {
 			packages: {}
 		};
 
-		this._sentry = null;
-
 		this.options = {};
 
 		for (let i in (options || {})) {
@@ -145,6 +143,10 @@ class SteamUser extends SteamUserTwoFactor {
 		this._richPresenceLocalization = {};
 		this._incomingMessageQueue = [];
 		this._useMessageQueue = false; // we only use the message queue while we're processing a multi message
+
+		if (!this._machineAuthTokenSetByDeprecatedSetSentry) {
+			delete this._machineAuthToken;
+		}
 	}
 
 	get packageName() {
