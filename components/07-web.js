@@ -40,6 +40,12 @@ class SteamUserWeb extends SteamUserWebAPI {
 				cookies.push(`sessionid=${sessionId}`);
 			}
 
+			// I don't know what this cookie is for or how important it is that it exist, but the Steam client uses it so let's include it
+			if (!cookies.some(c => c.startsWith('clientsessionid='))) {
+				let clientSessionId = Crypto.randomBytes(8).toString('hex');
+				cookies.push(`clientsessionid=${clientSessionId}`);
+			}
+
 			let sessionId = cookies.find(c => c.startsWith('sessionid=')).substring(10);
 			this.emit('webSession', sessionId, cookies);
 		});
