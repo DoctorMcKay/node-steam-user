@@ -736,7 +736,8 @@ class SteamUserMessages extends SteamUserConnection {
 	_getLoginSession() {
 		if (!this._loginSession) {
 			this._loginSession = new LoginSession(EAuthTokenPlatformType.SteamClient, {
-				transport: new CMAuthTransport(this)
+				transport: new CMAuthTransport(this),
+				machineId: this._logOnDetails?.machine_id
 			});
 		}
 
