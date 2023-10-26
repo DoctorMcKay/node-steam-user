@@ -31,6 +31,12 @@ class SteamUserConnection extends SteamUserEnums {
 
 		if (!this.steamID) {
 			// connection closed while connecting; reconnect
+
+			if (this._lastChosenCM) {
+				// Blacklist this CM from subsequent connection attempts
+				this._ttlCache.add(`CM_DQ_${this._lastChosenCM.type}_${this._lastChosenCM.endpoint}`, 1, 1000 * 60 * 2);
+			}
+
 			setTimeout(() => this._doConnection(), 1000);
 		} else {
 			// connection closed while we were connected; fire logoff

@@ -171,10 +171,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			// Read the required files
 			let filenames = [];
 
-			if (!this._cmList) {
-				filenames.push('cm_list.json');
-			}
-
 			if (!this._logOnDetails.cell_id) {
 				// Some people might be redirecting their storage to a database and running across multiple servers in multiple regions
 				// Let's account for this by saving cellid by a "machine ID" so different boxes will store different cellids
@@ -192,14 +188,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			let files = await this._readFiles(filenames);
 
 			files.forEach((file) => {
-				if (file.filename == 'cm_list.json' && file.contents) {
-					try {
-						this._cmList = JSON.parse(file.contents.toString('utf8'));
-					} catch (e) {
-						// don't care
-					}
-				}
-
 				if (file.filename.match(/^cellid/) && file.contents) {
 					let cellID = parseInt(file.contents.toString('utf8'), 10);
 					if (!isNaN(cellID)) {
@@ -211,27 +199,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 					machineID = file.contents;
 				}
 			});
-
-			if (!this._cmList || !this._cmList.time || Date.now() - this._cmList.time > (1000 * 60 * 60 * 24 * 7)) {
-				// CM list is out of date (more than 7 days old, or doesn't exist). Let's grab a new copy from the WebAPI
-				this.emit('debug', 'Getting CM list from WebAPI');
-				try {
-					let res = await this._apiRequest('GET', 'ISteamDirectory', 'GetCMList', 1, {cellid: this._logOnDetails.cell_id || 0});
-					this._cmList = {
-						tcp_servers: Helpers.fixVdfArray(res.response.serverlist),
-						websocket_servers: Helpers.fixVdfArray(res.response.serverlist_websockets),
-						time: Date.now()
-					};
-					this._saveCMList();
-				} catch (ex) {
-					this.emit('debug', `WebAPI error getting CMList: ${ex.message}`);
-				}
-			}
-
-			if (!this._cmList) {
-				// Get built-in list as a last resort
-				this._cmList = require('../resources/servers.json');
-			}
 
 			// Machine auth token (only necessary if logging on with account name and password)
 			if (!anonLogin && !this._machineAuthToken && this._logOnDetails.account_name) {
@@ -275,7 +242,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 	/**
 	 * @private
 	 */
-	_doConnection() {
+	async _doConnection() {
 		let thisProtocol = this.options.protocol;
 
 		if (this.options.webCompatibilityMode) {
@@ -296,27 +263,69 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			thisProtocol = EConnectionProtocol.WebSocket;
 		}
 
-		if (thisProtocol == EConnectionProtocol.Auto) {
-			if (this._cmList.auto_pct_websocket) {
-				let roll = Math.floor(Math.random() * 100);
-				thisProtocol = roll <= this._cmList.auto_pct_websocket ? EConnectionProtocol.WebSocket : EConnectionProtocol.TCP;
-				this.emit('debug', `Using ${thisProtocol == EConnectionProtocol.WebSocket ? 'WebSocket' : 'TCP'}; we rolled ${roll} and percent to use WS is ${this._cmList.auto_pct_websocket}`);
-			} else {
-				thisProtocol = EConnectionProtocol.TCP;
-			}
+		let getCmListQueryString = {
+			format: 'vdf',
+			cellid: '0'
+		};
+
+		if (this._logOnDetails.cell_id) {
+			getCmListQueryString.cellid = this._logOnDetails.cell_id;
 		}
 
 		switch (thisProtocol) {
 			case EConnectionProtocol.TCP:
-				this._connection = new TCPConnection(this);
+				getCmListQueryString.cmtype = 'netfilter';
 				break;
 
 			case EConnectionProtocol.WebSocket:
-				this._connection = new WebSocketConnection(this);
+				getCmListQueryString.cmtype = 'websockets';
+				break;
+		}
+
+		let cmListResponse = await this._apiRequest('GET', 'ISteamDirectory', 'GetCMListForConnect', 1, getCmListQueryString, 300);
+		if (!cmListResponse.response || !cmListResponse.response.serverlist || Object.keys(cmListResponse.response.serverlist).length == 0) {
+			this.emit('error', new Error('No Steam servers available'));
+			return;
+		}
+
+		let serverList = JSON.parse(JSON.stringify(cmListResponse.response.serverlist));
+		serverList.length = Object.keys(serverList).length;
+
+		serverList = Array.prototype.slice.call(serverList, 0)
+			.filter(s => s.realm == 'steamglobal')
+			.filter(s => ['netfilter', 'websockets'].includes(s.type));
+
+		// Disqualify any CMs that we've blacklisted
+		let dqServerList = serverList.filter(s => !this._ttlCache.get(`CM_DQ_${s.type}_${s.endpoint}`));
+		if (dqServerList.length == 0) {
+			// We've disqualified all potential servers. Reset our blacklist.
+			let dqKeys = this._ttlCache.getKeys().filter(k => k.startsWith('CM_DQ_'));
+			dqKeys.forEach(key => this._ttlCache.delete(key));
+		} else {
+			serverList = dqServerList;
+		}
+
+		serverList.sort((a, b) => a.wtd_load - b.wtd_load);
+
+		// We now have a server list that's sorted by weighted load. Pick a random one from the first 5 options.
+		serverList = serverList.slice(0, 5);
+		let rand = Math.floor(Math.random() * serverList.length);
+		let chosenServer = serverList[rand];
+		this.emit('debug', `Randomly chose ${chosenServer.type} server ${chosenServer.endpoint} (load = ${chosenServer.load}, wtd_load = ${chosenServer.wtd_load})`);
+
+		this._lastChosenCM = chosenServer;
+
+		switch (chosenServer.type) {
+			case 'netfilter':
+				this._connection = new TCPConnection(this, chosenServer);
+				break;
+
+			case 'websockets':
+				this._connection = new WebSocketConnection(this, chosenServer);
 				break;
 
 			default:
-				throw new Error('Unknown connection protocol: ' + this.options.protocol);
+				throw new Error(`Unknown server type ${chosenServer.type}`);
 		}
 	}
 
@@ -419,10 +428,10 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				// We need to synthesize a LogOnResponse eresult
 				let logOnResponse = {};
 
-				let wantsEmailCode = sessionStartResult.validActions.some(action => action.type == EAuthSessionGuardType.EmailCode);
+				let wantsEmailCode = sessionStartResult.validActions.find(action => action.type == EAuthSessionGuardType.EmailCode);
 				if (wantsEmailCode) {
 					logOnResponse.eresult = EResult.AccountLogonDenied;
-					logOnResponse.email_domain = sessionStartResult.validActions.find(action => action.type == EAuthSessionGuardType.EmailCode).detail;
+					logOnResponse.email_domain = wantsEmailCode.detail;
 				} else {
 					logOnResponse.eresult = this._logOnDetails.two_factor_code ? EResult.TwoFactorCodeMismatch : EResult.AccountLoginDeniedNeedTwoFactor;
 				}

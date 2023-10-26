@@ -130,6 +130,7 @@ class SteamUser extends SteamUserTwoFactor {
 		this._richPresenceLocalization = {};
 		this._incomingMessageQueue = [];
 		this._useMessageQueue = false; // we only use the message queue while we're processing a multi message
+		this._ttlCache = new StdLib.DataStructures.TTLCache(1000 * 60 * 5); // default 5 minutes
 
 		delete this._machineAuthToken;
 		delete this._shouldAttemptRefreshTokenRenewal;

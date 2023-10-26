@@ -7,26 +7,32 @@ const BaseConnection = require('./base.js');
 
 const MAGIC = 'VT01';
 
+/**
+ * @typedef CmServer
+ * @property {string} endpoint
+ * @property {string} legacy_endpoint
+ * @property {string} type
+ * @property {string} dc
+ * @property {string} realm
+ * @property {string} load
+ * @property {string} wtd_load
+ */
+
 class TCPConnection extends BaseConnection {
 	/**
 	 * Create a new TCP connection, and connect
 	 * @param {SteamUser} user
+	 * @param {CmServer} chosenServer
 	 * @constructor
 	 */
-	constructor(user) {
+	constructor(user, chosenServer) {
 		super(user);
 
 		this.connectionType = 'TCP';
 		this.sessionKey = null;
 
-		// Pick a CM randomly
-		if (!user._cmList || !user._cmList.tcp_servers) {
-			throw new Error('Nothing to connect to: ' + (user._cmList ? 'no TCP server list' : 'no CM list'));
-		}
-
-		let tcpCm = user._cmList.tcp_servers[Math.floor(Math.random() * user._cmList.tcp_servers.length)];
-		this._debug('Connecting to TCP CM: ' + tcpCm);
-		let cmParts = tcpCm.split(':');
+		this._debug('Connecting to TCP CM: ' + chosenServer.endpoint);
+		let cmParts = chosenServer.endpoint.split(':');
 		let cmHost = cmParts[0];
 		let cmPort = parseInt(cmParts[1], 10);
 
@@ -38,7 +44,7 @@ class TCPConnection extends BaseConnection {
 				port: url.port,
 
 				method: 'CONNECT',
-				path: tcpCm,
+				path: chosenServer.endpoint,
 				localAddress: user.options.localAddress,
 				localPort: user.options.localPort
 			};

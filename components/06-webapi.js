@@ -14,10 +14,11 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 	 * @param {string} method
 	 * @param {number} version
 	 * @param {object} [data]
+	 * @param {number} [cacheSeconds]
 	 * @returns {Promise}
 	 * @protected
 	 */
-	async _apiRequest(httpMethod, iface, method, version, data) {
+	async _apiRequest(httpMethod, iface, method, version, data, cacheSeconds) {
 		return new Promise((resolve, reject) => {
 			data = data || {};
 			httpMethod = httpMethod.toUpperCase(); // just in case
@@ -48,6 +49,13 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 				headers
 			};
 
+			let cacheKey = `API_${httpMethod}_https://${options.hostname}${options.path}`;
+			let cacheValue;
+			if (cacheSeconds && (cacheValue = this._ttlCache.get(cacheKey))) {
+				this.emit('debug', `[WebAPI] Using cached value for ${cacheKey}`);
+				return resolve(cacheValue);
+			}
+
 			if (this.options.localAddress) {
 				options.localAddress = this.options.localAddress;
 			}
@@ -71,15 +79,19 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 					res.pipe(stream);
 				}
 
-				stream.on('data', function(data) {
+				stream.on('data', (data) => {
 					responseData += data;
 				});
 
-				stream.on('end', function() {
+				stream.on('end', () => {
 					try {
 						responseData = VDF.parse(responseData);
 					} catch (ex) {
 						return reject(ex);
+					}
+
+					if (cacheSeconds) {
+						this._ttlCache.add(cacheKey, responseData, 1000 * cacheSeconds);
 					}
 
 					resolve(responseData);
