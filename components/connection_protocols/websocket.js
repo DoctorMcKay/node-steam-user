@@ -1,12 +1,7 @@
 const HTTPS = require('https');
-const StdLib = require('@doctormckay/stdlib');
 const WS13 = require('websocket13');
 
 const BaseConnection = require('./base.js');
-
-let g_BootstrapSemaphore = new StdLib.Concurrency.Semaphore();
-let g_LastWebsocketPing = 0;
-let g_PingedServers = [];
 
 /**
  * @typedef CmServer
