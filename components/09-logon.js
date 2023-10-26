@@ -548,17 +548,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			|| this._logOnDetails._steamid.toString();
 	}
 
-	/**
-	 * @private
-	 */
-	_saveCMList() {
-		if (!this._cmList) {
-			return;
-		}
-
-		this._saveFile('cm_list.json', JSON.stringify(this._cmList, null, '\t'));
-	}
-
 	relog() {
 		if (!this.steamID) {
 			throw new Error('Cannot relog if not already connected');
@@ -822,19 +811,6 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientLoggedOff, function(body)
 
 	this.emit('debug', 'Logged off: ' + msg);
 	this._handleLogOff(body.eresult, msg);
-});
-
-SteamUserBase.prototype._handlerManager.add(EMsg.ClientCMList, function(body) {
-	this.emit('debug', `Got list of ${(body.cm_websocket_addresses || []).length} WebSocket CMs, with percentage to use at ${body.percent_default_to_websocket || 0}%`);
-
-	this._cmList = {
-		tcp_servers: (body.cm_addresses || []).map((addr, idx) => StdLib.IPv4.intToString(addr) + ':' + body.cm_ports[idx]),
-		websocket_servers: body.cm_websocket_addresses || [],
-		auto_pct_websocket: body.percent_default_to_websocket,
-		time: Date.now()
-	};
-
-	this._saveCMList();
 });
 
 // Private functions
