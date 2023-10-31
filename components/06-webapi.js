@@ -34,6 +34,7 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 			httpsAgent: this._getProxyAgent(),
 			localAddress: this.options.localAddress,
 			defaultHeaders: Object.assign(getDefaultHeaders(), this.options.additionalHeaders),
+			defaultTimeout: 5000,
 			gzip: true
 		});
 		this._httpClient = client;
