@@ -765,8 +765,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 						// The new way of getting web cookies is to use a refresh token to get a fresh access token, which
 						// is what's used as the cookie. Confusingly, access_token in CMsgClientLogOn is actually a refresh token.
 						this.webLogOn();
-					} else if (body.webapi_authenticate_user_nonce) {
-						this._webAuthenticate(body.webapi_authenticate_user_nonce);
 					}
 				} else if (this.steamID.type == SteamID.Type.ANON_USER) {
 					this._getLicenseInfo();
