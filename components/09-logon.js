@@ -282,7 +282,28 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				break;
 		}
 
-		let cmListResponse = await this._apiRequest('GET', 'ISteamDirectory', 'GetCMListForConnect', 1, getCmListQueryString, 300);
+		let cmListResponse;
+		try {
+			cmListResponse = await this._apiRequest(
+				'GET',
+				'ISteamDirectory',
+				'GetCMListForConnect',
+				1,
+				getCmListQueryString,
+				300
+			);
+		} catch (ex) {
+			this.emit('debug', `GetCMListForConnect error: ${ex.message}`);
+
+			if (++this._getCmListAttempts >= 10) {
+				this.emit('error', ex);
+			} else {
+				setTimeout(() => this._doConnection());
+			}
+
+			return;
+		}
+
 		if (!cmListResponse.response || !cmListResponse.response.serverlist || Object.keys(cmListResponse.response.serverlist).length == 0) {
 			this.emit('error', new Error('No Steam servers available'));
 			return;
