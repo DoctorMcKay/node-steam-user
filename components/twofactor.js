@@ -13,10 +13,10 @@ class SteamUserTwoFactor extends SteamUserTrading {
 		return StdLib.Promises.timeoutCallbackPromise(15000, null, callback, (resolve, reject) => {
 			this._sendUnified('TwoFactor.AddAuthenticator#1', {
 				steamid: this.steamID.getSteamID64(),
-				authenticator_time: Math.floor(Date.now() / 1000),
 				authenticator_type: 1,
 				device_identifier: SteamTotp.getDeviceID(this.steamID),
-				sms_phone_id: '1'
+				sms_phone_id: '1',
+				version: 2
 			}, (body) => {
 				body.server_time = typeof body.server_time === 'string' ? parseInt(body.server_time, 10) : (body.server_time || null);
 				body.shared_secret = body.shared_secret ? body.shared_secret.toString('base64') : null;
