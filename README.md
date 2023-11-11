@@ -658,15 +658,16 @@ Listen for the [`webSession`](#websession) event to get your cookies.
 Requests Steam to send you a validation email to your registered email address.
 
 ### enableTwoFactor(callback)
-- `callback` - Required. Called when the activation email has been sent.
+- `callback` - Required. Called when the activation email or SMS has been sent.
     - `err` - An `Error` object on failure, or `null` on success
 	- `response` - An object containing the response data
 
 **v2.0.0 or later is required to use this method**
 
-Starts the process to turn on TOTP for your account. You must have a phone number already linked with and verified on your account.
+Starts the process to turn on TOTP for your account.
 
-You'll be sent an SMS with an activation code that you'll need to provide to `finalizeTwoFactor`.
+If you have a phone number linked with your account, then you'll be sent an SMS with an activation code. Otherwise,
+you'll receive the activation code by email. You'll need to provide the activation code to `finalizeTwoFactor`.
 
 **You should save the entire `response` object somewhere secure.** You can use `JSON.stringify` on it safely.
 
@@ -678,13 +679,14 @@ Properties of note in the `response` object:
 
 ### finalizeTwoFactor(secret, activationCode, callback)
 - `secret` - A `Buffer` containing your shared secret
-- `activationCode` - A `string` containing the activation code you got in your SMS
+- `activationCode` - A `string` containing the activation code you got in your SMS or email
 - `callback` - Required.
 	- `err` - An `Error` object on failure, or `null` on success
 
 **v2.0.0 or later is required to use this method**
 
-Finishes the process of enabling TOTP two-factor authentication for your account. You can use [`steam-totp`](https://www.npmjs.com/package/steam-totp) in the future when logging on to get a code.
+Finishes the process of enabling TOTP two-factor authentication for your account. You can use
+[`steam-totp`](https://www.npmjs.com/package/steam-totp) in the future when logging on to get a code.
 
 **If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a refresh token is used.**
 
