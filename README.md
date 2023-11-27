@@ -79,8 +79,8 @@ Formats a currency value and returns a string. For example:
 
 ```js
 console.log(SteamUser.formatCurrency(12.34, SteamUser.ECurrencyCode.USD)); // $12.34
-console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // � 12345
-console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45�
+console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // ¥ 12345
+console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45€
 ```
 
 # Options [^](#contents)
