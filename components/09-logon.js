@@ -298,7 +298,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			if (++this._getCmListAttempts >= 10) {
 				this.emit('error', ex);
 			} else {
-				setTimeout(() => this._doConnection());
+				setTimeout(() => this._doConnection(), 500);
 			}
 
 			return;
