@@ -41,13 +41,13 @@ class WebSocketConnection extends BaseConnection {
 		this.stream.on('debug', msg => this._debug(msg, true));
 		this.stream.on('message', this._readMessage.bind(this));
 
-		this.stream.on('disconnected', (code, reason) => {
+		this.stream.on('disconnected', (code, reason, initiatedByUs) => {
 			if (this._disconnected) {
 				return;
 			}
 
 			this._disconnected = true;
-			this._debug('WebSocket disconnected with code ' + code + ' and reason: ' + reason);
+			this._debug(`WebSocket closed by ${initiatedByUs ? 'us' : 'remote'} with code ${code} and reason "${reason}"`);
 			this.user._handleConnectionClose(this);
 		});
 
