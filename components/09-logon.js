@@ -295,12 +295,22 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		} catch (ex) {
 			this.emit('debug', `GetCMListForConnect error: ${ex.message}`);
 
+			if (this._connectionClosed) {
+				// logOff() was already called
+				return;
+			}
+
 			if (++this._getCmListAttempts >= 10) {
 				this.emit('error', ex);
 			} else {
 				setTimeout(() => this._doConnection(), 500);
 			}
 
+			return;
+		}
+
+		if (this._connectionClosed) {
+			// logOff() was already called
 			return;
 		}
 
