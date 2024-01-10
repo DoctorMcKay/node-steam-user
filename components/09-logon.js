@@ -43,10 +43,12 @@ class SteamUserLogon extends SteamUserMachineAuth {
 	 */
 	logOn(details) {
 		// Delay the actual logon by one tick, so if users call logOn from the error event they won't get a crash because
-		// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted)
+		// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted).
+		// Go ahead and create the Error now, so that we'll have a useful stack trace if we need to throw it.
+		let err = new Error('Already logged on, cannot log on again');
 		process.nextTick(async () => {
 			if (this.steamID) {
-				throw new Error('Already logged on, cannot log on again');
+				throw err;
 			}
 
 			this.steamID = null;
