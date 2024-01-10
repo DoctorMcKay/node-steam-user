@@ -49,13 +49,21 @@ class SteamUserConnection extends SteamUserEnums {
 	}
 
 	_cleanupClosedConnection() {
-		clearTimeout(this._logonTimeout); // cancel any queued reconnect attempt
-		clearTimeout(this._logonMsgTimeout);
+		this._connecting = false;
+		this._loggingOff = false;
+
+		this._cancelReconnectTimers();
 		clearInterval(this._heartbeatInterval);
 
 		this._incomingMessageQueue = []; // clear the incoming message queue. If we're disconnecting, we don't care about anything else in the queue.
 
 		this._clearChangelistUpdateTimer();
+	}
+
+	_cancelReconnectTimers() {
+		clearTimeout(this._logonTimeout);
+		clearTimeout(this._logonMsgTimeout);
+		clearTimeout(this._reconnectForCloseDuringAuthTimeout);
 	}
 
 	_getProxyAgent() {
