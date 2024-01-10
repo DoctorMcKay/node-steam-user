@@ -473,6 +473,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 	_enqueueLogonAttempt() {
 		let timer = this._logonTimeoutDuration || 1000;
 		this._logonTimeoutDuration = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
+		this.emit('debug', `Enqueueing login attempt in ${timer} ms`);
 		this._logonTimeout = setTimeout(() => {
 			this.logOn(true);
 		}, timer);
