@@ -682,6 +682,9 @@ class SteamUserLogon extends SteamUserMachineAuth {
 	async _handleLogOnResponse(body) {
 		this.emit('debug', `Handle logon response (${EResult[body.eresult]})`);
 
+		clearTimeout(this._reconnectForCloseDuringAuthTimeout);
+		delete this._reconnectForCloseDuringAuthTimeout;
+
 		clearTimeout(this._logonMsgTimeout);
 		delete this._logonMsgTimeout;
 
