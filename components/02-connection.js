@@ -27,6 +27,12 @@ class SteamUserConnection extends SteamUserEnums {
 		}
 
 		this.emit('debug', `[${connPrefix}] Handling connection close`);
+		if (this._loggingOff) {
+			// We want to bail, so call _handleLogOff now (normally it's called at the end)
+			this._handleLogOff(EResult.NoConnection, 'Logged off');
+			return;
+		}
+
 		this._cleanupClosedConnection();
 
 		if (!this.steamID) {

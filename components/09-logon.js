@@ -653,6 +653,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			this.steamID = null;
 		} else {
 			// Only emit "disconnected" if we were previously logged on
+			let wasLoggingOff = this._loggingOff; // remember this since our 'disconnected' event handler might reset it
 			if (this.steamID) {
 				this.emit('disconnected', result, msg);
 			}
@@ -660,7 +661,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			this._disconnect(true);
 
 			// if we're manually relogging, or we got disconnected because steam went down, enqueue a reconnect
-			if (!this._loggingOff || this._relogging) {
+			if (!wasLoggingOff || this._relogging) {
 				this._logonTimeout = setTimeout(() => {
 					this.logOn(true);
 				}, 1000);
