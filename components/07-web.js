@@ -50,7 +50,7 @@ class SteamUserWeb extends SteamUserWebAPI {
 			 */
 
 			this.emit('webSession', sessionId, cookies);
-		});
+		}).catch((error) => this.emit('error', new Error('Failed to get web session: ' + error.message)));
 	}
 }
 
