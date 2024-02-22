@@ -158,6 +158,11 @@ class TCPConnection extends BaseConnection {
 			data = SteamCrypto.symmetricEncryptWithHmacIv(data, this.sessionKey);
 		}
 
+		if (!this.stream) {
+			this._debug('Tried to send message, but there is no stream');
+			return;
+		}
+
 		let buf = Buffer.alloc(4 + 4 + data.length);
 		buf.writeUInt32LE(data.length, 0);
 		buf.write(MAGIC, 4);
@@ -192,8 +197,12 @@ class TCPConnection extends BaseConnection {
 			}
 		}
 
-		let message;
+		if (!this.stream) {
+			this._debug('Tried to read message, but there is no stream');
+			return;
+		}
 
+		let message;
 		try {
 			message = this.stream.read(this._messageLength);
 		} catch (error) {
