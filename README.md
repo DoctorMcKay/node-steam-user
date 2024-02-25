@@ -492,6 +492,14 @@ This is a `SteamChatRoomClient` instance. Use this object to chat with friends a
 
 [Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
+### playingState
+
+**v4.0.0 or later is required to use this property**
+
+An object containing information about your current playing state. This object has these properties:
+- `blocked` - `true` if you're blocked from playing a game on this session (because a game is being played on this account using another logon session)
+- `appid` - The AppID of the game you're playing, or `0` if you're not playing any game
+
 ### packageName
 
 **v4.2.0 or later is required to use this property**
