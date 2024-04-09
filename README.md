@@ -678,7 +678,7 @@ Properties of note in the `response` object:
 - `revocation_code` - You will need this in the future to disable two-factor authentication.
 
 ### finalizeTwoFactor(secret, activationCode, callback)
-- `secret` - A `Buffer` containing your shared secret
+- `secret` - A `string` containing your shared secret
 - `activationCode` - A `string` containing the activation code you got in your SMS or email
 - `callback` - Required.
 	- `err` - An `Error` object on failure, or `null` on success
