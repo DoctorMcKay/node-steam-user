@@ -61,6 +61,7 @@ class WebSocketConnection extends BaseConnection {
 
 			if (err.proxyConnecting || err.constructor.name == 'SocksClientError') {
 				// This error happened while connecting to the proxy
+				this.user._cleanupClosedConnection();
 				this.user.emit('error', err);
 			} else {
 				this.user._handleConnectionClose(this);
