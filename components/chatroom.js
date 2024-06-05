@@ -294,7 +294,7 @@ class SteamChatRoomClient extends EventEmitter {
 				}
 
 				body.group_summary = processChatGroupSummary(body.group_summary, true);
-				body.user_chat_group_state = processUserChatGroupState(body.user_chat_group_state, true);
+				body.user_chat_group_state = body.user_chat_group_state ? processUserChatGroupState(body.user_chat_group_state, true) : null;
 				body.banned = !!body.banned;
 				body.invite_code = match[1];
 				resolve(body);
