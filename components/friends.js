@@ -844,10 +844,11 @@ class SteamUserFriends extends SteamUserFamilySharing {
 			steamID = Helpers.steamID(steamID);
 			this._sendUnified('Player.GetOwnedGames#1', {
 				steamid: steamID.toString(),
-				include_appinfo: true,
+				include_appinfo: options.includeAppInfo ?? true,
 				include_played_free_games: options.includePlayedFreeGames || false,
 				appids_filter: options.filterAppids || undefined,
-				include_free_sub: options.includeFreeSub || false
+				include_free_sub: options.includeFreeSub || false,
+				skip_unvetted_apps: options.skipUnvettedApps ?? true
 			}, (body, hdr) => {
 				let err = Helpers.eresultError(hdr.proto);
 				if (err) {
