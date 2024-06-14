@@ -708,9 +708,9 @@ v3.5.0 or later is required to use `isPhoneVerified`.**
 Requests details about your account's Steam Guard status. This could be used to see if your account passes the Steam Guard trading requirements.
 
 In order to trade, **all** of the following must be true:
-- `enabled` must be `true` (account-level restriction)
-- `enabledTime` must be at least 15 days ago (account-level restriction)
-- ONE of `machineTime` OR `twoFactorTime` must be at least 7 days ago
+- `isSteamGuardEnabled` must be `true` (account-level restriction)
+- `timestampSteamGuardEnabled` must be at least 15 days ago (account-level restriction)
+- ONE of `timestampMachineSteamGuardEnabled` OR `timestampTwoFactorEnabled` must be at least 7 days ago
 
 ### getCredentialChangeTimes(callback)
 - `callback` - A function to be called when the requested data is available
