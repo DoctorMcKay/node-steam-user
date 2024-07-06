@@ -1322,8 +1322,8 @@ Gets your own Steam Level, and the level you have on a badge for a particular ga
 - `callback` - Called when the request completes.
     - `err` - An `Error` object on failure or `null` on success.
     - `response` - The response object
-        - `game_count` - A number indicating how many total apps this user owns
-        - `games` - An array of objects:
+        - `app_count` - A number indicating how many total apps this user owns
+        - `apps` - An array of objects:
             - `appid` - The ID of the app
             - `name` - The name of the app
             - `playtime_2weeks` - How many minutes this user has played in the past 2 weeks (may be `null`)
