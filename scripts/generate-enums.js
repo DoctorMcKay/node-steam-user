@@ -110,9 +110,26 @@ download('https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 					if (line.match(/^};?$/)) {
 						process.stdout.write(`Generating ${currentEnum.name}.js... `);
 						// We're done parsing this enum, let's go ahead and generate the file
-						// First make sure it has actually changed
-						let enumFileName = `${__dirname}/../enums/${currentEnum.name}.js`;
-						let {changed, valuesToAdd} = validateEnum(enumFileName, currentEnum.values, currentEnum.dynamicValues);
+
+						// Resolve any dynamic values
+						currentEnum.dynamicValues.forEach(({name, value, comment}) => {
+							let resolvedValue = 0;
+							value.forEach((flag) => {
+								let flagEnumValue = currentEnum.values.find(v => v.name == flag);
+								if (!flagEnumValue) {
+									throw new Error(`Couldn't find dynamic value "${name}" in enum ${currentEnum.name}`);
+								}
+
+								resolvedValue |= flagEnumValue.value;
+							});
+
+							comment = comment || value.join('|');
+							currentEnum.values.push({name, value: resolvedValue, comment});
+						});
+
+						// Make sure it has actually changed
+						let enumFileName = `${__dirname}/../src/enums/${currentEnum.name}.ts`;
+						let {changed, valuesToAdd} = validateEnum(enumFileName, currentEnum.values);
 						if (!changed) {
 							// Enum has not changed
 							console.log('unchanged');
@@ -132,36 +149,19 @@ download('https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 						currentEnum.values = currentEnum.values.concat(valuesToAdd);
 						currentEnum.values.sort(sortEnum);
 
-						let file = GENERATED_FILE_HEADER + `/**\n * @enum\n * @readonly\n */\nconst ${currentEnum.name} = {\n`;
+						let file = `${GENERATED_FILE_HEADER}enum ${currentEnum.name} {\n`;
 
 						currentEnum.values.forEach(function(val) {
-							file += '\t"' + val.name + '": ' + val.value + ',' + (val.comment ? ' // ' + val.comment.trim() : '') + '\n';
-						});
-
-						file += '\n\t// Value-to-name mapping for convenience\n';
-
-						// Put down the reverse, for simplicity in use
-						currentEnum.values.forEach(function(val, idx) {
-							if (!val.value.match(/^-?[0-9]+/)) {
-								return; // it's dynamic
-							}
-
-							// Is this the last value in this enum with this value?
-							if (currentEnum.values.some(function(val2, idx2) { return val2.value == val.value && idx2 > idx; })) {
+							let comment = val.comment ? val.comment.trim() : null;
+							if (comment?.startsWith('removed') && currentEnum.values.some(v => v.name == val.name && v.value != val.value)) {
+								// This name is used for another case
 								return;
 							}
 
-							file += '\t"' + val.value + '": "' + val.name + '",\n';
+							file += `\t${quoteObjectKey(val.name)} = ${val.value},${val.comment ? ` // ${val.comment.trim()}` : ''}\n`;
 						});
 
-						file += `};\n\nmodule.exports = ${currentEnum.name};\n`;
-
-						if (currentEnum.dynamicValues.length > 0) {
-							file += '\n';
-							currentEnum.dynamicValues.forEach(function(val) {
-								file += 'module.exports.' + val.name + ' = ' + val.value + ';' + (val.comment ? ' // ' + val.comment.trim() : '') + '\n';
-							});
-						}
+						file += `}\n\nexport default ${currentEnum.name};\n`;
 
 						FS.writeFileSync(enumFileName, file);
 						g_EnumNames[currentEnum.name] = true;
@@ -183,24 +183,16 @@ download('https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 
 						let isDynamic = false;
 
-						let flags = value.split('|').map(function(flag) {
+						let flags = value.split('|').map((flag) => {
 							flag = flag.trim();
-
-							if (flag.match(/^-?[0-9]+$/)) {
-								return flag;
-							} else {
-								isDynamic = true;
-								return 'module.exports.' + flag;
-							}
+							isDynamic = isDynamic || !flag.match(/^-?[0-9]+$/);
+							return flag;
 						});
 
-						value = flags.join(' | ');
+						// If this is a dynamic value, push the array into the current enum's object so we can resolve it later
+						value = isDynamic ? flags : flags[0];
 
-						(isDynamic ? currentEnum.dynamicValues : currentEnum.values).push({
-							name: name,
-							value: value,
-							comment: comment
-						});
+						(isDynamic ? currentEnum.dynamicValues : currentEnum.values).push({name, value, comment});
 					}
 				}
 			});
@@ -211,11 +203,13 @@ download('https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 				g_EnumNames = Object.keys(g_EnumNames);
 				g_EnumNames.sort();
 
-				let loader = GENERATED_FILE_HEADER + 'const SteamUserBase = require(\'./00-base.js\');\n\nclass SteamUserEnums extends SteamUserBase {\n}\n\n';
-				loader += g_EnumNames.map(name => `SteamUserEnums.${name} = require('../enums/${name}.js');`).join('\n');
-				loader += '\n\nmodule.exports = SteamUserEnums;\n';
+				let loader = `${GENERATED_FILE_HEADER}import SteamUserBase from './00-base';\n\n`;
+				loader += g_EnumNames.map(name => `import ${name} from '../enums/${name}';`).join('\n');
+				loader += '\n\nclass SteamUserEnums extends SteamUserBase {\n';
+				loader += g_EnumNames.map(name => `\tstatic ${name} = ${name};`).join('\n');
+				loader += '\n}\n\nexport default SteamUserEnums;\n';
 
-				FS.writeFileSync(__dirname + '/../components/01-enums.js', loader);
+				FS.writeFileSync(__dirname + '/../src/components/01-enums.ts', loader);
 				console.log('Wrote loader');
 			}
 		});
@@ -265,7 +259,7 @@ function processProtobufEnums() {
 			});
 		}
 
-		let enumFileName = `${__dirname}/../enums/${enumName}.js`;
+		let enumFileName = `${__dirname}/../src/enums/${enumName}.ts`;
 
 		// Check to see if the enum has changed at all
 		let {changed, valuesToAdd} = validateEnum(enumFileName, processed);
@@ -286,12 +280,10 @@ function processProtobufEnums() {
 		processed = processed.concat(valuesToAdd);
 		processed.sort(sortEnum);
 
-		let enumFile = GENERATED_FILE_HEADER + `/**\n * @enum\n * @readonly\n */\nconst ${enumName} = {\n`;
-		enumFile += processed.map(v => `\t${quoteObjectKey(v.name)}: ${v.value},` + (v.comment ? ` // ${v.comment}` : '')).join('\n');
-		enumFile += '\n\n\t// Value-to-name mapping for convenience\n';
-		enumFile += processed.filter(v => v.comment !== 'obsolete').map(v => `\t${quoteObjectKey(v.value)}: '${v.name}',`).join('\n');
-		enumFile += `\n};\n\nmodule.exports = ${enumName};\n`;
-		FS.writeFileSync(`${__dirname}/../enums/${enumName}.js`, enumFile);
+		let enumFile = `${GENERATED_FILE_HEADER}enum ${enumName} {\n`;
+		enumFile += processed.map(v => `\t${quoteObjectKey(v.name)} = ${v.value},` + (v.comment ? ` // ${v.comment}` : '')).join('\n');
+		enumFile += `\n}\n\nexport default ${enumName};\n`;
+		FS.writeFileSync(enumFileName, enumFile);
 
 		g_EnumNames[enumName] = true;
 		let normalized = enumName.toLowerCase();
@@ -324,14 +316,14 @@ function download(url, callback) {
 	}).end();
 }
 
-function validateEnum(enumFileName, values, dynamicValues = []) {
+function validateEnum(enumFileName, values) {
 	let output = {
 		changed: true,
 		valuesToAdd: []
 	};
 
 	if (FS.existsSync(enumFileName)) {
-		let existingEnum = Object.assign({}, require(enumFileName)); // clone it since we're about to manipulate it
+		let existingEnum = readEnumFile(enumFileName)
 		for (let i in existingEnum) {
 			if (i.match(/^-?\d+$/)) {
 				delete existingEnum[i];
@@ -352,13 +344,38 @@ function validateEnum(enumFileName, values, dynamicValues = []) {
 			}
 		}
 
-		if (values.length + output.valuesToAdd.length + dynamicValues.length == Object.keys(existingEnum).length) {
+		if (values.length + output.valuesToAdd.length == Object.keys(existingEnum).length) {
 			// Enum did not change
 			output.changed = false;
 		}
 	}
 
 	return output;
+}
+
+function readEnumFile(filename) {
+	let fileContent = FS.readFileSync(filename).toString('utf8');
+
+	let enumObjMatch = fileContent.match(/enum [^ ]+ ({\n[^}]+)\n}/);
+	if (!enumObjMatch) {
+		throw new Error(`Could not parse enum out of ${filename}`);
+	}
+
+	/** @var {{name: string, value: number, comment?: string}[]} cases */
+	let cases = [];
+
+	enumObjMatch[1].split('\n').forEach((enumCase) => {
+		let caseMatch = enumCase.match(/\t([^ ]+) = (-?\d+),(\W*\/\/[^\n]+)?\W*$/);
+		if (caseMatch) {
+			cases.push({
+				name: caseMatch[1],
+				value: parseInt(caseMatch[2]),
+				comment: caseMatch[3]?.match(/^\W*\/\/(.+)$/)[1].trim()
+			});
+		}
+	});
+
+	return cases;
 }
 
 function sortEnum(a, b) {

@@ -1,13 +1,17 @@
-class HandlerManager {
+type HandlerFunction = (...args: any[]) => any;
+
+export class HandlerManager {
+	_handlers: {[name: string]: HandlerFunction[]} = {};
+
 	constructor() {
 		this._handlers = {};
 	}
 
-	hasHandler(msg) {
-		return this._handlers[msg] && this._handlers[msg].length > 0;
+	hasHandler(msg: string): boolean {
+		return !!(this._handlers[msg] && this._handlers[msg].length > 0);
 	}
 
-	add(msg, handler) {
+	add(msg: string, handler: HandlerFunction) {
 		if (!this._handlers[msg]) {
 			this._handlers[msg] = [];
 		}
@@ -23,7 +27,7 @@ class HandlerManager {
 		this._handlers[msg].push(handler);
 	}
 
-	emit(instance, msg, ...args) {
+	emit(instance, msg: string, ...args: any[]) {
 		this.checkMsgForLegacyHandlers(msg);
 
 		let handlers = this._handlers[msg];
@@ -36,7 +40,8 @@ class HandlerManager {
 		});
 	}
 
-	checkMsgForLegacyHandlers(msg) {
+	checkMsgForLegacyHandlers(msg: string) {
+		// TODO change this require
 		const SteamUser = require('../../index.js');
 		if (typeof SteamUser.prototype._handlers[msg] === 'function') {
 			this.add(msg, SteamUser.prototype._handlers[msg]);
@@ -44,5 +49,3 @@ class HandlerManager {
 		}
 	}
 }
-
-module.exports = HandlerManager;

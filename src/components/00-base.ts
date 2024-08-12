@@ -1,6 +1,6 @@
-const {EventEmitter} = require('events');
+import {EventEmitter} from 'events';
 
-const HandlerManager = require('./classes/HandlerManager.js');
+import {HandlerManager} from './classes/HandlerManager';
 
 /**
  * I admit, this is a pretty unorthodox pattern, but this is the only way I've found to define a class across multiple
@@ -8,8 +8,10 @@ const HandlerManager = require('./classes/HandlerManager.js');
  *
  * Inheritance follows filenames sorted alphabetically with numbers first.
  */
-class SteamUserBase extends EventEmitter {}
+class SteamUserBase extends EventEmitter {
+	_handlerManager: HandlerManager;
+}
 
 SteamUserBase.prototype._handlerManager = new HandlerManager();
 
-module.exports = SteamUserBase;
+export default SteamUserBase;
