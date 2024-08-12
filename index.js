@@ -137,6 +137,9 @@ class SteamUser extends SteamUserTwoFactor {
 		delete this._shouldAttemptRefreshTokenRenewal;
 		delete this._loginSession;
 		delete this._connectionClosed;
+
+		clearTimeout(this._reconnectForCloseDuringAuthTimeout);
+		delete this._reconnectForCloseDuringAuthTimeout;
 	}
 
 	get packageName() {

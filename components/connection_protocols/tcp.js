@@ -79,11 +79,13 @@ class TCPConnection extends BaseConnection {
 
 			req.on('timeout', () => {
 				connectionEstablished = true;
+				this.user._cleanupClosedConnection();
 				this.user.emit('error', new Error('Proxy connection timed out'));
 			});
 
 			req.on('error', (err) => {
 				connectionEstablished = true;
+				this.user._cleanupClosedConnection();
 				this.user.emit('error', err);
 			});
 		} else {

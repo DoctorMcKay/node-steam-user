@@ -37,7 +37,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 
 	/**
 	 * Finalize the process of enabling TOTP two-factor authentication
-	 * @param {Buffer} secret - Your shared secret
+	 * @param {Buffer|string} secret - Your shared secret
 	 * @param {string} activationCode - The activation code you got in your email
 	 * @param {function} [callback] - Called with a single Error argument, or null on success
 	 * @return {Promise}
