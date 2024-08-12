@@ -4,14 +4,18 @@ module.exports = {
 		es2021: true,
 		node: true
 	},
-	extends: ['eslint:recommended'],
+	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
 	root: true,
 	parserOptions: {
 		ecmaVersion: 12,
 		sourceType: 'module'
 	},
 	ignorePatterns: [
-		'dev/*'
+		'dist/*',
+		'dev/*',
+		'scripts/*'
 	],
 	rules: {
 		'prefer-const': 'off',

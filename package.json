@@ -21,6 +21,22 @@
 		"type": "git",
 		"url": "https://github.com/DoctorMcKay/node-steam-user.git"
 	},
+	"main": "dist/index.js",
+	"files": [
+		"/dist",
+		"/src"
+	],
+	"scripts": {
+		"prepare": "npm run build",
+		"prepublishOnly": "npm run lint",
+		"build": "node scripts/delete-dist.js && tsc --outDir dist",
+		"lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+		"generate-enums": "node scripts/generate-enums.js",
+		"generate-protos": "node scripts/generate-protos.js"
+	},
+	"engines": {
+		"node": ">=14.0.0"
+	},
 	"dependencies": {
 		"@bbob/parser": "^2.2.0",
 		"@doctormckay/stdlib": "^2.9.1",
@@ -40,16 +56,14 @@
 		"websocket13": "^4.0.0"
 	},
 	"devDependencies": {
+		"@types/node": "14.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.36.0",
+		"@typescript-eslint/parser": "^5.36.0",
 		"eslint": "^8.23.0",
+		"protobufjs-cli": "^1.1.2",
 		"steamcommunity": "^3.39.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^4.9.5",
 		"wtfnode": "^0.8.4"
-	},
-	"scripts": {
-		"generate-enums": "node scripts/generate-enums.js",
-		"generate-protos": "node scripts/generate-protos.js",
-		"lint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
-	},
-	"engines": {
-		"node": ">=14.0.0"
 	}
 }
