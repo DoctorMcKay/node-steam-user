@@ -1,13 +1,13 @@
 const FileManager = require('file-manager');
 const StdLib = require('@doctormckay/stdlib');
 
-const SteamChatRoomClient = require('./components/chatroom.js');
-
-const DefaultOptions = require('./resources/default_options.js');
-const Package = require('./package.json');
+const DefaultOptions = require('../resources/default_options.js');
+const Package = require('../package.json');
 
 const SteamUserTwoFactor = require('./components/twofactor.js');
 const SteamUserBase = require('./components/00-base.js');
+
+const SteamChatRoomClient = require('./components/chatroom.js');
 
 /**
  * @class SteamUser

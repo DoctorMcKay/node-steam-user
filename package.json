@@ -29,7 +29,7 @@
 	"scripts": {
 		"prepare": "npm run build",
 		"prepublishOnly": "npm run lint",
-		"build": "node scripts/delete-dist.js && tsc --outDir dist",
+		"build": "node scripts/delete-dist.js && tsc --outDir dist && node scripts/post-build.js",
 		"lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
 		"generate-enums": "node scripts/generate-enums.js",
 		"generate-protos": "node scripts/generate-protos.js"
