@@ -130,7 +130,7 @@ class TCPConnection extends BaseConnection {
 	 * End the connection
 	 * @param {boolean} [andIgnore=false] - Pass true to also ignore all further events from this connection
 	 */
-	end(andIgnore) {
+	end(andIgnore: boolean = false) {
 		if (this.stream) {
 			this._debug('Ending connection' + (andIgnore ? ' and removing all listeners' : ''));
 
@@ -154,7 +154,7 @@ class TCPConnection extends BaseConnection {
 	 * Send data over the connection
 	 * @param {Buffer} data
 	 */
-	send(data) {
+	send(data: Buffer) {
 		if (this.sessionKey) {
 			data = SteamCrypto.symmetricEncryptWithHmacIv(data, this.sessionKey);
 		}

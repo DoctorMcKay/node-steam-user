@@ -1,17 +1,33 @@
-const ByteBuffer = require('bytebuffer');
-const SteamID = require('steamid');
-const Zlib = require('zlib');
+import ByteBuffer from 'bytebuffer';
+import SteamID from 'steamid';
+import Zlib from 'zlib';
 
-const SteamUserConnection = require('./02-connection.js');
+import SteamUserConnection, {IncomingMessageQueueItem} from './02-connection';
 
-const Schema = require('../protobufs/generated/_load.js');
+import Schema from '../protobuf-generated/load';
 
-const EMsg = require('../enums/EMsg.js');
-const EResult = require('../enums/EResult.js');
+import EMsg from '../enums/EMsg';
+import EResult from '../enums/EResult';
 
 // steam-session dependencies
-const {LoginSession, EAuthTokenPlatformType} = require('steam-session');
-const CMAuthTransport = require('./classes/CMAuthTransport');
+import {LoginSession, EAuthTokenPlatformType} from 'steam-session';
+import CMAuthTransport from './classes/CMAuthTransport';
+
+import type {Type as ProtoType} from 'protobufjs';
+import {CMsgClientLogonResponse, CMsgMulti, CMsgProtoBufHeader} from '../protobuf-generated/types';
+import BaseConnection from './connection_protocols/base';
+
+type FreeFormObject = {[name: string]: any};
+type MessageCallback = (body: FreeFormObject|ByteBuffer, header: MessageHeader, callback?: MessageCallback) => void;
+
+interface MessageHeader {
+	msg: number;
+	targetJobID?: string;
+	sourceJobID?: string;
+	steamID?: string;
+	sessionID?: number;
+	proto?: CMsgProtoBufHeader;
+}
 
 const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
@@ -42,8 +58,8 @@ protobufs[EMsg.ClientRequestItemAnnouncements] = Schema.CMsgClientRequestItemAnn
 protobufs[EMsg.ClientCommentNotifications] = Schema.CMsgClientCommentNotifications;
 protobufs[EMsg.ClientRequestCommentNotifications] = Schema.CMsgClientRequestCommentNotifications;
 protobufs[EMsg.ClientUserNotifications] = Schema.CMsgClientUserNotifications;
-protobufs[EMsg.ClientFSOfflineMessageNotification] = Schema.CMsgClientOfflineMessageNotification;
-protobufs[EMsg.ClientFSRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
+protobufs[EMsg.ClientChatOfflineMessageNotification] = Schema.CMsgClientOfflineMessageNotification;
+protobufs[EMsg.ClientChatRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
 protobufs[EMsg.ClientGamesPlayed] = Schema.CMsgClientGamesPlayed;
 protobufs[EMsg.ClientGamesPlayedWithDataBlob] = Schema.CMsgClientGamesPlayed;
 protobufs[EMsg.ClientAccountInfo] = Schema.CMsgClientAccountInfo;
@@ -81,15 +97,15 @@ protobufs[EMsg.ClientFriendMsg] = Schema.CMsgClientFriendMsg;
 protobufs[EMsg.ClientChatInvite] = Schema.CMsgClientChatInvite;
 protobufs[EMsg.ClientFriendMsgIncoming] = Schema.CMsgClientFriendMsgIncoming;
 protobufs[EMsg.ClientFriendMsgEchoToSender] = Schema.CMsgClientFriendMsgIncoming;
-protobufs[EMsg.ClientFSGetFriendMessageHistory] = Schema.CMsgClientChatGetFriendMessageHistory;
-protobufs[EMsg.ClientFSGetFriendMessageHistoryResponse] = Schema.CMsgClientChatGetFriendMessageHistoryResponse;
+protobufs[EMsg.ClientChatGetFriendMessageHistory] = Schema.CMsgClientChatGetFriendMessageHistory;
+protobufs[EMsg.ClientChatGetFriendMessageHistoryResponse] = Schema.CMsgClientChatGetFriendMessageHistoryResponse;
 protobufs[EMsg.ClientFriendsGroupsList] = Schema.CMsgClientFriendsGroupsList;
 protobufs[EMsg.AMClientCreateFriendsGroup] = Schema.CMsgClientCreateFriendsGroup;
 protobufs[EMsg.AMClientCreateFriendsGroupResponse] = Schema.CMsgClientCreateFriendsGroupResponse;
 protobufs[EMsg.AMClientDeleteFriendsGroup] = Schema.CMsgClientDeleteFriendsGroup;
 protobufs[EMsg.AMClientDeleteFriendsGroupResponse] = Schema.CMsgClientDeleteFriendsGroupResponse;
-protobufs[EMsg.AMClientRenameFriendsGroup] = Schema.CMsgClientManageFriendsGroup;
-protobufs[EMsg.AMClientRenameFriendsGroupResponse] = Schema.CMsgClientManageFriendsGroupResponse;
+protobufs[EMsg.AMClientManageFriendsGroup] = Schema.CMsgClientManageFriendsGroup;
+protobufs[EMsg.AMClientManageFriendsGroupResponse] = Schema.CMsgClientManageFriendsGroupResponse;
 protobufs[EMsg.AMClientAddFriendToGroup] = Schema.CMsgClientAddFriendToGroup;
 protobufs[EMsg.AMClientAddFriendToGroupResponse] = Schema.CMsgClientAddFriendToGroupResponse;
 protobufs[EMsg.AMClientRemoveFriendFromGroup] = Schema.CMsgClientRemoveFriendFromGroup;
@@ -336,7 +352,9 @@ if (hadMissingProtobuf) {
 	throw new Error('One or more protobuf schemas are missing');
 }
 
-class SteamUserMessages extends SteamUserConnection {
+abstract class SteamUserMessages extends SteamUserConnection {
+	abstract _disconnect(suppressLogoff: boolean): void;
+
 	/**
 	 * Encode a protobuf.
 	 * @param {object} proto - The protobuf class
@@ -344,8 +362,8 @@ class SteamUserMessages extends SteamUserConnection {
 	 * @returns {Buffer}
 	 * @protected
 	 */
-	static _encodeProto(proto, data) {
-		return proto.encode(data).finish();
+	static _encodeProto(proto: ProtoType, data: object): Buffer {
+		return proto.encode(data).finish() as Buffer;
 	}
 
 	/**
@@ -355,17 +373,17 @@ class SteamUserMessages extends SteamUserConnection {
 	 * @returns {object}
 	 * @protected
 	 */
-	static _decodeProto(proto, encoded) {
+	static _decodeProto(proto: ProtoType, encoded: Buffer|ByteBuffer): object {
 		if (ByteBuffer.isByteBuffer(encoded)) {
-			encoded = encoded.toBuffer();
+			encoded = (encoded as ByteBuffer).toBuffer();
 		}
 
-		let decoded = proto.decode(encoded);
+		let decoded = proto.decode(encoded as Buffer);
 		let objNoDefaults = proto.toObject(decoded, {longs: String});
 		let objWithDefaults = proto.toObject(decoded, {defaults: true, longs: String});
 		return replaceDefaults(objNoDefaults, objWithDefaults);
 
-		function replaceDefaults(noDefaults, withDefaults) {
+		function replaceDefaults(noDefaults: FreeFormObject, withDefaults: FreeFormObject) {
 			if (Array.isArray(withDefaults)) {
 				return withDefaults.map((val, idx) => replaceDefaults(noDefaults[idx], val));
 			}
@@ -387,7 +405,7 @@ class SteamUserMessages extends SteamUserConnection {
 			return withDefaults;
 		}
 
-		function isReplaceableDefaultValue(val) {
+		function isReplaceableDefaultValue(val: any) {
 			if (Buffer.isBuffer(val) && val.length == 0) {
 				// empty buffer is replaceable
 				return true;
@@ -409,12 +427,12 @@ class SteamUserMessages extends SteamUserConnection {
 	}
 
 	/**
-	 * @param {int|object} emsgOrHeader
+	 * @param {number|object} emsgOrHeader
 	 * @param {object|Buffer|ByteBuffer} body
 	 * @param {function} [callback]
 	 * @protected
 	 */
-	_send(emsgOrHeader, body, callback) {
+	_send(emsgOrHeader: number|FreeFormObject|EMsg, body: FreeFormObject|Buffer|ByteBuffer, callback?: MessageCallback) {
 		// header fields: msg, proto, sourceJobID, targetJobID
 		let header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {msg: emsgOrHeader};
 		let emsg = header.msg;
@@ -435,7 +453,7 @@ class SteamUserMessages extends SteamUserConnection {
 			header.proto = header.proto || {};
 			body = SteamUserMessages._encodeProto(Proto, body);
 		} else if (ByteBuffer.isByteBuffer(body)) {
-			body = body.toBuffer();
+			body = (body as ByteBuffer).toBuffer();
 		}
 
 		let jobIdSource = null;
@@ -496,7 +514,7 @@ class SteamUserMessages extends SteamUserConnection {
 	 * @param {string} [multiId]
 	 * @protected
 	 */
-	_handleNetMessage(buffer, conn, multiId) {
+	_handleNetMessage(buffer: Buffer|string, conn: BaseConnection, multiId: string) {
 		if (conn && conn != this._connection) {
 			let ghostConnId = conn.connectionType[0] + conn.connectionId;
 			let expectedConnId = this._connection ? (this._connection.connectionType[0] + this._connection.connectionId) : 'NO CONNECTION';
@@ -506,7 +524,7 @@ class SteamUserMessages extends SteamUserConnection {
 
 		if (this._useMessageQueue && !multiId) {
 			// Multi sub-messages skip the queue because we need messages contained in a decoded multi to be processed first
-			this._incomingMessageQueue.push(arguments);
+			this._incomingMessageQueue.push(Array.prototype.slice.call(arguments) as IncomingMessageQueueItem);
 			this.emit('debug', `Enqueued incoming message; queue size is now ${this._incomingMessageQueue.length}`);
 			return;
 		}
@@ -525,7 +543,7 @@ class SteamUserMessages extends SteamUserConnection {
 
 		this.emit('debug-traffic-incoming', buffer, eMsg);
 
-		let header = {msg: eMsg};
+		let header:MessageHeader = {msg: eMsg};
 		if ([EMsg.ChannelEncryptRequest, EMsg.ChannelEncryptResult].includes(eMsg)) {
 			// for encryption setup, we just have a very small header with two fields
 			header.targetJobID = buf.readUint64().toString();
@@ -553,7 +571,7 @@ class SteamUserMessages extends SteamUserConnection {
 		let sessionID = (header.proto && header.proto.client_sessionid) || header.sessionID;
 		let steamID = (header.proto && header.proto.steamid) || header.steamID;
 		let ourCurrentSteamID = this.steamID ? this.steamID.toString() : null;
-		if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != ourCurrentSteamID) && steamID != 0) {
+		if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != ourCurrentSteamID) && parseInt(steamID) != 0) {
 			// TODO if we get a new sessionid, should we check if it matches a previously-closed session? probably not necessary...
 			this._sessionID = sessionID;
 			this.steamID = new SteamID(steamID.toString());
@@ -571,7 +589,7 @@ class SteamUserMessages extends SteamUserConnection {
 	 * @param {string} [multiId]
 	 * @protected
 	 */
-	_handleMessage(header, bodyBuf, conn, multiId) {
+	_handleMessage(header: MessageHeader, bodyBuf: ByteBuffer, conn: BaseConnection, multiId: string) {
 		// Is this a multi? If yes, short-circuit and just process it now.
 		if (header.msg == EMsg.Multi) {
 			this._processMulti(header, SteamUserMessages._decodeProto(protobufs[EMsg.Multi], bodyBuf), conn);
@@ -579,7 +597,7 @@ class SteamUserMessages extends SteamUserConnection {
 		}
 
 		let msgName = EMsg[header.msg] || header.msg;
-		let handlerName = header.msg;
+		let handlerName = header.msg.toString();
 
 		let debugPrefix = multiId ? `[${multiId}] ` : (conn ? `[${conn.connectionType[0]}${conn.connectionId}] ` : '');
 
@@ -606,21 +624,22 @@ class SteamUserMessages extends SteamUserConnection {
 			return;
 		}
 
-		let body = bodyBuf;
+		let body:ByteBuffer|FreeFormObject = bodyBuf;
 		if (protobufs[handlerName]) {
 			body = SteamUserMessages._decodeProto(protobufs[handlerName], bodyBuf);
 		}
 
 		let handledMessageDebugMsg = debugPrefix + 'Handled message: ' + msgName;
 		if (header.msg == EMsg.ClientLogOnResponse) {
-			handledMessageDebugMsg += ` (${EResult[body.eresult] || body.eresult})`;
+			let logOnResponse:CMsgClientLogonResponse = body as CMsgClientLogonResponse;
+			handledMessageDebugMsg += ` (${EResult[logOnResponse.eresult] || logOnResponse.eresult})`;
 		}
 		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', handledMessageDebugMsg);
 
 		let cb = null;
 		if (header.sourceJobID != JOBID_NONE) {
 			// this message expects a response. make a callback we can pass to the end-user.
-			cb = (emsgOrHeader, body) => {
+			cb = (emsgOrHeader: number|MessageHeader, body: Buffer|ByteBuffer|FreeFormObject) => {
 				// once invoked the callback should set the jobid_target
 				let responseHeader = typeof emsgOrHeader === 'object' ? emsgOrHeader : {msg: emsgOrHeader};
 				let emsg = responseHeader.msg;
@@ -651,7 +670,7 @@ class SteamUserMessages extends SteamUserConnection {
 	 * @returns {Promise<void>}
 	 * @protected
 	 */
-	async _processMulti(header, body, conn) {
+	async _processMulti(header: MessageHeader, body: CMsgMulti, conn: BaseConnection): Promise<void> {
 		let multiId = conn.connectionType[0] + conn.connectionId + '#' + (++this._multiCount);
 		this.emit('debug-verbose', `=== Processing ${body.size_unzipped ? 'gzipped multi msg' : 'multi msg'} ${multiId} (${body.message_body.length} bytes) ===`);
 
@@ -721,7 +740,7 @@ class SteamUserMessages extends SteamUserConnection {
 	 * @param {function} [callback]
 	 * @protected
 	 */
-	_sendUnified(methodName, methodData, callback) {
+	_sendUnified(methodName: string, methodData: FreeFormObject, callback: MessageCallback) {
 		let Proto = protobufs[methodName + (callback ? '_Request' : '')];
 		let header = {
 			msg: EMsg.ServiceMethodCallFromClient,

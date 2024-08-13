@@ -18,7 +18,7 @@ export interface CMServer {
 
 let g_ConnectionId = 1;
 
-class BaseConnection extends EventEmitter {
+abstract class BaseConnection extends EventEmitter {
 	user: SteamUserLogon;
 
 	connectionId: number;
@@ -35,6 +35,8 @@ class BaseConnection extends EventEmitter {
 	_debug(msg, verbose = false) {
 		this.user.emit(verbose ? 'debug-verbose' : 'debug', `[${this.connectionType[0]}${this.connectionId}] ${msg}`);
 	}
+
+	abstract send(data: Buffer): void;
 }
 
 export default BaseConnection;

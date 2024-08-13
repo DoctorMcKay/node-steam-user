@@ -19,8 +19,6 @@ export type IncomingMessageQueueItem = [
 ];
 
 abstract class SteamUserConnection extends SteamUserEnums {
-	private _useMessageQueue: boolean = false; // we only use the message queue while we're processing a multi message
-
 	abstract _handleLogOff(result: EResult, message: string): void;
 	abstract _doConnection(): Promise<void>;
 
