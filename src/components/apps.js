@@ -452,16 +452,6 @@ class SteamUserApps extends SteamUserAppAuth {
 	/**
 	 * @protected
 	 */
-	_clearChangelistUpdateTimer() {
-		if (this._changelistUpdateTimer) {
-			clearTimeout(this._changelistUpdateTimer);
-			this._changelistUpdateTimer = null;
-		}
-	}
-
-	/**
-	 * @protected
-	 */
 	async _getChangelistUpdate() {
 		this._clearChangelistUpdateTimer();
 

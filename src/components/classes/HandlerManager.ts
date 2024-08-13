@@ -1,3 +1,7 @@
+import EMsg from '../../enums/EMsg';
+
+import type SteamUserBase from '../00-base';
+
 type HandlerFunction = (...args: any[]) => any;
 
 export class HandlerManager {
@@ -11,7 +15,7 @@ export class HandlerManager {
 		return !!(this._handlers[msg] && this._handlers[msg].length > 0);
 	}
 
-	add(msg: string, handler: HandlerFunction) {
+	add(msg: string|EMsg, handler: HandlerFunction) {
 		if (!this._handlers[msg]) {
 			this._handlers[msg] = [];
 		}
@@ -27,7 +31,7 @@ export class HandlerManager {
 		this._handlers[msg].push(handler);
 	}
 
-	emit(instance, msg: string, ...args: any[]) {
+	emit(instance: SteamUserBase, msg: string, ...args: any[]) {
 		this.checkMsgForLegacyHandlers(msg);
 
 		let handlers = this._handlers[msg];

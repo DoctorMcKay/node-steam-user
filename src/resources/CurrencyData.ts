@@ -1,6 +1,13 @@
-const ECurrencyCode = require('../enums/ECurrencyCode.js');
+import ECurrencyCode from '../enums/ECurrencyCode';
 
-let CurrencyData = {};
+interface CurrencyDataItem {
+	prepend?: string;
+	append?: string;
+	commas?: boolean;
+	whole?: boolean;
+}
+
+const CurrencyData:{[code: string]: CurrencyDataItem} = {};
 CurrencyData[ECurrencyCode.USD] = {prepend: '$'};
 CurrencyData[ECurrencyCode.GBP] = {prepend: '\u00a3'};
 CurrencyData[ECurrencyCode.EUR] = {append: '\u20ac', commas: true};
@@ -34,4 +41,4 @@ CurrencyData[ECurrencyCode.TWD] = {append: ' TWD'};
 CurrencyData[ECurrencyCode.SAR] = {append: ' SAR'};
 CurrencyData[ECurrencyCode.AED] = {append: ' AED'};
 
-module.exports = CurrencyData;
+export default CurrencyData;

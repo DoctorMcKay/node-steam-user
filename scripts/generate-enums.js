@@ -193,7 +193,7 @@ download('https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 
 				let loader = `${GENERATED_FILE_HEADER}import SteamUserBase from './00-base';\n\n`;
 				loader += g_EnumNames.map(name => `import ${name} from '../enums/${name}';`).join('\n');
-				loader += '\n\nclass SteamUserEnums extends SteamUserBase {\n';
+				loader += '\n\nabstract class SteamUserEnums extends SteamUserBase {\n';
 				loader += g_EnumNames.map(name => `\tstatic ${name} = ${name};`).join('\n');
 				loader += '\n}\n\nexport default SteamUserEnums;\n';
 

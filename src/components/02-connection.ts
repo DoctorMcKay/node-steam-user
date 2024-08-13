@@ -1,28 +1,40 @@
-const ByteBuffer = require('bytebuffer');
-const {SocksProxyAgent} = require('socks-proxy-agent');
-const StdLib = require('@doctormckay/stdlib');
-const SteamCrypto = require('@doctormckay/steam-crypto');
+import ByteBuffer from 'bytebuffer';
+import {SocksProxyAgent} from 'socks-proxy-agent';
+import StdLib from '@doctormckay/stdlib';
+import SteamCrypto from '@doctormckay/steam-crypto';
 
-const EMsg = require('../enums/EMsg.js');
-const EResult = require('../enums/EResult.js');
+import EMsg from '../enums/EMsg';
+import EResult from '../enums/EResult';
 
-const SteamUserBase = require('./00-base.js');
-const SteamUserEnums = require('./01-enums.js');
+import SteamUserBase from './00-base';
+import SteamUserEnums from './01-enums';
 
-class SteamUserConnection extends SteamUserEnums {
+import type BaseConnection from './connection_protocols/base';
+
+// This is equivalent to the arguments of _handleNetMessage
+export type IncomingMessageQueueItem = [
+	Buffer|string, // message content
+	BaseConnection, // connection
+	string|undefined // multiId
+];
+
+abstract class SteamUserConnection extends SteamUserEnums {
+	private _useMessageQueue: boolean = false; // we only use the message queue while we're processing a multi message
+
+	abstract _handleLogOff(result: EResult, message: string): void;
+	abstract _doConnection(): Promise<void>;
+
 	/**
-	 * Handle the closure of our underlying connection.
-	 * @param {BaseConnection} conn
-	 * @protected
+	 * Handle the closure of our underlying connection
 	 */
-	_handleConnectionClose(conn) {
+	_handleConnectionClose(conn: BaseConnection) {
 		let connPrefix = conn.connectionType[0] + conn.connectionId;
 
 		// If the message queue is currently enabled, we need to enqueue processing of the connection close.
 		// Otherwise we might handle the closed connection too early, e.g. before processing ClientLogOnResponse
 		if (this._useMessageQueue) {
 			this.emit('debug', `[${connPrefix}] Connection closed, but message queue is active. Enqueueing __CLOSE__`);
-			this._incomingMessageQueue.push(['__CLOSE__', conn]);
+			this._incomingMessageQueue.push(['__CLOSE__', conn, undefined]);
 			return;
 		}
 
@@ -68,12 +80,6 @@ class SteamUserConnection extends SteamUserEnums {
 		this._clearChangelistUpdateTimer();
 	}
 
-	_cancelReconnectTimers() {
-		clearTimeout(this._logonTimeout);
-		clearTimeout(this._logonMsgTimeout);
-		clearTimeout(this._reconnectForCloseDuringAuthTimeout);
-	}
-
 	_getProxyAgent() {
 		if (this.options.socksProxy && this.options.httpProxy) {
 			throw new Error('Cannot specify both socksProxy and httpProxy options');
@@ -109,7 +115,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ChannelEncryptRequest, function
 
 	let sessionKey = SteamCrypto.generateSessionKey(nonce);
 	this._connection._tempSessionKey = sessionKey.plain;
-	let keyCrc = StdLib.Hashing.crc32(sessionKey.encrypted);
+	let keyCrc = StdLib.Hashing.crc32(sessionKey.encrypted) as number;
 
 	let encResp = ByteBuffer.allocate(4 + 4 + sessionKey.encrypted.length + 4 + 4, ByteBuffer.LITTLE_ENDIAN);
 	encResp.writeUint32(protocol);
@@ -140,4 +146,4 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ChannelEncryptResult, function(
 	this._sendLogOn();
 });
 
-module.exports = SteamUserConnection;
+export default SteamUserConnection;

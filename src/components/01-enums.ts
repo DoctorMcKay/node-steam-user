@@ -226,7 +226,7 @@ import EWorkshopFileAction from '../enums/EWorkshopFileAction';
 import EWorkshopFileType from '../enums/EWorkshopFileType';
 import E_STAR_GlyphWriteResult from '../enums/E_STAR_GlyphWriteResult';
 
-class SteamUserEnums extends SteamUserBase {
+abstract class SteamUserEnums extends SteamUserBase {
 	static EACState = EACState;
 	static EAccountFlags = EAccountFlags;
 	static EAccountType = EAccountType;
