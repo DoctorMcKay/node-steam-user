@@ -1,14 +1,18 @@
 import {TTLCache} from '@doctormckay/stdlib/data_structures';
-import {EventEmitter} from 'events';
+import {LoginSession} from 'steam-session';
 import SteamID from 'steamid';
+import {TypedEmitter} from 'tiny-typed-emitter';
 
 import {HandlerManager} from './classes/HandlerManager';
-
 import BaseConnection, {CMServer} from './connection_protocols/base';
+
 import type {IncomingMessageQueueItem} from './02-connection';
 import type {OptionsObject} from '../resources/default_options';
-import {LoginSession} from 'steam-session';
-import {CMsgClientLogon} from '../protobuf-generated/types';
+import type {CMsgClientLogon} from '../protobuf-generated/types';
+import type FileManager from '../types/FileManager';
+import type {HttpClient} from '@doctormckay/stdlib/http';
+import type {SteamUserEvents} from '../types/events';
+import {InternalLogOnDetails} from '../types/logon';
 
 /**
  * I admit, this is a pretty unorthodox pattern, but this is the only way I've found to define a class across multiple
@@ -16,13 +20,15 @@ import {CMsgClientLogon} from '../protobuf-generated/types';
  *
  * Inheritance follows filenames sorted alphabetically with numbers first.
  */
-abstract class SteamUserBase extends EventEmitter {
+abstract class SteamUserBase extends TypedEmitter<SteamUserEvents> {
 	_handlerManager: HandlerManager;
+
+	steamID: SteamID|null = null;
+	options: OptionsObject;
+	storage: FileManager|null = null;
 
 	_sessionID: number|null = null;
 	_tempSteamID: SteamID|null = null;
-	steamID: SteamID|null = null;
-	options: OptionsObject;
 
 	_ttlCache: TTLCache<any> = null;
 
@@ -32,12 +38,15 @@ abstract class SteamUserBase extends EventEmitter {
 	_multiCount: number = 0;
 
 	_loginSession: LoginSession|null = null;
-	_logOnDetails: CMsgClientLogon|null = null;
+	_logOnDetails: InternalLogOnDetails|null = null;
+	_machineAuthToken: string|null = null;
 
 	_connecting: boolean = false;
 	_lastChosenCM: CMServer|null = null;
 	_loggingOff: boolean = false;
 	_connectionClosed: boolean = false;
+
+	_httpClient: HttpClient|null = null;
 
 	_currentJobID: number = 0;
 	_jobs: TTLCache<Function>;
@@ -54,6 +63,10 @@ abstract class SteamUserBase extends EventEmitter {
 
 		this._ttlCache = new TTLCache<any>(1000 * 60 * 5); // default 5 minutes
 		this._jobs = new TTLCache<Function>(1000 * 60 * 2); // default 2 minutes
+	}
+
+	_warn(message: string) {
+		process.emitWarning(message, 'Warning', this.constructor);
 	}
 
 	_clearChangelistUpdateTimer() {

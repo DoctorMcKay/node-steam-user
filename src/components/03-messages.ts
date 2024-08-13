@@ -764,4 +764,4 @@ abstract class SteamUserMessages extends SteamUserConnection {
 	}
 }
 
-module.exports = SteamUserMessages;
+export default SteamUserMessages;

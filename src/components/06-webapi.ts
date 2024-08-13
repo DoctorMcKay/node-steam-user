@@ -1,12 +1,14 @@
-const {HttpClient} = require('@doctormckay/stdlib/http');
-const VDF = require('kvparser');
+import {HttpClient} from '@doctormckay/stdlib/http';
+import VDF from 'kvparser';
 
-const SteamUserFileStorage = require('./05-filestorage.js');
+import SteamUserFileStorage from './05-filestorage';
+
+type FreeFormObject = {[name: string]: any};
 
 const USER_AGENT = 'Valve/Steam HTTP Client 1.0';
 const HOSTNAME = 'api.steampowered.com';
 
-class SteamUserWebAPI extends SteamUserFileStorage {
+abstract class SteamUserWebAPI extends SteamUserFileStorage {
 	/**
 	 * @param {string} httpMethod
 	 * @param {string} iface
@@ -17,21 +19,21 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 	 * @returns {Promise}
 	 * @protected
 	 */
-	async _apiRequest(httpMethod, iface, method, version, data, cacheSeconds) {
+	async _apiRequest(httpMethod: string, iface: string, method: string, version: number, data: FreeFormObject, cacheSeconds: number): Promise<FreeFormObject> {
 		data = data || {};
 		httpMethod = httpMethod.toUpperCase(); // just in case
 
 		// Pad the version with zeroes to make it 4 digits long, because Valve
-		version = version.toString();
-		while (version.length < 4) {
-			version = '0' + version;
+		let versionString = version.toString();
+		while (versionString.length < 4) {
+			versionString = '0' + versionString;
 		}
 
 		data.format = 'vdf'; // for parity with the Steam client
 
 		let client = this._httpClient || new HttpClient({
 			userAgent: USER_AGENT,
-			httpsAgent: this._getProxyAgent(),
+			httpsAgent: this._getProxyAgent() as any,
 			localAddress: this.options.localAddress,
 			defaultHeaders: Object.assign(getDefaultHeaders(), this.options.additionalHeaders),
 			defaultTimeout: 5000,
@@ -79,7 +81,7 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 	}
 }
 
-function buildQueryString(data) {
+function buildQueryString(data: FreeFormObject) {
 	// We can't use the querystring module's encode because we want binary data to be completely percent-encoded
 	let str = '';
 
@@ -108,4 +110,4 @@ function getDefaultHeaders() {
 	};
 }
 
-module.exports = SteamUserWebAPI;
+export default SteamUserWebAPI;

@@ -1,14 +1,16 @@
-const CurrencyData = require('../resources/CurrencyData.js');
+import CurrencyData from '../resources/CurrencyData';
 
-const SteamUserMessages = require('./03-messages.js');
+import ECurrencyCode from '../enums/ECurrencyCode';
 
-class SteamUserUtility extends SteamUserMessages {
+import SteamUserMessages from './03-messages';
+
+abstract class SteamUserUtility extends SteamUserMessages {
 	/**
 	 * @param {number} amount
 	 * @param {ECurrencyCode} currency
 	 * @returns {string}
 	 */
-	static formatCurrency(amount, currency) {
+	static formatCurrency(amount: number, currency: ECurrencyCode): string {
 		let amountString = amount.toFixed(2);
 
 		if (!CurrencyData[currency]) {
@@ -39,4 +41,4 @@ class SteamUserUtility extends SteamUserMessages {
 	}
 }
 
-module.exports = SteamUserUtility;
+export default SteamUserUtility;

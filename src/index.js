@@ -271,15 +271,6 @@ class SteamUser extends SteamUserTwoFactor {
 			}
 		}
 	}
-
-	/**
-	 * Issue a warning
-	 * @param msg
-	 * @private
-	 */
-	_warn(msg) {
-		process.emitWarning(msg, 'Warning', 'steam-user');
-	}
 }
 
 // Just in case any legacy code is directly accessing these (even though they shouldn't be since they're underscore-prefixed),

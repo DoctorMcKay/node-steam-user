@@ -1,11 +1,11 @@
-const Crypto = require('crypto');
-const SteamID = require('steamid');
+import Crypto from 'crypto';
+import SteamID from 'steamid';
 
-const SteamUserWebAPI = require('./06-webapi.js');
+import SteamUserWebAPI from './06-webapi';
 
-class SteamUserWeb extends SteamUserWebAPI {
+abstract class SteamUserWeb extends SteamUserWebAPI {
 	/**
-	 * Log onto steamcommunity.com. Emits {@link SteamUser#event:webSession} on success.
+	 * Log onto steamcommunity.com. Emits 'webSession' on success.
 	 */
 	webLogOn() {
 		// Verify logged on
@@ -54,4 +54,4 @@ class SteamUserWeb extends SteamUserWebAPI {
 	}
 }
 
-module.exports = SteamUserWeb;
+export default SteamUserWeb;

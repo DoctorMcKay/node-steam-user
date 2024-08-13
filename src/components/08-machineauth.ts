@@ -1,6 +1,6 @@
-const SteamUserWeb = require('./07-web.js');
+import SteamUserWeb from './07-web';
 
-class SteamUserMachineAuth extends SteamUserWeb {
+abstract class SteamUserMachineAuth extends SteamUserWeb {
 	_getMachineAuthFilename() {
 		let accountName = (this._logOnDetails.account_name || this._logOnDetails._newAuthAccountName).toLowerCase();
 		return `machineAuthToken.${accountName}.txt`;
@@ -22,4 +22,4 @@ class SteamUserMachineAuth extends SteamUserWeb {
 	}
 }
 
-module.exports = SteamUserMachineAuth;
+export default SteamUserMachineAuth;

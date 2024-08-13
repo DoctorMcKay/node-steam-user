@@ -1,13 +1,14 @@
-const SteamUserUtility = require('./04-utility.js');
+import SteamUserUtility from './04-utility';
+import {Stringifiable} from '../types/FileManager';
 
-class SteamUserFileStorage extends SteamUserUtility {
+abstract class SteamUserFileStorage extends SteamUserUtility {
 	/**
 	 * @param {string} filename
 	 * @param {Buffer|*} content
 	 * @return {Promise}
 	 * @protected
 	 */
-	async _saveFile(filename, content) {
+	async _saveFile(filename: string, content: Buffer|Stringifiable): Promise<any> {
 		try {
 			if (this.storage) {
 				await this.storage.saveFile(filename, content);
@@ -22,7 +23,7 @@ class SteamUserFileStorage extends SteamUserUtility {
 	 * @returns {Promise<Buffer|null>}
 	 * @protected
 	 */
-	async _readFile(filename) {
+	async _readFile(filename: string): Promise<Buffer|null> {
 		let content = null;
 
 		try {
@@ -41,7 +42,7 @@ class SteamUserFileStorage extends SteamUserUtility {
 	 * @returns {Promise<{filename: string, error?: Error, contents?: Buffer}[]>}
 	 * @protected
 	 */
-	async _readFiles(filenames) {
+	async _readFiles(filenames: string[]): Promise<{filename: string, error?: Error, contents?: Buffer}[]> {
 		if (!this.storage) {
 			return filenames.map(filename => ({filename, error: new Error('Storage system disabled')}));
 		}
@@ -51,4 +52,4 @@ class SteamUserFileStorage extends SteamUserUtility {
 	}
 }
 
-module.exports = SteamUserFileStorage;
+export default SteamUserFileStorage;
