@@ -1,31 +1,30 @@
-const HTTP = require('http');
-const Socket = require('net').Socket;
-const SteamCrypto = require('@doctormckay/steam-crypto');
-const {URL} = require('url');
+import HTTP from 'http';
+import {Socket} from 'net';
+import SteamCrypto from '@doctormckay/steam-crypto';
+import {URL} from 'url';
 
-const BaseConnection = require('./base.js');
+import BaseConnection, {type CMServer} from './base';
+
+import type SteamUserLogon from '../09-logon';
+import type {RequestOptions} from 'http';
 
 const MAGIC = 'VT01';
 
-/**
- * @typedef CmServer
- * @property {string} endpoint
- * @property {string} legacy_endpoint
- * @property {string} type
- * @property {string} dc
- * @property {string} realm
- * @property {string} load
- * @property {string} wtd_load
- */
+interface RequestOptionsCustom extends RequestOptions {
+	localPort?: number;
+}
 
 class TCPConnection extends BaseConnection {
+	sessionKey: string = null;
+	stream: Socket;
+
+	_messageLength: number = 0;
+
 	/**
 	 * Create a new TCP connection, and connect
-	 * @param {SteamUser} user
-	 * @param {CmServer} chosenServer
 	 * @constructor
 	 */
-	constructor(user, chosenServer) {
+	constructor(user: SteamUserLogon, chosenServer: CMServer) {
 		super(user);
 
 		this.connectionType = 'TCP';
@@ -38,7 +37,7 @@ class TCPConnection extends BaseConnection {
 
 		if (user.options.httpProxy) {
 			let url = new URL(user.options.httpProxy);
-			let prox = {
+			let prox:RequestOptionsCustom = {
 				protocol: url.protocol,
 				host: url.hostname,
 				port: url.port,
@@ -213,4 +212,4 @@ class TCPConnection extends BaseConnection {
 	}
 }
 
-module.exports = TCPConnection;
+export default TCPConnection;

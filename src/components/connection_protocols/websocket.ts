@@ -1,7 +1,9 @@
-const HTTPS = require('https');
-const WS13 = require('websocket13');
+import HTTPS from 'https';
+import WS13, {WebSocket} from 'websocket13';
 
-const BaseConnection = require('./base.js');
+import BaseConnection, {type CMServer} from './base';
+
+import type SteamUserLogon from '../09-logon';
 
 /**
  * @typedef CmServer
@@ -15,11 +17,11 @@ const BaseConnection = require('./base.js');
  */
 
 class WebSocketConnection extends BaseConnection {
-	/**
-	 * @param {SteamUser} user
-	 * @param {CmServer} chosenServer
-	 */
-	constructor(user, chosenServer) {
+	stream: WebSocket;
+
+	_disconnected: boolean = false;
+
+	constructor(user: SteamUserLogon, chosenServer: CMServer) {
 		super(user);
 
 		this.connectionType = 'WS';
@@ -59,6 +61,7 @@ class WebSocketConnection extends BaseConnection {
 			this._disconnected = true;
 			this._debug('WebSocket disconnected with error: ' + err.message);
 
+			// @ts-ignore
 			if (err.proxyConnecting || err.constructor.name == 'SocksClientError') {
 				// This error happened while connecting to the proxy
 				this.user._cleanupClosedConnection();
@@ -91,7 +94,7 @@ class WebSocketConnection extends BaseConnection {
 	 * End the connection
 	 * @param {boolean} [andIgnore=false] - Pass true to also ignore all further events from this connection
 	 */
-	end(andIgnore) {
+	end(andIgnore: boolean = false) {
 		if (this.stream && [WS13.State.Connected, WS13.State.Connecting].indexOf(this.stream.state) != -1) {
 			this._debug('Ending connection' + (andIgnore ? ' and removing all listeners' : ''));
 
@@ -111,7 +114,7 @@ class WebSocketConnection extends BaseConnection {
 	 * Send data over the connection.
 	 * @param {Buffer} data
 	 */
-	send(data) {
+	send(data: Buffer) {
 		if (this._disconnected) {
 			return;
 		}
@@ -132,11 +135,11 @@ class WebSocketConnection extends BaseConnection {
 
 	/**
 	 * Read a message from the WebSocket
-	 * @param {int} type
+	 * @param {number} type
 	 * @param {string|Buffer} msg
 	 * @private
 	 */
-	_readMessage(type, msg) {
+	_readMessage(type: number, msg: string|Buffer) {
 		if (type != WS13.FrameType.Data.Binary) {
 			this._debug('Got frame with wrong data type: ' + type);
 			return;
@@ -151,7 +154,7 @@ class WebSocketConnection extends BaseConnection {
 	 * @param callback
 	 * @private
 	 */
-	_pingCM(addr, callback) {
+	_pingCM(addr: string, callback: (err: Error|null, result?: {addr: string, load: number, latency: number}) => void) {
 		let host = addr.split(':')[0];
 		let port = parseInt(addr.split(':')[1] || '443', 10);
 		let options = {
@@ -193,7 +196,7 @@ class WebSocketConnection extends BaseConnection {
 				return;
 			}
 
-			let load = parseInt(res.headers['x-steam-cmload'], 10) || 999;
+			let load = parseInt(res.headers['x-steam-cmload'] as string, 10) || 999;
 			this._debug(`CM ${addr} latency ${latency} ms + load ${load}`, true);
 			callback(null, {addr, load, latency});
 		}).on('error', (err) => {
@@ -206,4 +209,4 @@ class WebSocketConnection extends BaseConnection {
 	}
 }
 
-module.exports = WebSocketConnection;
+export default WebSocketConnection;
