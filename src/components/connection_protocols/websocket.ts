@@ -100,8 +100,8 @@ class WebSocketConnection extends BaseConnection {
 
 			if (andIgnore) {
 				this.stream.removeAllListeners();
-				this.stream.on('error', () => {
-				});
+				// eslint-disable-next-line @typescript-eslint/no-empty-function
+				this.stream.on('error', () => {});
 			}
 
 			this.stream.disconnect();
@@ -186,8 +186,8 @@ class WebSocketConnection extends BaseConnection {
 
 			let latency = Date.now() - start;
 
-			res.on('data', () => {
-			}); // there is no body, so just throw it away
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
+			res.on('data', () => {}); // there is no body, so just throw it away
 
 			if (res.statusCode != 200) {
 				// CM is disqualified

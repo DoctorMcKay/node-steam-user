@@ -34,10 +34,12 @@ abstract class SteamUserUtility extends SteamUserMessages {
 	 * Same as emit() except the second argument (the first provided to the callback function) is a SteamID and will be appended to the event name with a hash.
 	 * @protected
 	 */
-	_emitIdEvent() {
-		this.emit.apply(this, arguments);
-		arguments[0] += '#' + arguments[1].getSteamID64();
-		this.emit.apply(this, arguments);
+	_emitIdEvent(...args: any[]): void {
+		// @ts-ignore
+		this.emit(...args);
+		args[0] += '#' + args[1].getSteamID64();
+		// @ts-ignore
+		this.emit(...args);
 	}
 }
 

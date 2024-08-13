@@ -8,11 +8,11 @@ import BaseConnection, {CMServer} from './connection_protocols/base';
 
 import type {IncomingMessageQueueItem} from './02-connection';
 import type {OptionsObject} from '../resources/default_options';
-import type {CMsgClientLogon} from '../protobuf-generated/types';
 import type FileManager from '../types/FileManager';
 import type {HttpClient} from '@doctormckay/stdlib/http';
 import type {SteamUserEvents} from '../types/events';
-import {InternalLogOnDetails} from '../types/logon';
+import type {InternalLogOnDetails} from '../types/logon';
+import type {MessageCallback} from './03-messages';
 
 /**
  * I admit, this is a pretty unorthodox pattern, but this is the only way I've found to define a class across multiple
@@ -49,7 +49,7 @@ abstract class SteamUserBase extends TypedEmitter<SteamUserEvents> {
 	_httpClient: HttpClient|null = null;
 
 	_currentJobID: number = 0;
-	_jobs: TTLCache<Function>;
+	_jobs: TTLCache<MessageCallback>;
 
 	// Timers
 	_changelistUpdateTimer: NodeJS.Timeout|null = null;
@@ -62,7 +62,7 @@ abstract class SteamUserBase extends TypedEmitter<SteamUserEvents> {
 		super();
 
 		this._ttlCache = new TTLCache<any>(1000 * 60 * 5); // default 5 minutes
-		this._jobs = new TTLCache<Function>(1000 * 60 * 2); // default 2 minutes
+		this._jobs = new TTLCache<MessageCallback>(1000 * 60 * 2); // default 2 minutes
 	}
 
 	_warn(message: string) {

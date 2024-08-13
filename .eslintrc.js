@@ -21,6 +21,9 @@ module.exports = {
 		'prefer-const': 'off',
 		'no-case-declarations': 'off',
 		'no-async-promise-executor': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/no-inferrable-types': 'off',
+		'@typescript-eslint/ban-ts-comment': 'off',
 
 		// Use tabs for indentation and require 'case' in switch to be indented 1 level (default 0)
 		indent: ['error', 'tab', {SwitchCase: 1}],
@@ -37,11 +40,11 @@ module.exports = {
 		// Require spaces before and after keywords (like "if")
 		'keyword-spacing': 'error',
 		// Don't allow unused variables, but allow unused function args (e.g. in callbacks) and global vars
-		'no-unused-vars': ['error', {vars: 'local', args: 'none', varsIgnorePattern: '^_'}],
+		'@typescript-eslint/no-unused-vars': ['error', {vars: 'local', args: 'none', varsIgnorePattern: '^_'}],
 		// Require using dot notation (obj.prop instead of obj['prop']) where possible
 		'dot-notation': 'error',
 		// Don't use spaces before parens in anonymous or named functions
-		'space-before-function-paren': ['error', {anonymous: 'never', named: 'never', asyncArrow: 'always'}]
+		'space-before-function-paren': ['error', {anonymous: 'never', named: 'never', asyncArrow: 'always'}],
 
 		// We will NOT be using eqeqeq for a few reasons:
 		//  1. I'm only using ESLint to enforce style, not actual differences in functionality. ==/=== is not merely a style choice.

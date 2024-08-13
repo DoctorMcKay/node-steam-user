@@ -137,8 +137,8 @@ class TCPConnection extends BaseConnection {
 			if (andIgnore) {
 				this.removeAllListeners();
 				this.stream.removeAllListeners();
-				this.stream.on('error', () => {
-				});
+				// eslint-disable-next-line @typescript-eslint/no-empty-function
+				this.stream.on('error', () => {});
 			}
 
 			this.stream.end();

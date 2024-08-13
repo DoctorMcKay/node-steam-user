@@ -18,7 +18,7 @@ import {CMsgClientLogonResponse, CMsgMulti, CMsgProtoBufHeader} from '../protobu
 import BaseConnection from './connection_protocols/base';
 
 type FreeFormObject = {[name: string]: any};
-type MessageCallback = (body: FreeFormObject|ByteBuffer, header: MessageHeader, callback?: MessageCallback) => void;
+export type MessageCallback = (body: FreeFormObject|ByteBuffer, header: MessageHeader, callback?: MessageCallback) => void;
 
 interface MessageHeader {
 	msg: number;
@@ -524,6 +524,7 @@ abstract class SteamUserMessages extends SteamUserConnection {
 
 		if (this._useMessageQueue && !multiId) {
 			// Multi sub-messages skip the queue because we need messages contained in a decoded multi to be processed first
+			// eslint-disable-next-line
 			this._incomingMessageQueue.push(Array.prototype.slice.call(arguments) as IncomingMessageQueueItem);
 			this.emit('debug', `Enqueued incoming message; queue size is now ${this._incomingMessageQueue.length}`);
 			return;
@@ -725,7 +726,7 @@ abstract class SteamUserMessages extends SteamUserConnection {
 		// Continue to pop items from the message queue until it's empty, or it gets re-enabled. If the message queue gets
 		// re-enabled, immediately stop popping items from it to avoid stuff getting out of order.
 		while (this._incomingMessageQueue.length > 0 && !this._useMessageQueue) {
-			this._handleNetMessage.apply(this, this._incomingMessageQueue.shift());
+			this._handleNetMessage(...this._incomingMessageQueue.shift());
 		}
 
 		if (this._incomingMessageQueue.length > 0) {
