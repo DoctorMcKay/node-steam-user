@@ -1327,6 +1327,8 @@ Gets your own Steam Level, and the level you have on a badge for a particular ga
     - `includePlayedFreeGames` - Set to `true` to include free games that the user has used before. Default `false`.
     - `filterAppids` - Pass an array of numeric AppIDs here to only retrieve those apps
     - `includeFreeSub` - Set to `true` to include apps owned through Steam Sub 0
+    - `includeAppInfo` - Set to `false` to not include app info (default `true`)
+    - `skipUnvettedApps` - Set to `false` to include apps that haven't been vetted by Valve (default `true`)
 - `callback` - Called when the request completes.
     - `err` - An `Error` object on failure or `null` on success.
     - `response` - The response object
