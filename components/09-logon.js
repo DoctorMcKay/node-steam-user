@@ -337,6 +337,10 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			.filter(s => s.realm == 'steamglobal')
 			.filter(s => ['netfilter', 'websockets'].includes(s.type));
 
+		if (this.options.webCompatibilityMode) {
+			serverList = serverList.filter(s => s.type == 'websockets' && s.endpoint.endsWith(':443'));
+		}
+
 		// Disqualify any CMs that we've blacklisted
 		let dqServerList = serverList.filter(s => !this._ttlCache.get(`CM_DQ_${s.type}_${s.endpoint}`));
 		if (dqServerList.length == 0) {
