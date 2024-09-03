@@ -21,7 +21,13 @@ const IMPORTANT_BACKOFFS = [
  */
 class SteamUserBase extends EventEmitter {
 	/** @var {{[name: string]: ExponentialBackoff}} */
-	_exponentialBackoffs = {};
+	_exponentialBackoffs;
+
+	constructor() {
+		super();
+
+		this._exponentialBackoffs = {};
+	}
 
 	/**
 	 * @param {boolean} [isConnecting=false]
