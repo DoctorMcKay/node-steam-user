@@ -7,7 +7,7 @@ module.exports = {
 	extends: ['eslint:recommended'],
 	root: true,
 	parserOptions: {
-		ecmaVersion: 12,
+		ecmaVersion: 'latest',
 		sourceType: 'module'
 	},
 	ignorePatterns: [
