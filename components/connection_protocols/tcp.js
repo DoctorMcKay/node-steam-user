@@ -4,6 +4,7 @@ const SteamCrypto = require('@doctormckay/steam-crypto');
 const {URL} = require('url');
 
 const BaseConnection = require('./base.js');
+const EResult = require('../../enums/EResult');
 
 const MAGIC = 'VT01';
 
@@ -69,7 +70,7 @@ class TCPConnection extends BaseConnection {
 				req.setTimeout(0); // disable timeout
 
 				if (res.statusCode != 200) {
-					this.user.emit('error', new Error('HTTP CONNECT ' + res.statusCode + ' ' + res.statusMessage));
+					this._fatal(new Error(`Proxy HTTP CONNECT ${res.statusCode} ${res.statusMessage}`));
 					return;
 				}
 
@@ -80,13 +81,13 @@ class TCPConnection extends BaseConnection {
 			req.on('timeout', () => {
 				connectionEstablished = true;
 				this.user._cleanupClosedConnection();
-				this.user.emit('error', new Error('Proxy connection timed out'));
+				this._fatal(new Error('Proxy connection timed out'));
 			});
 
 			req.on('error', (err) => {
 				connectionEstablished = true;
 				this.user._cleanupClosedConnection();
-				this.user.emit('error', err);
+				this._fatal(err);
 			});
 		} else {
 			let socket = new Socket();
@@ -174,6 +175,7 @@ class TCPConnection extends BaseConnection {
 			this.stream.write(buf);
 		} catch (error) {
 			this._debug('Error writing to socket: ' + error.message);
+			this._fatal(error);
 		}
 	}
 
@@ -192,9 +194,7 @@ class TCPConnection extends BaseConnection {
 			this._messageLength = header.readUInt32LE(0);
 			if (header.slice(4).toString('ascii') != MAGIC) {
 				// We definitely need to tear down the connection here
-				this.user.emit('error', new Error('Connection out of sync'));
-				// noinspection JSAccessibilityCheck
-				this.user._disconnect(true);
+				this._fatal(new Error('Connection out of sync'));
 				return;
 			}
 		}
@@ -209,6 +209,8 @@ class TCPConnection extends BaseConnection {
 			message = this.stream.read(this._messageLength);
 		} catch (error) {
 			this._debug('Error reading from socket: ' + error.message);
+			this._fatal(error);
+			return;
 		}
 
 		if (!message) {
@@ -221,9 +223,7 @@ class TCPConnection extends BaseConnection {
 			try {
 				message = SteamCrypto.symmetricDecrypt(message, this.sessionKey, true);
 			} catch (ex) {
-				this.user.emit('error', new Error('Encrypted message authentication failed'));
-				// noinspection JSAccessibilityCheck
-				this.user._disconnect(true);
+				this._fatal(new Error('Encrypted message authentication failed'));
 				return;
 			}
 		}
@@ -231,6 +231,21 @@ class TCPConnection extends BaseConnection {
 		// noinspection JSAccessibilityCheck
 		this.user._handleNetMessage(message, this);
 		this._readMessage();
+	}
+
+	/**
+	 * There was a fatal transport error
+	 * @param {Error} err
+	 * @private
+	 */
+	_fatal(err) {
+		if (!err.message.startsWith('Proxy')) {
+			err.eresult = EResult.NoConnection;
+		}
+
+		this.user.emit('error', err);
+		// noinspection JSAccessibilityCheck
+		this.user._disconnect(true);
 	}
 }
 
