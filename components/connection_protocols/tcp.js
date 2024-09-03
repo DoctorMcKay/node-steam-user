@@ -160,11 +160,21 @@ class TCPConnection extends BaseConnection {
 			data = SteamCrypto.symmetricEncryptWithHmacIv(data, this.sessionKey);
 		}
 
+		if (!this.stream) {
+			this._debug('Tried to send message, but there is no stream');
+			return;
+		}
+
 		let buf = Buffer.alloc(4 + 4 + data.length);
 		buf.writeUInt32LE(data.length, 0);
 		buf.write(MAGIC, 4);
 		data.copy(buf, 8);
-		this.stream.write(buf);
+
+		try {
+			this.stream.write(buf);
+		} catch (error) {
+			this._debug('Error writing to socket: ' + error.message);
+		}
 	}
 
 	/**
@@ -189,7 +199,18 @@ class TCPConnection extends BaseConnection {
 			}
 		}
 
-		let message = this.stream.read(this._messageLength);
+		if (!this.stream) {
+			this._debug('Tried to read message, but there is no stream');
+			return;
+		}
+
+		let message;
+		try {
+			message = this.stream.read(this._messageLength);
+		} catch (error) {
+			this._debug('Error reading from socket: ' + error.message);
+		}
+
 		if (!message) {
 			this._debug('Got incomplete message; expecting ' + this._messageLength + ' more bytes');
 			return;
