@@ -1802,6 +1802,19 @@ Requests your legacy CD key for a game in your library. This will only succeed i
 keys (usually you'll get a Steam popup when you launch this game presenting you with your key which you can copy and
 paste into the game when prompted).
 
+### markNotificationsRead(notificationIds)
+- `notificationIds` - Array of notification IDs from [`notificationsReceived`](#notificationsreceived) (numbers or strings) to mark as read
+
+**v5.2.0 or later is required to use this method**
+
+Marks a list of notifications as read. There is no response or feedback to this method.
+
+### markAllNotificationsRead()
+
+**v5.2.0 or later is required to use this method**
+
+Marks all notifications as read. There is no response or feedback to this method.
+
 ### createEncryptedAppTicket(appid[, userData], callback)
 - `appid` - The Steam AppID of the app for which you want a ticket
 - `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.
@@ -1970,6 +1983,33 @@ message gets read).
 - `friends` - An array of SteamID strings for the users who have sent you unread offline chat messages
 
 Emitted when Steam sends a notification of unread offline chat messages. This will always be emitted after logon, even if you have no messages.
+
+### notificationsReceived
+- `payload` - An object containing these properties:
+	- `notifications` - An array of objects containing these properties:
+        - `id` - Notification ID, as a string
+        - `type` - Notification type, from [ESteamNotificationType](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/ESteamNotificationType.js) enum
+        - `body` - Notification "body data", which varies depending on the notification type
+        - `read` - Boolean indicating whether the notification has been marked read
+        - `timestamp` - `Date` object indicating when the notification was created
+        - `hidden` - Boolean indicating whether the notification should be hidden from the client (has been deleted/cleared)
+        - `expiry` - `Date` object indicating when the notification expires
+        - `viewed` - `Date` object indicating when the notification was viewed, or `null` if not yet viewed
+
+**v5.2.0 or later is required to use this event**
+
+Emitted when the Steam backend notifies us of new or changed notifications. The behavior is not 100% intuitive, but here
+is what has been observed:
+
+- If a new notification is received, this will be emitted with **only that new notification**. Any other pending notification
+    will not be included in the `notifications` array
+- If you open the notification dropdown, unviewed notifications will be marked as viewed, and **only those changed notifications**
+    will be included in the `notifications` array
+- If a notification is marked as read, this doesn't appear to be emitted at all
+- If a notification is hidden (removed), **only that hidden notification** will be included in the `notifications` array
+    with `hidden: true` 
+- This is never emitted in response to [`markNotificationsRead()`](#marknotificationsreadnotificationids)
+    or [`markAllNotificationsRead()`](#markallnotificationsread)
 
 ### vanityURL
 - `url` - Your new vanity URL

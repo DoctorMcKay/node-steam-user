@@ -12,6 +12,25 @@ const NOTIFICATION_TYPES = {
 
 class SteamUserNotifications extends SteamUserGameServers {
 	/**
+	 * Mark some notifications as read by ID
+	 * @param {(string|number)[]} notificationIds - IDs of notifications to mark as read
+	 */
+	markNotificationsRead(notificationIds) {
+		this._sendUnified('SteamNotification.MarkNotificationsRead#1', {
+			notification_ids: notificationIds
+		});
+	}
+
+	/**
+	 * Mark all notifications as read
+	 */
+	markAllNotificationsRead() {
+		this._sendUnified('SteamNotification.MarkNotificationsRead#1', {
+			mark_all_read: true
+		});
+	}
+
+	/**
 	 * @protected
 	 */
 	_requestNotifications() {
@@ -99,6 +118,36 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientMarketingMessageUpdate2, 
 	}
 
 	this.emit('marketingMessages', new Date(time * 1000), messages);
+});
+
+SteamUserBase.prototype._handlerManager.add('SteamNotificationClient.NotificationsReceived#1', function(body) {
+	/** @var {Proto_SteamNotificationData[]} notifications */
+	let notifications = body.notifications;
+	if (notifications.length == 0) {
+		// This is observed to happen when you open the notification dropdown in web while everything is already viewed
+		return;
+	}
+
+	let mappedNotifications = notifications.map((notif) => {
+		let bodyData = null;
+		try {
+			bodyData = JSON.parse(notif.body_data);
+		} catch (ex) {}
+
+		return {
+			id: notif.notification_id,
+			type: notif.notification_type,
+			targets: notif.notification_targets,
+			body: bodyData,
+			read: notif.read,
+			timestamp: notif.timestamp ? new Date(notif.timestamp * 1000) : null,
+			hidden: notif.hidden,
+			expiry: notif.expiry ? new Date(notif.expiry * 1000) : null,
+			viewed: notif.viewed ? new Date(notif.viewed * 1000) : null
+		};
+	});
+
+	this.emit('notificationsReceived', {notifications: mappedNotifications});
 });
 
 module.exports = SteamUserNotifications;
