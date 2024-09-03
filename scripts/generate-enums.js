@@ -51,6 +51,10 @@ const ENUM_NAMES_TO_FIX = {
 	EChatroomNotificationLevel: 'EChatRoomNotificationLevel'
 };
 
+const ENUM_VALUES_TO_FIX = {
+	'2FAPrompt': 'TwoFactorPrompt'
+};
+
 // Generate enums
 if (!FS.existsSync(__dirname + '/../enums')) {
 	FS.mkdirSync(__dirname + '/../enums');
@@ -135,6 +139,10 @@ download('https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 						let file = GENERATED_FILE_HEADER + `/**\n * @enum\n * @readonly\n */\nconst ${currentEnum.name} = {\n`;
 
 						currentEnum.values.forEach(function(val) {
+							if (ENUM_VALUES_TO_FIX[val.name]) {
+								val.name = ENUM_VALUES_TO_FIX[val.name];
+							}
+
 							file += '\t"' + val.name + '": ' + val.value + ',' + (val.comment ? ' // ' + val.comment.trim() : '') + '\n';
 						});
 
@@ -285,6 +293,12 @@ function processProtobufEnums() {
 
 		processed = processed.concat(valuesToAdd);
 		processed.sort(sortEnum);
+
+		processed.forEach((val) => {
+			if (ENUM_VALUES_TO_FIX[val.name]) {
+				val.name = ENUM_VALUES_TO_FIX[val.name];
+			}
+		});
 
 		let enumFile = GENERATED_FILE_HEADER + `/**\n * @enum\n * @readonly\n */\nconst ${enumName} = {\n`;
 		enumFile += processed.map(v => `\t${quoteObjectKey(v.name)}: ${v.value},` + (v.comment ? ` // ${v.comment}` : '')).join('\n');
