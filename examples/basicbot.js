@@ -7,9 +7,13 @@
 const SteamUser = require('../index.js'); // Replace this with `require('steam-user');` if used outside of the module directory
 let client = new SteamUser();
 
-client.logOn({
-	accountName: 'username',
-	password: 'password'
+const collectCredentials = require('./lib/collect_credentials');
+
+collectCredentials().then((credentials) => {
+	client.logOn({
+		accountName: credentials.accountName,
+		password: credentials.password
+	});
 });
 
 client.on('loggedOn', function(details) {
