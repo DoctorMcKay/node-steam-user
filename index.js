@@ -133,6 +133,8 @@ class SteamUser extends SteamUserTwoFactor {
 		this._ttlCache = new StdLib.DataStructures.TTLCache(1000 * 60 * 5); // default 5 minutes
 		this._getCmListAttempts = 0;
 
+		this._resetAllExponentialBackoffs();
+
 		delete this._machineAuthToken;
 		delete this._shouldAttemptRefreshTokenRenewal;
 		delete this._loginSession;
