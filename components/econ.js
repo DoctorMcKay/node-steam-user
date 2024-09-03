@@ -30,8 +30,8 @@ class SteamUserEcon extends SteamUserChat {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 			this._sendUnified('Econ.GetTradeOfferAccessToken#1', {}, (body) => {
 				resolve({
-					"token": body.trade_offer_access_token,
-					"url": "https://steamcommunity.com/tradeoffer/new/?partner=" + this.steamID.accountid + "&token=" + body.trade_offer_access_token
+					token: body.trade_offer_access_token,
+					url: 'https://steamcommunity.com/tradeoffer/new/?partner=' + this.steamID.accountid + '&token=' + body.trade_offer_access_token
 				});
 			});
 		});
@@ -44,10 +44,10 @@ class SteamUserEcon extends SteamUserChat {
 	 */
 	changeTradeURL(callback) {
 		return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
-			this._sendUnified("Econ.GetTradeOfferAccessToken#1", {"generate_new_token": true}, (body) => {
+			this._sendUnified('Econ.GetTradeOfferAccessToken#1', {generate_new_token: true}, (body) => {
 				resolve({
 					token: body.trade_offer_access_token,
-					url: "https://steamcommunity.com/tradeoffer/new/?partner=" + this.steamID.accountid + "&token=" + body.trade_offer_access_token
+					url: 'https://steamcommunity.com/tradeoffer/new/?partner=' + this.steamID.accountid + '&token=' + body.trade_offer_access_token
 				});
 			});
 		});

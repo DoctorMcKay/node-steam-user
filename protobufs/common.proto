@@ -1,0 +1,5787 @@
+import "common_base.proto";
+
+// Used by: common.proto
+message CAppBootstrapData {
+	optional uint32 appid = 1;
+	optional bool hidden = 2;
+	repeated string user_tag = 3;
+}
+
+// Used by: common.proto
+message CAppOverview {
+	optional uint32 appid = 1;
+	optional string display_name = 2;
+	optional bool visible_in_game_list = 4;
+	optional bool subscribed_to = 5;
+	optional string sort_as = 6;
+	optional int32 app_type = 7 [(.description) = "enum"];
+	optional uint32 mru_index = 13;
+	optional uint32 rt_recent_activity_time = 14 [default = 0];
+	optional uint32 minutes_playtime_forever = 16 [default = 0];
+	optional uint32 minutes_playtime_last_two_weeks = 17 [default = 0];
+	optional uint32 rt_last_time_played = 18 [default = 0];
+	repeated uint32 store_tag = 19;
+	repeated .CAppOverview_AppAssociation association = 20;
+	repeated uint32 store_category = 23;
+	optional uint32 rt_original_release_date = 25 [default = 0];
+	optional uint32 rt_steam_release_date = 26 [default = 0];
+	optional string icon_hash = 27;
+	optional string logo_hash = 30;
+	optional int32 controller_support = 31 [(.description) = "enum"];
+	//optional int32 xbox_controller_support = 31 [(.description) = "enum"];
+	optional bool vr_supported = 32;
+	optional uint32 metacritic_score = 36;
+	optional uint64 size_on_disk = 37;
+	optional bool third_party_mod = 38;
+	optional string icon_data = 39;
+	optional string icon_data_format = 40;
+	optional string gameid = 41;
+	optional string library_capsule_filename = 42;
+	repeated .CAppOverview_PerClientData per_client_data = 43;
+	optional uint64 most_available_clientid = 44 [default = 0];
+	optional uint64 selected_clientid = 45 [default = 0];
+	optional uint32 rt_store_asset_mtime = 46;
+	optional uint32 rt_custom_image_mtime = 47;
+	optional uint32 optional_parent_app_id = 48;
+	optional uint32 owner_account_id = 49;
+	optional bool compat_mapping_enabled = 50;
+	optional uint32 compat_mapping_priority = 51;
+	optional string compat_mapping_tool_name = 52;
+	optional uint32 review_score_with_bombs = 53 [default = 0];
+	optional uint32 review_percentage_with_bombs = 54 [default = 0];
+	optional uint32 review_score_without_bombs = 55 [default = 0];
+	optional uint32 review_percentage_without_bombs = 56 [default = 0];
+	optional string library_id = 57;
+	optional bool vr_only = 58;
+	optional uint32 mastersub_appid = 59;
+	optional string mastersub_includedwith_logo = 60;
+	optional uint32 compat_allowlist_setting = 61 [default = 0];
+	optional string site_license_site_name = 62;
+	optional uint32 shortcut_override_appid = 63;
+	optional uint32 rt_last_time_locally_played = 65;
+	optional uint32 rt_purchased_time = 66;
+	optional string header_filename = 67;
+	optional uint32 local_cache_version = 68;
+	optional uint32 number_of_copies = 72 [default = 1];
+	optional uint32 steam_hw_compat_category_packed = 73 [default = 0];
+}
+
+// Used by: common.proto
+message CAppOverview_AppAssociation {
+	optional int32 type = 1 [(.description) = "enum"];
+	optional string name = 2;
+}
+
+message CAppOverview_Change {
+	repeated .CAppOverview app_overview = 1;
+	repeated uint32 removed_appid = 2;
+	optional bool full_update = 3;
+	optional bool update_complete = 4;
+}
+
+// Used by: common.proto
+message CAppOverview_PerClientData {
+	optional uint64 clientid = 1 [default = 0];
+	optional string client_name = 2;
+	optional int32 display_status = 3 [(.description) = "enum"];
+	optional uint32 status_percentage = 4 [default = 0];
+	optional string active_beta = 5;
+	optional bool installed = 6;
+	optional uint64 bytes_downloaded = 7 [default = 0];
+	optional uint64 bytes_total = 8 [default = 0];
+	optional bool streaming_to_local_client = 9;
+	optional bool is_available_on_current_platform = 10;
+	optional bool is_invalid_os_type = 11;
+	optional uint32 playtime_left = 12;
+	optional bool update_available_but_disabled_by_app = 14;
+}
+
+// Used by: AccountCart, Checkout
+message CartAmount {
+	optional int64 amount_in_cents = 1;
+	optional int32 currency_code = 2;
+	optional string formatted_amount = 3;
+}
+
+// Used by: AccountCart, Checkout
+message CartCoupon {
+	optional uint32 couponid = 1;
+	optional uint64 gidcoupon = 2;
+	optional string title = 5;
+	optional string coupon_description = 6;
+	optional string large_icon_url = 7;
+	optional int32 discount_pct = 8;
+}
+
+// Used by: AccountCart, Checkout
+message CartGiftInfo {
+	optional int32 accountid_giftee = 1;
+	optional .CartGiftMessage gift_message = 2;
+	optional int32 time_scheduled_send = 3;
+}
+
+// Used by: AccountCart, Checkout
+message CartGiftMessage {
+	optional string gifteename = 1;
+	optional string message = 2;
+	optional string sentiment = 3;
+	optional string signature = 4;
+}
+
+message CBilling_Address {
+	optional string first_name = 1;
+	optional string last_name = 2;
+	optional string address1 = 3;
+	optional string address2 = 4;
+	optional string city = 5;
+	optional string us_state = 6;
+	optional string country_code = 7;
+	optional string postcode = 8;
+	optional int32 zip_plus4 = 9;
+	optional string phone = 10;
+}
+
+message CBroadcast_NotifyBroadcastSessionHeartbeat_Notification {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_NotifyBroadcastUploadStop_Notification {
+	optional fixed64 broadcast_upload_id = 1;
+	optional uint32 upload_result = 2;
+}
+
+// Used by: ChatRoom, ChatRoomClient, ClanChatRooms
+message CChatPartyBeacon {
+	optional uint32 app_id = 1;
+	optional fixed64 steamid_owner = 2;
+	optional fixed64 beacon_id = 3;
+	optional string game_metadata = 4;
+}
+
+// Used by: ChatRoom, ChatRoomClient, ClanChatRooms
+message CChatRoleActions {
+	optional uint64 role_id = 1;
+	optional bool can_create_rename_delete_channel = 2;
+	optional bool can_kick = 3;
+	optional bool can_ban = 4;
+	optional bool can_invite = 5;
+	optional bool can_change_tagline_avatar_name = 6;
+	optional bool can_chat = 7;
+	optional bool can_view_history = 8;
+	optional bool can_change_group_roles = 9;
+	optional bool can_change_user_roles = 10;
+	optional bool can_mention_all = 11;
+	optional bool can_set_watching_broadcast = 12;
+}
+
+// Used by: ChatRoom, ChatRoomClient, ClanChatRooms
+message CChatRoom_GetChatRoomGroupSummary_Response {
+	optional uint64 chat_group_id = 1;
+	optional string chat_group_name = 2;
+	optional uint32 active_member_count = 3;
+	optional uint32 active_voice_member_count = 4;
+	optional uint64 default_chat_id = 5;
+	repeated .CChatRoomState chat_rooms = 6;
+	optional uint32 clanid = 7;
+	optional string chat_group_tagline = 8;
+	optional uint32 accountid_owner = 9;
+	repeated uint32 top_members = 10;
+	optional bytes chat_group_avatar_sha = 11;
+	optional int32 rank = 12 [(.description) = "enum"];
+	optional uint64 default_role_id = 13;
+	repeated uint64 role_ids = 14;
+	repeated .CChatRoleActions role_actions = 15;
+	optional uint32 watching_broadcast_accountid = 16;
+	optional uint32 appid = 17;
+	repeated .CChatPartyBeacon party_beacons = 18;
+	optional uint64 watching_broadcast_channel_id = 19;
+	optional uint64 active_minigame_id = 20;
+	optional string avatar_ugc_url = 21;
+	optional bool disabled = 22;
+}
+
+// Used by: ChatRoom, ChatRoomClient, ClanChatRooms
+message CChatRoomState {
+	optional uint64 chat_id = 1;
+	optional string chat_name = 2;
+	optional bool voice_allowed = 3;
+	repeated uint32 members_in_voice = 4;
+	optional uint32 time_last_message = 5;
+	optional uint32 sort_order = 6;
+	optional string last_message = 7;
+	optional uint32 accountid_last_message = 8;
+}
+
+message CClanEventData {
+	optional fixed64 gid = 1;
+	optional fixed64 clan_steamid = 2;
+	optional string event_name = 3;
+	optional int32 event_type = 4 [(.description) = "enum"];
+	optional uint32 appid = 5;
+	optional string server_address = 6;
+	optional string server_password = 7;
+	optional uint32 rtime32_start_time = 8;
+	optional uint32 rtime32_end_time = 9;
+	optional int32 comment_count = 10;
+	optional fixed64 creator_steamid = 11;
+	optional fixed64 last_update_steamid = 12;
+	optional string event_notes = 13;
+	optional string jsondata = 14;
+	optional .CCommunity_ClanAnnouncementInfo announcement_body = 15;
+	optional bool published = 16;
+	optional bool hidden = 17;
+	optional uint32 rtime32_visibility_start = 18;
+	optional uint32 rtime32_visibility_end = 19;
+	optional uint32 broadcaster_accountid = 20;
+	optional uint32 follower_count = 21;
+	optional uint32 ignore_count = 22;
+	optional fixed64 forum_topic_id = 23;
+	optional uint32 rtime32_last_modified = 24;
+	optional fixed64 news_post_gid = 25;
+	optional uint32 rtime_mod_reviewed = 26;
+	optional uint32 featured_app_tagid = 27;
+	repeated uint32 referenced_appids = 28;
+}
+
+// Used by: common.proto
+message CClientMetrics_AppInterfaceCreation {
+	optional string raw_version = 1;
+	optional string requested_interface_type = 2;
+}
+
+// Used by: common.proto
+message CClientMetrics_AppInterfaceMethodCounts {
+	optional string interface_name = 1;
+	optional string method_name = 2;
+	optional uint32 call_count = 3;
+}
+
+message CClientMetrics_AppInterfaceStats_Notification {
+	optional uint64 game_id = 1;
+	repeated .CClientMetrics_AppInterfaceCreation interfaces_created = 2;
+	repeated .CClientMetrics_AppInterfaceMethodCounts methods_called = 3;
+	optional uint32 session_length_seconds = 4;
+}
+
+message CClientMetrics_ClientBootstrap_Notification {
+	optional .CClientMetrics_ClientBootstrap_Summary summary = 1;
+}
+
+// Used by: common.proto
+message CClientMetrics_ClientBootstrap_RequestInfo {
+	optional string original_hostname = 1;
+	optional string actual_hostname = 2;
+	optional string path = 3;
+	optional string base_name = 4;
+	optional bool success = 5;
+	optional uint32 status_code = 6;
+	optional string address_of_request_url = 7;
+	optional uint32 response_time_ms = 8;
+	optional uint64 bytes_received = 9;
+	optional uint32 num_retries = 10;
+}
+
+// Used by: common.proto
+message CClientMetrics_ClientBootstrap_Summary {
+	optional uint32 launcher_type = 1;
+	optional uint32 steam_realm = 2;
+	optional string beta_name = 3;
+	optional bool download_completed = 4;
+	optional uint32 total_time_ms = 6;
+	repeated .CClientMetrics_ClientBootstrap_RequestInfo manifest_requests = 7;
+	repeated .CClientMetrics_ClientBootstrap_RequestInfo package_requests = 8;
+}
+
+message CClientMetrics_ClipRange_Notification {
+	optional int32 original_range_method = 1 [(.description) = "enum"];
+	optional .CClientMetrics_ClipRange_Notification_RelativeRangeEdge start = 2;
+	optional .CClientMetrics_ClipRange_Notification_RelativeRangeEdge end = 3;
+	optional float seconds = 4;
+	optional fixed64 gameid = 5;
+}
+
+// Used by: common.proto
+message CClientMetrics_ClipRange_Notification_RelativeRangeEdge {
+	optional int32 original_range_method = 1 [(.description) = "enum"];
+	optional int32 latest_range_method = 2 [(.description) = "enum"];
+	optional int32 delta_ms = 3;
+}
+
+message CClientMetrics_ClipShare_Notification {
+	optional uint32 eresult = 1 [default = 2];
+	optional int32 share_method = 2 [(.description) = "enum"];
+	optional float seconds = 3;
+	optional uint64 bytes = 4;
+	optional fixed64 gameid = 5;
+}
+
+message CClientMetrics_CloudAppSyncStats_Notification {
+	optional uint32 app_id = 1;
+	optional uint32 platform_type = 2;
+	optional bool preload = 3;
+	optional bool blocking_app_launch = 4;
+	optional uint32 files_uploaded = 5;
+	optional uint32 files_downloaded = 6;
+	optional uint32 files_deleted = 7;
+	optional uint64 bytes_uploaded = 8;
+	optional uint64 bytes_downloaded = 9;
+	optional uint64 microsec_total = 10;
+	optional uint64 microsec_init_caches = 11;
+	optional uint64 microsec_validate_state = 12;
+	optional uint64 microsec_ac_launch = 13;
+	optional uint64 microsec_ac_prep_user_files = 14;
+	optional uint64 microsec_ac_exit = 15;
+	optional uint64 microsec_build_sync_list = 16;
+	optional uint64 microsec_delete_files = 17;
+	optional uint64 microsec_download_files = 18;
+	optional uint64 microsec_upload_files = 19;
+	optional uint32 hardware_type = 20;
+	optional uint32 files_managed = 21;
+}
+
+// Used by: common.proto
+message CClientMetrics_ContentDownloadResponse_Counts {
+	optional uint32 class_100 = 1;
+	optional uint32 class_200 = 2;
+	optional uint32 class_300 = 3;
+	optional uint32 class_400 = 4;
+	optional uint32 class_500 = 5;
+	optional uint32 no_response = 6;
+	optional uint32 class_unknown = 7;
+}
+
+message CClientMetrics_ContentDownloadResponse_Counts_Notification {
+	optional uint32 cell_id = 1;
+	optional .CClientMetrics_ContentDownloadResponse_Hosts data = 2;
+}
+
+// Used by: common.proto
+message CClientMetrics_ContentDownloadResponse_HostCounts {
+	optional string hostname = 1;
+	optional uint32 source_type = 2;
+	optional .CClientMetrics_ContentDownloadResponse_Counts counts = 3;
+}
+
+// Used by: common.proto
+message CClientMetrics_ContentDownloadResponse_Hosts {
+	repeated .CClientMetrics_ContentDownloadResponse_HostCounts hosts = 1;
+}
+
+message CClientMetrics_ContentValidation_Notification {
+	optional int32 validation_result = 1;
+	optional uint32 app_id = 2;
+	optional bool staged_files = 3;
+	optional bool user_initiated = 4;
+	optional bool early_out = 5;
+	optional uint32 chunks_scanned = 6;
+	optional uint32 chunks_corrupt = 7;
+	optional uint64 bytes_scanned = 8;
+	optional uint64 chunk_bytes_corrupt = 9;
+	optional uint64 total_file_size_corrupt = 10;
+}
+
+message CClientMetrics_DownloadRates_Notification {
+	optional uint32 cell_id = 1;
+	repeated .CClientMetrics_DownloadRates_Notification_StatsInfo stats = 2;
+	optional uint32 throttling_kbps = 3;
+	optional uint32 os_type = 4;
+	optional uint32 device_type = 5;
+}
+
+// Used by: common.proto
+message CClientMetrics_DownloadRates_Notification_StatsInfo {
+	optional uint32 source_type = 1;
+	optional uint32 source_id = 2;
+	optional uint64 bytes = 3;
+	optional string host_name = 4;
+	optional uint64 microseconds = 5;
+	optional bool used_ipv6 = 6;
+	optional bool proxied = 7;
+	optional bool used_http2 = 8;
+	optional uint32 cache_hits = 9;
+	optional uint32 cache_misses = 10;
+	optional uint64 hit_bytes = 11;
+	optional uint64 miss_bytes = 12;
+}
+
+message CClientMetrics_EndGameRecording_Notification {
+	optional int32 recording_type = 1 [(.description) = "enum"];
+	optional float seconds = 2;
+	optional uint64 bytes = 3;
+	optional fixed64 gameid = 4;
+}
+
+message CClientMetrics_IPv6Connectivity_Notification {
+	optional uint32 cell_id = 1;
+	repeated .CClientMetrics_IPv6Connectivity_Result results = 2;
+	optional bool private_ip_is_rfc6598 = 3;
+}
+
+// Used by: common.proto
+message CClientMetrics_IPv6Connectivity_Result {
+	optional uint32 protocol_tested = 1;
+	optional uint32 connectivity_state = 2;
+}
+
+message CClientMetrics_ReportClientArgs_Notification {
+	repeated string client_args = 1;
+	optional bool gpu_webview_regkey_disabled = 2;
+	optional bool suppress_gpu_chrome = 3;
+	optional bool browser_not_supported = 4;
+	optional bool hw_accel_video_regkey_disabled = 5;
+	optional bool mini_mode_enabled = 6;
+	optional bool fps_counter_enabled = 7;
+	optional bool library_low_bandwidth_mode_enabled = 8;
+	optional bool library_low_perf_mode_enabled = 9;
+	optional int32 gr_mode = 10;
+}
+
+message CClientMetrics_ReportReactUsage_Notification {
+	optional string product = 1;
+	optional string version = 2;
+	repeated .CClientMetrics_ReportReactUsage_Notification_RouteData routes = 3;
+	repeated .CClientMetrics_ReportReactUsage_Notification_ComponentData components = 4;
+	repeated .CClientMetrics_ReportReactUsage_Notification_ActionData actions = 5;
+}
+
+// Used by: common.proto
+message CClientMetrics_ReportReactUsage_Notification_ActionData {
+	optional string action = 1;
+	optional uint32 count = 2;
+}
+
+// Used by: common.proto
+message CClientMetrics_ReportReactUsage_Notification_ComponentData {
+	optional string component = 1;
+	optional uint32 count = 2;
+}
+
+// Used by: common.proto
+message CClientMetrics_ReportReactUsage_Notification_RouteData {
+	optional string route = 1;
+	optional uint32 count = 2;
+}
+
+message CClientMetrics_SteamPipeWorkStats_Notification {
+	optional uint32 appid = 1;
+	optional uint32 depotid = 2;
+	optional int32 work_type = 3 [(.description) = "enum"];
+	repeated .CClientMetrics_SteamPipeWorkStats_Operation operations = 4;
+	optional uint32 hardware_type = 5;
+}
+
+// Used by: common.proto
+message CClientMetrics_SteamPipeWorkStats_Operation {
+	optional int32 type = 1 [(.description) = "enum"];
+	optional uint32 num_ops = 2;
+	optional uint64 num_bytes = 3;
+	optional uint64 busy_time_ms = 4;
+	optional uint64 idle_time_ms = 5;
+	optional uint64 sum_run_time_ms = 6;
+	optional uint64 sum_wait_time_ms = 7;
+}
+
+message CClientNotificationAchievement {
+	optional string achievement_id = 1;
+	optional uint32 appid = 2;
+	optional string name = 3;
+	optional string description = 4;
+	optional string image_url = 5;
+	optional bool achieved = 6;
+	optional uint32 rtime_unlocked = 7;
+	optional float min_progress = 8;
+	optional float current_progress = 9;
+	optional float max_progress = 10;
+	optional float global_achieved_pct = 11;
+}
+
+message CClientNotificationBatteryTemperature {
+	optional uint32 temperature = 1;
+	optional string notification_type = 2;
+}
+
+message CClientNotificationBroadcastAvailableToWatch {
+	optional int32 broadcast_permission = 1;
+}
+
+message CClientNotificationCannotReadControllerGuideButton {
+	optional int32 controller_index = 1;
+}
+
+message CClientNotificationClaimSteamDeckRewards {
+}
+
+message CClientNotificationCloudSyncConflict {
+	optional uint32 appid = 1;
+}
+
+message CClientNotificationCloudSyncFailure {
+	optional uint32 appid = 1;
+}
+
+message CClientNotificationDockUnsupportedFirmware {
+}
+
+message CClientNotificationDownloadCompleted {
+	optional uint32 appid = 1;
+	optional uint32 dlc_appid = 2;
+}
+
+message CClientNotificationFamilySharingDeviceAuthorizationChanged {
+	optional uint32 accountid_owner = 1;
+	optional bool authorized = 2;
+}
+
+message CClientNotificationFamilySharingLibraryAvailable {
+	optional uint32 accountid_owner = 1;
+}
+
+message CClientNotificationFamilySharingStopPlaying {
+	optional uint32 accountid_owner = 1;
+	optional uint32 seconds_remaining = 2;
+	optional uint32 appid = 3;
+}
+
+message CClientNotificationFriendInGame {
+	optional fixed64 steamid = 1;
+	optional string game_name = 2;
+}
+
+message CClientNotificationFriendInviteRollup {
+	optional uint32 new_invite_count = 1;
+}
+
+message CClientNotificationFriendMessage {
+	optional string tag = 1;
+	optional string steamid = 2;
+	optional string title = 3;
+	optional string body = 4;
+	optional string icon = 5;
+	optional uint32 notificationid = 6;
+	optional string response_steamurl = 7;
+}
+
+message CClientNotificationFriendOnline {
+	optional fixed64 steamid = 1;
+}
+
+message CClientNotificationGameRecordingError {
+	optional fixed64 game_id = 1;
+	optional int32 error_type = 2 [(.description) = "enum"];
+}
+
+message CClientNotificationGameRecordingStart {
+	optional fixed64 game_id = 1;
+}
+
+message CClientNotificationGameRecordingStop {
+	optional fixed64 game_id = 1;
+	optional string clip_id = 2;
+}
+
+message CClientNotificationGameRecordingUserMarkerAdded {
+	optional fixed64 game_id = 1;
+}
+
+message CClientNotificationGroupChatMessage {
+	optional string tag = 1;
+	optional string steamid_sender = 2;
+	optional string chat_group_id = 3;
+	optional string chat_id = 4;
+	optional string title = 5;
+	optional string body = 6;
+	optional string rawbody = 7;
+	optional string icon = 8;
+	optional uint32 notificationid = 9;
+}
+
+message CClientNotificationHardwareSurveyPending {
+}
+
+message CClientNotificationIncomingVoiceChat {
+	optional fixed64 steamid = 1;
+}
+
+message CClientNotificationItemAnnouncement {
+	optional uint32 new_item_count = 1;
+	optional bool new_backpack_items = 2;
+}
+
+message CClientNotificationLoginRefresh {
+}
+
+message CClientNotificationLowBattery {
+	optional float pct_remaining = 1;
+}
+
+message CClientNotificationLowDiskSpace {
+	optional uint32 folder_index = 1;
+}
+
+message CClientNotificationOverlaySplashScreen {
+}
+
+message CClientNotificationPlaytimeWarning {
+	optional string type = 1;
+	optional uint32 playtime_remaining = 2;
+}
+
+message CClientNotificationRemoteClientConnection {
+	optional string machine = 1;
+	optional bool connected = 2;
+}
+
+message CClientNotificationRemoteClientStartStream {
+	optional string machine = 1;
+	optional string game_name = 2;
+}
+
+message CClientNotificationScreenshot {
+	optional string screenshot_handle = 1;
+	optional string description = 2;
+	optional string local_url = 3;
+}
+
+message CClientNotificationSteamInputActionSetChanged {
+	optional int32 controller_index = 1;
+	optional string action_set_name = 2;
+}
+
+message CClientNotificationStreamingClientConnection {
+	optional string hostname = 1;
+	optional string machine = 2;
+	optional bool connected = 3;
+}
+
+message CClientNotificationSystemUpdate {
+	optional int32 type = 1 [(.description) = "enum"];
+}
+
+message CClientNotificationTimedTrialRemaining {
+	optional uint32 appid = 1;
+	optional string icon = 2;
+	optional bool offline = 3;
+	optional uint32 allowed_seconds = 4;
+	optional uint32 played_seconds = 5;
+}
+
+message CClientNotificationTimerExpired {
+}
+
+// Used by: common.proto
+message CCloud_PendingRemoteOperation {
+	optional int32 operation = 1 [(.description) = "enum"];
+	optional string machine_name = 2;
+	optional uint64 client_id = 3;
+	optional uint32 time_last_updated = 4;
+	optional int32 os_type = 5;
+	optional int32 device_type = 6;
+}
+
+// Used by: common.proto
+message CCommunity_ClanAnnouncementInfo {
+	optional uint64 gid = 1;
+	optional uint64 clanid = 2;
+	optional uint64 posterid = 3;
+	optional string headline = 4;
+	optional uint32 posttime = 5;
+	optional uint32 updatetime = 6;
+	optional string body = 7;
+	optional int32 commentcount = 8;
+	repeated string tags = 9;
+	optional int32 language = 10;
+	optional bool hidden = 11;
+	optional fixed64 forum_topic_id = 12;
+	optional fixed64 event_gid = 13;
+	optional int32 voteupcount = 14;
+	optional int32 votedowncount = 15;
+}
+
+message CCuratorPreferences {
+	optional uint32 supported_languages = 1;
+	optional bool platform_windows = 2;
+	optional bool platform_mac = 3;
+	optional bool platform_linux = 4;
+	optional bool vr_content = 5;
+	optional bool adult_content_violence = 6;
+	optional bool adult_content_sex = 7;
+	optional uint32 timestamp_updated = 8;
+	repeated uint32 tagids_curated = 9;
+	repeated uint32 tagids_filtered = 10;
+	optional string website_title = 11;
+	optional string website_url = 12;
+	optional string discussion_url = 13;
+	optional bool show_broadcast = 14;
+}
+
+message CGameNetworkingUI_AppSummary {
+	optional uint32 appid = 1;
+	optional bool ip_was_shared_with_friend = 10;
+	optional bool ip_was_shared_with_nonfriend = 11;
+	optional uint32 active_connections = 20;
+	optional .CGameNetworkingUI_ConnectionSummary main_cxn = 30;
+}
+
+message CGameNetworkingUI_ConnectionState {
+	optional string connection_key = 1;
+	optional uint32 appid = 2;
+	optional fixed32 connection_id_local = 3;
+	optional string identity_local = 4;
+	optional string identity_remote = 5;
+	optional uint32 connection_state = 10;
+	optional uint32 start_time = 12;
+	optional uint32 close_time = 13;
+	optional uint32 close_reason = 14;
+	optional string close_message = 15;
+	optional string status_loc_token = 16;
+	optional uint32 transport_kind = 20;
+	optional string sdrpopid_local = 21;
+	optional string sdrpopid_remote = 22;
+	optional string address_remote = 23;
+	optional .CMsgSteamDatagramP2PRoutingSummary p2p_routing = 24;
+	optional uint32 ping_interior = 25;
+	optional uint32 ping_remote_front = 26;
+	optional uint32 ping_default_internet_route = 27;
+	optional .CMsgSteamDatagramConnectionQuality e2e_quality_local = 30;
+	optional .CMsgSteamDatagramConnectionQuality e2e_quality_remote = 31;
+	optional uint64 e2e_quality_remote_instantaneous_time = 32;
+	optional uint64 e2e_quality_remote_lifetime_time = 33;
+	optional .CMsgSteamDatagramConnectionQuality front_quality_local = 40;
+	optional .CMsgSteamDatagramConnectionQuality front_quality_remote = 41;
+	optional uint64 front_quality_remote_instantaneous_time = 42;
+	optional uint64 front_quality_remote_lifetime_time = 43;
+}
+
+// Used by: common.proto
+message CGameNetworkingUI_ConnectionSummary {
+	optional uint32 transport_kind = 1;
+	optional string sdrpop_local = 2;
+	optional string sdrpop_remote = 3;
+	optional uint32 ping_ms = 4;
+	optional float packet_loss = 5;
+	optional uint32 ping_default_internet_route = 6;
+	optional bool ip_was_shared = 7;
+	optional uint32 connection_state = 8;
+}
+
+message CGameRecording_AudioSessionsChanged_Notification {
+	repeated .CGameRecording_AudioSessionsChanged_Notification_Session sessions = 1;
+}
+
+// Used by: common.proto
+message CGameRecording_AudioSessionsChanged_Notification_Session {
+	optional string id = 1;
+	optional string name = 2;
+	optional bool is_system = 3;
+	optional bool is_muted = 4;
+	optional bool is_active = 5;
+	optional bool is_captured = 6;
+	optional float recent_peak = 7;
+	optional bool is_game = 8;
+	optional bool is_steam = 9;
+	optional bool is_saved = 10;
+}
+
+message CLibraryBootstrapData {
+	repeated .CAppBootstrapData app_data = 1;
+}
+
+message CLocalizationToken {
+	optional uint32 language = 1;
+	optional string localized_string = 2;
+}
+
+message CMarketingMessages_MarkMessageSeen_Notification {
+	optional fixed64 gid = 1;
+	optional uint32 display_index = 2 [default = 0];
+	optional int32 template_type = 3 [default = 0, (.description) = "enum"];
+}
+
+message CMsgAchievementChange {
+	optional uint32 appid = 1;
+}
+
+message CMsgAMUnlockHEVC {
+}
+
+message CMsgAMUnlockHEVCResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgAMUnlockStreaming {
+}
+
+message CMsgAMUnlockStreamingResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional bytes encryption_key = 2;
+}
+
+message CMsgAppRights {
+	optional bool edit_info = 1;
+	optional bool publish = 2;
+	optional bool view_error_data = 3;
+	optional bool download = 4;
+	optional bool upload_cdkeys = 5;
+	optional bool generate_cdkeys = 6;
+	optional bool view_financials = 7;
+	optional bool manage_ceg = 8;
+	optional bool manage_signing = 9;
+	optional bool manage_cdkeys = 10;
+	optional bool edit_marketing = 11;
+	optional bool economy_support = 12;
+	optional bool economy_support_supervisor = 13;
+	optional bool manage_pricing = 14;
+	optional bool broadcast_live = 15;
+	optional bool view_marketing_traffic = 16;
+}
+
+// Used by: common.proto
+message CMsgAuthTicket {
+	optional uint32 estate = 1;
+	optional uint32 eresult = 2 [default = 2];
+	optional fixed64 steamid = 3;
+	optional fixed64 gameid = 4;
+	optional uint32 h_steam_pipe = 5;
+	optional uint32 ticket_crc = 6;
+	optional bytes ticket = 7;
+	optional bytes server_secret = 8;
+	optional uint32 ticket_type = 9;
+}
+
+message CMsgBadgeCraftedNotification {
+	optional uint32 appid = 1;
+	optional uint32 badge_level = 2;
+}
+
+message CMsgClientAccountInfo {
+	optional string persona_name = 1;
+	optional string ip_country = 2;
+	optional int32 count_authed_computers = 5;
+	optional uint32 account_flags = 7;
+	optional uint64 facebook_id = 8;
+	optional string facebook_name = 9;
+	optional bool steamguard_notify_newmachines = 14;
+	optional string steamguard_machine_name_user_chosen = 15;
+	optional bool is_phone_verified = 16;
+	optional uint32 two_factor_state = 17;
+	optional bool is_phone_identifying = 18;
+	optional bool is_phone_needing_reverify = 19;
+}
+
+message CMsgClientActivateOEMLicense {
+	optional string bios_manufacturer = 1;
+	optional string bios_serialnumber = 2;
+	optional bytes license_file = 3;
+	optional string mainboard_manufacturer = 4;
+	optional string mainboard_product = 5;
+	optional string mainboard_serialnumber = 6;
+}
+
+message CMsgClientAddFriend {
+	optional fixed64 steamid_to_add = 1;
+	optional string accountname_or_email_to_add = 2;
+}
+
+message CMsgClientAddFriendResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 steam_id_added = 2;
+	optional string persona_name_added = 3;
+}
+
+message CMsgClientAddFriendToGroup {
+	optional int32 groupid = 1;
+	optional fixed64 steamiduser = 2;
+}
+
+message CMsgClientAddFriendToGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientAMGetClanOfficers {
+	optional fixed64 steamid_clan = 1;
+}
+
+message CMsgClientAMGetClanOfficersResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 steamid_clan = 2;
+	optional int32 officer_count = 3;
+}
+
+message CMsgClientAMGetPersonaNameHistory {
+	optional int32 id_count = 1;
+	repeated .CMsgClientAMGetPersonaNameHistory_IdInstance Ids = 2;
+}
+
+// Used by: common.proto
+message CMsgClientAMGetPersonaNameHistory_IdInstance {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgClientAMGetPersonaNameHistoryResponse {
+	repeated .CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance responses = 2;
+}
+
+// Used by: common.proto
+message CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 steamid = 2;
+	repeated .CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance_NameInstance names = 3;
+}
+
+// Used by: common.proto
+message CMsgClientAMGetPersonaNameHistoryResponse_NameTableInstance_NameInstance {
+	optional fixed32 name_since = 1;
+	optional string name = 2;
+}
+
+message CMsgClientAppInfoChanges {
+	optional uint32 current_change_number = 1;
+	optional bool force_full_update = 2;
+	repeated uint32 appIDs = 3;
+}
+
+message CMsgClientAppInfoRequest {
+	repeated .CMsgClientAppInfoRequest_App apps = 1;
+	optional bool supports_batches = 2 [default = false];
+}
+
+// Used by: common.proto
+message CMsgClientAppInfoRequest_App {
+	optional uint32 app_id = 1;
+	optional uint32 section_flags = 2;
+	repeated uint32 section_CRC = 3;
+}
+
+message CMsgClientAppInfoResponse {
+	repeated .CMsgClientAppInfoResponse_App apps = 1;
+	repeated uint32 apps_unknown = 2;
+	optional uint32 apps_pending = 3;
+}
+
+// Used by: common.proto
+message CMsgClientAppInfoResponse_App {
+	optional uint32 app_id = 1;
+	optional uint32 change_number = 2;
+	repeated .CMsgClientAppInfoResponse_App_Section sections = 3;
+}
+
+// Used by: common.proto
+message CMsgClientAppInfoResponse_App_Section {
+	optional uint32 section_id = 1;
+	optional bytes section_kv = 2;
+}
+
+message CMsgClientAppInfoUpdate {
+	optional uint32 last_changenumber = 1;
+	optional bool send_changelist = 2;
+}
+
+message CMsgClientAuthList {
+	optional uint32 tokens_left = 1;
+	optional uint32 last_request_seq = 2;
+	optional uint32 last_request_seq_from_server = 3;
+	repeated .CMsgAuthTicket tickets = 4;
+	repeated uint32 app_ids = 5;
+	optional uint32 message_sequence = 6;
+}
+
+message CMsgClientAuthListAck {
+	repeated uint32 ticket_crc = 1;
+	repeated uint32 app_ids = 2;
+	optional uint32 message_sequence = 3;
+}
+
+message CMsgClientAuthorizeLocalDevice {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 owner_account_id = 2;
+	optional uint64 authed_device_token = 3;
+}
+
+message CMsgClientAuthorizeLocalDeviceNotification {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
+}
+
+message CMsgClientAuthorizeLocalDeviceRequest {
+	optional string device_description = 1;
+	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
+}
+
+message CMsgClientChallengeRequest {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgClientChallengeResponse {
+	optional fixed64 challenge = 1;
+}
+
+message CMsgClientChangeStatus {
+	optional uint32 persona_state = 1;
+	optional string player_name = 2;
+	optional bool is_auto_generated_name = 3;
+	optional bool high_priority = 4;
+	optional bool persona_set_by_user = 5;
+	optional uint32 persona_state_flags = 6 [default = 0];
+	optional bool need_persona_response = 7;
+	optional bool is_client_idle = 8;
+}
+
+message CMsgClientChatGetFriendMessageHistory {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgClientChatGetFriendMessageHistoryForOfflineMessages {
+}
+
+message CMsgClientChatGetFriendMessageHistoryResponse {
+	optional fixed64 steamid = 1;
+	optional uint32 success = 2;
+	repeated .CMsgClientChatGetFriendMessageHistoryResponse_FriendMessage messages = 3;
+}
+
+// Used by: common.proto
+message CMsgClientChatGetFriendMessageHistoryResponse_FriendMessage {
+	optional uint32 accountid = 1;
+	optional uint32 timestamp = 2;
+	optional string message = 3;
+	optional bool unread = 4;
+}
+
+message CMsgClientChatInvite {
+	optional fixed64 steam_id_invited = 1;
+	optional fixed64 steam_id_chat = 2;
+	optional fixed64 steam_id_patron = 3;
+	optional int32 chatroom_type = 4;
+	optional fixed64 steam_id_friend_chat = 5;
+	optional string chat_name = 6;
+	optional fixed64 game_id = 7;
+}
+
+message CMsgClientCheckAppBetaPassword {
+	optional uint32 app_id = 1;
+	optional string betapassword = 2;
+}
+
+message CMsgClientCheckAppBetaPasswordResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientCheckAppBetaPasswordResponse_BetaPassword betapasswords = 4;
+}
+
+// Used by: common.proto
+message CMsgClientCheckAppBetaPasswordResponse_BetaPassword {
+	optional string betaname = 1;
+	optional string betapassword = 2;
+}
+
+message CMsgClientCheckFileSignature {
+	optional uint32 app_id = 1;
+}
+
+message CMsgClientCheckFileSignatureResponse {
+	optional uint32 app_id = 1;
+	optional uint32 pid = 2;
+	optional uint32 eresult = 3;
+	optional string filename = 4;
+	optional uint32 esignatureresult = 5;
+	optional bytes sha_file = 6;
+	optional bytes signatureheader = 7;
+	optional uint32 filesize = 8;
+	optional uint32 getlasterror = 9;
+	optional uint32 evalvesignaturecheckdetail = 10;
+}
+
+message CMsgClientClanState {
+	optional fixed64 steamid_clan = 1;
+	optional uint32 clan_account_flags = 3;
+	optional .CMsgClientClanState_NameInfo name_info = 4;
+	optional .CMsgClientClanState_UserCounts user_counts = 5;
+	repeated .CMsgClientClanState_Event events = 6;
+	repeated .CMsgClientClanState_Event announcements = 7;
+	optional bool chat_room_private = 8;
+}
+
+// Used by: common.proto
+message CMsgClientClanState_Event {
+	optional fixed64 gid = 1;
+	optional uint32 event_time = 2;
+	optional string headline = 3;
+	optional fixed64 game_id = 4;
+	optional bool just_posted = 5;
+}
+
+// Used by: common.proto
+message CMsgClientClanState_NameInfo {
+	optional string clan_name = 1;
+	optional bytes sha_avatar = 2;
+}
+
+// Used by: common.proto
+message CMsgClientClanState_UserCounts {
+	optional uint32 members = 1;
+	optional uint32 online = 2;
+	optional uint32 chatting = 3;
+	optional uint32 in_game = 4;
+	optional uint32 chat_room_members = 5;
+}
+
+message CMsgClientCMList {
+	repeated uint32 cm_addresses = 1;
+	repeated uint32 cm_ports = 2;
+	repeated string cm_websocket_addresses = 3;
+	optional uint32 percent_default_to_websocket = 4;
+}
+
+message CMsgClientCommentNotifications {
+	optional uint32 count_new_comments = 1;
+	optional uint32 count_new_comments_owner = 2;
+	optional uint32 count_new_comments_subscriptions = 3;
+}
+
+message CMsgClientConnectionStats {
+	optional .CMsgClientConnectionStats_Stats_Logon stats_logon = 1;
+	optional .CMsgClientConnectionStats_Stats_VConn stats_vconn = 2;
+}
+
+// Used by: common.proto
+message CMsgClientConnectionStats_Stats_Logon {
+	optional int32 connect_attempts = 1;
+	optional int32 connect_successes = 2;
+	optional int32 connect_failures = 3;
+	optional int32 connections_dropped = 4;
+	optional uint32 seconds_running = 5;
+	optional uint32 msec_tologonthistime = 6;
+	optional uint32 count_bad_cms = 7;
+}
+
+// Used by: common.proto
+message CMsgClientConnectionStats_Stats_UDP {
+	optional uint64 pkts_sent = 1;
+	optional uint64 bytes_sent = 2;
+	optional uint64 pkts_recv = 3;
+	optional uint64 pkts_processed = 4;
+	optional uint64 bytes_recv = 5;
+}
+
+// Used by: common.proto
+message CMsgClientConnectionStats_Stats_VConn {
+	optional uint32 connections_udp = 1;
+	optional uint32 connections_tcp = 2;
+	optional .CMsgClientConnectionStats_Stats_UDP stats_udp = 3;
+	optional uint64 pkts_abandoned = 4;
+	optional uint64 conn_req_received = 5;
+	optional uint64 pkts_resent = 6;
+	optional uint64 msgs_sent = 7;
+	optional uint64 msgs_sent_failed = 8;
+	optional uint64 msgs_recv = 9;
+	optional uint64 datagrams_sent = 10;
+	optional uint64 datagrams_recv = 11;
+	optional uint64 bad_pkts_recv = 12;
+	optional uint64 unknown_conn_pkts_recv = 13;
+	optional uint64 missed_pkts_recv = 14;
+	optional uint64 dup_pkts_recv = 15;
+	optional uint64 failed_connect_challenges = 16;
+	optional uint32 micro_sec_avg_latency = 17;
+	optional uint32 micro_sec_min_latency = 18;
+	optional uint32 micro_sec_max_latency = 19;
+	optional uint32 mem_pool_msg_in_use = 20;
+}
+
+message CMsgClientCreateFriendsGroup {
+	optional fixed64 steamid = 1;
+	optional string groupname = 2;
+	repeated fixed64 steamid_friends = 3;
+}
+
+message CMsgClientCreateFriendsGroupResponse {
+	optional uint32 eresult = 1;
+	optional int32 groupid = 2;
+}
+
+message CMsgClientDeauthorizeDevice {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 deauthorization_account_id = 2;
+}
+
+message CMsgClientDeauthorizeDeviceRequest {
+	optional uint32 deauthorization_account_id = 1;
+	optional uint64 deauthorization_device_token = 2;
+}
+
+message CMsgClientDeleteFriendsGroup {
+	optional fixed64 steamid = 1;
+	optional int32 groupid = 2;
+}
+
+message CMsgClientDeleteFriendsGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientDeregisterWithServer {
+	optional uint32 eservertype = 1;
+	optional uint32 app_id = 2;
+}
+
+message CMsgClientDPCheckSpecialSurvey {
+	optional uint32 survey_id = 1;
+}
+
+message CMsgClientDPCheckSpecialSurveyResponse {
+	optional uint32 eResult = 1 [default = 2];
+	optional uint32 state = 2;
+	optional string name = 3;
+	optional string custom_url = 4;
+	optional bool include_software = 5;
+	optional bytes token = 6;
+}
+
+message CMsgClientDPContentStatsReport {
+	optional fixed64 stats_machine_id = 1;
+	optional string country_code = 2;
+	optional int32 os_type = 3;
+	optional int32 language = 4;
+	optional uint32 num_install_folders = 5;
+	optional uint32 num_installed_games = 6;
+	optional uint64 size_installed_games = 7;
+}
+
+message CMsgClientDPSendSpecialSurveyResponse {
+	optional uint32 survey_id = 1;
+	optional bytes data = 2;
+}
+
+message CMsgClientDPSendSpecialSurveyResponseReply {
+	optional uint32 eResult = 1 [default = 2];
+	optional bytes token = 2;
+}
+
+message CMsgClientEmailAddrInfo {
+	optional string email_address = 1;
+	optional bool email_is_validated = 2;
+	optional bool email_validation_changed = 3;
+	optional bool credential_change_requires_code = 4;
+	optional bool password_or_secretqa_change_requires_code = 5;
+	optional bool remind_user_about_email = 6;
+}
+
+message CMsgClientEmoticonList {
+	repeated .CMsgClientEmoticonList_Emoticon emoticons = 1;
+	repeated .CMsgClientEmoticonList_Sticker stickers = 2;
+	repeated .CMsgClientEmoticonList_Effect effects = 3;
+}
+
+// Used by: common.proto
+message CMsgClientEmoticonList_Effect {
+	optional string name = 1;
+	optional int32 count = 2;
+	optional uint32 time_received = 3;
+	optional bool infinite_use = 4;
+	optional uint32 appid = 5;
+}
+
+// Used by: common.proto
+message CMsgClientEmoticonList_Emoticon {
+	optional string name = 1;
+	optional int32 count = 2;
+	optional uint32 time_last_used = 3;
+	optional uint32 use_count = 4;
+	optional uint32 time_received = 5;
+	optional uint32 appid = 6;
+}
+
+// Used by: common.proto
+message CMsgClientEmoticonList_Sticker {
+	optional string name = 1;
+	optional int32 count = 2;
+	optional uint32 time_received = 3;
+	optional uint32 appid = 4;
+	optional uint32 time_last_used = 5;
+	optional uint32 use_count = 6;
+}
+
+message CMsgClientFriendMsg {
+	optional fixed64 steamid = 1;
+	optional int32 chat_entry_type = 2;
+	optional bytes message = 3;
+	optional fixed32 rtime32_server_timestamp = 4;
+	optional bool echo_to_sender = 5;
+}
+
+message CMsgClientFriendMsgIncoming {
+	optional fixed64 steamid_from = 1;
+	optional int32 chat_entry_type = 2;
+	optional bool from_limited_account = 3;
+	optional bytes message = 4;
+	optional fixed32 rtime32_server_timestamp = 5;
+}
+
+message CMsgClientFriendProfileInfo {
+	optional fixed64 steamid_friend = 1;
+}
+
+message CMsgClientFriendProfileInfoResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 steamid_friend = 2;
+	optional uint32 time_created = 3;
+	optional string real_name = 4;
+	optional string city_name = 5;
+	optional string state_name = 6;
+	optional string country_name = 7;
+	optional string headline = 8;
+	optional string summary = 9;
+}
+
+message CMsgClientFriendsGroupsList {
+	optional bool bremoval = 1;
+	optional bool bincremental = 2;
+	repeated .CMsgClientFriendsGroupsList_FriendGroup friendGroups = 3;
+	repeated .CMsgClientFriendsGroupsList_FriendGroupsMembership memberships = 4;
+}
+
+// Used by: common.proto
+message CMsgClientFriendsGroupsList_FriendGroup {
+	optional int32 nGroupID = 1;
+	optional string strGroupName = 2;
+}
+
+// Used by: common.proto
+message CMsgClientFriendsGroupsList_FriendGroupsMembership {
+	optional fixed64 ulSteamID = 1;
+	optional int32 nGroupID = 2;
+}
+
+message CMsgClientFriendUserStatusPublished {
+	optional fixed64 friend_steamid = 1;
+	optional uint32 appid = 2;
+	optional string status_text = 3;
+}
+
+message CMsgClientFSGetFriendsSteamLevels {
+	repeated uint32 accountids = 1;
+}
+
+message CMsgClientFSGetFriendsSteamLevelsResponse {
+	repeated .CMsgClientFSGetFriendsSteamLevelsResponse_Friend friends = 1;
+}
+
+// Used by: common.proto
+message CMsgClientFSGetFriendsSteamLevelsResponse_Friend {
+	optional uint32 accountid = 1;
+	optional uint32 level = 2;
+}
+
+message CMsgClientGameConnectTokens {
+	optional uint32 max_tokens_to_keep = 1 [default = 10];
+	repeated bytes tokens = 2;
+}
+
+message CMsgClientGamesPlayed {
+	repeated .CMsgClientGamesPlayed_GamePlayed games_played = 1;
+	optional uint32 client_os_type = 2;
+	optional uint32 cloud_gaming_platform = 3;
+}
+
+// Used by: common.proto
+message CMsgClientGamesPlayed_GamePlayed {
+	optional uint64 steam_id_gs = 1;
+	optional fixed64 game_id = 2;
+	optional uint32 deprecated_game_ip_address = 3;
+	optional uint32 game_port = 4;
+	optional bool is_secure = 5;
+	optional bytes token = 6;
+	optional string game_extra_info = 7;
+	optional bytes game_data_blob = 8;
+	optional uint32 process_id = 9;
+	optional uint32 streaming_provider_id = 10;
+	optional uint32 game_flags = 11;
+	optional uint32 owner_id = 12;
+	optional string vr_hmd_vendor = 13;
+	optional string vr_hmd_model = 14;
+	optional uint32 launch_option_type = 15 [default = 0];
+	optional int32 primary_controller_type = 16 [default = -1];
+	optional string primary_steam_controller_serial = 17 [default = ""];
+	optional uint32 total_steam_controller_count = 18 [default = 0];
+	optional uint32 total_non_steam_controller_count = 19 [default = 0];
+	optional uint64 controller_workshop_file_id = 20 [default = 0];
+	optional uint32 launch_source = 21 [default = 0];
+	optional uint32 vr_hmd_runtime = 22;
+	optional .CMsgIPAddress game_ip_address = 23;
+	optional uint32 controller_connection_type = 24 [default = 0];
+}
+
+message CMsgClientGetAppOwnershipTicket {
+	optional uint32 app_id = 1;
+}
+
+message CMsgClientGetAppOwnershipTicketResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional bytes ticket = 3;
+}
+
+message CMsgClientGetAuthorizedDevices {
+}
+
+message CMsgClientGetAuthorizedDevicesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientGetAuthorizedDevicesResponse_AuthorizedDevice authorized_device = 2;
+}
+
+// Used by: common.proto
+message CMsgClientGetAuthorizedDevicesResponse_AuthorizedDevice {
+	optional uint64 auth_device_token = 1;
+	optional string device_name = 2;
+	optional uint32 last_access_time = 3;
+	optional uint32 borrower_id = 4;
+	optional bool is_pending = 5;
+	optional uint32 app_played = 6;
+}
+
+message CMsgClientGetCDNAuthToken {
+	optional uint32 depot_id = 1;
+	optional string host_name = 2;
+	optional uint32 app_id = 3;
+}
+
+message CMsgClientGetCDNAuthTokenResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional string token = 2;
+	optional uint32 expiration_time = 3;
+}
+
+message CMsgClientGetClanActivityCounts {
+	repeated uint64 steamid_clans = 1;
+}
+
+message CMsgClientGetClanActivityCountsResponse {
+	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgClientGetClientAppList {
+	optional bool media = 1;
+	optional bool tools = 2;
+	optional bool games = 3;
+	optional bool only_installed = 4;
+	optional bool only_changing = 5;
+	optional bool comics = 6;
+}
+
+message CMsgClientGetClientAppListResponse {
+	repeated .CMsgClientGetClientAppListResponse_App apps = 1;
+	optional uint64 bytes_available = 2;
+}
+
+// Used by: common.proto
+message CMsgClientGetClientAppListResponse_App {
+	optional uint32 appid = 1;
+	optional string category = 2;
+	optional bool favorite = 3;
+	optional bool installed = 4;
+	optional bool auto_update = 5;
+	optional uint64 bytes_downloaded = 6;
+	optional uint64 bytes_needed = 7;
+	optional uint32 bytes_download_rate = 8;
+	repeated .CMsgClientGetClientAppListResponse_App_DLC dlcs = 9;
+	optional string app_type = 10;
+	optional bool download_paused = 11;
+	optional uint32 num_downloading = 12;
+	optional uint32 num_paused = 13;
+	optional bool changing = 14;
+	optional bool available_on_platform = 15;
+}
+
+// Used by: common.proto
+message CMsgClientGetClientAppListResponse_App_DLC {
+	optional uint32 appid = 1;
+	optional bool installed = 2;
+}
+
+message CMsgClientGetClientDetails {
+}
+
+message CMsgClientGetClientDetailsResponse {
+	optional uint32 package_version = 1;
+	optional string os = 2;
+	optional string machine_name = 3;
+	optional string ip_public = 4;
+	optional string ip_private = 5;
+	repeated .CMsgClientGetClientDetailsResponse_Game games_running = 6;
+	optional uint64 bytes_available = 7;
+	optional uint32 protocol_version = 8;
+}
+
+// Used by: common.proto
+message CMsgClientGetClientDetailsResponse_Game {
+	optional uint32 appid = 1;
+	optional string extra_info = 2;
+	optional uint32 time_running_sec = 3;
+}
+
+message CMsgClientGetDepotDecryptionKey {
+	optional uint32 depot_id = 1;
+	optional uint32 app_id = 2;
+}
+
+message CMsgClientGetDepotDecryptionKeyResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 depot_id = 2;
+	optional bytes depot_encryption_key = 3;
+}
+
+message CMsgClientGetEmoticonList {
+}
+
+message CMsgClientGetUserStats {
+	optional fixed64 game_id = 1;
+	optional uint32 crc_stats = 2;
+	optional int32 schema_local_version = 3;
+	optional fixed64 steam_id_for_user = 4;
+}
+
+message CMsgClientGetUserStatsResponse {
+	optional fixed64 game_id = 1;
+	optional int32 eresult = 2 [default = 2];
+	optional uint32 crc_stats = 3;
+	optional bytes schema = 4;
+	repeated .CMsgClientGetUserStatsResponse_Stats stats = 5;
+	repeated .CMsgClientGetUserStatsResponse_Achievement_Blocks achievement_blocks = 6;
+}
+
+// Used by: common.proto
+message CMsgClientGetUserStatsResponse_Achievement_Blocks {
+	optional uint32 achievement_id = 1;
+	repeated fixed32 unlock_time = 2;
+}
+
+// Used by: common.proto
+message CMsgClientGetUserStatsResponse_Stats {
+	optional uint32 stat_id = 1;
+	optional uint32 stat_value = 2;
+}
+
+message CMsgClientGMSServerQuery {
+	optional uint32 app_id = 1;
+	optional uint32 geo_location_ip = 2;
+	optional uint32 region_code = 3;
+	optional string filter_text = 4;
+	optional uint32 max_servers = 5;
+}
+
+message CMsgClientHeartBeat {
+	optional bool send_reply = 1;
+}
+
+message CMsgClientHideFriend {
+	optional fixed64 friendid = 1;
+	optional bool hide = 2;
+}
+
+message CMsgClientInstallClientApp {
+	optional uint32 appid = 1;
+}
+
+message CMsgClientInstallClientAppResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgClientInviteToGame {
+	optional fixed64 steam_id_dest = 1;
+	optional fixed64 steam_id_src = 2;
+	optional string connect_string = 3;
+	optional string remote_play = 4;
+}
+
+message CMsgClientIsLimitedAccount {
+	optional bool bis_limited_account = 1;
+	optional bool bis_community_banned = 2;
+	optional bool bis_locked_account = 3;
+	optional bool bis_limited_account_allowed_to_invite_friends = 4;
+}
+
+message CMsgClientItemAnnouncements {
+	optional uint32 count_new_items = 1;
+	repeated .CMsgClientItemAnnouncements_UnseenItem unseen_items = 2;
+}
+
+// Used by: common.proto
+message CMsgClientItemAnnouncements_UnseenItem {
+	optional uint32 appid = 1;
+	optional uint64 context_id = 2;
+	optional uint64 asset_id = 3;
+	optional uint64 amount = 4;
+	optional fixed32 rtime32_gained = 5;
+	optional uint32 source_appid = 6;
+}
+
+message CMsgClientKickPlayingSession {
+	optional bool only_stop_game = 1;
+}
+
+message CMsgClientLBSFindOrCreateLB {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_sort_method = 2;
+	optional int32 leaderboard_display_type = 3;
+	optional bool create_if_not_found = 4;
+	optional string leaderboard_name = 5;
+}
+
+message CMsgClientLBSFindOrCreateLBResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 leaderboard_id = 2;
+	optional int32 leaderboard_entry_count = 3;
+	optional int32 leaderboard_sort_method = 4 [default = 0];
+	optional int32 leaderboard_display_type = 5 [default = 0];
+	optional string leaderboard_name = 6;
+}
+
+message CMsgClientLBSGetLBEntries {
+	optional int32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional int32 range_start = 3;
+	optional int32 range_end = 4;
+	optional int32 leaderboard_data_request = 5;
+	repeated fixed64 steamids = 6;
+}
+
+message CMsgClientLBSGetLBEntriesResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 leaderboard_entry_count = 2;
+	repeated .CMsgClientLBSGetLBEntriesResponse_Entry entries = 3;
+}
+
+// Used by: common.proto
+message CMsgClientLBSGetLBEntriesResponse_Entry {
+	optional fixed64 steam_id_user = 1;
+	optional int32 global_rank = 2;
+	optional int32 score = 3;
+	optional bytes details = 4;
+	optional fixed64 ugc_id = 5;
+}
+
+message CMsgClientLBSSetScore {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional int32 score = 3;
+	optional bytes details = 4;
+	optional int32 upload_score_method = 5;
+}
+
+message CMsgClientLBSSetScoreResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 leaderboard_entry_count = 2;
+	optional bool score_changed = 3;
+	optional int32 global_rank_previous = 4;
+	optional int32 global_rank_new = 5;
+}
+
+message CMsgClientLBSSetUGC {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional fixed64 ugc_id = 3;
+}
+
+message CMsgClientLBSSetUGCResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientLicenseList {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientLicenseList_License licenses = 2;
+}
+
+// Used by: common.proto
+message CMsgClientLicenseList_License {
+	optional uint32 package_id = 1;
+	optional fixed32 time_created = 2;
+	optional fixed32 time_next_process = 3;
+	optional int32 minute_limit = 4;
+	optional int32 minutes_used = 5;
+	optional uint32 payment_method = 6;
+	optional uint32 flags = 7;
+	optional string purchase_country_code = 8;
+	optional uint32 license_type = 9;
+	optional int32 territory_code = 10;
+	optional int32 change_number = 11;
+	optional uint32 owner_id = 12;
+	optional uint32 initial_period = 13;
+	optional uint32 initial_time_unit = 14;
+	optional uint32 renewal_period = 15;
+	optional uint32 renewal_time_unit = 16;
+	optional uint64 access_token = 17;
+	optional uint32 master_package_id = 18;
+}
+
+message CMsgClientLoggedOff {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientLogOff {
+}
+
+message CMsgClientLogon {
+	optional uint32 protocol_version = 1;
+	optional uint32 deprecated_obfustucated_private_ip = 2;
+	optional uint32 cell_id = 3;
+	optional uint32 last_session_id = 4;
+	optional uint32 client_package_version = 5;
+	optional string client_language = 6;
+	optional uint32 client_os_type = 7;
+	optional bool should_remember_password = 8 [default = false];
+	optional string wine_version = 9;
+	optional uint32 deprecated_10 = 10;
+	optional .CMsgIPAddress obfuscated_private_ip = 11;
+	optional uint32 deprecated_public_ip = 20;
+	optional uint32 qos_level = 21;
+	optional fixed64 client_supplied_steam_id = 22;
+	optional .CMsgIPAddress public_ip = 23;
+	optional bytes machine_id = 30;
+	optional uint32 launcher_type = 31 [default = 0];
+	optional uint32 ui_mode = 32 [default = 0];
+	optional uint32 chat_mode = 33 [default = 0];
+	optional bytes steam2_auth_ticket = 41;
+	optional string email_address = 42;
+	optional fixed32 rtime32_account_creation = 43;
+	optional string account_name = 50;
+	optional string password = 51;
+	optional string game_server_token = 52;
+	optional string login_key = 60;
+	optional bool was_converted_deprecated_msg = 70 [default = false];
+	optional string anon_user_target_account_name = 80;
+	optional fixed64 resolved_user_steam_id = 81;
+	optional int32 eresult_sentryfile = 82;
+	optional bytes sha_sentryfile = 83;
+	optional string auth_code = 84;
+	optional int32 otp_type = 85;
+	optional uint32 otp_value = 86;
+	optional string otp_identifier = 87;
+	optional bool steam2_ticket_request = 88;
+	optional bytes sony_psn_ticket = 90;
+	optional string sony_psn_service_id = 91;
+	optional bool create_new_psn_linked_account_if_needed = 92 [default = false];
+	optional string sony_psn_name = 93;
+	optional int32 game_server_app_id = 94;
+	optional bool steamguard_dont_remember_computer = 95;
+	optional string machine_name = 96;
+	optional string machine_name_userchosen = 97;
+	optional string country_override = 98;
+	optional bool is_steam_box = 99;
+	optional uint64 client_instance_id = 100;
+	optional string two_factor_code = 101;
+	optional bool supports_rate_limit_response = 102;
+	optional string web_logon_nonce = 103;
+	optional int32 priority_reason = 104;
+	optional .CMsgClientSecret embedded_client_secret = 105;
+	optional bool disable_partner_autogrants = 106;
+	optional bool is_steam_deck = 107;
+	optional string access_token = 108;
+	optional bool is_chrome_os = 109;
+	optional bool is_tesla = 110;
+}
+
+message CMsgClientLogonResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 legacy_out_of_game_heartbeat_seconds = 2;
+	//optional int32 out_of_game_heartbeat_seconds = 2;
+	optional int32 heartbeat_seconds = 3;
+	//optional int32 in_game_heartbeat_seconds = 3;
+	optional uint32 deprecated_public_ip = 4;
+	optional fixed32 rtime32_server_time = 5;
+	optional uint32 account_flags = 6;
+	optional uint32 cell_id = 7;
+	optional string email_domain = 8;
+	optional bytes steam2_ticket = 9;
+	optional int32 eresult_extended = 10;
+	optional string webapi_authenticate_user_nonce = 11;
+	optional uint32 cell_id_ping_threshold = 12;
+	optional bool deprecated_use_pics = 13;
+	optional string vanity_url = 14;
+	optional .CMsgIPAddress public_ip = 15;
+	optional string user_country = 16;
+	optional fixed64 client_supplied_steamid = 20;
+	optional string ip_country_code = 21;
+	optional bytes parental_settings = 22;
+	optional bytes parental_setting_signature = 23;
+	optional int32 count_loginfailures_to_migrate = 24;
+	optional int32 count_disconnects_to_migrate = 25;
+	optional int32 ogs_data_report_time_window = 26;
+	optional uint64 client_instance_id = 27;
+	optional bool force_client_update_check = 28;
+	optional string agreement_session_url = 29;
+	optional uint64 token_id = 30;
+	optional uint64 family_group_id = 31;
+}
+
+message CMsgClientManageFriendsGroup {
+	optional int32 groupid = 1;
+	optional string groupname = 2;
+	repeated fixed64 steamid_friends_added = 3;
+	repeated fixed64 steamid_friends_removed = 4;
+}
+
+message CMsgClientManageFriendsGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientMMSCreateLobby {
+	optional uint32 app_id = 1;
+	optional int32 max_members = 2;
+	optional int32 lobby_type = 3;
+	optional int32 lobby_flags = 4;
+	optional uint32 cell_id = 5;
+	optional uint32 deprecated_public_ip = 6;
+	optional bytes metadata = 7;
+	optional string persona_name_owner = 8;
+	optional .CMsgIPAddress public_ip = 9;
+}
+
+message CMsgClientMMSCreateLobbyResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSGetLobbyData {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+}
+
+message CMsgClientMMSGetLobbyList {
+	optional uint32 app_id = 1;
+	optional int32 num_lobbies_requested = 3;
+	optional uint32 cell_id = 4;
+	optional uint32 deprecated_public_ip = 5;
+	repeated .CMsgClientMMSGetLobbyList_Filter filters = 6;
+	optional .CMsgIPAddress public_ip = 7;
+}
+
+// Used by: common.proto
+message CMsgClientMMSGetLobbyList_Filter {
+	optional string key = 1;
+	optional string value = 2;
+	optional int32 comparision = 3;
+	optional int32 filter_type = 4;
+}
+
+message CMsgClientMMSGetLobbyListResponse {
+	optional uint32 app_id = 1;
+	optional int32 eresult = 3 [default = 2];
+	repeated .CMsgClientMMSGetLobbyListResponse_Lobby lobbies = 4;
+}
+
+// Used by: common.proto
+message CMsgClientMMSGetLobbyListResponse_Lobby {
+	optional fixed64 steam_id = 1;
+	optional int32 max_members = 2;
+	optional int32 lobby_type = 3;
+	optional int32 lobby_flags = 4;
+	optional bytes metadata = 5;
+	optional int32 num_members = 6;
+	optional float distance = 7;
+	optional int64 weight = 8;
+}
+
+message CMsgClientMMSGetLobbyStatus {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional bool claim_membership = 3;
+	optional bool claim_ownership = 4;
+}
+
+message CMsgClientMMSGetLobbyStatusResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 lobby_status = 3 [(.description) = "enum"];
+}
+
+message CMsgClientMMSInviteToLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user_invited = 3;
+}
+
+message CMsgClientMMSJoinLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional string persona_name = 3;
+}
+
+message CMsgClientMMSJoinLobbyResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 chat_room_enter_response = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional fixed64 steam_id_owner = 7;
+	optional bytes metadata = 8;
+	repeated .CMsgClientMMSJoinLobbyResponse_Member members = 9;
+}
+
+// Used by: common.proto
+message CMsgClientMMSJoinLobbyResponse_Member {
+	optional fixed64 steam_id = 1;
+	optional string persona_name = 2;
+	optional bytes metadata = 3;
+}
+
+message CMsgClientMMSLeaveLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+}
+
+message CMsgClientMMSLeaveLobbyResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSLobbyChatMsg {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_sender = 3;
+	optional bytes lobby_message = 4;
+}
+
+message CMsgClientMMSLobbyData {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 num_members = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional fixed64 steam_id_owner = 7;
+	optional bytes metadata = 8;
+	repeated .CMsgClientMMSLobbyData_Member members = 9;
+	optional uint32 lobby_cellid = 10;
+	optional bool owner_should_accept_changes = 11;
+}
+
+// Used by: common.proto
+message CMsgClientMMSLobbyData_Member {
+	optional fixed64 steam_id = 1;
+	optional string persona_name = 2;
+	optional bytes metadata = 3;
+}
+
+message CMsgClientMMSLobbyGameServerSet {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional uint32 deprecated_game_server_ip = 3;
+	optional uint32 game_server_port = 4;
+	optional fixed64 game_server_steam_id = 5;
+	optional .CMsgIPAddress game_server_ip = 6;
+}
+
+message CMsgClientMMSSendLobbyChatMsg {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_target = 3;
+	optional bytes lobby_message = 4;
+}
+
+message CMsgClientMMSSetLobbyData {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_member = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional bytes metadata = 7;
+}
+
+message CMsgClientMMSSetLobbyDataResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSSetLobbyGameServer {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional uint32 deprecated_game_server_ip = 3;
+	optional uint32 game_server_port = 4;
+	optional fixed64 game_server_steam_id = 5;
+	optional .CMsgIPAddress game_server_ip = 6;
+}
+
+message CMsgClientMMSSetLobbyLinked {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_lobby2 = 3;
+}
+
+message CMsgClientMMSSetLobbyOwner {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_new_owner = 3;
+}
+
+message CMsgClientMMSSetLobbyOwnerResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSSetRatelimitPolicyOnClient {
+	optional uint32 app_id = 1;
+	optional bool enable_rate_limits = 2;
+	optional int32 seconds_per_message = 3;
+	optional int32 milliseconds_per_data_update = 4;
+}
+
+message CMsgClientMMSUserJoinedLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user = 3;
+	optional string persona_name = 4;
+}
+
+message CMsgClientMMSUserLeftLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user = 3;
+	optional string persona_name = 4;
+}
+
+message CMsgClientNetworkingCertReply {
+	optional bytes cert = 4;
+	optional fixed64 ca_key_id = 5;
+	optional bytes ca_signature = 6;
+}
+
+message CMsgClientNetworkingCertRequest {
+	optional bytes key_data = 2;
+	optional uint32 app_id = 3;
+}
+
+message CMsgClientNetworkingMobileCertReply {
+	optional string encoded_cert = 1;
+}
+
+message CMsgClientNetworkingMobileCertRequest {
+	optional uint32 app_id = 1;
+}
+
+message CMsgClientNewLoginKey {
+	optional uint32 unique_id = 1;
+	optional string login_key = 2;
+}
+
+message CMsgClientNewLoginKeyAccepted {
+	optional uint32 unique_id = 1;
+}
+
+message CMsgClientOfflineMessageNotification {
+	optional uint32 offline_messages = 1;
+	repeated uint32 friends_with_offline_messages = 2;
+}
+
+message CMsgClientOGSReportBug {
+	optional uint64 sessionid = 1;
+	optional string bugtext = 2;
+	optional bytes screenshot = 3;
+}
+
+message CMsgClientOGSReportString {
+	optional bool accumulated = 1;
+	optional uint64 sessionid = 2;
+	optional int32 severity = 3;
+	optional string formatter = 4;
+	optional bytes varargs = 5;
+}
+
+message CMsgClientP2PConnectionFailInfo {
+	optional fixed64 steam_id_dest = 1;
+	optional fixed64 steam_id_src = 2;
+	optional uint32 app_id = 3;
+	optional uint32 ep2p_session_error = 4;
+	optional fixed64 connection_id_dest = 5;
+	optional uint32 close_reason = 7;
+	optional string close_message = 8;
+}
+
+message CMsgClientP2PConnectionInfo {
+	optional fixed64 steam_id_dest = 1;
+	optional fixed64 steam_id_src = 2;
+	optional uint32 app_id = 3;
+	optional bytes candidate = 4;
+	optional fixed64 connection_id_src = 5;
+	optional bytes rendezvous = 6;
+}
+
+message CMsgClientPackageInfoRequest {
+	repeated uint32 package_ids = 1;
+	optional bool meta_data_only = 2;
+}
+
+message CMsgClientPackageInfoResponse {
+	repeated .CMsgClientPackageInfoResponse_Package packages = 1;
+	repeated uint32 packages_unknown = 2;
+	optional uint32 packages_pending = 3;
+}
+
+// Used by: common.proto
+message CMsgClientPackageInfoResponse_Package {
+	optional uint32 package_id = 1;
+	optional uint32 change_number = 2;
+	optional bytes sha = 3;
+	optional bytes buffer = 4;
+}
+
+message CMsgClientPersonaState {
+	optional uint32 status_flags = 1;
+	repeated .CMsgClientPersonaState_Friend friends = 2;
+}
+
+// Used by: ChatRoom, ChatRoomClient, common.proto
+message CMsgClientPersonaState_Friend {
+	optional fixed64 friendid = 1;
+	optional uint32 persona_state = 2;
+	optional uint32 game_played_app_id = 3;
+	optional uint32 game_server_ip = 4;
+	optional uint32 game_server_port = 5;
+	optional uint32 persona_state_flags = 6;
+	optional uint32 online_session_instances = 7;
+	optional bool persona_set_by_user = 10;
+	optional string player_name = 15;
+	optional uint32 query_port = 20;
+	optional fixed64 steamid_source = 25;
+	optional bytes avatar_hash = 31;
+	optional uint32 last_logoff = 45;
+	optional uint32 last_logon = 46;
+	optional uint32 last_seen_online = 47;
+	optional uint32 clan_rank = 50;
+	optional string game_name = 55;
+	optional fixed64 gameid = 56;
+	optional bytes game_data_blob = 60;
+	optional .CMsgClientPersonaState_Friend_ClanData clan_data = 64;
+	optional string clan_tag = 65;
+	repeated .CMsgClientPersonaState_Friend_KV rich_presence = 71;
+	optional fixed64 broadcast_id = 72;
+	optional fixed64 game_lobby_id = 73;
+	optional uint32 watching_broadcast_accountid = 74;
+	optional uint32 watching_broadcast_appid = 75;
+	optional uint32 watching_broadcast_viewers = 76;
+	optional string watching_broadcast_title = 77;
+	optional bool is_community_banned = 78;
+	optional bool player_name_pending_review = 79;
+	optional bool avatar_pending_review = 80;
+	optional bool on_steam_deck = 81;
+}
+
+// Used by: ChatRoom, ChatRoomClient, common.proto
+message CMsgClientPersonaState_Friend_ClanData {
+	optional uint32 ogg_app_id = 1;
+	optional uint64 chat_group_id = 2;
+}
+
+// Used by: ChatRoom, ChatRoomClient, common.proto
+message CMsgClientPersonaState_Friend_KV {
+	optional string key = 1;
+	optional string value = 2;
+}
+
+message CMsgClientPICSAccessTokenRequest {
+	repeated uint32 packageids = 1;
+	repeated uint32 appids = 2;
+}
+
+message CMsgClientPICSAccessTokenResponse {
+	repeated .CMsgClientPICSAccessTokenResponse_PackageToken package_access_tokens = 1;
+	repeated uint32 package_denied_tokens = 2;
+	repeated .CMsgClientPICSAccessTokenResponse_AppToken app_access_tokens = 3;
+	repeated uint32 app_denied_tokens = 4;
+}
+
+// Used by: common.proto
+message CMsgClientPICSAccessTokenResponse_AppToken {
+	optional uint32 appid = 1;
+	optional uint64 access_token = 2;
+}
+
+// Used by: common.proto
+message CMsgClientPICSAccessTokenResponse_PackageToken {
+	optional uint32 packageid = 1;
+	optional uint64 access_token = 2;
+}
+
+message CMsgClientPICSChangesSinceRequest {
+	optional uint32 since_change_number = 1;
+	optional bool send_app_info_changes = 2;
+	optional bool send_package_info_changes = 3;
+	optional uint32 num_app_info_cached = 4;
+	optional uint32 num_package_info_cached = 5;
+}
+
+message CMsgClientPICSChangesSinceResponse {
+	optional uint32 current_change_number = 1;
+	optional uint32 since_change_number = 2;
+	optional bool force_full_update = 3;
+	repeated .CMsgClientPICSChangesSinceResponse_PackageChange package_changes = 4;
+	repeated .CMsgClientPICSChangesSinceResponse_AppChange app_changes = 5;
+	optional bool force_full_app_update = 6;
+	optional bool force_full_package_update = 7;
+}
+
+// Used by: common.proto
+message CMsgClientPICSChangesSinceResponse_AppChange {
+	optional uint32 appid = 1;
+	optional uint32 change_number = 2;
+	optional bool needs_token = 3;
+}
+
+// Used by: common.proto
+message CMsgClientPICSChangesSinceResponse_PackageChange {
+	optional uint32 packageid = 1;
+	optional uint32 change_number = 2;
+	optional bool needs_token = 3;
+}
+
+message CMsgClientPICSProductInfoRequest {
+	repeated .CMsgClientPICSProductInfoRequest_PackageInfo packages = 1;
+	repeated .CMsgClientPICSProductInfoRequest_AppInfo apps = 2;
+	optional bool meta_data_only = 3;
+	optional uint32 num_prev_failed = 4;
+	optional uint32 supports_package_tokens = 5;
+}
+
+// Used by: common.proto
+message CMsgClientPICSProductInfoRequest_AppInfo {
+	optional uint32 appid = 1;
+	optional uint64 access_token = 2;
+	optional bool only_public_obsolete = 3;
+}
+
+// Used by: common.proto
+message CMsgClientPICSProductInfoRequest_PackageInfo {
+	optional uint32 packageid = 1;
+	optional uint64 access_token = 2;
+}
+
+message CMsgClientPICSProductInfoResponse {
+	repeated .CMsgClientPICSProductInfoResponse_AppInfo apps = 1;
+	repeated uint32 unknown_appids = 2;
+	repeated .CMsgClientPICSProductInfoResponse_PackageInfo packages = 3;
+	repeated uint32 unknown_packageids = 4;
+	optional bool meta_data_only = 5;
+	optional bool response_pending = 6;
+	optional uint32 http_min_size = 7;
+	optional string http_host = 8;
+}
+
+// Used by: common.proto
+message CMsgClientPICSProductInfoResponse_AppInfo {
+	optional uint32 appid = 1;
+	optional uint32 change_number = 2;
+	optional bool missing_token = 3;
+	optional bytes sha = 4;
+	optional bytes buffer = 5;
+	optional bool only_public = 6;
+	optional uint32 size = 7;
+}
+
+// Used by: common.proto
+message CMsgClientPICSProductInfoResponse_PackageInfo {
+	optional uint32 packageid = 1;
+	optional uint32 change_number = 2;
+	optional bool missing_token = 3;
+	optional bytes sha = 4;
+	optional bytes buffer = 5;
+	optional uint32 size = 6;
+}
+
+message CMsgClientPlayerNicknameList {
+	optional bool removal = 1;
+	optional bool incremental = 2;
+	repeated .CMsgClientPlayerNicknameList_PlayerNickname nicknames = 3;
+}
+
+// Used by: common.proto
+message CMsgClientPlayerNicknameList_PlayerNickname {
+	optional fixed64 steamid = 1;
+	optional string nickname = 3;
+}
+
+message CMsgClientPlayingSessionState {
+	optional bool playing_blocked = 2;
+	optional uint32 playing_app = 3;
+}
+
+message CMsgClientPurchaseResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 purchase_result_details = 2;
+	optional bytes purchase_receipt_info = 3;
+}
+
+message CMsgClientPurchaseWithMachineID {
+	optional uint32 package_id = 1;
+	optional bytes machine_info = 2;
+}
+
+message CMsgClientReadMachineAuth {
+	optional string filename = 1;
+	optional uint32 offset = 2;
+	optional uint32 cubtoread = 3;
+}
+
+message CMsgClientReadMachineAuthResponse {
+	optional string filename = 1;
+	optional uint32 eresult = 2;
+	optional uint32 filesize = 3;
+	optional bytes sha_file = 4;
+	optional uint32 getlasterror = 5;
+	optional uint32 offset = 6;
+	optional uint32 cubread = 7;
+	optional bytes bytes_read = 8;
+	optional string filename_sentry = 9;
+}
+
+message CMsgClientRedeemGuestPass {
+	optional fixed64 guest_pass_id = 1;
+}
+
+message CMsgClientRedeemGuestPassResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional uint32 package_id = 2;
+	optional uint32 must_own_appid = 3;
+}
+
+message CMsgClientRegisterAuthTicketWithCM {
+	optional uint32 protocol_version = 1;
+	optional bytes ticket = 3;
+	optional uint64 client_instance_id = 4;
+}
+
+message CMsgClientRegisterKey {
+	optional string key = 1;
+}
+
+message CMsgClientRegisterOEMMachine {
+	optional bytes oem_register_file = 1;
+}
+
+message CMsgClientRegisterOEMMachineResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientRemoveFriend {
+	optional fixed64 friendid = 1;
+}
+
+message CMsgClientRemoveFriendFromGroup {
+	optional int32 groupid = 1;
+	optional fixed64 steamiduser = 2;
+}
+
+message CMsgClientRemoveFriendFromGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientReportOverlayDetourFailure {
+	repeated string failure_strings = 1;
+}
+
+message CMsgClientRequestAccountData {
+	optional string account_or_email = 1;
+	optional uint32 action = 2;
+}
+
+message CMsgClientRequestAccountDataResponse {
+	optional uint32 action = 1;
+	optional uint32 eresult = 2;
+	optional string account_name = 3;
+	optional uint32 ct_matches = 4;
+	optional string account_name_suggestion1 = 5;
+	optional string account_name_suggestion2 = 6;
+	optional string account_name_suggestion3 = 7;
+}
+
+message CMsgClientRequestCommentNotifications {
+}
+
+message CMsgClientRequestedClientStats {
+	repeated .CMsgClientRequestedClientStats_StatsToSend stats_to_send = 1;
+}
+
+// Used by: common.proto
+message CMsgClientRequestedClientStats_StatsToSend {
+	optional uint32 client_stat = 1;
+	optional uint32 stat_aggregate_method = 2;
+}
+
+message CMsgClientRequestEncryptedAppTicket {
+	optional uint32 app_id = 1;
+	optional bytes userdata = 2;
+}
+
+message CMsgClientRequestEncryptedAppTicketResponse {
+	optional uint32 app_id = 1;
+	optional int32 eresult = 2 [default = 2];
+	optional .EncryptedAppTicket encrypted_app_ticket = 3;
+}
+
+message CMsgClientRequestForgottenPasswordEmail {
+	optional string account_name = 1;
+	optional string password_tried = 2;
+}
+
+message CMsgClientRequestForgottenPasswordEmailResponse {
+	optional uint32 eResult = 1;
+	optional bool use_secret_question = 2;
+}
+
+message CMsgClientRequestFreeLicense {
+	repeated uint32 appids = 2;
+}
+
+message CMsgClientRequestFreeLicenseResponse {
+	optional uint32 eresult = 1 [default = 2];
+	repeated uint32 granted_packageids = 2;
+	repeated uint32 granted_appids = 3;
+}
+
+message CMsgClientRequestFriendData {
+	optional uint32 persona_state_requested = 1;
+	repeated fixed64 friends = 2;
+}
+
+message CMsgClientRequestItemAnnouncements {
+}
+
+message CMsgClientRequestMachineAuth {
+	optional string filename = 1;
+	optional uint32 eresult_sentryfile = 2;
+	optional uint32 filesize = 3;
+	optional bytes sha_sentryfile = 4;
+	optional int32 lock_account_action = 6;
+	optional uint32 otp_type = 7;
+	optional string otp_identifier = 8;
+	optional bytes otp_sharedsecret = 9;
+	optional uint32 otp_value = 10;
+	optional string machine_name = 11;
+	optional string machine_name_userchosen = 12;
+}
+
+message CMsgClientRequestMachineAuthResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientRequestOfflineMessageCount {
+}
+
+message CMsgClientRequestWebAPIAuthenticateUserNonce {
+	optional int32 token_type = 1 [default = -1];
+}
+
+message CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 token_type = 3 [default = -1];
+	optional string webapi_authenticate_user_nonce = 11;
+}
+
+message CMsgClientRichPresenceInfo {
+	repeated .CMsgClientRichPresenceInfo_RichPresence rich_presence = 1;
+}
+
+// Used by: common.proto
+message CMsgClientRichPresenceInfo_RichPresence {
+	optional fixed64 steamid_user = 1;
+	optional bytes rich_presence_kv = 2;
+}
+
+message CMsgClientRichPresenceRequest {
+	repeated fixed64 steamid_request = 1;
+}
+
+message CMsgClientRichPresenceUpload {
+	optional bytes rich_presence_kv = 1;
+	repeated fixed64 steamid_broadcast = 2;
+}
+
+message CMsgClientScreenshotsChanged {
+}
+
+// Used by: common.proto
+message CMsgClientSecret {
+	optional uint32 version = 1;
+	optional uint32 appid = 2;
+	optional uint32 deviceid = 3;
+	optional fixed64 nonce = 4;
+	optional bytes hmac = 5;
+}
+
+message CMsgClientSentLogs {
+}
+
+message CMsgClientServersAvailable {
+	repeated .CMsgClientServersAvailable_Server_Types_Available server_types_available = 1;
+	optional uint32 server_type_for_auth_services = 2;
+}
+
+// Used by: common.proto
+message CMsgClientServersAvailable_Server_Types_Available {
+	optional uint32 server = 1;
+	optional bool changed = 2;
+}
+
+message CMsgClientServerTimestampRequest {
+	optional uint64 client_request_timestamp = 1;
+}
+
+message CMsgClientServerTimestampResponse {
+	optional uint64 client_request_timestamp = 1;
+	optional uint64 server_timestamp_ms = 2;
+}
+
+message CMsgClientServiceCall {
+	optional bytes sysid_routing = 1;
+	optional uint32 call_handle = 2;
+	optional uint32 module_crc = 3;
+	optional bytes module_hash = 4;
+	optional uint32 function_id = 5;
+	optional uint32 cub_output_max = 6;
+	optional uint32 flags = 7;
+	optional bytes callparameter = 8;
+	optional bool ping_only = 9;
+	optional uint32 max_outstanding_calls = 10;
+}
+
+message CMsgClientServiceCallResponse {
+	optional bytes sysid_routing = 1;
+	optional uint32 call_handle = 2;
+	optional uint32 module_crc = 3;
+	optional bytes module_hash = 4;
+	optional uint32 ecallresult = 5;
+	optional bytes result_content = 6;
+	optional bytes os_version_info = 7;
+	optional bytes system_info = 8;
+	optional fixed64 load_address = 9;
+	optional bytes exception_record = 10;
+	optional bytes portable_os_version_info = 11;
+	optional bytes portable_system_info = 12;
+	optional bool was_converted = 13;
+	optional uint32 internal_result = 14;
+	optional uint32 current_count = 15;
+	optional uint32 last_call_handle = 16;
+	optional uint32 last_call_module_crc = 17;
+	optional bytes last_call_sysid_routing = 18;
+	optional uint32 last_ecallresult = 19;
+	optional uint32 last_callissue_delta = 20;
+	optional uint32 last_callcomplete_delta = 21;
+}
+
+message CMsgClientServiceMethodLegacy {
+	optional string method_name = 1;
+	optional bytes serialized_method = 2;
+	optional bool is_notification = 3;
+}
+
+message CMsgClientServiceMethodLegacyResponse {
+	optional string method_name = 1;
+	optional bytes serialized_method_response = 2;
+}
+
+message CMsgClientServiceModule {
+	optional uint32 module_crc = 1;
+	optional bytes module_hash = 2;
+	optional bytes module_content = 3;
+}
+
+message CMsgClientSessionToken {
+	optional uint64 token = 1;
+}
+
+message CMsgClientSetClientAppUpdateState {
+	optional uint32 appid = 1;
+	optional bool update = 2;
+}
+
+message CMsgClientSetClientAppUpdateStateResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgClientSetPlayerNickname {
+	optional fixed64 steamid = 1;
+	optional string nickname = 2;
+}
+
+message CMsgClientSetPlayerNicknameResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientSettings {
+	optional bool no_save_personal_info = 1;
+	optional bool oobe_test_mode_enabled = 2;
+	optional bool in_client_beta = 3;
+	optional bool is_steam_sideloaded = 4;
+	optional string preferred_monitor = 5;
+	optional bool steam_cef_gpu_blocklist_disabled = 6;
+	optional bool bigpicture_windowed = 7;
+	optional string display_name = 8;
+	optional bool is_external_display = 9;
+	optional float steam_os_underscan_level = 10;
+	optional bool steam_os_underscan_enabled = 11;
+	optional float min_scale_factor = 12;
+	optional float max_scale_factor = 13;
+	optional float auto_scale_factor = 14;
+	optional bool small_mode = 16;
+	optional bool skip_steamvr_install_dialog = 19;
+	optional bool always_show_user_chooser = 20;
+	optional bool show_family_sharing_notifications = 3000;
+	optional bool show_copy_count_in_library = 3001;
+	optional int32 overlay_fps_counter_corner = 4000;
+	optional bool overlay_fps_counter_high_contrast = 4001;
+	optional .CMsgHotkey overlay_key = 4002;
+	optional .CMsgHotkey screenshot_key = 4003;
+	optional bool enable_overlay = 4004;
+	optional bool enable_screenshot_notification = 4006;
+	optional bool enable_screenshot_sound = 4007;
+	optional bool save_uncompressed_screenshots = 4008;
+	optional string screenshots_path = 4009;
+	optional int32 default_ping_rate = 4010;
+	optional int32 server_ping_rate = 4011;
+	optional int32 steam_networking_share_ip = 4012;
+	optional string web_browser_home = 4013;
+	optional string voice_mic_device_name = 4014;
+	optional float voice_mic_input_gain = 4015;
+	optional float voice_speaker_output_gain = 4016;
+	optional int32 voice_push_to_talk_setting = 4017;
+	optional .CMsgHotkey voice_push_to_talk_key = 4018;
+	optional bool overlay_toolbar_list_view = 4019;
+	optional bool always_use_gamepadui_overlay = 4020;
+	optional string overlay_tabs = 4021;
+	optional bool overlay_scale_interface = 4022;
+	optional bool overlay_restore_browser_tabs = 4023;
+	optional bool enable_avif_screenshots = 4024;
+	optional bool smooth_scroll_webviews = 5000;
+	optional bool enable_gpu_accelerated_webviews = 5001;
+	optional bool enable_hardware_video_decoding = 5003;
+	optional bool run_at_startup = 5004;
+	optional bool enable_dpi_scaling = 5005;
+	optional bool enable_marketing_messages = 5006;
+	optional bool start_in_big_picture_mode = 5007;
+	optional uint32 jumplist_flags = 5008;
+	optional bool enable_ui_sounds = 5009;
+	optional bool disable_all_toasts = 6000;
+	optional bool disable_toasts_in_game = 6001;
+	optional bool play_sound_on_toast = 6002;
+	optional int32 library_display_size = 7000;
+	optional bool library_whats_new_show_only_product_updates = 7001;
+	optional bool show_store_content_on_home = 7002;
+	optional string start_page = 7003;
+	optional bool library_low_bandwidth_mode = 7004;
+	optional bool library_low_perf_mode = 7005;
+	optional bool library_disable_community_content = 7006;
+	optional bool library_display_icon_in_game_list = 7007;
+	optional bool ready_to_play_includes_streaming = 7008;
+	optional bool show_steam_deck_info = 7009;
+	optional bool enable_shader_precache = 8000;
+	optional bool enable_shader_background_processing = 8001;
+	optional uint64 shader_precached_size = 8002;
+	optional bool needs_steam_service_repair = 8003;
+	optional int32 download_peer_content = 8004;
+	optional bool download_rate_bits_per_s = 8005;
+	optional bool restrict_auto_updates = 8006;
+	optional int32 restrict_auto_updates_start = 8007;
+	optional int32 restrict_auto_updates_end = 8008;
+	optional int32 download_region = 8009;
+	optional bool download_while_app_running = 8010;
+	optional bool download_throttle_while_streaming = 8011;
+	optional int32 download_throttle_rate = 8012;
+	optional bool cloud_enabled = 10000;
+	optional bool show_screenshot_manager = 10001;
+	optional int32 music_volume = 11000;
+	optional bool music_pause_on_app_start = 11001;
+	optional bool music_pause_on_voice_chat = 11002;
+	optional bool music_download_high_quality = 11003;
+	optional bool music_playlist_notification = 11004;
+	optional int32 broadcast_permissions = 12000 [(.description) = "enum"];
+	optional int32 broadcast_output_width = 12001;
+	optional int32 broadcast_output_height = 12002;
+	optional int32 broadcast_bitrate = 12003;
+	optional int32 broadcast_encoding_option = 12004 [(.description) = "enum"];
+	optional bool broadcast_record_all_video = 12005;
+	optional bool broadcast_record_all_audio = 12006;
+	optional bool broadcast_record_microphone = 12007;
+	optional bool broadcast_show_upload_stats = 12008;
+	optional bool broadcast_show_live_reminder = 12009;
+	optional int32 broadcast_chat_corner = 12010;
+	optional bool gamestream_hardware_video_encode = 13000;
+	optional bool steam_input_configurator_error_msg_enable = 14001;
+	optional bool controller_guide_button_focus_steam = 14002;
+	optional int32 controller_ps_support = 14003;
+	optional bool controller_xbox_support = 14004;
+	optional bool controller_xbox_driver = 14005;
+	optional bool controller_switch_support = 14006;
+	optional bool controller_generic_support = 14007;
+	optional int32 controller_power_off_timeout = 14008;
+	optional bool turn_off_controller_on_exit = 14009;
+	optional bool controller_combine_nintendo_joycons = 14010;
+	optional uint64 startup_movie_id = 16000;
+	optional string startup_movie_local_path = 16001;
+	optional bool startup_movie_shuffle = 16002;
+	optional bool startup_movie_used_for_resume = 16003;
+	optional bool game_notes_enable_spellcheck = 17001;
+	optional int32 screenshot_items_per_row = 18000;
+	optional string g_background_path = 18201;
+	optional string g_background_max_keep = 18202;
+	optional int32 g_background_time_resolution = 18203;
+	optional .CMsgHotkey g_background_mk = 18207;
+	optional .CMsgHotkey g_background_tg = 18208;
+	optional bool g_background_a_m = 18209;
+	optional int32 g_background_br = 18210;
+	optional bool g_background_a_s = 18211;
+	optional int32 g_background_mode = 18212 [(.description) = "enum"];
+	optional int32 g_background_audio = 18213 [(.description) = "enum"];
+	optional int32 g_max_fps = 18214;
+	optional bool show_timestamps_in_console = 20000;
+	optional bool force_oobe = 20001;
+	optional int32 override_browser_composer_mode = 20002;
+	optional bool cef_remote_debugging_enabled = 20003;
+	optional bool force_deck_perf_tab = 20004;
+	optional bool force_fake_mandatory_update = 20005;
+	optional bool hdr_compat_testing = 20006;
+	optional bool developer_mode_enabled = 20007;
+	optional bool show_advanced_update_channels = 20008;
+	optional int32 gamescope_hdr_visualization = 21001 [(.description) = "enum"];
+	optional int32 gamescope_app_target_framerate = 21002;
+	optional bool gamescope_enable_app_target_framerate = 21003;
+	optional bool gamescope_disable_framelimit = 21004;
+	optional int32 gamescope_display_refresh_rate = 21005;
+	optional bool gamescope_use_game_refresh_rate_in_steam = 21006;
+	optional bool gamescope_disable_mura_correction = 21007;
+	optional bool gamescope_include_steamui_in_screenshots = 21008;
+	optional bool gamescope_allow_tearing = 21009;
+	optional bool gamescope_composite_debug = 21010;
+	optional bool gamescope_force_composite = 21011;
+	optional string gamescope_game_resolution_global = 21012;
+	optional int32 steamos_status_led_brightness = 22000;
+	optional bool steamos_tdp_limit_enabled = 22001;
+	optional int32 steamos_tdp_limit = 22002;
+	optional bool steamos_cec_enabled = 22003;
+	optional bool steamos_cec_wake_on_resume = 22004;
+	optional bool steamos_wifi_debug = 22005;
+	optional bool steamos_wifi_force_wpa_supplicant = 22006;
+	optional int32 steamos_magnifier_scale = 22007;
+	optional bool setting_validation_bool = 23001;
+	optional int32 setting_validation_enum = 23002 [(.description) = "enum"];
+	optional int32 setting_validation_int32 = 23003;
+	optional uint32 setting_validation_uint32 = 23004;
+	optional uint64 setting_validation_uint64 = 23005;
+	optional float setting_validation_float = 23006;
+	optional string setting_validation_string = 23007;
+	optional bool system_bluetooth_enabled = 24000;
+}
+
+message CMsgClientSharedLibraryLockStatus {
+	repeated .CMsgClientSharedLibraryLockStatus_LockedLibrary locked_library = 1;
+	optional uint32 own_library_locked_by = 2;
+}
+
+// Used by: common.proto
+message CMsgClientSharedLibraryLockStatus_LockedLibrary {
+	optional uint32 owner_id = 1;
+	optional uint32 locked_by = 2;
+}
+
+message CMsgClientSharedLibraryStopPlaying {
+	optional int32 seconds_left = 1;
+	repeated .CMsgClientSharedLibraryStopPlaying_StopApp stop_apps = 2;
+}
+
+// Used by: common.proto
+message CMsgClientSharedLibraryStopPlaying_StopApp {
+	optional uint32 app_id = 1;
+	optional uint32 owner_id = 2;
+}
+
+message CMsgClientStat2 {
+	repeated .CMsgClientStat2_StatDetail stat_detail = 1;
+}
+
+// Used by: common.proto
+message CMsgClientStat2_StatDetail {
+	optional uint32 client_stat = 1;
+	optional int64 ll_value = 2;
+	optional uint32 time_of_day = 3;
+	optional uint32 cell_id = 4;
+	optional uint32 depot_id = 5;
+	optional uint32 app_id = 6;
+}
+
+message CMsgClientStatsUpdated {
+	optional fixed64 steam_id = 1;
+	optional fixed64 game_id = 2;
+	optional uint32 crc_stats = 3;
+	repeated .CMsgClientStatsUpdated_Updated_Stats updated_stats = 4;
+}
+
+// Used by: common.proto
+message CMsgClientStatsUpdated_Updated_Stats {
+	optional uint32 stat_id = 1;
+	optional uint32 stat_value = 2;
+}
+
+message CMsgClientStoreUserStats {
+	optional fixed64 game_id = 1;
+	optional bool explicit_reset = 2;
+	repeated .CMsgClientStoreUserStats_Stats_To_Store stats_to_store = 3;
+}
+
+// Used by: common.proto
+message CMsgClientStoreUserStats_Stats_To_Store {
+	optional uint32 stat_id = 1;
+	optional uint32 stat_value = 2;
+}
+
+message CMsgClientStoreUserStats2 {
+	optional fixed64 game_id = 1;
+	optional fixed64 settor_steam_id = 2;
+	optional fixed64 settee_steam_id = 3;
+	optional uint32 crc_stats = 4;
+	optional bool explicit_reset = 5;
+	repeated .CMsgClientStoreUserStats2_Stats stats = 6;
+}
+
+// Used by: common.proto
+message CMsgClientStoreUserStats2_Stats {
+	optional uint32 stat_id = 1;
+	optional uint32 stat_value = 2;
+}
+
+message CMsgClientStoreUserStatsResponse {
+	optional fixed64 game_id = 1;
+	optional int32 eresult = 2 [default = 2];
+	optional uint32 crc_stats = 3;
+	repeated .CMsgClientStoreUserStatsResponse_Stats_Failed_Validation stats_failed_validation = 4;
+	optional bool stats_out_of_date = 5;
+}
+
+// Used by: common.proto
+message CMsgClientStoreUserStatsResponse_Stats_Failed_Validation {
+	optional uint32 stat_id = 1;
+	optional uint32 reverted_stat_value = 2;
+}
+
+message CMsgClientTicketAuthComplete {
+	optional fixed64 steam_id = 1;
+	optional fixed64 game_id = 2;
+	optional uint32 estate = 3;
+	optional uint32 eauth_session_response = 4;
+	optional bytes DEPRECATED_ticket = 5;
+	optional uint32 ticket_crc = 6;
+	optional uint32 ticket_sequence = 7;
+	optional fixed64 owner_steam_id = 8;
+}
+
+message CMsgClientUCMAddScreenshot {
+	optional uint32 appid = 1;
+	optional string filename = 2;
+	optional string thumbname = 3;
+	optional fixed32 rtime32_created = 4;
+	optional uint32 width = 5;
+	optional uint32 height = 6;
+	optional uint32 permissions = 7;
+	optional string caption = 8;
+	optional string shortcut_name = 9;
+	repeated .CMsgClientUCMAddScreenshot_Tag tag = 10;
+	repeated fixed64 tagged_steamid = 11;
+	optional bool spoiler_tag = 12;
+	repeated uint64 tagged_publishedfileid = 13;
+	optional string vr_filename = 14;
+}
+
+// Used by: common.proto
+message CMsgClientUCMAddScreenshot_Tag {
+	optional string tag_name = 1;
+	optional string tag_value = 2;
+}
+
+message CMsgClientUCMAddScreenshotResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 screenshotid = 2 [default = 18446744073709551615];
+}
+
+message CMsgClientUCMDeletePublishedFile {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+}
+
+message CMsgClientUCMDeletePublishedFileResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUCMDeleteScreenshot {
+	optional fixed64 screenshotid = 1 [default = 18446744073709551615];
+}
+
+message CMsgClientUCMDeleteScreenshotResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUCMEnumeratePublishedFilesByUserAction {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional int32 action = 3;
+}
+
+message CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumeratePublishedFilesByUserActionResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+// Used by: common.proto
+message CMsgClientUCMEnumeratePublishedFilesByUserActionResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+	optional fixed32 rtime_time_stamp = 2 [default = 0];
+}
+
+message CMsgClientUCMEnumerateUserPublishedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 sort_order = 3;
+}
+
+message CMsgClientUCMEnumerateUserPublishedFilesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+// Used by: common.proto
+message CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 list_type = 3 [default = 1];
+	optional uint32 matching_file_type = 4 [default = 0];
+	optional uint32 count = 5 [default = 50];
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId subscribed_files = 2;
+	optional uint32 total_results = 3;
+}
+
+// Used by: common.proto
+message CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+	optional fixed32 rtime32_subscribed = 2 [default = 0];
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional fixed32 start_time = 3;
+	optional uint32 desired_revision = 4 [default = 0];
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse_PublishedFileId subscribed_files = 2;
+	optional uint32 total_results = 3;
+}
+
+// Used by: common.proto
+message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+	optional fixed32 rtime32_subscribed = 2 [default = 0];
+	optional uint32 appid = 3;
+	optional fixed64 file_hcontent = 4;
+	optional uint32 file_size = 5;
+	optional fixed32 rtime32_last_updated = 6;
+	optional bool is_depot_content = 7;
+}
+
+message CMsgClientUCMGetPublishedFilesForUser {
+	optional uint32 app_id = 1;
+	optional fixed64 creator_steam_id = 2;
+	repeated string required_tags = 3;
+	repeated string excluded_tags = 4;
+	optional uint32 start_index = 5;
+}
+
+message CMsgClientUCMGetPublishedFilesForUserResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+// Used by: common.proto
+message CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgClientUCMPublishedFileUpdated {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+	optional uint32 time_updated = 3;
+	optional fixed64 hcontent = 4;
+	optional fixed32 file_size = 5;
+	optional bool is_depot_content = 6;
+	optional uint32 revision = 7;
+}
+
+message CMsgClientUCMPublishFile {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional string preview_file_name = 3;
+	optional uint32 consumer_app_id = 4;
+	optional string title = 5;
+	optional string description = 6;
+	repeated string tags = 8;
+	optional bool workshop_file = 9;
+	optional int32 visibility = 10;
+	optional uint32 file_type = 11;
+	optional string url = 12;
+	optional uint32 video_provider = 13;
+	optional string video_account_name = 14;
+	optional string video_identifier = 15;
+	optional bool in_progress = 16;
+}
+
+message CMsgClientUCMPublishFileResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 published_file_id = 2 [default = 18446744073709551615];
+	optional bool needs_workshop_legal_agreement_acceptance = 3 [default = false];
+}
+
+message CMsgClientUCMSetUserPublishedFileAction {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+	optional int32 action = 3;
+}
+
+message CMsgClientUCMSetUserPublishedFileActionResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUCMUpdatePublishedFile {
+	optional uint32 app_id = 1;
+	optional fixed64 published_file_id = 2;
+	optional string file_name = 3;
+	optional string preview_file_name = 4;
+	optional string title = 5;
+	optional string description = 6;
+	repeated string tags = 7;
+	optional int32 visibility = 8;
+	optional bool update_file = 9;
+	optional bool update_preview_file = 10;
+	optional bool update_title = 11;
+	optional bool update_description = 12;
+	optional bool update_tags = 13;
+	optional bool update_visibility = 14;
+	optional string change_description = 15;
+	optional bool update_url = 16;
+	optional string url = 17;
+	optional bool update_content_manifest = 18;
+	optional fixed64 content_manifest = 19;
+	optional string metadata = 20;
+	optional bool update_metadata = 21;
+	optional int32 language = 22 [default = 0];
+	repeated string removed_kvtags = 23;
+	repeated .CMsgClientUCMUpdatePublishedFile_KeyValueTag kvtags = 24;
+	repeated .CMsgClientUCMUpdatePublishedFile_AdditionalPreview previews = 25;
+	repeated int32 previews_to_remove = 26;
+	optional bool clear_in_progress = 27;
+	optional bool remove_all_kvtags = 28;
+}
+
+// Used by: common.proto
+message CMsgClientUCMUpdatePublishedFile_AdditionalPreview {
+	optional string original_file_name = 1;
+	optional string internal_file_name = 2;
+	optional string videoid = 3;
+	optional uint32 preview_type = 4;
+	optional int32 update_index = 5 [default = -1];
+}
+
+// Used by: common.proto
+message CMsgClientUCMUpdatePublishedFile_KeyValueTag {
+	optional string key = 1;
+	optional string value = 2;
+}
+
+message CMsgClientUCMUpdatePublishedFileResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional bool needs_workshop_legal_agreement_acceptance = 2 [default = false];
+}
+
+message CMsgClientUDSP2PSessionEnded {
+	optional fixed64 steamid_remote = 1;
+	optional int32 appid = 2;
+	optional int32 session_length_sec = 3;
+	optional int32 session_error = 4;
+	optional int32 nattype = 5;
+	optional int32 bytes_recv = 6;
+	optional int32 bytes_sent = 7;
+	optional int32 bytes_sent_relay = 8;
+	optional int32 bytes_recv_relay = 9;
+	optional int32 time_to_connect_ms = 10;
+}
+
+message CMsgClientUDSP2PSessionStarted {
+	optional fixed64 steamid_remote = 1;
+	optional int32 appid = 2;
+}
+
+message CMsgClientUFSDeleteFileRequest {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional bool is_explicit_delete = 3;
+}
+
+message CMsgClientUFSDeleteFileResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional string file_name = 2;
+}
+
+message CMsgClientUFSDownloadRequest {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional bool can_handle_http = 3;
+}
+
+message CMsgClientUFSDownloadResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional uint32 file_size = 3;
+	optional uint32 raw_file_size = 4;
+	optional bytes sha_file = 5;
+	optional uint64 time_stamp = 6;
+	optional bool is_explicit_delete = 7;
+	optional bool use_http = 8;
+	optional string http_host = 9;
+	optional string http_url = 10;
+	optional bytes kv_headers = 11;
+	optional bool use_https = 12;
+	optional bool encrypted = 13;
+}
+
+message CMsgClientUFSFileChunk {
+	optional bytes sha_file = 1;
+	optional uint32 file_start = 2;
+	optional bytes data = 3;
+}
+
+message CMsgClientUFSGetFileListForApp {
+	repeated uint32 apps_to_query = 1;
+	optional bool send_path_prefixes = 2;
+}
+
+message CMsgClientUFSGetFileListForAppResponse {
+	repeated .CMsgClientUFSGetFileListForAppResponse_File files = 1;
+	repeated string path_prefixes = 2;
+}
+
+// Used by: common.proto
+message CMsgClientUFSGetFileListForAppResponse_File {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional bytes sha_file = 3;
+	optional uint64 time_stamp = 4;
+	optional uint32 raw_file_size = 5;
+	optional bool is_explicit_delete = 6;
+	optional uint32 platforms_to_sync = 7;
+	optional uint32 path_prefix_index = 8;
+}
+
+message CMsgClientUFSGetSingleFileInfo {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+}
+
+message CMsgClientUFSGetSingleFileInfoResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional string file_name = 3;
+	optional bytes sha_file = 4;
+	optional uint64 time_stamp = 5;
+	optional uint32 raw_file_size = 6;
+	optional bool is_explicit_delete = 7;
+}
+
+message CMsgClientUFSGetUGCDetails {
+	optional fixed64 hcontent = 1 [default = 18446744073709551615];
+}
+
+message CMsgClientUFSGetUGCDetailsResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional string url = 2;
+	optional uint32 app_id = 3;
+	optional string filename = 4;
+	optional fixed64 steamid_creator = 5;
+	optional uint32 file_size = 6;
+	optional uint32 compressed_file_size = 7;
+	optional string rangecheck_host = 8;
+	optional string file_encoded_sha1 = 9;
+}
+
+message CMsgClientUFSLoginRequest {
+	optional uint32 protocol_version = 1;
+	optional uint64 am_session_token = 2;
+	repeated uint32 apps = 3;
+}
+
+message CMsgClientUFSLoginResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUFSShareFile {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+}
+
+message CMsgClientUFSShareFileResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 hcontent = 2 [default = 18446744073709551615];
+}
+
+message CMsgClientUFSTransferHeartbeat {
+}
+
+message CMsgClientUFSUploadCommit {
+	repeated .CMsgClientUFSUploadCommit_File files = 1;
+}
+
+// Used by: common.proto
+message CMsgClientUFSUploadCommit_File {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional bytes sha_file = 3;
+	optional uint32 cub_file = 4;
+	optional string file_name = 5;
+}
+
+message CMsgClientUFSUploadCommitResponse {
+	repeated .CMsgClientUFSUploadCommitResponse_File files = 1;
+}
+
+// Used by: common.proto
+message CMsgClientUFSUploadCommitResponse_File {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional bytes sha_file = 3;
+}
+
+message CMsgClientUFSUploadFileFinished {
+	optional int32 eresult = 1 [default = 2];
+	optional bytes sha_file = 2;
+}
+
+message CMsgClientUFSUploadFileRequest {
+	optional uint32 app_id = 1;
+	optional uint32 file_size = 2;
+	optional uint32 raw_file_size = 3;
+	optional bytes sha_file = 4;
+	optional uint64 time_stamp = 5;
+	optional string file_name = 6;
+	optional uint32 platforms_to_sync_deprecated = 7;
+	optional uint32 platforms_to_sync = 8 [default = 4294967295];
+	optional uint32 cell_id = 9;
+	optional bool can_encrypt = 10;
+}
+
+message CMsgClientUFSUploadFileResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional bytes sha_file = 2;
+	optional bool use_http = 3;
+	optional string http_host = 4;
+	optional string http_url = 5;
+	optional bytes kv_headers = 6;
+	optional bool use_https = 7;
+	optional bool encrypt_file = 8;
+}
+
+message CMsgClientUGSGetGlobalStats {
+	optional uint64 gameid = 1;
+	optional uint32 history_days_requested = 2;
+	optional fixed32 time_last_requested = 3;
+	optional uint32 first_day_cached = 4;
+	optional uint32 days_cached = 5;
+}
+
+message CMsgClientUGSGetGlobalStatsResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed32 timestamp = 2;
+	optional int32 day_current = 3;
+	repeated .CMsgClientUGSGetGlobalStatsResponse_Day days = 4;
+}
+
+// Used by: common.proto
+message CMsgClientUGSGetGlobalStatsResponse_Day {
+	optional uint32 day_id = 1;
+	repeated .CMsgClientUGSGetGlobalStatsResponse_Day_Stat stats = 2;
+}
+
+// Used by: common.proto
+message CMsgClientUGSGetGlobalStatsResponse_Day_Stat {
+	optional int32 stat_id = 1;
+	optional int64 data = 2;
+}
+
+message CMsgClientUIMode {
+	optional uint32 uimode = 1;
+	optional uint32 chat_mode = 2;
+}
+
+message CMsgClientUninstallClientApp {
+	optional uint32 appid = 1;
+}
+
+message CMsgClientUninstallClientAppResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgClientUnsignedInstallScript {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional uint32 file_size = 3;
+	optional bool signature_broken = 4;
+	optional uint32 depot_id = 5;
+	optional uint64 manifest_id = 6;
+	optional uint32 file_flags = 7;
+}
+
+message CMsgClientUpdateAppJobReport {
+	optional uint32 app_id = 1;
+	repeated uint32 depot_ids = 2;
+	optional uint32 app_state = 3;
+	optional uint32 job_app_error = 4;
+	optional string error_details = 5;
+	optional uint32 job_duration = 6;
+	optional uint32 files_validation_failed = 7;
+	optional uint64 job_bytes_downloaded = 8;
+	optional uint64 job_bytes_staged = 9;
+	optional uint64 bytes_comitted = 10;
+	optional uint32 start_app_state = 11;
+	optional fixed64 stats_machine_id = 12;
+	optional string branch_name = 13;
+	optional uint64 total_bytes_downloaded = 14;
+	optional uint64 total_bytes_staged = 15;
+	optional uint64 total_bytes_restored = 16;
+	optional bool is_borrowed = 17;
+	optional bool is_free_weekend = 18;
+	optional uint64 total_bytes_legacy = 19;
+	optional uint64 total_bytes_patched = 20;
+	optional uint64 total_bytes_saved = 21;
+	optional uint32 cell_id = 22;
+}
+
+message CMsgClientUpdateMachineAuth {
+	optional string filename = 1;
+	optional uint32 offset = 2;
+	optional uint32 cubtowrite = 3;
+	optional bytes bytes = 4;
+	optional uint32 otp_type = 5;
+	optional string otp_identifier = 6;
+	optional bytes otp_sharedsecret = 7;
+	optional uint32 otp_timedrift = 8;
+}
+
+message CMsgClientUpdateMachineAuthResponse {
+	optional string filename = 1;
+	optional uint32 eresult = 2;
+	optional uint32 filesize = 3;
+	optional bytes sha_file = 4;
+	optional uint32 getlasterror = 5;
+	optional uint32 offset = 6;
+	optional uint32 cubwrote = 7;
+	optional int32 otp_type = 8;
+	optional uint32 otp_value = 9;
+	optional string otp_identifier = 10;
+}
+
+message CMsgClientUpdateUserGameInfo {
+	optional fixed64 steamid_idgs = 1;
+	optional fixed64 gameid = 2;
+	optional uint32 game_ip = 3;
+	optional uint32 game_port = 4;
+	optional bytes token = 5;
+}
+
+message CMsgClientUseLocalDeviceAuthorizations {
+	repeated uint32 authorization_account_id = 1;
+	repeated .CMsgClientUseLocalDeviceAuthorizations_DeviceToken device_tokens = 2;
+}
+
+// Used by: common.proto
+message CMsgClientUseLocalDeviceAuthorizations_DeviceToken {
+	optional uint32 owner_account_id = 1;
+	optional uint64 token_id = 2;
+}
+
+message CMsgClientUserNotifications {
+	repeated .CMsgClientUserNotifications_Notification notifications = 1;
+}
+
+// Used by: common.proto
+message CMsgClientUserNotifications_Notification {
+	optional uint32 user_notification_type = 1;
+	optional uint32 count = 2;
+}
+
+message CMsgClientVanityURLChangedNotification {
+	optional string vanity_url = 1;
+}
+
+message CMsgClientVoiceCallPreAuthorize {
+	optional fixed64 caller_steamid = 1;
+	optional fixed64 receiver_steamid = 2;
+	optional int32 caller_id = 3;
+	optional bool hangup = 4;
+}
+
+message CMsgClientVoiceCallPreAuthorizeResponse {
+	optional fixed64 caller_steamid = 1;
+	optional fixed64 receiver_steamid = 2;
+	optional int32 eresult = 3 [default = 2];
+	optional int32 caller_id = 4;
+}
+
+message CMsgClientWalletInfoUpdate {
+	optional bool has_wallet = 1;
+	optional int32 balance = 2;
+	optional int32 currency = 3;
+	optional int32 balance_delayed = 4;
+	optional int64 balance64 = 5;
+	optional int64 balance64_delayed = 6;
+}
+
+message CMsgClientWorkshopItemChangesRequest {
+	optional uint32 app_id = 1;
+	optional uint32 last_time_updated = 2;
+	optional uint32 num_items_needed = 3;
+}
+
+message CMsgClientWorkshopItemChangesResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 update_time = 2;
+	repeated .CMsgClientWorkshopItemChangesResponse_WorkshopItemInfo workshop_items = 5;
+}
+
+// Used by: common.proto
+message CMsgClientWorkshopItemChangesResponse_WorkshopItemInfo {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+	optional fixed64 manifest_id = 3;
+}
+
+message CMsgClientWorkshopItemInfoRequest {
+	optional uint32 app_id = 1;
+	optional uint32 last_time_updated = 2;
+	repeated .CMsgClientWorkshopItemInfoRequest_WorkshopItem workshop_items = 3;
+}
+
+// Used by: common.proto
+message CMsgClientWorkshopItemInfoRequest_WorkshopItem {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+}
+
+message CMsgClientWorkshopItemInfoResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 update_time = 2;
+	repeated .CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo workshop_items = 3;
+	repeated fixed64 private_items = 4;
+}
+
+// Used by: common.proto
+message CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+	optional fixed64 manifest_id = 3;
+	optional bool is_legacy = 4;
+}
+
+message CMsgCloudPendingRemoteOperations {
+	repeated .CCloud_PendingRemoteOperation operations = 1;
+}
+
+// Used by: common.proto
+message CMsgControllerActionSetMiscSettings {
+	optional string cursor_visible_action_set_key = 1;
+	optional string cursor_hidden_action_set_key = 2;
+}
+
+message CMsgControllerConfiguration {
+	optional uint32 binding_handle = 1;
+	optional string display_name = 2;
+	optional string description = 3;
+	optional string creator = 4;
+	optional int32 controller_type = 5;
+	repeated .CMsgGameActionSet sets = 6;
+	repeated .CMsgControllerMode modes = 7;
+	optional string error_msg = 8;
+	optional string action_block_path = 9;
+	optional .CMsgControllerActionSetMiscSettings misc_action_set_settings = 10;
+	optional string url = 11;
+}
+
+// Used by: common.proto
+message CMsgControllerInput {
+	optional int32 key = 1 [(.description) = "enum"];
+	repeated .CMsgControllerInputActivator activators = 2;
+	repeated .CMsgControllerInputActivator disabled_activators = 3;
+	optional bool inherited_from_parentset = 4;
+}
+
+// Used by: common.proto
+message CMsgControllerInputActivator {
+	optional int32 activation = 1 [(.description) = "enum"];
+	repeated .CMsgControllerInputBinding bindings = 2;
+	repeated .CMsgControllerSetting settings = 3;
+}
+
+// Used by: common.proto
+message CMsgControllerInputBinding {
+	optional int32 type = 1;
+	optional .CMsgControllerInputBinding_KeyBindingData key_binding_data = 2;
+	optional .CMsgControllerInputKeyBinding keyboard_key = 3;
+	optional .CMsgControllerInputMouseButtonBinding mouse_button = 4;
+	optional .CMsgControllerInputGamepadButtonBinding gamepad_button = 5;
+	optional .CMsgControllerInputMouseWheelBinding mouse_wheel = 6;
+	optional .CMsgControllerInputModeShiftBinding mode_shift = 7;
+	optional .CMsgControllerInputGameActionBinding game_action = 8;
+	optional .CMsgControllerInputControllerActionBinding controller_action = 9;
+}
+
+// Used by: common.proto
+message CMsgControllerInputBinding_IconBindingData {
+	optional string icon_filename = 1;
+	optional string color_foreground = 2;
+	optional string color_background = 3;
+	optional string icon_url = 4;
+}
+
+// Used by: common.proto
+message CMsgControllerInputBinding_KeyBindingData {
+	optional string keys_bound_utf8 = 1;
+	optional string friendly_name_utf8 = 2;
+	optional .CMsgControllerInputBinding_IconBindingData icon_data = 3;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionBinding {
+	optional int32 action = 1 [(.description) = "enum"];
+	optional .CMsgControllerInputControllerActionMouseBinding mouse = 2;
+	optional .CMsgControllerInputControllerActionCameraHorizonReset camera_horizon_reset = 3;
+	optional .CMsgControllerInputControllerActionDotsPer360CalibrationSpin dots_per_360_calibration_spin = 4;
+	optional .CMsgControllerInputControllerActionTurnToFaceDirection turn_to_face_direction = 5;
+	optional .CMsgControllerInputControllerActionGameActionSetBinding action_set = 6;
+	optional .CMsgControllerInputControllerActionLEDColorBinding led_color = 7;
+	optional .CMsgControllerInputControllerActionChangePlayerNumberBinding change_player_number = 8;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionCameraHorizonReset {
+	optional int32 camera_dip_angle = 1;
+	optional int32 delay_duration = 2;
+	optional int32 camera_horizon_reset_angle = 3;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionChangePlayerNumberBinding {
+	optional int32 player_number = 1;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionDotsPer360CalibrationSpin {
+	optional int32 spin_by_amount = 1;
+	optional int32 spin_duration = 2;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionGameActionSetBinding {
+	optional int32 preset_type = 1 [(.description) = "enum"];
+	optional string action_set_key = 2;
+	optional bool display = 3;
+	optional bool beep = 4;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionLEDColorBinding {
+	optional int32 setting = 1 [(.description) = "enum"];
+	optional int32 brightness = 2;
+	optional int32 saturation = 3;
+	optional int32 color_r = 4;
+	optional int32 color_g = 5;
+	optional int32 color_b = 6;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionMouseBinding {
+	optional sint32 x = 1;
+	optional sint32 y = 2;
+	optional bool restore = 3;
+}
+
+// Used by: common.proto
+message CMsgControllerInputControllerActionTurnToFaceDirection {
+	optional int32 source_of_direction = 1;
+	optional int32 turn_duration = 2;
+	optional bool use_last_direction_if_deadzoned = 3;
+}
+
+// Used by: common.proto
+message CMsgControllerInputGameActionBinding {
+	optional string action_set_key = 1;
+	optional string action_key = 2;
+}
+
+// Used by: common.proto
+message CMsgControllerInputGamepadButtonBinding {
+	optional int32 button = 1 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgControllerInputKeyBinding {
+	optional int32 key = 1 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgControllerInputModeShiftBinding {
+	optional int32 source = 1 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgControllerInputMouseButtonBinding {
+	optional int32 button = 1 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgControllerInputMouseWheelBinding {
+	optional int32 button = 1 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgControllerMode {
+	optional int32 mode = 1 [(.description) = "enum"];
+	optional uint32 modeid = 2;
+	optional string description = 3;
+	repeated .CMsgControllerInput inputs = 4;
+	repeated .CMsgControllerSetting settings = 5;
+	optional string friendlyname = 6;
+	optional int32 source = 7 [(.description) = "enum"];
+	optional .CMsgControllerVirtualMenuPreviewInfo virtual_menu_info = 8;
+	optional bool mode_shift = 9;
+}
+
+// Used by: common.proto
+message CMsgControllerSetting {
+	optional int32 key = 1 [(.description) = "enum"];
+	optional sint32 int_value = 2;
+	optional sint32 int_min = 3;
+	optional sint32 int_max = 4;
+	optional sint32 int_default = 5;
+	optional .CMsgControllerSetting parentset_setting = 6;
+	optional sint64 long_value = 7;
+}
+
+// Used by: common.proto
+message CMsgControllerSourceGroup {
+	optional int32 mode = 1 [(.description) = "enum"];
+	optional .CMsgControllerInputGameActionBinding game_action = 2;
+	repeated .CMsgControllerInput inputs = 3;
+	repeated .CMsgControllerSetting settings = 4;
+	optional uint32 modeid = 5;
+	optional bool mode_shift = 6;
+	optional .CMsgControllerSourceGroup mode_shift_source_group = 7;
+}
+
+// Used by: common.proto
+message CMsgControllerSources {
+	optional int32 key = 1 [(.description) = "enum"];
+	optional .CMsgControllerSourceGroup active_group = 2;
+}
+
+// Used by: common.proto
+message CMsgControllerVirtualMenuPreviewInfo {
+	optional int32 source = 1 [(.description) = "enum"];
+	optional float x_pos = 2;
+	optional float y_pos = 3;
+	optional float opacity = 4;
+	optional float scale = 5;
+	optional bool show_labels = 6;
+	optional uint32 menu_style = 7;
+	optional bool force_on = 8;
+	repeated .CVirtualMenuKey keys = 9;
+}
+
+message CMsgCREGetUserPublishedItemVoteDetails {
+	repeated .CMsgCREGetUserPublishedItemVoteDetails_PublishedFileId published_file_ids = 1;
+}
+
+// Used by: common.proto
+message CMsgCREGetUserPublishedItemVoteDetails_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgCREGetUserPublishedItemVoteDetailsResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCREGetUserPublishedItemVoteDetailsResponse_UserItemVoteDetail user_item_vote_details = 2;
+}
+
+// Used by: common.proto
+message CMsgCREGetUserPublishedItemVoteDetailsResponse_UserItemVoteDetail {
+	optional fixed64 published_file_id = 1;
+	optional int32 vote = 2 [default = 0];
+}
+
+message CMsgCREItemVoteSummary {
+	repeated .CMsgCREItemVoteSummary_PublishedFileId published_file_ids = 1;
+}
+
+// Used by: common.proto
+message CMsgCREItemVoteSummary_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgCREItemVoteSummaryResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCREItemVoteSummaryResponse_ItemVoteSummary item_vote_summaries = 2;
+}
+
+// Used by: common.proto
+message CMsgCREItemVoteSummaryResponse_ItemVoteSummary {
+	optional fixed64 published_file_id = 1;
+	optional int32 votes_for = 2;
+	optional int32 votes_against = 3;
+	optional int32 reports = 4;
+	optional float score = 5;
+}
+
+message CMsgCREUpdateUserPublishedItemVote {
+	optional fixed64 published_file_id = 1;
+	optional bool vote_up = 2;
+}
+
+message CMsgCREUpdateUserPublishedItemVoteResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgDownloadRateStatistics {
+	optional uint32 cell_id = 1;
+	repeated .CMsgDownloadRateStatistics_StatsInfo stats = 2;
+	optional uint32 throttling_kbps = 3;
+	optional uint32 steam_realm = 4;
+}
+
+// Used by: common.proto
+message CMsgDownloadRateStatistics_StatsInfo {
+	optional uint32 source_type = 1;
+	optional uint32 source_id = 2;
+	optional uint32 seconds = 3;
+	optional uint64 bytes = 4;
+	optional string host_name = 5;
+	optional uint64 microseconds = 6;
+	optional bool used_ipv6 = 7;
+	optional bool proxied = 8;
+}
+
+message CMsgDPGetNumberOfCurrentPlayers {
+	optional uint32 appid = 1;
+}
+
+message CMsgDPGetNumberOfCurrentPlayersResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 player_count = 2;
+}
+
+message CMsgDRMDownloadRequestWithCrashData {
+	optional uint32 download_flags = 1;
+	optional uint32 download_types_known = 2;
+	optional bytes guid_drm = 3;
+	optional bytes guid_split = 4;
+	optional bytes guid_merge = 5;
+	optional string module_name = 6;
+	optional string module_path = 7;
+	optional bytes crash_data = 8;
+}
+
+message CMsgDRMDownloadResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional uint32 blob_download_type = 3;
+	optional bytes merge_guid = 4;
+	optional uint32 download_file_dfs_ip = 5;
+	optional uint32 download_file_dfs_port = 6;
+	optional string download_file_url = 7;
+	optional string module_path = 8;
+}
+
+message CMsgDRMFinalResult {
+	optional uint32 eResult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional uint32 blob_download_type = 3;
+	optional uint32 error_detail = 4;
+	optional bytes merge_guid = 5;
+	optional uint32 download_file_dfs_ip = 6;
+	optional uint32 download_file_dfs_port = 7;
+	optional string download_file_url = 8;
+}
+
+message CMsgFSEnumerateFollowingList {
+	optional uint32 start_index = 1;
+}
+
+message CMsgFSEnumerateFollowingListResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 total_results = 2;
+	repeated fixed64 steam_ids = 3;
+}
+
+message CMsgFSGetFollowerCount {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgFSGetFollowerCountResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 count = 2 [default = 0];
+}
+
+message CMsgFSGetIsFollowing {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgFSGetIsFollowingResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional bool is_following = 2 [default = false];
+}
+
+// Used by: common.proto
+message CMsgGameAction {
+	optional string key = 1;
+	optional string display_name = 2;
+	repeated int32 modes = 3 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgGameActionBindingType {
+	optional int32 key = 1 [(.description) = "enum"];
+	repeated .CMsgGameAction actions = 2;
+}
+
+// Used by: common.proto
+message CMsgGameActionSet {
+	optional string key = 1;
+	optional string display_name = 2;
+	optional bool legacy_set = 3;
+	repeated .CMsgGameActionSet layers = 4;
+	repeated .CMsgGameActionBindingType action_binding_types = 5;
+	repeated .CMsgControllerSources source_bindings = 6;
+}
+
+message CMsgGameServerData {
+	optional fixed64 steam_id_gs = 1;
+	optional uint32 deprecated_ip = 2;
+	optional uint32 query_port = 3;
+	optional uint32 game_port = 4;
+	optional uint32 sourcetv_port = 5;
+	optional uint32 app_id = 6;
+	optional string gamedir = 7;
+	optional string version = 8;
+	optional string product = 9;
+	optional string region = 10;
+	repeated .CMsgGameServerData_Player players = 11;
+	optional uint32 max_players = 12;
+	optional uint32 bot_count = 13;
+	optional bool password = 14;
+	optional bool secure = 15;
+	optional bool dedicated = 16;
+	optional string os = 17;
+	optional string game_data = 18;
+	optional uint32 game_data_version = 19;
+	optional string game_type = 20;
+	optional string map = 21;
+	optional string name = 22;
+	optional .CMsgIPAddress game_ip_address = 23;
+}
+
+// Used by: common.proto
+message CMsgGameServerData_Player {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgGameServerOutOfDate {
+	optional fixed64 steam_id_gs = 1;
+	optional bool reject = 2;
+	optional string message = 3;
+}
+
+message CMsgGameServerPingSample {
+	optional fixed32 my_ip = 1;
+	optional int32 gs_app_id = 2;
+	repeated .CMsgGameServerPingSample_Sample gs_samples = 3;
+}
+
+// Used by: common.proto
+message CMsgGameServerPingSample_Sample {
+	optional fixed32 ip = 1;
+	optional uint32 avg_ping_ms = 2;
+	optional uint32 stddev_ping_ms_x10 = 3;
+}
+
+message CMsgGameServerRemove {
+	optional fixed64 steam_id = 1;
+	optional uint32 deprecated_ip = 2;
+	optional uint32 query_port = 3;
+	optional .CMsgIPAddress ip = 4;
+}
+
+message CMsgGCClient {
+	optional uint32 appid = 1;
+	optional uint32 msgtype = 2;
+	optional bytes payload = 3;
+	optional fixed64 steamid = 4;
+	optional string gcname = 5;
+	optional uint32 ip = 6;
+}
+
+// Used by: common.proto
+message CMsgGCRoutingProtoBufHeader {
+	optional uint64 dst_gcid_queue = 1;
+	optional uint32 dst_gc_dir_index = 2;
+}
+
+message CMsgGenerateSystemReportReply {
+	optional string report_id = 1;
+}
+
+message CMsgGMSClientServerQueryResponse {
+	repeated .CMsgGMSClientServerQueryResponse_Server servers = 1;
+	optional string error = 2;
+}
+
+// Used by: common.proto
+message CMsgGMSClientServerQueryResponse_Server {
+	optional uint32 deprecated_server_ip = 1;
+	optional uint32 server_port = 2;
+	optional uint32 auth_players = 3;
+	optional .CMsgIPAddress server_ip = 4;
+}
+
+message CMsgGSApprove {
+	optional fixed64 steam_id = 1;
+	optional fixed64 owner_steam_id = 2;
+}
+
+message CMsgGSAssociateWithClan {
+	optional fixed64 steam_id_clan = 1;
+}
+
+message CMsgGSAssociateWithClanResponse {
+	optional fixed64 steam_id_clan = 1;
+	optional uint32 eresult = 2 [default = 2];
+}
+
+message CMsgGSComputeNewPlayerCompatibility {
+	optional fixed64 steam_id_candidate = 1;
+}
+
+message CMsgGSComputeNewPlayerCompatibilityResponse {
+	optional fixed64 steam_id_candidate = 1;
+	optional uint32 eresult = 2 [default = 2];
+	optional bool is_clan_member = 3;
+	optional int32 ct_dont_like_you = 4;
+	optional int32 ct_you_dont_like = 5;
+	optional int32 ct_clanmembers_dont_like_you = 6;
+}
+
+message CMsgGSDeny {
+	optional fixed64 steam_id = 1;
+	optional int32 edeny_reason = 2;
+	optional string deny_string = 3;
+}
+
+message CMsgGSDisconnectNotice {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgGSKick {
+	optional fixed64 steam_id = 1;
+	optional int32 edeny_reason = 2;
+}
+
+message CMsgGSPlayerList {
+	repeated .CMsgGSPlayerList_Player players = 1;
+}
+
+// Used by: common.proto
+message CMsgGSPlayerList_Player {
+	optional uint64 steam_id = 1;
+	optional uint32 deprecated_public_ip = 2;
+	optional bytes token = 3;
+	optional .CMsgIPAddress public_ip = 4;
+}
+
+message CMsgGSServerType {
+	optional uint32 app_id_served = 1;
+	optional uint32 flags = 2;
+	optional uint32 deprecated_game_ip_address = 3;
+	optional uint32 game_port = 4;
+	optional string game_dir = 5;
+	optional string game_version = 6;
+	optional uint32 game_query_port = 7;
+}
+
+message CMsgGSStatusReply {
+	optional bool is_secure = 1;
+}
+
+message CMsgGSUserPlaying {
+	optional fixed64 steam_id = 1;
+	optional uint32 deprecated_public_ip = 2;
+	optional bytes token = 3;
+	optional .CMsgIPAddress public_ip = 4;
+}
+
+// Used by: common.proto
+message CMsgHotkey {
+	optional uint32 key_code = 1;
+	optional bool alt_key = 2;
+	optional bool shift_key = 3;
+	optional bool ctrl_key = 4;
+	optional bool meta_key = 5;
+	optional string display_name = 6;
+}
+
+// Used by: Authentication, AuthenticationSupport, Community, common.proto
+message CMsgIPAddress {
+	optional fixed32 v4 = 1;
+	optional bytes v6 = 2;
+}
+
+message CMsgIPAddressBucket {
+	optional .CMsgIPAddress original_ip_address = 1;
+	optional fixed64 bucket = 2;
+}
+
+message CMsgMobileChatFriendMessage {
+	optional fixed64 steamid_friend = 1;
+	optional bool local_echo = 2;
+	optional int32 chat_entry_type = 3;
+	optional string message = 4;
+	optional fixed32 current_message_timestamp = 5;
+	optional fixed32 current_message_ordinal = 6;
+	optional fixed32 previous_message_timestamp = 7;
+	optional fixed32 previous_message_ordinal = 8;
+	optional string client_message_id = 9;
+}
+
+message CMsgMonitorInfo {
+	optional string selected_display_name = 1;
+	repeated .CMsgMonitorInfo_MonitorInfo monitors = 2;
+}
+
+// Used by: common.proto
+message CMsgMonitorInfo_MonitorInfo {
+	optional string monitor_device_name = 1;
+	optional string monitor_display_name = 2;
+}
+
+message CMsgMulti {
+	optional uint32 size_unzipped = 1;
+	optional bytes message_body = 2;
+}
+
+message CMsgNetworkDeviceConnect {
+	optional uint32 device_id = 1 [default = 0];
+	optional .CMsgNetworkDeviceConnect_KnownAP ap_known = 2;
+	optional .CMsgNetworkDeviceConnect_CustomAP ap_custom = 3;
+	optional .CMsgNetworkDeviceConnect_Credentials credentials = 4;
+	optional .CMsgNetworkDeviceIP4Config ip4 = 5;
+	optional .CMsgNetworkDeviceIP6Config ip6 = 6;
+}
+
+// Used by: common.proto
+message CMsgNetworkDeviceConnect_Credentials {
+	optional string username = 1;
+	optional string password = 2;
+}
+
+// Used by: common.proto
+message CMsgNetworkDeviceConnect_CustomAP {
+	optional string ssid = 1;
+	optional int32 esecurity = 2;
+}
+
+// Used by: common.proto
+message CMsgNetworkDeviceConnect_KnownAP {
+	optional uint32 ap_id = 1;
+}
+
+// Used by: common.proto
+message CMsgNetworkDeviceIP4Address {
+	optional int32 ip = 1 [default = 0];
+	optional int32 netmask = 2;
+}
+
+// Used by: common.proto
+message CMsgNetworkDeviceIP4Config {
+	repeated .CMsgNetworkDeviceIP4Address addresses = 1;
+	repeated int32 dns_ip = 2;
+	optional int32 gateway_ip = 3;
+	optional bool is_dhcp_enabled = 4;
+	optional bool is_default_route = 5;
+	optional bool is_enabled = 6 [default = false];
+}
+
+// Used by: common.proto
+message CMsgNetworkDeviceIP6Address {
+	optional string ip = 1 [default = ""];
+}
+
+// Used by: common.proto
+message CMsgNetworkDeviceIP6Config {
+	repeated .CMsgNetworkDeviceIP6Address addresses = 1;
+	repeated string dns_ip = 2;
+	optional string gateway_ip = 3;
+	optional bool is_dhcp_enabled = 4;
+	optional bool is_default_route = 5;
+	optional bool is_enabled = 6 [default = false];
+}
+
+message CMsgNetworkDevicesData {
+	repeated .CMsgNetworkDevicesData_Device devices = 1;
+	optional bool is_wifi_enabled = 2;
+	optional bool is_wifi_scanning_enabled = 3;
+}
+
+// Used by: common.proto
+message CMsgNetworkDevicesData_Device {
+	optional uint32 id = 1 [default = 0];
+	optional int32 etype = 2;
+	optional int32 estate = 3;
+	optional string mac = 4;
+	optional string vendor = 5;
+	optional string product = 6;
+	optional .CMsgNetworkDeviceIP4Config ip4 = 7;
+	optional .CMsgNetworkDeviceIP6Config ip6 = 8;
+	optional .CMsgNetworkDevicesData_Device_Wired wired = 9;
+	optional .CMsgNetworkDevicesData_Device_Wireless wireless = 10;
+}
+
+// Used by: common.proto
+message CMsgNetworkDevicesData_Device_Wired {
+	optional bool is_cable_present = 1 [default = false];
+	optional uint32 speed_mbit = 2;
+	optional string friendly_name = 3;
+}
+
+// Used by: common.proto
+message CMsgNetworkDevicesData_Device_Wireless {
+	repeated .CMsgNetworkDevicesData_Device_Wireless_AP aps = 1;
+	optional int32 esecurity_supported = 2;
+}
+
+// Used by: common.proto
+message CMsgNetworkDevicesData_Device_Wireless_AP {
+	optional uint32 id = 1 [default = 0];
+	optional int32 estrength = 2;
+	optional string ssid = 3;
+	optional bool is_active = 4;
+	optional bool is_autoconnect = 5;
+	optional int32 esecurity = 6;
+	optional string user_name = 7;
+	optional string password = 8;
+	optional int32 strength_raw = 9;
+}
+
+message CMsgPersonaChangeResponse {
+	optional uint32 result = 1;
+	optional string player_name = 2;
+}
+
+message CMsgProtoBufHeader {
+	optional fixed64 steamid = 1;
+	optional int32 client_sessionid = 2;
+	optional uint32 routing_appid = 3;
+	optional fixed64 jobid_source = 10 [default = 18446744073709551615];
+	optional fixed64 jobid_target = 11 [default = 18446744073709551615];
+	optional string target_job_name = 12;
+	optional int32 eresult = 13 [default = 2];
+	optional string error_message = 14;
+	optional uint32 ip = 15;
+	optional uint32 auth_account_flags = 16;
+	optional int32 transport_error = 17 [default = 1];
+	optional uint64 messageid = 18 [default = 18446744073709551615];
+	optional uint32 publisher_group_id = 19;
+	optional uint32 sysid = 20;
+	optional uint64 trace_tag = 21;
+	optional uint32 token_source = 22;
+	optional bool admin_spoofing_user = 23;
+	optional int32 seq_num = 24;
+	optional uint32 webapi_key_id = 25;
+	optional bool is_from_external_source = 26;
+	repeated uint32 forward_to_sysid = 27;
+	optional uint32 cm_sysid = 28;
+	optional bytes ip_v6 = 29;
+	optional string wg_token = 30;
+	optional uint32 launcher_type = 31 [default = 0];
+	optional uint32 realm = 32 [default = 0];
+	optional int32 timeout_ms = 33 [default = -1];
+	optional string debug_source = 34;
+	optional uint32 debug_source_string_index = 35;
+	optional uint64 token_id = 36;
+	optional .CMsgGCRoutingProtoBufHeader routing_gc = 37;
+	optional int32 session_disposition = 38 [default = 0, (.description) = "enum"];
+	optional string wg_token__field_39 = 39;
+	optional string webui_auth_key = 40;
+	repeated int32 exclude_client_sessionids = 41;
+}
+
+message CMsgProtobufWrapped {
+	optional bytes message_body = 1;
+}
+
+message CMsgSelectOSBranchParams {
+	optional int32 branch = 1 [(.description) = "enum"];
+	optional string custom_branch = 2;
+}
+
+message CMsgSetControllerActionSet {
+	optional string action_set_key = 1;
+	optional string action_set_layer_key = 2;
+	optional string new_display_name = 3;
+	optional string action_set_to_copy_key = 4;
+}
+
+message CMsgSetControllerInputActivator {
+	optional string action_set_key = 1;
+	optional string action_set_layer_key = 2;
+	optional int32 source_binding_key = 3 [(.description) = "enum"];
+	optional bool mode_shift = 4;
+	optional int32 input_key = 5 [(.description) = "enum"];
+	optional int32 activator_index = 6;
+	optional int32 new_activation = 7 [(.description) = "enum"];
+	optional .CMsgControllerSetting new_setting = 8;
+	optional int32 modeid = 9;
+}
+
+message CMsgSetControllerInputActivatorEnabled {
+	optional string action_set_key = 1;
+	optional string action_set_layer_key = 2;
+	optional int32 source_binding_key = 3 [(.description) = "enum"];
+	optional bool mode_shift = 4;
+	optional int32 input_key = 5 [(.description) = "enum"];
+	optional int32 activator_index = 6;
+	optional bool enabled = 7;
+	optional int32 modeid = 8;
+}
+
+message CMsgSetControllerInputBinding {
+	optional string action_set_key = 1;
+	optional string action_set_layer_key = 2;
+	optional int32 source_binding_key = 3 [(.description) = "enum"];
+	optional bool mode_shift = 4;
+	optional int32 input_key = 5 [(.description) = "enum"];
+	optional int32 activator_index = 6;
+	optional int32 binding_index = 7;
+	optional .CMsgControllerInputBinding new_binding = 8;
+	optional int32 source_mode = 9 [(.description) = "enum"];
+	optional int32 modeid = 10;
+}
+
+message CMsgSetControllerSourceMode {
+	optional string action_set_key = 1;
+	optional string action_set_layer_key = 2;
+	optional int32 source_binding_key = 3 [(.description) = "enum"];
+	optional bool mode_shift = 4;
+	optional int32 new_mode = 5 [(.description) = "enum"];
+	optional .CMsgControllerInputGameActionBinding new_game_action = 6;
+	optional .CMsgControllerSetting new_setting = 7;
+	optional string new_name = 8;
+	optional uint32 modeid = 9;
+	optional bool change_mode = 10;
+	optional bool new_virtual_menu = 11;
+	optional bool enable_virtual_menu_support = 12;
+}
+
+message CMsgSetModeShiftButton {
+	optional string action_set_key = 1;
+	optional string action_set_layer_key = 2;
+	optional int32 modeid = 3;
+	optional int32 source = 4 [(.description) = "enum"];
+	optional int32 digital_io = 5 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgSteamDatagramConnectionQuality {
+	optional .CMsgSteamDatagramLinkInstantaneousStats instantaneous = 1;
+	optional .CMsgSteamDatagramLinkLifetimeStats lifetime = 2;
+}
+
+// Used by: common.proto
+message CMsgSteamDatagramLinkInstantaneousStats {
+	optional uint32 out_packets_per_sec_x10 = 1;
+	optional uint32 out_bytes_per_sec = 2;
+	optional uint32 in_packets_per_sec_x10 = 3;
+	optional uint32 in_bytes_per_sec = 4;
+	optional uint32 ping_ms = 5;
+	optional uint32 packets_dropped_pct = 6;
+	optional uint32 packets_weird_sequence_pct = 7;
+	optional uint32 peak_jitter_usec = 8;
+}
+
+// Used by: common.proto
+message CMsgSteamDatagramLinkLifetimeStats {
+	optional uint32 connected_seconds = 2;
+	optional uint64 packets_sent = 3;
+	optional uint64 kb_sent = 4;
+	optional uint64 packets_recv = 5;
+	optional uint64 kb_recv = 6;
+	optional uint64 packets_recv_sequenced = 7;
+	optional uint64 packets_recv_dropped = 8;
+	optional uint64 packets_recv_out_of_order = 9;
+	optional uint64 packets_recv_duplicate = 10;
+	optional uint64 packets_recv_lurch = 11;
+	repeated uint64 multipath_packets_recv_sequenced = 12;
+	repeated uint64 multipath_packets_recv_later = 13;
+	optional uint32 multipath_send_enabled = 14;
+	optional uint64 packets_recv_out_of_order_corrected = 15;
+	optional uint32 quality_histogram_100 = 21;
+	optional uint32 quality_histogram_99 = 22;
+	optional uint32 quality_histogram_97 = 23;
+	optional uint32 quality_histogram_95 = 24;
+	optional uint32 quality_histogram_90 = 25;
+	optional uint32 quality_histogram_75 = 26;
+	optional uint32 quality_histogram_50 = 27;
+	optional uint32 quality_histogram_1 = 28;
+	optional uint32 quality_histogram_dead = 29;
+	optional uint32 quality_ntile_2nd = 30;
+	optional uint32 quality_ntile_5th = 31;
+	optional uint32 quality_ntile_25th = 32;
+	optional uint32 quality_ntile_50th = 33;
+	optional uint32 ping_histogram_25 = 41;
+	optional uint32 ping_histogram_50 = 42;
+	optional uint32 ping_histogram_75 = 43;
+	optional uint32 ping_histogram_100 = 44;
+	optional uint32 ping_histogram_125 = 45;
+	optional uint32 ping_histogram_150 = 46;
+	optional uint32 ping_histogram_200 = 47;
+	optional uint32 ping_histogram_300 = 48;
+	optional uint32 ping_histogram_max = 49;
+	optional uint32 ping_ntile_5th = 50;
+	optional uint32 ping_ntile_50th = 51;
+	optional uint32 ping_ntile_75th = 52;
+	optional uint32 ping_ntile_95th = 53;
+	optional uint32 ping_ntile_98th = 54;
+	optional uint32 jitter_histogram_negligible = 61;
+	optional uint32 jitter_histogram_1 = 62;
+	optional uint32 jitter_histogram_2 = 63;
+	optional uint32 jitter_histogram_5 = 64;
+	optional uint32 jitter_histogram_10 = 65;
+	optional uint32 jitter_histogram_20 = 66;
+	optional uint32 txspeed_max = 67;
+	optional uint32 txspeed_histogram_16 = 68;
+	optional uint32 txspeed_histogram_32 = 69;
+	optional uint32 txspeed_histogram_64 = 70;
+	optional uint32 txspeed_histogram_128 = 71;
+	optional uint32 txspeed_histogram_256 = 72;
+	optional uint32 txspeed_histogram_512 = 73;
+	optional uint32 txspeed_histogram_1024 = 74;
+	optional uint32 txspeed_histogram_max = 75;
+	optional uint32 txspeed_ntile_5th = 76;
+	optional uint32 txspeed_ntile_50th = 77;
+	optional uint32 txspeed_ntile_75th = 78;
+	optional uint32 txspeed_ntile_95th = 79;
+	optional uint32 txspeed_ntile_98th = 80;
+	optional uint32 rxspeed_max = 81;
+	optional uint32 rxspeed_histogram_16 = 82;
+	optional uint32 rxspeed_histogram_32 = 83;
+	optional uint32 rxspeed_histogram_64 = 84;
+	optional uint32 rxspeed_histogram_128 = 85;
+	optional uint32 rxspeed_histogram_256 = 86;
+	optional uint32 rxspeed_histogram_512 = 87;
+	optional uint32 rxspeed_histogram_1024 = 88;
+	optional uint32 rxspeed_histogram_max = 89;
+	optional uint32 rxspeed_ntile_5th = 90;
+	optional uint32 rxspeed_ntile_50th = 91;
+	optional uint32 rxspeed_ntile_75th = 92;
+	optional uint32 rxspeed_ntile_95th = 93;
+	optional uint32 rxspeed_ntile_98th = 94;
+}
+
+// Used by: common.proto
+message CMsgSteamDatagramP2PRoutingSummary {
+	optional .CMsgSteamNetworkingICESessionSummary ice = 2;
+	optional .CMsgSteamNetworkingP2PSDRRoutingSummary sdr = 3;
+}
+
+// Used by: common.proto
+message CMsgSteamNetworkingICESessionSummary {
+	optional uint32 local_candidate_types = 1;
+	optional uint32 remote_candidate_types = 2;
+	optional uint32 initial_route_kind = 3;
+	optional uint32 initial_ping = 4;
+	optional uint32 negotiation_ms = 5;
+	optional uint32 initial_score = 6;
+	optional uint32 failure_reason_code = 7;
+	optional uint32 selected_seconds = 12;
+	optional uint32 user_settings = 13;
+	optional uint32 ice_enable_var = 14;
+	optional uint32 local_candidate_types_allowed = 15;
+	optional uint32 best_route_kind = 16;
+	optional uint32 best_ping = 17;
+	optional uint32 best_score = 18;
+	optional uint32 best_time = 19;
+}
+
+// Used by: common.proto
+message CMsgSteamNetworkingP2PSDRRoutingSummary {
+	optional uint32 initial_ping = 1;
+	optional uint32 initial_ping_front_local = 2;
+	optional uint32 initial_ping_front_remote = 3;
+	optional uint32 initial_score = 4;
+	optional fixed32 initial_pop_local = 5;
+	optional fixed32 initial_pop_remote = 6;
+	optional uint32 negotiation_ms = 7;
+	optional uint32 selected_seconds = 8;
+	optional uint32 best_ping = 11;
+	optional uint32 best_ping_front_local = 12;
+	optional uint32 best_ping_front_remote = 13;
+	optional uint32 best_score = 14;
+	optional fixed32 best_pop_local = 15;
+	optional fixed32 best_pop_remote = 16;
+	optional uint32 best_time = 17;
+}
+
+message CMsgSwapControllerSourceModes {
+	optional string action_set_key_a = 1;
+	optional string action_set_layer_key_a = 2;
+	optional int32 source_a = 3 [(.description) = "enum"];
+	optional string action_set_key_b = 4;
+	optional string action_set_layer_key_b = 5;
+	optional int32 source_b = 6 [(.description) = "enum"];
+}
+
+message CMsgSwapModeInputBindings {
+	optional string action_set_key = 1;
+	optional string action_set_layer_key = 2;
+	optional int32 source_binding_key = 3 [(.description) = "enum"];
+	optional bool mode_shift = 4;
+	optional int32 modeid = 5;
+	repeated .CMsgSwapModeInputBindings_CModeInputSwap swaps = 6;
+}
+
+// Used by: common.proto
+message CMsgSwapModeInputBindings_CModeInputSwap {
+	optional int32 old_key = 1 [(.description) = "enum"];
+	optional int32 new_key = 2 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgSystemAudioManagerDevice {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional string name = 2;
+	optional string nick = 3;
+	optional string description = 4;
+	optional string api = 5;
+}
+
+// Used by: common.proto
+message CMsgSystemAudioManagerLink {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional uint32 output_node_id = 2;
+	optional uint32 output_port_id = 3;
+	optional uint32 input_node_id = 4;
+	optional uint32 input_port_id = 5;
+}
+
+// Used by: common.proto
+message CMsgSystemAudioManagerNode {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional uint32 device_id = 2;
+	optional string name = 3;
+	optional string nick = 4;
+	optional string description = 5;
+	optional int32 edirection = 6 [(.description) = "enum"];
+	optional .CMsgSystemAudioVolume volume = 7;
+}
+
+// Used by: common.proto
+message CMsgSystemAudioManagerObject {
+	optional uint32 id = 1;
+	optional fixed32 rtime_last_update = 2;
+}
+
+// Used by: common.proto
+message CMsgSystemAudioManagerPort {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional uint32 node_id = 3;
+	optional string name = 4;
+	optional string alias = 5;
+	optional int32 etype = 6 [(.description) = "enum"];
+	optional int32 edirection = 7 [(.description) = "enum"];
+	optional bool is_physical = 8;
+	optional bool is_terminal = 9;
+	optional bool is_control = 10;
+	optional bool is_monitor = 11;
+}
+
+message CMsgSystemAudioManagerState {
+	optional fixed32 rtime_filter = 1;
+	optional int32 counter = 2;
+	optional .CMsgSystemAudioManagerStateHW hw = 3;
+}
+
+// Used by: common.proto
+message CMsgSystemAudioManagerStateHW {
+	repeated .CMsgSystemAudioManagerDevice devices = 1;
+	repeated .CMsgSystemAudioManagerNode nodes = 2;
+	repeated .CMsgSystemAudioManagerPort ports = 3;
+	repeated .CMsgSystemAudioManagerLink links = 4;
+}
+
+message CMsgSystemAudioManagerUpdateSomething {
+	optional int32 counter = 1;
+}
+
+// Used by: common.proto
+message CMsgSystemAudioVolume {
+	repeated .CMsgSystemAudioVolume_ChannelEntry entries = 1;
+	optional bool is_muted = 2;
+}
+
+// Used by: common.proto
+message CMsgSystemAudioVolume_ChannelEntry {
+	optional int32 echannel = 1 [(.description) = "enum"];
+	optional float volume = 2;
+}
+
+// Used by: common.proto
+message CMsgSystemDisplay {
+	optional int32 id = 1;
+	optional string name = 2;
+	optional string description = 3;
+	optional bool is_primary = 4;
+	optional bool is_enabled = 5;
+	optional bool is_internal = 6;
+	optional bool has_mode_override = 7;
+	optional int32 width_mm = 8;
+	optional int32 height_mm = 9;
+	optional int32 current_mode_id = 10;
+	repeated .CMsgSystemDisplayMode modes = 11;
+	optional int32 refresh_rate_min = 12;
+	optional int32 refresh_rate_max = 13;
+	optional bool is_vrr_capable = 14;
+	optional bool is_vrr_enabled = 15;
+	optional bool is_hdr_capable = 16;
+	optional bool is_hdr_enabled = 17;
+	repeated int32 supported_refresh_rates = 18;
+}
+
+message CMsgSystemDisplayManagerSetMode {
+	optional int32 display_id = 1;
+	optional int32 mode_id = 2;
+}
+
+message CMsgSystemDisplayManagerState {
+	repeated .CMsgSystemDisplay displays = 1;
+	optional bool is_mode_switching_supported = 2;
+	optional int32 compatibility_mode = 3 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgSystemDisplayMode {
+	optional int32 id = 1;
+	optional int32 width = 2;
+	optional int32 height = 3;
+	optional int32 refresh_hz = 4;
+}
+
+message CMsgSystemDockState {
+	optional .CMsgSystemDockUpdateState update_state = 1;
+}
+
+message CMsgSystemDockUpdateFirmware {
+	optional bool check_only = 1;
+}
+
+// Used by: common.proto
+message CMsgSystemDockUpdateState {
+	optional int32 state = 1 [(.description) = "enum"];
+	optional fixed32 rtime_last_checked = 2;
+	optional string version_current = 3;
+	optional string version_available = 4;
+	optional float stage_progress = 5;
+	optional fixed32 rtime_estimated_completion = 6;
+	optional int32 old_fw_workaround = 7;
+}
+
+message CMsgSystemManagerSettings {
+	optional float idle_backlight_dim_battery_seconds = 1;
+	optional float idle_backlight_dim_ac_seconds = 2;
+	optional float idle_suspend_battery_seconds = 3;
+	optional float idle_suspend_ac_seconds = 4;
+	optional bool idle_suspend_supressed = 5;
+	optional bool is_adaptive_brightness_available = 6;
+	optional bool display_adaptive_brightness_enabled = 7;
+	optional bool display_nightmode_enabled = 10;
+	optional float display_nightmode_tintstrength = 11;
+	optional float display_nightmode_maxhue = 12;
+	optional float display_nightmode_maxsat = 13;
+	optional float display_nightmode_uiexp = 14;
+	optional float display_nightmode_blend = 15;
+	optional bool display_nightmode_reset = 16;
+	optional bool display_nightmode_schedule_enabled = 17;
+	optional float display_nightmode_schedule_starttime = 18;
+	optional float display_nightmode_schedule_endtime = 19;
+	optional bool display_diagnostics_enabled = 20;
+	optional float als_lux_primary = 21;
+	optional float als_lux_median = 22;
+	optional float display_backlight_raw = 23;
+	optional float display_brightness_adaptivemin = 24;
+	optional float display_brightness_adaptivemax = 25;
+	optional bool is_wifi_powersave_enabled = 26;
+	optional bool is_fan_control_available = 27;
+	optional int32 fan_control_mode = 28 [(.description) = "enum"];
+	optional bool is_display_brightness_available = 29;
+	optional bool is_display_colormanagement_available = 31;
+	optional float display_colorgamut = 32;
+	optional float als_lux_alternate = 33;
+	optional bool is_display_colortemp_available = 34;
+	optional float display_colortemp = 35;
+	optional float display_colortemp_default = 36;
+	optional bool display_colortemp_enabled = 37;
+	optional int32 display_colorgamut_labelset = 38 [(.description) = "enum"];
+	optional float display_brightness_overdrive_hdr_split = 39;
+}
+
+// Used by: common.proto
+message CMsgSystemPerfDiagnosticEntry {
+	optional string name = 1;
+	optional string value = 2;
+}
+
+message CMsgSystemPerfDiagnosticInfo {
+	repeated .CMsgSystemPerfDiagnosticEntry entries = 1;
+	repeated .CMsgSystemPerfNetworkInterface interfaces = 2;
+	optional float battery_temp_c = 3;
+}
+
+// Used by: common.proto
+message CMsgSystemPerfLimits {
+	optional int32 cpu_governor_manual_min_mhz = 1;
+	optional int32 cpu_governor_manual_max_mhz = 2;
+	optional int32 fsr_sharpness_min = 3;
+	optional int32 fsr_sharpness_max = 4;
+	optional int32 gpu_performance_manual_min_mhz = 5;
+	optional int32 gpu_performance_manual_max_mhz = 6;
+	optional bool perf_overlay_is_standalone = 7;
+	optional bool is_dynamic_vrs_available = 8;
+	optional bool is_manual_display_refresh_rate_available = 9;
+	repeated int32 gpu_performance_levels_available = 10 [(.description) = "enum"];
+	optional int32 display_refresh_manual_hz_min = 11;
+	optional int32 display_refresh_manual_hz_max = 12;
+	repeated int32 fps_limit_options = 13;
+	optional int32 tdp_limit_min = 14;
+	optional int32 tdp_limit_max = 15;
+	optional bool is_nis_supported = 16;
+	optional int32 nis_sharpness_min = 17;
+	optional int32 nis_sharpness_max = 18;
+	optional int32 display_external_refresh_manual_hz_min = 19;
+	optional int32 display_external_refresh_manual_hz_max = 20;
+	repeated int32 fps_limit_options_external = 21;
+	optional bool is_vrr_supported = 23;
+	optional bool is_dynamic_refresh_rate_in_steam_supported = 24;
+	optional bool is_split_scaling_and_filtering_supported = 25;
+	repeated int32 split_scaling_filters_available = 26 [(.description) = "enum"];
+	repeated int32 split_scaling_scalers_available = 27 [(.description) = "enum"];
+	optional bool is_hdr_supported = 28;
+	optional int32 display_refresh_manual_hz_oc_max = 29;
+	optional bool disable_refresh_rate_management = 30;
+}
+
+// Used by: common.proto
+message CMsgSystemPerfNetworkInterface {
+	optional string name = 1;
+	optional double timestamp = 2;
+	optional int64 tx_bytes_total = 3;
+	optional int64 rx_bytes_total = 4;
+	optional int32 tx_bytes_per_sec = 5;
+	optional int32 rx_bytes_per_sec = 6;
+}
+
+// Used by: common.proto
+message CMsgSystemPerfSettings {
+	optional .CMsgSystemPerfSettingsGlobal global = 1;
+	optional .CMsgSystemPerfSettingsPerApp per_app = 2;
+}
+
+// Used by: common.proto
+message CMsgSystemPerfSettingsGlobal {
+	optional float diagnostic_update_rate = 1;
+	optional int32 system_trace_service_state = 2 [(.description) = "enum"];
+	optional int32 graphics_profiling_service_state = 3 [(.description) = "enum"];
+	optional int32 perf_overlay_service_state = 4 [(.description) = "enum"];
+	optional int32 perf_overlay_level = 5 [(.description) = "enum"];
+	optional bool is_show_perf_overlay_over_steam_enabled = 6;
+	optional bool is_advanced_settings_enabled = 7;
+	optional bool allow_external_display_refresh_control = 8;
+	optional bool is_hdr_enabled = 9;
+	optional int32 hdr_on_sdr_tonemap_operator = 12 [(.description) = "enum"];
+	optional bool is_hdr_debug_heatmap_enabled = 13;
+	optional bool force_hdr_wide_gammut_for_sdr = 15 [default = true];
+	optional bool allow_experimental_hdr = 16;
+	optional bool debug_force_hdr_support = 18;
+	optional bool force_hdr_10pq_output_debug = 19;
+	optional bool is_display_oc_enabled = 20;
+	optional bool is_color_management_enabled = 21;
+	optional float sdr_to_hdr_brightness = 22;
+}
+
+// Used by: common.proto
+message CMsgSystemPerfSettingsPerApp {
+	optional int32 gpu_performance_manual_mhz = 1;
+	optional int32 fps_limit = 2;
+	optional bool is_variable_resolution_enabled = 3;
+	optional bool is_dynamic_refresh_rate_enabled = 4;
+	optional int32 tdp_limit = 5;
+	optional int32 cpu_governor = 6 [(.description) = "enum"];
+	optional int32 cpu_governor_manual_mhz = 7;
+	optional int32 scaling_filter = 8;
+	optional int32 fsr_sharpness = 9;
+	optional bool is_fps_limit_enabled = 10;
+	optional bool is_tdp_limit_enabled = 11;
+	optional bool is_low_latency_mode_enabled = 12;
+	optional int32 display_refresh_manual_hz = 13;
+	optional bool is_game_perf_profile_enabled = 14;
+	optional int32 gpu_performance_level = 15 [(.description) = "enum"];
+	optional int32 nis_sharpness = 16;
+	optional int32 display_external_refresh_manual_hz = 17;
+	optional int32 fps_limit_external = 18;
+	optional bool is_tearing_enabled = 19;
+	optional bool is_vrr_enabled = 20;
+	optional bool use_dynamic_refresh_rate_in_steam = 23;
+	optional int32 split_scaling_filter = 24 [(.description) = "enum"];
+	optional int32 split_scaling_scaler = 25 [(.description) = "enum"];
+}
+
+message CMsgSystemPerfState {
+	optional .CMsgSystemPerfLimits limits = 1;
+	optional .CMsgSystemPerfSettings settings = 2;
+	optional uint64 current_game_id = 3;
+	optional uint64 active_profile_game_id = 4;
+}
+
+message CMsgSystemPerfUpdateSettings {
+	optional uint64 gameid = 1;
+	optional bool reset_to_default = 2;
+	optional .CMsgSystemPerfSettings settings_delta = 3;
+	optional bool skip_storage_update = 4;
+}
+
+message CMsgSystemUpdateApplyParams {
+	repeated int32 apply_types = 1 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CMsgSystemUpdateApplyResult {
+	optional int32 type = 1 [(.description) = "enum"];
+	optional uint32 eresult = 2 [default = 2];
+	optional bool requires_client_restart = 3 [default = false];
+	optional bool requires_system_restart = 4 [default = false];
+}
+
+// Used by: common.proto
+message CMsgSystemUpdateCheckResult {
+	optional int32 type = 1 [(.description) = "enum"];
+	optional uint32 eresult = 2 [default = 2];
+	optional fixed32 rtime_checked = 3;
+	optional bool available = 4;
+	optional string version = 5;
+	optional string auto_message = 6;
+	optional bool system_restart_pending = 7;
+}
+
+// Used by: common.proto
+message CMsgSystemUpdateProgress {
+	optional float stage_progress = 1;
+	optional int64 stage_size_bytes = 2;
+	optional fixed32 rtime_estimated_completion = 3;
+}
+
+message CMsgSystemUpdateState {
+	optional int32 state = 1 [(.description) = "enum"];
+	optional .CMsgSystemUpdateProgress progress = 2;
+	repeated .CMsgSystemUpdateCheckResult update_check_results = 3;
+	repeated .CMsgSystemUpdateApplyResult update_apply_results = 4;
+	optional bool supports_os_updates = 5;
+}
+
+message CMsgTrading_CancelTradeRequest {
+	optional uint64 other_steamid = 1;
+}
+
+message CMsgTrading_InitiateTradeRequest {
+	optional uint32 trade_request_id = 1;
+	optional uint64 other_steamid = 2;
+	optional string other_name = 3;
+}
+
+message CMsgTrading_InitiateTradeResponse {
+	optional uint32 response = 1;
+	optional uint32 trade_request_id = 2;
+	optional uint64 other_steamid = 3;
+	optional uint32 steamguard_required_days = 4;
+	optional uint32 new_device_cooldown_days = 5;
+	optional uint32 default_password_reset_probation_days = 6;
+	optional uint32 password_reset_probation_days = 7;
+	optional uint32 default_email_change_probation_days = 8;
+	optional uint32 email_change_probation_days = 9;
+}
+
+message CMsgTrading_StartSession {
+	optional uint64 other_steamid = 1;
+}
+
+message CMsgWebUITransportFailure {
+	optional uint32 connect_count = 1;
+}
+
+message CPartnerStoreBrowse_GetItems_Request {
+	optional .CStoreBrowse_GetItems_Request request = 1;
+	optional bool include_unpublished = 2;
+}
+
+message CProductImpressionsFromClient_Notification {
+	repeated .CProductImpressionsFromClient_Notification_Impression impressions = 1;
+}
+
+// Used by: common.proto
+message CProductImpressionsFromClient_Notification_Impression {
+	optional int32 type = 1 [(.description) = "enum"];
+	optional uint32 appid = 2;
+	optional uint32 num_impressions = 3;
+}
+
+// Used by: RemoteClient, common.proto
+message CRemoteClient_DeviceDetails {
+	optional string device_friendly_name = 1;
+	optional int32 os_type = 2;
+	optional uint32 gaming_device_type = 3;
+}
+
+message CRemoteClient_Online_Notification {
+	optional fixed64 steamid = 1;
+	optional fixed64 remote_client_id = 2;
+	optional .CRemoteClient_DeviceDetails device_details = 3;
+}
+
+message CRemoteClient_ReplyPacket_Notification {
+	optional fixed64 session_id = 1;
+	optional bytes payload = 2;
+}
+
+message CRemotePlay_SessionStopped_Notification {
+	optional fixed64 record_id = 1;
+	optional bool used_x264 = 2;
+	optional bool used_h264 = 3;
+	optional bool used_hevc = 4;
+}
+
+message CSteamNotification_HideNotification_Notification {
+	repeated uint64 notification_ids = 1;
+}
+
+message CSteamNotification_MarkNotificationsRead_Notification {
+	optional uint32 timestamp = 1;
+	optional int32 notification_type = 2 [(.description) = "enum"];
+	repeated uint64 notification_ids = 3;
+	optional bool mark_all_read = 4;
+}
+
+message CSteamNotification_MarkNotificationsViewed_Notification {
+	optional uint64 remote_client_id = 1;
+	optional uint32 target_client_type = 2;
+}
+
+message CSteamVR_AudioSettings_ChangeSettings_Request {
+	optional .CSteamVR_AudioSettings_Settings settings = 1;
+}
+
+message CSteamVR_AudioSettings_RegisterForSettings_Request {
+}
+
+// Used by: common.proto
+message CSteamVR_AudioSettings_Settings {
+	optional .CSteamVR_AudioSettings_Settings_Channel main = 1;
+	optional .CSteamVR_AudioSettings_Settings_Channel audio_mirror = 2;
+	optional .CSteamVR_AudioSettings_Settings_Channel microphone = 3;
+}
+
+// Used by: common.proto
+message CSteamVR_AudioSettings_Settings_Channel {
+	optional bool available = 1;
+	optional bool muted = 2;
+	optional float volume = 3;
+}
+
+message CSteamVR_AudioSettings_SettingsChanged_Notification {
+	optional .CSteamVR_AudioSettings_Settings settings = 1;
+}
+
+message CSteamVR_Header {
+	optional int32 type = 1 [(.description) = "enum"];
+	optional uint32 id = 2;
+}
+
+message CSteamVR_VoiceChat_Active_Notification {
+}
+
+message CSteamVR_VoiceChat_ConfigureVideo_Request {
+	optional bool send = 1;
+	optional bool receive = 2;
+}
+
+message CSteamVR_VoiceChat_ConfigureVideo_Response {
+}
+
+message CSteamVR_VoiceChat_ExitRoomChat_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_room_id = 2;
+}
+
+message CSteamVR_VoiceChat_ExitRoomChat_Response {
+}
+
+message CSteamVR_VoiceChat_GetAvatarUrl_Request {
+	optional fixed64 profile_steamid = 1;
+	optional int32 avatar_type = 2 [(.description) = "enum"];
+}
+
+message CSteamVR_VoiceChat_GetAvatarUrl_Response {
+	optional string profile_avatar_url = 1;
+}
+
+message CSteamVR_VoiceChat_GroupName_Notification {
+	optional string name = 1;
+}
+
+message CSteamVR_VoiceChat_Inactive_Notification {
+}
+
+message CSteamVR_VoiceChat_InitiateRoomChat_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_room_id = 2;
+}
+
+message CSteamVR_VoiceChat_InitiateRoomChat_Response {
+}
+
+message CSteamVR_VoiceChat_NewGroupChatMsgAdded_Notification {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_room_id = 2;
+	optional uint32 sender_accountid = 3;
+	optional uint32 timestamp = 4;
+	optional uint32 ordinal = 5;
+	optional string message = 6;
+}
+
+message CSteamVR_VoiceChat_PerUserGainValue_Notification {
+	optional uint32 accountid = 1;
+	optional bool muted = 2;
+	optional float gain = 3;
+}
+
+message CSteamVR_VoiceChat_PerUserVoiceStatus_Notification {
+	optional uint32 accountid = 1;
+	optional bool mic_muted_locally = 2;
+	optional bool output_muted_locally = 3;
+}
+
+message CSteamVR_VoiceChat_Ready_Notification {
+}
+
+message CSteamVR_VoiceChat_SendGroupChatMessage_Request {
+	optional string message_with_bbcode = 1;
+}
+
+message CSteamVR_VoiceChat_SendGroupChatMessage_Response {
+}
+
+message CSteamVR_VoiceChat_SetDefaultSession_Notification {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_room_id = 2;
+}
+
+message CSteamVR_VoiceChat_SetPerUserMuting_Request {
+	optional uint32 accountid = 1;
+	optional bool muted = 2;
+}
+
+message CSteamVR_VoiceChat_SetPerUserMuting_Response {
+}
+
+message CSteamVR_VoiceChat_SetPerUserVideo_Request {
+	optional uint32 accountid = 1;
+	optional bool receive = 2;
+}
+
+message CSteamVR_VoiceChat_SetPerUserVideo_Response {
+}
+
+message CSteamVR_VRGamepadUI_Message {
+	optional bytes header = 1;
+	optional bytes payload = 2;
+}
+
+message CSteamVR_WebRTC_Active_Notification {
+}
+
+message CSteamVR_WebRTC_CloseDataChannel_Request {
+	optional uint32 channel_id = 1;
+}
+
+message CSteamVR_WebRTC_CloseDataChannel_Response {
+}
+
+message CSteamVR_WebRTC_CreateDataChannel_Request {
+	optional string label = 1;
+	optional bool ordered = 2;
+	optional uint32 max_retransmits = 3;
+	optional uint32 max_packet_life_time = 4;
+}
+
+message CSteamVR_WebRTC_CreateDataChannel_Response {
+	optional uint32 channel_id = 1;
+}
+
+message CSteamVR_WebRTC_DataChannel_Close_Notification {
+	optional uint32 channel_id = 1;
+}
+
+message CSteamVR_WebRTC_DataChannel_Error_Notification {
+	optional uint32 channel_id = 1;
+	optional string reason = 2;
+}
+
+message CSteamVR_WebRTC_DataChannel_Message_Notification {
+	optional uint32 channel_id = 1;
+	optional bytes data = 2;
+}
+
+message CSteamVR_WebRTC_DataChannel_Open_Notification {
+	optional uint32 channel_id = 1;
+}
+
+message CSteamVR_WebRTC_Inactive_Notification {
+}
+
+message CSteamVR_WebRTC_OnDataChannel_Notification {
+	optional fixed64 source_steamid = 1;
+	optional uint32 channel_id = 2;
+	optional string label = 3;
+}
+
+message CStore_MigratePartnerLinkTracking_Notification {
+	optional uint32 accountid = 1;
+	optional uint64 browserid = 2;
+	optional int32 backfill_source = 3 [(.description) = "enum"];
+}
+
+message CStore_ReloadAllReservationPositionMessages_Notification {
+}
+
+// Used by: PartnerStoreBrowse, StoreBrowse, common.proto
+message CStoreBrowse_GetItems_Request {
+	repeated .StoreItemID ids = 1;
+	optional .StoreBrowseContext context = 2;
+	optional .StoreBrowseItemDataRequest data_request = 3;
+}
+
+// Used by: PartnerStoreBrowse, StoreBrowse
+message CStoreBrowse_GetItems_Response {
+	repeated .StoreItem store_items = 1;
+}
+
+// Used by: Store, StoreBrowse, StoreQuery
+message CStorePageFilter {
+	optional .CStorePageFilter_SalePageFilter sale_filter = 1;
+	optional .CStorePageFilter_ContentHubFilter content_hub_filter = 2;
+	repeated .CStorePageFilter_StoreFilter store_filters = 3;
+}
+
+// Used by: Store, StoreBrowse, StoreQuery
+message CStorePageFilter_ContentHubFilter {
+	optional string hub_type = 1;
+	optional string hub_category = 2;
+	optional uint32 hub_tagid = 3;
+	optional int32 discount_filter = 4 [(.description) = "enum"];
+	optional .CStorePageFilter_ContentHubFilter_OptInInfo optin = 5;
+}
+
+// Used by: Store, StoreBrowse, StoreQuery
+message CStorePageFilter_ContentHubFilter_OptInInfo {
+	optional string name = 1;
+	optional uint32 optin_tagid = 2;
+	optional uint32 prune_tagid = 3;
+	optional bool optin_only = 4;
+}
+
+// Used by: Store, StoreBrowse, StoreQuery
+message CStorePageFilter_SalePageFilter {
+	optional uint32 sale_tagid = 1;
+}
+
+// Used by: Store, StoreBrowse, StoreQuery
+message CStorePageFilter_StoreFilter {
+	optional string filter_json = 1;
+	optional string cache_key = 2;
+}
+
+message CStreamingClientConfig {
+	optional int32 quality = 1 [default = 2, (.description) = "enum"];
+	optional uint32 desired_resolution_x = 2;
+	optional uint32 desired_resolution_y = 3;
+	optional uint32 desired_framerate_numerator = 4;
+	optional uint32 desired_framerate_denominator = 5;
+	optional int32 desired_bitrate_kbps = 6 [default = -1];
+	optional bool enable_hardware_decoding = 7 [default = true];
+	optional bool enable_performance_overlay = 8 [default = false];
+	optional bool enable_video_streaming = 9 [default = true];
+	optional bool enable_audio_streaming = 10 [default = true];
+	optional bool enable_input_streaming = 11 [default = true];
+	optional int32 audio_channels = 12 [default = 2];
+	optional bool enable_video_hevc = 13 [default = false];
+	optional bool enable_performance_icons = 14 [default = true];
+	optional bool enable_microphone_streaming = 15 [default = false];
+	optional string controller_overlay_hotkey = 16;
+	optional bool enable_touch_controller_OBSOLETE = 17 [default = false];
+	optional int32 p2p_scope = 19 [default = 0, (.description) = "enum"];
+	optional bool enable_audio_uncompressed = 20 [default = false];
+	optional .CStreamVideoLimit display_limit = 21;
+	optional .CStreamVideoLimit quality_limit = 22;
+	optional .CStreamVideoLimit runtime_limit = 23;
+	repeated .CStreamVideoLimit decoder_limit = 24;
+	optional bool enable_unreliable_fec = 25 [default = false];
+}
+
+message CStreamingServerConfig {
+	optional bool change_desktop_resolution = 1;
+	optional bool dynamically_adjust_resolution_OBSOLETE = 2;
+	optional bool enable_capture_nvfbc = 3;
+	optional bool enable_hardware_encoding_nvidia_OBSOLETE = 4;
+	optional bool enable_hardware_encoding_amd_OBSOLETE = 5;
+	optional bool enable_hardware_encoding_intel_OBSOLETE = 6;
+	optional int32 software_encoding_threads = 7;
+	optional bool enable_traffic_priority = 8;
+	optional int32 host_play_audio = 9 [default = 0, (.description) = "enum"];
+	optional bool enable_hardware_encoding = 10;
+}
+
+// Used by: common.proto
+message CStreamVideoLimit {
+	optional int32 codec = 1 [(.description) = "enum"];
+	optional .CStreamVideoMode mode = 2;
+	optional int32 bitrate_kbps = 3;
+	optional int32 burst_bitrate_kbps = 4;
+}
+
+// Used by: common.proto
+message CStreamVideoMode {
+	optional uint32 width = 1;
+	optional uint32 height = 2;
+	optional uint32 refresh_rate = 3;
+	optional uint32 refresh_rate_numerator = 4;
+	optional uint32 refresh_rate_denominator = 5;
+}
+
+// Used by: Test_TransportError, TransportValidation
+message CTransportValidation_AppendToString_Request {
+	repeated string append_strings = 1;
+}
+
+// Used by: Test_TransportError, TransportValidation
+message CTransportValidation_AppendToString_Response {
+	optional string combined_text = 1;
+}
+
+// Used by: GameRecordingClip, VideoClip
+message CVideo_GameRecordingSegmentInfo {
+	optional uint32 segment_number = 1;
+	optional uint64 segment_size_bytes = 2;
+	optional string component_name = 3;
+	optional string representation_name = 4;
+}
+
+// Used by: common.proto
+message CVirtualMenuKey {
+	optional uint32 key_index = 1;
+	optional bool bound = 2;
+	optional float x = 3;
+	optional float y = 4;
+	optional float width = 5;
+	optional float height = 6;
+	optional string description = 7;
+	optional string label = 8;
+	optional string glyph_path = 9;
+	optional string icon_filename = 10;
+	optional string color_foreground = 11;
+	optional string color_background = 12;
+	optional uint32 quadrants = 13;
+	optional uint32 binding_type = 14;
+}
+
+message CVRGamepadUI_Message_DashboardActionInvoked_Request {
+	optional uint32 action_id = 1;
+	optional bool toggle_value = 2;
+}
+
+message CVRGamepadUI_Message_DashboardActionInvoked_Response {
+}
+
+message CVRGamepadUI_Message_DashboardDesktopWindowClicked_Request {
+	optional uint32 window_id = 1;
+}
+
+message CVRGamepadUI_Message_DashboardDesktopWindowClicked_Response {
+}
+
+message CVRGamepadUI_Message_DashboardTabClicked_Request {
+	optional uint32 tab_id = 1;
+}
+
+message CVRGamepadUI_Message_DashboardTabClicked_Response {
+}
+
+message CVRGamepadUI_Message_Error_Response {
+	optional int32 error = 1 [(.description) = "enum"];
+	optional string description = 2;
+	optional int32 origin = 3 [(.description) = "enum"];
+}
+
+message CVRGamepadUI_Message_Header {
+	optional string name = 1;
+	optional uint32 message_id = 2;
+	optional uint32 response_to_message_id = 3;
+	optional bool is_error_response = 4;
+}
+
+message CVRGamepadUI_Message_HideDashboardPopup_Request {
+	optional uint32 dashboard_popup_request_id = 1;
+}
+
+message CVRGamepadUI_Message_HideDashboardPopup_Response {
+}
+
+message CVRGamepadUI_Message_RemoteVideoStream_Request {
+	optional uint32 source_accountid = 1;
+	optional string video_uniqueid = 2;
+}
+
+message CVRGamepadUI_Message_RemoteVideoStream_Response {
+}
+
+message CVRGamepadUI_Message_ShowDashboardPopup_Request {
+	optional uint32 dashboard_popup_request_id = 1;
+	optional string popup_overlay_key = 2;
+	optional string parent_overlay_key = 3;
+	optional .CVRGamepadUI_Message_ShowDashboardPopup_Request_NormalizedPosition origin_on_parent = 4;
+	optional .CVRGamepadUI_Message_ShowDashboardPopup_Request_NormalizedPosition origin_on_popup = 5;
+	optional .CVRGamepadUI_Message_ShowDashboardPopup_Request_Position offset = 6;
+	optional .CVRGamepadUI_Message_ShowDashboardPopup_Request_Rotation rotation = 7;
+	optional bool inherit_parent_pitch = 8;
+	optional bool inherit_parent_curvature = 9;
+	optional .CVRGamepadUI_Message_ShowDashboardPopup_Request_Rect clip_rect = 10;
+	optional bool interactive = 11;
+	optional bool requires_laser = 12;
+	optional string parent_device_path = 13;
+	optional int32 sort_order = 14 [(.description) = "enum"];
+	optional int32 parent_enum = 15 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CVRGamepadUI_Message_ShowDashboardPopup_Request_NormalizedPosition {
+	optional float x = 1;
+	optional float y = 2;
+}
+
+// Used by: common.proto
+message CVRGamepadUI_Message_ShowDashboardPopup_Request_Position {
+	optional float x_pixels = 1;
+	optional float y_pixels = 2;
+	optional float z_pixels = 3;
+	optional float x_meters = 4;
+	optional float y_meters = 5;
+	optional float z_meters = 6;
+}
+
+// Used by: common.proto
+message CVRGamepadUI_Message_ShowDashboardPopup_Request_Rect {
+	optional float u_min = 1;
+	optional float v_min = 2;
+	optional float u_max = 3;
+	optional float v_max = 4;
+}
+
+// Used by: common.proto
+message CVRGamepadUI_Message_ShowDashboardPopup_Request_Rotation {
+	optional float pitch_degrees = 1;
+	optional float yaw_degrees = 2;
+}
+
+message CVRGamepadUI_Message_ShowDashboardPopup_Response {
+}
+
+// Used by: common.proto
+message CVRGamepadUIShared_DashboardAction {
+	optional uint32 action_id = 1;
+	optional bool visible_in_dashboard_bar = 2;
+	optional bool enabled = 3;
+	optional string display_name = 4;
+	optional .CVRGamepadUIShared_DashboardActionIcon icon = 5;
+	optional .CVRGamepadUIShared_DashboardActionIcon icon_active = 6;
+	optional int32 invocation = 7 [default = 1, (.description) = "enum"];
+	optional bool active = 8;
+	optional int32 special_invocation = 9 [(.description) = "enum"];
+	optional bool visible_in_dashboard_menu = 10;
+}
+
+// Used by: common.proto
+message CVRGamepadUIShared_DashboardActionIcon {
+	optional int32 enum = 1 [(.description) = "enum"];
+}
+
+// Used by: common.proto
+message CVRGamepadUIShared_DashboardTabIcon {
+	optional int32 enum = 1 [(.description) = "enum"];
+	optional uint32 appid = 2;
+	optional string overlay = 3;
+	optional uint32 hwnd = 4;
+}
+
+message CVRGamepadUIShared_PathProperty_DashboardActions {
+	repeated .CVRGamepadUIShared_DashboardAction actions = 1;
+}
+
+message CVRGamepadUIShared_PathProperty_DashboardTabs {
+	repeated .CVRGamepadUIShared_PathProperty_DashboardTabs_Tab tabs = 1;
+	optional uint32 selected_tab_id = 2;
+	optional uint32 vr_settings_tab_id = 3;
+	optional uint32 vr_steam_tab_id = 4;
+}
+
+// Used by: common.proto
+message CVRGamepadUIShared_PathProperty_DashboardTabs_Tab {
+	optional uint32 tab_id = 1;
+	optional bool visible_in_dashboard_bar = 2;
+	optional string display_name = 3;
+	optional .CVRGamepadUIShared_DashboardTabIcon icon = 4;
+	optional bool visible_in_dashboard_menu = 5;
+}
+
+message CVRGamepadUIShared_PathProperty_DesktopWindows {
+	repeated .CVRGamepadUIShared_PathProperty_DesktopWindows_Window windows = 1;
+}
+
+// Used by: common.proto
+message CVRGamepadUIShared_PathProperty_DesktopWindows_Window {
+	optional uint32 window_id = 1;
+	optional uint32 hwnd = 2;
+	optional string title = 3;
+	optional uint32 tab_id = 4;
+}
+
+message CVRGamepadUIShared_PathProperty_PowerOptions {
+	optional bool can_sleep = 1;
+	optional bool can_shutdown = 2;
+	optional bool can_restart_system = 3;
+	optional bool can_exitvr = 4;
+}
+
+// Used by: common.proto
+message EncryptedAppTicket {
+	optional uint32 ticket_version_no = 1;
+	optional uint32 crc_encryptedticket = 2;
+	optional uint32 cb_encrypteduserdata = 3;
+	optional uint32 cb_encrypted_appownershipticket = 4;
+	optional bytes encrypted_ticket = 5;
+}
+
+// Used by: LoyaltyRewards, SaleItemRewards
+message LoyaltyRewardDefinition {
+	optional uint32 appid = 1;
+	optional uint32 defid = 2;
+	optional int32 type = 3 [(.description) = "enum"];
+	optional int32 community_item_class = 4;
+	optional uint32 community_item_type = 5;
+	optional int64 point_cost = 6;
+	optional uint32 timestamp_created = 7;
+	optional uint32 timestamp_updated = 8;
+	optional uint32 timestamp_available = 9;
+	optional int64 quantity = 10;
+	optional string internal_description = 11;
+	optional bool active = 12;
+	optional .LoyaltyRewardDefinition_CommunityItemData community_item_data = 13;
+	optional uint32 timestamp_available_end = 14;
+	repeated uint32 bundle_defids = 15;
+	optional uint32 usable_duration = 16;
+	optional uint32 bundle_discount = 17;
+	optional uint32 timestamp_free_until = 18;
+}
+
+// Used by: LoyaltyRewards, SaleItemRewards
+message LoyaltyRewardDefinition_BadgeData {
+	optional int32 level = 1;
+	optional string image = 2;
+}
+
+// Used by: LoyaltyRewards, SaleItemRewards
+message LoyaltyRewardDefinition_CommunityItemData {
+	optional string item_name = 1;
+	optional string item_title = 2;
+	optional string item_description = 3;
+	optional string item_image_small = 4;
+	optional string item_image_large = 5;
+	optional string item_movie_webm = 6;
+	optional string item_movie_mp4 = 7;
+	optional bool animated = 8;
+	repeated .LoyaltyRewardDefinition_BadgeData badge_data = 9;
+	optional string item_movie_webm_small = 10;
+	optional string item_movie_mp4_small = 11;
+	optional string profile_theme_id = 12;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist, common.proto
+message StoreBrowseContext {
+	optional string language = 1;
+	optional int32 elanguage = 2;
+	optional string country_code = 3;
+	optional int32 steam_realm = 4;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreBrowseFilterFailure {
+	optional int32 filter_failure = 1 [default = 0, (.description) = "enum"];
+	optional bool already_owned = 5;
+	optional bool on_wishlist = 6;
+	optional bool ignored = 7;
+	optional bool not_in_users_language = 10;
+	optional bool not_on_users_platform = 11;
+	optional bool demo_for_owned_game = 12;
+	optional bool dlc_for_unowned_game = 13;
+	optional bool nonpreferred_product_type = 20;
+	repeated uint32 excluded_tagids = 21;
+	repeated int32 excluded_content_descriptorids = 30 [(.description) = "enum"];
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist, common.proto
+message StoreBrowseItemDataRequest {
+	optional bool include_assets = 1;
+	optional bool include_release = 2;
+	optional bool include_platforms = 3;
+	optional bool include_all_purchase_options = 4;
+	optional bool include_screenshots = 5;
+	optional bool include_trailers = 6;
+	optional bool include_ratings = 7;
+	optional int32 include_tag_count = 8;
+	optional bool include_reviews = 9;
+	optional bool include_basic_info = 10;
+	optional bool include_supported_languages = 11;
+	optional bool include_full_description = 12;
+	optional bool include_included_items = 13;
+	optional .StoreBrowseItemDataRequest included_item_data_request = 14;
+	optional bool include_assets_without_overrides = 15;
+	optional bool apply_user_filters = 16;
+	optional bool include_links = 17;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreGameRating {
+	optional string type = 1;
+	optional string rating = 2;
+	repeated string descriptors = 3;
+	optional string interactive_elements = 4;
+	optional int32 required_age = 10;
+	optional bool use_age_gate = 11;
+	optional string image_url = 20;
+	optional string image_target = 21;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem {
+	optional int32 item_type = 1 [(.description) = "enum"];
+	optional uint32 id = 2;
+	optional uint32 success = 3;
+	optional bool visible = 4;
+	optional bool unvailable_for_country_restriction = 5;
+	optional string name = 6;
+	optional string store_url_path = 7;
+	optional uint32 appid = 9;
+	optional int32 type = 10 [(.description) = "enum"];
+	repeated int32 included_types = 11 [(.description) = "enum"];
+	repeated uint32 included_appids = 12;
+	optional bool is_free = 13;
+	optional bool is_early_access = 14;
+	optional .StoreItem_RelatedItems related_items = 15;
+	optional .StoreItem_IncludedItems included_items = 16;
+	repeated int32 content_descriptorids = 20 [(.description) = "enum"];
+	repeated uint32 tagids = 21;
+	optional .StoreItem_Categories categories = 22;
+	optional .StoreItem_Reviews reviews = 23;
+	optional .StoreItem_BasicInfo basic_info = 24;
+	repeated .StoreItem_Tag tags = 25;
+	optional .StoreItem_Assets assets = 30;
+	optional .StoreItem_ReleaseInfo release = 31;
+	optional .StoreItem_Platforms platforms = 32;
+	optional .StoreGameRating game_rating = 33;
+	optional .StoreItem_PurchaseOption best_purchase_option = 40;
+	repeated .StoreItem_PurchaseOption purchase_options = 41;
+	repeated .StoreItem_PurchaseOption accessories = 42;
+	optional .StoreItem_PurchaseOption self_purchase_option = 43;
+	optional .StoreItem_Screenshots screenshots = 50;
+	optional .StoreItem_Trailers trailers = 51;
+	repeated .StoreItem_SupportedLanguage supported_languages = 52;
+	optional string store_url_path_override = 53;
+	optional .StoreItem_FreeWeekend free_weekend = 54;
+	optional bool unlisted = 55;
+	optional uint32 game_count = 56;
+	optional string internal_name = 57;
+	optional string full_description = 58;
+	optional bool is_free_temporarily = 59;
+	optional .StoreItem_Assets assets_without_overrides = 60;
+	optional .StoreBrowseFilterFailure user_filter_failure = 70;
+	repeated .StoreItem_Link links = 71;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Assets {
+	optional string asset_url_format = 1;
+	optional string main_capsule = 2;
+	optional string small_capsule = 3;
+	optional string header = 4;
+	optional string package_header = 5;
+	optional string page_background = 6;
+	optional string hero_capsule = 7;
+	optional string hero_capsule_2x = 8;
+	optional string library_capsule = 9;
+	optional string library_capsule_2x = 10;
+	optional string library_hero = 11;
+	optional string library_hero_2x = 12;
+	optional string community_icon = 13;
+	optional string clan_avatar = 14;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_BasicInfo {
+	optional string short_description = 1;
+	repeated .StoreItem_BasicInfo_CreatorHomeLink publishers = 2;
+	//repeated string publishers = 2;
+	repeated .StoreItem_BasicInfo_CreatorHomeLink developers = 3;
+	//repeated string developers = 3;
+	repeated .StoreItem_BasicInfo_CreatorHomeLink franchises = 4;
+	//repeated string franchises = 4;
+	optional string capsule_headline = 5;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_BasicInfo_CreatorHomeLink {
+	optional string name = 1;
+	optional uint32 creator_clan_account_id = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Categories {
+	repeated uint32 supported_player_categoryids = 2;
+	repeated uint32 feature_categoryids = 3;
+	repeated uint32 controller_categoryids = 4;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_FreeWeekend {
+	optional uint32 start_time = 1;
+	optional uint32 end_time = 2;
+	optional string text = 3;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_IncludedItems {
+	repeated .StoreItem included_apps = 1;
+	repeated .StoreItem included_packages = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Link {
+	optional int32 link_type = 1 [(.description) = "enum"];
+	optional string url = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Platforms {
+	optional bool windows = 1;
+	optional bool mac = 2;
+	optional bool linux = 3;
+	//optional bool steamos_linux = 3;
+	optional .StoreItem_Platforms_VRSupport vr_support = 10;
+	optional int32 steam_deck_compat_category = 11 [(.description) = "enum"];
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Platforms_VRSupport {
+	optional bool vrhmd = 1;
+	optional bool vrhmd_only = 2;
+	optional bool htc_vive = 40;
+	optional bool oculus_rift = 41;
+	optional bool windows_mr = 42;
+	optional bool valve_index = 43;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_PurchaseOption {
+	optional int32 packageid = 1;
+	optional int32 bundleid = 2;
+	optional string purchase_option_name = 3;
+	optional int64 final_price_in_cents = 5;
+	optional int64 original_price_in_cents = 6;
+	optional int64 user_final_price_in_cents = 7;
+	optional string formatted_final_price = 8;
+	optional string formatted_original_price = 9;
+	optional int32 discount_pct = 10;
+	optional int32 user_discount_pct = 11;
+	optional int32 bundle_discount_pct = 12;
+	repeated .StoreItem_PurchaseOption_Discount active_discounts = 20;
+	repeated .StoreItem_PurchaseOption_Discount user_active_discounts = 21;
+	repeated .StoreItem_PurchaseOption_Discount inactive_discounts = 22;
+	optional bool user_can_purchase = 30;
+	optional bool user_can_purchase_as_gift = 31;
+	optional bool is_commercial_license = 40;
+	optional bool should_suppress_discount_pct = 41;
+	optional bool hide_discount_pct_for_compliance = 42 [default = false];
+	optional int32 included_game_count = 43;
+	optional int64 lowest_recent_price_in_cents = 44;
+	optional bool requires_shipping = 45;
+	optional .StoreItem_PurchaseOption_RecurrenceInfo recurrence_info = 46;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_PurchaseOption_Discount {
+	optional int64 discount_amount = 1;
+	optional string discount_description = 2;
+	optional uint32 discount_end_date = 3;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_PurchaseOption_RecurrenceInfo {
+	optional int32 packageid = 1;
+	optional int32 billing_agreement_type = 2;
+	optional int32 renewal_time_unit = 3;
+	optional int32 renewal_time_period = 4;
+	optional int64 renewal_price_in_cents = 5;
+	optional string formatted_renewal_price = 6;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_RelatedItems {
+	optional uint32 parent_appid = 1;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_ReleaseInfo {
+	optional uint32 steam_release_date = 1;
+	optional uint32 original_release_date = 2;
+	optional uint32 original_steam_release_date = 3;
+	optional bool is_coming_soon = 4;
+	optional bool is_preload = 5;
+	optional string custom_release_date_message = 6;
+	optional bool is_abridged_release_date = 7;
+	optional string coming_soon_display = 8;
+	optional bool is_early_access = 10;
+	optional uint32 mac_release_date = 20;
+	optional uint32 linux_release_date = 21;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Reviews {
+	optional .StoreItem_Reviews_StoreReviewSummary summary_filtered = 1;
+	optional .StoreItem_Reviews_StoreReviewSummary summary_unfiltered = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Reviews_StoreReviewSummary {
+	optional uint32 review_count = 1;
+	optional int32 percent_positive = 2;
+	optional int32 review_score = 3 [(.description) = "enum"];
+	optional string review_score_label = 4;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Screenshots {
+	repeated .StoreItem_Screenshots_Screenshot all_ages_screenshots = 2;
+	repeated .StoreItem_Screenshots_Screenshot mature_content_screenshots = 3;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Screenshots_Screenshot {
+	optional string filename = 1;
+	optional int32 ordinal = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_SupportedLanguage {
+	optional int32 elanguage = 1 [default = -1];
+	optional bool supported = 2;
+	optional bool full_audio = 3;
+	optional bool subtitles = 4;
+	optional int32 eadditionallanguage = 5 [default = -1];
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Tag {
+	optional uint32 tagid = 1;
+	optional uint32 weight = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Trailers {
+	repeated .StoreItem_Trailers_Trailer highlights = 1;
+	repeated .StoreItem_Trailers_Trailer other_trailers = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Trailers_Trailer {
+	optional string trailer_name = 1;
+	optional string trailer_url_format = 2;
+	repeated .StoreItem_Trailers_VideoSource trailer_480p = 3;
+	repeated .StoreItem_Trailers_VideoSource trailer_max = 4;
+	repeated .StoreItem_Trailers_VideoSource microtrailer = 5;
+	optional string screenshot_medium = 10;
+	optional string screenshot_full = 11;
+	optional int32 trailer_base_id = 12;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, StoreTopSellers, Wishlist
+message StoreItem_Trailers_VideoSource {
+	optional string filename = 1;
+	optional string type = 2;
+}
+
+// Used by: Checkout, MarketingMessages, PartnerStoreBrowse, SteamCharts, StoreAppSimilarity, StoreBrowse, StoreMarketing, StoreQuery, common.proto
+message StoreItemID {
+	optional uint32 appid = 1;
+	optional uint32 packageid = 2;
+	optional uint32 bundleid = 3;
+	optional uint32 tagid = 4;
+	optional uint32 creatorid = 5;
+	optional uint32 hubcategoryid = 6;
+}
+
+// Used by: Player, PlayerClient, Store, StoreClient
+message UserContentDescriptorPreferences {
+	repeated .UserContentDescriptorPreferences_ContentDescriptor content_descriptors_to_exclude = 1;
+}
+
+// Used by: Player, PlayerClient, Store, StoreClient
+message UserContentDescriptorPreferences_ContentDescriptor {
+	optional uint32 content_descriptorid = 1;
+	optional uint32 timestamp_added = 2;
+}
+

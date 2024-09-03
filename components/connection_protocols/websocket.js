@@ -1,82 +1,31 @@
 const HTTPS = require('https');
-const StdLib = require('@doctormckay/stdlib');
 const WS13 = require('websocket13');
 
 const BaseConnection = require('./base.js');
 
-let g_BootstrapSemaphore = new StdLib.Concurrency.Semaphore();
-let g_LastWebsocketPing = 0;
-let g_PingedServers = [];
+/**
+ * @typedef CmServer
+ * @property {string} endpoint
+ * @property {string} legacy_endpoint
+ * @property {string} type
+ * @property {string} dc
+ * @property {string} realm
+ * @property {string} load
+ * @property {string} wtd_load
+ */
 
 class WebSocketConnection extends BaseConnection {
-	constructor(user) {
+	/**
+	 * @param {SteamUser} user
+	 * @param {CmServer} chosenServer
+	 */
+	constructor(user, chosenServer) {
 		super(user);
 
 		this.connectionType = 'WS';
 
-		// Pick a CM semi-randomly
-		if (!user._cmList || !user._cmList.websocket_servers) {
-			throw new Error("Nothing to connect to: " + (user._cmList ? "no WebSocket server list" : "no CM list"));
-		}
-
-		// Only allow one CM ping to happen at once
-		g_BootstrapSemaphore.wait(async (release) => {
-			if (Date.now() - g_LastWebsocketPing < (1000 * 60 * 30)) {
-				// Last ping was less than 30 minutes ago
-				release();
-				this._chooseAndConnect();
-				return;
-			}
-
-			// Ping 'em
-			let promises = [];
-			let pingResults = [];
-			this.user._cmList.websocket_servers.forEach((addr) => {
-				if (user.options.webCompatibilityMode && !addr.match(/:443$/)) {
-					// In web compatibility mode, we don't want any CMs on ports other than 443
-					return;
-				}
-
-				promises.push(new Promise((resolve, reject) => {
-					this._pingCM(addr, (err, result) => {
-						if (!err && result) {
-							pingResults.push(result);
-						}
-
-						resolve();
-					})
-				}));
-			});
-
-			await Promise.all(promises);
-			release(); // pinging is done
-
-			if (pingResults.length < 20) {
-				// Less than 20 responded? Assume Steam is down and just pick a random one.
-				this._debug(`Only ${pingResults.length} CMs responded to ping; choosing a random one`, true);
-				this._chooseAndConnect();
-				return;
-			}
-
-			pingResults.sort((a, b) => ((a.load * 2) + a.latency) < ((b.load * 2) + b.latency) ? -1 : 1);
-			g_PingedServers = pingResults.map(cm => cm.addr).slice(0, 20); // save the top 20, we'll randomly pick from there
-			g_LastWebsocketPing = Date.now();
-			this._chooseAndConnect();
-		});
-	}
-
-	/**
-	 * Choose a CM, create a WebSocket, connect to it, and attach handlers.
-	 * @private
-	 */
-	_chooseAndConnect() {
-		let servers = g_PingedServers;
-		if (servers.length == 0) {
-			servers = this.user._cmList.websocket_servers;
-		}
-
-		let addr = servers[Math.floor(Math.random() * servers.length)];
-		this._debug(`Randomly chose WebSocket CM ${addr}`);
+		let addr = chosenServer.endpoint;
+		this._debug(`Connecting to WebSocket CM ${addr}`);
 		this.stream = new WS13.WebSocket(`wss://${addr}/cmsocket/`, {
 			pingInterval: 30000,
 			proxyTimeout: this.user.options.proxyTimeout,
@@ -92,13 +41,13 @@ class WebSocketConnection extends BaseConnection {
 		this.stream.on('debug', msg => this._debug(msg, true));
 		this.stream.on('message', this._readMessage.bind(this));
 
-		this.stream.on('disconnected', (code, reason) => {
+		this.stream.on('disconnected', (code, reason, initiatedByUs) => {
 			if (this._disconnected) {
 				return;
 			}
 
 			this._disconnected = true;
-			this._debug('WebSocket disconnected with code ' + code + ' and reason: ' + reason);
+			this._debug(`WebSocket closed by ${initiatedByUs ? 'us' : 'remote'} with code ${code} and reason "${reason}"`);
 			this.user._handleConnectionClose(this);
 		});
 
@@ -112,6 +61,7 @@ class WebSocketConnection extends BaseConnection {
 
 			if (err.proxyConnecting || err.constructor.name == 'SocksClientError') {
 				// This error happened while connecting to the proxy
+				this.user._cleanupClosedConnection();
 				this.user.emit('error', err);
 			} else {
 				this.user._handleConnectionClose(this);

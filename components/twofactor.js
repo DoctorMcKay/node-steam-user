@@ -13,10 +13,10 @@ class SteamUserTwoFactor extends SteamUserTrading {
 		return StdLib.Promises.timeoutCallbackPromise(15000, null, callback, (resolve, reject) => {
 			this._sendUnified('TwoFactor.AddAuthenticator#1', {
 				steamid: this.steamID.getSteamID64(),
-				authenticator_time: Math.floor(Date.now() / 1000),
 				authenticator_type: 1,
 				device_identifier: SteamTotp.getDeviceID(this.steamID),
-				sms_phone_id: '1'
+				sms_phone_id: '1',
+				version: 2
 			}, (body) => {
 				body.server_time = typeof body.server_time === 'string' ? parseInt(body.server_time, 10) : (body.server_time || null);
 				body.shared_secret = body.shared_secret ? body.shared_secret.toString('base64') : null;
@@ -25,7 +25,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 
 				// Delete all the null keys
 				for (let i in body) {
-					if (body.hasOwnProperty(i) && body[i] === null) {
+					if (Object.hasOwnProperty.call(body, i) && body[i] === null) {
 						delete body[i];
 					}
 				}
@@ -37,7 +37,7 @@ class SteamUserTwoFactor extends SteamUserTrading {
 
 	/**
 	 * Finalize the process of enabling TOTP two-factor authentication
-	 * @param {Buffer} secret - Your shared secret
+	 * @param {Buffer|string} secret - Your shared secret
 	 * @param {string} activationCode - The activation code you got in your email
 	 * @param {function} [callback] - Called with a single Error argument, or null on success
 	 * @return {Promise}
@@ -77,6 +77,10 @@ class SteamUserTwoFactor extends SteamUserTrading {
 					} else if (body.want_more) {
 						attemptsLeft--;
 						diff += 30;
+
+						if (attemptsLeft <= 0) {
+							return reject(new Error('Failed to finalize adding authenticator after 30 attempts'));
+						}
 
 						finalize();
 					} else {

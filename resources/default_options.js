@@ -12,7 +12,7 @@ const EMachineIDType = require('./EMachineIDType.js');
  * @property {boolean} [picsCacheAll=false]
  * @property {number} [changelistUpdateInterval=60000]
  * @property {PackageFilter|PackageFilterFunction|null} [ownershipFilter=null]
- * @property {object} [additionalHeaders={}}
+ * @property {object} [additionalHeaders={}]
  * @property {string|null} [localAddress=null]
  * @property {number|null} [localPort=null]
  * @property {string|null} [httpProxy=null]
@@ -21,6 +21,7 @@ const EMachineIDType = require('./EMachineIDType.js');
  * @property {string} [language='english']
  * @property {boolean} [webCompatibilityMode=false]
  * @property {boolean} [saveAppTickets=true]
+ * @property {boolean} [renewRefreshTokens=false]
  */
 
 module.exports = {
@@ -39,5 +40,6 @@ module.exports = {
 	protocol: EConnectionProtocol.Auto,
 	language: 'english',
 	webCompatibilityMode: false,
-	saveAppTickets: true
+	saveAppTickets: true,
+	renewRefreshTokens: false
 };

@@ -1,0 +1,57 @@
+name: Lint and Syntax Check
+
+on:
+    push:
+        branches:
+            # Only run on branch push, not tag push
+            - '**'
+    pull_request:
+
+jobs:
+    lint:
+        # Run for external PRs, but not on our own internal PRs as they'll be run by the push to the branch.
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'DoctorMcKay/node-steam-user'
+
+        uses: DoctorMcKay/github-workflows/.github/workflows/eslint.yml@master
+        with:
+            node-version: 14.x
+
+    syntax-check:
+        # Run for external PRs, but not on our own internal PRs as they'll be run by the push to the branch.
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'DoctorMcKay/node-steam-user'
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [ 14.x, 16.x, 18.x, 20.x ]
+
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    fetch-depth: 1
+
+            -   name: Use Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v4
+                with:
+                    node-version: ${{ matrix.node-version }}
+
+            -   name: Cache dependencies
+                uses: actions/cache@v4
+                with:
+                    path: node_modules
+                    key: ${{ runner.os }}-node_modules
+
+            -   name: npm install
+                run: npm install
+
+            -   name: Syntax check
+                run: node index.js
+
+    publish:
+        needs: [ lint, syntax-check ]
+        if: success() && github.event.ref == 'refs/heads/master' && contains(github.event.head_commit.message, '#npm-publish')
+        uses: DoctorMcKay/github-workflows/.github/workflows/npm-publish.yml@master
+        with:
+            node-version: 14.x
+        secrets:
+            npm-access-token: ${{ secrets.NPM_ACCESS_TOKEN }}

@@ -26,7 +26,7 @@ class SteamUserUtility extends SteamUserMessages {
 		}
 
 		return (data.prepend || '') + amountString + (data.append || '');
-	};
+	}
 
 	/**
 	 * Same as emit() except the second argument (the first provided to the callback function) is a SteamID and will be appended to the event name with a hash.
@@ -36,7 +36,7 @@ class SteamUserUtility extends SteamUserMessages {
 		this.emit.apply(this, arguments);
 		arguments[0] += '#' + arguments[1].getSteamID64();
 		this.emit.apply(this, arguments);
-	};
+	}
 }
 
 module.exports = SteamUserUtility;

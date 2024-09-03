@@ -1,0 +1,70 @@
+import "steammessages_base.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+enum ESteamNotificationType {
+	k_ESteamNotificationType_Invalid = 0;
+	k_ESteamNotificationType_Test = 1;
+	k_ESteamNotificationType_Gift = 2;
+	k_ESteamNotificationType_Comment = 3;
+	k_ESteamNotificationType_Item = 4;
+	k_ESteamNotificationType_FriendInvite = 5;
+	k_ESteamNotificationType_MajorSale = 6;
+	k_ESteamNotificationType_PreloadAvailable = 7;
+	k_ESteamNotificationType_Wishlist = 8;
+	k_ESteamNotificationType_TradeOffer = 9;
+	k_ESteamNotificationType_General = 10;
+	k_ESteamNotificationType_HelpRequest = 11;
+	k_ESteamNotificationType_AsyncGame = 12;
+	k_ESteamNotificationType_ChatMsg = 13;
+	k_ESteamNotificationType_ModeratorMsg = 14;
+	k_ESteamNotificationType_ParentalFeatureAccessRequest = 15;
+	k_ESteamNotificationType_FamilyInvite = 16;
+	k_ESteamNotificationType_FamilyPurchaseRequest = 17;
+	k_ESteamNotificationType_ParentalPlaytimeRequest = 18;
+	k_ESteamNotificationType_FamilyPurchaseRequestResponse = 19;
+	k_ESteamNotificationType_ParentalFeatureAccessResponse = 20;
+	k_ESteamNotificationType_ParentalPlaytimeResponse = 21;
+	k_ESteamNotificationType_RequestedGameAdded = 22;
+	k_ESteamNotificationType_SendToPhone = 23;
+	k_ESteamNotificationType_ClipDownloaded = 24;
+	k_ESteamNotificationType_2FAPrompt = 25;
+	k_ESteamNotificationType_MobileConfirmation = 26;
+	k_ESteamNotificationType_PartnerEvent = 27;
+}
+
+message SteamNotificationData {
+	optional uint64 notification_id = 1;
+	optional uint32 notification_targets = 2;
+	optional .ESteamNotificationType notification_type = 3 [default = k_ESteamNotificationType_Invalid];
+	optional string body_data = 4;
+	optional bool read = 7;
+	optional uint32 timestamp = 8;
+	optional bool hidden = 9;
+	optional uint32 expiry = 10;
+	optional uint32 viewed = 11;
+}
+
+message CSteamNotification_NotificationsReceived_Notification {
+	repeated .SteamNotificationData notifications = 1;
+	optional uint32 pending_gift_count = 2;
+	optional uint32 pending_friend_count = 3;
+	optional uint32 pending_family_invite_count = 4;
+}
+
+message SteamNotificationPreference {
+	optional .ESteamNotificationType notification_type = 1 [default = k_ESteamNotificationType_Invalid];
+	optional uint32 notification_targets = 2;
+}
+
+message CSteamNotification_PreferencesUpdated_Notification {
+	repeated .SteamNotificationPreference preferences = 1;
+}
+
+service SteamNotificationClient {
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
+	rpc NotificationsReceived (.CSteamNotification_NotificationsReceived_Notification) returns (.NoResponse);
+	rpc PreferencesUpdated (.CSteamNotification_PreferencesUpdated_Notification) returns (.NoResponse);
+}

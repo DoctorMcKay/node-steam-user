@@ -36,7 +36,7 @@ class SteamUserPublishedFiles extends SteamUserNotifications {
 					}
 
 					for (let i in item) {
-						if (item.hasOwnProperty(i) && item[i] && typeof item[i] === 'object' && item[i].constructor.name == 'Long') {
+						if (Object.hasOwnProperty.call(item, i) && item[i] && typeof item[i] === 'object' && item[i].constructor.name == 'Long') {
 							item[i] = item[i].toString();
 						}
 					}

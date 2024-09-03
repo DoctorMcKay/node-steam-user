@@ -55,7 +55,7 @@ exports.parse = function(buffer) {
 
 	(manifest.files || []).forEach(function process(file) {
 		for (let i in file) {
-			if (!file.hasOwnProperty(i)) {
+			if (!Object.hasOwnProperty.call(file, i)) {
 				continue;
 			}
 
@@ -73,7 +73,7 @@ exports.parse = function(buffer) {
 
 	if (meta) {
 		for (let i in meta) {
-			if (meta.hasOwnProperty(i)) {
+			if (Object.hasOwnProperty.call(meta, i)) {
 				manifest[i] = meta[i] instanceof ByteBuffer.Long ? meta[i].toString() : meta[i];
 			}
 		}

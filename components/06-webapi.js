@@ -1,6 +1,5 @@
-const HTTPS = require('https');
+const {HttpClient} = require('@doctormckay/stdlib/http');
 const VDF = require('kvparser');
-const Zlib = require('zlib');
 
 const SteamUserFileStorage = require('./05-filestorage.js');
 
@@ -14,84 +13,69 @@ class SteamUserWebAPI extends SteamUserFileStorage {
 	 * @param {string} method
 	 * @param {number} version
 	 * @param {object} [data]
+	 * @param {number} [cacheSeconds]
 	 * @returns {Promise}
 	 * @protected
 	 */
-	async _apiRequest(httpMethod, iface, method, version, data) {
-		return new Promise((resolve, reject) => {
-			data = data || {};
-			httpMethod = httpMethod.toUpperCase(); // just in case
+	async _apiRequest(httpMethod, iface, method, version, data, cacheSeconds) {
+		data = data || {};
+		httpMethod = httpMethod.toUpperCase(); // just in case
 
-			// Pad the version with zeroes to make it 4 digits long, because Valve
-			version = version.toString();
-			while (version.length < 4) {
-				version = '0' + version;
-			}
+		// Pad the version with zeroes to make it 4 digits long, because Valve
+		version = version.toString();
+		while (version.length < 4) {
+			version = '0' + version;
+		}
 
-			data.format = 'vdf'; // for parity with the Steam client
+		data.format = 'vdf'; // for parity with the Steam client
 
-			let query = buildQueryString(data);
-			let headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
-			let path = `/${iface}/${method}/v${version}/`;
-
-			if (httpMethod == 'POST') {
-				headers['Content-Type'] = 'application/x-www-form-urlencoded';
-				headers['Content-Length'] = Buffer.byteLength(query);
-			} else {
-				path += '?' + query;
-			}
-
-			let options = {
-				hostname: HOSTNAME,
-				path,
-				method: httpMethod,
-				headers
-			};
-
-			if (this.options.localAddress) {
-				options.localAddress = this.options.localAddress;
-			}
-
-			options.agent = this._getProxyAgent();
-
-			let req = HTTPS.request(options, (res) => {
-				this.emit('debug', `API ${options.method} request to https://${HOSTNAME}${path}: ${res.statusCode}`);
-
-				if (res.statusCode != 200) {
-					res.on('data', () => {
-					}); // discard the response
-					return reject(new Error('HTTP error ' + res.statusCode));
-				}
-
-				let responseData = '';
-
-				let stream = res;
-				if (res.headers['content-encoding'] && res.headers['content-encoding'].toLowerCase() == 'gzip') {
-					stream = Zlib.createGunzip();
-					res.pipe(stream);
-				}
-
-				stream.on('data', function(data) {
-					responseData += data;
-				});
-
-				stream.on('end', function() {
-					try {
-						responseData = VDF.parse(responseData);
-					} catch (ex) {
-						return reject(ex);
-					}
-
-					resolve(responseData);
-				});
-			});
-
-			req.on('error', function(err) {
-				reject(err);
-			});
-
-			req.end(httpMethod == 'POST' ? query : null);
+		let client = this._httpClient || new HttpClient({
+			userAgent: USER_AGENT,
+			httpsAgent: this._getProxyAgent(),
+			localAddress: this.options.localAddress,
+			defaultHeaders: Object.assign(getDefaultHeaders(), this.options.additionalHeaders),
+			defaultTimeout: 5000,
+			gzip: true
 		});
+		this._httpClient = client;
+
+		let url = `https://${HOSTNAME}/${iface}/${method}/v${version}/`;
+
+		let cacheKey = `API_${httpMethod}_${url}`;
+		let cacheValue;
+		if (cacheSeconds && (cacheValue = this._ttlCache.get(cacheKey))) {
+			this.emit('debug', `[WebAPI] Using cached value for ${cacheKey}`);
+			return cacheValue;
+		}
+
+		let headers = {};
+		let body = null;
+		if (httpMethod == 'GET') {
+			url += `?${buildQueryString(data)}`;
+		} else {
+			headers['Content-Type'] = 'application/x-www-form-urlencoded';
+			body = buildQueryString(data);
+		}
+
+		let res = await client.request({
+			method: httpMethod,
+			url,
+			body
+		});
+
+		this.emit('debug', `API ${httpMethod} request to ${url}: ${res.statusCode}`);
+
+		if (res.statusCode != 200) {
+			throw new Error(`HTTP error ${res.statusCode}`);
+		}
+
+		let responseData = VDF.parse(res.textBody);
+
+		if (cacheSeconds) {
+			this._ttlCache.add(cacheKey, responseData, 1000 * cacheSeconds);
+		}
+
+		return responseData;
 	}
 }
 
@@ -100,7 +84,7 @@ function buildQueryString(data) {
 	let str = '';
 
 	for (let i in data) {
-		if (!data.hasOwnProperty(i)) {
+		if (!Object.hasOwnProperty.call(data, i)) {
 			continue;
 		}
 
@@ -120,8 +104,7 @@ function getDefaultHeaders() {
 	return {
 		Accept: 'text/html,*/*;q=0.9',
 		'Accept-Encoding': 'gzip,identity,*;q=0',
-		'Accept-Charset': 'ISO-8859-1,utf-8,*;q=0.7',
-		'User-Agent': USER_AGENT
+		'Accept-Charset': 'ISO-8859-1,utf-8,*;q=0.7'
 	};
 }
 

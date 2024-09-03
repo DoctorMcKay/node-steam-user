@@ -101,7 +101,7 @@ class SteamUser extends SteamUserTwoFactor {
 		this._initialized = true;
 	}
 
-	_initProperties() {
+	_initProperties(isConnecting) {
 		// Account info
 		this.limitations = null;
 		this.vac = null;
@@ -137,16 +137,23 @@ class SteamUser extends SteamUserTwoFactor {
 		this._sessionID = 0;
 		this._currentJobID = 0;
 		this._currentGCJobID = 0;
-		this._jobs = {};
-		this._jobsGC = {};
-		this._jobCleanupTimers = [];
+		this._jobs = new StdLib.DataStructures.TTLCache(1000 * 60 * 2); // job callbacks are cleaned up after 2 minutes
+		this._jobsGC = new StdLib.DataStructures.TTLCache(1000 * 60 * 2);
 		this._richPresenceLocalization = {};
 		this._incomingMessageQueue = [];
 		this._useMessageQueue = false; // we only use the message queue while we're processing a multi message
+		this._ttlCache = new StdLib.DataStructures.TTLCache(1000 * 60 * 5); // default 5 minutes
+		this._getCmListAttempts = 0;
 
-		if (!this._machineAuthTokenSetByDeprecatedSetSentry) {
-			delete this._machineAuthToken;
-		}
+		this._resetAllExponentialBackoffs(isConnecting);
+
+		delete this._machineAuthToken;
+		delete this._shouldAttemptRefreshTokenRenewal;
+		delete this._loginSession;
+		delete this._connectionClosed;
+
+		clearTimeout(this._reconnectForCloseDuringAuthTimeout);
+		delete this._reconnectForCloseDuringAuthTimeout;
 	}
 
 	get packageName() {

@@ -1,6 +1,6 @@
 {
 	"name": "steam-user",
-	"version": "4.29.3",
+	"version": "5.2.0",
 	"description": "Steam client for Individual and AnonUser Steam account types",
 	"keywords": [
 		"steam",
@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@bbob/parser": "^2.2.0",
-		"@doctormckay/stdlib": "^1.16.0",
+		"@doctormckay/stdlib": "^2.9.1",
 		"@doctormckay/steam-crypto": "^1.2.0",
 		"adm-zip": "^0.5.10",
 		"binarykvparser": "^2.2.0",
@@ -31,25 +31,26 @@
 		"file-manager": "^2.0.1",
 		"kvparser": "^1.0.1",
 		"lzma": "^2.3.2",
-		"protobufjs": "^6.11.3",
+		"protobufjs": "^7.2.4",
 		"socks-proxy-agent": "^7.0.0",
 		"steam-appticket": "^1.0.1",
-		"steam-session": "^1.3.3",
+		"steam-session": "^1.8.0",
 		"steam-totp": "^2.0.1",
-		"steamid": "^1.1.0",
-		"websocket13": "^3.0.1"
+		"steamid": "^2.0.0",
+		"websocket13": "^4.0.0"
 	},
 	"devDependencies": {
+		"eslint": "^8.57.0",
+		"protobufjs-cli": "^1.1.3",
 		"steamcommunity": "^3.39.0",
 		"wtfnode": "^0.8.4"
 	},
 	"scripts": {
-		"basicbot": "node examples/basicbot.js",
-		"prepublishOnly": "node scripts/prepublish.js",
 		"generate-enums": "node scripts/generate-enums.js",
-		"generate-protos": "node scripts/generate-protos.js"
+		"generate-protos": "node scripts/generate-protos.js",
+		"lint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
 	},
 	"engines": {
-		"node": ">=8.0.0"
+		"node": ">=14.0.0"
 	}
 }

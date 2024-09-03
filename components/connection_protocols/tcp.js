@@ -4,29 +4,36 @@ const SteamCrypto = require('@doctormckay/steam-crypto');
 const {URL} = require('url');
 
 const BaseConnection = require('./base.js');
+const EResult = require('../../enums/EResult');
 
 const MAGIC = 'VT01';
+
+/**
+ * @typedef CmServer
+ * @property {string} endpoint
+ * @property {string} legacy_endpoint
+ * @property {string} type
+ * @property {string} dc
+ * @property {string} realm
+ * @property {string} load
+ * @property {string} wtd_load
+ */
 
 class TCPConnection extends BaseConnection {
 	/**
 	 * Create a new TCP connection, and connect
 	 * @param {SteamUser} user
+	 * @param {CmServer} chosenServer
 	 * @constructor
 	 */
-	constructor(user) {
+	constructor(user, chosenServer) {
 		super(user);
 
 		this.connectionType = 'TCP';
 		this.sessionKey = null;
 
-		// Pick a CM randomly
-		if (!user._cmList || !user._cmList.tcp_servers) {
-			throw new Error("Nothing to connect to: " + (user._cmList ? "no TCP server list" : "no CM list"));
-		}
-
-		let tcpCm = user._cmList.tcp_servers[Math.floor(Math.random() * user._cmList.tcp_servers.length)];
-		this._debug('Connecting to TCP CM: ' + tcpCm);
-		let cmParts = tcpCm.split(':');
+		this._debug('Connecting to TCP CM: ' + chosenServer.endpoint);
+		let cmParts = chosenServer.endpoint.split(':');
 		let cmHost = cmParts[0];
 		let cmPort = parseInt(cmParts[1], 10);
 
@@ -38,10 +45,10 @@ class TCPConnection extends BaseConnection {
 				port: url.port,
 
 				method: 'CONNECT',
-				path: tcpCm,
+				path: chosenServer.endpoint,
 				localAddress: user.options.localAddress,
 				localPort: user.options.localPort
-			}
+			};
 			if (url.username) {
 				prox.headers = {
 					'Proxy-Authorization': `Basic ${(Buffer.from(`${url.username}:${url.password || ''}`, 'utf8')).toString('base64')}`
@@ -63,7 +70,7 @@ class TCPConnection extends BaseConnection {
 				req.setTimeout(0); // disable timeout
 
 				if (res.statusCode != 200) {
-					this.user.emit('error', new Error('HTTP CONNECT ' + res.statusCode + ' ' + res.statusMessage));
+					this._fatal(new Error(`Proxy HTTP CONNECT ${res.statusCode} ${res.statusMessage}`));
 					return;
 				}
 
@@ -73,12 +80,14 @@ class TCPConnection extends BaseConnection {
 
 			req.on('timeout', () => {
 				connectionEstablished = true;
-				this.user.emit('error', new Error('Proxy connection timed out'));
+				this.user._cleanupClosedConnection();
+				this._fatal(new Error('Proxy connection timed out'));
 			});
 
 			req.on('error', (err) => {
 				connectionEstablished = true;
-				this.user.emit('error', err);
+				this.user._cleanupClosedConnection();
+				this._fatal(err);
 			});
 		} else {
 			let socket = new Socket();
@@ -152,11 +161,22 @@ class TCPConnection extends BaseConnection {
 			data = SteamCrypto.symmetricEncryptWithHmacIv(data, this.sessionKey);
 		}
 
+		if (!this.stream) {
+			this._debug('Tried to send message, but there is no stream');
+			return;
+		}
+
 		let buf = Buffer.alloc(4 + 4 + data.length);
 		buf.writeUInt32LE(data.length, 0);
 		buf.write(MAGIC, 4);
 		data.copy(buf, 8);
-		this.stream.write(buf);
+
+		try {
+			this.stream.write(buf);
+		} catch (error) {
+			this._debug('Error writing to socket: ' + error.message);
+			this._fatal(error);
+		}
 	}
 
 	/**
@@ -174,14 +194,25 @@ class TCPConnection extends BaseConnection {
 			this._messageLength = header.readUInt32LE(0);
 			if (header.slice(4).toString('ascii') != MAGIC) {
 				// We definitely need to tear down the connection here
-				this.user.emit('error', new Error('Connection out of sync'));
-				// noinspection JSAccessibilityCheck
-				this.user._disconnect(true);
+				this._fatal(new Error('Connection out of sync'));
 				return;
 			}
 		}
 
-		let message = this.stream.read(this._messageLength);
+		if (!this.stream) {
+			this._debug('Tried to read message, but there is no stream');
+			return;
+		}
+
+		let message;
+		try {
+			message = this.stream.read(this._messageLength);
+		} catch (error) {
+			this._debug('Error reading from socket: ' + error.message);
+			this._fatal(error);
+			return;
+		}
+
 		if (!message) {
 			this._debug('Got incomplete message; expecting ' + this._messageLength + ' more bytes');
 			return;
@@ -192,9 +223,7 @@ class TCPConnection extends BaseConnection {
 			try {
 				message = SteamCrypto.symmetricDecrypt(message, this.sessionKey, true);
 			} catch (ex) {
-				this.user.emit('error', new Error('Encrypted message authentication failed'));
-				// noinspection JSAccessibilityCheck
-				this.user._disconnect(true);
+				this._fatal(new Error('Encrypted message authentication failed'));
 				return;
 			}
 		}
@@ -202,6 +231,21 @@ class TCPConnection extends BaseConnection {
 		// noinspection JSAccessibilityCheck
 		this.user._handleNetMessage(message, this);
 		this._readMessage();
+	}
+
+	/**
+	 * There was a fatal transport error
+	 * @param {Error} err
+	 * @private
+	 */
+	_fatal(err) {
+		if (!err.message.startsWith('Proxy')) {
+			err.eresult = EResult.NoConnection;
+		}
+
+		this.user.emit('error', err);
+		// noinspection JSAccessibilityCheck
+		this.user._disconnect(true);
 	}
 }
 

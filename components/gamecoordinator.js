@@ -23,10 +23,7 @@ class SteamUserGameCoordinator extends SteamUserFriends {
 		let sourceJobId = JOBID_NONE;
 		if (typeof callback === 'function') {
 			sourceJobId = ++this._currentGCJobID;
-			this._jobsGC[sourceJobId] = callback;
-
-			// Clean up job callbacks after 2 minutes
-			this._jobCleanupTimers.push(setTimeout(() => delete this._jobsGC[sourceJobId], 1000 * 60 * 2));
+			this._jobsGC.add(sourceJobId.toString(), callback);
 		}
 
 		this.emit('debug', `Sending ${appid} GC message ${msgType}`);
@@ -80,8 +77,9 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientFromGC, function(body) {
 
 	this.emit('debug', `Received ${body.appid} GC message ${msgType}`);
 
-	if (targetJobID && this._jobsGC[targetJobID]) {
-		this._jobsGC[targetJobID].call(this, body.appid, msgType, payload);
+	let jobCallback = this._jobsGC.get(targetJobID.toString());
+	if (targetJobID && jobCallback) {
+		jobCallback.call(this, body.appid, msgType, payload);
 	} else {
 		this.emit('receivedFromGC', body.appid, msgType, payload);
 		this.emit('recievedFromGC', body.appid, msgType, payload); // make typos work because why not
