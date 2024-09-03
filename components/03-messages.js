@@ -735,10 +735,17 @@ class SteamUserMessages extends SteamUserConnection {
 
 	_getLoginSession() {
 		if (!this._loginSession) {
-			this._loginSession = new LoginSession(EAuthTokenPlatformType.SteamClient, {
+			let options = {
 				transport: new CMAuthTransport(this),
 				machineId: this._logOnDetails?.machine_id
-			});
+			};
+
+			let customMachineName = this._logOnDetails?.machine_name || '';
+			if (customMachineName.length > 0) {
+				options.machineFriendlyName = customMachineName;
+			}
+
+			this._loginSession = new LoginSession(EAuthTokenPlatformType.SteamClient, options);
 		}
 
 		return this._loginSession;
