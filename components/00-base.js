@@ -8,6 +8,11 @@ const HandlerManager = require('./classes/HandlerManager.js');
  * @property {number} lastTimeout
  */
 
+// Important backoffs will be logged to debug rather than debug-verbose
+const IMPORTANT_BACKOFFS = [
+	'logOn'
+];
+
 /**
  * I admit, this is a pretty unorthodox pattern, but this is the only way I've found to define a class across multiple
  * files while also making sure that IDE intellisense can figure out which methods belong to the final class.
@@ -19,23 +24,29 @@ class SteamUserBase extends EventEmitter {
 	_exponentialBackoffs = {};
 
 	/**
+	 * @param {boolean} [isConnecting=false]
 	 * @protected
 	 */
-	_resetAllExponentialBackoffs() {
+	_resetAllExponentialBackoffs(isConnecting) {
 		for (let i in this._exponentialBackoffs) {
-			this._resetExponentialBackoff(i);
+			// Don't clear logOn's backoff timer if we're currently connecting
+			this._resetExponentialBackoff(i, isConnecting && i == 'logOn');
 		}
 	}
 
 	/**
 	 * @param {string} backoffName
+	 * @param {boolean} [dontClearBackoffTime=false]
 	 * @protected
 	 */
-	_resetExponentialBackoff(backoffName) {
+	_resetExponentialBackoff(backoffName, dontClearBackoffTime) {
 		if (this._exponentialBackoffs[backoffName]) {
-			this.emit('debug-verbose', `[EBO] Resetting exponential backoff "${backoffName}"`);
+			this.emit('debug-verbose', `[EBO] ${dontClearBackoffTime ? 'Soft-resetting' : 'Resetting'} exponential backoff "${backoffName}"`);
 			clearTimeout(this._exponentialBackoffs[backoffName].timeout);
-			delete this._exponentialBackoffs[backoffName];
+
+			if (!dontClearBackoffTime) {
+				delete this._exponentialBackoffs[backoffName];
+			}
 		}
 	}
 
@@ -55,7 +66,8 @@ class SteamUserBase extends EventEmitter {
 			timeout = Math.max(timeout, minimumTimeout);
 			timeout = Math.min(timeout, maximumTimeout);
 
-			this.emit('debug-verbose', `[EBO] Queueing exponential backoff "${backoffName}" with timeout ${timeout}`);
+			let isImportant = IMPORTANT_BACKOFFS.includes(backoffName);
+			this.emit(isImportant ? 'debug' : 'debug-verbose', `[EBO] Queueing exponential backoff "${backoffName}" with timeout ${timeout}`);
 			this._exponentialBackoffs[backoffName] = {
 				lastTimeout: timeout,
 				timeout: setTimeout(resolve, timeout)

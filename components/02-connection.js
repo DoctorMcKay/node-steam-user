@@ -58,7 +58,7 @@ class SteamUserConnection extends SteamUserEnums {
 		this._connecting = false;
 		this._loggingOff = false;
 
-		this._cancelReconnectTimers();
+		this._cancelReconnectTimers(true);
 		clearInterval(this._heartbeatInterval);
 
 		this._connectionClosed = true;
@@ -68,9 +68,8 @@ class SteamUserConnection extends SteamUserEnums {
 		this._clearChangelistUpdateTimer();
 	}
 
-	_cancelReconnectTimers() {
-		clearTimeout(this._logonTimeout);
-		clearTimeout(this._logonMsgTimeout);
+	_cancelReconnectTimers(dontClearBackoffTime) {
+		this._resetExponentialBackoff('logOn', dontClearBackoffTime);
 		clearTimeout(this._reconnectForCloseDuringAuthTimeout);
 	}
 

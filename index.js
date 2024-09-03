@@ -89,7 +89,7 @@ class SteamUser extends SteamUserTwoFactor {
 		this._initialized = true;
 	}
 
-	_initProperties() {
+	_initProperties(isConnecting) {
 		// Account info
 		this.limitations = null;
 		this.vac = null;
@@ -133,7 +133,7 @@ class SteamUser extends SteamUserTwoFactor {
 		this._ttlCache = new StdLib.DataStructures.TTLCache(1000 * 60 * 5); // default 5 minutes
 		this._getCmListAttempts = 0;
 
-		this._resetAllExponentialBackoffs();
+		this._resetAllExponentialBackoffs(isConnecting);
 
 		delete this._machineAuthToken;
 		delete this._shouldAttemptRefreshTokenRenewal;

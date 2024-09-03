@@ -57,8 +57,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			}
 
 			this.steamID = null;
-			this._cancelReconnectTimers();
-			this._initProperties();
+			this._cancelReconnectTimers(true);
+			this._initProperties(true);
 
 			this._connecting = true;
 			this._loggingOff = false;
@@ -494,10 +494,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 	 * @private
 	 */
 	_enqueueLogonAttempt() {
-		let timer = this._logonTimeoutDuration || 1000;
-		this._logonTimeoutDuration = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
-		this.emit('debug', `Enqueueing login attempt in ${timer} ms`);
-		this._logonTimeout = setTimeout(() => {
+		this._exponentialBackoff('logOn', 1000, 60000).then(() => {
 			if (this.steamID || this._connecting) {
 				// Not sure why this happened, but we're already connected
 				let whyFail = this.steamID ? 'already connected' : 'already attempting to connect';
@@ -507,7 +504,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 
 			this.emit('debug', 'Firing queued login attempt');
 			this.logOn(true);
-		}, timer);
+		});
 	}
 
 	/**
@@ -676,9 +673,10 @@ class SteamUserLogon extends SteamUserMachineAuth {
 
 			// if we're manually relogging, or we got disconnected because steam went down, enqueue a reconnect
 			if (!wasLoggingOff || this._relogging) {
-				this._logonTimeout = setTimeout(() => {
+				this._resetExponentialBackoff('logOn');
+				this._exponentialBackoff('logOn', 1000, 1000).then(() => {
 					this.logOn(true);
-				}, 1000);
+				});
 			}
 
 			this._loggingOff = false;
@@ -724,7 +722,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 
 		switch (body.eresult) {
 			case EResult.OK:
-				delete this._logonTimeoutDuration; // success, so reset reconnect timer
+				this._resetExponentialBackoff('logOn'); // success, so reset reconnect timer
 
 				this._logOnDetails.last_session_id = this._sessionID;
 				this._logOnDetails.client_instance_id = body.client_instance_id;
@@ -820,7 +818,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			case EResult.AccountLoginDeniedNeedTwoFactor:
 			case EResult.TwoFactorCodeMismatch:
 				// server is up, so reset logon timer
-				delete this._logonTimeoutDuration;
+				this._resetExponentialBackoff('logOn');
 
 				this._disconnect(true);
 
@@ -844,7 +842,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 
 			default:
 				// server is up, so reset logon timer
-				delete this._logonTimeoutDuration;
+				this._resetExponentialBackoff('logOn');
 
 				let error = new Error(EResult[body.eresult] || body.eresult);
 				error.eresult = body.eresult;
