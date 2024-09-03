@@ -132,7 +132,9 @@ SteamUserBase.prototype._handlerManager.add('SteamNotificationClient.Notificatio
 		let bodyData = null;
 		try {
 			bodyData = JSON.parse(notif.body_data);
-		} catch (ex) {}
+		} catch (ex) {
+			// don't care
+		}
 
 		return {
 			id: notif.notification_id,

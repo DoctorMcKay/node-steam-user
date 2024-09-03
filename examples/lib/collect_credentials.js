@@ -7,7 +7,7 @@ module.exports = async function collectCredentials() {
 	let accountName = await promptAsync('Account Name: ');
 	let password = await promptAsync('Password: ', true);
 	return {accountName, password};
-}
+};
 
 /**
  *
