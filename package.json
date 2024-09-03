@@ -41,6 +41,7 @@
 	},
 	"devDependencies": {
 		"eslint": "^8.57.0",
+		"protobufjs-cli": "^1.1.3",
 		"steamcommunity": "^3.39.0",
 		"wtfnode": "^0.8.4"
 	},

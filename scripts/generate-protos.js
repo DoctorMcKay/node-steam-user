@@ -2,7 +2,7 @@ const ChildProcess = require('child_process');
 const FS = require('fs');
 const Path = require('path');
 
-const PBJS_BINARY_PATH = Path.join(__dirname, '..', 'node_modules', 'protobufjs', 'bin', 'pbjs');
+const PBJS_BINARY_PATH = Path.join(__dirname, '..', 'node_modules', 'protobufjs-cli', 'bin', 'pbjs');
 const PROTO_FILE_PATH = Path.join(__dirname, '..', 'protobufs', '%s.proto');
 const DESTINATION_PATH = Path.join(__dirname, '..', 'protobufs', 'generated', '%s.json');
 const PBJS_COMMAND_LINE = `node "${PBJS_BINARY_PATH}" --target json --out "${DESTINATION_PATH}" --keep-case "${PROTO_FILE_PATH}"`;
