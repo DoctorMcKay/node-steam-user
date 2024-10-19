@@ -78,7 +78,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 					}
 				}
 
-				let anonLogin = !details.accountName && !details.refreshToken;
+				let anonLogin = !details.accountName && !details.password && !details.refreshToken;
 
 				this._logOnDetails = {
 					account_name: details.accountName,
