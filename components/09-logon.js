@@ -557,8 +557,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		if (
 			(
 				!this._logOnDetails.account_name
-				&& !this._logOnDetails.password
-				&& !this._logOnDetails.access_token
 				&& !this._logOnDetails._steamid
 			)
 			|| this.options.machineIdType == EMachineIDType.None
