@@ -122,7 +122,6 @@ class SteamUserLogon extends SteamUserMachineAuth {
 			if (details.refreshToken) {
 				// If logging in with a refresh token, we need to make sure that no conflicting properties are set
 				let disallowedProps = [
-					'account_name',
 					'password',
 					'auth_code',
 					'two_factor_code'
@@ -171,7 +170,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				}
 			}
 
-			let anonLogin = !this._logOnDetails.account_name && !this._logOnDetails.access_token;
+			let anonLogin = !this._logOnDetails.account_name && !this._logOnDetails.password && !this._logOnDetails.access_token;
 			let explicitlyRequestedAnonLogin = details !== true && details.anonymous;
 			if (explicitlyRequestedAnonLogin && !anonLogin) {
 				this._warn('Anonymous logon was requested but account details were specified; logging into specified individual user account');
@@ -209,8 +208,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				}
 			});
 
-			// Machine auth token (only necessary if logging on with account name and password)
-			if (!anonLogin && !this._machineAuthToken && this._logOnDetails.account_name) {
+			// Machine auth token (only necessary if logging on with account name and password && email-based Steam Guard)
+			if (!anonLogin && !this._machineAuthToken && this._logOnDetails.account_name && this._logOnDetails.password) {
 				let tokenContent = this._logOnDetails._machineAuthToken || await this._readFile(this._getMachineAuthFilename());
 				if (tokenContent) {
 					this._machineAuthToken = tokenContent.toString('utf8').trim();
@@ -558,6 +557,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 		if (
 			(
 				!this._logOnDetails.account_name
+				&& !this._logOnDetails.password
+				&& !this._logOnDetails.access_token
 				&& !this._logOnDetails._steamid
 			)
 			|| this.options.machineIdType == EMachineIDType.None
