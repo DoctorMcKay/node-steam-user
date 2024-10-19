@@ -568,8 +568,9 @@ There are five ways to log onto Steam:
       default to logging on anonymously. This is still current behavior, but logging on in this manner is now deprecated.
       If you now call `logOn()` without providing a `refreshToken` or `accountName` and without specifying `anonymous: true`,
       then steam-user will raise a warning and then log on anonymously.
-- Individually using a refresh token **(recommended)**
+- Individually using a refresh token and account name **(recommended)**
 	- These properties are required:
+        - `accountName`
         - `refreshToken`
     - These properties are optional:
         - `steamID` - If provided, steam-user will check to make sure that the provided `refreshToken` matches this SteamID. If SteamIDs don't match, the app will crash.
@@ -577,7 +578,6 @@ There are five ways to log onto Steam:
         - `machineName` - Defaults to empty string if not specified.
         - `clientOS` - Defaults to an auto-detected value if not specified.
     - These properties must not be provided:
-        - `accountName`
         - `password`
         - `machineAuthToken`
         - `webLogonToken`
