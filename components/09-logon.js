@@ -596,7 +596,8 @@ class SteamUserLogon extends SteamUserMachineAuth {
 	}
 
 	_getAccountIdentifier() {
-		return this._logOnDetails.account_name
+		return this.options.accountIdentifier
+			|| this._logOnDetails.account_name
 			|| this._logOnDetails._newAuthAccountName
 			|| this._logOnDetails._steamid.toString();
 	}
