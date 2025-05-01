@@ -99,6 +99,11 @@ class WebSocketConnection extends BaseConnection {
 				this.stream.removeAllListeners();
 				this.stream.on('error', () => {
 				});
+
+				this.stream.disconnect();
+				this._disconnected = true;
+
+				return;
 			}
 
 			this.stream.disconnect();
