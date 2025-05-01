@@ -70,6 +70,8 @@ class SteamUserConnection extends SteamUserEnums {
 
 	_cancelReconnectTimers(dontClearBackoffTime) {
 		this._resetExponentialBackoff('logOn', dontClearBackoffTime);
+		this._resetExponentialBackoff('webLogOn', dontClearBackoffTime);
+
 		clearTimeout(this._reconnectForCloseDuringAuthTimeout);
 	}
 
