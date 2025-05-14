@@ -201,7 +201,7 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientVACBanStatus, function(bo
 });
 
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientWalletInfoUpdate, function(body) {
-	if (this.wallet && body.has_wallet == this.wallet.hasWallet && body.currency == this.wallet.currency && body.balance / 100 == this.wallet.balance && body.balancePending / 100 == this.wallet.balancePending) {
+	if (this.wallet && body.has_wallet == this.wallet.hasWallet && body.currency == this.wallet.currency && body.balance / 100 == this.wallet.balance && body.balance_delayed / 100 == this.wallet.balancePending) {
 		return; // nothing changed
 	}
 
