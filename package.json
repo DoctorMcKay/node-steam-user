@@ -37,7 +37,8 @@
 		"steam-session": "^1.8.0",
 		"steam-totp": "^2.0.1",
 		"steamid": "^2.0.0",
-		"websocket13": "^4.0.0"
+		"websocket13": "^4.0.0",
+		"zstddec": "^0.1.0"
 	},
 	"devDependencies": {
 		"eslint": "^8.57.0",
