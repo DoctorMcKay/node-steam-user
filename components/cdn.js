@@ -383,7 +383,7 @@ class SteamUserCDN extends SteamUserApps {
 
 			let numWorkers = 4;
 
-			fileManifest.size = parseInt(fileManifest.size, 10);
+			let fileSize = parseInt(fileManifest.size, 10);
 			let bytesDownloaded = 0;
 
 			let {servers: availableServers} = await this.getContentServers(appID);
@@ -408,7 +408,7 @@ class SteamUserCDN extends SteamUserApps {
 						}
 
 						outputFd = fd;
-						FS.ftruncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
+						FS.ftruncate(outputFd, fileSize, (err) => {
 							if (err) {
 								FS.closeSync(outputFd);
 								return reject(err);
@@ -419,7 +419,7 @@ class SteamUserCDN extends SteamUserApps {
 					});
 				});
 			} else {
-				downloadBuffer = Buffer.alloc(parseInt(fileManifest.size, 10));
+				downloadBuffer = Buffer.alloc(fileSize);
 			}
 
 			let self = this;
@@ -467,7 +467,7 @@ class SteamUserCDN extends SteamUserApps {
 						callback(null, {
 							type: 'progress',
 							bytesDownloaded,
-							totalSizeBytes: fileManifest.size
+							totalSizeBytes: fileSize
 						});
 					}
 
@@ -502,6 +502,11 @@ class SteamUserCDN extends SteamUserApps {
 							return reject(err);
 						}
 
+						if (fileSize === 0) {
+							// Steam uses a hash of all 0s if the file is empty, which won't validate properly
+							return resolve({type: 'complete'});
+						}
+
 						// File closed. Now re-open it so we can hash it!
 						hash = require('crypto').createHash('sha1');
 						FS.createReadStream(outputFilePath).pipe(hash);
@@ -521,7 +526,7 @@ class SteamUserCDN extends SteamUserApps {
 						});
 					});
 				} else {
-					if (StdLib.Hashing.sha1(downloadBuffer) != fileManifest.sha_content) {
+					if (fileSize > 0 && StdLib.Hashing.sha1(downloadBuffer) != fileManifest.sha_content) {
 						return reject(new Error('File checksum mismatch'));
 					}
 
@@ -531,6 +536,11 @@ class SteamUserCDN extends SteamUserApps {
 					});
 				}
 			};
+
+			if (fileSize === 0) {
+				// nothing to download, so manually trigger the queue drain method
+				queue.drain();
+			}
 
 			function assignServer(idx) {
 				servers[idx] = availableServers.splice(Math.floor(Math.random() * availableServers.length), 1)[0];
