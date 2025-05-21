@@ -923,7 +923,7 @@ class SteamUserApps extends SteamUserAppAuth {
 			appIDs = [appIDs];
 		}
 
-		return StdLib.Promises.timeoutCallbackPromise(10000, ['grantedPackageIds', 'grantedAppIds'], callback, (resolve, reject) => {
+		return StdLib.Promises.timeoutCallbackPromise(120000, ['grantedPackageIds', 'grantedAppIds'], callback, (resolve, reject) => {
 			this._send(EMsg.ClientRequestFreeLicense, {appids: appIDs}, (body) => {
 				if (body.eresult != EResult.OK) {
 					reject(Helpers.eresultError(body.eresult));
