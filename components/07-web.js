@@ -50,7 +50,10 @@ class SteamUserWeb extends SteamUserWebAPI {
 			 */
 
 			this._resetExponentialBackoff('webLogOn');
-			this.emit('webSession', sessionId, cookies);
+			process.nextTick(() => {
+				// Emit this after next tick so we avoid swallowing any exceptions emitted by event handlers
+				this.emit('webSession', sessionId, cookies);
+			});
 		}).catch((err) => {
 			this.emit('debug', `Failed to get web session: ${err.message}`);
 			this._exponentialBackoff('webLogOn', 1000, 60000).then(() => this.webLogOn());
