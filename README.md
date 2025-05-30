@@ -1948,7 +1948,7 @@ This will automatically be emitted on logon (**unless** you used a `webLogonToke
 Some libraries require you to provide your `sessionID`, others don't. If the library you're using doesn't need you to
 provide a `sessionID`, then you can safely ignore it.
 
-[Read more about how cookies work and interact with other modules.](https://dev.doctormckay.com/topic/365-cookies/#user-cookieusage)
+[Read more about how cookies work and interact with other modules.](https://dev.doctormckay.com/topic/4584-cookies-updated-for-2023/)
 
 ### newItems
 - `count` - How many new items you have (can be 0)
