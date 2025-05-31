@@ -201,15 +201,16 @@ SteamUserBase.prototype._handlerManager.add(EMsg.ClientVACBanStatus, function(bo
 });
 
 SteamUserBase.prototype._handlerManager.add(EMsg.ClientWalletInfoUpdate, function(body) {
-	if (this.wallet && body.has_wallet == this.wallet.hasWallet && body.currency == this.wallet.currency && body.balance / 100 == this.wallet.balance) {
+	if (this.wallet && body.has_wallet == this.wallet.hasWallet && body.currency == this.wallet.currency && body.balance / 100 == this.wallet.balance && body.balance_delayed / 100 == this.wallet.balancePending) {
 		return; // nothing changed
 	}
 
-	this.emit('wallet', body.has_wallet, body.currency, body.balance / 100);
+	this.emit('wallet', body.has_wallet, body.currency, body.balance / 100, body.balance_delayed / 100);
 	this.wallet = {
 		hasWallet: body.has_wallet,
 		currency: body.currency,
-		balance: body.balance / 100
+		balance: body.balance / 100,
+		balancePending: body.balance_delayed / 100
 	};
 });
 
