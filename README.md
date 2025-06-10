@@ -87,6 +87,13 @@ console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 1
 
 There are a number of options which can control the behavior of the `SteamUser` object. They are:
 
+### accountIdentifier
+
+A string which identifies the account. This is not the same as your SteamID.
+It's used as salt for internal methods, for example when generating the machineId.
+
+Defaults to `null`, which means internal methods will be used to select a proper identifier.
+
 ### dataDirectory
 
 Controls where the Steam server list and machine auth token files are written. If `null`, no data will be automatically
