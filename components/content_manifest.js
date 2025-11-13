@@ -61,7 +61,7 @@ exports.parse = function(buffer) {
 				chunk.sha = chunk.sha.toString('hex');
 			}
 		}
-		if ("linktarget" in file) {
+		if ('linktarget' in file) {
 			file.linktarget = file.linktarget ? file.linktarget : null;
 		}
 	});
