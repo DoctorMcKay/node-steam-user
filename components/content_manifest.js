@@ -15,7 +15,7 @@ exports.parse = function(buffer) {
 		buffer = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 	}
 
-	let files;
+	let files = [];
 	let magic;
 	let meta;
 	let length;
@@ -53,7 +53,6 @@ exports.parse = function(buffer) {
 		}
 	}
 
-	files ??= [];
 	files.forEach(function(file) {
 		file.sha_filename = file.sha_filename.toString('hex');
 		file.sha_content = file.sha_content.toString('hex');
