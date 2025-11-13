@@ -53,7 +53,8 @@ exports.parse = function(buffer) {
 		}
 	}
 
-	(files ??= []).forEach(function(file) {
+	files ??= [];
+	files.forEach(function(file) {
 		file.sha_filename = file.sha_filename.toString('hex');
 		file.sha_content = file.sha_content.toString('hex');
 		if (file.chunks) {
