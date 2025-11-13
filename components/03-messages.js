@@ -354,18 +354,22 @@ class SteamUserMessages extends SteamUserConnection {
 	 * Decode a protobuf.
 	 * @param {object} proto - The protobuf class
 	 * @param {Buffer|ByteBuffer} encoded - The data to decode
+	 * @param {boolean} shouldReplaceDefaults
 	 * @returns {object}
 	 * @protected
 	 */
-	static _decodeProto(proto, encoded) {
+	static _decodeProto(proto, encoded, shouldReplaceDefaults = true) {
 		if (ByteBuffer.isByteBuffer(encoded)) {
 			encoded = encoded.toBuffer();
 		}
 
 		let decoded = proto.decode(encoded);
-		let objNoDefaults = proto.toObject(decoded, {longs: String});
-		let objWithDefaults = proto.toObject(decoded, {defaults: true, longs: String});
-		return replaceDefaults(objNoDefaults, objWithDefaults);
+		let obj = proto.toObject(decoded, {defaults: true, longs: String});
+		if (shouldReplaceDefaults) {
+			let objNoDefaults = proto.toObject(decoded, {longs: String});
+			obj = replaceDefaults(objNoDefaults, obj);
+		}
+		return obj;
 
 		function replaceDefaults(noDefaults, withDefaults) {
 			if (Array.isArray(withDefaults)) {
