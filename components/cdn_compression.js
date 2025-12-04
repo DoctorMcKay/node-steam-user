@@ -1,6 +1,8 @@
+const {requireWithFallback} = require('./helpers.js');
+
 const AdmZip = require('adm-zip');
 const ByteBuffer = require('bytebuffer');
-const LZMA = require('lzma-native');
+const LZMA = requireWithFallback('lzma-native', 'lzma');
 const StdLib = require('@doctormckay/stdlib');
 const {ZSTDDecoder} = require('zstddec');
 
