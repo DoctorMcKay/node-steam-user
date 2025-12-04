@@ -8,6 +8,7 @@ const EMachineIDType = require('./EMachineIDType.js');
  * @property {EMachineIDType} [machineIdType]
  * @property {string[]} [machineIdFormat]
  * @property {boolean} [enablePicsCache=false]
+ * @property {boolean} [savePicsCache=false]
  * @property {boolean} [picsCacheAll=false]
  * @property {number} [changelistUpdateInterval=60000]
  * @property {PackageFilter|PackageFilterFunction|null} [ownershipFilter=null]
@@ -28,6 +29,7 @@ module.exports = {
 	machineIdType: EMachineIDType.AccountNameGenerated,
 	machineIdFormat: ['SteamUser Hash BB3 {account_name}', 'SteamUser Hash FF2 {account_name}', 'SteamUser Hash 3B3 {account_name}'],
 	enablePicsCache: false,
+	savePicsCache: false,
 	picsCacheAll: false,
 	changelistUpdateInterval: 60000,
 	additionalHeaders: {},

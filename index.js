@@ -86,6 +86,18 @@ class SteamUser extends SteamUserTwoFactor {
 			this.storage = new FileManager(this.options.dataDirectory);
 		}
 
+		if (this.options.savePicsCache) {
+			this._readFile('changenumber.txt').then((changenumber) => {
+				if (changenumber && isFinite(changenumber)) {
+					this.picsCache.changenumber = parseInt(changenumber, 10);
+				}
+			});
+		}
+
+		if (this.options.picsCacheAll && this.options.savePicsCache) {
+			this._warn('Both picsCacheAll and savePicsCache are enabled. Unless a custom storage engine is used, beware that this will cause a lot of disk IO and space usage!');
+		}
+
 		this._initialized = true;
 	}
 
