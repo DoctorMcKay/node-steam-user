@@ -30,7 +30,7 @@
 		"bytebuffer": "^5.0.0",
 		"file-manager": "^2.0.0",
 		"kvparser": "^1.0.1",
-		"lzma": "^2.3.2",
+		"lzma-native": "^8.0.6",
 		"protobufjs": "^7.2.4",
 		"socks-proxy-agent": "^7.0.0",
 		"steam-appticket": "^1.0.1",
