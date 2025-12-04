@@ -27,6 +27,7 @@ const PRIVATE_IP_OBFUSCATION_MASK = 0xbaadf00d;
  * @property {string} [refreshToken]
  * @property {string} [accountName]
  * @property {string} [password]
+ * @property {string} [machineId]
  * @property {string} [machineAuthToken]
  * @property {string} [webLogonToken]
  * @property {string|SteamID} [steamID]
@@ -79,6 +80,12 @@ class SteamUserLogon extends SteamUserMachineAuth {
 				}
 
 				let anonLogin = !details.accountName && !details.refreshToken;
+				let machineID = details.machineId || undefined;
+
+				if (machineID && !Buffer.isBuffer(machineID)) {
+					this._warn(`machineId must be a type of Buffer, but got '${typeof machineID}', it will be ignored and created internally.`);
+					machineID = undefined;
+				}
 
 				this._logOnDetails = {
 					account_name: details.accountName,
@@ -89,6 +96,7 @@ class SteamUserLogon extends SteamUserMachineAuth {
 					obfuscated_private_ip: {v4: logonId || 0},
 					protocol_version: PROTOCOL_VERSION,
 					supports_rate_limit_response: !anonLogin,
+					machine_id: machineID,
 					machine_name: !anonLogin ? (details.machineName || '') : '',
 					ping_ms_from_cell_search: !anonLogin ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
 					client_language: !anonLogin ? 'english' : '',
