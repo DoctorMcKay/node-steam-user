@@ -1,6 +1,6 @@
 const AdmZip = require('adm-zip');
 const ByteBuffer = require('bytebuffer');
-const LZMA = require('lzma');
+const LZMA = require('lzma-native');
 const StdLib = require('@doctormckay/stdlib');
 const {ZSTDDecoder} = require('zstddec');
 
