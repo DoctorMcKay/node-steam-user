@@ -15,7 +15,7 @@ exports.parse = function(buffer) {
 		buffer = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 	}
 
-	let manifest = {};
+	let files = [];
 	let magic;
 	let meta;
 	let length;
@@ -25,13 +25,13 @@ exports.parse = function(buffer) {
 		switch (magic) {
 			case PROTOBUF_PAYLOAD_MAGIC:
 				length = buffer.readUint32();
-				manifest.files = SteamUserMessages._decodeProto(Schema.ContentManifestPayload, buffer.slice(buffer.offset, buffer.offset + length)).mappings;
+				files = SteamUserMessages._decodeProto(Schema.ContentManifestPayload, buffer.slice(buffer.offset, buffer.offset + length), false).mappings;
 				buffer.skip(length);
 				break;
 
 			case PROTOBUF_METADATA_MAGIC:
 				length = buffer.readUint32();
-				meta = SteamUserMessages._decodeProto(Schema.ContentManifestMetadata, buffer.slice(buffer.offset, buffer.offset + length));
+				meta = SteamUserMessages._decodeProto(Schema.ContentManifestMetadata, buffer.slice(buffer.offset, buffer.offset + length), false);
 				buffer.skip(length);
 				break;
 
@@ -53,33 +53,20 @@ exports.parse = function(buffer) {
 		}
 	}
 
-	(manifest.files || []).forEach(function process(file) {
-		for (let i in file) {
-			if (!Object.hasOwnProperty.call(file, i)) {
-				continue;
+	files.forEach(function(file) {
+		file.sha_filename = file.sha_filename.toString('hex');
+		file.sha_content = file.sha_content.toString('hex');
+		if (file.chunks) {
+			for (const chunk of file.chunks) {
+				chunk.sha = chunk.sha.toString('hex');
 			}
-
-			if (file[i] instanceof ByteBuffer) {
-				file[i] = file[i].toString('hex');
-			} else if (file[i] instanceof ByteBuffer.Long) {
-				file[i] = file[i].toString();
-			} else if (Buffer.isBuffer(file[i])) {
-				file[i] = file[i].toString('hex');
-			} else if (file[i] && !Buffer.isBuffer(file[i]) && typeof file[i] === 'object') {
-				process(file[i]);
-			}
+		}
+		if ('linktarget' in file) {
+			file.linktarget = file.linktarget ? file.linktarget : null;
 		}
 	});
 
-	if (meta) {
-		for (let i in meta) {
-			if (Object.hasOwnProperty.call(meta, i)) {
-				manifest[i] = meta[i] instanceof ByteBuffer.Long ? meta[i].toString() : meta[i];
-			}
-		}
-	}
-
-	return manifest;
+	return { files, ...meta };
 };
 
 exports.decryptFilenames = function(manifest, key) {
