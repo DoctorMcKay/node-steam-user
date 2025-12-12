@@ -33,7 +33,7 @@
 		"lzma": "^2.3.2",
 		"protobufjs": "^7.2.4",
 		"socks-proxy-agent": "^7.0.0",
-		"steam-appticket": "^1.0.1",
+		"steam-appticket": "^2.0.1",
 		"steam-session": "^1.8.0",
 		"steam-totp": "^2.0.1",
 		"steamid": "^2.0.0",
