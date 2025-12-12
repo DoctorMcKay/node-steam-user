@@ -254,3 +254,12 @@ exports.decodeJwt = function(jwt) {
 
 	return JSON.parse(Buffer.from(standardBase64, 'base64').toString('utf8'));
 };
+
+exports.requireWithFallback = function(moduleName, fallbackModuleName) {
+	try {
+		return require(moduleName);
+	} catch (ex) {
+		// If requiring preferred module failed, require fallback module instead
+		return require(fallbackModuleName);
+	}
+};

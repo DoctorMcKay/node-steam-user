@@ -7,6 +7,10 @@ on:
             - '**'
     pull_request:
 
+permissions:
+    id-token: write
+    contents: read
+
 jobs:
     lint:
         # Run for external PRs, but not on our own internal PRs as they'll be run by the push to the branch.
@@ -23,7 +27,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [ 14.x, 16.x, 18.x, 20.x ]
+                node-version: [ 14.x, 16.x, 18.x, 20.x, 22.x, 24.x ]
 
         steps:
             -   uses: actions/checkout@v4
@@ -51,7 +55,3 @@ jobs:
         needs: [ lint, syntax-check ]
         if: success() && github.event.ref == 'refs/heads/master' && contains(github.event.head_commit.message, '#npm-publish')
         uses: DoctorMcKay/github-workflows/.github/workflows/npm-publish.yml@master
-        with:
-            node-version: 14.x
-        secrets:
-            npm-access-token: ${{ secrets.NPM_ACCESS_TOKEN }}
