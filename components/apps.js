@@ -62,7 +62,7 @@ class SteamUserApps extends SteamUserAppAuth {
 				if (typeof app == 'string') {
 					const appid = 753; // Steam itself - See https://steamcommunity.com/app/753
 					const apptype = 1; // GameMod - See https://github.com/SteamRE/SteamKit/blob/48f89a29d2e9cb4dbda2ec0000da49393d8c42b0/SteamKit2/SteamKit2/Types/GameID.cs#L23-L41
-					const modid = 0xFFFFFFFF // 1 hexadecimal digit = 4 bits, so we need 8 of these to fill the 32 bits reserved for modid.
+					const modid = 0xFFFFFFFF; // 1 hexadecimal digit = 4 bits, so we need 8 of these to fill the 32 bits reserved for modid.
 
 					/*
 					GameID is a raw 64-bit value is constructed like this:
