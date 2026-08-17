@@ -297,6 +297,14 @@ Added in 4.0.0.
 
 Defaults to `english`.
 
+### localizeRichPresence
+
+Set this to `false` to disable localization of `rich_presence_string` in [`user`](#user) event data and in
+`requestRichPresence`. When disabled, `SteamUser` won't request rich presence localization tokens from Steam and
+localized strings will be empty.
+
+Defaults to `true`.
+
 ### webCompatibilityMode
 
 If you're having trouble connecting to Steam (e.g. through a firewall or a proxy), set this to `true`. When in web

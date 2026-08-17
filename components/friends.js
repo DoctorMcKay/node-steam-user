@@ -919,6 +919,11 @@ class SteamUserFriends extends SteamUserFamilySharing {
 	 */
 	_getRPLocalizedString(appid, tokens, language) {
 		return new Promise(async (resolve, reject) => {
+			if (!this.options.localizeRichPresence) {
+				// Localization is disabled
+				return resolve('');
+			}
+
 			if (!tokens.steam_display) {
 				// Nothing to do here
 				return reject();
