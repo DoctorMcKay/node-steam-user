@@ -31,7 +31,7 @@
 		"file-manager": "^2.0.0",
 		"kvparser": "^1.0.1",
 		"lzma": "^2.3.2",
-		"protobufjs": "^7.2.4",
+		"protobufjs": "^7.6.5",
 		"socks-proxy-agent": "^7.0.0",
 		"steam-appticket": "^1.0.1",
 		"steam-session": "^1.8.0",
@@ -44,7 +44,9 @@
 		"lzma-native": "^8.0.0"
 	},
 	"peerDependenciesMeta": {
-		"lzma-native": {"optional": true}
+		"lzma-native": {
+			"optional": true
+		}
 	},
 	"devDependencies": {
 		"eslint": "^8.57.0",
