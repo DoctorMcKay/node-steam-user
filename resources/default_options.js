@@ -18,6 +18,7 @@ const EMachineIDType = require('./EMachineIDType.js');
  * @property {string|null} [socksProxy=null]
  * @property {EConnectionProtocol} [protocol]
  * @property {string} [language='english']
+ * @property {boolean} [localizeRichPresence=true]
  * @property {boolean} [webCompatibilityMode=false]
  * @property {boolean} [saveAppTickets=true]
  * @property {boolean} [renewRefreshTokens=false]
@@ -37,6 +38,7 @@ module.exports = {
 	socksProxy: null,
 	protocol: EConnectionProtocol.Auto,
 	language: 'english',
+	localizeRichPresence: true,
 	webCompatibilityMode: false,
 	saveAppTickets: true,
 	renewRefreshTokens: false
