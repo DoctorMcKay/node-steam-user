@@ -66,7 +66,9 @@ user._sendUnified = (method, body, callback) => {
 			// appid = populated+1 -> every key distinct -> every call inserts a new entry
 			try {
 				await user._getRPLocalizedString(populated + 1, {steam_display: '#status'}, 'english');
-			} catch (ex) {}
+			} catch (ex) {
+				//
+			}
 		}
 
 		const live = liveHeapBytes();
