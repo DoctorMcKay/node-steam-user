@@ -1,0 +1,6 @@
+{
+	"eslint.enable": false,
+	"[javascript]": {
+		"editor.formatOnSave": false
+	}
+}

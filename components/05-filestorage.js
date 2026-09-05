@@ -18,6 +18,19 @@ class SteamUserFileStorage extends SteamUserUtility {
 	}
 
 	/**
+	 * @param {Object} files - Keys are filenames, values are Buffer objects containing the file contents
+	 * @return {Promise}
+	 * @protected
+	 */
+	async _saveFiles(files) {
+		if (!this.storage) {
+			return Promise.reject(new Error('Storage system disabled'));
+		}
+
+		return await this.storage.saveFiles(files);
+	}
+
+	/**
 	 * @param {string} filename
 	 * @returns {Promise<Buffer|null>}
 	 * @protected
@@ -43,7 +56,7 @@ class SteamUserFileStorage extends SteamUserUtility {
 	 */
 	async _readFiles(filenames) {
 		if (!this.storage) {
-			return filenames.map(filename => ({filename, error: new Error('Storage system disabled')}));
+			return filenames.map(filename => ({ filename, error: new Error('Storage system disabled') }));
 		}
 
 		// No need for a try/catch because readFiles can't reject

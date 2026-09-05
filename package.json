@@ -28,7 +28,7 @@
 		"adm-zip": "^0.5.10",
 		"binarykvparser": "^2.2.0",
 		"bytebuffer": "^5.0.0",
-		"file-manager": "^2.0.0",
+		"file-manager": "^2.0.1",
 		"kvparser": "^1.0.1",
 		"lzma": "^2.3.2",
 		"protobufjs": "^7.2.4",
