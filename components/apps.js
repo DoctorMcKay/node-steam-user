@@ -142,10 +142,10 @@ class SteamUserApps extends SteamUserAppAuth {
 	 * Get a list of apps or packages which have changed since a particular changenumber.
 	 * @param {int} sinceChangenumber - Changenumber to get changes since. Use 0 to get the latest changenumber, but nothing else
 	 * @param {function} [callback]
-	 * @returns {Promise<{currentChangeNumber: number, appChanges: number[], packageChanges: number[]}>}
+	 * @returns {Promise<{currentChangeNumber: number, appChanges: object[], packageChanges: object[], forceFullUpdate: boolean, forceFullAppUpdate: boolean, forceFullPackageUpdate: boolean}>}
 	 */
 	getProductChanges(sinceChangenumber, callback) {
-		let args = ['currentChangeNumber', 'appChanges', 'packageChanges'];
+		let args = ['currentChangeNumber', 'appChanges', 'packageChanges', 'forceFullUpdate', 'forceFullAppUpdate', 'forceFullPackageUpdate'];
 		return StdLib.Promises.timeoutCallbackPromise(10000, args, callback, (resolve, reject) => {
 			this._send(EMsg.ClientPICSChangesSinceRequest, {
 				since_change_number: sinceChangenumber,
@@ -155,7 +155,10 @@ class SteamUserApps extends SteamUserAppAuth {
 				resolve({
 					currentChangeNumber: body.current_change_number,
 					appChanges: body.app_changes,
-					packageChanges: body.package_changes
+					packageChanges: body.package_changes,
+					forceFullUpdate: !!body.force_full_update,
+					forceFullAppUpdate: !!body.force_full_app_update,
+					forceFullPackageUpdate: !!body.force_full_package_update
 				});
 			});
 		});
