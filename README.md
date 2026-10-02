@@ -860,15 +860,18 @@ Requests a list of game servers from the master server.
 **Works when anonymous.** Gets current IP addresses for servers with given SteamIDs.
 
 ### getProductChanges(sinceChangenumber, callback)
-- `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. You won't get any info except the current changenumber if you request more than around 5,000 changenumbers in the past.
+- `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. You won't get any info except the current changenumber if you request more than around 5,000 changenumbers in the past. In those cases Steam can indicate whether product information needs a full refresh using forceFull*Update flags below.
 - `callback` - Called when data is available
     - `err` - An `Error` object on failure, or `null` on success
-	- `currentChangenumber` - The changenumber of the newest changelist
+	- `currentChangeNumber` - The changenumber of the newest changelist
 	- `appChanges` - An array of objects for apps which have changed. Each object has these properties:
 		- `appid` - The AppID of the app
 		- `change_number` - The changenumber of the latest changelist in which the app has changed
 		- `needs_token` - `true` if you need an access token to get most details about this app, `null` if not
 	- `packageChanges` - An array of objects for packages which have changed. Each object has the same properties as the `apps` array, except `appid` is `packageid`.
+	- `forceFullUpdate` - `true` if Steam requires a full refresh of product information
+	- `forceFullAppUpdate` - `true` if Steam requires a full refresh of app information
+	- `forceFullPackageUpdate` - `true` if Steam requires a full refresh of package information
 
 **Works when anonymous.** Requests a list of all apps/packages which have changed since a given changenumber.
 
