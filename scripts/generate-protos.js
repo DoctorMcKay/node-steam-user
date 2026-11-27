@@ -1,6 +1,7 @@
 const ChildProcess = require('child_process');
 const FS = require('fs');
 const Path = require('path');
+const {Root} = require('protobufjs');
 
 const PBJS_BINARY_PATH = Path.join(__dirname, '..', 'node_modules', 'protobufjs-cli', 'bin', 'pbjs');
 const PROTO_FILE_PATH = Path.join(__dirname, '..', 'protobufs', '%s.proto');
@@ -22,6 +23,8 @@ let loader = GENERATED_FILE_HEADER;
 // eslint-disable-next-line
 loader += "const Schema = module.exports;\nconst {Root} = require('protobufjs');\n\n";
 
+let descriptorFiles = {}; // Maps each schema name to the descriptor it gets loaded from
+
 if (!FS.existsSync(GENERATED_DIR)) {
 	FS.mkdirSync(GENERATED_DIR);
 }
@@ -37,7 +40,10 @@ let documentedTypes = {}; // Some types might be defined in multiple proto files
 
 FS.writeSync(typesFile, GENERATED_FILE_HEADER);
 
-FS.readdirSync(__dirname + '/../protobufs').forEach((filename) => {
+// Later files win when a type is defined more than once, so use the same order on every OS.
+// This is the Windows order the checked-in files were generated with ('_' sorts after letters).
+let protoFilenames = FS.readdirSync(__dirname + '/../protobufs').sort((a, b) => a.toUpperCase() < b.toUpperCase() ? -1 : 1);
+protoFilenames.forEach((filename) => {
 	if (!filename.match(/\.proto$/)) {
 		return;
 	}
@@ -47,9 +53,15 @@ FS.readdirSync(__dirname + '/../protobufs').forEach((filename) => {
 	console.log(cmdLine);
 
 	ChildProcess.execSync(cmdLine);
-	loader += `mergeObjects(Schema, Root.fromJSON(require('./${filenameWithoutExtension}.json')));\n`;
 
 	let protoDefinition = require(Path.join(GENERATED_DIR, `${filenameWithoutExtension}.json`));
+
+	// protobufjs only exposes names starting with an uppercase letter as properties of a Root.
+	// Imported types appear in several descriptors. The last one wins, like when every Root was merged at startup.
+	Object.keys(Root.fromJSON(protoDefinition)).filter(name => /^[A-Z]/.test(name)).forEach((name) => {
+		descriptorFiles[name] = `${filenameWithoutExtension}.json`;
+	});
+
 	if (protoDefinition.nested) {
 		FS.writeSync(typesFile, `///////////////////////////////////////////////\n// ${filenameWithoutExtension}.proto\n///////////////////////////////////////////////\n\n`);
 		FS.writeSync(typesFile, writeTypedef(protoDefinition.nested));
@@ -59,15 +71,37 @@ FS.readdirSync(__dirname + '/../protobufs').forEach((filename) => {
 FS.closeSync(typesFile);
 
 console.log('Generating _load.js');
-loader += `\n${mergeObjects.toString()}\n`;
+let namesByFile = {};
+for (let name in descriptorFiles) {
+	namesByFile[descriptorFiles[name]] = namesByFile[descriptorFiles[name]] || [];
+	namesByFile[descriptorFiles[name]].push(name);
+}
+
+Object.keys(namesByFile).sort().forEach((filename) => {
+	let names = namesByFile[filename].sort().map(name => `\t'${name}'`).join(',\n');
+	loader += `defineLazySchema(Schema, () => require('./${filename}'), [\n${names}\n]);\n`;
+});
+
+loader += `\n${defineLazySchema.toString()}\n`;
 FS.writeFileSync(GENERATED_DIR + '/_load.js', loader);
 
-function mergeObjects(destinationObject, sourceObject) {
-	for (let i in sourceObject) {
-		if (Object.hasOwnProperty.call(sourceObject, i)) {
-			destinationObject[i] = sourceObject[i];
-		}
-	}
+function defineLazySchema(destinationObject, loadDescriptor, names) {
+	// Parse the descriptor the first time one of its names is used. All of its names share that Root.
+	let root = null;
+	names.forEach((name) => {
+		Object.defineProperty(destinationObject, name, {
+			configurable: true,
+			enumerable: true,
+			get() {
+				root = root || Root.fromJSON(loadDescriptor());
+				return root[name];
+			},
+			set(value) {
+				// Assignment replaces the lazy property, like it would replace a plain property
+				Object.defineProperty(destinationObject, name, {configurable: true, enumerable: true, writable: true, value});
+			}
+		});
+	});
 }
 
 function writeTypedef(obj, namespace = '.') {
